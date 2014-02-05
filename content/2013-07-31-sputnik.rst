@@ -21,7 +21,7 @@ From the diary of *Dr. Valentin Vassilev, Soviet Academy of Sciences*:
     | 30 seconds
     | 10 seconds
     | the hand reaches vertical
-    | a mighty roar<
+    | a mighty roar
     | our rocket vibrates
     | white hot flame gushes downward
     | and the Great Beast
