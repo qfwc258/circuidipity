@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Hosting multiple domains from one IP address using Apache</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Sunday 20 February 2011</p>
+</div>
+
+<!-- article -->
+<h1>Hosting multiple domains from one IP address using Apache</h1>
+<div id="article">
+    <p>Creating <em>virtual hosts</em> in Apache makes it possible to host multiple websites from a single IP address.</p>
+<p>My old netbook has discovered new life as a <a class="reference external" href="linux-home-server.html">Linux home server</a>. A combination of <a class="reference external" href="http://httpd.apache.org/docs/2.0/vhosts/name-based.html">name-based virtual hosting</a> in Apache + Debian <tt class="docutils literal">squeeze</tt> allows me to host multiple websites running behind a single static IP address I obtained from my ISP.</p>
+<p>This is my setup ...</p>
+<div class="section" id="step-0-install-apache">
+<h2>Step 0 - Install Apache</h2>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install apache2
+<span class="nv">$ </span>/etc/init.d/apache2 start
+</pre></div>
+<p>Confirm the web server is up-and-running by navigating to <a class="reference external" href="http://localhost/">localhost</a> ... You should now see:</p>
+<div class="highlight"><pre>It works!
+
+This is the default web page <span class="k">for </span>this server.
+
+The web server software is running but no content has been added, yet.
+</pre></div>
+<p>Apache's default page is located at <tt class="docutils literal">/var/www/index.html</tt>. Enabling Apache to host multiple domains requires giving each website:</p>
+<ul class="simple">
+<li>its own directory to hold files</li>
+<li>a virtual host configuration</li>
+</ul>
+</div>
+<div class="section" id="step-1-website-directory">
+<h2>Step 1 - Website directory</h2>
+<p>Create a directory for the website and grant ownership to USERNAME ...</p>
+<pre class="code bash literal-block">
+<span class="nv">$ </span>sudo mkdir /var/www/SITENAME
+<span class="nv">$ </span>sudo chown USERNAME:USERNAME /var/www/SITENAME
+</pre>
+</div>
+<div class="section" id="step-2-virtual-host">
+<h2>Step 2 - Virtual host</h2>
+<p>Create a new virtual host configuration for the website by copying Apache's <tt class="docutils literal">default</tt> configuration to the new sitename ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo <span class="nb">cd</span> /etc/apache2/sites-available/
+<span class="nv">$ </span>sudo cp default SITENAME
+</pre></div>
+<p>Edit the newly-created configuration to match the new website settings ...</p>
+<div class="highlight"><pre>&lt;VirtualHost *:80&gt;
+ServerName SITENAME
+    ServerAlias *.SITENAME
+    ServerAdmin admin@SITENAME
+
+    DocumentRoot /var/www/SITENAME
+    &lt;Directory /&gt;
+        Options FollowSymLinks
+        AllowOverride None
+    &lt;/Directory&amp;gt&gt;
+    &lt;Directory /var/www/SITENAME/&gt;
+</pre></div>
+<p>Enable the new site in Apache ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo a2ensite SITENAME
+<span class="nv">$ </span>sudo /etc/init.d/apache2 restart
+</pre></div>
+<p>If you want to be able to view the website on the same localhost it is being served from ... modify <tt class="docutils literal">/etc/hosts</tt> by adding a <em>testing</em> domain to the localhost address ...</p>
+<div class="highlight"><pre>127.0.1.1       test.*sitename*
+</pre></div>
+<p>... and another ... and another ...</p>
+<p>Copy the steps for each additional website ... giving each site a unique name and virtual host configuration.</p>
+</div>
+<div class="section" id="step-3-extra-web-enabled-user-directory">
+<h2>Step 3 - Extra: Web-enabled user directory</h2>
+<p>Create a folder in a user's home directory with contents made available over the web ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>mkdir /home/USERNAME/public_html
+</pre></div>
+<p>Configure Apache to allow outside access to the folder by editing <tt class="docutils literal"><span class="pre">/etc/apache2/mods-available/userdir.conf</span></tt> ...</p>
+<div class="highlight"><pre>&lt;IfModule mod_userdir.c&gt;
+UserDir public_html
+UserDir disabled root
+UserDir enabled USERNAME
+</pre></div>
+<p>Enable the <tt class="docutils literal">userdir</tt> module and reload Apache ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo a2enmod userdir
+<span class="nv">$ </span>sudo /etc/init.d/apache2 restart
+</pre></div>
+<p>Navigate to <a class="reference external" href="http://localhost/~USERNAME_">http://localhost/~USERNAME_</a> to view the contents of <tt class="docutils literal">/home/USERNAME/public_html</tt> ... Outside your LAN a user would travel to <a class="reference external" href="http://YOUR_IP_ADDRESS/~USERNAME">http://YOUR_IP_ADDRESS/~USERNAME</a>.</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-web.html">web</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/print-copy-scan-using-the-epson-nx215-all-in-one-with-debian.html">Print copy scan using the Epson NX215 all-in-one with Linux</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/getting-nvidia-and-xorg-to-play-nice.html">Getting Nvidia and xorg to play nice</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

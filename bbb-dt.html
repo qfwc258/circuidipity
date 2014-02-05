@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Device Tree and BeagleBone Black</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Sunday 08 September 2013</p>
+</div>
+
+<!-- article -->
+<h1>Device Tree and BeagleBone Black</h1>
+<div id="article">
+    <p>In the world of x86 hardware a Linux distribution can ship a generic kernel and expect that it will load necessary drivers and run on a wide range of hardware. ARM embedded devices are a very different experience. Much of the hardware is not detected at boot and this has required creating a customized kernel for each device. <em>Device Tree</em> is designed to address this shortcoming and the <a class="reference external" href="getting-started-with-beaglebone-black.html">BeagleBone Black</a> with its 3.8 kernel is one of the first ARM devices to embrace the new way of doing things.</p>
+<div class="section" id="device-tree-and-arm">
+<h2>Device Tree and ARM</h2>
+<p>Device Tree (DT) support for ARM arrived in the 3.7 kernel (it has existed for years in the PowerPC and SPARC worlds). Basically it is a method for describing the underlying hardware to the Linux kernel so that the required drivers will be loaded.</p>
+<p>On the BeagleBone Black a <em>device tree source</em> (dts) file is written that describes a piece of hardware and a <em>device tree compiler</em> (dtc) transforms the instructions into a <em>device tree blob</em> (dtb) binary that can be used by the kernel. On the BBB there is a bunch of dtb binaries located in <tt class="docutils literal">/boot</tt> that describe the device to the kernel at boot time ...</p>
+<div class="highlight"><pre><span class="c"># ls /boot/*.dtb</span>
+/boot/am335x-bone.dtb           /boot/am335x-tester.dtb    /boot/omap3-evm.dtb       /boot/omap4-panda.dtb
+/boot/am335x-boneblack.dtb  /boot/omap2420-h4.dtb      /boot/omap3-tobi.dtb  /boot/omap4-sdp.dtb
+/boot/am335x-evm.dtb            /boot/omap3-beagle-xm.dtb  /boot/omap4-panda-a4.dtb  /boot/omap4-var-som.dtb
+/boot/am335x-evmsk.dtb          /boot/omap3-beagle.dtb     /boot/omap4-panda-es.dtb  /boot/omap5-evm.dtb
+</pre></div>
+<p>By implementing DT on the BeagleBone Black the device can receive and contribute back all the benefits of upstream kernel development and avoid the hassle of maintaining a custom kernel. Developers of expansion boards (known as <em>capes</em> in BBB lingo) also benefit as Jason Kridner - co-founder of Beagleboard.org - <a class="reference external" href="http://linuxgizmos.com/introducing-the-new-beaglebone-black-kernel/">points out</a>:</p>
+<blockquote>
+Where this [Device Tree implementation] pays off for us, is in the development of capes. By standardizing all of the logic in the kernel and providing the device tree information as data files, it becomes rather easy for a new cape developer to simply create a device tree description of their board and provide it to end users without them ever needing to recompile the kernel! As all of this gets documented, cape development is being greatly simplified and few cape developers should ever have to touch a line of code and end-users should rarely need to change their kernel binary itself based on simply using new capes.</blockquote>
+</div>
+<div class="section" id="overlays">
+<h2>Overlays</h2>
+<p>BBB also introduced the idea of <em>Device Tree Overlays</em>. Overlays allow the device tree that was accessed by the kernel at boot to be modified afterwards in userspace. If a new piece of hardware like a cape is added to BBB or the onboard header pins are initialized/re-configured an overlay can enable the modifications without having to reboot. On the default <em>Angstrom</em> Linux that ships with BBB there is a bunch of DT overlays already created and available for use in <tt class="docutils literal">/lib/firmware</tt>.</p>
+<p>A <em>cape manager</em> has been implemented to load and (in theory) unload overlays and <em>slots</em> is its interface and can show us what is currently loaded ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>cat /sys/devices/bone_capemgr.8/slots
+0: 54:PF---
+1: 55:PF---
+2: 56:PF---
+3: 57:PF---
+4: ff:P-O-L Bone-LT-eMMC-2G,00A0,Texas Instrument,BB-BONE-EMMC-2G
+5: ff:P-O-L Bone-Black-HDMI,00A0,Texas Instrument,BB-BONELT-HDMI
+</pre></div>
+<p>By default the onboard storage and HDMI interface are loaded as <em>virtual capes</em> and there are free slots for adding up to 4 additional physical capes.</p>
+</div>
+<div class="section" id="analog-inputs">
+<h2>Analog Inputs</h2>
+<p>An example of overlays in action is loading the BeagleBone Black's analog inputs and making the pins available for use. We use the SLOTS interface a lot so export the location to <tt class="docutils literal"><span class="pre">~/.profile</span></tt> ...</p>
+<div class="highlight"><pre><span class="c"># export SLOTS=/sys/devices/bone_capemgr.*/slots</span>
+<span class="c"># echo &#39;export SLOTS=/sys/devices/bone_capemgr.*/slots&#39; &gt;&gt; ~/.profile</span>
+</pre></div>
+<p>BBB has a pre-configured DT overlay <tt class="docutils literal"><span class="pre">BB-ADC-00A0.dtbo</span></tt> for analog pins. Load the overlay (omitting the <tt class="docutils literal"><span class="pre">-00A0.dtbo</span></tt> bit) and see that $SLOTS registers a new cape and the kernel detects new hardware ...</p>
+<div class="highlight"><pre><span class="c"># echo BB-ADC &gt; $SLOTS</span>
+<span class="c"># cat $SLOTS</span>
+0: 54:PF---
+1: 55:PF---
+2: 56:PF---
+3: 57:PF---
+4: ff:P-O-L Bone-LT-eMMC-2G,00A0,Texas Instrument,BB-BONE-EMMC-2G
+5: ff:P-O-L Bone-Black-HDMI,00A0,Texas Instrument,BB-BONELT-HDMI
+7: ff:P-O-L Override Board Name,00A0,Override Manuf,BB-ADC
+<span class="c"># dmesg</span>
+...
+<span class="o">[</span>37166.391913<span class="o">]</span> bone-capemgr bone_capemgr.8: part_number <span class="s1">&#39;BB-ADC&#39;</span>, version <span class="s1">&#39;N/A&#39;</span>
+<span class="o">[</span>37166.392100<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c">#7: generic override</span>
+<span class="o">[</span>37166.392151<span class="o">]</span> bone-capemgr bone_capemgr.8: bone: Using override eeprom data at slot 7
+<span class="o">[</span>37166.392204<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c">#7: &#39;Override Board Name,00A0,Override Manuf,BB-ADC&#39;</span>
+<span class="o">[</span>37166.392478<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c">#7: Requesting part number/version based &#39;BB-ADC-00A0.dtbo</span>
+<span class="o">[</span>37166.392536<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c">#7: Requesting firmware &#39;BB-ADC-00A0.dtbo&#39; for board-name &#39;Override Board Name&#39;, version &#39;00A0&#39;</span>
+<span class="o">[</span>37166.392605<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c">#7: dtbo &#39;BB-ADC-00A0.dtbo&#39; loaded; converting to live tree</span>
+<span class="o">[</span>37166.400854<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c">#7: #1 overlays</span>
+<span class="o">[</span>37166.423565<span class="o">]</span> bone-iio-helper helper.14: ready
+<span class="o">[</span>37166.426252<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c">#7: Applied #1 overlays.</span>
+</pre></div>
+<p>The analog input pins are now available for use.</p>
+<p>Example: If you connect a photoresistor to BBB's <tt class="docutils literal">P9_32(1.8V)</tt> and <tt class="docutils literal">P9_34(AGND)</tt> and <tt class="docutils literal">P9_36(AIN5)</tt> pins you can measure light levels in <tt class="docutils literal">/sys/devices/ocp.2/helper.14/AIN5</tt> and <tt class="docutils literal"><span class="pre">/sys/devices/ocp.2/44e0d000.tscadc/tiadc/iio\:device0/in_voltage5_raw</span></tt>.</p>
+<p>Our BB-ADC dtbo above resides in slot 7. To unload we would run <tt class="docutils literal">echo <span class="pre">-7</span> &gt; $SLOTS</tt>.</p>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Unloading from $SLOTS is currently very unstable and can induce kernel panics. Much safer to simply reboot.</p>
+</div>
+<p>To have this overlay load at boot time we add the option <tt class="docutils literal"><span class="pre">capemgr.enable_partno=BB-ADC</span></tt> to the <tt class="docutils literal">uEnv.txt</tt> file located on the <tt class="docutils literal">/dev/mmcblk0p1</tt> partition.</p>
+</div>
+<div class="section" id="helpful-resources">
+<h2>Helpful Resources</h2>
+<ul class="simple">
+<li><a class="reference external" href="http://devicetree.org/Device_Tree_Usage">Device Tree Usage</a> and <a class="reference external" href="https://lkml.org/lkml/2012/11/5/615">Device Tree Overlays</a></li>
+<li>Adafruit's introduction to the <a class="reference external" href="http://learn.adafruit.com/introduction-to-the-beaglebone-black-device-tree?view=all">BBB Device Tree</a></li>
+<li><a class="reference external" href="http://elinux.org/BeagleBone_and_the_3.8_Kernel">BeagleBone and the 3.8 Kernel</a></li>
+<li><a class="reference external" href="http://derekmolloy.ie/tag/beaglebone-black/">Derek Molloy's</a> tables for the <a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true">P8</a> and <a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true">P9</a> header pins</li>
+<li><a class="reference external" href="http://derekmolloy.ie/gpios-on-the-beaglebone-black-using-device-tree-overlays/">GPIOs on the BBB using Device Tree Overlays</a></li>
+<li><a class="reference external" href="https://github.com/jadonk/validation-scripts/tree/master/test-capemgr">Capemgr and Device Tree Overlays</a></li>
+<li><a class="reference external" href="http://beagleboard-gsoc13.blogspot.ca/2013/07/sampling-analogue-signals-using-adc-on.html">Sampling analog signals using the ADC</a> on BBB</li>
+</ul>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-beaglebone.html">beaglebone</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-electronics.html">electronics</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-angstrom.html">angstrom</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/bbb-led.html">BeagleBone Black: 'Say Hello to My Little LEDs'</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/install-arduino-debian.html">Install Arduino on Debian</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

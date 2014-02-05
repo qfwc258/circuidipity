@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Fidel - Find and delete files</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Thursday 04 April 2013</p>
+</div>
+
+<!-- article -->
+<h1>Fidel - Find and delete files</h1>
+<div id="article">
+    <p>After writing shell scripts that find files matching NAME and/or TIME parameters and <a class="reference external" href="tartime-find-time-tar.html">create tar archives</a> or <a class="reference external" href="video2audio.html">convert video to audio</a> I wanted a script that could find and delete files. Example: <em>Find all MP4 files modified in the last 7 days, provide a total count, and prompt to confirm file deletion before erasure.</em></p>
+<p>In the course of creating a deletion script I ran into a problem that I had overlooked in my earlier scripts. Supplying a <em>positional parameter</em> with a NAME and a <em>wildcard</em> would have the shell <em>expand</em> the parameter before it was passed to the <tt class="docutils literal">find</tt> command. So for example <em>shellscript *.mp4</em> would expand the <em>*.mp4</em> to all the files in the current directory that ended with that argument and pass those filenames to find. If there were no sub-folders in the directory that needed to be searched this is not a problem ... otherwise the result is that filename expansion prevents recursive search.</p>
+<p>What I <em>wanted</em> to occur is have the script forego expansion and pass the literal argument <em>&amp;lowast;mp4</em> to search. The solution was to use the <tt class="docutils literal">noglob</tt> variable which turns off and on shell pathname expansion. Writing a function that includes <tt class="docutils literal">set <span class="pre">-o</span> noglob</tt> to turn off and <tt class="docutils literal">set +o noglob</tt> to restore expansion allows wildcard characters to be treated literally in a variable. Recursive search is now a <em>go</em> ...</p>
+<div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<span class="c">#: VARIABLES</span>
+<span class="nv">Scriptname</span><span class="o">=</span><span class="s2">&quot;Fidel&quot;</span>
+<span class="nv">Description</span><span class="o">=</span><span class="s2">&quot;[Fi]nd and [del]ete - Recursive search of PWD for matching FILE(s) and delete&quot;</span>
+<span class="nv">Synopsis</span><span class="o">=</span><span class="s2">&quot;$Scriptname [-v|-h|-n [FILE]|-t [+-][TIME]]&quot;</span>
+<span class="nv">Version</span><span class="o">=</span><span class="s2">&quot;0.2&quot;</span>
+<span class="c"># -------- #</span>
+<span class="nv">RequiredPrograms</span><span class="o">=</span><span class="s2">&quot;findutils&quot;</span>
+<span class="nv">InvalidInput</span><span class="o">=</span><span class="s2">&quot;is invalid input. Please select &#39;Y(es)&#39; or &#39;N(o)&#39; ...&quot;</span>
+<span class="nv">FindName</span><span class="o">=</span>
+<span class="nv">FindTime</span><span class="o">=</span>
+
+<span class="c">#: FUNCTIONS</span>
+VersionInfo<span class="o">()</span>
+<span class="o">{</span>
+cat <span class="s">&lt;&lt; _EOF_</span>
+<span class="s">$Scriptname, Version $Version</span>
+<span class="s">_EOF_</span>
+<span class="o">}</span>
+
+HelpInfo<span class="o">()</span>
+<span class="o">{</span>
+cat <span class="s">&lt;&lt; _EOF_</span>
+<span class="s">Usage: $Synopsis</span>
+<span class="s">${Description}.</span>
+
+<span class="s">Debian package requirements: $RequiredPrograms</span>
+
+<span class="s">OPTIONS</span>
+<span class="s">-v  display version</span>
+<span class="s">-h  display help</span>
+<span class="s">-t  match files whose contents were last modified</span>
+<span class="s">    [+-][digit][m[inutes]|d[ays] ago</span>
+<span class="s">-n  match file &quot;NAME&quot;</span>
+
+<span class="s">EXAMPLES</span>
+<span class="s"># delete files modified less than 7 days ago</span>
+<span class="s">Fidel -t -7d</span>
+<span class="s"># delete files modified more than 88 minutes ago</span>
+<span class="s">Fidel -t +88m</span>
+<span class="s"># delete all JPG files (quotes are important)</span>
+<span class="s">Fidel -n &quot;*jpg&quot;</span>
+<span class="s"># delete all PNG files modified less than 90 minutes ago</span>
+<span class="s">Fidel -n &quot;*png&quot; -t -90m</span>
+<span class="s">_EOF_</span>
+<span class="o">}</span>
+
+Penguinista<span class="o">()</span>
+<span class="o">{</span>
+cat <span class="s">&lt;&lt; _EOF_</span>
+
+<span class="s">(O&lt;</span>
+<span class="s">(/)_</span>
+<span class="s">_EOF_</span>
+<span class="o">}</span>
+
+PenguinistaDone<span class="o">()</span>
+<span class="o">{</span>
+<span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
+<span class="nb">printf</span> <span class="s2">&quot;$( Penguinista )\tAll done.\n&quot;</span>
+<span class="o">}</span>
+
+PenguinistaNoDelete<span class="o">()</span>
+<span class="o">{</span>
+<span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
+<span class="nb">printf</span> <span class="s2">&quot;$( Penguinista )\tOK. No files deleted.\n&quot;</span>
+<span class="o">}</span>
+
+ReplyInvalid<span class="o">()</span>
+<span class="o">{</span>
+<span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
+<span class="nb">printf</span> <span class="s2">&quot;&#39;$REPLY&#39; $InvalidInput\n&quot;</span>
+<span class="o">}</span>
+
+ModField<span class="o">()</span>
+<span class="o">{</span>
+<span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$FindTime</span> <span class="o">]]</span>
+<span class="k">then</span>
+<span class="k">            </span><span class="nv">ModUnits</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="k">else</span>
+<span class="k">            if</span> <span class="o">[[</span> <span class="nv">$FindTime</span> <span class="o">=</span>~ ^<span class="o">[</span>+-<span class="o">]</span>*<span class="o">[</span>0-9<span class="o">]</span>+<span class="o">[</span>m<span class="o">]</span><span class="nv">$ </span><span class="o">]]</span>
+            <span class="k">then</span>
+<span class="k">                            </span><span class="nv">ModUnits</span><span class="o">=</span><span class="s2">&quot;-mmin ${FindTime%m}&quot;</span>
+            <span class="k">elif</span> <span class="o">[[</span> <span class="nv">$FindTime</span> <span class="o">=</span>~ ^<span class="o">[</span>+-<span class="o">]</span>*<span class="o">[</span>0-9<span class="o">]</span>+<span class="o">[</span>d<span class="o">]</span><span class="nv">$ </span><span class="o">]]</span>
+            <span class="k">then</span>
+<span class="k">                            </span><span class="nv">ModUnits</span><span class="o">=</span><span class="s2">&quot;-mtime ${FindTime%d}&quot;</span>
+            <span class="k">else</span>
+<span class="k">                            </span><span class="nb">printf</span> <span class="s2">&quot;Error: &#39;-t&#39; option requires argument in correct format ...\n&quot;</span>
+                            <span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
+                            HelpInfo
+                            <span class="nb">exit </span>1
+            <span class="k">fi</span>
+<span class="k">fi</span>
+<span class="o">}</span>
+
+FindNameCount<span class="o">()</span>
+<span class="o">{</span>
+<span class="nb">set</span> -o noglob       <span class="c"># no pathname expansion</span>
+ModField
+<span class="nb">local </span>counter
+<span class="nv">counter</span><span class="o">=</span>/tmp/FindNameCount
+find -L . -iname <span class="nv">$FindName</span> -type f <span class="nv">$ModUnits</span> -print 2&gt;/dev/null | tee -a <span class="nv">$counter</span>
+<span class="nb">printf</span> <span class="s2">&quot;Found $( wc -l $counter | awk {&#39;print $1&#39;} ) file(s).\n&quot;</span>
+rm <span class="nv">$counter</span>
+<span class="nb">set</span> +o noglob
+<span class="o">}</span>
+
+FindTimeCount<span class="o">()</span>
+<span class="o">{</span>
+ModField
+<span class="nb">local </span>counter
+<span class="nv">counter</span><span class="o">=</span><span class="k">$(</span> find . -type f <span class="nv">$ModUnits</span> -print 2&gt;/dev/null | tee /dev/tty | wc -l <span class="k">)</span>
+<span class="nb">printf</span> <span class="s2">&quot;Found $counter file(s).\n&quot;</span>
+<span class="o">}</span>
+
+<span class="c">#: LET&#39;S ROLL ...</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="nv">$1</span> !<span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span>
+<span class="k">then</span>
+<span class="k">    while </span><span class="nb">getopts</span> “n:t:hv” OPTION
+            <span class="k">do</span>
+<span class="k">            case</span> <span class="nv">$OPTION</span> in
+                                            n <span class="o">)</span>             <span class="nv">FindName</span><span class="o">=</span><span class="nv">$OPTARG</span>
+                                                            ;;
+                                            t <span class="o">)</span>             <span class="nv">FindTime</span><span class="o">=</span><span class="nv">$OPTARG</span>
+                                                            ;;
+                                            h <span class="o">)</span>             HelpInfo
+                                                            <span class="nb">exit</span>
+                                                            ;;
+                                            v <span class="o">)</span>             VersionInfo
+                                                            <span class="nb">exit</span>
+                                                            ;;
+                                            ? <span class="o">)</span>             HelpInfo
+                                                            <span class="nb">exit</span>
+                                                            ;;
+            <span class="k">esac</span>
+<span class="k">    done</span>
+<span class="k">else</span>
+<span class="k">    </span><span class="nb">printf</span> <span class="s2">&quot;Error: Fidel requires at least 1 parameter ...\n&quot;</span>
+            <span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
+    HelpInfo
+    <span class="nb">exit </span>1
+<span class="k">fi</span>
+
+<span class="k">if</span> <span class="o">[[</span> <span class="o">(</span> -n <span class="nv">$FindTime</span> <span class="o">&amp;&amp;</span> -n <span class="nv">$FindName</span> <span class="o">)</span> <span class="o">||</span> -n <span class="nv">$FindName</span> <span class="o">]]</span>
+<span class="k">then</span>
+<span class="k">            </span>FindNameCount
+            <span class="k">while </span><span class="nb">true</span>
+<span class="nb">            </span><span class="k">do</span>
+<span class="k">                            </span><span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
+                            <span class="nb">read</span> -n 1 -p <span class="s2">&quot;Delete? [yN] &gt; &quot;</span>
+                            <span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;$REPLY&quot;</span> <span class="o">==</span> <span class="o">[</span>yY<span class="o">]</span> <span class="o">]]</span>
+                            <span class="k">then</span>
+<span class="k">                                            </span>find -L . -iname <span class="s2">&quot;$FindName&quot;</span> -type f <span class="nv">$ModUnits</span> -delete
+                                            PenguinistaDone
+                                            <span class="nb">exit</span>
+<span class="nb">                            </span><span class="k">elif</span> <span class="o">[[</span> <span class="s2">&quot;$REPLY&quot;</span> <span class="o">==</span> <span class="o">[</span>nN<span class="o">]</span> <span class="o">||</span> <span class="s2">&quot;$REPLY&quot;</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span>
+                            <span class="k">then</span>
+<span class="k">                                            </span>PenguinistaNoDelete
+                                            <span class="nb">exit</span>
+<span class="nb">                            </span><span class="k">else</span>
+<span class="k">                                            </span>ReplyInvalid
+                            <span class="k">fi</span>
+<span class="k">            done</span>
+<span class="k">fi</span>
+
+<span class="k">if</span> <span class="o">[[</span> -n <span class="nv">$FindTime</span> <span class="o">]]</span>
+<span class="k">then</span>
+<span class="k">            </span>FindTimeCount
+            <span class="k">while </span><span class="nb">true</span>
+<span class="nb">            </span><span class="k">do</span>
+<span class="k">                            </span><span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
+                            <span class="nb">read</span> -n 1 -p <span class="s2">&quot;Delete? [yN] &gt; &quot;</span>
+                            <span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;$REPLY&quot;</span> <span class="o">==</span> <span class="o">[</span>yY<span class="o">]</span> <span class="o">]]</span>
+                            <span class="k">then</span>
+<span class="k">                                            </span>find . -type f <span class="nv">$ModUnits</span> -delete
+                                            PenguinistaDone
+                                            <span class="nb">exit</span>
+<span class="nb">                            </span><span class="k">elif</span> <span class="o">[[</span> <span class="s2">&quot;$REPLY&quot;</span> <span class="o">==</span> <span class="o">[</span>nN<span class="o">]</span> <span class="o">||</span> <span class="s2">&quot;$REPLY&quot;</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span>
+                            <span class="k">then</span>
+<span class="k">                                            </span>PenguinistaNoDelete
+                                            <span class="nb">exit</span>
+<span class="nb">                            </span><span class="k">else</span>
+<span class="k">                                            </span>ReplyInvalid
+                            <span class="k">fi</span>
+<span class="k">            done</span>
+<span class="k">fi</span>
+</pre></div>
+<div class="section" id="examples">
+<h2>Examples</h2>
+<p>Fidel can find and delete files by NAME and/or TIME ...</p>
+<div class="highlight"><pre><span class="c"># delete files modified less than 7 days ago</span>
+<span class="nv">$ </span>Fidel -t -7d
+
+<span class="c"># delete files modified more than 88 minutes ago</span>
+<span class="nv">$ </span>Fidel -t +88m
+
+<span class="c"># delete all JPG files (quotes are important)</span>
+<span class="nv">$ </span>Fidel -n <span class="s2">&quot;*jpg&quot;</span>
+
+<span class="c"># delete all PNG files modified less than 90 minutes ago</span>
+<span class="nv">$ </span>Fidel -n <span class="s2">&quot;*png&quot;</span> -t -90m
+</pre></div>
+<p>Running <tt class="docutils literal">Fidel <span class="pre">-h</span></tt> displays available options.</p>
+<p>This week - in addition to <tt class="docutils literal">set noglob</tt> I learned about the <tt class="docutils literal">tee</tt> command and <tt class="docutils literal">getopts</tt>. Fidel's counter function totals up the number of files returned by find and uses tee to both display to screen and create a temporary file to hold the output. The shell's built-in command <tt class="docutils literal">getopts</tt> is used to process the script's positional parameters and arguments.</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/video2audio.html">Video2Audio - Search for video and copy/convert to MP3</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/funkygoodtimer.html">FunkyGoodTimer - A simple (but funky) graphical countdown timer</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

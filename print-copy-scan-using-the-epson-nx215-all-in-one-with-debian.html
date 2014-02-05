@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Print copy scan using the Epson NX215 all-in-one with Linux</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Thursday 12 August 2010</p>
+</div>
+
+<!-- article -->
+<h1>Print copy scan using the Epson NX215 all-in-one with Linux</h1>
+<div id="article">
+    <p>While browsing through my local cluster of computer stores I came across the <em>Epson Stylus NX215 All-in-one Printer</em> which I purchased on sale for $40.</p>
+<p>Now someone who prints a <em>lot</em> probably should be looking at laser printers. But the higher operating costs of inkjets are not really a deterrent for my modest printing needs when the trade-off is a good sale price on a device that includes a scanner/copier in a single space-saving package. Epson is one of the better-supported brands in Linux and the NX215 works well... <em>after</em> bouncing over a few speedbumps to printshop glory.</p>
+<p>This is how I configured the printer to play nice with my Debian host machine ...</p>
+<div class="section" id="step-0-download">
+<h2>Step 0 - Download</h2>
+<p>Unpack the Epson, load it up with ink and paper, then switch the printer back off. Do not connect the device via USB cable just yet. On the host computer running Debian:</p>
+<pre class="code bash literal-block">
+<span class="nv">$ </span>sudo apt-get install cups lsb libltdl7 sane-utils xsane
+</pre>
+<p>Download printer and scanner packages from <a class="reference external" href="http://avasys.jp/eng/linux_driver/">Avasys</a> . On their Linux driver page... select your printer type and model. For the NX215 all-in-one I download:</p>
+<ul class="simple">
+<li>Epson-Stylus_NX215-pipslite-en.ppd</li>
+<li>pipslite_VERSION.deb</li>
+<li>iscan-data_VERSION_all.deb</li>
+<li>iscan_VERSION.deb</li>
+</ul>
+</div>
+<div class="section" id="step-1-install-print-drivers">
+<h2>Step 1 - Install print drivers</h2>
+<p>Attempting to install the print driver at this point will generate a complaint about a missing <tt class="docutils literal">libltdl3</tt> dependency and will result in a broken package. In Debian <tt class="docutils literal">stable</tt> the <tt class="docutils literal">libltdl3</tt> library has been superseded by <tt class="docutils literal">libltdl7</tt> and the Avasys package is hardcoded to look for the former. A way around this is to create a symlink before installing the drivers:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo ln -s /usr/lib/libltdl.so.7 /usr/lib/libltdl.so.3
+</pre></div>
+<p>Now install the <em>Photo Image Print System Lite</em> package:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo dpkg --ignore-depends<span class="o">=</span>libltdl3 -i pipslite_VERSION.deb
+</pre></div>
+<p>Copy the downloaded <em>PostScript Printer Description (PPD)</em> file to <tt class="docutils literal">/etc/cups/ppd</tt>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo cp Epson-Stylus_NX215-pipslite-en.ppd /etc/cups/ppd/
+<span class="nv">$ </span>sudo chmod 644 /etc/cups/ppd/Epson-Stylus_NX215-pipslite-en.ppd
+<span class="nv">$ </span>sudo /etc/init.d/cups restart
+</pre></div>
+</div>
+<div class="section" id="step-2-configure-cups">
+<h2>Step 2 - Configure CUPS</h2>
+<p>Now connect the NX215 via USB cable to the computer and switch on the printer. Running <tt class="docutils literal">dmesg</tt> on my desktop outputs:</p>
+<div class="highlight"><pre><span class="nv">$ </span>dmesg
+<span class="o">[</span>418676.456021<span class="o">]</span> usb 1-1: new high speed USB device using ehci_hcd and address 8
+<span class="o">[</span>418676.596366<span class="o">]</span> usb 1-1: New USB device found, <span class="nv">idVendor</span><span class="o">=</span>04b8, <span class="nv">idProduct</span><span class="o">=</span>084f
+<span class="o">[</span>418676.596370<span class="o">]</span> usb 1-1: New USB device strings: <span class="nv">Mfr</span><span class="o">=</span>1, <span class="nv">Product</span><span class="o">=</span>2, <span class="nv">SerialNumber</span><span class="o">=</span>3
+<span class="o">[</span>418676.596373<span class="o">]</span> usb 1-1: Product: USB2.0 MFP<span class="o">(</span>Hi-Speed<span class="o">)</span>
+<span class="o">[</span>418676.596376<span class="o">]</span> usb 1-1: Manufacturer: EPSON
+<span class="o">[</span>418676.596378<span class="o">]</span> usb 1-1: SerialNumber: 4C39544B3033343183
+<span class="o">[</span>418676.596487<span class="o">]</span> usb 1-1: configuration <span class="c">#1 chosen from 1 choice</span>
+<span class="o">[</span>418676.604068<span class="o">]</span> usblp0: USB Bidirectional printer dev 8 <span class="k">if </span>1 alt 0 proto 2 vid 0x04B8 pid 0x084F
+<span class="o">[</span>418676.605087<span class="o">]</span> scsi11 : SCSI emulation <span class="k">for </span>USB Mass Storage devices
+<span class="o">[</span>418676.605194<span class="o">]</span> usb-storage: device found at 8
+<span class="o">[</span>418676.605196<span class="o">]</span> usb-storage: waiting <span class="k">for </span>device to settle before scanning
+<span class="o">[</span>418681.604309<span class="o">]</span> usb-storage: device scan <span class="nb">complete</span>
+<span class="o">[</span>418681.606512<span class="o">]</span> scsi 11:0:0:0: Direct-Access     EPSON    Stylus Storage   1.00 PQ: 0 ANSI: 2
+<span class="o">[</span>418681.607084<span class="o">]</span> sd 11:0:0:0: Attached scsi generic sg6 <span class="nb">type </span>0
+<span class="o">[</span>418681.613113<span class="o">]</span> sd 11:0:0:0: <span class="o">[</span>sdf<span class="o">]</span> Attached SCSI removable disk
+</pre></div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Kernel driver <em>usb-storage</em> is detecting the printer SD slot. It can be used to print photos directly from a memory card without using a computer. I have not yet tried this feature (and with the price of ink I doubt I will make use of it).</p>
+</div>
+<p>Navigate with a web browser to <a class="reference external" href="http://localhost:631">http://localhost:631</a> and use the <em>Common Unix Printing System (CUPS)</em> to add the printer. CUPS detects the NX215 as a <em>Epson Stylus NX210</em> but despite the small difference in model number it does not appear to make a difference in use. During the CUPS configuration select the PPD installed in <tt class="docutils literal">/etc/cups/ppd</tt>.</p>
+</div>
+<div class="section" id="step-3-copier">
+<h2>Step 3 - Copier</h2>
+<p>One feature of the NX215 is the ability to act as a photocopier and make a duplicate of a document with the host computer powered off. Nothing to configure here... it works as expected.</p>
+</div>
+<div class="section" id="step-4-scanner">
+<h2>Step 4 - Scanner</h2>
+<p><tt class="docutils literal">Xsane</tt> is a popular Linux scanner tool with many options. For a simple front-end to xsane that is useful for basic scanning needs I installed the Avasys-sponsored <tt class="docutils literal">iscan</tt> package:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo dpkg -i iscan-data_VERSION.deb
+<span class="nv">$ </span>sudo dpkg --ignore-depends<span class="o">=</span>libltdl3 -i iscan_VERSION.deb
+</pre></div>
+<p>Before you can scan as a non-privileged user... that user account needs to be added to the <tt class="docutils literal">lp</tt> and <tt class="docutils literal">scanner</tt> groups:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo adduser USERNAME lp
+<span class="nv">$ </span>sudo adduser USERNAME scanner
+</pre></div>
+<p>Log out and back in again to update the user group list. Test the configuration by first running <tt class="docutils literal">xsane</tt>. If <tt class="docutils literal">xsane</tt> outputs an error message:</p>
+<div class="highlight"><pre>Failed to open device <span class="s1">&#39;epkowa:usb:001:008&#39;</span>:
+Access to resource has been denied.
+</pre></div>
+<p>... confirm that the affected user is a member of the <tt class="docutils literal">lp|scanner</tt> groups.</p>
+</div>
+<div class="section" id="step-5-modify-dpkg">
+<h2>Step 5 - Modify dpkg</h2>
+<p>Since I earlier installed <tt class="docutils literal">pipslite</tt> and <tt class="docutils literal">iscan</tt> by ignoring the <tt class="docutils literal">libltdl3</tt> dependency... the Debian package management tools will complain about broken packages every time I try to install something new. To fix this (thanks <a class="reference external" href="http://danson.grafidog.com/2010/02/epson-nx510-scanner-and-ubuntu-904.html">Dale</a>)... start by making a backup of <tt class="docutils literal">/var/lib/dpkg/status</tt> ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo cp /var/lib/dpkg/status /var/lib/dpkg/status.bak
+</pre></div>
+<p>Open a text editor and modify the entries for the <tt class="docutils literal">pipslite</tt> and <tt class="docutils literal">iscan</tt> packages by removing the reference to <tt class="docutils literal">libltdl3</tt>. After making this change Debian will no longer treat these packages as broken or try to remove them.</p>
+<p>Done! Good printer/scanner at a good price. I like it!</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr.html">Big screen little screen virtual screen and xrandr</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/hosting-multiple-domains-from-one-ip-address-using-apache.html">Hosting multiple domains from one IP address using Apache</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

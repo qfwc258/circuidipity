@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Dual-display configuration using Nvidia + Twinview</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Thursday 03 March 2011</p>
+</div>
+
+<!-- article -->
+<h1>Dual-display configuration using Nvidia + Twinview</h1>
+<div id="article">
+    <p>Use monitors of different resolutions and combine them into one desktop.</p>
+<p>Nvidia's <em>Twinview</em> feature makes it easy to create a single X session over two separate displays. Running - for example - <a class="reference external" href="http://fluxbox.org/">Fluxbox</a> window manager in a Twinview configuration the menubar can be extended across the entire length of both displays, windows maximize within the boundaries of a single display with no overlap, and windows are easily dragged from one display to the next (and if they are maximized ... auto-resize to fit the new resolution).</p>
+<p>To setup my desired side-by-side, dual-display layout I use ...</p>
+<ul class="simple">
+<li>a home-built Linux desktop box with a motherboard-embedded <em>GeForce 6150</em> video chipset offering dual VGA + DVI</li>
+<li>on my <em>right</em> ... an <em>Acer AL2216W</em> 22&quot; LCD at 1680x1050 resolution connected to the VGA port</li>
+<li>on my <em>left</em> ... an <em>I-INC iF281D</em> 28&quot; LCD at 1920x1200 resolution connected to the DVI port</li>
+<li>Debian <tt class="docutils literal">wheezy</tt> with a <tt class="docutils literal"><span class="pre">2.6.32-30</span> kernel</tt>, <tt class="docutils literal">Xorg 7.5+8</tt>, and the Nvidia proprietary <tt class="docutils literal">driver ver. <span class="pre">195.36.31-7</span></tt> installed via <tt class="docutils literal"><span class="pre">module-assistant</span></tt></li>
+</ul>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">For a dual-display configuration using non-Nvidia graphics try <a class="reference external" href="big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr.html">xrandr</a> .</p>
+</div>
+<p>Make a small edit to <tt class="docutils literal">/etc/X11/xorg.conf</tt> by adding <tt class="docutils literal">Option &quot;TwinView&quot;</tt> and <tt class="docutils literal">Option &quot;TwinViewOrientation&quot;</tt>. Using my own configuration as an example ... my primary display is the Acer and the I-INC is positioned left-relative to it. So I add to my <tt class="docutils literal">xorg.conf</tt> ...</p>
+<div class="highlight"><pre>Section <span class="s2">&quot;Device&quot;</span>
+    Identifier  <span class="s2">&quot;Card0&quot;</span>
+    <span class="c">#Driver      &quot;nouveau&quot;</span>
+    Driver      <span class="s2">&quot;nvidia&quot;</span>
+    VendorName  <span class="s2">&quot;nVidia Corporation&quot;</span>
+    BoardName   <span class="s2">&quot;C51PV [GeForce 6150]&quot;</span>
+    BusID       <span class="s2">&quot;PCI:0:5:0&quot;</span>
+    **Option      <span class="s2">&quot;TwinView&quot;</span> <span class="s2">&quot;true&quot;</span>**
+    **Option      <span class="s2">&quot;TwinViewOrientation&quot;</span> <span class="s2">&quot;LeftOf&quot;</span>**
+EndSection
+</pre></div>
+<p>Launch an X session and you are welcomed by a single, combined desktop (in my case ... 3600(1680+1920)x1200 resolution).</p>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/getting-nvidia-and-xorg-to-play-nice.html">Getting Nvidia and xorg to play nice</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/add-a-dynamic-menu-to-your-desktop-using-dmenu.html">Add a dynamic menu to your desktop using dmenu</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | DualDisplay - Extended desktop configuration</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Thursday 14 March 2013</p>
+</div>
+
+<!-- article -->
+<h1>DualDisplay - Extended desktop configuration</h1>
+<div id="article">
+    <p>Bash shell scripting strikes me as a good place for a Linux user to start to learn programming. Diving into the command line unlocks the power of Linux, makes it malleable to the user, and you pick up some history of how Unix came to be what it is today. Design ideas like <em>everything is a file</em> and <em>pipes</em> are incredibly useful for taking simple discrete components and stringing them together to build something new and awesome!</p>
+<p>I am working my way through <a class="reference external" href="http://linuxcommand.org/tlcl.php">The Linux Command Line</a> and I love it! Starting with a gentle introduction and configuration of the Bash shell, then quickly moving on to exploring the filesystem, input and output and redirection, manipulating text with <em>vim</em> and <em>regular expressions</em> and a whole suite of simple utilities (that can be piped to direct the flow of data into executing tasks of increasing complexity), finally bringing it all together in the latter part of the book to start assembling these commands together via <em>shell scripting</em>.</p>
+<p>When I am at home I connect an external display to my Thinkpad to create an <em>extended desktop</em> (running the <em>Openbox</em> window manager). I thought, <em>How cool would it be to have a shell script that auto-detected and configured the external display at startup?</em></p>
+<p>So I used some new tricks gleaned from <em>TLCL</em> to create <tt class="docutils literal">dualDisplay</tt>. I required a script that would:</p>
+<ul class="simple">
+<li>parse output of <tt class="docutils literal">xrandr</tt> to <em>detect</em> PRIMARY (and possible SECOND) displays connected to HOST</li>
+<li><em>if</em> SECOND <em>then create</em> an extended desktop using PRIMARY + SECOND</li>
+<li>use a <em>positional parameter</em> to provide option to <em>disable</em> extended desktop</li>
+<li>create a <em>test</em> to give the user feedback if an incorrect option is used</li>
+</ul>
+<div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<span class="c"># Enable|disable extended desktop using XRandR</span>
+
+<span class="nv">PRIMARY</span><span class="o">=</span><span class="k">$(</span>xrandr | grep <span class="s2">&quot; connected&quot;</span> | awk <span class="s1">&#39;FNR == 1 {print $1}&#39;</span><span class="k">)</span>
+<span class="nv">SECOND</span><span class="o">=</span><span class="k">$(</span>xrandr | grep <span class="s2">&quot; connected&quot;</span> | awk <span class="s1">&#39;FNR == 2 {print $1}&#39;</span><span class="k">)</span>
+<span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;xrandr --output $PRIMARY --auto --primary --output $SECOND&quot;</span>
+
+<span class="k">if</span> <span class="o">[[</span> -n <span class="nv">$SECOND</span> <span class="o">]]</span>; <span class="k">then</span>
+<span class="k">    if</span> <span class="o">[</span> <span class="s2">&quot;$1&quot;</span> !<span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+<span class="k">        case</span> <span class="nv">$1</span> in
+            -q <span class="o">)</span>    <span class="nv">$CONFIG</span> --off
+                    <span class="nb">exit</span>
+                    ;;
+            * <span class="o">)</span>     <span class="nb">printf</span> <span class="s2">&quot;ERROR: &#39;$1&#39; is an invalid option\n&quot;</span>
+                    <span class="nb">printf</span> <span class="s2">&quot;Option: &#39;-q&#39; disables an extended desktop\n&quot;</span>
+                    <span class="nb">exit </span>1
+                    ;;
+        <span class="k">esac</span>
+<span class="k">    else</span>
+        <span class="nv">$CONFIG</span> --auto --right-of <span class="nv">$PRIMARY</span>
+    <span class="k">fi</span>
+<span class="k">fi</span>
+</pre></div>
+<p>Make the script executable and drop it in <tt class="docutils literal">$HOME/bin</tt>.</p>
+<p>Run <tt class="docutils literal">dualDisplay</tt> or <tt class="docutils literal">dualDisplay <span class="pre">-q</span></tt> at the command line to enable|disable PRIMARY + SECOND. For Openbox I add the command to <tt class="docutils literal"><span class="pre">~/.config/openbox/autostart</span></tt> and now it launches and stitches together the Thinkpad's LCD and external display into a extended desktop whenever I enter the X environment.</p>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/adb-fastboot-android.html">Install ADB and Fastboot Android Tools</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/tartime-find-time-tar.html">TarTime - Match files and generate a tar archive</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

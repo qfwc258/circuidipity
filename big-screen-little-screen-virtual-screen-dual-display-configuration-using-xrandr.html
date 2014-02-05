@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Big screen little screen virtual screen and xrandr</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Thursday 17 June 2010</p>
+</div>
+
+<!-- article -->
+<h1>Big screen little screen virtual screen and xrandr</h1>
+<div id="article">
+    <p>Sometimes <em>less is more</em>. But sometimes less is just... well... <em>less</em>. I love my <a class="reference external" href="debian-linux-on-the-asus-eeepc-1001p.html">little netbook</a> . But when you have parked yourself somewhere and made yourself comfortable with an espresso and a banana... and portability is no longer a factor... the 10&quot; screen can be a mite limiting.</p>
+<p>But that VGA port on the side is there for a reason. Enter <tt class="docutils literal">xrandr</tt>.</p>
+<p>This nifty command line tool is useful for setting screen size, orientation, mirroring outputs or... my interest... adding an external display and pairing it with my netbook's built-in LCD to create a single <em>virtual</em> desktop. This allows applications to be launched on either display, windows dragged from one display to the next, and window borders will respect the dimensions of whatever display they reside on when maximized.</p>
+<p>No modifications are necessary to <tt class="docutils literal">xorg.conf</tt>. External displays can be hot-plugged to the host and a running X server can be modified by using xrandr + desired options in a terminal.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">For a dual-display configuration using <em>Nvidia</em> graphics ... give <a class="reference external" href="twinview.html">Twinview</a> a go.</p>
+</div>
+<p>To setup my desired dual-display layout ... I use:</p>
+<ul class="simple">
+<li><a class="reference external" href="debian-linux-on-the-asus-eeepc-1001p.html">Asus EEEPC 1001P-MU17</a> netbook with 10.1&quot; LCD at 1024x600 powered by Intel GMA 3150 integrated video</li>
+<li>Acer AL2216W 22&quot; LCD at 1680x1050 resolution</li>
+<li><a class="reference external" href="install-debian-linux-squeeze.html">Debian</a> with a <tt class="docutils literal"><span class="pre">2.6.32-15</span> kernel</tt>, <tt class="docutils literal">xrandr v1.3.2</tt>, and the <a class="reference external" href="http://fluxbox.org/">Fluxbox</a> window manager</li>
+</ul>
+<p>Running xrandr without any options will dump the state of the outputs, show existing modes for each of them, with a '+' after the preferred mode and a '*' after the current mode.</p>
+<p>Using my setup as an example... connecting my 22&quot; LCD to my netbook's VGA-port but leaving the external display powered off outputs:</p>
+<div class="highlight"><pre><span class="nv">$ </span>xrandr
+Screen 0: minimum 320 x 200, current 1024 x 600, maximum 4096 x 4096
+VGA1 connected <span class="o">(</span>normal left inverted right x axis y axis<span class="o">)</span>
+    1680x1050      60.0 +
+    1280x1024      75.0     60.0
+    1440x900       75.0     59.9
+    1280x960       60.0
+    1360x765       59.8
+    1152x864       75.0
+    1280x720       60.0
+    1024x768       75.1     70.1     60.0
+    832x624        74.6
+    800x600        72.2     75.0     60.3     56.2
+    640x480        72.8     75.0     66.7     60.0
+    720x400        70.1
+LVDS1 connected 1024x600+0+0 <span class="o">(</span>normal left inverted right x axis y axis<span class="o">)</span> 220mm x 129mm
+    1024x600       60.0*+   65.0
+    800x600        60.3
+    640x480        59.9
+</pre></div>
+<p><tt class="docutils literal">Xrandr</tt> correctly detects my attached external display <tt class="docutils literal">VGA1</tt> and my netbook's LCD <tt class="docutils literal">LVDS1</tt> running at its optimum setting. For the purposes of using the dual-displays to create a virtual desktop... recent work on <em>Kernel Mode Setting</em> <tt class="docutils literal">KMS</tt> and the latest Intel chips/drivers like the GMA 3150 allow a larger virtual display size (4096x4096) <em>but</em> the chip has hardware limitations when the display area exceeds 2048 pixels (horizontally or vertically).</p>
+<p><a class="reference external" href="https://bugzilla.redhat.com/show_bug.cgi?id=497069">Known issues and possible workarounds</a> when running a dual-display virtual desktop include limited and crash-prone 3D acceleration and Xvideo fails (black or empty video window). In the case of Xvideo... I experimented with the various <tt class="docutils literal"><span class="pre">-vo</span></tt> settings of <tt class="docutils literal">mplayer</tt> and found that running <tt class="docutils literal">mplayer <span class="pre">-vo</span> gl</tt> bypassed the problem.</p>
+<p>Now to create my dual-display virtual desktop with my external display on the left and my netbook on the right I run ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>xrandr --output LVDS1 --auto --output VGA1 --auto --left-of LVDS1
+</pre></div>
+<p>Using <tt class="docutils literal"><span class="pre">--auto</span></tt> prompts xrandr to select the optimum resolution for each display. Any supported resolution may also be set by using the <tt class="docutils literal"><span class="pre">--mode</span> resolution</tt> option. If the external display is to the right of the netbook I would change <tt class="docutils literal"><span class="pre">--left-of</span></tt> to <tt class="docutils literal"><span class="pre">--right-of</span></tt> ... in addition you arrange the displays in a top or bottom layout.</p>
+<p>If you would rather <em>mirror</em> (clone) the netbook's display on the external device (perhaps for using a projector connected to the VGA-port) ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>xrandr --output LVDS1 --mode 800x600 --output VGA1 --mode 800x600 --same-as LVDS1
+</pre></div>
+<p>There are many other options and details described in <tt class="docutils literal">man xrandr</tt> ... I also found <a class="reference external" href="http://www.thinkwiki.org/wiki/Xorg_RandR_1.2">http://www.thinkwiki.org/wiki/Xorg_RandR_1.2</a> and <a class="reference external" href="http://wiki.debian.org/XStrikeForce/HowToRandR12">http://wiki.debian.org/XStrikeForce/HowToRandR12</a> helpful.</p>
+<p>To preserve my xrandr configuration strings for future use... I added aliases to <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt> ...</p>
+<div class="highlight"><pre><span class="nb">alias </span><span class="nv">dsply2clone</span><span class="o">=</span><span class="s1">&#39;xrandr --output LVDS1 --mode 800x600 --output VGA1 --mode 800x600 --same-as LVDS1&#39;</span>
+<span class="nb">alias </span><span class="nv">dsply2left</span><span class="o">=</span><span class="s1">&#39;xrandr --output LVDS1 --auto --output VGA1 --auto --left-of LVDS1&#39;</span>
+<span class="nb">alias </span><span class="nv">dsply2right</span><span class="o">=</span><span class="s1">&#39;xrandr --output LVDS1 --auto --output VGA1 --auto --right-of LVDS1&#39;</span>
+</pre></div>
+<p>I was really impressed how setting up a dual-display configuration in xrandr &quot;just worked&quot; running on recent hardware and Debian. Can't believe I never tried it sooner. I like it!</p>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/debian-linux-on-the-asus-eeepc-1001p.html">Debian Linux on the Asus EEEPC 1001P</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/print-copy-scan-using-the-epson-nx215-all-in-one-with-debian.html">Print copy scan using the Epson NX215 all-in-one with Linux</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

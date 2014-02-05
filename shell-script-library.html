@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | A library for shell scripts</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Thursday 18 April 2013</p>
+</div>
+
+<!-- article -->
+<h1>A library for shell scripts</h1>
+<div id="article">
+    <p>Programming languages like Python can make use of <em>libraries</em> of code to add ready-to-go capabilities to programs. Shell scripts don't use libraries but I learned this week it is possible to &lt;strong&gt;source&lt;/strong&gt; a file in a shell script and add functions to the script as if they were entered directly (vs spawning a subshell). Very useful in creating your own library equivalent for the shell!</p>
+<p>There are several functions I have created in previous scripts that are self-contained in their logic and can be re-used over and over again. This function - for example - adds a test whether or not the user executing a script has root privileges ...</p>
+<div class="highlight"><pre>ConfirmRoot<span class="o">()</span>
+<span class="o">{</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="nv">$UID</span> -ne 0 <span class="o">]]</span>
+<span class="k">then</span>
+<span class="k">    </span><span class="nb">printf</span> <span class="s2">&quot;\n$( Penguinista )\t$Scriptname requires ROOT privileges to do its job.\n&quot;</span>
+<span class="nb">exit</span>
+<span class="k">fi</span>
+<span class="o">}</span>
+</pre></div>
+<p><em>Penguinista</em> is another function that draws a little ASCII penguin and <em>Scriptname</em> is a variable that holds - you guessed it - the script's name and is present in every script I write. I gathered up several other functions like this adding them to a <tt class="docutils literal">Library.sh</tt> file and placing it in my PATH. When I create a new shell script and want to access this library of functions I source <em>Library.sh</em> by adding ...</p>
+<div class="highlight"><pre>. Library.sh
+</pre></div>
+<p><tt class="docutils literal">ConfirmRoot</tt> is now available for inclusion in every script that needs it ... write once and use everywhere. Sourcing a library file for the shell reminds me of HTML templates and CSS stylesheets for websites. Adding new functions or making improvements to existing ones in a single location means the changes ripple across every script that calls upon that location.</p>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/funkygoodtimer.html">FunkyGoodTimer - A simple (but funky) graphical countdown timer</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/python-mechanical-mooc.html">Python Frankenstein and the Mechanical MOOC</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Install Arduino on Debian</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Friday 04 October 2013</p>
+</div>
+
+<!-- article -->
+<h1>Install Arduino on Debian</h1>
+<div id="article">
+    <p>I have been exploring the <em>Arduino Uno</em> microcontroller board this week and it is proving a fun entry point to hardware hacking and programming.</p>
+<p>Installing the <a class="reference external" href="http://playground.arduino.cc/Learning/Linux">Arduino development environment</a> on Debian or Ubuntu involves ... 0) adding my USER to the <tt class="docutils literal">dialout</tt> group (and logging out and back in again for the change to take effect); 1) install package dependencies and; 2) download the Debian packages for Arduino for manual installation ...</p>
+<div class="highlight"><pre>$ sudo adduser USER dialout
+$ sudo apt-get update &amp;&amp; sudo apt-get install openjdk-7-jre avr-libc avrdude binutils-avr extra-xdg-menus gcc-avr libftdi1 libjna-java librxtx-java
+</pre></div>
+<p>Versions of the Arduino software packaged for official Ubuntu and Debian releases are often outdated. Download the latest packages for <a class="reference external" href="http://packages.debian.org/sid/arduino-core">arduino-core</a> and <a class="reference external" href="http://packages.debian.org/sid/arduino">arduino</a> from Debian's <tt class="docutils literal">unstable</tt> branch and install manually ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo dpkg -i arduino-core_VERSION_all.deb
+<span class="nv">$ </span>sudo dpkg -i arduino_VERSION_all.deb
+</pre></div>
+<p>Connect the Uno to a computer via USB, open the Arduino IDE and confirm that the port setting is properly set to <tt class="docutils literal"><span class="pre">Tools-&gt;Serial</span> <span class="pre">Port-&gt;/dev/ttyACM0</span></tt>. Ready to go!</p>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-arduino.html">arduino</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-electronics.html">electronics</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/bbb-dt.html">Device Tree and BeagleBone Black</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/install-debian-wheezy-screenshot-tour.html">Install Debian Wheezy Screenshot Tour</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Virtualbox with Debian HOST and GUEST</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Friday 07 December 2012</p>
+</div>
+
+<!-- article -->
+<h1>Virtualbox with Debian HOST and GUEST</h1>
+<div id="article">
+    <p><a class="reference external" href="https://www.virtualbox.org/">Virtualbox</a> is virtualization software that allows a Linux user to HOST multiple GUEST OSs as <em>virtual machines</em> (VMs). Its an awesome piece of kit for playing with different Linux distros and experimenting with configurations without blowing up your main box.</p>
+<p>In this HOWTO I install Virtualbox on a Debian HOST and create a Debian GUEST VM.</p>
+<div class="section" id="step-0-install">
+<h2>Step 0 - Install</h2>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install dkms linux-headers-amd64
+<span class="nv">$ </span>sudo apt-get install virtualbox virtualbox-dkms virtualbox-qt
+</pre></div>
+<p>Virtualbox kernel modules are built via <em>Dynamic Kernel Module Support</em> (<a class="reference external" href="http://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support">DKMS</a>). After installing the virtualbox packages the <tt class="docutils literal">vbox</tt> modules should be auto-built and -loaded ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>lsmod | grep vbox
+vboxpci                19066  0
+vboxnetadp             13155  0
+vboxnetflt             23571  0
+vboxdrv               190057  4 vboxnetflt,vboxnetadp,vboxpci
+</pre></div>
+<p>Add USERNAME to the <tt class="docutils literal">vboxusers</tt> group <tt class="docutils literal">sudo adduser USERNAME vboxusers</tt>.</p>
+</div>
+<div class="section" id="step-1-create-vm">
+<h2>Step 1 - Create VM</h2>
+<p>The <em>Default Machine Folder</em> where VM images are stored is <tt class="docutils literal">$HOME/Virtualbox VMs</tt> (this can be modified in <tt class="docutils literal"><span class="pre">File-&gt;Preferences-&gt;General</span></tt>).</p>
+<p>See the <a class="reference external" href="http://www.virtualbox.org/manual/UserManual.html">User Manual</a> for creating a GUEST VM. I use the <a class="reference external" href="http://ftp.nl.debian.org/debian/dists/testing/main/installer-amd64/current/images/netboot/mini.iso">Debian mini installer</a> to create a new VM with a minimal system configuration. The installer auto-detects it is being configured as a VM and prompts for permission to install the <tt class="docutils literal"><span class="pre">virtualbox-ose-guest-x11</span></tt> package. Go ahead and install.</p>
+<p>After the new Debian guest VM is sucessfully created I <em>clone</em> the image <tt class="docutils literal"><span class="pre">Machine-&gt;Clone</span> ...</tt> - preserving the fresh install image 'as is' - and go off to do all my experiments on the clone. Saves having to repeat the installation all over again.</p>
+</div>
+<div class="section" id="step-2-guest-vm-configuration">
+<h2>Step 2 - Guest VM Configuration</h2>
+<p><em>Guest Additions</em> are designed to be installed inside a guest VM after the operating system has been installed. <a class="reference external" href="https://www.youtube.com/watch?v=Q84boOmiPW8">This video</a> was helpful for setting it up. Some cool extra features they bring to the party are the ability to tweak display settings and add a shared folder that can accessed by both HOST and GUEST machines.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">There is much discussion online about installing the virtualbox <em>guest-additions iso</em> (available both from virtualbox.org and as a Debian package) and the <a class="reference external" href="https://www.virtualbox.org/manual/ch01.html#intro-installing">extensions pack</a> but I skipped it.</p>
+</div>
+<p>Startup your newly-created (clone) Debian guest VM and install ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install dkms
+<span class="nv">$ </span>sudo apt-get install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+</pre></div>
+<p>Add USERNAME to the <tt class="docutils literal">vboxsf</tt> group.</p>
+<p>Tweak display settings by going to the VM&amp;#39;s <tt class="docutils literal"><span class="pre">Machine-&gt;Settings...-&gt;Display</span></tt> and move the slider to add more video memory and enable 3d acceleration.</p>
+<img alt="Display Settings" class="align-center" src="images/20121207-display.png" style="width: 662px; height: 502px;" />
+<p>With virtualbox guest additions installed the display and resolution can be changed when running X ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>ps aux | grep VBox
+/usr/sbin/VBoxService
+/usr/bin/VBoxClient --clipboard
+/usr/bin/VBoxClient --display
+/usr/bin/VBoxClient --seamless
+</pre></div>
+<p>If the VM does not use a graphical login manager to launch its desktop then modify <tt class="docutils literal"><span class="pre">$HOME/.xinitrc</span></tt> to start VBoxClient services ...</p>
+<div class="highlight"><pre>VBoxClient --clipboard &amp;
+VBoxClient --display &amp;
+VBoxClient --seamless &amp;
+</pre></div>
+<p>Next create a shared folder on HOST. Make it accessible to GUEST by going to <tt class="docutils literal"><span class="pre">Machine-&gt;Settings...-&gt;Shared</span> Folders</tt> and click <tt class="docutils literal">Add Shared Folder</tt> and <tt class="docutils literal"><span class="pre">Auto-Mount</span></tt>.</p>
+<img alt="Shared Folder Settings" class="align-center" src="images/20121207-shared-folders.png" style="width: 662px; height: 502px;" />
+<p>GUEST should see <tt class="docutils literal">vbox</tt> running processes ...</p>
+<pre class="code bash literal-block">
+<span class="nv">$ </span>lsmod | grep vbox
+vboxguest
+vboxsf
+vboxvideo
+</pre>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-virtual-environments.html">virtual environments</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/multi-boot-usb.html">Transform a USB stick into a boot device packing multiple Linux distros</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/100-days-of-programming.html">100 Days of Programming</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

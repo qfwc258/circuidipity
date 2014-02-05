@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Great fun getting started with Jekyll</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Thursday 07 June 2012</p>
+</div>
+
+<!-- article -->
+<h1>Great fun getting started with Jekyll</h1>
+<div id="article">
+    <p>I discovered a cool tool named <em>Jekyll</em> that I am now using to generate my website. From the <a class="reference external" href="https://github.com/mojombo/jekyll#readme">README</a> ...</p>
+<blockquote>
+Jekyll is a simple, blog aware, static site generator. It takes a template directory (representing the raw form of a website), runs it through Textile or Markdown and Liquid converters, and spits out a complete, static website suitable for serving with Apache or your favorite web server.</blockquote>
+<p>I find the idea of creating a static website very appealing. Some of the advantages:</p>
+<ul class="simple">
+<li>everything is stored as plain text files ... easy to edit, backup and move around</li>
+<li>cheap and easy to host ... I make use of Amazon S3 and its ability to <a class="reference external" href="host-website-on-amazon-s3.html">host static webpages</a></li>
+<li>easy to maintain and scale ... at the end of the day its straight HTML</li>
+</ul>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Another possible (free for non-commercial use) hosting option is <a class="reference external" href="https://github.com/">GitHub</a>. Jekyll is the default page generator for the site (and was created by GitHub co-founder Tom Preston-Werner).</p>
+</div>
+<p>The traditional disadvantage to using static pages for a blog has been the lack of dynamic elements - hosting feeds, user comments - but JavaScript for things like the Twitter widget to provide real-time updates and out-sourced services like Disqus to provide comments can work around the old limitations.</p>
+<p>Jekyll hits a sweet spot for me. At one end is writing hand-crafted HTML and at the other is database-driven solutions like Wordpress serving up a full-load burrito. Each is most excellent in its own way but Jekyll offers the power of static combined with the use of YAML, Liquid templating, more human-friendly Markdown syntax, and the ability to craft simple programming logic to make writing for the web easier to do and maintain over time.</p>
+<div class="section" id="getting-started">
+<h2>Getting Started</h2>
+<p>Jekyll is powered by the <a class="reference external" href="http://www.ruby-lang.org/en/">Ruby</a> programming language. You don't need to know Ruby to get started and if the default configuration of Jekyll does what you want you can merrily go off and write your posts without touching the language. But Jekyll can be extended by <a class="reference external" href="https://github.com/mojombo/jekyll/wiki/Plugins">downloading plugins</a> or rolling your own. Having an opportunity to play with Jekyll for the last week I believe it will be good entry-point for myself to learn programming in general and Ruby in particular.</p>
+<p>Last week I <a class="reference external" href="install-ruby-on-debian-wheezy-using-rvm.html">installed Ruby using RVM</a> and after your Ruby environment is properly configured its a simple matter to <a class="reference external" href="https://github.com/mojombo/jekyll/wiki/install">install Jekyll</a>. Note that Jekyll is a <em>rendering</em> engine. Pre-configuration is left in user hands. The documentation quickly guides you through creating default directories and files and its possible to have something up and running in minutes.</p>
+</div>
+<div class="section" id="yaml-liquid-and-markdown">
+<h2>YAML, Liquid, and Markdown</h2>
+<p><em>YAML</em> and <em>Liquid</em> templating are new to me. <a class="reference external" href="http://yaml.org/">YAML</a> &quot;is a human friendly data serialization standard for all programming languages&quot;. Its presence in a document header signals Jekyll to go to work on the contents and it holds variables that can be used in templates and Jekyll functions. This post - for example - has the following YAML header ...</p>
+<div class="highlight"><pre>---
+layout: post
+title: Great fun getting started with Jekyll
+location: Toronto
+modified: 2012-06-07
+---
+</pre></div>
+<p>Variables <em>layout</em> and <em>title</em> are included by default in Jekyll and can be used to set a template for the document and generate a page title (and more).</p>
+<p>I also can create my own variables. The entry <em>location: Toronto</em> sets a variable that is used in <a class="reference external" href="http://liquidmarkup.org/">Liquid</a> to add my location to the posting date ...</p>
+<div class="highlight"><pre><span class="o">{</span>% raw %<span class="o">}</span>
+<span class="o">{{</span> page.date | date_to_long_string <span class="o">}}</span> in <span class="o">{{</span> page.location <span class="o">}}</span>
+<span class="o">{</span>% endraw %<span class="o">}</span>
+</pre></div>
+<p>I then create a layout template named <em>post.html</em> and insert this piece of code ...</p>
+<div class="highlight"><pre><span class="o">{</span>% raw %<span class="o">}</span>
+---
+layout: default
+---
+
+&lt;div <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;post&quot;</span>&gt;
+
+        &lt;div <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;page-date&quot;</span>&gt;
+                <span class="o">{{</span> page.date | date_to_long_string <span class="o">}}</span> in <span class="o">{{</span> page.location <span class="o">}}</span>
+        &lt;/div&gt;
+
+        &lt;div <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;page-title&quot;</span>&gt;
+                &lt;h1&gt;<span class="o">{{</span> page.title <span class="o">}}</span>&lt;/h1&gt;
+        &lt;/div&gt;
+
+        <span class="o">{{</span> content <span class="o">}}</span>
+<span class="o">{</span>% endraw %<span class="o">}</span>
+</pre></div>
+<p>Any modifications I make to this document will ripple across all documents that call on <em>layout: post</em>. Cool!</p>
+<p><a class="reference external" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> &quot;allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML)&quot;. So - for example - web links ...</p>
+<div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://daringfireball.net/projects/markdown/syntax&quot;</span><span class="nt">&gt;</span>Markdown<span class="nt">&lt;/a&gt;</span>
+</pre></div>
+<p>... can be written as ...</p>
+<div class="highlight"><pre>[Markdown](http://daringfireball.net/projects/markdown/syntax)
+</pre></div>
+<p>Other examples ...</p>
+<div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Header 1<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h2&gt;</span>Header 2<span class="nt">&lt;/h2&gt;</span>
+
+# Header 1
+## Header 2
+
+<span class="nt">&lt;em&gt;</span>italic<span class="nt">&lt;/em&gt;</span>
+<span class="nt">&lt;strong&gt;</span>emphasis<span class="nt">&lt;/strong&gt;</span>
+
+*italic*
+**emphasis**
+</pre></div>
+<p>Markdown syntax co-exists peacefully with HTML tags inside the same document leaving you free to mix and match as you please. I use it to format my regular text files as well. It is a very natural way to write.</p>
+</div>
+<div class="section" id="next-step">
+<h2>Next step</h2>
+<p>Starting fresh not only with Jekyll but also YAML, Liquid, plus picking up a dash of CSS to style it ... the width and breadth of documentation available can be a bit overwhelming. I found <a class="reference external" href="http://www.kinnetica.com/2011/04/17/jekyll-tips-and-tricks/">Jekyll - 7 Tips &amp; Tricks</a> to be a good &quot;next step&quot; after Jekyll is up-and-running.</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-web.html">web</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/install-ruby-on-debian-wheezy-using-rvm.html">Install Ruby on Debian Wheezy using RVM</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/multi-boot-usb.html">Transform a USB stick into a boot device packing multiple Linux distros</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

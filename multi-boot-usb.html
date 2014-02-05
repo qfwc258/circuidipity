@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Transform a USB stick into a boot device packing multiple Linux distros</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Thursday 06 December 2012</p>
+</div>
+
+<!-- article -->
+<h1>Transform a USB stick into a boot device packing multiple Linux distros</h1>
+<div id="article">
+    <p>In 5 easy steps I transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.</p>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">In this HOWTO the USB stick is identified as <em>sdX</em> and contains a single partition <em>sdX1</em>. Make careful note of the drive and partition labels on your system. The following steps will <strong>destroy all data</strong> currently stored on the device.</p>
+</div>
+<div class="section" id="step-0-select-device-and-create-filesystem">
+<h2>Step 0 - Select device and create filesystem</h2>
+<p>I create a <tt class="docutils literal">FAT32</tt> partition on the unmounted USB stick ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkfs.vfat -n multiboot /dev/sdX1
+</pre></div>
+</div>
+<div class="section" id="step-1-create-boot-and-iso-folders">
+<h2>Step 1 - Create boot and iso folders</h2>
+<p>The new <tt class="docutils literal">FAT32</tt> partition is mounted and I create a <tt class="docutils literal">boot</tt> folder for GRUB and a <tt class="docutils literal">iso</tt> folder to hold my Linux distro images ...</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>MOUNTPOINT
+<span class="nv">$ </span>mkdir boot iso
+</pre></div>
+</div>
+<div class="section" id="step-2-install-grub">
+<h2>Step 2 - Install GRUB</h2>
+<p>Install GRUB to the <em>Master Boot Record (MBR)</em> of the USB stick ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo grub-install --force --no-floppy --boot-directory<span class="o">=</span>MOUNTPOINT/boot /dev/sdX
+</pre></div>
+</div>
+<div class="section" id="step-3-copy-linux-images">
+<h2>Step 3 - Copy Linux images</h2>
+<p>Download and copy Linux ISO images to the newly-created <tt class="docutils literal">iso</tt> folder on the USB stick. For example I have installed on my own USB stick:</p>
+<ul class="simple">
+<li><strong>TAILS</strong> - <a class="reference external" href="https://tails.boum.org/about/index.en.html">The Amnesic Incognito Live System</a> - distro focused on user privacy and anonymity</li>
+<li><strong>GParted Live CD</strong> - <a class="reference external" href="http://gparted.sourceforge.net/livecd.php">Graphical partition editor</a> for hard drives</li>
+<li><strong>Ubuntu current and LTS Mini-Installers</strong> - Minimal (approx 25-30MB) <a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD">install disks</a></li>
+<li><strong>Debian 7.0  Mini-Installers</strong> - Install disks for <a class="reference external" href="http://ftp.nl.debian.org/debian/dists/testing/main/installer-amd64/current/images/netboot/mini.iso">64-bit</a> and <a class="reference external" href="http://ftp.nl.debian.org/debian/dists/testing/main/installer-i386/current/images/netboot/mini.iso">32-bit</a></li>
+<li><strong>Memtest86+</strong> - Diagnostic tool for <a class="reference external" href="http://www.memtest.org/">testing RAM</a></li>
+<li><strong>Darik's Boot and Nuke (DBAN)</strong> - <a class="reference external" href="http://www.dban.org/">Secure deletion tool</a> to wipe hard disks clean</li>
+</ul>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">When using DBAN remove the USB stick immediately when the boot messages begin to scroll past ... otherwise it will scan for USB drives and later fail when selecting a hard drive to wipe.</p>
+</div>
+</div>
+<div class="section" id="step-4-create-grub-cfg">
+<h2>Step 4 - Create grub.cfg</h2>
+<p>Create a <tt class="docutils literal">grub.cfg</tt> with entries for the Linux images copied to the USB stick. Each distro is a little bit different in the manner its booted by GRUB. Using my own example above I have created ...</p>
+<div class="highlight"><pre><span class="c"># Config for GNU GRand Unified Bootloader (GRUB)</span>
+<span class="c"># /boot/grub/grub.cfg</span>
+
+<span class="c"># Timeout for menu</span>
+<span class="nb">set </span><span class="nv">timeout</span><span class="o">=</span>30
+
+<span class="c"># Default boot entry</span>
+<span class="nb">set </span><span class="nv">default</span><span class="o">=</span>0
+
+<span class="c"># Menu Colours</span>
+<span class="nb">set </span><span class="nv">menu_color_normal</span><span class="o">=</span>white/black
+<span class="nb">set </span><span class="nv">menu_color_highlight</span><span class="o">=</span>white/green
+
+<span class="c"># Boot ISOs</span>
+menuentry <span class="s2">&quot;TAILS - The Amnesic Incognito Live System&quot;</span> <span class="o">{</span>
+    <span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/tails-i386.iso&quot;</span>
+    loopback loop <span class="nv">$iso</span>
+    linux <span class="o">(</span>loop<span class="o">)</span>/live/vmlinuz <span class="nv">boot</span><span class="o">=</span>live config live-media<span class="o">=</span>removable nopersistent noprompt quiet <span class="nv">timezone</span><span class="o">=</span>America/Toronto block.events_dfl_poll_msecs<span class="o">=</span>1000 splash nox11autologin <span class="nv">module</span><span class="o">=</span>Tails <span class="nv">findiso</span><span class="o">=</span><span class="nv">$iso</span> quiet_
+    initrd <span class="o">(</span>loop<span class="o">)</span>/live/initrd.img
+<span class="o">}</span>
+
+menuentry <span class="s2">&quot;GParted Live - Partition Editor&quot;</span> <span class="o">{</span>
+    <span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/gparted-live.iso&quot;</span>
+    loopback loop <span class="nv">$iso</span>
+    linux <span class="o">(</span>loop<span class="o">)</span>/live/vmlinuz <span class="nv">boot</span><span class="o">=</span>live config <span class="nv">union</span><span class="o">=</span>aufs noswap noprompt <span class="nv">ip</span><span class="o">=</span>frommedia <span class="nv">toram</span><span class="o">=</span>filesystem.squashfs <span class="nv">findiso</span><span class="o">=</span><span class="nv">$iso</span>
+    initrd <span class="o">(</span>loop<span class="o">)</span>/live/initrd.img
+<span class="o">}</span>
+
+menuentry <span class="s2">&quot;Ubuntu 13.10 Saucy Salamander - 64bit Mini-Installer&quot;</span> <span class="o">{</span>
+    <span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/ubuntu-13.10-64bit-mini.iso&quot;</span>
+    loopback loop <span class="nv">$iso</span>
+    linux <span class="o">(</span>loop<span class="o">)</span>/linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject
+    initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
+<span class="o">}</span>
+
+menuentry <span class="s2">&quot;Ubuntu 12.04 LTS Precise Pangolin - 32bit Mini-Installer&quot;</span> <span class="o">{</span>
+    <span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/ubuntu-12.04-32bit-mini.iso&quot;</span>
+    loopback loop <span class="nv">$iso</span>
+    linux <span class="o">(</span>loop<span class="o">)</span>/linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject
+    initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
+<span class="o">}</span>
+
+menuentry <span class="s2">&quot;Debian 7.0 Wheezy - 64bit Mini-Installer&quot;</span> <span class="o">{</span>
+    <span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/debian-wheezy-amd64-mini.iso&quot;</span>
+    loopback loop <span class="nv">$iso</span>
+    linux <span class="o">(</span>loop<span class="o">)</span>/linux
+    initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
+<span class="o">}</span>
+
+menuentry <span class="s2">&quot;Debian 7.0 Wheezy - 32bit Mini-Installer&quot;</span> <span class="o">{</span>
+    <span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/debian-wheezy-i386-mini.iso&quot;</span>
+    loopback loop <span class="nv">$iso</span>
+    linux <span class="o">(</span>loop<span class="o">)</span>/linux
+    initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
+<span class="o">}</span>
+
+menuentry <span class="s2">&quot;Memtest86+ - RAM Tester&quot;</span> <span class="o">{</span>
+    linux16 /boot/memtest86+.bin
+<span class="o">}</span>
+
+menuentry <span class="s2">&quot;Darik&#39;s Boot and Nuke - Hard Disk Wipe&quot;</span> <span class="o">{</span>
+    <span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/dban-i586.iso&quot;</span>
+    loopback loop <span class="nv">$iso</span>
+    linux <span class="o">(</span>loop<span class="o">)</span>/DBAN.BZI <span class="nv">nuke</span><span class="o">=</span><span class="s2">&quot;dwipe&quot;</span>
+<span class="o">}</span>
+</pre></div>
+<p>Save <tt class="docutils literal">grub.cfg</tt> to the USB stick at <tt class="docutils literal">MOUNTPOINT/boot/grub</tt>.</p>
+<p>All done! Reboot, select the USB stick (depending on BIOS settings) as boot device and GRUB will display a menu of the installed Linux distro images. Reboot again and return to using your USB stick as a regular storage device.</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-tails.html">tails</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-gparted.html">gparted</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-dban.html">dban</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/great-fun-getting-started-with-jekyll.html">Great fun getting started with Jekyll</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/virtualbox-install.html">Virtualbox with Debian HOST and GUEST</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

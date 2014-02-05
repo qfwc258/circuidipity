@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | BeagleBone Black: 'Say Hello to My Little LEDs'</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Friday 06 September 2013</p>
+</div>
+
+<!-- article -->
+<h1>BeagleBone Black: 'Say Hello to My Little LEDs'</h1>
+<div id="article">
+    <p>Blinking an LED is the 'Hello World' of hardware. <a class="reference external" href="getting-started-with-beaglebone-black.html">BeagleBone Black's</a> LEDs can be controlled by the user and the device can be connected with external LEDs.</p>
+<div class="section" id="built-in-leds">
+<h2>Built-in LEDs</h2>
+<p>BBB has 4 onboard LEDs that serve as indicators for various bits of the hardware and their interfaces can be accessed under <tt class="docutils literal">/sys/class/leds</tt> ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>ls /sys/class/leds/
+beaglebone:green:usr0  beaglebone:green:usr1  beaglebone:green:usr2  beaglebone:green:usr3
+</pre></div>
+<p>The blinking 'heartbeat' LED that indicates BBB is alive and well is <tt class="docutils literal">beaglebone:green:usr0</tt> ...</p>
+<div class="highlight"><pre><span class="c">## &#39;trigger&#39; determines what event is monitored</span>
+<span class="nv">$ </span>ls /sys/class/leds/beaglebone<span class="se">\:</span>green<span class="se">\:</span>usr0/
+brightness  device  max_brightness  power  subsystem  trigger  uevent
+<span class="nv">$ </span>cat /sys/class/leds/beaglebone<span class="se">\:</span>green<span class="se">\:</span>usr0/trigger
+none nand-disk mmc0 mmc1 timer oneshot <span class="o">[</span>heartbeat<span class="o">]</span> backlight gpio cpu0 default-on transient
+
+<span class="c">## stop the heart</span>
+<span class="c"># echo none &gt; /sys/class/leds/beaglebone\:green\:usr0/trigger</span>
+
+<span class="c">## turn LED on (no blinking)</span>
+<span class="c"># echo none &gt; /sys/class/leds/beaglebone\:green\:usr0/trigger</span>
+<span class="c"># echo 1 &gt; /sys/class/leds/beaglebone\:green\:usr0/brightness</span>
+
+<span class="c">## strobe LED (get BeagleBone&#39;s heart racing at 20 &#39;beats&#39; per second)</span>
+<span class="c"># echo timer &gt; /sys/class/leds/beaglebone\:green\:usr0/trigger</span>
+<span class="c"># echo 25 &gt; /sys/class/leds/beaglebone\:green\:usr0/delay_off</span>
+<span class="c"># echo 25 &gt; /sys/class/leds/beaglebone\:green\:usr0/delay_on</span>
+
+<span class="c">## *whew* ... restore default heartbeat</span>
+<span class="c"># echo heartbeat &gt; /sys/class/leds/beaglebone\:green\:usr0/trigger</span>
+</pre></div>
+</div>
+<div class="section" id="how-to-use-the-gpio-pins">
+<h2>How to Use the GPIO Pins</h2>
+<p>BeagleBone Black has 65 <em>General Purpose Input/Output (GPIO)</em> pins distributed on the board's P8 and P9 headers. These software-controlled pins can be configured to work with external hardware and are accessed through the Linux kernel's GPIO interfaces under <tt class="docutils literal">/sys/class/gpio</tt> ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>ls /sys/class/gpio/
+<span class="nb">export      </span>gpiochip0  gpiochip32  gpiochip64  gpiochip96  unexport
+</pre></div>
+<p>What can be confusing at first glance is that a pin's number on the BeagleBone header and its GPIO number are different. Each <tt class="docutils literal">gpiochipX</tt> controls 32 pins and is used to calculate the GPIO address of a pin (some of the GPIO pins are dedicated to BBB's onboard hardware and unavailable by default).</p>
+<p>Example: Pin <tt class="docutils literal">P8_12</tt> is controlled by <tt class="docutils literal">gpio1[12]</tt> which translates as pin 12 on the second controller (starting from zero) ... (32 * 1) + 12 = 44. To <em>add</em> a pin for use I map GPIO_44 into the filesystem by echoing its pin number to the GPIO <tt class="docutils literal">export</tt> file ...</p>
+<div class="highlight"><pre><span class="c"># echo 44 &gt; /sys/class/gpio/export</span>
+<span class="c"># ls /sys/class/gpio/</span>
+<span class="nb">export      </span>gpio44  gpiochip0  gpiochip32  gpiochip64  gpiochip96  unexport
+<span class="c"># ls /sys/class/gpio/gpio44/</span>
+active_low  direction  edge  power  subsystem  uevent  value
+</pre></div>
+<p>... and a new <tt class="docutils literal">gpio44</tt> directory is created and the pin is available for work.</p>
+</div>
+<div class="section" id="breadboard-blinking-led">
+<h2>Breadboard Blinking LED</h2>
+<img alt="BBB and Breadboard" src="images/bbb-ledzilla.jpg" />
+<p>For my external LED experiment I use:</p>
+<ul class="simple">
+<li>red LED</li>
+<li>breadboard</li>
+<li>470 ohm resistor</li>
+<li>2 jumper wires</li>
+<li>penguin (optional)</li>
+</ul>
+<p>Header pins <tt class="docutils literal">P8_1</tt> and <tt class="docutils literal">P8_2</tt> are both <tt class="docutils literal">GND</tt>. Connect <tt class="docutils literal">P8_2</tt> to the LED cathode and our newly-enabled <tt class="docutils literal">GPIO_44</tt> pin (<tt class="docutils literal">P8_12</tt>) to the LED anode.</p>
+<p>To turn the LED on and off I input settings HIGH and LOW ...</p>
+<div class="highlight"><pre><span class="c">## ON</span>
+<span class="c"># echo high &gt; /sys/class/gpio/gpio44/direction</span>
+<span class="c">## OFF</span>
+<span class="c"># echo low &gt; /sys/class/gpio/gpio44/direction</span>
+</pre></div>
+<p>I created a tiny shell script to blink the LED ...</p>
+<div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<span class="c"># Blink an LED on breadboard</span>
+
+<span class="nv">PIN</span><span class="o">=</span><span class="s2">&quot;44&quot;</span> <span class="c"># P8_12 is gpio1[12] = (32 * 1) + 12 = 44</span>
+<span class="nv">GPIOPIN</span><span class="o">=</span><span class="s2">&quot;/sys/class/gpio/gpio$PIN&quot;</span>
+
+<span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;$GPIOPIN&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+<span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;Blinking LED connected to Pin $PIN ...&quot;</span>
+<span class="k">else</span>
+<span class="k">    </span><span class="nb">echo</span> <span class="nv">$PIN</span> &gt; /sys/class/gpio/export
+    <span class="nb">echo</span> <span class="s2">&quot;Blinking LED connected to Pin $PIN ...&quot;</span>
+    sleep 1
+<span class="k">fi</span>
+
+<span class="k">while </span><span class="nb">true</span>; <span class="k">do</span>
+<span class="k">    </span><span class="nb">echo </span>high &gt; <span class="nv">$GPIOPIN</span>/direction
+    sleep 2
+    <span class="nb">echo </span>low &gt; <span class="nv">$GPIOPIN</span>/direction
+    sleep 2
+<span class="k">done</span>
+</pre></div>
+<p>... and <tt class="docutils literal"><span class="pre">CTRL-C</span></tt> to kill the script.</p>
+<p>To <em>remove</em> a GPIO pin from use simply <tt class="docutils literal">unexport</tt> the pin ...</p>
+<div class="highlight"><pre><span class="c"># echo 44 &gt; /sys/class/gpio/unexport</span>
+</pre></div>
+</div>
+<div class="section" id="helpful-resources">
+<h2>Helpful Resources</h2>
+<ul class="simple">
+<li>Linux Kernel <a class="reference external" href="https://www.kernel.org/doc/Documentation/gpio.txt">GPIO Interfaces</a></li>
+<li>Adafruit's <a class="reference external" href="http://learn.adafruit.com/blinking-an-led-with-beaglebone-black/overview">Blinking an LED with BBB</a> tutorial using Python</li>
+<li><a class="reference external" href="http://derekmolloy.ie/tag/beaglebone-black/">Derek Molloy's</a> tables for the <a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true">P8</a> and <a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true">P9</a> header pins</li>
+</ul>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-beaglebone.html">beaglebone</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-electronics.html">electronics</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-angstrom.html">angstrom</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/getting-started-with-beaglebone-black.html">Getting Started with BeagleBone Black</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/bbb-dt.html">Device Tree and BeagleBone Black</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

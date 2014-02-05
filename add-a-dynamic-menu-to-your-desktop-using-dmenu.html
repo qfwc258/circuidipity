@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Add a dynamic menu to your desktop using dmenu</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Tuesday 22 March 2011</p>
+</div>
+
+<!-- article -->
+<h1>Add a dynamic menu to your desktop using dmenu</h1>
+<div id="article">
+    <p><em>Dmenu</em> is a cool application for generating a dynamic menu on your desktop that can be activated using a hot-key combination.</p>
+<p>A user begins typing the name of the application they wish to run and dmenu narrows down the list of possible matches as each letter is entered. When the desired choice is revealed it is highlighted and pressing ENTER launches the application.</p>
+<p>I use <a class="reference external" href="http://www.xfce.org/">XFCE</a> as my desktop and completely ignore the built-in menu for launching applications ... relying instead on the combination of dmenu + hot-key codes for activating a few favourites.</p>
+<p>On Debian <tt class="docutils literal">dmenu</tt> is a part of the <tt class="docutils literal"><span class="pre">suckless-tools</span></tt> package ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install suckless-tools
+</pre></div>
+<p>Create a bash script named <tt class="docutils literal"><span class="pre">dmenu-run.sh</span></tt> and place in <tt class="docutils literal">~/bin</tt> ...</p>
+<div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<span class="nv">exe</span><span class="o">=</span><span class="sb">`</span>dmenu_path | dmenu -fn 10x20 -nb <span class="s1">&#39;#000000&#39;</span> -nf <span class="s1">&#39;#ffffff&#39;</span> -sb green -sf <span class="s1">&#39;#000000&#39;</span><span class="sb">`</span> <span class="o">&amp;&amp;</span> <span class="nb">eval</span> <span class="s2">&quot;exec $exe&quot;</span>
+</pre></div>
+<p>This will use <tt class="docutils literal">dmenu</tt> to generate a horizontal menu of applications running across the top of the desktop (this can be tricky to get right... thanks <a class="reference external" href="http://www.gilesorr.com/wm/helpers.html">Giles</a> for the hint). Create a hot-key combination to activate <tt class="docutils literal"><span class="pre">dmenu-run.sh</span></tt> on your desktop when desired.</p>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/twinview.html">Dual-display configuration using Nvidia + Twinview</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/use-gtk-themes-with-fluxbox.html">Use GTK+ themes with Fluxbox</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

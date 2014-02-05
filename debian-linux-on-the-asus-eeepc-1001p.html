@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Debian Linux on the Asus EEEPC 1001P</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Thursday 10 June 2010</p>
+</div>
+
+<!-- article -->
+<h1>Debian Linux on the Asus EEEPC 1001P</h1>
+<div id="article">
+    <p>I recently acquired an <em>Asus EEEPC 1001P-MU17</em> netbook and replaced the marginal crippled operating system it included with <a class="reference external" href="install-debian-linux-squeeze.html">Debian GNU/Linux</a>.</p>
+<p>There were a few hiccups during the install... but with the replacement of Debian's default 2.6.32 kernel with a more recent release (currently running kernel 2.6.37) most of the 1001P's hardware is supported by default. Adding a few configuration tweaks makes this one nifty little device!</p>
+<div class="section" id="step-0-start">
+<h2>Step 0 - Start</h2>
+<div class="section" id="asus-1001p-mu17-hardware-specifications">
+<h3>Asus 1001P-MU17 Hardware specifications</h3>
+<ul class="simple">
+<li>Processor: Intel Atom N450</li>
+<li>Chipset: Intel NM10&lt;</li>
+<li>Memory: 1GB DDR2-667</li>
+<li>Graphics: Intel GMA 3150 (kernel driver: i915)</li>
+<li>Display: 10.1&quot; LED Matte 1024x600</li>
+<li>Hard Drive: 160GB 5400RPM Western Digital WD1600BEVT-2</li>
+<li>Ethernet: Atheros AR8132 (kernel driver: atl1c)</li>
+<li>Wireless: Atheros AR2427 802.11g (kernel driver: ath9k)</li>
+<li>Audio: Realtek AL269 2-Channel HD Audio</li>
+<li>Webcam: 0.3MP UVC Camera (kernel driver: uvcvideo)</li>
+<li>Battery: 6-Cell, 4400mAh, 48Wh (~7 hours runtime)</li>
+<li>Ports: 3 x USB 2.0, VGA, SD Reader, 100Mb Ethernet, Microphone/Headphone Jacks</li>
+</ul>
+</div>
+<div class="section" id="device-status">
+<h3>Device status</h3>
+<ul class="simple">
+<li>Graphics: Works</li>
+<li>Ethernet: Works</li>
+<li>Wireless: Works</li>
+<li>Audio: Works</li>
+<li>Webcam: Works</li>
+<li>SD reader: Works</li>
+<li>Touchpad: Works</li>
+</ul>
+</div>
+<div class="section" id="function-keys">
+<h3>Function keys</h3>
+<ul class="simple">
+<li>Fn+F1 (Suspend-to-RAM): Works</li>
+<li>Fn+F2 (Toggle wireless): Not used</li>
+<li>Fn+F3: Not used</li>
+<li>Fn+F4: Not used</li>
+<li>Fn+F5 (Brightness down): Works</li>
+<li>Fn+F6 (Brightness up): Works</li>
+<li>Fn+F7: Not used</li>
+<li>Fn+F8: Use <a class="reference external" href="big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr.html">xrandr</a> in the terminal</li>
+<li>Fn+F9: Not used</li>
+<li>Fn+F10 (Volume mute): Works</li>
+<li>Fn+F11 (Volume down): Works</li>
+<li>Fn+F12 (Volume up): Works</li>
+</ul>
+</div>
+<div class="section" id="step-1-install">
+<h3>Step 1 - Install</h3>
+<p>My <a class="reference external" href="install-debian-linux-squeeze.html">Debian install notes</a>. Specific details concerning the Asus 1001P are noted below.</p>
+</div>
+<div class="section" id="configure-bios-and-boot-debian-installer">
+<h3>Configure BIOS and boot Debian installer</h3>
+<p>Power up and enter the Asus BIOS by pressing the <tt class="docutils literal">F2</tt> key. Configure for a USB install:</p>
+<ul class="simple">
+<li>under <tt class="docutils literal">Advanced</tt> ... ensure that both onboard camera and WLAN are <tt class="docutils literal">Enabled</tt></li>
+<li>under <tt class="docutils literal">Boot</tt> ... ensure that 1st boot device is set to <tt class="docutils literal">Removable Device</tt></li>
+<li>under <tt class="docutils literal">Boot</tt> ... ensure that boot booster is <tt class="docutils literal">Disabled</tt></li>
+</ul>
+<p><a class="reference external" href="install-debian-linux-squeeze.html">Prepare the Debian installer</a> on a USB stick, attach, and reboot. At the BIOS screen hit <tt class="docutils literal">Esc</tt> and select USB as boot device.</p>
+</div>
+</div>
+<div class="section" id="step-2-configuration">
+<h2>Step 2 - Configuration</h2>
+<div class="section" id="ethernet">
+<h3>Ethernet</h3>
+<p>Auto-detection probing of the ethernet interface during the install can result in device disappearing from the system and network configuration to fail (<em>Update:</em> Appears problem has been resolved with the stable release of Debian <tt class="docutils literal">squeeze</tt>). If the ethernet device was knocked out during installation:</p>
+<ul class="simple">
+<li>ensure that <tt class="docutils literal">/etc/network/interfaces</tt> contains no hotplug entry for <tt class="docutils literal">eth0</tt> or <tt class="docutils literal">wlan0</tt></li>
+<li>shutdown netbook and remove the power cord</li>
+<li>remove battery and let sit for a minute or so</li>
+<li>restore power to netbook and startup</li>
+<li><tt class="docutils literal">lspci <span class="pre">-v</span> | grep net</tt> reveals the ethernet device (Atheros Communications AR8132 Fast Ethernet)</li>
+<li>bring up the interface... <tt class="docutils literal">ifconfig eth0 up</tt> and <tt class="docutils literal">dhclient eth0</tt></li>
+</ul>
+</div>
+<div class="section" id="wireless">
+<h3>Wireless</h3>
+<p>Works &quot;out-of-box&quot;. Interface is identified as <tt class="docutils literal">wlan0</tt>.</p>
+</div>
+<div class="section" id="eeepc">
+<h3>EEEPC</h3>
+<p>Install the <tt class="docutils literal"><span class="pre">eeepc-acpi-scripts</span></tt> to enable the function keys and the ability to suspend-to-RAM (sleep) ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install eeepc-acpi-scripts
+</pre></div>
+</div>
+<div class="section" id="power-management">
+<h3>Power management</h3>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install acpid acpi cpufrequtils pm-utils
+</pre></div>
+<p>Verify <tt class="docutils literal"><span class="pre">acpi-cpufreq</span></tt> module is loaded... otherwise <tt class="docutils literal">sudo modprobe <span class="pre">acpi-cpufreq</span></tt>.</p>
+<p>Output detailed information about the CPU(s) by running <tt class="docutils literal"><span class="pre">cpufreq-info</span></tt>.</p>
+<p>Settings are in <tt class="docutils literal">/sys/devices/system/cpu/cpu0/cpufreq</tt>. CPU speed can be monitored in real-time by running ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>watch grep <span class="se">\&quot;</span>cpu MHz<span class="se">\&quot;</span> /proc/cpuinfo
+</pre></div>
+<p>Default scaling governor is <tt class="docutils literal">ondemand</tt>.</p>
+</div>
+<div class="section" id="screen-brightness">
+<h3>Screen brightness</h3>
+<p>Post-install the display brightness is extremely low and the assigned funtion keys for adjusting the brightness level cause the setting to jump all over the place. This can be fixed by editing <tt class="docutils literal">/etc/default/grub</tt> and modifying <tt class="docutils literal">GRUB_CMDLINE_LINUX_DEFAULT</tt> ...</p>
+<div class="highlight"><pre><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s2">&quot;quiet acpi_osi=Linux acpi_backlight=vendor&quot;</span>
+</pre></div>
+<p>Save your changes and run <tt class="docutils literal">sudo <span class="pre">update-grub2</span></tt>. Reboot... login... and run ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo <span class="sb">`</span><span class="nb">echo </span>15 &gt; /sys/class/backlight/eeepc/brightness<span class="sb">`</span>
+</pre></div>
+</div>
+<div class="section" id="touchpad">
+<h3>Touchpad</h3>
+<p>By default the touchpad is limited to finger-tap=left-mouse-click. <em>HAL</em> and <em>fdi</em> files were previously used to enable more mouse-click and scrolling functions but their use is now deprecated... <em>udev</em> is the way to go now.</p>
+<p>Determine type of touchpad used in the 1001P ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>egrep -i <span class="s1">&#39;synap|alps|etps&#39;</span> /proc/bus/input/devices
+N: <span class="nv">Name</span><span class="o">=</span><span class="s2">&quot;SynPS/2 Synaptics TouchPad&quot;</span>
+</pre></div>
+<p>Use <tt class="docutils literal">xinput</tt> to determine the properties of the touchpad and add new functions ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xinput
+<span class="nv">$ </span>xinput --list | grep Synaptic     <span class="c"># determine ``DEVICE_ID`` of the touchpad ... on the 1001P its ``id=13``)</span>
+<span class="nv">$ </span>xinput --list-props 13
+</pre></div>
+<p>Create a shell script using xinput to configure the touchpad for left-middle-right mouse clicks with finger taps and two-finger scrolling, save it in <tt class="docutils literal">~/bin</tt> and source it to run at login. On my 1001P running Fluxbox window manager I add the line <tt class="docutils literal">touchpad_config &amp;</tt> to <tt class="docutils literal"><span class="pre">~/.fluxbox/startup</span></tt>.</p>
+</div>
+<div class="section" id="suspend-to-ram">
+<h3>Suspend-to-RAM</h3>
+<p>Using the <tt class="docutils literal"><span class="pre">eeepc-acpi-scripts</span></tt> and key combo <tt class="docutils literal">Fn + F1</tt> to put the netbook to sleep &quot;just works&quot;.</p>
+</div>
+<div class="section" id="microphone">
+<h3>Microphone</h3>
+<p>Muted by default. Need to enable capture in <tt class="docutils literal">alsamixer</tt>.</p>
+</div>
+<div class="section" id="hard-drive-management">
+<h3>Hard drive management</h3>
+<p>I noticed a frequent clicking noise from the drive heads on my netbook. Digging online reveals discussion about over-aggressive power management settings on hard drives that rapidly mount/unmount/remount and gradually wear out the drive. Feedback suggests that laptop drives are good for roughly ~600000 <em>load_cycles</em>.</p>
+<p>To check the drive and alter management settings ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install smartmontools hdparm
+<span class="nv">$ </span>sudo smartctl -a /dev/sda | egrep -i <span class="s1">&#39;Power_On_Hours|Load_Cycle_Count&#39;</span>
+</pre></div>
+<p>In my situation I felt <tt class="docutils literal">Load_Cycle_Count</tt> was increasing too rapidly and I found the <em>click-click-click</em> of the drive every few seconds a nuisance. I use <tt class="docutils literal">hdparm</tt> to set powersaving mode to less aggressive tactics... which eliminated the clicking <tt class="docutils literal">hdparm <span class="pre">-B</span> 254 /dev/sda</tt>.</p>
+<p>To make the change permanent edit <tt class="docutils literal">/etc/hdparm.conf</tt> by adding to the end of the file ...</p>
+<div class="highlight"><pre>command_line <span class="o">{</span>
+    hdparm -q -B 254 /dev/sda
+</pre></div>
+</div>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/applications-checklist-for-my-debian-linux-installs.html">Applications checklist for my Debian Squeeze installs</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr.html">Big screen little screen virtual screen and xrandr</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

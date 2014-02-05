@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Firefox as RSS reader</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Saturday 22 June 2013</p>
+</div>
+
+<!-- article -->
+<h1>Firefox as RSS reader</h1>
+<div id="article">
+    <p>Google Reader is going dark at the end of this month and I need to find an alternative for consuming my RSS feeds. A <a class="reference external" href="http://lwn.net/Articles/553761/">recent article in LWN</a> explores the idea of using Firefox via extensions as an RSS reader and one of several options that caught my interest is <em>Digest</em>:</p>
+<blockquote>
+<p><a class="reference external" href="https://addons.mozilla.org/en-us/firefox/addon/digest/">Digest</a> ... attempts to provide a more full-featured feed-reading experience than some of the other readers; it keeps a count of unread items for each feed, allows the user to &quot;star&quot; individual items or mark them as unread, and quite a few other features one would expect to find in a web service like Google Reader.</p>
+<p>As is the case with several other extensions, Digest stores feed subscriptions in a (selectable) bookmarks folder. However, it also downloads entries locally—allowing the user to choose how long old downloads are preserved (thankfully), which enables it to offer content search. It also renders its entire interface within the browser tab in HTML, unlike some of the competition. Digest is licensed as MPL 2.0, and is actively under development by its new maintainer <a class="reference external" href="https://github.com/Tanriol/digest">at GitHub</a>. It can import (and export) OPML subscription files.</p>
+</blockquote>
+<p>Sounds good! I decided to give it a try.</p>
+<div class="section" id="step-0-export-list-of-subscriptions-from-google-reader">
+<h2>Step 0 - Export list of subscriptions from Google Reader</h2>
+<img alt="Google Takeout" class="align-center" src="images/google-takeout.png" />
+<p>Navigate to the Google Reader settings, select the <tt class="docutils literal">Import/Export</tt> tab and click <tt class="docutils literal">Download your data through Takeout</tt>. Click <tt class="docutils literal">Create Archive</tt> and it bundles up your RSS feed subscriptions in a downloadable zip archive.</p>
+</div>
+<div class="section" id="step-1-add-digest-to-firefox">
+<h2>Step 1 - Add Digest to Firefox</h2>
+<img alt="Digest Import" class="align-center" src="images/digest-import.png" />
+<p>Add Digest to Firefox and the extension's icon becomes visible on the Address bar. Right-click the icon and select <tt class="docutils literal"><span class="pre">Options-&gt;Feeds-&gt;Bookmarks</span> <span class="pre">Menu-&gt;Subscribed</span> Feeds</tt> and click <tt class="docutils literal"><span class="pre">Import...</span></tt>. Navigate to that unpacked zip archive and there will be a <tt class="docutils literal">subscriptions.xml</tt> file (by default the app looks for OPML Files ... use the drop-down menu and select XML Files). Open it up and let Digest perform its Import magic.</p>
+</div>
+<div class="section" id="step-2-options-and-sync">
+<h2>Step 2 - Options and Sync</h2>
+<img alt="Digest Options" class="align-center" src="images/digest-tab.png" />
+<p>I like Digest's very clean interface running in a Firefox tab. Options include displaying article contents vs article titles and local storage timeouts.</p>
+<p>Using Firefox Sync allows the user to share their RSS subscriptions and history between multiple devices running Firefox. I have not tried that feature myself yet and - while useful for sharing RSS between a laptop and a phone/tablet - it lacks the flexibility of storing the data on a remote server accessible (with appropriate permissions) by any device with web access.</p>
+<p>Digest is great if you are a Firefox fan and want to get up and running with your RSS feeds with no fuss.</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-firefox.html">firefox</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-web.html">web</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/python-mechanical-mooc.html">Python Frankenstein and the Mechanical MOOC</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/python-on-codecademy.html">Python on Codecademy</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

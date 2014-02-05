@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Getting Nvidia and xorg to play nice</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Monday 28 February 2011</p>
+</div>
+
+<!-- article -->
+<h1>Getting Nvidia and xorg to play nice</h1>
+<div id="article">
+    <p>Configure a Nvidia graphics card for use in Debian.</p>
+<p><em>Nvidia</em> provides a driver on their website that can be downloaded and installed directly on a Linux system. But it is not a recommended course of action for a Debian user.</p>
+<p>A better way is to use an open-source driver (2-D graphics) ... and if 3-D is the name of your game the <em>best</em> way is either downloading the Debian pre-built Nvidia package or create one using <tt class="docutils literal"><span class="pre">module-assistant</span></tt>. Going down the package route permits the Nvidia driver to be properly tracked and managed by the awesome Debian package tools.</p>
+<div class="section" id="step-0-start">
+<h2>Step 0 - Start</h2>
+<p>Shutdown the X server if currently running ... either by exiting the current X session and returning to the console or - if running a graphical login manager such as <tt class="docutils literal">gdm</tt> or <tt class="docutils literal">kdm</tt> - exiting to the login screen and hitting CTRL+ALT+F1 to jump back to a console.</p>
+<p>Stop the running X session ... <tt class="docutils literal">sudo /etc/init.d/gdm stop</tt>.</p>
+<div class="section" id="determine-which-nvidia-graphics-card-is-installed">
+<h3>Determine which Nvidia graphics card is installed</h3>
+<div class="highlight"><pre><span class="nv">$ </span>lspci -v | grep <span class="s2">&quot;VGA compatible controller: nvidia&quot;</span>
+</pre></div>
+<p>On the motherboard of my primary workstation I have an embedded Nvidia chipset with dual VGA + DVI ports:</p>
+<div class="highlight"><pre><span class="nv">$ </span>lspci -v | grep <span class="s2">&quot;VGA compatible controller: nvidia&quot;</span>
+00:05.0 VGA compatible controller: nVidia Corporation C51PV <span class="o">[</span>GeForce 6150<span class="o">]</span> <span class="o">(</span>rev a2<span class="o">)</span> <span class="o">(</span>prog-if 00 <span class="o">[</span>VGA controller<span class="o">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-1-install-driver">
+<h2>Step 1 - Install driver</h2>
+<div class="section" id="using-the-open-source-nouveau-driver">
+<h3>Using the open-source nouveau driver</h3>
+<p>For 2-D graphics the <tt class="docutils literal">vesa</tt> or <tt class="docutils literal">nv</tt> or <tt class="docutils literal">nouveau</tt> drivers will suffice (3-D graphics require the proprietary driver).</p>
+<p>To install the &lt;strong&gt;nouveau&lt;/strong&gt; driver ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xorg xserver-xorg-video-vesa xserver-xorg-video-nouveau xbindkeys mesa-utils
+</pre></div>
+<p>That's it. X should pick it up automatically. See below to confirm that the correct driver is loaded or switch to another open-source driver (<tt class="docutils literal">vesa</tt> can be a good fallback if things go awry).</p>
+</div>
+<div class="section" id="using-the-proprietary-nvidia-driver">
+<h3>Using the proprietary Nvidia driver</h3>
+<p>Few different ways this can go ...</p>
+<ul class="simple">
+<li>use Debian pre-built package</li>
+<li>run module-assistant to build and install our own package (<em>my choice</em>)</li>
+<li>perform a manual build for either a custom or Debian-packaged kernel</li>
+</ul>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">These <tt class="docutils literal"><span class="pre">nvidia-{kernel,glx}</span></tt> packages only support GeForce 6xxx and higher GPUs. Check out the <em>nvidia legacy</em> packages for older cards and the list of <a class="reference external" href="http://www.nvidia.com/object/IO_32667.html">legacy drivers</a> .</p>
+</div>
+</div>
+<div class="section" id="pre-built">
+<h3>Pre-built</h3>
+<p>If running the default kernel in Debian <tt class="docutils literal">squeeze</tt> or <tt class="docutils literal">wheezy</tt> ... there is a Debian package available of a pre-built Nvidia module (<a class="reference external" href="http://us.download.nvidia.com/XFree86/Linux-x86/195.36.24/README/supportedchips.html">supported chipsets</a>) ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xorg xserver-xorg-video-vesa xserver-xorg-video-nouveau xbindkeys mesa-utils
+<span class="nv">$ </span>sudo apt-get install nvidia-kernel-<span class="k">$(</span>uname -r<span class="k">)</span>
+<span class="nv">$ </span>sudo apt-get install nvidia-glx
+</pre></div>
+<p>See below for configuring X to use the proprietary Nvidia driver vs an open-source driver.</p>
+</div>
+<div class="section" id="module-assistant">
+<h3>module-assistant</h3>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xorg xbindkeys mesa-utils module-assistant nvidia-kernel-common build-essential
+<span class="nv">$ </span>sudo m-a prepare
+<span class="nv">$ </span>sudo m-a clean nvidia-kernel-source
+<span class="nv">$ </span>m-a get nvidia-kernel-source
+<span class="nv">$ </span>sudo m-a build nvidia-kernel-source
+<span class="nv">$ </span>sudo m-a install nvidia-kernel-source
+<span class="nv">$ </span>sudo apt-get install nvidia-glx
+</pre></div>
+<p>See below for configuring X to use the proprietary Nvidia driver vs an open-source driver.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">When upgrading to a newer kernel ... the Nvidia kernel module will need to be rebuilt to match the new kernel.</p>
+</div>
+</div>
+<div class="section" id="manual-build">
+<h3>Manual build</h3>
+<p>Never had a need to do this myself. But here are the <a class="reference external" href="http://wiki.debian.org/NvidiaGraphicsDrivers#Buildmanually.2Cwithacustomkernel">instructions</a> in the Debian wiki.</p>
+</div>
+</div>
+<div class="section" id="step-2-xorg-conf">
+<h2>Step 2 - Xorg.conf</h2>
+<p>An X configuration file is no longer included by default in Debian <tt class="docutils literal">squeeze</tt>. Create a sample file by running ... <tt class="docutils literal">sudo Xorg <span class="pre">-configure</span></tt>.</p>
+<p>Open the new <tt class="docutils literal">xorg.conf.new</tt> file in a text editor. Under <tt class="docutils literal">Module</tt> confirm that it contains the line <tt class="docutils literal">Load &quot;glx&quot;</tt>.</p>
+<p>Remove/comment out any lines that refer to the <tt class="docutils literal">dri</tt> or <tt class="docutils literal">GLCore</tt> modules.</p>
+<p>Under <tt class="docutils literal">Device</tt> change the driver - normally <tt class="docutils literal">nouveau</tt> or <tt class="docutils literal">nv</tt> or <tt class="docutils literal">vesa</tt> - to <tt class="docutils literal">nvidia</tt> ... <tt class="docutils literal">Driver &quot;nvidia&quot;</tt>.</p>
+<p>Sample configuration from my own system ...</p>
+<div class="highlight"><pre>Section <span class="s2">&quot;Module&quot;</span>
+    Load  <span class="s2">&quot;dbe&quot;</span>
+    <span class="c">#Load  &quot;dri&quot;</span>
+    Load  <span class="s2">&quot;extmod&quot;</span>
+    Load  <span class="s2">&quot;record&quot;</span>
+    <span class="c">#Load  &quot;dri2&quot;</span>
+    Load  <span class="s2">&quot;glx&quot;</span>
+EndSection
+
+Section <span class="s2">&quot;Device&quot;</span>
+    Identifier  <span class="s2">&quot;Card0&quot;</span>
+    <span class="c">#Driver      &quot;nouveau&quot;</span>
+    Driver      <span class="s2">&quot;nvidia&quot;</span>
+    VendorName  <span class="s2">&quot;nVidia Corporation&quot;</span>
+    BoardName   <span class="s2">&quot;C51PV [GeForce 6150]&quot;</span>
+    BusID       <span class="s2">&quot;PCI:0:5:0&quot;</span>
+EndSection
+</pre></div>
+<p>Move the modified file to its default name and location ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo cp /root/xorg.conf.new /etc/X11/xorg.conf
+</pre></div>
+<p>Any user that wants to run 3-D code must belong to the <tt class="docutils literal">video</tt> group. Should already be pre-configured ... but if not <tt class="docutils literal">sudo adduser USERNAME video</tt>.</p>
+</div>
+<div class="section" id="step-3-run">
+<h2>Step 3 - Run</h2>
+<p>Logged in as regular user ... start the X server <tt class="docutils literal">startx</tt> or restart <tt class="docutils literal">sudo /etc/init.d/gdm start</tt> if using a graphical login manager.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">I needed to restart my system to get the nvidia driver to work properly.</p>
+</div>
+<p>View what video driver is in use ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>grep -B2 <span class="s1">&#39;Module class: X.Org Video Driver&#39;</span> /var/log/Xorg.0.log
+</pre></div>
+<p>You should see ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>grep -B2 <span class="s1">&#39;Module class: X.Org Video Driver&#39;</span> /var/log/Xorg.0.log
+<span class="o">(</span>II<span class="o">)</span> Module nvidia: <span class="nv">vendor</span><span class="o">=</span><span class="s2">&quot;NVIDIA Corporation&quot;</span>
+        compiled <span class="k">for </span>4.0.2, module <span class="nv">version</span> <span class="o">=</span> 1.0.0
+        Module class: X.Org Video Driver
+</pre></div>
+<p>Confirm that video acceleration is actually working ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>glxinfo | grep rendering
+direct rendering: Yes
+</pre></div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">For a dual-display configuration - use monitors of different resolutions and combine them into one desktop - give <a class="reference external" href="twinview.html">Twinview</a> a chance.</p>
+</div>
+<p>Good to go!</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/hosting-multiple-domains-from-one-ip-address-using-apache.html">Hosting multiple domains from one IP address using Apache</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/twinview.html">Dual-display configuration using Nvidia + Twinview</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

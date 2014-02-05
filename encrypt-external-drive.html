@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Configure an encrypted external hard drive in Linux</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Wednesday 14 December 2011</p>
+</div>
+
+<!-- article -->
+<h1>Configure an encrypted external hard drive in Linux</h1>
+<div id="article">
+    <p>Using an external USB-connected hard drive is part of my personal backup plan (the other part is backups to a <a class="reference external" href="linux-home-server.html">home server</a>).</p>
+<p>I actually use 2 one terabyte drives. One drive is in my possession and the other drive I store at a friend's home. Periodically I swap the drives and update the data via the <em>sneakernet</em>.</p>
+<p>To guard against loss or theft its a good idea to <em>encrypt</em> the hard drive. I prepare the device using <em>Linux Unified Key Setup (LUKS)</em> and the <tt class="docutils literal">cryptsetup</tt> utility.</p>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">In this example the external hard drive is identified as <em>sdb</em> and contains a single partition <em>sdb1</em>. Make careful note of the drive and partition labels on <strong>your system</strong> as they can be very different. The following steps will <strong>destroy all data</strong> currently stored on the drive.</p>
+</div>
+<p>Download the cryptsetup package if not already installed. Connect the external drive, make note of drive labels (<tt class="docutils literal">sdb</tt>, <tt class="docutils literal">sdb1</tt> ...), and erase/overwrite the drive.</p>
+<p>Filling the drive with zeros can take several hours depending on storage size. <em>Random number generation</em> is even more secure but takes much longer ...</p>
+<div class="highlight"><pre><span class="c"># dd if=/dev/zero of=/dev/sdb bs=1M</span>
+</pre></div>
+<p>Create a single partition that fills the entire drive. Encrypt that newly-created partition and assign a password ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo cryptsetup luksFormat /dev/sdb1
+<span class="nv">$ </span>sudo cryptsetup luksOpen /dev/sdb1 sdb1_crypt
+</pre></div>
+<p>Install a filesystem (I use <tt class="docutils literal">ext4</tt>) and mount the partition to gain access to the storage ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkfs -t ext4 /dev/mapper/sdb1_crypt
+<span class="nv">$ </span>sudo mount /dev/mapper/sdb1_crypt /mnt
+</pre></div>
+<p>Before disconnecting the drive the partition must be unmounted and the encrypted device must be closed ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo umount /mnt
+<span class="nv">$ </span>sudo cryptsetup luksClose /dev/mapper/sdb1_crypt
+</pre></div>
+<p>A file manager like <a class="reference external" href="http://thunar.xfce.org/">Thunar</a> can automatically mount and unmount encrypted partitions. For scripting purposes its useful to assign a <em>default mount point</em> for the encrypted drive ... that is, whenever the drive is plugged into your system it will always be mounted in the same location.</p>
+<p>Mount the encrypted drive, retrieve the LUKS string for the partition, and create a custom mount point (<tt class="docutils literal">/media/crypt</tt> in my example) ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>ls /dev/mapper/luks*      <span class="c"># outputs &#39;/dev/mapper/luks_crypto_STRING&#39;</span>
+<span class="nv">$ </span>sudo mkdir /media/crypt
+</pre></div>
+<p>Unmount the drive and create an entry in <tt class="docutils literal">/etc/fstab</tt> for the new custom mount point ...</p>
+<div class="highlight"><pre>/dev/mapper/luks_crypto_STRING  /media/crypt    auto    users,noauto,noatime    0   0
+</pre></div>
+<p>Next time the drive is auto-mounted it will be assigned to <tt class="docutils literal">/media/crypt</tt>.</p>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/linux-home-server.html">Make an old netbook or laptop into a Linux home server</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/going-going-gandi-done.html">Going ... going ... Gandi ... done!</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

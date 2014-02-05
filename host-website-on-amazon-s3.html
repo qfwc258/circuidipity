@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Tie a balloon on your website and head for the clouds of Amazon</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Saturday 26 November 2011</p>
+</div>
+
+<!-- article -->
+<h1>Tie a balloon on your website and head for the clouds of Amazon</h1>
+<div id="article">
+    <p>Last week I packed up the handwritten html pages, images, and bits hosted on my home netbook server and moved up into the <em>cloud</em>.</p>
+<p><a class="reference external" href="http://aws.amazon.com/s3/">Amazon Simple Storage Service</a> (S3) added the capability of <a class="reference external" href="http://www.allthingsdistributed.com/2011/02/website_amazon_s3.html">hosting a static website</a> (a website built on files as opposed to a database) and made it very cheap to get started and very easy to scale up bandwidth and storage as required.</p>
+<p>This is how I did it in 5 steps ...</p>
+<div class="section" id="step-0-sign-up-for-amazon-web-services-aws-free-usage-tier">
+<h2>Step 0 — Sign up for Amazon Web Services (AWS) Free Usage Tier</h2>
+<p>AWS has created a <a class="reference external" href="http://aws.amazon.com/free/">free 12-month introductory offer</a> to try out their various services. Amazon S3 includes 5 GB storage, 20,000 Get Requests and 2,000 Put Requests for hosting your website. You <a class="reference external" href="http://aws.amazon.com/s3/#pricing">pay for anything</a> that exceeds those limits.</p>
+</div>
+<div class="section" id="step-1-create-an-amazon-s3-website-enabled-bucket">
+<h2>Step 1 — Create an Amazon S3 website-enabled bucket</h2>
+<p>S3 uses <em>buckets</em> (think folders) that act as containers for your static files. <a class="reference external" href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?HostingWebsiteOnS3Setup.html">Create a new website-enabled bucket</a> to hold your website files.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Make sure when creating the S3 bucket to give it the name <em>www.YOURWEBSITE.TLD</em>. For example, this website uses an S3 bucket with the name <em>www.circuidipity.com</em>.</p>
+</div>
+<p>The endpoint address for your newly-created S3 bucket will be <a class="reference external" href="http://www.YOURWEBSITE.TLD.s3-website-location.amazonaws.com">http://www.YOURWEBSITE.TLD.s3-website-location.amazonaws.com</a> (my endpoint is <a class="reference external" href="http://www.circuidipity.com.s3-website-us-east-1.amazonaws.com/">http://www.circuidipity.com.s3-website-us-east-1.amazonaws.com/</a>).</p>
+</div>
+<div class="section" id="step-2-set-public-permissions-on-s3-bucket">
+<h2>Step 2 - Set public permissions on S3 bucket</h2>
+<p>At this stage your website-enabled bucket and contents are only viewable over the web by their owner ... you.</p>
+<p>Add a <em>bucket policy</em> to make your files <a class="reference external" href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?HostingWebsiteOnS3Setup.html">publicly available</a>. In the AWS Management Console, right-click on your website bucket and select <tt class="docutils literal"><span class="pre">Properties-&gt;Permissions-&gt;Edit</span> bucket policy</tt> and create a new policy ...</p>
+<div class="highlight"><pre><span class="o">{</span>
+        <span class="s2">&quot;Version&quot;</span>: <span class="s2">&quot;2008-10-17&quot;</span>,
+        <span class="s2">&quot;Statement&quot;</span>: <span class="o">[</span>
+                <span class="o">{</span>
+                        <span class="s2">&quot;Sid&quot;</span>: <span class="s2">&quot;PublicReadForGetBucketObjects&quot;</span>,
+                        <span class="s2">&quot;Effect&quot;</span>: <span class="s2">&quot;Allow&quot;</span>,
+                        <span class="s2">&quot;Principal&quot;</span>: <span class="o">{</span>
+                                <span class="s2">&quot;AWS&quot;</span>: <span class="s2">&quot;*&quot;</span>
+                        <span class="o">}</span>,
+                        <span class="s2">&quot;Action&quot;</span>: <span class="s2">&quot;s3:GetObject&quot;</span>,
+                        <span class="s2">&quot;Resource&quot;</span>: <span class="s2">&quot;arn:aws:s3:::&lt;strong&gt;your_website_bucket_name&lt;/strong&gt;/*&quot;</span>
+                <span class="o">}</span>
+        <span class="o">]</span>
+<span class="o">}</span>
+</pre></div>
+<p>Now any files placed in your bucket will be world-readable.</p>
+</div>
+<div class="section" id="step-3-upload-website-files">
+<h2>Step 3 — Upload website files</h2>
+<p>Start your website by creating 2 files ...  <tt class="docutils literal">index.html</tt> and a custom 404 error document <tt class="docutils literal">doesnotexist.html</tt>. Use the AWS Management Console to upload the files into your S3 bucket and test by browsing to <a class="reference external" href="http://YOURBUCKET.s3-location.amazonaws.com/">http://YOURBUCKET.s3-location.amazonaws.com/</a> .</p>
+<p>For uploading multiple files in one great swoop I ran across <a class="reference external" href="http://s3tools.org/s3cmd">s3cmd</a> ... a cool Linux command line utility for managing S3 storage. A package is available for Debian <tt class="docutils literal">sudo <span class="pre">apt-get</span> install s3cmd</tt>.</p>
+<p>Before configuring <tt class="docutils literal">s3cmd</tt> to grant access to your website's S3 bucket you require your <tt class="docutils literal">Access Key ID</tt> and <tt class="docutils literal">Secret Access Key</tt>. Navigate to <a class="reference external" href="https://aws-portal.amazon.com">https://aws-portal.amazon.com</a> and the <tt class="docutils literal"><span class="pre">-&gt;</span> Security Credentials <span class="pre">-&gt;</span> Access Keys</tt> tab and make note of your Amazon S3 keys.</p>
+<p>Now run ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>s3cmd --configure    <span class="c"># configuration saved to &#39;/home/&lt;em&gt;user&lt;/em&gt;/.s3cfg&#39;</span>
+</pre></div>
+<p><tt class="docutils literal">s3cmd</tt> has lots of options ... but especially cool is the <a class="reference external" href="http://s3tools.org/s3cmd-sync">sync</a> command. Its similar to <tt class="docutils literal">rsync</tt> and uses <tt class="docutils literal">md5</tt> checksum and filesize to compare files between localhost and your remote S3 bucket and only transfer files that have changed.</p>
+<p>For my own website I run ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>s3cmd sync --dry-run output/ s3://www.circuidipity.com/   <span class="c"># first I test it out ... nothing is transferred</span>
+<span class="nv">$ </span>s3cmd sync output/ s3://www.circuidipity.com/
+</pre></div>
+</div>
+<div class="section" id="step-4-configure-dns">
+<h2>Step 4 - Configure DNS</h2>
+<p>To transform <em>s3-website-location.amazonaws.com</em> into <em>www.YOURWEBSITE.com</em> you need to <a class="reference external" href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?VirtualHosting.html">create a CNAME at your DNS provider</a> that maps <tt class="docutils literal">www</tt> to your S3 bucket ... in my case DNS is provided by GoDaddy and I map <tt class="docutils literal">www</tt> to www.circuidipity.com.s3-website-us-east-1.amazonaws.com.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last"><em>s3-website-us-east-1.amazonaws.com</em> is for accessing the website feature. If you just want S3 you can use <em>s3.amazonaws.com</em>.</p>
+</div>
+<p>Allow a bit of time for your changes to propagate through the global network of DNS servers ... check your modifications by running <tt class="docutils literal">host</tt> (cool little DNS hookup utility) ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>host www.circuidipity.com
+www.circuidipity.com is an <span class="nb">alias </span><span class="k">for </span>www.circuidipity.com.s3-website-us-east-1.amazonaws.com.
+www.circuidipity.com.s3-website-us-east-1.amazonaws.com is an <span class="nb">alias </span><span class="k">for </span>s3-website-us-east-1.amazonaws.com.
+s3-website-us-east-1.amazonaws.com has address 207.171.163.149
+</pre></div>
+<p>So <tt class="docutils literal">CNAME www</tt> is working ... <em>dy-naaa-MITE!</em> But a <tt class="docutils literal">CNAME</tt> cannot point to a <em>naked domain</em> (circuidipity.com).</p>
+<p>There are a few different ways to do a <em>naked domain redirect</em>. I chose to use a free service provided by <a class="reference external" href="http://wwwizer.com/">wwwizer.com</a> ... simply point your <tt class="docutils literal">A record</tt> (on GoDaddy and other registrars sometimes represented by the <tt class="docutils literal">&#64;</tt> symbol) to <em>174.129.25.170</em> and it will be redirected to the <a class="reference external" href="http://wwwizer.com/naked-domain-redirect">same domain with www placed in front</a>.</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-web.html">web</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/intel-backlight.html">Fix the backlight on laptops using Intel video chipsets</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/linux-home-server.html">Make an old netbook or laptop into a Linux home server</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

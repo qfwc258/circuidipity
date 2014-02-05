@@ -1,0 +1,291 @@
+/*
+    Name: Chungking Condo
+    Date: February 2014
+    Description: Theme for the Pelican static site generator
+    Version: 0.1
+    Licence: GPL2
+    Author: Daniel Wayne Armstrong <http://www.circuidipity.com>
+*/
+
+/* Imports */
+@import url(font.css);
+@import url(pygment.css);
+
+/*
+-------- Global --------
+*/
+
+/*
+Body
+*/
+
+body {
+    width: 100%;
+    max-width: 960px;
+    position: relative;
+    margin: 20px auto 60px auto;
+    color: #282828;
+    background-color: #ffffff;
+    font-family: 'MerriweatherRegular', serif;
+    font-size: 1.1em;
+    line-height: 1.4em;
+}
+
+/*
+Headings
+*/
+
+h1 {font-size: 2.0em; color: #660066;}
+h2 {font-size: 1.6em;}
+h3 {font-size: 1.4em;}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'YanoneKaffeesatzRegular', sans-serif;
+    font-weight: bold;
+    word-spacing: 0.05em;
+}
+
+h2, h3, h4, h5, h6 {color: #000000;}
+
+/*
+Anchors
+*/
+
+a {
+    color: #ff6600;
+    text-decoration: none;
+    padding: 2px;
+}
+
+a:hover {
+    color: #ffffff;
+    background-color: #009900;
+}
+
+a.tag, ul.tagcloud a {
+    font-family: 'MerriweatherRegular', serif;
+    color: #409fff;
+}
+
+a:hover.tag, ul.tagcloud a:hover, 
+#sitemenu a:hover, #footer a:hover {color: #ffffff;}
+
+a.invisibleLink, a.invisibleLink:hover {
+    color: #ffffff;
+    background-color: #ffffff;
+}
+
+#tagposts a.tag {font-size: 0.8em;}
+
+ul.tagcloud a, #siteheader a, #navmenu a, #footer a, #breadcrumb a, 
+#archives a, #tagposts a {
+    font-weight: bold;
+}
+
+#sitemenu a, #footer a {color: #ff0000;}
+
+/*
+Paragraphs
+*/
+
+p.contentinfo {margin-top: 2px;}
+
+p.published {
+    font-size: 1.4em;
+    font-family: 'YanoneKaffeesatzRegular', sans-serif;
+    word-spacing: 0.05em;
+}
+
+p.articletags {font-weight: bold;}
+    
+p.prevpost {text-align: left; margin-bottom: 0px;}
+
+p.nextpost {
+    text-align: right;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.note p.first.admonition-title, .warning p.first.admonition-title {
+    font-size: 1.2em; 
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 0px;
+    padding: 4px;
+}
+
+.note p.first.admonition-title {background-color: #009900;}
+
+.warning p.first.admonition-title {background-color: #ff0000;}
+
+.note p.last, .warning p.last {margin-top: 0px;}
+
+/*
+Quotes
+*/
+
+blockquote {
+    padding-left: 12px;
+    border-left: 6px solid #009900;
+}
+
+/*
+Lists
+*/
+
+#archives ol, #tagposts ol {line-height: 1.4em;}
+
+ul.tagcloud {
+    list-style: none;
+    line-height: 1.8em;
+}
+
+ul.tagcloud li {display: inline-block;}
+
+li.tag-0 {font-size: 225%;}
+li.tag-1 {font-size: 175%;}
+li.tag-2 {font-size: 145%;}
+li.tag-3 {font-size: 100%;}
+
+/*
+Code
+*/
+
+pre {
+    border: 2px dashed #000000;
+    overflow: auto;
+    color: #000000;
+    background-color: #ffffff;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 20px;
+}
+
+tt {
+    border: 1px solid #bbb;
+    padding: 1px 2px 1px 2px;
+    background: #eee;
+}
+
+/*
+Dividers
+*/
+
+hr {
+    border: 1px solid #3d3d3d;
+}
+
+/*
+Images
+*/
+
+img.whoami {
+    width: 200px;
+    height: 200px;
+    float: left;
+    margin: 0px 20px 20px 0px !important;
+}
+
+img.align-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+img.align-left {
+    display: block;
+    margin: 20px 20px 20px 0px;
+    float: left;
+}
+
+img.align-right {
+    display: block;
+    margin: 20px 0px 20px 20px;
+    float: right;
+}
+
+/*
+-------- Sections --------
+*/
+
+/*
+Siteheader
+*/
+
+#siteheader {
+    font-size: 2.0em;
+    line-height: 1.0em;
+}
+
+/*
+Latest Post
+*/
+
+#latestpost {
+    clear: both;
+}
+
+/*
+Nav Links to Old/New Posts
+*/
+
+/*
+Footer
+*/
+
+#footer {
+    margin-top: 20px;
+    line-height: 1.2em;
+    text-align: right;
+}
+
+/*
+Breadcrumb Trail
+*/
+
+/*
+Archives
+*/
+
+/*
+Tagged Posts
+*/
+
+/*
+All Tags
+*/
+
+#siteheader, #navmenu, #footer, #breadcrumb, 
+#archives, #tagposts {  
+    font-family: 'YanoneKaffeesatzRegular', sans-serif;
+    word-spacing: 0.05em;
+}
+
+#navmenu, #footer, #breadcrumb, #archives, #tagposts {
+    font-size: 1.4em;
+}
+
+/*
+-------- Extras --------
+*/
+
+.noWrap {
+    white-space: nowrap;
+}
+
+.whoa {
+    font-weight: bold;
+    color: #009900;
+}
+
+.note, .warning {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: monospace;
+}
+
+div.aphorism {
+    font-family: 'YanoneKaffeesatzRegular', sans-serif;
+    color: #7a7a7a;
+}

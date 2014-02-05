@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Use GTK+ themes with Fluxbox</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Wednesday 23 March 2011</p>
+</div>
+
+<!-- article -->
+<h1>Use GTK+ themes with Fluxbox</h1>
+<div id="article">
+    <p>Pick a theme for <em>Fluxbox</em> that has a compatible GTK+ counterpart and apply a clean consistent look across applications.</p>
+<p>I like using the <a class="reference external" href="http://customize.org/fluxbox/themes/77548">Finery Dark</a> theme. It has a <a class="reference external" href="http://gnome-look.org/content/show.php/FineryThemes?content=124694">matching GTK theme</a> that can also be used to style QT applications.</p>
+<div class="section" id="fluxbox">
+<h2>Fluxbox</h2>
+<p>Download <em>Finery Dark</em>, untar the package and place the theme folder in <tt class="docutils literal"><span class="pre">~/.fluxbox/styles</span></tt> (create the <tt class="docutils literal">styles</tt> folder if necessary). Right-click on the Fluxbox desktop and select <tt class="docutils literal"><span class="pre">Styles-&gt;Finery</span> Dark</tt>.</p>
+</div>
+<div class="section" id="gtk">
+<h2>GTK</h2>
+<p>Download the Finery Dark <em>GTK</em> matching theme, untar the package and place the theme folder in <tt class="docutils literal"><span class="pre">~/.themes</span></tt> (create folder if necessary).</p>
+<p>GTK themes require an <em>engine</em> to run. Download the <tt class="docutils literal">murrine</tt> engine to run Finery Dark and some GUI apps (thanks <a class="reference external" href="ahref=&quot;http://identi.ca/allsystemsarego">Dan</a> for sugesting <tt class="docutils literal"><span class="pre">gtk-chtheme</span></tt>) to make switching between themes easier ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install gtk2-engines gtk2-engines-murrine gtk-chtheme qt4-qtconfig
+<span class="nv">$ </span>gtk-chtheme
+</pre></div>
+<p>Select your newly-installed Finery Dark theme.</p>
+</div>
+<div class="section" id="qt">
+<h2>QT</h2>
+<p>Apply a GTK theme to all your QT4-based applications by running <tt class="docutils literal">qtconfig</tt>. Select the <tt class="docutils literal">Appearance</tt> tab and modify <tt class="docutils literal">Select GUI Style</tt> from <tt class="docutils literal">Desktop Settings (default)</tt> to <tt class="docutils literal">GTK+</tt>.</p>
+<p>Done! Looking good Fluxbox (... and GTK ... and QT ...)!</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/add-a-dynamic-menu-to-your-desktop-using-dmenu.html">Add a dynamic menu to your desktop using dmenu</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/intel-backlight.html">Fix the backlight on laptops using Intel video chipsets</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

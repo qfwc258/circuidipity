@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Multiple instances of nm-applet in Openbox</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Monday 23 December 2013</p>
+</div>
+
+<!-- article -->
+<h1>Multiple instances of nm-applet in Openbox</h1>
+<div id="article">
+    <p>I had commented out my entry for <tt class="docutils literal"><span class="pre">nm-applet</span></tt> in <tt class="docutils literal"><span class="pre">$HOME/.config/openbox/autostart</span></tt> and system was loading <tt class="docutils literal"><span class="pre">nm-applet</span></tt> from <tt class="docutils literal"><span class="pre">/etc/xdg/autostart/nm-applet.desktop</span></tt>. Problem: After updating Openbox there were <em>two</em> instances of <tt class="docutils literal"><span class="pre">nm-applet</span></tt> being loaded.</p>
+<p>In <tt class="docutils literal"><span class="pre">/usr/lib/x86_64-linux-gnu/openbox-autostart</span></tt> ...</p>
+<div class="highlight"><pre><span class="nv">GLOBALAUTOSTART</span><span class="o">=</span><span class="s2">&quot;/etc/xdg/openbox/autostart&quot;</span>
+<span class="nv">AUTOSTART</span><span class="o">=</span><span class="s2">&quot;${XDG_CONFIG_HOME:-&quot;</span><span class="nv">$HOME</span>/.config<span class="s2">&quot;}/openbox/autostart&quot;</span>
+</pre></div>
+<p><strong>Fix:</strong> Edited <tt class="docutils literal"><span class="pre">/etc/xdg/autostart/nm-applet.desktop</span></tt> to read ...</p>
+<div class="highlight"><pre><span class="nv">NotShowIn</span><span class="o">=</span>KDE;GNOME;OPENBOX;
+</pre></div>
+<p>... and <em>no</em> <tt class="docutils literal"><span class="pre">nm-applet</span></tt> appears when Openbox is loaded. Re-enabled <tt class="docutils literal"><span class="pre">nm-applet</span></tt> in <tt class="docutils literal">autostart</tt> ...</p>
+<div class="highlight"><pre><span class="o">(</span>sleep 3 <span class="o">&amp;&amp;</span> /usr/bin/nm-applet --sm-disable<span class="o">)</span> &amp;
+</pre></div>
+<p>... re-started Openbox and now only the desired <em>single</em> instance of <tt class="docutils literal"><span class="pre">nm-applet</span></tt> is loaded.</p>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-openbox.html">openbox</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/python2-and-python3.html">Python2 and Python3 co-existing in harmony using Virtualenv</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/convert-video-to-audio.html">Convert video file(s) to MP3 audio</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

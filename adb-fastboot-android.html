@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Install ADB and Fastboot Android Tools</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Thursday 07 March 2013</p>
+</div>
+
+<!-- article -->
+<h1>Install ADB and Fastboot Android Tools</h1>
+<div id="article">
+    <p>Rooting my Nexus 7 tablet required the installation of <em>ADB</em> and <em>Fastboot</em>. ADB stands for <em>Android Debugging Bridge</em> and enables command-line control of Android devices connected to a host machine while Fastboot is used to flash software to Android via USB. Both tools are provided by the Android SDK.</p>
+<p>This is how I setup Android tools on my laptop running Debian <tt class="docutils literal">sid</tt>.</p>
+<div class="section" id="step-0">
+<h2>Step 0</h2>
+<p>Configure Android for <a class="reference external" href="mtp.html">USB debugging</a> and the host for <a class="reference external" href="mtp.html">MTP</a>. This step confirms host is capable of detecting and mounting the Android device. Because things have changed in the latest Jelly Bean ...</p>
+</div>
+<div class="section" id="step-1">
+<h2>Step 1</h2>
+<p>Debian has packages for ADB and Fastboot but they are slightly out-of-date even in <tt class="docutils literal">sid</tt>. Android 4.2.2 now requires the <em>RSA key fingerprint</em> of the attempting-to-connect host to be confirmed before allowing ADB to do its stuff. Which requires the very latest version of ADB to even <em>see</em> the RSA confirmation request (I kept running into <tt class="docutils literal">device offline</tt> output from the Debian-supplied ADB).</p>
+<p>Remove the Debian-supplied Android tools if they are installed ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get purge android-tools-adb android-tools-fastboot
+</pre></div>
+<p>... and download the latest <a class="reference external" href="http://developer.android.com/sdk/index.html">Android SDK</a> (for my 64-bit host I chose <tt class="docutils literal"><span class="pre">adt-bundle-linux-x86_64.zip</span></tt>) and unpack. ADB and Fastboot are located in <tt class="docutils literal"><span class="pre">adt-bundle-linux-x86_64/sdk/platform-tools</span></tt>.</p>
+<p>If you are running 64-bit Debian then enable <em>multiarch</em> to use 32-bit ADB and Fastboot (yes they are 32-bit even though packed in the x86_64 bundle) and install their dependencies ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo dpkg --add-architecture i386
+<span class="nv">$ </span>sudo apt-get update ; apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
+</pre></div>
+</div>
+<div class="section" id="step-2">
+<h2>Step 2</h2>
+<p>Navigate to platform-tools and start ADB <tt class="docutils literal">./adb <span class="pre">start-server</span></tt>.</p>
+<p>I connect my Nexus 7 to Debian and now see Android requesting confirmation of the RSA key fingerprint ...</p>
+<div class="highlight"><pre>Allow USB debugging?
+
+The computer<span class="err">&#39;</span>s RSA key fingerprint is:
+STRING
+
+<span class="o">[</span>*<span class="o">]</span> Always allow from this computer
+
+OK
+</pre></div>
+<p>ADB now detects my tablet ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>adb devices
+List of devices attached
+STRING                device
+</pre></div>
+</div>
+<div class="section" id="step-3">
+<h2>Step 3</h2>
+<p>To permit running ADB and Fastboot outside of platform-tools I add the executables to $PATH by creating symbolic links in <tt class="docutils literal">~/bin</tt> ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>ln -s /path/to/adt-bundle-linux-x86_64/sdk/platform-tools/adb ~/bin/
+<span class="nv">$ </span>ln -s /path/to/adt-bundle-linux-x86_64/sdk/platform-tools/fastboot ~/bin
+</pre></div>
+<p>The groundwork is now in place to dive into some Android mods and rooting!</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-android.html">android</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/mtp.html">Configure MTP in Linux</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/dual-display-xrandr-extended-desktop-configuration.html">DualDisplay - Extended desktop configuration</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

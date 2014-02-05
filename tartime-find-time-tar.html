@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | TarTime - Match files and generate a tar archive</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Thursday 21 March 2013</p>
+</div>
+
+<!-- article -->
+<h1>TarTime - Match files and generate a tar archive</h1>
+<div id="article">
+    <p>If you are going to perform some multi-step action on the Linux command line more than once or twice ... why not create a <em>shell script</em>?</p>
+<p>Scripting poses the question <em>What am I trying to accomplish?</em> then provides a framework for sketching a logical flow of operations to make it so. I am discovering it is a fun puzzle trying to get the friendly but simple computer and I to agree on what is logical. End result is a well-tested scripted solution that can be automated out of sight, saves time (or do we just tell ourselves that because its fun?) and reduces error vs manual entry of commands.</p>
+<p>Often I want to share files accumulated over a specific period of time. I thought ... <em>How about a shell script that would allow me to input a TIME and it would find all files last modified since TIME then copy and bundle them up into a tar archive?</em> Example: I might want to share with a friend all the photos I have accumulated on my hard drive since we last met 2 weeks ago. All the photos are in my <em>images</em> folder but underneath that are scattered among various sub-folders.</p>
+<p>Building on what I learned last week creating <a class="reference external" href="dual-display-xrandr-extended-desktop-configuration.html">dualDisplay</a> I required a script that would:</p>
+<ul class="simple">
+<li>allow me to define a period of TIME in <em>minutes</em> or <em>days</em></li>
+<li>use <tt class="docutils literal">find</tt> to <em>recursively</em> match all files last modified since TIME</li>
+<li>list all the matching files or ...</li>
+<li>... copy and create the tar archive (with an option to <em>compress</em> the contents)</li>
+</ul>
+<p>One element I found a bit tricky was sorting out the use of <em>regular expressions</em> and <em>globbing</em> in creating positional parameters for matching relevant files ... <tt class="docutils literal">man 7 glob</tt>, this <a class="reference external" href="http://www.linuxjournal.com/content/bash-extended-globbing">tutorial</a>, and my local <a class="reference external" href="http://gtalug.org/wiki/Main_Page">LUG</a> were a big help.</p>
+<p>So this is <strong>tarTime</strong> ... a Bash shell script that matches files recursively from the current directory that were last modified [+-TIME] ago and generates a tar archive ...</p>
+<div class="highlight"><pre><span class="c">#!/bin/bash</span>
+
+<span class="c">#: VARIABLES</span>
+<span class="nv">filename</span><span class="o">=</span><span class="k">$(</span>basename <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>.<span class="k">$(</span>date +%F.%H%M%S<span class="k">)</span>.tar<span class="k">)</span>
+
+<span class="c">#: FUNCTIONS</span>
+helpInfo <span class="o">()</span> <span class="o">{</span>
+            cat <span class="s">&lt;&lt; _EOF_</span>
+<span class="s">Usage: tarTime [OPTION] [+-TIME]</span>
+<span class="s">Match files recursively from current directory that were last modified [+-TIME] ago and generate a tar archive.</span>
+
+<span class="s">OPTIONS</span>
+<span class="s">-[digit][m[inutes]|d[ays], +[digit][m[inutes]|d[ays]]</span>
+<span class="s">    match files whose contents were last modified [TIME] ago</span>
+<span class="s">-a, --all</span>
+<span class="s">    match all files</span>
+<span class="s">-z, --compress</span>
+<span class="s">    compress tar archive using gzip</span>
+<span class="s">-l, --list</span>
+<span class="s">    only list files that match find search parameters</span>
+
+<span class="s">Examples:</span>
+<span class="s">    TarTime -7d             # match files &lt; 7 days old and generate tar archive</span>
+<span class="s">    TarTime +7d             # match files &gt; 7 days old and generate tar archive</span>
+<span class="s">    TarTime -88m            # match files &lt; 88 minutes old and generate tar archive</span>
+<span class="s">    TarTime -l -7d          # only list files &lt; 7 days old</span>
+<span class="s">    TarTime --all           # match all files and generate tar archive</span>
+<span class="s">_EOF_</span>
+<span class="o">}</span>
+
+searchMethod <span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">[[</span> <span class="nv">$searchLimit</span> <span class="o">=</span>~ <span class="o">[</span>m<span class="o">]</span><span class="nv">$ </span><span class="o">]]</span>; <span class="k">then</span>
+<span class="k">            </span><span class="nv">findTime</span><span class="o">=</span><span class="s2">&quot;find . -type f -mmin ${searchLimit%m}&quot;</span>
+        <span class="k">elif</span> <span class="o">[[</span> <span class="nv">$searchLimit</span> <span class="o">=</span>~ <span class="o">[</span>d<span class="o">]</span><span class="nv">$ </span><span class="o">]]</span>; <span class="k">then</span>
+<span class="k">            </span><span class="nv">findTime</span><span class="o">=</span><span class="s2">&quot;find . -type f -mtime ${searchLimit%d}&quot;</span>
+        <span class="k">else</span>
+<span class="k">            </span><span class="nv">findTime</span><span class="o">=</span><span class="s2">&quot;find . -type f&quot;</span>
+        <span class="k">fi</span>
+<span class="o">}</span>
+
+penguinista <span class="o">()</span> <span class="o">{</span>
+        cat <span class="s">&lt;&lt; _EOF_</span>
+
+<span class="s">(O&lt;</span>
+<span class="s">(/)_</span>
+<span class="s">_EOF_</span>
+<span class="o">}</span>
+
+<span class="c">#: LET&#39;S ROLL ...</span>
+<span class="c"># enable extended globbing for &#39;searchLimit=&#39; match - see &#39;man 7 glob&#39;</span>
+<span class="nb">shopt</span> -s extglob
+
+<span class="c"># &#39;$#&#39; is a shell variable containing total number of items on command line minus the command($0) itself</span>
+<span class="c"># &#39;shift&#39; is a shell builtin that shifts all the positional parameters down by one</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="nv">$1</span> !<span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span>; <span class="k">then</span>
+<span class="k">    while</span> <span class="o">[[</span> <span class="nv">$# </span>-gt 0 <span class="o">]]</span>; <span class="k">do</span>
+<span class="k">        case</span> <span class="nv">$1</span> in
+            <span class="o">[</span>+-<span class="o">]</span>+<span class="o">([</span>0-9<span class="o">])[</span>md<span class="o">]</span> | -a | --all <span class="o">)</span>     <span class="nv">searchLimit</span><span class="o">=</span><span class="nv">$1</span>
+                                                searchMethod
+                                                <span class="nb">shift</span>
+                                                ;;
+            -l | --list <span class="o">)</span>                       <span class="nv">listOnly</span><span class="o">=</span>1
+                                                <span class="nb">shift</span>
+                                                ;;
+            -z | --compress <span class="o">)</span>                   <span class="nv">compress</span><span class="o">=</span>1
+                                                <span class="nb">shift</span>
+                                                ;;
+            -h | --help <span class="o">)</span>                       helpInfo
+                                                <span class="nb">exit</span>
+                                                ;;
+            * <span class="o">)</span>                                 <span class="nb">echo</span> <span class="s2">&quot;ERROR: Invalid option(s) specified ...&quot;</span>
+                                                <span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
+                                                helpInfo
+                                                <span class="nb">exit </span>1
+                                                ;;
+            <span class="k">esac</span>
+<span class="k">        done</span>
+<span class="k">else</span>
+<span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;ERROR: tarTime requires at least 1 parameter ...&quot;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
+    helpInfo
+    <span class="nb">exit </span>1
+<span class="k">fi</span>
+
+<span class="k">if</span> <span class="o">[[</span> <span class="nv">$listOnly</span> -eq 1 <span class="o">]]</span>; <span class="k">then</span>
+<span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;These are the files that will be copied to the tar archive ...&quot;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
+    <span class="nv">$findTime</span>
+<span class="k">else</span>
+<span class="k">    if</span> <span class="o">[[</span> <span class="nv">$compress</span> -eq 1 <span class="o">]]</span>; <span class="k">then</span>
+        <span class="nv">$findTime</span> -exec tar -czf <span class="k">${</span><span class="nv">filename</span><span class="k">}</span>.gz <span class="s1">&#39;{}&#39;</span> <span class="se">\+</span>
+    <span class="k">else</span>
+        <span class="nv">$findTime</span> -exec tar -cf <span class="nv">$filename</span> <span class="s1">&#39;{}&#39;</span> <span class="se">\+</span>
+    <span class="k">fi</span>
+<span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;$(penguinista)  &#39;$(ls -t *.tar* | head -n 1 | awk &#39; { print ( $(NF) ) }&#39;)&#39; was generated.&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+<div class="section" id="examples">
+<h2>Examples</h2>
+<p>If I wanted to share all photos created in the last 2 weeks I would navigate to the images directory and run <tt class="docutils literal">tarTime <span class="pre">-14d</span></tt>. The script would recursively match all photos from the last 14 days and generate a tar archive labelled <tt class="docutils literal">FOLDER.DATE.TIME.tar</tt> or <tt class="docutils literal">.tar.gz</tt> if compressed.</p>
+<p>Some other uses ...</p>
+<div class="highlight"><pre><span class="c"># tar files modified more than 7 days ago</span>
+<span class="nv">$ </span>tarTime +7d
+
+<span class="c"># tar files modified less than 88 minutes ago</span>
+<span class="nv">$ </span>tarTime -88m
+
+<span class="c"># list files modified less than 7 days ago</span>
+<span class="nv">$ </span>tarTime -l -7ds
+
+<span class="c"># tar all files</span>
+<span class="nv">$ </span>tarTime --all
+</pre></div>
+<p>Running <tt class="docutils literal">tarTime <span class="pre">--help</span></tt> displays available options.</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/dual-display-xrandr-extended-desktop-configuration.html">DualDisplay - Extended desktop configuration</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/video2audio.html">Video2Audio - Search for video and copy/convert to MP3</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

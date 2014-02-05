@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Configure MTP in Linux</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Thursday 28 February 2013</p>
+</div>
+
+<!-- article -->
+<h1>Configure MTP in Linux</h1>
+<div id="article">
+    <p>Many MP3 players and recent Android phones and tablets no longer appear as removable USB storage devices under Linux. Instead they use <em>MTP</em> (Media Transfer Protocol) and to enable these devices to be detected, mountable, and usable by Linux requires a bit of configuration.</p>
+<p>This is how I setup my laptop running Debian <tt class="docutils literal">sid</tt> to work with a <em>Nexus 4</em> phone and <em>Nexus 7</em> tablet. These steps should work with any MTP-enabled device with the only difference being Android-specific configuration and the relevant <em>vendor</em> or <em>device</em> IDs for each device.</p>
+<div class="section" id="step-0-enable-developer-options">
+<h2>Step 0 - Enable Developer Options</h2>
+<p>On the Nexus I enable <tt class="docutils literal">Developer Options</tt> by navigating to <tt class="docutils literal"><span class="pre">Settings-&gt;About</span> {tablet,phone}</tt>, click to open and <em>tap 7 times</em> on <tt class="docutils literal">Build number</tt>. Nexus displays <tt class="docutils literal">You are now a developer.</tt> Congratulations!</p>
+<p>Return to settings and <tt class="docutils literal">Developer Options</tt> is now visible. Click to open and activate <tt class="docutils literal">USB debugging</tt>.</p>
+</div>
+<div class="section" id="step-1-install-mtp">
+<h2>Step 1 - Install MTP</h2>
+<p>Configure Debian by installing MTP packages and assigning USER to the <tt class="docutils literal">plugdev</tt> and <tt class="docutils literal">fuse</tt> groups ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install mtp-tools mtpfs
+<span class="nv">$ </span>sudo adduser USER plugdev
+<span class="nv">$ </span>sudo adduser USER fuse
+</pre></div>
+<p>Logout and re-login to activate new group permissions.</p>
+</div>
+<div class="section" id="step-2-udev">
+<h2>Step 2 - Udev</h2>
+<p>Connect the MTP-enabled device to Linux and make note of the <tt class="docutils literal">idVendor</tt> and <tt class="docutils literal">idProduct</tt> codes. For my Nexus 7 tablet I run ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>lsusb | grep Google
+Bus 001 Device 010: ID 18d1:4e42 Google Inc.
+</pre></div>
+<p>Google's <tt class="docutils literal">idVendor</tt> is <tt class="docutils literal">18d1</tt> and the Nexus 7 <tt class="docutils literal">idProduct</tt> code is <tt class="docutils literal">4e42</tt>. Go ahead and disconnect the device.</p>
+<p>Create a new <em>udev rule</em> for Google Nexus devices in <tt class="docutils literal"><span class="pre">/etc/udev/rules.d/99-android.rules</span></tt> containing ...</p>
+<div class="highlight"><pre><span class="c"># Google</span>
+<span class="nv">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;usb&quot;</span>, ATTR<span class="o">{</span>idVendor<span class="o">}==</span><span class="s2">&quot;18d1&quot;</span>, <span class="nv">MODE</span><span class="o">=</span><span class="s2">&quot;0666&quot;</span>
+</pre></div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">For a generic entry to handle all Google devices use <em>idVendor</em>. Otherwise add <em>idVendor</em> and <em>idProduct</em> codes to make a <em>device-specific</em> udev rule.</p>
+</div>
+</div>
+<div class="section" id="step-3-mtpfs">
+<h2>Step 3 - MTPFS</h2>
+<p><em>MTPFS</em> is a FUSE filesystem (hence the need for USER to belong to the <tt class="docutils literal">fuse</tt> group) that enables reading and writing data to the MTP-enabled Nexus. Create a <em>mount point</em> for the tablet and restart the udev daemon ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /media/nexus
+<span class="nv">$ </span>sudo service udev restart
+</pre></div>
+<p>Connect the active tablet (make sure its not in sleep mode) to the computer and access its onboard storage by running ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mtpfs /media/nexus -o allow_other
+</pre></div>
+<p>... and unmount the device when finished <tt class="docutils literal">sudo umount mtpfs</tt>.</p>
+<p>For Android devices other options such as <a class="reference external" href="https://play.google.com/store/apps/details?id=com.sand.airdroid">Airdroid</a> exist for device storage management over wireless connections that are OS-independent. MTP, though, is useful to setup if you plan to install Android <a class="reference external" href="adb-fastboot-android.html">development tools</a> and <em>root</em> your device.</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-android.html">android</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/100-days-of-programming.html">100 Days of Programming</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/adb-fastboot-android.html">Install ADB and Fastboot Android Tools</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <a href="/colophon.html">Colophon</a>
+    <a href="/tags.html">Tags</a>
+    <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
+    <span class="noWrap">Copyright &#169; 2014</span> and
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
+    <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
+</div></body>
+</html>

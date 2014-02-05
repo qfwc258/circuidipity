@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-01-07T00:00:00-05:00</updated><entry><title>Vimeo and FlashBlock not playing nice on Iceweasel/Firefox</title><link href="http://www.circuidipity.com/flashblock.html" rel="alternate"></link><updated>2014-01-07T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-01-07:flashblock.html</id><summary type="html">&lt;p&gt;Vimeo videos actually are not playing &lt;em&gt;at all&lt;/em&gt; ... neither embedded or on the site itself.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Add 3 entries to the FlashBlock &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Preferences-&amp;gt;Whitelist&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;vimeo.com&lt;/div&gt;
+&lt;div class="line"&gt;vimeocdn.com&lt;/div&gt;
+&lt;div class="line"&gt;player.vimeo.com&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Works on &lt;tt class="docutils literal"&gt;Iceweasel 24.2.0&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;Flashblock 1.5.17&lt;/tt&gt; .&lt;/p&gt;
+</summary><category term="firefox"></category><category term="web"></category><category term="linux"></category></entry><entry><title>Add ascii logo to login prompt</title><link href="http://www.circuidipity.com/ascii-logo.html" rel="alternate"></link><updated>2014-01-06T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-01-06:ascii-logo.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.deater.net/weave/vmwprod/linux_logo/"&gt;Linuxlogo&lt;/a&gt; provides Tux, the Debian swirl, and other distro logos that can be displayed - along with system information - at the console login prompt ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install linuxlogo
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo cp /etc/issue /etc/issue.bak
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo sh -c &lt;span class="s1"&gt;&amp;#39;linux_logo -L debian -F &amp;quot;.: Greetings, Carbon-Based Biped :.\n\n#O Version #V\nCompiled #C\n#H \\l&amp;quot; &amp;gt; /etc/issue&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</summary><category term="linux"></category><category term="debian"></category></entry><entry><title>Convert video file(s) to MP3 audio</title><link href="http://www.circuidipity.com/convert-video-to-audio.html" rel="alternate"></link><updated>2014-01-01T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-01-01:convert-video-to-audio.html</id><summary type="html">&lt;p&gt;A simple shell script I made to convert downloaded YouTube videos to MP3s ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="c"&gt;# Convert video file to audio&lt;/span&gt;
+
+&lt;span class="nv"&gt;MP3&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;-acodec libmp3lame -aq 0 -ac 2 -ar 44100&amp;quot;&lt;/span&gt;
+
+&lt;span class="k"&gt;for &lt;/span&gt;f in &lt;span class="s2"&gt;&amp;quot;$@&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;do&lt;/span&gt;
+&lt;span class="k"&gt;    &lt;/span&gt;ffmpeg -i &lt;span class="s2"&gt;&amp;quot;$f&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;$MP3&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;$(echo $f | sed &amp;#39;s/....$/.mp3/&amp;#39;)&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Requires &lt;tt class="docutils literal"&gt;ffmpeg&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;libmp3lame0&lt;/tt&gt;.&lt;/p&gt;
+</summary><category term="programming"></category><category term="shell"></category><category term="linux"></category></entry><entry><title>Multiple instances of nm-applet in Openbox</title><link href="http://www.circuidipity.com/nm-applet-openbox.html" rel="alternate"></link><updated>2013-12-23T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2013-12-23:nm-applet-openbox.html</id><summary type="html">&lt;p&gt;I had commented out my entry for &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.config/openbox/autostart&lt;/span&gt;&lt;/tt&gt; and system was loading &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; from &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/xdg/autostart/nm-applet.desktop&lt;/span&gt;&lt;/tt&gt;. Problem: After updating Openbox there were &lt;em&gt;two&lt;/em&gt; instances of &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; being loaded.&lt;/p&gt;
+&lt;p&gt;In &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/usr/lib/x86_64-linux-gnu/openbox-autostart&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;GLOBALAUTOSTART&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/etc/xdg/openbox/autostart&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;AUTOSTART&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;${XDG_CONFIG_HOME:-&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/.config&lt;span class="s2"&gt;&amp;quot;}/openbox/autostart&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Edited &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/xdg/autostart/nm-applet.desktop&lt;/span&gt;&lt;/tt&gt; to read ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;NotShowIn&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;KDE;GNOME;OPENBOX;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and &lt;em&gt;no&lt;/em&gt; &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; appears when Openbox is loaded. Re-enabled &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; in &lt;tt class="docutils literal"&gt;autostart&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;(&lt;/span&gt;sleep 3 &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; /usr/bin/nm-applet --sm-disable&lt;span class="o"&gt;)&lt;/span&gt; &amp;amp;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... re-started Openbox and now only the desired &lt;em&gt;single&lt;/em&gt; instance of &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; is loaded.&lt;/p&gt;
+</summary><category term="openbox"></category><category term="linux"></category></entry><entry><title>Python2 and Python3 co-existing in harmony using Virtualenv</title><link href="http://www.circuidipity.com/python2-and-python3.html" rel="alternate"></link><updated>2013-11-22T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2013-11-22:python2-and-python3.html</id><summary type="html">&lt;p&gt;On my laptop Python is pre-installed ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;python -V
+Python 2.7.5+
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://inventwithpython.com/hacking/index.html"&gt;Hacking Secret Ciphers with Python&lt;/a&gt; looks to be a good resource for beginners to get started with Python programming. This free book uses Python3 but Debian defaults to Python2. No problem. Multiple versions of Python can co-exist on the same computer thanks to &lt;em&gt;virtual isolated python environments&lt;/em&gt; created using &lt;a class="reference external" href="https://pypi.python.org/pypi/virtualenv"&gt;Virtualenv&lt;/a&gt;. That allows me to use Python3 for certain projects - like the exercises in &lt;em&gt;Ciphers&lt;/em&gt; - but continue using Python2 as the system default.&lt;/p&gt;
+&lt;p&gt;Install the Debian package for &lt;tt class="docutils literal"&gt;virtualenv&lt;/tt&gt; and create a directory to hold multiple virtual environments ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install python-virtualenv
+&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir &lt;span class="nv"&gt;$HOME&lt;/span&gt;/virtualenvs
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="nv"&gt;$HOME&lt;/span&gt;/virtualenvs
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now we can create and activate a new sandboxed Python3 environment ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;virtualenv --python&lt;span class="o"&gt;=&lt;/span&gt;/usr/bin/python3 --no-site-packages secret_ciphers
+Running virtualenv with interpreter /usr/bin/python3
+Using base prefix &lt;span class="s1"&gt;&amp;#39;/usr&amp;#39;&lt;/span&gt;
+New python executable in secret_ciphers/bin/python3
+Also creating executable in secret_ciphers/bin/python
+Installing Setuptools........done.
+Installing Pip...............done.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Enter the newly-created sandbox with &lt;tt class="docutils literal"&gt;activate&lt;/tt&gt; and install additional Python package using &lt;tt class="docutils literal"&gt;pip&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;~&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;source &lt;/span&gt;secret_ciphers/bin/activate
+&lt;span class="o"&gt;(&lt;/span&gt;secret_ciphers&lt;span class="o"&gt;)[&lt;/span&gt;~&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;python -V
+Python 3.3.3
+&lt;span class="o"&gt;(&lt;/span&gt;secret_ciphers&lt;span class="o"&gt;)[&lt;/span&gt;~&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pip install PACKAGENAME
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Run &lt;tt class="docutils literal"&gt;deativate&lt;/tt&gt; to exit the sandbox and return to the default system Python. Delete an inactive sandbox with a simple &lt;tt class="docutils literal"&gt;rm &lt;span class="pre"&gt;-rf&lt;/span&gt; SANDBOX&lt;/tt&gt;.&lt;/p&gt;
+</summary><category term="python"></category><category term="virtual environments"></category><category term="programming"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Install Debian Wheezy Screenshot Tour</title><link href="http://www.circuidipity.com/install-debian-wheezy-screenshot-tour.html" rel="alternate"></link><updated>2013-10-11T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2013-10-11:install-debian-wheezy-screenshot-tour.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.debian.org"&gt;Debian GNU/Linux&lt;/a&gt; is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like Ubuntu build their edifices on solid Debian &lt;em&gt;awesomesauce&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;There are 3 &lt;em&gt;release branches&lt;/em&gt; - &lt;tt class="docutils literal"&gt;stable&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;testing&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;unstable&lt;/tt&gt; - and the current stable branch goes by the name &lt;tt class="docutils literal"&gt;wheezy&lt;/tt&gt;. Below is a visual walk-through of a Debian installation that features:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;separate root, encrypted home and swap partitions&lt;/li&gt;
+&lt;li&gt;a minimal foundation for any type of Linux configuration (server, desktop, &lt;a class="reference external" href="http://wiki.debian.org/DebianUnstable"&gt;rolling release&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="section" id="step-0-installer"&gt;
+&lt;h2&gt;Step 0 - Installer&lt;/h2&gt;
+&lt;p&gt;Download a &lt;a class="reference external" href="http://ftp.nl.debian.org/debian/dists/testing/main/installer-amd64/current/images/netboot/mini.iso"&gt;64-bit&lt;/a&gt;  (or &lt;a class="reference external" href="http://ftp.nl.debian.org/debian/dists/testing/main/installer-i386/current/images/netboot/mini.iso"&gt;32-bit&lt;/a&gt; for older machines) Debian mini installer and burn the image to a CD or &lt;a class="reference external" href="multi-boot-usb.html"&gt;prepare a USB boot device&lt;/a&gt;).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-1-go"&gt;
+&lt;h2&gt;Step 1 - Go!&lt;/h2&gt;
+&lt;img alt="Install" class="align-center" src="images/wheezyInstall/011.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Select Language" class="align-center" src="images/wheezyInstall/02.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Select Location" class="align-center" src="images/wheezyInstall/03.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Configure Keyboard" class="align-center" src="images/wheezyInstall/04.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Hostname" class="align-center" src="images/wheezyInstall/05.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Domain" class="align-center" src="images/wheezyInstall/06.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Mirror Country" class="align-center" src="images/wheezyInstall/07.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Mirror archive" class="align-center" src="images/wheezyInstall/08.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Mirror Directory" class="align-center" src="images/wheezyInstall/09.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Proxy" class="align-center" src="images/wheezyInstall/10.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Root password" class="align-center" src="images/wheezyInstall/11.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Verify password" class="align-center" src="images/wheezyInstall/12.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Full Name" class="align-center" src="images/wheezyInstall/13.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Username" class="align-center" src="images/wheezyInstall/14.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="User password" class="align-center" src="images/wheezyInstall/15.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Verify password" class="align-center" src="images/wheezyInstall/16.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Select time zone" class="align-center" src="images/wheezyInstall/17.png" style="width: 800px; height: 600px;" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-2-partitions"&gt;
+&lt;h2&gt;Step 2 - Partitions&lt;/h2&gt;
+&lt;p&gt;In the example below we create 3 partitions on the disk:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;sda1 is a 20GB &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; partition&lt;/li&gt;
+&lt;li&gt;sda2 is a 1GB &lt;tt class="docutils literal"&gt;swap&lt;/tt&gt; partition &lt;em&gt;encrypted&lt;/em&gt; with a &lt;em&gt;random key&lt;/em&gt; (double the RAM &amp;lt;= 2GB is a good rule of thumb for sizing swap)&lt;/li&gt;
+&lt;li&gt;sda3 uses the remaining space as a &lt;tt class="docutils literal"&gt;home&lt;/tt&gt; partition &lt;em&gt;encrypted&lt;/em&gt; with a &lt;em&gt;passphrase&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img alt="Partitioning method" class="align-center" src="images/wheezyInstall/18.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Partition disks" class="align-center" src="images/wheezyInstall/19.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Partition table" class="align-center" src="images/wheezyInstall/20.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Free space" class="align-center" src="images/wheezyInstall/21.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="New Partition" class="align-center" src="images/wheezyInstall/22.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Partition size" class="align-center" src="images/wheezyInstall/23.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Primary partition" class="align-center" src="images/wheezyInstall/24.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Beginning" class="align-center" src="images/wheezyInstall/25.png" style="width: 800px; height: 600px;" /&gt;
+&lt;div class="note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;Setting &lt;em&gt;Mount options&lt;/em&gt; to &lt;em&gt;noatime&lt;/em&gt; decreases write operations and boosts drive speed.&lt;/p&gt;
+&lt;/div&gt;
+&lt;img alt="Partition settings" class="align-center" src="images/wheezyInstall/26.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Free space" class="align-center" src="images/wheezyInstall/27.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="New partition" class="align-center" src="images/wheezyInstall/28.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Partition size" class="align-center" src="images/wheezyInstall/29.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Primary partition" class="align-center" src="images/wheezyInstall/30.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Beginning" class="align-center" src="images/wheezyInstall/31.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Encrypt volume" class="align-center" src="images/wheezyInstall/32.png" style="width: 800px; height: 600px;" /&gt;
+&lt;div class="note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;If the hard disk has not been securely wiped prior to installing Debian (using a utility like &lt;a class="reference external" href="multi-boot-usb.html"&gt;DBAN&lt;/a&gt; you may want to configure &lt;em&gt;Erase data&lt;/em&gt; as &lt;em&gt;yes&lt;/em&gt;. Note, however, that depending on the size of the disk this operation can last several hours.&lt;/p&gt;
+&lt;/div&gt;
+&lt;img alt="Random key" class="align-center" src="images/wheezyInstall/33.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Free space" class="align-center" src="images/wheezyInstall/34.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="New partition" class="align-center" src="images/wheezyInstall/35.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Partition size" class="align-center" src="images/wheezyInstall/36.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Primary partition" class="align-center" src="images/wheezyInstall/37.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Encrypt volume" class="align-center" src="images/wheezyInstall/38.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Passphrase" class="align-center" src="images/wheezyInstall/39.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Configure encrypted volumes" class="align-center" src="images/wheezyInstall/40.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Write changes to disk" class="align-center" src="images/wheezyInstall/41.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Create encrypted volumes" class="align-center" src="images/wheezyInstall/42.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Devices to encrypt" class="align-center" src="images/wheezyInstall/43.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Finish encrypt" class="align-center" src="images/wheezyInstall/44.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Encryption passphrase" class="align-center" src="images/wheezyInstall/45.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Verify passphrase" class="align-center" src="images/wheezyInstall/46.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Configure encrypted volume" class="align-center" src="images/wheezyInstall/47.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Partition settings" class="align-center" src="images/wheezyInstall/48.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Finish partitioning" class="align-center" src="images/wheezyInstall/49.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Write changes to disk" class="align-center" src="images/wheezyInstall/50.png" style="width: 800px; height: 600px;" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-3-install-packages-and-finish-up"&gt;
+&lt;h2&gt;Step 3 - Install packages and finish up&lt;/h2&gt;
+&lt;img alt="Popularity-contest" class="align-center" src="images/wheezyInstall/51.png" style="width: 800px; height: 600px;" /&gt;
+&lt;div class="note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;Select only [*] &lt;em&gt;Standard system utilities&lt;/em&gt; if you want to start with a minimal foundation (no desktop) to build your own post-install custom Debian configuration.&lt;/p&gt;
+&lt;/div&gt;
+&lt;img alt="Software selection" class="align-center" src="images/wheezyInstall/52.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="GRUB" class="align-center" src="images/wheezyInstall/53.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Finish install" class="align-center" src="images/wheezyInstall/54.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="GRUB menu" class="align-center" src="images/wheezyInstall/544.png" style="width: 800px; height: 600px;" /&gt;
+&lt;div class="note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;If an encrypted &lt;em&gt;home&lt;/em&gt; partition was created in Step 2 the system will display a passphrase prompt to unlock the partition.&lt;/p&gt;
+&lt;/div&gt;
+&lt;img alt="Enter encrypt passphrase" class="align-center" src="images/wheezyInstall/55.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Login" class="align-center" src="images/wheezyInstall/56.png" style="width: 800px; height: 600px;" /&gt;
+&lt;p&gt;Enjoy your fresh Debian!&lt;/p&gt;
+&lt;p&gt;Add extra packages, stick with &lt;tt class="docutils literal"&gt;stable&lt;/tt&gt; or move to &lt;tt class="docutils literal"&gt;testing&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;unstable&lt;/tt&gt; or maybe setup a &lt;a class="reference external" href="linux-home-server.html"&gt;home server&lt;/a&gt;?&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="debian"></category><category term="linux"></category></entry><entry><title>Install Arduino on Debian</title><link href="http://www.circuidipity.com/install-arduino-debian.html" rel="alternate"></link><updated>2013-10-04T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2013-10-04:install-arduino-debian.html</id><summary type="html">&lt;p&gt;I have been exploring the &lt;em&gt;Arduino Uno&lt;/em&gt; microcontroller board this week and it is proving a fun entry point to hardware hacking and programming.&lt;/p&gt;
+&lt;p&gt;Installing the &lt;a class="reference external" href="http://playground.arduino.cc/Learning/Linux"&gt;Arduino development environment&lt;/a&gt; on Debian or Ubuntu involves ... 0) adding my USER to the &lt;tt class="docutils literal"&gt;dialout&lt;/tt&gt; group (and logging out and back in again for the change to take effect); 1) install package dependencies and; 2) download the Debian packages for Arduino for manual installation ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo adduser USER dialout
+$ sudo apt-get update &amp;amp;&amp;amp; sudo apt-get install openjdk-7-jre avr-libc avrdude binutils-avr extra-xdg-menus gcc-avr libftdi1 libjna-java librxtx-java
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Versions of the Arduino software packaged for official Ubuntu and Debian releases are often outdated. Download the latest packages for &lt;a class="reference external" href="http://packages.debian.org/sid/arduino-core"&gt;arduino-core&lt;/a&gt; and &lt;a class="reference external" href="http://packages.debian.org/sid/arduino"&gt;arduino&lt;/a&gt; from Debian's &lt;tt class="docutils literal"&gt;unstable&lt;/tt&gt; branch and install manually ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i arduino-core_VERSION_all.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i arduino_VERSION_all.deb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Connect the Uno to a computer via USB, open the Arduino IDE and confirm that the port setting is properly set to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Tools-&amp;gt;Serial&lt;/span&gt; &lt;span class="pre"&gt;Port-&amp;gt;/dev/ttyACM0&lt;/span&gt;&lt;/tt&gt;. Ready to go!&lt;/p&gt;
+</summary><category term="arduino"></category><category term="electronics"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Device Tree and BeagleBone Black</title><link href="http://www.circuidipity.com/bbb-dt.html" rel="alternate"></link><updated>2013-09-08T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2013-09-08:bbb-dt.html</id><summary type="html">&lt;p&gt;In the world of x86 hardware a Linux distribution can ship a generic kernel and expect that it will load necessary drivers and run on a wide range of hardware. ARM embedded devices are a very different experience. Much of the hardware is not detected at boot and this has required creating a customized kernel for each device. &lt;em&gt;Device Tree&lt;/em&gt; is designed to address this shortcoming and the &lt;a class="reference external" href="getting-started-with-beaglebone-black.html"&gt;BeagleBone Black&lt;/a&gt; with its 3.8 kernel is one of the first ARM devices to embrace the new way of doing things.&lt;/p&gt;
+&lt;div class="section" id="device-tree-and-arm"&gt;
+&lt;h2&gt;Device Tree and ARM&lt;/h2&gt;
+&lt;p&gt;Device Tree (DT) support for ARM arrived in the 3.7 kernel (it has existed for years in the PowerPC and SPARC worlds). Basically it is a method for describing the underlying hardware to the Linux kernel so that the required drivers will be loaded.&lt;/p&gt;
+&lt;p&gt;On the BeagleBone Black a &lt;em&gt;device tree source&lt;/em&gt; (dts) file is written that describes a piece of hardware and a &lt;em&gt;device tree compiler&lt;/em&gt; (dtc) transforms the instructions into a &lt;em&gt;device tree blob&lt;/em&gt; (dtb) binary that can be used by the kernel. On the BBB there is a bunch of dtb binaries located in &lt;tt class="docutils literal"&gt;/boot&lt;/tt&gt; that describe the device to the kernel at boot time ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# ls /boot/*.dtb&lt;/span&gt;
+/boot/am335x-bone.dtb           /boot/am335x-tester.dtb    /boot/omap3-evm.dtb       /boot/omap4-panda.dtb
+/boot/am335x-boneblack.dtb  /boot/omap2420-h4.dtb      /boot/omap3-tobi.dtb  /boot/omap4-sdp.dtb
+/boot/am335x-evm.dtb            /boot/omap3-beagle-xm.dtb  /boot/omap4-panda-a4.dtb  /boot/omap4-var-som.dtb
+/boot/am335x-evmsk.dtb          /boot/omap3-beagle.dtb     /boot/omap4-panda-es.dtb  /boot/omap5-evm.dtb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;By implementing DT on the BeagleBone Black the device can receive and contribute back all the benefits of upstream kernel development and avoid the hassle of maintaining a custom kernel. Developers of expansion boards (known as &lt;em&gt;capes&lt;/em&gt; in BBB lingo) also benefit as Jason Kridner - co-founder of Beagleboard.org - &lt;a class="reference external" href="http://linuxgizmos.com/introducing-the-new-beaglebone-black-kernel/"&gt;points out&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+Where this [Device Tree implementation] pays off for us, is in the development of capes. By standardizing all of the logic in the kernel and providing the device tree information as data files, it becomes rather easy for a new cape developer to simply create a device tree description of their board and provide it to end users without them ever needing to recompile the kernel! As all of this gets documented, cape development is being greatly simplified and few cape developers should ever have to touch a line of code and end-users should rarely need to change their kernel binary itself based on simply using new capes.&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="overlays"&gt;
+&lt;h2&gt;Overlays&lt;/h2&gt;
+&lt;p&gt;BBB also introduced the idea of &lt;em&gt;Device Tree Overlays&lt;/em&gt;. Overlays allow the device tree that was accessed by the kernel at boot to be modified afterwards in userspace. If a new piece of hardware like a cape is added to BBB or the onboard header pins are initialized/re-configured an overlay can enable the modifications without having to reboot. On the default &lt;em&gt;Angstrom&lt;/em&gt; Linux that ships with BBB there is a bunch of DT overlays already created and available for use in &lt;tt class="docutils literal"&gt;/lib/firmware&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;A &lt;em&gt;cape manager&lt;/em&gt; has been implemented to load and (in theory) unload overlays and &lt;em&gt;slots&lt;/em&gt; is its interface and can show us what is currently loaded ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cat /sys/devices/bone_capemgr.8/slots
+0: 54:PF---
+1: 55:PF---
+2: 56:PF---
+3: 57:PF---
+4: ff:P-O-L Bone-LT-eMMC-2G,00A0,Texas Instrument,BB-BONE-EMMC-2G
+5: ff:P-O-L Bone-Black-HDMI,00A0,Texas Instrument,BB-BONELT-HDMI
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;By default the onboard storage and HDMI interface are loaded as &lt;em&gt;virtual capes&lt;/em&gt; and there are free slots for adding up to 4 additional physical capes.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="analog-inputs"&gt;
+&lt;h2&gt;Analog Inputs&lt;/h2&gt;
+&lt;p&gt;An example of overlays in action is loading the BeagleBone Black's analog inputs and making the pins available for use. We use the SLOTS interface a lot so export the location to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.profile&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# export SLOTS=/sys/devices/bone_capemgr.*/slots&lt;/span&gt;
+&lt;span class="c"&gt;# echo &amp;#39;export SLOTS=/sys/devices/bone_capemgr.*/slots&amp;#39; &amp;gt;&amp;gt; ~/.profile&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;BBB has a pre-configured DT overlay &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;BB-ADC-00A0.dtbo&lt;/span&gt;&lt;/tt&gt; for analog pins. Load the overlay (omitting the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-00A0.dtbo&lt;/span&gt;&lt;/tt&gt; bit) and see that $SLOTS registers a new cape and the kernel detects new hardware ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# echo BB-ADC &amp;gt; $SLOTS&lt;/span&gt;
+&lt;span class="c"&gt;# cat $SLOTS&lt;/span&gt;
+0: 54:PF---
+1: 55:PF---
+2: 56:PF---
+3: 57:PF---
+4: ff:P-O-L Bone-LT-eMMC-2G,00A0,Texas Instrument,BB-BONE-EMMC-2G
+5: ff:P-O-L Bone-Black-HDMI,00A0,Texas Instrument,BB-BONELT-HDMI
+7: ff:P-O-L Override Board Name,00A0,Override Manuf,BB-ADC
+&lt;span class="c"&gt;# dmesg&lt;/span&gt;
+...
+&lt;span class="o"&gt;[&lt;/span&gt;37166.391913&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: part_number &lt;span class="s1"&gt;&amp;#39;BB-ADC&amp;#39;&lt;/span&gt;, version &lt;span class="s1"&gt;&amp;#39;N/A&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;37166.392100&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: slot &lt;span class="c"&gt;#7: generic override&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;37166.392151&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: bone: Using override eeprom data at slot 7
+&lt;span class="o"&gt;[&lt;/span&gt;37166.392204&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: slot &lt;span class="c"&gt;#7: &amp;#39;Override Board Name,00A0,Override Manuf,BB-ADC&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;37166.392478&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: slot &lt;span class="c"&gt;#7: Requesting part number/version based &amp;#39;BB-ADC-00A0.dtbo&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;37166.392536&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: slot &lt;span class="c"&gt;#7: Requesting firmware &amp;#39;BB-ADC-00A0.dtbo&amp;#39; for board-name &amp;#39;Override Board Name&amp;#39;, version &amp;#39;00A0&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;37166.392605&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: slot &lt;span class="c"&gt;#7: dtbo &amp;#39;BB-ADC-00A0.dtbo&amp;#39; loaded; converting to live tree&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;37166.400854&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: slot &lt;span class="c"&gt;#7: #1 overlays&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;37166.423565&lt;span class="o"&gt;]&lt;/span&gt; bone-iio-helper helper.14: ready
+&lt;span class="o"&gt;[&lt;/span&gt;37166.426252&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: slot &lt;span class="c"&gt;#7: Applied #1 overlays.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The analog input pins are now available for use.&lt;/p&gt;
+&lt;p&gt;Example: If you connect a photoresistor to BBB's &lt;tt class="docutils literal"&gt;P9_32(1.8V)&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;P9_34(AGND)&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;P9_36(AIN5)&lt;/tt&gt; pins you can measure light levels in &lt;tt class="docutils literal"&gt;/sys/devices/ocp.2/helper.14/AIN5&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/sys/devices/ocp.2/44e0d000.tscadc/tiadc/iio\:device0/in_voltage5_raw&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Our BB-ADC dtbo above resides in slot 7. To unload we would run &lt;tt class="docutils literal"&gt;echo &lt;span class="pre"&gt;-7&lt;/span&gt; &amp;gt; $SLOTS&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="warning"&gt;
+&lt;p class="first admonition-title"&gt;Warning&lt;/p&gt;
+&lt;p class="last"&gt;Unloading from $SLOTS is currently very unstable and can induce kernel panics. Much safer to simply reboot.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;To have this overlay load at boot time we add the option &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;capemgr.enable_partno=BB-ADC&lt;/span&gt;&lt;/tt&gt; to the &lt;tt class="docutils literal"&gt;uEnv.txt&lt;/tt&gt; file located on the &lt;tt class="docutils literal"&gt;/dev/mmcblk0p1&lt;/tt&gt; partition.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="helpful-resources"&gt;
+&lt;h2&gt;Helpful Resources&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://devicetree.org/Device_Tree_Usage"&gt;Device Tree Usage&lt;/a&gt; and &lt;a class="reference external" href="https://lkml.org/lkml/2012/11/5/615"&gt;Device Tree Overlays&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Adafruit's introduction to the &lt;a class="reference external" href="http://learn.adafruit.com/introduction-to-the-beaglebone-black-device-tree?view=all"&gt;BBB Device Tree&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://elinux.org/BeagleBone_and_the_3.8_Kernel"&gt;BeagleBone and the 3.8 Kernel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://derekmolloy.ie/tag/beaglebone-black/"&gt;Derek Molloy's&lt;/a&gt; tables for the &lt;a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true"&gt;P8&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true"&gt;P9&lt;/a&gt; header pins&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://derekmolloy.ie/gpios-on-the-beaglebone-black-using-device-tree-overlays/"&gt;GPIOs on the BBB using Device Tree Overlays&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/jadonk/validation-scripts/tree/master/test-capemgr"&gt;Capemgr and Device Tree Overlays&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://beagleboard-gsoc13.blogspot.ca/2013/07/sampling-analogue-signals-using-adc-on.html"&gt;Sampling analog signals using the ADC&lt;/a&gt; on BBB&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</summary><category term="beaglebone"></category><category term="electronics"></category><category term="angstrom"></category><category term="linux"></category></entry><entry><title>BeagleBone Black: 'Say Hello to My Little LEDs'</title><link href="http://www.circuidipity.com/bbb-led.html" rel="alternate"></link><updated>2013-09-06T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2013-09-06:bbb-led.html</id><summary type="html">&lt;p&gt;Blinking an LED is the 'Hello World' of hardware. &lt;a class="reference external" href="getting-started-with-beaglebone-black.html"&gt;BeagleBone Black's&lt;/a&gt; LEDs can be controlled by the user and the device can be connected with external LEDs.&lt;/p&gt;
+&lt;div class="section" id="built-in-leds"&gt;
+&lt;h2&gt;Built-in LEDs&lt;/h2&gt;
+&lt;p&gt;BBB has 4 onboard LEDs that serve as indicators for various bits of the hardware and their interfaces can be accessed under &lt;tt class="docutils literal"&gt;/sys/class/leds&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ls /sys/class/leds/
+beaglebone:green:usr0  beaglebone:green:usr1  beaglebone:green:usr2  beaglebone:green:usr3
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The blinking 'heartbeat' LED that indicates BBB is alive and well is &lt;tt class="docutils literal"&gt;beaglebone:green:usr0&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## &amp;#39;trigger&amp;#39; determines what event is monitored&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;ls /sys/class/leds/beaglebone&lt;span class="se"&gt;\:&lt;/span&gt;green&lt;span class="se"&gt;\:&lt;/span&gt;usr0/
+brightness  device  max_brightness  power  subsystem  trigger  uevent
+&lt;span class="nv"&gt;$ &lt;/span&gt;cat /sys/class/leds/beaglebone&lt;span class="se"&gt;\:&lt;/span&gt;green&lt;span class="se"&gt;\:&lt;/span&gt;usr0/trigger
+none nand-disk mmc0 mmc1 timer oneshot &lt;span class="o"&gt;[&lt;/span&gt;heartbeat&lt;span class="o"&gt;]&lt;/span&gt; backlight gpio cpu0 default-on transient
+
+&lt;span class="c"&gt;## stop the heart&lt;/span&gt;
+&lt;span class="c"&gt;# echo none &amp;gt; /sys/class/leds/beaglebone\:green\:usr0/trigger&lt;/span&gt;
+
+&lt;span class="c"&gt;## turn LED on (no blinking)&lt;/span&gt;
+&lt;span class="c"&gt;# echo none &amp;gt; /sys/class/leds/beaglebone\:green\:usr0/trigger&lt;/span&gt;
+&lt;span class="c"&gt;# echo 1 &amp;gt; /sys/class/leds/beaglebone\:green\:usr0/brightness&lt;/span&gt;
+
+&lt;span class="c"&gt;## strobe LED (get BeagleBone&amp;#39;s heart racing at 20 &amp;#39;beats&amp;#39; per second)&lt;/span&gt;
+&lt;span class="c"&gt;# echo timer &amp;gt; /sys/class/leds/beaglebone\:green\:usr0/trigger&lt;/span&gt;
+&lt;span class="c"&gt;# echo 25 &amp;gt; /sys/class/leds/beaglebone\:green\:usr0/delay_off&lt;/span&gt;
+&lt;span class="c"&gt;# echo 25 &amp;gt; /sys/class/leds/beaglebone\:green\:usr0/delay_on&lt;/span&gt;
+
+&lt;span class="c"&gt;## *whew* ... restore default heartbeat&lt;/span&gt;
+&lt;span class="c"&gt;# echo heartbeat &amp;gt; /sys/class/leds/beaglebone\:green\:usr0/trigger&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="how-to-use-the-gpio-pins"&gt;
+&lt;h2&gt;How to Use the GPIO Pins&lt;/h2&gt;
+&lt;p&gt;BeagleBone Black has 65 &lt;em&gt;General Purpose Input/Output (GPIO)&lt;/em&gt; pins distributed on the board's P8 and P9 headers. These software-controlled pins can be configured to work with external hardware and are accessed through the Linux kernel's GPIO interfaces under &lt;tt class="docutils literal"&gt;/sys/class/gpio&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ls /sys/class/gpio/
+&lt;span class="nb"&gt;export      &lt;/span&gt;gpiochip0  gpiochip32  gpiochip64  gpiochip96  unexport
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;What can be confusing at first glance is that a pin's number on the BeagleBone header and its GPIO number are different. Each &lt;tt class="docutils literal"&gt;gpiochipX&lt;/tt&gt; controls 32 pins and is used to calculate the GPIO address of a pin (some of the GPIO pins are dedicated to BBB's onboard hardware and unavailable by default).&lt;/p&gt;
+&lt;p&gt;Example: Pin &lt;tt class="docutils literal"&gt;P8_12&lt;/tt&gt; is controlled by &lt;tt class="docutils literal"&gt;gpio1[12]&lt;/tt&gt; which translates as pin 12 on the second controller (starting from zero) ... (32 * 1) + 12 = 44. To &lt;em&gt;add&lt;/em&gt; a pin for use I map GPIO_44 into the filesystem by echoing its pin number to the GPIO &lt;tt class="docutils literal"&gt;export&lt;/tt&gt; file ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# echo 44 &amp;gt; /sys/class/gpio/export&lt;/span&gt;
+&lt;span class="c"&gt;# ls /sys/class/gpio/&lt;/span&gt;
+&lt;span class="nb"&gt;export      &lt;/span&gt;gpio44  gpiochip0  gpiochip32  gpiochip64  gpiochip96  unexport
+&lt;span class="c"&gt;# ls /sys/class/gpio/gpio44/&lt;/span&gt;
+active_low  direction  edge  power  subsystem  uevent  value
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and a new &lt;tt class="docutils literal"&gt;gpio44&lt;/tt&gt; directory is created and the pin is available for work.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="breadboard-blinking-led"&gt;
+&lt;h2&gt;Breadboard Blinking LED&lt;/h2&gt;
+&lt;img alt="BBB and Breadboard" src="images/bbb-ledzilla.jpg" /&gt;
+&lt;p&gt;For my external LED experiment I use:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;red LED&lt;/li&gt;
+&lt;li&gt;breadboard&lt;/li&gt;
+&lt;li&gt;470 ohm resistor&lt;/li&gt;
+&lt;li&gt;2 jumper wires&lt;/li&gt;
+&lt;li&gt;penguin (optional)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Header pins &lt;tt class="docutils literal"&gt;P8_1&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;P8_2&lt;/tt&gt; are both &lt;tt class="docutils literal"&gt;GND&lt;/tt&gt;. Connect &lt;tt class="docutils literal"&gt;P8_2&lt;/tt&gt; to the LED cathode and our newly-enabled &lt;tt class="docutils literal"&gt;GPIO_44&lt;/tt&gt; pin (&lt;tt class="docutils literal"&gt;P8_12&lt;/tt&gt;) to the LED anode.&lt;/p&gt;
+&lt;p&gt;To turn the LED on and off I input settings HIGH and LOW ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## ON&lt;/span&gt;
+&lt;span class="c"&gt;# echo high &amp;gt; /sys/class/gpio/gpio44/direction&lt;/span&gt;
+&lt;span class="c"&gt;## OFF&lt;/span&gt;
+&lt;span class="c"&gt;# echo low &amp;gt; /sys/class/gpio/gpio44/direction&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I created a tiny shell script to blink the LED ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class="c"&gt;# Blink an LED on breadboard&lt;/span&gt;
+
+&lt;span class="nv"&gt;PIN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;44&amp;quot;&lt;/span&gt; &lt;span class="c"&gt;# P8_12 is gpio1[12] = (32 * 1) + 12 = 44&lt;/span&gt;
+&lt;span class="nv"&gt;GPIOPIN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/sys/class/gpio/gpio$PIN&amp;quot;&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -d &lt;span class="s2"&gt;&amp;quot;$GPIOPIN&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;; &lt;span class="k"&gt;then&lt;/span&gt;
+&lt;span class="k"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Blinking LED connected to Pin $PIN ...&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt;
+&lt;span class="k"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$PIN&lt;/span&gt; &amp;gt; /sys/class/gpio/export
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Blinking LED connected to Pin $PIN ...&amp;quot;&lt;/span&gt;
+    sleep 1
+&lt;span class="k"&gt;fi&lt;/span&gt;
+
+&lt;span class="k"&gt;while &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;; &lt;span class="k"&gt;do&lt;/span&gt;
+&lt;span class="k"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;echo &lt;/span&gt;high &amp;gt; &lt;span class="nv"&gt;$GPIOPIN&lt;/span&gt;/direction
+    sleep 2
+    &lt;span class="nb"&gt;echo &lt;/span&gt;low &amp;gt; &lt;span class="nv"&gt;$GPIOPIN&lt;/span&gt;/direction
+    sleep 2
+&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-C&lt;/span&gt;&lt;/tt&gt; to kill the script.&lt;/p&gt;
+&lt;p&gt;To &lt;em&gt;remove&lt;/em&gt; a GPIO pin from use simply &lt;tt class="docutils literal"&gt;unexport&lt;/tt&gt; the pin ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# echo 44 &amp;gt; /sys/class/gpio/unexport&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="helpful-resources"&gt;
+&lt;h2&gt;Helpful Resources&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Linux Kernel &lt;a class="reference external" href="https://www.kernel.org/doc/Documentation/gpio.txt"&gt;GPIO Interfaces&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Adafruit's &lt;a class="reference external" href="http://learn.adafruit.com/blinking-an-led-with-beaglebone-black/overview"&gt;Blinking an LED with BBB&lt;/a&gt; tutorial using Python&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://derekmolloy.ie/tag/beaglebone-black/"&gt;Derek Molloy's&lt;/a&gt; tables for the &lt;a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true"&gt;P8&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true"&gt;P9&lt;/a&gt; header pins&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</summary><category term="beaglebone"></category><category term="electronics"></category><category term="angstrom"></category><category term="linux"></category></entry><entry><title>Getting Started with BeagleBone Black</title><link href="http://www.circuidipity.com/getting-started-with-beaglebone-black.html" rel="alternate"></link><updated>2013-09-02T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2013-09-02:getting-started-with-beaglebone-black.html</id><summary type="html">&lt;img alt="BeagleBone Black" class="align-center" src="images/bbb-details3.png" /&gt;
+&lt;p&gt;Raspberry Pi, Arduino, OpenWRT on routers ... Happy days are here for open source on little computers! Five years ago BeagleBoard.org released its first hacker-friendly ARM-powered development board and now I am having fun exploring their brand new &lt;em&gt;BeagleBone Black&lt;/em&gt; - a $45 community-supported Linux computer.&lt;/p&gt;
+&lt;div class="section" id="step-0-out-of-box"&gt;
+&lt;h2&gt;Step 0 - Out-of-Box&lt;/h2&gt;
+&lt;p&gt;The original BeagleBone - released near the end of 2011 - started with the idea of making an ARM board that would fit in a small mint tin and see how much &lt;em&gt;awesomesauce&lt;/em&gt; could be packed inside! &lt;a class="reference external" href="http://beagleboard.org/Products/BeagleBone%20Black"&gt;BeagleBone Black&lt;/a&gt; (BBB) has the same convenient size, rounded corners, and 4 mounting holes for building projects. Onboard is a 1GHz ARMv7 processor, 512MB RAM, 2GB storage, microSD slot, a microUSB port for power and connectivity, a USB host port, microHDMI, 5V power connector, and - as I am having fun exploring - 96 header pins for interfacing BBB with external hardware. A microUSB-to-USB cable is included for connecting BBB to a host machine.&lt;/p&gt;
+&lt;p&gt;BeagleBone Black is completely open source ... &lt;a class="reference external" href="http://circuitco.com/support/index.php?title=BeagleBoneBlack#Hardware_Files"&gt;hardware schematics&lt;/a&gt; are provided (build your own!), no &lt;em&gt;binary blobs&lt;/em&gt;, no &lt;a class="reference external" href="http://www.raspberrypi.org/faqs"&gt;NDA&lt;/a&gt; required to dive into the 4,000+ pages(!) of Texas Instruments' &lt;a class="reference external" href="http://www.ti.com/product/am3359"&gt;AM335x processor manual&lt;/a&gt;. BBB ships with the &lt;em&gt;Angstrom Linux&lt;/em&gt; distribution pre-installed ... but using an ARMv7 processor is a big plus because alternative ARM ports of the mainstream Linux distros (such as Debian) are available for the BBB without re-compiling packages. BBB is also one of the first ARM devices to fully embrace the &lt;a class="reference external" href="http://linuxgizmos.com/introducing-the-new-beaglebone-black-kernel"&gt;Linux Device Tree&lt;/a&gt; and will benefit from ongoing ARM improvements in mainstream kernel development and make it easier to create expansion boards (or &lt;em&gt;capes&lt;/em&gt; in BBB lingo) for the device.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-1-connect-to-host"&gt;
+&lt;h2&gt;Step 1 - Connect to Host&lt;/h2&gt;
+&lt;p&gt;BeagleBone Black is designed to get the Linux user up-and-running quickly. Within a few minutes of unboxing the device I was using the provided USB cable to connect the device to my host computer (running Debian &lt;tt class="docutils literal"&gt;sid&lt;/tt&gt;). BBB mounts as a usb-storage device and provides a usbnet virtual-ethernet interface running a DHCP server.&lt;/p&gt;
+&lt;p&gt;Some post-connection HOST output of interest ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cat /var/log/kern.log
+Sep  1 16:58:17 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.036280&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.2: new high-speed USB device number 20 using ehci-pci
+Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.129344&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.2: New USB device found, &lt;span class="nv"&gt;idVendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1d6b, &lt;span class="nv"&gt;idProduct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0104
+Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.129350&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.2: New USB device strings: &lt;span class="nv"&gt;Mfr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;Product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;3, &lt;span class="nv"&gt;SerialNumber&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4
+Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.129355&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.2: Product: BeagleBoneBlack
+Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.129358&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.2: Manufacturer: Circuitco
+Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.129361&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.2: SerialNumber: 5A-1713BBBK2013
+Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.133166&lt;span class="o"&gt;]&lt;/span&gt; rndis_host 1-1.2:1.0 eth1: register &lt;span class="s1"&gt;&amp;#39;rndis_host&amp;#39;&lt;/span&gt; at usb-0000:00:1a.0-1.2, RNDIS device, c8:a0:30:ac:1d:6f
+Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.133843&lt;span class="o"&gt;]&lt;/span&gt; cdc_acm 1-1.2:1.2: This device cannot &lt;span class="k"&gt;do &lt;/span&gt;calls on its own. It is not a modem.
+Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.133917&lt;span class="o"&gt;]&lt;/span&gt; cdc_acm 1-1.2:1.2: ttyACM0: USB ACM device
+Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.135249&lt;span class="o"&gt;]&lt;/span&gt; usb-storage 1-1.2:1.4: USB Mass Storage device detected
+Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.135458&lt;span class="o"&gt;]&lt;/span&gt; scsi20 : usb-storage 1-1.2:1.4
+Sep  1 16:58:19 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455196.133604&lt;span class="o"&gt;]&lt;/span&gt; scsi 20:0:0:0: Direct-Access     Linux    File-CD Gadget   0308 PQ: 0 ANSI: 2
+Sep  1 16:58:19 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455196.134045&lt;span class="o"&gt;]&lt;/span&gt; sd 20:0:0:0: Attached scsi generic sg1 &lt;span class="nb"&gt;type &lt;/span&gt;0
+Sep  1 16:58:19 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455196.135313&lt;span class="o"&gt;]&lt;/span&gt; sd 20:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sdb&lt;span class="o"&gt;]&lt;/span&gt; 144522 512-byte logical blocks: &lt;span class="o"&gt;(&lt;/span&gt;73.9 MB/70.5 MiB&lt;span class="o"&gt;)&lt;/span&gt;
+Sep  1 16:58:19 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455196.136080&lt;span class="o"&gt;]&lt;/span&gt; sd 20:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sdb&lt;span class="o"&gt;]&lt;/span&gt; Write Protect is off
+Sep  1 16:58:19 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455196.136089&lt;span class="o"&gt;]&lt;/span&gt; sd 20:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sdb&lt;span class="o"&gt;]&lt;/span&gt; Mode Sense: 0f 00 00 00
+Sep  1 16:58:19 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455196.136840&lt;span class="o"&gt;]&lt;/span&gt; sd 20:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sdb&lt;span class="o"&gt;]&lt;/span&gt; Write cache: enabled, &lt;span class="nb"&gt;read &lt;/span&gt;cache: enabled, doesn&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;t support DPO or FUA
+Sep  1 16:58:19 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455196.147108&lt;span class="o"&gt;]&lt;/span&gt;  sdb:
+Sep  1 16:58:19 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455196.149998&lt;span class="o"&gt;]&lt;/span&gt; sd 20:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sdb&lt;span class="o"&gt;]&lt;/span&gt; Attached SCSI removable disk
+&lt;span class="nv"&gt;$ &lt;/span&gt;lsusb
+Bus 001 Device 020: ID 1d6b:0104 Linux Foundation Multifunction Composite Gadget
+&lt;span class="nv"&gt;$ &lt;/span&gt;mount
+/dev/sdb on /media/dwa/BEAGLEBONE &lt;span class="nb"&gt;type &lt;/span&gt;vfat &lt;span class="o"&gt;(&lt;/span&gt;rw,nosuid,nodev,relatime,uid&lt;span class="o"&gt;=&lt;/span&gt;1000,gid&lt;span class="o"&gt;=&lt;/span&gt;1000,fmask&lt;span class="o"&gt;=&lt;/span&gt;0022,dmask&lt;span class="o"&gt;=&lt;/span&gt;0077,codepage&lt;span class="o"&gt;=&lt;/span&gt;437,iocharset&lt;span class="o"&gt;=&lt;/span&gt;utf8,shortname&lt;span class="o"&gt;=&lt;/span&gt;mixed,showexec,utf8,flush,errors&lt;span class="o"&gt;=&lt;/span&gt;remount-ro,uhelper&lt;span class="o"&gt;=&lt;/span&gt;udisks2&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;ls /dev/ttyA*
+crw-rw---T 1 root dialout 166, 0 Aug 18 13:30 /dev/ttyACM0
+&lt;span class="nv"&gt;$ &lt;/span&gt;ifconfig
+eth0      Link encap:Ethernet  HWaddr f0:de:f1:15:e8:51
+          inet addr:192.168.1.4  Bcast:192.168.1.255  Mask:255.255.255.0
+          inet6 addr: fe80::f2de:f1ff:fe15:e851/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:22559530 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:21337616 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:28619436829 &lt;span class="o"&gt;(&lt;/span&gt;26.6 GiB&lt;span class="o"&gt;)&lt;/span&gt;  TX bytes:3283938274 &lt;span class="o"&gt;(&lt;/span&gt;3.0 GiB&lt;span class="o"&gt;)&lt;/span&gt;
+          Interrupt:20 Memory:f2500000-f2520000
+
+eth1      Link encap:Ethernet  HWaddr c8:a0:30:ac:1d:6f
+          inet addr:192.168.7.1  Bcast:192.168.7.3  Mask:255.255.255.252
+          inet6 addr: fe80::caa0:30ff:feac:1d6f/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:35 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:83 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:6572 &lt;span class="o"&gt;(&lt;/span&gt;6.4 KiB&lt;span class="o"&gt;)&lt;/span&gt;  TX bytes:18103 &lt;span class="o"&gt;(&lt;/span&gt;17.6 KiB&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I use the &lt;em&gt;Thunar&lt;/em&gt; file manager to browse the device and click on &lt;tt class="docutils literal"&gt;START.htm&lt;/tt&gt; to launch BeagleBone's &lt;em&gt;Getting Started&lt;/em&gt; page in a web browser.&lt;/p&gt;
+&lt;img alt="Thunar file manager" class="align-center" src="images/bbb-start.png" /&gt;
+&lt;p&gt;Scroll down to &lt;tt class="docutils literal"&gt;Step #3: Browse to your board&lt;/tt&gt; and clicking on the address of BBB's web server &lt;tt class="docutils literal"&gt;192.168.7.2&lt;/tt&gt; opens the onboard documentation &lt;tt class="docutils literal"&gt;BeagleBone 101&lt;/tt&gt;.&lt;/p&gt;
+&lt;img alt="Beaglebone 101" class="align-center" src="images/bbb-101.png" /&gt;
+&lt;p&gt;Also included is a link to a self-hosted instance of the &lt;em&gt;Cloud9 IDE&lt;/em&gt;  listening at &lt;tt class="docutils literal"&gt;192.168.7.2:3000&lt;/tt&gt; that provides a JavaScript library called &lt;em&gt;BoneScript&lt;/em&gt; for hacking on the BeagleBone's hardware. Some tiny example scripts are provided to blink LEDs and whatnot ... at first glance they remind me of Arduino code but I haven't really played with this environment (or Arduino for that matter) much yet.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Network-Manager&lt;/em&gt; auto-creates a second wired interface for the BeagleBone Black on my HOST ... allowing me to ssh into the device as &lt;tt class="docutils literal"&gt;root&amp;#64;192.168.7.2&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;root&amp;#64;beaglebone.local&lt;/tt&gt; (Angstrom runs &lt;em&gt;Avahi&lt;/em&gt; daemon by default) and no password. Will definitely need to change &lt;strong&gt;that&lt;/strong&gt; ... but not before ...&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-2-flashing-updated-angstrom-image"&gt;
+&lt;h2&gt;Step 2 - Flashing updated Angstrom image&lt;/h2&gt;
+&lt;p&gt;Having determined the device is working - and before diving into custom configuration - its a good idea to flash an updated Angstrom image for the BeagleBone Black to the device's onboard eMMC storage. This will require a microSD (8GB+) card and a 5V power adapter.&lt;/p&gt;
+&lt;div class="section" id="download-and-unpack-image"&gt;
+&lt;h3&gt;Download and unpack image&lt;/h3&gt;
+&lt;p&gt;Angstrom image files for the BBB are labelled &lt;a class="reference external" href="http://dominion.thruhere.net/koen/angstrom/beaglebone/"&gt;BBB-eMMC-flasher-xxxx.xx.xx.img.xz&lt;/a&gt; ... Latest version as of 2 September is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;BBB-eMMC-flasher-2013.08.21.img.xz&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Using the above image as an example ... download the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;xz-utils&lt;/span&gt;&lt;/tt&gt; Debian package and download and unpack the Angstrom image ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install xz-utils
+&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://dominion.thruhere.net/koen/angstrom/beaglebone/BBB-eMMC-flasher-2013.08.21.img.xz
+&lt;span class="nv"&gt;$ &lt;/span&gt;xz -d BBB-eMMC-flasher-2013.08.21.img.xz
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="copy-image-to-microsd"&gt;
+&lt;h3&gt;Copy image to microSD&lt;/h3&gt;
+&lt;div class="warning"&gt;
+&lt;p class="first admonition-title"&gt;Warning&lt;/p&gt;
+&lt;p class="last"&gt;Be careful to note the proper &lt;em&gt;DeviceID&lt;/em&gt; of your microSD card ... in my example I use &lt;em&gt;sdb&lt;/em&gt; but your device will probably have a &lt;em&gt;different address&lt;/em&gt;. Command &lt;em&gt;dd&lt;/em&gt; will completely &lt;strong&gt;wipe out the contents of the card&lt;/strong&gt;. Its not nicknamed &lt;em&gt;disk destroyer&lt;/em&gt; for nothing!&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Copy image to card using &lt;tt class="docutils literal"&gt;dd&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;BBB-eMMC-flasher-2013.08.21.img &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sdb &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1M
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="flash-the-bbb"&gt;
+&lt;h3&gt;Flash the BBB&lt;/h3&gt;
+&lt;p&gt;A USB port does not supply enough power to the BBB when flashing an image to the eMMC ... the board must be connected to a 5V adapter. Luckily I was able to recycle an old Linksys power adapter that provided the necessary 5V and 2000mA and fit the power plug on the BBB.&lt;/p&gt;
+&lt;p&gt;With the BBB disconnected from HOST and powered off ... insert the Angstrom-prepared microSD card into BBB. Hold down the BOOT button (located above the microSD slot), connect the 5V adapter, and wait until you see the bank of 4 LEDs on the BBB all light up for a few seconds before releasing BOOT. A new image is now being flashed from card to BBB storage and will take approximately 50-60 minutes. Upon completion all 4 LEDs will be lit solid. Disconnect power, remove the microSD, then restore power and BBB will boot into the updated Angstrom.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-3-configuration"&gt;
+&lt;h2&gt;Step 3 - Configuration&lt;/h2&gt;
+&lt;div class="section" id="root-password"&gt;
+&lt;h3&gt;Root password&lt;/h3&gt;
+&lt;p&gt;Root with no password &lt;em&gt;oh noooooo&lt;/em&gt; ... set one now &lt;tt class="docutils literal"&gt;passwd&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;You might also want to create an unprivileged user account (I did not).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configure-host-as-router"&gt;
+&lt;h3&gt;Configure HOST as router&lt;/h3&gt;
+&lt;p&gt;Tip from &lt;a class="reference external" href="http://shallowsky.com/blog/hardware/talking-to-beaglebone.html"&gt;http://shallowsky.com/blog/hardware/talking-to-beaglebone.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;When BBB is connected to my HOST via USB ... Network-Manager sets up a second wired interface &lt;tt class="docutils literal"&gt;eth1&lt;/tt&gt; to connect with BBB ... and BBB connects to HOST through &lt;tt class="docutils literal"&gt;usb0&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ifconfig
+...
+usb0      Link encap:Ethernet  HWaddr BA:E1:A2:37:43:15
+          inet addr:192.168.7.2  Bcast:192.168.7.3  Mask:255.255.255.252
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:7685 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:12461 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:888859 &lt;span class="o"&gt;(&lt;/span&gt;868.0 KiB&lt;span class="o"&gt;)&lt;/span&gt;  TX bytes:13309157 &lt;span class="o"&gt;(&lt;/span&gt;12.6 MiB&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This arrangment is OK for getting HOST and BBB talking to each other but BBB - in lieu of an additional ethernet cable - cannot reach the net. I created a tiny script that can be run as desired to configure my Linux HOST to route internet traffic for the BBB ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class="c"&gt;# bbbIPforward.sh -- Enable internet access for my BeagleBone Black (BBB)&lt;/span&gt;
+&lt;span class="c"&gt;# using my Linux HOST as a router&lt;/span&gt;
+
+&lt;span class="nv"&gt;bbbAddr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;192.168.7.2&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;hostAddr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;192.168.7.1&amp;quot;&lt;/span&gt;
+
+&lt;span class="c"&gt;# Configure IP forwarding on HOST&lt;/span&gt;
+sudo iptables -A POSTROUTING -t nat -j MASQUERADE
+&lt;span class="nb"&gt;echo &lt;/span&gt;1 | sudo tee /proc/sys/net/ipv4/ip_forward &amp;gt; /dev/null
+
+&lt;span class="c"&gt;# Copy ssh key to BBB for passwordless logins&lt;/span&gt;
+ssh-copy-id root@&lt;span class="nv"&gt;$bbbAddr&lt;/span&gt;
+
+&lt;span class="c"&gt;# Configure BBB to use HOST as gateway&lt;/span&gt;
+ssh root@&lt;span class="nv"&gt;$bbbAddr&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/sbin/route add default gw $hostAddr&amp;quot;&lt;/span&gt;
+
+&lt;span class="c"&gt;# Backup and substitute BBB resolv.conf with HOST resolv.conf&lt;/span&gt;
+ssh root@&lt;span class="nv"&gt;$bbbAddr&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;mv -n /etc/resolv.conf /etc/resolv.conf.bak&amp;quot;&lt;/span&gt;
+scp /etc/resolv.conf root@&lt;span class="nv"&gt;$bbbAddr&lt;/span&gt;:/etc/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="date-and-time"&gt;
+&lt;h3&gt;Date and Time&lt;/h3&gt;
+&lt;p&gt;Tip from &lt;a class="reference external" href="http://derekmolloy.ie/automatically-setting-the-beaglebone-black-time-using-ntp/"&gt;http://derekmolloy.ie/automatically-setting-the-beaglebone-black-time-using-ntp/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The BeagleBone Black does not include an onboard &lt;em&gt;Real Time Clock&lt;/em&gt; (RTC) and thus loses its time and date setting after every power off.&lt;/p&gt;
+&lt;p&gt;Set the time over the internet using an ntp server by first configuring the timezone linking &lt;tt class="docutils literal"&gt;localtime&lt;/tt&gt; to your proper location in &lt;tt class="docutils literal"&gt;zoneinfo&lt;/tt&gt; (in my case &lt;tt class="docutils literal"&gt;Toronto/New York&lt;/tt&gt;) and then running a quick one-off command to set the proper date ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# ln -s /usr/share/zoneinfo/America/New_York /etc/localtime&lt;/span&gt;
+&lt;span class="c"&gt;# ntpdate -u pool.ntp.org&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... but the date/time will still be lost after every shutdown.&lt;/p&gt;
+&lt;p&gt;For a more permanent solution install &lt;em&gt;NTP&lt;/em&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# opkg update&lt;/span&gt;
+&lt;span class="c"&gt;# opkg install ntp&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Find local NTP servers (Canada) and edit &lt;tt class="docutils literal"&gt;/etc/ntp.conf&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;driftfile /etc/ntp.drift
+logfile /var/log/ntpd.log
+
+&lt;span class="c"&gt;# NTP Servers for Canada from www.pool.ntp.org&lt;/span&gt;
+server 0.ca.pool.ntp.org
+server 1.ca.pool.ntp.org
+server 2.ca.pool.ntp.org
+server 3.ca.pool.ntp.org
+
+&lt;span class="c"&gt;# Using local hardware clock as fallback&lt;/span&gt;
+&lt;span class="c"&gt;# Disable this when using ntpd -q -g -x as ntpdate or it will sync to itself&lt;/span&gt;
+&lt;span class="c"&gt;# server 127.127.1.0&lt;/span&gt;
+&lt;span class="c"&gt;# fudge 127.127.1.0 stratum 14&lt;/span&gt;
+
+&lt;span class="c"&gt;# Defining a default security setting&lt;/span&gt;
+restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;Angstrom uses &lt;em&gt;systemd&lt;/em&gt; and init.d is replaced by &lt;em&gt;systemctl COMMAND&lt;/em&gt; and files are located in &lt;em&gt;/lib/systemd/system/NAME.service&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Enable NTP services ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# systemctl enable ntpdate.service&lt;/span&gt;
+&lt;span class="c"&gt;# systemctl enable ntpd.service&lt;/span&gt;
+&lt;span class="c"&gt;# cat /lib/systemd/system/ntpd.service&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;Unit&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Network Time Service
+&lt;span class="nv"&gt;After&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;network.target
+
+&lt;span class="o"&gt;[&lt;/span&gt;Service&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;forking
+&lt;span class="nv"&gt;PIDFile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/run/ntpd.pid
+&lt;span class="nv"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/bin/ntpd -p /run/ntpd.pid
+
+&lt;span class="o"&gt;[&lt;/span&gt;Install&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;multi-user.target
+&lt;span class="o"&gt;{&lt;/span&gt;% endhighlight %&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;ExecStart&lt;/tt&gt; of &lt;tt class="docutils literal"&gt;/lib/systemd/system/ntpdate.service&lt;/tt&gt; ....&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;Unit&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Network Time Service &lt;span class="o"&gt;(&lt;/span&gt;one-shot ntpdate mode&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;Before&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ntpd.service
+
+&lt;span class="o"&gt;[&lt;/span&gt;Service&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;oneshot
+&lt;span class="nv"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/bin/ntpd -q -g -x
+&lt;span class="nv"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/sbin/hwclock --systohc
+&lt;span class="nv"&gt;RemainAfterExit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;yes
+
+&lt;span class="o"&gt;[&lt;/span&gt;Install&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;multi-user.target
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Save all changes, reboot the BBB while connected to the Internet, and verify the proper date and time are set with &lt;tt class="docutils literal"&gt;timedatectl&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   &lt;span class="c"&gt;# timedatectl&lt;/span&gt;
+     Local &lt;span class="nb"&gt;time&lt;/span&gt;: Wed 2013-07-10 23:14:45 EDT
+ Universal &lt;span class="nb"&gt;time&lt;/span&gt;: Thu 2013-07-11 03:14:45 UTC
+       RTC &lt;span class="nb"&gt;time&lt;/span&gt;: Wed 2013-07-10 23:14:45
+       Timezone: America/New_York &lt;span class="o"&gt;(&lt;/span&gt;EDT, -0400&lt;span class="o"&gt;)&lt;/span&gt;
+       NTP enabled: no
+   NTP synchronized: yes
+RTC in &lt;span class="nb"&gt;local &lt;/span&gt;TZ: no
+     DST active: yes
+Last DST change: DST began at
+                 Sun 2013-03-10 01:59:59 EST
+                 Sun 2013-03-10 03:00:00 EDT
+Next DST change: DST ends &lt;span class="o"&gt;(&lt;/span&gt;the clock jumps one hour backwards&lt;span class="o"&gt;)&lt;/span&gt; at
+                 Sun 2013-11-03 01:59:59 EDT
+                 Sun 2013-11-03 01:00:00 EST
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reference: &lt;a class="reference external" href="http://stackoverflow.com/questions/11219832/what-is-the-best-way-to-run-ntpdate-at-reboot-only-after-network-is-ready"&gt;What is the best way to run ntpdate?&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="remote-desktop"&gt;
+&lt;h3&gt;Remote Desktop&lt;/h3&gt;
+&lt;p&gt;Tip from &lt;a class="reference external" href="http://digitaldiner.blogspot.ca/2013/05/quick-hint-for-beaglebone-black-user.html"&gt;http://digitaldiner.blogspot.ca/2013/05/quick-hint-for-beaglebone-black-user.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In lieu of a microHDMI cable for connecting an HDMI display to the BBB the device may be configured to transmit a remote desktop to HOST.&lt;/p&gt;
+&lt;p&gt;On BBB install the &lt;tt class="docutils literal"&gt;x11vnc&lt;/tt&gt; package and launch ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# opkg update&lt;/span&gt;
+&lt;span class="c"&gt;# opkg install x11vnc&lt;/span&gt;
+&lt;span class="c"&gt;# x11vnc -bg -o %HOME/.x11vnc.log.%VNCDISPLAY -auth /var/run/gdm/auth-for-gdm*/database -display :0  -forever&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... which provides a display available for remote viewing at address &lt;tt class="docutils literal"&gt;192.168.7.2:5900&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;On my HOST I install and use the &lt;tt class="docutils literal"&gt;ssvnc&lt;/tt&gt; viewer &lt;tt class="docutils literal"&gt;sudo &lt;span class="pre"&gt;apt-get&lt;/span&gt; install ssvnc&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;It works!&lt;/p&gt;
+&lt;img alt="Remote desktop" class="align-center" src="images/bbb-x11vnc.png" /&gt;
+&lt;p&gt;Reference: &lt;a class="reference external" href="http://www.karlrunge.com/x11vnc/"&gt;http://www.karlrunge.com/x11vnc/&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-4-issues-and-fixes"&gt;
+&lt;h2&gt;Step 4 - Issues and Fixes&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;BeagleBone Black Rev. A5A running default Angstrom Linux&lt;/em&gt;&lt;/p&gt;
+&lt;div class="section" id="opkg-upgrade"&gt;
+&lt;h3&gt;'opkg upgrade'&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Fix:&lt;/em&gt; Do not run this command or else Bad Things Will Happen.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="no-login-screen-over-hdmi"&gt;
+&lt;h3&gt;No login screen over HDMI&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Issue:&lt;/em&gt; BeagleBone logo appears at boot but no login screen.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Fix:&lt;/em&gt; Turns out that my powered USB hub - with keyboard attached - was not being detected by the BBB during boot. If the device thinks no keyboard or mouse is attached during boot it kills power to the microHDMI port and hence no display. You can &amp;quot;wake up&amp;quot; the display by ssh'ing into BBB and sending an &lt;tt class="docutils literal"&gt;echo 0 &amp;gt; /sys/class/graphics/fb0/blank&lt;/tt&gt; command but it will still fail to detect a hot-plugged USB keyboard or mouse.&lt;/p&gt;
+&lt;p&gt;If I connect the keyboard (with built-in trackpoint) directly to the BBB USB port and reboot and hit SHIFT key the display springs to life and the login window appears.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Issue:&lt;/em&gt; BeagleBone logo appears at boot but no login screen (and this time its not the keyboard).&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Fix:&lt;/em&gt; Creating a password for root causes the &lt;em&gt;autologin&lt;/em&gt; task running at login screen to constantly fail (because it doesn't know the password) and buggers up the display. To disable autologin edit &lt;tt class="docutils literal"&gt;/etc/gdm/custom.conf&lt;/tt&gt; and modify the line &lt;tt class="docutils literal"&gt;TimedLoginEnable&lt;/tt&gt; from &lt;tt class="docutils literal"&gt;true&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;false&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;daemon&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;TimedLoginEnable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and restart GDM with the command &lt;tt class="docutils literal"&gt;systemctl restart gdm.service&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Reference: &lt;a class="reference external" href="http://circuitco.com/support/index.php?title=BeagleBoneBlack_HDMI"&gt;http://circuitco.com/support/index.php?title=BeagleBoneBlack_HDMI&lt;/a&gt;&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://bb-lcnc.blogspot.ca/2013/06/force-beaglebone-black-hdmi-resolution.html"&gt;http://bb-lcnc.blogspot.ca/2013/06/force-beaglebone-black-hdmi-resolution.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="hdmi-output-goes-beyond-edge-of-display"&gt;
+&lt;h3&gt;HDMI output goes beyond edge of display&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Issue:&lt;/em&gt; Using a microHDMI-HDMI cable to connect BBB to my 1920x1200 display produces a working 1280x720 resolution working ... but the desktop area is slightly bigger than the margins of the display.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Fix:&lt;/em&gt; Needed to adjust settings on display ... modifying &lt;tt class="docutils literal"&gt;Image &lt;span class="pre"&gt;Setting-&amp;gt;Video&lt;/span&gt; &lt;span class="pre"&gt;Mode-&amp;gt;Video&lt;/span&gt; Mode&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;Image &lt;span class="pre"&gt;Setting-&amp;gt;Video&lt;/span&gt; &lt;span class="pre"&gt;Mode-&amp;gt;PC&lt;/span&gt; Mode&lt;/tt&gt;&lt;/p&gt;
+&lt;p&gt;Reference: &lt;a class="reference external" href="http://groups.google.com/forum/#!msg/beagleboard/sxaSIUpiZo8/__TmDqD4aJcJ"&gt;http://groups.google.com/forum/#!msg/beagleboard/sxaSIUpiZo8/__TmDqD4aJcJ&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="drm-debug"&gt;
+&lt;h2&gt;drm.debug&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Issue:&lt;/em&gt; A whole pile of these messages were filling dmesg ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;Mon Aug 26 03:34:00 2013&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;drm:output_poll_execute&lt;span class="o"&gt;]&lt;/span&gt;, &lt;span class="o"&gt;[&lt;/span&gt;CONNECTOR:5:HDMI-A-1&lt;span class="o"&gt;]&lt;/span&gt; status updated from 2 to 2
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... repeating every few seconds.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Fix:&lt;/em&gt; These debugging messages can safely be turned off by editing &lt;tt class="docutils literal"&gt;uEnv.txt&lt;/tt&gt; located on the &lt;tt class="docutils literal"&gt;mmcblk0p1&lt;/tt&gt; partition (&lt;strong&gt;not&lt;/strong&gt; the &lt;tt class="docutils literal"&gt;uEnv.txt&lt;/tt&gt; found in &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt;).&lt;/p&gt;
+&lt;p&gt;If that partition is not auto-mounted (mine was not) then go ahead and mount it now ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# mount /dev/mmcblk0p1 /media/BEAGLEBONE/&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and edit &lt;tt class="docutils literal"&gt;/media/BEAGLEBONE/uEnv.txt&lt;/tt&gt; by changing the line &lt;tt class="docutils literal"&gt;optargs=quiet drm.debug=7&lt;/tt&gt; to simply &lt;tt class="docutils literal"&gt;optargs=quiet&lt;/tt&gt; ... Reboot and issue resolved.&lt;/p&gt;
+&lt;div class="section" id="resolv-conf"&gt;
+&lt;h3&gt;resolv.conf&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Issue:&lt;/em&gt; Noticed an instance where after running &lt;tt class="docutils literal"&gt;opkg update&lt;/tt&gt; internet access was broken and I was getting a pile of &lt;tt class="docutils literal"&gt;wget: bad address &lt;span class="pre"&gt;'feeds.angstrom-distribution.org'&lt;/span&gt;&lt;/tt&gt; errors ... &lt;tt class="docutils literal"&gt;ifconfig&lt;/tt&gt; showed I still had a good connection to LAN.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Fix:&lt;/em&gt; Discovered that &lt;tt class="docutils literal"&gt;resolv.conf&lt;/tt&gt; was pointing to &lt;tt class="docutils literal"&gt;127.0.0.1&lt;/tt&gt;. Modified file to my router's IP address ... ran update again and everything OK.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="urxvt"&gt;
+&lt;h3&gt;urxvt&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Issue:&lt;/em&gt; Using &lt;tt class="docutils literal"&gt;urxvt&lt;/tt&gt; as my terminal and ssh'ing into BBB ... some commands like &lt;tt class="docutils literal"&gt;htop&lt;/tt&gt; will not run.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Fix:&lt;/em&gt; Copy &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/usr/share/terminfo/r/rxvt-unicode&lt;/span&gt;&lt;/tt&gt; from HOST to the BBB and place in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.terminfo/r/rxvt-unicode&lt;/span&gt;&lt;/tt&gt;. Same for &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;rxvt-unicode-256color&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Reference: &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Urxvt#Remote_Hosts"&gt;https://wiki.archlinux.org/index.php/Urxvt#Remote_Hosts&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ssh-session-hangs"&gt;
+&lt;h3&gt;SSH session hangs&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Issue:&lt;/em&gt; SSH session sometimes hangs when rebooting the BBB.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Fix:&lt;/em&gt; Type &lt;tt class="docutils literal"&gt;~.&lt;/tt&gt; and it should kill the SSH session.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-5-helpful-resources"&gt;
+&lt;h2&gt;Step 5 - Helpful Resources&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Purchase a BeagleBone Black: in my hometown (Toronto) from &lt;a class="reference external" href="http://www.creatroninc.com/"&gt;Creatron&lt;/a&gt; or online from &lt;a class="reference external" href="https://www.adafruit.com/category/75"&gt;Adafruit&lt;/a&gt;, &lt;a class="reference external" href="http://www.digikey.ca/product-detail/en/BB-BBLK-000/BB-BBLK-000-ND/3884456"&gt;Digikey&lt;/a&gt; and others&lt;/li&gt;
+&lt;li&gt;BeagleBone Black &lt;a class="reference external" href="http://circuitco.com/support/index.php?title=BeagleBoneBlack"&gt;wiki&lt;/a&gt; and &lt;a class="reference external" href="https://groups.google.com/forum/?fromgroups#!forum/beagleboard"&gt;forum&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/CircuitCo/BeagleBone-Black/blob/master/BBB_SRM.pdf?raw=true"&gt;System Reference Manual&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;BBB on the &lt;a class="reference external" href="http://elinux.org/BeagleBone"&gt;Embedded Linux Wiki&lt;/a&gt; and &lt;a class="reference external" href="http://eewiki.net/display/linuxonarm/BeagleBone+Black"&gt;eewiki&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://learn.adafruit.com/category/beaglebone/"&gt;Hardware tutorials&lt;/a&gt; on Adafruit&lt;/li&gt;
+&lt;li&gt;Excellent series of tutorials and videos by &lt;a class="reference external" href="http://derekmolloy.ie/tag/beaglebone-black/"&gt;Derek Molloy&lt;/a&gt; ... his tables for the BBB's &lt;a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true"&gt;P8&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true"&gt;P9&lt;/a&gt; header pins are essential if you play with the hardware&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/jadonk/bonescript"&gt;Bonescript&lt;/a&gt; scripting tools&lt;/li&gt;
+&lt;li&gt;Angstrom Linux &lt;a class="reference external" href="http://www.angstrom-distribution.org/repo/"&gt;package browser&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;BBB and the &lt;a class="reference external" href="http://elinux.org/BeagleBone_and_the_3.8_Kernel"&gt;3.8 kernel&lt;/a&gt; and an &lt;a class="reference external" href="http://linuxgizmos.com/introducing-the-new-beaglebone-black-kernel/"&gt;introduction&lt;/a&gt; from Jason Kridner, co-founder of BeagleBoard.org&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</summary><category term="beaglebone"></category><category term="electronics"></category><category term="angstrom"></category><category term="linux"></category></entry></feed>
