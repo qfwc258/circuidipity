@@ -1,6 +1,5 @@
-====================
-www.circuidipity.com
-====================
+www dot circuidipity dot com
+============================
 
 This repository holds my blog which you can visit at www.circuidipity.com.
 
