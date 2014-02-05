@@ -1,0 +1,41 @@
+==================================================
+Dual-display configuration using Nvidia + Twinview
+==================================================
+
+:tags: linux
+:slug: twinview
+
+Use monitors of different resolutions and combine them into one desktop.
+
+Nvidia's *Twinview* feature makes it easy to create a single X session over two separate displays. Running - for example - `Fluxbox <http://fluxbox.org/>`_ window manager in a Twinview configuration the menubar can be extended across the entire length of both displays, windows maximize within the boundaries of a single display with no overlap, and windows are easily dragged from one display to the next (and if they are maximized ... auto-resize to fit the new resolution).
+
+To setup my desired side-by-side, dual-display layout I use ...
+
+* a home-built Linux desktop box with a motherboard-embedded *GeForce 6150* video chipset offering dual VGA + DVI
+
+* on my *right* ... an *Acer AL2216W* 22" LCD at 1680x1050 resolution connected to the VGA port
+
+* on my *left* ... an *I-INC iF281D* 28" LCD at 1920x1200 resolution connected to the DVI port
+
+* Debian ``wheezy`` with a ``2.6.32-30 kernel``, ``Xorg 7.5+8``, and the Nvidia proprietary ``driver ver. 195.36.31-7`` installed via ``module-assistant``
+
+.. note::
+
+    For a dual-display configuration using non-Nvidia graphics try `xrandr <big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr.html>`_ .
+
+Make a small edit to ``/etc/X11/xorg.conf`` by adding ``Option "TwinView"`` and ``Option "TwinViewOrientation"``. Using my own configuration as an example ... my primary display is the Acer and the I-INC is positioned left-relative to it. So I add to my ``xorg.conf`` ...
+
+.. code-block:: bash
+
+    Section "Device"
+        Identifier  "Card0"
+        #Driver      "nouveau"
+        Driver      "nvidia"
+        VendorName  "nVidia Corporation"
+        BoardName   "C51PV [GeForce 6150]"
+        BusID       "PCI:0:5:0"
+        **Option      "TwinView" "true"**
+        **Option      "TwinViewOrientation" "LeftOf"**
+    EndSection
+
+Launch an X session and you are welcomed by a single, combined desktop (in my case ... 3600(1680+1920)x1200 resolution).

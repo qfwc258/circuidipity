@@ -1,0 +1,73 @@
+======================
+Configure MTP in Linux
+======================
+
+:tags: android, debian, linux
+:slug: mtp
+
+Many MP3 players and recent Android phones and tablets no longer appear as removable USB storage devices under Linux. Instead they use *MTP* (Media Transfer Protocol) and to enable these devices to be detected, mountable, and usable by Linux requires a bit of configuration.
+
+This is how I setup my laptop running Debian ``sid`` to work with a *Nexus 4* phone and *Nexus 7* tablet. These steps should work with any MTP-enabled device with the only difference being Android-specific configuration and the relevant *vendor* or *device* IDs for each device.
+
+Step 0 - Enable Developer Options
+=================================
+
+On the Nexus I enable ``Developer Options`` by navigating to ``Settings->About {tablet,phone}``, click to open and *tap 7 times* on ``Build number``. Nexus displays ``You are now a developer.`` Congratulations!
+
+Return to settings and ``Developer Options`` is now visible. Click to open and activate ``USB debugging``.
+
+Step 1 - Install MTP
+====================
+
+Configure Debian by installing MTP packages and assigning USER to the ``plugdev`` and ``fuse`` groups ...
+
+.. code-block:: bash
+
+    $ sudo apt-get install mtp-tools mtpfs
+    $ sudo adduser USER plugdev
+    $ sudo adduser USER fuse 
+
+Logout and re-login to activate new group permissions.
+
+Step 2 - Udev 
+=============
+
+Connect the MTP-enabled device to Linux and make note of the ``idVendor`` and ``idProduct`` codes. For my Nexus 7 tablet I run ... 
+
+.. code-block:: bash
+
+    $ lsusb | grep Google
+    Bus 001 Device 010: ID 18d1:4e42 Google Inc. 
+
+Google's ``idVendor`` is ``18d1`` and the Nexus 7 ``idProduct`` code is ``4e42``. Go ahead and disconnect the device.
+
+Create a new *udev rule* for Google Nexus devices in ``/etc/udev/rules.d/99-android.rules`` containing ...
+
+.. code-block:: bash
+
+    # Google
+    SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", MODE="0666"
+
+.. note::
+
+    For a generic entry to handle all Google devices use *idVendor*. Otherwise add *idVendor* and *idProduct* codes to make a *device-specific* udev rule.
+
+Step 3 - MTPFS
+==============
+
+*MTPFS* is a FUSE filesystem (hence the need for USER to belong to the ``fuse`` group) that enables reading and writing data to the MTP-enabled Nexus. Create a *mount point* for the tablet and restart the udev daemon ...
+
+.. code-block:: bash
+
+    $ sudo mkdir /media/nexus
+    $ sudo service udev restart
+
+Connect the active tablet (make sure its not in sleep mode) to the computer and access its onboard storage by running ...
+
+.. code-block:: bash
+
+    $ sudo mtpfs /media/nexus -o allow_other
+
+... and unmount the device when finished ``sudo umount mtpfs``.
+
+For Android devices other options such as `Airdroid <https://play.google.com/store/apps/details?id=com.sand.airdroid>`_ exist for device storage management over wireless connections that are OS-independent. MTP, though, is useful to setup if you plan to install Android `development tools <adb-fastboot-android.html>`_ and *root* your device.

@@ -1,0 +1,105 @@
+================================
+Device Tree and BeagleBone Black
+================================
+
+:tags: beaglebone, electronics, angstrom, linux
+:slug: bbb-dt
+
+In the world of x86 hardware a Linux distribution can ship a generic kernel and expect that it will load necessary drivers and run on a wide range of hardware. ARM embedded devices are a very different experience. Much of the hardware is not detected at boot and this has required creating a customized kernel for each device. *Device Tree* is designed to address this shortcoming and the `BeagleBone Black <getting-started-with-beaglebone-black.html>`_ with its 3.8 kernel is one of the first ARM devices to embrace the new way of doing things.
+
+Device Tree and ARM
+===================
+
+Device Tree (DT) support for ARM arrived in the 3.7 kernel (it has existed for years in the PowerPC and SPARC worlds). Basically it is a method for describing the underlying hardware to the Linux kernel so that the required drivers will be loaded.
+
+On the BeagleBone Black a *device tree source* (dts) file is written that describes a piece of hardware and a *device tree compiler* (dtc) transforms the instructions into a *device tree blob* (dtb) binary that can be used by the kernel. On the BBB there is a bunch of dtb binaries located in ``/boot`` that describe the device to the kernel at boot time ...
+
+.. code-block:: bash
+
+    # ls /boot/*.dtb
+    /boot/am335x-bone.dtb	    /boot/am335x-tester.dtb    /boot/omap3-evm.dtb	 /boot/omap4-panda.dtb
+    /boot/am335x-boneblack.dtb  /boot/omap2420-h4.dtb      /boot/omap3-tobi.dtb	 /boot/omap4-sdp.dtb
+    /boot/am335x-evm.dtb	    /boot/omap3-beagle-xm.dtb  /boot/omap4-panda-a4.dtb  /boot/omap4-var-som.dtb
+    /boot/am335x-evmsk.dtb	    /boot/omap3-beagle.dtb     /boot/omap4-panda-es.dtb  /boot/omap5-evm.dtb
+
+By implementing DT on the BeagleBone Black the device can receive and contribute back all the benefits of upstream kernel development and avoid the hassle of maintaining a custom kernel. Developers of expansion boards (known as *capes* in BBB lingo) also benefit as Jason Kridner - co-founder of Beagleboard.org - `points out <http://linuxgizmos.com/introducing-the-new-beaglebone-black-kernel/>`_:
+
+    Where this [Device Tree implementation] pays off for us, is in the development of capes. By standardizing all of the logic in the kernel and providing the device tree information as data files, it becomes rather easy for a new cape developer to simply create a device tree description of their board and provide it to end users without them ever needing to recompile the kernel! As all of this gets documented, cape development is being greatly simplified and few cape developers should ever have to touch a line of code and end-users should rarely need to change their kernel binary itself based on simply using new capes.
+
+Overlays
+========
+
+BBB also introduced the idea of *Device Tree Overlays*. Overlays allow the device tree that was accessed by the kernel at boot to be modified afterwards in userspace. If a new piece of hardware like a cape is added to BBB or the onboard header pins are initialized/re-configured an overlay can enable the modifications without having to reboot. On the default *Angstrom* Linux that ships with BBB there is a bunch of DT overlays already created and available for use in ``/lib/firmware``.
+
+A *cape manager* has been implemented to load and (in theory) unload overlays and *slots* is its interface and can show us what is currently loaded ...
+
+.. code-block:: bash
+
+    $ cat /sys/devices/bone_capemgr.8/slots
+    0: 54:PF--- 
+    1: 55:PF--- 
+    2: 56:PF--- 
+    3: 57:PF--- 
+    4: ff:P-O-L Bone-LT-eMMC-2G,00A0,Texas Instrument,BB-BONE-EMMC-2G
+    5: ff:P-O-L Bone-Black-HDMI,00A0,Texas Instrument,BB-BONELT-HDMI
+
+By default the onboard storage and HDMI interface are loaded as *virtual capes* and there are free slots for adding up to 4 additional physical capes.
+
+Analog Inputs
+=============
+
+An example of overlays in action is loading the BeagleBone Black's analog inputs and making the pins available for use. We use the SLOTS interface a lot so export the location to ``~/.profile`` ...
+
+.. code-block:: bash
+
+    # export SLOTS=/sys/devices/bone_capemgr.*/slots
+    # echo 'export SLOTS=/sys/devices/bone_capemgr.*/slots' >> ~/.profile
+
+BBB has a pre-configured DT overlay ``BB-ADC-00A0.dtbo`` for analog pins. Load the overlay (omitting the ``-00A0.dtbo`` bit) and see that $SLOTS registers a new cape and the kernel detects new hardware ...
+
+.. code-block:: bash
+
+    # echo BB-ADC > $SLOTS
+    # cat $SLOTS
+    0: 54:PF--- 
+    1: 55:PF--- 
+    2: 56:PF--- 
+    3: 57:PF--- 
+    4: ff:P-O-L Bone-LT-eMMC-2G,00A0,Texas Instrument,BB-BONE-EMMC-2G
+    5: ff:P-O-L Bone-Black-HDMI,00A0,Texas Instrument,BB-BONELT-HDMI
+    7: ff:P-O-L Override Board Name,00A0,Override Manuf,BB-ADC
+    # dmesg
+    ...
+    [37166.391913] bone-capemgr bone_capemgr.8: part_number 'BB-ADC', version 'N/A'
+    [37166.392100] bone-capemgr bone_capemgr.8: slot #7: generic override
+    [37166.392151] bone-capemgr bone_capemgr.8: bone: Using override eeprom data at slot 7
+    [37166.392204] bone-capemgr bone_capemgr.8: slot #7: 'Override Board Name,00A0,Override Manuf,BB-ADC'
+    [37166.392478] bone-capemgr bone_capemgr.8: slot #7: Requesting part number/version based 'BB-ADC-00A0.dtbo
+    [37166.392536] bone-capemgr bone_capemgr.8: slot #7: Requesting firmware 'BB-ADC-00A0.dtbo' for board-name 'Override Board Name', version '00A0'
+    [37166.392605] bone-capemgr bone_capemgr.8: slot #7: dtbo 'BB-ADC-00A0.dtbo' loaded; converting to live tree
+    [37166.400854] bone-capemgr bone_capemgr.8: slot #7: #1 overlays
+    [37166.423565] bone-iio-helper helper.14: ready
+    [37166.426252] bone-capemgr bone_capemgr.8: slot #7: Applied #1 overlays.
+
+The analog input pins are now available for use.
+
+Example: If you connect a photoresistor to BBB's ``P9_32(1.8V)`` and ``P9_34(AGND)`` and ``P9_36(AIN5)`` pins you can measure light levels in ``/sys/devices/ocp.2/helper.14/AIN5`` and ``/sys/devices/ocp.2/44e0d000.tscadc/tiadc/iio\:device0/in_voltage5_raw``. 
+
+Our BB-ADC dtbo above resides in slot 7. To unload we would run ``echo -7 > $SLOTS``.
+
+.. warning::
+
+    Unloading from $SLOTS is currently very unstable and can induce kernel panics. Much safer to simply reboot.
+
+To have this overlay load at boot time we add the option ``capemgr.enable_partno=BB-ADC`` to the ``uEnv.txt`` file located on the ``/dev/mmcblk0p1`` partition.
+
+Helpful Resources
+=================
+
+* `Device Tree Usage <http://devicetree.org/Device_Tree_Usage>`_ and `Device Tree Overlays <https://lkml.org/lkml/2012/11/5/615>`_
+* Adafruit's introduction to the `BBB Device Tree <http://learn.adafruit.com/introduction-to-the-beaglebone-black-device-tree?view=all>`_
+* `BeagleBone and the 3.8 Kernel <http://elinux.org/BeagleBone_and_the_3.8_Kernel>`_
+* `Derek Molloy's <http://derekmolloy.ie/tag/beaglebone-black/>`_ tables for the `P8 <https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true>`_ and `P9 <https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true>`_ header pins
+* `GPIOs on the BBB using Device Tree Overlays <http://derekmolloy.ie/gpios-on-the-beaglebone-black-using-device-tree-overlays/>`_
+* `Capemgr and Device Tree Overlays <https://github.com/jadonk/validation-scripts/tree/master/test-capemgr>`_
+* `Sampling analog signals using the ADC <http://beagleboard-gsoc13.blogspot.ca/2013/07/sampling-analogue-signals-using-adc-on.html>`_ on BBB

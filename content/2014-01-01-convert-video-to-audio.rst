@@ -1,0 +1,22 @@
+==================================
+Convert video file(s) to MP3 audio
+==================================
+
+:tags: programming, shell, linux
+:slug: convert-video-to-audio
+
+A simple shell script I made to convert downloaded YouTube videos to MP3s ...
+
+.. code-block:: bash
+
+    #!/bin/bash
+    # Convert video file to audio
+
+    MP3="-acodec libmp3lame -aq 0 -ac 2 -ar 44100"
+
+    for f in "$@"
+    do
+        ffmpeg -i "$f" $MP3 "$(echo $f | sed 's/....$/.mp3/')"
+    done
+
+Requires ``ffmpeg`` and ``libmp3lame0``.
