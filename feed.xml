@@ -1,5 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-01-07T00:00:00-05:00</updated><entry><title>Vimeo and FlashBlock not playing nice on Iceweasel/Firefox</title><link href="http://www.circuidipity.com/flashblock.html" rel="alternate"></link><updated>2014-01-07T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-01-07:flashblock.html</id><summary type="html">&lt;p&gt;Vimeo videos actually are not playing &lt;em&gt;at all&lt;/em&gt; ... neither embedded or on the site itself.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-02-06T00:00:00-05:00</updated><entry><title>Build a blog using the Pelican static site generator</title><link href="http://www.circuidipity.com/pelican.html" rel="alternate"></link><updated>2014-02-06T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-02-06:pelican.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://docs.getpelican.com/en/3.3.0/"&gt;Pelican&lt;/a&gt; is a Python-powered &lt;em&gt;static site generator&lt;/em&gt;. I design the look and layout of this site using CSS and &lt;a class="reference external" href="http://jinja.pocoo.org/docs/"&gt;Jinja2&lt;/a&gt; templates and write my posts as plaintext files using &lt;a class="reference external" href="http://docutils.sourceforge.net/rst.html"&gt;reStructuredText&lt;/a&gt; and Pelican &lt;em&gt;compiles&lt;/em&gt; the contents into HTML output suitable for a blog.&lt;/p&gt;
+&lt;p&gt;I like the idea of creating a static website. Some of the advantages:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;no database required ... plaintext is easy to edit, backup and move around&lt;/li&gt;
+&lt;li&gt;plaintext allows your choice of editor ... I am learning &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;cheap and easy to host practically anywhere ... one option: &lt;a class="reference external" href="http://pages.github.com/"&gt;GitHub Pages&lt;/a&gt; is a free service for hosting static HTML content&lt;/li&gt;
+&lt;li&gt;no database or excutable code makes a website easy to secure, maintain and scale&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The traditional disadvantage to using static pages for a blog has been the lack of dynamic elements - hosting feeds, user comments - but JavaScript for things like a Twitter widget to provide real-time updates and out-sourced services like Disqus for commenting are possible alternatives to work around static limitations.&lt;/p&gt;
+&lt;p&gt;This is how I built &lt;em&gt;Circuidipity&lt;/em&gt; using Pelican.&lt;/p&gt;
+&lt;div class="section" id="install"&gt;
+&lt;h2&gt;Install&lt;/h2&gt;
+&lt;p&gt;I install Pelican and extra tools by creating a &lt;em&gt;virtual environment&lt;/em&gt; using &lt;a class="reference external" href="/python2-and-python3.html"&gt;virtualenv&lt;/a&gt; and &lt;a class="reference external" href="https://pypi.python.org/pypi/pip"&gt;pip&lt;/a&gt;. This allows me to create a sandboxed work area specific to my blog and user separate from my default Python installation (an alternative method in Debian would be to install the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;python-pelican&lt;/span&gt;&lt;/tt&gt; package).&lt;/p&gt;
+&lt;p&gt;With &lt;tt class="docutils literal"&gt;virtualenv&lt;/tt&gt; installed and using my blog as an example ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;virtualenv ~/virtualenvs/circuidipity
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt; ~/virtualenvs/circuidipity/bin/activate
+&lt;span class="o"&gt;(&lt;/span&gt;circuidipity&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pip install pelican
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To later upgrade to newer versions simply run &lt;tt class="docutils literal"&gt;pip install &lt;span class="pre"&gt;--upgrade&lt;/span&gt; pelican&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Next I create a directory to hold my blog contents and run &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pelican-quickstart&lt;/span&gt;&lt;/tt&gt; to create a default site layout and configuration. I add my blog details and mostly accept the default choices provided (except for &lt;a class="reference external" href="http://docs.getpelican.com/en/3.3.0/settings.html#pagination"&gt;pagination&lt;/a&gt;) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;(&lt;/span&gt;circuidipity&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/circuidipity
+&lt;span class="o"&gt;(&lt;/span&gt;circuidipity&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/circuidipity
+&lt;span class="o"&gt;(&lt;/span&gt;circuidipity&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pelican-quickstart
+Welcome to pelican-quickstart v3.3.0.
+
+This script will &lt;span class="nb"&gt;help &lt;/span&gt;you create a new Pelican-based website.
+
+Please answer the following questions so this script can generate the files
+needed by Pelican.
+
+
+&amp;gt; Where &lt;span class="k"&gt;do &lt;/span&gt;you want to create your new web site? &lt;span class="o"&gt;[&lt;/span&gt;.&lt;span class="o"&gt;]&lt;/span&gt;
+&amp;gt; What will be the title of this web site? Circuidipity
+&amp;gt; Who will be the author of this web site? Daniel Wayne Armstrong
+&amp;gt; What will be the default language of this web site? &lt;span class="o"&gt;[&lt;/span&gt;en&lt;span class="o"&gt;]&lt;/span&gt;
+&amp;gt; Do you want to specify a URL prefix? e.g., http://example.com   &lt;span class="o"&gt;(&lt;/span&gt;Y/n&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt; What is your URL prefix? &lt;span class="o"&gt;(&lt;/span&gt;see above example; no trailing slash&lt;span class="o"&gt;)&lt;/span&gt; http://www.circuidipity.com
+&amp;gt; Do you want to &lt;span class="nb"&gt;enable &lt;/span&gt;article pagination? &lt;span class="o"&gt;(&lt;/span&gt;Y/n&lt;span class="o"&gt;)&lt;/span&gt; n
+&amp;gt; Do you want to generate a Fabfile/Makefile to automate generation and publishing? &lt;span class="o"&gt;(&lt;/span&gt;Y/n&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt; Do you want an auto-reload &amp;amp; simpleHTTP script to assist with theme and site development? &lt;span class="o"&gt;(&lt;/span&gt;Y/n&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt; Do you want to upload your website using FTP? &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt; Do you want to upload your website using SSH? &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt; Do you want to upload your website using Dropbox? &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt; Do you want to upload your website using S3? &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt; Do you want to upload your website using Rackspace Cloud Files? &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt;
+Done. Your new project is available at /home/dwa/circuidipity
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is the layout generated by &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pelican-quickstart&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;tree
+.
+├── content
+├── develop_server.sh
+├── fabfile.py
+├── Makefile
+├── output
+├── pelicanconf.py
+└── publishconf.py
+
+2 directories, 5 files
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="first-post"&gt;
+&lt;h2&gt;First post&lt;/h2&gt;
+&lt;p&gt;Posts go into &lt;tt class="docutils literal"&gt;content&lt;/tt&gt; and I create a &lt;tt class="docutils literal"&gt;images&lt;/tt&gt; subdirectory for screenshots and artwork and a &lt;tt class="docutils literal"&gt;pages&lt;/tt&gt; subdirectory to hold things like an &lt;tt class="docutils literal"&gt;about&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;contact&lt;/tt&gt; page ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir content/&lt;span class="o"&gt;{&lt;/span&gt;images,pages&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Inside &lt;tt class="docutils literal"&gt;content&lt;/tt&gt; create your first post &lt;tt class="docutils literal"&gt;hello_world.rst&lt;/tt&gt; using reStructuredText ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gh"&gt;===========&lt;/span&gt;
+&lt;span class="gh"&gt;Hello World&lt;/span&gt;
+&lt;span class="gh"&gt;===========&lt;/span&gt;
+
+&lt;span class="nc"&gt;:date:&lt;/span&gt; &lt;span class="nf"&gt;2014-02-06 23:24&lt;/span&gt;
+&lt;span class="nc"&gt;:tags:&lt;/span&gt; &lt;span class="nf"&gt;pelican, web&lt;/span&gt;
+&lt;span class="nc"&gt;:slug:&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;
+
+My &lt;span class="ge"&gt;*first*&lt;/span&gt; post using &lt;span class="s"&gt;`Pelican &lt;/span&gt;&lt;span class="si"&gt;&amp;lt;http://docs.getpelican.com/en/3.3.0/getting_started.html&amp;gt;&lt;/span&gt;&lt;span class="s"&gt;`_&lt;/span&gt;!
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Items like &lt;tt class="docutils literal"&gt;:date&lt;/tt&gt; &lt;tt class="docutils literal"&gt;:tags:&lt;/tt&gt; &lt;tt class="docutils literal"&gt;:slug:&lt;/tt&gt; are &lt;em&gt;metadata&lt;/em&gt; that can be used in the generated HTML output. These and a few others are included in Pelican and users can create their own to use in &lt;a class="reference external" href="http://docs.getpelican.com/en/3.1.1/themes.html#theming-pelican"&gt;templates&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Save the file and test the new blog by running the Pelican built-in development server. This will take all the &lt;tt class="docutils literal"&gt;*.rst&lt;/tt&gt; files and generate HTML formatted files in &lt;tt class="docutils literal"&gt;output&lt;/tt&gt; and serve up the results for inspection in a browser at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://localhost:8000&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;(&lt;/span&gt;circuidipity&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;make devserver
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The server will continue to run in the background and re-generate any updated content for viewing. Stop the server by running &lt;tt class="docutils literal"&gt;./develop_server.sh stop&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="settings"&gt;
+&lt;h2&gt;Settings&lt;/h2&gt;
+&lt;p&gt;Running &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pelican-quickstart&lt;/span&gt;&lt;/tt&gt; creates 2 configuration files: &lt;tt class="docutils literal"&gt;pelicanconf.py&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;publishconf.py&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Primary settings are configured in &lt;tt class="docutils literal"&gt;pelicanconf.py&lt;/tt&gt;. Settings can be used as &lt;em&gt;variables&lt;/em&gt; in posts, pages, and templates. This is how mine looks ... some of the settings such as &lt;tt class="docutils literal"&gt;AUTHOR&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;SITENAME&lt;/tt&gt; were generated by Pelican and some like &lt;tt class="docutils literal"&gt;WHOAMI_URL&lt;/tt&gt; were created by myself ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;span class="c"&gt;# -*- coding: utf-8 -*- #&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;__future__&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;unicode_literals&lt;/span&gt;
+
+&lt;span class="n"&gt;AUTHOR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Daniel Wayne Armstrong&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;SITENAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Circuidipity&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;SITEURL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;TIMEZONE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;America/Toronto&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;DEFAULT_LANG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;en&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;DEFAULT_DATE_FORMAT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;%A &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s"&gt; %B %Y&amp;#39;&lt;/span&gt;
+
+&lt;span class="c"&gt;# Static paths will be copied without parsing their contents&lt;/span&gt;
+&lt;span class="n"&gt;STATIC_PATHS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;images&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;extra&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="c"&gt;# Shift the installed location of a file&lt;/span&gt;
+&lt;span class="n"&gt;EXTRA_PATH_METADATA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;#39;extra/CNAME&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;path&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;CNAME&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+                &lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="c"&gt;# Extract post date from filename&lt;/span&gt;
+&lt;span class="n"&gt;FILENAME_METADATA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;(?P&amp;lt;date&amp;gt;\d{4}-\d{2}-\d{2})&amp;#39;&lt;/span&gt;
+
+&lt;span class="c"&gt;# Sole author and don&amp;#39;t use categories ... disable these features&lt;/span&gt;
+&lt;span class="n"&gt;AUTHOR_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;AUTHOR_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;CATEGORY_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;CATEGORY_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+
+&lt;span class="c"&gt;# Feed generation is usually not desired when developing&lt;/span&gt;
+&lt;span class="n"&gt;FEED_ALL_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+&lt;span class="n"&gt;CATEGORY_FEED_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+&lt;span class="n"&gt;TRANSLATION_FEED_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+
+&lt;span class="c"&gt;# URL settings&lt;/span&gt;
+&lt;span class="c"&gt;# Uncomment following line if you want document-relative URLs when developing&lt;/span&gt;
+&lt;span class="n"&gt;RELATIVE_URLS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;
+&lt;span class="n"&gt;ARTICLE_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;{slug}.html&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;PAGE_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;{slug}.html&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;PAGE_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;{slug}.html&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;TAG_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;tag-{slug}.html&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;TAG_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;tag-{slug}.html&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;TAGS_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;tags.html&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;TAGS_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;tags.html&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;ARCHIVES_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;archives.html&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;ARCHIVES_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;archives.html&amp;#39;&lt;/span&gt;
+
+&lt;span class="c"&gt;# Contact&lt;/span&gt;
+&lt;span class="n"&gt;EMAIL_ADDR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;daniel at circuidipity dot com&amp;#39;&lt;/span&gt;
+
+&lt;span class="c"&gt;# Plugins&lt;/span&gt;
+&lt;span class="n"&gt;PLUGIN_PATH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/home/dwa/doc/code/pelican-plugins&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;PLUGINS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;neighbors&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="c"&gt;# Theme&lt;/span&gt;
+&lt;span class="n"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/home/dwa/doc/code/pelican-themes/chungking-condo&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;WHOAMI_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/theme/images/whoami.jpg&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;GREETING&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Howdy!&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;LICENCE_NAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;BY-NC-SA&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;LICENCE_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;LICENCE_URL_IMG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;JINJA_EXTENSIONS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;jinja2.ext.loopcontrols&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="c"&gt;# Social&lt;/span&gt;
+&lt;span class="n"&gt;TWITTER_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;https://twitter.com/circuidipity&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;GITHUB_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;https://github.com/vonbrownie&amp;#39;&lt;/span&gt;
+
+&lt;span class="c"&gt;# Tag cloud&lt;/span&gt;
+&lt;span class="n"&gt;TAG_CLOUD_STEPS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A few of the settings like &lt;tt class="docutils literal"&gt;RELATIVE_URLS = True&lt;/tt&gt; and turning off &lt;tt class="docutils literal"&gt;ATOM&lt;/tt&gt; feeds are appropriate for a &lt;em&gt;test&lt;/em&gt; environment but are probably things that need to be modified when its time for deployment. The second &lt;tt class="docutils literal"&gt;publishconf.py&lt;/tt&gt; configuration file contains priority settings for &lt;em&gt;publishing&lt;/em&gt; content ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;span class="c"&gt;# -*- coding: utf-8 -*- #&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;__future__&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;unicode_literals&lt;/span&gt;
+
+&lt;span class="c"&gt;# This file is only used if you use `make publish` or&lt;/span&gt;
+&lt;span class="c"&gt;# explicitly specify it as your config file.&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;curdir&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pelicanconf&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+
+&lt;span class="n"&gt;SITEURL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;http://www.circuidipity.com&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;RELATIVE_URLS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+
+&lt;span class="n"&gt;FEED_ALL_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;feed.xml&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;CATEGORY_FEED_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+&lt;span class="n"&gt;TRANSLATION_FEED_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+
+&lt;span class="n"&gt;FEED_MAX_ITEMS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;
+
+&lt;span class="n"&gt;DELETE_OUTPUT_DIRECTORY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="plugins-and-themes"&gt;
+&lt;h2&gt;Plugins and themes&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://docs.getpelican.com/en/3.3.0/plugins.html"&gt;Plugins&lt;/a&gt; are available to extend the functionality of Pelican. I use a plugin called &lt;a class="reference external" href="https://github.com/getpelican/pelican-plugins/tree/master/neighbors"&gt;neighbors&lt;/a&gt; that makes it easy for me to add links near the bottom to &lt;tt class="docutils literal"&gt;Newer&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;Older&lt;/tt&gt; articles in relation to the current page.&lt;/p&gt;
+&lt;p&gt;Pelican includes a default theme to get you started and there is a collection of &lt;a class="reference external" href="https://github.com/getpelican/pelican-themes"&gt;user-created themes&lt;/a&gt; to choose from or &lt;a class="reference external" href="http://docs.getpelican.com/en/3.3.0/themes.html"&gt;create your own&lt;/a&gt;. I chose to start from scratch and explore CSS, Jinja2 templating, &lt;a class="reference external" href="http://pygments.org/faq/"&gt;pygments&lt;/a&gt; and &lt;a class="reference external" href="http://fortawesome.github.io/Font-Awesome/"&gt;Font Awesome icons&lt;/a&gt; to create my own &lt;a class="reference external" href="https://github.com/vonbrownie/circuidipity/tree/gh-pages/theme"&gt;Chungking Condo&lt;/a&gt; theme.&lt;/p&gt;
+&lt;p&gt;To use a theme set the location of its contents in &lt;tt class="docutils literal"&gt;pelicanconf.py&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/home/dwa/doc/code/pelican-themes/chungking-condo&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="publish"&gt;
+&lt;h2&gt;Publish&lt;/h2&gt;
+&lt;p&gt;When ready to generate for deployment run ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;(&lt;/span&gt;circuidipity&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;make publish
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;All blog contents are placed in &lt;tt class="docutils literal"&gt;output&lt;/tt&gt; ready to be uploaded to a hosting service. Since everything is static content there are many options available. Previously I used &lt;a class="reference external" href="http://www.circuidipity.com/host-website-on-amazon-s3.html"&gt;Amazon S3&lt;/a&gt; and have now switched to a free &lt;a class="reference external" href="https://github.com/vonbrownie/circuidipity"&gt;project repository hosted on GitHub Pages&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Go forth &lt;em&gt;write&lt;/em&gt; and &lt;em&gt;post&lt;/em&gt; and make merry!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="pelican"></category><category term="web"></category><category term="python"></category><category term="linux"></category></entry><entry><title>Vimeo and FlashBlock not playing nice on Iceweasel/Firefox</title><link href="http://www.circuidipity.com/flashblock.html" rel="alternate"></link><updated>2014-01-07T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-01-07:flashblock.html</id><summary type="html">&lt;p&gt;Vimeo videos actually are not playing &lt;em&gt;at all&lt;/em&gt; ... neither embedded or on the site itself.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Add 3 entries to the FlashBlock &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Preferences-&amp;gt;Whitelist&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;vimeo.com&lt;/div&gt;
@@ -121,7 +321,7 @@ Python 3.3.3
 &lt;img alt="Encrypt volume" class="align-center" src="images/wheezyInstall/32.png" style="width: 800px; height: 600px;" /&gt;
 &lt;div class="note"&gt;
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
-&lt;p class="last"&gt;If the hard disk has not been securely wiped prior to installing Debian (using a utility like &lt;a class="reference external" href="multi-boot-usb.html"&gt;DBAN&lt;/a&gt; you may want to configure &lt;em&gt;Erase data&lt;/em&gt; as &lt;em&gt;yes&lt;/em&gt;. Note, however, that depending on the size of the disk this operation can last several hours.&lt;/p&gt;
+&lt;p class="last"&gt;If the hard disk has not been securely wiped prior to installing Debian (using a utility like &lt;a class="reference external" href="multi-boot-usb.html"&gt;DBAN&lt;/a&gt;) you may want to configure &lt;em&gt;Erase data&lt;/em&gt; as &lt;em&gt;yes&lt;/em&gt;. Note, however, that depending on the size of the disk this operation can last several hours.&lt;/p&gt;
 &lt;/div&gt;
 &lt;img alt="Random key" class="align-center" src="images/wheezyInstall/33.png" style="width: 800px; height: 600px;" /&gt;
 &lt;img alt="Free space" class="align-center" src="images/wheezyInstall/34.png" style="width: 800px; height: 600px;" /&gt;
@@ -348,315 +548,6 @@ active_low  direction  edge  power  subsystem  uevent  value
 &lt;li&gt;Linux Kernel &lt;a class="reference external" href="https://www.kernel.org/doc/Documentation/gpio.txt"&gt;GPIO Interfaces&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Adafruit's &lt;a class="reference external" href="http://learn.adafruit.com/blinking-an-led-with-beaglebone-black/overview"&gt;Blinking an LED with BBB&lt;/a&gt; tutorial using Python&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://derekmolloy.ie/tag/beaglebone-black/"&gt;Derek Molloy's&lt;/a&gt; tables for the &lt;a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true"&gt;P8&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true"&gt;P9&lt;/a&gt; header pins&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-</summary><category term="beaglebone"></category><category term="electronics"></category><category term="angstrom"></category><category term="linux"></category></entry><entry><title>Getting Started with BeagleBone Black</title><link href="http://www.circuidipity.com/getting-started-with-beaglebone-black.html" rel="alternate"></link><updated>2013-09-02T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2013-09-02:getting-started-with-beaglebone-black.html</id><summary type="html">&lt;img alt="BeagleBone Black" class="align-center" src="images/bbb-details3.png" /&gt;
-&lt;p&gt;Raspberry Pi, Arduino, OpenWRT on routers ... Happy days are here for open source on little computers! Five years ago BeagleBoard.org released its first hacker-friendly ARM-powered development board and now I am having fun exploring their brand new &lt;em&gt;BeagleBone Black&lt;/em&gt; - a $45 community-supported Linux computer.&lt;/p&gt;
-&lt;div class="section" id="step-0-out-of-box"&gt;
-&lt;h2&gt;Step 0 - Out-of-Box&lt;/h2&gt;
-&lt;p&gt;The original BeagleBone - released near the end of 2011 - started with the idea of making an ARM board that would fit in a small mint tin and see how much &lt;em&gt;awesomesauce&lt;/em&gt; could be packed inside! &lt;a class="reference external" href="http://beagleboard.org/Products/BeagleBone%20Black"&gt;BeagleBone Black&lt;/a&gt; (BBB) has the same convenient size, rounded corners, and 4 mounting holes for building projects. Onboard is a 1GHz ARMv7 processor, 512MB RAM, 2GB storage, microSD slot, a microUSB port for power and connectivity, a USB host port, microHDMI, 5V power connector, and - as I am having fun exploring - 96 header pins for interfacing BBB with external hardware. A microUSB-to-USB cable is included for connecting BBB to a host machine.&lt;/p&gt;
-&lt;p&gt;BeagleBone Black is completely open source ... &lt;a class="reference external" href="http://circuitco.com/support/index.php?title=BeagleBoneBlack#Hardware_Files"&gt;hardware schematics&lt;/a&gt; are provided (build your own!), no &lt;em&gt;binary blobs&lt;/em&gt;, no &lt;a class="reference external" href="http://www.raspberrypi.org/faqs"&gt;NDA&lt;/a&gt; required to dive into the 4,000+ pages(!) of Texas Instruments' &lt;a class="reference external" href="http://www.ti.com/product/am3359"&gt;AM335x processor manual&lt;/a&gt;. BBB ships with the &lt;em&gt;Angstrom Linux&lt;/em&gt; distribution pre-installed ... but using an ARMv7 processor is a big plus because alternative ARM ports of the mainstream Linux distros (such as Debian) are available for the BBB without re-compiling packages. BBB is also one of the first ARM devices to fully embrace the &lt;a class="reference external" href="http://linuxgizmos.com/introducing-the-new-beaglebone-black-kernel"&gt;Linux Device Tree&lt;/a&gt; and will benefit from ongoing ARM improvements in mainstream kernel development and make it easier to create expansion boards (or &lt;em&gt;capes&lt;/em&gt; in BBB lingo) for the device.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-1-connect-to-host"&gt;
-&lt;h2&gt;Step 1 - Connect to Host&lt;/h2&gt;
-&lt;p&gt;BeagleBone Black is designed to get the Linux user up-and-running quickly. Within a few minutes of unboxing the device I was using the provided USB cable to connect the device to my host computer (running Debian &lt;tt class="docutils literal"&gt;sid&lt;/tt&gt;). BBB mounts as a usb-storage device and provides a usbnet virtual-ethernet interface running a DHCP server.&lt;/p&gt;
-&lt;p&gt;Some post-connection HOST output of interest ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cat /var/log/kern.log
-Sep  1 16:58:17 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.036280&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.2: new high-speed USB device number 20 using ehci-pci
-Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.129344&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.2: New USB device found, &lt;span class="nv"&gt;idVendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1d6b, &lt;span class="nv"&gt;idProduct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0104
-Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.129350&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.2: New USB device strings: &lt;span class="nv"&gt;Mfr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;Product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;3, &lt;span class="nv"&gt;SerialNumber&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4
-Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.129355&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.2: Product: BeagleBoneBlack
-Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.129358&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.2: Manufacturer: Circuitco
-Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.129361&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.2: SerialNumber: 5A-1713BBBK2013
-Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.133166&lt;span class="o"&gt;]&lt;/span&gt; rndis_host 1-1.2:1.0 eth1: register &lt;span class="s1"&gt;&amp;#39;rndis_host&amp;#39;&lt;/span&gt; at usb-0000:00:1a.0-1.2, RNDIS device, c8:a0:30:ac:1d:6f
-Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.133843&lt;span class="o"&gt;]&lt;/span&gt; cdc_acm 1-1.2:1.2: This device cannot &lt;span class="k"&gt;do &lt;/span&gt;calls on its own. It is not a modem.
-Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.133917&lt;span class="o"&gt;]&lt;/span&gt; cdc_acm 1-1.2:1.2: ttyACM0: USB ACM device
-Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.135249&lt;span class="o"&gt;]&lt;/span&gt; usb-storage 1-1.2:1.4: USB Mass Storage device detected
-Sep  1 16:58:18 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455195.135458&lt;span class="o"&gt;]&lt;/span&gt; scsi20 : usb-storage 1-1.2:1.4
-Sep  1 16:58:19 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455196.133604&lt;span class="o"&gt;]&lt;/span&gt; scsi 20:0:0:0: Direct-Access     Linux    File-CD Gadget   0308 PQ: 0 ANSI: 2
-Sep  1 16:58:19 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455196.134045&lt;span class="o"&gt;]&lt;/span&gt; sd 20:0:0:0: Attached scsi generic sg1 &lt;span class="nb"&gt;type &lt;/span&gt;0
-Sep  1 16:58:19 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455196.135313&lt;span class="o"&gt;]&lt;/span&gt; sd 20:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sdb&lt;span class="o"&gt;]&lt;/span&gt; 144522 512-byte logical blocks: &lt;span class="o"&gt;(&lt;/span&gt;73.9 MB/70.5 MiB&lt;span class="o"&gt;)&lt;/span&gt;
-Sep  1 16:58:19 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455196.136080&lt;span class="o"&gt;]&lt;/span&gt; sd 20:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sdb&lt;span class="o"&gt;]&lt;/span&gt; Write Protect is off
-Sep  1 16:58:19 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455196.136089&lt;span class="o"&gt;]&lt;/span&gt; sd 20:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sdb&lt;span class="o"&gt;]&lt;/span&gt; Mode Sense: 0f 00 00 00
-Sep  1 16:58:19 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455196.136840&lt;span class="o"&gt;]&lt;/span&gt; sd 20:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sdb&lt;span class="o"&gt;]&lt;/span&gt; Write cache: enabled, &lt;span class="nb"&gt;read &lt;/span&gt;cache: enabled, doesn&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;t support DPO or FUA
-Sep  1 16:58:19 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455196.147108&lt;span class="o"&gt;]&lt;/span&gt;  sdb:
-Sep  1 16:58:19 kambei kernel: &lt;span class="o"&gt;[&lt;/span&gt;455196.149998&lt;span class="o"&gt;]&lt;/span&gt; sd 20:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sdb&lt;span class="o"&gt;]&lt;/span&gt; Attached SCSI removable disk
-&lt;span class="nv"&gt;$ &lt;/span&gt;lsusb
-Bus 001 Device 020: ID 1d6b:0104 Linux Foundation Multifunction Composite Gadget
-&lt;span class="nv"&gt;$ &lt;/span&gt;mount
-/dev/sdb on /media/dwa/BEAGLEBONE &lt;span class="nb"&gt;type &lt;/span&gt;vfat &lt;span class="o"&gt;(&lt;/span&gt;rw,nosuid,nodev,relatime,uid&lt;span class="o"&gt;=&lt;/span&gt;1000,gid&lt;span class="o"&gt;=&lt;/span&gt;1000,fmask&lt;span class="o"&gt;=&lt;/span&gt;0022,dmask&lt;span class="o"&gt;=&lt;/span&gt;0077,codepage&lt;span class="o"&gt;=&lt;/span&gt;437,iocharset&lt;span class="o"&gt;=&lt;/span&gt;utf8,shortname&lt;span class="o"&gt;=&lt;/span&gt;mixed,showexec,utf8,flush,errors&lt;span class="o"&gt;=&lt;/span&gt;remount-ro,uhelper&lt;span class="o"&gt;=&lt;/span&gt;udisks2&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;ls /dev/ttyA*
-crw-rw---T 1 root dialout 166, 0 Aug 18 13:30 /dev/ttyACM0
-&lt;span class="nv"&gt;$ &lt;/span&gt;ifconfig
-eth0      Link encap:Ethernet  HWaddr f0:de:f1:15:e8:51
-          inet addr:192.168.1.4  Bcast:192.168.1.255  Mask:255.255.255.0
-          inet6 addr: fe80::f2de:f1ff:fe15:e851/64 Scope:Link
-          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-          RX packets:22559530 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:21337616 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:1000
-          RX bytes:28619436829 &lt;span class="o"&gt;(&lt;/span&gt;26.6 GiB&lt;span class="o"&gt;)&lt;/span&gt;  TX bytes:3283938274 &lt;span class="o"&gt;(&lt;/span&gt;3.0 GiB&lt;span class="o"&gt;)&lt;/span&gt;
-          Interrupt:20 Memory:f2500000-f2520000
-
-eth1      Link encap:Ethernet  HWaddr c8:a0:30:ac:1d:6f
-          inet addr:192.168.7.1  Bcast:192.168.7.3  Mask:255.255.255.252
-          inet6 addr: fe80::caa0:30ff:feac:1d6f/64 Scope:Link
-          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-          RX packets:35 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:83 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:1000
-          RX bytes:6572 &lt;span class="o"&gt;(&lt;/span&gt;6.4 KiB&lt;span class="o"&gt;)&lt;/span&gt;  TX bytes:18103 &lt;span class="o"&gt;(&lt;/span&gt;17.6 KiB&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I use the &lt;em&gt;Thunar&lt;/em&gt; file manager to browse the device and click on &lt;tt class="docutils literal"&gt;START.htm&lt;/tt&gt; to launch BeagleBone's &lt;em&gt;Getting Started&lt;/em&gt; page in a web browser.&lt;/p&gt;
-&lt;img alt="Thunar file manager" class="align-center" src="images/bbb-start.png" /&gt;
-&lt;p&gt;Scroll down to &lt;tt class="docutils literal"&gt;Step #3: Browse to your board&lt;/tt&gt; and clicking on the address of BBB's web server &lt;tt class="docutils literal"&gt;192.168.7.2&lt;/tt&gt; opens the onboard documentation &lt;tt class="docutils literal"&gt;BeagleBone 101&lt;/tt&gt;.&lt;/p&gt;
-&lt;img alt="Beaglebone 101" class="align-center" src="images/bbb-101.png" /&gt;
-&lt;p&gt;Also included is a link to a self-hosted instance of the &lt;em&gt;Cloud9 IDE&lt;/em&gt;  listening at &lt;tt class="docutils literal"&gt;192.168.7.2:3000&lt;/tt&gt; that provides a JavaScript library called &lt;em&gt;BoneScript&lt;/em&gt; for hacking on the BeagleBone's hardware. Some tiny example scripts are provided to blink LEDs and whatnot ... at first glance they remind me of Arduino code but I haven't really played with this environment (or Arduino for that matter) much yet.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Network-Manager&lt;/em&gt; auto-creates a second wired interface for the BeagleBone Black on my HOST ... allowing me to ssh into the device as &lt;tt class="docutils literal"&gt;root&amp;#64;192.168.7.2&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;root&amp;#64;beaglebone.local&lt;/tt&gt; (Angstrom runs &lt;em&gt;Avahi&lt;/em&gt; daemon by default) and no password. Will definitely need to change &lt;strong&gt;that&lt;/strong&gt; ... but not before ...&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-2-flashing-updated-angstrom-image"&gt;
-&lt;h2&gt;Step 2 - Flashing updated Angstrom image&lt;/h2&gt;
-&lt;p&gt;Having determined the device is working - and before diving into custom configuration - its a good idea to flash an updated Angstrom image for the BeagleBone Black to the device's onboard eMMC storage. This will require a microSD (8GB+) card and a 5V power adapter.&lt;/p&gt;
-&lt;div class="section" id="download-and-unpack-image"&gt;
-&lt;h3&gt;Download and unpack image&lt;/h3&gt;
-&lt;p&gt;Angstrom image files for the BBB are labelled &lt;a class="reference external" href="http://dominion.thruhere.net/koen/angstrom/beaglebone/"&gt;BBB-eMMC-flasher-xxxx.xx.xx.img.xz&lt;/a&gt; ... Latest version as of 2 September is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;BBB-eMMC-flasher-2013.08.21.img.xz&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Using the above image as an example ... download the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;xz-utils&lt;/span&gt;&lt;/tt&gt; Debian package and download and unpack the Angstrom image ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install xz-utils
-&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://dominion.thruhere.net/koen/angstrom/beaglebone/BBB-eMMC-flasher-2013.08.21.img.xz
-&lt;span class="nv"&gt;$ &lt;/span&gt;xz -d BBB-eMMC-flasher-2013.08.21.img.xz
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="copy-image-to-microsd"&gt;
-&lt;h3&gt;Copy image to microSD&lt;/h3&gt;
-&lt;div class="warning"&gt;
-&lt;p class="first admonition-title"&gt;Warning&lt;/p&gt;
-&lt;p class="last"&gt;Be careful to note the proper &lt;em&gt;DeviceID&lt;/em&gt; of your microSD card ... in my example I use &lt;em&gt;sdb&lt;/em&gt; but your device will probably have a &lt;em&gt;different address&lt;/em&gt;. Command &lt;em&gt;dd&lt;/em&gt; will completely &lt;strong&gt;wipe out the contents of the card&lt;/strong&gt;. Its not nicknamed &lt;em&gt;disk destroyer&lt;/em&gt; for nothing!&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;Copy image to card using &lt;tt class="docutils literal"&gt;dd&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;BBB-eMMC-flasher-2013.08.21.img &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sdb &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1M
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="flash-the-bbb"&gt;
-&lt;h3&gt;Flash the BBB&lt;/h3&gt;
-&lt;p&gt;A USB port does not supply enough power to the BBB when flashing an image to the eMMC ... the board must be connected to a 5V adapter. Luckily I was able to recycle an old Linksys power adapter that provided the necessary 5V and 2000mA and fit the power plug on the BBB.&lt;/p&gt;
-&lt;p&gt;With the BBB disconnected from HOST and powered off ... insert the Angstrom-prepared microSD card into BBB. Hold down the BOOT button (located above the microSD slot), connect the 5V adapter, and wait until you see the bank of 4 LEDs on the BBB all light up for a few seconds before releasing BOOT. A new image is now being flashed from card to BBB storage and will take approximately 50-60 minutes. Upon completion all 4 LEDs will be lit solid. Disconnect power, remove the microSD, then restore power and BBB will boot into the updated Angstrom.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-3-configuration"&gt;
-&lt;h2&gt;Step 3 - Configuration&lt;/h2&gt;
-&lt;div class="section" id="root-password"&gt;
-&lt;h3&gt;Root password&lt;/h3&gt;
-&lt;p&gt;Root with no password &lt;em&gt;oh noooooo&lt;/em&gt; ... set one now &lt;tt class="docutils literal"&gt;passwd&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;You might also want to create an unprivileged user account (I did not).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="configure-host-as-router"&gt;
-&lt;h3&gt;Configure HOST as router&lt;/h3&gt;
-&lt;p&gt;Tip from &lt;a class="reference external" href="http://shallowsky.com/blog/hardware/talking-to-beaglebone.html"&gt;http://shallowsky.com/blog/hardware/talking-to-beaglebone.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;When BBB is connected to my HOST via USB ... Network-Manager sets up a second wired interface &lt;tt class="docutils literal"&gt;eth1&lt;/tt&gt; to connect with BBB ... and BBB connects to HOST through &lt;tt class="docutils literal"&gt;usb0&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ifconfig
-...
-usb0      Link encap:Ethernet  HWaddr BA:E1:A2:37:43:15
-          inet addr:192.168.7.2  Bcast:192.168.7.3  Mask:255.255.255.252
-          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-          RX packets:7685 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:12461 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:1000
-          RX bytes:888859 &lt;span class="o"&gt;(&lt;/span&gt;868.0 KiB&lt;span class="o"&gt;)&lt;/span&gt;  TX bytes:13309157 &lt;span class="o"&gt;(&lt;/span&gt;12.6 MiB&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This arrangment is OK for getting HOST and BBB talking to each other but BBB - in lieu of an additional ethernet cable - cannot reach the net. I created a tiny script that can be run as desired to configure my Linux HOST to route internet traffic for the BBB ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
-
-&lt;span class="c"&gt;# bbbIPforward.sh -- Enable internet access for my BeagleBone Black (BBB)&lt;/span&gt;
-&lt;span class="c"&gt;# using my Linux HOST as a router&lt;/span&gt;
-
-&lt;span class="nv"&gt;bbbAddr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;192.168.7.2&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;hostAddr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;192.168.7.1&amp;quot;&lt;/span&gt;
-
-&lt;span class="c"&gt;# Configure IP forwarding on HOST&lt;/span&gt;
-sudo iptables -A POSTROUTING -t nat -j MASQUERADE
-&lt;span class="nb"&gt;echo &lt;/span&gt;1 | sudo tee /proc/sys/net/ipv4/ip_forward &amp;gt; /dev/null
-
-&lt;span class="c"&gt;# Copy ssh key to BBB for passwordless logins&lt;/span&gt;
-ssh-copy-id root@&lt;span class="nv"&gt;$bbbAddr&lt;/span&gt;
-
-&lt;span class="c"&gt;# Configure BBB to use HOST as gateway&lt;/span&gt;
-ssh root@&lt;span class="nv"&gt;$bbbAddr&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/sbin/route add default gw $hostAddr&amp;quot;&lt;/span&gt;
-
-&lt;span class="c"&gt;# Backup and substitute BBB resolv.conf with HOST resolv.conf&lt;/span&gt;
-ssh root@&lt;span class="nv"&gt;$bbbAddr&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;mv -n /etc/resolv.conf /etc/resolv.conf.bak&amp;quot;&lt;/span&gt;
-scp /etc/resolv.conf root@&lt;span class="nv"&gt;$bbbAddr&lt;/span&gt;:/etc/
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="date-and-time"&gt;
-&lt;h3&gt;Date and Time&lt;/h3&gt;
-&lt;p&gt;Tip from &lt;a class="reference external" href="http://derekmolloy.ie/automatically-setting-the-beaglebone-black-time-using-ntp/"&gt;http://derekmolloy.ie/automatically-setting-the-beaglebone-black-time-using-ntp/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;The BeagleBone Black does not include an onboard &lt;em&gt;Real Time Clock&lt;/em&gt; (RTC) and thus loses its time and date setting after every power off.&lt;/p&gt;
-&lt;p&gt;Set the time over the internet using an ntp server by first configuring the timezone linking &lt;tt class="docutils literal"&gt;localtime&lt;/tt&gt; to your proper location in &lt;tt class="docutils literal"&gt;zoneinfo&lt;/tt&gt; (in my case &lt;tt class="docutils literal"&gt;Toronto/New York&lt;/tt&gt;) and then running a quick one-off command to set the proper date ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# ln -s /usr/share/zoneinfo/America/New_York /etc/localtime&lt;/span&gt;
-&lt;span class="c"&gt;# ntpdate -u pool.ntp.org&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... but the date/time will still be lost after every shutdown.&lt;/p&gt;
-&lt;p&gt;For a more permanent solution install &lt;em&gt;NTP&lt;/em&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# opkg update&lt;/span&gt;
-&lt;span class="c"&gt;# opkg install ntp&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Find local NTP servers (Canada) and edit &lt;tt class="docutils literal"&gt;/etc/ntp.conf&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;driftfile /etc/ntp.drift
-logfile /var/log/ntpd.log
-
-&lt;span class="c"&gt;# NTP Servers for Canada from www.pool.ntp.org&lt;/span&gt;
-server 0.ca.pool.ntp.org
-server 1.ca.pool.ntp.org
-server 2.ca.pool.ntp.org
-server 3.ca.pool.ntp.org
-
-&lt;span class="c"&gt;# Using local hardware clock as fallback&lt;/span&gt;
-&lt;span class="c"&gt;# Disable this when using ntpd -q -g -x as ntpdate or it will sync to itself&lt;/span&gt;
-&lt;span class="c"&gt;# server 127.127.1.0&lt;/span&gt;
-&lt;span class="c"&gt;# fudge 127.127.1.0 stratum 14&lt;/span&gt;
-
-&lt;span class="c"&gt;# Defining a default security setting&lt;/span&gt;
-restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="note"&gt;
-&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
-&lt;p class="last"&gt;Angstrom uses &lt;em&gt;systemd&lt;/em&gt; and init.d is replaced by &lt;em&gt;systemctl COMMAND&lt;/em&gt; and files are located in &lt;em&gt;/lib/systemd/system/NAME.service&lt;/em&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;Enable NTP services ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# systemctl enable ntpdate.service&lt;/span&gt;
-&lt;span class="c"&gt;# systemctl enable ntpd.service&lt;/span&gt;
-&lt;span class="c"&gt;# cat /lib/systemd/system/ntpd.service&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;Unit&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Network Time Service
-&lt;span class="nv"&gt;After&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;network.target
-
-&lt;span class="o"&gt;[&lt;/span&gt;Service&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;forking
-&lt;span class="nv"&gt;PIDFile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/run/ntpd.pid
-&lt;span class="nv"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/bin/ntpd -p /run/ntpd.pid
-
-&lt;span class="o"&gt;[&lt;/span&gt;Install&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;multi-user.target
-&lt;span class="o"&gt;{&lt;/span&gt;% endhighlight %&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;ExecStart&lt;/tt&gt; of &lt;tt class="docutils literal"&gt;/lib/systemd/system/ntpdate.service&lt;/tt&gt; ....&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;Unit&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Network Time Service &lt;span class="o"&gt;(&lt;/span&gt;one-shot ntpdate mode&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="nv"&gt;Before&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ntpd.service
-
-&lt;span class="o"&gt;[&lt;/span&gt;Service&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;oneshot
-&lt;span class="nv"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/bin/ntpd -q -g -x
-&lt;span class="nv"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/sbin/hwclock --systohc
-&lt;span class="nv"&gt;RemainAfterExit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;yes
-
-&lt;span class="o"&gt;[&lt;/span&gt;Install&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;multi-user.target
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Save all changes, reboot the BBB while connected to the Internet, and verify the proper date and time are set with &lt;tt class="docutils literal"&gt;timedatectl&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;   &lt;span class="c"&gt;# timedatectl&lt;/span&gt;
-     Local &lt;span class="nb"&gt;time&lt;/span&gt;: Wed 2013-07-10 23:14:45 EDT
- Universal &lt;span class="nb"&gt;time&lt;/span&gt;: Thu 2013-07-11 03:14:45 UTC
-       RTC &lt;span class="nb"&gt;time&lt;/span&gt;: Wed 2013-07-10 23:14:45
-       Timezone: America/New_York &lt;span class="o"&gt;(&lt;/span&gt;EDT, -0400&lt;span class="o"&gt;)&lt;/span&gt;
-       NTP enabled: no
-   NTP synchronized: yes
-RTC in &lt;span class="nb"&gt;local &lt;/span&gt;TZ: no
-     DST active: yes
-Last DST change: DST began at
-                 Sun 2013-03-10 01:59:59 EST
-                 Sun 2013-03-10 03:00:00 EDT
-Next DST change: DST ends &lt;span class="o"&gt;(&lt;/span&gt;the clock jumps one hour backwards&lt;span class="o"&gt;)&lt;/span&gt; at
-                 Sun 2013-11-03 01:59:59 EDT
-                 Sun 2013-11-03 01:00:00 EST
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reference: &lt;a class="reference external" href="http://stackoverflow.com/questions/11219832/what-is-the-best-way-to-run-ntpdate-at-reboot-only-after-network-is-ready"&gt;What is the best way to run ntpdate?&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="remote-desktop"&gt;
-&lt;h3&gt;Remote Desktop&lt;/h3&gt;
-&lt;p&gt;Tip from &lt;a class="reference external" href="http://digitaldiner.blogspot.ca/2013/05/quick-hint-for-beaglebone-black-user.html"&gt;http://digitaldiner.blogspot.ca/2013/05/quick-hint-for-beaglebone-black-user.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;In lieu of a microHDMI cable for connecting an HDMI display to the BBB the device may be configured to transmit a remote desktop to HOST.&lt;/p&gt;
-&lt;p&gt;On BBB install the &lt;tt class="docutils literal"&gt;x11vnc&lt;/tt&gt; package and launch ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# opkg update&lt;/span&gt;
-&lt;span class="c"&gt;# opkg install x11vnc&lt;/span&gt;
-&lt;span class="c"&gt;# x11vnc -bg -o %HOME/.x11vnc.log.%VNCDISPLAY -auth /var/run/gdm/auth-for-gdm*/database -display :0  -forever&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... which provides a display available for remote viewing at address &lt;tt class="docutils literal"&gt;192.168.7.2:5900&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;On my HOST I install and use the &lt;tt class="docutils literal"&gt;ssvnc&lt;/tt&gt; viewer &lt;tt class="docutils literal"&gt;sudo &lt;span class="pre"&gt;apt-get&lt;/span&gt; install ssvnc&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;It works!&lt;/p&gt;
-&lt;img alt="Remote desktop" class="align-center" src="images/bbb-x11vnc.png" /&gt;
-&lt;p&gt;Reference: &lt;a class="reference external" href="http://www.karlrunge.com/x11vnc/"&gt;http://www.karlrunge.com/x11vnc/&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-4-issues-and-fixes"&gt;
-&lt;h2&gt;Step 4 - Issues and Fixes&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;BeagleBone Black Rev. A5A running default Angstrom Linux&lt;/em&gt;&lt;/p&gt;
-&lt;div class="section" id="opkg-upgrade"&gt;
-&lt;h3&gt;'opkg upgrade'&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Fix:&lt;/em&gt; Do not run this command or else Bad Things Will Happen.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="no-login-screen-over-hdmi"&gt;
-&lt;h3&gt;No login screen over HDMI&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Issue:&lt;/em&gt; BeagleBone logo appears at boot but no login screen.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Fix:&lt;/em&gt; Turns out that my powered USB hub - with keyboard attached - was not being detected by the BBB during boot. If the device thinks no keyboard or mouse is attached during boot it kills power to the microHDMI port and hence no display. You can &amp;quot;wake up&amp;quot; the display by ssh'ing into BBB and sending an &lt;tt class="docutils literal"&gt;echo 0 &amp;gt; /sys/class/graphics/fb0/blank&lt;/tt&gt; command but it will still fail to detect a hot-plugged USB keyboard or mouse.&lt;/p&gt;
-&lt;p&gt;If I connect the keyboard (with built-in trackpoint) directly to the BBB USB port and reboot and hit SHIFT key the display springs to life and the login window appears.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Issue:&lt;/em&gt; BeagleBone logo appears at boot but no login screen (and this time its not the keyboard).&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Fix:&lt;/em&gt; Creating a password for root causes the &lt;em&gt;autologin&lt;/em&gt; task running at login screen to constantly fail (because it doesn't know the password) and buggers up the display. To disable autologin edit &lt;tt class="docutils literal"&gt;/etc/gdm/custom.conf&lt;/tt&gt; and modify the line &lt;tt class="docutils literal"&gt;TimedLoginEnable&lt;/tt&gt; from &lt;tt class="docutils literal"&gt;true&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;false&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;daemon&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;TimedLoginEnable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and restart GDM with the command &lt;tt class="docutils literal"&gt;systemctl restart gdm.service&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Reference: &lt;a class="reference external" href="http://circuitco.com/support/index.php?title=BeagleBoneBlack_HDMI"&gt;http://circuitco.com/support/index.php?title=BeagleBoneBlack_HDMI&lt;/a&gt;&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://bb-lcnc.blogspot.ca/2013/06/force-beaglebone-black-hdmi-resolution.html"&gt;http://bb-lcnc.blogspot.ca/2013/06/force-beaglebone-black-hdmi-resolution.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="hdmi-output-goes-beyond-edge-of-display"&gt;
-&lt;h3&gt;HDMI output goes beyond edge of display&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Issue:&lt;/em&gt; Using a microHDMI-HDMI cable to connect BBB to my 1920x1200 display produces a working 1280x720 resolution working ... but the desktop area is slightly bigger than the margins of the display.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Fix:&lt;/em&gt; Needed to adjust settings on display ... modifying &lt;tt class="docutils literal"&gt;Image &lt;span class="pre"&gt;Setting-&amp;gt;Video&lt;/span&gt; &lt;span class="pre"&gt;Mode-&amp;gt;Video&lt;/span&gt; Mode&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;Image &lt;span class="pre"&gt;Setting-&amp;gt;Video&lt;/span&gt; &lt;span class="pre"&gt;Mode-&amp;gt;PC&lt;/span&gt; Mode&lt;/tt&gt;&lt;/p&gt;
-&lt;p&gt;Reference: &lt;a class="reference external" href="http://groups.google.com/forum/#!msg/beagleboard/sxaSIUpiZo8/__TmDqD4aJcJ"&gt;http://groups.google.com/forum/#!msg/beagleboard/sxaSIUpiZo8/__TmDqD4aJcJ&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="drm-debug"&gt;
-&lt;h2&gt;drm.debug&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;Issue:&lt;/em&gt; A whole pile of these messages were filling dmesg ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;Mon Aug 26 03:34:00 2013&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;drm:output_poll_execute&lt;span class="o"&gt;]&lt;/span&gt;, &lt;span class="o"&gt;[&lt;/span&gt;CONNECTOR:5:HDMI-A-1&lt;span class="o"&gt;]&lt;/span&gt; status updated from 2 to 2
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... repeating every few seconds.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Fix:&lt;/em&gt; These debugging messages can safely be turned off by editing &lt;tt class="docutils literal"&gt;uEnv.txt&lt;/tt&gt; located on the &lt;tt class="docutils literal"&gt;mmcblk0p1&lt;/tt&gt; partition (&lt;strong&gt;not&lt;/strong&gt; the &lt;tt class="docutils literal"&gt;uEnv.txt&lt;/tt&gt; found in &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt;).&lt;/p&gt;
-&lt;p&gt;If that partition is not auto-mounted (mine was not) then go ahead and mount it now ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# mount /dev/mmcblk0p1 /media/BEAGLEBONE/&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and edit &lt;tt class="docutils literal"&gt;/media/BEAGLEBONE/uEnv.txt&lt;/tt&gt; by changing the line &lt;tt class="docutils literal"&gt;optargs=quiet drm.debug=7&lt;/tt&gt; to simply &lt;tt class="docutils literal"&gt;optargs=quiet&lt;/tt&gt; ... Reboot and issue resolved.&lt;/p&gt;
-&lt;div class="section" id="resolv-conf"&gt;
-&lt;h3&gt;resolv.conf&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Issue:&lt;/em&gt; Noticed an instance where after running &lt;tt class="docutils literal"&gt;opkg update&lt;/tt&gt; internet access was broken and I was getting a pile of &lt;tt class="docutils literal"&gt;wget: bad address &lt;span class="pre"&gt;'feeds.angstrom-distribution.org'&lt;/span&gt;&lt;/tt&gt; errors ... &lt;tt class="docutils literal"&gt;ifconfig&lt;/tt&gt; showed I still had a good connection to LAN.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Fix:&lt;/em&gt; Discovered that &lt;tt class="docutils literal"&gt;resolv.conf&lt;/tt&gt; was pointing to &lt;tt class="docutils literal"&gt;127.0.0.1&lt;/tt&gt;. Modified file to my router's IP address ... ran update again and everything OK.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="urxvt"&gt;
-&lt;h3&gt;urxvt&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Issue:&lt;/em&gt; Using &lt;tt class="docutils literal"&gt;urxvt&lt;/tt&gt; as my terminal and ssh'ing into BBB ... some commands like &lt;tt class="docutils literal"&gt;htop&lt;/tt&gt; will not run.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Fix:&lt;/em&gt; Copy &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/usr/share/terminfo/r/rxvt-unicode&lt;/span&gt;&lt;/tt&gt; from HOST to the BBB and place in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.terminfo/r/rxvt-unicode&lt;/span&gt;&lt;/tt&gt;. Same for &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;rxvt-unicode-256color&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Reference: &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Urxvt#Remote_Hosts"&gt;https://wiki.archlinux.org/index.php/Urxvt#Remote_Hosts&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="ssh-session-hangs"&gt;
-&lt;h3&gt;SSH session hangs&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Issue:&lt;/em&gt; SSH session sometimes hangs when rebooting the BBB.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Fix:&lt;/em&gt; Type &lt;tt class="docutils literal"&gt;~.&lt;/tt&gt; and it should kill the SSH session.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-5-helpful-resources"&gt;
-&lt;h2&gt;Step 5 - Helpful Resources&lt;/h2&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Purchase a BeagleBone Black: in my hometown (Toronto) from &lt;a class="reference external" href="http://www.creatroninc.com/"&gt;Creatron&lt;/a&gt; or online from &lt;a class="reference external" href="https://www.adafruit.com/category/75"&gt;Adafruit&lt;/a&gt;, &lt;a class="reference external" href="http://www.digikey.ca/product-detail/en/BB-BBLK-000/BB-BBLK-000-ND/3884456"&gt;Digikey&lt;/a&gt; and others&lt;/li&gt;
-&lt;li&gt;BeagleBone Black &lt;a class="reference external" href="http://circuitco.com/support/index.php?title=BeagleBoneBlack"&gt;wiki&lt;/a&gt; and &lt;a class="reference external" href="https://groups.google.com/forum/?fromgroups#!forum/beagleboard"&gt;forum&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/CircuitCo/BeagleBone-Black/blob/master/BBB_SRM.pdf?raw=true"&gt;System Reference Manual&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;BBB on the &lt;a class="reference external" href="http://elinux.org/BeagleBone"&gt;Embedded Linux Wiki&lt;/a&gt; and &lt;a class="reference external" href="http://eewiki.net/display/linuxonarm/BeagleBone+Black"&gt;eewiki&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://learn.adafruit.com/category/beaglebone/"&gt;Hardware tutorials&lt;/a&gt; on Adafruit&lt;/li&gt;
-&lt;li&gt;Excellent series of tutorials and videos by &lt;a class="reference external" href="http://derekmolloy.ie/tag/beaglebone-black/"&gt;Derek Molloy&lt;/a&gt; ... his tables for the BBB's &lt;a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true"&gt;P8&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true"&gt;P9&lt;/a&gt; header pins are essential if you play with the hardware&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://github.com/jadonk/bonescript"&gt;Bonescript&lt;/a&gt; scripting tools&lt;/li&gt;
-&lt;li&gt;Angstrom Linux &lt;a class="reference external" href="http://www.angstrom-distribution.org/repo/"&gt;package browser&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;BBB and the &lt;a class="reference external" href="http://elinux.org/BeagleBone_and_the_3.8_Kernel"&gt;3.8 kernel&lt;/a&gt; and an &lt;a class="reference external" href="http://linuxgizmos.com/introducing-the-new-beaglebone-black-kernel/"&gt;introduction&lt;/a&gt; from Jason Kridner, co-founder of BeagleBoard.org&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 </summary><category term="beaglebone"></category><category term="electronics"></category><category term="angstrom"></category><category term="linux"></category></entry></feed>

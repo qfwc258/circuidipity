@@ -7,7 +7,10 @@
     Author: Daniel Wayne Armstrong <http://www.circuidipity.com>
 */
 
-/* Imports */
+/*
+Imports
+*/
+
 @import url(font.css);
 @import url(pygment.css);
 
@@ -285,7 +288,7 @@ All Tags
     font-family: monospace;
 }
 
-div.aphorism {
+div.aphorism, p.modified {
     font-family: 'YanoneKaffeesatzRegular', sans-serif;
     color: #7a7a7a;
 }
