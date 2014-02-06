@@ -227,7 +227,7 @@ In the example below we create 3 partitions on the disk:
 
 .. note::
 
-    If the hard disk has not been securely wiped prior to installing Debian (using a utility like `DBAN <multi-boot-usb.html>`_ you may want to configure *Erase data* as *yes*. Note, however, that depending on the size of the disk this operation can last several hours.
+    If the hard disk has not been securely wiped prior to installing Debian (using a utility like `DBAN <multi-boot-usb.html>`_) you may want to configure *Erase data* as *yes*. Note, however, that depending on the size of the disk this operation can last several hours.
 
 .. image:: images/wheezyInstall/33.png
     :alt: Random key
