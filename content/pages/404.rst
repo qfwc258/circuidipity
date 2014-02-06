@@ -4,7 +4,7 @@
 
 :slug: 404
 
-.. image:: images/4041.png
+.. image:: /images/4041.png
     :alt: Cowsay
     :align: center
     :width: 640px
