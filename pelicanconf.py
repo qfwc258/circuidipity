@@ -24,10 +24,10 @@ EXTRA_PATH_METADATA = {
 FILENAME_METADATA = '(?P<date>\d{4}-\d{2}-\d{2})'
 
 # Sole author and don't use categories ... disable these features
-AUTHOR_URL = ''
-AUTHOR_SAVE_AS = ''
-CATEGORY_URL = ''
-CATEGORY_SAVE_AS = ''
+AUTHOR_SAVE_AS = False
+AUTHORS_SAVE_AS = False
+CATEGORY_SAVE_AS = False
+CATEGORIES_SAVE_AS = False
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
