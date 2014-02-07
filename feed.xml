@@ -112,10 +112,10 @@ My &lt;span class="ge"&gt;*first*&lt;/span&gt; post using &lt;span class="s"&gt;
 &lt;span class="n"&gt;FILENAME_METADATA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;(?P&amp;lt;date&amp;gt;\d{4}-\d{2}-\d{2})&amp;#39;&lt;/span&gt;
 
 &lt;span class="c"&gt;# Sole author and don&amp;#39;t use categories ... disable these features&lt;/span&gt;
-&lt;span class="n"&gt;AUTHOR_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;AUTHOR_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;CATEGORY_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;CATEGORY_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;AUTHOR_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+&lt;span class="n"&gt;AUTHORS_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+&lt;span class="n"&gt;CATEGORY_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+&lt;span class="n"&gt;CATEGORIES_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
 
 &lt;span class="c"&gt;# Feed generation is usually not desired when developing&lt;/span&gt;
 &lt;span class="n"&gt;FEED_ALL_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
