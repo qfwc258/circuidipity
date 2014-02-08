@@ -267,6 +267,6 @@ When ready to generate for deployment run ...
 
     (circuidipity)$ make publish
 
-All blog contents are placed in ``output`` ready to be uploaded to a hosting service. Since everything is static content there are many options available. Previously I used `Amazon S3 <http://www.circuidipity.com/host-website-on-amazon-s3.html>`_ and have now switched to a free `project repository hosted on GitHub Pages <https://github.com/vonbrownie/circuidipity>`_.
+All blog contents are placed in ``output`` ready to be uploaded to a hosting service. Since everything is static content there are many options available. Previously I used `Amazon S3 <http://www.circuidipity.com/host-website-on-amazon-s3.html>`_ and have now switched to a free `project repository hosted on GitHub Pages </github-pages.html`_.
 
 Go forth *write* and *post* and make merry!
