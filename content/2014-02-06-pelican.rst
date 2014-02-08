@@ -234,7 +234,7 @@ Enable plugins in ``pelicanconf.py`` ...
     PLUGIN_PATH = '/home/dwa/doc/code/pelican-plugins'
     PLUGINS = ['neighbors']
 
-I can then make use of the plugin's ``next_article`` and ``prev_article`` variables in a Jinja2-formatted template to add those navigation links:
+I can then make use of the plugin's ``next_article`` and ``prev_article`` variables in a Jinja2-formatted template to add those navigation links ...
 
 .. code-block:: python
 
