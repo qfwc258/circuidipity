@@ -222,10 +222,33 @@ A few of the settings like ``RELATIVE_URLS = True`` and turning off ``ATOM`` fee
     DELETE_OUTPUT_DIRECTORY = True
 
 
-Plugins and themes
-==================
+Plugins
+=======
 
 `Plugins <http://docs.getpelican.com/en/3.3.0/plugins.html>`_ are available to extend the functionality of Pelican. I use a plugin called `neighbors <https://github.com/getpelican/pelican-plugins/tree/master/neighbors>`_ that makes it easy for me to add links near the bottom to ``Newer`` and ``Older`` articles in relation to the current page.
+
+Enable plugins in ``pelicanconf.py`` ...
+
+.. code-block:: python
+
+    PLUGIN_PATH = '/home/dwa/doc/code/pelican-plugins'
+    PLUGINS = ['neighbors']
+
+I can then make use of the plugin's ``next_article`` and ``prev_article`` variables in a Jinja2-formatted template to add those navigation links:
+
+.. code-block:: python
+
+    {% if article.prev_article %}
+        <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="{{ SITEURL }}/{{ article.prev_article.url}}">{{ article.prev_article.title }}</a></p>
+    {% endif %}
+    {% if article.next_article %}
+        <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="{{ SITEURL }}/{{ article.next_article.url}}">{{ article.next_article.title }}</a></p>
+    {% endif %}
+
+Themes
+======
 
 Pelican includes a default theme to get you started and there is a collection of `user-created themes <https://github.com/getpelican/pelican-themes>`_ to choose from or `create your own <http://docs.getpelican.com/en/3.3.0/themes.html>`_. I chose to start from scratch and explore CSS, Jinja2 templating, `pygments <http://pygments.org/faq/>`_ and `Font Awesome icons <http://fortawesome.github.io/Font-Awesome/>`_ to create my own `Chungking Condo <https://github.com/vonbrownie/circuidipity/tree/gh-pages/theme>`_ theme.
 
