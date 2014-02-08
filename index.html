@@ -218,9 +218,26 @@ My <span class="ge">*first*</span> post using <span class="s">`Pelican </span><s
 <span class="n">DELETE_OUTPUT_DIRECTORY</span> <span class="o">=</span> <span class="bp">True</span>
 </pre></div>
 </div>
-<div class="section" id="plugins-and-themes">
-<h2>Plugins and themes</h2>
+<div class="section" id="plugins">
+<h2>Plugins</h2>
 <p><a class="reference external" href="http://docs.getpelican.com/en/3.3.0/plugins.html">Plugins</a> are available to extend the functionality of Pelican. I use a plugin called <a class="reference external" href="https://github.com/getpelican/pelican-plugins/tree/master/neighbors">neighbors</a> that makes it easy for me to add links near the bottom to <tt class="docutils literal">Newer</tt> and <tt class="docutils literal">Older</tt> articles in relation to the current page.</p>
+<p>Enable plugins in <tt class="docutils literal">pelicanconf.py</tt> ...</p>
+<div class="highlight"><pre><span class="n">PLUGIN_PATH</span> <span class="o">=</span> <span class="s">&#39;/home/dwa/doc/code/pelican-plugins&#39;</span>
+<span class="n">PLUGINS</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;neighbors&#39;</span><span class="p">]</span>
+</pre></div>
+<p>I can then make use of the plugin's <tt class="docutils literal">next_article</tt> and <tt class="docutils literal">prev_article</tt> variables in a Jinja2-formatted template to add those navigation links:</p>
+<div class="highlight"><pre><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">article</span><span class="o">.</span><span class="n">prev_article</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">p</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;prevpost&quot;</span><span class="o">&gt;&lt;</span><span class="n">i</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;fa fa-arrow-left&quot;</span><span class="o">&gt;&lt;/</span><span class="n">i</span><span class="o">&gt;</span> <span class="n">Older</span><span class="o">&lt;</span><span class="n">br</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/{{ article.prev_article.url}}&quot;</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">article</span><span class="o">.</span><span class="n">prev_article</span><span class="o">.</span><span class="n">title</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">article</span><span class="o">.</span><span class="n">next_article</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">p</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;nextpost&quot;</span><span class="o">&gt;</span><span class="n">Newer</span> <span class="o">&lt;</span><span class="n">i</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;fa fa-arrow-right&quot;</span><span class="o">&gt;&lt;/</span><span class="n">i</span><span class="o">&gt;&lt;</span><span class="n">br</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/{{ article.next_article.url}}&quot;</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">article</span><span class="o">.</span><span class="n">next_article</span><span class="o">.</span><span class="n">title</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="themes">
+<h2>Themes</h2>
 <p>Pelican includes a default theme to get you started and there is a collection of <a class="reference external" href="https://github.com/getpelican/pelican-themes">user-created themes</a> to choose from or <a class="reference external" href="http://docs.getpelican.com/en/3.3.0/themes.html">create your own</a>. I chose to start from scratch and explore CSS, Jinja2 templating, <a class="reference external" href="http://pygments.org/faq/">pygments</a> and <a class="reference external" href="http://fortawesome.github.io/Font-Awesome/">Font Awesome icons</a> to create my own <a class="reference external" href="https://github.com/vonbrownie/circuidipity/tree/gh-pages/theme">Chungking Condo</a> theme.</p>
 <p>To use a theme set the location of its contents in <tt class="docutils literal">pelicanconf.py</tt> ...</p>
 <div class="highlight"><pre><span class="n">THEME</span> <span class="o">=</span> <span class="s">&#39;/home/dwa/doc/code/pelican-themes/chungking-condo&#39;</span>
