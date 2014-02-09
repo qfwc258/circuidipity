@@ -56,7 +56,7 @@ PLUGINS = ['neighbors']
 
 # Theme
 THEME = '/home/dwa/doc/code/pelican-themes/chungking-condo'
-WHOAMI_URL = '/theme/images/whoami.jpg'
+WHOAMI_URL = '/theme/images/whoami.png'
 GREETING = 'Howdy!'
 LICENCE_NAME = 'BY-NC-SA'
 LICENCE_URL = 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US'
