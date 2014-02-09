@@ -1,5 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-02-06T00:00:00-05:00</updated><entry><title>Build a blog using the Pelican static site generator</title><link href="http://www.circuidipity.com/pelican.html" rel="alternate"></link><updated>2014-02-06T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-02-06:pelican.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://docs.getpelican.com/en/3.3.0/"&gt;Pelican&lt;/a&gt; is a Python-powered &lt;em&gt;static site generator&lt;/em&gt;. I design the look and layout of this site using CSS and &lt;a class="reference external" href="http://jinja.pocoo.org/docs/"&gt;Jinja2&lt;/a&gt; templates and write my posts as plaintext files using &lt;a class="reference external" href="http://docutils.sourceforge.net/rst.html"&gt;reStructuredText&lt;/a&gt; and Pelican &lt;em&gt;compiles&lt;/em&gt; the contents into HTML output suitable for a blog.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-02-08T00:00:00-05:00</updated><entry><title>Host a blog on GitHub Pages</title><link href="http://www.circuidipity.com/github-pages.html" rel="alternate"></link><updated>2014-02-08T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-02-08:github-pages.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://pages.github.com/"&gt;GitHub Pages&lt;/a&gt; is a free web hosting service for projects composed of static files (i.e no database). Combine a Pages &lt;em&gt;repository&lt;/em&gt; with &lt;tt class="docutils literal"&gt;git&lt;/tt&gt; version control and a &lt;em&gt;static site generator&lt;/em&gt; like &lt;a class="reference external" href="/pelican.html"&gt;Pelican&lt;/a&gt; and you have one awesome toolset to build a website.&lt;/p&gt;
+&lt;p&gt;This is how I configured GitHub Pages to host &lt;em&gt;Circuidipity&lt;/em&gt;.&lt;/p&gt;
+&lt;div class="section" id="step-0-install-git"&gt;
+&lt;h2&gt;Step 0 - Install git&lt;/h2&gt;
+&lt;p&gt;Install (on Debian Linux) the &lt;tt class="docutils literal"&gt;git&lt;/tt&gt; package and write global configuration variables for &lt;tt class="docutils literal"&gt;USERNAME&lt;/tt&gt; in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.gitconfig&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install git git-doc
+&lt;span class="nv"&gt;$ &lt;/span&gt;git config --global user.name &lt;span class="s2"&gt;&amp;quot;USERNAME&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;git config --global user.email USERNAME.EMAIL@example.com
+&lt;span class="nv"&gt;$ &lt;/span&gt;git config --global core.editor EDITOR  &lt;span class="c"&gt;# I use &amp;#39;vim&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;git config --global merge.tool vimdiff
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-1-create-git-repository"&gt;
+&lt;h2&gt;Step 1 - Create git repository&lt;/h2&gt;
+&lt;p&gt;Inside my &lt;tt class="docutils literal"&gt;pelican&lt;/tt&gt;-powered blog project I create 2 new files: &lt;tt class="docutils literal"&gt;.gitignore&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;README.rst&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;tt class="docutils literal"&gt;.gitignore&lt;/tt&gt; file does exactly what the name implies ... it instructs &lt;tt class="docutils literal"&gt;git&lt;/tt&gt; which files and directories not to bother tracking in version control. For example I do not want to track ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;*.pid
+*.pyc
+output/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Creating a &lt;tt class="docutils literal"&gt;README.rst&lt;/tt&gt; will allow GitHub to auto-detect and configure it as the project homepage when we upload our blog contents to the remote repository. Mine looks like ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gh"&gt;www dot circuidipity dot com&lt;/span&gt;
+&lt;span class="gh"&gt;============================&lt;/span&gt;
+
+This repository holds my blog which you can visit at www.circuidipity.com.
+
+It is compiled by &lt;span class="s"&gt;`Pelican &lt;/span&gt;&lt;span class="si"&gt;&amp;lt;http://docs.getpelican.com/&amp;gt;&lt;/span&gt;&lt;span class="s"&gt;`_&lt;/span&gt; and hosted on &lt;span class="s"&gt;`GitHub Pages &lt;/span&gt;&lt;span class="si"&gt;&amp;lt;http://pages.github.com/&amp;gt;&lt;/span&gt;&lt;span class="s"&gt;`_&lt;/span&gt;.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now I &lt;em&gt;create&lt;/em&gt; my local repository, &lt;em&gt;add&lt;/em&gt; the items I want to track, and execute my first &lt;em&gt;commit&lt;/em&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git init
+&lt;span class="nv"&gt;$ &lt;/span&gt;git add README.rst
+&lt;span class="nv"&gt;$ &lt;/span&gt;git add .gitignore
+&lt;span class="nv"&gt;$ &lt;/span&gt;git add Makefile
+&lt;span class="nv"&gt;$ &lt;/span&gt;git add content/
+&lt;span class="nv"&gt;$ &lt;/span&gt;git add pelicanconf.py
+&lt;span class="nv"&gt;$ &lt;/span&gt;git add publishconf.py
+&lt;span class="nv"&gt;$ &lt;/span&gt;git status
+&lt;span class="nv"&gt;$ &lt;/span&gt;git commit -a -m &lt;span class="s2"&gt;&amp;quot;first commit&amp;quot;&lt;/span&gt;  &lt;span class="c"&gt;# &amp;#39;-a&amp;#39; adds all files that are being tracked and commits them&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;git log  &lt;span class="c"&gt;# to view commit history&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-2-create-github-repository"&gt;
+&lt;h2&gt;Step 2 - Create GitHub repository&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://help.github.com/articles/signing-up-for-a-new-github-account"&gt;Sign up&lt;/a&gt; for a free account on GitHub and &lt;a class="reference external" href="https://help.github.com/articles/creating-a-new-repository"&gt;create a new empty repository&lt;/a&gt; to hold the blog contents.&lt;/p&gt;
+&lt;p&gt;Next I connect my local &lt;tt class="docutils literal"&gt;.git&lt;/tt&gt; repository to my GitHub remote repository ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git remote add origin https://github.com/vonbrownie/circuidipity.git
+&lt;span class="nv"&gt;$ &lt;/span&gt;git remote -v  &lt;span class="c"&gt;# confirm local knows about remote&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;git push -u origin master
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-3-configure-pelican-to-use-github-pages"&gt;
+&lt;h2&gt;Step 3 - Configure Pelican to use GitHub Pages&lt;/h2&gt;
+&lt;p&gt;GitHub offers 2 types of &lt;a class="reference external" href="https://help.github.com/articles/user-organization-and-project-pages"&gt;Pages&lt;/a&gt; ... &lt;em&gt;User Pages&lt;/em&gt; and &lt;em&gt;Project Pages&lt;/em&gt;. Each GitHub account can host a single User Page and an unlimited amount of Project Pages. Basically they are identical to the end-user and differ only in their configuration.&lt;/p&gt;
+&lt;p&gt;I chose to make my blog a Project Page and the contents are hosted in the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;gh-pages&lt;/span&gt;&lt;/tt&gt; branch of my GitHub project repository. Pelican makes it easy to create and configure &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;gh-pages&lt;/span&gt;&lt;/tt&gt; using the &lt;a class="reference external" href="https://github.com/davisp/ghp-import"&gt;ghp-import&lt;/a&gt; Python script ... which I install via &lt;tt class="docutils literal"&gt;pip&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pip install ghp-import
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally I &lt;em&gt;publish&lt;/em&gt; my blog by pushing the files up to GitHub ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;make github
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;GitHub Pages is now hosting the site at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://USERNAME.github.io/REPOSITORY&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-4-custom-domain-name"&gt;
+&lt;h2&gt;Step 4 - Custom domain name&lt;/h2&gt;
+&lt;p&gt;Awesome! But I want to use my own &lt;em&gt;Circuidipity&lt;/em&gt; custom domain name ... not &lt;tt class="docutils literal"&gt;REPOSITORY&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;GitHub enables &lt;a class="reference external" href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages"&gt;custom domains&lt;/a&gt; by allowing users to create a &lt;tt class="docutils literal"&gt;CNAME&lt;/tt&gt; file with their domain address that resides in the root directory of &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;gh-pages&lt;/span&gt;&lt;/tt&gt;. Inside my Pelican project folder I create a new &lt;tt class="docutils literal"&gt;extra&lt;/tt&gt; directory containing a single-line &lt;tt class="docutils literal"&gt;CNAME&lt;/tt&gt; file with my domain address &lt;tt class="docutils literal"&gt;www.circuidipity.com&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Next I edit &lt;tt class="docutils literal"&gt;pelicanconf.py&lt;/tt&gt; to recognize &lt;tt class="docutils literal"&gt;CNAME&lt;/tt&gt; and place the file in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;gh-pages&lt;/span&gt;&lt;/tt&gt; when I upload my files ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Static paths will be copied without parsing their contents&lt;/span&gt;
+&lt;span class="n"&gt;STATIC_PATHS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;images&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;extra&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="c"&gt;# Shift the installed location of a file&lt;/span&gt;
+&lt;span class="n"&gt;EXTRA_PATH_METADATA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;#39;extra/CNAME&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;path&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;CNAME&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Upload my changes to GitHub ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;make github
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="domain-registrar"&gt;
+&lt;h3&gt;4.1 - Domain Registrar&lt;/h3&gt;
+&lt;p&gt;Now the &lt;em&gt;domain name registrar&lt;/em&gt; needs to be configured to point to the new GitHub address. &lt;a class="reference external" href="https://www.gandi.net/"&gt;Gandi&lt;/a&gt; is my registrar and while the details will vary between domain services the steps are basically the same to redirect a custom domain.&lt;/p&gt;
+&lt;p&gt;My objective is for the GitHub Pages repository to resolve to &lt;tt class="docutils literal"&gt;www.circuidipity.com&lt;/tt&gt; and for &lt;tt class="docutils literal"&gt;circuidipity.com&lt;/tt&gt; to redirect to the &lt;tt class="docutils literal"&gt;www&lt;/tt&gt; address.&lt;/p&gt;
+&lt;p&gt;Using Gandi as an example I will create new &lt;tt class="docutils literal"&gt;CNAME&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;A&lt;/tt&gt; records:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;click on domain name to access admin page and near the bottom select option &lt;tt class="docutils literal"&gt;Edit the zone&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;create new &lt;tt class="docutils literal"&gt;zone file&lt;/tt&gt; for editing by selecting &lt;tt class="docutils literal"&gt;Create a new version&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;modify/add &lt;tt class="docutils literal"&gt;CNAME&lt;/tt&gt; &lt;tt class="docutils literal"&gt;www&lt;/tt&gt; record with value &lt;tt class="docutils literal"&gt;USERNAME.github.io.&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;modify/add &lt;tt class="docutils literal"&gt;A&lt;/tt&gt; record to &lt;a class="reference external" href="https://wiki.gandi.net/en/domains/management/domain-as-website/forwarding"&gt;permanently redirect&lt;/a&gt; the top level domain to &lt;tt class="docutils literal"&gt;www&lt;/tt&gt; using the Gandi redirect service address &lt;tt class="docutils literal"&gt;217.70.184.38&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;click &lt;tt class="docutils literal"&gt;Use this version&lt;/tt&gt; to save all changes and wait a few hours for the DNS modifications to propagate around the world&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;It is possible to skip web redirection and set the A record value to point directly to a &lt;a class="reference external" href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages"&gt;GitHub address&lt;/a&gt; but at the loss of &lt;em&gt;dynamic traffic management&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-5-custom-404"&gt;
+&lt;h2&gt;Step 5 - Custom 404&lt;/h2&gt;
+&lt;p&gt;Configuring a custom domain allows the option of using a &lt;a class="reference external" href="https://help.github.com/articles/custom-404-pages"&gt;custom 404 page&lt;/a&gt;. Simply create a &lt;tt class="docutils literal"&gt;404.html&lt;/tt&gt; file in the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;gh-pages&lt;/span&gt;&lt;/tt&gt; root.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="git"></category><category term="web"></category><category term="pelican"></category></entry><entry><title>Build a blog using the Pelican static site generator</title><link href="http://www.circuidipity.com/pelican.html" rel="alternate"></link><updated>2014-02-06T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-02-06:pelican.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://docs.getpelican.com/en/3.3.0/"&gt;Pelican&lt;/a&gt; is a Python-powered &lt;em&gt;static site generator&lt;/em&gt;. I design the look and layout of this site using CSS and &lt;a class="reference external" href="http://jinja.pocoo.org/docs/"&gt;Jinja2&lt;/a&gt; templates and write my posts as plaintext files using &lt;a class="reference external" href="http://docutils.sourceforge.net/rst.html"&gt;reStructuredText&lt;/a&gt; and Pelican &lt;em&gt;compiles&lt;/em&gt; the contents into HTML output suitable for a blog.&lt;/p&gt;
 &lt;p&gt;I like the idea of creating a static website. Some of the advantages:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;no database required ... plaintext is easy to edit, backup and move around&lt;/li&gt;
@@ -213,7 +313,7 @@ My &lt;span class="ge"&gt;*first*&lt;/span&gt; post using &lt;span class="s"&gt;
 &lt;p&gt;When ready to generate for deployment run ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;(&lt;/span&gt;circuidipity&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;make publish
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;All blog contents are placed in &lt;tt class="docutils literal"&gt;output&lt;/tt&gt; ready to be uploaded to a hosting service. Since everything is static content there are many options available. Previously I used &lt;a class="reference external" href="http://www.circuidipity.com/host-website-on-amazon-s3.html"&gt;Amazon S3&lt;/a&gt; and have now switched to a free &lt;a class="reference external" href="https://github.com/vonbrownie/circuidipity"&gt;project repository hosted on GitHub Pages&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;All blog contents are placed in &lt;tt class="docutils literal"&gt;output&lt;/tt&gt; ready to be uploaded to a hosting service. Since everything is static content there are many options available. Previously I used &lt;a class="reference external" href="http://www.circuidipity.com/host-website-on-amazon-s3.html"&gt;Amazon S3&lt;/a&gt; and have now switched to a free &lt;a class="reference external" href="/github-pages.html"&gt;project repository hosted on GitHub Pages&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Go forth &lt;em&gt;write&lt;/em&gt; and &lt;em&gt;post&lt;/em&gt; and make merry!&lt;/p&gt;
 &lt;/div&gt;
 </summary><category term="pelican"></category><category term="web"></category><category term="python"></category><category term="linux"></category></entry><entry><title>Vimeo and FlashBlock not playing nice on Iceweasel/Firefox</title><link href="http://www.circuidipity.com/flashblock.html" rel="alternate"></link><updated>2014-01-07T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-01-07:flashblock.html</id><summary type="html">&lt;p&gt;Vimeo videos actually are not playing &lt;em&gt;at all&lt;/em&gt; ... neither embedded or on the site itself.&lt;/p&gt;
@@ -466,105 +566,6 @@ Where this [Device Tree implementation] pays off for us, is in the development o
 &lt;li&gt;&lt;a class="reference external" href="http://derekmolloy.ie/gpios-on-the-beaglebone-black-using-device-tree-overlays/"&gt;GPIOs on the BBB using Device Tree Overlays&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://github.com/jadonk/validation-scripts/tree/master/test-capemgr"&gt;Capemgr and Device Tree Overlays&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://beagleboard-gsoc13.blogspot.ca/2013/07/sampling-analogue-signals-using-adc-on.html"&gt;Sampling analog signals using the ADC&lt;/a&gt; on BBB&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-</summary><category term="beaglebone"></category><category term="electronics"></category><category term="angstrom"></category><category term="linux"></category></entry><entry><title>BeagleBone Black: 'Say Hello to My Little LEDs'</title><link href="http://www.circuidipity.com/bbb-led.html" rel="alternate"></link><updated>2013-09-06T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2013-09-06:bbb-led.html</id><summary type="html">&lt;p&gt;Blinking an LED is the 'Hello World' of hardware. &lt;a class="reference external" href="getting-started-with-beaglebone-black.html"&gt;BeagleBone Black's&lt;/a&gt; LEDs can be controlled by the user and the device can be connected with external LEDs.&lt;/p&gt;
-&lt;div class="section" id="built-in-leds"&gt;
-&lt;h2&gt;Built-in LEDs&lt;/h2&gt;
-&lt;p&gt;BBB has 4 onboard LEDs that serve as indicators for various bits of the hardware and their interfaces can be accessed under &lt;tt class="docutils literal"&gt;/sys/class/leds&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ls /sys/class/leds/
-beaglebone:green:usr0  beaglebone:green:usr1  beaglebone:green:usr2  beaglebone:green:usr3
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The blinking 'heartbeat' LED that indicates BBB is alive and well is &lt;tt class="docutils literal"&gt;beaglebone:green:usr0&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## &amp;#39;trigger&amp;#39; determines what event is monitored&lt;/span&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;ls /sys/class/leds/beaglebone&lt;span class="se"&gt;\:&lt;/span&gt;green&lt;span class="se"&gt;\:&lt;/span&gt;usr0/
-brightness  device  max_brightness  power  subsystem  trigger  uevent
-&lt;span class="nv"&gt;$ &lt;/span&gt;cat /sys/class/leds/beaglebone&lt;span class="se"&gt;\:&lt;/span&gt;green&lt;span class="se"&gt;\:&lt;/span&gt;usr0/trigger
-none nand-disk mmc0 mmc1 timer oneshot &lt;span class="o"&gt;[&lt;/span&gt;heartbeat&lt;span class="o"&gt;]&lt;/span&gt; backlight gpio cpu0 default-on transient
-
-&lt;span class="c"&gt;## stop the heart&lt;/span&gt;
-&lt;span class="c"&gt;# echo none &amp;gt; /sys/class/leds/beaglebone\:green\:usr0/trigger&lt;/span&gt;
-
-&lt;span class="c"&gt;## turn LED on (no blinking)&lt;/span&gt;
-&lt;span class="c"&gt;# echo none &amp;gt; /sys/class/leds/beaglebone\:green\:usr0/trigger&lt;/span&gt;
-&lt;span class="c"&gt;# echo 1 &amp;gt; /sys/class/leds/beaglebone\:green\:usr0/brightness&lt;/span&gt;
-
-&lt;span class="c"&gt;## strobe LED (get BeagleBone&amp;#39;s heart racing at 20 &amp;#39;beats&amp;#39; per second)&lt;/span&gt;
-&lt;span class="c"&gt;# echo timer &amp;gt; /sys/class/leds/beaglebone\:green\:usr0/trigger&lt;/span&gt;
-&lt;span class="c"&gt;# echo 25 &amp;gt; /sys/class/leds/beaglebone\:green\:usr0/delay_off&lt;/span&gt;
-&lt;span class="c"&gt;# echo 25 &amp;gt; /sys/class/leds/beaglebone\:green\:usr0/delay_on&lt;/span&gt;
-
-&lt;span class="c"&gt;## *whew* ... restore default heartbeat&lt;/span&gt;
-&lt;span class="c"&gt;# echo heartbeat &amp;gt; /sys/class/leds/beaglebone\:green\:usr0/trigger&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="how-to-use-the-gpio-pins"&gt;
-&lt;h2&gt;How to Use the GPIO Pins&lt;/h2&gt;
-&lt;p&gt;BeagleBone Black has 65 &lt;em&gt;General Purpose Input/Output (GPIO)&lt;/em&gt; pins distributed on the board's P8 and P9 headers. These software-controlled pins can be configured to work with external hardware and are accessed through the Linux kernel's GPIO interfaces under &lt;tt class="docutils literal"&gt;/sys/class/gpio&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ls /sys/class/gpio/
-&lt;span class="nb"&gt;export      &lt;/span&gt;gpiochip0  gpiochip32  gpiochip64  gpiochip96  unexport
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;What can be confusing at first glance is that a pin's number on the BeagleBone header and its GPIO number are different. Each &lt;tt class="docutils literal"&gt;gpiochipX&lt;/tt&gt; controls 32 pins and is used to calculate the GPIO address of a pin (some of the GPIO pins are dedicated to BBB's onboard hardware and unavailable by default).&lt;/p&gt;
-&lt;p&gt;Example: Pin &lt;tt class="docutils literal"&gt;P8_12&lt;/tt&gt; is controlled by &lt;tt class="docutils literal"&gt;gpio1[12]&lt;/tt&gt; which translates as pin 12 on the second controller (starting from zero) ... (32 * 1) + 12 = 44. To &lt;em&gt;add&lt;/em&gt; a pin for use I map GPIO_44 into the filesystem by echoing its pin number to the GPIO &lt;tt class="docutils literal"&gt;export&lt;/tt&gt; file ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# echo 44 &amp;gt; /sys/class/gpio/export&lt;/span&gt;
-&lt;span class="c"&gt;# ls /sys/class/gpio/&lt;/span&gt;
-&lt;span class="nb"&gt;export      &lt;/span&gt;gpio44  gpiochip0  gpiochip32  gpiochip64  gpiochip96  unexport
-&lt;span class="c"&gt;# ls /sys/class/gpio/gpio44/&lt;/span&gt;
-active_low  direction  edge  power  subsystem  uevent  value
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and a new &lt;tt class="docutils literal"&gt;gpio44&lt;/tt&gt; directory is created and the pin is available for work.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="breadboard-blinking-led"&gt;
-&lt;h2&gt;Breadboard Blinking LED&lt;/h2&gt;
-&lt;img alt="BBB and Breadboard" src="images/bbb-ledzilla.jpg" /&gt;
-&lt;p&gt;For my external LED experiment I use:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;red LED&lt;/li&gt;
-&lt;li&gt;breadboard&lt;/li&gt;
-&lt;li&gt;470 ohm resistor&lt;/li&gt;
-&lt;li&gt;2 jumper wires&lt;/li&gt;
-&lt;li&gt;penguin (optional)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Header pins &lt;tt class="docutils literal"&gt;P8_1&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;P8_2&lt;/tt&gt; are both &lt;tt class="docutils literal"&gt;GND&lt;/tt&gt;. Connect &lt;tt class="docutils literal"&gt;P8_2&lt;/tt&gt; to the LED cathode and our newly-enabled &lt;tt class="docutils literal"&gt;GPIO_44&lt;/tt&gt; pin (&lt;tt class="docutils literal"&gt;P8_12&lt;/tt&gt;) to the LED anode.&lt;/p&gt;
-&lt;p&gt;To turn the LED on and off I input settings HIGH and LOW ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## ON&lt;/span&gt;
-&lt;span class="c"&gt;# echo high &amp;gt; /sys/class/gpio/gpio44/direction&lt;/span&gt;
-&lt;span class="c"&gt;## OFF&lt;/span&gt;
-&lt;span class="c"&gt;# echo low &amp;gt; /sys/class/gpio/gpio44/direction&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I created a tiny shell script to blink the LED ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/sh&lt;/span&gt;
-&lt;span class="c"&gt;# Blink an LED on breadboard&lt;/span&gt;
-
-&lt;span class="nv"&gt;PIN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;44&amp;quot;&lt;/span&gt; &lt;span class="c"&gt;# P8_12 is gpio1[12] = (32 * 1) + 12 = 44&lt;/span&gt;
-&lt;span class="nv"&gt;GPIOPIN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/sys/class/gpio/gpio$PIN&amp;quot;&lt;/span&gt;
-
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -d &lt;span class="s2"&gt;&amp;quot;$GPIOPIN&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;; &lt;span class="k"&gt;then&lt;/span&gt;
-&lt;span class="k"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Blinking LED connected to Pin $PIN ...&amp;quot;&lt;/span&gt;
-&lt;span class="k"&gt;else&lt;/span&gt;
-&lt;span class="k"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$PIN&lt;/span&gt; &amp;gt; /sys/class/gpio/export
-    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Blinking LED connected to Pin $PIN ...&amp;quot;&lt;/span&gt;
-    sleep 1
-&lt;span class="k"&gt;fi&lt;/span&gt;
-
-&lt;span class="k"&gt;while &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;; &lt;span class="k"&gt;do&lt;/span&gt;
-&lt;span class="k"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;echo &lt;/span&gt;high &amp;gt; &lt;span class="nv"&gt;$GPIOPIN&lt;/span&gt;/direction
-    sleep 2
-    &lt;span class="nb"&gt;echo &lt;/span&gt;low &amp;gt; &lt;span class="nv"&gt;$GPIOPIN&lt;/span&gt;/direction
-    sleep 2
-&lt;span class="k"&gt;done&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-C&lt;/span&gt;&lt;/tt&gt; to kill the script.&lt;/p&gt;
-&lt;p&gt;To &lt;em&gt;remove&lt;/em&gt; a GPIO pin from use simply &lt;tt class="docutils literal"&gt;unexport&lt;/tt&gt; the pin ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# echo 44 &amp;gt; /sys/class/gpio/unexport&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="helpful-resources"&gt;
-&lt;h2&gt;Helpful Resources&lt;/h2&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Linux Kernel &lt;a class="reference external" href="https://www.kernel.org/doc/Documentation/gpio.txt"&gt;GPIO Interfaces&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Adafruit's &lt;a class="reference external" href="http://learn.adafruit.com/blinking-an-led-with-beaglebone-black/overview"&gt;Blinking an LED with BBB&lt;/a&gt; tutorial using Python&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://derekmolloy.ie/tag/beaglebone-black/"&gt;Derek Molloy's&lt;/a&gt; tables for the &lt;a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true"&gt;P8&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true"&gt;P9&lt;/a&gt; header pins&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 </summary><category term="beaglebone"></category><category term="electronics"></category><category term="angstrom"></category><category term="linux"></category></entry></feed>
