@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-02-08T00:00:00-05:00</updated><entry><title>Host a blog on GitHub Pages</title><link href="http://www.circuidipity.com/github-pages.html" rel="alternate"></link><updated>2014-02-08T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-02-08:github-pages.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://pages.github.com/"&gt;GitHub Pages&lt;/a&gt; is a free web hosting service for projects composed of static files (i.e no database). Combine a Pages &lt;em&gt;repository&lt;/em&gt; with &lt;tt class="docutils literal"&gt;git&lt;/tt&gt; version control and a &lt;em&gt;static site generator&lt;/em&gt; like &lt;a class="reference external" href="/pelican.html"&gt;Pelican&lt;/a&gt; and you have one awesome toolset to build a website.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-02-10T00:00:00-05:00</updated><entry><title>Easy 8-bit pixel images</title><link href="http://www.circuidipity.com/easy-8-bit-pixel-images.html" rel="alternate"></link><updated>2014-02-10T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-02-10:easy-8-bit-pixel-images.html</id><summary type="html">&lt;img alt="wall of pixels" src="/images/wall_of_pixels.jpg" style="width: 910px; height: 450px;" /&gt;
+&lt;p&gt;A simple &lt;a class="reference external" href="http://www.gimp.org"&gt;GIMP&lt;/a&gt; recipe for play at making 8-bit pixel images:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Open image and select &lt;tt class="docutils literal"&gt;Colors &amp;gt; &lt;span class="pre"&gt;Brightness-Contrast&lt;/span&gt; &amp;gt; Contrast&lt;/tt&gt; to increase contrast&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;Image &amp;gt; Scale Image &amp;gt; 10%&amp;nbsp; Interpolation: None&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;Image &amp;gt; Scale Image &amp;gt; 400%&amp;nbsp; Interpolation: None&lt;/tt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Manipulate the scale image settings to increase/decrease pixelation to satisfaction.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+</summary><category term="gimp"></category><category term="linux"></category></entry><entry><title>Host a blog on GitHub Pages</title><link href="http://www.circuidipity.com/github-pages.html" rel="alternate"></link><updated>2014-02-08T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-02-08:github-pages.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://pages.github.com/"&gt;GitHub Pages&lt;/a&gt; is a free web hosting service for projects composed of static files (i.e no database). Combine a Pages &lt;em&gt;repository&lt;/em&gt; with &lt;tt class="docutils literal"&gt;git&lt;/tt&gt; version control and a &lt;em&gt;static site generator&lt;/em&gt; like &lt;a class="reference external" href="/pelican.html"&gt;Pelican&lt;/a&gt; and you have one awesome toolset to build a website.&lt;/p&gt;
 &lt;p&gt;This is how I configured GitHub Pages to host &lt;em&gt;Circuidipity&lt;/em&gt;.&lt;/p&gt;
 &lt;div class="section" id="step-0-install-git"&gt;
 &lt;h2&gt;Step 0 - Install git&lt;/h2&gt;
@@ -489,83 +498,4 @@ $ sudo apt-get update &amp;amp;&amp;amp; sudo apt-get install openjdk-7-jre avr-
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i arduino_VERSION_all.deb
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Connect the Uno to a computer via USB, open the Arduino IDE and confirm that the port setting is properly set to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Tools-&amp;gt;Serial&lt;/span&gt; &lt;span class="pre"&gt;Port-&amp;gt;/dev/ttyACM0&lt;/span&gt;&lt;/tt&gt;. Ready to go!&lt;/p&gt;
-</summary><category term="arduino"></category><category term="electronics"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Device Tree and BeagleBone Black</title><link href="http://www.circuidipity.com/bbb-dt.html" rel="alternate"></link><updated>2013-09-08T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2013-09-08:bbb-dt.html</id><summary type="html">&lt;p&gt;In the world of x86 hardware a Linux distribution can ship a generic kernel and expect that it will load necessary drivers and run on a wide range of hardware. ARM embedded devices are a very different experience. Much of the hardware is not detected at boot and this has required creating a customized kernel for each device. &lt;em&gt;Device Tree&lt;/em&gt; is designed to address this shortcoming and the &lt;a class="reference external" href="getting-started-with-beaglebone-black.html"&gt;BeagleBone Black&lt;/a&gt; with its 3.8 kernel is one of the first ARM devices to embrace the new way of doing things.&lt;/p&gt;
-&lt;div class="section" id="device-tree-and-arm"&gt;
-&lt;h2&gt;Device Tree and ARM&lt;/h2&gt;
-&lt;p&gt;Device Tree (DT) support for ARM arrived in the 3.7 kernel (it has existed for years in the PowerPC and SPARC worlds). Basically it is a method for describing the underlying hardware to the Linux kernel so that the required drivers will be loaded.&lt;/p&gt;
-&lt;p&gt;On the BeagleBone Black a &lt;em&gt;device tree source&lt;/em&gt; (dts) file is written that describes a piece of hardware and a &lt;em&gt;device tree compiler&lt;/em&gt; (dtc) transforms the instructions into a &lt;em&gt;device tree blob&lt;/em&gt; (dtb) binary that can be used by the kernel. On the BBB there is a bunch of dtb binaries located in &lt;tt class="docutils literal"&gt;/boot&lt;/tt&gt; that describe the device to the kernel at boot time ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# ls /boot/*.dtb&lt;/span&gt;
-/boot/am335x-bone.dtb           /boot/am335x-tester.dtb    /boot/omap3-evm.dtb       /boot/omap4-panda.dtb
-/boot/am335x-boneblack.dtb  /boot/omap2420-h4.dtb      /boot/omap3-tobi.dtb  /boot/omap4-sdp.dtb
-/boot/am335x-evm.dtb            /boot/omap3-beagle-xm.dtb  /boot/omap4-panda-a4.dtb  /boot/omap4-var-som.dtb
-/boot/am335x-evmsk.dtb          /boot/omap3-beagle.dtb     /boot/omap4-panda-es.dtb  /boot/omap5-evm.dtb
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;By implementing DT on the BeagleBone Black the device can receive and contribute back all the benefits of upstream kernel development and avoid the hassle of maintaining a custom kernel. Developers of expansion boards (known as &lt;em&gt;capes&lt;/em&gt; in BBB lingo) also benefit as Jason Kridner - co-founder of Beagleboard.org - &lt;a class="reference external" href="http://linuxgizmos.com/introducing-the-new-beaglebone-black-kernel/"&gt;points out&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-Where this [Device Tree implementation] pays off for us, is in the development of capes. By standardizing all of the logic in the kernel and providing the device tree information as data files, it becomes rather easy for a new cape developer to simply create a device tree description of their board and provide it to end users without them ever needing to recompile the kernel! As all of this gets documented, cape development is being greatly simplified and few cape developers should ever have to touch a line of code and end-users should rarely need to change their kernel binary itself based on simply using new capes.&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;div class="section" id="overlays"&gt;
-&lt;h2&gt;Overlays&lt;/h2&gt;
-&lt;p&gt;BBB also introduced the idea of &lt;em&gt;Device Tree Overlays&lt;/em&gt;. Overlays allow the device tree that was accessed by the kernel at boot to be modified afterwards in userspace. If a new piece of hardware like a cape is added to BBB or the onboard header pins are initialized/re-configured an overlay can enable the modifications without having to reboot. On the default &lt;em&gt;Angstrom&lt;/em&gt; Linux that ships with BBB there is a bunch of DT overlays already created and available for use in &lt;tt class="docutils literal"&gt;/lib/firmware&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;A &lt;em&gt;cape manager&lt;/em&gt; has been implemented to load and (in theory) unload overlays and &lt;em&gt;slots&lt;/em&gt; is its interface and can show us what is currently loaded ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cat /sys/devices/bone_capemgr.8/slots
-0: 54:PF---
-1: 55:PF---
-2: 56:PF---
-3: 57:PF---
-4: ff:P-O-L Bone-LT-eMMC-2G,00A0,Texas Instrument,BB-BONE-EMMC-2G
-5: ff:P-O-L Bone-Black-HDMI,00A0,Texas Instrument,BB-BONELT-HDMI
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;By default the onboard storage and HDMI interface are loaded as &lt;em&gt;virtual capes&lt;/em&gt; and there are free slots for adding up to 4 additional physical capes.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="analog-inputs"&gt;
-&lt;h2&gt;Analog Inputs&lt;/h2&gt;
-&lt;p&gt;An example of overlays in action is loading the BeagleBone Black's analog inputs and making the pins available for use. We use the SLOTS interface a lot so export the location to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.profile&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# export SLOTS=/sys/devices/bone_capemgr.*/slots&lt;/span&gt;
-&lt;span class="c"&gt;# echo &amp;#39;export SLOTS=/sys/devices/bone_capemgr.*/slots&amp;#39; &amp;gt;&amp;gt; ~/.profile&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;BBB has a pre-configured DT overlay &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;BB-ADC-00A0.dtbo&lt;/span&gt;&lt;/tt&gt; for analog pins. Load the overlay (omitting the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-00A0.dtbo&lt;/span&gt;&lt;/tt&gt; bit) and see that $SLOTS registers a new cape and the kernel detects new hardware ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# echo BB-ADC &amp;gt; $SLOTS&lt;/span&gt;
-&lt;span class="c"&gt;# cat $SLOTS&lt;/span&gt;
-0: 54:PF---
-1: 55:PF---
-2: 56:PF---
-3: 57:PF---
-4: ff:P-O-L Bone-LT-eMMC-2G,00A0,Texas Instrument,BB-BONE-EMMC-2G
-5: ff:P-O-L Bone-Black-HDMI,00A0,Texas Instrument,BB-BONELT-HDMI
-7: ff:P-O-L Override Board Name,00A0,Override Manuf,BB-ADC
-&lt;span class="c"&gt;# dmesg&lt;/span&gt;
-...
-&lt;span class="o"&gt;[&lt;/span&gt;37166.391913&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: part_number &lt;span class="s1"&gt;&amp;#39;BB-ADC&amp;#39;&lt;/span&gt;, version &lt;span class="s1"&gt;&amp;#39;N/A&amp;#39;&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;37166.392100&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: slot &lt;span class="c"&gt;#7: generic override&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;37166.392151&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: bone: Using override eeprom data at slot 7
-&lt;span class="o"&gt;[&lt;/span&gt;37166.392204&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: slot &lt;span class="c"&gt;#7: &amp;#39;Override Board Name,00A0,Override Manuf,BB-ADC&amp;#39;&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;37166.392478&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: slot &lt;span class="c"&gt;#7: Requesting part number/version based &amp;#39;BB-ADC-00A0.dtbo&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;37166.392536&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: slot &lt;span class="c"&gt;#7: Requesting firmware &amp;#39;BB-ADC-00A0.dtbo&amp;#39; for board-name &amp;#39;Override Board Name&amp;#39;, version &amp;#39;00A0&amp;#39;&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;37166.392605&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: slot &lt;span class="c"&gt;#7: dtbo &amp;#39;BB-ADC-00A0.dtbo&amp;#39; loaded; converting to live tree&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;37166.400854&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: slot &lt;span class="c"&gt;#7: #1 overlays&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;37166.423565&lt;span class="o"&gt;]&lt;/span&gt; bone-iio-helper helper.14: ready
-&lt;span class="o"&gt;[&lt;/span&gt;37166.426252&lt;span class="o"&gt;]&lt;/span&gt; bone-capemgr bone_capemgr.8: slot &lt;span class="c"&gt;#7: Applied #1 overlays.&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The analog input pins are now available for use.&lt;/p&gt;
-&lt;p&gt;Example: If you connect a photoresistor to BBB's &lt;tt class="docutils literal"&gt;P9_32(1.8V)&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;P9_34(AGND)&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;P9_36(AIN5)&lt;/tt&gt; pins you can measure light levels in &lt;tt class="docutils literal"&gt;/sys/devices/ocp.2/helper.14/AIN5&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/sys/devices/ocp.2/44e0d000.tscadc/tiadc/iio\:device0/in_voltage5_raw&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Our BB-ADC dtbo above resides in slot 7. To unload we would run &lt;tt class="docutils literal"&gt;echo &lt;span class="pre"&gt;-7&lt;/span&gt; &amp;gt; $SLOTS&lt;/tt&gt;.&lt;/p&gt;
-&lt;div class="warning"&gt;
-&lt;p class="first admonition-title"&gt;Warning&lt;/p&gt;
-&lt;p class="last"&gt;Unloading from $SLOTS is currently very unstable and can induce kernel panics. Much safer to simply reboot.&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;To have this overlay load at boot time we add the option &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;capemgr.enable_partno=BB-ADC&lt;/span&gt;&lt;/tt&gt; to the &lt;tt class="docutils literal"&gt;uEnv.txt&lt;/tt&gt; file located on the &lt;tt class="docutils literal"&gt;/dev/mmcblk0p1&lt;/tt&gt; partition.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="helpful-resources"&gt;
-&lt;h2&gt;Helpful Resources&lt;/h2&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://devicetree.org/Device_Tree_Usage"&gt;Device Tree Usage&lt;/a&gt; and &lt;a class="reference external" href="https://lkml.org/lkml/2012/11/5/615"&gt;Device Tree Overlays&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Adafruit's introduction to the &lt;a class="reference external" href="http://learn.adafruit.com/introduction-to-the-beaglebone-black-device-tree?view=all"&gt;BBB Device Tree&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://elinux.org/BeagleBone_and_the_3.8_Kernel"&gt;BeagleBone and the 3.8 Kernel&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://derekmolloy.ie/tag/beaglebone-black/"&gt;Derek Molloy's&lt;/a&gt; tables for the &lt;a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true"&gt;P8&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/derekmolloy/boneDeviceTree/blob/master/docs/BeagleboneBlackP8HeaderTable.pdf?raw=true"&gt;P9&lt;/a&gt; header pins&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://derekmolloy.ie/gpios-on-the-beaglebone-black-using-device-tree-overlays/"&gt;GPIOs on the BBB using Device Tree Overlays&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://github.com/jadonk/validation-scripts/tree/master/test-capemgr"&gt;Capemgr and Device Tree Overlays&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://beagleboard-gsoc13.blogspot.ca/2013/07/sampling-analogue-signals-using-adc-on.html"&gt;Sampling analog signals using the ADC&lt;/a&gt; on BBB&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-</summary><category term="beaglebone"></category><category term="electronics"></category><category term="angstrom"></category><category term="linux"></category></entry></feed>
+</summary><category term="arduino"></category><category term="electronics"></category><category term="debian"></category><category term="linux"></category></entry></feed>
