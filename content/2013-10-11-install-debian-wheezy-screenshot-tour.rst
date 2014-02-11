@@ -20,103 +20,103 @@ Download a `64-bit <http://ftp.nl.debian.org/debian/dists/testing/main/installer
 Step 1 - Go!
 ============
 
-.. image:: images/wheezyInstall/011.png
+.. image:: images/screenshot/wheezyInstall/011.png
     :align: center
     :alt: Install
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/02.png
+.. image:: images/screenshot/wheezyInstall/02.png
     :align: center
     :alt: Select Language
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/03.png
+.. image:: images/screenshot/wheezyInstall/03.png
     :alt: Select Location
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/04.png
+.. image:: images/screenshot/wheezyInstall/04.png
     :alt: Configure Keyboard
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/05.png
+.. image:: images/screenshot/wheezyInstall/05.png
     :alt: Hostname
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/06.png
+.. image:: images/screenshot/wheezyInstall/06.png
     :alt: Domain
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/07.png
+.. image:: images/screenshot/wheezyInstall/07.png
     :alt: Mirror Country
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/08.png
+.. image:: images/screenshot/wheezyInstall/08.png
     :alt: Mirror archive
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/09.png
+.. image:: images/screenshot/wheezyInstall/09.png
     :alt: Mirror Directory
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/10.png
+.. image:: images/screenshot/wheezyInstall/10.png
     :alt: Proxy
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/11.png
+.. image:: images/screenshot/wheezyInstall/11.png
     :alt: Root password
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/12.png
+.. image:: images/screenshot/wheezyInstall/12.png
     :alt: Verify password
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/13.png
+.. image:: images/screenshot/wheezyInstall/13.png
     :alt: Full Name
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/14.png
+.. image:: images/screenshot/wheezyInstall/14.png
     :alt: Username
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/15.png
+.. image:: images/screenshot/wheezyInstall/15.png
     :alt: User password
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/16.png
+.. image:: images/screenshot/wheezyInstall/16.png
     :alt: Verify password
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/17.png
+.. image:: images/screenshot/wheezyInstall/17.png
     :alt: Select time zone
     :align: center
     :width: 800px
@@ -131,49 +131,49 @@ In the example below we create 3 partitions on the disk:
 * sda2 is a 1GB ``swap`` partition *encrypted* with a *random key* (double the RAM <= 2GB is a good rule of thumb for sizing swap)
 * sda3 uses the remaining space as a ``home`` partition *encrypted* with a *passphrase*
 
-.. image:: images/wheezyInstall/18.png
+.. image:: images/screenshot/wheezyInstall/18.png
     :alt: Partitioning method
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/19.png
+.. image:: images/screenshot/wheezyInstall/19.png
     :alt: Partition disks
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/20.png
+.. image:: images/screenshot/wheezyInstall/20.png
     :alt: Partition table
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/21.png
+.. image:: images/screenshot/wheezyInstall/21.png
     :alt: Free space
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/22.png
+.. image:: images/screenshot/wheezyInstall/22.png
     :alt: New Partition
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/23.png
+.. image:: images/screenshot/wheezyInstall/23.png
     :alt: Partition size
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/24.png
+.. image:: images/screenshot/wheezyInstall/24.png
     :alt: Primary partition
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/25.png
+.. image:: images/screenshot/wheezyInstall/25.png
     :alt: Beginning
     :align: center
     :width: 800px
@@ -183,43 +183,43 @@ In the example below we create 3 partitions on the disk:
 
     Setting *Mount options* to *noatime* decreases write operations and boosts drive speed.
 
-.. image:: images/wheezyInstall/26.png
+.. image:: images/screenshot/wheezyInstall/26.png
     :alt: Partition settings
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/27.png
+.. image:: images/screenshot/wheezyInstall/27.png
     :alt: Free space
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/28.png
+.. image:: images/screenshot/wheezyInstall/28.png
     :alt: New partition
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/29.png
+.. image:: images/screenshot/wheezyInstall/29.png
     :alt: Partition size
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/30.png
+.. image:: images/screenshot/wheezyInstall/30.png
     :alt: Primary partition
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/31.png
+.. image:: images/screenshot/wheezyInstall/31.png
     :alt: Beginning
     :align: center
     :width: 800
     :height: 600px
 
-.. image:: images/wheezyInstall/32.png
+.. image:: images/screenshot/wheezyInstall/32.png
     :alt: Encrypt volume
     :align: center
     :width: 800px
@@ -229,109 +229,109 @@ In the example below we create 3 partitions on the disk:
 
     If the hard disk has not been securely wiped prior to installing Debian (using a utility like `DBAN <multi-boot-usb.html>`_) you may want to configure *Erase data* as *yes*. Note, however, that depending on the size of the disk this operation can last several hours.
 
-.. image:: images/wheezyInstall/33.png
+.. image:: images/screenshot/wheezyInstall/33.png
     :alt: Random key
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/34.png
+.. image:: images/screenshot/wheezyInstall/34.png
     :alt: Free space
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/35.png
+.. image:: images/screenshot/wheezyInstall/35.png
     :alt: New partition
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/36.png
+.. image:: images/screenshot/wheezyInstall/36.png
     :alt: Partition size
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/37.png
+.. image:: images/screenshot/wheezyInstall/37.png
     :alt: Primary partition
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/38.png
+.. image:: images/screenshot/wheezyInstall/38.png
     :alt: Encrypt volume
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/39.png
+.. image:: images/screenshot/wheezyInstall/39.png
     :alt: Passphrase
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/40.png
+.. image:: images/screenshot/wheezyInstall/40.png
     :alt: Configure encrypted volumes
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/41.png
+.. image:: images/screenshot/wheezyInstall/41.png
     :alt: Write changes to disk
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/42.png
+.. image:: images/screenshot/wheezyInstall/42.png
     :alt: Create encrypted volumes
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/43.png
+.. image:: images/screenshot/wheezyInstall/43.png
     :alt: Devices to encrypt
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/44.png
+.. image:: images/screenshot/wheezyInstall/44.png
     :alt: Finish encrypt
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/45.png
+.. image:: images/screenshot/wheezyInstall/45.png
     :alt: Encryption passphrase
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/46.png
+.. image:: images/screenshot/wheezyInstall/46.png
     :alt: Verify passphrase
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/47.png
+.. image:: images/screenshot/wheezyInstall/47.png
     :alt: Configure encrypted volume
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/48.png
+.. image:: images/screenshot/wheezyInstall/48.png
     :alt: Partition settings
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/49.png
+.. image:: images/screenshot/wheezyInstall/49.png
     :alt: Finish partitioning
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/50.png
+.. image:: images/screenshot/wheezyInstall/50.png
     :alt: Write changes to disk
     :align: center
     :width: 800px
@@ -340,7 +340,7 @@ In the example below we create 3 partitions on the disk:
 Step 3 - Install packages and finish up
 =======================================
 
-.. image:: images/wheezyInstall/51.png
+.. image:: images/screenshot/wheezyInstall/51.png
     :alt: Popularity-contest
     :align: center
     :width: 800px
@@ -350,25 +350,25 @@ Step 3 - Install packages and finish up
 
     Select only [*] *Standard system utilities* if you want to start with a minimal foundation (no desktop) to build your own post-install custom Debian configuration.
 
-.. image:: images/wheezyInstall/52.png
+.. image:: images/screenshot/wheezyInstall/52.png
     :alt: Software selection
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/53.png
+.. image:: images/screenshot/wheezyInstall/53.png
     :alt: GRUB
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/54.png
+.. image:: images/screenshot/wheezyInstall/54.png
     :alt: Finish install
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/544.png
+.. image:: images/screenshot/wheezyInstall/544.png
     :alt: GRUB menu
     :align: center
     :width: 800px
@@ -378,13 +378,13 @@ Step 3 - Install packages and finish up
 
     If an encrypted *home* partition was created in Step 2 the system will display a passphrase prompt to unlock the partition.
 
-.. image:: images/wheezyInstall/55.png
+.. image:: images/screenshot/wheezyInstall/55.png
     :alt: Enter encrypt passphrase
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/wheezyInstall/56.png
+.. image:: images/screenshot/wheezyInstall/56.png
     :alt: Login
     :align: center
     :width: 800px
