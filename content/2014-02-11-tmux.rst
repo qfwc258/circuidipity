@@ -1,0 +1,202 @@
+==================
+My tmux cheatsheet
+==================
+
+:slug: tmux
+:tags: tmux, shell, linux, cheatsheet
+
+.. image:: /images/screenshot/tmux_window_pane.png
+    :width: 940px
+    :height: 529px
+    :alt: tmux
+
+`tmux <http://tmux.sourceforge.net/>`_ is a *terminal multiplexer*. What this means is I can take a single terminal window and create multiple *windows* (tabs) and further partition a window into horizontal and vertical *panes*.
+
+Using ``tmux`` I can create terminal sessions with a custom layout of windows / panes / names / running programs, switch between different sessions, and - best of all - *detach* from a session, log out, return later, *re-attach* and find the session layout preserved and programs continuing to run in the interim.
+
+*Example:* I can ``ssh`` into my `home server </linux-home-server.html>`_, start a ``tmux`` session and create multiple windows, run `rtorrent <http://libtorrent.rakshasa.no/>`_ in a window to start seeding a Linux ``iso``, detach from session and server, and return later to find everything in place and the ``iso`` uploading.
+
+*To install:* on Debian run ``sudo apt-get install tmux``.
+
+Commands entered inside a ``tmux`` session are preceded by the key combination ``CTRL-b`` as the default ``PREFIX`` (this can be modified in ``.tmux.conf``).
+
+Helpful Commands
+================
+
+Sessions
+--------
+
+``tmux new -s blogging``
+    start new session with the name *blogging*
+
+``tmux attach -t blogging``
+    attach to a session with the name *blogging*
+
+``tmux ls`` | ``PREFIX`` ``s``
+    show the session list
+
+``PREFIX`` ``(``
+    move to previous session
+
+``PREFIX`` ``)``
+    move to next session
+
+``PREFIX`` ``?``
+    show every *bound key* and the command it runs
+
+``PREFIX`` ``d``
+    detach from session
+
+``tmux kill-session -t blogging``
+    kill session *blogging*
+
+``tmux info``
+    show every session, window, pane, etc...
+
+Windows and Panes
+-----------------
+
+``tmux new -s blogging -n vim``
+    create session *blogging* with a window named *vim*
+
+``PREFIX`` ``c``
+    create window
+
+``PREFIX`` ``,``
+    rename window
+
+``PREFIX`` ``0`` ... ``9``
+    select window by number
+
+``PREFIX`` ``p`` | ``n``
+    previous | next window
+
+``PREFIX`` ``%``
+    arrange panes vertically
+
+``PREFIX`` ``"``
+    arrange panes horizontally
+
+``PREFIX`` ``;``
+    toggle last active pane
+
+``PREFIX`` ``{`` | ``}``
+    swap pane location
+
+``PREFIX`` ``o``
+    cycle through panes
+
+``PREFIX`` ``SPACEBAR``
+    cycle through built-in pane layouts
+    
+``PREFIX`` ``z``
+    toggle pane zoom
+    
+``PREFIX`` ``!``
+    convert pane into a window
+
+``PREFIX`` ``x``
+    close pane
+
+``PREFIX`` ``&``
+    close current window ... if last window the session terminates
+
+Command Mode
+------------
+
+``PREFIX`` ``:``
+    enter command mode
+
+Copy Mode
+---------
+
+``PREFIX`` ``[``
+    enter copy mode
+
+``g`` | ``G``
+    top | bottom of buffer
+
+``h`` | ``j`` | ``k`` | ``l``
+    move cursor left | down | up | right (in vi mode)
+
+``w`` | ``b``
+    move cursor forward | backward one word at a time (in vi mode)
+
+``?`` | ``n`` | ``N``
+    search for *keyword* | next occurance | previous occurance
+
+``SPACEBAR`` | ``ENTER``
+    start copy | stop copy
+
+``PREFIX`` ``]``
+    paste contents of buffer_0
+
+``ENTER``
+    exit copy mode
+
+**Inside command mode ...**
+
+``show-buffer``
+    display buffer_0 contents
+
+``capture-pane``
+    copy entire visible contents of pane to a buffer
+
+``list-buffers``
+    list all buffers
+
+``choose-buffer``
+    list all buffers and paste selected buffer
+
+``save-buffer log.txt``
+    save buffer contents to *log.txt*
+
+``delete-buffer −b 4``
+    delete *buffer_4*
+
+Configure
+=========
+
+Customize ``tmux`` by creating a ``~/.tmux.conf`` configuration file. Different key combinations, colours, items running in the status bar, activity alerts can be configured with ``command`` ``OPTION`` ...
+
+``set -g OPTION``
+    set OPTION for all tmux sessions
+``setw -g OPTION``
+    set OPTION for all windows
+``setw -g mode-keys vi``
+    use vi keys in buffer
+``unbind KEY``
+    release default KEY for user customization
+``bind KEY OPTION``
+    bind KEY to OPTION
+
+*Example:* My own `.tmux.conf <https://github.com/vonbrownie/linux-home-config/blob/master/.tmux.conf>`_ configuration.
+
+Layouts
+=======
+
+Pre-configured layouts can be created to batch together ``tmux`` options for custom work environments. Such options might include ...
+
+``source-file ~/.tmux.conf``
+    import settings from my default config
+
+``new-window -t development``
+    create new window in the *development* session
+
+``split-window -v -t development``
+    arrange panes vertically inside a window in *development*
+
+``send-keys -t development:1.0 'vim' C-m``
+    in *development* run ``vim`` in window_1 pane_0 and ``C-m`` sends the Carriage Return sequence
+
+*Example:* I created a `default.conf <https://github.com/vonbrownie/tmux-scripts/blob/master/default.conf>`_ to outline my standard ``tmux`` session layout and a simple launcher to create / attach sessions that source the file ...
+
+.. code-block:: bash
+
+    #!/bin/bash                                                                        
+    # Launch/attach tmux session with $CONFIG                                          
+    CONFIG="$HOME/doc/code/tmux_scripts/default.conf"                                  
+                                                                                       
+    tmux -f $CONFIG attach
+
+Check out ``man tmux`` for *lots* more information. Happy hacking!
