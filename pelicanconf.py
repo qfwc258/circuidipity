@@ -61,6 +61,7 @@ GREETING = 'Howdy!'
 LICENCE_NAME = 'BY-NC-SA'
 LICENCE_URL = 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US'
 LICENCE_URL_IMG = 'http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png'
+COPYRIGHT = '2014'
 JINJA_EXTENSIONS = ['jinja2.ext.loopcontrols']
 
 # Social
