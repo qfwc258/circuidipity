@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Daniel Wayne Armstrong</title>
+        <title>Circuidipity | My tmux cheatsheet</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -15,26 +15,17 @@
 <body>
         <!-- content -->
 
-<!-- greeting -->
-<div id="siteheader">
-        <img class="whoami" src="/theme/images/whoami.png" />
-    <div id="sitegreeting">
-<p><span class="whoa">Howdy!</span><br />
-My name is <span class="noWrap"><span class="whoa">Daniel Wayne Armstrong</span></span>.
-I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    </div>
-<!-- menu -->
-    <div id="sitemenu">
-<p><a href="archives.html">Archives</a>
-&nbsp;<a href="feed.xml"><i class="fa fa-rss"></i></a>
-&nbsp;<a href="https://twitter.com/circuidipity"><i class="fa fa-twitter"></i></a>
-&nbsp;<a href="https://github.com/vonbrownie"><i class="fa fa-github-alt"></i></a></p>    </div>
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Tuesday 11 February 2014</p>
 </div>
 
-<!-- latest post -->
-<div id="latestpost">
-        <p class="published"> Tuesday 11 February 2014</p>
-        <h1><a href="http://www.circuidipity.com/tmux.html">My tmux cheatsheet</a></h1>
-        <img alt="tmux" src="/images/screenshot/tmux_window_pane.png" style="width: 940px; height: 529px;" />
+<!-- article -->
+<h1>My tmux cheatsheet</h1>
+<div id="article">
+    <img alt="tmux" src="/images/screenshot/tmux_window_pane.png" style="width: 940px; height: 529px;" />
 <p><a class="reference external" href="http://tmux.sourceforge.net/">tmux</a> is a <em>terminal multiplexer</em>. What this means is I can take a single terminal window and create multiple <em>windows</em> (tabs) and further partition a window into horizontal and vertical <em>panes</em>.</p>
 <p>Using <tt class="docutils literal">tmux</tt> I can create terminal sessions with a custom layout of windows / panes / names / running programs, switch between different sessions, and - best of all - <em>detach</em> from a session, log out, return later, <em>re-attach</em> and find the session layout preserved and programs continuing to run in the interim.</p>
 <p><em>Example:</em> I can <tt class="docutils literal">ssh</tt> into my <a class="reference external" href="/linux-home-server.html">home server</a>, start a <tt class="docutils literal">tmux</tt> session and create multiple windows, run <a class="reference external" href="http://libtorrent.rakshasa.no/">rtorrent</a> in a window to start seeding a Linux <tt class="docutils literal">iso</tt>, detach from session and server, and return later to find everything in place and the <tt class="docutils literal">iso</tt> uploading.</p>
@@ -184,13 +175,18 @@ tmux -f <span class="nv">$CONFIG</span> attach
 <p>Check out <tt class="docutils literal">man tmux</tt> for <em>lots</em> more information. Happy hacking!</p>
 </div>
 
-        <!-- Nav links to previous|next article --> 
-        <div id="navmenu">
-            <hr />
-            <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-                <a href="http://www.circuidipity.com/easy-8-bit-pixel-images.html">
-                Easy 8-bit pixel images</a></p>
-        </div>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-tmux.html">tmux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-cheatsheet.html">cheatsheet</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/easy-8-bit-pixel-images.html">Easy 8-bit pixel images</a></p>
 </div>
 
 
