@@ -277,10 +277,11 @@ All Tags
     white-space: nowrap;
 }
 
-.whoa {
-    font-weight: bold;
-    color: #009900;
-}
+.booktitle, .whoa {color: #009900;}
+
+.booktitle {font-style: italic;}
+
+.whoa {font-weight: bold;}
 
 .note, .warning {
     padding-left: 20px;
