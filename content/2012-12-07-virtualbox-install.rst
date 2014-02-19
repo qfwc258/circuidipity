@@ -56,7 +56,7 @@ Startup your newly-created (clone) Debian guest VM and install ...
 
 Add USERNAME to the ``vboxsf`` group.
 
-Tweak display settings by going to the VM&#39;s ``Machine->Settings...->Display`` and move the slider to add more video memory and enable 3d acceleration.
+Tweak display settings by going to the VM ``Machine->Settings...->Display`` and move the slider to add more video memory and enable 3d acceleration.
 
 .. image:: images/20121207-display.png
     :alt: Display Settings
