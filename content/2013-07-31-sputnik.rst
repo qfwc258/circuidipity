@@ -2,14 +2,14 @@
 It is for those in the future to envy us our Joy
 ================================================
 
-:tags: space
+:tags: space, quote
 :slug: sputnik
 
 .. image:: images/sputnik.jpg
     :alt: Sputnik launch
     :align: right
 
-From the diary of *Dr. Valentin Vassilev, Soviet Academy of Sciences*:
+From the diary of **Dr. Valentin Vassilev**, Soviet Academy of Sciences:
 
 
     | Moments of farewell
