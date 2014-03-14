@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-02-20T00:00:00-05:00</updated><entry><title>The Man In The Arena</title><link href="http://www.circuidipity.com/the-man-in-the-arena.html" rel="alternate"></link><updated>2014-02-20T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-02-20:the-man-in-the-arena.html</id><summary type="html">&lt;p&gt;Excerpt from the speech &amp;quot;Citizenship In A Republic&amp;quot; delivered by &lt;strong&gt;Theodore Roosevelt&lt;/strong&gt; in Paris, France on 23 April 1910:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-03-13T00:00:00-04:00</updated><entry><title>GRUBS Reanimated USB Boot Stick</title><link href="http://www.circuidipity.com/grubs.html" rel="alternate"></link><updated>2014-03-13T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-03-13:grubs.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;GRUBS&lt;/strong&gt; is a Bash script I created for transforming a USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.&lt;/p&gt;
+&lt;p&gt;See: &lt;a class="reference external" href="/multi-boot-usb.html"&gt;Transform a USB stick into a boot device packing multiple Linux distros&lt;/a&gt;&lt;/p&gt;
+&lt;div class="section" id="requirements"&gt;
+&lt;h2&gt;Requirements&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;GRUB2&lt;/tt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="installation"&gt;
+&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;div class="section" id="source"&gt;
+&lt;h3&gt;Source&lt;/h3&gt;
+&lt;p&gt;To install GRUBS from source:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; wget -c https://github.com/vonbrownie/grubs/releases/download/v0.9.0/grubs-0.9.0.tar.gz
+&lt;span class="gp"&gt;$&lt;/span&gt; tar -xvzf grubs-*.tar.gz
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="usage"&gt;
+&lt;h2&gt;Usage&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Step 0:&lt;/strong&gt; Download Linux distro images and place in the &lt;tt class="docutils literal"&gt;iso&lt;/tt&gt; folder.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Step 1:&lt;/strong&gt; Edit the USB stick's sample &lt;tt class="docutils literal"&gt;grub.cfg&lt;/tt&gt; with entries for the Linux images to be copied to the device. Each distro is a little bit different in the manner its booted by GRUB.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Step 2:&lt;/strong&gt; Open &lt;tt class="docutils literal"&gt;grubs&lt;/tt&gt; in a text editor and modify the variables &lt;tt class="docutils literal"&gt;ISODIR&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;CONFIG&lt;/tt&gt; to match where &lt;tt class="docutils literal"&gt;iso&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;grub.cfg&lt;/tt&gt; are located on your system.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Step 3:&lt;/strong&gt; Just run (as root) &lt;tt class="docutils literal"&gt;grubs [DEVICE]&lt;/tt&gt;. For example ... to install GRUB and Linux distros on a USB stick identified as &lt;tt class="docutils literal"&gt;/dev/sdb1&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; sudo grubs sdb1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot, select the USB stick (depending on BIOS settings) as boot device and GRUB will display a menu of the installed Linux distro images. Reboot again and return to using your USB stick as a regular storage device.&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="shell"></category><category term="programming"></category><category term="linux"></category></entry><entry><title>The Man In The Arena</title><link href="http://www.circuidipity.com/the-man-in-the-arena.html" rel="alternate"></link><updated>2014-02-20T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-02-20:the-man-in-the-arena.html</id><summary type="html">&lt;p&gt;Excerpt from the speech &amp;quot;Citizenship In A Republic&amp;quot; delivered by &lt;strong&gt;Theodore Roosevelt&lt;/strong&gt; in Paris, France on 23 April 1910:&lt;/p&gt;
 &lt;blockquote&gt;
 It is not the critic who counts; not the man who points out how the strong man stumbles, or where the doer of deeds could have done them better. The credit belongs to the man who is actually in the arena, whose face is marred by dust and sweat and blood; who strives valiantly; who errs, who comes short again and again, because there is no effort without error and shortcoming; but who does actually strive to do the deeds; who knows great enthusiasms, the great devotions; who spends himself in a worthy cause; who at the best knows in the end the triumph of high achievement, and who at the worst, if he fails, at least fails while daring greatly, so that his place shall never be with those cold and timid souls who neither know victory nor defeat.&lt;/blockquote&gt;
 </summary><category term="quote"></category></entry><entry><title>Snapshot Debian</title><link href="http://www.circuidipity.com/snapshot-debian.html" rel="alternate"></link><updated>2014-02-15T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-02-15:snapshot-debian.html</id><summary type="html">&lt;p&gt;Debian's &lt;a class="reference external" href="http://snapshot.debian.org/"&gt;snapshot archive&lt;/a&gt; is a collection of every past and current Debian package searchable by name and version number. Perhaps a &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dist-upgrade&lt;/span&gt;&lt;/tt&gt; has messed up a package and a fix is not readily available? It is possible courtesy of this archive to download and install a previous version.&lt;/p&gt;
@@ -504,16 +532,4 @@ My &lt;span class="ge"&gt;*first*&lt;/span&gt; post using &lt;span class="s"&gt;
 &lt;span class="k"&gt;done&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Requires &lt;tt class="docutils literal"&gt;ffmpeg&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;libmp3lame0&lt;/tt&gt;.&lt;/p&gt;
-</summary><category term="programming"></category><category term="shell"></category><category term="linux"></category></entry><entry><title>Multiple instances of nm-applet in Openbox</title><link href="http://www.circuidipity.com/nm-applet-openbox.html" rel="alternate"></link><updated>2013-12-23T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2013-12-23:nm-applet-openbox.html</id><summary type="html">&lt;p&gt;I had commented out my entry for &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.config/openbox/autostart&lt;/span&gt;&lt;/tt&gt; and system was loading &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; from &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/xdg/autostart/nm-applet.desktop&lt;/span&gt;&lt;/tt&gt;. Problem: After updating Openbox there were &lt;em&gt;two&lt;/em&gt; instances of &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; being loaded.&lt;/p&gt;
-&lt;p&gt;In &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/usr/lib/x86_64-linux-gnu/openbox-autostart&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;GLOBALAUTOSTART&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/etc/xdg/openbox/autostart&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;AUTOSTART&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;${XDG_CONFIG_HOME:-&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/.config&lt;span class="s2"&gt;&amp;quot;}/openbox/autostart&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Edited &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/xdg/autostart/nm-applet.desktop&lt;/span&gt;&lt;/tt&gt; to read ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;NotShowIn&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;KDE;GNOME;OPENBOX;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and &lt;em&gt;no&lt;/em&gt; &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; appears when Openbox is loaded. Re-enabled &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; in &lt;tt class="docutils literal"&gt;autostart&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;(&lt;/span&gt;sleep 3 &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; /usr/bin/nm-applet --sm-disable&lt;span class="o"&gt;)&lt;/span&gt; &amp;amp;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... re-started Openbox and now only the desired &lt;em&gt;single&lt;/em&gt; instance of &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-applet&lt;/span&gt;&lt;/tt&gt; is loaded.&lt;/p&gt;
-</summary><category term="openbox"></category><category term="linux"></category></entry></feed>
+</summary><category term="programming"></category><category term="shell"></category><category term="linux"></category></entry></feed>

@@ -24,6 +24,7 @@
 
 <!-- article -->
 <h1>Transform a USB stick into a boot device packing multiple Linux distros</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on 13 March 2014</p>
 <div id="article">
     <p>In 5 easy steps I transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.</p>
 <div class="warning">
@@ -53,6 +54,7 @@
 <h2>Step 3 - Copy Linux images</h2>
 <p>Download and copy Linux ISO images to the newly-created <tt class="docutils literal">iso</tt> folder on the USB stick. For example I have installed on my own USB stick:</p>
 <ul class="simple">
+<li><strong>GRML</strong> - <a class="reference external" href="http://grml.org/download/">Bootable 64-bit Live-CD</a> collection of sysadmin tools based on Debian</li>
 <li><strong>TAILS</strong> - <a class="reference external" href="https://tails.boum.org/about/index.en.html">The Amnesic Incognito Live System</a> - distro focused on user privacy and anonymity</li>
 <li><strong>GParted Live CD</strong> - <a class="reference external" href="http://gparted.sourceforge.net/livecd.php">Graphical partition editor</a> for hard drives</li>
 <li><strong>Ubuntu current and LTS Mini-Installers</strong> - Minimal (approx 25-30MB) <a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD">install disks</a></li>
@@ -82,6 +84,13 @@
 <span class="nb">set </span><span class="nv">menu_color_highlight</span><span class="o">=</span>white/green
 
 <span class="c"># Boot ISOs</span>
+menuentry <span class="s2">&quot;GRML - Friend of the sysadmin&quot;</span> <span class="o">{</span>
+<span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/grml64-full.iso&quot;</span>
+loopback loop <span class="nv">$iso</span>
+<span class="nb">set </span><span class="nv">root</span><span class="o">=(</span>loop<span class="o">)</span>
+configfile /boot/grub/loopback.cfg
+<span class="o">}</span>
+
 menuentry <span class="s2">&quot;TAILS - The Amnesic Incognito Live System&quot;</span> <span class="o">{</span>
     <span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/tails-i386.iso&quot;</span>
     loopback loop <span class="nv">$iso</span>
@@ -137,13 +146,12 @@ menuentry <span class="s2">&quot;Darik&#39;s Boot and Nuke - Hard Disk Wipe&quot
 <p>Save <tt class="docutils literal">grub.cfg</tt> to the USB stick at <tt class="docutils literal">MOUNTPOINT/boot/grub</tt>.</p>
 <p>All done! Reboot, select the USB stick (depending on BIOS settings) as boot device and GRUB will display a menu of the installed Linux distro images. Reboot again and return to using your USB stick as a regular storage device.</p>
 </div>
+<div class="section" id="grubs-reanimated-usb-boot-stick">
+<h2>GRUBS Reanimated USB Boot Stick</h2>
+<p>I made a Bash script called <a class="reference external" href="https://github.com/vonbrownie/grubs">GRUBS</a> that creates multi-boot Linux USB sticks using the above steps and placed it on <a class="reference external" href="https://github.com/vonbrownie/grubs">GitHub</a>.</p>
+</div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-tails.html">tails</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-gparted.html">gparted</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-dban.html">dban</a>
 </p>
 </div>
 
