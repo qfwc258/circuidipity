@@ -13,7 +13,7 @@
 &lt;div class="section" id="source"&gt;
 &lt;h3&gt;Source&lt;/h3&gt;
 &lt;p&gt;To install GRUBS from source:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; wget -c https://github.com/vonbrownie/grubs/releases/download/v0.9.0/grubs-0.9.0.tar.gz
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; wget -c https://github.com/vonbrownie/grubs/releases/download/v0.9.1/grubs-0.9.1.tar.gz
 &lt;span class="gp"&gt;$&lt;/span&gt; tar -xvzf grubs-*.tar.gz
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
