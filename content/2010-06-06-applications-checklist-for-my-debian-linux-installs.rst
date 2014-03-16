@@ -5,7 +5,7 @@ Applications checklist for my Debian Squeeze installs
 :tags: debian, linux
 :slug: applications-checklist-for-my-debian-linux-installs
 
-These are some Linux applications I like to include with a `desktop installation <install-debian-linux-squeeze.html>`_ of Debian Squeeze.
+These are some Linux applications I like to include with a `desktop installation <http://www.circuidipity.com/install-debian-linux-squeeze.html>`_ of Debian Squeeze.
 
 Terminal: rxvt-unicode, tmux
 ----------------------------

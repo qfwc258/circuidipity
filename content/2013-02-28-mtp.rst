@@ -70,4 +70,4 @@ Connect the active tablet (make sure its not in sleep mode) to the computer and 
 
 ... and unmount the device when finished ``sudo umount mtpfs``.
 
-For Android devices other options such as `Airdroid <https://play.google.com/store/apps/details?id=com.sand.airdroid>`_ exist for device storage management over wireless connections that are OS-independent. MTP, though, is useful to setup if you plan to install Android `development tools <adb-fastboot-android.html>`_ and *root* your device.
+For Android devices other options such as `Airdroid <https://play.google.com/store/apps/details?id=com.sand.airdroid>`_ exist for device storage management over wireless connections that are OS-independent. MTP, though, is useful to setup if you plan to install Android `development tools <http://www.circuidipity.com/adb-fastboot-android.html>`_ and *root* your device.

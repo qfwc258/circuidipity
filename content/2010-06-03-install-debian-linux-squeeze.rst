@@ -9,7 +9,7 @@ Happy news! On February 6, 2011 the word came down: "After 24 months of constant
 
 Debian GNU/Linux is the one of the largest and longest-running all-volunteer free software projects in the world. One of the (many) things I like about Debian is how they balance the competing desires of *"ooohhh... shiny!"* vs *stability* in Linux by maintaining 3 different releases of the distribution: ``stable/squeeze``, ``testing/wheezy``, and ``unstable/sid``.
 
-For a recent `home server setup <linux-home-server.html>`_ and laptop installation I chose ``stable``. Bleeding-edge packages are not required and these systems benefit from active security patches and bug fixes while avoiding any potentially disruptive changes in a very solid working environment.
+For a recent `home server setup <http://www.circuidipity.com/linux-home-server.html>`_ and laptop installation I chose ``stable``. Bleeding-edge packages are not required and these systems benefit from active security patches and bug fixes while avoiding any potentially disruptive changes in a very solid working environment.
 
 ``Unstable`` is the staging ground for changes which - if no serious bugs are unearthed - migrate in short order to ``testing``. Which in turn is destined to be "released when its ready" and become the next version of ``stable``. It is even possible to use `backports <http://backports.debian.org/>`_ plus - lightly and with caution - `apt-pinning <http://www.debian.org/doc/manuals/debian-reference/ch02.en.html#_tweaking_candidate_version>`_ to pull packages from different releases and create the perfect mix (as tailored by you) of stability and freshness.
 
@@ -294,13 +294,13 @@ Discover your machine's video card:
 
     There are known issues with some Intel video cards - ``xserver-xorg-video-intel`` - and `KMS <http://wiki.debian.org/KernelModesetting>`_ and the default ``2.6.32 kernel`` in Debian ``stable``.
 
-On my Intel-equipped `netbook <debian-linux-on-the-asus-eeepc-1001p.html>`_ netbook booting from GRUB or starting an X session can result in a black screen. A temporary fix is to edit the booting GRUB entry and add ``acpi=off`` to the kernel line.
+On my Intel-equipped `netbook <http://www.circuidipity.com/debian-linux-on-the-asus-eeepc-1001p.html>`_ netbook booting from GRUB or starting an X session can result in a black screen. A temporary fix is to edit the booting GRUB entry and add ``acpi=off`` to the kernel line.
 
 A more permanent fix is to configure the *backlight* setting in ``/etc/default/grub``.
 
 *Using the proprietary Nvidia driver*
 
-See `Getting Nvidia and Xorg to play nice <getting-nvidia-and-xorg-to-play-nice.html>`_ ... though I think this information might be out-dated. I no longer use an NVIDIA-equipped machine.
+See `Getting Nvidia and Xorg to play nice <http://www.circuidipity.com/getting-nvidia-and-xorg-to-play-nice.html>`_ ... though I think this information might be out-dated. I no longer use an NVIDIA-equipped machine.
 
 Step 4 - Desktop
 ================
@@ -319,4 +319,4 @@ I like `XFCE <http://www.xfce.org/>`_. For a desktop environment complete with f
 Applications
 ------------
 
-My `applications checklist <applications-checklist-for-my-debian-linux-installs.html>`_.
+My `applications checklist <http://www.circuidipity.com/applications-checklist-for-my-debian-linux-installs.html>`_.

@@ -12,7 +12,7 @@ I discovered a cool tool named *Jekyll* that I am now using to generate my websi
 I find the idea of creating a static website very appealing. Some of the advantages:
 
 * everything is stored as plain text files ... easy to edit, backup and move around
-* cheap and easy to host ... I make use of Amazon S3 and its ability to `host static webpages <host-website-on-amazon-s3.html>`_
+* cheap and easy to host ... I make use of Amazon S3 and its ability to `host static webpages <http://www.circuidipity.com/host-website-on-amazon-s3.html>`_
 * easy to maintain and scale ... at the end of the day its straight HTML
 
 .. note::
@@ -28,7 +28,7 @@ Getting Started
 
 Jekyll is powered by the `Ruby <http://www.ruby-lang.org/en/>`_ programming language. You don't need to know Ruby to get started and if the default configuration of Jekyll does what you want you can merrily go off and write your posts without touching the language. But Jekyll can be extended by `downloading plugins <https://github.com/mojombo/jekyll/wiki/Plugins>`_ or rolling your own. Having an opportunity to play with Jekyll for the last week I believe it will be good entry-point for myself to learn programming in general and Ruby in particular.
 
-Last week I `installed Ruby using RVM <install-ruby-on-debian-wheezy-using-rvm.html>`_ and after your Ruby environment is properly configured its a simple matter to `install Jekyll <https://github.com/mojombo/jekyll/wiki/install>`_. Note that Jekyll is a *rendering* engine. Pre-configuration is left in user hands. The documentation quickly guides you through creating default directories and files and its possible to have something up and running in minutes. 
+Last week I `installed Ruby using RVM <http://www.circuidipity.com/install-ruby-on-debian-wheezy-using-rvm.html>`_ and after your Ruby environment is properly configured its a simple matter to `install Jekyll <https://github.com/mojombo/jekyll/wiki/install>`_. Note that Jekyll is a *rendering* engine. Pre-configuration is left in user hands. The documentation quickly guides you through creating default directories and files and its possible to have something up and running in minutes. 
 
 YAML, Liquid, and Markdown
 ==========================

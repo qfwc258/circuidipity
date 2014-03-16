@@ -21,7 +21,7 @@ This is how I built *Circuidipity* using Pelican.
 Install
 =======
 
-I install Pelican and extra tools by creating a *virtual environment* using `virtualenv </python2-and-python3.html>`_ and `pip <https://pypi.python.org/pypi/pip>`_. This allows me to create a sandboxed work area specific to my blog and user separate from my default Python installation (an alternative method in Debian would be to install the ``python-pelican`` package).
+I install Pelican and extra tools by creating a *virtual environment* using `virtualenv <http://www.circuidipity.com/python2-and-python3.html>`_ and `pip <https://pypi.python.org/pypi/pip>`_. This allows me to create a sandboxed work area specific to my blog and user separate from my default Python installation (an alternative method in Debian would be to install the ``python-pelican`` package).
 
 With ``virtualenv`` installed and using my blog as an example ...
 
@@ -267,6 +267,6 @@ When ready to generate for deployment run ...
 
     (circuidipity)$ make publish
 
-All blog contents are placed in ``output`` ready to be uploaded to a hosting service. Since everything is static content there are many options available. Previously I used `Amazon S3 <http://www.circuidipity.com/host-website-on-amazon-s3.html>`_ and have now switched to a free `project repository hosted on GitHub Pages </github-pages.html>`_.
+All blog contents are placed in ``output`` ready to be uploaded to a hosting service. Since everything is static content there are many options available. Previously I used `Amazon S3 <http://www.circuidipity.com/host-website-on-amazon-s3.html>`_ and have now switched to a free `project repository hosted on GitHub Pages <http://www.circuidipity.com/github-pages.html>`_.
 
 Go forth *write* and *post* and make merry!

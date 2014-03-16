@@ -174,6 +174,6 @@ Confirm that video acceleration is actually working ...
 
 .. note::
 
-    For a dual-display configuration - use monitors of different resolutions and combine them into one desktop - give `Twinview <twinview.html>`_ a chance.
+    For a dual-display configuration - use monitors of different resolutions and combine them into one desktop - give `Twinview <http://www.circuidipity.com/twinview.html>`_ a chance.
 
 Good to go!

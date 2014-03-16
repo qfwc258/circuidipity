@@ -5,7 +5,7 @@ Device Tree and BeagleBone Black
 :tags: beaglebone, electronics, angstrom, linux
 :slug: bbb-dt
 
-In the world of x86 hardware a Linux distribution can ship a generic kernel and expect that it will load necessary drivers and run on a wide range of hardware. ARM embedded devices are a very different experience. Much of the hardware is not detected at boot and this has required creating a customized kernel for each device. *Device Tree* is designed to address this shortcoming and the `BeagleBone Black <getting-started-with-beaglebone-black.html>`_ with its 3.8 kernel is one of the first ARM devices to embrace the new way of doing things.
+In the world of x86 hardware a Linux distribution can ship a generic kernel and expect that it will load necessary drivers and run on a wide range of hardware. ARM embedded devices are a very different experience. Much of the hardware is not detected at boot and this has required creating a customized kernel for each device. *Device Tree* is designed to address this shortcoming and the `BeagleBone Black <http://www.circuidipity.com/getting-started-with-beaglebone-black.html>`_ with its 3.8 kernel is one of the first ARM devices to embrace the new way of doing things.
 
 Device Tree and ARM
 ===================

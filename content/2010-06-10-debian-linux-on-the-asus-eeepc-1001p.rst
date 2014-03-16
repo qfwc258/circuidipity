@@ -5,7 +5,7 @@ Debian Linux on the Asus EEEPC 1001P
 :tags: linux, debian
 :slug: debian-linux-on-the-asus-eeepc-1001p
 
-I recently acquired an *Asus EEEPC 1001P-MU17* netbook and replaced the marginal crippled operating system it included with `Debian GNU/Linux <install-debian-linux-squeeze.html>`_.
+I recently acquired an *Asus EEEPC 1001P-MU17* netbook and replaced the marginal crippled operating system it included with `Debian GNU/Linux <http://www.circuidipity.com/install-debian-linux-squeeze.html>`_.
 
 There were a few hiccups during the install... but with the replacement of Debian's default 2.6.32 kernel with a more recent release (currently running kernel 2.6.37) most of the 1001P's hardware is supported by default. Adding a few configuration tweaks makes this one nifty little device!
 
@@ -49,7 +49,7 @@ Function keys
 * Fn+F5 (Brightness down): Works
 * Fn+F6 (Brightness up): Works
 * Fn+F7: Not used
-* Fn+F8: Use `xrandr <big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr.html>`_ in the terminal
+* Fn+F8: Use `xrandr <http://www.circuidipity.com/big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr.html>`_ in the terminal
 * Fn+F9: Not used
 * Fn+F10 (Volume mute): Works
 * Fn+F11 (Volume down): Works
@@ -58,7 +58,7 @@ Function keys
 Step 1 - Install
 ----------------
 
-My `Debian install notes <install-debian-linux-squeeze.html>`_. Specific details concerning the Asus 1001P are noted below.
+My `Debian install notes <http://www.circuidipity.com/install-debian-linux-squeeze.html>`_. Specific details concerning the Asus 1001P are noted below.
 
 Configure BIOS and boot Debian installer
 ----------------------------------------
@@ -69,7 +69,7 @@ Power up and enter the Asus BIOS by pressing the ``F2`` key. Configure for a USB
 * under ``Boot`` ... ensure that 1st boot device is set to ``Removable Device``
 * under ``Boot`` ... ensure that boot booster is ``Disabled``
 
-`Prepare the Debian installer <install-debian-linux-squeeze.html>`_ on a USB stick, attach, and reboot. At the BIOS screen hit ``Esc`` and select USB as boot device.
+`Prepare the Debian installer <http://www.circuidipity.com/install-debian-linux-squeeze.html>`_ on a USB stick, attach, and reboot. At the BIOS screen hit ``Esc`` and select USB as boot device.
 
 Step 2 - Configuration
 ======================

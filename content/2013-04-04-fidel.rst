@@ -5,7 +5,7 @@ Fidel - Find and delete files
 :tags: shell, programming, linux
 :slug: fidel
 
-After writing shell scripts that find files matching NAME and/or TIME parameters and `create tar archives <tartime-find-time-tar.html>`_ or `convert video to audio <video2audio.html>`_ I wanted a script that could find and delete files. Example: *Find all MP4 files modified in the last 7 days, provide a total count, and prompt to confirm file deletion before erasure.*
+After writing shell scripts that find files matching NAME and/or TIME parameters and `create tar archives <http://www.circuidipity.com/tartime-find-time-tar.html>`_ or `convert video to audio <http://www.circuidipity.com/video2audio.html>`_ I wanted a script that could find and delete files. Example: *Find all MP4 files modified in the last 7 days, provide a total count, and prompt to confirm file deletion before erasure.*
 
 In the course of creating a deletion script I ran into a problem that I had overlooked in my earlier scripts. Supplying a *positional parameter* with a NAME and a *wildcard* would have the shell *expand* the parameter before it was passed to the ``find`` command. So for example *shellscript \*.mp4* would expand the *\*.mp4* to all the files in the current directory that ended with that argument and pass those filenames to find. If there were no sub-folders in the directory that needed to be searched this is not a problem ... otherwise the result is that filename expansion prevents recursive search. 
 

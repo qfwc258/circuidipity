@@ -14,7 +14,7 @@ My tmux cheatsheet
 
 Using ``tmux`` I can create terminal sessions with a custom layout of windows / panes / names / running programs, switch between different sessions, and - best of all - *detach* from a session, log out, return later, *re-attach* and find the session layout preserved and programs continuing to run in the interim.
 
-*Example:* I can ``ssh`` into my `home server </linux-home-server.html>`_, start a ``tmux`` session and create multiple windows, run `rtorrent <http://libtorrent.rakshasa.no/>`_ in a window to start seeding a Linux ``iso``, detach from session and server, and return later to find everything in place and the ``iso`` uploading.
+*Example:* I can ``ssh`` into my `home server <http://www.circuidipity.com/linux-home-server.html>`_, start a ``tmux`` session and create multiple windows, run `rtorrent <http://libtorrent.rakshasa.no/>`_ in a window to start seeding a Linux ``iso``, detach from session and server, and return later to find everything in place and the ``iso`` uploading.
 
 *To install:* on Debian run ``sudo apt-get install tmux``.
 

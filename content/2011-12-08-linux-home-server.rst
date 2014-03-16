@@ -205,11 +205,11 @@ I use ``rsync`` to manually backup my main laptop's home partition to a designat
 Web
 ---
 
-Host `multiple domains from one IP address <hosting-multiple-domains-from-one-ip-address-using-apache.html>`_. Suitable for light traffic.
+Host `multiple domains from one IP address <http://www.circuidipity.com/hosting-multiple-domains-from-one-ip-address-using-apache.html>`_. Suitable for light traffic.
 
 Bandwidth available for a home server can be limiting factor. Upload speeds provided by ISPs can be much slower than download speeds. Most things one might want to host on a personal home server can function just fine with this constraint ... but anything beyond light webhosting can quickly run into bandwidth and scalability issues.
 
-After experimenting a bit I ended up moving the handwritten html pages, images, and bits of this website hosted on my netbook server to `Amazon S3 <host-website-on-amazon-s3.html>`_ .
+After experimenting a bit I ended up moving the handwritten html pages, images, and bits of this website hosted on my netbook server to `Amazon S3 <http://www.circuidipity.com/host-website-on-amazon-s3.html>`_ .
 
 Torrent
 -------

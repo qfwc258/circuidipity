@@ -11,7 +11,7 @@ Scripting poses the question *What am I trying to accomplish?* then provides a f
 
 Often I want to share files accumulated over a specific period of time. I thought ... *How about a shell script that would allow me to input a TIME and it would find all files last modified since TIME then copy and bundle them up into a tar archive?* Example: I might want to share with a friend all the photos I have accumulated on my hard drive since we last met 2 weeks ago. All the photos are in my *images* folder but underneath that are scattered among various sub-folders.
 
-Building on what I learned last week creating `dualDisplay <dual-display-xrandr-extended-desktop-configuration.html>`_ I required a script that would:
+Building on what I learned last week creating `dualDisplay <http://www.circuidipity.com/dual-display-xrandr-extended-desktop-configuration.html>`_ I required a script that would:
 
 * allow me to define a period of TIME in *minutes* or *days*
 * use ``find`` to *recursively* match all files last modified since TIME

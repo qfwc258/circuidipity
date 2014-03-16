@@ -12,7 +12,7 @@ This is how I setup Android tools on my laptop running Debian ``sid``.
 Step 0
 ======
 
-Configure Android for `USB debugging <mtp.html>`_ and the host for `MTP <mtp.html>`_. This step confirms host is capable of detecting and mounting the Android device. Because things have changed in the latest Jelly Bean ...
+Configure Android for `USB debugging <http://www.circuidipity.com/mtp.html>`_ and the host for `MTP <http://www.circuidipity.com/mtp.html>`_. This step confirms host is capable of detecting and mounting the Android device. Because things have changed in the latest Jelly Bean ...
 
 Step 1
 ======

@@ -15,7 +15,7 @@ There are 3 *release branches* - ``stable``, ``testing``, and ``unstable`` - and
 Step 0 - Installer
 ==================
 
-Download a `64-bit <http://ftp.nl.debian.org/debian/dists/testing/main/installer-amd64/current/images/netboot/mini.iso>`_  (or `32-bit <http://ftp.nl.debian.org/debian/dists/testing/main/installer-i386/current/images/netboot/mini.iso>`_ for older machines) Debian mini installer and burn the image to a CD or `prepare a USB boot device <multi-boot-usb.html>`_).
+Download a `64-bit <http://ftp.nl.debian.org/debian/dists/testing/main/installer-amd64/current/images/netboot/mini.iso>`_  (or `32-bit <http://ftp.nl.debian.org/debian/dists/testing/main/installer-i386/current/images/netboot/mini.iso>`_ for older machines) Debian mini installer and burn the image to a CD or `prepare a USB boot device <http://www.circuidipity.com/multi-boot-usb.html>`_).
 
 Step 1 - Go!
 ============
@@ -227,7 +227,7 @@ In the example below we create 3 partitions on the disk:
 
 .. note::
 
-    If the hard disk has not been securely wiped prior to installing Debian (using a utility like `DBAN <multi-boot-usb.html>`_) you may want to configure *Erase data* as *yes*. Note, however, that depending on the size of the disk this operation can last several hours.
+    If the hard disk has not been securely wiped prior to installing Debian (using a utility like `DBAN <http://www.circuidipity.com/multi-boot-usb.html>`_) you may want to configure *Erase data* as *yes*. Note, however, that depending on the size of the disk this operation can last several hours.
 
 .. image:: images/screenshot/wheezyInstall/33.png
     :alt: Random key
@@ -392,4 +392,4 @@ Step 3 - Install packages and finish up
 
 Enjoy your fresh Debian!
 
-Add extra packages, stick with ``stable`` or move to ``testing`` or ``unstable`` or maybe setup a `home server <linux-home-server.html>`_?
+Add extra packages, stick with ``stable`` or move to ``testing`` or ``unstable`` or maybe setup a `home server <http://www.circuidipity.com/linux-home-server.html>`_?

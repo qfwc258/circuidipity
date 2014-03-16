@@ -11,7 +11,7 @@ I think I have discovered the secret to learning to  program. Write programs!
 
 OK. Perhaps a bit more explanation. Great programming books and online resources and sample problems are *accelerants* but trying to program a solution to your *own private thing* is the *spark*. Write a bit of code every day that you need and that *pushes* the learning engine ever higher and makes it stutter stop start in the rarified air. Feel the wonderful little jolts to the brain when the code *works*. Then do it *again*. Spark. Code. Repeat.
 
-Building on what I learned last week using the ``find`` command in `tarTime <tartime-find-time-tar.html>`_ I thought ... *How about a shell script that would allow me to find a bunch of videos accumulated over TIME and would copy/convert them to MP3 audio? Or instead of TIME as my search parameter maybe only certain TYPES of video or use both TIME and TYPE*. Example: only convert MP4 videos modified in the last 3 days?
+Building on what I learned last week using the ``find`` command in `tarTime <http://www.circuidipity.com/tartime-find-time-tar.html>`_ I thought ... *How about a shell script that would allow me to find a bunch of videos accumulated over TIME and would copy/convert them to MP3 audio? Or instead of TIME as my search parameter maybe only certain TYPES of video or use both TIME and TYPE*. Example: only convert MP4 videos modified in the last 3 days?
 
 So I wanted to code a shell script that would:
 
@@ -245,4 +245,4 @@ Running ``Video2Audio -h`` displays available options.
 
 This week I learned about *bash arrays*. They allow you to assign multiple values to a variable. I used them twice in this shell script: 1/ to list video FILETYPES for *find*; 2/ to construct a list of NAMES of videos to be converted to audio. Also the find *exec* option is put to good use and trying to get the syntax right for file manipulation is a bit of a puzzle.
 
-But it *works*. I use this script to generate MP3 files and `tarTime <tartime-find-time-tar.html>`_ to bundle them up into a single convenient package.
+But it *works*. I use this script to generate MP3 files and `tarTime <http://www.circuidipity.com/tartime-find-time-tar.html>`_ to bundle them up into a single convenient package.

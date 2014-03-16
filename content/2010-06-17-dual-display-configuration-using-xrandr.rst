@@ -5,7 +5,7 @@ Big screen little screen virtual screen and xrandr
 :tags: linux
 :slug: big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr
 
-Sometimes *less is more*. But sometimes less is just... well... *less*. I love my `little netbook <debian-linux-on-the-asus-eeepc-1001p.html>`_ . But when you have parked yourself somewhere and made yourself comfortable with an espresso and a banana... and portability is no longer a factor... the 10" screen can be a mite limiting.
+Sometimes *less is more*. But sometimes less is just... well... *less*. I love my `little netbook <http://www.circuidipity.com/debian-linux-on-the-asus-eeepc-1001p.html>`_ . But when you have parked yourself somewhere and made yourself comfortable with an espresso and a banana... and portability is no longer a factor... the 10" screen can be a mite limiting.
 
 But that VGA port on the side is there for a reason. Enter ``xrandr``.
 
@@ -15,15 +15,15 @@ No modifications are necessary to ``xorg.conf``. External displays can be hot-pl
 
 .. note::
 
-    For a dual-display configuration using *Nvidia* graphics ... give `Twinview <twinview.html>`_ a go.
+    For a dual-display configuration using *Nvidia* graphics ... give `Twinview <http://www.circuidipity.com/twinview.html>`_ a go.
 
 To setup my desired dual-display layout ... I use:
 
-* `Asus EEEPC 1001P-MU17 <debian-linux-on-the-asus-eeepc-1001p.html>`_ netbook with 10.1" LCD at 1024x600 powered by Intel GMA 3150 integrated video
+* `Asus EEEPC 1001P-MU17 <http://www.circuidipity.com/debian-linux-on-the-asus-eeepc-1001p.html>`_ netbook with 10.1" LCD at 1024x600 powered by Intel GMA 3150 integrated video
 
 * Acer AL2216W 22" LCD at 1680x1050 resolution
 
-* `Debian <install-debian-linux-squeeze.html>`_ with a ``2.6.32-15 kernel``, ``xrandr v1.3.2``, and the `Fluxbox <http://fluxbox.org/>`_ window manager
+* `Debian <http://www.circuidipity.com/install-debian-linux-squeeze.html>`_ with a ``2.6.32-15 kernel``, ``xrandr v1.3.2``, and the `Fluxbox <http://fluxbox.org/>`_ window manager
 
 Running xrandr without any options will dump the state of the outputs, show existing modes for each of them, with a '+' after the preferred mode and a '*' after the current mode.
 
