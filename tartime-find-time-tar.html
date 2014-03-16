@@ -28,7 +28,7 @@
     <p>If you are going to perform some multi-step action on the Linux command line more than once or twice ... why not create a <em>shell script</em>?</p>
 <p>Scripting poses the question <em>What am I trying to accomplish?</em> then provides a framework for sketching a logical flow of operations to make it so. I am discovering it is a fun puzzle trying to get the friendly but simple computer and I to agree on what is logical. End result is a well-tested scripted solution that can be automated out of sight, saves time (or do we just tell ourselves that because its fun?) and reduces error vs manual entry of commands.</p>
 <p>Often I want to share files accumulated over a specific period of time. I thought ... <em>How about a shell script that would allow me to input a TIME and it would find all files last modified since TIME then copy and bundle them up into a tar archive?</em> Example: I might want to share with a friend all the photos I have accumulated on my hard drive since we last met 2 weeks ago. All the photos are in my <em>images</em> folder but underneath that are scattered among various sub-folders.</p>
-<p>Building on what I learned last week creating <a class="reference external" href="dual-display-xrandr-extended-desktop-configuration.html">dualDisplay</a> I required a script that would:</p>
+<p>Building on what I learned last week creating <a class="reference external" href="http://www.circuidipity.com/dual-display-xrandr-extended-desktop-configuration.html">dualDisplay</a> I required a script that would:</p>
 <ul class="simple">
 <li>allow me to define a period of TIME in <em>minutes</em> or <em>days</em></li>
 <li>use <tt class="docutils literal">find</tt> to <em>recursively</em> match all files last modified since TIME</li>

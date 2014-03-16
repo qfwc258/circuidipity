@@ -25,19 +25,19 @@
 <!-- article -->
 <h1>Big screen little screen virtual screen and xrandr</h1>
 <div id="article">
-    <p>Sometimes <em>less is more</em>. But sometimes less is just... well... <em>less</em>. I love my <a class="reference external" href="debian-linux-on-the-asus-eeepc-1001p.html">little netbook</a> . But when you have parked yourself somewhere and made yourself comfortable with an espresso and a banana... and portability is no longer a factor... the 10&quot; screen can be a mite limiting.</p>
+    <p>Sometimes <em>less is more</em>. But sometimes less is just... well... <em>less</em>. I love my <a class="reference external" href="http://www.circuidipity.com/debian-linux-on-the-asus-eeepc-1001p.html">little netbook</a> . But when you have parked yourself somewhere and made yourself comfortable with an espresso and a banana... and portability is no longer a factor... the 10&quot; screen can be a mite limiting.</p>
 <p>But that VGA port on the side is there for a reason. Enter <tt class="docutils literal">xrandr</tt>.</p>
 <p>This nifty command line tool is useful for setting screen size, orientation, mirroring outputs or... my interest... adding an external display and pairing it with my netbook's built-in LCD to create a single <em>virtual</em> desktop. This allows applications to be launched on either display, windows dragged from one display to the next, and window borders will respect the dimensions of whatever display they reside on when maximized.</p>
 <p>No modifications are necessary to <tt class="docutils literal">xorg.conf</tt>. External displays can be hot-plugged to the host and a running X server can be modified by using xrandr + desired options in a terminal.</p>
 <div class="note">
 <p class="first admonition-title">Note</p>
-<p class="last">For a dual-display configuration using <em>Nvidia</em> graphics ... give <a class="reference external" href="twinview.html">Twinview</a> a go.</p>
+<p class="last">For a dual-display configuration using <em>Nvidia</em> graphics ... give <a class="reference external" href="http://www.circuidipity.com/twinview.html">Twinview</a> a go.</p>
 </div>
 <p>To setup my desired dual-display layout ... I use:</p>
 <ul class="simple">
-<li><a class="reference external" href="debian-linux-on-the-asus-eeepc-1001p.html">Asus EEEPC 1001P-MU17</a> netbook with 10.1&quot; LCD at 1024x600 powered by Intel GMA 3150 integrated video</li>
+<li><a class="reference external" href="http://www.circuidipity.com/debian-linux-on-the-asus-eeepc-1001p.html">Asus EEEPC 1001P-MU17</a> netbook with 10.1&quot; LCD at 1024x600 powered by Intel GMA 3150 integrated video</li>
 <li>Acer AL2216W 22&quot; LCD at 1680x1050 resolution</li>
-<li><a class="reference external" href="install-debian-linux-squeeze.html">Debian</a> with a <tt class="docutils literal"><span class="pre">2.6.32-15</span> kernel</tt>, <tt class="docutils literal">xrandr v1.3.2</tt>, and the <a class="reference external" href="http://fluxbox.org/">Fluxbox</a> window manager</li>
+<li><a class="reference external" href="http://www.circuidipity.com/install-debian-linux-squeeze.html">Debian</a> with a <tt class="docutils literal"><span class="pre">2.6.32-15</span> kernel</tt>, <tt class="docutils literal">xrandr v1.3.2</tt>, and the <a class="reference external" href="http://fluxbox.org/">Fluxbox</a> window manager</li>
 </ul>
 <p>Running xrandr without any options will dump the state of the outputs, show existing modes for each of them, with a '+' after the preferred mode and a '*' after the current mode.</p>
 <p>Using my setup as an example... connecting my 22&quot; LCD to my netbook's VGA-port but leaving the external display powered off outputs:</p>
