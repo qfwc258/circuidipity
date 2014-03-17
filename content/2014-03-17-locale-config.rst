@@ -55,7 +55,7 @@ Set default locale
 
 .. code-block:: bash                                                                
                                                                                     
-    $ sudo update-locale LANG=en_US.UTF-8 LANGUAGE=en_CA:en                         
+    $ sudo update-locale LANG=en_CA.UTF-8 LANGUAGE=en_CA:en                         
                                                                                     
 ... and reboot.                                                                     
                                                                                 
