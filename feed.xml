@@ -37,7 +37,7 @@ POSIX
 &lt;/div&gt;
 &lt;div class="section" id="set-default-locale"&gt;
 &lt;h2&gt;Set default locale&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-locale &lt;span class="nv"&gt;LANG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;en_US.UTF-8 &lt;span class="nv"&gt;LANGUAGE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;en_CA:en
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-locale &lt;span class="nv"&gt;LANG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;en_CA.UTF-8 &lt;span class="nv"&gt;LANGUAGE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;en_CA:en
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... and reboot.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;locale
