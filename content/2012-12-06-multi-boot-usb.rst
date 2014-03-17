@@ -4,7 +4,7 @@ Transform a USB stick into a boot device packing multiple Linux distros
 
 :tags: linux
 :slug: multi-boot-usb
-:modified: 13 March 2014
+:modified: 17 March 2014
 
 In 5 easy steps I transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.
 
@@ -45,7 +45,7 @@ Step 3 - Copy Linux images
 
 Download and copy Linux ISO images to the newly-created ``iso`` folder on the USB stick. For example I have installed on my own USB stick:
 
-* **GRML** - `Bootable 64-bit Live-CD <http://grml.org/download/>`_ collection of sysadmin tools based on Debian
+* **GRML** - `Bootable 32|64-bit Live-CD <http://grml.org/download/>`_ collection of sysadmin tools based on Debian
 * **TAILS** - `The Amnesic Incognito Live System <https://tails.boum.org/about/index.en.html>`_ - distro focused on user privacy and anonymity
 * **GParted Live CD** - `Graphical partition editor <http://gparted.sourceforge.net/livecd.php>`_ for hard drives
 * **Ubuntu current and LTS Mini-Installers** - Minimal (approx 25-30MB) `install disks <https://help.ubuntu.com/community/Installation/MinimalCD>`_
@@ -79,10 +79,12 @@ Create a ``grub.cfg`` with entries for the Linux images copied to the USB stick.
 
     # Boot ISOs
     menuentry "GRML - Friend of the sysadmin" {
-    set iso="/iso/grml64-full.iso"
-    loopback loop $iso
-    set root=(loop)
-    configfile /boot/grub/loopback.cfg
+        iso_path="/iso/grml96-full.iso"                                                
+        export iso_path                                                                
+        loopback loop $iso_path                                                        
+        search --set=root --file $iso --no-floppy --fs-uuid                            
+        set root=(loop)                                                                
+        configfile /boot/grub/loopback.cfg                                             
     }
 
     menuentry "TAILS - The Amnesic Incognito Live System" {
