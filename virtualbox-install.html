@@ -58,8 +58,8 @@ vboxdrv               190057  4 vboxnetflt,vboxnetadp,vboxpci
 <span class="nv">$ </span>sudo apt-get install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
 </pre></div>
 <p>Add USERNAME to the <tt class="docutils literal">vboxsf</tt> group.</p>
-<div class="section" id="guest-additions-cd">
-<h3>Guest Additions CD</h3>
+<div class="section" id="optional-guest-additions-cd">
+<h3>Optional: Guest Additions CD</h3>
 <p>Earlier I installed Debian's <tt class="docutils literal"><span class="pre">virtualbox-guest-additions-iso</span></tt> package on HOST. Adding software from this image to GUEST often proves a bit wonky for me. Here is how I get it to work!</p>
 <p>On GUEST edit <tt class="docutils literal">/etc/fstab</tt> adding the <tt class="docutils literal">exec</tt> permission to <tt class="docutils literal">/dev/sr0</tt> ...</p>
 <div class="highlight"><pre>/dev/sr0    /media/cdrom0    udf,iso9660    user,noauto,exec    0 0
