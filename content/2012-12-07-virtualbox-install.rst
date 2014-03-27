@@ -55,8 +55,8 @@ Debian GUEST is a 32-bit VM. Install on GUEST ...
 
 Add USERNAME to the ``vboxsf`` group.
 
-Guest Additions CD
-------------------
+Optional: Guest Additions CD
+----------------------------
 
 Earlier I installed Debian's ``virtualbox-guest-additions-iso`` package on HOST. Adding software from this image to GUEST often proves a bit wonky for me. Here is how I get it to work!
 
