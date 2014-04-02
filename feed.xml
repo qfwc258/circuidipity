@@ -19,7 +19,7 @@
 &lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--restrict-filenames&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
 &lt;dd&gt;removes spaces and non-alphanumeric characters from filename&lt;/dd&gt;
 &lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--extract-audio&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--audio-format&lt;/span&gt; &amp;quot;mp3&amp;quot;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;create an &lt;em&gt;mp3&lt;/em&gt; audio file and delete the video (add &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-k&lt;/span&gt;&lt;/tt&gt; option to save)&lt;/dd&gt;
+&lt;dd&gt;create an &lt;em&gt;mp3&lt;/em&gt; audio file and delete the video (or add the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-k&lt;/span&gt;&lt;/tt&gt; option to save video)&lt;/dd&gt;
 &lt;/dl&gt;
 &lt;p&gt;Reload the config and extract audio from an online video ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt; ~/.bashrc
