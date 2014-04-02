@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-03-31T00:00:00-04:00</updated><entry><title>Stop SHOUTING and convert Caps_Lock into a Super key</title><link href="http://www.circuidipity.com/super-key.html" rel="alternate"></link><updated>2014-03-31T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-03-31:super-key.html</id><summary type="html">&lt;p&gt;For my Openbox &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-config/blob/master/.config/openbox/rc.xml"&gt;rc.xml configuration&lt;/a&gt; I frequently enlist the &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; (Windows) key in creating hotkey combos. Since the &lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt; key is larger, better placed, and rarely used I transformed it into another &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; modifier key. An added bonus is that I can preserve my hotkeys configuration on keyboards lacking a dedicated &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; key (example: my old Thinkpad X31) plus the new Chromebooks have a dedicated &lt;tt class="docutils literal"&gt;Search&lt;/tt&gt; key in the old &lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt; location that by default acts as a &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; key under Linux.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-04-01T00:00:00-04:00</updated><entry><title>Download videos using youtube-dl</title><link href="http://www.circuidipity.com/youtube-dl.html" rel="alternate"></link><updated>2014-04-01T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-04-01:youtube-dl.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://rg3.github.io/youtube-dl/"&gt;youtube-dl&lt;/a&gt; is a cool command-line program for downloading videos from a whole bunch of online video sites. It can also convert videos into audio files (courtesy of &lt;tt class="docutils literal"&gt;ffmpeg&lt;/tt&gt;).&lt;/p&gt;
+&lt;p&gt;To install on Debian (&lt;tt class="docutils literal"&gt;ffmpeg&lt;/tt&gt; requires &lt;a class="reference external" href="http://www.deb-multimedia.org/"&gt;deb-multimedia&lt;/a&gt;) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install youtube-dl rtmpdump ffmpeg
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Basic usage ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;youtube-dl https://www.youtube.com/watch?v&lt;span class="o"&gt;=&lt;/span&gt;SOMEiD
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... will download the best quality copy (default) of the specified video hosted on YouTube to the current directory.&lt;/p&gt;
+&lt;p&gt;To enable audio extraction with a few desirable pre-configured options I create a new &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;youtube-dl-audio&lt;/span&gt;&lt;/tt&gt; alias in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bashrc&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;youtube-dl-audio&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;youtube-dl $1 --output &amp;quot;$HOME/audio/%(title)s-%(upload_date)s.%(ext)s&amp;quot; --restrict-filenames --extract-audio --audio-format &amp;quot;mp3&amp;quot;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... using these options ...&lt;/p&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;$1&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;video URL&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--output&lt;/span&gt; &lt;span class="pre"&gt;&amp;quot;$HOME/audio/%(title)s-%(upload_date)s.%(ext)s&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;save file to &lt;em&gt;$HOME/audio/&lt;/em&gt; and rename the file using the template &lt;em&gt;%(title)s-%(upload_date)s.%(ext)s&lt;/em&gt;&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--restrict-filenames&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;removes spaces and non-alphanumeric characters from filename&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--extract-audio&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--audio-format&lt;/span&gt; &amp;quot;mp3&amp;quot;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;create an &lt;em&gt;mp3&lt;/em&gt; audio file and delete the video (add &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-k&lt;/span&gt;&lt;/tt&gt; option to save)&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;Reload the config and extract audio from an online video ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt; ~/.bashrc
+&lt;span class="nv"&gt;$ &lt;/span&gt;youtube-dl-audio https://www.youtube.com/watch?v&lt;span class="o"&gt;=&lt;/span&gt;SOMEiD
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;See &lt;tt class="docutils literal"&gt;man &lt;span class="pre"&gt;youtube-dl&lt;/span&gt;&lt;/tt&gt; for more possibilities!&lt;/p&gt;
+&lt;p&gt;Source: &lt;em&gt;Thanks Paul!&lt;/em&gt;&lt;/p&gt;
+</summary><category term="shell"></category><category term="linux"></category></entry><entry><title>Stop SHOUTING and convert Caps_Lock into a Super key</title><link href="http://www.circuidipity.com/super-key.html" rel="alternate"></link><updated>2014-03-31T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-03-31:super-key.html</id><summary type="html">&lt;p&gt;For my Openbox &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-config/blob/master/.config/openbox/rc.xml"&gt;rc.xml configuration&lt;/a&gt; I frequently enlist the &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; (Windows) key in creating hotkey combos. Since the &lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt; key is larger, better placed, and rarely used I transformed it into another &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; modifier key. An added bonus is that I can preserve my hotkeys configuration on keyboards lacking a dedicated &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; key (example: my old Thinkpad X31) plus the new Chromebooks have a dedicated &lt;tt class="docutils literal"&gt;Search&lt;/tt&gt; key in the old &lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt; location that by default acts as a &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; key under Linux.&lt;/p&gt;
 &lt;p&gt;&lt;tt class="docutils literal"&gt;xev&lt;/tt&gt; is a neat utility run in the terminal that allows one to press keys and outputs the corresponding &lt;em&gt;keycode&lt;/em&gt;. The &lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt; key is &lt;tt class="docutils literal"&gt;Keycode 66&lt;/tt&gt;. Create/edit &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/home/USER/.xmodmap&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;! Clear the caps_lock key binding
 clear lock
@@ -363,221 +391,4 @@ It is compiled by &lt;span class="s"&gt;`Pelican &lt;/span&gt;&lt;span class="si
 &lt;p&gt;Configuring a custom domain allows the option of using a &lt;a class="reference external" href="https://help.github.com/articles/custom-404-pages"&gt;custom 404 page&lt;/a&gt;. Simply create a &lt;tt class="docutils literal"&gt;404.html&lt;/tt&gt; file in the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;gh-pages&lt;/span&gt;&lt;/tt&gt; root.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="git"></category><category term="web"></category><category term="pelican"></category></entry><entry><title>Build a blog using the Pelican static site generator</title><link href="http://www.circuidipity.com/pelican.html" rel="alternate"></link><updated>2014-02-06T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-02-06:pelican.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://docs.getpelican.com/en/3.3.0/"&gt;Pelican&lt;/a&gt; is a Python-powered &lt;em&gt;static site generator&lt;/em&gt;. I design the look and layout of this site using CSS and &lt;a class="reference external" href="http://jinja.pocoo.org/docs/"&gt;Jinja2&lt;/a&gt; templates and write my posts as plaintext files using &lt;a class="reference external" href="http://docutils.sourceforge.net/rst.html"&gt;reStructuredText&lt;/a&gt; and Pelican &lt;em&gt;compiles&lt;/em&gt; the contents into HTML output suitable for a blog.&lt;/p&gt;
-&lt;p&gt;I like the idea of creating a static website. Some of the advantages:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;no database required ... plaintext is easy to edit, backup and move around&lt;/li&gt;
-&lt;li&gt;plaintext allows your choice of editor ... I am learning &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;cheap and easy to host practically anywhere ... one option: &lt;a class="reference external" href="http://pages.github.com/"&gt;GitHub Pages&lt;/a&gt; is a free service for hosting static HTML content&lt;/li&gt;
-&lt;li&gt;no database or excutable code makes a website easy to secure, maintain and scale&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The traditional disadvantage to using static pages for a blog has been the lack of dynamic elements - hosting feeds, user comments - but JavaScript for things like a Twitter widget to provide real-time updates and out-sourced services like Disqus for commenting are possible alternatives to work around static limitations.&lt;/p&gt;
-&lt;p&gt;This is how I built &lt;em&gt;Circuidipity&lt;/em&gt; using Pelican.&lt;/p&gt;
-&lt;div class="section" id="install"&gt;
-&lt;h2&gt;Install&lt;/h2&gt;
-&lt;p&gt;I install Pelican and extra tools by creating a &lt;em&gt;virtual environment&lt;/em&gt; using &lt;a class="reference external" href="http://www.circuidipity.com/python2-and-python3.html"&gt;virtualenv&lt;/a&gt; and &lt;a class="reference external" href="https://pypi.python.org/pypi/pip"&gt;pip&lt;/a&gt;. This allows me to create a sandboxed work area specific to my blog and user separate from my default Python installation (an alternative method in Debian would be to install the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;python-pelican&lt;/span&gt;&lt;/tt&gt; package).&lt;/p&gt;
-&lt;p&gt;With &lt;tt class="docutils literal"&gt;virtualenv&lt;/tt&gt; installed and using my blog as an example ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;virtualenv ~/virtualenvs/circuidipity
-&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt; ~/virtualenvs/circuidipity/bin/activate
-&lt;span class="o"&gt;(&lt;/span&gt;circuidipity&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pip install pelican
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To later upgrade to newer versions simply run &lt;tt class="docutils literal"&gt;pip install &lt;span class="pre"&gt;--upgrade&lt;/span&gt; pelican&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Next I create a directory to hold my blog contents and run &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pelican-quickstart&lt;/span&gt;&lt;/tt&gt; to create a default site layout and configuration. I add my blog details and mostly accept the default choices provided (except for &lt;a class="reference external" href="http://docs.getpelican.com/en/3.3.0/settings.html#pagination"&gt;pagination&lt;/a&gt;) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;(&lt;/span&gt;circuidipity&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/circuidipity
-&lt;span class="o"&gt;(&lt;/span&gt;circuidipity&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/circuidipity
-&lt;span class="o"&gt;(&lt;/span&gt;circuidipity&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pelican-quickstart
-Welcome to pelican-quickstart v3.3.0.
-
-This script will &lt;span class="nb"&gt;help &lt;/span&gt;you create a new Pelican-based website.
-
-Please answer the following questions so this script can generate the files
-needed by Pelican.
-
-
-&amp;gt; Where &lt;span class="k"&gt;do &lt;/span&gt;you want to create your new web site? &lt;span class="o"&gt;[&lt;/span&gt;.&lt;span class="o"&gt;]&lt;/span&gt;
-&amp;gt; What will be the title of this web site? Circuidipity
-&amp;gt; Who will be the author of this web site? Daniel Wayne Armstrong
-&amp;gt; What will be the default language of this web site? &lt;span class="o"&gt;[&lt;/span&gt;en&lt;span class="o"&gt;]&lt;/span&gt;
-&amp;gt; Do you want to specify a URL prefix? e.g., http://example.com   &lt;span class="o"&gt;(&lt;/span&gt;Y/n&lt;span class="o"&gt;)&lt;/span&gt;
-&amp;gt; What is your URL prefix? &lt;span class="o"&gt;(&lt;/span&gt;see above example; no trailing slash&lt;span class="o"&gt;)&lt;/span&gt; http://www.circuidipity.com
-&amp;gt; Do you want to &lt;span class="nb"&gt;enable &lt;/span&gt;article pagination? &lt;span class="o"&gt;(&lt;/span&gt;Y/n&lt;span class="o"&gt;)&lt;/span&gt; n
-&amp;gt; Do you want to generate a Fabfile/Makefile to automate generation and publishing? &lt;span class="o"&gt;(&lt;/span&gt;Y/n&lt;span class="o"&gt;)&lt;/span&gt;
-&amp;gt; Do you want an auto-reload &amp;amp; simpleHTTP script to assist with theme and site development? &lt;span class="o"&gt;(&lt;/span&gt;Y/n&lt;span class="o"&gt;)&lt;/span&gt;
-&amp;gt; Do you want to upload your website using FTP? &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt;
-&amp;gt; Do you want to upload your website using SSH? &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt;
-&amp;gt; Do you want to upload your website using Dropbox? &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt;
-&amp;gt; Do you want to upload your website using S3? &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt;
-&amp;gt; Do you want to upload your website using Rackspace Cloud Files? &lt;span class="o"&gt;(&lt;/span&gt;y/N&lt;span class="o"&gt;)&lt;/span&gt;
-Done. Your new project is available at /home/dwa/circuidipity
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This is the layout generated by &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pelican-quickstart&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;tree
-.
-├── content
-├── develop_server.sh
-├── fabfile.py
-├── Makefile
-├── output
-├── pelicanconf.py
-└── publishconf.py
-
-2 directories, 5 files
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="first-post"&gt;
-&lt;h2&gt;First post&lt;/h2&gt;
-&lt;p&gt;Posts go into &lt;tt class="docutils literal"&gt;content&lt;/tt&gt; and I create a &lt;tt class="docutils literal"&gt;images&lt;/tt&gt; subdirectory for screenshots and artwork and a &lt;tt class="docutils literal"&gt;pages&lt;/tt&gt; subdirectory to hold things like an &lt;tt class="docutils literal"&gt;about&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;contact&lt;/tt&gt; page ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir content/&lt;span class="o"&gt;{&lt;/span&gt;images,pages&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Inside &lt;tt class="docutils literal"&gt;content&lt;/tt&gt; create your first post &lt;tt class="docutils literal"&gt;hello_world.rst&lt;/tt&gt; using reStructuredText ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gh"&gt;===========&lt;/span&gt;
-&lt;span class="gh"&gt;Hello World&lt;/span&gt;
-&lt;span class="gh"&gt;===========&lt;/span&gt;
-
-&lt;span class="nc"&gt;:date:&lt;/span&gt; &lt;span class="nf"&gt;2014-02-06 23:24&lt;/span&gt;
-&lt;span class="nc"&gt;:tags:&lt;/span&gt; &lt;span class="nf"&gt;pelican, web&lt;/span&gt;
-&lt;span class="nc"&gt;:slug:&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;
-
-My &lt;span class="ge"&gt;*first*&lt;/span&gt; post using &lt;span class="s"&gt;`Pelican &lt;/span&gt;&lt;span class="si"&gt;&amp;lt;http://docs.getpelican.com/en/3.3.0/getting_started.html&amp;gt;&lt;/span&gt;&lt;span class="s"&gt;`_&lt;/span&gt;!
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Items like &lt;tt class="docutils literal"&gt;:date&lt;/tt&gt; &lt;tt class="docutils literal"&gt;:tags:&lt;/tt&gt; &lt;tt class="docutils literal"&gt;:slug:&lt;/tt&gt; are &lt;em&gt;metadata&lt;/em&gt; that can be used in the generated HTML output. These and a few others are included in Pelican and users can create their own to use in &lt;a class="reference external" href="http://docs.getpelican.com/en/3.1.1/themes.html#theming-pelican"&gt;templates&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Save the file and test the new blog by running the Pelican built-in development server. This will take all the &lt;tt class="docutils literal"&gt;*.rst&lt;/tt&gt; files and generate HTML formatted files in &lt;tt class="docutils literal"&gt;output&lt;/tt&gt; and serve up the results for inspection in a browser at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://localhost:8000&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;(&lt;/span&gt;circuidipity&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;make devserver
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The server will continue to run in the background and re-generate any updated content for viewing. Stop the server by running &lt;tt class="docutils literal"&gt;./develop_server.sh stop&lt;/tt&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="settings"&gt;
-&lt;h2&gt;Settings&lt;/h2&gt;
-&lt;p&gt;Running &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pelican-quickstart&lt;/span&gt;&lt;/tt&gt; creates 2 configuration files: &lt;tt class="docutils literal"&gt;pelicanconf.py&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;publishconf.py&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Primary settings are configured in &lt;tt class="docutils literal"&gt;pelicanconf.py&lt;/tt&gt;. Settings can be used as &lt;em&gt;variables&lt;/em&gt; in posts, pages, and templates. This is how mine looks ... some of the settings such as &lt;tt class="docutils literal"&gt;AUTHOR&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;SITENAME&lt;/tt&gt; were generated by Pelican and some like &lt;tt class="docutils literal"&gt;WHOAMI_URL&lt;/tt&gt; were created by myself ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
-&lt;span class="c"&gt;# -*- coding: utf-8 -*- #&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;__future__&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;unicode_literals&lt;/span&gt;
-
-&lt;span class="n"&gt;AUTHOR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Daniel Wayne Armstrong&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;SITENAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Circuidipity&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;SITEURL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;TIMEZONE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;America/Toronto&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;DEFAULT_LANG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;en&amp;#39;&lt;/span&gt;
-
-&lt;span class="n"&gt;DEFAULT_DATE_FORMAT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;%A &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s"&gt; %B %Y&amp;#39;&lt;/span&gt;
-
-&lt;span class="c"&gt;# Static paths will be copied without parsing their contents&lt;/span&gt;
-&lt;span class="n"&gt;STATIC_PATHS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;images&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;extra&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-&lt;span class="c"&gt;# Shift the installed location of a file&lt;/span&gt;
-&lt;span class="n"&gt;EXTRA_PATH_METADATA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="s"&gt;&amp;#39;extra/CNAME&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;path&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;CNAME&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
-                &lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="c"&gt;# Extract post date from filename&lt;/span&gt;
-&lt;span class="n"&gt;FILENAME_METADATA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;(?P&amp;lt;date&amp;gt;\d{4}-\d{2}-\d{2})&amp;#39;&lt;/span&gt;
-
-&lt;span class="c"&gt;# Sole author and don&amp;#39;t use categories ... disable these features&lt;/span&gt;
-&lt;span class="n"&gt;AUTHOR_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
-&lt;span class="n"&gt;AUTHORS_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
-&lt;span class="n"&gt;CATEGORY_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
-&lt;span class="n"&gt;CATEGORIES_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
-
-&lt;span class="c"&gt;# Feed generation is usually not desired when developing&lt;/span&gt;
-&lt;span class="n"&gt;FEED_ALL_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
-&lt;span class="n"&gt;CATEGORY_FEED_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
-&lt;span class="n"&gt;TRANSLATION_FEED_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
-
-&lt;span class="c"&gt;# URL settings&lt;/span&gt;
-&lt;span class="c"&gt;# Uncomment following line if you want document-relative URLs when developing&lt;/span&gt;
-&lt;span class="n"&gt;RELATIVE_URLS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;
-&lt;span class="n"&gt;ARTICLE_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;{slug}.html&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;PAGE_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;{slug}.html&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;PAGE_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;{slug}.html&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;TAG_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;tag-{slug}.html&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;TAG_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;tag-{slug}.html&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;TAGS_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;tags.html&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;TAGS_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;tags.html&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;ARCHIVES_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;archives.html&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;ARCHIVES_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;archives.html&amp;#39;&lt;/span&gt;
-
-&lt;span class="c"&gt;# Contact&lt;/span&gt;
-&lt;span class="n"&gt;EMAIL_ADDR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;daniel at circuidipity dot com&amp;#39;&lt;/span&gt;
-
-&lt;span class="c"&gt;# Plugins&lt;/span&gt;
-&lt;span class="n"&gt;PLUGIN_PATH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/home/dwa/doc/code/pelican-plugins&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;PLUGINS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;neighbors&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-&lt;span class="c"&gt;# Theme&lt;/span&gt;
-&lt;span class="n"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/home/dwa/doc/code/pelican-themes/chungking-condo&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;WHOAMI_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/theme/images/whoami.jpg&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;GREETING&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Howdy!&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;LICENCE_NAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;BY-NC-SA&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;LICENCE_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;LICENCE_URL_IMG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;JINJA_EXTENSIONS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;jinja2.ext.loopcontrols&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-&lt;span class="c"&gt;# Social&lt;/span&gt;
-&lt;span class="n"&gt;TWITTER_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;https://twitter.com/circuidipity&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;GITHUB_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;https://github.com/vonbrownie&amp;#39;&lt;/span&gt;
-
-&lt;span class="c"&gt;# Tag cloud&lt;/span&gt;
-&lt;span class="n"&gt;TAG_CLOUD_STEPS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;A few of the settings like &lt;tt class="docutils literal"&gt;RELATIVE_URLS = True&lt;/tt&gt; and turning off &lt;tt class="docutils literal"&gt;ATOM&lt;/tt&gt; feeds are appropriate for a &lt;em&gt;test&lt;/em&gt; environment but are probably things that need to be modified when its time for deployment. The second &lt;tt class="docutils literal"&gt;publishconf.py&lt;/tt&gt; configuration file contains priority settings for &lt;em&gt;publishing&lt;/em&gt; content ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
-&lt;span class="c"&gt;# -*- coding: utf-8 -*- #&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;__future__&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;unicode_literals&lt;/span&gt;
-
-&lt;span class="c"&gt;# This file is only used if you use `make publish` or&lt;/span&gt;
-&lt;span class="c"&gt;# explicitly specify it as your config file.&lt;/span&gt;
-
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
-&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;curdir&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pelicanconf&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
-
-&lt;span class="n"&gt;SITEURL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;http://www.circuidipity.com&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;RELATIVE_URLS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
-
-&lt;span class="n"&gt;FEED_ALL_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;feed.xml&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;CATEGORY_FEED_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
-&lt;span class="n"&gt;TRANSLATION_FEED_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
-
-&lt;span class="n"&gt;FEED_MAX_ITEMS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;
-
-&lt;span class="n"&gt;DELETE_OUTPUT_DIRECTORY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="plugins"&gt;
-&lt;h2&gt;Plugins&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://docs.getpelican.com/en/3.3.0/plugins.html"&gt;Plugins&lt;/a&gt; are available to extend the functionality of Pelican. I use a plugin called &lt;a class="reference external" href="https://github.com/getpelican/pelican-plugins/tree/master/neighbors"&gt;neighbors&lt;/a&gt; that makes it easy for me to add links near the bottom to &lt;tt class="docutils literal"&gt;Newer&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;Older&lt;/tt&gt; articles in relation to the current page.&lt;/p&gt;
-&lt;p&gt;Enable plugins in &lt;tt class="docutils literal"&gt;pelicanconf.py&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;PLUGIN_PATH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/home/dwa/doc/code/pelican-plugins&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;PLUGINS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;neighbors&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I can then make use of the plugin's &lt;tt class="docutils literal"&gt;next_article&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;prev_article&lt;/tt&gt; variables in a Jinja2-formatted template to add those navigation links ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;article&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prev_article&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="n"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;prevpost&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;fa fa-arrow-left&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Older&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;br&lt;/span&gt; &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{{ SITEURL }}/{{ article.prev_article.url}}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{{&lt;/span&gt; &lt;span class="n"&gt;article&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prev_article&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt; &lt;span class="p"&gt;}}&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;endif&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;article&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next_article&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="n"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;nextpost&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;Newer&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;fa fa-arrow-right&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;br&lt;/span&gt; &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{{ SITEURL }}/{{ article.next_article.url}}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{{&lt;/span&gt; &lt;span class="n"&gt;article&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next_article&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt; &lt;span class="p"&gt;}}&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;endif&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="themes"&gt;
-&lt;h2&gt;Themes&lt;/h2&gt;
-&lt;p&gt;Pelican includes a default theme to get you started and there is a collection of &lt;a class="reference external" href="https://github.com/getpelican/pelican-themes"&gt;user-created themes&lt;/a&gt; to choose from or &lt;a class="reference external" href="http://docs.getpelican.com/en/3.3.0/themes.html"&gt;create your own&lt;/a&gt;. I chose to start from scratch and explore CSS, Jinja2 templating, &lt;a class="reference external" href="http://pygments.org/faq/"&gt;pygments&lt;/a&gt; and &lt;a class="reference external" href="http://fortawesome.github.io/Font-Awesome/"&gt;Font Awesome icons&lt;/a&gt; to create my own &lt;a class="reference external" href="https://github.com/vonbrownie/circuidipity/tree/gh-pages/theme"&gt;Chungking Condo&lt;/a&gt; theme.&lt;/p&gt;
-&lt;p&gt;To use a theme set the location of its contents in &lt;tt class="docutils literal"&gt;pelicanconf.py&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/home/dwa/doc/code/pelican-themes/chungking-condo&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="publish"&gt;
-&lt;h2&gt;Publish&lt;/h2&gt;
-&lt;p&gt;When ready to generate for deployment run ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;(&lt;/span&gt;circuidipity&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;make publish
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;All blog contents are placed in &lt;tt class="docutils literal"&gt;output&lt;/tt&gt; ready to be uploaded to a hosting service. Since everything is static content there are many options available. Previously I used &lt;a class="reference external" href="http://www.circuidipity.com/host-website-on-amazon-s3.html"&gt;Amazon S3&lt;/a&gt; and have now switched to a free &lt;a class="reference external" href="http://www.circuidipity.com/github-pages.html"&gt;project repository hosted on GitHub Pages&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Go forth &lt;em&gt;write&lt;/em&gt; and &lt;em&gt;post&lt;/em&gt; and make merry!&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="pelican"></category><category term="web"></category><category term="python"></category><category term="linux"></category></entry></feed>
+</summary><category term="git"></category><category term="web"></category><category term="pelican"></category></entry></feed>
