@@ -15,7 +15,7 @@
 &lt;dt&gt;&lt;tt class="docutils literal"&gt;$1&lt;/tt&gt;&lt;/dt&gt;
 &lt;dd&gt;video URL&lt;/dd&gt;
 &lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--output&lt;/span&gt; &lt;span class="pre"&gt;&amp;quot;$HOME/audio/%(title)s-%(upload_date)s.%(ext)s&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;save file to &lt;em&gt;$HOME/audio/&lt;/em&gt; and rename the file using the template &lt;em&gt;%(title)s-%(upload_date)s.%(ext)s&lt;/em&gt;&lt;/dd&gt;
+&lt;dd&gt;save file to &lt;em&gt;$HOME/audio/&lt;/em&gt; and rename file using template &lt;em&gt;%(title)s-%(upload_date)s.%(ext)s&lt;/em&gt;&lt;/dd&gt;
 &lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--restrict-filenames&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
 &lt;dd&gt;removes spaces and non-alphanumeric characters from filename&lt;/dd&gt;
 &lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--extract-audio&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--audio-format&lt;/span&gt; &amp;quot;mp3&amp;quot;&lt;/tt&gt;&lt;/dt&gt;
