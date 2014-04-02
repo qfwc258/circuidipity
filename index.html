@@ -43,7 +43,7 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 </pre></div>
 <p>... will download the best quality copy (default) of the specified video hosted on YouTube to the current directory.</p>
 <p>To enable audio extraction with a few desirable pre-configured options I create a new <tt class="docutils literal"><span class="pre">youtube-dl-audio</span></tt> alias in <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt> ...</p>
-<div class="highlight"><pre><span class="nb">alias </span>youtube-dl-audio<span class="o">=</span><span class="s1">&#39;youtube-dl $1 --output &quot;$HOME/audio/%(title)s-%(upload_date)s.%(ext)s&quot; --restrict-filenames --extract-audio --audio-format &quot;mp3&quot;&#39;</span>
+<div class="highlight"><pre><span class="nb">alias </span>youtube-dl-audio<span class="o">=</span><span class="s1">&#39;youtube-dl $1 --output &quot;$HOME/audio/%(title)s-%(upload_date)s.%(ext)s&quot; --restrict-filenames --extract-audio --audio-format &quot;mp3&quot; --audio-quality &quot;0&quot;&#39;</span>
 </pre></div>
 <p>... using these options ...</p>
 <dl class="docutils">
@@ -55,6 +55,8 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <dd>removes spaces and non-alphanumeric characters from filename</dd>
 <dt><tt class="docutils literal"><span class="pre">--extract-audio</span></tt> and <tt class="docutils literal"><span class="pre">--audio-format</span> &quot;mp3&quot;</tt></dt>
 <dd>create an <em>mp3</em> audio file and delete the video (or add the <tt class="docutils literal"><span class="pre">-k</span></tt> option to save video)</dd>
+<dt><tt class="docutils literal"><span class="pre">--audio-quality</span> &quot;0&quot;</tt></dt>
+<dd>set a value between 0-9 (lower equals better) for VBR or assign a specific bitrate (default is 5|128K)</dd>
 </dl>
 <p>Reload the config and extract audio from an online video ...</p>
 <div class="highlight"><pre><span class="nv">$ </span><span class="nb">source</span> ~/.bashrc

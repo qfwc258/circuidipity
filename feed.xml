@@ -8,7 +8,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... will download the best quality copy (default) of the specified video hosted on YouTube to the current directory.&lt;/p&gt;
 &lt;p&gt;To enable audio extraction with a few desirable pre-configured options I create a new &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;youtube-dl-audio&lt;/span&gt;&lt;/tt&gt; alias in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bashrc&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;youtube-dl-audio&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;youtube-dl $1 --output &amp;quot;$HOME/audio/%(title)s-%(upload_date)s.%(ext)s&amp;quot; --restrict-filenames --extract-audio --audio-format &amp;quot;mp3&amp;quot;&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;youtube-dl-audio&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;youtube-dl $1 --output &amp;quot;$HOME/audio/%(title)s-%(upload_date)s.%(ext)s&amp;quot; --restrict-filenames --extract-audio --audio-format &amp;quot;mp3&amp;quot; --audio-quality &amp;quot;0&amp;quot;&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... using these options ...&lt;/p&gt;
 &lt;dl class="docutils"&gt;
@@ -20,6 +20,8 @@
 &lt;dd&gt;removes spaces and non-alphanumeric characters from filename&lt;/dd&gt;
 &lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--extract-audio&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--audio-format&lt;/span&gt; &amp;quot;mp3&amp;quot;&lt;/tt&gt;&lt;/dt&gt;
 &lt;dd&gt;create an &lt;em&gt;mp3&lt;/em&gt; audio file and delete the video (or add the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-k&lt;/span&gt;&lt;/tt&gt; option to save video)&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--audio-quality&lt;/span&gt; &amp;quot;0&amp;quot;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;set a value between 0-9 (lower equals better) for VBR or assign a specific bitrate (default is 5|128K)&lt;/dd&gt;
 &lt;/dl&gt;
 &lt;p&gt;Reload the config and extract audio from an online video ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt; ~/.bashrc
