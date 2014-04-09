@@ -92,7 +92,7 @@ update-initramfs -u -k all
 &lt;/div&gt;
 &lt;div class="section" id="step-5-sid-and-swappiness"&gt;
 &lt;h2&gt;Step 5 - Sid and swappiness&lt;/h2&gt;
-&lt;p&gt;It is possible to use grml-debootstrap to directly install a &lt;tt class="docutils literal"&gt;sid/unstable&lt;/tt&gt; Debian setup. But I have experienced greater success by first installing a minimal &lt;tt class="docutils literal"&gt;stable&lt;/tt&gt; Debian system before proceeding to upgrade the system to &lt;tt class="docutils literal"&gt;unstable&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;It is possible to use grml-debootstrap to directly install a Debian &lt;tt class="docutils literal"&gt;sid/unstable&lt;/tt&gt; setup. But I have experienced greater success by first installing a minimal &lt;tt class="docutils literal"&gt;stable&lt;/tt&gt; system before doing a dist-upgrade to track the &lt;tt class="docutils literal"&gt;unstable&lt;/tt&gt; rolling release.&lt;/p&gt;
 &lt;p&gt;Optional: Continuing configuration inside &lt;tt class="docutils literal"&gt;chroot&lt;/tt&gt; ... upgrade &lt;tt class="docutils literal"&gt;wheezy&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;sid&lt;/tt&gt; by modifying &lt;tt class="docutils literal"&gt;/etc/apt/sources.list&lt;/tt&gt; ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;### unstable ###&lt;/span&gt;
 deb http://http.debian.net/debian unstable main contrib non-free

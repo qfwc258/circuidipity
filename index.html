@@ -127,7 +127,7 @@ update-initramfs -u -k all
 </div>
 <div class="section" id="step-5-sid-and-swappiness">
 <h2>Step 5 - Sid and swappiness</h2>
-<p>It is possible to use grml-debootstrap to directly install a <tt class="docutils literal">sid/unstable</tt> Debian setup. But I have experienced greater success by first installing a minimal <tt class="docutils literal">stable</tt> Debian system before proceeding to upgrade the system to <tt class="docutils literal">unstable</tt>.</p>
+<p>It is possible to use grml-debootstrap to directly install a Debian <tt class="docutils literal">sid/unstable</tt> setup. But I have experienced greater success by first installing a minimal <tt class="docutils literal">stable</tt> system before doing a dist-upgrade to track the <tt class="docutils literal">unstable</tt> rolling release.</p>
 <p>Optional: Continuing configuration inside <tt class="docutils literal">chroot</tt> ... upgrade <tt class="docutils literal">wheezy</tt> to <tt class="docutils literal">sid</tt> by modifying <tt class="docutils literal">/etc/apt/sources.list</tt> ...</p>
 <div class="highlight"><pre><span class="c">### unstable ###</span>
 deb http://http.debian.net/debian unstable main contrib non-free
