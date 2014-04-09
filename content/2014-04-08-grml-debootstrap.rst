@@ -125,7 +125,7 @@ Source: `TRIM configuration on solid-state drives <http://www.linuxjournal.com/c
 Step 5 - Sid and swappiness
 ===========================
 
-It is possible to use grml-debootstrap to directly install a ``sid/unstable`` Debian setup. But I have experienced greater success by first installing a minimal ``stable`` Debian system before proceeding to upgrade the system to ``unstable``.
+It is possible to use grml-debootstrap to directly install a Debian ``sid/unstable`` setup. But I have experienced greater success by first installing a minimal ``stable`` system before doing a dist-upgrade to track the ``unstable`` rolling release.
 
 Optional: Continuing configuration inside ``chroot`` ... upgrade ``wheezy`` to ``sid`` by modifying ``/etc/apt/sources.list`` ...
 
