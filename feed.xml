@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-04-08T00:00:00-04:00</updated><entry><title>Install Debian using grml-debootstrap</title><link href="http://www.circuidipity.com/grml-debootstrap.html" rel="alternate"></link><updated>2014-04-08T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-04-08:grml-debootstrap.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://grml.org/"&gt;Grml&lt;/a&gt; is a Debian-based Linux distribution optimized for running off USB sticks and taking care of sysadmin duties. One of its cool programs that I have been exploring is &lt;a class="reference external" href="http://grml.org/grml-debootstrap/"&gt;grml-debootstrap&lt;/a&gt; ... a console application that makes it very easy to set custom options and install Debian.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-04-14T00:00:00-04:00</updated><entry><title>No udevd no auto-mount</title><link href="http://www.circuidipity.com/no-udevd-no-automount.html" rel="alternate"></link><updated>2014-04-14T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-04-14:no-udevd-no-automount.html</id><summary type="html">&lt;p&gt;Problem: Auto-mounting USB storage devices fails in &lt;tt class="docutils literal"&gt;thunar&lt;/tt&gt; file manager.&lt;/p&gt;
+&lt;p&gt;I ran into a situation today where changing from &lt;tt class="docutils literal"&gt;init 2&lt;/tt&gt; -&amp;gt; &lt;tt class="docutils literal"&gt;init 1&lt;/tt&gt; -&amp;gt; &lt;tt class="docutils literal"&gt;init 2&lt;/tt&gt; failed to restart the udev daemon and rendered USB mounting non-functional.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;FIX:&lt;/strong&gt; Start the udev daemon ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service udev start
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and after plugging in a USB stick - if it successfully auto-mounts - additional udisk activity is generated ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ps ax | grep udisk | awk &lt;span class="s1"&gt;&amp;#39;{print $5}&amp;#39;&lt;/span&gt;
+/usr/lib/gvfs/gvfs-udisks2-volume-monitor
+/usr/lib/udisks2/udisksd
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Hope it helps!&lt;/p&gt;
+</summary><category term="linux"></category></entry><entry><title>Install Debian using grml-debootstrap</title><link href="http://www.circuidipity.com/grml-debootstrap.html" rel="alternate"></link><updated>2014-04-08T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-04-08:grml-debootstrap.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://grml.org/"&gt;Grml&lt;/a&gt; is a Debian-based Linux distribution optimized for running off USB sticks and taking care of sysadmin duties. One of its cool programs that I have been exploring is &lt;a class="reference external" href="http://grml.org/grml-debootstrap/"&gt;grml-debootstrap&lt;/a&gt; ... a console application that makes it very easy to set custom options and install Debian.&lt;/p&gt;
 &lt;p&gt;Here is a step-by-step process using grml-debootstrap to implement the following sample installation on a solid-state drive (SSD):&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;create encrypted root + swap&lt;/li&gt;
@@ -405,13 +416,4 @@ tmux -f &lt;span class="nv"&gt;$CONFIG&lt;/span&gt; attach
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Check out &lt;tt class="docutils literal"&gt;man tmux&lt;/tt&gt; for &lt;em&gt;lots&lt;/em&gt; more information. Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="tmux"></category><category term="shell"></category><category term="linux"></category><category term="cheatsheet"></category></entry><entry><title>Easy 8-bit pixel images</title><link href="http://www.circuidipity.com/easy-8-bit-pixel-images.html" rel="alternate"></link><updated>2014-02-10T00:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-02-10:easy-8-bit-pixel-images.html</id><summary type="html">&lt;img alt="wall of pixels" src="/images/wall_of_pixels.jpg" style="width: 910px; height: 450px;" /&gt;
-&lt;p&gt;A simple &lt;a class="reference external" href="http://www.gimp.org"&gt;GIMP&lt;/a&gt; recipe for play at making 8-bit pixel images:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Open image and select &lt;tt class="docutils literal"&gt;Colors &amp;gt; &lt;span class="pre"&gt;Brightness-Contrast&lt;/span&gt; &amp;gt; Contrast&lt;/tt&gt; to increase contrast&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;Image &amp;gt; Scale Image &amp;gt; 10%&amp;nbsp; Interpolation: None&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;Image &amp;gt; Scale Image &amp;gt; 400%&amp;nbsp; Interpolation: None&lt;/tt&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Manipulate the scale image settings to increase/decrease pixelation to satisfaction.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-</summary><category term="gimp"></category><category term="linux"></category></entry></feed>
+</summary><category term="tmux"></category><category term="shell"></category><category term="linux"></category><category term="cheatsheet"></category></entry></feed>
