@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-04-14T00:00:00-04:00</updated><entry><title>No udevd no auto-mount</title><link href="http://www.circuidipity.com/no-udevd-no-automount.html" rel="alternate"></link><updated>2014-04-14T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-04-14:no-udevd-no-automount.html</id><summary type="html">&lt;p&gt;Problem: Auto-mounting USB storage devices fails in &lt;tt class="docutils literal"&gt;thunar&lt;/tt&gt; file manager.&lt;/p&gt;
 &lt;p&gt;I ran into a situation today where changing from &lt;tt class="docutils literal"&gt;init 2&lt;/tt&gt; -&amp;gt; &lt;tt class="docutils literal"&gt;init 1&lt;/tt&gt; -&amp;gt; &lt;tt class="docutils literal"&gt;init 2&lt;/tt&gt; failed to restart the udev daemon and rendered USB mounting non-functional.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;FIX:&lt;/strong&gt; Start the udev daemon ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service udev start
+&lt;p&gt;&lt;strong&gt;FIX:&lt;/strong&gt; Confirm &lt;tt class="docutils literal"&gt;udevd&lt;/tt&gt; is running and - if not - start the daemon ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ps ax | grep udevd
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service udev start
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... and after plugging in a USB stick additional udisk activity is generated ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ps ax | grep udisk | awk &lt;span class="s1"&gt;&amp;#39;{print $5}&amp;#39;&lt;/span&gt;
