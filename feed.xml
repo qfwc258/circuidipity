@@ -4,7 +4,7 @@
 &lt;p&gt;&lt;strong&gt;FIX:&lt;/strong&gt; Start the udev daemon ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service udev start
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and after plugging in a USB stick - if it successfully auto-mounts - additional udisk activity is generated ...&lt;/p&gt;
+&lt;p&gt;... and after plugging in a USB stick additional udisk activity is generated ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ps ax | grep udisk | awk &lt;span class="s1"&gt;&amp;#39;{print $5}&amp;#39;&lt;/span&gt;
 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
 /usr/lib/udisks2/udisksd
