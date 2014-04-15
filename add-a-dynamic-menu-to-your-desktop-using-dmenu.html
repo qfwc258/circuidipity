@@ -24,18 +24,24 @@
 
 <!-- article -->
 <h1>Add a dynamic menu to your desktop using dmenu</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on 15 April 2014</p>
 <div id="article">
     <p><em>Dmenu</em> is a cool application for generating a dynamic menu on your desktop that can be activated using a hot-key combination.</p>
 <p>A user begins typing the name of the application they wish to run and dmenu narrows down the list of possible matches as each letter is entered. When the desired choice is revealed it is highlighted and pressing ENTER launches the application.</p>
-<p>I use <a class="reference external" href="http://www.xfce.org/">XFCE</a> as my desktop and completely ignore the built-in menu for launching applications ... relying instead on the combination of dmenu + hot-key codes for activating a few favourites.</p>
+<p>I use <a class="reference external" href="http://openbox.org/">Openbox</a> as my window manager and completely ignore the built-in menu for launching applications ... relying instead on the combination of dmenu + hot-key codes for activating a few favourites.</p>
 <p>On Debian <tt class="docutils literal">dmenu</tt> is a part of the <tt class="docutils literal"><span class="pre">suckless-tools</span></tt> package ...</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install suckless-tools
 </pre></div>
-<p>Create a bash script named <tt class="docutils literal"><span class="pre">dmenu-run.sh</span></tt> and place in <tt class="docutils literal">~/bin</tt> ...</p>
+<p>Create a bash script named <tt class="docutils literal"><span class="pre">dmenu-run.sh</span></tt> and place in <tt class="docutils literal">$HOME/bin</tt> ...</p>
 <div class="highlight"><pre><span class="c">#!/bin/bash</span>
-<span class="nv">exe</span><span class="o">=</span><span class="sb">`</span>dmenu_path | dmenu -fn 10x20 -nb <span class="s1">&#39;#000000&#39;</span> -nf <span class="s1">&#39;#ffffff&#39;</span> -sb green -sf <span class="s1">&#39;#000000&#39;</span><span class="sb">`</span> <span class="o">&amp;&amp;</span> <span class="nb">eval</span> <span class="s2">&quot;exec $exe&quot;</span>
+<span class="c"># Generate a dynamic applications menu</span>
+<span class="c"># Source: bitmap fonts &lt;https://en.wikipedia.org/wiki/Fixed_%28typeface%29&gt;</span>
+
+dmenu_run -b -i -fn <span class="s1">&#39;10x20&#39;</span> <span class="se">\</span>
+    -nb <span class="s1">&#39;#000000&#39;</span> -nf <span class="s1">&#39;#ffffff&#39;</span> -sb <span class="s1">&#39;#d64937&#39;</span> -sf <span class="s1">&#39;#000000&#39;</span>
 </pre></div>
-<p>This will use <tt class="docutils literal">dmenu</tt> to generate a horizontal menu of applications running across the top of the desktop (this can be tricky to get right... thanks <a class="reference external" href="http://www.gilesorr.com/wm/helpers.html">Giles</a> for the hint). Create a hot-key combination to activate <tt class="docutils literal"><span class="pre">dmenu-run.sh</span></tt> on your desktop when desired.</p>
+<p>This will use <tt class="docutils literal">dmenu</tt> to generate a horizontal menu of applications running across the bottom of the desktop (this can be tricky to get right... thanks <a class="reference external" href="http://www.gilesorr.com/wm/helpers.html">Giles</a> for the hint). Create a hot-key combination to activate <tt class="docutils literal"><span class="pre">dmenu-run.sh</span></tt> on your desktop.</p>
+<p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dmenu-run.sh">dmenu-run.sh</a></p>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
