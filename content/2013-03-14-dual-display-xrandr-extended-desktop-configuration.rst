@@ -46,3 +46,5 @@ So I used some new tricks gleaned from *TLCL* to create ``dualDisplay``. I requi
 Make the script executable and drop it in ``$HOME/bin``.
 
 Run ``dualDisplay`` or ``dualDisplay -q`` at the command line to enable|disable PRIMARY + SECOND. For Openbox I add the command to ``~/.config/openbox/autostart`` and now it launches and stitches together the Thinkpad's LCD and external display into a extended desktop whenever I enter the X environment.
+
+Source: `dualDisplay <https://github.com/vonbrownie/linux-home-bin/blob/master/dualDisplay>`_
