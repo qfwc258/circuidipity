@@ -4,12 +4,13 @@ Add a dynamic menu to your desktop using dmenu
 
 :tags: debian, linux
 :slug: add-a-dynamic-menu-to-your-desktop-using-dmenu
+:modified: 15 April 2014
 
 *Dmenu* is a cool application for generating a dynamic menu on your desktop that can be activated using a hot-key combination.
 
 A user begins typing the name of the application they wish to run and dmenu narrows down the list of possible matches as each letter is entered. When the desired choice is revealed it is highlighted and pressing ENTER launches the application.
 
-I use `XFCE <http://www.xfce.org/>`_ as my desktop and completely ignore the built-in menu for launching applications ... relying instead on the combination of dmenu + hot-key codes for activating a few favourites.
+I use `Openbox <http://openbox.org/>`_ as my window manager and completely ignore the built-in menu for launching applications ... relying instead on the combination of dmenu + hot-key codes for activating a few favourites.
 
 On Debian ``dmenu`` is a part of the ``suckless-tools`` package ...
 
@@ -17,11 +18,17 @@ On Debian ``dmenu`` is a part of the ``suckless-tools`` package ...
 
     $ sudo apt-get install suckless-tools
 
-Create a bash script named ``dmenu-run.sh`` and place in ``~/bin`` ...
+Create a bash script named ``dmenu-run.sh`` and place in ``$HOME/bin`` ...
 
 .. code-block:: bash
 
     #!/bin/bash
-    exe=`dmenu_path | dmenu -fn 10x20 -nb '#000000' -nf '#ffffff' -sb green -sf '#000000'` && eval "exec $exe"
+    # Generate a dynamic applications menu
+    # Source: bitmap fonts <https://en.wikipedia.org/wiki/Fixed_%28typeface%29>
 
-This will use ``dmenu`` to generate a horizontal menu of applications running across the top of the desktop (this can be tricky to get right... thanks `Giles <http://www.gilesorr.com/wm/helpers.html>`_ for the hint). Create a hot-key combination to activate ``dmenu-run.sh`` on your desktop when desired.
+    dmenu_run -b -i -fn '10x20' \
+        -nb '#000000' -nf '#ffffff' -sb '#d64937' -sf '#000000'
+
+This will use ``dmenu`` to generate a horizontal menu of applications running across the bottom of the desktop (this can be tricky to get right... thanks `Giles <http://www.gilesorr.com/wm/helpers.html>`_ for the hint). Create a hot-key combination to activate ``dmenu-run.sh`` on your desktop.
+
+Source: `dmenu-run.sh <https://github.com/vonbrownie/linux-home-bin/blob/master/dmenu-run.sh>`_
