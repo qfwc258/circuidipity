@@ -25,11 +25,8 @@
 <!-- article -->
 <h1>Convert video file(s) to MP3 audio</h1>
 <div id="article">
-    <p>A simple shell script I made to convert downloaded YouTube videos to MP3s ...</p>
-<div class="highlight"><pre><span class="c">#!/bin/bash</span>
-<span class="c"># Convert video file to audio</span>
-
-<span class="nv">MP3</span><span class="o">=</span><span class="s2">&quot;-acodec libmp3lame -aq 0 -ac 2 -ar 44100&quot;</span>
+    <p>A simple script I made to convert downloaded YouTube videos to MP3s ...</p>
+<div class="highlight"><pre><span class="nv">MP3</span><span class="o">=</span><span class="s2">&quot;-acodec libmp3lame -aq 0 -ac 2 -ar 44100&quot;</span>
 
 <span class="k">for </span>f in <span class="s2">&quot;$@&quot;</span>
 <span class="k">do</span>
@@ -37,6 +34,7 @@
 <span class="k">done</span>
 </pre></div>
 <p>Requires <tt class="docutils literal">ffmpeg</tt> and <tt class="docutils literal">libmp3lame0</tt>.</p>
+<p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/v2a">v2a</a></p>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
