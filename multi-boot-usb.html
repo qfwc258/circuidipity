@@ -54,15 +54,18 @@
 <h2>Step 3 - Copy Linux images</h2>
 <p>Download and copy Linux ISO images to the newly-created <tt class="docutils literal">iso</tt> folder on the USB stick. For example I have installed on my own USB stick:</p>
 <ul class="simple">
-<li><strong>GRML</strong> - <a class="reference external" href="http://grml.org/download/">Bootable 32|64-bit Live-CD</a> collection of sysadmin tools based on Debian</li>
-<li><strong>Debian Wheezy Mini-Installers</strong> - Minimal (~25MB) <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/">64bit</a> and <a href="#id3"><span class="problematic" id="id4">`32bit &lt;http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/`_</span></a> <em>mini.iso</em> installers</li>
+<li><strong>GRML</strong> - <a class="reference external" href="http://grml.org/download/">Bootable 32|64-bit Live CD</a> collection of sysadmin tools based on Debian</li>
+<li><strong>Debian Wheezy Mini-Installers</strong> - Minimal (~25MB) <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/">64bit</a> and <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/">32bit</a> <em>mini.iso</em> installers</li>
 </ul>
 <div class="system-message">
 <p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">/home/dwa/doc/circuidipity/www/content/2012-12-06-multi-boot-usb.rst</tt>, line 50)</p>
 Bullet list ends without a blank line; unexpected unindent.</div>
 <div class="system-message">
-<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">/home/dwa/doc/circuidipity/www/content/2012-12-06-multi-boot-usb.rst</tt>, line 3); <em><a href="#id1">backlink</a></em></p>
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">/home/dwa/doc/circuidipity/www/content/2012-12-06-multi-boot-usb.rst</tt>, line 3); <em><a href="#id2">backlink</a></em></p>
 Duplicate explicit target name: &quot;64bit&quot;.</div>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">/home/dwa/doc/circuidipity/www/content/2012-12-06-multi-boot-usb.rst</tt>, line 3); <em><a href="#id3">backlink</a></em></p>
+Duplicate explicit target name: &quot;32bit&quot;.</div>
 <p><strong>Ubuntu 14.04 'Trusty Tahr' LTS Mini-Installers</strong> - <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/">64bit</a> and <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/">32bit</a> <em>mini.iso</em> installers
 * <strong>GParted Live CD</strong> - <a class="reference external" href="http://gparted.sourceforge.net/livecd.php">Graphical partition editor</a> for hard drives
 * <strong>Memtest86+</strong> - Diagnostic tool for <a class="reference external" href="http://www.memtest.org/">testing RAM</a>
@@ -149,12 +152,6 @@ linux <span class="o">(</span>loop<span class="o">)</span>/DBAN.BZI <span class=
 <div class="section" id="grubs-reanimated-usb-boot-stick">
 <h2>GRUBS Reanimated USB Boot Stick</h2>
 <p>I made a Bash script called <a class="reference external" href="https://github.com/vonbrownie/grubs">GRUBS</a> that creates multi-boot Linux USB sticks using the above steps and placed it on <a class="reference external" href="https://github.com/vonbrownie/grubs">GitHub</a>.</p>
-</div>
-<div class="system-messages section">
-<h2>Docutils System Messages</h2>
-<div class="system-message" id="id3">
-<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/home/dwa/doc/circuidipity/www/content/2012-12-06-multi-boot-usb.rst</tt>, line 49); <em><a href="#id4">backlink</a></em></p>
-Unknown target name: &quot;32bit &lt;http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/&quot;.</div>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
