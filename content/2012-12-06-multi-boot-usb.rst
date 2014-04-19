@@ -2,7 +2,7 @@
 Transform a USB stick into a boot device packing multiple Linux distros
 =======================================================================
 
-:tags: linux
+:tags: linux, debian, ubuntu
 :slug: multi-boot-usb
 :modified: 17 April 2014
 
