@@ -3,7 +3,8 @@ Download videos using youtube-dl
 ================================
 
 :slug: youtube-dl
-:tags: shell, linux
+:tags: shell, programming, linux
+:modified: 19 April 2014
 
 `youtube-dl <http://rg3.github.io/youtube-dl/>`_ is a cool command-line program for downloading videos from a whole bunch of online video sites. It can also convert videos into audio files (courtesy of ``ffmpeg``).                                  
 
@@ -48,5 +49,11 @@ Reload the config and extract audio from an online video ...
     $ youtube-dl-audio https://www.youtube.com/watch?v=SOMEiD
 
 See ``man youtube-dl`` for more possibilities!
+
+**Update**
+
+I skipped the alterations to ``.bashrc`` and created a `youtube-dl-audio <https://github.com/vonbrownie/linux-home-bin/blob/master/youtube-dl-audio>`_ program with a few extra options.
+
+To use: `download <https://github.com/vonbrownie/linux-home-bin/blob/master/youtube-dl-audio>`_ the script and its companion `Library.sh <https://github.com/vonbrownie/linux-home-bin/blob/master/Library.sh>`_ to ``$HOME/bin``.
 
 Source: *Thanks Paul!*
