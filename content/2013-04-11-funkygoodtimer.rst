@@ -4,6 +4,7 @@ FunkyGoodTimer - A simple (but funky) graphical countdown timer
 
 :tags: shell, programming, linux
 :slug: funkygoodtimer
+:modified: 19 April 2014
 
 Learning to write shell scripts leads to sitting at your computer for long stretches of time. It is good for mind and body to take a break and get up and enjoy some *funky time movement* at regular intervals. But how do you remember to do so when you are oh so engrossed in coding? Why you write a shell script to remind you of course!
 
@@ -169,3 +170,5 @@ Time is UP. Get UP! Choose to reset the timer or quit.
 .. image:: images/fgt2.png
     :alt: Time is UP alert
     :align: center
+
+Source: `funkyGoodTimer <https://github.com/vonbrownie/linux-home-bin/blob/master/funkyGoodTimer>`_
