@@ -56,7 +56,7 @@ vboxdrv               190057  4 vboxnetflt,vboxnetadp,vboxpci
 <p>I ran into a situation with my Debian 32-bit virtual machine where the installer created virtualbox kernel modules for <tt class="docutils literal"><span class="pre">linux-image-686-pae</span></tt> but not the <tt class="docutils literal">486</tt> kernel I ended up using. Confirm that the current kernel has the necessary modules...</p>
 <div class="highlight"><pre><span class="nv">$ </span>modinfo /lib/modules/<span class="k">$(</span>uname -r<span class="k">)</span>/updates/dkms/vbox*
 </pre></div>
-<p>If they are missing like there were for me ... use DKMS to build them...</p>
+<p>If they are missing like they were for me ... use DKMS to build them...</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install build-essential module-assistant linux-headers-<span class="k">$(</span>dpkg --print-architecture<span class="k">)</span>
 <span class="nv">$ </span>sudo apt-get install dkms
 <span class="nv">$ </span>sudo m-a prepare
