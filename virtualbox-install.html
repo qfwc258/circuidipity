@@ -49,12 +49,11 @@ vboxdrv               190057  4 vboxnetflt,vboxnetadp,vboxpci
 <h2>Step 1 - Create the Debian GUEST VM</h2>
 <p>The <em>Default Machine Folder</em> where VM images are stored is <tt class="docutils literal">$HOME/Virtualbox VMs</tt> (this can be modified in <tt class="docutils literal"><span class="pre">File-&gt;Preferences-&gt;General</span></tt>).</p>
 <p>See the <a class="reference external" href="http://www.virtualbox.org/manual/UserManual.html">User Manual</a> for creating a GUEST VM. I use the <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/">Debian mini installer</a> to create a new VM with a minimal system configuration. The installer auto-detects it is being configured as a VM and installs the necessary <tt class="docutils literal"><span class="pre">virtualbox-guest-{dkms,utils,x11}</span></tt> packages.</p>
-<p>After the new Debian guest VM is sucessfully created I <em>clone</em> the image <tt class="docutils literal"><span class="pre">Machine-&gt;Clone</span></tt> - preserving the fresh install image 'as is' and go off to do all my experiments on the clone.</p>
 </div>
 <div class="section" id="step-2-guest-additions">
 <h2>Step 2 - GUEST Additions</h2>
 <p><em>Guest Additions</em> provide extra features such as the ability to tweak display settings and add a shared folder that can accessed by both HOST and GUEST machines.</p>
-<p>I ran into a situation with my Debian 32-bit virtual machine where the installer created virtualbox kernel modules for the <tt class="docutils literal"><span class="pre">686-pae</span></tt> linux-image but not the <tt class="docutils literal">486</tt> kernel I ended up using. Confirm that the current kernel has the necessary modules...</p>
+<p>I ran into a situation with my Debian 32-bit virtual machine where the installer created virtualbox kernel modules for <tt class="docutils literal"><span class="pre">linux-image-686-pae</span></tt> but not the <tt class="docutils literal">486</tt> kernel I ended up using. Confirm that the current kernel has the necessary modules...</p>
 <div class="highlight"><pre><span class="nv">$ </span>modinfo /lib/modules/<span class="k">$(</span>uname -r<span class="k">)</span>/updates/dkms/vbox*
 </pre></div>
 <p>If they are missing like there were for me ... use DKMS to build them...</p>
