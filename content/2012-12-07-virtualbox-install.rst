@@ -15,7 +15,7 @@ Step 0 - Install VirtualBox on HOST
 
 .. code-block:: bash
 
-    $ sudo apt-get install build-essential module-assistant linux-headers-$(dpkg --print-architecture)
+    $ sudo apt-get install build-essential module-assistant linux-headers-$(uname -r)
     $ sudo apt-get install dkms
     $ sudo apt-get install virtualbox virtualbox-dkms virtualbox-qt
 
@@ -57,7 +57,7 @@ If they are missing like they were for me ... use DKMS to build them...
 
 .. code-block:: bash
 
-    $ sudo apt-get install build-essential module-assistant linux-headers-$(dpkg --print-architecture)
+    $ sudo apt-get install build-essential module-assistant linux-headers-$(uname -r)
     $ sudo apt-get install dkms
     $ sudo m-a prepare
 
