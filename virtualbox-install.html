@@ -30,7 +30,7 @@
 <p>In this HOWTO I install Virtualbox on a 64-bit Debian HOST and create a 32-bit Debian GUEST virtual machine.</p>
 <div class="section" id="step-0-install-virtualbox-on-host">
 <h2>Step 0 - Install VirtualBox on HOST</h2>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install build-essential module-assistant linux-headers-<span class="k">$(</span>dpkg --print-architecture<span class="k">)</span>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install build-essential module-assistant linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span>
 <span class="nv">$ </span>sudo apt-get install dkms
 <span class="nv">$ </span>sudo apt-get install virtualbox virtualbox-dkms virtualbox-qt
 </pre></div>
@@ -57,7 +57,7 @@ vboxdrv               190057  4 vboxnetflt,vboxnetadp,vboxpci
 <div class="highlight"><pre><span class="nv">$ </span>modinfo /lib/modules/<span class="k">$(</span>uname -r<span class="k">)</span>/updates/dkms/vbox*
 </pre></div>
 <p>If they are missing like they were for me ... use DKMS to build them...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install build-essential module-assistant linux-headers-<span class="k">$(</span>dpkg --print-architecture<span class="k">)</span>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install build-essential module-assistant linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span>
 <span class="nv">$ </span>sudo apt-get install dkms
 <span class="nv">$ </span>sudo m-a prepare
 </pre></div>
