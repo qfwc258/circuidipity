@@ -4,7 +4,7 @@ Virtualbox with Debian HOST and GUEST
 
 :tags: virtual environments, linux, debian
 :slug: virtualbox-install
-:modified: 23 April 2014
+:modified: 25 April 2014
 
 `Virtualbox <https://www.virtualbox.org/>`_ is virtualization software that allows a Linux user to HOST multiple GUEST OSs as *virtual machines* (VMs). Its a cool tool for playing with different Linux distros and experimenting with configurations.
 
@@ -15,8 +15,7 @@ Step 0 - Install VirtualBox on HOST
 
 .. code-block:: bash
 
-    $ sudo apt-get install build-essential module-assistant linux-headers-$(uname -r)
-    $ sudo apt-get install dkms
+    $ sudo apt-get install build-essential dkms module-assistant linux-headers-$(uname -r)
     $ sudo apt-get install virtualbox virtualbox-dkms virtualbox-qt
 
 Virtualbox kernel modules are built via *Dynamic Kernel Module Support* (`DKMS <http://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support>`_). After installing the virtualbox packages the ``vbox`` modules should be auto-built and -loaded ...
@@ -57,9 +56,9 @@ If they are missing like they were for me ... use DKMS to build them...
 
 .. code-block:: bash
 
-    $ sudo apt-get install build-essential module-assistant linux-headers-$(uname -r)
-    $ sudo apt-get install dkms
+    $ sudo apt-get install build-essential dkms module-assistant linux-headers-$(uname -r)
     $ sudo m-a prepare
+    $ uname -r | sudo xargs -n1 /usr/lib/dkms/dkms_autoinstaller start  # rebuild modules for running kernel
 
 Add USERNAME to the ``vboxsf`` group. Reboot the Debian guest  and ``vbox`` drivers should now be loaded...
 
