@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Debian and Virtualbox</title>
+        <title>Circuidipity | Ubuntu 14.04 and Virtualbox</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -19,15 +19,14 @@
 <div id="breadcrumb">
     <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
     <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
-    Friday 07 December 2012</p>
+    Sunday 27 April 2014</p>
 </div>
 
 <!-- article -->
-<h1>Debian and Virtualbox</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on 27 April 2014</p>
+<h1>Ubuntu 14.04 and Virtualbox</h1>
 <div id="article">
     <p><a class="reference external" href="https://www.virtualbox.org/">Virtualbox</a> is virtualization software that allows a Linux user to HOST multiple GUEST operating systems as <em>virtual machines</em> (VMs). Its a cool tool for playing with different Linux distros and experimenting with configurations.</p>
-<p>In this HOWTO I install Virtualbox on a 64-bit Debian HOST and create a Debian GUEST virtual machine.</p>
+<p>In this HOWTO I install Virtualbox on a 64-bit Ubuntu HOST and create an Ubuntu GUEST virtual machine.</p>
 <div class="section" id="step-0-install-virtualbox-on-host">
 <h2>Step 0 - Install VirtualBox on HOST</h2>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install build-essential dkms module-assistant linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span>
@@ -44,26 +43,24 @@ vboxdrv               190057  4 vboxnetflt,vboxnetadp,vboxpci
 <div class="highlight"><pre><span class="nv">$ </span>sudo adduser YOUR_USERNAME vboxusers
 </pre></div>
 </div>
-<div class="section" id="step-1-create-the-debian-guest">
-<h2>Step 1 - Create the Debian GUEST</h2>
+<div class="section" id="step-1-create-the-ubuntu-guest">
+<h2>Step 1 - Create the Ubuntu GUEST</h2>
 <p>The <em>Default Machine Folder</em> where VM images are stored is <tt class="docutils literal">$HOME/Virtualbox VMs</tt> (this can be modified in <tt class="docutils literal"><span class="pre">File-&gt;Preferences-&gt;General</span></tt>).</p>
-<p>See the <a class="reference external" href="http://www.virtualbox.org/manual/UserManual.html">User Manual</a> for creating a GUEST virtual machine. I use the <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/">Debian mini.iso installer</a> to create a new virtual machine with a minimal system configuration. The installer auto-detects it is being configured as a virtualbox GUEST and installs the necessary <tt class="docutils literal"><span class="pre">virtualbox-guest-{dkms,utils,x11}</span></tt> packages.</p>
+<p>See the <a class="reference external" href="http://www.virtualbox.org/manual/UserManual.html">User Manual</a> for creating a GUEST virtual machine. I use the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/">Ubuntu mini.iso installer</a> to create a new virtual machine with a minimal system configuration.</p>
 </div>
 <div class="section" id="step-2-guest-additions">
 <h2>Step 2 - GUEST Additions</h2>
 <p><em>Guest Additions</em> provide extra features such as the ability to tweak display settings and add a shared folder that can accessed by both HOST and GUEST machines.</p>
-<p>I ran into a situation with my Debian 32-bit virtual machine where the installer created virtualbox kernel modules for <tt class="docutils literal"><span class="pre">linux-image-686-pae</span></tt> but not the <tt class="docutils literal">486</tt> kernel I ended up using. Confirm that the current kernel has the necessary modules...</p>
-<div class="highlight"><pre><span class="nv">$ </span>modinfo /lib/modules/<span class="k">$(</span>uname -r<span class="k">)</span>/updates/dkms/vbox*
-</pre></div>
-<p>If they are missing like they were for me ... use DKMS to build them...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install build-essential dkms module-assistant linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span>
+<p>On the new Ubuntu GUEST run...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install build-essential module-assistant linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span> dkms
+<span class="nv">$ </span>sudo apt-get install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
 <span class="nv">$ </span>sudo m-a prepare
 <span class="nv">$ </span>sudo adduser YOUR_USERNAME vboxsf
 </pre></div>
 <p>If the virtualbox modules need to be rebuilt for any reason for the running kernel...</p>
 <div class="highlight"><pre><span class="nv">$ </span>uname -r | sudo xargs -n1 /usr/lib/dkms/dkms_autoinstaller start
 </pre></div>
-<p>Reboot Debian GUEST and <tt class="docutils literal">vbox</tt> drivers should now be loaded...</p>
+<p>Reboot Ubuntu GUEST and <tt class="docutils literal">vbox</tt> drivers should now be loaded...</p>
 <pre class="code bash literal-block">
 <span class="nv">$ </span>lsmod | grep vbox
 vboxguest
@@ -94,7 +91,7 @@ VBoxClient --seamless &amp;
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-virtual-environments.html">virtual environments</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
 </p>
 </div>
 
@@ -102,9 +99,7 @@ VBoxClient --seamless &amp;
 <div id="navmenu">
     <hr />
     <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-        <a href="http://www.circuidipity.com/multi-boot-usb.html">Transform a USB stick into a boot device packing multiple Linux distros</a></p>
-    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
-        <a href="http://www.circuidipity.com/100-days-of-programming.html">100 Days of Programming</a></p>
+        <a href="http://www.circuidipity.com/no-udevd-no-automount.html">No udevd no auto-mount</a></p>
 </div>
 
 

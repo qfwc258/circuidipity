@@ -32,27 +32,78 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 
 <!-- latest post -->
 <div id="latestpost">
-        <p class="published"> Monday 14 April 2014</p>
-        <h1><a href="http://www.circuidipity.com/no-udevd-no-automount.html">No udevd no auto-mount</a></h1>
-        <p>Problem: Auto-mounting USB storage devices fails in <tt class="docutils literal">thunar</tt> file manager.</p>
-<p>I ran into a situation today where changing from <tt class="docutils literal">init 2</tt> -&gt; <tt class="docutils literal">init 1</tt> -&gt; <tt class="docutils literal">init 2</tt> failed to restart the udev daemon and rendered USB mounting non-functional.</p>
-<p><strong>FIX:</strong> Confirm <tt class="docutils literal">udevd</tt> is running and - if not - start the daemon ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>ps ax | grep udevd
-<span class="nv">$ </span>sudo service udev start
+        <p class="published"> Sunday 27 April 2014</p>
+        <h1><a href="http://www.circuidipity.com/ubuntu1404-virtualbox.html">Ubuntu 14.04 and Virtualbox</a></h1>
+        <p><a class="reference external" href="https://www.virtualbox.org/">Virtualbox</a> is virtualization software that allows a Linux user to HOST multiple GUEST operating systems as <em>virtual machines</em> (VMs). Its a cool tool for playing with different Linux distros and experimenting with configurations.</p>
+<p>In this HOWTO I install Virtualbox on a 64-bit Ubuntu HOST and create an Ubuntu GUEST virtual machine.</p>
+<div class="section" id="step-0-install-virtualbox-on-host">
+<h2>Step 0 - Install VirtualBox on HOST</h2>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install build-essential dkms module-assistant linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span>
+<span class="nv">$ </span>sudo apt-get install virtualbox virtualbox-dkms virtualbox-qt
 </pre></div>
-<p>... and after plugging in a USB stick additional udisk activity is generated ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>ps ax | grep udisk | awk <span class="s1">&#39;{print $5}&#39;</span>
-/usr/lib/gvfs/gvfs-udisks2-volume-monitor
-/usr/lib/udisks2/udisksd
+<p>Virtualbox kernel modules are built via <em>Dynamic Kernel Module Support</em> (<a class="reference external" href="http://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support">DKMS</a>). After installing the virtualbox packages the <tt class="docutils literal">vbox</tt> modules should be auto-built and -loaded ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>lsmod | grep vbox
+vboxpci                19066  0
+vboxnetadp             13155  0
+vboxnetflt             23571  0
+vboxdrv               190057  4 vboxnetflt,vboxnetadp,vboxpci
 </pre></div>
-<p>Hope it helps!</p>
+<p>I add my USERNAME to the <tt class="docutils literal">vboxusers</tt> group...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo adduser YOUR_USERNAME vboxusers
+</pre></div>
+</div>
+<div class="section" id="step-1-create-the-ubuntu-guest">
+<h2>Step 1 - Create the Ubuntu GUEST</h2>
+<p>The <em>Default Machine Folder</em> where VM images are stored is <tt class="docutils literal">$HOME/Virtualbox VMs</tt> (this can be modified in <tt class="docutils literal"><span class="pre">File-&gt;Preferences-&gt;General</span></tt>).</p>
+<p>See the <a class="reference external" href="http://www.virtualbox.org/manual/UserManual.html">User Manual</a> for creating a GUEST virtual machine. I use the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/">Ubuntu mini.iso installer</a> to create a new virtual machine with a minimal system configuration.</p>
+</div>
+<div class="section" id="step-2-guest-additions">
+<h2>Step 2 - GUEST Additions</h2>
+<p><em>Guest Additions</em> provide extra features such as the ability to tweak display settings and add a shared folder that can accessed by both HOST and GUEST machines.</p>
+<p>On the new Ubuntu GUEST run...</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install build-essential module-assistant linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span> dkms
+<span class="nv">$ </span>sudo apt-get install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+<span class="nv">$ </span>sudo m-a prepare
+<span class="nv">$ </span>sudo adduser YOUR_USERNAME vboxsf
+</pre></div>
+<p>If the virtualbox modules need to be rebuilt for any reason for the running kernel...</p>
+<div class="highlight"><pre><span class="nv">$ </span>uname -r | sudo xargs -n1 /usr/lib/dkms/dkms_autoinstaller start
+</pre></div>
+<p>Reboot Ubuntu GUEST and <tt class="docutils literal">vbox</tt> drivers should now be loaded...</p>
+<pre class="code bash literal-block">
+<span class="nv">$ </span>lsmod | grep vbox
+vboxguest
+vboxsf
+vboxvideo
+</pre>
+</div>
+<div class="section" id="step-3-guest-configuration">
+<h2>Step 3 - GUEST Configuration</h2>
+<p>Tweak display settings by going to the Virtualbox <tt class="docutils literal"><span class="pre">Machine-&gt;Settings...-&gt;Display</span></tt> setting and move the slider to add more video memory and enable 3d acceleration.</p>
+<img alt="Display Settings" src="images/20121207-display.png" style="width: 662px; height: 502px;" />
+<p>With VirtualBox guest additions the display and resolution can be changed when running X...</p>
+<div class="highlight"><pre><span class="nv">$ </span>ps aux | grep VBox
+/usr/sbin/VBoxService
+/usr/bin/VBoxClient --clipboard
+/usr/bin/VBoxClient --display
+/usr/bin/VBoxClient --seamless
+</pre></div>
+<p>If GUEST does not use a graphical login manager to launch its desktop then modify <tt class="docutils literal"><span class="pre">$HOME/.xinitrc</span></tt> to start VBoxClient services...</p>
+<div class="highlight"><pre>VBoxClient --clipboard &amp;
+VBoxClient --display &amp;
+VBoxClient --seamless &amp;
+</pre></div>
+<p>Next create a shared folder on HOST. Make it accessible to GUEST by going to <tt class="docutils literal"><span class="pre">Machine-&gt;Settings...-&gt;Shared</span> Folders</tt> and click <tt class="docutils literal">Add Shared Folder</tt> and <tt class="docutils literal"><span class="pre">Auto-Mount</span></tt>.</p>
+<img alt="Shared Folder Settings" src="images/20121207-shared-folders.png" style="width: 662px; height: 502px;" />
+<p>Happy hacking!</p>
+</div>
 
         <!-- Nav links to previous|next article --> 
         <div id="navmenu">
             <hr />
             <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-                <a href="http://www.circuidipity.com/grml-debootstrap.html">
-                Install Debian using grml-debootstrap</a></p>
+                <a href="http://www.circuidipity.com/no-udevd-no-automount.html">
+                No udevd no auto-mount</a></p>
         </div>
 </div>
 
