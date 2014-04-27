@@ -1,14 +1,14 @@
-=====================================
-Virtualbox with Debian HOST and GUEST
-=====================================
+=====================
+Debian and Virtualbox
+=====================
 
 :tags: virtual environments, linux, debian
 :slug: virtualbox-install
-:modified: 25 April 2014
+:modified: 27 April 2014
 
-`Virtualbox <https://www.virtualbox.org/>`_ is virtualization software that allows a Linux user to HOST multiple GUEST OSs as *virtual machines* (VMs). Its a cool tool for playing with different Linux distros and experimenting with configurations.
+`Virtualbox <https://www.virtualbox.org/>`_ is virtualization software that allows a Linux user to HOST multiple GUEST operating systems as *virtual machines* (VMs). Its a cool tool for playing with different Linux distros and experimenting with configurations.
 
-In this HOWTO I install Virtualbox on a 64-bit Debian HOST and create a 32-bit Debian GUEST virtual machine.
+In this HOWTO I install Virtualbox on a 64-bit Debian HOST and create a Debian GUEST virtual machine.
 
 Step 0 - Install VirtualBox on HOST
 ===================================
@@ -32,14 +32,14 @@ I add my USERNAME to the ``vboxusers`` group...
 
 .. code-block:: bash
 
-    $ sudo adduser USERNAME vboxusers
+    $ sudo adduser YOUR_USERNAME vboxusers
 
-Step 1 - Create the Debian GUEST VM
-===================================
+Step 1 - Create the Debian GUEST
+================================
 
 The *Default Machine Folder* where VM images are stored is ``$HOME/Virtualbox VMs`` (this can be modified in ``File->Preferences->General``).
 
-See the `User Manual <http://www.virtualbox.org/manual/UserManual.html>`_ for creating a GUEST VM. I use the `Debian mini installer <http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/>`_ to create a new VM with a minimal system configuration. The installer auto-detects it is being configured as a VM and installs the necessary ``virtualbox-guest-{dkms,utils,x11}`` packages.
+See the `User Manual <http://www.virtualbox.org/manual/UserManual.html>`_ for creating a GUEST virtual machine. I use the `Debian mini.iso installer <http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/>`_ to create a new virtual machine with a minimal system configuration. The installer auto-detects it is being configured as a virtualbox GUEST and installs the necessary ``virtualbox-guest-{dkms,utils,x11}`` packages.
 
 Step 2 - GUEST Additions
 ========================
@@ -58,9 +58,15 @@ If they are missing like they were for me ... use DKMS to build them...
 
     $ sudo apt-get install build-essential dkms module-assistant linux-headers-$(uname -r)
     $ sudo m-a prepare
-    $ uname -r | sudo xargs -n1 /usr/lib/dkms/dkms_autoinstaller start  # rebuild modules for running kernel
+    $ sudo adduser YOUR_USERNAME vboxsf
 
-Add USERNAME to the ``vboxsf`` group. Reboot the Debian guest  and ``vbox`` drivers should now be loaded...
+If the virtualbox modules need to be rebuilt for any reason for the running kernel...
+
+.. code-block:: bash
+
+    $ uname -r | sudo xargs -n1 /usr/lib/dkms/dkms_autoinstaller start
+
+Reboot Debian GUEST and ``vbox`` drivers should now be loaded...
 
 .. code:: bash
 
@@ -72,7 +78,7 @@ Add USERNAME to the ``vboxsf`` group. Reboot the Debian guest  and ``vbox`` driv
 Step 3 - GUEST Configuration
 ============================
 
-Tweak display settings by going to the VM ``Machine->Settings...->Display`` and move the slider to add more video memory and enable 3d acceleration.
+Tweak display settings by going to the Virtualbox ``Machine->Settings...->Display`` setting and move the slider to add more video memory and enable 3d acceleration.
 
 .. image:: images/20121207-display.png
     :alt: Display Settings
@@ -89,7 +95,7 @@ With VirtualBox guest additions the display and resolution can be changed when r
     /usr/bin/VBoxClient --display
     /usr/bin/VBoxClient --seamless
 
-If the VM does not use a graphical login manager to launch its desktop then modify ``$HOME/.xinitrc`` to start VBoxClient services...
+If GUEST does not use a graphical login manager to launch its desktop then modify ``$HOME/.xinitrc`` to start VBoxClient services...
 
 .. code-block:: bash
 
