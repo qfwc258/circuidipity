@@ -108,7 +108,7 @@ grub-install /dev/sda
 update-grub
 <span class="c"># For SSD add the &#39;discard&#39; option</span>
 <span class="nb">echo</span> <span class="s2">&quot;crypt_root /dev/sda4 none luks,discard&quot;</span> &gt;&gt; /etc/crypttab
-<span class="nb">echo</span> <span class="s2">&quot;crypt_swap /dev/sda3 /dev/urandom cipher=aes-xts-plain64,size=256,noearly,discard,swap&quot;</span> &gt;&gt; /etc/crypttab
+<span class="nb">echo</span> <span class="s2">&quot;crypt_swap /dev/sda3 /dev/urandom cipher=aes-xts-plain64,size=256,discard,swap&quot;</span> &gt;&gt; /etc/crypttab
 <span class="nb">echo</span> <span class="s2">&quot;/dev/mapper/crypt_root / ext4 noatime,discard,errors=remount-ro 0 1&quot;</span> &gt; /etc/fstab
 <span class="nb">echo</span> <span class="s2">&quot;/dev/sda2 /boot ext4 noatime,discard 0 2&quot;</span> &gt;&gt; /etc/fstab
 <span class="nb">echo</span> <span class="s2">&quot;/dev/mapper/crypt_swap none swap sw,discard 0 0&quot;</span> &gt;&gt; /etc/fstab
@@ -128,7 +128,7 @@ deb-src http://http.debian.net/debian unstable main contrib non-free
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Swappiness">swappiness</a> parameter controls the preference of the kernel to move processes out of physical memory to the swap partition. Range is 0-100, default is set to 60 and lower values cause the kernel to avoid swapping and higher values prompt more frequent swap use.</p>
 <p>To reduce writes on the SSD set a low value of '1' ...</p>
 <div class="highlight"><pre><span class="c"># check current swappiness value</span>
-cat proc/sys/vim/swappiness
+cat /proc/sys/vm/swappiness
 <span class="c"># temporarily change value</span>
 /sbin/sysctl vm.swappiness<span class="o">=</span>1
 <span class="c"># permanently change value... modify &#39;vm.swappiness&#39; value in /etc/sysctl.conf...</span>
@@ -171,8 +171,8 @@ reboot
     <a href="/tags.html">Tags</a>
     <a href="/"><i class="fa fa-rocket"></i> Home</a><br />
     <span class="noWrap">Copyright &#169; 2014</span> and
-    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
-    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+    <a class="invisibleLink" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons BY-NC-SA License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
     by <span class="noWrap"><a rel="author" href="/">Daniel Wayne Armstrong</a></span>&nbsp;
     <span class="noWrap"><i class="fa fa-globe"></i> Find me at <span class="whoa">daniel at circuidipity dot com</span></span></p>
 </div></body>

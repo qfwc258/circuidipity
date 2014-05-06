@@ -157,7 +157,7 @@ grub-install /dev/sda
 update-grub
 &lt;span class="c"&gt;# For SSD add the &amp;#39;discard&amp;#39; option&lt;/span&gt;
 &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;crypt_root /dev/sda4 none luks,discard&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/crypttab
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;crypt_swap /dev/sda3 /dev/urandom cipher=aes-xts-plain64,size=256,noearly,discard,swap&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/crypttab
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;crypt_swap /dev/sda3 /dev/urandom cipher=aes-xts-plain64,size=256,discard,swap&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/crypttab
 &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/dev/mapper/crypt_root / ext4 noatime,discard,errors=remount-ro 0 1&amp;quot;&lt;/span&gt; &amp;gt; /etc/fstab
 &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/dev/sda2 /boot ext4 noatime,discard 0 2&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/fstab
 &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/dev/mapper/crypt_swap none swap sw,discard 0 0&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/fstab
@@ -177,7 +177,7 @@ deb-src http://http.debian.net/debian unstable main contrib non-free
 &lt;p&gt;The &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Swappiness"&gt;swappiness&lt;/a&gt; parameter controls the preference of the kernel to move processes out of physical memory to the swap partition. Range is 0-100, default is set to 60 and lower values cause the kernel to avoid swapping and higher values prompt more frequent swap use.&lt;/p&gt;
 &lt;p&gt;To reduce writes on the SSD set a low value of '1' ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# check current swappiness value&lt;/span&gt;
-cat proc/sys/vim/swappiness
+cat /proc/sys/vm/swappiness
 &lt;span class="c"&gt;# temporarily change value&lt;/span&gt;
 /sbin/sysctl vm.swappiness&lt;span class="o"&gt;=&lt;/span&gt;1
 &lt;span class="c"&gt;# permanently change value... modify &amp;#39;vm.swappiness&amp;#39; value in /etc/sysctl.conf...&lt;/span&gt;
