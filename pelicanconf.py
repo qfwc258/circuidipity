@@ -51,16 +51,16 @@ ARCHIVES_SAVE_AS = 'archives.html'
 EMAIL_ADDR = 'daniel at circuidipity dot com'
 
 # Plugins
-PLUGIN_PATH = '/home/dwa/doc/code/pelican-plugins'
+PLUGIN_PATH = '/home/dwa/code/pelican-plugins'
 PLUGINS = ['neighbors']
 
 # Theme
-THEME = '/home/dwa/doc/code/pelican-themes/chungking-condo'
+THEME = '/home/dwa/code/pelican-themes/chungking-condo'
 WHOAMI_URL = '/theme/images/whoami.png'
 GREETING = 'Howdy!'
-LICENCE_NAME = 'BY-NC-SA'
-LICENCE_URL = 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US'
-LICENCE_URL_IMG = 'http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png'
+LICENCE_NAME = 'CC BY-NC-SA'
+LICENCE_URL = 'http://creativecommons.org/licenses/by-nc-sa/4.0/'
+#LICENCE_URL_IMG = 'http://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png'
 COPYRIGHT = '2014'
 JINJA_EXTENSIONS = ['jinja2.ext.loopcontrols']
 

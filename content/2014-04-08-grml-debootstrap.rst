@@ -114,7 +114,7 @@ Next step is to enter ``chroot`` and perform post-install configuration ...
     update-grub                                                                     
     # For SSD add the 'discard' option
     echo "crypt_root /dev/sda4 none luks,discard" >> /etc/crypttab                  
-    echo "crypt_swap /dev/sda3 /dev/urandom cipher=aes-xts-plain64,size=256,noearly,discard,swap" >> /etc/crypttab
+    echo "crypt_swap /dev/sda3 /dev/urandom cipher=aes-xts-plain64,size=256,discard,swap" >> /etc/crypttab
     echo "/dev/mapper/crypt_root / ext4 noatime,discard,errors=remount-ro 0 1" > /etc/fstab
     echo "/dev/sda2 /boot ext4 noatime,discard 0 2" >> /etc/fstab                   
     echo "/dev/mapper/crypt_swap none swap sw,discard 0 0" >> /etc/fstab            
@@ -144,7 +144,7 @@ To reduce writes on the SSD set a low value of '1' ...
 .. code-block:: bash
 
     # check current swappiness value
-    cat proc/sys/vim/swappiness
+    cat /proc/sys/vm/swappiness
     # temporarily change value
     /sbin/sysctl vm.swappiness=1
     # permanently change value... modify 'vm.swappiness' value in /etc/sysctl.conf...
