@@ -2,12 +2,12 @@
 Ubuntu 14.04 and Virtualbox
 ===========================
 
-:tags: virtual environments, linux, ubuntu
+:tags: virtual environments, debian, ubuntu, linux
 :slug: ubuntu1404-virtualbox
 
 `Virtualbox <https://www.virtualbox.org/>`_ is virtualization software that allows a Linux user to HOST multiple GUEST operating systems as *virtual machines* (VMs). Its a cool tool for playing with different Linux distros and experimenting with configurations.
 
-In this HOWTO I install Virtualbox on a 64-bit Ubuntu HOST and create an Ubuntu GUEST virtual machine.
+In this HOWTO I install Virtualbox on a Debian HOST and create an Ubuntu GUEST virtual machine.
 
 Step 0 - Install VirtualBox on HOST
 ===================================
@@ -75,6 +75,7 @@ Step 3 - GUEST Configuration
 Tweak display settings by going to the Virtualbox ``Machine->Settings...->Display`` setting and move the slider to add more video memory and enable 3d acceleration.
 
 .. image:: images/20121207-display.png
+    :align: center
     :alt: Display Settings
     :width: 662px
     :height: 502px
@@ -100,6 +101,7 @@ If GUEST does not use a graphical login manager to launch its desktop then modif
 Next create a shared folder on HOST. Make it accessible to GUEST by going to ``Machine->Settings...->Shared Folders`` and click ``Add Shared Folder`` and ``Auto-Mount``.
 
 .. image:: images/20121207-shared-folders.png
+    :align: center
     :alt: Shared Folder Settings
     :width: 662px
     :height: 502px
