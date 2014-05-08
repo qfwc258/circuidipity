@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-04-27T00:00:00-04:00</updated><entry><title>Ubuntu 14.04 and Virtualbox</title><link href="http://www.circuidipity.com/ubuntu1404-virtualbox.html" rel="alternate"></link><updated>2014-04-27T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-04-27:ubuntu1404-virtualbox.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://www.virtualbox.org/"&gt;Virtualbox&lt;/a&gt; is virtualization software that allows a Linux user to HOST multiple GUEST operating systems as &lt;em&gt;virtual machines&lt;/em&gt; (VMs). Its a cool tool for playing with different Linux distros and experimenting with configurations.&lt;/p&gt;
-&lt;p&gt;In this HOWTO I install Virtualbox on a 64-bit Ubuntu HOST and create an Ubuntu GUEST virtual machine.&lt;/p&gt;
+&lt;p&gt;In this HOWTO I install Virtualbox on a Debian HOST and create an Ubuntu GUEST virtual machine.&lt;/p&gt;
 &lt;div class="section" id="step-0-install-virtualbox-on-host"&gt;
 &lt;h2&gt;Step 0 - Install VirtualBox on HOST&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install build-essential dkms module-assistant linux-headers-&lt;span class="k"&gt;$(&lt;/span&gt;uname -r&lt;span class="k"&gt;)&lt;/span&gt;
@@ -45,7 +45,7 @@ vboxvideo
 &lt;div class="section" id="step-3-guest-configuration"&gt;
 &lt;h2&gt;Step 3 - GUEST Configuration&lt;/h2&gt;
 &lt;p&gt;Tweak display settings by going to the Virtualbox &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Machine-&amp;gt;Settings...-&amp;gt;Display&lt;/span&gt;&lt;/tt&gt; setting and move the slider to add more video memory and enable 3d acceleration.&lt;/p&gt;
-&lt;img alt="Display Settings" src="images/20121207-display.png" style="width: 662px; height: 502px;" /&gt;
+&lt;img alt="Display Settings" class="align-center" src="images/20121207-display.png" style="width: 662px; height: 502px;" /&gt;
 &lt;p&gt;With VirtualBox guest additions the display and resolution can be changed when running X...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ps aux | grep VBox
 /usr/sbin/VBoxService
@@ -59,10 +59,10 @@ VBoxClient --display &amp;amp;
 VBoxClient --seamless &amp;amp;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Next create a shared folder on HOST. Make it accessible to GUEST by going to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Machine-&amp;gt;Settings...-&amp;gt;Shared&lt;/span&gt; Folders&lt;/tt&gt; and click &lt;tt class="docutils literal"&gt;Add Shared Folder&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Auto-Mount&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;img alt="Shared Folder Settings" src="images/20121207-shared-folders.png" style="width: 662px; height: 502px;" /&gt;
+&lt;img alt="Shared Folder Settings" class="align-center" src="images/20121207-shared-folders.png" style="width: 662px; height: 502px;" /&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="virtual environments"></category><category term="linux"></category><category term="ubuntu"></category></entry><entry><title>No udevd no auto-mount</title><link href="http://www.circuidipity.com/no-udevd-no-automount.html" rel="alternate"></link><updated>2014-04-14T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-04-14:no-udevd-no-automount.html</id><summary type="html">&lt;p&gt;Problem: Auto-mounting USB storage devices fails in &lt;tt class="docutils literal"&gt;thunar&lt;/tt&gt; file manager.&lt;/p&gt;
+</summary><category term="virtual environments"></category><category term="debian"></category><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>No udevd no auto-mount</title><link href="http://www.circuidipity.com/no-udevd-no-automount.html" rel="alternate"></link><updated>2014-04-14T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-04-14:no-udevd-no-automount.html</id><summary type="html">&lt;p&gt;Problem: Auto-mounting USB storage devices fails in &lt;tt class="docutils literal"&gt;thunar&lt;/tt&gt; file manager.&lt;/p&gt;
 &lt;p&gt;I ran into a situation today where changing from &lt;tt class="docutils literal"&gt;init 2&lt;/tt&gt; -&amp;gt; &lt;tt class="docutils literal"&gt;init 1&lt;/tt&gt; -&amp;gt; &lt;tt class="docutils literal"&gt;init 2&lt;/tt&gt; failed to restart the udev daemon and rendered USB mounting non-functional.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;FIX:&lt;/strong&gt; Confirm &lt;tt class="docutils literal"&gt;udevd&lt;/tt&gt; is running and - if not - start the daemon ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ps ax | grep udevd

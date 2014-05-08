@@ -26,7 +26,7 @@
 <h1>Ubuntu 14.04 and Virtualbox</h1>
 <div id="article">
     <p><a class="reference external" href="https://www.virtualbox.org/">Virtualbox</a> is virtualization software that allows a Linux user to HOST multiple GUEST operating systems as <em>virtual machines</em> (VMs). Its a cool tool for playing with different Linux distros and experimenting with configurations.</p>
-<p>In this HOWTO I install Virtualbox on a 64-bit Ubuntu HOST and create an Ubuntu GUEST virtual machine.</p>
+<p>In this HOWTO I install Virtualbox on a Debian HOST and create an Ubuntu GUEST virtual machine.</p>
 <div class="section" id="step-0-install-virtualbox-on-host">
 <h2>Step 0 - Install VirtualBox on HOST</h2>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install build-essential dkms module-assistant linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span>
@@ -71,7 +71,7 @@ vboxvideo
 <div class="section" id="step-3-guest-configuration">
 <h2>Step 3 - GUEST Configuration</h2>
 <p>Tweak display settings by going to the Virtualbox <tt class="docutils literal"><span class="pre">Machine-&gt;Settings...-&gt;Display</span></tt> setting and move the slider to add more video memory and enable 3d acceleration.</p>
-<img alt="Display Settings" src="images/20121207-display.png" style="width: 662px; height: 502px;" />
+<img alt="Display Settings" class="align-center" src="images/20121207-display.png" style="width: 662px; height: 502px;" />
 <p>With VirtualBox guest additions the display and resolution can be changed when running X...</p>
 <div class="highlight"><pre><span class="nv">$ </span>ps aux | grep VBox
 /usr/sbin/VBoxService
@@ -85,13 +85,14 @@ VBoxClient --display &amp;
 VBoxClient --seamless &amp;
 </pre></div>
 <p>Next create a shared folder on HOST. Make it accessible to GUEST by going to <tt class="docutils literal"><span class="pre">Machine-&gt;Settings...-&gt;Shared</span> Folders</tt> and click <tt class="docutils literal">Add Shared Folder</tt> and <tt class="docutils literal"><span class="pre">Auto-Mount</span></tt>.</p>
-<img alt="Shared Folder Settings" src="images/20121207-shared-folders.png" style="width: 662px; height: 502px;" />
+<img alt="Shared Folder Settings" class="align-center" src="images/20121207-shared-folders.png" style="width: 662px; height: 502px;" />
 <p>Happy hacking!</p>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-virtual-environments.html">virtual environments</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
 </div>
 
