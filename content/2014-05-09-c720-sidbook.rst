@@ -1,0 +1,212 @@
+==========================
+From Chromebook to Sidbook
+==========================
+
+:slug: c720-sidbook
+:tags: chrome, debian, linux
+
+A guide for replacing Chrome OS with **Debian "Sid" Unstable** on the **Acer C720 Chromebook**.
+
+.. image:: images/sidbook.png
+    :align: right
+    :alt: Debianized Acer C720
+    :width: 300px
+    :height: 161px
+
+Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy using my preferred window manager (`Openbox <http://openbox.org/>`_).
+
+There are a few different configurations of this device... mine is the `C720-2848 <http://us.acer.com/ac/en/US/content/model-datasheet/NX.SHEAA.002>`_ non-touchscreen model with 2GB RAM and 16GB SSD.
+
+Step 0 - Recovery Image
+=======================
+
+Create a recovery image of Chrome OS in case you need to restore the Chromebook to its default configuration. This will require a spare USB stick of 4GB or better...
+
+* Log into the Chromebook and let it auto update, as there sometimes are firmware updates... check the updating status in the browser at ``chrome://help``
+* Insert the USB stick, enter ``chrome://imageburner`` and follow the directions to generate a recovery image
+
+Source: `Create a Chromebook recovery image <https://support.google.com/chromebook/answer/1080595?hl=en>`_
+
+Step 1 - Debian Installer
+=========================
+
+I use `GRML 2014.03 <http://grml.org/>`_ installed on a USB stick as my Debian install media.
+
+Sources: Creating a `USB stick with multiple Linux installers <http://www.circuidipity.com/multi-boot-usb.html>`_ and `installing Debian using grml-debootstrap <http://www.circuidipity.com/grml-debootstrap.html>`_
+
+Step 2 - Developer Mode
+=======================
+
+Before booting the Debian installer the Chromebook needs to be put into developer mode...
+
+* With the Chromebook off... Hold down ``ESC-F3`` (Refresh) keys and power on the device
+* Invoke Recovery, and at the Recovery screen press ``Ctrl-D``
+* Device will prompt for confirmation, press ``ENTER`` and the system reboots into developer mode
+* 'Scary' white boot screen appears and you need to press ``Ctrl-D`` to continue boot
+
+.. note::
+
+    Switching between developer and normal (non-developer) modes will remove user accounts and their associated information from your Chromebook.
+
+Step 3 - USB Boot and Legacy BIOS
+=================================
+
+Open up a shell in Chrome OS by pressing ``Ctrl-Alt-T`` and enter ``shell``.
+
+Enable ``dev_boot_usb`` and ``dev_boot_legacy`` ...
+
+.. code-block:: bash
+
+    $ sudo crossystem dev_boot_usb=1
+    $ sudo dev_boot_legacy=1
+
+Connect the USB install stick, reboot the Chromebook and press ``CTRL-L`` at the white splash screen to enter legacy boot mode.
+
+Source: `Chromium OS <http://www.chromium.org/chromium-os>`_ developer information for the `Acer C720 Chromebook <http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook>`_
+
+Step 4 - Install Debian
+=======================
+
+My `grml-debootstrap instructions <http://www.circuidipity.com/grml-debootstrap.html>`_ for installing Debian Wheezy, configuring TRIM support for the SSD, and my `post-install script <https://github.com/vonbrownie/linux-post-install/blob/master/debian_post_install>`_ for upgrading and configuring Debian's sid/unstable branch. 
+
+.. note::
+
+    After Debian is successfully installed the white boot screen will continue to appear at boot time. Keep pressing ``CTRL-L`` to fire up GRUB... **DO NOT** follow the suggestion to press spacebar and proceed, or `your system may be wiped <http://www.reddit.com/r/chrubuntu/comments/1v7i0i/what_will_happen_if_i_press_the_spacebar_on_the/>`_.
+
+Step 5 - Touchpad
+=================
+
+After installing Debian the C720 touchpad is non-functional and requires compiling new kernel modules and creating a synaptic touchpad config file...
+
+* Compile new kernel modules using the `sid-c720-kern-mods.sh <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/sid-c720-kern-mods.sh>`_ script... Confirmed **working** in kernel ``3.13.10`` and **not working** in ``3.14.x``
+* Create touchpad config `50-c720-touchpad.conf <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/50-c720-touchpad.conf>`_ in ``/etc/X11/xorg.conf.d`` ...
+
+.. code-block:: bash
+
+    $ sudo mkdir /etc/X11/xorg.conf.d
+    $ sudo cp /usr/share/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-c720-touchpad.conf
+
+Modify this file to adjust timeouts, add tap-mouse actions (2-finger tap = right-click, 3-finger tap = middle-click), and 2-finger scrolling.
+
+Sources: `Touchpad Synaptics <https://wiki.archlinux.org/index.php/Touchpad_Synaptics>`_ and `C720 configuration <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration>`_ on the Arch Wiki
+
+Step 6 - Suspend
+================
+
+Enable suspend|resume under **systemd** (for sysv-init see *Helpful Resources* at bottom)...
+
+* Create `cros-sound-suspend.sh <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/cros-sound-suspend.sh>`_ (make it executable) in ``/lib/systemd/system-sleep`` and...
+* ... `cros-acpi-wakeup.conf <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/cros-acpi-wakeup.conf>`_ in ``/etc/tmpfiles.d`` to restore sound and touchpad after suspend
+* Configure ``GRUB_CMDLINE_LINUX_DEFAULT`` setting in ``/etc/default/grub``...
+
+.. code-block:: bash
+
+    GRUB_CMDLINE_LINUX_DEFAULT="quiet splash add_efi_memmap boot=local noresume noswap i915.modeset=1 tpm_tis.force=1 tpm_tis.interrupts=0 nmi_watchdog=panic,lapic"
+
+... and update the grub config...
+
+.. code-block:: bash
+
+    $ sudo update-grub
+
+Sources: `Chrubuntu resume fix <https://plus.google.com/+PedroLarroy/posts/6CgQypQukMa>`_ on Google+, `Acer C720 thread <https://bbs.archlinux.org/viewtopic.php?pid=1364521#p1364521>`_ in Arch Forums, and `systemctl user controls <https://wiki.archlinux.org/index.php/Allow_users_to_shutdown>`_
+
+Step 7 - Keyboard Shortcuts
+===========================
+
+The top row on the keyboard with the shortcut icons (brightness, volume, etc.) identify in Linux as the ``F1-F10`` keys and the Search key (in the ``CapsLk`` position) acts as the ``Super`` (Windows) modifier key.
+
+Create keyboard shortcuts in Openbox to modify the sound, brightness, and page movement settings by first installing...
+
+* amixer - command line mixer
+* xbacklight - set backlight level using RandR
+* xdotool - simulate keyboard/mouse input
+
+.. code-block:: bash
+
+    $ sudo apt-get install alsa-utils xbacklight xdotool
+
+... and creating keybindings in ``$HOME/.config/openbox/rc.xml`` ...
+
+Sound
+-----
+
+.. code-block:: bash
+
+    <!-- Keybindings for Acer C720 volume keys: mute/down/up -->
+    <keybind key="W-F8">
+        <action name="Execute">
+            <command>amixer -q -D pulse set Master toggle</command>
+        </action>
+    </keybind>
+    <keybind key="W-F9">
+        <action name="Execute">
+            <command>amixer -q -D pulse set Master 5%- unmute</command>
+        </action>
+    </keybind>
+    <keybind key="W-F10">
+        <action name="Execute">
+            <command>amixer -q -D pulse set Master 5%+ unmute</command>
+        </action>
+    </keybind>
+
+Display Brightness
+------------------
+
+.. code-block:: bash
+
+    <!-- Keybingings for Acer C720 brightness keys: lower/raise -->
+    <keybind key="W-F6">
+        <action name="Execute">
+            <command>xbacklight - 10</command>
+        </action>
+    </keybind>
+    <keybind key="W-F7">
+        <action name="Execute">
+            <command>xbacklight + 10</command>
+        </action>
+    </keybind>
+
+Page-Up, Page-Down, Home, End
+-----------------------------
+
+.. code-block:: bash
+
+    <!-- Keybindings for Page-Up, Page-Down, Home, End -->
+   <keybind key="A-Up">
+      <action name="Execute">
+        <command>xdotool key --clearmodifiers Page_Up</command>
+      </action>
+    </keybind>
+    <keybind key="A-Down">
+      <action name="Execute">
+          <command>xdotool key --clearmodifiers Page_Down</command>
+      </action>
+    </keybind>
+    <keybind key="C-A-Up">
+      <action name="Execute">
+        <command>xdotool key --clearmodifiers Home</command>
+      </action>
+    </keybind>
+    <keybind key="C-A-Down">
+      <action name="Execute">
+        <command>xdotool key --clearmodifiers End</command>
+      </action>
+    </keybind>
+
+Power Key
+=========
+
+The power key ignores any configuration in the window manager and triggers poweroff without delay when pressed (easy to do by accident as its positioned next to ``backspace``).
+
+If you want to disable the power key... modify ``/etc/systemd/logind.conf`` and set ``HandlePowerKey=ignore``.
+
+Helpful Resources
+=================
+
+* My `C720 config files <https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720/debian>`_ and the output of `lshw <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/lshw.txt>`_, `lspci <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/lspci.txt>`_, and `lsusb <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/lsusb.txt>`_
+* `CrunchBang Linux on the C720 <https://github.com/liangcj/AcerC720CrunchBang>`_
+* `Arch Linux wiki entry for the C720 <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook>`_
+* `List of fixes for Xubuntu 13.10 on the C720 <http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/>`_
+
+Happy hacking!
