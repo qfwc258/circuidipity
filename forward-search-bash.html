@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Daniel Wayne Armstrong</title>
+        <title>Circuidipity | Enable forward search in Bash history</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -15,39 +15,33 @@
 <body>
         <!-- content -->
 
-<!-- greeting -->
-<div id="siteheader">
-        <img class="whoami" src="/theme/images/whoami.png" />
-    <div id="sitegreeting">
-<p><span class="whoa">Howdy!</span><br />
-My name is <span class="noWrap"><span class="whoa">Daniel Wayne Armstrong</span></span>.
-I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    </div>
-<!-- menu -->
-    <div id="sitemenu">
-<p><a href="archives.html">Archives</a>
-&nbsp;<a href="feed.xml"><i class="fa fa-rss"></i></a>
-&nbsp;<a href="https://twitter.com/circuidipity"><i class="fa fa-twitter"></i></a>
-&nbsp;<a href="https://github.com/vonbrownie"><i class="fa fa-github-alt"></i></a></p>    </div>
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Saturday 10 May 2014</p>
 </div>
 
-<!-- latest post -->
-<div id="latestpost">
-        <p class="published"> Saturday 10 May 2014</p>
-        <h1><a href="http://www.circuidipity.com/forward-search-bash.html">Enable forward search in Bash history</a></h1>
-        <p><tt class="docutils literal"><span class="pre">CTRL-R</span></tt> enables reverse incremental searches through the Bash shell history and <tt class="docutils literal"><span class="pre">CTRL-S</span></tt> runs forward searches. However <tt class="docutils literal"><span class="pre">CTRL-S</span></tt> collides with XON/XOFF flow control in my terminal and disables that feature in history.</p>
+<!-- article -->
+<h1>Enable forward search in Bash history</h1>
+<div id="article">
+    <p><tt class="docutils literal"><span class="pre">CTRL-R</span></tt> enables reverse incremental searches through the Bash shell history and <tt class="docutils literal"><span class="pre">CTRL-S</span></tt> runs forward searches. However <tt class="docutils literal"><span class="pre">CTRL-S</span></tt> collides with XON/XOFF flow control in my terminal and disables that feature in history.</p>
 <p><strong>Fix:</strong> Disable XON/XOFF in <tt class="docutils literal"><span class="pre">$HOME/.bashrc</span></tt>...</p>
 <div class="highlight"><pre>stty -ixon
 </pre></div>
 <p>Bonus: Hitting <tt class="docutils literal"><span class="pre">CTRL-S</span></tt> by mistake in vim no longer disables output to the terminal.</p>
 <p>Source: <a class="reference external" href="https://stackoverflow.com/questions/791765/unable-to-forward-search-bash-history-similarly-as-with-ctrl-r">Unable to forward search Bash history similarly as with CTRL-r</a></p>
 
-        <!-- Nav links to previous|next article --> 
-        <div id="navmenu">
-            <hr />
-            <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-                <a href="http://www.circuidipity.com/c720-sidbook.html">
-                From Chromebook to Sidbook</a></p>
-        </div>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/c720-sidbook.html">From Chromebook to Sidbook</a></p>
 </div>
 
 
