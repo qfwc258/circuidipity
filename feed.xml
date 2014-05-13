@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-05-10T00:00:00-04:00</updated><entry><title>Enable forward search in Bash history</title><link href="http://www.circuidipity.com/forward-search-bash.html" rel="alternate"></link><updated>2014-05-10T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-05-10:forward-search-bash.html</id><summary type="html">&lt;p&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-R&lt;/span&gt;&lt;/tt&gt; enables reverse incremental searches through the Bash shell history and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-S&lt;/span&gt;&lt;/tt&gt; runs forward searches. However &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-S&lt;/span&gt;&lt;/tt&gt; collides with XON/XOFF flow control in my terminal and disables that feature in history.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-05-13T00:00:00-04:00</updated><entry><title>Creating new commands with alias</title><link href="http://www.circuidipity.com/alias-commands.html" rel="alternate"></link><updated>2014-05-13T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-05-13:alias-commands.html</id><summary type="html">&lt;p&gt;An &lt;strong&gt;alias&lt;/strong&gt; is useful for setting desirable options for a shell command or creating new commands using the structure &lt;tt class="docutils literal"&gt;alias &lt;span class="pre"&gt;name='string&lt;/span&gt;&lt;/tt&gt;. Multiple commands can be placed on a single line by separating them with a semicolon &lt;tt class="docutils literal"&gt;alias &lt;span class="pre"&gt;name='command0;&lt;/span&gt; command1; command2&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Check for aliases already set in the environment:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;alias&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Remove the alias for command &lt;tt class="docutils literal"&gt;foo&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;unalias &lt;/span&gt;foo
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Create new aliases:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;ls&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ls -aFlhv --color=auto&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;dpkgg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dpkg -l | grep&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;aaa&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sudo apt-get update; sudo apt-get dist-upgrade; sudo apt-get autoremove&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;type &lt;/span&gt;ls   &lt;span class="c"&gt;# display information about a command&lt;/span&gt;
+ls is aliased to &lt;span class="sb"&gt;`&lt;/span&gt;ls -aFlhv --color&lt;span class="o"&gt;=&lt;/span&gt;auto&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Aliases created at the prompt persist only for the duration of the current session. Make them permanent by adding them to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.bashrc&lt;/span&gt;&lt;/tt&gt;. Examples:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;df&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;df -hT&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;diff&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;colordiff&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;dpkgg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dpkg -l | grep&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;grep&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;grep --color=auto&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;halt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;systemctl poweroff&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;mkdir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;mkdir -p -v&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;psg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ps aux | grep&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;alias pwd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;pwd -P&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;reboot&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;systemctl reboot&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;alias suspend&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;systemctl suspend&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+</summary><category term="shell"></category><category term="linux"></category></entry><entry><title>Enable forward search in Bash history</title><link href="http://www.circuidipity.com/forward-search-bash.html" rel="alternate"></link><updated>2014-05-10T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-05-10:forward-search-bash.html</id><summary type="html">&lt;p&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-R&lt;/span&gt;&lt;/tt&gt; enables reverse incremental searches through the Bash shell history and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-S&lt;/span&gt;&lt;/tt&gt; runs forward searches. However &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-S&lt;/span&gt;&lt;/tt&gt; collides with XON/XOFF flow control in my terminal and disables that feature in history.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Disable XON/XOFF in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.bashrc&lt;/span&gt;&lt;/tt&gt;...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;stty -ixon
 &lt;/pre&gt;&lt;/div&gt;
@@ -472,33 +499,4 @@ POSIX
 </summary><category term="linux"></category></entry><entry><title>Academic discipline</title><link href="http://www.circuidipity.com/academic-discipline.html" rel="alternate"></link><updated>2014-03-16T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-03-16:academic-discipline.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Mark Nathan Cohen&lt;/strong&gt;, &lt;em&gt;Health and the Rise of Civilization&lt;/em&gt;, 1989:&lt;/p&gt;
 &lt;blockquote&gt;
 A colleague once defined an academic discipline as a group of scholars who had agreed not to ask certain embarrassing questions about key assumptions.&lt;/blockquote&gt;
-</summary><category term="quote"></category></entry><entry><title>GRUBS Reanimated USB Boot Stick</title><link href="http://www.circuidipity.com/grubs.html" rel="alternate"></link><updated>2014-03-13T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-03-13:grubs.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/grubs"&gt;GRUBS&lt;/a&gt; is a Bash script I created for transforming a USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.&lt;/p&gt;
-&lt;p&gt;See: &lt;a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html"&gt;Transform a USB stick into a boot device packing multiple Linux distros&lt;/a&gt;&lt;/p&gt;
-&lt;div class="section" id="requirements"&gt;
-&lt;h2&gt;Requirements&lt;/h2&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;GRUB2&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;rsync&lt;/tt&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="installation"&gt;
-&lt;h2&gt;Installation&lt;/h2&gt;
-&lt;div class="section" id="source"&gt;
-&lt;h3&gt;Source&lt;/h3&gt;
-&lt;p&gt;To install GRUBS from source:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; wget -c https://github.com/vonbrownie/grubs/releases/download/v0.9.2/grubs-0.9.2.tar.gz
-&lt;span class="gp"&gt;$&lt;/span&gt; tar -xvzf grubs-*.tar.gz
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="usage"&gt;
-&lt;h2&gt;Usage&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Step 0:&lt;/strong&gt; Download Linux distro images and place in the &lt;tt class="docutils literal"&gt;iso&lt;/tt&gt; folder.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Step 1:&lt;/strong&gt; Edit the USB stick's sample &lt;tt class="docutils literal"&gt;grub.cfg&lt;/tt&gt; with entries for the Linux images to be copied to the device. Each distro is a little bit different in the manner its booted by GRUB.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Step 2:&lt;/strong&gt; Open &lt;tt class="docutils literal"&gt;grubs&lt;/tt&gt; in a text editor and modify the variables &lt;tt class="docutils literal"&gt;ISODIR&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;CONFIG&lt;/tt&gt; to match where &lt;tt class="docutils literal"&gt;iso&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;grub.cfg&lt;/tt&gt; are located on your system.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Step 3:&lt;/strong&gt; Just run (as root) &lt;tt class="docutils literal"&gt;grubs [DEVICE]&lt;/tt&gt;. For example ... to install GRUB and Linux distros on a USB stick identified as &lt;tt class="docutils literal"&gt;/dev/sdb1&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; sudo grubs sdb1
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reboot, select the USB stick (depending on BIOS settings) as boot device and GRUB will display a menu of the installed Linux distro images. Reboot again and return to using your USB stick as a regular storage device.&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="shell"></category><category term="programming"></category><category term="linux"></category></entry></feed>
+</summary><category term="quote"></category></entry></feed>
