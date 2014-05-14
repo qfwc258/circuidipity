@@ -27,7 +27,7 @@ Create new aliases:
         $ alias dpkgg='dpkg -l | grep'
         $ alias aaa='sudo apt-get update; sudo apt-get dist-upgrade; sudo apt-get autoremove'
         $ type ls   # display information about a command
-        ls is aliased to `ls -aFlhv --color=auto'
+        ls is aliased to 'ls -aFlhv --color=auto'
 
 Aliases created at the prompt persist only for the duration of the current session. Make them permanent by adding them to ``$HOME/.bashrc``. Examples:
 
