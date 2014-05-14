@@ -11,7 +11,7 @@
 &lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;dpkgg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dpkg -l | grep&amp;#39;&lt;/span&gt;
 &lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;aaa&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sudo apt-get update; sudo apt-get dist-upgrade; sudo apt-get autoremove&amp;#39;&lt;/span&gt;
 &lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;type &lt;/span&gt;ls   &lt;span class="c"&gt;# display information about a command&lt;/span&gt;
-ls is aliased to &lt;span class="sb"&gt;`&lt;/span&gt;ls -aFlhv --color&lt;span class="o"&gt;=&lt;/span&gt;auto&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+ls is aliased to &lt;span class="s1"&gt;&amp;#39;ls -aFlhv --color=auto&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Aliases created at the prompt persist only for the duration of the current session. Make them permanent by adding them to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.bashrc&lt;/span&gt;&lt;/tt&gt;. Examples:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;df&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;df -hT&amp;#39;&lt;/span&gt;
