@@ -28,7 +28,7 @@
     <p>After a recent upgrade on my 64-bit systems running Debian Sid/Unstable and Openbox I discovered user permission problems with:</p>
 <ul class="simple">
 <li><strong>nm-applet</strong> - &quot;(32) Not authorized to control networking&quot; - refusing to make new wireless connections</li>
-<li><strong>xfce4-power-manager</strong> disabling suspend/reboot/shutdown</li>
+<li><strong>xfce4-power-manager --dump</strong> shows suspend/reboot/shutdown as disabled</li>
 </ul>
 <p>Openbox launches with <tt class="docutils literal">startx</tt> using <tt class="docutils literal">exec <span class="pre">ck-launch-session</span> <span class="pre">dbus-launch</span> <span class="pre">openbox-session</span></tt> in <tt class="docutils literal"><span class="pre">$HOME/.xinitrc</span></tt>. Online searching for fixes generates a lot of information about policykit, consolekit, and systemd but the current problems narrowed down to the most recent upgrade of polkit-related packages in Debian.</p>
 <p><strong>(Temporary) Fix:</strong> Downgrade the problematic packages from versions <tt class="docutils literal"><span class="pre">0.105-5</span></tt> to <tt class="docutils literal"><span class="pre">0.105-4</span></tt>.</p>
