@@ -8,7 +8,7 @@ Policykit upgrade generates user permission problems
 After a recent upgrade on my 64-bit systems running Debian Sid/Unstable and Openbox I discovered user permission problems with:
 
 * **nm-applet** - "(32) Not authorized to control networking" - refusing to make new wireless connections
-* **xfce4-power-manager** disabling suspend/reboot/shutdown
+* **xfce4-power-manager --dump** shows suspend/reboot/shutdown as disabled
 
 Openbox launches with ``startx`` using ``exec ck-launch-session dbus-launch openbox-session`` in ``$HOME/.xinitrc``. Online searching for fixes generates a lot of information about policykit, consolekit, and systemd but the current problems narrowed down to the most recent upgrade of polkit-related packages in Debian.
 
