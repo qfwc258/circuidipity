@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-05-13T00:00:00-04:00</updated><entry><title>Creating new commands with alias</title><link href="http://www.circuidipity.com/alias-commands.html" rel="alternate"></link><updated>2014-05-13T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-05-13:alias-commands.html</id><summary type="html">&lt;p&gt;An &lt;strong&gt;alias&lt;/strong&gt; is useful for setting desirable options for a shell command or creating new commands using the structure &lt;tt class="docutils literal"&gt;alias &lt;span class="pre"&gt;name='string&lt;/span&gt;&lt;/tt&gt;. Multiple commands can be placed on a single line by separating them with a semicolon &lt;tt class="docutils literal"&gt;alias &lt;span class="pre"&gt;name='command0;&lt;/span&gt; command1; command2&lt;/tt&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-05-15T00:00:00-04:00</updated><entry><title>Policykit upgrade generates user permission problems</title><link href="http://www.circuidipity.com/policykit-upgrade-user-permission.html" rel="alternate"></link><updated>2014-05-15T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-05-15:policykit-upgrade-user-permission.html</id><summary type="html">&lt;p&gt;After a recent upgrade on my 64-bit systems running Debian Sid/Unstable and Openbox I discovered user permission problems with:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;nm-applet&lt;/strong&gt; refusing - &lt;em&gt;&amp;quot;(32) Not authorized to control networking&amp;quot;&lt;/em&gt; - to make new wireless connections&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;xfce4-power-manager&lt;/strong&gt; disabling suspend/reboot/shutdown functions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt; the window manager with the command &lt;tt class="docutils literal"&gt;exec &lt;span class="pre"&gt;ck-launch-session&lt;/span&gt; &lt;span class="pre"&gt;dbus-launch&lt;/span&gt; &lt;span class="pre"&gt;openbox-session&lt;/span&gt;&lt;/tt&gt; in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.xinitrc&lt;/span&gt;&lt;/tt&gt;. Online searching for fixes generates a lot of information about policykit, console-kit, and systemd but the current problems began with the recent upgrade of polkit packages in Debian.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;(Temporary) Fix:&lt;/strong&gt; Downgrade the problematic polkit packages from versions &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;0.105-5&lt;/span&gt;&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;0.105-4&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Step 0:&lt;/strong&gt; Removing the current polkit packages temporarily removes a number of related packages including network-manager and breaks the net connection. Previous good &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;0.105-4&lt;/span&gt;&lt;/tt&gt; versions of the affected packages were still available for installation in &lt;tt class="docutils literal"&gt;/var/cache/apt/archives&lt;/tt&gt;... otherwise download (amd64) packages from &lt;a class="reference external" href="http://snapshot.debian.org/"&gt;snapshot.debian.org&lt;/a&gt;:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://snapshot.debian.org/archive/debian/20131015T214817Z/pool/main/p/policykit-1/libpolkit-gobject-1-0_0.105-4_amd64.deb"&gt;libpolkit-gobject-1-0:amd64&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://snapshot.debian.org/archive/debian/20131015T214817Z/pool/main/p/policykit-1/libpolkit-agent-1-0_0.105-4_amd64.deb"&gt;libpolkit-agent-1-0:amd64&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://snapshot.debian.org/archive/debian/20131015T214817Z/pool/main/p/policykit-1/libpolkit-backend-1-0_0.105-4_amd64.deb"&gt;libpolkit-backend-1-0:amd64&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://snapshot.debian.org/archive/debian/20131015T214817Z/pool/main/p/policykit-1/policykit-1_0.105-4_amd64.deb"&gt;policykit-1&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Step 1:&lt;/strong&gt; Remove the affected packages. Take note of the dependencies also removed for later restoration:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get remove libpolkit-gobject-1-0:amd64 libpolkit-agent-1-0:amd64 libpolkit-backend-1-0:amd64 policykit-1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Step 2:&lt;/strong&gt; Install the earlier packages and place them &amp;quot;on hold&amp;quot; to block &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-get&lt;/span&gt;&lt;/tt&gt; from trying to upgrade again to newer (broken) versions:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i libpolkit-gobject-1-0_0.105-4_amd64.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i libpolkit-agent-1-0_0.105-4_amd64.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i libpolkit-backend-1-0_0.105-4_amd64.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i policykit-1_0.105-4_amd64.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;libpolkit-gobject-1-0:amd64 hold&amp;quot;&lt;/span&gt; | sudo dpkg --set-selections
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;libpolkit-agent-1-0:amd64 hold&amp;quot;&lt;/span&gt; | sudo dpkg --set-selections
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;libpolkit-backend-1-0:amd64 hold&amp;quot;&lt;/span&gt; | sudo dpkg --set-selections
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;policykit-1 hold&amp;quot;&lt;/span&gt; | sudo dpkg --set-selections
+&lt;span class="nv"&gt;$ &lt;/span&gt;dpkg get-selections | grep &lt;span class="s2"&gt;&amp;quot;pol&amp;quot;&lt;/span&gt;  &lt;span class="c"&gt;# confirm pkgs are now on hold&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Step 3:&lt;/strong&gt; Restore dependencies... my own system as an example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install accountsservice colord consolekit cups-pk-helper &lt;span class="se"&gt;\&lt;/span&gt;
+gnome-control-center network-manager network-manager-gnome packagekit &lt;span class="se"&gt;\&lt;/span&gt;
+packagekit-tools policykit-1-gnome upower xfce4-power-manager
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="http://forums.debian.net/viewtopic.php?f=5&amp;amp;t=114412"&gt;UPower Suspend/Hibernate: not authorized&lt;/a&gt;&lt;/p&gt;
+</summary><category term="debian"></category><category term="linux"></category></entry><entry><title>Creating new commands with alias</title><link href="http://www.circuidipity.com/alias-commands.html" rel="alternate"></link><updated>2014-05-13T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-05-13:alias-commands.html</id><summary type="html">&lt;p&gt;An &lt;strong&gt;alias&lt;/strong&gt; is useful for setting desirable options for a shell command or creating new commands using the structure &lt;tt class="docutils literal"&gt;alias &lt;span class="pre"&gt;name='string&lt;/span&gt;&lt;/tt&gt;. Multiple commands can be placed on a single line by separating them with a semicolon &lt;tt class="docutils literal"&gt;alias &lt;span class="pre"&gt;name='command0;&lt;/span&gt; command1; command2&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;Check for aliases already set in the environment:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;alias&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -496,7 +530,4 @@ POSIX
 &lt;span class="nv"&gt;LC_ALL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="linux"></category></entry><entry><title>Academic discipline</title><link href="http://www.circuidipity.com/academic-discipline.html" rel="alternate"></link><updated>2014-03-16T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-03-16:academic-discipline.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Mark Nathan Cohen&lt;/strong&gt;, &lt;em&gt;Health and the Rise of Civilization&lt;/em&gt;, 1989:&lt;/p&gt;
-&lt;blockquote&gt;
-A colleague once defined an academic discipline as a group of scholars who had agreed not to ask certain embarrassing questions about key assumptions.&lt;/blockquote&gt;
-</summary><category term="quote"></category></entry></feed>
+</summary><category term="linux"></category></entry></feed>
