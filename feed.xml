@@ -28,9 +28,8 @@
 &lt;span class="nv"&gt;$ &lt;/span&gt;dpkg get-selections | grep &lt;span class="s2"&gt;&amp;quot;pol&amp;quot;&lt;/span&gt;  &lt;span class="c"&gt;# confirm pkgs are now on hold&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Step 3:&lt;/strong&gt; Restore dependencies... my own system as an example:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install accountsservice colord consolekit cups-pk-helper &lt;span class="se"&gt;\&lt;/span&gt;
-gnome-control-center network-manager network-manager-gnome packagekit &lt;span class="se"&gt;\&lt;/span&gt;
-packagekit-tools policykit-1-gnome upower xfce4-power-manager
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install accountsservice colord consolekit cups-pk-helper gnome-control-center network-manager-gnome &lt;span class="se"&gt;\&lt;/span&gt;
+packagekit packagekit-tools policykit-1-gnome upower xfce4-power-manager
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Source: &lt;a class="reference external" href="http://forums.debian.net/viewtopic.php?f=5&amp;amp;t=114412"&gt;UPower Suspend/Hibernate: not authorized&lt;/a&gt;&lt;/p&gt;
 </summary><category term="debian"></category><category term="linux"></category></entry><entry><title>Creating new commands with alias</title><link href="http://www.circuidipity.com/alias-commands.html" rel="alternate"></link><updated>2014-05-13T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-05-13:alias-commands.html</id><summary type="html">&lt;p&gt;An &lt;strong&gt;alias&lt;/strong&gt; is useful for setting desirable options for a shell command or creating new commands using the structure &lt;tt class="docutils literal"&gt;alias &lt;span class="pre"&gt;name='string&lt;/span&gt;&lt;/tt&gt;. Multiple commands can be placed on a single line by separating them with a semicolon &lt;tt class="docutils literal"&gt;alias &lt;span class="pre"&gt;name='command0;&lt;/span&gt; command1; command2&lt;/tt&gt;.&lt;/p&gt;

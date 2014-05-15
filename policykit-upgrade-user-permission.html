@@ -54,9 +54,8 @@
 <span class="nv">$ </span>dpkg get-selections | grep <span class="s2">&quot;pol&quot;</span>  <span class="c"># confirm pkgs are now on hold</span>
 </pre></div>
 <p><strong>Step 3:</strong> Restore dependencies... my own system as an example:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install accountsservice colord consolekit cups-pk-helper <span class="se">\</span>
-gnome-control-center network-manager network-manager-gnome packagekit <span class="se">\</span>
-packagekit-tools policykit-1-gnome upower xfce4-power-manager
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install accountsservice colord consolekit cups-pk-helper gnome-control-center network-manager-gnome <span class="se">\</span>
+packagekit packagekit-tools policykit-1-gnome upower xfce4-power-manager
 </pre></div>
 <p>Source: <a class="reference external" href="http://forums.debian.net/viewtopic.php?f=5&amp;t=114412">UPower Suspend/Hibernate: not authorized</a></p>
 
