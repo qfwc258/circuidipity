@@ -11,7 +11,7 @@ Circuidipity is made possible thanks to the *awesomesauce* of `free and open-sou
 
 I use `GitHub Pages </github-pages.html>`_ as my hosting service. Espresso, bananas, serendipity and friends are my duct tape.
 
-Original content is available under a `Creative Commons BY-NC-SA Licence <http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US>`_. Happy reading and thanks for visiting!
+Original content is available under a `Creative Commons BY-NC-SA Licence <https://creativecommons.org/licenses/by-nc-sa/4.0/>`_. Happy reading and thanks for visiting!
 
 .. image:: images/tuxspeak.png
     :alt: Tux
