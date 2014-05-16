@@ -70,6 +70,12 @@ a.tag, ul.tagcloud a {
     color: #409fff;
 }
 
+a.ccLicense, a.authorID {color: #ff0000;}
+
+a.subTweat {color: #409fff;}
+
+a.subEmail {color: #660066;}
+
 a:hover.tag, ul.tagcloud a:hover, 
 #sitemenu a:hover, #footer a:hover {color: #ffffff;}
 
@@ -85,13 +91,13 @@ ul.tagcloud a, #siteheader a, #navmenu a, #footer a, #breadcrumb a,
     font-weight: bold;
 }
 
-#sitemenu a, #footer a {color: #ff0000;}
+#sitemenu a {color: #ff0000;}
 
 /*
 Paragraphs
 */
 
-p.contentinfo {margin-top: 2px;}
+p.contentinfo {margin-top: 2px; font-size: 0.9em;}
 
 p.published {
     font-size: 1.4em;
