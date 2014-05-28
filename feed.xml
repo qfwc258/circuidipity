@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-05-15T00:00:00-04:00</updated><entry><title>Policykit upgrade generates user permission problems</title><link href="http://www.circuidipity.com/policykit-upgrade-user-permission.html" rel="alternate"></link><updated>2014-05-15T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-05-15:policykit-upgrade-user-permission.html</id><summary type="html">&lt;p&gt;After a recent upgrade on my 64-bit systems running Debian Sid/Unstable and Openbox I discovered user permission problems with:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-05-28T00:00:00-04:00</updated><entry><title>Duplicate Debian package selection on multiple machines</title><link href="http://www.circuidipity.com/dpkg-duplicate.html" rel="alternate"></link><updated>2014-05-28T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-05-28:dpkg-duplicate.html</id><summary type="html">&lt;p&gt;I am happy with the selection of packages installed on my &lt;a class="reference external" href="http://www.circuidipity.com/c720-sidbook.html"&gt;Debian-powered laptop&lt;/a&gt; and discovered an easy method to &lt;strong&gt;duplicate&lt;/strong&gt; the configuration on another machine.&lt;/p&gt;
+&lt;p&gt;On the 'master' machine generate a list of installed packages...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;dpkg --get-selections | grep -v deinstall &amp;gt; deb-pkg-list.txt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Move the generated list to the target machine. Configure the package manager to duplicate the selection on the new system...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ PKGS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;mktemp&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-cache dumpavail &amp;gt; &lt;span class="s2"&gt;&amp;quot;$PKGS&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg --merge-avail &lt;span class="s2"&gt;&amp;quot;$PKGS&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo rm -f &lt;span class="s2"&gt;&amp;quot;$PKGS&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg --clear-selections
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg --set-selections &amp;lt; deb-pkg-list.txt
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get dselect-upgrade
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I created a &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dpkgDup"&gt;shell script&lt;/a&gt; that includes the above steps for generating and restoring package lists.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dpkgDup"&gt;dpkgDup&lt;/a&gt;, &lt;a class="reference external" href="http://debian-handbook.info/browse/wheezy/sect.apt-get.html"&gt;Debian Administrator's Handbook&lt;/a&gt;&lt;/p&gt;
+</summary><category term="debian"></category><category term="linux"></category></entry><entry><title>Policykit upgrade generates user permission problems</title><link href="http://www.circuidipity.com/policykit-upgrade-user-permission.html" rel="alternate"></link><updated>2014-05-15T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-05-15:policykit-upgrade-user-permission.html</id><summary type="html">&lt;p&gt;After a recent upgrade on my 64-bit systems running Debian Sid/Unstable and Openbox I discovered user permission problems with:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;strong&gt;nm-applet&lt;/strong&gt; - &amp;quot;(32) Not authorized to control networking&amp;quot; - refusing to make new wireless connections&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;xfce4-power-manager --dump&lt;/strong&gt; shows suspend/reboot/shutdown as disabled&lt;/li&gt;
@@ -470,63 +486,4 @@ add &lt;span class="nv"&gt;mod4&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Test the new setting by running &lt;tt class="docutils literal"&gt;xmodmap &lt;span class="pre"&gt;~/.xmodmap&lt;/span&gt;&lt;/tt&gt;. Place the command in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/home/USER/.xinitrc&lt;/span&gt;&lt;/tt&gt; to auto-load when running &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;Source: &lt;a class="reference external" href="http://www.danplanet.com/blog/2011/04/14/a-super-key-for-people-with-real-keyboards/"&gt;A super key for people with real keyboards&lt;/a&gt;&lt;/p&gt;
-</summary><category term="linux"></category></entry><entry><title>Locale configuration</title><link href="http://www.circuidipity.com/locale-config.html" rel="alternate"></link><updated>2014-03-17T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-03-17:locale-config.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Locales&lt;/strong&gt; are used to define language settings in Linux.&lt;/p&gt;
-&lt;div class="section" id="default-locale"&gt;
-&lt;h2&gt;Default locale&lt;/h2&gt;
-&lt;p&gt;Current setting for the default locale is stored in &lt;tt class="docutils literal"&gt;/etc/default/locale&lt;/tt&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;locale
-&lt;span class="nv"&gt;LANG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
-&lt;span class="nv"&gt;LANGUAGE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
-&lt;span class="nv"&gt;LC_CTYPE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POSIX&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_NUMERIC&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POSIX&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_TIME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POSIX&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_COLLATE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POSIX&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_MONETARY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POSIX&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_MESSAGES&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POSIX&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_PAPER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POSIX&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_NAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POSIX&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_ADDRESS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POSIX&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_TELEPHONE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POSIX&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_MEASUREMENT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POSIX&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_IDENTIFICATION&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;POSIX&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_ALL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="locales-available"&gt;
-&lt;h2&gt;Locales available&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;locale -a
-C
-C.UTF-8
-POSIX
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="generate-locales"&gt;
-&lt;h2&gt;Generate locales&lt;/h2&gt;
-&lt;p&gt;A list of locales to be built is stored in &lt;tt class="docutils literal"&gt;/etc/locale.gen&lt;/tt&gt;. Edit this file by [un]commenting the entries to [enable]disable locales and run &lt;tt class="docutils literal"&gt;sudo &lt;span class="pre"&gt;update-gen&lt;/span&gt;&lt;/tt&gt;, or select which locales to build from an interactive menu by running ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg-reconfigure locales
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="set-default-locale"&gt;
-&lt;h2&gt;Set default locale&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-locale &lt;span class="nv"&gt;LANG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;en_CA.UTF-8 &lt;span class="nv"&gt;LANGUAGE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;en_CA:en
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and reboot.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;locale
-&lt;span class="nv"&gt;LANG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;en_CA.UTF-8
-&lt;span class="nv"&gt;LANGUAGE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;en_CA:en
-&lt;span class="nv"&gt;LC_CTYPE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en_CA.UTF-8&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_NUMERIC&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en_CA.UTF-8&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_TIME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en_CA.UTF-8&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_COLLATE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en_CA.UTF-8&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_MONETARY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en_CA.UTF-8&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_MESSAGES&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en_CA.UTF-8&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_PAPER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en_CA.UTF-8&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_NAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en_CA.UTF-8&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_ADDRESS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en_CA.UTF-8&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_TELEPHONE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en_CA.UTF-8&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_MEASUREMENT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en_CA.UTF-8&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_IDENTIFICATION&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en_CA.UTF-8&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;LC_ALL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
 </summary><category term="linux"></category></entry></feed>

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Daniel Wayne Armstrong</title>
+        <title>Circuidipity | Duplicate Debian package selection on multiple machines</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -15,27 +15,17 @@
 <body>
         <!-- content -->
 
-<!-- greeting -->
-<div id="siteheader">
-        <img class="whoami" src="/theme/images/whoami.png" />
-    <div id="sitegreeting">
-<p><span class="whoa">Howdy!</span><br />
-My name is <span class="noWrap"><span class="whoa">Daniel Wayne Armstrong</span></span>.
-I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    </div>
-<!-- menu -->
-    <div id="sitemenu">
-<p><a href="archives.html">Archives</a>
-&nbsp;<a href="/colophon.html">Colophon</a>
-&nbsp;<a href="feed.xml"><i class="fa fa-rss"></i></a>
-&nbsp;<a href="https://twitter.com/circuidipity"><i class="fa fa-twitter"></i></a>
-&nbsp;<a href="https://github.com/vonbrownie"><i class="fa fa-github-alt"></i></a></p>    </div>
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Wednesday 28 May 2014</p>
 </div>
 
-<!-- latest post -->
-<div id="latestpost">
-        <p class="published"> Wednesday 28 May 2014</p>
-        <h1><a href="http://www.circuidipity.com/dpkg-duplicate.html">Duplicate Debian package selection on multiple machines</a></h1>
-        <p>I am happy with the selection of packages installed on my <a class="reference external" href="http://www.circuidipity.com/c720-sidbook.html">Debian-powered laptop</a> and discovered an easy method to <strong>duplicate</strong> the configuration on another machine.</p>
+<!-- article -->
+<h1>Duplicate Debian package selection on multiple machines</h1>
+<div id="article">
+    <p>I am happy with the selection of packages installed on my <a class="reference external" href="http://www.circuidipity.com/c720-sidbook.html">Debian-powered laptop</a> and discovered an easy method to <strong>duplicate</strong> the configuration on another machine.</p>
 <p>On the 'master' machine generate a list of installed packages...</p>
 <div class="highlight"><pre><span class="nv">$ </span>dpkg --get-selections | grep -v deinstall &gt; deb-pkg-list.txt
 </pre></div>
@@ -52,13 +42,16 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <p>Happy hacking!</p>
 <p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dpkgDup">dpkgDup</a>, <a class="reference external" href="http://debian-handbook.info/browse/wheezy/sect.apt-get.html">Debian Administrator's Handbook</a></p>
 
-        <!-- Nav links to previous|next article --> 
-        <div id="navmenu">
-            <hr />
-            <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-                <a href="http://www.circuidipity.com/policykit-upgrade-user-permission.html">
-                Policykit upgrade generates user permission problems</a></p>
-        </div>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/policykit-upgrade-user-permission.html">Policykit upgrade generates user permission problems</a></p>
 </div>
 
 
