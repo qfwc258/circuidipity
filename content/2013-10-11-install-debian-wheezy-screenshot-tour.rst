@@ -1,21 +1,26 @@
-=====================================
-Install Debian Wheezy Screenshot Tour
-=====================================
+=============================
+Debian Wheezy Minimal Install
+=============================
 
 :tags: debian, linux
 :slug: install-debian-wheezy-screenshot-tour
+:modified: 07 July 2014
 
-`Debian GNU/Linux <http://www.debian.org>`_ is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like Ubuntu build their edifices on solid Debian *awesomesauce*.
+.. image:: images/debianVader.png
+    :alt: Debian Vader
+    :width: 851px
+    :height: 315px
 
-There are 3 *release branches* - ``stable``, ``testing``, and ``unstable`` - and the current stable branch goes by the name ``wheezy``. Below is a visual walk-through of a Debian installation that features:
+`Debian GNU/Linux <http://www.debian.org>`_ is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like `Ubuntu <http://www.circuidipity.com/ubuntu-trusty-install.html>`_ build their edifices on solid Debian *awesomesauce*.
 
-* separate root, encrypted home and swap partitions
-* a minimal foundation for any type of Linux configuration (server, desktop, `rolling release <http://wiki.debian.org/DebianUnstable>`_)
+There are 3 *release branches* - ``stable``, ``testing``, and ``unstable`` - and the current stable branch goes by the name *wheezy*. I use Debian's *minimal install image* to create a *lightweight, console-only* base configuration that can be customized for various tasks and alternate desktops.
+
+Below is a visual walk-through of a sample Debian setup that makes use of an entire storage device divided into 3 partitions: unencrypted ``root`` and `LUKS <https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup>`_ encrypted ``home`` + ``swap``.
 
 Step 0 - Installer
 ==================
 
-Download a `64-bit <http://ftp.nl.debian.org/debian/dists/testing/main/installer-amd64/current/images/netboot/mini.iso>`_  (or `32-bit <http://ftp.nl.debian.org/debian/dists/testing/main/installer-i386/current/images/netboot/mini.iso>`_ for older machines) Debian mini installer and burn the image to a CD or `prepare a USB boot device <http://www.circuidipity.com/multi-boot-usb.html>`_).
+Download a `64-bit <http://ftp.nl.debian.org/debian/dists/testing/main/installer-amd64/current/images/netboot/mini.iso>`_  (`32-bit <http://ftp.nl.debian.org/debian/dists/testing/main/installer-i386/current/images/netboot/mini.iso>`_ for older machines) Debian *mini.iso* and burn the image to a CD or `prepare a USB boot device <http://www.circuidipity.com/multi-boot-usb.html>`_.
 
 Step 1 - Go!
 ============
@@ -125,11 +130,11 @@ Step 1 - Go!
 Step 2 - Partitions
 ===================
 
-In the example below we create 3 partitions on the disk:
+In the example below I create 3 partitions on the disk:
 
 * sda1 is a 20GB ``root`` partition 
-* sda2 is a 1GB ``swap`` partition *encrypted* with a *random key* (double the RAM <= 2GB is a good rule of thumb for sizing swap)
-* sda3 uses the remaining space as a ``home`` partition *encrypted* with a *passphrase*
+* sda5 is a 1GB LUKS encrypted ``swap`` partition using a *random key*
+* sda6 uses the remaining space as a LUKS encrypted ``home`` partition using a *passphrase*
 
 .. image:: images/screenshot/wheezyInstall/18.png
     :alt: Partitioning method
@@ -183,8 +188,20 @@ In the example below we create 3 partitions on the disk:
 
     Setting *Mount options* to *noatime* decreases write operations and boosts drive speed.
 
+.. image:: images/screenshot/wheezyInstall/25.1.png
+    :alt: Mount options
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/wheezyInstall/25.2.png
+    :alt: noatime
+    :align: center
+    :width: 800px
+    :height: 600px
+
 .. image:: images/screenshot/wheezyInstall/26.png
-    :alt: Partition settings
+    :alt: Done setting up partition
     :align: center
     :width: 800px
     :height: 600px
@@ -208,7 +225,7 @@ In the example below we create 3 partitions on the disk:
     :height: 600px
 
 .. image:: images/screenshot/wheezyInstall/30.png
-    :alt: Primary partition
+    :alt: Logical partition
     :align: center
     :width: 800px
     :height: 600px
@@ -219,8 +236,26 @@ In the example below we create 3 partitions on the disk:
     :width: 800
     :height: 600px
 
+.. image:: images/screenshot/wheezyInstall/31.1.png
+    :alt: Use as
+    :align: center
+    :width: 800px
+    :height: 600px
+
 .. image:: images/screenshot/wheezyInstall/32.png
     :alt: Encrypt volume
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/wheezyInstall/32.1.png
+    :alt: Encryption key
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/wheezyInstall/33.png
+    :alt: Random key
     :align: center
     :width: 800px
     :height: 600px
@@ -229,8 +264,14 @@ In the example below we create 3 partitions on the disk:
 
     If the hard disk has not been securely wiped prior to installing Debian (using a utility like `DBAN <http://www.circuidipity.com/multi-boot-usb.html>`_) you may want to configure *Erase data* as *yes*. Note, however, that depending on the size of the disk this operation can last several hours.
 
-.. image:: images/screenshot/wheezyInstall/33.png
-    :alt: Random key
+.. image:: images/screenshot/wheezyInstall/33.1.png
+    :alt: Erase data
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/wheezyInstall/33.2.png
+    :alt: Done setting up partition
     :align: center
     :width: 800px
     :height: 600px
@@ -253,8 +294,14 @@ In the example below we create 3 partitions on the disk:
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/wheezyInstall/37.png
-    :alt: Primary partition
+.. image:: images/screenshot/wheezyInstall/30.png
+    :alt: Logical partition
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/wheezyInstall/31.1.png
+    :alt: Use as
     :align: center
     :width: 800px
     :height: 600px
@@ -267,6 +314,18 @@ In the example below we create 3 partitions on the disk:
 
 .. image:: images/screenshot/wheezyInstall/39.png
     :alt: Passphrase
+    :align: center
+    :width: 800px
+    :height: 600px
+  
+.. image:: images/screenshot/wheezyInstall/39.1.png
+    :alt: Erase data
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/wheezyInstall/39.2.png
+    :alt: Done setting up the partition
     :align: center
     :width: 800px
     :height: 600px
@@ -320,12 +379,52 @@ In the example below we create 3 partitions on the disk:
     :height: 600px
 
 .. image:: images/screenshot/wheezyInstall/48.png
-    :alt: Partition settings
+    :alt: Mount point
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/wheezyInstall/48.1.png
+    :alt: Mount home
     :align: center
     :width: 800px
     :height: 600px
 
 .. image:: images/screenshot/wheezyInstall/49.png
+    :alt: Mount options
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/wheezyInstall/25.2.png
+    :alt: noatime
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. note::
+
+    *Reserved blocks* can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the 5% reserve set aside by Debian to 1%.
+
+.. image:: images/screenshot/wheezyInstall/49.1.png
+    :alt: Reserved blocks
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/wheezyInstall/49.2.png
+    :alt: Percent reserved
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/wheezyInstall/49.3.png
+    :alt: Done setting up the partition
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/wheezyInstall/49.4.png
     :alt: Finish partitioning
     :align: center
     :width: 800px
@@ -348,8 +447,8 @@ Step 3 - Install packages and finish up
 
 .. note::
 
-    Select only [*] *Standard system utilities* if you want to start with a minimal foundation (no desktop) to build your own post-install custom Debian configuration.
-
+    Select only [*] *Standard system utilities* if you wish to start with a minimal, console-only base configuration ready for further customization. The task menu can be accessed post-install by running ``sudo tasksel``.
+    
 .. image:: images/screenshot/wheezyInstall/52.png
     :alt: Software selection
     :align: center
@@ -392,4 +491,6 @@ Step 3 - Install packages and finish up
 
 Enjoy your fresh Debian!
 
-Add extra packages, stick with ``stable`` or move to ``testing`` or ``unstable`` or maybe setup a `home server <http://www.circuidipity.com/linux-home-server.html>`_?
+I have created a `post-install shell script <https://github.com/vonbrownie/linux-post-install/blob/master/debian_post_install>`_ that can be used to configure tracking of Debian's ``stable`` or ``unstable/sid`` branch with the option of installing the Openbox window manager + extra apps suitable for a desktop environment.
+
+Source: *Debian Vader* image courtesy of `jschild <http://jschild.deviantart.com/art/Facebook-cover-debian-Darth-Vader-380351614>`_
