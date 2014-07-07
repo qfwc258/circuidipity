@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Install Debian Wheezy Screenshot Tour</title>
+        <title>Circuidipity | Debian Wheezy Minimal Install</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -23,17 +23,16 @@
 </div>
 
 <!-- article -->
-<h1>Install Debian Wheezy Screenshot Tour</h1>
+<h1>Debian Wheezy Minimal Install</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on 07 July 2014</p>
 <div id="article">
-    <p><a class="reference external" href="http://www.debian.org">Debian GNU/Linux</a> is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like Ubuntu build their edifices on solid Debian <em>awesomesauce</em>.</p>
-<p>There are 3 <em>release branches</em> - <tt class="docutils literal">stable</tt>, <tt class="docutils literal">testing</tt>, and <tt class="docutils literal">unstable</tt> - and the current stable branch goes by the name <tt class="docutils literal">wheezy</tt>. Below is a visual walk-through of a Debian installation that features:</p>
-<ul class="simple">
-<li>separate root, encrypted home and swap partitions</li>
-<li>a minimal foundation for any type of Linux configuration (server, desktop, <a class="reference external" href="http://wiki.debian.org/DebianUnstable">rolling release</a>)</li>
-</ul>
+    <img alt="Debian Vader" src="images/debianVader.png" style="width: 851px; height: 315px;" />
+<p><a class="reference external" href="http://www.debian.org">Debian GNU/Linux</a> is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like <a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html">Ubuntu</a> build their edifices on solid Debian <em>awesomesauce</em>.</p>
+<p>There are 3 <em>release branches</em> - <tt class="docutils literal">stable</tt>, <tt class="docutils literal">testing</tt>, and <tt class="docutils literal">unstable</tt> - and the current stable branch goes by the name <em>wheezy</em>. I use Debian's <em>minimal install image</em> to create a <em>lightweight, console-only</em> base configuration that can be customized for various tasks and alternate desktops.</p>
+<p>Below is a visual walk-through of a sample Debian setup that makes use of an entire storage device divided into 3 partitions: unencrypted <tt class="docutils literal">root</tt> and <a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a> encrypted <tt class="docutils literal">home</tt> + <tt class="docutils literal">swap</tt>.</p>
 <div class="section" id="step-0-installer">
 <h2>Step 0 - Installer</h2>
-<p>Download a <a class="reference external" href="http://ftp.nl.debian.org/debian/dists/testing/main/installer-amd64/current/images/netboot/mini.iso">64-bit</a>  (or <a class="reference external" href="http://ftp.nl.debian.org/debian/dists/testing/main/installer-i386/current/images/netboot/mini.iso">32-bit</a> for older machines) Debian mini installer and burn the image to a CD or <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">prepare a USB boot device</a>).</p>
+<p>Download a <a class="reference external" href="http://ftp.nl.debian.org/debian/dists/testing/main/installer-amd64/current/images/netboot/mini.iso">64-bit</a>  (<a class="reference external" href="http://ftp.nl.debian.org/debian/dists/testing/main/installer-i386/current/images/netboot/mini.iso">32-bit</a> for older machines) Debian <em>mini.iso</em> and burn the image to a CD or <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">prepare a USB boot device</a>.</p>
 </div>
 <div class="section" id="step-1-go">
 <h2>Step 1 - Go!</h2>
@@ -57,11 +56,11 @@
 </div>
 <div class="section" id="step-2-partitions">
 <h2>Step 2 - Partitions</h2>
-<p>In the example below we create 3 partitions on the disk:</p>
+<p>In the example below I create 3 partitions on the disk:</p>
 <ul class="simple">
 <li>sda1 is a 20GB <tt class="docutils literal">root</tt> partition</li>
-<li>sda2 is a 1GB <tt class="docutils literal">swap</tt> partition <em>encrypted</em> with a <em>random key</em> (double the RAM &lt;= 2GB is a good rule of thumb for sizing swap)</li>
-<li>sda3 uses the remaining space as a <tt class="docutils literal">home</tt> partition <em>encrypted</em> with a <em>passphrase</em></li>
+<li>sda5 is a 1GB LUKS encrypted <tt class="docutils literal">swap</tt> partition using a <em>random key</em></li>
+<li>sda6 uses the remaining space as a LUKS encrypted <tt class="docutils literal">home</tt> partition using a <em>passphrase</em></li>
 </ul>
 <img alt="Partitioning method" class="align-center" src="images/screenshot/wheezyInstall/18.png" style="width: 800px; height: 600px;" />
 <img alt="Partition disks" class="align-center" src="images/screenshot/wheezyInstall/19.png" style="width: 800px; height: 600px;" />
@@ -75,24 +74,33 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Setting <em>Mount options</em> to <em>noatime</em> decreases write operations and boosts drive speed.</p>
 </div>
-<img alt="Partition settings" class="align-center" src="images/screenshot/wheezyInstall/26.png" style="width: 800px; height: 600px;" />
+<img alt="Mount options" class="align-center" src="images/screenshot/wheezyInstall/25.1.png" style="width: 800px; height: 600px;" />
+<img alt="noatime" class="align-center" src="images/screenshot/wheezyInstall/25.2.png" style="width: 800px; height: 600px;" />
+<img alt="Done setting up partition" class="align-center" src="images/screenshot/wheezyInstall/26.png" style="width: 800px; height: 600px;" />
 <img alt="Free space" class="align-center" src="images/screenshot/wheezyInstall/27.png" style="width: 800px; height: 600px;" />
 <img alt="New partition" class="align-center" src="images/screenshot/wheezyInstall/28.png" style="width: 800px; height: 600px;" />
 <img alt="Partition size" class="align-center" src="images/screenshot/wheezyInstall/29.png" style="width: 800px; height: 600px;" />
-<img alt="Primary partition" class="align-center" src="images/screenshot/wheezyInstall/30.png" style="width: 800px; height: 600px;" />
+<img alt="Logical partition" class="align-center" src="images/screenshot/wheezyInstall/30.png" style="width: 800px; height: 600px;" />
 <img alt="Beginning" class="align-center" src="images/screenshot/wheezyInstall/31.png" style="width: 800px; height: 600px;" />
+<img alt="Use as" class="align-center" src="images/screenshot/wheezyInstall/31.1.png" style="width: 800px; height: 600px;" />
 <img alt="Encrypt volume" class="align-center" src="images/screenshot/wheezyInstall/32.png" style="width: 800px; height: 600px;" />
+<img alt="Encryption key" class="align-center" src="images/screenshot/wheezyInstall/32.1.png" style="width: 800px; height: 600px;" />
+<img alt="Random key" class="align-center" src="images/screenshot/wheezyInstall/33.png" style="width: 800px; height: 600px;" />
 <div class="note">
 <p class="first admonition-title">Note</p>
 <p class="last">If the hard disk has not been securely wiped prior to installing Debian (using a utility like <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">DBAN</a>) you may want to configure <em>Erase data</em> as <em>yes</em>. Note, however, that depending on the size of the disk this operation can last several hours.</p>
 </div>
-<img alt="Random key" class="align-center" src="images/screenshot/wheezyInstall/33.png" style="width: 800px; height: 600px;" />
+<img alt="Erase data" class="align-center" src="images/screenshot/wheezyInstall/33.1.png" style="width: 800px; height: 600px;" />
+<img alt="Done setting up partition" class="align-center" src="images/screenshot/wheezyInstall/33.2.png" style="width: 800px; height: 600px;" />
 <img alt="Free space" class="align-center" src="images/screenshot/wheezyInstall/34.png" style="width: 800px; height: 600px;" />
 <img alt="New partition" class="align-center" src="images/screenshot/wheezyInstall/35.png" style="width: 800px; height: 600px;" />
 <img alt="Partition size" class="align-center" src="images/screenshot/wheezyInstall/36.png" style="width: 800px; height: 600px;" />
-<img alt="Primary partition" class="align-center" src="images/screenshot/wheezyInstall/37.png" style="width: 800px; height: 600px;" />
+<img alt="Logical partition" class="align-center" src="images/screenshot/wheezyInstall/30.png" style="width: 800px; height: 600px;" />
+<img alt="Use as" class="align-center" src="images/screenshot/wheezyInstall/31.1.png" style="width: 800px; height: 600px;" />
 <img alt="Encrypt volume" class="align-center" src="images/screenshot/wheezyInstall/38.png" style="width: 800px; height: 600px;" />
 <img alt="Passphrase" class="align-center" src="images/screenshot/wheezyInstall/39.png" style="width: 800px; height: 600px;" />
+<img alt="Erase data" class="align-center" src="images/screenshot/wheezyInstall/39.1.png" style="width: 800px; height: 600px;" />
+<img alt="Done setting up the partition" class="align-center" src="images/screenshot/wheezyInstall/39.2.png" style="width: 800px; height: 600px;" />
 <img alt="Configure encrypted volumes" class="align-center" src="images/screenshot/wheezyInstall/40.png" style="width: 800px; height: 600px;" />
 <img alt="Write changes to disk" class="align-center" src="images/screenshot/wheezyInstall/41.png" style="width: 800px; height: 600px;" />
 <img alt="Create encrypted volumes" class="align-center" src="images/screenshot/wheezyInstall/42.png" style="width: 800px; height: 600px;" />
@@ -101,8 +109,18 @@
 <img alt="Encryption passphrase" class="align-center" src="images/screenshot/wheezyInstall/45.png" style="width: 800px; height: 600px;" />
 <img alt="Verify passphrase" class="align-center" src="images/screenshot/wheezyInstall/46.png" style="width: 800px; height: 600px;" />
 <img alt="Configure encrypted volume" class="align-center" src="images/screenshot/wheezyInstall/47.png" style="width: 800px; height: 600px;" />
-<img alt="Partition settings" class="align-center" src="images/screenshot/wheezyInstall/48.png" style="width: 800px; height: 600px;" />
-<img alt="Finish partitioning" class="align-center" src="images/screenshot/wheezyInstall/49.png" style="width: 800px; height: 600px;" />
+<img alt="Mount point" class="align-center" src="images/screenshot/wheezyInstall/48.png" style="width: 800px; height: 600px;" />
+<img alt="Mount home" class="align-center" src="images/screenshot/wheezyInstall/48.1.png" style="width: 800px; height: 600px;" />
+<img alt="Mount options" class="align-center" src="images/screenshot/wheezyInstall/49.png" style="width: 800px; height: 600px;" />
+<img alt="noatime" class="align-center" src="images/screenshot/wheezyInstall/25.2.png" style="width: 800px; height: 600px;" />
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last"><em>Reserved blocks</em> can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the 5% reserve set aside by Debian to 1%.</p>
+</div>
+<img alt="Reserved blocks" class="align-center" src="images/screenshot/wheezyInstall/49.1.png" style="width: 800px; height: 600px;" />
+<img alt="Percent reserved" class="align-center" src="images/screenshot/wheezyInstall/49.2.png" style="width: 800px; height: 600px;" />
+<img alt="Done setting up the partition" class="align-center" src="images/screenshot/wheezyInstall/49.3.png" style="width: 800px; height: 600px;" />
+<img alt="Finish partitioning" class="align-center" src="images/screenshot/wheezyInstall/49.4.png" style="width: 800px; height: 600px;" />
 <img alt="Write changes to disk" class="align-center" src="images/screenshot/wheezyInstall/50.png" style="width: 800px; height: 600px;" />
 </div>
 <div class="section" id="step-3-install-packages-and-finish-up">
@@ -110,7 +128,7 @@
 <img alt="Popularity-contest" class="align-center" src="images/screenshot/wheezyInstall/51.png" style="width: 800px; height: 600px;" />
 <div class="note">
 <p class="first admonition-title">Note</p>
-<p class="last">Select only [*] <em>Standard system utilities</em> if you want to start with a minimal foundation (no desktop) to build your own post-install custom Debian configuration.</p>
+<p class="last">Select only [*] <em>Standard system utilities</em> if you wish to start with a minimal, console-only base configuration ready for further customization. The task menu can be accessed post-install by running <tt class="docutils literal">sudo tasksel</tt>.</p>
 </div>
 <img alt="Software selection" class="align-center" src="images/screenshot/wheezyInstall/52.png" style="width: 800px; height: 600px;" />
 <img alt="GRUB" class="align-center" src="images/screenshot/wheezyInstall/53.png" style="width: 800px; height: 600px;" />
@@ -123,7 +141,8 @@
 <img alt="Enter encrypt passphrase" class="align-center" src="images/screenshot/wheezyInstall/55.png" style="width: 800px; height: 600px;" />
 <img alt="Login" class="align-center" src="images/screenshot/wheezyInstall/56.png" style="width: 800px; height: 600px;" />
 <p>Enjoy your fresh Debian!</p>
-<p>Add extra packages, stick with <tt class="docutils literal">stable</tt> or move to <tt class="docutils literal">testing</tt> or <tt class="docutils literal">unstable</tt> or maybe setup a <a class="reference external" href="http://www.circuidipity.com/linux-home-server.html">home server</a>?</p>
+<p>I have created a <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/debian_post_install">post-install shell script</a> that can be used to configure tracking of Debian's <tt class="docutils literal">stable</tt> or <tt class="docutils literal">unstable/sid</tt> branch with the option of installing the Openbox window manager + extra apps suitable for a desktop environment.</p>
+<p>Source: <em>Debian Vader</em> image courtesy of <a class="reference external" href="http://jschild.deviantart.com/art/Facebook-cover-debian-Darth-Vader-380351614">jschild</a></p>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>

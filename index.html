@@ -33,18 +33,125 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 
 <!-- latest post -->
 <div id="latestpost">
-        <p class="published"> Thursday 03 July 2014</p>
-        <h1><a href="http://www.circuidipity.com/pi-plate.html">Raspberry Pi Plate</a></h1>
-        <img alt="Raspberry Pi Plate" class="align-right" src="images/pi_plate_300.jpg" style="width: 300px; height: 400px;" />
-<p>My new <strong>Raspberry Pi</strong> attached to a bottom <a class="reference external" href="http://www.thingiverse.com/thing:24096">Pi Plate</a> I generated using my local library's 3D printer!</p>
-<p>The <a class="reference external" href="http://www.torontopubliclibrary.ca/using-the-library/computer-services/innovation-spaces/3D-design-print.jsp">Toronto Public Library</a> recently installed MakerBot <a class="reference external" href="https://store.makerbot.com/replicator2">3D printers</a> at two locations for public use.</p>
+        <p class="published"> Monday 07 July 2014</p>
+        <h1><a href="http://www.circuidipity.com/ubuntu-trusty-install.html">Ubuntu 14.04 Minimal Install</a></h1>
+        <img alt="Ubuntu Trusty Tahr" class="align-left" src="images/ubuntuTrusty.png" style="width: 100px; height: 100px;" />
+<p><a class="reference external" href="http://www.ubuntu.com/desktop">Ubuntu 14.04 &quot;Trusty Tahr&quot;</a> is a <em>long-term support</em> release (till 2019) of the popular Linux operating system. I use Ubuntu's <a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD">minimal install image</a> to create a <em>lightweight, console-only</em> base configuration that can be customized for various tasks and alternate desktops.</p>
+<p>Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire storage device divided into 3 partitions: unencrypted <tt class="docutils literal">root</tt> and <a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a> encrypted <tt class="docutils literal">home</tt> + <tt class="docutils literal">swap</tt>.</p>
+<div class="section" id="step-0-installer">
+<h2>Step 0 - Installer</h2>
+<p>Download a <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso">64-bit</a> (<a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/mini.iso">32-bit</a> for older machines) Ubuntu <em>mini.iso</em> and burn the image to a CD or <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">prepare a USB boot device</a>.</p>
+</div>
+<div class="section" id="step-1-go">
+<h2>Step 1 - Go!</h2>
+<img alt="Install" class="align-center" src="images/screenshot/trustyInstall/01.png" style="width: 800px; height: 600px;" />
+<img alt="Select Language" class="align-center" src="images/screenshot/trustyInstall/02.png" style="width: 800px; height: 600px;" />
+<img alt="Select Location" class="align-center" src="images/screenshot/trustyInstall/03.png" style="width: 800px; height: 600px;" />
+<img alt="Configure Keyboard" class="align-center" src="images/screenshot/trustyInstall/04.png" style="width: 800px; height: 600px;" />
+<img alt="Configure Keyboard" class="align-center" src="images/screenshot/trustyInstall/041.png" style="width: 800px; height: 600px;" />
+<img alt="Configure Keyboard" class="align-center" src="images/screenshot/trustyInstall/042.png" style="width: 800px; height: 600px;" />
+<img alt="Hostname" class="align-center" src="images/screenshot/trustyInstall/05.png" style="width: 800px; height: 600px;" />
+<img alt="Mirror Country" class="align-center" src="images/screenshot/trustyInstall/06.png" style="width: 800px; height: 600px;" />
+<img alt="Mirror archive" class="align-center" src="images/screenshot/trustyInstall/07.png" style="width: 800px; height: 600px;" />
+<img alt="Proxy" class="align-center" src="images/screenshot/trustyInstall/08.png" style="width: 800px; height: 600px;" />
+<img alt="Full Name" class="align-center" src="images/screenshot/trustyInstall/09.png" style="width: 800px; height: 600px;" />
+<img alt="Username" class="align-center" src="images/screenshot/trustyInstall/10.png" style="width: 800px; height: 600px;" />
+<img alt="User password" class="align-center" src="images/screenshot/trustyInstall/11.png" style="width: 800px; height: 600px;" />
+<img alt="Verify password" class="align-center" src="images/screenshot/trustyInstall/12.png" style="width: 800px; height: 600px;" />
+<img alt="Encrypt home" class="align-center" src="images/screenshot/trustyInstall/13.png" style="width: 800px; height: 600px;" />
+<img alt="Configure clock" class="align-center" src="images/screenshot/trustyInstall/14.png" style="width: 800px; height: 600px;" />
+<img alt="Select time zone" class="align-center" src="images/screenshot/trustyInstall/15.png" style="width: 800px; height: 600px;" />
+</div>
+<div class="section" id="step-2-partitions">
+<h2>Step 2 - Partitions</h2>
+<p>In the example below we create 3 partitions on the disk:</p>
+<ul class="simple">
+<li>sda1 is a 16GB <tt class="docutils literal">root</tt> partition</li>
+<li>sda5 is a 1GB LUKS encrypted <tt class="docutils literal">swap</tt> partition using a <em>random key</em></li>
+<li>sda6 uses the remaining space as a LUKS encrypted <tt class="docutils literal">home</tt> partition using a <em>passphrase</em></li>
+</ul>
+<img alt="Partitioning method" class="align-center" src="images/screenshot/trustyInstall/16.png" style="width: 800px; height: 600px;" />
+<img alt="Partition disks" class="align-center" src="images/screenshot/trustyInstall/17.png" style="width: 800px; height: 600px;" />
+<img alt="Partition table" class="align-center" src="images/screenshot/trustyInstall/18.png" style="width: 800px; height: 600px;" />
+<img alt="Free space" class="align-center" src="images/screenshot/trustyInstall/19.png" style="width: 800px; height: 600px;" />
+<img alt="New Partition" class="align-center" src="images/screenshot/trustyInstall/20.png" style="width: 800px; height: 600px;" />
+<img alt="Partition size" class="align-center" src="images/screenshot/trustyInstall/21.png" style="width: 800px; height: 600px;" />
+<img alt="Primary partition" class="align-center" src="images/screenshot/trustyInstall/22.png" style="width: 800px; height: 600px;" />
+<img alt="Beginning" class="align-center" src="images/screenshot/trustyInstall/23.png" style="width: 800px; height: 600px;" />
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Setting <em>Mount options</em> to <em>noatime</em> decreases write operations and boosts drive speed.</p>
+</div>
+<img alt="Done setting up partition" class="align-center" src="images/screenshot/trustyInstall/24.png" style="width: 800px; height: 600px;" />
+<img alt="Free space" class="align-center" src="images/screenshot/trustyInstall/25.png" style="width: 800px; height: 600px;" />
+<img alt="New partition" class="align-center" src="images/screenshot/trustyInstall/26.png" style="width: 800px; height: 600px;" />
+<img alt="Partition size" class="align-center" src="images/screenshot/trustyInstall/27.png" style="width: 800px; height: 600px;" />
+<img alt="Logical partition" class="align-center" src="images/screenshot/trustyInstall/28.png" style="width: 800px; height: 600px;" />
+<img alt="Beginning" class="align-center" src="images/screenshot/trustyInstall/29.png" style="width: 800px; height: 600px;" />
+<img alt="Use as" class="align-center" src="images/screenshot/trustyInstall/30.png" style="width: 800px; height: 600px;" />
+<img alt="Encrypt volume" class="align-center" src="images/screenshot/trustyInstall/31.png" style="width: 800px; height: 600px;" />
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the hard disk has not been securely wiped prior to installing Ubuntu (using a utility like <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">DBAN</a>) you may want to configure <em>Erase data</em> as <em>yes</em>. Note, however, that depending on the size of the disk this operation can last several hours.</p>
+</div>
+<img alt="Encryption key" class="align-center" src="images/screenshot/trustyInstall/32.png" style="width: 800px; height: 600px;" />
+<img alt="Random key" class="align-center" src="images/screenshot/trustyInstall/33.png" style="width: 800px; height: 600px;" />
+<img alt="Done setting up partition" class="align-center" src="images/screenshot/trustyInstall/34.png" style="width: 800px; height: 600px;" />
+<img alt="Free space" class="align-center" src="images/screenshot/trustyInstall/35.png" style="width: 800px; height: 600px;" />
+<img alt="New partition" class="align-center" src="images/screenshot/trustyInstall/36.png" style="width: 800px; height: 600px;" />
+<img alt="Partition size" class="align-center" src="images/screenshot/trustyInstall/37.png" style="width: 800px; height: 600px;" />
+<img alt="Logical partition" class="align-center" src="images/screenshot/trustyInstall/38.png" style="width: 800px; height: 600px;" />
+<img alt="Use as" class="align-center" src="images/screenshot/trustyInstall/39.png" style="width: 800px; height: 600px;" />
+<img alt="Encrypt volume" class="align-center" src="images/screenshot/trustyInstall/40.png" style="width: 800px; height: 600px;" />
+<img alt="Done setting up partition" class="align-center" src="images/screenshot/trustyInstall/41.png" style="width: 800px; height: 600px;" />
+<img alt="Configure encrypted volumes" class="align-center" src="images/screenshot/trustyInstall/42.png" style="width: 800px; height: 600px;" />
+<img alt="Write changes to disk" class="align-center" src="images/screenshot/trustyInstall/43.png" style="width: 800px; height: 600px;" />
+<img alt="Create encrypted volumes" class="align-center" src="images/screenshot/trustyInstall/44.png" style="width: 800px; height: 600px;" />
+<img alt="Devices to encrypt" class="align-center" src="images/screenshot/trustyInstall/45.png" style="width: 800px; height: 600px;" />
+<img alt="Finish encrypt" class="align-center" src="images/screenshot/trustyInstall/46.png" style="width: 800px; height: 600px;" />
+<img alt="Encryption passphrase" class="align-center" src="images/screenshot/trustyInstall/47.png" style="width: 800px; height: 600px;" />
+<img alt="Verify passphrase" class="align-center" src="images/screenshot/trustyInstall/48.png" style="width: 800px; height: 600px;" />
+<img alt="Configure encrypted volume" class="align-center" src="images/screenshot/trustyInstall/49.png" style="width: 800px; height: 600px;" />
+<img alt="Mount point" class="align-center" src="images/screenshot/trustyInstall/50.png" style="width: 800px; height: 600px;" />
+<img alt="Mount home" class="align-center" src="images/screenshot/trustyInstall/51.png" style="width: 800px; height: 600px;" />
+<img alt="Mount options" class="align-center" src="images/screenshot/trustyInstall/52.png" style="width: 800px; height: 600px;" />
+<img alt="noatime" class="align-center" src="images/screenshot/trustyInstall/53.png" style="width: 800px; height: 600px;" />
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last"><em>Reserved blocks</em> can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the 5% reserve set aside by Ubuntu to 1%.</p>
+</div>
+<img alt="Reserved blocks" class="align-center" src="images/screenshot/trustyInstall/54.png" style="width: 800px; height: 600px;" />
+<img alt="Percent file blocks" class="align-center" src="images/screenshot/trustyInstall/55.png" style="width: 800px; height: 600px;" />
+<img alt="Done setting up partition" class="align-center" src="images/screenshot/trustyInstall/56.png" style="width: 800px; height: 600px;" />
+<img alt="Write changes to disk" class="align-center" src="images/screenshot/trustyInstall/57.png" style="width: 800px; height: 600px;" />
+<img alt="Confirm write" class="align-center" src="images/screenshot/trustyInstall/58.png" style="width: 800px; height: 600px;" />
+</div>
+<div class="section" id="step-3-install-packages-and-finish-up">
+<h2>Step 3 - Install packages and finish up</h2>
+<img alt="No automatic updates" class="align-center" src="images/screenshot/trustyInstall/59.png" style="width: 800px; height: 600px;" />
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Leave all tasks unmarked if you wish to start with a minimal, console-only base configuration ready for further customization. The task menu can be accessed post-install by running <tt class="docutils literal">sudo tasksel</tt>.</p>
+</div>
+<img alt="Software selection" class="align-center" src="images/screenshot/trustyInstall/60.png" style="width: 800px; height: 600px;" />
+<img alt="GRUB" class="align-center" src="images/screenshot/trustyInstall/61.png" style="width: 800px; height: 600px;" />
+<img alt="UTC" class="align-center" src="images/screenshot/trustyInstall/62.png" style="width: 800px; height: 600px;" />
+<img alt="Finish install" class="align-center" src="images/screenshot/trustyInstall/63.png" style="width: 800px; height: 600px;" />
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">If an encrypted <tt class="docutils literal">home</tt> partition was created in Step 2 the system will display a passphrase prompt to unlock the partition.</p>
+</div>
+<img alt="Enter encrypt passphrase" class="align-center" src="images/screenshot/trustyInstall/64.png" style="width: 800px; height: 600px;" />
+<img alt="Login" class="align-center" src="images/screenshot/trustyInstall/65.png" style="width: 800px; height: 600px;" />
+<p>Enjoy your fresh Ubuntu!</p>
+</div>
 
         <!-- Nav links to previous|next article --> 
         <div id="navmenu">
             <hr />
             <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-                <a href="http://www.circuidipity.com/dpkg-duplicate.html">
-                Duplicate Debian package selection on multiple machines</a></p>
+                <a href="http://www.circuidipity.com/pi-plate.html">
+                Raspberry Pi Plate</a></p>
         </div>
 </div>
 
