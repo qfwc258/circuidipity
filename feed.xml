@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-07-07T00:00:00-04:00</updated><entry><title>Ubuntu 14.04 Minimal Install</title><link href="http://www.circuidipity.com/ubuntu-trusty-install.html" rel="alternate"></link><updated>2014-07-07T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-07-07:ubuntu-trusty-install.html</id><summary type="html">&lt;img alt="Ubuntu Trusty Tahr" class="align-left" src="images/ubuntuTrusty.png" style="width: 100px; height: 100px;" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-07-09T00:00:00-04:00</updated><entry><title>Increase RAM available to Raspberry Pi CPU</title><link href="http://www.circuidipity.com/pi-memory-split.html" rel="alternate"></link><updated>2014-07-09T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-07-09:pi-memory-split.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Raspberry Pi Model B Rev 2&lt;/strong&gt; has 512MB RAM that is partitioned between the CPU and the GPU. If the Pi is working as a headless server or the Pi desktop is being accessed via &lt;a class="reference external" href="http://www.raspberrypi.org/documentation/remote-access/vnc/"&gt;VNC&lt;/a&gt; (which doesn't utilize the GPU) the &lt;em&gt;memory split&lt;/em&gt; between the two processors can be altered to assign more memory to the CPU for running applications.&lt;/p&gt;
+&lt;div class="note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;The &lt;strong&gt;Pi Camera Module&lt;/strong&gt; requires a minimum of 128MB RAM assigned to the GPU.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Default GPU memory on Raspbian is set to 64MB and the minimum recommended to ensure proper operation is 16MB. To modify GPU memory to 16MB either:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;edit &lt;tt class="docutils literal"&gt;/boot/config.txt&lt;/tt&gt; and set &lt;tt class="docutils literal"&gt;gpu_mem=16&lt;/tt&gt;; or&lt;/li&gt;
+&lt;li&gt;run &lt;tt class="docutils literal"&gt;sudo &lt;span class="pre"&gt;raspi-config&lt;/span&gt;&lt;/tt&gt; and select &lt;strong&gt;&amp;quot;8 Advanced Options -&amp;gt; A3 Memory Split&amp;quot;&lt;/strong&gt; and modify &lt;strong&gt;64&lt;/strong&gt; to &lt;strong&gt;16&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Save the change, reboot the Pi, and enjoy the CPU memory boost!&lt;/p&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="http://elinux.org/RPi_config.txt"&gt;RPiconfig&lt;/a&gt;&lt;/p&gt;
+</summary><category term="raspberry pi"></category><category term="raspbian"></category><category term="linux"></category></entry><entry><title>Ubuntu 14.04 Minimal Install</title><link href="http://www.circuidipity.com/ubuntu-trusty-install.html" rel="alternate"></link><updated>2014-07-07T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-07-07:ubuntu-trusty-install.html</id><summary type="html">&lt;img alt="Ubuntu Trusty Tahr" class="align-left" src="images/ubuntuTrusty.png" style="width: 100px; height: 100px;" /&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://www.ubuntu.com/desktop"&gt;Ubuntu 14.04 &amp;quot;Trusty Tahr&amp;quot;&lt;/a&gt; is a &lt;em&gt;long-term support&lt;/em&gt; release (till 2019) of the popular Linux operating system. I use Ubuntu's &lt;a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD"&gt;minimal install image&lt;/a&gt; to create a &lt;em&gt;lightweight, console-only&lt;/em&gt; base configuration that can be customized for various tasks and alternate desktops.&lt;/p&gt;
 &lt;p&gt;Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire storage device divided into 3 partitions: unencrypted &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; and &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup"&gt;LUKS&lt;/a&gt; encrypted &lt;tt class="docutils literal"&gt;home&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;swap&lt;/tt&gt;.&lt;/p&gt;
 &lt;div class="section" id="step-0-installer"&gt;
@@ -435,125 +447,4 @@ VBoxClient --seamless &amp;amp;
 /usr/lib/udisks2/udisksd
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Hope it helps!&lt;/p&gt;
-</summary><category term="linux"></category></entry><entry><title>Install Debian using grml-debootstrap</title><link href="http://www.circuidipity.com/grml-debootstrap.html" rel="alternate"></link><updated>2014-04-08T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-04-08:grml-debootstrap.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://grml.org/"&gt;Grml&lt;/a&gt; is a Debian-based Linux distribution optimized for running off USB sticks and taking care of sysadmin duties. One of its cool programs that I have been exploring is &lt;a class="reference external" href="http://grml.org/grml-debootstrap/"&gt;grml-debootstrap&lt;/a&gt; ... a console application that makes it very easy to set custom options and install Debian.&lt;/p&gt;
-&lt;p&gt;Here is a step-by-step process using grml-debootstrap to implement the following sample installation on a solid-state drive (SSD):&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;create encrypted root + swap&lt;/li&gt;
-&lt;li&gt;install Debian &lt;em&gt;wheezy&lt;/em&gt; (stable)&lt;/li&gt;
-&lt;li&gt;upgrade to Debian &lt;em&gt;sid&lt;/em&gt; (unstable) rolling release&lt;/li&gt;
-&lt;li&gt;configure &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Solid_State_Drives"&gt;TRIM&lt;/a&gt; on the SSD to maximize performance&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Source: Debian installation with &lt;a class="reference external" href="http://michael-prokop.at/blog/2014/02/28/state-of-the-art-debianwheezy-deployments-with-grub-and-lvmsw-raidcrypto/"&gt;GRUB2 + GPT + LUKS crypto&lt;/a&gt;&lt;/p&gt;
-&lt;div class="section" id="step-0-prepare-usb-boot-device"&gt;
-&lt;h2&gt;Step 0 - Prepare USB boot device&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://grml.org/download/"&gt;Download&lt;/a&gt; a Grml 32- or 64-bit ISO (or the 2-in-1 &lt;strong&gt;grml96&lt;/strong&gt; [my choice]) and simply &lt;tt class="docutils literal"&gt;dd&lt;/tt&gt; the image to a spare USB device.&lt;/p&gt;
-&lt;p&gt;An alternate, more flexible approach (does not take over the entire drive) is &lt;a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html"&gt;transforming a USB stick into a GRUB boot device&lt;/a&gt; then adding the grml ISO as a menu entry that can co-exist with &lt;a class="reference external" href="http://www.circuidipity.com/grubs.html"&gt;multiple Linux distros&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-1-boot-network-and-partitions"&gt;
-&lt;h2&gt;Step 1 - Boot, network and partitions&lt;/h2&gt;
-&lt;p&gt;Boot Grml with the &lt;em&gt;toram&lt;/em&gt; option &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;grml64-full&lt;/span&gt; - advanced options &lt;span class="pre"&gt;-&amp;gt;&lt;/span&gt; copy Grml to RAM&lt;/tt&gt;. This way we can make use of the USB boot device as storage for any extra packages or scripts we might want to use on the new Debian system.&lt;/p&gt;
-&lt;p&gt;Use the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;grml-network&lt;/span&gt;&lt;/tt&gt; command to launch an interactive configuration of network interfaces. A sample entry generated for wifi in &lt;tt class="docutils literal"&gt;/etc/network/interfaces&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;iface wlan0 inet dhcp
-    wireless-mode auto
-    wireless-essid MY_ROUTER
-    wpa-ssid SSID
-    wpa-psk PASSWORD
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;A sample &lt;em&gt;GUID Partition Table&lt;/em&gt; (GPT) layout:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;sda1 - BIOS boot partition - 2MB&lt;/li&gt;
-&lt;li&gt;sda2 - boot - 200MB&lt;/li&gt;
-&lt;li&gt;sda3 - swap - 1GB&lt;/li&gt;
-&lt;li&gt;sda4 - root - remaining space&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Create the above using &lt;tt class="docutils literal"&gt;parted&lt;/tt&gt; (note: any changes are executed instantly) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;parted -a optimal /dev/sda
-print
-mklabel gpt
-unit mib
-mkpart primary 1 3
-name 1 grub
-&lt;span class="nb"&gt;set &lt;/span&gt;1 bios_grub on
-mkpart primary 3 203
-name 2 boot
-mkpart primary 203 1203
-name 3 swap
-mkpart primary 1203 -1
-name 4 root
-print
-quit
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To verify that a partition is properly aligned query it using &lt;tt class="docutils literal"&gt;blockdev&lt;/tt&gt; ('0' return = aligned) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;blockdev --getalignoff /dev/&amp;lt;partition&amp;gt;
-0
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="http://git.grml.org/?p=grml-live.git;a=blob_plain;f=templates/GRML/grml-cheatcodes.txt;hb=HEAD"&gt;Grml boot cheatcodes&lt;/a&gt;, the &lt;a class="reference external" href="https://www.gnu.org/software/grub/manual/html_node/BIOS-installation.html"&gt;BIOS Boot Partition&lt;/a&gt;, and &lt;a class="reference external" href="http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&amp;amp;chap=4"&gt;partitioning disks using parted&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-2-cryptsetup"&gt;
-&lt;h2&gt;Step 2 - Cryptsetup&lt;/h2&gt;
-&lt;p&gt;Set the newly-created root partition for encrypted storage and create filesystems for &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;crypt-root&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;echo &lt;/span&gt;cryptsetup &amp;gt;&amp;gt; /etc/debootstrap/packages  &lt;span class="c"&gt;# only necessary for Grml &amp;lt;=2013.09&lt;/span&gt;
-cryptsetup luksFormat -c aes-xts-plain64 -s 256 /dev/sda4
-cryptsetup luksOpen /dev/sda4 crypt_root
-mkfs.ext4 /dev/sda2
-mkfs.ext4 /dev/mapper/crypt_root
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-3-install-debian"&gt;
-&lt;h2&gt;Step 3 - Install Debian&lt;/h2&gt;
-&lt;p&gt;Any extra packages to be installed can be added to the list in &lt;tt class="docutils literal"&gt;/etc/debootstrap/packages&lt;/tt&gt; and scripts to customize the setup can be placed in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/debootstrap/chroot-scripts/&lt;/span&gt;&lt;/tt&gt;. Check out the &lt;a class="reference external" href="http://grml.org/grml-debootstrap/"&gt;grml-debootstrap HOWTO&lt;/a&gt; for many possible options ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;mount -t ext4 /dev/mapper/crypt_root /media
-mkdir /media/boot
-mount -t ext4 /dev/sda2 /media/boot
-&lt;span class="c"&gt;# optional: with &amp;#39;toram&amp;#39; usb stick can be mounted to /media... check /etc/fstab for auto-generated entries&lt;/span&gt;
-grml-debootstrap --target /media --password &lt;span class="s2"&gt;&amp;quot;PASSWORD&amp;quot;&lt;/span&gt; --hostname HOSTNAME
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If grml-debootstrap is run with no options a limited interactive menu is provided ... otherwise the necessary Debian packages are downloaded and system setup runs unattended to completion.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-4-adjust-crypttab-fstab-initramfs"&gt;
-&lt;h2&gt;Step 4 - Adjust crypttab, fstab, initramfs&lt;/h2&gt;
-&lt;p&gt;Next step is to enter &lt;tt class="docutils literal"&gt;chroot&lt;/tt&gt; and perform post-install configuration ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;grml-chroot /media /bin/bash
-grub-install /dev/sda
-update-grub
-&lt;span class="c"&gt;# For SSD add the &amp;#39;discard&amp;#39; option&lt;/span&gt;
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;crypt_root /dev/sda4 none luks,discard&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/crypttab
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;crypt_swap /dev/sda3 /dev/urandom cipher=aes-xts-plain64,size=256,discard,swap&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/crypttab
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/dev/mapper/crypt_root / ext4 noatime,discard,errors=remount-ro 0 1&amp;quot;&lt;/span&gt; &amp;gt; /etc/fstab
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/dev/sda2 /boot ext4 noatime,discard 0 2&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/fstab
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/dev/mapper/crypt_swap none swap sw,discard 0 0&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/fstab
-update-initramfs -u -k all
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="http://www.linuxjournal.com/content/solid-state-drives-get-one-already"&gt;TRIM configuration on solid-state drives&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-5-sid-and-swappiness"&gt;
-&lt;h2&gt;Step 5 - Sid and swappiness&lt;/h2&gt;
-&lt;p&gt;It is possible to use grml-debootstrap to directly install a Debian &lt;tt class="docutils literal"&gt;sid/unstable&lt;/tt&gt; setup. But I have experienced greater success by first installing a minimal &lt;tt class="docutils literal"&gt;stable&lt;/tt&gt; system before doing a dist-upgrade to track the &lt;tt class="docutils literal"&gt;unstable&lt;/tt&gt; rolling release.&lt;/p&gt;
-&lt;p&gt;Optional: Continuing configuration inside &lt;tt class="docutils literal"&gt;chroot&lt;/tt&gt; ... upgrade &lt;tt class="docutils literal"&gt;wheezy&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;sid&lt;/tt&gt; by modifying &lt;tt class="docutils literal"&gt;/etc/apt/sources.list&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;### unstable ###&lt;/span&gt;
-deb http://http.debian.net/debian unstable main contrib non-free
-deb-src http://http.debian.net/debian unstable main contrib non-free
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Run &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-get&lt;/span&gt; update &amp;amp;&amp;amp; &lt;span class="pre"&gt;apt-get&lt;/span&gt; &lt;span class="pre"&gt;dist-upgrade&lt;/span&gt;&lt;/tt&gt;&lt;/p&gt;
-&lt;p&gt;The &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Swappiness"&gt;swappiness&lt;/a&gt; parameter controls the preference of the kernel to move processes out of physical memory to the swap partition. Range is 0-100, default is set to 60 and lower values cause the kernel to avoid swapping and higher values prompt more frequent swap use.&lt;/p&gt;
-&lt;p&gt;To reduce writes on the SSD set a low value of '1' ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# check current swappiness value&lt;/span&gt;
-cat /proc/sys/vm/swappiness
-&lt;span class="c"&gt;# temporarily change value&lt;/span&gt;
-/sbin/sysctl vm.swappiness&lt;span class="o"&gt;=&lt;/span&gt;1
-&lt;span class="c"&gt;# permanently change value... modify &amp;#39;vm.swappiness&amp;#39; value in /etc/sysctl.conf...&lt;/span&gt;
-vm.swappiness&lt;span class="o"&gt;=&lt;/span&gt;1
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-6-reboot"&gt;
-&lt;h2&gt;Step 6 - Reboot&lt;/h2&gt;
-&lt;p&gt;With everything configured to satisfaction ... exit the chroot, unmount partitions, and reboot into the new Debian system ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;exit&lt;/span&gt;
-umount /media/boot
-umount /media
-cryptsetup luksClose /dev/mapper/crypt_root
-reboot
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and enjoy!&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="grml"></category><category term="debian"></category><category term="linux"></category></entry></feed>
+</summary><category term="linux"></category></entry></feed>

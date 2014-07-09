@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Daniel Wayne Armstrong</title>
+        <title>Circuidipity | Increase RAM available to Raspberry Pi CPU</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -15,27 +15,17 @@
 <body>
         <!-- content -->
 
-<!-- greeting -->
-<div id="siteheader">
-        <img class="whoami" src="/theme/images/whoami.png" />
-    <div id="sitegreeting">
-<p><span class="whoa">Howdy!</span><br />
-My name is <span class="noWrap"><span class="whoa">Daniel Wayne Armstrong</span></span>.
-I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    </div>
-<!-- menu -->
-    <div id="sitemenu">
-<p><a href="archives.html">Archives</a>
-&nbsp;<a href="/colophon.html">Colophon</a>
-&nbsp;<a href="feed.xml"><i class="fa fa-rss"></i></a>
-&nbsp;<a href="https://twitter.com/circuidipity"><i class="fa fa-twitter"></i></a>
-&nbsp;<a href="https://github.com/vonbrownie"><i class="fa fa-github-alt"></i></a></p>    </div>
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Wednesday 09 July 2014</p>
 </div>
 
-<!-- latest post -->
-<div id="latestpost">
-        <p class="published"> Wednesday 09 July 2014</p>
-        <h1><a href="http://www.circuidipity.com/pi-memory-split.html">Increase RAM available to Raspberry Pi CPU</a></h1>
-        <p><strong>Raspberry Pi Model B Rev 2</strong> has 512MB RAM that is partitioned between the CPU and the GPU. If the Pi is working as a headless server or the Pi desktop is being accessed via <a class="reference external" href="http://www.raspberrypi.org/documentation/remote-access/vnc/">VNC</a> (which doesn't utilize the GPU) the <em>memory split</em> between the two processors can be altered to assign more memory to the CPU for running applications.</p>
+<!-- article -->
+<h1>Increase RAM available to Raspberry Pi CPU</h1>
+<div id="article">
+    <p><strong>Raspberry Pi Model B Rev 2</strong> has 512MB RAM that is partitioned between the CPU and the GPU. If the Pi is working as a headless server or the Pi desktop is being accessed via <a class="reference external" href="http://www.raspberrypi.org/documentation/remote-access/vnc/">VNC</a> (which doesn't utilize the GPU) the <em>memory split</em> between the two processors can be altered to assign more memory to the CPU for running applications.</p>
 <div class="note">
 <p class="first admonition-title">Note</p>
 <p class="last">The <strong>Pi Camera Module</strong> requires a minimum of 128MB RAM assigned to the GPU.</p>
@@ -48,13 +38,17 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <p>Save the change, reboot the Pi, and enjoy the CPU memory boost!</p>
 <p>Source: <a class="reference external" href="http://elinux.org/RPi_config.txt">RPiconfig</a></p>
 
-        <!-- Nav links to previous|next article --> 
-        <div id="navmenu">
-            <hr />
-            <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-                <a href="http://www.circuidipity.com/ubuntu-trusty-install.html">
-                Ubuntu 14.04 Minimal Install</a></p>
-        </div>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-raspberry-pi.html">raspberry pi</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-raspbian.html">raspbian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/ubuntu-trusty-install.html">Ubuntu 14.04 Minimal Install</a></p>
 </div>
 
 
