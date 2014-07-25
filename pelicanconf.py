@@ -48,8 +48,8 @@ ARCHIVES_URL = 'archives.html'
 ARCHIVES_SAVE_AS = 'archives.html'
 PROJECTS_URL = 'projects.html'
 PROJECTS_SAVE_AS = 'projects.html'
-PINGPARADE_URL = 'ping-parade.html'
-PINGPARADE_SAVE_AS = 'ping-parade.html'
+PINGPARADE_URL = 'pingparade.html'
+PINGPARADE_SAVE_AS = 'pingparade.html'
 
 # Contact
 EMAIL_ADDR = 'daniel at circuidipity dot com'
