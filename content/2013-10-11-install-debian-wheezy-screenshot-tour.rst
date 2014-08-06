@@ -4,23 +4,25 @@ Debian Wheezy Minimal Install
 
 :tags: debian, linux
 :slug: install-debian-wheezy-screenshot-tour
-:modified: 07 July 2014
+:modified: 06 August 2014
 
-.. image:: images/debianVader.png
+.. figure:: images/debianVader.png
     :alt: Debian Vader
-    :width: 851px
-    :height: 315px
+    :width: 960px
+    :height: 355px
+
+    [Image courtesy of `jschild <http://jschild.deviantart.com/art/Facebook-cover-debian-Darth-Vader-380351614>`_]
 
 `Debian GNU/Linux <http://www.debian.org>`_ is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like `Ubuntu <http://www.circuidipity.com/ubuntu-trusty-install.html>`_ build their edifices on solid Debian *awesomesauce*.
 
-There are 3 *release branches* - ``stable``, ``testing``, and ``unstable`` - and the current stable branch goes by the name *wheezy*. I use Debian's *minimal install image* to create a *lightweight, console-only* base configuration that can be customized for various tasks and alternate desktops.
+There are 3 **release branches** - ``stable``, ``testing``, and ``unstable`` - and the current stable branch goes by the name **wheezy**. I use Debian's `minimal install image <http://www.circuidipity.com/multi-boot-usb.html>`_ to create a **lightweight, console-only** base configuration that can be customized for various tasks and desktops.
 
-Below is a visual walk-through of a sample Debian setup that makes use of an entire storage device divided into 3 partitions: unencrypted ``root`` and `LUKS <https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup>`_ encrypted ``home`` + ``swap``.
+Below is a visual walk-through of a sample Debian setup that makes use of an entire storage device divided into 3 partitions: an unencrypted **root** and `LUKS <https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup>`_ encrypted **home** + **swap**.
 
 Step 0 - Installer
 ==================
 
-Download a `64-bit <http://ftp.nl.debian.org/debian/dists/testing/main/installer-amd64/current/images/netboot/mini.iso>`_  (`32-bit <http://ftp.nl.debian.org/debian/dists/testing/main/installer-i386/current/images/netboot/mini.iso>`_ for older machines) Debian *mini.iso* and burn the image to a CD or `prepare a USB boot device <http://www.circuidipity.com/multi-boot-usb.html>`_.
+Download a `64bit <http://ftp.nl.debian.org/debian/dists/testing/main/installer-amd64/current/images/netboot/mini.iso>`_  (`32bit <http://ftp.nl.debian.org/debian/dists/testing/main/installer-i386/current/images/netboot/mini.iso>`_ for older machines) Debian **mini.iso** and burn the image to a CD or `prepare a USB boot device <http://www.circuidipity.com/multi-boot-usb.html>`_.
 
 Step 1 - Go!
 ============
@@ -133,8 +135,8 @@ Step 2 - Partitions
 In the example below I create 3 partitions on the disk:
 
 * sda1 is a 20GB ``root`` partition 
-* sda5 is a 1GB LUKS encrypted ``swap`` partition using a *random key*
-* sda6 uses the remaining space as a LUKS encrypted ``home`` partition using a *passphrase*
+* sda5 is a 1GB LUKS encrypted ``swap`` partition using a **random key**
+* sda6 uses the remaining space as a LUKS encrypted ``home`` partition using a **passphrase**
 
 .. image:: images/screenshot/wheezyInstall/18.png
     :alt: Partitioning method
@@ -262,7 +264,7 @@ In the example below I create 3 partitions on the disk:
 
 .. note::
 
-    If the hard disk has not been securely wiped prior to installing Debian (using a utility like `DBAN <http://www.circuidipity.com/multi-boot-usb.html>`_) you may want to configure *Erase data* as *yes*. Note, however, that depending on the size of the disk this operation can last several hours.
+    If the hard disk has not been securely wiped prior to installing Debian (using a utility like `DBAN <http://www.circuidipity.com/multi-boot-usb.html>`_) you may want to configure **Erase data** as **yes**. Note, however, that depending on the size of the disk this operation can last several hours.
 
 .. image:: images/screenshot/wheezyInstall/33.1.png
     :alt: Erase data
@@ -404,7 +406,7 @@ In the example below I create 3 partitions on the disk:
 
 .. note::
 
-    *Reserved blocks* can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the 5% reserve set aside by Debian to 1%.
+    **Reserved blocks** can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the 5% reserve set aside by Debian to 1%.
 
 .. image:: images/screenshot/wheezyInstall/49.1.png
     :alt: Reserved blocks
@@ -447,7 +449,7 @@ Step 3 - Install packages and finish up
 
 .. note::
 
-    Select only [*] *Standard system utilities* if you wish to start with a minimal, console-only base configuration ready for further customization. The task menu can be accessed post-install by running ``sudo tasksel``.
+    Select only **[*] Standard system utilities** if you wish to start with a minimal, console-only base configuration ready for further customization. The task menu can be accessed post-install by running ``tasksel``.
     
 .. image:: images/screenshot/wheezyInstall/52.png
     :alt: Software selection
@@ -475,7 +477,7 @@ Step 3 - Install packages and finish up
 
 .. note::
 
-    If an encrypted *home* partition was created in Step 2 the system will display a passphrase prompt to unlock the partition.
+    If an **encrypted home** partition was created in Step 2 the system will display a passphrase prompt to unlock the partition.
 
 .. image:: images/screenshot/wheezyInstall/55.png
     :alt: Enter encrypt passphrase
@@ -489,8 +491,6 @@ Step 3 - Install packages and finish up
     :width: 800px
     :height: 600px
 
-Enjoy your fresh Debian!
+I have created a `post-install shell script <https://github.com/vonbrownie/linux-post-install/blob/master/debian_post_install>`_ that can be used to configure tracking of Debian's stable or unstable branch with the option of installing the **Openbox** window manager + extra applications suitable for a desktop environment.
 
-I have created a `post-install shell script <https://github.com/vonbrownie/linux-post-install/blob/master/debian_post_install>`_ that can be used to configure tracking of Debian's ``stable`` or ``unstable/sid`` branch with the option of installing the Openbox window manager + extra apps suitable for a desktop environment.
-
-Source: *Debian Vader* image courtesy of `jschild <http://jschild.deviantart.com/art/Facebook-cover-debian-Darth-Vader-380351614>`_
+Happy hacking!
