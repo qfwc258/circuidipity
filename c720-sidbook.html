@@ -5,6 +5,7 @@
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
         <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
         <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
@@ -18,20 +19,21 @@
 <!-- breadcrumb trail -->
 <div id="breadcrumb">
     <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
-    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
-    Friday 09 May 2014</p>
+    <a href="projects.html">Projects</a></p>
 </div>
 
 <!-- article -->
 <h1>From Chromebook to Sidbook</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on 09 August 2014</p>
 <div id="article">
-    <p>A guide for replacing Chrome OS with <strong>Debian &quot;Sid&quot; Unstable</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
+    <p>Replace ChromeOS permanently with the <strong>sid/unstable</strong> branch of <strong>Debian Linux</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
 <img alt="Debianized Acer C720" class="align-right" src="images/sidbook.png" style="width: 300px; height: 161px;" />
-<p>Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy using my preferred window manager (<a class="reference external" href="http://openbox.org/">Openbox</a>).</p>
+<p>Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance using <a class="reference external" href="http://openbox.org/">Openbox</a> window manager.</p>
 <p>There are a few different configurations of this device... mine is the <a class="reference external" href="http://us.acer.com/ac/en/US/content/model-datasheet/NX.SHEAA.002">C720-2848</a> non-touchscreen model with 2GB RAM and 16GB SSD.</p>
+<p>Let's go!</p>
 <div class="section" id="step-0-recovery-image">
 <h2>Step 0 - Recovery Image</h2>
-<p>Create a recovery image of Chrome OS in case you need to restore the Chromebook to its default configuration. This will require a spare USB stick of 4GB or better...</p>
+<p>Create a recovery image of Chrome OS (my C720 is model <tt class="docutils literal">PEPPY <span class="pre">C6A-N3C-A7O</span></tt>) to enable restoring the Chromebook to its default configuration. This will require a spare USB stick of 2GB or better:</p>
 <ul class="simple">
 <li>Log into the Chromebook and let it auto update, as there sometimes are firmware updates... check the updating status in the browser at <tt class="docutils literal"><span class="pre">chrome://help</span></tt></li>
 <li>Insert the USB stick, enter <tt class="docutils literal"><span class="pre">chrome://imageburner</span></tt> and follow the directions to generate a recovery image</li>
@@ -40,44 +42,86 @@
 </div>
 <div class="section" id="step-1-debian-installer">
 <h2>Step 1 - Debian Installer</h2>
-<p>I use <a class="reference external" href="http://grml.org/">GRML 2014.03</a> installed on a USB stick as my Debian install media.</p>
+<p>Prepare the Debian installation media. I use <a class="reference external" href="http://grml.org/">GRML 2014.03</a> installed on a USB stick.</p>
 <p>Sources: Creating a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a> and <a class="reference external" href="http://www.circuidipity.com/grml-debootstrap.html">installing Debian using grml-debootstrap</a></p>
 </div>
-<div class="section" id="step-2-developer-mode">
-<h2>Step 2 - Developer Mode</h2>
-<p>Before booting the Debian installer the Chromebook needs to be put into developer mode...</p>
+<div class="section" id="step-2-seabios">
+<h2>Step 2 - SeaBIOS</h2>
+<p><a class="reference external" href="http://www.coreboot.org/SeaBIOS">SeaBIOS</a> in combination with <strong>coreboot</strong> provides an open-source legacy BIOS that enables access to the MBR and the ability to install an alternative OS on the Chromebook. All this good stuff involves jumping through a few simple hoops and not trembling in fear at the &quot;scary white screen&quot; that pops up at power up stating that the boot loader detects something is <strong>very very wrong</strong> with the Chromebook and helpfully suggests pressing the spacebar to begin recovery. <strong>Do not press the spacebar</strong> or the Debian installation will be wiped from disk!</p>
+<p>There are 2 different methods for configuring SeaBIOS in preparation for installing Debian. The first method uses a few simple commands in the ChromeOS shell to place the Chromebook into <strong>developer mode</strong> and allow booting the USB install media and replacing ChromeOS with Debian. The drawback is that scary screen appears at every boot and you must press <tt class="docutils literal">CTRL+L</tt> to boot to legacy-mode and onward to GRUB and Debian (and <strong>ignore</strong> the helpful prompt to press spacebar and inadvertently begin the adventure of wiping clean the SSD).</p>
+<p>The second method involves setting new flags for the write-protected <strong>Google Binary Block</strong> (GBB) in the device firmware. Delay at the boot screen can be reduced to a one second timeout and the legacy-mode BIOS set as the system default (no key combo required). Pressing the spacebar is disabled from doing any harm to Debian (the Chromebook just beeps). The drawback is that it involves the (very simple) removal of the device's bottom cover and the temporary removal of the <strong>write-protect screw</strong> from the motherboard to permit flashing new flags to the GBB... and this may void the Chromebook's warranty (one of the case screws lies underneath a sticker declaring the warranty void if disturbed).</p>
+<p>Experimenting with alternate OS installs on the Chromebook I first employed the developer mode method followed by the write-protect screw removal. I prefer configuring the device to default to legacy-mode BIOS but I have employed both methods successfully and describe their respective steps below.</p>
+<p><strong>No guarantees</strong>, though... Hopefully you enjoy equal success!</p>
+<div class="section" id="write-protect-screw-method">
+<h3>2.1 Write-Protect Screw Method</h3>
+<p>Disconnect power. Turn the Chromebook over facing bottom up and remove the 13 screws (not missing the one hidden under the warranty sticker). Gently pry the case off starting with the seam where the display connects to device. It comes away pretty easy.</p>
+<p>This is what you see...</p>
+<div class="figure">
+<img alt="C720 annotated innards" src="images/c720-chromebook-annotated-innards.png" style="width: 800px; height: 558px;" />
+<p class="caption">[Image: The battery lock screw is #6 and the write-protect screw is #7, courtesy <a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook#TOC-Firmware">Chromium</a>].</p>
+</div>
 <ul class="simple">
-<li>With the Chromebook off... Hold down <tt class="docutils literal"><span class="pre">ESC-F3</span></tt> (Refresh) keys and power on the device</li>
-<li>Invoke Recovery, and at the Recovery screen press <tt class="docutils literal"><span class="pre">Ctrl-D</span></tt></li>
+<li>Remove the write-protect screw (this will <strong>wipe out</strong> whatever is installed on the SSD)</li>
+<li>Close back cover using only the battery lock screw to hold in place</li>
+<li>Re-connect power, boot chromebook and wait until it displays...</li>
+</ul>
+<div class="highlight"><pre>Chrome OS is missing or damaged.
+Please insert a recovery USB stick or SD card.
+</pre></div>
+<ul class="simple">
+<li>Insert USB recovery media prepared in Step 0 and it will proceed to restore ChromeOS and reboot</li>
+<li>At default ChromeOS &quot;Welcome!&quot; screen open a terminal <tt class="docutils literal">CTRL+ALT+F2</tt> (Right-arrow)</li>
+<li>Login as <tt class="docutils literal">chronos</tt> (no password), then enter <tt class="docutils literal">sudo su</tt> for superuser access</li>
+</ul>
+<p>Set new GBB flags using the <tt class="docutils literal">set_gbb_flags.sh</tt> script in ChromeOS. To enable short <strong>developer mode</strong> screen (1 second timeout) followed by <strong>default legacy mode</strong> boot use these flags...</p>
+<div class="highlight"><pre>GBB_FLAG_DEV_SCREEN_SHORT_DELAY 0×00000001
+GBB_FLAG_FORCE_DEV_SWITCH_ON 0×00000008
+GBB_FLAG_FORCE_DEV_BOOT_LEGACY 0×00000080
+GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
+</pre></div>
+<p>... which adds up to running in the shell...</p>
+<div class="highlight"><pre>set_gbb_flags.sh 0x489
+</pre></div>
+<p>Shutdown with <tt class="docutils literal">shutdown <span class="pre">-h</span> now</tt> and disconnect the power:</p>
+<ul class="simple">
+<li>Remove the bottom cover again and reinstall the write-lock screw to protect the BIOS</li>
+<li>Close cover and reinstall all the case screws</li>
+</ul>
+<p>Re-connect the power, insert the USB stick prepared in Step 1, and power up the Chromebook.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Whenever you remove battery power to the Chromebook (like opening up the case) the hardware clock on the motherboard resets to a future year (mine travelled to 2040). Providing a network connection is up during the Debian installation the system should fetch a correct time from a NTP server... otherwise fix the <a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-debian-gnu-linux/">fallout from an incorrect clock</a> by re-mounting partitions read-only and correct filesystem timestamps using <tt class="docutils literal">fsck</tt>.</p>
+</div>
+<p>Sources: <a class="reference external" href="http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html">Useful GBB flags</a> for <a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-debian-gnu-linux/">another new free software machine</a></p>
+</div>
+<div class="section" id="developer-mode-method">
+<h3>2.2 Developer Mode Method</h3>
+<p>The alternative to removing the write-protect screw above is to place the Chromebook into developer mode using the ChromeOS shell before booting the USB install media:</p>
+<ul class="simple">
+<li>With the Chromebook off... Hold down <tt class="docutils literal">ESC+F3</tt> (Refresh) keys and power on the device</li>
+<li>Invoke Recovery, and at the Recovery screen press <tt class="docutils literal">Ctrl+D</tt></li>
 <li>Device will prompt for confirmation, press <tt class="docutils literal">ENTER</tt> and the system reboots into developer mode</li>
-<li>'Scary' white boot screen appears and you need to press <tt class="docutils literal"><span class="pre">Ctrl-D</span></tt> to continue boot</li>
+<li>Scary white boot screen appears and you need to press <tt class="docutils literal">Ctrl+D</tt> to continue boot</li>
 </ul>
 <div class="note">
 <p class="first admonition-title">Note</p>
 <p class="last">Switching between developer and normal (non-developer) modes will remove user accounts and their associated information from your Chromebook.</p>
 </div>
-</div>
-<div class="section" id="step-3-usb-boot-and-legacy-bios">
-<h2>Step 3 - USB Boot and Legacy BIOS</h2>
-<p>Open up a shell in Chrome OS by pressing <tt class="docutils literal"><span class="pre">Ctrl-Alt-T</span></tt> and enter <tt class="docutils literal">shell</tt>.</p>
-<p>Enable <tt class="docutils literal">dev_boot_usb</tt> and <tt class="docutils literal">dev_boot_legacy</tt> ...</p>
+<p>Enable the <strong>USB Boot</strong> and <strong>Legacy BIOS</strong> modes by opening the shell with <tt class="docutils literal">Ctrl+Alt+T</tt> and enter <tt class="docutils literal">shell</tt>. Set <tt class="docutils literal">dev_boot_usb</tt> and <tt class="docutils literal">dev_boot_legacy</tt> to active...</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo crossystem <span class="nv">dev_boot_usb</span><span class="o">=</span>1
 <span class="nv">$ </span>sudo <span class="nv">dev_boot_legacy</span><span class="o">=</span>1
 </pre></div>
-<p>Connect the USB install stick, reboot the Chromebook and press <tt class="docutils literal"><span class="pre">CTRL-L</span></tt> at the white splash screen to enter legacy boot mode.</p>
+<p>Insert the USB stick prepared in Step 1, reboot the Chromebook and press <tt class="docutils literal">CTRL+L</tt> at the boot screen to enter legacy boot mode.</p>
 <p>Source: <a class="reference external" href="http://www.chromium.org/chromium-os">Chromium OS</a> developer information for the <a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook">Acer C720 Chromebook</a></p>
 </div>
-<div class="section" id="step-4-install-debian">
-<h2>Step 4 - Install Debian</h2>
-<p>My <a class="reference external" href="http://www.circuidipity.com/grml-debootstrap.html">grml-debootstrap instructions</a> for installing Debian Wheezy, configuring TRIM support for the SSD, and my <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/debian_post_install">post-install script</a> for upgrading and configuring Debian's sid/unstable branch.</p>
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">After Debian is successfully installed the white boot screen will continue to appear at boot time. Keep pressing <tt class="docutils literal"><span class="pre">CTRL-L</span></tt> to fire up GRUB... <strong>DO NOT</strong> follow the suggestion to press spacebar and proceed, or <a class="reference external" href="http://www.reddit.com/r/chrubuntu/comments/1v7i0i/what_will_happen_if_i_press_the_spacebar_on_the/">your system may be wiped</a>.</p>
 </div>
+<div class="section" id="step-3-install-debian">
+<h2>Step 3 - Install Debian</h2>
+<p>My <a class="reference external" href="http://www.circuidipity.com/grml-debootstrap.html">grml-debootstrap instructions</a> for installing Debian Wheezy, configuring <strong>TRIM</strong> support for the SSD, and my <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/debian_post_install">post-install script</a> for upgrading and configuring Debian's sid/unstable branch.</p>
 </div>
-<div class="section" id="step-5-touchpad">
-<h2>Step 5 - Touchpad</h2>
-<p>After installing Debian the C720 touchpad is non-functional and requires compiling new kernel modules and creating a synaptic touchpad config file...</p>
+<div class="section" id="step-4-touchpad">
+<h2>Step 4 - Touchpad</h2>
+<p>After installing Debian the C720 touchpad is non-functional and requires compiling new kernel modules and creating a <strong>synaptic touchpad</strong> config file:</p>
 <ul class="simple">
 <li>Compile new kernel modules using the <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/sid-c720-kern-mods.sh">sid-c720-kern-mods.sh</a> script... Confirmed <strong>working</strong> in kernel <tt class="docutils literal">3.13.10</tt> and <strong>not working</strong> in <tt class="docutils literal">3.14.x</tt></li>
 <li>Create touchpad config <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/50-c720-touchpad.conf">50-c720-touchpad.conf</a> in <tt class="docutils literal">/etc/X11/xorg.conf.d</tt> ...</li>
@@ -88,9 +132,9 @@
 <p>Modify this file to adjust timeouts, add tap-mouse actions (2-finger tap = right-click, 3-finger tap = middle-click), and 2-finger scrolling.</p>
 <p>Sources: <a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics">Touchpad Synaptics</a> and <a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration">C720 configuration</a> on the Arch Wiki</p>
 </div>
-<div class="section" id="step-6-suspend">
-<h2>Step 6 - Suspend</h2>
-<p>Enable suspend|resume under <strong>systemd</strong> (for sysv-init see <em>Helpful Resources</em> at bottom)...</p>
+<div class="section" id="step-5-suspend">
+<h2>Step 5 - Suspend</h2>
+<p>Enable suspend|resume under <strong>systemd</strong> (for sysv-init see <em>Helpful Resources</em> at bottom):</p>
 <ul class="simple">
 <li>Create <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/cros-sound-suspend.sh">cros-sound-suspend.sh</a> (make it executable) in <tt class="docutils literal"><span class="pre">/lib/systemd/system-sleep</span></tt> and...</li>
 <li>... <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/cros-acpi-wakeup.conf">cros-acpi-wakeup.conf</a> in <tt class="docutils literal">/etc/tmpfiles.d</tt> to restore sound and touchpad after suspend</li>
@@ -103,10 +147,10 @@
 </pre></div>
 <p>Sources: <a class="reference external" href="https://plus.google.com/+PedroLarroy/posts/6CgQypQukMa">Chrubuntu resume fix</a> on Google+, <a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?pid=1364521#p1364521">Acer C720 thread</a> in Arch Forums, and <a class="reference external" href="https://wiki.archlinux.org/index.php/Allow_users_to_shutdown">systemctl user controls</a></p>
 </div>
-<div class="section" id="step-7-keyboard-shortcuts">
-<h2>Step 7 - Keyboard Shortcuts</h2>
+<div class="section" id="step-6-keyboard-shortcuts">
+<h2>Step 6 - Keyboard Shortcuts</h2>
 <p>The top row on the keyboard with the shortcut icons (brightness, volume, etc.) identify in Linux as the <tt class="docutils literal"><span class="pre">F1-F10</span></tt> keys and the Search key (in the <tt class="docutils literal">CapsLk</tt> position) acts as the <tt class="docutils literal">Super</tt> (Windows) modifier key.</p>
-<p>Create keyboard shortcuts in Openbox to modify the sound, brightness, and page movement settings by first installing...</p>
+<p>Create keyboard shortcuts in Openbox to modify the sound, brightness, and page movement settings by first installing:</p>
 <ul class="simple">
 <li>amixer - command line mixer</li>
 <li>xbacklight - set backlight level using RandR</li>
@@ -114,9 +158,9 @@
 </ul>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install alsa-utils xbacklight xdotool
 </pre></div>
-<p>... and creating keybindings in <tt class="docutils literal"><span class="pre">$HOME/.config/openbox/rc.xml</span></tt> ...</p>
+<p>... and creating keybindings in <tt class="docutils literal"><span class="pre">$HOME/.config/openbox/rc.xml</span></tt>.</p>
 <div class="section" id="sound">
-<h3>Sound</h3>
+<h3>6.1 Sound</h3>
 <div class="highlight"><pre>&lt;!-- Keybindings <span class="k">for </span>Acer C720 volume keys: mute/down/up --&gt;
 &lt;keybind <span class="nv">key</span><span class="o">=</span><span class="s2">&quot;W-F8&quot;</span>&gt;
     &lt;action <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Execute&quot;</span>&gt;
@@ -136,7 +180,7 @@
 </pre></div>
 </div>
 <div class="section" id="display-brightness">
-<h3>Display Brightness</h3>
+<h3>6.2 Display Brightness</h3>
 <div class="highlight"><pre>&lt;!-- Keybingings <span class="k">for </span>Acer C720 brightness keys: lower/raise --&gt;
 &lt;keybind <span class="nv">key</span><span class="o">=</span><span class="s2">&quot;W-F6&quot;</span>&gt;
     &lt;action <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Execute&quot;</span>&gt;
@@ -151,7 +195,7 @@
 </pre></div>
 </div>
 <div class="section" id="page-up-page-down-home-end">
-<h3>Page-Up, Page-Down, Home, End</h3>
+<h3>6.3 Page-Up, Page-Down, Home, End</h3>
 <div class="highlight"><pre> &lt;!-- Keybindings <span class="k">for </span>Page-Up, Page-Down, Home, End --&gt;
 &lt;keybind <span class="nv">key</span><span class="o">=</span><span class="s2">&quot;A-Up&quot;</span>&gt;
    &lt;action <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Execute&quot;</span>&gt;
@@ -175,21 +219,28 @@
  &lt;/keybind&gt;
 </pre></div>
 </div>
-</div>
 <div class="section" id="power-key">
-<h2>Power Key</h2>
+<h3>6.4 Power Key</h3>
 <p>The power key ignores any configuration in the window manager and triggers poweroff without delay when pressed (easy to do by accident as its positioned next to <tt class="docutils literal">backspace</tt>).</p>
 <p>If you want to disable the power key... modify <tt class="docutils literal">/etc/systemd/logind.conf</tt> and set <tt class="docutils literal">HandlePowerKey=ignore</tt>.</p>
 </div>
-<div class="section" id="helpful-resources">
-<h2>Helpful Resources</h2>
-<ul class="simple">
-<li>My <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720/debian">C720 config files</a> and the output of <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/lshw.txt">lshw</a>, <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/lspci.txt">lspci</a>, and <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/lsusb.txt">lsusb</a></li>
-<li><a class="reference external" href="https://github.com/liangcj/AcerC720CrunchBang">CrunchBang Linux on the C720</a></li>
-<li><a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook">Arch Linux wiki entry for the C720</a></li>
-<li><a class="reference external" href="http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/">List of fixes for Xubuntu 13.10 on the C720</a></li>
-</ul>
-<p>Happy hacking!</p>
+</div>
+<div class="section" id="step-7-helpful-resources">
+<h2>Step 7 - Helpful Resources</h2>
+<p><a href="https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720/debian">My personal C720 configurations</a> (github.com/vonbrownie)<br />
+Configuring the Chromebook and the output of <em>lshw</em>, <em>lspci</em>, and <em>lsusb</em></p>
+
+<p><a href="https://github.com/liangcj/AcerC720CrunchBang">CrunchBang Linux on the Acer C720 Chromebook</a> (github.com/liangcj)<br />
+Guide for wiping ChromeOS and installing CrunchBang</p>
+
+<p><a href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook">Acer C720 Chromebook</a> (wiki.archlinux.org)<br />
+Arch Linux installation with useful post-install details applicable to any Linux distro</p>
+
+<p><a href="http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/">List of fixes for Xubuntu 13.10 on the Acer C720</a> (reddit.com/r/chrubuntu)<br />
+Ongoing discussion thread about Chromebook configuration for a Debian/Ubuntu-based install</p>
+
+<p><a href="http://blog.codestarter.org/post/93985346780/how-we-turn-199-chromebooks-into-ubuntu-based-code">Turn Chromebooks into Ubuntu-based code learning machines for kids</a> (blog.codestarter.org)<br />
+Configure the C720 to dual-boot ChromeOS and Ubuntu using open-source install script</p><p>Happy hacking!</p>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-chrome.html">chrome</a>

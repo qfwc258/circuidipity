@@ -1,8 +1,8 @@
 /*
     Name: Chungking Condo
-    Date: February 2014
+    Date: July 2014
     Description: Theme for the Pelican static site generator
-    Version: 0.1
+    Version: 0.2
     Licence: GPL2
     Author: Daniel Wayne Armstrong <http://www.circuidipity.com>
 */
@@ -50,6 +50,8 @@ h1, h2, h3, h4, h5, h6 {
 
 h2, h3, h4, h5, h6 {color: #000000;}
 
+.projectx h2 {font-size: 2.0em; color: #660066;}
+
 /*
 Anchors
 */
@@ -79,7 +81,7 @@ a.subEmail {color: #660066;}
 a:hover.tag, ul.tagcloud a:hover, 
 #sitemenu a:hover, #footer a:hover {color: #ffffff;}
 
-a.invisibleLink, a.invisibleLink:hover {
+a.invisiblelink, a.invisiblelink:hover {
     color: #ffffff;
     background-color: #ffffff;
 }
@@ -115,6 +117,15 @@ p.nextpost {
     margin-bottom: 0px;
 }
 
+p.firstparagraph {
+    font-size: 1.4em;
+    font-family: 'YanoneKaffeesatzRegular', sans-serif;
+    line-height: 1.2em;
+    word-spacing: 0.1em;
+}
+
+p.caption {font-size: 1.0em; font-weight: bold; margin-top: 0px;}
+
 .note p.first.admonition-title, .warning p.first.admonition-title {
     font-size: 1.2em; 
     font-weight: bold;
@@ -128,6 +139,8 @@ p.nextpost {
 .warning p.first.admonition-title {background-color: #ff0000;}
 
 .note p.last, .warning p.last {margin-top: 0px;}
+
+.projectx p {font-size: 1.2em;}
 
 /*
 Quotes
@@ -155,6 +168,86 @@ li.tag-0 {font-size: 225%;}
 li.tag-1 {font-size: 175%;}
 li.tag-2 {font-size: 145%;}
 li.tag-3 {font-size: 100%;}
+
+/* Responsive Image Grids Using CSS -- awesome tutorial: */
+/* http://alijafarian.com/responsive-image-grids-using-css/ */
+
+ul.rig {
+    list-style: none;
+    font-size: 0px;
+    margin-left: -2.5%; /* should match li left margin */
+}
+
+ul.rig li {
+    display: inline-block;
+    padding: 10px;
+    margin: 0 0 2.5% 2.5%;
+    /* border: 1px solid #ddd; */
+    font-family: 'YanoneKaffeesatzRegular', sans-serif;
+    color: #7a7a7a;
+    font-size: 16px; 
+    font-size: 1rem; 
+    text-align: center;
+    vertical-align: top;
+    /* box-shadow: 0 0 5px #ddd; */
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+ul.rig li img {
+    max-width: 100%;
+    height: auto;
+    margin: 0 0 10px;
+}
+
+ul.rig li a, ul.rig li a:hover {
+    color: #ff6600;
+    background-color: #ffffff;
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+ul.rig li h3 {
+    margin: 0 0 5px;
+}
+
+ul.rig li p {
+    margin: 0;
+}
+
+/* class for 2 columns */
+ul.rig.columns-2 li {
+    width: 47.5%; /* this value + 2.5 should = 50% */
+}
+/* class for 3 columns */
+ul.rig.columns-3 li {
+    width: 30.83%; /* this value + 2.5 should = 33% */
+}
+/* class for 4 columns */
+ul.rig.columns-4 li {
+    width: 22.5%; /* this value + 2.5 should = 25% */
+}
+ 
+@media (max-width: 480px) {
+    ul.grid-nav li {
+        display: block;
+        margin: 0 0 5px;
+    }
+
+    ul.grid-nav li a {
+        display: block;
+    }
+
+    ul.rig {
+        margin-left: 0;
+    }
+
+    ul.rig li {
+        width: 100% !important; /* over-ride all li styles */
+        margin: 0 0 20px;
+    }
+}
 
 /*
 Code
@@ -213,6 +306,8 @@ img.align-right {
     margin: 20px 0px 20px 20px;
     float: right;
 }
+
+.figure img {margin-bottom: 0px;}
 
 /*
 -------- Sections --------
@@ -295,7 +390,7 @@ All Tags
     font-family: monospace;
 }
 
-div.aphorism, p.modified {
+div.aphorism, p.modified, p.caption {
     font-family: 'YanoneKaffeesatzRegular', sans-serif;
     color: #7a7a7a;
 }

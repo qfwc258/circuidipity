@@ -5,6 +5,7 @@
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
         <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
         <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
@@ -24,15 +25,18 @@
 
 <!-- article -->
 <h1>Debian Wheezy Minimal Install</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on 07 July 2014</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on 06 August 2014</p>
 <div id="article">
-    <img alt="Debian Vader" src="images/debianVader.png" style="width: 851px; height: 315px;" />
+    <div class="figure">
+<img alt="Debian Vader" src="images/debianVader.png" style="width: 960px; height: 355px;" />
+<p class="caption">[Image: Debian Vader, courtesy <a class="reference external" href="http://jschild.deviantart.com/art/Facebook-cover-debian-Darth-Vader-380351614">jschild</a>].</p>
+</div>
 <p><a class="reference external" href="http://www.debian.org">Debian GNU/Linux</a> is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like <a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html">Ubuntu</a> build their edifices on solid Debian <em>awesomesauce</em>.</p>
-<p>There are 3 <em>release branches</em> - <tt class="docutils literal">stable</tt>, <tt class="docutils literal">testing</tt>, and <tt class="docutils literal">unstable</tt> - and the current stable branch goes by the name <em>wheezy</em>. I use Debian's <em>minimal install image</em> to create a <em>lightweight, console-only</em> base configuration that can be customized for various tasks and alternate desktops.</p>
-<p>Below is a visual walk-through of a sample Debian setup that makes use of an entire storage device divided into 3 partitions: unencrypted <tt class="docutils literal">root</tt> and <a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a> encrypted <tt class="docutils literal">home</tt> + <tt class="docutils literal">swap</tt>.</p>
+<p>There are 3 <strong>release branches</strong> - <tt class="docutils literal">stable</tt>, <tt class="docutils literal">testing</tt>, and <tt class="docutils literal">unstable</tt> - and the current stable branch goes by the name <strong>wheezy</strong>. I use Debian's <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">minimal install image</a> to create a <strong>lightweight, console-only</strong> base configuration that can be customized for various tasks and desktops.</p>
+<p>Below is a visual walk-through of a sample Debian setup that makes use of an entire storage device divided into 3 partitions: an unencrypted <strong>root</strong> and <a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a> encrypted <strong>home</strong> + <strong>swap</strong>.</p>
 <div class="section" id="step-0-installer">
 <h2>Step 0 - Installer</h2>
-<p>Download a <a class="reference external" href="http://ftp.nl.debian.org/debian/dists/testing/main/installer-amd64/current/images/netboot/mini.iso">64-bit</a>  (<a class="reference external" href="http://ftp.nl.debian.org/debian/dists/testing/main/installer-i386/current/images/netboot/mini.iso">32-bit</a> for older machines) Debian <em>mini.iso</em> and burn the image to a CD or <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">prepare a USB boot device</a>.</p>
+<p>Download a <a class="reference external" href="http://ftp.nl.debian.org/debian/dists/testing/main/installer-amd64/current/images/netboot/mini.iso">64bit</a>  (<a class="reference external" href="http://ftp.nl.debian.org/debian/dists/testing/main/installer-i386/current/images/netboot/mini.iso">32bit</a> for older machines) Debian <strong>mini.iso</strong> and burn the image to a CD or <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">prepare a USB boot device</a>.</p>
 </div>
 <div class="section" id="step-1-go">
 <h2>Step 1 - Go!</h2>
@@ -59,8 +63,8 @@
 <p>In the example below I create 3 partitions on the disk:</p>
 <ul class="simple">
 <li>sda1 is a 20GB <tt class="docutils literal">root</tt> partition</li>
-<li>sda5 is a 1GB LUKS encrypted <tt class="docutils literal">swap</tt> partition using a <em>random key</em></li>
-<li>sda6 uses the remaining space as a LUKS encrypted <tt class="docutils literal">home</tt> partition using a <em>passphrase</em></li>
+<li>sda5 is a 1GB LUKS encrypted <tt class="docutils literal">swap</tt> partition using a <strong>random key</strong></li>
+<li>sda6 uses the remaining space as a LUKS encrypted <tt class="docutils literal">home</tt> partition using a <strong>passphrase</strong></li>
 </ul>
 <img alt="Partitioning method" class="align-center" src="images/screenshot/wheezyInstall/18.png" style="width: 800px; height: 600px;" />
 <img alt="Partition disks" class="align-center" src="images/screenshot/wheezyInstall/19.png" style="width: 800px; height: 600px;" />
@@ -88,7 +92,7 @@
 <img alt="Random key" class="align-center" src="images/screenshot/wheezyInstall/33.png" style="width: 800px; height: 600px;" />
 <div class="note">
 <p class="first admonition-title">Note</p>
-<p class="last">If the hard disk has not been securely wiped prior to installing Debian (using a utility like <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">DBAN</a>) you may want to configure <em>Erase data</em> as <em>yes</em>. Note, however, that depending on the size of the disk this operation can last several hours.</p>
+<p class="last">If the hard disk has not been securely wiped prior to installing Debian (using a utility like <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">DBAN</a>) you may want to configure <strong>Erase data</strong> as <strong>yes</strong>. Note, however, that depending on the size of the disk this operation can last several hours.</p>
 </div>
 <img alt="Erase data" class="align-center" src="images/screenshot/wheezyInstall/33.1.png" style="width: 800px; height: 600px;" />
 <img alt="Done setting up partition" class="align-center" src="images/screenshot/wheezyInstall/33.2.png" style="width: 800px; height: 600px;" />
@@ -115,7 +119,7 @@
 <img alt="noatime" class="align-center" src="images/screenshot/wheezyInstall/25.2.png" style="width: 800px; height: 600px;" />
 <div class="note">
 <p class="first admonition-title">Note</p>
-<p class="last"><em>Reserved blocks</em> can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the 5% reserve set aside by Debian to 1%.</p>
+<p class="last"><strong>Reserved blocks</strong> can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the 5% reserve set aside by Debian to 1%.</p>
 </div>
 <img alt="Reserved blocks" class="align-center" src="images/screenshot/wheezyInstall/49.1.png" style="width: 800px; height: 600px;" />
 <img alt="Percent reserved" class="align-center" src="images/screenshot/wheezyInstall/49.2.png" style="width: 800px; height: 600px;" />
@@ -128,7 +132,7 @@
 <img alt="Popularity-contest" class="align-center" src="images/screenshot/wheezyInstall/51.png" style="width: 800px; height: 600px;" />
 <div class="note">
 <p class="first admonition-title">Note</p>
-<p class="last">Select only [*] <em>Standard system utilities</em> if you wish to start with a minimal, console-only base configuration ready for further customization. The task menu can be accessed post-install by running <tt class="docutils literal">sudo tasksel</tt>.</p>
+<p class="last">Select only <strong>[*] Standard system utilities</strong> if you wish to start with a minimal, console-only base configuration ready for further customization. The task menu can be accessed post-install by running <tt class="docutils literal">tasksel</tt>.</p>
 </div>
 <img alt="Software selection" class="align-center" src="images/screenshot/wheezyInstall/52.png" style="width: 800px; height: 600px;" />
 <img alt="GRUB" class="align-center" src="images/screenshot/wheezyInstall/53.png" style="width: 800px; height: 600px;" />
@@ -136,13 +140,12 @@
 <img alt="GRUB menu" class="align-center" src="images/screenshot/wheezyInstall/544.png" style="width: 800px; height: 600px;" />
 <div class="note">
 <p class="first admonition-title">Note</p>
-<p class="last">If an encrypted <em>home</em> partition was created in Step 2 the system will display a passphrase prompt to unlock the partition.</p>
+<p class="last">If an <strong>encrypted home</strong> partition was created in Step 2 the system will display a passphrase prompt to unlock the partition.</p>
 </div>
 <img alt="Enter encrypt passphrase" class="align-center" src="images/screenshot/wheezyInstall/55.png" style="width: 800px; height: 600px;" />
 <img alt="Login" class="align-center" src="images/screenshot/wheezyInstall/56.png" style="width: 800px; height: 600px;" />
-<p>Enjoy your fresh Debian!</p>
-<p>I have created a <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/debian_post_install">post-install shell script</a> that can be used to configure tracking of Debian's <tt class="docutils literal">stable</tt> or <tt class="docutils literal">unstable/sid</tt> branch with the option of installing the Openbox window manager + extra apps suitable for a desktop environment.</p>
-<p>Source: <em>Debian Vader</em> image courtesy of <a class="reference external" href="http://jschild.deviantart.com/art/Facebook-cover-debian-Darth-Vader-380351614">jschild</a></p>
+<p>I have created a <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/debian_post_install">post-install shell script</a> that can be used to configure tracking of Debian's stable or unstable branch with the option of installing the <strong>Openbox</strong> window manager + extra applications suitable for a desktop environment.</p>
+<p>Happy hacking!</p>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
