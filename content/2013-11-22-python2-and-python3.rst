@@ -45,4 +45,4 @@ Enter the newly-created sandbox with ``activate`` and install additional Python 
         Python 3.3.3                                                                   
         (secret_ciphers)[~]$ pip install PACKAGENAME                                                
 
-Run ``deativate`` to exit the sandbox and return to the default system Python. Delete an inactive sandbox with a simple ``rm -rf SANDBOX``. 
+Run ``deactivate`` to exit the sandbox and return to the default system Python. Delete an inactive sandbox with a simple ``rm -rf SANDBOX``. 
