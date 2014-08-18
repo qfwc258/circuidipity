@@ -300,7 +300,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 &lt;/div&gt;
 &lt;div class="section" id="step-3-install-debian"&gt;
 &lt;h2&gt;Step 3 - Install Debian&lt;/h2&gt;
-&lt;p&gt;My &lt;a class="reference external" href="http://www.circuidipity.com/grml-debootstrap.html"&gt;grml-debootstrap instructions&lt;/a&gt; for installing Debian Wheezy, configuring &lt;strong&gt;TRIM&lt;/strong&gt; support for the SSD, and my &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/debian_post_install"&gt;post-install script&lt;/a&gt; for upgrading and configuring Debian's sid/unstable branch.&lt;/p&gt;
+&lt;p&gt;My &lt;a class="reference external" href="http://www.circuidipity.com/grml-debootstrap.html"&gt;grml-debootstrap instructions&lt;/a&gt; for installing Debian Wheezy, configuring &lt;strong&gt;TRIM&lt;/strong&gt; support for the SSD, and my &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/debian-post-install-main.sh"&gt;post-install script&lt;/a&gt; for upgrading and configuring Debian's sid/unstable branch.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="step-4-touchpad"&gt;
 &lt;h2&gt;Step 4 - Touchpad&lt;/h2&gt;
