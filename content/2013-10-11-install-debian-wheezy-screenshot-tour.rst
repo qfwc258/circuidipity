@@ -491,6 +491,6 @@ Step 3 - Install packages and finish up
     :width: 800px
     :height: 600px
 
-I have created a `post-install shell script <https://github.com/vonbrownie/linux-post-install/blob/master/debian_post_install>`_ that can be used to configure tracking of Debian's stable or unstable branch with the option of installing the **Openbox** window manager + extra applications suitable for a desktop environment.
+I have created a `post-install shell script <https://github.com/vonbrownie/linux-post-install/blob/master/debian-post-install-main.sh>`_ that can be used to configure tracking of Debian's stable, testing, or unstable branch with the option of installing the **Openbox** window manager + extra applications suitable for a desktop environment.
 
 Happy hacking!
