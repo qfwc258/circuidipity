@@ -141,8 +141,8 @@ Step 4 - Touchpad
 
 After installing Debian the C720 touchpad is non-functional and requires compiling new kernel modules and creating a **synaptic touchpad** config file:
 
-* Compile new kernel modules using the `sid-c720-kern-mods.sh <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/sid-c720-kern-mods.sh>`_ script... Confirmed **working** in kernel ``3.13.10`` and **not working** in ``3.14.x``
-* Create touchpad config `50-c720-touchpad.conf <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/50-c720-touchpad.conf>`_ in ``/etc/X11/xorg.conf.d`` ...
+* Compile new kernel modules using the `sid-c720-kern-mods.sh <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_chromebook/sidbook/scripts/sid-c720-kern-mods.sh>`_ script... Confirmed **working** in kernel ``3.13.10`` and **not working** in ``3.14.x``
+* Create touchpad config `50-c720-touchpad.conf <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_chromebook/sidbook/etc/X11/xorg.conf.d/50-c720-touchpad.conf>`_ in ``/etc/X11/xorg.conf.d`` ...
 
 .. code-block:: bash
 
@@ -158,8 +158,8 @@ Step 5 - Suspend
 
 Enable suspend|resume under **systemd** (for sysv-init see *Helpful Resources* at bottom):
 
-* Create `cros-sound-suspend.sh <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/cros-sound-suspend.sh>`_ (make it executable) in ``/lib/systemd/system-sleep`` and...
-* ... `cros-acpi-wakeup.conf <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/cros-acpi-wakeup.conf>`_ in ``/etc/tmpfiles.d`` to restore sound and touchpad after suspend
+* Create `cros-sound-suspend.sh <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_chromebook/sidbook/lib/systemd/system-sleep/cros-sound-suspend.sh>`_ (make it executable) in ``/lib/systemd/system-sleep`` and...
+* ... `cros-acpi-wakeup.conf <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_chromebook/sidbook/etc/tmpfiles.d/cros-acpi-wakeup.conf>`_ in ``/etc/tmpfiles.d`` to restore sound and touchpad after suspend
 * Configure ``GRUB_CMDLINE_LINUX_DEFAULT`` setting in ``/etc/default/grub``...
 
 .. code-block:: bash
@@ -269,7 +269,7 @@ Step 7 - Helpful Resources
 
 .. raw:: html
 
-    <p><a href="https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720/debian">My personal C720 configurations</a> (github.com/vonbrownie)<br />
+    <p><a href="https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720_chromebook/sidbook">My personal C720 configurations</a> (github.com/vonbrownie)<br />
     Configuring the Chromebook and the output of <em>lshw</em>, <em>lspci</em>, and <em>lsusb</em></p>
 
     <p><a href="https://github.com/liangcj/AcerC720CrunchBang">CrunchBang Linux on the Acer C720 Chromebook</a> (github.com/liangcj)<br />
