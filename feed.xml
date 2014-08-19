@@ -306,8 +306,8 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 &lt;h2&gt;Step 4 - Touchpad&lt;/h2&gt;
 &lt;p&gt;After installing Debian the C720 touchpad is non-functional and requires compiling new kernel modules and creating a &lt;strong&gt;synaptic touchpad&lt;/strong&gt; config file:&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;Compile new kernel modules using the &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/sid-c720-kern-mods.sh"&gt;sid-c720-kern-mods.sh&lt;/a&gt; script... Confirmed &lt;strong&gt;working&lt;/strong&gt; in kernel &lt;tt class="docutils literal"&gt;3.13.10&lt;/tt&gt; and &lt;strong&gt;not working&lt;/strong&gt; in &lt;tt class="docutils literal"&gt;3.14.x&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;Create touchpad config &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/50-c720-touchpad.conf"&gt;50-c720-touchpad.conf&lt;/a&gt; in &lt;tt class="docutils literal"&gt;/etc/X11/xorg.conf.d&lt;/tt&gt; ...&lt;/li&gt;
+&lt;li&gt;Compile new kernel modules using the &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_chromebook/sidbook/scripts/sid-c720-kern-mods.sh"&gt;sid-c720-kern-mods.sh&lt;/a&gt; script... Confirmed &lt;strong&gt;working&lt;/strong&gt; in kernel &lt;tt class="docutils literal"&gt;3.13.10&lt;/tt&gt; and &lt;strong&gt;not working&lt;/strong&gt; in &lt;tt class="docutils literal"&gt;3.14.x&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;Create touchpad config &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_chromebook/sidbook/etc/X11/xorg.conf.d/50-c720-touchpad.conf"&gt;50-c720-touchpad.conf&lt;/a&gt; in &lt;tt class="docutils literal"&gt;/etc/X11/xorg.conf.d&lt;/tt&gt; ...&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /etc/X11/xorg.conf.d
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo cp /usr/share/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-c720-touchpad.conf
@@ -319,8 +319,8 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 &lt;h2&gt;Step 5 - Suspend&lt;/h2&gt;
 &lt;p&gt;Enable suspend|resume under &lt;strong&gt;systemd&lt;/strong&gt; (for sysv-init see &lt;em&gt;Helpful Resources&lt;/em&gt; at bottom):&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;Create &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/cros-sound-suspend.sh"&gt;cros-sound-suspend.sh&lt;/a&gt; (make it executable) in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/lib/systemd/system-sleep&lt;/span&gt;&lt;/tt&gt; and...&lt;/li&gt;
-&lt;li&gt;... &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720/debian/cros-acpi-wakeup.conf"&gt;cros-acpi-wakeup.conf&lt;/a&gt; in &lt;tt class="docutils literal"&gt;/etc/tmpfiles.d&lt;/tt&gt; to restore sound and touchpad after suspend&lt;/li&gt;
+&lt;li&gt;Create &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_chromebook/sidbook/lib/systemd/system-sleep/cros-sound-suspend.sh"&gt;cros-sound-suspend.sh&lt;/a&gt; (make it executable) in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/lib/systemd/system-sleep&lt;/span&gt;&lt;/tt&gt; and...&lt;/li&gt;
+&lt;li&gt;... &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_chromebook/sidbook/etc/tmpfiles.d/cros-acpi-wakeup.conf"&gt;cros-acpi-wakeup.conf&lt;/a&gt; in &lt;tt class="docutils literal"&gt;/etc/tmpfiles.d&lt;/tt&gt; to restore sound and touchpad after suspend&lt;/li&gt;
 &lt;li&gt;Configure &lt;tt class="docutils literal"&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/tt&gt; setting in &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;...&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;quiet splash add_efi_memmap boot=local noresume noswap i915.modeset=1 tpm_tis.force=1 tpm_tis.interrupts=0 nmi_watchdog=panic,lapic&amp;quot;&lt;/span&gt;
@@ -410,7 +410,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 &lt;/div&gt;
 &lt;div class="section" id="step-7-helpful-resources"&gt;
 &lt;h2&gt;Step 7 - Helpful Resources&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720/debian"&gt;My personal C720 configurations&lt;/a&gt; (github.com/vonbrownie)&lt;br /&gt;
+&lt;p&gt;&lt;a href="https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720_chromebook/sidbook"&gt;My personal C720 configurations&lt;/a&gt; (github.com/vonbrownie)&lt;br /&gt;
 Configuring the Chromebook and the output of &lt;em&gt;lshw&lt;/em&gt;, &lt;em&gt;lspci&lt;/em&gt;, and &lt;em&gt;lsusb&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="https://github.com/liangcj/AcerC720CrunchBang"&gt;CrunchBang Linux on the Acer C720 Chromebook&lt;/a&gt; (github.com/liangcj)&lt;br /&gt;
