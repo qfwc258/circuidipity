@@ -4,7 +4,7 @@ Install Debian using grml-debootstrap
 
 :slug: grml-debootstrap
 :tags: grml, debian, linux
-:modified: 06 August 2014
+:modified: 23 August 2014
 
 `Grml <http://grml.org/>`_ is a Debian-based Linux distribution optimized for running off USB sticks and taking care of sysadmin duties. One of its cool programs that I have been exploring is `grml-debootstrap <http://grml.org/grml-debootstrap/>`_ ... a console application that makes it very easy to set custom options and install Debian.
 
@@ -92,17 +92,19 @@ Step 3 - Install Debian
 
 Any extra packages to be installed can be added to the list in ``/etc/debootstrap/packages`` and scripts to customize the setup can be placed in ``/etc/debootstrap/chroot-scripts/``.
 
-**Tip:** If configuring a device that only has a wireless interface (like my Chromebook) add the ``wireless-tools`` and ``wpasupplicant`` packages to the install list...
+**Tip:** If configuring a device that only has a wireless interface (like my Chromebook) add the ``wireless-tools`` and ``wpasupplicant`` packages to the install list.
+
+GRML auto-detects ``crypt_root``, updating ``fstab`` and creating a mountpoint for the device in ``/media``. Mount the newly-created partitions and install a minimal Debian setup...
 
 .. code-block:: bash
 
-    mount -t ext4 /dev/mapper/crypt_root /media                                     
-    mkdir /media/boot                                                               
-    mount -t ext4 /dev/sda2 /media/boot                                             
+    mount /media/crypt_root                                     
+    mkdir /media/crypt_root/boot                                                               
+    mount -t ext4 /dev/sda2 /media/crypt_root/boot                                             
     # optional: with 'toram' usb stick can be mounted to /media... check /etc/fstab for auto-generated entries       
-    grml-debootstrap --target /media --password "PASSWORD" --hostname HOSTNAME      
+    grml-debootstrap --target /media/crypt_root --password "PASSWORD" --hostname HOSTNAME      
 
-If grml-debootstrap is run with no options a limited interactive menu is provided ... otherwise the necessary Debian packages are downloaded and system setup runs unattended to completion.
+If ``grml-debootstrap`` is run with no options a limited interactive menu is provided ... otherwise the necessary Debian packages are downloaded and system setup runs unattended to completion.
 
 Source: `grml-debootstrap HOWTO <http://grml.org/grml-debootstrap/>`_
 
