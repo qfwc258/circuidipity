@@ -25,17 +25,17 @@
 
 <!-- article -->
 <h1>Install Debian using grml-debootstrap</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on 06 August 2014</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on 22 August 2014</p>
 <div id="article">
     <p><a class="reference external" href="http://grml.org/">Grml</a> is a Debian-based Linux distribution optimized for running off USB sticks and taking care of sysadmin duties. One of its cool programs that I have been exploring is <a class="reference external" href="http://grml.org/grml-debootstrap/">grml-debootstrap</a> ... a console application that makes it very easy to set custom options and install Debian.</p>
-<p>Here is a step-by-step process using grml-debootstrap to implement the following sample installation on the 16GB solid-state drive (SSD) in my <a class="reference external" href="http://http://www.circuidipity.com/c720-sidbook.html">Acer C720 Chromebook</a>:</p>
+<p>Here is a step-by-step process using grml-debootstrap to implement the following sample Debian minimal install on the 16GB solid-state drive (SSD) of my <a class="reference external" href="http://http://www.circuidipity.com/c720-sidbook.html">Acer C720 Chromebook</a>:</p>
 <ul class="simple">
 <li>create encrypted root + swap</li>
-<li>install Debian <strong>wheezy</strong> (stable)</li>
-<li>upgrade to Debian <strong>sid</strong> (unstable) rolling release</li>
+<li>install Debian <strong>_wheezy_</strong> (stable)</li>
+<li>upgrade to Debian <strong>_sid_</strong> (unstable) rolling release</li>
 <li>configure <a class="reference external" href="https://wiki.archlinux.org/index.php/Solid_State_Drives">TRIM</a> on the SSD to maximize performance</li>
 </ul>
-<p>Source: Debian installation with <a class="reference external" href="http://michael-prokop.at/blog/2014/02/28/state-of-the-art-debianwheezy-deployments-with-grub-and-lvmsw-raidcrypto/">GRUB2 + GPT + LUKS crypto</a></p>
+<p>Source: Debian installation with <a class="reference external" href="http://michael-prokop.at/blog/2014/02/28/state-of-the-art-debianwheezy-deployments-with-grub-and-lvmsw-raidcrypto/">GRUB2 + GPT + LUKS crypto</a> (michael-prokop.at/blog)</p>
 <div class="section" id="step-0-prepare-usb-boot-device">
 <h2>Step 0 - Prepare USB boot device</h2>
 <p><a class="reference external" href="http://grml.org/download/">Download</a> an installer image (I selected the 32+64bit <strong>grml96</strong> combo) and simply <tt class="docutils literal">dd</tt> the image to a spare USB device.</p>
@@ -58,7 +58,7 @@
 <li>sda3 - swap - 1GB</li>
 <li>sda4 - root - remaining space</li>
 </ul>
-<p>Create the above using <tt class="docutils literal">parted</tt> (note: any changes are executed instantly) ...</p>
+<p>Create the above using <tt class="docutils literal">parted</tt> (note: any changes are <strong>executed instantly</strong>) ...</p>
 <div class="highlight"><pre>parted -a optimal /dev/sda
 print
 mklabel gpt
@@ -79,7 +79,7 @@ quit
 <div class="highlight"><pre>blockdev --getalignoff /dev/sdaX
 0
 </pre></div>
-<p>Sources: <a class="reference external" href="http://git.grml.org/?p=grml-live.git;a=blob_plain;f=templates/GRML/grml-cheatcodes.txt;hb=HEAD">Grml boot cheatcodes</a>, the <a class="reference external" href="https://www.gnu.org/software/grub/manual/html_node/BIOS-installation.html">BIOS Boot Partition</a>, and <a class="reference external" href="http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&amp;chap=4">partitioning disks using parted</a></p>
+<p>Sources: <a class="reference external" href="http://git.grml.org/?p=grml-live.git;a=blob_plain;f=templates/GRML/grml-cheatcodes.txt;hb=HEAD">Grml boot cheatcodes</a> (git.grml.org), the <a class="reference external" href="https://www.gnu.org/software/grub/manual/html_node/BIOS-installation.html">BIOS Boot Partition</a> (gnu.org), and <a class="reference external" href="http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&amp;chap=4">partitioning disks using parted</a> (gentoo.org)</p>
 </div>
 <div class="section" id="step-2-cryptsetup">
 <h2>Step 2 - Cryptsetup</h2>
@@ -93,20 +93,21 @@ mkfs.ext4 /dev/mapper/crypt_root
 <div class="section" id="step-3-install-debian">
 <h2>Step 3 - Install Debian</h2>
 <p>Any extra packages to be installed can be added to the list in <tt class="docutils literal">/etc/debootstrap/packages</tt> and scripts to customize the setup can be placed in <tt class="docutils literal"><span class="pre">/etc/debootstrap/chroot-scripts/</span></tt>.</p>
-<p><strong>Tip:</strong> If configuring a device that only has a wireless interface (like my Chromebook) add the <tt class="docutils literal"><span class="pre">wireless-tools</span></tt> and <tt class="docutils literal">wpasupplicant</tt> packages to the install list...</p>
-<div class="highlight"><pre>mount -t ext4 /dev/mapper/crypt_root /media
-mkdir /media/boot
-mount -t ext4 /dev/sda2 /media/boot
+<p><strong>Tip:</strong> If configuring a device that only has a wireless interface (Chromebook) add the <tt class="docutils literal"><span class="pre">wireless-tools</span></tt> and <tt class="docutils literal">wpasupplicant</tt> packages to the install list.</p>
+<p>GRML auto-detects the <tt class="docutils literal">crypt_root</tt>, updating <tt class="docutils literal">fstab</tt> and creating a mountpoint for the device in <tt class="docutils literal">/media</tt>. Mount the newly-created partitions and install a minimal Debian setup...</p>
+<div class="highlight"><pre>mount /media/crypt_root
+mkdir /media/crypt_root/boot
+mount -t ext4 /dev/sda2 /media/crypt_root/boot
 <span class="c"># optional: with &#39;toram&#39; usb stick can be mounted to /media... check /etc/fstab for auto-generated entries</span>
-grml-debootstrap --target /media --password <span class="s2">&quot;PASSWORD&quot;</span> --hostname HOSTNAME
+grml-debootstrap --target /media/crypt_root --password <span class="s2">&quot;PASSWORD&quot;</span> --hostname HOSTNAME
 </pre></div>
-<p>If grml-debootstrap is run with no options a limited interactive menu is provided ... otherwise the necessary Debian packages are downloaded and system setup runs unattended to completion.</p>
-<p>Source: <a class="reference external" href="http://grml.org/grml-debootstrap/">grml-debootstrap HOWTO</a></p>
+<p>If <tt class="docutils literal"><span class="pre">grml-debootstrap</span></tt> is run with no options a limited interactive menu is provided ... otherwise the necessary Debian packages are downloaded and system setup runs unattended to completion.</p>
+<p>Source: <a class="reference external" href="http://grml.org/grml-debootstrap/">grml-debootstrap HOWTO</a> (grml.org)</p>
 </div>
 <div class="section" id="step-4-adjust-crypttab-fstab-initramfs">
 <h2>Step 4 - Adjust crypttab, fstab, initramfs</h2>
 <p>Next step is to enter <tt class="docutils literal">chroot</tt> and perform post-install configuration ...</p>
-<div class="highlight"><pre>grml-chroot /media /bin/bash
+<div class="highlight"><pre>grml-chroot /media/crypt_root /bin/bash
 grub-install /dev/sda
 update-grub
 <span class="c"># For SSD add the &#39;discard&#39; option</span>
@@ -117,11 +118,11 @@ update-grub
 <span class="nb">echo</span> <span class="s2">&quot;/dev/mapper/crypt_swap none swap sw,discard 0 0&quot;</span> &gt;&gt; /etc/fstab
 update-initramfs -u -k all
 </pre></div>
-<p>Source: <a class="reference external" href="http://www.linuxjournal.com/content/solid-state-drives-get-one-already">TRIM configuration on solid-state drives</a></p>
+<p>Source: <a class="reference external" href="http://www.linuxjournal.com/content/solid-state-drives-get-one-already">TRIM configuration on solid-state drives</a> (linuxjournal.com)</p>
 </div>
 <div class="section" id="step-5-sid-swappiness-locales-and-timezone">
 <h2>Step 5 - Sid, swappiness, locales, and timezone</h2>
-<p>It is possible to use grml-debootstrap to directly install a Debian sid/unstable setup. But I have experienced greater success by first installing a minimal stable system before doing a dist-upgrade to track the unstable rolling release.</p>
+<p>It is possible to use grml-debootstrap to directly install a Debian _sid_/unstable setup. But I have experienced greater success by first installing a minimal stable system before doing a dist-upgrade to track the unstable rolling release.</p>
 <p><strong>Optional:</strong> Continue configuration inside <tt class="docutils literal">chroot</tt> and dist-upgrade to unstable by modifying <tt class="docutils literal">/etc/apt/sources.list</tt> ...</p>
 <div class="highlight"><pre><span class="c">### unstable ###</span>
 deb http://http.debian.net/debian unstable main contrib non-free
@@ -141,10 +142,10 @@ vm.swappiness<span class="o">=</span>1
 </div>
 <div class="section" id="step-6-reboot">
 <h2>Step 6 - Reboot</h2>
-<p>Exit the chroot, unmount partitions, and reboot into Debian...</p>
+<p>Exit the chroot, unmount partitions, and reboot into Debian ...</p>
 <div class="highlight"><pre><span class="nb">exit</span>
-umount /media/boot
-umount /media
+umount /media/crypt_root/boot
+umount /media/crypt_root
 cryptsetup luksClose /dev/mapper/crypt_root
 reboot
 </pre></div>
@@ -154,6 +155,7 @@ reboot
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-grml.html">grml</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-chromebook.html">chromebook</a>
 </p>
 </div>
 
