@@ -221,7 +221,7 @@ ls is aliased to &lt;span class="s1"&gt;&amp;#39;ls -aFlhv --color=auto&amp;#39;
 &lt;li&gt;Log into the Chromebook and let it auto update, as there sometimes are firmware updates... check the updating status in the browser at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;chrome://help&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
 &lt;li&gt;Insert the USB stick, enter &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;chrome://imageburner&lt;/span&gt;&lt;/tt&gt; and follow the directions to generate a recovery image&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://support.google.com/chromebook/answer/1080595?hl=en"&gt;Create a Chromebook recovery image&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="https://support.google.com/chromebook/answer/1080595?hl=en"&gt;Create a Chromebook recovery image&lt;/a&gt; (support.google.com)&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="step-1-debian-installer"&gt;
 &lt;h2&gt;Step 1 - Debian Installer&lt;/h2&gt;
@@ -275,7 +275,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
 &lt;p class="last"&gt;Whenever you remove battery power to the Chromebook (like opening up the case) the hardware clock on the motherboard resets to a future year (mine travelled to 2040). Providing a network connection is up during the Debian installation the system should fetch a correct time from a NTP server... otherwise fix the &lt;a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-debian-gnu-linux/"&gt;fallout from an incorrect clock&lt;/a&gt; by re-mounting partitions read-only and correct filesystem timestamps using &lt;tt class="docutils literal"&gt;fsck&lt;/tt&gt;.&lt;/p&gt;
 &lt;/div&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html"&gt;Useful GBB flags&lt;/a&gt; for &lt;a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-debian-gnu-linux/"&gt;another new free software machine&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html"&gt;Useful GBB flags&lt;/a&gt; (coreboot.org) for &lt;a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-debian-gnu-linux/"&gt;another new free software machine&lt;/a&gt; (fsfe.org)&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="developer-mode-method"&gt;
 &lt;h3&gt;2.2 Developer Mode Method&lt;/h3&gt;
@@ -295,7 +295,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo &lt;span class="nv"&gt;dev_boot_legacy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Insert the USB stick prepared in Step 1, reboot the Chromebook and press &lt;tt class="docutils literal"&gt;CTRL+L&lt;/tt&gt; at the boot screen to enter legacy boot mode.&lt;/p&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="http://www.chromium.org/chromium-os"&gt;Chromium OS&lt;/a&gt; developer information for the &lt;a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook"&gt;Acer C720 Chromebook&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="http://www.chromium.org/chromium-os"&gt;Chromium OS&lt;/a&gt; developer information for the &lt;a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook"&gt;Acer C720 Chromebook&lt;/a&gt; (chromium.org)&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="step-3-install-debian"&gt;
@@ -313,7 +313,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo cp /usr/share/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-c720-touchpad.conf
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Modify this file to adjust timeouts, add tap-mouse actions (2-finger tap = right-click, 3-finger tap = middle-click), and 2-finger scrolling.&lt;/p&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics"&gt;Touchpad Synaptics&lt;/a&gt; and &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration"&gt;C720 configuration&lt;/a&gt; on the Arch Wiki&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics"&gt;Touchpad Synaptics&lt;/a&gt; and &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration"&gt;C720 configuration&lt;/a&gt; (wiki.archlinux.org)&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="step-5-suspend"&gt;
 &lt;h2&gt;Step 5 - Suspend&lt;/h2&gt;
@@ -328,7 +328,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 &lt;p&gt;... and update the grub config...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-grub
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://plus.google.com/+PedroLarroy/posts/6CgQypQukMa"&gt;Chrubuntu resume fix&lt;/a&gt; on Google+, &lt;a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?pid=1364521#p1364521"&gt;Acer C720 thread&lt;/a&gt; in Arch Forums, and &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Allow_users_to_shutdown"&gt;systemctl user controls&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://plus.google.com/+PedroLarroy/posts/6CgQypQukMa"&gt;Chrubuntu resume fix&lt;/a&gt; (plus.google.com/+PedroLarroy), &lt;a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?pid=1364521#p1364521"&gt;Acer C720 thread&lt;/a&gt; (bbs.archlinux.org), and &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Allow_users_to_shutdown"&gt;systemctl user controls&lt;/a&gt; (wiki.archlinux.org)&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="step-6-keyboard-shortcuts"&gt;
 &lt;h2&gt;Step 6 - Keyboard Shortcuts&lt;/h2&gt;
