@@ -5,9 +5,9 @@ From Chromebook to Sidbook
 :slug: c720-sidbook
 :template: article-project
 :tags: chromebook, debian, linux
-:modified: 21 August 2014
+:modified: 27 August 2014
 
-Replace ChromeOS permanently with the **_sid_/unstable** branch of **Debian Linux** on the **Acer C720 Chromebook**.
+Replace ChromeOS permanently with the *sid* (unstable) branch of **Debian Linux** on the **Acer C720 Chromebook**.
 
 .. image:: images/sidbook.png
     :align: right
@@ -134,7 +134,9 @@ Source: `Chromium OS <http://www.chromium.org/chromium-os>`_ developer informati
 Step 3 - Install Debian
 =======================
 
-My `grml-debootstrap instructions <http://www.circuidipity.com/grml-debootstrap.html>`_ for installing Debian Wheezy, configuring **TRIM** support for the SSD, and my `post-install script <https://github.com/vonbrownie/linux-post-install/blob/master/debian-post-install-main.sh>`_ for upgrading and configuring Debian's sid/unstable branch. 
+My `grml-debootstrap instructions <http://www.circuidipity.com/grml-debootstrap.html>`_ for installing Debian Wheezy, configuring **TRIM** support for the SSD, and my `post-install script <https://github.com/vonbrownie/linux-post-install/blob/master/c720-sidbook-post-install-main.sh>`_ for upgrading and configuring Debian's unstable branch. 
+
+Source: `linux-post-install <https://github.com/vonbrownie/linux-post-install>`_ (github.com/vonbrownie)
 
 Step 4 - Touchpad
 =================
