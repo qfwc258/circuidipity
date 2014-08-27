@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-07-10T00:00:00-04:00</updated><entry><title>Ship or sails adapted to the heavenly breezes</title><link href="http://www.circuidipity.com/heavenly-breezes.html" rel="alternate"></link><updated>2014-07-10T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-07-10:heavenly-breezes.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Johannes Kepler&lt;/strong&gt; in a letter to &lt;strong&gt;Galileo Galilei&lt;/strong&gt; - &lt;em&gt;Conversation with the Messenger from the Stars&lt;/em&gt; - dated 19 April 1610:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-08-27T00:00:00-04:00</updated><entry><title>Linux post-install configuration scripts</title><link href="http://www.circuidipity.com/linux-post-install.html" rel="alternate"></link><updated>2014-08-27T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-08-27:linux-post-install.html</id><summary type="html">&lt;p&gt;Scripts to configure a fresh installation of Debian GNU/Linux.&lt;/p&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/debian-post-install-main.sh"&gt;debian-post-install-main.sh&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Track the &lt;em&gt;wheezy&lt;/em&gt; (stable), &lt;em&gt;jessie&lt;/em&gt; (testing), or &lt;em&gt;sid&lt;/em&gt; (unstable) branch with the option of installing the lightweight Openbox window manager + extra apps suitable for a desktop environment.&lt;/p&gt;
+&lt;p&gt;See: &lt;a class="reference external" href="http://www.circuidipity.com/install-debian-wheezy-screenshot-tour.html"&gt;Debian Wheezy Minimal Install&lt;/a&gt; and &lt;a class="reference external" href="http://www.circuidipity.com/grml-debootstrap.html"&gt;Install Debian using grml-debootstrap&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/c720-sidbook-post-install-main.sh"&gt;c720-sidbook-post-install-main.sh&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Configures the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt; to track Debian's &lt;em&gt;sid&lt;/em&gt; branch and installs Openbox.&lt;/p&gt;
+&lt;p&gt;See: &lt;a class="reference external" href="http://www.circuidipity.com/c720-sidbook.html"&gt;From Chromebook to Sidbook&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="usage"&gt;
+&lt;h2&gt;Usage&lt;/h2&gt;
+&lt;p&gt;Download the contents of &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install"&gt;linux-post-install&lt;/a&gt; (github.com/vonbrownie), navigate to the folder, and run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;cd &lt;/span&gt;SCRIPTS_LOCATION
+&lt;span class="gp"&gt;$&lt;/span&gt; sudo ./SCRIPT-post-install-main.sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="debian"></category><category term="linux"></category><category term="chromebook"></category><category term="shell"></category><category term="programming"></category></entry><entry><title>Ship or sails adapted to the heavenly breezes</title><link href="http://www.circuidipity.com/heavenly-breezes.html" rel="alternate"></link><updated>2014-07-10T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-07-10:heavenly-breezes.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Johannes Kepler&lt;/strong&gt; in a letter to &lt;strong&gt;Galileo Galilei&lt;/strong&gt; - &lt;em&gt;Conversation with the Messenger from the Stars&lt;/em&gt; - dated 19 April 1610:&lt;/p&gt;
 &lt;blockquote&gt;
 As soon as somebody demonstrates the art of flying, settlers from our species of man will not be lacking [on the Moon and Jupiter]... Who would have believed that a huge ocean could be crossed more peacefully and safely than the the narrow expanse of the Adriatic, the Baltic Sea or the English Channel? Provide ship or sails adapted to the heavenly breezes, and there will be some who will not fear even that void [of space]... So, for those who will come shortly to attempt this journey, let us establish the astronomy: Galileo, you of Jupiter, I of the Moon.&lt;/blockquote&gt;
 </summary><category term="quote"></category><category term="space"></category></entry><entry><title>Increase RAM available to Raspberry Pi CPU</title><link href="http://www.circuidipity.com/pi-memory-split.html" rel="alternate"></link><updated>2014-07-09T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-07-09:pi-memory-split.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Raspberry Pi Model B Rev 2&lt;/strong&gt; has 512MB RAM that is partitioned between the CPU and the GPU. If the Pi is working as a headless server or the Pi desktop is being accessed via &lt;a class="reference external" href="http://www.raspberrypi.org/documentation/remote-access/vnc/"&gt;VNC&lt;/a&gt; (which doesn't utilize the GPU) the &lt;em&gt;memory split&lt;/em&gt; between the two processors can be altered to assign more memory to the CPU for running applications.&lt;/p&gt;
@@ -425,67 +444,4 @@ Ongoing discussion thread about Chromebook configuration for a Debian/Ubuntu-bas
 &lt;p&gt;&lt;a href="http://blog.codestarter.org/post/93985346780/how-we-turn-199-chromebooks-into-ubuntu-based-code"&gt;Turn Chromebooks into Ubuntu-based code learning machines for kids&lt;/a&gt; (blog.codestarter.org)&lt;br /&gt;
 Configure the C720 to dual-boot ChromeOS and Ubuntu using open-source install script&lt;/p&gt;&lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="chromebook"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Ubuntu 14.04 and Virtualbox</title><link href="http://www.circuidipity.com/ubuntu1404-virtualbox.html" rel="alternate"></link><updated>2014-04-27T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-04-27:ubuntu1404-virtualbox.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://www.virtualbox.org/"&gt;Virtualbox&lt;/a&gt; is virtualization software that allows a Linux user to HOST multiple GUEST operating systems as &lt;em&gt;virtual machines&lt;/em&gt; (VMs). Its a cool tool for playing with different Linux distros and experimenting with configurations.&lt;/p&gt;
-&lt;p&gt;In this HOWTO I install Virtualbox on a Debian HOST and create an Ubuntu GUEST virtual machine.&lt;/p&gt;
-&lt;div class="section" id="step-0-install-virtualbox-on-host"&gt;
-&lt;h2&gt;Step 0 - Install VirtualBox on HOST&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install build-essential dkms module-assistant linux-headers-&lt;span class="k"&gt;$(&lt;/span&gt;uname -r&lt;span class="k"&gt;)&lt;/span&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install virtualbox virtualbox-dkms virtualbox-qt
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Virtualbox kernel modules are built via &lt;em&gt;Dynamic Kernel Module Support&lt;/em&gt; (&lt;a class="reference external" href="http://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support"&gt;DKMS&lt;/a&gt;). After installing the virtualbox packages the &lt;tt class="docutils literal"&gt;vbox&lt;/tt&gt; modules should be auto-built and -loaded ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;lsmod | grep vbox
-vboxpci                19066  0
-vboxnetadp             13155  0
-vboxnetflt             23571  0
-vboxdrv               190057  4 vboxnetflt,vboxnetadp,vboxpci
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I add my USERNAME to the &lt;tt class="docutils literal"&gt;vboxusers&lt;/tt&gt; group...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser YOUR_USERNAME vboxusers
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-1-create-the-ubuntu-guest"&gt;
-&lt;h2&gt;Step 1 - Create the Ubuntu GUEST&lt;/h2&gt;
-&lt;p&gt;The &lt;em&gt;Default Machine Folder&lt;/em&gt; where VM images are stored is &lt;tt class="docutils literal"&gt;$HOME/Virtualbox VMs&lt;/tt&gt; (this can be modified in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;File-&amp;gt;Preferences-&amp;gt;General&lt;/span&gt;&lt;/tt&gt;).&lt;/p&gt;
-&lt;p&gt;See the &lt;a class="reference external" href="http://www.virtualbox.org/manual/UserManual.html"&gt;User Manual&lt;/a&gt; for creating a GUEST virtual machine. I use the &lt;a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/"&gt;Ubuntu mini.iso installer&lt;/a&gt; to create a new virtual machine with a minimal system configuration.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-2-guest-additions"&gt;
-&lt;h2&gt;Step 2 - GUEST Additions&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;Guest Additions&lt;/em&gt; provide extra features such as the ability to tweak display settings and add a shared folder that can accessed by both HOST and GUEST machines.&lt;/p&gt;
-&lt;p&gt;On the new Ubuntu GUEST run...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install build-essential module-assistant linux-headers-&lt;span class="k"&gt;$(&lt;/span&gt;uname -r&lt;span class="k"&gt;)&lt;/span&gt; dkms
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo m-a prepare
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser YOUR_USERNAME vboxsf
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If the virtualbox modules need to be rebuilt for any reason for the running kernel...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;uname -r | sudo xargs -n1 /usr/lib/dkms/dkms_autoinstaller start
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reboot Ubuntu GUEST and &lt;tt class="docutils literal"&gt;vbox&lt;/tt&gt; drivers should now be loaded...&lt;/p&gt;
-&lt;pre class="code bash literal-block"&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;lsmod | grep vbox
-vboxguest
-vboxsf
-vboxvideo
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-3-guest-configuration"&gt;
-&lt;h2&gt;Step 3 - GUEST Configuration&lt;/h2&gt;
-&lt;p&gt;Tweak display settings by going to the Virtualbox &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Machine-&amp;gt;Settings...-&amp;gt;Display&lt;/span&gt;&lt;/tt&gt; setting and move the slider to add more video memory and enable 3d acceleration.&lt;/p&gt;
-&lt;img alt="Display Settings" class="align-center" src="images/20121207-display.png" style="width: 662px; height: 502px;" /&gt;
-&lt;p&gt;With VirtualBox guest additions the display and resolution can be changed when running X...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ps aux | grep VBox
-/usr/sbin/VBoxService
-/usr/bin/VBoxClient --clipboard
-/usr/bin/VBoxClient --display
-/usr/bin/VBoxClient --seamless
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If GUEST does not use a graphical login manager to launch its desktop then modify &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.xinitrc&lt;/span&gt;&lt;/tt&gt; to start VBoxClient services...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;VBoxClient --clipboard &amp;amp;
-VBoxClient --display &amp;amp;
-VBoxClient --seamless &amp;amp;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Next create a shared folder on HOST. Make it accessible to GUEST by going to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Machine-&amp;gt;Settings...-&amp;gt;Shared&lt;/span&gt; Folders&lt;/tt&gt; and click &lt;tt class="docutils literal"&gt;Add Shared Folder&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Auto-Mount&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;img alt="Shared Folder Settings" class="align-center" src="images/20121207-shared-folders.png" style="width: 662px; height: 502px;" /&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="virtual environments"></category><category term="debian"></category><category term="ubuntu"></category><category term="linux"></category></entry></feed>
+</summary><category term="chromebook"></category><category term="debian"></category><category term="linux"></category></entry></feed>
