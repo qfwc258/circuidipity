@@ -24,9 +24,9 @@
 
 <!-- article -->
 <h1>From Chromebook to Sidbook</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on 21 August 2014</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on 27 August 2014</p>
 <div id="article">
-    <p>Replace ChromeOS permanently with the <strong>_sid_/unstable</strong> branch of <strong>Debian Linux</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
+    <p>Replace ChromeOS permanently with the <em>sid</em> (unstable) branch of <strong>Debian Linux</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
 <img alt="Debianized Acer C720" class="align-right" src="images/sidbook.png" style="width: 300px; height: 161px;" />
 <p>Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance using <a class="reference external" href="http://openbox.org/">Openbox</a> window manager.</p>
 <p>There are a few different configurations of this device... mine is the <a class="reference external" href="http://us.acer.com/ac/en/US/content/model-datasheet/NX.SHEAA.002">C720-2848</a> non-touchscreen model with 2GB RAM and 16GB SSD.</p>
@@ -117,7 +117,8 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 </div>
 <div class="section" id="step-3-install-debian">
 <h2>Step 3 - Install Debian</h2>
-<p>My <a class="reference external" href="http://www.circuidipity.com/grml-debootstrap.html">grml-debootstrap instructions</a> for installing Debian Wheezy, configuring <strong>TRIM</strong> support for the SSD, and my <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/debian-post-install-main.sh">post-install script</a> for upgrading and configuring Debian's sid/unstable branch.</p>
+<p>My <a class="reference external" href="http://www.circuidipity.com/grml-debootstrap.html">grml-debootstrap instructions</a> for installing Debian Wheezy, configuring <strong>TRIM</strong> support for the SSD, and my <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/c720-sidbook-post-install-main.sh">post-install script</a> for upgrading and configuring Debian's unstable branch.</p>
+<p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install">linux-post-install</a> (github.com/vonbrownie)</p>
 </div>
 <div class="section" id="step-4-touchpad">
 <h2>Step 4 - Touchpad</h2>
@@ -150,52 +151,46 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <div class="section" id="step-6-keyboard-shortcuts">
 <h2>Step 6 - Keyboard Shortcuts</h2>
 <p>The top row on the keyboard with the shortcut icons (brightness, volume, etc.) identify in Linux as the <tt class="docutils literal"><span class="pre">F1-F10</span></tt> keys and the Search key (in the <tt class="docutils literal">CapsLk</tt> position) acts as the <tt class="docutils literal">Super</tt> (Windows) modifier key.</p>
-<p>Create keyboard shortcuts in Openbox to modify the sound, brightness, and page movement settings by first installing:</p>
+<p>Create keyboard shortcuts by first installing:</p>
 <ul class="simple">
-<li>amixer - command line mixer</li>
+<li>pulseaudio-utils - manage sound with <em>pactl</em></li>
 <li>xbacklight - set backlight level using RandR</li>
 <li>xdotool - simulate keyboard/mouse input</li>
+<li>xbindkeys - associate keys to shell commands</li>
 </ul>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install alsa-utils xbacklight xdotool
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install pulseaudio-utils xbacklight xdotool xbindkeys
 </pre></div>
-<p>... and creating keybindings in <tt class="docutils literal"><span class="pre">$HOME/.config/openbox/rc.xml</span></tt>.</p>
-<div class="section" id="sound">
-<h3>6.1 Sound</h3>
-<div class="highlight"><pre>&lt;!-- Keybindings <span class="k">for </span>Acer C720 volume keys: mute/down/up --&gt;
-&lt;keybind <span class="nv">key</span><span class="o">=</span><span class="s2">&quot;W-F8&quot;</span>&gt;
-    &lt;action <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Execute&quot;</span>&gt;
-        &lt;<span class="nb">command</span>&gt;amixer -q -D pulse <span class="nb">set </span>Master toggle&lt;/command&gt;
-    &lt;/action&gt;
-&lt;/keybind&gt;
-&lt;keybind <span class="nv">key</span><span class="o">=</span><span class="s2">&quot;W-F9&quot;</span>&gt;
-    &lt;action <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Execute&quot;</span>&gt;
-        &lt;<span class="nb">command</span>&gt;amixer -q -D pulse <span class="nb">set </span>Master 5%- unmute&lt;/command&gt;
-    &lt;/action&gt;
-&lt;/keybind&gt;
-&lt;keybind <span class="nv">key</span><span class="o">=</span><span class="s2">&quot;W-F10&quot;</span>&gt;
-    &lt;action <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Execute&quot;</span>&gt;
-        &lt;<span class="nb">command</span>&gt;amixer -q -D pulse <span class="nb">set </span>Master 5%+ unmute&lt;/command&gt;
-    &lt;/action&gt;
-&lt;/keybind&gt;
+<div class="section" id="function-keys">
+<h3>6.1 Function keys</h3>
+<p>Enable the function keys to modify the sound and brightness settings by creating <tt class="docutils literal"><span class="pre">~/.xbindkeysrc</span></tt> ...</p>
+<div class="highlight"><pre><span class="s2">&quot;xdotool keyup F1; xdotool key alt+Left&quot;</span>
+F1
+<span class="s2">&quot;xdotool keyup F2; xdotool key alt+Right&quot;</span>
+F2
+<span class="s2">&quot;xdotool keyup F5; xdotool key alt+Tab&quot;</span>
+F5
+<span class="s2">&quot;xdotool keyup F3; xdotool key ctrl+r&quot;</span>
+F3
+<span class="s2">&quot;xdotool keyup F4; xdotool key F11&quot;</span>
+F4
+<span class="s2">&quot;xdotool keyup F6; xbacklight -dec 10&quot;</span>
+F6
+<span class="s2">&quot;xdotool keyup F7; xbacklight -inc 10&quot;</span>
+F7
+<span class="s2">&quot;xdotool keyup shift+BackSpace; xdotool key Delete; xdotool keydown shift&quot;</span>
+<span class="nb">shift</span>+BackSpace
+<span class="s2">&quot;xdotool keyup F8; pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo toggle&quot;</span>
+F8
+<span class="s2">&quot;xdotool keyup F9; pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -- -10%&quot;</span>
+F9
+<span class="s2">&quot;xdotool keyup F10; pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -- +10%&quot;</span>
+F10
 </pre></div>
-</div>
-<div class="section" id="display-brightness">
-<h3>6.2 Display Brightness</h3>
-<div class="highlight"><pre>&lt;!-- Keybingings <span class="k">for </span>Acer C720 brightness keys: lower/raise --&gt;
-&lt;keybind <span class="nv">key</span><span class="o">=</span><span class="s2">&quot;W-F6&quot;</span>&gt;
-    &lt;action <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Execute&quot;</span>&gt;
-        &lt;<span class="nb">command</span>&gt;xbacklight - 10&lt;/command&gt;
-    &lt;/action&gt;
-&lt;/keybind&gt;
-&lt;keybind <span class="nv">key</span><span class="o">=</span><span class="s2">&quot;W-F7&quot;</span>&gt;
-    &lt;action <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Execute&quot;</span>&gt;
-        &lt;<span class="nb">command</span>&gt;xbacklight + 10&lt;/command&gt;
-    &lt;/action&gt;
-&lt;/keybind&gt;
-</pre></div>
+<p>Source: <a class="reference external" href="https://github.com/codestarterorg/ubuntu-chromebook-installer/blob/master/profiles/default/system/etc/skel/.xbindkeysrc">xbindkeysrc</a> (github.com/codestarterorg)</p>
 </div>
 <div class="section" id="page-up-page-down-home-end">
-<h3>6.3 Page-Up, Page-Down, Home, End</h3>
+<h3>6.2 Page-Up, Page-Down, Home, End</h3>
+<p>Create keybindings for Openbox in <tt class="docutils literal"><span class="pre">$HOME/.config/openbox/rc.xml</span></tt> ...</p>
 <div class="highlight"><pre> &lt;!-- Keybindings <span class="k">for </span>Page-Up, Page-Down, Home, End --&gt;
 &lt;keybind <span class="nv">key</span><span class="o">=</span><span class="s2">&quot;A-Up&quot;</span>&gt;
    &lt;action <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Execute&quot;</span>&gt;
@@ -220,7 +215,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 </pre></div>
 </div>
 <div class="section" id="power-key">
-<h3>6.4 Power Key</h3>
+<h3>6.3 Power Key</h3>
 <p>The power key ignores any configuration in the window manager and triggers poweroff without delay when pressed (easy to do by accident as its positioned next to <tt class="docutils literal">backspace</tt>).</p>
 <p>If you want to disable the power key... modify <tt class="docutils literal">/etc/systemd/logind.conf</tt> and set <tt class="docutils literal">HandlePowerKey=ignore</tt>.</p>
 </div>

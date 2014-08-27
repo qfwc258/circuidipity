@@ -228,7 +228,7 @@ ls is aliased to &lt;span class="s1"&gt;&amp;#39;ls -aFlhv --color=auto&amp;#39;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Bonus: Hitting &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-S&lt;/span&gt;&lt;/tt&gt; by mistake in vim no longer disables output to the terminal.&lt;/p&gt;
 &lt;p&gt;Source: &lt;a class="reference external" href="https://stackoverflow.com/questions/791765/unable-to-forward-search-bash-history-similarly-as-with-ctrl-r"&gt;Unable to forward search Bash history similarly as with CTRL-r&lt;/a&gt;&lt;/p&gt;
-</summary><category term="shell"></category><category term="linux"></category></entry><entry><title>From Chromebook to Sidbook</title><link href="http://www.circuidipity.com/c720-sidbook.html" rel="alternate"></link><updated>2014-05-09T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-05-09:c720-sidbook.html</id><summary type="html">&lt;p&gt;Replace ChromeOS permanently with the &lt;strong&gt;_sid_/unstable&lt;/strong&gt; branch of &lt;strong&gt;Debian Linux&lt;/strong&gt; on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt;.&lt;/p&gt;
+</summary><category term="shell"></category><category term="linux"></category></entry><entry><title>From Chromebook to Sidbook</title><link href="http://www.circuidipity.com/c720-sidbook.html" rel="alternate"></link><updated>2014-05-09T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-05-09:c720-sidbook.html</id><summary type="html">&lt;p&gt;Replace ChromeOS permanently with the &lt;em&gt;sid&lt;/em&gt; (unstable) branch of &lt;strong&gt;Debian Linux&lt;/strong&gt; on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt;.&lt;/p&gt;
 &lt;img alt="Debianized Acer C720" class="align-right" src="images/sidbook.png" style="width: 300px; height: 161px;" /&gt;
 &lt;p&gt;Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance using &lt;a class="reference external" href="http://openbox.org/"&gt;Openbox&lt;/a&gt; window manager.&lt;/p&gt;
 &lt;p&gt;There are a few different configurations of this device... mine is the &lt;a class="reference external" href="http://us.acer.com/ac/en/US/content/model-datasheet/NX.SHEAA.002"&gt;C720-2848&lt;/a&gt; non-touchscreen model with 2GB RAM and 16GB SSD.&lt;/p&gt;
@@ -319,7 +319,8 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 &lt;/div&gt;
 &lt;div class="section" id="step-3-install-debian"&gt;
 &lt;h2&gt;Step 3 - Install Debian&lt;/h2&gt;
-&lt;p&gt;My &lt;a class="reference external" href="http://www.circuidipity.com/grml-debootstrap.html"&gt;grml-debootstrap instructions&lt;/a&gt; for installing Debian Wheezy, configuring &lt;strong&gt;TRIM&lt;/strong&gt; support for the SSD, and my &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/debian-post-install-main.sh"&gt;post-install script&lt;/a&gt; for upgrading and configuring Debian's sid/unstable branch.&lt;/p&gt;
+&lt;p&gt;My &lt;a class="reference external" href="http://www.circuidipity.com/grml-debootstrap.html"&gt;grml-debootstrap instructions&lt;/a&gt; for installing Debian Wheezy, configuring &lt;strong&gt;TRIM&lt;/strong&gt; support for the SSD, and my &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/c720-sidbook-post-install-main.sh"&gt;post-install script&lt;/a&gt; for upgrading and configuring Debian's unstable branch.&lt;/p&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install"&gt;linux-post-install&lt;/a&gt; (github.com/vonbrownie)&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="step-4-touchpad"&gt;
 &lt;h2&gt;Step 4 - Touchpad&lt;/h2&gt;
@@ -352,52 +353,46 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 &lt;div class="section" id="step-6-keyboard-shortcuts"&gt;
 &lt;h2&gt;Step 6 - Keyboard Shortcuts&lt;/h2&gt;
 &lt;p&gt;The top row on the keyboard with the shortcut icons (brightness, volume, etc.) identify in Linux as the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;F1-F10&lt;/span&gt;&lt;/tt&gt; keys and the Search key (in the &lt;tt class="docutils literal"&gt;CapsLk&lt;/tt&gt; position) acts as the &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; (Windows) modifier key.&lt;/p&gt;
-&lt;p&gt;Create keyboard shortcuts in Openbox to modify the sound, brightness, and page movement settings by first installing:&lt;/p&gt;
+&lt;p&gt;Create keyboard shortcuts by first installing:&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;amixer - command line mixer&lt;/li&gt;
+&lt;li&gt;pulseaudio-utils - manage sound with &lt;em&gt;pactl&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;xbacklight - set backlight level using RandR&lt;/li&gt;
 &lt;li&gt;xdotool - simulate keyboard/mouse input&lt;/li&gt;
+&lt;li&gt;xbindkeys - associate keys to shell commands&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install alsa-utils xbacklight xdotool
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install pulseaudio-utils xbacklight xdotool xbindkeys
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and creating keybindings in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.config/openbox/rc.xml&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;div class="section" id="sound"&gt;
-&lt;h3&gt;6.1 Sound&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;lt;!-- Keybindings &lt;span class="k"&gt;for &lt;/span&gt;Acer C720 volume keys: mute/down/up --&amp;gt;
-&amp;lt;keybind &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;W-F8&amp;quot;&lt;/span&gt;&amp;gt;
-    &amp;lt;action &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Execute&amp;quot;&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span class="nb"&gt;command&lt;/span&gt;&amp;gt;amixer -q -D pulse &lt;span class="nb"&gt;set &lt;/span&gt;Master toggle&amp;lt;/command&amp;gt;
-    &amp;lt;/action&amp;gt;
-&amp;lt;/keybind&amp;gt;
-&amp;lt;keybind &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;W-F9&amp;quot;&lt;/span&gt;&amp;gt;
-    &amp;lt;action &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Execute&amp;quot;&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span class="nb"&gt;command&lt;/span&gt;&amp;gt;amixer -q -D pulse &lt;span class="nb"&gt;set &lt;/span&gt;Master 5%- unmute&amp;lt;/command&amp;gt;
-    &amp;lt;/action&amp;gt;
-&amp;lt;/keybind&amp;gt;
-&amp;lt;keybind &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;W-F10&amp;quot;&lt;/span&gt;&amp;gt;
-    &amp;lt;action &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Execute&amp;quot;&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span class="nb"&gt;command&lt;/span&gt;&amp;gt;amixer -q -D pulse &lt;span class="nb"&gt;set &lt;/span&gt;Master 5%+ unmute&amp;lt;/command&amp;gt;
-    &amp;lt;/action&amp;gt;
-&amp;lt;/keybind&amp;gt;
+&lt;div class="section" id="function-keys"&gt;
+&lt;h3&gt;6.1 Function keys&lt;/h3&gt;
+&lt;p&gt;Enable the function keys to modify the sound and brightness settings by creating &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="s2"&gt;&amp;quot;xdotool keyup F1; xdotool key alt+Left&amp;quot;&lt;/span&gt;
+F1
+&lt;span class="s2"&gt;&amp;quot;xdotool keyup F2; xdotool key alt+Right&amp;quot;&lt;/span&gt;
+F2
+&lt;span class="s2"&gt;&amp;quot;xdotool keyup F5; xdotool key alt+Tab&amp;quot;&lt;/span&gt;
+F5
+&lt;span class="s2"&gt;&amp;quot;xdotool keyup F3; xdotool key ctrl+r&amp;quot;&lt;/span&gt;
+F3
+&lt;span class="s2"&gt;&amp;quot;xdotool keyup F4; xdotool key F11&amp;quot;&lt;/span&gt;
+F4
+&lt;span class="s2"&gt;&amp;quot;xdotool keyup F6; xbacklight -dec 10&amp;quot;&lt;/span&gt;
+F6
+&lt;span class="s2"&gt;&amp;quot;xdotool keyup F7; xbacklight -inc 10&amp;quot;&lt;/span&gt;
+F7
+&lt;span class="s2"&gt;&amp;quot;xdotool keyup shift+BackSpace; xdotool key Delete; xdotool keydown shift&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;shift&lt;/span&gt;+BackSpace
+&lt;span class="s2"&gt;&amp;quot;xdotool keyup F8; pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo toggle&amp;quot;&lt;/span&gt;
+F8
+&lt;span class="s2"&gt;&amp;quot;xdotool keyup F9; pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -- -10%&amp;quot;&lt;/span&gt;
+F9
+&lt;span class="s2"&gt;&amp;quot;xdotool keyup F10; pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -- +10%&amp;quot;&lt;/span&gt;
+F10
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="display-brightness"&gt;
-&lt;h3&gt;6.2 Display Brightness&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;lt;!-- Keybingings &lt;span class="k"&gt;for &lt;/span&gt;Acer C720 brightness keys: lower/raise --&amp;gt;
-&amp;lt;keybind &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;W-F6&amp;quot;&lt;/span&gt;&amp;gt;
-    &amp;lt;action &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Execute&amp;quot;&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span class="nb"&gt;command&lt;/span&gt;&amp;gt;xbacklight - 10&amp;lt;/command&amp;gt;
-    &amp;lt;/action&amp;gt;
-&amp;lt;/keybind&amp;gt;
-&amp;lt;keybind &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;W-F7&amp;quot;&lt;/span&gt;&amp;gt;
-    &amp;lt;action &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Execute&amp;quot;&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span class="nb"&gt;command&lt;/span&gt;&amp;gt;xbacklight + 10&amp;lt;/command&amp;gt;
-    &amp;lt;/action&amp;gt;
-&amp;lt;/keybind&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/codestarterorg/ubuntu-chromebook-installer/blob/master/profiles/default/system/etc/skel/.xbindkeysrc"&gt;xbindkeysrc&lt;/a&gt; (github.com/codestarterorg)&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="page-up-page-down-home-end"&gt;
-&lt;h3&gt;6.3 Page-Up, Page-Down, Home, End&lt;/h3&gt;
+&lt;h3&gt;6.2 Page-Up, Page-Down, Home, End&lt;/h3&gt;
+&lt;p&gt;Create keybindings for Openbox in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.config/openbox/rc.xml&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt; &amp;lt;!-- Keybindings &lt;span class="k"&gt;for &lt;/span&gt;Page-Up, Page-Down, Home, End --&amp;gt;
 &amp;lt;keybind &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;A-Up&amp;quot;&lt;/span&gt;&amp;gt;
    &amp;lt;action &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Execute&amp;quot;&lt;/span&gt;&amp;gt;
@@ -422,7 +417,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="power-key"&gt;
-&lt;h3&gt;6.4 Power Key&lt;/h3&gt;
+&lt;h3&gt;6.3 Power Key&lt;/h3&gt;
 &lt;p&gt;The power key ignores any configuration in the window manager and triggers poweroff without delay when pressed (easy to do by accident as its positioned next to &lt;tt class="docutils literal"&gt;backspace&lt;/tt&gt;).&lt;/p&gt;
 &lt;p&gt;If you want to disable the power key... modify &lt;tt class="docutils literal"&gt;/etc/systemd/logind.conf&lt;/tt&gt; and set &lt;tt class="docutils literal"&gt;HandlePowerKey=ignore&lt;/tt&gt;.&lt;/p&gt;
 &lt;/div&gt;
