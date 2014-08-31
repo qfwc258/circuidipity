@@ -41,7 +41,7 @@ This will be designated as the new default kernel to boot.
 Step 2 - Set default kernel
 ===========================
 
-Open ``/etc/default/grub`` in an editor and modify ``GRUB_DEFAULT=`` (set to '0' or most recent by default) to the new desired boot kernel. In the case of my Chromebook I include the submenu + kernel in the modified setting ...
+Open ``/etc/default/grub`` in an editor and modify ``GRUB_DEFAULT=`` (set to '0' or most recent by default) to the new desired boot kernel. In the case of my Chromebook I include the submenu + menuentry in the modified setting ...
 
 .. code-block:: bash
 
