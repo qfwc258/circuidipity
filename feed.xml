@@ -3,15 +3,15 @@
 &lt;p&gt;This is how I changed the GRUB boot order to default to my touchpad-friendly kernel.&lt;/p&gt;
 &lt;div class="section" id="step-0-install-a-less-than-current-debian-packaged-kernel"&gt;
 &lt;h2&gt;Step 0 - Install a (less-than-current) Debian-packaged kernel&lt;/h2&gt;
-&lt;p&gt;I am running Debian's &lt;em&gt;sid&lt;/em&gt; (unstable) branch and the 3.13.X kernel is no longer available in the package manager. I download the kernel headers and image and install the packages using &lt;em&gt;dpkg&lt;/em&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;wget http://snapshot.debian.org/archive/debian/20140320T042639Z/pool/main/l/linux-tools/linux-kbuild-3.13_3.13.6-1_amd64.deb
-dpkg -i linux-kbuild-3.13_3.13.6-1_amd64.deb
-wget http://snapshot.debian.org/archive/debian/20140416T101543Z/pool/main/l/linux/linux-headers-3.13-1-common_3.13.10-1_amd64.deb
-dpkg -i linux-headers-3.13-1-common_3.13.10-1_amd64.deb
-wget http://snapshot.debian.org/archive/debian/20140416T101543Z/pool/main/l/linux/linux-headers-3.13-1-amd64_3.13.10-1_amd64.deb
-dpkg -i linux-headers-3.13-1-amd64_3.13.10-1_amd64.deb
-wget http://snapshot.debian.org/archive/debian/20140416T101543Z/pool/main/l/linux/linux-image-3.13-1-amd64_3.13.10-1_amd64.deb
-dpkg -i linux-image-3.13-1-amd64_3.13.10-1_amd64.deb
+&lt;p&gt;I am running Debian's &lt;em&gt;sid&lt;/em&gt; (unstable) branch and the 3.13.X kernel is no longer available in the package manager. I download the kernel headers and image and install the packages using &lt;tt class="docutils literal"&gt;dpkg&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;wget http://snapshot.debian.org/archive/debian/20140320T042639Z/pool/main/l/linux-tools/linux-kbuild-3.13_3.13.6-1_amd64.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i linux-kbuild-3.13_3.13.6-1_amd64.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;wget http://snapshot.debian.org/archive/debian/20140416T101543Z/pool/main/l/linux/linux-headers-3.13-1-common_3.13.10-1_amd64.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i linux-headers-3.13-1-common_3.13.10-1_amd64.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;wget http://snapshot.debian.org/archive/debian/20140416T101543Z/pool/main/l/linux/linux-headers-3.13-1-amd64_3.13.10-1_amd64.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i linux-headers-3.13-1-amd64_3.13.10-1_amd64.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;wget http://snapshot.debian.org/archive/debian/20140416T101543Z/pool/main/l/linux/linux-image-3.13-1-amd64_3.13.10-1_amd64.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i linux-image-3.13-1-amd64_3.13.10-1_amd64.deb
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;A menuentry for the new kernel is auto-generated in &lt;tt class="docutils literal"&gt;/boot/grub/grub.cfg&lt;/tt&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -27,7 +27,7 @@ dpkg -i linux-image-3.13-1-amd64_3.13.10-1_amd64.deb
 &lt;p&gt;Open &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt; in an editor and modify &lt;tt class="docutils literal"&gt;GRUB_DEFAULT=&lt;/tt&gt; (set to '0' or most recent by default) to the new desired boot kernel. In the case of my Chromebook I include the submenu + kernel in the modified setting ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;GRUB_DEFAULT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Advanced options for Debian GNU/Linux&amp;gt;Debian GNU/Linux, with Linux 3.13-1-amd64&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Run &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;update-grub&lt;/span&gt;&lt;/tt&gt; to generate a new config and reboot. At the GRUB splash screen the &lt;tt class="docutils literal"&gt;Advanced options for Debian GNU&lt;/tt&gt; menu will be the new default and the designated kernel will load.&lt;/p&gt;
+&lt;p&gt;Run &lt;tt class="docutils literal"&gt;sudo &lt;span class="pre"&gt;update-grub&lt;/span&gt;&lt;/tt&gt; to generate a new config and reboot. At the GRUB splash screen the &lt;tt class="docutils literal"&gt;Advanced options for Debian GNU&lt;/tt&gt; menu will be the new default and the designated kernel will load.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 </summary><category term="debian"></category><category term="linux"></category><category term="chromebook"></category></entry><entry><title>Linux post-install configuration scripts</title><link href="http://www.circuidipity.com/linux-post-install.html" rel="alternate"></link><updated>2014-08-27T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-08-27:linux-post-install.html</id><summary type="html">&lt;p&gt;Scripts to configure a fresh installation of Debian GNU/Linux.&lt;/p&gt;
