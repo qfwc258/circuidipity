@@ -12,18 +12,18 @@ This is how I changed the GRUB boot order to default to my touchpad-friendly ker
 Step 0 - Install a (less-than-current) Debian-packaged kernel
 =============================================================
 
-I am running Debian's *sid* (unstable) branch and the 3.13.X kernel is no longer available in the package manager. I download the kernel headers and image and install the packages using *dpkg* ...
+I am running Debian's *sid* (unstable) branch and the 3.13.X kernel is no longer available in the package manager. I download the kernel headers and image and install the packages using ``dpkg`` ...
 
 .. code-block:: bash
 
-    wget http://snapshot.debian.org/archive/debian/20140320T042639Z/pool/main/l/linux-tools/linux-kbuild-3.13_3.13.6-1_amd64.deb
-    dpkg -i linux-kbuild-3.13_3.13.6-1_amd64.deb
-    wget http://snapshot.debian.org/archive/debian/20140416T101543Z/pool/main/l/linux/linux-headers-3.13-1-common_3.13.10-1_amd64.deb
-    dpkg -i linux-headers-3.13-1-common_3.13.10-1_amd64.deb
-    wget http://snapshot.debian.org/archive/debian/20140416T101543Z/pool/main/l/linux/linux-headers-3.13-1-amd64_3.13.10-1_amd64.deb
-    dpkg -i linux-headers-3.13-1-amd64_3.13.10-1_amd64.deb
-    wget http://snapshot.debian.org/archive/debian/20140416T101543Z/pool/main/l/linux/linux-image-3.13-1-amd64_3.13.10-1_amd64.deb
-    dpkg -i linux-image-3.13-1-amd64_3.13.10-1_amd64.deb
+    $ wget http://snapshot.debian.org/archive/debian/20140320T042639Z/pool/main/l/linux-tools/linux-kbuild-3.13_3.13.6-1_amd64.deb
+    $ sudo dpkg -i linux-kbuild-3.13_3.13.6-1_amd64.deb
+    $ wget http://snapshot.debian.org/archive/debian/20140416T101543Z/pool/main/l/linux/linux-headers-3.13-1-common_3.13.10-1_amd64.deb
+    $ sudo dpkg -i linux-headers-3.13-1-common_3.13.10-1_amd64.deb
+    $ wget http://snapshot.debian.org/archive/debian/20140416T101543Z/pool/main/l/linux/linux-headers-3.13-1-amd64_3.13.10-1_amd64.deb
+    $ sudo dpkg -i linux-headers-3.13-1-amd64_3.13.10-1_amd64.deb
+    $ wget http://snapshot.debian.org/archive/debian/20140416T101543Z/pool/main/l/linux/linux-image-3.13-1-amd64_3.13.10-1_amd64.deb
+    $ sudo dpkg -i linux-image-3.13-1-amd64_3.13.10-1_amd64.deb
 
 A menuentry for the new kernel is auto-generated in ``/boot/grub/grub.cfg``.
 
@@ -47,6 +47,6 @@ Open ``/etc/default/grub`` in an editor and modify ``GRUB_DEFAULT=`` (set to '0'
 
     GRUB_DEFAULT="Advanced options for Debian GNU/Linux>Debian GNU/Linux, with Linux 3.13-1-amd64"
 
-Run ``update-grub`` to generate a new config and reboot. At the GRUB splash screen the ``Advanced options for Debian GNU`` menu will be the new default and the designated kernel will load.
+Run ``sudo update-grub`` to generate a new config and reboot. At the GRUB splash screen the ``Advanced options for Debian GNU`` menu will be the new default and the designated kernel will load.
 
 Happy hacking!
