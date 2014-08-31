@@ -24,7 +24,7 @@
 
 <!-- article -->
 <h1>From Chromebook to Sidbook</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on 27 August 2014</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on 31 August 2014</p>
 <div id="article">
     <p>Replace ChromeOS permanently with the <em>sid</em> (unstable) branch of <strong>Debian Linux</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
 <img alt="Debianized Acer C720" class="align-right" src="images/sidbook.png" style="width: 300px; height: 161px;" />
@@ -125,6 +125,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <p>After installing Debian the C720 touchpad is non-functional and requires compiling new kernel modules and creating a <strong>synaptic touchpad</strong> config file:</p>
 <ul class="simple">
 <li>Compile new kernel modules using the <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_sidbook/scripts/c720-kernel-mods.sh">c720-kernel-mods.sh</a> script... Confirmed <strong>working</strong> in kernel <tt class="docutils literal">3.13.10</tt> and <strong>not working</strong> in <tt class="docutils literal">3.14.x</tt></li>
+<li>See <a class="reference external" href="http://www.circuidipity.com/20140831.html">Modify the default boot order in GRUB</a> about installing and designating a less-than-recent kernel as the new boot default</li>
 <li>Create touchpad config <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_sidbook/etc/X11/xorg.conf.d/50-c720-touchpad.conf">50-c720-touchpad.conf</a> in <tt class="docutils literal">/etc/X11/xorg.conf.d</tt> ...</li>
 </ul>
 <div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /etc/X11/xorg.conf.d

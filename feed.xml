@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-08-27T00:00:00-04:00</updated><entry><title>Linux post-install configuration scripts</title><link href="http://www.circuidipity.com/linux-post-install.html" rel="alternate"></link><updated>2014-08-27T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-08-27:linux-post-install.html</id><summary type="html">&lt;p&gt;Scripts to configure a fresh installation of Debian GNU/Linux.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-08-31T00:00:00-04:00</updated><entry><title>Modify the default boot order in GRUB</title><link href="http://www.circuidipity.com/20140831.html" rel="alternate"></link><updated>2014-08-31T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-08-31:20140831.html</id><summary type="html">&lt;p&gt;My &lt;a class="reference external" href="http://www.circuidipity.com/c720-sidbook.html"&gt;Chromebook running Debian&lt;/a&gt; requires a less-than-recent kernel (3.13.10) that supports &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_sidbook/scripts/c720-kernel-mods.sh"&gt;compiling modules&lt;/a&gt; for the laptop's touchpad. After installing a kernel retrieved from &lt;a class="reference external" href="http://snapshot.debian.org/archive/debian"&gt;snapshot.debian.org&lt;/a&gt; the GRUB boot manager auto-generates a menuentry for the new kernel but defaults to booting the most recent kernel available.&lt;/p&gt;
+&lt;p&gt;This is how I changed the GRUB boot order to default to my touchpad-friendly kernel.&lt;/p&gt;
+&lt;div class="section" id="step-0-install-a-less-than-current-debian-packaged-kernel"&gt;
+&lt;h2&gt;Step 0 - Install a (less-than-current) Debian-packaged kernel&lt;/h2&gt;
+&lt;p&gt;I am running Debian's &lt;em&gt;sid&lt;/em&gt; (unstable) branch and the 3.13.X kernel is no longer available in the package manager. I download the kernel headers and image and install the packages using &lt;em&gt;dpkg&lt;/em&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;wget http://snapshot.debian.org/archive/debian/20140320T042639Z/pool/main/l/linux-tools/linux-kbuild-3.13_3.13.6-1_amd64.deb
+dpkg -i linux-kbuild-3.13_3.13.6-1_amd64.deb
+wget http://snapshot.debian.org/archive/debian/20140416T101543Z/pool/main/l/linux/linux-headers-3.13-1-common_3.13.10-1_amd64.deb
+dpkg -i linux-headers-3.13-1-common_3.13.10-1_amd64.deb
+wget http://snapshot.debian.org/archive/debian/20140416T101543Z/pool/main/l/linux/linux-headers-3.13-1-amd64_3.13.10-1_amd64.deb
+dpkg -i linux-headers-3.13-1-amd64_3.13.10-1_amd64.deb
+wget http://snapshot.debian.org/archive/debian/20140416T101543Z/pool/main/l/linux/linux-image-3.13-1-amd64_3.13.10-1_amd64.deb
+dpkg -i linux-image-3.13-1-amd64_3.13.10-1_amd64.deb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A menuentry for the new kernel is auto-generated in &lt;tt class="docutils literal"&gt;/boot/grub/grub.cfg&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-1-retrieve-the-kernel-menuentry"&gt;
+&lt;h2&gt;Step 1 - Retrieve the kernel menuentry&lt;/h2&gt;
+&lt;p&gt;Inside &lt;tt class="docutils literal"&gt;grub.cfg&lt;/tt&gt; there is an option for &lt;tt class="docutils literal"&gt;submenu 'Advanced options for Debian GNU/Linux'&lt;/tt&gt; and beneath it multiple menuentries for installed kernels and boot options. Using my Chromebook's 3.13.10 kernel as an example the relevant entry is ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;menuentry &lt;span class="s1"&gt;&amp;#39;Debian GNU/Linux, with Linux 3.13-1-amd64&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will be designated as the new default kernel to boot.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-2-set-default-kernel"&gt;
+&lt;h2&gt;Step 2 - Set default kernel&lt;/h2&gt;
+&lt;p&gt;Open &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt; in an editor and modify &lt;tt class="docutils literal"&gt;GRUB_DEFAULT=&lt;/tt&gt; (set to '0' or most recent by default) to the new desired boot kernel. In the case of my Chromebook I include the submenu + kernel in the modified setting ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;GRUB_DEFAULT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Advanced options for Debian GNU/Linux&amp;gt;Debian GNU/Linux, with Linux 3.13-1-amd64&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Run &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;update-grub&lt;/span&gt;&lt;/tt&gt; to generate a new config and reboot. At the GRUB splash screen the &lt;tt class="docutils literal"&gt;Advanced options for Debian GNU&lt;/tt&gt; menu will be the new default and the designated kernel will load.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="debian"></category><category term="linux"></category><category term="chromebook"></category></entry><entry><title>Linux post-install configuration scripts</title><link href="http://www.circuidipity.com/linux-post-install.html" rel="alternate"></link><updated>2014-08-27T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-08-27:linux-post-install.html</id><summary type="html">&lt;p&gt;Scripts to configure a fresh installation of Debian GNU/Linux.&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h2&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/debian-post-install-main.sh"&gt;debian-post-install-main.sh&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Track the &lt;em&gt;wheezy&lt;/em&gt; (stable), &lt;em&gt;jessie&lt;/em&gt; (testing), or &lt;em&gt;sid&lt;/em&gt; (unstable) branch with the option of installing the lightweight Openbox window manager + extra apps suitable for a desktop environment.&lt;/p&gt;
@@ -228,215 +259,4 @@ ls is aliased to &lt;span class="s1"&gt;&amp;#39;ls -aFlhv --color=auto&amp;#39;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Bonus: Hitting &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-S&lt;/span&gt;&lt;/tt&gt; by mistake in vim no longer disables output to the terminal.&lt;/p&gt;
 &lt;p&gt;Source: &lt;a class="reference external" href="https://stackoverflow.com/questions/791765/unable-to-forward-search-bash-history-similarly-as-with-ctrl-r"&gt;Unable to forward search Bash history similarly as with CTRL-r&lt;/a&gt;&lt;/p&gt;
-</summary><category term="shell"></category><category term="linux"></category></entry><entry><title>From Chromebook to Sidbook</title><link href="http://www.circuidipity.com/c720-sidbook.html" rel="alternate"></link><updated>2014-05-09T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-05-09:c720-sidbook.html</id><summary type="html">&lt;p&gt;Replace ChromeOS permanently with the &lt;em&gt;sid&lt;/em&gt; (unstable) branch of &lt;strong&gt;Debian Linux&lt;/strong&gt; on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt;.&lt;/p&gt;
-&lt;img alt="Debianized Acer C720" class="align-right" src="images/sidbook.png" style="width: 300px; height: 161px;" /&gt;
-&lt;p&gt;Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance using &lt;a class="reference external" href="http://openbox.org/"&gt;Openbox&lt;/a&gt; window manager.&lt;/p&gt;
-&lt;p&gt;There are a few different configurations of this device... mine is the &lt;a class="reference external" href="http://us.acer.com/ac/en/US/content/model-datasheet/NX.SHEAA.002"&gt;C720-2848&lt;/a&gt; non-touchscreen model with 2GB RAM and 16GB SSD.&lt;/p&gt;
-&lt;p&gt;Let's go!&lt;/p&gt;
-&lt;div class="section" id="step-0-recovery-image"&gt;
-&lt;h2&gt;Step 0 - Recovery Image&lt;/h2&gt;
-&lt;p&gt;Create a recovery image of Chrome OS (my C720 is model &lt;tt class="docutils literal"&gt;PEPPY &lt;span class="pre"&gt;C6A-N3C-A7O&lt;/span&gt;&lt;/tt&gt;) to enable restoring the Chromebook to its default configuration. This will require a spare USB stick of 2GB or better:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Log into the Chromebook and let it auto update, as there sometimes are firmware updates... check the updating status in the browser at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;chrome://help&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;Insert the USB stick, enter &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;chrome://imageburner&lt;/span&gt;&lt;/tt&gt; and follow the directions to generate a recovery image&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://support.google.com/chromebook/answer/1080595?hl=en"&gt;Create a Chromebook recovery image&lt;/a&gt; (support.google.com)&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-1-debian-installer"&gt;
-&lt;h2&gt;Step 1 - Debian Installer&lt;/h2&gt;
-&lt;p&gt;Prepare the Debian installation media. I use &lt;a class="reference external" href="http://grml.org/"&gt;GRML 2014.03&lt;/a&gt; installed on a USB stick.&lt;/p&gt;
-&lt;p&gt;Sources: Creating a &lt;a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html"&gt;USB stick with multiple Linux installers&lt;/a&gt; and &lt;a class="reference external" href="http://www.circuidipity.com/grml-debootstrap.html"&gt;installing Debian using grml-debootstrap&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-2-seabios"&gt;
-&lt;h2&gt;Step 2 - SeaBIOS&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://www.coreboot.org/SeaBIOS"&gt;SeaBIOS&lt;/a&gt; in combination with &lt;strong&gt;coreboot&lt;/strong&gt; provides an open-source legacy BIOS that enables access to the MBR and the ability to install an alternative OS on the Chromebook. All this good stuff involves jumping through a few simple hoops and not trembling in fear at the &amp;quot;scary white screen&amp;quot; that pops up at power up stating that the boot loader detects something is &lt;strong&gt;very very wrong&lt;/strong&gt; with the Chromebook and helpfully suggests pressing the spacebar to begin recovery. &lt;strong&gt;Do not press the spacebar&lt;/strong&gt; or the Debian installation will be wiped from disk!&lt;/p&gt;
-&lt;p&gt;There are 2 different methods for configuring SeaBIOS in preparation for installing Debian. The first method uses a few simple commands in the ChromeOS shell to place the Chromebook into &lt;strong&gt;developer mode&lt;/strong&gt; and allow booting the USB install media and replacing ChromeOS with Debian. The drawback is that scary screen appears at every boot and you must press &lt;tt class="docutils literal"&gt;CTRL+L&lt;/tt&gt; to boot to legacy-mode and onward to GRUB and Debian (and &lt;strong&gt;ignore&lt;/strong&gt; the helpful prompt to press spacebar and inadvertently begin the adventure of wiping clean the SSD).&lt;/p&gt;
-&lt;p&gt;The second method involves setting new flags for the write-protected &lt;strong&gt;Google Binary Block&lt;/strong&gt; (GBB) in the device firmware. Delay at the boot screen can be reduced to a one second timeout and the legacy-mode BIOS set as the system default (no key combo required). Pressing the spacebar is disabled from doing any harm to Debian (the Chromebook just beeps). The drawback is that it involves the (very simple) removal of the device's bottom cover and the temporary removal of the &lt;strong&gt;write-protect screw&lt;/strong&gt; from the motherboard to permit flashing new flags to the GBB... and this may void the Chromebook's warranty (one of the case screws lies underneath a sticker declaring the warranty void if disturbed).&lt;/p&gt;
-&lt;p&gt;Experimenting with alternate OS installs on the Chromebook I first employed the developer mode method followed by the write-protect screw removal. I prefer configuring the device to default to legacy-mode BIOS but I have employed both methods successfully and describe their respective steps below.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;No guarantees&lt;/strong&gt;, though... Hopefully you enjoy equal success!&lt;/p&gt;
-&lt;div class="section" id="write-protect-screw-method"&gt;
-&lt;h3&gt;2.1 Write-Protect Screw Method&lt;/h3&gt;
-&lt;p&gt;Disconnect power. Turn the Chromebook over facing bottom up and remove the 13 screws (not missing the one hidden under the warranty sticker). Gently pry the case off starting with the seam where the display connects to device. It comes away pretty easy.&lt;/p&gt;
-&lt;p&gt;This is what you see...&lt;/p&gt;
-&lt;div class="figure"&gt;
-&lt;img alt="C720 annotated innards" src="images/c720-chromebook-annotated-innards.png" style="width: 800px; height: 558px;" /&gt;
-&lt;p class="caption"&gt;[Image: The battery lock screw is #6 and the write-protect screw is #7, courtesy &lt;a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook#TOC-Firmware"&gt;Chromium&lt;/a&gt;].&lt;/p&gt;
-&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Remove the write-protect screw (this will &lt;strong&gt;wipe out&lt;/strong&gt; whatever is installed on the SSD)&lt;/li&gt;
-&lt;li&gt;Close back cover using only the battery lock screw to hold in place&lt;/li&gt;
-&lt;li&gt;Re-connect power, boot chromebook and wait until it displays...&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Chrome OS is missing or damaged.
-Please insert a recovery USB stick or SD card.
-&lt;/pre&gt;&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Insert USB recovery media prepared in Step 0 and it will proceed to restore ChromeOS and reboot&lt;/li&gt;
-&lt;li&gt;At default ChromeOS &amp;quot;Welcome!&amp;quot; screen open a terminal &lt;tt class="docutils literal"&gt;CTRL+ALT+F2&lt;/tt&gt; (Right-arrow)&lt;/li&gt;
-&lt;li&gt;Login as &lt;tt class="docutils literal"&gt;chronos&lt;/tt&gt; (no password), then enter &lt;tt class="docutils literal"&gt;sudo su&lt;/tt&gt; for superuser access&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Set new GBB flags using the &lt;tt class="docutils literal"&gt;set_gbb_flags.sh&lt;/tt&gt; script in ChromeOS. To enable short &lt;strong&gt;developer mode&lt;/strong&gt; screen (1 second timeout) followed by &lt;strong&gt;default legacy mode&lt;/strong&gt; boot use these flags...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;GBB_FLAG_DEV_SCREEN_SHORT_DELAY 0×00000001
-GBB_FLAG_FORCE_DEV_SWITCH_ON 0×00000008
-GBB_FLAG_FORCE_DEV_BOOT_LEGACY 0×00000080
-GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... which adds up to running in the shell...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;set_gbb_flags.sh 0x489
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Shutdown with &lt;tt class="docutils literal"&gt;shutdown &lt;span class="pre"&gt;-h&lt;/span&gt; now&lt;/tt&gt; and disconnect the power:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Remove the bottom cover again and reinstall the write-lock screw to protect the BIOS&lt;/li&gt;
-&lt;li&gt;Close cover and reinstall all the case screws&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Re-connect the power, insert the USB stick prepared in Step 1, and power up the Chromebook.&lt;/p&gt;
-&lt;div class="note"&gt;
-&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
-&lt;p class="last"&gt;Whenever you remove battery power to the Chromebook (like opening up the case) the hardware clock on the motherboard resets to a future year (mine travelled to 2040). Providing a network connection is up during the Debian installation the system should fetch a correct time from a NTP server... otherwise fix the &lt;a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-debian-gnu-linux/"&gt;fallout from an incorrect clock&lt;/a&gt; by re-mounting partitions read-only and correct filesystem timestamps using &lt;tt class="docutils literal"&gt;fsck&lt;/tt&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html"&gt;Useful GBB flags&lt;/a&gt; (coreboot.org) for &lt;a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-debian-gnu-linux/"&gt;another new free software machine&lt;/a&gt; (fsfe.org)&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="developer-mode-method"&gt;
-&lt;h3&gt;2.2 Developer Mode Method&lt;/h3&gt;
-&lt;p&gt;The alternative to removing the write-protect screw above is to place the Chromebook into developer mode using the ChromeOS shell before booting the USB install media:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;With the Chromebook off... Hold down &lt;tt class="docutils literal"&gt;ESC+F3&lt;/tt&gt; (Refresh) keys and power on the device&lt;/li&gt;
-&lt;li&gt;Invoke Recovery, and at the Recovery screen press &lt;tt class="docutils literal"&gt;Ctrl+D&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;Device will prompt for confirmation, press &lt;tt class="docutils literal"&gt;ENTER&lt;/tt&gt; and the system reboots into developer mode&lt;/li&gt;
-&lt;li&gt;Scary white boot screen appears and you need to press &lt;tt class="docutils literal"&gt;Ctrl+D&lt;/tt&gt; to continue boot&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="note"&gt;
-&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
-&lt;p class="last"&gt;Switching between developer and normal (non-developer) modes will remove user accounts and their associated information from your Chromebook.&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;Enable the &lt;strong&gt;USB Boot&lt;/strong&gt; and &lt;strong&gt;Legacy BIOS&lt;/strong&gt; modes by opening the shell with &lt;tt class="docutils literal"&gt;Ctrl+Alt+T&lt;/tt&gt; and enter &lt;tt class="docutils literal"&gt;shell&lt;/tt&gt;. Set &lt;tt class="docutils literal"&gt;dev_boot_usb&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;dev_boot_legacy&lt;/tt&gt; to active...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo crossystem &lt;span class="nv"&gt;dev_boot_usb&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo &lt;span class="nv"&gt;dev_boot_legacy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Insert the USB stick prepared in Step 1, reboot the Chromebook and press &lt;tt class="docutils literal"&gt;CTRL+L&lt;/tt&gt; at the boot screen to enter legacy boot mode.&lt;/p&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="http://www.chromium.org/chromium-os"&gt;Chromium OS&lt;/a&gt; developer information for the &lt;a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook"&gt;Acer C720 Chromebook&lt;/a&gt; (chromium.org)&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-3-install-debian"&gt;
-&lt;h2&gt;Step 3 - Install Debian&lt;/h2&gt;
-&lt;p&gt;My &lt;a class="reference external" href="http://www.circuidipity.com/grml-debootstrap.html"&gt;grml-debootstrap instructions&lt;/a&gt; for installing Debian Wheezy, configuring &lt;strong&gt;TRIM&lt;/strong&gt; support for the SSD, and my &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/c720-sidbook-post-install-main.sh"&gt;post-install script&lt;/a&gt; for upgrading and configuring Debian's unstable branch.&lt;/p&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install"&gt;linux-post-install&lt;/a&gt; (github.com/vonbrownie)&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-4-touchpad"&gt;
-&lt;h2&gt;Step 4 - Touchpad&lt;/h2&gt;
-&lt;p&gt;After installing Debian the C720 touchpad is non-functional and requires compiling new kernel modules and creating a &lt;strong&gt;synaptic touchpad&lt;/strong&gt; config file:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Compile new kernel modules using the &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_sidbook/scripts/c720-kernel-mods.sh"&gt;c720-kernel-mods.sh&lt;/a&gt; script... Confirmed &lt;strong&gt;working&lt;/strong&gt; in kernel &lt;tt class="docutils literal"&gt;3.13.10&lt;/tt&gt; and &lt;strong&gt;not working&lt;/strong&gt; in &lt;tt class="docutils literal"&gt;3.14.x&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;Create touchpad config &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_sidbook/etc/X11/xorg.conf.d/50-c720-touchpad.conf"&gt;50-c720-touchpad.conf&lt;/a&gt; in &lt;tt class="docutils literal"&gt;/etc/X11/xorg.conf.d&lt;/tt&gt; ...&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /etc/X11/xorg.conf.d
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo cp /usr/share/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-c720-touchpad.conf
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Modify this file to adjust timeouts, add tap-mouse actions (2-finger tap = right-click, 3-finger tap = middle-click), and 2-finger scrolling.&lt;/p&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics"&gt;Touchpad Synaptics&lt;/a&gt; and &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration"&gt;C720 configuration&lt;/a&gt; (wiki.archlinux.org)&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-5-suspend"&gt;
-&lt;h2&gt;Step 5 - Suspend&lt;/h2&gt;
-&lt;p&gt;Enable suspend|resume under &lt;strong&gt;systemd&lt;/strong&gt; (for sysv-init see &lt;em&gt;Helpful Resources&lt;/em&gt; at bottom):&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Create &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_sidbook/lib/systemd/system-sleep/cros-sound-suspend.sh"&gt;cros-sound-suspend.sh&lt;/a&gt; (make it executable) in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/lib/systemd/system-sleep&lt;/span&gt;&lt;/tt&gt; and...&lt;/li&gt;
-&lt;li&gt;... &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_sidbook/etc/tmpfiles.d/cros-acpi-wakeup.conf"&gt;cros-acpi-wakeup.conf&lt;/a&gt; in &lt;tt class="docutils literal"&gt;/etc/tmpfiles.d&lt;/tt&gt; to restore sound and touchpad after suspend&lt;/li&gt;
-&lt;li&gt;Configure &lt;tt class="docutils literal"&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/tt&gt; setting in &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;...&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;quiet splash add_efi_memmap boot=local noresume noswap i915.modeset=1 tpm_tis.force=1 tpm_tis.interrupts=0 nmi_watchdog=panic,lapic&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and update the grub config...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-grub
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://plus.google.com/+PedroLarroy/posts/6CgQypQukMa"&gt;Chrubuntu resume fix&lt;/a&gt; (plus.google.com/+PedroLarroy), &lt;a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?pid=1364521#p1364521"&gt;Acer C720 thread&lt;/a&gt; (bbs.archlinux.org), and &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Allow_users_to_shutdown"&gt;systemctl user controls&lt;/a&gt; (wiki.archlinux.org)&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-6-keyboard-shortcuts"&gt;
-&lt;h2&gt;Step 6 - Keyboard Shortcuts&lt;/h2&gt;
-&lt;p&gt;The top row on the keyboard with the shortcut icons (brightness, volume, etc.) identify in Linux as the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;F1-F10&lt;/span&gt;&lt;/tt&gt; keys and the Search key (in the &lt;tt class="docutils literal"&gt;CapsLk&lt;/tt&gt; position) acts as the &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; (Windows) modifier key.&lt;/p&gt;
-&lt;p&gt;Create keyboard shortcuts by first installing:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;pulseaudio-utils - manage sound with &lt;em&gt;pactl&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;xbacklight - set backlight level using RandR&lt;/li&gt;
-&lt;li&gt;xdotool - simulate keyboard/mouse input&lt;/li&gt;
-&lt;li&gt;xbindkeys - associate keys to shell commands&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install pulseaudio-utils xbacklight xdotool xbindkeys
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="section" id="function-keys"&gt;
-&lt;h3&gt;6.1 Function keys&lt;/h3&gt;
-&lt;p&gt;Enable the function keys to modify the sound and brightness settings by creating &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="s2"&gt;&amp;quot;xdotool keyup F1; xdotool key alt+Left&amp;quot;&lt;/span&gt;
-F1
-&lt;span class="s2"&gt;&amp;quot;xdotool keyup F2; xdotool key alt+Right&amp;quot;&lt;/span&gt;
-F2
-&lt;span class="s2"&gt;&amp;quot;xdotool keyup F5; xdotool key alt+Tab&amp;quot;&lt;/span&gt;
-F5
-&lt;span class="s2"&gt;&amp;quot;xdotool keyup F3; xdotool key ctrl+r&amp;quot;&lt;/span&gt;
-F3
-&lt;span class="s2"&gt;&amp;quot;xdotool keyup F4; xdotool key F11&amp;quot;&lt;/span&gt;
-F4
-&lt;span class="s2"&gt;&amp;quot;xdotool keyup F6; xbacklight -dec 10&amp;quot;&lt;/span&gt;
-F6
-&lt;span class="s2"&gt;&amp;quot;xdotool keyup F7; xbacklight -inc 10&amp;quot;&lt;/span&gt;
-F7
-&lt;span class="s2"&gt;&amp;quot;xdotool keyup shift+BackSpace; xdotool key Delete; xdotool keydown shift&amp;quot;&lt;/span&gt;
-&lt;span class="nb"&gt;shift&lt;/span&gt;+BackSpace
-&lt;span class="s2"&gt;&amp;quot;xdotool keyup F8; pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo toggle&amp;quot;&lt;/span&gt;
-F8
-&lt;span class="s2"&gt;&amp;quot;xdotool keyup F9; pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -- -10%&amp;quot;&lt;/span&gt;
-F9
-&lt;span class="s2"&gt;&amp;quot;xdotool keyup F10; pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -- +10%&amp;quot;&lt;/span&gt;
-F10
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/codestarterorg/ubuntu-chromebook-installer/blob/master/profiles/default/system/etc/skel/.xbindkeysrc"&gt;xbindkeysrc&lt;/a&gt; (github.com/codestarterorg)&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="page-up-page-down-home-end"&gt;
-&lt;h3&gt;6.2 Page-Up, Page-Down, Home, End&lt;/h3&gt;
-&lt;p&gt;Create keybindings for Openbox in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.config/openbox/rc.xml&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt; &amp;lt;!-- Keybindings &lt;span class="k"&gt;for &lt;/span&gt;Page-Up, Page-Down, Home, End --&amp;gt;
-&amp;lt;keybind &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;A-Up&amp;quot;&lt;/span&gt;&amp;gt;
-   &amp;lt;action &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Execute&amp;quot;&lt;/span&gt;&amp;gt;
-     &amp;lt;&lt;span class="nb"&gt;command&lt;/span&gt;&amp;gt;xdotool key --clearmodifiers Page_Up&amp;lt;/command&amp;gt;
-   &amp;lt;/action&amp;gt;
- &amp;lt;/keybind&amp;gt;
- &amp;lt;keybind &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;A-Down&amp;quot;&lt;/span&gt;&amp;gt;
-   &amp;lt;action &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Execute&amp;quot;&lt;/span&gt;&amp;gt;
-       &amp;lt;&lt;span class="nb"&gt;command&lt;/span&gt;&amp;gt;xdotool key --clearmodifiers Page_Down&amp;lt;/command&amp;gt;
-   &amp;lt;/action&amp;gt;
- &amp;lt;/keybind&amp;gt;
- &amp;lt;keybind &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;C-A-Up&amp;quot;&lt;/span&gt;&amp;gt;
-   &amp;lt;action &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Execute&amp;quot;&lt;/span&gt;&amp;gt;
-     &amp;lt;&lt;span class="nb"&gt;command&lt;/span&gt;&amp;gt;xdotool key --clearmodifiers Home&amp;lt;/command&amp;gt;
-   &amp;lt;/action&amp;gt;
- &amp;lt;/keybind&amp;gt;
- &amp;lt;keybind &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;C-A-Down&amp;quot;&lt;/span&gt;&amp;gt;
-   &amp;lt;action &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Execute&amp;quot;&lt;/span&gt;&amp;gt;
-     &amp;lt;&lt;span class="nb"&gt;command&lt;/span&gt;&amp;gt;xdotool key --clearmodifiers End&amp;lt;/command&amp;gt;
-   &amp;lt;/action&amp;gt;
- &amp;lt;/keybind&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="power-key"&gt;
-&lt;h3&gt;6.3 Power Key&lt;/h3&gt;
-&lt;p&gt;The power key ignores any configuration in the window manager and triggers poweroff without delay when pressed (easy to do by accident as its positioned next to &lt;tt class="docutils literal"&gt;backspace&lt;/tt&gt;).&lt;/p&gt;
-&lt;p&gt;If you want to disable the power key... modify &lt;tt class="docutils literal"&gt;/etc/systemd/logind.conf&lt;/tt&gt; and set &lt;tt class="docutils literal"&gt;HandlePowerKey=ignore&lt;/tt&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-7-helpful-resources"&gt;
-&lt;h2&gt;Step 7 - Helpful Resources&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720_sidbook"&gt;My personal C720 configurations&lt;/a&gt; (github.com/vonbrownie)&lt;br /&gt;
-Configuring the Chromebook and the output of &lt;em&gt;lshw&lt;/em&gt;, &lt;em&gt;lspci&lt;/em&gt;, and &lt;em&gt;lsusb&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/liangcj/AcerC720CrunchBang"&gt;CrunchBang Linux on the Acer C720 Chromebook&lt;/a&gt; (github.com/liangcj)&lt;br /&gt;
-Guide for wiping ChromeOS and installing CrunchBang&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook"&gt;Acer C720 Chromebook&lt;/a&gt; (wiki.archlinux.org)&lt;br /&gt;
-Arch Linux installation with useful post-install details applicable to any Linux distro&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/"&gt;List of fixes for Xubuntu 13.10 on the Acer C720&lt;/a&gt; (reddit.com/r/chrubuntu)&lt;br /&gt;
-Ongoing discussion thread about Chromebook configuration for a Debian/Ubuntu-based install&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://blog.codestarter.org/post/93985346780/how-we-turn-199-chromebooks-into-ubuntu-based-code"&gt;Turn Chromebooks into Ubuntu-based code learning machines for kids&lt;/a&gt; (blog.codestarter.org)&lt;br /&gt;
-Configure the C720 to dual-boot ChromeOS and Ubuntu using open-source install script&lt;/p&gt;&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="chromebook"></category><category term="debian"></category><category term="linux"></category></entry></feed>
+</summary><category term="shell"></category><category term="linux"></category></entry></feed>
