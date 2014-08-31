@@ -24,7 +24,7 @@
 &lt;/div&gt;
 &lt;div class="section" id="step-2-set-default-kernel"&gt;
 &lt;h2&gt;Step 2 - Set default kernel&lt;/h2&gt;
-&lt;p&gt;Open &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt; in an editor and modify &lt;tt class="docutils literal"&gt;GRUB_DEFAULT=&lt;/tt&gt; (set to '0' or most recent by default) to the new desired boot kernel. In the case of my Chromebook I include the submenu + kernel in the modified setting ...&lt;/p&gt;
+&lt;p&gt;Open &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt; in an editor and modify &lt;tt class="docutils literal"&gt;GRUB_DEFAULT=&lt;/tt&gt; (set to '0' or most recent by default) to the new desired boot kernel. In the case of my Chromebook I include the submenu + menuentry in the modified setting ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;GRUB_DEFAULT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Advanced options for Debian GNU/Linux&amp;gt;Debian GNU/Linux, with Linux 3.13-1-amd64&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Run &lt;tt class="docutils literal"&gt;sudo &lt;span class="pre"&gt;update-grub&lt;/span&gt;&lt;/tt&gt; to generate a new config and reboot. At the GRUB splash screen the &lt;tt class="docutils literal"&gt;Advanced options for Debian GNU&lt;/tt&gt; menu will be the new default and the designated kernel will load.&lt;/p&gt;

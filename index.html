@@ -62,7 +62,7 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 </div>
 <div class="section" id="step-2-set-default-kernel">
 <h2>Step 2 - Set default kernel</h2>
-<p>Open <tt class="docutils literal">/etc/default/grub</tt> in an editor and modify <tt class="docutils literal">GRUB_DEFAULT=</tt> (set to '0' or most recent by default) to the new desired boot kernel. In the case of my Chromebook I include the submenu + kernel in the modified setting ...</p>
+<p>Open <tt class="docutils literal">/etc/default/grub</tt> in an editor and modify <tt class="docutils literal">GRUB_DEFAULT=</tt> (set to '0' or most recent by default) to the new desired boot kernel. In the case of my Chromebook I include the submenu + menuentry in the modified setting ...</p>
 <div class="highlight"><pre><span class="nv">GRUB_DEFAULT</span><span class="o">=</span><span class="s2">&quot;Advanced options for Debian GNU/Linux&gt;Debian GNU/Linux, with Linux 3.13-1-amd64&quot;</span>
 </pre></div>
 <p>Run <tt class="docutils literal">sudo <span class="pre">update-grub</span></tt> to generate a new config and reboot. At the GRUB splash screen the <tt class="docutils literal">Advanced options for Debian GNU</tt> menu will be the new default and the designated kernel will load.</p>
