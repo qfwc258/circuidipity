@@ -5,7 +5,7 @@ From Chromebook to Sidbook
 :slug: c720-sidbook
 :template: article-project
 :tags: chromebook, debian, linux
-:modified: 27 August 2014
+:modified: 31 August 2014
 
 Replace ChromeOS permanently with the *sid* (unstable) branch of **Debian Linux** on the **Acer C720 Chromebook**.
 
@@ -144,6 +144,7 @@ Step 4 - Touchpad
 After installing Debian the C720 touchpad is non-functional and requires compiling new kernel modules and creating a **synaptic touchpad** config file:
 
 * Compile new kernel modules using the `c720-kernel-mods.sh <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_sidbook/scripts/c720-kernel-mods.sh>`_ script... Confirmed **working** in kernel ``3.13.10`` and **not working** in ``3.14.x``
+* See `Modify the default boot order in GRUB <http://www.circuidipity.com/20140831.html>`_ about installing and designating a less-than-recent kernel as the new boot default
 * Create touchpad config `50-c720-touchpad.conf <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_sidbook/etc/X11/xorg.conf.d/50-c720-touchpad.conf>`_ in ``/etc/X11/xorg.conf.d`` ...
 
 .. code-block:: bash
