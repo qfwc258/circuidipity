@@ -6,6 +6,23 @@ Projects
 
 .. class:: invisiblelink
 
+    .. image:: images/pingparade-thumb.png
+        :alt: Ping Parade
+        :width: 150px
+        :height: 150px
+        :align: left
+        :target: pingparade.html
+
+.. raw:: html
+
+    <div class="projectx">
+        <h2>Ping Parade</h2>
+        <p>The galactic internet <a href="pingparade.html">begins at home ...</a></p>
+        <p style="clear:both;"></p>
+    </div>
+
+.. class:: invisiblelink
+
     .. image:: images/linux-post-install-thumb.png
         :alt: Sidbook
         :width: 150px
