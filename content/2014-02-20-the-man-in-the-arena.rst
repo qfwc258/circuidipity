@@ -3,7 +3,7 @@ The Man In The Arena
 ====================
 
 :slug: the-man-in-the-arena
-:tags: quote
+:tags: quotes
 
 Excerpt from the speech "Citizenship In A Republic" delivered by **Theodore Roosevelt** in Paris, France on 23 April 1910:
 

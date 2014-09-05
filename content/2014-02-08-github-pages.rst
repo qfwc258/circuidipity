@@ -3,7 +3,7 @@ Host a blog on GitHub Pages
 ===========================
 
 :slug: github-pages
-:tags: git, web, pelican
+:tags: git, web, pelican, network
 
 `GitHub Pages <http://pages.github.com/>`_ is a free web hosting service for projects composed of static files (i.e no database). Combine a Pages *repository* with ``git`` version control and a *static site generator* like `Pelican <http://www.circuidipity.com/pelican.html>`_ and you have one awesome toolset to build a website.
 

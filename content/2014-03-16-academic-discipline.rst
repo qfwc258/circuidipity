@@ -3,7 +3,7 @@ Academic discipline
 ===================
 
 :slug: academic-discipline
-:tags: quote
+:tags: quotes
 
 **Mark Nathan Cohen**, *Health and the Rise of Civilization*, 1989:
 

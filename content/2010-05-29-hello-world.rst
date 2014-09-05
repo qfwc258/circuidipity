@@ -2,7 +2,7 @@
 Hello World
 ===========
 
-:tags: news, web
+:tags: web
 :slug: hello-world
 
 .. image:: {filename}/images/hello-world.png

@@ -2,7 +2,7 @@
 It is for those in the future to envy us our Joy
 ================================================
 
-:tags: quote, space
+:tags: quotes, space
 :slug: sputnik
 
 .. image:: images/sputnik.jpg
