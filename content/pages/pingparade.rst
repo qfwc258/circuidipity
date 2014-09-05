@@ -21,6 +21,6 @@ Let's go explore!
         <li>
             <a class="invisiblelink" href="pingparade1.html"><img src="images/pingparade1-0-thumb.png" alt="#1 -- Keys" /></a>
             <p><a href="pingparade1.html">#1 -- Repurpose</a></p>
-            <p>08 September 2014</p>
+            <p>05 September 2014</p>
         </li>
     </ul>
