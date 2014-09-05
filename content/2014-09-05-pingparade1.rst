@@ -26,7 +26,7 @@ Below is a visual walk-through of a sample Debian home server setup that makes u
 Step 0 - Installer
 ==================
 
-Download a `32bit <http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/mini.iso>`_ Debian **mini.iso** and burn the image to a CD or `prepare a USB boot device <http://www.circuidipity.com/multi-boot-usb.html>`_.
+Download a `Debian mini.iso <http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/mini.iso>`_ and burn the image to a CD or `prepare a USB boot device <http://www.circuidipity.com/multi-boot-usb.html>`_.
 
 Step 1 - Go!
 ============
