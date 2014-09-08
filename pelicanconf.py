@@ -46,6 +46,8 @@ TAGS_URL = 'tags.html'
 TAGS_SAVE_AS = 'tags.html'
 ARCHIVES_URL = 'archives.html'
 ARCHIVES_SAVE_AS = 'archives.html'
+BOOKS_URL = 'books.html'
+BOOKS_SAVE_AS = 'books.html'
 PROJECTS_URL = 'projects.html'
 PROJECTS_SAVE_AS = 'projects.html'
 PINGPARADE_URL = 'pingparade.html'
@@ -59,7 +61,7 @@ PLUGIN_PATH = '/home/dwa/code/pelican-plugins'
 PLUGINS = ['neighbors']
 
 # Theme
-THEME = '/home/dwa/code/pelican-themes/chungking-condo'
+THEME = '/home/dwa/code/pelican-themes/orangespresso'
 WHOAMI_URL = '/theme/images/whoami.png'
 GREETING = 'Howdy!'
 LICENCE_NAME = 'CC BY-NC-SA'
