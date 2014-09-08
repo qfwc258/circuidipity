@@ -8,7 +8,7 @@ Ping Parade #1 -- Repurpose
 
 **Give new life to an old netbook or laptop as a Linux home server.**
 
-.. image:: images/pingparade1-0.png
+.. image:: images/pingparade/pingparade1-0.png
     :alt: netbook server
     :width: 960px
     :height: 500px
