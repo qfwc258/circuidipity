@@ -5,7 +5,7 @@ Ping Parade
 :slug: pingparade
 :template: page-project
 
-.. image:: images/pingparade/pingparade-banner.png
+.. image:: images/pingparade-banner.png
     :alt: Ping Parade
     :width: 960px
     :height: 150px
