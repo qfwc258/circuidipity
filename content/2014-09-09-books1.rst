@@ -1,0 +1,43 @@
+======================
+Happier China Spy Keys
+======================
+
+:slug: 20140909
+:tags: books, buddhism, meditation, health, china, history, espionage, biography, network, linux
+
+**Latest books feeding my ((^_^)) ... meditation tips for dicks, communists make the best capitalists, secret agent charged with hunting Russian spies _was_ a Russian spy, and Secure Shell (SHH) tricks.**
+
+.. raw:: html
+
+    <ul class="rig columns-4">
+        <li>
+            <img src="images/books1-1-thumb.jpg" alt="10percent Happier" /></a>
+        </li>
+        <li>
+            <img src="images/books1-2-thumb.jpg" alt="Age of Ambition" /></a>
+        </li>
+        <li>
+            <img src="images/books1-3-thumb.jpg" alt="A Spy Among Friends" /></a>
+        </li>
+        <li>
+            <img src="images/books1-4-thumb.jpg" alt="SSH Mastery" /></a>
+        </li>
+    </ul>
+
+.. role:: booktitle
+
+**1)** :booktitle:`10% Happier: How I Tamed the Voice in My Head, Reduced Stress Without Losing My Edge, and Found Self-Help That Actually Works - A True Story` by Dan Harris (It Books)
+
+ABC correspondent Dan Harris takes a sceptical and very personal odyssey through the frontiers of self-help and neuroscience and discovers the power of Buddhist meditation and the "self-interested case for not being a dick". 
+
+**2)** :booktitle:`Age of Ambition: Chasing Fortune, Truth, and Faith in the New China` by Evan Osnos (Farrar, Straus and Giroux)
+
+Communist China has lifted more people out of poverty in less time than any other society in history, and the lives of ordinary Chinese portrayed here hustle up more questions than answers (good!) about personal ambition inside an authoritarian state and sacrifices being made to build the world's largest economy.
+
+**3)** :booktitle:`A Spy Among Friends: Kim Philby and the Great Betrayal` by Ben Macintyre (Crown)
+
+British spymaster and Soviet double-agent Philby's long-running Cold War act of betrayal ultimately gives the impression that the man was playing **everybody** as part of his own personal game, and in the end proved too clever by half with his "defection" more a case of push than escape.
+
+**4)** :booktitle:`SSH Mastery: OpenSSH, Putty, Tunnels and Keys` by Michael W. Lucas (Tilted Windmill Press)
+
+OpenSSH is a toolkit for securing communication with Unix-like remote machines and services and this book does an excellent job getting you started and describing SSH best practices such as replacing passwords with encryption keys.
