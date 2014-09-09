@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-09-05T00:00:00-04:00</updated><entry><title>Ping Parade #1 -- Repurpose</title><link href="http://www.circuidipity.com/pingparade1.html" rel="alternate"></link><updated>2014-09-05T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-09-05:pingparade1.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Give new life to an old netbook or laptop as a Linux home server.&lt;/strong&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-09-09T00:00:00-04:00</updated><entry><title>Happier China Spy Keys</title><link href="http://www.circuidipity.com/20140909.html" rel="alternate"></link><updated>2014-09-09T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-09-09:20140909.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Latest books feeding my ((^_^)) ... meditation tips for dicks, communists make the best capitalists, secret agent charged with hunting Russian spies _was_ a Russian spy, and Secure Shell (SHH) tricks.&lt;/strong&gt;&lt;/p&gt;
+&lt;ul class="rig columns-4"&gt;
+    &lt;li&gt;
+        &lt;img src="images/books1-1-thumb.jpg" alt="10percent Happier" /&gt;&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;img src="images/books1-2-thumb.jpg" alt="Age of Ambition" /&gt;&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;img src="images/books1-3-thumb.jpg" alt="A Spy Among Friends" /&gt;&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;img src="images/books1-4-thumb.jpg" alt="SSH Mastery" /&gt;&lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;strong&gt;1)&lt;/strong&gt; &lt;span class="booktitle"&gt;10% Happier: How I Tamed the Voice in My Head, Reduced Stress Without Losing My Edge, and Found Self-Help That Actually Works - A True Story&lt;/span&gt; by Dan Harris (It Books)&lt;/p&gt;
+&lt;p&gt;ABC correspondent Dan Harris takes a sceptical and very personal odyssey through the frontiers of self-help and neuroscience and discovers the power of Buddhist meditation and the &amp;quot;self-interested case for not being a dick&amp;quot;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2)&lt;/strong&gt; &lt;span class="booktitle"&gt;Age of Ambition: Chasing Fortune, Truth, and Faith in the New China&lt;/span&gt; by Evan Osnos (Farrar, Straus and Giroux)&lt;/p&gt;
+&lt;p&gt;Communist China has lifted more people out of poverty in less time than any other society in history, and the lives of ordinary Chinese portrayed here hustle up more questions than answers (good!) about personal ambition inside an authoritarian state and sacrifices being made to build the world's largest economy.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3)&lt;/strong&gt; &lt;span class="booktitle"&gt;A Spy Among Friends: Kim Philby and the Great Betrayal&lt;/span&gt; by Ben Macintyre (Crown)&lt;/p&gt;
+&lt;p&gt;British spymaster and Soviet double-agent Philby's long-running Cold War act of betrayal ultimately gives the impression that the man was playing &lt;strong&gt;everybody&lt;/strong&gt; as part of his own personal game, and in the end proved too clever by half with his &amp;quot;defection&amp;quot; more a case of push than escape.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4)&lt;/strong&gt; &lt;span class="booktitle"&gt;SSH Mastery: OpenSSH, Putty, Tunnels and Keys&lt;/span&gt; by Michael W. Lucas (Tilted Windmill Press)&lt;/p&gt;
+&lt;p&gt;OpenSSH is a toolkit for securing communication with Unix-like remote machines and services and this book does an excellent job getting you started and describing SSH best practices such as replacing passwords with encryption keys.&lt;/p&gt;
+</summary><category term="books"></category><category term="buddhism"></category><category term="meditation"></category><category term="health"></category><category term="china"></category><category term="history"></category><category term="espionage"></category><category term="biography"></category><category term="network"></category><category term="linux"></category></entry><entry><title>Ping Parade #1 -- Repurpose</title><link href="http://www.circuidipity.com/pingparade1.html" rel="alternate"></link><updated>2014-09-05T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-09-05:pingparade1.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Give new life to an old netbook or laptop as a Linux home server.&lt;/strong&gt;&lt;/p&gt;
 &lt;img alt="netbook server" src="images/pingparade1-0.png" style="width: 960px; height: 500px;" /&gt;
 &lt;p&gt;Running your own Linux home server is a fun learning experience and offers several advantages.&lt;/p&gt;
 &lt;p&gt;It is cheap if you already have a spare machine. Or search for inexpensive, second-hand netbooks now that the short-lived craze for these lightweight devices has well and truly passed. An old netbook or laptop - retired in favour of more current and powerful machines - can still deliver plenty of &lt;em&gt;oomph&lt;/em&gt; for running a personal server. Netbooks are frugal with power and come equipped with multiple network interfaces and their own built-in UPS/battery! I have been using an Asus 900HA netbook equipped with 1GM RAM and (user-replaced) 500GB hard drive for the past few years as a 24/7 home server.&lt;/p&gt;
@@ -337,31 +359,4 @@ As soon as somebody demonstrates the art of flying, settlers from our species of
 packagekit packagekit-tools policykit-1-gnome upower xfce4-power-manager
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Source: &lt;a class="reference external" href="http://forums.debian.net/viewtopic.php?f=5&amp;amp;t=114412"&gt;UPower Suspend/Hibernate: not authorized&lt;/a&gt;&lt;/p&gt;
-</summary><category term="debian"></category><category term="linux"></category></entry><entry><title>Creating new commands with alias</title><link href="http://www.circuidipity.com/alias-commands.html" rel="alternate"></link><updated>2014-05-13T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-05-13:alias-commands.html</id><summary type="html">&lt;p&gt;An &lt;strong&gt;alias&lt;/strong&gt; is useful for setting desirable options for a shell command or creating new commands using the structure &lt;tt class="docutils literal"&gt;alias &lt;span class="pre"&gt;name='string&lt;/span&gt;&lt;/tt&gt;. Multiple commands can be placed on a single line by separating them with a semicolon &lt;tt class="docutils literal"&gt;alias &lt;span class="pre"&gt;name='command0;&lt;/span&gt; command1; command2&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Check for aliases already set in the environment:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;alias&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Remove the alias for command &lt;tt class="docutils literal"&gt;foo&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;unalias &lt;/span&gt;foo
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Create new aliases:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;ls&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ls -aFlhv --color=auto&amp;#39;&lt;/span&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;dpkgg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dpkg -l | grep&amp;#39;&lt;/span&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;aaa&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sudo apt-get update; sudo apt-get dist-upgrade; sudo apt-get autoremove&amp;#39;&lt;/span&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;type &lt;/span&gt;ls   &lt;span class="c"&gt;# display information about a command&lt;/span&gt;
-ls is aliased to &lt;span class="s1"&gt;&amp;#39;ls -aFlhv --color=auto&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Aliases created at the prompt persist only for the duration of the current session. Make them permanent by adding them to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.bashrc&lt;/span&gt;&lt;/tt&gt;. Examples:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;df&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;df -hT&amp;#39;&lt;/span&gt;
-&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;diff&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;colordiff&amp;#39;&lt;/span&gt;
-&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;dpkgg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dpkg -l | grep&amp;#39;&lt;/span&gt;
-&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;grep&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;grep --color=auto&amp;#39;&lt;/span&gt;
-&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;halt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;systemctl poweroff&amp;#39;&lt;/span&gt;
-&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;mkdir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;mkdir -p -v&amp;#39;&lt;/span&gt;
-&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;psg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ps aux | grep&amp;#39;&lt;/span&gt;
-&lt;span class="nb"&gt;alias pwd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;pwd -P&amp;#39;&lt;/span&gt;
-&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;reboot&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;systemctl reboot&amp;#39;&lt;/span&gt;
-&lt;span class="nb"&gt;alias suspend&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;systemctl suspend&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-</summary><category term="shell"></category><category term="linux"></category></entry></feed>
+</summary><category term="debian"></category><category term="linux"></category></entry></feed>

@@ -1,8 +1,8 @@
 /*
-    Name: Chungking Condo
-    Date: July 2014
+    Name: Orangespresso
+    Date: September 2014
     Description: Theme for the Pelican static site generator
-    Version: 0.2
+    Version: 0.3
     Licence: GPL2
     Author: Daniel Wayne Armstrong <http://www.circuidipity.com>
 */
@@ -378,11 +378,18 @@ All Tags
     white-space: nowrap;
 }
 
-.booktitle, .whoa {color: #009900;}
+.green, .booktitle, .whoa {color: #009900;}
 
-.booktitle {font-style: italic;}
+.red, .redhead {color: #ff0000}
 
-.whoa {font-weight: bold;}
+.booktitle, .redhead, .whoa {font-weight: bold;}
+
+/*
+.booktitle {
+    font-family: 'YanoneKaffeesatzRegular', sans-serif;
+    font-size: 1.2em;
+}
+*/
 
 .note, .warning {
     padding-left: 20px;
