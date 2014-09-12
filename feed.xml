@@ -1,5 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-09-11T00:00:00-04:00</updated><entry><title>A growing something else</title><link href="http://www.circuidipity.com/20140911.html" rel="alternate"></link><updated>2014-09-11T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-09-11:20140911.html</id><summary type="html">&lt;p&gt;After a tour of Google's headquaters, historian &lt;strong&gt;George Dyson&lt;/strong&gt; - quoted in James Barrat's &lt;em&gt;Our Final Invention: Artificial Intelligence and the End of the Human Era&lt;/em&gt; - had this to say about where an &lt;strong&gt;artificial superintelligence&lt;/strong&gt; might take root:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-09-12T00:00:00-04:00</updated><entry><title>Ping Parade #2 -- Keys</title><link href="http://www.circuidipity.com/pingparade2.html" rel="alternate"></link><updated>2014-09-12T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-09-12:pingparade2.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Create cryptographic keys and disable password logins to make remote machines more secure.&lt;/strong&gt;&lt;/p&gt;
+&lt;img alt="OpenSSH" src="images/pingparade2-0.png" style="width: 960px; height: 500px;" /&gt;
+&lt;p&gt;&lt;strong&gt;OpenSSH&lt;/strong&gt; is a toolkit for securing communication with Unix-like remote machines and services and supports authenticating users with a public and private &lt;strong&gt;key pair&lt;/strong&gt;. Michael Lucas, author of &lt;a class="reference external" href="https://www.michaelwlucas.com/nonfiction/ssh-mastery"&gt;OpenSSH Mastery&lt;/a&gt;, describes the risk of passwords in SSH:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For the last few years, a network of compromised machines dubbed the &amp;quot;Hail Mary Cloud&amp;quot; has scanned the Internet for SSH servers. When a member of this cloud finds an SSH server, it lets the other machines in the network know about it. The cloud then methodically tries possible usernames and passwords. One host on the network tries a few times, then another, then another. Blocking individual IP addresses is not a useful defense, because each address is used only a few times.&lt;/p&gt;
+&lt;p&gt;Any one attempt has low odds of guessing successfully. The attempts are constant. They never end. Eventually [some automated attacker] will get lucky and break into your server. It might be tomorrow, or next year, but it _will_ happen. To stop these types of attacks, you can either use packet filtering to block public access to your SSH server, or you can eliminate passwords on your servers. User keys let you eliminate passwords.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This is how to configure SSH key authentication between a &lt;a class="reference external" href="http://www.circuidipity.com/pingparade1.html"&gt;home server&lt;/a&gt; and a client such as a laptop that are both running &lt;strong&gt;Debian Linux&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="section" id="step-0-install"&gt;
+&lt;h2&gt;Step 0 - Install&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;On the server:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;install &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openssh-server&lt;/span&gt;&lt;/tt&gt; and create an SSH configuration in the home directory of users who requires access to the system ...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install openssh-server
+&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/.ssh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod 700 ~/.ssh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; touch ~/.ssh/authorized_keys &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod 600 ~/.ssh/authorized_keys
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;collect key fingerprints from the server...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-keygen -lf /etc/ssh/ssh_host_dsa_key.pub &amp;gt;&amp;gt; ~/.ssh/keys.txt
+&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub &amp;gt;&amp;gt; ~/.ssh/keys.txt
+&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-keygen -lf /etc/ssh/ssh_host_rsa_key.pub &amp;gt;&amp;gt; ~/.ssh/keys.txt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and give &lt;tt class="docutils literal"&gt;keys.txt&lt;/tt&gt; to users to compare signature when connecting for the first time&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;em&gt;optional:&lt;/em&gt; edit &lt;tt class="docutils literal"&gt;/etc/ssh/sshd_config&lt;/tt&gt; adding specific users to be granted system access (&lt;strong&gt;disabling&lt;/strong&gt; all others by default) ...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;AllowUsers USERNAME1 USERNAME2
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Save and restart SSH with the new config by running &lt;tt class="docutils literal"&gt;sudo service ssh restart&lt;/tt&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;On the client:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;install &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openssh-client&lt;/span&gt;&lt;/tt&gt; and create the SSH folder in the user home directory ...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install openssh-client
+&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/.ssh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod 700 ~/.ssh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;em&gt;optional:&lt;/em&gt; create an entry in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/config&lt;/span&gt;&lt;/tt&gt; with the login options for a server - for example ...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Host tyrell
+HostName 192.168.1.88
+Port 23456
+User gaff
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-1-generate-keys"&gt;
+&lt;h2&gt;Step 1 - Generate keys&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;On the client:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;generate keys by running &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-keygen&lt;/span&gt; &lt;span class="pre"&gt;-t&lt;/span&gt; rsa &lt;span class="pre"&gt;-C&lt;/span&gt; &lt;span class="pre"&gt;&amp;quot;$(whoami)&amp;#64;$(hostname)-$(date&lt;/span&gt; &lt;span class="pre"&gt;-I)&amp;quot;&lt;/span&gt;&lt;/tt&gt; and supply a passphrase&lt;/li&gt;
+&lt;li&gt;upload the public key to the server and append it to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/authorized_keys&lt;/span&gt;&lt;/tt&gt; ...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cat ~/.ssh/id_rsa.pub | ssh SERVER &lt;span class="s2"&gt;&amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-2-test"&gt;
+&lt;h2&gt;Step 2 - Test&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;On the client:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Graphical display managers like &lt;tt class="docutils literal"&gt;gdm&lt;/tt&gt; will automatically check a user account for SSH keys upon login. A pop-up box will prompt for the passphrase and the key will be added to the desktop session.&lt;/p&gt;
+&lt;p&gt;If logging into a console, tell SSH that you have keys by running &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-add&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-add
+&lt;span class="nv"&gt;$ &lt;/span&gt;Enter passphrase &lt;span class="k"&gt;for&lt;/span&gt; /home/gaff/.ssh/id_rsa:
+Identity added: /home/gaff/.ssh/id_rsa &lt;span class="o"&gt;(&lt;/span&gt;/home/gaff/.ssh/id_rsa&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;All SSH sessions launched from this console will access this user key stored in memory. Make sure to test the connection before disabling password logins ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh 192.168.1.88
+Last login: Thu Sep 11 23:46:28 2014 from kambei.lan
+&lt;span class="nv"&gt;$ &lt;/span&gt;uname -n
+tyrell
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;No request to enter a passphrase indicates SSH key authentication is properly configured.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-3-disable-password-logins"&gt;
+&lt;h2&gt;Step 3 - Disable password logins&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;On the server:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;edit &lt;tt class="docutils literal"&gt;/etc/ssh/sshd_config&lt;/tt&gt; ...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;PubkeyAuthentication yes
+ChallengeResponseAuthentication no
+PasswordAuthentication no
+UsePAM no
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and restart the SSH server &lt;tt class="docutils literal"&gt;sudo service ssh restart&lt;/tt&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-4-key-management"&gt;
+&lt;h2&gt;Step 4 - Key management&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.funtoo.org/Keychain"&gt;Keychain&lt;/a&gt; is an OpenSSH key manager. From the Debian package description:&lt;/p&gt;
+&lt;blockquote&gt;
+When keychain is run, it checks for a running ssh-agent, otherwise it starts one. It saves the ssh-agent environment variables to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.keychain/$HOSTNAME-sh&lt;/span&gt;&lt;/tt&gt;, so that subsequent logins and non-interactive shells such as cron jobs can source the file and make passwordless ssh connections.  In addition, when keychain runs, it verifies that the key files specified on the command-line are known to ssh-agent, otherwise it loads them, prompting you for a password if necessary.&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;On the client:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;install &lt;tt class="docutils literal"&gt;sudo &lt;span class="pre"&gt;apt-get&lt;/span&gt; install keychain&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;configure &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bashrc&lt;/span&gt;&lt;/tt&gt; ...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# setup keychain - ssh-agent management&lt;/span&gt;
+keychain ~/.ssh/id_rsa
+. ~/.keychain/&lt;span class="nv"&gt;$HOSTNAME&lt;/span&gt;-sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;flush all cached keys from memory with &lt;tt class="docutils literal"&gt;keychain &lt;span class="pre"&gt;--clear&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;if using &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; enable persistent SSH key management across sessions by editing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.tmux.conf&lt;/span&gt;&lt;/tt&gt; ...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;set&lt;/span&gt;-option -g update-environment &lt;span class="s2"&gt;&amp;quot;DISPLAY SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="network"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>A growing something else</title><link href="http://www.circuidipity.com/20140911.html" rel="alternate"></link><updated>2014-09-11T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-09-11:20140911.html</id><summary type="html">&lt;p&gt;After a tour of Google's headquaters, historian &lt;strong&gt;George Dyson&lt;/strong&gt; - quoted in James Barrat's &lt;em&gt;Our Final Invention: Artificial Intelligence and the End of the Human Era&lt;/em&gt; - had this to say about where an &lt;strong&gt;artificial superintelligence&lt;/strong&gt; might take root:&lt;/p&gt;
 &lt;blockquote&gt;
 For thirty years I have been wondering, what indication of its existence might we expect from a true AI? Certainly not any explicit revelation, which might spark a movement to pull the plug. Anomalous accumulation or creation of wealth might be a sign, or an unquenchable thirst for raw information, storage space, and processing cycles, or a concerted attempt to secure an uninterrupted, autonomous power supply. But the real sign, I suspect, would be a circle of cheerful, contented, intellectually and physically well-nourished people surrounding the AI. There wouldn't be any need for True Believers, or the downloading of human brains or anything sinister like that: just a gradual, gentle, pervasive and mutually beneficial contact between us and a growing something else. This remains a nontestable hypothesis, for now.&lt;/blockquote&gt;
 </summary><category term="quotes"></category><category term="books"></category><category term="AI"></category></entry><entry><title>Happier China Spy Keys</title><link href="http://www.circuidipity.com/20140909.html" rel="alternate"></link><updated>2014-09-09T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-09-09:20140909.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Latest books feeding my ((^_^)) ... meditation tips for dicks, communists make the best capitalists, secret agent charged with hunting Russian spies _was_ a Russian spy, and Secure Shell (SSH) tricks.&lt;/strong&gt;&lt;/p&gt;
@@ -313,20 +422,4 @@ As soon as somebody demonstrates the art of flying, settlers from our species of
 </summary><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>Raspberry Pi Plate</title><link href="http://www.circuidipity.com/pi-plate.html" rel="alternate"></link><updated>2014-07-03T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-07-03:pi-plate.html</id><summary type="html">&lt;img alt="Raspberry Pi Plate" class="align-right" src="images/pi_plate_300.jpg" style="width: 300px; height: 400px;" /&gt;
 &lt;p&gt;My new &lt;strong&gt;Raspberry Pi&lt;/strong&gt; attached to a bottom &lt;a class="reference external" href="http://www.thingiverse.com/thing:24096"&gt;Pi Plate&lt;/a&gt; I generated using my local library's 3D printer!&lt;/p&gt;
 &lt;p&gt;The &lt;a class="reference external" href="http://www.torontopubliclibrary.ca/using-the-library/computer-services/innovation-spaces/3D-design-print.jsp"&gt;Toronto Public Library&lt;/a&gt; recently installed MakerBot &lt;a class="reference external" href="https://store.makerbot.com/replicator2"&gt;3D printers&lt;/a&gt; at two locations for public use.&lt;/p&gt;
-</summary><category term="raspberry pi"></category><category term="3D printing"></category></entry><entry><title>Duplicate Debian package selection on multiple machines</title><link href="http://www.circuidipity.com/dpkg-duplicate.html" rel="alternate"></link><updated>2014-05-28T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-05-28:dpkg-duplicate.html</id><summary type="html">&lt;p&gt;I am happy with the selection of packages installed on my &lt;a class="reference external" href="http://www.circuidipity.com/c720-sidbook.html"&gt;Debian-powered laptop&lt;/a&gt; and discovered an easy method to &lt;strong&gt;duplicate&lt;/strong&gt; the configuration on another machine.&lt;/p&gt;
-&lt;p&gt;On the 'master' machine generate a list of installed packages...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;dpkg --get-selections | grep -v deinstall &amp;gt; deb-pkg-list.txt
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Move the generated list to the target machine. Configure the package manager to duplicate the selection on the new system...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ PKGS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;mktemp&lt;span class="k"&gt;)&lt;/span&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-cache dumpavail &amp;gt; &lt;span class="s2"&gt;&amp;quot;$PKGS&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg --merge-avail &lt;span class="s2"&gt;&amp;quot;$PKGS&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo rm -f &lt;span class="s2"&gt;&amp;quot;$PKGS&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg --clear-selections
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg --set-selections &amp;lt; deb-pkg-list.txt
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get dselect-upgrade
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I created a &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dpkgDup"&gt;shell script&lt;/a&gt; that includes the above steps for generating and restoring package lists.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dpkgDup"&gt;dpkgDup&lt;/a&gt;, &lt;a class="reference external" href="http://debian-handbook.info/browse/wheezy/sect.apt-get.html"&gt;Debian Administrator's Handbook&lt;/a&gt;&lt;/p&gt;
-</summary><category term="debian"></category><category term="linux"></category><category term="shell"></category><category term="programming"></category></entry></feed>
+</summary><category term="raspberry pi"></category><category term="3D printing"></category></entry></feed>
