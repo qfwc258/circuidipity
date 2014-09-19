@@ -19,6 +19,11 @@ Let's go explore!
 
     <ul class="rig columns-4">
         <li>
+            <a class="invisiblelink" href="pingparade3.html"><img src="images/pingparade3-0-thumb.png" alt="#3 -- Backup" /></a>
+            <p><a href="pingparade3.html">#3 -- Backup</a></p>
+            <p>19 September 2014</p>
+        </li>
+        <li>
             <a class="invisiblelink" href="pingparade2.html"><img src="images/pingparade2-0-thumb.png" alt="#2 -- Keys" /></a>
             <p><a href="pingparade2.html">#2 -- Keys</a></p>
             <p>12 September 2014</p>
