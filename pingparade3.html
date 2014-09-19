@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Daniel Wayne Armstrong</title>
+        <title>Circuidipity | Ping Parade #3 -- Backup</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -16,28 +16,18 @@
 <body>
         <!-- content -->
 
-<!-- greeting -->
-<div id="siteheader">
-        <img class="whoami" src="/theme/images/whoami.png" />
-    <div id="sitegreeting">
-<p><span class="whoa">Howdy!</span><br />
-My name is <span class="noWrap"><span class="whoa">Daniel Wayne Armstrong</span></span>.
-I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    </div>
-<!-- menu -->
-    <div id="sitemenu">
-<p><a href="archives.html">Archives</a>
-&nbsp;<a href="projects.html">Projects</a>
-&nbsp;<a href="/colophon.html">Colophon</a>
-&nbsp;<a href="feed.xml"><i class="fa fa-rss"></i></a>
-&nbsp;<a href="https://twitter.com/circuidipity"><i class="fa fa-twitter"></i></a>
-&nbsp;<a href="https://github.com/vonbrownie"><i class="fa fa-github-alt"></i></a></p>    </div>
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="projects.html">Projects</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="pingparade.html">Ping Parade</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Friday 19 September 2014</p>
 </div>
 
-<!-- latest post -->
-<div id="latestpost">
-        <p class="published"> Friday 19 September 2014</p>
-        <h1><a href="http://www.circuidipity.com/pingparade3.html">Ping Parade #3 -- Backup</a></h1>
-        <p><strong>Make automatic backups of important stuff using a dash of shell scripting + rsync + SSH + cron!</strong></p>
+<!-- article -->
+<h1>Ping Parade #3 -- Backup</h1>
+<div id="article">
+    <p><strong>Make automatic backups of important stuff using a dash of shell scripting + rsync + SSH + cron!</strong></p>
 <img alt="Backup" src="images/pingparade3-0.png" style="width: 960px; height: 500px;" />
 <p>One of the advantages of setting up a <a class="reference external" href="http://www.circuidipity.com/pingparade1.html">Linux home server</a> is providing a place to do that thing which everyone agrees is important but <em>very few do consistently</em> (or even <em>once</em>): <strong>backups</strong>. Hopefully you never experience any loss of data... but <em>hope</em> is not a plan! A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home directory on my netbook server sitting on the local area network (LAN).</p>
 <div class="section" id="step-0-ssh">
@@ -97,13 +87,18 @@ rsync <span class="nv">$rsync_options</span> <span class="nv">$exclude_items</sp
 <p>Happy hacking!</p>
 </div>
 
-        <!-- Nav links to previous|next article --> 
-        <div id="navmenu">
-            <hr />
-            <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-                <a href="http://www.circuidipity.com/20140918.html">
-                Stay relaxed and success will follow</a></p>
-        </div>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/20140918.html">Stay relaxed and success will follow</a></p>
 </div>
 
 
