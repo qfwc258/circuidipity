@@ -5,7 +5,7 @@ From Chromebook to Sidbook
 :slug: c720-sidbook
 :template: article-project
 :tags: chromebook, debian, linux
-:modified: 31 August 2014
+:modified: 2014-08-31
 
 Replace ChromeOS permanently with the *sid* (unstable) branch of **Debian Linux** on the **Acer C720 Chromebook**.
 
