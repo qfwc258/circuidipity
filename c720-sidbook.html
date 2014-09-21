@@ -38,7 +38,7 @@
 <li>Log into the Chromebook and let it auto update, as there sometimes are firmware updates... check the updating status in the browser at <tt class="docutils literal"><span class="pre">chrome://help</span></tt></li>
 <li>Insert the USB stick, enter <tt class="docutils literal"><span class="pre">chrome://imageburner</span></tt> and follow the directions to generate a recovery image</li>
 </ul>
-<p>Source: <a class="reference external" href="https://support.google.com/chromebook/answer/1080595?hl=en">Create a Chromebook recovery image</a> (support.google.com)</p>
+<p>Source: <a class="reference external" href="https://support.google.com/chromebook/answer/1080595?hl=en">Create a Chromebook recovery image</a></p>
 </div>
 <div class="section" id="step-1-debian-installer">
 <h2>Step 1 - Debian Installer</h2>
@@ -92,7 +92,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <p class="first admonition-title">Note</p>
 <p class="last">Whenever you remove battery power to the Chromebook (like opening up the case) the hardware clock on the motherboard resets to a future year (mine travelled to 2040). Providing a network connection is up during the Debian installation the system should fetch a correct time from a NTP server... otherwise fix the <a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-debian-gnu-linux/">fallout from an incorrect clock</a> by re-mounting partitions read-only and correct filesystem timestamps using <tt class="docutils literal">fsck</tt>.</p>
 </div>
-<p>Sources: <a class="reference external" href="http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html">Useful GBB flags</a> (coreboot.org) for <a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-debian-gnu-linux/">another new free software machine</a> (fsfe.org)</p>
+<p>Sources: <a class="reference external" href="http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html">Useful GBB flags</a> for <a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-debian-gnu-linux/">another new free software machine</a></p>
 </div>
 <div class="section" id="developer-mode-method">
 <h3>2.2 Developer Mode Method</h3>
@@ -112,13 +112,13 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <span class="nv">$ </span>sudo <span class="nv">dev_boot_legacy</span><span class="o">=</span>1
 </pre></div>
 <p>Insert the USB stick prepared in Step 1, reboot the Chromebook and press <tt class="docutils literal">CTRL+L</tt> at the boot screen to enter legacy boot mode.</p>
-<p>Source: <a class="reference external" href="http://www.chromium.org/chromium-os">Chromium OS</a> developer information for the <a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook">Acer C720 Chromebook</a> (chromium.org)</p>
+<p>Source: <a class="reference external" href="http://www.chromium.org/chromium-os">Chromium OS</a> developer information for the <a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook">Acer C720 Chromebook</a></p>
 </div>
 </div>
 <div class="section" id="step-3-install-debian">
 <h2>Step 3 - Install Debian</h2>
 <p>My <a class="reference external" href="http://www.circuidipity.com/grml-debootstrap.html">grml-debootstrap instructions</a> for installing Debian Wheezy, configuring <strong>TRIM</strong> support for the SSD, and my <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/c720-sidbook-post-install-main.sh">post-install script</a> for upgrading and configuring Debian's unstable branch.</p>
-<p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install">linux-post-install</a> (github.com/vonbrownie)</p>
+<p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install">linux-post-install</a></p>
 </div>
 <div class="section" id="step-4-touchpad">
 <h2>Step 4 - Touchpad</h2>
@@ -132,7 +132,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <span class="nv">$ </span>sudo cp /usr/share/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-c720-touchpad.conf
 </pre></div>
 <p>Modify this file to adjust timeouts, add tap-mouse actions (2-finger tap = right-click, 3-finger tap = middle-click), and 2-finger scrolling.</p>
-<p>Sources: <a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics">Touchpad Synaptics</a> and <a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration">C720 configuration</a> (wiki.archlinux.org)</p>
+<p>Sources: <a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics">Touchpad Synaptics</a> and <a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration">C720 configuration</a></p>
 </div>
 <div class="section" id="step-5-suspend">
 <h2>Step 5 - Suspend</h2>
@@ -147,7 +147,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <p>... and update the grub config...</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo update-grub
 </pre></div>
-<p>Sources: <a class="reference external" href="https://plus.google.com/+PedroLarroy/posts/6CgQypQukMa">Chrubuntu resume fix</a> (plus.google.com/+PedroLarroy), <a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?pid=1364521#p1364521">Acer C720 thread</a> (bbs.archlinux.org), and <a class="reference external" href="https://wiki.archlinux.org/index.php/Allow_users_to_shutdown">systemctl user controls</a> (wiki.archlinux.org)</p>
+<p>Sources: <a class="reference external" href="https://plus.google.com/+PedroLarroy/posts/6CgQypQukMa">Chrubuntu resume fix</a>, <a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?pid=1364521#p1364521">Acer C720 thread</a>, and <a class="reference external" href="https://wiki.archlinux.org/index.php/Allow_users_to_shutdown">systemctl user controls</a></p>
 </div>
 <div class="section" id="step-6-keyboard-shortcuts">
 <h2>Step 6 - Keyboard Shortcuts</h2>
@@ -187,7 +187,7 @@ F9
 <span class="s2">&quot;xdotool keyup F10; pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -- +10%&quot;</span>
 F10
 </pre></div>
-<p>Source: <a class="reference external" href="https://github.com/codestarterorg/ubuntu-chromebook-installer/blob/master/profiles/default/system/etc/skel/.xbindkeysrc">xbindkeysrc</a> (github.com/codestarterorg)</p>
+<p>Source: <a class="reference external" href="https://github.com/codestarterorg/ubuntu-chromebook-installer/blob/master/profiles/default/system/etc/skel/.xbindkeysrc">xbindkeysrc</a></p>
 </div>
 <div class="section" id="page-up-page-down-home-end">
 <h3>6.2 Page-Up, Page-Down, Home, End</h3>
@@ -223,25 +223,29 @@ F10
 </div>
 <div class="section" id="step-7-helpful-resources">
 <h2>Step 7 - Helpful Resources</h2>
-<p><a href="https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720_sidbook">My personal C720 configurations</a> (github.com/vonbrownie)<br />
+<p><a href="https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720_sidbook">My personal C720 configurations</a> <br />
 Configuring the Chromebook and the output of <em>lshw</em>, <em>lspci</em>, and <em>lsusb</em></p>
 
-<p><a href="https://github.com/liangcj/AcerC720CrunchBang">CrunchBang Linux on the Acer C720 Chromebook</a> (github.com/liangcj)<br />
+<p><a href="https://github.com/liangcj/AcerC720CrunchBang">CrunchBang Linux on the Acer C720 Chromebook</a><br />
 Guide for wiping ChromeOS and installing CrunchBang</p>
 
-<p><a href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook">Acer C720 Chromebook</a> (wiki.archlinux.org)<br />
+<p><a href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook">Acer C720 Chromebook</a><br />
 Arch Linux installation with useful post-install details applicable to any Linux distro</p>
 
-<p><a href="http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/">List of fixes for Xubuntu 13.10 on the Acer C720</a> (reddit.com/r/chrubuntu)<br />
+<p><a href="http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/">List of fixes for Xubuntu 13.10 on the Acer C720</a><br />
 Ongoing discussion thread about Chromebook configuration for a Debian/Ubuntu-based install</p>
 
-<p><a href="http://blog.codestarter.org/post/93985346780/how-we-turn-199-chromebooks-into-ubuntu-based-code">Turn Chromebooks into Ubuntu-based code learning machines for kids</a> (blog.codestarter.org)<br />
+<p><a href="http://blog.codestarter.org/post/93985346780/how-we-turn-199-chromebooks-into-ubuntu-based-code">Turn Chromebooks into Ubuntu-based code learning machines for kids</a><br />
 Configure the C720 to dual-boot ChromeOS and Ubuntu using open-source install script</p><p>Happy hacking!</p>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-chromebook.html">chromebook</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-openbox.html">openbox</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-github.html">github</a>
 </p>
 </div>
 
