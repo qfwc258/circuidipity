@@ -2,8 +2,9 @@
 Happier China Spy Keys
 ======================
 
+:date: 2014-09-09 01:23:00
 :slug: 20140909
-:tags: books, buddhism, meditation, health, china, history, espionage, biography, network, linux
+:tags: books, buddhism, meditation, health, china, history, espionage, biography, encryption, networks, linux
 
 **Latest books feeding my ((^_^)) ...**
 

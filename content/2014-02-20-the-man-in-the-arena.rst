@@ -2,6 +2,7 @@
 The Man In The Arena
 ====================
 
+:date: 2014-02-20 01:23:00
 :slug: the-man-in-the-arena
 :tags: quotes
 

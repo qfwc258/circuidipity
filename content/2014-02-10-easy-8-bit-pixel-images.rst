@@ -2,8 +2,9 @@
 Easy 8-bit pixel images
 =======================
 
+:date: 2014-02-10 01:23:00
 :slug: easy-8-bit-pixel-images
-:tags: gimp, linux
+:tags: linux
 
 .. image:: /images/wall_of_pixels.jpg
     :width: 910px

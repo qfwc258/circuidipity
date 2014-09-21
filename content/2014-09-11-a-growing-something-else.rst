@@ -2,8 +2,9 @@
 A growing something else
 ========================
 
+:date: 2014-09-11 01:23:00
 :slug: 20140911
-:tags: quotes, AI
+:tags: quotes, books, AI, transhuman
 
 After a tour of Google's headquaters, historian **George Dyson** - quoted in James Barrat's *Our Final Invention: Artificial Intelligence and the End of the Human Era* - had this to say about where an **artificial superintelligence** might take root:
 

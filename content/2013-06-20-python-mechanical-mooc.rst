@@ -2,7 +2,8 @@
 Python Frankenstein and the Mechanical MOOC
 ===========================================
 
-:tags: programming, python, mooc
+:date: 2013-06-20 01:23:00
+:tags: python, programming, mooc
 :slug: python-mechanical-mooc
 
 In my continuing mission to learn programming I am digging into *Python* this week. I have made a few abortive stabs at the language in the past but the discipline of small daily doses of coding and checking in with a mentor over these last few months have sparked a love of the craft and a desire to dive in deeper.

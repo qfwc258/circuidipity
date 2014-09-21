@@ -2,6 +2,7 @@
 Stay relaxed and success will follow
 ====================================
 
+:date: 2014-09-18 01:23:00
 :slug: 20140918
 :tags: quotes
 

@@ -4,8 +4,8 @@ Linux post-install configuration scripts
 
 :slug: linux-post-install
 :template: article-project
-:tags: debian, linux, chromebook, shell, programming
-:modified: 27 August 2014
+:tags: debian, linux, chromebook, shell, programming, github
+:modified: 2014-08-27 01:23:00
 
 Scripts to configure a fresh installation of Debian GNU/Linux.
 

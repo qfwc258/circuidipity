@@ -2,9 +2,9 @@
 Debian Wheezy Minimal Install
 =============================
 
-:tags: debian, linux
+:tags: debian, linux, shell, programming, github
 :slug: install-debian-wheezy-screenshot-tour
-:modified: 06 August 2014
+:modified: 2014-08-06 01:23:00
 
 .. figure:: images/debianVader.png
     :alt: Debian Vader

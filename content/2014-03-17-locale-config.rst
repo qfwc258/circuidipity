@@ -2,8 +2,9 @@
 Locale configuration
 ====================
 
+:date: 2014-03-17 01:23:00
 :slug: locale-config
-:tags: linux
+:tags: shell, linux
 
 **Locales** are used to define language settings in Linux.                      
                                                                                 

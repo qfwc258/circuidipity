@@ -2,8 +2,9 @@
 Ping Parade #2 -- Keys
 ======================
 
+:date: 2014-09-12 01:23:00
 :slug: pingparade2
-:tags: network, debian, linux
+:tags: networks, encryption, debian, linux
 :template: article-project-pingparade
 
 **Create cryptographic keys and disable password logins to make remote machines more secure.**

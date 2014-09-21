@@ -2,6 +2,7 @@
 Big screen little screen virtual screen and xrandr
 ==================================================
 
+:date: 2010-06-17 01:23:00
 :tags: linux
 :slug: big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr
 

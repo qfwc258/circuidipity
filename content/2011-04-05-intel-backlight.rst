@@ -2,6 +2,7 @@
 Fix the backlight on laptops using Intel video chipsets
 =======================================================
 
+:date: 2011-04-05 01:23:00
 :tags: linux
 :slug: intel-backlight
 

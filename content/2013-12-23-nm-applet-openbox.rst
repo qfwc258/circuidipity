@@ -2,7 +2,8 @@
 Multiple instances of nm-applet in Openbox
 ==========================================
 
-:tags: openbox, linux
+:date: 2013-12-23 01:23:00
+:tags: openbox, gnome, linux
 :slug: nm-applet-openbox
 
 I had commented out my entry for ``nm-applet`` in ``$HOME/.config/openbox/autostart`` and system was loading ``nm-applet`` from ``/etc/xdg/autostart/nm-applet.desktop``. Problem: After updating Openbox there were *two* instances of ``nm-applet`` being loaded.

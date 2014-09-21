@@ -2,6 +2,7 @@
 TarTime - Match files and generate a tar archive
 ================================================
 
+:date: 2013-03-21 01:23:00
 :tags: shell, programming, linux
 :slug: tartime-find-time-tar
 

@@ -2,6 +2,7 @@
 BeagleBone Black: 'Say Hello to My Little LEDs'
 ===============================================
 
+:date: 2013-09-06 01:23:00
 :tags: beaglebone, electronics, angstrom, linux
 :slug: bbb-led
 

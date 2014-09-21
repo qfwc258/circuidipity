@@ -2,7 +2,8 @@
 Great fun getting started with Jekyll
 =====================================
 
-:tags: network, web, linux, debian
+:date: 2012-06-07 01:23:00
+:tags: networks, web, ruby, debian, linux
 :slugs: jekyll-static-website-generator
 
 I discovered a cool tool named *Jekyll* that I am now using to generate my website. From the `README <https://github.com/mojombo/jekyll#readme>`_ ...

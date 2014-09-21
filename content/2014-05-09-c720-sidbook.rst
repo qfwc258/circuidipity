@@ -4,8 +4,8 @@ From Chromebook to Sidbook
 
 :slug: c720-sidbook
 :template: article-project
-:tags: chromebook, debian, linux
-:modified: 2014-08-31
+:tags: chromebook, debian, linux, openbox, shell, programming, github
+:modified: 2014-08-31 01:23:00
 
 Replace ChromeOS permanently with the *sid* (unstable) branch of **Debian Linux** on the **Acer C720 Chromebook**.
 
@@ -29,7 +29,7 @@ Create a recovery image of Chrome OS (my C720 is model ``PEPPY C6A-N3C-A7O``) to
 * Log into the Chromebook and let it auto update, as there sometimes are firmware updates... check the updating status in the browser at ``chrome://help``
 * Insert the USB stick, enter ``chrome://imageburner`` and follow the directions to generate a recovery image
 
-Source: `Create a Chromebook recovery image <https://support.google.com/chromebook/answer/1080595?hl=en>`_ (support.google.com)
+Source: `Create a Chromebook recovery image <https://support.google.com/chromebook/answer/1080595?hl=en>`_ 
 
 Step 1 - Debian Installer
 =========================
@@ -104,7 +104,7 @@ Re-connect the power, insert the USB stick prepared in Step 1, and power up the 
 
     Whenever you remove battery power to the Chromebook (like opening up the case) the hardware clock on the motherboard resets to a future year (mine travelled to 2040). Providing a network connection is up during the Debian installation the system should fetch a correct time from a NTP server... otherwise fix the `fallout from an incorrect clock <https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-debian-gnu-linux/>`_ by re-mounting partitions read-only and correct filesystem timestamps using ``fsck``.
 
-Sources: `Useful GBB flags <http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html>`_ (coreboot.org) for `another new free software machine <https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-debian-gnu-linux/>`_ (fsfe.org)
+Sources: `Useful GBB flags <http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html>`_ for `another new free software machine <https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-debian-gnu-linux/>`_
 
 2.2 Developer Mode Method
 -------------------------
@@ -129,14 +129,14 @@ Enable the **USB Boot** and **Legacy BIOS** modes by opening the shell with ``Ct
 
 Insert the USB stick prepared in Step 1, reboot the Chromebook and press ``CTRL+L`` at the boot screen to enter legacy boot mode.
 
-Source: `Chromium OS <http://www.chromium.org/chromium-os>`_ developer information for the `Acer C720 Chromebook <http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook>`_ (chromium.org)
+Source: `Chromium OS <http://www.chromium.org/chromium-os>`_ developer information for the `Acer C720 Chromebook <http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook>`_
 
 Step 3 - Install Debian
 =======================
 
 My `grml-debootstrap instructions <http://www.circuidipity.com/grml-debootstrap.html>`_ for installing Debian Wheezy, configuring **TRIM** support for the SSD, and my `post-install script <https://github.com/vonbrownie/linux-post-install/blob/master/c720-sidbook-post-install-main.sh>`_ for upgrading and configuring Debian's unstable branch. 
 
-Source: `linux-post-install <https://github.com/vonbrownie/linux-post-install>`_ (github.com/vonbrownie)
+Source: `linux-post-install <https://github.com/vonbrownie/linux-post-install>`_
 
 Step 4 - Touchpad
 =================
@@ -154,7 +154,7 @@ After installing Debian the C720 touchpad is non-functional and requires compili
 
 Modify this file to adjust timeouts, add tap-mouse actions (2-finger tap = right-click, 3-finger tap = middle-click), and 2-finger scrolling.
 
-Sources: `Touchpad Synaptics <https://wiki.archlinux.org/index.php/Touchpad_Synaptics>`_ and `C720 configuration <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration>`_ (wiki.archlinux.org)
+Sources: `Touchpad Synaptics <https://wiki.archlinux.org/index.php/Touchpad_Synaptics>`_ and `C720 configuration <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration>`_
 
 Step 5 - Suspend
 ================
@@ -175,7 +175,7 @@ Enable suspend|resume under **systemd** (for sysv-init see *Helpful Resources* a
 
     $ sudo update-grub
 
-Sources: `Chrubuntu resume fix <https://plus.google.com/+PedroLarroy/posts/6CgQypQukMa>`_ (plus.google.com/+PedroLarroy), `Acer C720 thread <https://bbs.archlinux.org/viewtopic.php?pid=1364521#p1364521>`_ (bbs.archlinux.org), and `systemctl user controls <https://wiki.archlinux.org/index.php/Allow_users_to_shutdown>`_ (wiki.archlinux.org)
+Sources: `Chrubuntu resume fix <https://plus.google.com/+PedroLarroy/posts/6CgQypQukMa>`_, `Acer C720 thread <https://bbs.archlinux.org/viewtopic.php?pid=1364521#p1364521>`_, and `systemctl user controls <https://wiki.archlinux.org/index.php/Allow_users_to_shutdown>`_
 
 Step 6 - Keyboard Shortcuts
 ===========================
@@ -223,7 +223,7 @@ Enable the function keys to modify the sound and brightness settings by creating
     "xdotool keyup F10; pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -- +10%"
     F10
 
-Source: `xbindkeysrc <https://github.com/codestarterorg/ubuntu-chromebook-installer/blob/master/profiles/default/system/etc/skel/.xbindkeysrc>`_ (github.com/codestarterorg)
+Source: `xbindkeysrc <https://github.com/codestarterorg/ubuntu-chromebook-installer/blob/master/profiles/default/system/etc/skel/.xbindkeysrc>`_
 
 6.2 Page-Up, Page-Down, Home, End
 ---------------------------------
@@ -266,19 +266,19 @@ Step 7 - Helpful Resources
 
 .. raw:: html
 
-    <p><a href="https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720_sidbook">My personal C720 configurations</a> (github.com/vonbrownie)<br />
+    <p><a href="https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720_sidbook">My personal C720 configurations</a> <br />
     Configuring the Chromebook and the output of <em>lshw</em>, <em>lspci</em>, and <em>lsusb</em></p>
 
-    <p><a href="https://github.com/liangcj/AcerC720CrunchBang">CrunchBang Linux on the Acer C720 Chromebook</a> (github.com/liangcj)<br />
+    <p><a href="https://github.com/liangcj/AcerC720CrunchBang">CrunchBang Linux on the Acer C720 Chromebook</a><br />
     Guide for wiping ChromeOS and installing CrunchBang</p>
 
-    <p><a href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook">Acer C720 Chromebook</a> (wiki.archlinux.org)<br />
+    <p><a href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook">Acer C720 Chromebook</a><br />
     Arch Linux installation with useful post-install details applicable to any Linux distro</p>
 
-    <p><a href="http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/">List of fixes for Xubuntu 13.10 on the Acer C720</a> (reddit.com/r/chrubuntu)<br />
+    <p><a href="http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/">List of fixes for Xubuntu 13.10 on the Acer C720</a><br />
     Ongoing discussion thread about Chromebook configuration for a Debian/Ubuntu-based install</p>
 
-    <p><a href="http://blog.codestarter.org/post/93985346780/how-we-turn-199-chromebooks-into-ubuntu-based-code">Turn Chromebooks into Ubuntu-based code learning machines for kids</a> (blog.codestarter.org)<br />
+    <p><a href="http://blog.codestarter.org/post/93985346780/how-we-turn-199-chromebooks-into-ubuntu-based-code">Turn Chromebooks into Ubuntu-based code learning machines for kids</a><br />
     Configure the C720 to dual-boot ChromeOS and Ubuntu using open-source install script</p>
 
 Happy hacking!

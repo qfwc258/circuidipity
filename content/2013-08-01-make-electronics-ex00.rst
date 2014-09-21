@@ -2,6 +2,7 @@
 Necessary Items Acquired and the Journey Begins
 ===============================================
 
+:date: 2013-08-01 01:23:00
 :tags: electronics
 :slug: make-electronics-ex00
 

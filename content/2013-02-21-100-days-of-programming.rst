@@ -2,6 +2,7 @@
 100 Days of Programming
 =======================
 
+:date: 2013-02-21 01:23:00
 :tags: programming
 :slug: 100-days-of-programming
 

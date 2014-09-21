@@ -2,6 +2,7 @@
 Modify the default boot order in GRUB
 =====================================
 
+:date: 2014-08-31 01:23:00
 :slug: 20140831
 :tags: debian, linux, chromebook
 

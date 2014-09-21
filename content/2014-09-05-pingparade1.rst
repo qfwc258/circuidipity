@@ -2,8 +2,9 @@
 Ping Parade #1 -- Repurpose
 ===========================
 
+:date: 2014-09-05 01:23:00
 :slug: pingparade1
-:tags: network, debian, linux
+:tags: networks, debian, linux, shell, programming, github
 :template: article-project-pingparade
 
 **Give new life to an old netbook or laptop as a Linux home server.**

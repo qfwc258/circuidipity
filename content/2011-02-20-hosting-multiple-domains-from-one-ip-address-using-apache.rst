@@ -2,7 +2,8 @@
 Hosting multiple domains from one IP address using Apache
 =========================================================
 
-:tags: web, network, linux, debian
+:date: 2011-02-20 01:23:00
+:tags: networks, web, debian, linux
 :slug: hosting-multiple-domains-from-one-ip-address-using-apache
 
 Creating *virtual hosts* in Apache makes it possible to host multiple websites from a single IP address.

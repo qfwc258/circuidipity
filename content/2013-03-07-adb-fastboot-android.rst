@@ -2,6 +2,7 @@
 Install ADB and Fastboot Android Tools
 ======================================
 
+:date: 2013-03-07 01:23:00
 :tags: android, debian, linux
 :slug: adb-fastboot-android
 

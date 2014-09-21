@@ -2,6 +2,7 @@
 Applications checklist for my Debian Squeeze installs
 =====================================================
 
+:date: 2010-06-06 01:23:00
 :tags: debian, linux
 :slug: applications-checklist-for-my-debian-linux-installs
 

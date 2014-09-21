@@ -2,7 +2,8 @@
 Configure an encrypted external hard drive in Linux
 ===================================================
 
-:tags: linux
+:date: 2011-12-14 01:23:00
+:tags: encryption, linux
 :slug: encrypt-external-drive
 
 Using an external USB-connected hard drive is part of my personal backup plan (the other part is backups to a `home server <http://www.circuidipity.com/linux-home-server.html>`_).

@@ -2,6 +2,7 @@
 Install Arduino on Debian
 =========================
 
+:date: 2013-10-04 01:23:00
 :tags: arduino, electronics, debian, linux
 :slug: install-arduino-debian
 

@@ -2,6 +2,7 @@
 Creating new commands with alias
 ================================
 
+:date: 2014-05-13 01:23:00
 :slug: alias-commands
 :tags: shell, linux
 

@@ -2,6 +2,7 @@
 Install Debian Squeeze GNU/Linux
 ================================
 
+:date: 2010-06-03 01:23:00
 :tags: debian, linux
 :slug: install-debian-linux-squeeze
 

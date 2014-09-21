@@ -2,7 +2,8 @@
 Print copy scan using the Epson NX215 all-in-one with Linux
 ===========================================================
 
-:tags: linux, debian
+:date: 2010-08-12 01:23:00
+:tags: debian, linux
 :slug: print-copy-scan-using-the-epson-nx215-all-in-one-with-debian
 
 While browsing through my local cluster of computer stores I came across the *Epson Stylus NX215 All-in-one Printer* which I purchased on sale for $40.

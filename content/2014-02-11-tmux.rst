@@ -2,8 +2,9 @@
 My tmux cheatsheet
 ==================
 
+:date: 2014-02-11 01:23:00
 :slug: tmux
-:tags: tmux, shell, linux, cheatsheet
+:tags: shell, linux, cheatsheet
 
 .. image:: /images/screenshot/tmux_window_pane.png
     :width: 940px

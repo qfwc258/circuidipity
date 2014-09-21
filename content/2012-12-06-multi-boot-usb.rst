@@ -2,9 +2,9 @@
 Transform a USB stick into a boot device packing multiple Linux distros
 =======================================================================
 
-:tags: linux, debian, ubuntu
+:tags: debian, grml, gparted, dban, ubuntu, linux, shell, programming, github
 :slug: multi-boot-usb
-:modified: 17 April 2014
+:modified: 2014-04-17 01:23:00
 
 In 5 easy steps I transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.
 

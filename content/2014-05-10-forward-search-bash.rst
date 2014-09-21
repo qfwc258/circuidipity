@@ -2,6 +2,7 @@
 Enable forward search in Bash history
 =====================================
 
+:date: 2014-05-10 01:23:00
 :slug: forward-search-bash
 :tags: shell, linux
 

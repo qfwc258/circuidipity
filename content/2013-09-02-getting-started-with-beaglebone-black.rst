@@ -2,6 +2,7 @@
 Getting Started with BeagleBone Black
 =====================================
 
+:date: 2013-09-02 01:23:00
 :tags: beaglebone, electronics, angstrom, linux
 :slug: getting-started-with-beaglebone-black
 

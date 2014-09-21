@@ -2,7 +2,8 @@
 Convert video file(s) to MP3 audio
 ==================================
 
-:tags: programming, shell, linux
+:date: 2014-01-01 01:23:00
+:tags: shell, programming, github, linux
 :slug: convert-video-to-audio
 
 A simple script I made to convert downloaded YouTube videos to MP3s ...

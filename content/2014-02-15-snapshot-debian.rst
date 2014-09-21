@@ -2,6 +2,7 @@
 Snapshot Debian
 ===============
 
+:date: 2014-02-15 01:23:00
 :slug: snapshot-debian
 :tags: debian, linux
 

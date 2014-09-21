@@ -2,6 +2,7 @@
 Device Tree and BeagleBone Black
 ================================
 
+:date: 2013-09-08 01:23:00
 :tags: beaglebone, electronics, angstrom, linux
 :slug: bbb-dt
 

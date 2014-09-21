@@ -2,9 +2,9 @@
 A library for shell scripts
 ===========================
 
-:tags: shell, programming, linux
+:tags: shell, programming, github, linux
 :slug: shell-script-library
-:modified: 12 April 2014
+:modified: 2014-04-12 01:23:00
 
 Programming languages like Python can make use of *libraries* of code to add ready-to-go capabilities to programs. Shell scripts don't use libraries but I learned this week it is possible to *source* a file in a shell script and add functions to the script as if they were entered directly (vs spawning a subshell). Very useful in creating your own library equivalent for the shell!
 

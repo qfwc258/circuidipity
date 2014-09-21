@@ -2,9 +2,9 @@
 FunkyGoodTimer - A simple (but funky) graphical countdown timer
 ===============================================================
 
-:tags: shell, programming, linux
+:tags: shell, programming, github, linux
 :slug: funkygoodtimer
-:modified: 19 April 2014
+:modified: 2014-04-19 01:23:00
 
 Learning to write shell scripts leads to sitting at your computer for long stretches of time. It is good for mind and body to take a break and get up and enjoy some *funky time movement* at regular intervals. But how do you remember to do so when you are oh so engrossed in coding? Why you write a shell script to remind you of course!
 

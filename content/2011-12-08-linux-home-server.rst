@@ -2,7 +2,8 @@
 Make an old netbook or laptop into a Linux home server
 ======================================================
 
-:tags: network, debian, linux
+:date: 2011-12-08 01:23:00
+:tags: networks, debian, linux
 :slug: linux-home-server
 
 Running your own Linux home server is a fun learning experience and offers several advantages.

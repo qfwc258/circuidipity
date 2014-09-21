@@ -2,9 +2,9 @@
 Debian and Virtualbox
 =====================
 
-:tags: virtual environments, linux, debian
+:tags: virtual environments, debian, linux
 :slug: virtualbox-install
-:modified: 27 April 2014
+:modified: 2014-04-27 01:23:00
 
 `Virtualbox <https://www.virtualbox.org/>`_ is virtualization software that allows a Linux user to HOST multiple GUEST operating systems as *virtual machines* (VMs). Its a cool tool for playing with different Linux distros and experimenting with configurations.
 

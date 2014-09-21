@@ -2,6 +2,7 @@
 100 Days of Electronics
 =======================
 
+:date: 2013-07-16 01:23:00
 :tags: electronics
 :slug: 100-days-of-electronics
 

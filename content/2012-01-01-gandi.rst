@@ -2,7 +2,8 @@
 Going ... going ... Gandi ... done!
 ===================================
 
-:tags: network, web
+:date: 2012-01-01 01:23:00
+:tags: networks, web
 :slugs: gandi
 
 When I discovered Godaddy was a `supporter <http://www.reddit.com/r/politics/comments/nmnie/godaddy_supports_sopa_im_transferring_51_domains/>`_ of this `SOPA nonsense <http://www.popularmechanics.com/science/mythbusters/articles/mythbuster-adam-savage-sopa-could-destroy-the-internet-as-we-know-it-6620300>`_ the hunt was on for a new domain registrar.

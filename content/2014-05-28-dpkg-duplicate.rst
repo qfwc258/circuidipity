@@ -2,8 +2,9 @@
 Duplicate Debian package selection on multiple machines
 =======================================================
 
+:date: 2014-05-28 01:23:00
 :slug: dpkg-duplicate
-:tags: debian, linux, shell, programming
+:tags: debian, linux, shell, programming, github
 
 I am happy with the selection of packages installed on my `Debian-powered laptop <http://www.circuidipity.com/c720-sidbook.html>`_ and discovered an easy method to **duplicate** the configuration on another machine.
 

@@ -4,7 +4,7 @@ Install Debian using grml-debootstrap
 
 :slug: grml-debootstrap
 :tags: grml, debian, linux, chromebook
-:modified: 22 August 2014
+:modified: 2014-08-22 01:23:00
 
 `Grml <http://grml.org/>`_ is a Debian-based Linux distribution optimized for running off USB sticks and taking care of sysadmin duties. One of its cool programs that I have been exploring is `grml-debootstrap <http://grml.org/grml-debootstrap/>`_ ... a console application that makes it very easy to set custom options and install Debian.
 

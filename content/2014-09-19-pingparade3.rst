@@ -2,8 +2,9 @@
 Ping Parade #3 -- Backup
 ========================
 
+:date: 2014-09-19 01:23:00
 :slug: pingparade3
-:tags: network, shell, programming, linux
+:tags: networks, encryption, linux, shell, programming, github
 :template: article-project-pingparade
 
 **Make automatic backups of important stuff using a dash of shell scripting + rsync + SSH + cron!**
