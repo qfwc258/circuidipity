@@ -6,7 +6,7 @@ Modify the default boot order in GRUB
 :slug: 20140831
 :tags: debian, linux, chromebook
 
-My `Chromebook running Debian <http://www.circuidipity.com/c720-sidbook.html>`_ requires a less-than-recent kernel (3.13.10) that supports `compiling modules <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_sidbook/scripts/c720-kernel-mods.sh>`_ for the laptop's touchpad. After installing a kernel retrieved from `snapshot.debian.org <http://snapshot.debian.org>`_ the GRUB boot manager auto-generates a menuentry for the new kernel but defaults to booting the most recent kernel available.
+My `Chromebook running Debian <http://www.circuidipity.com/c720-sidbook.html>`_ requires a less-than-recent kernel (3.13.10) that supports `compiling modules <https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_sidbook/scripts/c720-kernel-mods.sh>`_ for the laptop's touchpad. After installing a kernel retrieved from `snapshot.debian.org <http://www.circuidipity.com/snapshot-debian.html>`_ the GRUB boot manager auto-generates a menuentry for the new kernel but defaults to booting the most recent kernel available.
 
 This is how I changed the GRUB boot order to default to my touchpad-friendly kernel.
 
