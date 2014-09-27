@@ -2,6 +2,7 @@
 Ping Parade #4 -- Breaker
 =========================
 
+:date: 2014-09-26 21:10:00
 :slug: pingparade4
 :tags: networks, openwrt, linux
 :template: article-project-pingparade
