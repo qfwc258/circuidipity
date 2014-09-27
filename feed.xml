@@ -1,5 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-09-21T13:14:00-04:00</updated><entry><title>He did not have a long voyage, just a long tossing about</title><link href="http://www.circuidipity.com/20140921.html" rel="alternate"></link><updated>2014-09-21T13:14:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-09-21:20140921.html</id><summary type="html">&lt;img alt="Seneca" class="align-right" src="images/20140921-2-seneca.png" style="width: 222px; height: 300px;" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-09-26T00:00:00-04:00</updated><entry><title>Ping Parade #4 -- Breaker</title><link href="http://www.circuidipity.com/pingparade4.html" rel="alternate"></link><updated>2014-09-26T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-09-26:pingparade4.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Unlock the full potential of your home router using OpenWrt.&lt;/strong&gt;&lt;/p&gt;
+&lt;img alt="OpenWRT" src="images/pingparade4-0.png" style="width: 960px; height: 500px;" /&gt;
+&lt;p&gt;A &lt;strong&gt;home router&lt;/strong&gt; is a much more capable device than its pre-installed software would lead you to believe. &lt;a class="reference external" href="https://openwrt.org/"&gt;OpenWrt&lt;/a&gt; is an embedded Linux distribution that converts cheap, energy-efficient, network-capable devices into much more useful hackable computers.&lt;/p&gt;
+&lt;p&gt;Getting its start hacking the original &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Linksys_WRT54G_series#WRT54G"&gt;Linksys WRT54G&lt;/a&gt;, OpenWrt and its volunteer developers now support a &lt;a class="reference external" href="http://wiki.openwrt.org/toh/start"&gt;wide and growing range of hardware&lt;/a&gt;. The project hosts software packages that lay out a smorgasboard of extra possibilities: more network tools with more fine-grained controls, plus a range of server capabilities... manage printers, connect external USB drives for backup, host files/torrents/VOIP/VPNs.&lt;/p&gt;
+&lt;p&gt;I am currently using an OpenWrt-supported &lt;a class="reference external" href="http://wiki.openwrt.org/toh/tp-link/tl-wr841nd"&gt;TP-Link TL-WR841N&lt;/a&gt; wireless N router, an inexpensive ($20-25CDN) device with:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;2 antennas (on the otherwise identical TL-WR841ND they are detachable)&lt;/li&gt;
+&lt;li&gt;4 Port 100/10 LAN&lt;/li&gt;
+&lt;li&gt;1 Port 100/10 WAN&lt;/li&gt;
+&lt;li&gt;4 MB Flash + 32MB RAM&lt;/li&gt;
+&lt;li&gt;[my device has] firmware: 3.14.3 build 131011 rel. 55505n hardware &lt;strong&gt;version: v8&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Not much flash storage for added packages but its a cheap and cheerful device to hack on. It has been running &lt;a class="reference external" href="http://wiki.openwrt.org/doc/barrier.breaker"&gt;Barrier Breaker&lt;/a&gt;  - the release candidate of the next upcoming version of OpenWrt - with no problems for the last few months.&lt;/p&gt;
+&lt;p&gt;Below are the steps to replace the default router firmware with OpenWrt. I am using my TL-WR841N as an example. Good luck!&lt;/p&gt;
+&lt;div class="section" id="step-0-download-install-image"&gt;
+&lt;h2&gt;Step 0 - Download install image&lt;/h2&gt;
+&lt;div class="warning"&gt;
+&lt;p class="first admonition-title"&gt;Warning&lt;/p&gt;
+&lt;p class="last"&gt;OpenWrt builds different install images for different devices. Consult the &lt;a class="reference external" href="http://wiki.openwrt.org/toh/start"&gt;Table of Hardware&lt;/a&gt; to confirm that your router is supported and read the wiki entry for your particular device to identify the correct image. It is &lt;strong&gt;easy to brick a device&lt;/strong&gt; (render inoperable) using an incorrect install image.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;TL-WR841N is an &lt;strong&gt;ar71xx&lt;/strong&gt; device. Download the most recent devel VERSION (=14.07-rc3 as of 9-26):&lt;/p&gt;
+&lt;p&gt;[Sample link] &lt;a class="reference external" href="http://downloads.openwrt.org/barrier_breaker/VERSION/ar71xx/generic/openwrt-ar71xx-generic-tl-wr841n-v8-squashfs-factory.bin"&gt;http://downloads.openwrt.org/barrier_breaker/VERSION/ar71xx/generic/openwrt-ar71xx-generic-tl-wr841n-v8-squashfs-factory.bin&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-1-flash-router"&gt;
+&lt;h2&gt;Step 1 - Flash router&lt;/h2&gt;
+&lt;p&gt;Log into the TP-Link router web interface - address=192.168.0.1, user=admin, pass=admin - navigate to the update page and select the downloaded &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openwrt-*-squashfs-factory.bin&lt;/span&gt;&lt;/tt&gt; firmware image as the update package. Allow several minutes for the device to write the new OpenWrt firmware; when finished the device will reboot and can be accessed at address=192.168.1.1.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-2-first-login"&gt;
+&lt;h2&gt;Step 2 - First login&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/firstlogin"&gt;Use telnet (no password) to login for the first time&lt;/a&gt; to the new OpenWrt installation. Use &lt;tt class="docutils literal"&gt;passwd&lt;/tt&gt; to create a new root password. Once the password is properly configured telnet is disabled. Exit and re-login using &lt;tt class="docutils literal"&gt;ssh root&amp;#64;192.168.1.1&lt;/tt&gt; and the new password.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/internet.connection"&gt;Setup your internet connection&lt;/a&gt; either by editing &lt;tt class="docutils literal"&gt;/etc/config/network&lt;/tt&gt; or using OpenWrt's &lt;em&gt;Unified Configuration Interface&lt;/em&gt; (UCI). Using my DSL (pppoe) as an example...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;uci &lt;span class="nb"&gt;set &lt;/span&gt;network.wan.proto&lt;span class="o"&gt;=&lt;/span&gt;pppoe
+uci &lt;span class="nb"&gt;set &lt;/span&gt;network.wan.username&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;yougotthisfromyour@isp.su&amp;#39;&lt;/span&gt;
+uci &lt;span class="nb"&gt;set &lt;/span&gt;network.wan.password&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;yourpassword&amp;#39;&lt;/span&gt;
+uci commit network
+ifup wan
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-3-web-interface"&gt;
+&lt;h2&gt;Step 3 - Web interface&lt;/h2&gt;
+&lt;p&gt;OpenWrt can be further configured in the console or install the optional &lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/luci.essentials"&gt;LuCI web interface&lt;/a&gt; using the &lt;strong&gt;opkg&lt;/strong&gt; package manager...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;opkg update
+opkg install luci
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;With only 4MB flash to play with there is less than 256K remaining in &lt;tt class="docutils literal"&gt;rootfs/overlay&lt;/tt&gt; for more packages after installing LuCI.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;After install LuCI is not running by default...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;/etc/init.d/uhttpd start    &lt;span class="c"&gt;# start the web server&lt;/span&gt;
+/etc/init.d/uhttpd &lt;span class="nb"&gt;enable&lt;/span&gt;   &lt;span class="c"&gt;# auto-start at boot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;LuCI's default web server &lt;strong&gt;uhttpd&lt;/strong&gt; is configured in &lt;tt class="docutils literal"&gt;/etc/config/uhttpd&lt;/tt&gt; and LuCI itself is configured in &lt;tt class="docutils literal"&gt;/etc/config/luci&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="step-4-ssh"&gt;
+&lt;h2&gt;Step 4 - SSH&lt;/h2&gt;
+&lt;p&gt;Secure access to the router by configuring &lt;a class="reference external" href="http://www.circuidipity.com/pingparade2.html"&gt;SSH key authentication&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Its exciting what you can do with these consumer routers once you let it sink in that - with a few dollars and OpenWrt - you have an extremely configurable general purpose computer.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="networks"></category><category term="openwrt"></category><category term="linux"></category></entry><entry><title>He did not have a long voyage, just a long tossing about</title><link href="http://www.circuidipity.com/20140921.html" rel="alternate"></link><updated>2014-09-21T13:14:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-09-21:20140921.html</id><summary type="html">&lt;img alt="Seneca" class="align-right" src="images/20140921-2-seneca.png" style="width: 222px; height: 300px;" /&gt;
 &lt;p&gt;In his book &lt;em&gt;On the Shortness of Life&lt;/em&gt; the Roman statesman and philosopher &lt;strong&gt;Seneca&lt;/strong&gt; makes his argument that the perceived shortness of a human life is an illusion:&lt;/p&gt;
 &lt;blockquote&gt;
 Everyone hustles his life along, and is troubled by a longing for the future and weariness of the present. But the man who... organizes every day as though it were his last, neither longs for nor fears the next day… Nothing can be taken from this life, and you can only add to it as if giving to a man who is already full and satisfied food which he does not want but can hold. So you must not think a man has lived long because he has white hair and wrinkles: he has not lived long, just existed long. For suppose you should think that a man had had a long voyage who had been caught in a raging storm as he left harbor, and carried hither and thither and driven round and round in a circle by the rage of opposing winds? He did not have a long voyage, just a long tossing about.&lt;/blockquote&gt;
@@ -208,7 +268,7 @@ For thirty years I have been wondering, what indication of its existence might w
 &lt;p&gt;British spymaster and Soviet double-agent Philby's long-running Cold War act of betrayal ultimately gives the impression that the man was playing &lt;strong&gt;everybody&lt;/strong&gt; as part of his own personal game, and in the end proved too clever by half with his &amp;quot;defection&amp;quot; more a case of push than escape.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;4)&lt;/strong&gt; &lt;span class="booktitle"&gt;SSH Mastery: OpenSSH, Putty, Tunnels and Keys&lt;/span&gt; by Michael W. Lucas (Tilted Windmill Press)&lt;/p&gt;
 &lt;p&gt;OpenSSH is a toolkit for securing communication with Unix-like remote machines and services and this book does an excellent job getting you started and describing SSH best practices such as replacing passwords with encryption keys.&lt;/p&gt;
-</summary><category term="books"></category><category term="buddhism"></category><category term="meditation"></category><category term="health"></category><category term="china"></category><category term="history"></category><category term="espionage"></category><category term="biography"></category><category term="encryption"></category><category term="networks"></category><category term="linux"></category></entry><entry><title>Ping Parade #1 -- Repurpose</title><link href="http://www.circuidipity.com/pingparade1.html" rel="alternate"></link><updated>2014-09-05T01:23:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-09-05:pingparade1.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Give new life to an old netbook or laptop as a Linux home server.&lt;/strong&gt;&lt;/p&gt;
+</summary><category term="books"></category></entry><entry><title>Ping Parade #1 -- Repurpose</title><link href="http://www.circuidipity.com/pingparade1.html" rel="alternate"></link><updated>2014-09-05T01:23:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-09-05:pingparade1.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Give new life to an old netbook or laptop as a Linux home server.&lt;/strong&gt;&lt;/p&gt;
 &lt;img alt="netbook server" src="images/pingparade1-0.png" style="width: 960px; height: 500px;" /&gt;
 &lt;p&gt;Running your own Linux home server is a fun learning experience and offers several advantages.&lt;/p&gt;
 &lt;p&gt;It is cheap if you already have a spare machine. Or search for inexpensive, second-hand netbooks now that the short-lived craze for these lightweight devices has well and truly passed. An old netbook or laptop - retired in favour of more current and powerful machines - can still deliver plenty of &lt;em&gt;oomph&lt;/em&gt; for running a personal server. Netbooks are frugal with power and come equipped with multiple network interfaces and their own built-in UPS/battery! I have been using an Asus 900HA netbook equipped with 1GM RAM and (user-replaced) 500GB hard drive for the past few years as a 24/7 home server.&lt;/p&gt;
@@ -369,7 +429,4 @@ iface eth0 inet static
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="debian"></category><category term="linux"></category><category term="chromebook"></category><category term="shell"></category><category term="programming"></category><category term="github"></category></entry><entry><title>Ship or sails adapted to the heavenly breezes</title><link href="http://www.circuidipity.com/heavenly-breezes.html" rel="alternate"></link><updated>2014-07-10T01:23:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-07-10:heavenly-breezes.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Johannes Kepler&lt;/strong&gt; in a letter to &lt;strong&gt;Galileo Galilei&lt;/strong&gt; - &lt;em&gt;Conversation with the Messenger from the Stars&lt;/em&gt; - dated 19 April 1610:&lt;/p&gt;
-&lt;blockquote&gt;
-As soon as somebody demonstrates the art of flying, settlers from our species of man will not be lacking [on the Moon and Jupiter]... Who would have believed that a huge ocean could be crossed more peacefully and safely than the the narrow expanse of the Adriatic, the Baltic Sea or the English Channel? Provide ship or sails adapted to the heavenly breezes, and there will be some who will not fear even that void [of space]... So, for those who will come shortly to attempt this journey, let us establish the astronomy: Galileo, you of Jupiter, I of the Moon.&lt;/blockquote&gt;
-</summary><category term="quotes"></category><category term="space"></category></entry></feed>
+</summary><category term="debian"></category><category term="linux"></category><category term="chromebook"></category><category term="shell"></category><category term="programming"></category><category term="github"></category></entry></feed>
