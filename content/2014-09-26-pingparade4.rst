@@ -84,6 +84,11 @@ After install LuCI is not running by default...
 
 LuCI's default web server **uhttpd** is configured in ``/etc/config/uhttpd`` and LuCI itself is configured in ``/etc/config/luci``.
 
+.. image:: images/pingparade4-1.png
+    :alt: LuCI login
+    :width: 960px
+    :height: 300px
+
 Step 4 - SSH
 ============
 
