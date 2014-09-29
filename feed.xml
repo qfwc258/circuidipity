@@ -64,6 +64,7 @@ opkg install luci
 /etc/init.d/uhttpd &lt;span class="nb"&gt;enable&lt;/span&gt;   &lt;span class="c"&gt;# auto-start at boot&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;LuCI's default web server &lt;strong&gt;uhttpd&lt;/strong&gt; is configured in &lt;tt class="docutils literal"&gt;/etc/config/uhttpd&lt;/tt&gt; and LuCI itself is configured in &lt;tt class="docutils literal"&gt;/etc/config/luci&lt;/tt&gt;.&lt;/p&gt;
+&lt;img alt="LuCI login" src="images/pingparade4-1.png" style="width: 960px; height: 300px;" /&gt;
 &lt;/div&gt;
 &lt;div class="section" id="step-4-ssh"&gt;
 &lt;h2&gt;Step 4 - SSH&lt;/h2&gt;
