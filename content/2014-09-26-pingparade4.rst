@@ -89,10 +89,10 @@ LuCI's default web server **uhttpd** is configured in ``/etc/config/uhttpd`` and
     :width: 960px
     :height: 300px
 
-Step 4 - SSH
-============
+Step 4 - Configuration
+======================
 
-Secure access to the router by configuring `SSH key authentication <http://www.circuidipity.com/pingparade2.html>`_.
+Secure access to the router using `SSH key authentication <http://www.circuidipity.com/pingparade2.html>`_. Create `static leases <http://www.circuidipity.com/20141001.html>`_ for hosts using DHCP.
 
 Its exciting what you can do with these consumer routers once you let it sink in that - with a few dollars and OpenWrt - you have an extremely configurable general purpose computer.
 
