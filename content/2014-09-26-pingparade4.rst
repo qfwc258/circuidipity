@@ -37,9 +37,9 @@ Step 0 - Download install image
 
     OpenWrt builds different install images for different devices. Consult the `Table of Hardware <http://wiki.openwrt.org/toh/start>`_ to confirm that your router is supported and read the wiki entry for your particular device to identify the correct image. It is **easy to brick a device** (render inoperable) using an incorrect install image.
 
-TL-WR841N is an **ar71xx** device. Download the most recent devel VERSION (=14.07-rc3 as of 9-26):
+TL-WR841N is an **ar71xx** device. Download the most recent VERSION (*14.07* as of 10-02):
 
-[Sample link] http://downloads.openwrt.org/barrier_breaker/VERSION/ar71xx/generic/openwrt-ar71xx-generic-tl-wr841n-v8-squashfs-factory.bin
+[Sample link] http://downloads.openwrt.org/barrier_breaker/14.07/ar71xx/generic/openwrt-ar71xx-generic-tl-wr841n-v8-squashfs-factory.bin
 
 Step 1 - Flash router
 =====================
