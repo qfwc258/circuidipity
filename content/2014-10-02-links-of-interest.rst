@@ -4,7 +4,7 @@ Links of interest
 
 :date: 2014-10-02 07:58:00
 :slug: 20141002
-:tags: links, AI, space, free diving, india, china
+:tags: links
 
 * `Interview with James Barrat, author of <https://www.youtube.com/watch?v=Gt0Jf-79uOE>`_ *Our Final Invention: Artificial Intelligence and the End of the Human Era*
 * Cassini watches `mysterious feature evolve in Titan sea <http://www.nasa.gov/jpl/cassini/cassini-watches-mysterious-feature-evolve-in-titan-sea/>`_
