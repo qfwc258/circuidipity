@@ -50,7 +50,7 @@ Step 0 - Install
                                                                                     
   AllowUsers USERNAME1 USERNAME2
 
-Save and restart SSH with the new config by running ``sudo service ssh restart``                           
+Save and restart SSH with the new config by running ``sudo systemctl restart sshd.service``                           
                                                                                     
 **On the client:**                                                                
 
@@ -123,7 +123,7 @@ Step 3 - Disable password logins
     PasswordAuthentication no                                                   
     UsePAM no                                                                   
                                                                                 
-... and restart the SSH server ``sudo service ssh restart``                                               
+... and restart the SSH server ``sudo systemctl restart sshd.service``                                               
                                   
 Step 4 - Key management                                                     
 =======================
