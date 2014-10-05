@@ -57,7 +57,7 @@
 </ul>
 <div class="highlight"><pre>AllowUsers USERNAME1 USERNAME2
 </pre></div>
-<p>Save and restart SSH with the new config by running <tt class="docutils literal">sudo service ssh restart</tt></p>
+<p>Save and restart SSH with the new config by running <tt class="docutils literal">sudo systemctl restart sshd.service</tt></p>
 <p><strong>On the client:</strong></p>
 <ul class="simple">
 <li>install <tt class="docutils literal"><span class="pre">openssh-client</span></tt> and create the SSH folder in the user home directory ...</li>
@@ -112,7 +112,7 @@ ChallengeResponseAuthentication no
 PasswordAuthentication no
 UsePAM no
 </pre></div>
-<p>... and restart the SSH server <tt class="docutils literal">sudo service ssh restart</tt></p>
+<p>... and restart the SSH server <tt class="docutils literal">sudo systemctl restart sshd.service</tt></p>
 </div>
 <div class="section" id="step-4-key-management">
 <h2>Step 4 - Key management</h2>
