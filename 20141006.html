@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Daniel Wayne Armstrong</title>
+        <title>Circuidipity | Port forwarding</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -16,28 +16,17 @@
 <body>
         <!-- content -->
 
-<!-- greeting -->
-<div id="siteheader">
-        <img class="whoami" src="/theme/images/whoami.png" />
-    <div id="sitegreeting">
-<p><span class="whoa">Howdy!</span><br />
-My name is <span class="noWrap"><span class="whoa">Daniel Wayne Armstrong</span></span>.
-I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    </div>
-<!-- menu -->
-    <div id="sitemenu">
-<p><a href="archives.html">Archives</a>
-&nbsp;<a href="projects.html">Projects</a>
-&nbsp;<a href="/colophon.html">Colophon</a>
-&nbsp;<a href="feed.xml"><i class="fa fa-rss"></i></a>
-&nbsp;<a href="https://twitter.com/circuidipity"><i class="fa fa-twitter"></i></a>
-&nbsp;<a href="https://github.com/vonbrownie"><i class="fa fa-github-alt"></i></a></p>    </div>
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Monday 06 October 2014</p>
 </div>
 
-<!-- latest post -->
-<div id="latestpost">
-        <p class="published"> Monday 06 October 2014</p>
-        <h1><a href="http://www.circuidipity.com/20141006.html">Port forwarding</a></h1>
-        <p><strong>Port forwarding</strong> enables <a class="reference external" href="http://www.circuidipity.com/pingparade2.html">SSH access</a> to my <a class="reference external" href="http://www.circuidipity.com/pingparade1.html">home server</a> from outside the home by forwarding traffic directed at a port on the router (reachable over the Internet by static IP) to the SSH port on the internal server behind a <a class="reference external" href="http://wiki.openwrt.org/doc/uci/firewall">NAT firewall</a>.</p>
+<!-- article -->
+<h1>Port forwarding</h1>
+<div id="article">
+    <p><strong>Port forwarding</strong> enables <a class="reference external" href="http://www.circuidipity.com/pingparade2.html">SSH access</a> to my <a class="reference external" href="http://www.circuidipity.com/pingparade1.html">home server</a> from outside the home by forwarding traffic directed at a port on the router (reachable over the Internet by static IP) to the SSH port on the internal server behind a <a class="reference external" href="http://wiki.openwrt.org/doc/uci/firewall">NAT firewall</a>.</p>
 <p><a class="reference external" href="http://www.circuidipity.com/pingparade4.html">OpenWrt</a> port forwarding configuration is done in <tt class="docutils literal">/etc/config/firewall</tt>. A sample entry that redirects port 55555 on the router to port 22 on the server...</p>
 <div class="highlight"><pre>config <span class="s1">&#39;redirect&#39;</span>
     option <span class="s1">&#39;name&#39;</span> <span class="s1">&#39;ssh&#39;</span>
@@ -53,13 +42,17 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <p>Alternately, setup port forwarding in LuCI under <tt class="docutils literal"><span class="pre">Network-&gt;Firewall-&gt;Port</span> Forwards</tt>.</p>
 <p>Source: <a class="reference external" href="http://wiki.openwrt.org/doc/howto/port.forwarding">OpenWrt Port Forwarding</a></p>
 
-        <!-- Nav links to previous|next article --> 
-        <div id="navmenu">
-            <hr />
-            <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-                <a href="http://www.circuidipity.com/pingparade5.html">
-                Ping Parade #5 -- Raspberry</a></p>
-        </div>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-networks.html">networks</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-openwrt.html">openwrt</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/pingparade5.html">Ping Parade #5 -- Raspberry</a></p>
 </div>
 
 
