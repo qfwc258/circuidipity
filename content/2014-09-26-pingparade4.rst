@@ -6,6 +6,7 @@ Ping Parade #4 -- Breaker
 :slug: pingparade4
 :tags: networks, openwrt, linux
 :template: article-project-pingparade
+:modified: 2014-10-06 15:01:00
 
 **Unlock the full potential of your home router using OpenWrt.**
 
@@ -92,7 +93,7 @@ LuCI's default web server **uhttpd** is configured in ``/etc/config/uhttpd`` and
 Step 4 - Configuration
 ======================
 
-Secure access to the router using `SSH key authentication <http://www.circuidipity.com/pingparade2.html>`_. Create `static leases <http://www.circuidipity.com/20141001.html>`_ for hosts using DHCP.
+Secure access to the router using `SSH key authentication <http://www.circuidipity.com/pingparade2.html>`_. Create `static leases <http://www.circuidipity.com/20141001.html>`_ for hosts using DHCP and setup `port forwarding <http://www.circuidipity.com/20141006.html>`_ to reach devices behind the firewall from the world-at-large.
 
 Its exciting what you can do with these consumer routers once you let it sink in that - with a few dollars and OpenWrt - you have an extremely configurable general purpose computer.
 
