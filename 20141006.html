@@ -27,7 +27,7 @@
 <h1>Port forwarding</h1>
 <div id="article">
     <p><strong>Port forwarding</strong> enables <a class="reference external" href="http://www.circuidipity.com/pingparade2.html">SSH access</a> to my <a class="reference external" href="http://www.circuidipity.com/pingparade1.html">home server</a> from outside the home by forwarding traffic directed at a port on the router (reachable over the Internet by static IP) to the SSH port on the internal server behind a <a class="reference external" href="http://wiki.openwrt.org/doc/uci/firewall">NAT firewall</a>.</p>
-<p><a class="reference external" href="http://www.circuidipity.com/pingparade4.html">OpenWrt</a> port forwarding configuration is done in <tt class="docutils literal">/etc/config/firewall</tt>. A sample entry that redirects port 55555 on the router to port 22 on the server...</p>
+<p><a class="reference external" href="http://www.circuidipity.com/pingparade4.html">OpenWrt</a> port forward configuration is done in <tt class="docutils literal">/etc/config/firewall</tt>. A sample entry that redirects port 55555 on the router to port 22 on the server...</p>
 <div class="highlight"><pre>config <span class="s1">&#39;redirect&#39;</span>
     option <span class="s1">&#39;name&#39;</span> <span class="s1">&#39;ssh&#39;</span>
     option <span class="s1">&#39;src&#39;</span> <span class="s1">&#39;wan&#39;</span>
