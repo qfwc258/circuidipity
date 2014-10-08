@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-10-06T15:01:00-04:00</updated><entry><title>Port forwarding</title><link href="http://www.circuidipity.com/20141006.html" rel="alternate"></link><updated>2014-10-06T14:58:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-10-06:20141006.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Port forwarding&lt;/strong&gt; enables &lt;a class="reference external" href="http://www.circuidipity.com/pingparade2.html"&gt;SSH access&lt;/a&gt; to my &lt;a class="reference external" href="http://www.circuidipity.com/pingparade1.html"&gt;home server&lt;/a&gt; from outside the home by forwarding traffic directed at a port on the router (reachable over the Internet by static IP) to the SSH port on the internal server behind a &lt;a class="reference external" href="http://wiki.openwrt.org/doc/uci/firewall"&gt;NAT firewall&lt;/a&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-10-08T17:43:00-04:00</updated><entry><title>Restore stock Android for Nexus 7</title><link href="http://www.circuidipity.com/20141008.html" rel="alternate"></link><updated>2014-10-08T17:43:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-10-08:20141008.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Device:&lt;/strong&gt; Nexus 7 2012 (model) -&amp;gt; grouper (device) -&amp;gt; nakasi (device-appropriate Google ROMs)&lt;/p&gt;
+&lt;p&gt;After experimenting a bit with &lt;a class="reference external" href="http://www.cyanogenmod.org/"&gt;CyanogenMod&lt;/a&gt;, my first attempt to restore stock Android to my tablet hit a snag when the flashing procedure stumbled over the included bootloader file in Google's tarball: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;bootloader-grouper-4.23.img&lt;/span&gt;&lt;/tt&gt; packaged in the v4.4.4 &lt;tt class="docutils literal"&gt;KTU84P&lt;/tt&gt; factory image. &lt;a class="reference external" href="http://forum.xda-developers.com/showthread.php?t=2417097&amp;amp;page=7"&gt;The solution&lt;/a&gt; was to download a bootloader extracted from an earlier image and swap out the buggy version in the current image.&lt;/p&gt;
+&lt;div class="section" id="to-successfully-flash-a-factory-image-under-linux"&gt;
+&lt;h2&gt;To successfully flash a factory image under Linux:&lt;/h2&gt;
+&lt;div class="section" id="backup"&gt;
+&lt;h3&gt;0. Backup&lt;/h3&gt;
+&lt;p&gt;This procedure &lt;strong&gt;erases all data&lt;/strong&gt; on the tablet. Google settings will be restored during post-install setup but anything of importance stored in device memory will require backup.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="tools"&gt;
+&lt;h3&gt;1. Tools&lt;/h3&gt;
+&lt;p&gt;Verify that &lt;a class="reference external" href="http://www.circuidipity.com/mtp.html"&gt;MTP&lt;/a&gt; and &lt;a class="reference external" href="http://www.circuidipity.com/adb-fastboot-android.html"&gt;adb + fastboot&lt;/a&gt; are installed.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="image"&gt;
+&lt;h3&gt;2. Image&lt;/h3&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://developers.google.com/android/nexus/images"&gt;Download the latest device-specific factory image&lt;/a&gt; and unpack the tarball. Factory images for my Nexus 7 are code-named &lt;strong&gt;nakasi&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="replace-bootloader"&gt;
+&lt;h3&gt;3. Replace bootloader&lt;/h3&gt;
+&lt;p&gt;Work around the buggy bootloader by &lt;a class="reference external" href="http://forum.xda-developers.com/showpost.php?p=44903559&amp;amp;postcount=1"&gt;downloading and replacing it with this alternate file&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fastboot"&gt;
+&lt;h3&gt;4. Fastboot&lt;/h3&gt;
+&lt;p&gt;Connect the tablet. Start adb and restart the tablet in fastboot mode:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;adb start-server
+&lt;span class="nv"&gt;$ &lt;/span&gt;adb reboot bootloader
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="flash-image"&gt;
+&lt;h3&gt;5. Flash image&lt;/h3&gt;
+&lt;p&gt;Navigate to the factory image folder and run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;./flash-all.sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After flashing is complete the device will reboot into its default factory state.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://developers.google.com/android/nexus/images"&gt;Factory Images for Nexus Devices&lt;/a&gt; (developers.google.com), &lt;a class="reference external" href="http://forum.xda-developers.com/showthread.php?t=2417097"&gt;Factory image bootloader problem&lt;/a&gt; (forum.xda-developers.com)&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="android"></category><category term="linux"></category></entry><entry><title>Port forwarding</title><link href="http://www.circuidipity.com/20141006.html" rel="alternate"></link><updated>2014-10-06T14:58:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-10-06:20141006.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Port forwarding&lt;/strong&gt; enables &lt;a class="reference external" href="http://www.circuidipity.com/pingparade2.html"&gt;SSH access&lt;/a&gt; to my &lt;a class="reference external" href="http://www.circuidipity.com/pingparade1.html"&gt;home server&lt;/a&gt; from outside the home by forwarding traffic directed at a port on the router (reachable over the Internet by static IP) to the SSH port on the internal server behind a &lt;a class="reference external" href="http://wiki.openwrt.org/doc/uci/firewall"&gt;NAT firewall&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;OpenWrt&lt;/a&gt; port forward configuration is done in &lt;tt class="docutils literal"&gt;/etc/config/firewall&lt;/tt&gt;. A sample entry that redirects port 55555 on the router to port 22 on the server...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;config &lt;span class="s1"&gt;&amp;#39;redirect&amp;#39;&lt;/span&gt;
     option &lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ssh&amp;#39;&lt;/span&gt;
@@ -193,63 +230,4 @@ No one will bring back the years; no one will restore you to yourself. Life will
 &lt;p&gt;All the years that have passed before them are added to their own... By the toil of others we are led into presence of things which have been brought from darkness into light. We are excluded from no age, but we have access to them all; and if we are prepared in loftiness of mind to pass beyond the narrow confines of human weakness, there is a long period of time through which we can roam...&lt;/p&gt;
 &lt;p&gt;We are in the habit of saying that it was not in our power to choose the parents who were allotted to us, that they were given to us by chance. But we can choose whose children we would like to be. There are households of the noblest intellects: choose the one into which you wish to be adopted, and you will inherit not only their name but their property too. Nor will this property need to be guarded meanly or grudgingly: the more it is shared out, the greater it will become. These will offer you a path to immortality and raise you to a point from which no one is cast down... So the life of the philosopher extends widely... Some time has passed: he grasps it in his recollection. Time is present: he uses it. Time is to come: he anticipates it. This combination of all times into one gives him a long life.&lt;/p&gt;
 &lt;/blockquote&gt;
-</summary><category term="books"></category><category term="philosophy"></category><category term="quotes"></category></entry><entry><title>Ping Parade #3 -- Backup</title><link href="http://www.circuidipity.com/pingparade3.html" rel="alternate"></link><updated>2014-09-19T01:23:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-09-19:pingparade3.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Make automatic backups of important stuff using a dash of shell scripting + rsync + SSH + cron!&lt;/strong&gt;&lt;/p&gt;
-&lt;img alt="Backup" src="images/pingparade3-0.png" style="width: 960px; height: 500px;" /&gt;
-&lt;p&gt;One of the advantages of setting up a &lt;a class="reference external" href="http://www.circuidipity.com/pingparade1.html"&gt;Linux home server&lt;/a&gt; is providing a place to do that thing which everyone agrees is important but &lt;em&gt;very few do consistently&lt;/em&gt; (or even &lt;em&gt;once&lt;/em&gt;): &lt;strong&gt;backups&lt;/strong&gt;. Hopefully you never experience any loss of data... but &lt;em&gt;hope&lt;/em&gt; is not a plan! A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home directory on my netbook server sitting on the local area network (LAN).&lt;/p&gt;
-&lt;div class="section" id="step-0-ssh"&gt;
-&lt;h2&gt;Step 0 - SSH&lt;/h2&gt;
-&lt;p&gt;Configure &lt;strong&gt;OpenSSH&lt;/strong&gt; and &lt;strong&gt;keychain&lt;/strong&gt; as per &lt;a class="reference external" href="http://www.circuidipity.com/pingparade2.html"&gt;these instructions&lt;/a&gt;. Keychain makes it easy to use a &lt;strong&gt;passphrase-protected encryption key&lt;/strong&gt; and &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Ssh-agent"&gt;ssh-agent&lt;/a&gt; in automated scripts.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-1-script"&gt;
-&lt;h2&gt;Step 1 - Script&lt;/h2&gt;
-&lt;p&gt;Login to the server and create a backup directory to hold the contents of $HOME: &lt;tt class="docutils literal"&gt;mkdir &lt;span class="pre"&gt;~/home-backup&lt;/span&gt;&lt;/tt&gt;&lt;/p&gt;
-&lt;p&gt;On the local machine create a backup script - &lt;tt class="docutils literal"&gt;~/bin/backup_home.sh&lt;/tt&gt; - that makes use of the &lt;strong&gt;rsync&lt;/strong&gt; file-copying tool. A sample script includes:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;load the details of the &lt;strong&gt;SSH key&lt;/strong&gt; stored in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.keychain/$HOSTNAME-sh&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;mirror&lt;/strong&gt; &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt; to the server's &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/home-backup&lt;/span&gt;&lt;/tt&gt; using options &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--archive&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--delete&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;exclude&lt;/strong&gt; certain items from the backup like &lt;em&gt;cache&lt;/em&gt; and &lt;em&gt;trash&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;be careful nothing important is wiped out&lt;/strong&gt; using &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--delete&lt;/span&gt;&lt;/tt&gt; ... run rsync in a console with option &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--dry-run&lt;/span&gt;&lt;/tt&gt; to test your settings before saving to a script ...&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
-&lt;span class="c"&gt;# Sample variables&lt;/span&gt;
-&lt;span class="nv"&gt;ssh_agent&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;$HOME/.keychain/$HOSTNAME-sh&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;rsync_options&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;--verbose --archive --delete&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;exclude_items&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;--exclude=*[Cc]ache* --exclude=*[Tt]rash*&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;local_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;${HOME}/&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;address&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;192.168.1.22&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;destination&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;${address}:~/home-backup&amp;quot;&lt;/span&gt;
-
-. &lt;span class="nv"&gt;$ssh_agent&lt;/span&gt;
-rsync &lt;span class="nv"&gt;$rsync_options&lt;/span&gt; &lt;span class="nv"&gt;$exclude_items&lt;/span&gt; &lt;span class="nv"&gt;$local_dir&lt;/span&gt; &lt;span class="nv"&gt;$destination&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Make the script executable and run manually at least once to test...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;chmod 755 ~/bin/backup_home.sh
-&lt;span class="nv"&gt;$ &lt;/span&gt;~/bin/backup_home.sh
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="step-2-automate"&gt;
-&lt;h2&gt;Step 2 - Automate&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Cron&lt;/strong&gt; is a daemon that runs programs at specified times and I use the command &lt;tt class="docutils literal"&gt;crontab &lt;span class="pre"&gt;-e&lt;/span&gt;&lt;/tt&gt; to setup my backup script to auto-run with the following parameters:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;perform a daily backup at 23:55&lt;/li&gt;
-&lt;li&gt;run program silently in the background by redirecting output to &lt;tt class="docutils literal"&gt;/dev/null&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;any errors will be emailed to the user ...&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# To define the time you can provide concrete values for&lt;/span&gt;
-&lt;span class="c"&gt;# minute (m), hour (h), day of month (dom), month (mon),&lt;/span&gt;
-&lt;span class="c"&gt;# and day of week (dow) or use &amp;#39;*&amp;#39; in these fields (for &amp;#39;any&amp;#39;).#&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# Output of the crontab jobs (including errors) is sent through&lt;/span&gt;
-&lt;span class="c"&gt;# email to the user the crontab file belongs to (unless redirected).&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# For more information see the manual pages of crontab(5) and cron(8)&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# m h  dom mon dow   command&lt;/span&gt;
-
-&lt;span class="c"&gt;# Daily backup of $HOME to the netbook server&lt;/span&gt;
-55 23 * * * &lt;span class="nv"&gt;$HOME&lt;/span&gt;/bin/backup_home.sh &amp;gt;/dev/null
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;For an alternate, more flexible rsync solution that accepts options at runtime &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/home2"&gt;check out this more complete script&lt;/a&gt; that I call using this &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/backup-home-server"&gt;second script&lt;/a&gt; executed by cron that includes logging (un)successful backup attempts to file.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="networks"></category><category term="encryption"></category><category term="linux"></category><category term="shell"></category><category term="programming"></category><category term="github"></category></entry></feed>
+</summary><category term="books"></category><category term="philosophy"></category><category term="quotes"></category></entry></feed>
