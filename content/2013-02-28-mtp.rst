@@ -9,17 +9,20 @@ Configure MTP in Linux
 
 Many MP3 players and recent Android phones and tablets no longer appear as removable USB storage devices under Linux. Instead they use **MTP** (*Media Transfer Protocol*) and to enable these devices to be detected, mountable, and usable by Linux requires a bit of configuration.
 
-This is how I setup my laptop running Debian to work with **Nexus 4** and **Nexus 7** devices. These steps should work with any MTP-enabled device with the only difference being Android-specific configuration and the relevant **vendor** or **device IDs** for each device.
+This is how I setup my laptop to work with **Nexus 4** and **Nexus 7** devices. These steps should work with any MTP-enabled device with the only difference being Android-specific configuration and the relevant **vendor** or **device IDs** for each device.
+
+To configure MTP under Debian:
+==============================
 
 0. Developer Options
-====================
+--------------------
 
 On the Nexus I enable developer options by navigating to ``Settings->About {tablet,phone}``, click to open and make **+7 taps** on ``Build number``. Nexus displays ``You are now a developer``.
 
 Return to settings and ``Developer Options`` is now visible. Click to open and activate ``USB debugging``.
 
-0. MTP
-======
+1. MTP
+------
 
 Install MTP packages and assign USER to the ``plugdev`` group:
 
@@ -30,8 +33,8 @@ Install MTP packages and assign USER to the ``plugdev`` group:
 
 Logout and re-login to activate new group permissions.
 
-1. Udev 
-=======
+2. Udev 
+-------
 
 Connect the MTP-enabled device to Linux and make note of the ``idVendor`` and ``idProduct`` codes. Sample output from my Nexus 7: 
 
@@ -51,8 +54,8 @@ Google's **idVendor=18d1** and the Nexus 7 is **idProduct=4e41**. Disconnect the
 
     For a generic entry to handle all Google devices use **idVendor**. Otherwise add **idVendor** and **idProduct** codes to make a device-specific udev rule.
 
-2. MTPFS
-========
+3. MTPFS
+--------
 
 **MTPFS** is a FUSE filesystem that enables reading and writing data to the MTP-enabled Nexus. Create a mount point for the tablet and restart the udev daemon:
 
