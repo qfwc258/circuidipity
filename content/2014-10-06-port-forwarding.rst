@@ -8,7 +8,7 @@ Port forwarding
 
 **Port forwarding** enables `SSH access <http://www.circuidipity.com/pingparade2.html>`_ to my `home server <http://www.circuidipity.com/pingparade1.html>`_ from outside the home by forwarding traffic directed at a port on the router (reachable over the Internet by static IP) to the SSH port on the internal server behind a `NAT firewall <http://wiki.openwrt.org/doc/uci/firewall>`_.
 
-`OpenWrt <http://www.circuidipity.com/pingparade4.html>`_ port forwarding configuration is done in ``/etc/config/firewall``. A sample entry that redirects port 55555 on the router to port 22 on the server...
+`OpenWrt <http://www.circuidipity.com/pingparade4.html>`_ port forward configuration is done in ``/etc/config/firewall``. A sample entry that redirects port 55555 on the router to port 22 on the server...
 
 .. code-block:: bash
 
