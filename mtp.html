@@ -28,14 +28,16 @@
     <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Wednesday 08 October 2014</p>
 <div id="article">
     <p>Many MP3 players and recent Android phones and tablets no longer appear as removable USB storage devices under Linux. Instead they use <strong>MTP</strong> (<em>Media Transfer Protocol</em>) and to enable these devices to be detected, mountable, and usable by Linux requires a bit of configuration.</p>
-<p>This is how I setup my laptop running Debian to work with <strong>Nexus 4</strong> and <strong>Nexus 7</strong> devices. These steps should work with any MTP-enabled device with the only difference being Android-specific configuration and the relevant <strong>vendor</strong> or <strong>device IDs</strong> for each device.</p>
+<p>This is how I setup my laptop to work with <strong>Nexus 4</strong> and <strong>Nexus 7</strong> devices. These steps should work with any MTP-enabled device with the only difference being Android-specific configuration and the relevant <strong>vendor</strong> or <strong>device IDs</strong> for each device.</p>
+<div class="section" id="to-configure-mtp-under-debian">
+<h2>To configure MTP under Debian:</h2>
 <div class="section" id="developer-options">
-<h2>0. Developer Options</h2>
+<h3>0. Developer Options</h3>
 <p>On the Nexus I enable developer options by navigating to <tt class="docutils literal"><span class="pre">Settings-&gt;About</span> {tablet,phone}</tt>, click to open and make <strong>+7 taps</strong> on <tt class="docutils literal">Build number</tt>. Nexus displays <tt class="docutils literal">You are now a developer</tt>.</p>
 <p>Return to settings and <tt class="docutils literal">Developer Options</tt> is now visible. Click to open and activate <tt class="docutils literal">USB debugging</tt>.</p>
 </div>
 <div class="section" id="mtp">
-<h2>0. MTP</h2>
+<h3>1. MTP</h3>
 <p>Install MTP packages and assign USER to the <tt class="docutils literal">plugdev</tt> group:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install mtp-tools mtpfs
 <span class="nv">$ </span>sudo adduser USER plugdev
@@ -43,7 +45,7 @@
 <p>Logout and re-login to activate new group permissions.</p>
 </div>
 <div class="section" id="udev">
-<h2>1. Udev</h2>
+<h3>2. Udev</h3>
 <p>Connect the MTP-enabled device to Linux and make note of the <tt class="docutils literal">idVendor</tt> and <tt class="docutils literal">idProduct</tt> codes. Sample output from my Nexus 7:</p>
 <div class="highlight"><pre><span class="nv">$ </span>lsusb | grep Google
 Bus 001 Device 009: ID 18d1:4e41 Google Inc. ASUS Nexus 7 <span class="o">(</span>MTP modus<span class="o">)</span>
@@ -58,7 +60,7 @@ Bus 001 Device 009: ID 18d1:4e41 Google Inc. ASUS Nexus 7 <span class="o">(</spa
 </div>
 </div>
 <div class="section" id="mtpfs">
-<h2>2. MTPFS</h2>
+<h3>3. MTPFS</h3>
 <p><strong>MTPFS</strong> is a FUSE filesystem that enables reading and writing data to the MTP-enabled Nexus. Create a mount point for the tablet and restart the udev daemon:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /media/nexus
 <span class="nv">$ </span>sudo service udev restart
@@ -71,6 +73,7 @@ Bus 001 Device 009: ID 18d1:4e41 Google Inc. ASUS Nexus 7 <span class="o">(</spa
 </pre></div>
 <p>Alternate options such as <a class="reference external" href="https://play.google.com/store/apps/details?id=com.sand.airdroid">Airdroid</a> exist for device storage management over wireless connections that are OS-independent. MTP is useful to setup if you plan to install <a class="reference external" href="http://www.circuidipity.com/adb-fastboot-android.html">development tools</a> and <strong>root</strong> your device.</p>
 <p>Happy hacking!</p>
+</div>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-android.html">android</a>
