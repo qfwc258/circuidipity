@@ -36,7 +36,7 @@ Logout and re-login to activate new group permissions.
 2. Udev 
 -------
 
-Connect the MTP-enabled device to Linux and make note of the ``idVendor`` and ``idProduct`` codes. Sample output from my Nexus 7: 
+Connect the MTP-enabled device to Linux and make note of the **idVendor** and **idProduct** codes. Sample output from my Nexus 7: 
 
 .. code-block:: bash
 
