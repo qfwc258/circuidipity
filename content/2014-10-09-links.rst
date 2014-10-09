@@ -1,0 +1,16 @@
+=================
+Links of interest
+=================
+
+:date: 2014-10-09 10:03:00
+:slug: 20141009
+:tags: links
+
+* How `algorithms shape our world <http://www.ted.com/talks/kevin_slavin_how_algorithms_shape_our_world?language=en>`_
+* Sam Harris `on separating mindfulness from its religious origins <http://youtu.be/Iwac6Uk-zyk>`_
+* Is your `ability to eat carbs determined by your genes? <http://www.precisionnutrition.com/carbohydrate-tolerance-genes>`_
+* What the future `of robots reveals about the human condition <http://www.brainpickings.org/2014/10/06/diane-ackerman-human-age/>`_
+* New artificial materials `open possibilities for manned space exploration <http://singularityhub.com/2014/10/06/new-artificial-materials-open-possibilities-for-manned-space-exploration/>`_
+* Disruptive technologies that could `make medicine more affordable and accessible <http://peterdiamandis.com/post/99317310881/life-or-death>`_
+* "Hardware hacking hasn't become a hot new thing in China `because it never stopped being a regular old thing..." <https://ello.co/cshirky/post/FQKBh4QMjfaqBM1C4XYnjw>`_
+* Hong Kongers `look to their city, not China, for identity <http://www.nytimes.com/2014/10/08/world/asia/hong-kong-people-looking-in-mirror-see-fading-chinese-identity.html>`_
