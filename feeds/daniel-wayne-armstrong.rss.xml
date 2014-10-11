@@ -68,8 +68,8 @@
 &lt;p&gt;The Pi has connectors for attaching an ethernet cable, USB peripherals such as keyboards and mice, and a monitor or TV permitting the device to serve as a complete standalone desktop computer. An alternative to dedicating input devices and a display to the Pi is to access the device via another computer using &lt;em&gt;Virtual Networking Computing&lt;/em&gt; (VNC). VNC allows remote control of the Pi by transmitting all the display, keyboard, and mouse events to another computer.&lt;/p&gt;
 &lt;div class="section" id="to-configure-a-vnc-server-and-client"&gt;
 &lt;h2&gt;To configure a VNC server and client:&lt;/h2&gt;
-&lt;div class="section" id="vnc-server"&gt;
-&lt;h3&gt;0. VNC Server&lt;/h3&gt;
+&lt;div class="section" id="server"&gt;
+&lt;h3&gt;0. Server&lt;/h3&gt;
 &lt;p&gt;VNC enables a connection to a remote device display using two different methods: control an &lt;em&gt;existing&lt;/em&gt; remote desktop attached to a physical display on a device running a VNC server (example: &lt;em&gt;x11vnc&lt;/em&gt;); use a VNC server on the remote device to create a &lt;em&gt;new&lt;/em&gt; desktop (example: &lt;a class="reference external" href="http://www.tightvnc.com/"&gt;tightvnc&lt;/a&gt;) for display on the VNC client device. This second option is what I configure to enable running the Pi as a &lt;em&gt;headless&lt;/em&gt; device (no attached display or peripherals).&lt;/p&gt;
 &lt;p&gt;Temporary access to a display and USB input devices makes the inital configuration of the Pi and VNC an easier task. The alternative is connecting to the Pi using &lt;a class="reference external" href="http://www.raspberrypi.org/documentation/remote-access/ssh/"&gt;SSH&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Open or access a console on the Pi and install &lt;tt class="docutils literal"&gt;tightvncserver&lt;/tt&gt;:&lt;/p&gt;
@@ -94,8 +94,8 @@ Log file is /home/USERNAME/.vnc/HOSTNAME:1.log
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Default port on which vncserver runs is &lt;tt class="docutils literal"&gt;:1&lt;/tt&gt; which corresponds to the TCP port on which the server is running (5900+n = port number)... therefore the first instance is running on &lt;strong&gt;5901&lt;/strong&gt;. Running vncserver a second time will create a second instance running on the next free port, i.e &lt;tt class="docutils literal"&gt;:2&lt;/tt&gt; or 5902.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="vnc-client"&gt;
-&lt;h3&gt;1. VNC Client&lt;/h3&gt;
+&lt;div class="section" id="client"&gt;
+&lt;h3&gt;1. Client&lt;/h3&gt;
 &lt;p&gt;Install a VNC client to connect with the newly-accessible remote Pi (example: &lt;a class="reference external" href="http://www.tightvnc.com/"&gt;xtightvncviewer&lt;/a&gt; is available for multiple platforms). On my Debian-powered laptop I install the &lt;a class="reference external" href="http://www.karlrunge.com/x11vnc/ssvnc.html"&gt;ssvnc&lt;/a&gt; (Unix only) client:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get update
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install ssvnc
