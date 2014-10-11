@@ -42,8 +42,13 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;./flash-all.sh
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;After flashing is complete the device will reboot into its default factory state.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://developers.google.com/android/nexus/images"&gt;Factory Images for Nexus Devices&lt;/a&gt; (developers.google.com), &lt;a class="reference external" href="http://forum.xda-developers.com/showthread.php?t=2417097"&gt;Factory image bootloader problem&lt;/a&gt; (forum.xda-developers.com)&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="helpful-resources"&gt;
+&lt;h3&gt;6. Helpful Resources&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://developers.google.com/android/nexus/images"&gt;Factory images for Nexus devices&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://forum.xda-developers.com/showthread.php?t=2417097"&gt;Image bootloader problem&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 08 Oct 2014 17:43:00 -0400</pubDate><guid>tag:www.circuidipity.com,2014-10-08:20141008.html</guid><category>android</category><category>linux</category></item><item><title>Port forwarding</title><link>http://www.circuidipity.com/20141006.html</link><description>&lt;p&gt;&lt;strong&gt;Port forwarding&lt;/strong&gt; enables &lt;a class="reference external" href="http://www.circuidipity.com/pingparade2.html"&gt;SSH access&lt;/a&gt; to my &lt;a class="reference external" href="http://www.circuidipity.com/pingparade1.html"&gt;home server&lt;/a&gt; from outside the home by forwarding traffic directed at a port on the router (reachable over the Internet by static IP) to the SSH port on the internal server behind a &lt;a class="reference external" href="http://wiki.openwrt.org/doc/uci/firewall"&gt;NAT firewall&lt;/a&gt;.&lt;/p&gt;
