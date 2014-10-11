@@ -206,7 +206,7 @@ Today's belief in ineluctable certainty is the true innovation killer of our age
 &lt;p&gt;&lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/firstlogin"&gt;Use telnet (no password) to login for the first time&lt;/a&gt; to the new OpenWrt installation. Use &lt;tt class="docutils literal"&gt;passwd&lt;/tt&gt; to create a new root password. Once the password is properly configured telnet is disabled. Exit and re-login using SSH:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh root@192.168.1.1
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/internet.connection"&gt;Setup your internet connection&lt;/a&gt; either by editing &lt;tt class="docutils literal"&gt;/etc/config/network&lt;/tt&gt; or using OpenWrt's &lt;strong&gt;Unified Configuration Interface&lt;/strong&gt; (UCI). Using my DSL (pppoe) as an example:&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/internet.connection"&gt;Setup your internet connection&lt;/a&gt; either by editing &lt;tt class="docutils literal"&gt;/etc/config/network&lt;/tt&gt; or using OpenWrt's &lt;strong&gt;Unified Configuration Interface (UCI)&lt;/strong&gt;. Using my DSL (pppoe) as an example:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# uci set network.wan.proto=pppoe&lt;/span&gt;
 &lt;span class="c"&gt;# uci set network.wan.username=&amp;#39;yougotthisfromyour@isp.su&amp;#39;&lt;/span&gt;
 &lt;span class="c"&gt;# uci set network.wan.password=&amp;#39;yourpassword&amp;#39;&lt;/span&gt;

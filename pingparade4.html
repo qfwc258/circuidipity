@@ -58,7 +58,7 @@
 <p><a class="reference external" href="http://wiki.openwrt.org/doc/howto/firstlogin">Use telnet (no password) to login for the first time</a> to the new OpenWrt installation. Use <tt class="docutils literal">passwd</tt> to create a new root password. Once the password is properly configured telnet is disabled. Exit and re-login using SSH:</p>
 <div class="highlight"><pre><span class="nv">$ </span>ssh root@192.168.1.1
 </pre></div>
-<p><a class="reference external" href="http://wiki.openwrt.org/doc/howto/internet.connection">Setup your internet connection</a> either by editing <tt class="docutils literal">/etc/config/network</tt> or using OpenWrt's <strong>Unified Configuration Interface</strong> (UCI). Using my DSL (pppoe) as an example:</p>
+<p><a class="reference external" href="http://wiki.openwrt.org/doc/howto/internet.connection">Setup your internet connection</a> either by editing <tt class="docutils literal">/etc/config/network</tt> or using OpenWrt's <strong>Unified Configuration Interface (UCI)</strong>. Using my DSL (pppoe) as an example:</p>
 <div class="highlight"><pre><span class="c"># uci set network.wan.proto=pppoe</span>
 <span class="c"># uci set network.wan.username=&#39;yougotthisfromyour@isp.su&#39;</span>
 <span class="c"># uci set network.wan.password=&#39;yourpassword&#39;</span>
