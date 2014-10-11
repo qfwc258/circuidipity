@@ -52,7 +52,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 </summary><category term="android"></category><category term="linux"></category></entry><entry><title>Port forwarding</title><link href="http://www.circuidipity.com/20141006.html" rel="alternate"></link><updated>2014-10-06T14:58:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-10-06:20141006.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Port forwarding&lt;/strong&gt; enables &lt;a class="reference external" href="http://www.circuidipity.com/pingparade2.html"&gt;SSH access&lt;/a&gt; to my &lt;a class="reference external" href="http://www.circuidipity.com/pingparade1.html"&gt;home server&lt;/a&gt; from outside the home by forwarding traffic directed at a port on the router (reachable over the Internet by static IP) to the SSH port on the internal server behind a &lt;a class="reference external" href="http://wiki.openwrt.org/doc/uci/firewall"&gt;NAT firewall&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;OpenWrt&lt;/a&gt; port forward configuration is done in &lt;tt class="docutils literal"&gt;/etc/config/firewall&lt;/tt&gt;. A sample entry that redirects port 55555 on the router to port 22 on the server...&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;OpenWrt&lt;/a&gt; port forward configuration is done in &lt;tt class="docutils literal"&gt;/etc/config/firewall&lt;/tt&gt;. A sample entry that redirects port 55555 on the router to port 22 on the server:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;config &lt;span class="s1"&gt;&amp;#39;redirect&amp;#39;&lt;/span&gt;
     option &lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ssh&amp;#39;&lt;/span&gt;
     option &lt;span class="s1"&gt;&amp;#39;src&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;wan&amp;#39;&lt;/span&gt;
@@ -63,7 +63,9 @@
     option &lt;span class="s1"&gt;&amp;#39;target&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;DNAT&amp;#39;&lt;/span&gt;
     option &lt;span class="s1"&gt;&amp;#39;dest&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;lan&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Save and make the changes active by running &lt;tt class="docutils literal"&gt;/etc/init.d/firewall restart&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Save and make the changes active by running:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# /etc/init.d/firewall restart&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Alternately, setup port forwarding in LuCI under &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Network-&amp;gt;Firewall-&amp;gt;Port&lt;/span&gt; Forwards&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;Source: &lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/port.forwarding"&gt;OpenWrt Port Forwarding&lt;/a&gt;&lt;/p&gt;
 </summary><category term="networks"></category><category term="openwrt"></category><category term="linux"></category></entry><entry><title>Ping Parade #5 -- Raspberry</title><link href="http://www.circuidipity.com/pingparade5.html" rel="alternate"></link><updated>2014-10-03T00:07:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-10-03:pingparade5.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Remote control a Linux desktop using Virtual Network Computing (VNC).&lt;/strong&gt;&lt;/p&gt;
