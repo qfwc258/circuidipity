@@ -66,16 +66,17 @@
 &lt;p&gt;&lt;a class="reference external" href="http://www.raspberrypi.org/"&gt;Raspberry Pi&lt;/a&gt; is a less-than-$50 credit card sized computer that delivers all the power and flexibility of Linux, tools to start programming, and the opportunity to &lt;a class="reference external" href="https://learn.adafruit.com/category/raspberry-pi"&gt;explore electronics&lt;/a&gt; courtesy of the onboard GPIO pins. There is an active community of Pi enthusiasts and plenty of resources to &lt;a class="reference external" href="http://www.raspberrypi.org/help/"&gt;help you get started&lt;/a&gt;. I think this plucky little device has real potential as a &lt;a class="reference external" href="http://www.circuidipity.com/pingparade1.html"&gt;home server&lt;/a&gt;!&lt;/p&gt;
 &lt;p&gt;One of the features I really like about the Pi is that the operating system runs off an SD card. Protecting the device's firmware from being mucked up makes it very easy to experiment with different Linux releases and configurations without any fear of bricking the device. I currently run &lt;a class="reference external" href="http://www.raspbian.org/"&gt;Raspbian Linux&lt;/a&gt; - the default recommendation - on a SanDisk 32GB microSD with adapter but there is an active and growing &lt;a class="reference external" href="http://elinux.org/RPi_Distributions#Available_Distributions"&gt;list of alternatives&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The Pi has connectors for attaching an ethernet cable, USB peripherals such as keyboards and mice, and a monitor or TV permitting the device to serve as a complete standalone desktop computer. An alternative to dedicating input devices and a display to the Pi is to access the device via another computer using &lt;em&gt;Virtual Networking Computing&lt;/em&gt; (VNC). VNC allows remote control of the Pi by transmitting all the display, keyboard, and mouse events to another computer.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Let's do it!&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="section" id="step-0-vnc-server"&gt;
-&lt;h2&gt;Step 0 - VNC Server&lt;/h2&gt;
+&lt;div class="section" id="to-configure-a-vnc-server-and-client"&gt;
+&lt;h2&gt;To configure a VNC server and client:&lt;/h2&gt;
+&lt;div class="section" id="vnc-server"&gt;
+&lt;h3&gt;0. VNC Server&lt;/h3&gt;
 &lt;p&gt;VNC enables a connection to a remote device display using two different methods: control an &lt;em&gt;existing&lt;/em&gt; remote desktop attached to a physical display on a device running a VNC server (example: &lt;em&gt;x11vnc&lt;/em&gt;); use a VNC server on the remote device to create a &lt;em&gt;new&lt;/em&gt; desktop (example: &lt;a class="reference external" href="http://www.tightvnc.com/"&gt;tightvnc&lt;/a&gt;) for display on the VNC client device. This second option is what I configure to enable running the Pi as a &lt;em&gt;headless&lt;/em&gt; device (no attached display or peripherals).&lt;/p&gt;
 &lt;p&gt;Temporary access to a display and USB input devices makes the inital configuration of the Pi and VNC an easier task. The alternative is connecting to the Pi using &lt;a class="reference external" href="http://www.raspberrypi.org/documentation/remote-access/ssh/"&gt;SSH&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Open or access a console on the Pi and install &lt;tt class="docutils literal"&gt;tightvncserver&lt;/tt&gt;...&lt;/p&gt;
+&lt;p&gt;Open or access a console on the Pi and install &lt;tt class="docutils literal"&gt;tightvncserver&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get update
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install tightvncserver
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The first time the VNC server is launched it will prompt the user to create a password to permit access to the desktop...&lt;/p&gt;
+&lt;p&gt;The first time the VNC server is launched it will prompt the user to create a password to permit access to the desktop:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;vncserver
 You will require a password to access your desktops.
 
@@ -93,41 +94,42 @@ Log file is /home/USERNAME/.vnc/HOSTNAME:1.log
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Default port on which vncserver runs is &lt;tt class="docutils literal"&gt;:1&lt;/tt&gt; which corresponds to the TCP port on which the server is running (5900+n = port number)... therefore the first instance is running on &lt;strong&gt;5901&lt;/strong&gt;. Running vncserver a second time will create a second instance running on the next free port, i.e &lt;tt class="docutils literal"&gt;:2&lt;/tt&gt; or 5902.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="step-1-vnc-client"&gt;
-&lt;h2&gt;Step 1 - VNC Client&lt;/h2&gt;
+&lt;div class="section" id="vnc-client"&gt;
+&lt;h3&gt;1. VNC Client&lt;/h3&gt;
 &lt;p&gt;Install a VNC client to connect with the newly-accessible remote Pi (example: &lt;a class="reference external" href="http://www.tightvnc.com/"&gt;xtightvncviewer&lt;/a&gt; is available for multiple platforms). On my Debian-powered laptop I install the &lt;a class="reference external" href="http://www.karlrunge.com/x11vnc/ssvnc.html"&gt;ssvnc&lt;/a&gt; (Unix only) client:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get update
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install ssvnc
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Start the client and connect to the Pi by supplying its &lt;tt class="docutils literal"&gt;ADDRESS:VNC_DESKTOP&lt;/tt&gt; and the VNC desktop password...&lt;/p&gt;
+&lt;p&gt;Start the client and connect to the Pi by supplying its &lt;tt class="docutils literal"&gt;ADDRESS:VNC_DESKTOP&lt;/tt&gt; and the VNC desktop password:&lt;/p&gt;
 &lt;img alt="SSVNC" class="align-center" src="images/pingparade5-ssvnc.png" style="width: 500px; height: 154px;" /&gt;
 &lt;p&gt;... and use it with the &lt;tt class="docutils literal"&gt;ssh&lt;/tt&gt; option since I already run &lt;em&gt;openssh-server&lt;/em&gt; on the Pi and have it setup for &lt;a class="reference external" href="http://www.circuidipity.com/pingparade2.html"&gt;ssh key authentication&lt;/a&gt;.&lt;/p&gt;
 &lt;img alt="VNC" class="align-center" src="images/pingparade5-vnc.png" style="width: 800px; height: 503px;" /&gt;
-&lt;p&gt;When finished with the session just close the VNC client window and use the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-kill&lt;/span&gt;&lt;/tt&gt; switch on the Pi to shut down the VNC server...&lt;/p&gt;
+&lt;p&gt;When finished with the session just close the VNC client window and use the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-kill&lt;/span&gt;&lt;/tt&gt; switch on the Pi to shut down the VNC server:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;vncserver -kill :1
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="step-2-optimize"&gt;
-&lt;h2&gt;Step 2 - Optimize&lt;/h2&gt;
-&lt;p&gt;On the Pi - create &lt;tt class="docutils literal"&gt;myVNCserver&lt;/tt&gt; with desired vncserver settings and place in &lt;tt class="docutils literal"&gt;~/bin&lt;/tt&gt;&lt;/p&gt;
+&lt;div class="section" id="optimize"&gt;
+&lt;h3&gt;2. Optimize&lt;/h3&gt;
+&lt;p&gt;On the Pi - create &lt;tt class="docutils literal"&gt;myVNCserver&lt;/tt&gt; with desired vncserver settings and place in &lt;tt class="docutils literal"&gt;~/bin&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/sh&lt;/span&gt;
 vncserver -geometry 1800x1000 -depth 24 -dpi 96
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Note that &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-geometry&lt;/span&gt;&lt;/tt&gt; can be set to whatever is desired&lt;/p&gt;
 &lt;p&gt;With this setup VNC can be started and halted on demand. To have VNC auto-start at boot consult the &lt;a class="reference external" href="http://www.raspberrypi.org/documentation/remote-access/vnc/"&gt;Pi documentation&lt;/a&gt; for a sample &lt;tt class="docutils literal"&gt;/etc/init.d&lt;/tt&gt; script. Since I plan to run my Pi as a headless server and rarely access the desktop I will just start VNC when I need it.&lt;/p&gt;
 &lt;p&gt;VNC does not use the Pi graphics processor and its memory allocation can be altered to &lt;a class="reference external" href="http://www.circuidipity.com/pi-memory-split.html"&gt;assign more RAM to the CPU&lt;/a&gt; for running applications.&lt;/p&gt;
-&lt;p&gt;The desktop that vncserver puts up is controlled by &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vnc/xstartup&lt;/span&gt;&lt;/tt&gt;. To load the lightweight &lt;strong&gt;Openbox&lt;/strong&gt; window manager as an alternative to the default LXDE desktop environment, comment out the &lt;tt class="docutils literal"&gt;/etc/X11/Xsession&lt;/tt&gt; line and replace with...&lt;/p&gt;
+&lt;p&gt;The desktop that vncserver puts up is controlled by &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vnc/xstartup&lt;/span&gt;&lt;/tt&gt;. To load the lightweight &lt;strong&gt;Openbox&lt;/strong&gt; window manager as an alternative to the default LXDE desktop environment, comment out the &lt;tt class="docutils literal"&gt;/etc/X11/Xsession&lt;/tt&gt; line and replace with:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;exec &lt;/span&gt;ck-launch-session openbox-session
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="helpful-resources"&gt;
-&lt;h2&gt;Helpful Resources&lt;/h2&gt;
+&lt;h3&gt;3. Helpful Resources&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.raspberrypi.org/documentation/remote-access/vnc/"&gt;Raspberry Pi VNC&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.raspberrypi.org/documentation/remote-access/vnc/linux.md"&gt;Connecting to a Pi over VNC using Linux&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Vncserver"&gt;Vncserver on the Arch Wiki&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 03 Oct 2014 00:07:00 -0400</pubDate><guid>tag:www.circuidipity.com,2014-10-03:pingparade5.html</guid><category>networks</category><category>raspberry pi</category><category>raspbian</category><category>linux</category></item><item><title>Links of interest</title><link>http://www.circuidipity.com/20141002.html</link><description>&lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://www.youtube.com/watch?v=Gt0Jf-79uOE"&gt;Interview with James Barrat, author of&lt;/a&gt; &lt;em&gt;Our Final Invention: Artificial Intelligence and the End of the Human Era&lt;/em&gt;&lt;/li&gt;
