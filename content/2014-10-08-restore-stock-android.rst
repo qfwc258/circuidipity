@@ -54,6 +54,8 @@ Navigate to the factory image folder and run:
 
 After flashing is complete the device will reboot into its default factory state. 
 
-Happy hacking!
+6. Helpful Resources
+--------------------
 
-Sources: `Factory Images for Nexus Devices <https://developers.google.com/android/nexus/images>`_ (developers.google.com), `Factory image bootloader problem <http://forum.xda-developers.com/showthread.php?t=2417097>`_ (forum.xda-developers.com)
+* `Factory images for Nexus devices <https://developers.google.com/android/nexus/images>`_
+* `Image bootloader problem <http://forum.xda-developers.com/showthread.php?t=2417097>`_
