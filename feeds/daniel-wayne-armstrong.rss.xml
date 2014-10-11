@@ -189,52 +189,53 @@ Today's belief in ineluctable certainty is the true innovation killer of our age
 &lt;li&gt;[my device has] firmware: 3.14.3 build 131011 rel. 55505n hardware &lt;strong&gt;version: v8&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Not much flash storage for added packages but its a cheap and cheerful device to hack on. It has been running &lt;a class="reference external" href="http://wiki.openwrt.org/doc/barrier.breaker"&gt;Barrier Breaker&lt;/a&gt;  - the release candidate of the next upcoming version of OpenWrt - with no problems for the last few months.&lt;/p&gt;
-&lt;p&gt;Below are the steps to replace the default router firmware with OpenWrt. I am using my TL-WR841N as an example. Good luck!&lt;/p&gt;
-&lt;div class="section" id="step-0-download-install-image"&gt;
-&lt;h2&gt;Step 0 - Download install image&lt;/h2&gt;
-&lt;div class="warning"&gt;
-&lt;p class="first admonition-title"&gt;Warning&lt;/p&gt;
-&lt;p class="last"&gt;OpenWrt builds different install images for different devices. Consult the &lt;a class="reference external" href="http://wiki.openwrt.org/toh/start"&gt;Table of Hardware&lt;/a&gt; to confirm that your router is supported and read the wiki entry for your particular device to identify the correct image. It is &lt;strong&gt;easy to brick a device&lt;/strong&gt; (render inoperable) using an incorrect install image.&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;TL-WR841N is an &lt;strong&gt;ar71xx&lt;/strong&gt; device. Download the most recent VERSION (&lt;em&gt;14.07&lt;/em&gt; as of 10-02):&lt;/p&gt;
+&lt;div class="section" id="to-replace-the-default-router-firmware-with-openwrt"&gt;
+&lt;h2&gt;To replace the default router firmware with OpenWrt:&lt;/h2&gt;
+&lt;div class="section" id="download-install-image"&gt;
+&lt;h3&gt;0. Download install image&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;WARNING:&lt;/strong&gt; OpenWrt builds different install images for different devices. Consult the &lt;a class="reference external" href="http://wiki.openwrt.org/toh/start"&gt;Table of Hardware&lt;/a&gt; to confirm that your router is supported and read the wiki entry for your particular device to identify the correct image. It is &lt;strong&gt;easy to brick a device&lt;/strong&gt; (render inoperable) using an incorrect install image.&lt;/p&gt;
+&lt;p&gt;TL-WR841N is an &lt;strong&gt;ar71xx&lt;/strong&gt; device. Download the most recent VERSION (&lt;strong&gt;14.07&lt;/strong&gt; as of 10-02):&lt;/p&gt;
 &lt;p&gt;[Sample link] &lt;a class="reference external" href="http://downloads.openwrt.org/barrier_breaker/14.07/ar71xx/generic/openwrt-ar71xx-generic-tl-wr841n-v8-squashfs-factory.bin"&gt;http://downloads.openwrt.org/barrier_breaker/14.07/ar71xx/generic/openwrt-ar71xx-generic-tl-wr841n-v8-squashfs-factory.bin&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="step-1-flash-router"&gt;
-&lt;h2&gt;Step 1 - Flash router&lt;/h2&gt;
-&lt;p&gt;Log into the TP-Link router web interface - address=192.168.0.1, user=admin, pass=admin - navigate to the update page and select the downloaded &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openwrt-*-squashfs-factory.bin&lt;/span&gt;&lt;/tt&gt; firmware image as the update package. Allow several minutes for the device to write the new OpenWrt firmware; when finished the device will reboot and can be accessed at address=192.168.1.1.&lt;/p&gt;
+&lt;div class="section" id="flash-router"&gt;
+&lt;h3&gt;1. Flash router&lt;/h3&gt;
+&lt;p&gt;Log into the TP-Link router web interface - address=192.168.0.1, user=admin, pass=admin - navigate to the update page and select the downloaded &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openwrt-*-squashfs-factory.bin&lt;/span&gt;&lt;/tt&gt; firmware image as the update package. Allow several minutes for the device to write the new OpenWrt firmware; when finished the device will reboot and can be accessed at &lt;strong&gt;192.168.1.1&lt;/strong&gt;.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="step-2-first-login"&gt;
-&lt;h2&gt;Step 2 - First login&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/firstlogin"&gt;Use telnet (no password) to login for the first time&lt;/a&gt; to the new OpenWrt installation. Use &lt;tt class="docutils literal"&gt;passwd&lt;/tt&gt; to create a new root password. Once the password is properly configured telnet is disabled. Exit and re-login using &lt;tt class="docutils literal"&gt;ssh root&amp;#64;192.168.1.1&lt;/tt&gt; and the new password.&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/internet.connection"&gt;Setup your internet connection&lt;/a&gt; either by editing &lt;tt class="docutils literal"&gt;/etc/config/network&lt;/tt&gt; or using OpenWrt's &lt;em&gt;Unified Configuration Interface&lt;/em&gt; (UCI). Using my DSL (pppoe) as an example...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;uci &lt;span class="nb"&gt;set &lt;/span&gt;network.wan.proto&lt;span class="o"&gt;=&lt;/span&gt;pppoe
-uci &lt;span class="nb"&gt;set &lt;/span&gt;network.wan.username&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;yougotthisfromyour@isp.su&amp;#39;&lt;/span&gt;
-uci &lt;span class="nb"&gt;set &lt;/span&gt;network.wan.password&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;yourpassword&amp;#39;&lt;/span&gt;
-uci commit network
-ifup wan
+&lt;div class="section" id="first-login"&gt;
+&lt;h3&gt;2. First login&lt;/h3&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/firstlogin"&gt;Use telnet (no password) to login for the first time&lt;/a&gt; to the new OpenWrt installation. Use &lt;tt class="docutils literal"&gt;passwd&lt;/tt&gt; to create a new root password. Once the password is properly configured telnet is disabled. Exit and re-login using SSH:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh root@192.168.1.1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/internet.connection"&gt;Setup your internet connection&lt;/a&gt; either by editing &lt;tt class="docutils literal"&gt;/etc/config/network&lt;/tt&gt; or using OpenWrt's &lt;strong&gt;Unified Configuration Interface&lt;/strong&gt; (UCI). Using my DSL (pppoe) as an example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# uci set network.wan.proto=pppoe&lt;/span&gt;
+&lt;span class="c"&gt;# uci set network.wan.username=&amp;#39;yougotthisfromyour@isp.su&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;# uci set network.wan.password=&amp;#39;yourpassword&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;# uci commit network&lt;/span&gt;
+&lt;span class="c"&gt;# ifup wan&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="step-3-web-interface"&gt;
-&lt;h2&gt;Step 3 - Web interface&lt;/h2&gt;
-&lt;p&gt;OpenWrt can be further configured in the console or install the optional &lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/luci.essentials"&gt;LuCI web interface&lt;/a&gt; using the &lt;strong&gt;opkg&lt;/strong&gt; package manager...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;opkg update
-opkg install luci
+&lt;div class="section" id="web-interface"&gt;
+&lt;h3&gt;3. Web interface&lt;/h3&gt;
+&lt;p&gt;OpenWrt can be further configured in the console or install the optional &lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/luci.essentials"&gt;LuCI web interface&lt;/a&gt; using the &lt;strong&gt;opkg&lt;/strong&gt; package manager [1]:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# opkg update&lt;/span&gt;
+&lt;span class="c"&gt;# opkg install luci&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;div class="note"&gt;
-&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
-&lt;p class="last"&gt;With only 4MB flash to play with there is less than 256K remaining in &lt;tt class="docutils literal"&gt;rootfs/overlay&lt;/tt&gt; for more packages after installing LuCI.&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;After install LuCI is not running by default...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;/etc/init.d/uhttpd start    &lt;span class="c"&gt;# start the web server&lt;/span&gt;
-/etc/init.d/uhttpd &lt;span class="nb"&gt;enable&lt;/span&gt;   &lt;span class="c"&gt;# auto-start at boot&lt;/span&gt;
+&lt;p&gt;After install LuCI is not running by default:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# /etc/init.d/uhttpd start    # start the web server&lt;/span&gt;
+&lt;span class="c"&gt;# /etc/init.d/uhttpd enable   # auto-start at boot&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;LuCI's default web server &lt;strong&gt;uhttpd&lt;/strong&gt; is configured in &lt;tt class="docutils literal"&gt;/etc/config/uhttpd&lt;/tt&gt; and LuCI itself is configured in &lt;tt class="docutils literal"&gt;/etc/config/luci&lt;/tt&gt;.&lt;/p&gt;
 &lt;img alt="LuCI login" src="images/pingparade4-1.png" style="width: 960px; height: 300px;" /&gt;
 &lt;/div&gt;
-&lt;div class="section" id="step-4-configuration"&gt;
-&lt;h2&gt;Step 4 - Configuration&lt;/h2&gt;
+&lt;div class="section" id="configuration"&gt;
+&lt;h3&gt;4. Configuration&lt;/h3&gt;
 &lt;p&gt;Secure access to the router using &lt;a class="reference external" href="http://www.circuidipity.com/pingparade2.html"&gt;SSH key authentication&lt;/a&gt;. Create &lt;a class="reference external" href="http://www.circuidipity.com/20141001.html"&gt;static leases&lt;/a&gt; for hosts using DHCP and setup &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;port forwarding&lt;/a&gt; to reach devices behind the firewall from the world-at-large.&lt;/p&gt;
 &lt;p&gt;Its exciting what you can do with these consumer routers once you let it sink in that - with a few dollars and OpenWrt - you have an extremely configurable general purpose computer.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h3&gt;Notes&lt;/h3&gt;
+&lt;p&gt;[1] With only 4MB flash to play with there is less than 256K remaining in &lt;tt class="docutils literal"&gt;rootfs/overlay&lt;/tt&gt; for more packages after installing LuCI.&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Mon, 06 Oct 2014 15:01:00 -0400</pubDate><guid>tag:www.circuidipity.com,2014-09-26:pingparade4.html</guid><category>networks</category><category>openwrt</category><category>linux</category></item></channel></rss>
