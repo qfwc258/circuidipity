@@ -12,9 +12,9 @@ I actually use 2 one terabyte drives. One drive is in my possession and the othe
 
 To guard against loss or theft its a good idea to *encrypt* the hard drive. I prepare the device using *Linux Unified Key Setup (LUKS)* and the ``cryptsetup`` utility.
 
-.. warning::
+.. role:: warning
 
-    In this example the external hard drive is identified as *sdb* and contains a single partition *sdb1*. Make careful note of the drive and partition labels on **your system** as they can be very different. The following steps will **destroy all data** currently stored on the drive.
+:warning:`WARNING!` In this example the external hard drive is identified as *sdb* and contains a single partition *sdb1*. Make careful note of the drive and partition labels on **your system** as they can be very different. The following steps will **destroy all data** currently stored on the drive.
 
 Download the cryptsetup package if not already installed. Connect the external drive, make note of drive labels (``sdb``, ``sdb1`` ...), and erase/overwrite the drive.
 

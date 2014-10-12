@@ -111,9 +111,9 @@ Using the above image as an example ... download the ``xz-utils`` Debian package
 Copy image to microSD
 ---------------------
 
-.. warning::
+.. role:: warning
 
-    Be careful to note the proper *DeviceID* of your microSD card ... in my example I use *sdb* but your device will probably have a *different address*. Command *dd* will completely **wipe out the contents of the card**. Its not nicknamed *disk destroyer* for nothing!
+:warning:`WARNING!` Be careful to note the proper *DeviceID* of your microSD card ... in my example I use *sdb* but your device will probably have a *different address*. Command *dd* will completely **wipe out the contents of the card**. Its not nicknamed *disk destroyer* for nothing!
 
 Copy image to card using ``dd`` ...
 

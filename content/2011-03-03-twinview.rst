@@ -20,9 +20,7 @@ To setup my desired side-by-side, dual-display layout I use ...
 
 * Debian ``wheezy`` with a ``2.6.32-30 kernel``, ``Xorg 7.5+8``, and the Nvidia proprietary ``driver ver. 195.36.31-7`` installed via ``module-assistant``
 
-.. note::
-
-    For a dual-display configuration using non-Nvidia graphics try `xrandr <big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr.html>`_ .
+For a dual-display configuration using non-Nvidia graphics try `xrandr <big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr.html>`_ .
 
 Make a small edit to ``/etc/X11/xorg.conf`` by adding ``Option "TwinView"`` and ``Option "TwinViewOrientation"``. Using my own configuration as an example ... my primary display is the Acer and the I-INC is positioned left-relative to it. So I add to my ``xorg.conf`` ...
 

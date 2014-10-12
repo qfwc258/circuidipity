@@ -28,9 +28,9 @@ Step 1 - Prepare a USB stick
 
 USB sticks are my Linux install media of choice because I have configured several devices like this Asus netbook that do not include an optical drive. Plug the USB stick into your Linux host machine and leave the stick unmounted. Run the ``dmesg`` command and note the USB device ID (``sdb``, ``sdc``, ...).
 
-.. warning::
+.. role:: warning
 
-    Make sure to record the correct USB device ID. The following procedure **wipes out** all data on the USB stick. On my system the device shows up as *sdb* but it will possibly be different on your system.
+:warning:`WARNING!` Make sure to record the correct USB device ID. The following procedure **wipes out** all data on the USB stick. On my system the device shows up as *sdb* but it will possibly be different on your system.
 
 Copy the iso to the USB stick ...
 
@@ -128,9 +128,9 @@ Additional packages
 
     terminal multiplexer: it enables a number of terminals (or windows), each running a separate program, to be created, accessed, and controlled from a single screen ... [then] detached from a screen and continue running in the background, then later reattached."* I love this program. Massive usefulness on a single remote connection to a server.
 
-.. warning::
+.. role:: warning
 
-    Place your netbook or laptop with the lid open (many laptops radiate heat through the keyboard) in a well-ventilated location to prevent overheating and minimize wear-and-tear. My netbook sits on an elevated metal grate that leaves the bottom vents unblocked.
+:warning:`WARNING!` Place your netbook or laptop with the lid open (many laptops radiate heat through the keyboard) in a well-ventilated location to prevent overheating and minimize wear-and-tear. My netbook sits on an elevated metal grate that leaves the bottom vents unblocked.
 
 Step 4 - Services
 =================

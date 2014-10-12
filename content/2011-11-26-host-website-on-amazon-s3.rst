@@ -22,9 +22,8 @@ Step 1 — Create an Amazon S3 website-enabled bucket
 
 S3 uses *buckets* (think folders) that act as containers for your static files. `Create a new website-enabled bucket <http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?HostingWebsiteOnS3Setup.html>`_ to hold your website files.
 
-.. note::
 
-    Make sure when creating the S3 bucket to give it the name *www.YOURWEBSITE.TLD*. For example, this website uses an S3 bucket with the name *www.circuidipity.com*.
+Make sure when creating the S3 bucket to give it the name *www.YOURWEBSITE.TLD*. For example, this website uses an S3 bucket with the name *www.circuidipity.com*.
 
 The endpoint address for your newly-created S3 bucket will be http://www.YOURWEBSITE.TLD.s3-website-location.amazonaws.com (my endpoint is http://www.circuidipity.com.s3-website-us-east-1.amazonaws.com/).
     
@@ -83,9 +82,7 @@ Step 4 - Configure DNS
 
 To transform *s3-website-location.amazonaws.com* into *www.YOURWEBSITE.com* you need to `create a CNAME at your DNS provider <http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?VirtualHosting.html>`_ that maps ``www`` to your S3 bucket ... in my case DNS is provided by GoDaddy and I map ``www`` to www.circuidipity.com.s3-website-us-east-1.amazonaws.com.
 
-.. note::
-
-    *s3-website-us-east-1.amazonaws.com* is for accessing the website feature. If you just want S3 you can use *s3.amazonaws.com*.
+*s3-website-us-east-1.amazonaws.com* is for accessing the website feature. If you just want S3 you can use *s3.amazonaws.com*.
 
 Allow a bit of time for your changes to propagate through the global network of DNS servers ... check your modifications by running ``host`` (cool little DNS hookup utility) ...
 

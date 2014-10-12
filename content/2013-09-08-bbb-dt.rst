@@ -88,9 +88,9 @@ Example: If you connect a photoresistor to BBB's ``P9_32(1.8V)`` and ``P9_34(AGN
 
 Our BB-ADC dtbo above resides in slot 7. To unload we would run ``echo -7 > $SLOTS``.
 
-.. warning::
+.. role:: warning
 
-    Unloading from $SLOTS is currently very unstable and can induce kernel panics. Much safer to simply reboot.
+:warning:`WARNING!` Unloading from $SLOTS is currently very unstable and can induce kernel panics. Much safer to simply reboot.
 
 To have this overlay load at boot time we add the option ``capemgr.enable_partno=BB-ADC`` to the ``uEnv.txt`` file located on the ``/dev/mmcblk0p1`` partition.
 

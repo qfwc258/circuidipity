@@ -34,9 +34,9 @@ Step 1 - Prepare USB stick
 
 USB sticks are my Linux install media of choice because I have configured several devices that do not include an optical drive. Plug the USB stick into your Linux host machine and leave the stick **unmounted**. Run the ``dmesg`` command and note the USB device ID (``sdb``, ``sdc``, ...).
 
-.. warning::
+.. role:: warning
 
-    Make sure to record the correct USB device ID. The following procedure **wipes out all data on the USB stick.** On my system the device shows up as ``sdb`` but it will possibly be different on **your** system.
+:warning:`WARNING!` Make sure to record the correct USB device ID. The following procedure **wipes out all data on the USB stick.** On my system the device shows up as ``sdb`` but it will possibly be different on **your** system.
 
 Copy the iso to the USB stick:
 
@@ -72,9 +72,7 @@ Debian's ``businesscard`` installer allows a choice of Debian versions - ``stabl
 Partition disks
 ---------------
 
-.. note::
-
-    Creating encrypted partitions with **Erase date: yes** (default) overwrites the partition with random data and can take many hours depending on partition size.
+Creating encrypted partitions with **Erase date: yes** (default) overwrites the partition with random data and can take many hours depending on partition size.
 
 Select the ``Manual`` option to partition the drive. I choose to encrypt my ``swap`` and ``home`` partitions. Space permitting - my chosen partition layout is:
 
@@ -214,9 +212,7 @@ Add the archive to the package manager by generating an entry in ``/etc/apt/sour
     $ sudo echo 'deb http://backports.debian.org/debian-backports squeeze-backports main' > /etc/apt/sources.list.d/squeeze-backports.list
     $ sudo apt-get update
 
-.. note::
-
-    Files in ``sources.list.d`` must end with a ``*.list`` extension.
+Files in ``sources.list.d`` must end with a ``*.list`` extension.
 
 To verify which versions of a package are available and - for example - to install the version from backports:
 
@@ -291,9 +287,7 @@ Discover your machine's video card:
 
     $ sudo apt-get install xorg
 
-.. note:: 
-
-    There are known issues with some Intel video cards - ``xserver-xorg-video-intel`` - and `KMS <http://wiki.debian.org/KernelModesetting>`_ and the default ``2.6.32 kernel`` in Debian ``stable``.
+There are known issues with some Intel video cards - ``xserver-xorg-video-intel`` - and `KMS <http://wiki.debian.org/KernelModesetting>`_ and the default ``2.6.32 kernel`` in Debian ``stable``.
 
 On my Intel-equipped `netbook <http://www.circuidipity.com/debian-linux-on-the-asus-eeepc-1001p.html>`_ netbook booting from GRUB or starting an X session can result in a black screen. A temporary fix is to edit the booting GRUB entry and add ``acpi=off`` to the kernel line.
 

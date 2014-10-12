@@ -35,7 +35,9 @@ To replace the default router firmware with OpenWrt:
 0. Download install image
 -------------------------
 
-**WARNING:** OpenWrt builds different install images for different devices. Consult the `Table of Hardware <http://wiki.openwrt.org/toh/start>`_ to confirm that your router is supported and read the wiki entry for your particular device to identify the correct image. It is **easy to brick a device** (render inoperable) using an incorrect install image.
+.. role:: warning
+
+:warning:`WARNING!` OpenWrt builds different install images for different devices. Consult the `Table of Hardware <http://wiki.openwrt.org/toh/start>`_ to confirm that your router is supported and read the wiki entry for your particular device to identify the correct image. It is **easy to brick a device** (render inoperable) using an incorrect install image.
 
 TL-WR841N is an **ar71xx** device. Download the most recent VERSION (**14.07** as of 10-02):
 

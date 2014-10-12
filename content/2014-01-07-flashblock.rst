@@ -10,8 +10,10 @@ Vimeo videos actually are not playing *at all* ... neither embedded or on the si
 
 **Fix:** Add 3 entries to the FlashBlock ``Preferences->Whitelist``:
 
-| vimeo.com
-| vimeocdn.com
-| player.vimeo.com
+.. code-block:: bash
+
+    vimeo.com
+    vimeocdn.com
+    player.vimeo.com
 
 Works on ``Iceweasel 24.2.0`` with ``Flashblock 1.5.17`` .

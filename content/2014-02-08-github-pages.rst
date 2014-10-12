@@ -134,9 +134,7 @@ Using Gandi as an example I will create new ``CNAME`` and ``A`` records:
 * modify/add ``A`` record to `permanently redirect <https://wiki.gandi.net/en/domains/management/domain-as-website/forwarding>`_ the top level domain to ``www`` using the Gandi redirect service address ``217.70.184.38``
 * click ``Use this version`` to save all changes and wait a few hours for the DNS modifications to propagate around the world
 
-.. note::
-
-    It is possible to skip web redirection and set the A record value to point directly to a `GitHub address <https://help.github.com/articles/setting-up-a-custom-domain-with-pages>`_ but at the loss of *dynamic traffic management*.
+It is possible to skip web redirection and set the A record value to point directly to a `GitHub address <https://help.github.com/articles/setting-up-a-custom-domain-with-pages>`_ but at the loss of *dynamic traffic management*.
 
 Step 5 - Custom 404
 -------------------

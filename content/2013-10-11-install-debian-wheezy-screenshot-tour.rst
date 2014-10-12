@@ -186,9 +186,7 @@ In the example below I create 3 partitions on the disk:
     :width: 800px
     :height: 600px
 
-.. note::
-
-    Setting *Mount options* to *noatime* decreases write operations and boosts drive speed.
+Setting **Mount options** to ``noatime`` decreases write operations and boosts drive speed.
 
 .. image:: images/screenshot/wheezyInstall/25.1.png
     :alt: Mount options
@@ -262,9 +260,7 @@ In the example below I create 3 partitions on the disk:
     :width: 800px
     :height: 600px
 
-.. note::
-
-    If the hard disk has not been securely wiped prior to installing Debian (using a utility like `DBAN <http://www.circuidipity.com/multi-boot-usb.html>`_) you may want to configure **Erase data** as **yes**. Note, however, that depending on the size of the disk this operation can last several hours.
+If the hard disk has not been securely wiped prior to installing Debian (using a utility like `DBAN <http://www.circuidipity.com/multi-boot-usb.html>`_) you may want to configure **Erase data** as **yes**. Note, however, that depending on the size of the disk this operation can last several hours.
 
 .. image:: images/screenshot/wheezyInstall/33.1.png
     :alt: Erase data
@@ -404,9 +400,7 @@ In the example below I create 3 partitions on the disk:
     :width: 800px
     :height: 600px
 
-.. note::
-
-    **Reserved blocks** can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the 5% reserve set aside by Debian to 1%.
+**Reserved blocks** can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the 5% reserve set aside by Debian to 1%.
 
 .. image:: images/screenshot/wheezyInstall/49.1.png
     :alt: Reserved blocks
@@ -447,9 +441,7 @@ Step 3 - Install packages and finish up
     :width: 800px
     :height: 600px
 
-.. note::
-
-    Select only **[*] Standard system utilities** if you wish to start with a minimal, console-only base configuration ready for further customization. The task menu can be accessed post-install by running ``tasksel``.
+Select only **[*] Standard system utilities** if you wish to start with a minimal, console-only base configuration ready for further customization. The task menu can be accessed post-install by running ``tasksel``.
     
 .. image:: images/screenshot/wheezyInstall/52.png
     :alt: Software selection
@@ -475,9 +467,7 @@ Step 3 - Install packages and finish up
     :width: 800px
     :height: 600px
 
-.. note::
-
-    If an **encrypted home** partition was created in Step 2 the system will display a passphrase prompt to unlock the partition.
+If an **encrypted home** partition was created in Step 2 the system will display a passphrase prompt to unlock the partition.
 
 .. image:: images/screenshot/wheezyInstall/55.png
     :alt: Enter encrypt passphrase

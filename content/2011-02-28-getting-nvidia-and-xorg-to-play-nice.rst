@@ -60,9 +60,7 @@ Few different ways this can go ...
 
 * perform a manual build for either a custom or Debian-packaged kernel
 
-.. note::
-
-    These ``nvidia-{kernel,glx}`` packages only support GeForce 6xxx and higher GPUs. Check out the *nvidia legacy* packages for older cards and the list of `legacy drivers <http://www.nvidia.com/object/IO_32667.html>`_ .
+These ``nvidia-{kernel,glx}`` packages only support GeForce 6xxx and higher GPUs. Check out the *nvidia legacy* packages for older cards and the list of `legacy drivers <http://www.nvidia.com/object/IO_32667.html>`_ .
 
 Pre-built
 ---------
@@ -92,9 +90,7 @@ module-assistant
 
 See below for configuring X to use the proprietary Nvidia driver vs an open-source driver.
 
-.. note::
-
-    When upgrading to a newer kernel ... the Nvidia kernel module will need to be rebuilt to match the new kernel.
+When upgrading to a newer kernel ... the Nvidia kernel module will need to be rebuilt to match the new kernel.
 
 Manual build
 ------------
@@ -145,11 +141,7 @@ Any user that wants to run 3-D code must belong to the ``video`` group. Should a
 Step 3 - Run
 ============
 
-Logged in as regular user ... start the X server ``startx`` or restart ``sudo /etc/init.d/gdm start`` if using a graphical login manager.
-
-.. note::
-
-    I needed to restart my system to get the nvidia driver to work properly.
+Logged in as regular user ... start the X server ``startx`` or restart ``sudo /etc/init.d/gdm start`` if using a graphical login manager. I needed to restart my system to get the nvidia driver to work properly.
                         
 View what video driver is in use ...
 
@@ -173,8 +165,6 @@ Confirm that video acceleration is actually working ...
     $ glxinfo | grep rendering       
     direct rendering: Yes
 
-.. note::
-
-    For a dual-display configuration - use monitors of different resolutions and combine them into one desktop - give `Twinview <http://www.circuidipity.com/twinview.html>`_ a chance.
+For a dual-display configuration - use monitors of different resolutions and combine them into one desktop - give `Twinview <http://www.circuidipity.com/twinview.html>`_ a chance.
 
 Good to go!

@@ -6,7 +6,7 @@ Upton on Shenzhen
 :slug: 20140927
 :tags: shenzhen, china, raspberry pi, electronics, quotes
 
-**Eben Upton**, co-founder of **Raspberry Pi**, on hardware hacker-friendly Shenzhen:
+**Eben Upton**, co-founder of **Raspberry Pi**, on hardware hacker-friendly **Shenzhen**:
 
     One of the big problems with large Western components companies is that they have such big overheads that they have to qualify (sales) opportunities. One of the reasons that the Raspberry Pi has been successful is that we have taken high-end software and silicon that you can’t normally only buy a million of, because you have got to get through an opportunity certification program… it could cost a hundred thousand dollars for them to just to think about selling you the chip. They have got to know if it will be worth it.
 

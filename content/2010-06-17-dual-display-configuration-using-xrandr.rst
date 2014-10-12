@@ -14,9 +14,7 @@ This nifty command line tool is useful for setting screen size, orientation, mir
 
 No modifications are necessary to ``xorg.conf``. External displays can be hot-plugged to the host and a running X server can be modified by using xrandr + desired options in a terminal.
 
-.. note::
-
-    For a dual-display configuration using *Nvidia* graphics ... give `Twinview <http://www.circuidipity.com/twinview.html>`_ a go.
+For a dual-display configuration using *Nvidia* graphics ... give `Twinview <http://www.circuidipity.com/twinview.html>`_ a go.
 
 To setup my desired dual-display layout ... I use:
 

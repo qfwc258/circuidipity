@@ -8,9 +8,9 @@ Transform a USB stick into a boot device packing multiple Linux distros
 
 In 5 easy steps I transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.
 
-.. warning::
+.. role:: warning
 
-    In this HOWTO the USB stick is identified as *sdX* and contains a single partition *sdX1*. Make careful note of the drive and partition labels on your system. The following steps will **destroy all data** currently stored on the device.
+:warning:`WARNING!` In this HOWTO the USB stick is identified as *sdX* and contains a single partition *sdX1*. Make careful note of the drive and partition labels on your system. The following steps will **destroy all data** currently stored on the device.
 
 Step 0 - Select device and create filesystem
 ============================================
@@ -52,9 +52,9 @@ Download and copy Linux ISO images to the newly-created ``iso`` folder on the US
 * **Memtest86+** - Diagnostic tool for `testing RAM <http://www.memtest.org/>`_
 * **Darik's Boot and Nuke (DBAN)** - `Secure deletion tool <http://www.dban.org/>`_ to wipe hard disks clean
 
-.. note::
+.. role:: warning
 
-    When using DBAN remove the USB stick immediately when the boot messages begin to scroll past ... otherwise it will scan for USB drives and later fail when selecting a hard drive to wipe.
+:warning:`WARNING!` When using DBAN remove the USB stick immediately when the boot messages begin to scroll past ... otherwise it will scan for USB drives and later fail when selecting a hard drive to wipe.
 
 Step 4 - Create grub.cfg
 ========================

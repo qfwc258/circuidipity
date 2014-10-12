@@ -4,7 +4,7 @@ Ping Parade #5 -- Raspberry
 
 :date: 2014-10-03 00:07:00
 :slug: pingparade5
-:tags: networks, raspberry pi, raspbian, linux
+:tags: networks, vnc, raspberry pi, raspbian, linux
 :template: article-project-pingparade
 
 **Remote control a Linux desktop using Virtual Network Computing (VNC).**
