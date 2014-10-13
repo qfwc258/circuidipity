@@ -35,10 +35,7 @@
 <li>on my <em>left</em> ... an <em>I-INC iF281D</em> 28&quot; LCD at 1920x1200 resolution connected to the DVI port</li>
 <li>Debian <tt class="docutils literal">wheezy</tt> with a <tt class="docutils literal"><span class="pre">2.6.32-30</span> kernel</tt>, <tt class="docutils literal">Xorg 7.5+8</tt>, and the Nvidia proprietary <tt class="docutils literal">driver ver. <span class="pre">195.36.31-7</span></tt> installed via <tt class="docutils literal"><span class="pre">module-assistant</span></tt></li>
 </ul>
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">For a dual-display configuration using non-Nvidia graphics try <a class="reference external" href="big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr.html">xrandr</a> .</p>
-</div>
+<p>For a dual-display configuration using non-Nvidia graphics try <a class="reference external" href="big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr.html">xrandr</a> .</p>
 <p>Make a small edit to <tt class="docutils literal">/etc/X11/xorg.conf</tt> by adding <tt class="docutils literal">Option &quot;TwinView&quot;</tt> and <tt class="docutils literal">Option &quot;TwinViewOrientation&quot;</tt>. Using my own configuration as an example ... my primary display is the Acer and the I-INC is positioned left-relative to it. So I add to my <tt class="docutils literal">xorg.conf</tt> ...</p>
 <div class="highlight"><pre>Section <span class="s2">&quot;Device&quot;</span>
     Identifier  <span class="s2">&quot;Card0&quot;</span>

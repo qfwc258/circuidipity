@@ -1,8 +1,8 @@
 /*
     Name: Orangespresso
-    Date: October 2014
+    Date: September 2014
     Description: Theme for the Pelican static site generator
-    Version: 0.4
+    Version: 0.3
     Licence: GPL2
     Author: Daniel Wayne Armstrong <http://www.circuidipity.com>
 */
@@ -12,6 +12,7 @@ Imports
 */
 
 @import url(font.css);
+@import url(pygment.css);
 
 /*
 -------- Global --------
@@ -55,9 +56,16 @@ h2, h3, h4, h5, h6 {color: #000000;}
 Anchors
 */
 
-a {color: #ff6600; text-decoration: none; padding: 2px;}
+a {
+    color: #ff6600;
+    text-decoration: none;
+    padding: 2px;
+}
 
-a:hover {color: #ffffff; background-color: #009900;}
+a:hover {
+    color: #ffffff;
+    background-color: #009900;
+}
 
 a.tag, ul.tagcloud a {
     font-family: 'MerriweatherRegular', serif;
@@ -103,7 +111,11 @@ p.articletags {font-weight: bold;}
     
 p.prevpost {text-align: left; margin-bottom: 0px;}
 
-p.nextpost {text-align: right; margin-top: 0px; margin-bottom: 0px;}
+p.nextpost {
+    text-align: right;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
 
 p.firstparagraph {
     font-size: 1.4em;
@@ -114,7 +126,6 @@ p.firstparagraph {
 
 p.caption {font-size: 1.0em; font-weight: bold; margin-top: 0px;}
 
-/*
 .note p.first.admonition-title, .warning p.first.admonition-title {
     font-size: 1.2em; 
     font-weight: bold;
@@ -128,7 +139,6 @@ p.caption {font-size: 1.0em; font-weight: bold; margin-top: 0px;}
 .warning p.first.admonition-title {background-color: #ff0000;}
 
 .note p.last, .warning p.last {margin-top: 0px;}
-*/
 
 .projectx p {font-size: 1.2em;}
 
@@ -136,7 +146,10 @@ p.caption {font-size: 1.0em; font-weight: bold; margin-top: 0px;}
 Quotes
 */
 
-blockquote {padding-left: 12px; border-left: 6px solid #009900;}
+blockquote {
+    padding-left: 12px;
+    border-left: 6px solid #009900;
+}
 
 /*
 Lists
@@ -144,7 +157,10 @@ Lists
 
 #archives ol, #tagposts ol {line-height: 1.4em;}
 
-ul.tagcloud {list-style: none; line-height: 1.8em;}
+ul.tagcloud {
+    list-style: none;
+    line-height: 1.8em;
+}
 
 ul.tagcloud li {display: inline-block;}
 
@@ -179,7 +195,11 @@ ul.rig li {
     -webkit-box-sizing: border-box;
 }
 
-ul.rig li img {max-width: 100%; height: auto; margin: 0 0 10px;}
+ul.rig li img {
+    max-width: 100%;
+    height: auto;
+    margin: 0 0 10px;
+}
 
 ul.rig li a, ul.rig li a:hover {
     color: #ff6600;
@@ -188,9 +208,13 @@ ul.rig li a, ul.rig li a:hover {
     font-weight: bold;
 }
 
-ul.rig li h3 {margin: 0 0 5px;}
+ul.rig li h3 {
+    margin: 0 0 5px;
+}
 
-ul.rig li p {margin: 0;}
+ul.rig li p {
+    margin: 0;
+}
 
 /* class for 2 columns */
 ul.rig.columns-2 li {
@@ -230,20 +254,28 @@ Code
 */
 
 pre {
+    border: 2px dashed #000000;
     overflow: auto;
-    font-weight: bold;
-    background-color: #ccffcc;
     color: #000000;
-    padding: 1px 2px 1px 2px;
+    background-color: #ffffff;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 20px;
 }
 
-tt {font-weight: bold;}
+tt {
+    border: 1px solid #bbb;
+    padding: 1px 2px 1px 2px;
+    background: #eee;
+}
 
 /*
 Dividers
 */
 
-hr {border: 1px solid #3d3d3d;}
+hr {
+    border: 1px solid #3d3d3d;
+}
 
 /*
 Images
@@ -285,13 +317,18 @@ img.align-right {
 Siteheader
 */
 
-#siteheader {font-size: 2.0em; line-height: 1.0em;}
+#siteheader {
+    font-size: 2.0em;
+    line-height: 1.0em;
+}
 
 /*
 Latest Post
 */
 
-#latestpost {clear: both;}
+#latestpost {
+    clear: both;
+}
 
 /*
 Nav Links to Old/New Posts
@@ -301,7 +338,11 @@ Nav Links to Old/New Posts
 Footer
 */
 
-#footer {margin-top: 20px; line-height: 1.2em; text-align: right;}
+#footer {
+    margin-top: 20px;
+    line-height: 1.2em;
+    text-align: right;
+}
 
 /*
 Breadcrumb Trail
@@ -325,13 +366,17 @@ All Tags
     word-spacing: 0.05em;
 }
 
-#navmenu, #footer, #breadcrumb, #archives, #tagposts {font-size: 1.4em;}
+#navmenu, #footer, #breadcrumb, #archives, #tagposts {
+    font-size: 1.4em;
+}
 
 /*
 -------- Extras --------
 */
 
-.noWrap {white-space: nowrap;}
+.noWrap {
+    white-space: nowrap;
+}
 
 .green, .booktitle, .whoa {color: #009900;}
 
@@ -339,13 +384,19 @@ All Tags
 
 .booktitle, .redhead, .whoa {font-weight: bold;}
 
-.warning {
-    font-weight: bold;
-    background-color: #ff0000;
-    color: #ffffff;
-    padding: 1px 2px 1px 2px;
+/*
+.booktitle {
+    font-family: 'YanoneKaffeesatzRegular', sans-serif;
+    font-size: 1.2em;
 }
-    
+*/
+
+.note, .warning {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: monospace;
+}
+
 div.aphorism, p.modified, p.caption {
     font-family: 'YanoneKaffeesatzRegular', sans-serif;
     color: #7a7a7a;

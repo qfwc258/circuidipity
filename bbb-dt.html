@@ -87,10 +87,7 @@ Where this [Device Tree implementation] pays off for us, is in the development o
 <p>The analog input pins are now available for use.</p>
 <p>Example: If you connect a photoresistor to BBB's <tt class="docutils literal">P9_32(1.8V)</tt> and <tt class="docutils literal">P9_34(AGND)</tt> and <tt class="docutils literal">P9_36(AIN5)</tt> pins you can measure light levels in <tt class="docutils literal">/sys/devices/ocp.2/helper.14/AIN5</tt> and <tt class="docutils literal"><span class="pre">/sys/devices/ocp.2/44e0d000.tscadc/tiadc/iio\:device0/in_voltage5_raw</span></tt>.</p>
 <p>Our BB-ADC dtbo above resides in slot 7. To unload we would run <tt class="docutils literal">echo <span class="pre">-7</span> &gt; $SLOTS</tt>.</p>
-<div class="warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Unloading from $SLOTS is currently very unstable and can induce kernel panics. Much safer to simply reboot.</p>
-</div>
+<p><span class="warning">WARNING!</span> Unloading from $SLOTS is currently very unstable and can induce kernel panics. Much safer to simply reboot.</p>
 <p>To have this overlay load at boot time we add the option <tt class="docutils literal"><span class="pre">capemgr.enable_partno=BB-ADC</span></tt> to the <tt class="docutils literal">uEnv.txt</tt> file located on the <tt class="docutils literal">/dev/mmcblk0p1</tt> partition.</p>
 </div>
 <div class="section" id="helpful-resources">

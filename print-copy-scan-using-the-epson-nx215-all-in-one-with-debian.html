@@ -77,10 +77,7 @@
 <span class="o">[</span>418681.607084<span class="o">]</span> sd 11:0:0:0: Attached scsi generic sg6 <span class="nb">type </span>0
 <span class="o">[</span>418681.613113<span class="o">]</span> sd 11:0:0:0: <span class="o">[</span>sdf<span class="o">]</span> Attached SCSI removable disk
 </pre></div>
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">Kernel driver <em>usb-storage</em> is detecting the printer SD slot. It can be used to print photos directly from a memory card without using a computer. I have not yet tried this feature (and with the price of ink I doubt I will make use of it).</p>
-</div>
+<p>Kernel driver <em>usb-storage</em> is detecting the printer SD slot. It can be used to print photos directly from a memory card without using a computer. I have not yet tried this feature (and with the price of ink I doubt I will make use of it).</p>
 <p>Navigate with a web browser to <a class="reference external" href="http://localhost:631">http://localhost:631</a> and use the <em>Common Unix Printing System (CUPS)</em> to add the printer. CUPS detects the NX215 as a <em>Epson Stylus NX210</em> but despite the small difference in model number it does not appear to make a difference in use. During the CUPS configuration select the PPD installed in <tt class="docutils literal">/etc/cups/ppd</tt>.</p>
 </div>
 <div class="section" id="step-3-copier">

@@ -39,10 +39,7 @@
 <div class="section" id="step-1-prepare-a-usb-stick">
 <h2>Step 1 - Prepare a USB stick</h2>
 <p>USB sticks are my Linux install media of choice because I have configured several devices like this Asus netbook that do not include an optical drive. Plug the USB stick into your Linux host machine and leave the stick unmounted. Run the <tt class="docutils literal">dmesg</tt> command and note the USB device ID (<tt class="docutils literal">sdb</tt>, <tt class="docutils literal">sdc</tt>, ...).</p>
-<div class="warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Make sure to record the correct USB device ID. The following procedure <strong>wipes out</strong> all data on the USB stick. On my system the device shows up as <em>sdb</em> but it will possibly be different on your system.</p>
-</div>
+<p><span class="warning">WARNING!</span> Make sure to record the correct USB device ID. The following procedure <strong>wipes out</strong> all data on the USB stick. On my system the device shows up as <em>sdb</em> but it will possibly be different on your system.</p>
 <p>Copy the iso to the USB stick ...</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo cat debian-6.0.3-i386-businesscard.iso &gt; /dev/sdX
 <span class="nv">$ </span>sudo sync
@@ -111,10 +108,7 @@ Choose software to install:
 <p><a class="reference external" href="http://tmux.sourceforge.net/">Tmux</a> is a ...</p>
 <blockquote>
 terminal multiplexer: it enables a number of terminals (or windows), each running a separate program, to be created, accessed, and controlled from a single screen ... [then] detached from a screen and continue running in the background, then later reattached.&quot;* I love this program. Massive usefulness on a single remote connection to a server.</blockquote>
-<div class="warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Place your netbook or laptop with the lid open (many laptops radiate heat through the keyboard) in a well-ventilated location to prevent overheating and minimize wear-and-tear. My netbook sits on an elevated metal grate that leaves the bottom vents unblocked.</p>
-</div>
+<p><span class="warning">WARNING!</span> Place your netbook or laptop with the lid open (many laptops radiate heat through the keyboard) in a well-ventilated location to prevent overheating and minimize wear-and-tear. My netbook sits on an elevated metal grate that leaves the bottom vents unblocked.</p>
 </div>
 </div>
 <div class="section" id="step-4-services">

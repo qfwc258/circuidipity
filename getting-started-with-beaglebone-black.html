@@ -104,10 +104,7 @@ eth1      Link encap:Ethernet  HWaddr c8:a0:30:ac:1d:6f
 </div>
 <div class="section" id="copy-image-to-microsd">
 <h3>Copy image to microSD</h3>
-<div class="warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Be careful to note the proper <em>DeviceID</em> of your microSD card ... in my example I use <em>sdb</em> but your device will probably have a <em>different address</em>. Command <em>dd</em> will completely <strong>wipe out the contents of the card</strong>. Its not nicknamed <em>disk destroyer</em> for nothing!</p>
-</div>
+<p><span class="warning">WARNING!</span> Be careful to note the proper <em>DeviceID</em> of your microSD card ... in my example I use <em>sdb</em> but your device will probably have a <em>different address</em>. Command <em>dd</em> will completely <strong>wipe out the contents of the card</strong>. Its not nicknamed <em>disk destroyer</em> for nothing!</p>
 <p>Copy image to card using <tt class="docutils literal">dd</tt> ...</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo dd <span class="k">if</span><span class="o">=</span>BBB-eMMC-flasher-2013.08.21.img <span class="nv">of</span><span class="o">=</span>/dev/sdb <span class="nv">bs</span><span class="o">=</span>1M
 </pre></div>

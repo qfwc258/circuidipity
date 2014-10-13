@@ -28,10 +28,7 @@
     <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 17 April 2014</p>
 <div id="article">
     <p>In 5 easy steps I transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.</p>
-<div class="warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">In this HOWTO the USB stick is identified as <em>sdX</em> and contains a single partition <em>sdX1</em>. Make careful note of the drive and partition labels on your system. The following steps will <strong>destroy all data</strong> currently stored on the device.</p>
-</div>
+<p><span class="warning">WARNING!</span> In this HOWTO the USB stick is identified as <em>sdX</em> and contains a single partition <em>sdX1</em>. Make careful note of the drive and partition labels on your system. The following steps will <strong>destroy all data</strong> currently stored on the device.</p>
 <div class="section" id="step-0-select-device-and-create-filesystem">
 <h2>Step 0 - Select device and create filesystem</h2>
 <p>I create a <tt class="docutils literal">FAT32</tt> partition on the unmounted USB stick ...</p>
@@ -62,10 +59,7 @@
 <li><strong>Memtest86+</strong> - Diagnostic tool for <a class="reference external" href="http://www.memtest.org/">testing RAM</a></li>
 <li><strong>Darik's Boot and Nuke (DBAN)</strong> - <a class="reference external" href="http://www.dban.org/">Secure deletion tool</a> to wipe hard disks clean</li>
 </ul>
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">When using DBAN remove the USB stick immediately when the boot messages begin to scroll past ... otherwise it will scan for USB drives and later fail when selecting a hard drive to wipe.</p>
-</div>
+<p><span class="warning">WARNING!</span> When using DBAN remove the USB stick immediately when the boot messages begin to scroll past ... otherwise it will scan for USB drives and later fail when selecting a hard drive to wipe.</p>
 </div>
 <div class="section" id="step-4-create-grub-cfg">
 <h2>Step 4 - Create grub.cfg</h2>

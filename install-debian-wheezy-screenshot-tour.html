@@ -74,10 +74,7 @@
 <img alt="Partition size" class="align-center" src="images/screenshot/wheezyInstall/23.png" style="width: 800px; height: 600px;" />
 <img alt="Primary partition" class="align-center" src="images/screenshot/wheezyInstall/24.png" style="width: 800px; height: 600px;" />
 <img alt="Beginning" class="align-center" src="images/screenshot/wheezyInstall/25.png" style="width: 800px; height: 600px;" />
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">Setting <em>Mount options</em> to <em>noatime</em> decreases write operations and boosts drive speed.</p>
-</div>
+<p>Setting <strong>Mount options</strong> to <tt class="docutils literal">noatime</tt> decreases write operations and boosts drive speed.</p>
 <img alt="Mount options" class="align-center" src="images/screenshot/wheezyInstall/25.1.png" style="width: 800px; height: 600px;" />
 <img alt="noatime" class="align-center" src="images/screenshot/wheezyInstall/25.2.png" style="width: 800px; height: 600px;" />
 <img alt="Done setting up partition" class="align-center" src="images/screenshot/wheezyInstall/26.png" style="width: 800px; height: 600px;" />
@@ -90,10 +87,7 @@
 <img alt="Encrypt volume" class="align-center" src="images/screenshot/wheezyInstall/32.png" style="width: 800px; height: 600px;" />
 <img alt="Encryption key" class="align-center" src="images/screenshot/wheezyInstall/32.1.png" style="width: 800px; height: 600px;" />
 <img alt="Random key" class="align-center" src="images/screenshot/wheezyInstall/33.png" style="width: 800px; height: 600px;" />
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">If the hard disk has not been securely wiped prior to installing Debian (using a utility like <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">DBAN</a>) you may want to configure <strong>Erase data</strong> as <strong>yes</strong>. Note, however, that depending on the size of the disk this operation can last several hours.</p>
-</div>
+<p>If the hard disk has not been securely wiped prior to installing Debian (using a utility like <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">DBAN</a>) you may want to configure <strong>Erase data</strong> as <strong>yes</strong>. Note, however, that depending on the size of the disk this operation can last several hours.</p>
 <img alt="Erase data" class="align-center" src="images/screenshot/wheezyInstall/33.1.png" style="width: 800px; height: 600px;" />
 <img alt="Done setting up partition" class="align-center" src="images/screenshot/wheezyInstall/33.2.png" style="width: 800px; height: 600px;" />
 <img alt="Free space" class="align-center" src="images/screenshot/wheezyInstall/34.png" style="width: 800px; height: 600px;" />
@@ -117,10 +111,7 @@
 <img alt="Mount home" class="align-center" src="images/screenshot/wheezyInstall/48.1.png" style="width: 800px; height: 600px;" />
 <img alt="Mount options" class="align-center" src="images/screenshot/wheezyInstall/49.png" style="width: 800px; height: 600px;" />
 <img alt="noatime" class="align-center" src="images/screenshot/wheezyInstall/25.2.png" style="width: 800px; height: 600px;" />
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Reserved blocks</strong> can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the 5% reserve set aside by Debian to 1%.</p>
-</div>
+<p><strong>Reserved blocks</strong> can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the 5% reserve set aside by Debian to 1%.</p>
 <img alt="Reserved blocks" class="align-center" src="images/screenshot/wheezyInstall/49.1.png" style="width: 800px; height: 600px;" />
 <img alt="Percent reserved" class="align-center" src="images/screenshot/wheezyInstall/49.2.png" style="width: 800px; height: 600px;" />
 <img alt="Done setting up the partition" class="align-center" src="images/screenshot/wheezyInstall/49.3.png" style="width: 800px; height: 600px;" />
@@ -130,18 +121,12 @@
 <div class="section" id="step-3-install-packages-and-finish-up">
 <h2>Step 3 - Install packages and finish up</h2>
 <img alt="Popularity-contest" class="align-center" src="images/screenshot/wheezyInstall/51.png" style="width: 800px; height: 600px;" />
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">Select only <strong>[*] Standard system utilities</strong> if you wish to start with a minimal, console-only base configuration ready for further customization. The task menu can be accessed post-install by running <tt class="docutils literal">tasksel</tt>.</p>
-</div>
+<p>Select only <strong>[*] Standard system utilities</strong> if you wish to start with a minimal, console-only base configuration ready for further customization. The task menu can be accessed post-install by running <tt class="docutils literal">tasksel</tt>.</p>
 <img alt="Software selection" class="align-center" src="images/screenshot/wheezyInstall/52.png" style="width: 800px; height: 600px;" />
 <img alt="GRUB" class="align-center" src="images/screenshot/wheezyInstall/53.png" style="width: 800px; height: 600px;" />
 <img alt="Finish install" class="align-center" src="images/screenshot/wheezyInstall/54.png" style="width: 800px; height: 600px;" />
 <img alt="GRUB menu" class="align-center" src="images/screenshot/wheezyInstall/544.png" style="width: 800px; height: 600px;" />
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">If an <strong>encrypted home</strong> partition was created in Step 2 the system will display a passphrase prompt to unlock the partition.</p>
-</div>
+<p>If an <strong>encrypted home</strong> partition was created in Step 2 the system will display a passphrase prompt to unlock the partition.</p>
 <img alt="Enter encrypt passphrase" class="align-center" src="images/screenshot/wheezyInstall/55.png" style="width: 800px; height: 600px;" />
 <img alt="Login" class="align-center" src="images/screenshot/wheezyInstall/56.png" style="width: 800px; height: 600px;" />
 <p>I have created a <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/debian-post-install-main.sh">post-install shell script</a> that can be used to configure tracking of Debian's stable, testing, or unstable branch with the option of installing the <strong>Openbox</strong> window manager + extra applications suitable for a desktop environment.</p>

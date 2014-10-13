@@ -61,10 +61,7 @@
 <li>run module-assistant to build and install our own package (<em>my choice</em>)</li>
 <li>perform a manual build for either a custom or Debian-packaged kernel</li>
 </ul>
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">These <tt class="docutils literal"><span class="pre">nvidia-{kernel,glx}</span></tt> packages only support GeForce 6xxx and higher GPUs. Check out the <em>nvidia legacy</em> packages for older cards and the list of <a class="reference external" href="http://www.nvidia.com/object/IO_32667.html">legacy drivers</a> .</p>
-</div>
+<p>These <tt class="docutils literal"><span class="pre">nvidia-{kernel,glx}</span></tt> packages only support GeForce 6xxx and higher GPUs. Check out the <em>nvidia legacy</em> packages for older cards and the list of <a class="reference external" href="http://www.nvidia.com/object/IO_32667.html">legacy drivers</a> .</p>
 </div>
 <div class="section" id="pre-built">
 <h3>Pre-built</h3>
@@ -86,10 +83,7 @@
 <span class="nv">$ </span>sudo apt-get install nvidia-glx
 </pre></div>
 <p>See below for configuring X to use the proprietary Nvidia driver vs an open-source driver.</p>
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">When upgrading to a newer kernel ... the Nvidia kernel module will need to be rebuilt to match the new kernel.</p>
-</div>
+<p>When upgrading to a newer kernel ... the Nvidia kernel module will need to be rebuilt to match the new kernel.</p>
 </div>
 <div class="section" id="manual-build">
 <h3>Manual build</h3>
@@ -128,11 +122,7 @@ EndSection
 </div>
 <div class="section" id="step-3-run">
 <h2>Step 3 - Run</h2>
-<p>Logged in as regular user ... start the X server <tt class="docutils literal">startx</tt> or restart <tt class="docutils literal">sudo /etc/init.d/gdm start</tt> if using a graphical login manager.</p>
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">I needed to restart my system to get the nvidia driver to work properly.</p>
-</div>
+<p>Logged in as regular user ... start the X server <tt class="docutils literal">startx</tt> or restart <tt class="docutils literal">sudo /etc/init.d/gdm start</tt> if using a graphical login manager. I needed to restart my system to get the nvidia driver to work properly.</p>
 <p>View what video driver is in use ...</p>
 <div class="highlight"><pre><span class="nv">$ </span>grep -B2 <span class="s1">&#39;Module class: X.Org Video Driver&#39;</span> /var/log/Xorg.0.log
 </pre></div>
@@ -146,10 +136,7 @@ EndSection
 <div class="highlight"><pre><span class="nv">$ </span>glxinfo | grep rendering
 direct rendering: Yes
 </pre></div>
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">For a dual-display configuration - use monitors of different resolutions and combine them into one desktop - give <a class="reference external" href="http://www.circuidipity.com/twinview.html">Twinview</a> a chance.</p>
-</div>
+<p>For a dual-display configuration - use monitors of different resolutions and combine them into one desktop - give <a class="reference external" href="http://www.circuidipity.com/twinview.html">Twinview</a> a chance.</p>
 <p>Good to go!</p>
 </div>
 

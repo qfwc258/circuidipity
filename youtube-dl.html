@@ -28,20 +28,18 @@
     <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Saturday 19 April 2014</p>
 <div id="article">
     <p><a class="reference external" href="http://rg3.github.io/youtube-dl/">youtube-dl</a> is a cool command-line program for downloading videos from a whole bunch of online video sites. It can also convert videos into audio files (courtesy of <tt class="docutils literal">ffmpeg</tt>).</p>
-<p>To install on Debian (<tt class="docutils literal">ffmpeg</tt> requires <a class="reference external" href="http://www.deb-multimedia.org/">deb-multimedia</a>) ...</p>
+<p>To install on Debian (<tt class="docutils literal">ffmpeg</tt> requires <a class="reference external" href="http://www.deb-multimedia.org/">deb-multimedia</a>) :</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install youtube-dl rtmpdump ffmpeg
 </pre></div>
-<p>Basic usage ...</p>
+<p>Basic usage:</p>
 <div class="highlight"><pre><span class="nv">$ </span>youtube-dl https://www.youtube.com/watch?v<span class="o">=</span>SOMEiD
 </pre></div>
 <p>... will download the best quality copy (default) of the specified video hosted on YouTube to the current directory.</p>
-<p>To enable audio extraction with a few desirable pre-configured options I create a new <tt class="docutils literal"><span class="pre">youtube-dl-audio</span></tt> alias in <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt> ...</p>
+<p>To enable audio extraction with a few desirable pre-configured options I create a new <tt class="docutils literal"><span class="pre">youtube-dl-audio</span></tt> alias in <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt>:</p>
 <div class="highlight"><pre><span class="nb">alias </span>youtube-dl-audio<span class="o">=</span><span class="s1">&#39;youtube-dl $1 --output &quot;$HOME/audio/%(title)s-%(upload_date)s.%(ext)s&quot; --restrict-filenames --extract-audio --audio-format &quot;mp3&quot; --audio-quality &quot;0&quot;&#39;</span>
 </pre></div>
-<p>... using these options ...</p>
+<p>... using these options:</p>
 <dl class="docutils">
-<dt><tt class="docutils literal">$1</tt></dt>
-<dd>video URL</dd>
 <dt><tt class="docutils literal"><span class="pre">--output</span> <span class="pre">&quot;$HOME/audio/%(title)s-%(upload_date)s.%(ext)s</span></tt></dt>
 <dd>save file to <em>$HOME/audio/</em> and rename file using template <em>%(title)s-%(upload_date)s.%(ext)s</em></dd>
 <dt><tt class="docutils literal"><span class="pre">--restrict-filenames</span></tt></dt>
@@ -51,7 +49,7 @@
 <dt><tt class="docutils literal"><span class="pre">--audio-quality</span> &quot;0&quot;</tt></dt>
 <dd>set a value between 0-9 (lower equals better) for VBR or assign a specific bitrate (default is 5|128K)</dd>
 </dl>
-<p>Reload the config and extract audio from an online video ...</p>
+<p>Reload the config and extract audio from an online video:</p>
 <div class="highlight"><pre><span class="nv">$ </span><span class="nb">source</span> ~/.bashrc
 <span class="nv">$ </span>youtube-dl-audio https://www.youtube.com/watch?v<span class="o">=</span>SOMEiD
 </pre></div>
@@ -59,6 +57,7 @@
 <p><strong>Update</strong></p>
 <p>I skipped the alterations to <tt class="docutils literal">.bashrc</tt> and created a <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/youtube-dl-audio">youtube-dl-audio</a> program with a few extra options.</p>
 <p>To use: <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/youtube-dl-audio">download</a> the script and its companion <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/Library.sh">Library.sh</a> to <tt class="docutils literal">$HOME/bin</tt>.</p>
+<p>Happy hacking!</p>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>

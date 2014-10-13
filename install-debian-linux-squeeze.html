@@ -42,10 +42,7 @@
 <div class="section" id="step-1-prepare-usb-stick">
 <h2>Step 1 - Prepare USB stick</h2>
 <p>USB sticks are my Linux install media of choice because I have configured several devices that do not include an optical drive. Plug the USB stick into your Linux host machine and leave the stick <strong>unmounted</strong>. Run the <tt class="docutils literal">dmesg</tt> command and note the USB device ID (<tt class="docutils literal">sdb</tt>, <tt class="docutils literal">sdc</tt>, ...).</p>
-<div class="warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Make sure to record the correct USB device ID. The following procedure <strong>wipes out all data on the USB stick.</strong> On my system the device shows up as <tt class="docutils literal">sdb</tt> but it will possibly be different on <strong>your</strong> system.</p>
-</div>
+<p><span class="warning">WARNING!</span> Make sure to record the correct USB device ID. The following procedure <strong>wipes out all data on the USB stick.</strong> On my system the device shows up as <tt class="docutils literal">sdb</tt> but it will possibly be different on <strong>your</strong> system.</p>
 <p>Copy the iso to the USB stick:</p>
 <div class="highlight"><pre><span class="c"># cat debian-VERSION-i386-businesscard.iso &gt; /dev/sdX</span>
 <span class="c"># sync</span>
@@ -69,10 +66,7 @@ squeeze - stable
 </div>
 <div class="section" id="partition-disks">
 <h3>Partition disks</h3>
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">Creating encrypted partitions with <strong>Erase date: yes</strong> (default) overwrites the partition with random data and can take many hours depending on partition size.</p>
-</div>
+<p>Creating encrypted partitions with <strong>Erase date: yes</strong> (default) overwrites the partition with random data and can take many hours depending on partition size.</p>
 <p>Select the <tt class="docutils literal">Manual</tt> option to partition the drive. I choose to encrypt my <tt class="docutils literal">swap</tt> and <tt class="docutils literal">home</tt> partitions. Space permitting - my chosen partition layout is:</p>
 <div class="highlight"><pre>sda1 - 20GB - root partition - filesystem: ext4, noatime
 sda2 - 1GB - swap partition - filesystem: swap, Encryption key: Random key
@@ -172,10 +166,7 @@ yourusername     <span class="nv">ALL</span><span class="o">=</span>NOPASSWD: /s
 <div class="highlight"><pre><span class="nv">$ </span>sudo <span class="nb">echo</span> <span class="s1">&#39;deb http://backports.debian.org/debian-backports squeeze-backports main&#39;</span> &gt; /etc/apt/sources.list.d/squeeze-backports.list
 <span class="nv">$ </span>sudo apt-get update
 </pre></div>
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">Files in <tt class="docutils literal">sources.list.d</tt> must end with a <tt class="docutils literal">*.list</tt> extension.</p>
-</div>
+<p>Files in <tt class="docutils literal">sources.list.d</tt> must end with a <tt class="docutils literal">*.list</tt> extension.</p>
 <p>To verify which versions of a package are available and - for example - to install the version from backports:</p>
 <div class="highlight"><pre><span class="nv">$ </span>apt-cache policy PACKAGE
 <span class="nv">$ </span>sudo apt-get -t squeeze-backports install PACKAGE
@@ -224,10 +215,7 @@ yourusername     <span class="nv">ALL</span><span class="o">=</span>NOPASSWD: /s
 <p><em>Using an open-source video driver</em></p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xorg
 </pre></div>
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">There are known issues with some Intel video cards - <tt class="docutils literal"><span class="pre">xserver-xorg-video-intel</span></tt> - and <a class="reference external" href="http://wiki.debian.org/KernelModesetting">KMS</a> and the default <tt class="docutils literal">2.6.32 kernel</tt> in Debian <tt class="docutils literal">stable</tt>.</p>
-</div>
+<p>There are known issues with some Intel video cards - <tt class="docutils literal"><span class="pre">xserver-xorg-video-intel</span></tt> - and <a class="reference external" href="http://wiki.debian.org/KernelModesetting">KMS</a> and the default <tt class="docutils literal">2.6.32 kernel</tt> in Debian <tt class="docutils literal">stable</tt>.</p>
 <p>On my Intel-equipped <a class="reference external" href="http://www.circuidipity.com/debian-linux-on-the-asus-eeepc-1001p.html">netbook</a> netbook booting from GRUB or starting an X session can result in a black screen. A temporary fix is to edit the booting GRUB entry and add <tt class="docutils literal">acpi=off</tt> to the kernel line.</p>
 <p>A more permanent fix is to configure the <em>backlight</em> setting in <tt class="docutils literal">/etc/default/grub</tt>.</p>
 <p><em>Using the proprietary Nvidia driver</em></p>

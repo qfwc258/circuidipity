@@ -36,10 +36,7 @@
 <div class="section" id="step-1-create-an-amazon-s3-website-enabled-bucket">
 <h2>Step 1 — Create an Amazon S3 website-enabled bucket</h2>
 <p>S3 uses <em>buckets</em> (think folders) that act as containers for your static files. <a class="reference external" href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?HostingWebsiteOnS3Setup.html">Create a new website-enabled bucket</a> to hold your website files.</p>
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">Make sure when creating the S3 bucket to give it the name <em>www.YOURWEBSITE.TLD</em>. For example, this website uses an S3 bucket with the name <em>www.circuidipity.com</em>.</p>
-</div>
+<p>Make sure when creating the S3 bucket to give it the name <em>www.YOURWEBSITE.TLD</em>. For example, this website uses an S3 bucket with the name <em>www.circuidipity.com</em>.</p>
 <p>The endpoint address for your newly-created S3 bucket will be <a class="reference external" href="http://www.YOURWEBSITE.TLD.s3-website-location.amazonaws.com">http://www.YOURWEBSITE.TLD.s3-website-location.amazonaws.com</a> (my endpoint is <a class="reference external" href="http://www.circuidipity.com.s3-website-us-east-1.amazonaws.com/">http://www.circuidipity.com.s3-website-us-east-1.amazonaws.com/</a>).</p>
 </div>
 <div class="section" id="step-2-set-public-permissions-on-s3-bucket">
@@ -80,10 +77,7 @@
 <div class="section" id="step-4-configure-dns">
 <h2>Step 4 - Configure DNS</h2>
 <p>To transform <em>s3-website-location.amazonaws.com</em> into <em>www.YOURWEBSITE.com</em> you need to <a class="reference external" href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?VirtualHosting.html">create a CNAME at your DNS provider</a> that maps <tt class="docutils literal">www</tt> to your S3 bucket ... in my case DNS is provided by GoDaddy and I map <tt class="docutils literal">www</tt> to www.circuidipity.com.s3-website-us-east-1.amazonaws.com.</p>
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last"><em>s3-website-us-east-1.amazonaws.com</em> is for accessing the website feature. If you just want S3 you can use <em>s3.amazonaws.com</em>.</p>
-</div>
+<p><em>s3-website-us-east-1.amazonaws.com</em> is for accessing the website feature. If you just want S3 you can use <em>s3.amazonaws.com</em>.</p>
 <p>Allow a bit of time for your changes to propagate through the global network of DNS servers ... check your modifications by running <tt class="docutils literal">host</tt> (cool little DNS hookup utility) ...</p>
 <div class="highlight"><pre><span class="nv">$ </span>host www.circuidipity.com
 www.circuidipity.com is an <span class="nb">alias </span><span class="k">for </span>www.circuidipity.com.s3-website-us-east-1.amazonaws.com.
