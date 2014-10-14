@@ -117,7 +117,7 @@ Log file is /home/USERNAME/.vnc/HOSTNAME:1.log
 &lt;/div&gt;
 &lt;div class="section" id="optimize"&gt;
 &lt;h3&gt;2. Optimize&lt;/h3&gt;
-&lt;p&gt;On the Pi - create &lt;tt class="docutils literal"&gt;myVNCserver&lt;/tt&gt; with desired vncserver settings and place in &lt;tt class="docutils literal"&gt;~/bin&lt;/tt&gt;:&lt;/p&gt;
+&lt;p&gt;On the Pi create &lt;tt class="docutils literal"&gt;myVNCserver&lt;/tt&gt; with desired vncserver settings and place in &lt;tt class="docutils literal"&gt;~/bin&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/sh&lt;/span&gt;
 vncserver -geometry 1800x1000 -depth 24 -dpi 96
 &lt;/pre&gt;&lt;/div&gt;
@@ -216,7 +216,7 @@ Today's belief in ineluctable certainty is the true innovation killer of our age
 &lt;/div&gt;
 &lt;div class="section" id="web-interface"&gt;
 &lt;h3&gt;3. Web interface&lt;/h3&gt;
-&lt;p&gt;OpenWrt can be further configured in the console or install the optional &lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/luci.essentials"&gt;LuCI web interface&lt;/a&gt; using the &lt;strong&gt;opkg&lt;/strong&gt; package manager [1]:&lt;/p&gt;
+&lt;p&gt;OpenWrt can be further configured in the console or install the optional &lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/luci.essentials"&gt;LuCI web interface&lt;/a&gt; using the &lt;strong&gt;opkg&lt;/strong&gt; package manager &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# opkg update&lt;/span&gt;
 &lt;span class="c"&gt;# opkg install luci&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -235,7 +235,12 @@ Today's belief in ineluctable certainty is the true innovation killer of our age
 &lt;/div&gt;
 &lt;div class="section" id="notes"&gt;
 &lt;h3&gt;Notes&lt;/h3&gt;
-&lt;p&gt;[1] With only 4MB flash to play with there is less than 256K remaining in &lt;tt class="docutils literal"&gt;rootfs/overlay&lt;/tt&gt; for more packages after installing LuCI.&lt;/p&gt;
+&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;With only 4MB flash to play with there is less than 256K remaining in &lt;tt class="docutils literal"&gt;rootfs/overlay&lt;/tt&gt; for more packages after installing LuCI.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Mon, 06 Oct 2014 15:01:00 -0400</pubDate><guid>tag:www.circuidipity.com,2014-09-26:pingparade4.html</guid><category>networks</category><category>openwrt</category><category>linux</category></item></channel></rss>

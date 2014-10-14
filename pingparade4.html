@@ -68,7 +68,7 @@
 </div>
 <div class="section" id="web-interface">
 <h3>3. Web interface</h3>
-<p>OpenWrt can be further configured in the console or install the optional <a class="reference external" href="http://wiki.openwrt.org/doc/howto/luci.essentials">LuCI web interface</a> using the <strong>opkg</strong> package manager [1]:</p>
+<p>OpenWrt can be further configured in the console or install the optional <a class="reference external" href="http://wiki.openwrt.org/doc/howto/luci.essentials">LuCI web interface</a> using the <strong>opkg</strong> package manager <a class="footnote-reference" href="#id2" id="id1">[1]</a>:</p>
 <div class="highlight"><pre><span class="c"># opkg update</span>
 <span class="c"># opkg install luci</span>
 </pre></div>
@@ -87,7 +87,12 @@
 </div>
 <div class="section" id="notes">
 <h3>Notes</h3>
-<p>[1] With only 4MB flash to play with there is less than 256K remaining in <tt class="docutils literal">rootfs/overlay</tt> for more packages after installing LuCI.</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>With only 4MB flash to play with there is less than 256K remaining in <tt class="docutils literal">rootfs/overlay</tt> for more packages after installing LuCI.</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 
