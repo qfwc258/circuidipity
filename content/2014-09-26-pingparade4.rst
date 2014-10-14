@@ -70,7 +70,7 @@ Log into the TP-Link router web interface - address=192.168.0.1, user=admin, pas
 3. Web interface
 ----------------
 
-OpenWrt can be further configured in the console or install the optional `LuCI web interface <http://wiki.openwrt.org/doc/howto/luci.essentials>`_ using the **opkg** package manager [1]:
+OpenWrt can be further configured in the console or install the optional `LuCI web interface <http://wiki.openwrt.org/doc/howto/luci.essentials>`_ using the **opkg** package manager [1]_:
 
 .. code-block:: bash
 
@@ -103,4 +103,4 @@ Happy hacking!
 Notes
 -----
 
-[1] With only 4MB flash to play with there is less than 256K remaining in ``rootfs/overlay`` for more packages after installing LuCI.
+.. [1] With only 4MB flash to play with there is less than 256K remaining in ``rootfs/overlay`` for more packages after installing LuCI.
