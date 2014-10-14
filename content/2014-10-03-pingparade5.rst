@@ -93,7 +93,7 @@ When finished with the session just close the VNC client window and use the ``-k
 2. Optimize
 -----------
 
-On the Pi - create ``myVNCserver`` with desired vncserver settings and place in ``~/bin``:
+On the Pi create ``myVNCserver`` with desired vncserver settings and place in ``~/bin``:
 
 .. code-block:: bash
 
