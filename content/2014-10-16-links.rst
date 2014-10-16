@@ -1,0 +1,16 @@
+=================
+Links of interest
+=================
+
+:date: 2014-10-16 09:50:00
+:slug: 20141016
+:tags: links
+
+* Synchronizing files between multiple machines `with the open-source Syncthing <http://lwn.net/Articles/614358/>`_
+* Making `ultra-realistic wax+plastic Japanese food samples <https://www.youtube.com/watch?v=PPQrNkOgttQ>`_
+* `You feel the maker's heart through their art <https://www.youtube.com/watch?v=_z8pKzfhDys>`_
+* Linux setup of `Slackware developer Eric Hameleers <http://www.mylinuxrig.com/post/100003933891/the-linux-setup-eric-hameleers-slackware-linux>`_
+* `A sunset glimpse of Deep Time <http://www.centauri-dreams.org/?p=31737>`_
+* How crowdfunding changed `China's hardware startups <https://www.techinasia.com/play-crowd-crowdfunding-changed-status-quo-chinas-hardware-startups/>`_
+* The `dark side of efficient markets <http://blogs.hbr.org/2014/10/the-dark-side-of-efficient-markets/>`_
+* Xiaomi, the four-year-old smartphone manufacturer, `"thinks different" and rockets ahead in China <http://blogs.hbr.org/2014/10/xiaomi-not-apple-is-changing-the-smartphone-industry/>`_
