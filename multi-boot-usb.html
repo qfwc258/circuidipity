@@ -28,42 +28,44 @@
     <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 17 April 2014</p>
 <div id="article">
     <p>In 5 easy steps I transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.</p>
-<p><span class="warning">WARNING!</span> In this HOWTO the USB stick is identified as <em>sdX</em> and contains a single partition <em>sdX1</em>. Make careful note of the drive and partition labels on your system. The following steps will <strong>destroy all data</strong> currently stored on the device.</p>
-<div class="section" id="step-0-select-device-and-create-filesystem">
-<h2>Step 0 - Select device and create filesystem</h2>
-<p>I create a <tt class="docutils literal">FAT32</tt> partition on the unmounted USB stick ...</p>
+<p><span class="warning">WARNING!</span> In this HOWTO the USB stick is identified as <strong>sdX</strong> and contains a single partition <strong>sdX1</strong>. Make careful note of the drive and partition labels on your system. The following steps will <strong>destroy all data</strong> currently stored on the device.</p>
+<div class="section" id="to-boot-linux-distro-images-using-grub">
+<h2>To boot Linux distro images using GRUB:</h2>
+<div class="section" id="select-device-and-create-filesystem">
+<h3>0. Select device and create filesystem</h3>
+<p>Create a <tt class="docutils literal">FAT32</tt> partition on the unmounted USB stick:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo mkfs.vfat -n multiboot /dev/sdX1
 </pre></div>
 </div>
-<div class="section" id="step-1-create-boot-and-iso-folders">
-<h2>Step 1 - Create boot and iso folders</h2>
-<p>The new <tt class="docutils literal">FAT32</tt> partition is mounted and I create a <tt class="docutils literal">boot</tt> folder for GRUB and a <tt class="docutils literal">iso</tt> folder to hold my Linux distro images ...</p>
+<div class="section" id="create-boot-and-iso-folders">
+<h3>1. Create boot and iso folders</h3>
+<p>The new <tt class="docutils literal">FAT32</tt> partition is mounted and I create a <tt class="docutils literal">boot</tt> folder for GRUB and a <tt class="docutils literal">iso</tt> folder to hold my Linux distro images:</p>
 <div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>MOUNTPOINT
 <span class="nv">$ </span>mkdir boot iso
 </pre></div>
 </div>
-<div class="section" id="step-2-install-grub">
-<h2>Step 2 - Install GRUB</h2>
-<p>Install GRUB to the <em>Master Boot Record (MBR)</em> of the USB stick ...</p>
+<div class="section" id="install-grub">
+<h3>2. Install GRUB</h3>
+<p>Install GRUB to the <strong>Master Boot Record (MBR)</strong> of the USB stick:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo grub-install --force --no-floppy --boot-directory<span class="o">=</span>MOUNTPOINT/boot /dev/sdX
 </pre></div>
 </div>
-<div class="section" id="step-3-copy-linux-images">
-<h2>Step 3 - Copy Linux images</h2>
+<div class="section" id="copy-linux-images">
+<h3>3. Copy Linux images</h3>
 <p>Download and copy Linux ISO images to the newly-created <tt class="docutils literal">iso</tt> folder on the USB stick. For example I have installed on my own USB stick:</p>
 <ul class="simple">
-<li><strong>GRML</strong> - <a class="reference external" href="http://grml.org/download/">Bootable 32|64-bit Live CD</a> collection of sysadmin tools based on Debian</li>
-<li><strong>Debian Wheezy Mini-Installers</strong> - Minimal (~25MB) <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/">64bit</a> and <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/">32bit</a> <tt class="docutils literal">mini.iso</tt> installers</li>
-<li><strong>Ubuntu 14.04 LTS Mini-Installers</strong> - <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/">64bit mini.iso</a> and <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/">32bit mini.iso</a></li>
 <li><strong>GParted Live CD</strong> - <a class="reference external" href="http://gparted.sourceforge.net/livecd.php">Graphical partition editor</a> for hard drives</li>
+<li><strong>Darik's Boot and Nuke (DBAN)</strong> - <a class="reference external" href="http://www.dban.org/">Secure deletion tool</a> to wipe hard disks clean <a class="footnote-reference" href="#id4" id="id1">[1]</a></li>
+<li><strong>Debian Wheezy Mini-Installers</strong> - Minimal (~25MB) <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/">64bit</a> and <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/">32bit</a> <tt class="docutils literal">mini.iso</tt> installers</li>
+<li><strong>GRML</strong> - <a class="reference external" href="http://grml.org/download/">Bootable 32|64-bit Live CD</a> collection of sysadmin tools based on Debian</li>
+<li><strong>Lubuntu 14.04 LTS</strong> - Ubuntu-based distro using the <a class="reference external" href="http://lubuntu.net/">lightweight LXDE desktop</a></li>
+<li><strong>Ubuntu 14.04 LTS Mini-Installers</strong> - <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/">64bit mini.iso</a> and <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/">32bit mini.iso</a></li>
 <li><strong>Memtest86+</strong> - Diagnostic tool for <a class="reference external" href="http://www.memtest.org/">testing RAM</a></li>
-<li><strong>Darik's Boot and Nuke (DBAN)</strong> - <a class="reference external" href="http://www.dban.org/">Secure deletion tool</a> to wipe hard disks clean</li>
 </ul>
-<p><span class="warning">WARNING!</span> When using DBAN remove the USB stick immediately when the boot messages begin to scroll past ... otherwise it will scan for USB drives and later fail when selecting a hard drive to wipe.</p>
 </div>
-<div class="section" id="step-4-create-grub-cfg">
-<h2>Step 4 - Create grub.cfg</h2>
-<p>Create a <tt class="docutils literal">grub.cfg</tt> with entries for the Linux images copied to the USB stick. Each distro is a little bit different in the manner its booted by GRUB. Using my own example above I have created ...</p>
+<div class="section" id="create-grub-cfg">
+<h3>4. Create grub.cfg</h3>
+<p>Create a <tt class="docutils literal">grub.cfg</tt> with entries for the Linux images copied to the USB stick. Each distro is a little bit different in the manner its booted by GRUB. Using my own example above I have created:</p>
 <div class="highlight"><pre><span class="c"># Config for GNU GRand Unified Bootloader (GRUB)</span>
 <span class="c"># /boot/grub/grub.cfg</span>
 
@@ -78,13 +80,17 @@
 <span class="nb">set </span><span class="nv">menu_color_highlight</span><span class="o">=</span>white/green
 
 <span class="c"># Boot ISOs</span>
-menuentry <span class="s2">&quot;GRML 2014.03 - Friend of the sysadmin&quot;</span> <span class="o">{</span>
-<span class="nv">iso_path</span><span class="o">=</span><span class="s2">&quot;/iso/grml96-full_2014.03.iso&quot;</span>
-<span class="nb">export </span>iso_path
-loopback loop <span class="nv">$iso_path</span>
-search --set<span class="o">=</span>root --file <span class="nv">$iso</span> --no-floppy --fs-uuid
-<span class="nb">set </span><span class="nv">root</span><span class="o">=(</span>loop<span class="o">)</span>
-configfile /boot/grub/loopback.cfg
+menuentry <span class="s2">&quot;GParted Live - Partition Editor&quot;</span> <span class="o">{</span>
+<span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/gparted-live-0.19.1-4-i486.iso&quot;</span>
+loopback loop <span class="nv">$iso</span>
+linux <span class="o">(</span>loop<span class="o">)</span>/live/vmlinuz <span class="nv">boot</span><span class="o">=</span>live config <span class="nv">union</span><span class="o">=</span>aufs noswap noprompt <span class="nv">ip</span><span class="o">=</span>frommedia <span class="nv">toram</span><span class="o">=</span>filesystem.squashfs <span class="nv">findiso</span><span class="o">=</span><span class="nv">$iso</span>
+initrd <span class="o">(</span>loop<span class="o">)</span>/live/initrd.img
+<span class="o">}</span>
+
+menuentry <span class="s2">&quot;Darik&#39;s Boot and Nuke - Hard Disk Wipe&quot;</span> <span class="o">{</span>
+<span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/dban-2.2.8_i586.iso&quot;</span>
+loopback loop <span class="nv">$iso</span>
+linux <span class="o">(</span>loop<span class="o">)</span>/DBAN.BZI <span class="nv">nuke</span><span class="o">=</span><span class="s2">&quot;dwipe&quot;</span>
 <span class="o">}</span>
 
 menuentry <span class="s2">&quot;Debian Wheezy - 64bit Mini-Installer&quot;</span> <span class="o">{</span>
@@ -101,6 +107,36 @@ linux <span class="o">(</span>loop<span class="o">)</span>/linux
 initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
 <span class="o">}</span>
 
+menuentry <span class="s2">&quot;GRML 2014.03 - Friend of the sysadmin&quot;</span> <span class="o">{</span>
+<span class="nv">iso_path</span><span class="o">=</span><span class="s2">&quot;/iso/grml96-full_2014.03.iso&quot;</span>
+<span class="nb">export </span>iso_path
+loopback loop <span class="nv">$iso_path</span>
+search --set<span class="o">=</span>root --file <span class="nv">$iso</span> --no-floppy --fs-uuid
+<span class="nb">set </span><span class="nv">root</span><span class="o">=(</span>loop<span class="o">)</span>
+configfile /boot/grub/loopback.cfg
+<span class="o">}</span>
+
+menuentry <span class="s2">&quot;Lubuntu 14.04 LTS - 64bit Installer&quot;</span> <span class="o">{</span>
+<span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/lubuntu-14.04.1-desktop-amd64.iso&quot;</span>
+loopback loop <span class="nv">$iso</span>
+linux <span class="o">(</span>loop<span class="o">)</span>/casper/vmlinuz.efi linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject
+initrd <span class="o">(</span>loop<span class="o">)</span>/casper/initrd.lz
+<span class="o">}</span>
+
+menuentry <span class="s2">&quot;Lubuntu 14.04 LTS - 32bit Installer&quot;</span> <span class="o">{</span>
+<span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/lubuntu-14.04.1-desktop-i386.iso&quot;</span>
+loopback loop <span class="nv">$iso</span>
+linux <span class="o">(</span>loop<span class="o">)</span>/casper/vmlinuz linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject
+initrd <span class="o">(</span>loop<span class="o">)</span>/casper/initrd.lz
+<span class="o">}</span>
+
+menuentry <span class="s2">&quot;Lubuntu 14.04 LTS - 32bit Installer (&#39;forcepae&#39; for Pentium M)&quot;</span> <span class="o">{</span>
+<span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/lubuntu-14.04.1-desktop-i386.iso&quot;</span>
+loopback loop <span class="nv">$iso</span>
+linux <span class="o">(</span>loop<span class="o">)</span>/casper/vmlinuz linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject forcepae
+initrd <span class="o">(</span>loop<span class="o">)</span>/casper/initrd.lz
+<span class="o">}</span>
+
 menuentry <span class="s2">&quot;Ubuntu 14.04 LTS - 64bit Mini-Installer&quot;</span> <span class="o">{</span>
 <span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/ubuntu-14.04-amd64-mini.iso&quot;</span>
 loopback loop <span class="nv">$iso</span>
@@ -115,40 +151,37 @@ linux <span class="o">(</span>loop<span class="o">)</span>/linux <span class="nv
 initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
 <span class="o">}</span>
 
-menuentry <span class="s2">&quot;GParted Live - Partition Editor&quot;</span> <span class="o">{</span>
-<span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/gparted-live-0.18.0-2-i486.iso&quot;</span>
-loopback loop <span class="nv">$iso</span>
-linux <span class="o">(</span>loop<span class="o">)</span>/live/vmlinuz <span class="nv">boot</span><span class="o">=</span>live config <span class="nv">union</span><span class="o">=</span>aufs noswap noprompt <span class="nv">ip</span><span class="o">=</span>frommedia <span class="nv">toram</span><span class="o">=</span>filesystem.squashfs <span class="nv">findiso</span><span class="o">=</span><span class="nv">$iso</span>
-initrd <span class="o">(</span>loop<span class="o">)</span>/live/initrd.img
-<span class="o">}</span>
-
 menuentry <span class="s2">&quot;Memtest86+ - RAM Tester&quot;</span> <span class="o">{</span>
 linux16 /boot/memtest86+-4.20.bin
-<span class="o">}</span>
-
-menuentry <span class="s2">&quot;Darik&#39;s Boot and Nuke - Hard Disk Wipe&quot;</span> <span class="o">{</span>
-<span class="nb">set </span><span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/dban-2.2.7_i586.iso&quot;</span>
-loopback loop <span class="nv">$iso</span>
-linux <span class="o">(</span>loop<span class="o">)</span>/DBAN.BZI <span class="nv">nuke</span><span class="o">=</span><span class="s2">&quot;dwipe&quot;</span>
 <span class="o">}</span>
 </pre></div>
 <p>Save <tt class="docutils literal">grub.cfg</tt> to the USB stick at <tt class="docutils literal">MOUNTPOINT/boot/grub</tt>.</p>
 <p>All done! Reboot, select the USB stick (depending on BIOS settings) as boot device and GRUB will display a menu of the installed Linux distro images. Reboot again and return to using your USB stick as a regular storage device.</p>
 </div>
 <div class="section" id="grubs-reanimated-usb-boot-stick">
-<h2>GRUBS Reanimated USB Boot Stick</h2>
+<h3>GRUBS Reanimated USB Boot Stick</h3>
 <p>I made a Bash script called <a class="reference external" href="https://github.com/vonbrownie/grubs">GRUBS</a> that creates multi-boot Linux USB sticks using the above steps and placed it on <a class="reference external" href="https://github.com/vonbrownie/grubs">GitHub</a>.</p>
+<p>Happy hacking!</p>
+</div>
+<div class="section" id="notes">
+<h3>Notes</h3>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>When using DBAN remove the USB stick immediately when the boot messages begin to scroll past... otherwise it will scan for USB drives and later fail when selecting a hard drive to wipe.</td></tr>
+</tbody>
+</table>
+</div>
 </div>
 
-    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-grml.html">grml</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-gparted.html">gparted</a>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-gparted.html">gparted</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-dban.html">dban</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-grml.html">grml</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-lubuntu.html">lubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-github.html">github</a>
 </p>
 </div>
 
