@@ -34,18 +34,20 @@
 <p>For the last few years, a network of compromised machines dubbed the &quot;Hail Mary Cloud&quot; has scanned the Internet for SSH servers. When a member of this cloud finds an SSH server, it lets the other machines in the network know about it. The cloud then methodically tries possible usernames and passwords. One host on the network tries a few times, then another, then another. Blocking individual IP addresses is not a useful defense, because each address is used only a few times.</p>
 <p>Any one attempt has low odds of guessing successfully. The attempts are constant. They never end. Eventually [some automated attacker] will get lucky and break into your server. It might be tomorrow, or next year, but it _will_ happen. To stop these types of attacks, you can either use packet filtering to block public access to your SSH server, or you can eliminate passwords on your servers. User keys let you eliminate passwords.</p>
 </blockquote>
-<p>This is how to configure SSH key authentication between a <a class="reference external" href="http://www.circuidipity.com/pingparade1.html">home server</a> and a client such as a laptop that are both running <strong>Debian Linux</strong>.</p>
-<div class="section" id="step-0-install">
-<h2>Step 0 - Install</h2>
+<div class="section" id="to-configure-ssh-key-authentication-between-a-home-server-and-client">
+<h2>To configure SSH key authentication between a home server and client:</h2>
+<div class="section" id="install">
+<h3>0. Install</h3>
+<p>Both the <a class="reference external" href="http://www.circuidipity.com/pingparade1.html">home server</a> and client are running <strong>Debian Linux</strong>.</p>
 <p><strong>On the server:</strong></p>
 <ul class="simple">
-<li>install <tt class="docutils literal"><span class="pre">openssh-server</span></tt> and create an SSH configuration in the home directory of users who requires access to the system ...</li>
+<li>install <tt class="docutils literal"><span class="pre">openssh-server</span></tt> and create an SSH configuration in the home directory of users who requires access to the system:</li>
 </ul>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install openssh-server
 <span class="nv">$ </span>mkdir ~/.ssh <span class="o">&amp;&amp;</span> chmod 700 ~/.ssh <span class="o">&amp;&amp;</span> touch ~/.ssh/authorized_keys <span class="o">&amp;&amp;</span> chmod 600 ~/.ssh/authorized_keys
 </pre></div>
 <ul class="simple">
-<li>collect key fingerprints from the server...</li>
+<li>collect key fingerprints from the server:</li>
 </ul>
 <div class="highlight"><pre><span class="nv">$ </span>ssh-keygen -lf /etc/ssh/ssh_host_dsa_key.pub &gt;&gt; ~/.ssh/keys.txt
 <span class="nv">$ </span>ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub &gt;&gt; ~/.ssh/keys.txt
@@ -53,20 +55,22 @@
 </pre></div>
 <p>... and give <tt class="docutils literal">keys.txt</tt> to users to compare signature when connecting for the first time</p>
 <ul class="simple">
-<li><em>optional:</em> edit <tt class="docutils literal">/etc/ssh/sshd_config</tt> adding specific users to be granted system access (<strong>disabling</strong> all others by default) ...</li>
+<li><strong>optional:</strong> edit <tt class="docutils literal">/etc/ssh/sshd_config</tt> adding specific users to be granted system access (<strong>disabling</strong> all others by default):</li>
 </ul>
 <div class="highlight"><pre>AllowUsers USERNAME1 USERNAME2
 </pre></div>
-<p>Save and restart SSH with the new config by running <tt class="docutils literal">sudo systemctl restart sshd.service</tt></p>
+<p>Save and restart SSH with the new config by running:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo systemctl restart sshd.service
+</pre></div>
 <p><strong>On the client:</strong></p>
 <ul class="simple">
-<li>install <tt class="docutils literal"><span class="pre">openssh-client</span></tt> and create the SSH folder in the user home directory ...</li>
+<li>install <tt class="docutils literal"><span class="pre">openssh-client</span></tt> and create the SSH folder in the user home directory:</li>
 </ul>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install openssh-client
 <span class="nv">$ </span>mkdir ~/.ssh <span class="o">&amp;&amp;</span> chmod 700 ~/.ssh
 </pre></div>
 <ul class="simple">
-<li><em>optional:</em> create an entry in <tt class="docutils literal"><span class="pre">~/.ssh/config</span></tt> with the login options for a server - for example ...</li>
+<li><strong>optional:</strong> create an entry in <tt class="docutils literal"><span class="pre">~/.ssh/config</span></tt> with the login options for a server - for example:</li>
 </ul>
 <div class="highlight"><pre>Host tyrell
 HostName 192.168.1.88
@@ -74,26 +78,30 @@ Port 23456
 User gaff
 </pre></div>
 </div>
-<div class="section" id="step-1-generate-keys">
-<h2>Step 1 - Generate keys</h2>
+<div class="section" id="generate-keys">
+<h3>1. Generate keys</h3>
 <p><strong>On the client:</strong></p>
 <ul class="simple">
-<li>generate keys by running <tt class="docutils literal"><span class="pre">ssh-keygen</span> <span class="pre">-t</span> rsa <span class="pre">-C</span> <span class="pre">&quot;$(whoami)&#64;$(hostname)-$(date</span> <span class="pre">-I)&quot;</span></tt> and supply a passphrase</li>
-<li>upload the public key to the server and append it to <tt class="docutils literal"><span class="pre">~/.ssh/authorized_keys</span></tt> ...</li>
+<li>generate keys by running:</li>
+</ul>
+<div class="highlight"><pre><span class="nv">$ </span>ssh-keygen -t rsa -C <span class="s2">&quot;$(whoami)@$(hostname)-$(date -I)&quot;</span>
+</pre></div>
+<ul class="simple">
+<li>upload the public key to the server and append it to <tt class="docutils literal"><span class="pre">~/.ssh/authorized_keys</span></tt>:</li>
 </ul>
 <div class="highlight"><pre><span class="nv">$ </span>cat ~/.ssh/id_rsa.pub | ssh SERVER <span class="s2">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span>
 </pre></div>
 </div>
-<div class="section" id="step-2-test">
-<h2>Step 2 - Test</h2>
+<div class="section" id="test">
+<h3>2. Test</h3>
 <p><strong>On the client:</strong></p>
 <p>Graphical display managers like <tt class="docutils literal">gdm</tt> will automatically check a user account for SSH keys upon login. A pop-up box will prompt for the passphrase and the key will be added to the desktop session.</p>
-<p>If logging into a console, tell SSH that you have keys by running <tt class="docutils literal"><span class="pre">ssh-add</span></tt> ...</p>
+<p>If logging into a console, tell SSH that you have keys by running <tt class="docutils literal"><span class="pre">ssh-add</span></tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>ssh-add
 <span class="nv">$ </span>Enter passphrase <span class="k">for</span> /home/gaff/.ssh/id_rsa:
 Identity added: /home/gaff/.ssh/id_rsa <span class="o">(</span>/home/gaff/.ssh/id_rsa<span class="o">)</span>
 </pre></div>
-<p>All SSH sessions launched from this console will access this user key stored in memory. Make sure to test the connection before disabling password logins ...</p>
+<p>All SSH sessions launched from this console will access this user key stored in memory. Make sure to test the connection before disabling password logins:</p>
 <div class="highlight"><pre><span class="nv">$ </span>ssh 192.168.1.88
 Last login: Thu Sep 11 23:46:28 2014 from kambei.lan
 <span class="nv">$ </span>uname -n
@@ -101,40 +109,51 @@ tyrell
 </pre></div>
 <p>No request to enter a passphrase indicates SSH key authentication is properly configured.</p>
 </div>
-<div class="section" id="step-3-disable-password-logins">
-<h2>Step 3 - Disable password logins</h2>
+<div class="section" id="disable-password-logins">
+<h3>3. Disable password logins</h3>
 <p><strong>On the server:</strong></p>
 <ul class="simple">
-<li>edit <tt class="docutils literal">/etc/ssh/sshd_config</tt> ...</li>
+<li>edit <tt class="docutils literal">/etc/ssh/sshd_config</tt>:</li>
 </ul>
 <div class="highlight"><pre>PubkeyAuthentication yes
 ChallengeResponseAuthentication no
 PasswordAuthentication no
 UsePAM no
 </pre></div>
-<p>... and restart the SSH server <tt class="docutils literal">sudo systemctl restart sshd.service</tt></p>
+<p>... and restart the SSH server:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo systemctl restart sshd.service
+</pre></div>
 </div>
-<div class="section" id="step-4-key-management">
-<h2>Step 4 - Key management</h2>
+<div class="section" id="key-management">
+<h3>4. Key management</h3>
 <p><a class="reference external" href="http://www.funtoo.org/Keychain">Keychain</a> is an OpenSSH key manager. From the Debian package description:</p>
 <blockquote>
 When keychain is run, it checks for a running ssh-agent, otherwise it starts one. It saves the ssh-agent environment variables to <tt class="docutils literal"><span class="pre">~/.keychain/$HOSTNAME-sh</span></tt>, so that subsequent logins and non-interactive shells such as cron jobs can source the file and make passwordless ssh connections.  In addition, when keychain runs, it verifies that the key files specified on the command-line are known to ssh-agent, otherwise it loads them, prompting you for a password if necessary.</blockquote>
 <p><strong>On the client:</strong></p>
 <ul class="simple">
-<li>install <tt class="docutils literal">sudo <span class="pre">apt-get</span> install keychain</tt></li>
-<li>configure <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt> ...</li>
+<li>install:</li>
+</ul>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install keychain
+</pre></div>
+<ul class="simple">
+<li>configure <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt>:</li>
 </ul>
 <div class="highlight"><pre><span class="c"># setup keychain - ssh-agent management</span>
 keychain ~/.ssh/id_rsa
 . ~/.keychain/<span class="nv">$HOSTNAME</span>-sh
 </pre></div>
 <ul class="simple">
-<li>flush all cached keys from memory with <tt class="docutils literal">keychain <span class="pre">--clear</span></tt></li>
-<li>if using <a class="reference external" href="http://www.circuidipity.com/tmux.html">tmux</a> enable persistent SSH key management across sessions by editing <tt class="docutils literal"><span class="pre">~/.tmux.conf</span></tt> ...</li>
+<li>flush all cached keys from memory with:</li>
+</ul>
+<div class="highlight"><pre><span class="nv">$ </span>keychain --clear
+</pre></div>
+<ul class="simple">
+<li>if using <a class="reference external" href="http://www.circuidipity.com/tmux.html">tmux</a> enable persistent SSH key management across sessions by editing <tt class="docutils literal"><span class="pre">~/.tmux.conf</span></tt>:</li>
 </ul>
 <div class="highlight"><pre><span class="nb">set</span>-option -g update-environment <span class="s2">&quot;DISPLAY SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY&quot;</span>
 </pre></div>
 <p>Happy hacking!</p>
+</div>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-networks.html">networks</a>

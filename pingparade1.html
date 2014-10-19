@@ -34,12 +34,14 @@
 <p>A stable Linux distribution can be installed on the device and provide ongoing services such as printing, hosting torrents or websites, and file backups. <a class="reference external" href="http://www.debian.org">Debian GNU/Linux</a> is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like <a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html">Ubuntu</a> build their edifices on solid Debian <em>awesomesauce</em>.</p>
 <p>There are 3 Debian <strong>release branches</strong> - <tt class="docutils literal">stable</tt>, <tt class="docutils literal">testing</tt>, and <tt class="docutils literal">unstable</tt> - and the current stable branch goes by the name <strong>wheezy</strong>. I use the <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">minimal install image</a> to create a <strong>lightweight, console-only</strong> base configuration that can be customized for various tasks.</p>
 <p>Below is a visual walk-through of a sample Debian home server setup that makes use of an entire storage device divided into <tt class="docutils literal">root</tt> + <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt> partitions.</p>
-<div class="section" id="step-0-installer">
-<h2>Step 0 - Installer</h2>
+<div class="section" id="to-install">
+<h2>To install:</h2>
+<div class="section" id="install-image">
+<h3>0. Install image</h3>
 <p>Download a <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/mini.iso">Debian mini.iso</a> and burn the image to a CD or <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">prepare a USB boot device</a>.</p>
 </div>
-<div class="section" id="step-1-go">
-<h2>Step 1 - Go!</h2>
+<div class="section" id="go">
+<h3>1. Go!</h3>
 <img alt="Install" class="align-center" src="images/screenshot/netbookServer/01.png" style="width: 800px; height: 600px;" />
 <img alt="Select Language" class="align-center" src="images/screenshot/netbookServer/02.png" style="width: 800px; height: 600px;" />
 <img alt="Select Location" class="align-center" src="images/screenshot/netbookServer/03.png" style="width: 800px; height: 600px;" />
@@ -58,8 +60,8 @@
 <img alt="Verify password" class="align-center" src="images/screenshot/netbookServer/16.png" style="width: 800px; height: 600px;" />
 <img alt="Select time zone" class="align-center" src="images/screenshot/netbookServer/17.png" style="width: 800px; height: 600px;" />
 </div>
-<div class="section" id="step-2-partitions">
-<h2>Step 2 - Partitions</h2>
+<div class="section" id="partitions">
+<h3>2. Partitions</h3>
 <p>In the example below I create 3 partitions on the disk:</p>
 <ul class="simple">
 <li>sda1 is a 10GB <tt class="docutils literal">root</tt> partition</li>
@@ -99,8 +101,8 @@
 <img alt="Finish partitioning" class="align-center" src="images/screenshot/netbookServer/46.png" style="width: 800px; height: 600px;" />
 <img alt="Write changes to disk" class="align-center" src="images/screenshot/netbookServer/47.png" style="width: 800px; height: 600px;" />
 </div>
-<div class="section" id="step-3-install-packages-and-reboot">
-<h2>Step 3 - Install packages and reboot</h2>
+<div class="section" id="install-packages-and-reboot">
+<h3>3. Install packages and reboot</h3>
 <img alt="Popularity-contest" class="align-center" src="images/screenshot/netbookServer/48.png" style="width: 800px; height: 600px;" />
 <p>Select only <tt class="docutils literal">[*] Standard system utilities</tt> if you wish to start with a minimal, console-only base configuration ready for further customization. The task menu can be accessed post-install by running <tt class="docutils literal">tasksel</tt>.</p>
 <img alt="Software selection" class="align-center" src="images/screenshot/netbookServer/49.png" style="width: 800px; height: 600px;" />
@@ -109,9 +111,9 @@
 <img alt="GRUB menu" class="align-center" src="images/screenshot/netbookServer/52.png" style="width: 800px; height: 600px;" />
 <img alt="Login" class="align-center" src="images/screenshot/netbookServer/53.png" style="width: 800px; height: 600px;" />
 </div>
-<div class="section" id="step-4-static-network-interface">
-<h2>Step 4 - Static network interface</h2>
-<p>For a home server that is going to stay put in one location its a good idea to configure the device with a static network interface. Log in as root and run <tt class="docutils literal">nano /etc/network/interfaces</tt> to configure (in example below) the ethernet port with a static address...</p>
+<div class="section" id="static-network-interface">
+<h3>4. Static network interface</h3>
+<p>For a home server that is going to stay put in one location its a good idea to configure the device with a static network interface. Log in as root and run <tt class="docutils literal">nano /etc/network/interfaces</tt> to configure (in this example) the ethernet port with a static address:</p>
 <div class="highlight"><pre><span class="c"># The loopback network interface</span>
 auto lo
 iface lo inet loopback
@@ -124,10 +126,11 @@ iface eth0 inet static
     gateway 192.168.1.1  <span class="c"># home router address</span>
 </pre></div>
 </div>
-<div class="section" id="step-5-post-install-configuration">
-<h2>Step 5 - Post-install configuration</h2>
-<p>I have created a <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/debian-post-install-main.sh">post-install shell script</a> that can be used to configure tracking of Debian's stable, testing, or unstable branch with the option of installing the <strong>Openbox</strong> window manager or (more suitable for a server setup) sticking with a console-only environment.</p>
+<div class="section" id="post-install">
+<h3>5. Post-install</h3>
+<p>I have created a <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/debian-post-install-main.sh">post-install shell script</a> that can be used to configure tracking of Debian's branches with the option of installing the <a class="reference external" href="http://www.circuidipity.com/tag-openbox.html">Openbox</a> window manager or (more suitable for a server setup) sticking with a console-only environment.</p>
 <p>Happy hacking!</p>
+</div>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-networks.html">networks</a>
