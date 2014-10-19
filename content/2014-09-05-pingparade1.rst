@@ -24,13 +24,16 @@ There are 3 Debian **release branches** - ``stable``, ``testing``, and ``unstabl
 
 Below is a visual walk-through of a sample Debian home server setup that makes use of an entire storage device divided into ``root`` + ``swap`` + ``home`` partitions.
 
-Step 0 - Installer
-==================
+To install:
+===========
+
+0. Install image
+----------------
 
 Download a `Debian mini.iso <http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/mini.iso>`_ and burn the image to a CD or `prepare a USB boot device <http://www.circuidipity.com/multi-boot-usb.html>`_.
 
-Step 1 - Go!
-============
+1. Go!
+------
 
 .. image:: images/screenshot/netbookServer/01.png
     :align: center
@@ -134,8 +137,8 @@ Step 1 - Go!
     :width: 800px
     :height: 600px
 
-Step 2 - Partitions
-===================
+2. Partitions
+-------------
 
 In the example below I create 3 partitions on the disk:
 
@@ -327,8 +330,8 @@ Setting **Mount options** to ``noatime`` decreases write operations and boosts d
     :width: 800px
     :height: 600px
 
-Step 3 - Install packages and reboot
-====================================
+3. Install packages and reboot
+------------------------------
 
 .. image:: images/screenshot/netbookServer/48.png
     :alt: Popularity-contest
@@ -368,10 +371,10 @@ Select only ``[*] Standard system utilities`` if you wish to start with a minima
     :width: 800px
     :height: 600px
 
-Step 4 - Static network interface
-=================================
+4. Static network interface
+---------------------------
 
-For a home server that is going to stay put in one location its a good idea to configure the device with a static network interface. Log in as root and run ``nano /etc/network/interfaces`` to configure (in example below) the ethernet port with a static address...
+For a home server that is going to stay put in one location its a good idea to configure the device with a static network interface. Log in as root and run ``nano /etc/network/interfaces`` to configure (in this example) the ethernet port with a static address:
 
 .. code-block:: bash
 
@@ -386,9 +389,9 @@ For a home server that is going to stay put in one location its a good idea to c
         netmask 255.255.255.0
         gateway 192.168.1.1  # home router address
 
-Step 5 - Post-install configuration
-===================================
+5. Post-install
+---------------
 
-I have created a `post-install shell script <https://github.com/vonbrownie/linux-post-install/blob/master/debian-post-install-main.sh>`_ that can be used to configure tracking of Debian's stable, testing, or unstable branch with the option of installing the **Openbox** window manager or (more suitable for a server setup) sticking with a console-only environment.
+I have created a `post-install shell script <https://github.com/vonbrownie/linux-post-install/blob/master/debian-post-install-main.sh>`_ that can be used to configure tracking of Debian's branches with the option of installing the `Openbox <http://www.circuidipity.com/tag-openbox.html>`_ window manager or (more suitable for a server setup) sticking with a console-only environment.
 
 Happy hacking!

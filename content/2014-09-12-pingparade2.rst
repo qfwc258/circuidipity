@@ -20,21 +20,24 @@ Ping Parade #2 -- Keys
 
     Any one attempt has low odds of guessing successfully. The attempts are constant. They never end. Eventually [some automated attacker] will get lucky and break into your server. It might be tomorrow, or next year, but it _will_ happen. To stop these types of attacks, you can either use packet filtering to block public access to your SSH server, or you can eliminate passwords on your servers. User keys let you eliminate passwords.
 
-This is how to configure SSH key authentication between a `home server <http://www.circuidipity.com/pingparade1.html>`_ and a client such as a laptop that are both running **Debian Linux**.
+To configure SSH key authentication between a home server and client:
+=====================================================================
 
-Step 0 - Install                                             
-================
+0. Install                                             
+----------
+
+Both the `home server <http://www.circuidipity.com/pingparade1.html>`_ and client are running **Debian Linux**.
 
 **On the server:**                                                                
                
-* install ``openssh-server`` and create an SSH configuration in the home directory of users who requires access to the system ...
+* install ``openssh-server`` and create an SSH configuration in the home directory of users who requires access to the system:
 
 .. code-block:: bash                                                                
                                                                                     
     $ sudo apt-get install openssh-server                                           
     $ mkdir ~/.ssh && chmod 700 ~/.ssh && touch ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys
                                                                                     
-* collect key fingerprints from the server...                                                      
+* collect key fingerprints from the server:                                                      
                                                                                     
 .. code-block:: bash                                                                
                                                                                     
@@ -44,24 +47,28 @@ Step 0 - Install
                                                                                     
 ... and give ``keys.txt`` to users to compare signature when connecting for the first time            
                                                                                     
-* *optional:* edit ``/etc/ssh/sshd_config`` adding specific users to be granted system access (**disabling** all others by default) ...
+* **optional:** edit ``/etc/ssh/sshd_config`` adding specific users to be granted system access (**disabling** all others by default):
 
 .. code-block:: bash
                                                                                     
   AllowUsers USERNAME1 USERNAME2
 
-Save and restart SSH with the new config by running ``sudo systemctl restart sshd.service``                           
+Save and restart SSH with the new config by running:
+
+.. code-block:: bash
+
+    $ sudo systemctl restart sshd.service                      
                                                                                     
 **On the client:**                                                                
 
-* install ``openssh-client`` and create the SSH folder in the user home directory ...
+* install ``openssh-client`` and create the SSH folder in the user home directory:
 
 .. code-block:: bash                                                                
                                                                                     
   $ sudo apt-get install openssh-client                                             
   $ mkdir ~/.ssh && chmod 700 ~/.ssh                                                
                                                                                     
-* *optional:* create an entry in ``~/.ssh/config`` with the login options for a server - for example ...                              
+* **optional:** create an entry in ``~/.ssh/config`` with the login options for a server - for example:                          
                                                                                     
 .. code-block:: bash                                                                
                                                                                     
@@ -70,27 +77,31 @@ Save and restart SSH with the new config by running ``sudo systemctl restart ssh
     Port 23456                                                                      
     User gaff                                                                       
      
-Step 1 - Generate keys                                                                   
-======================
+1. Generate keys
+----------------
 
 **On the client:**                                                            
                                                                                 
-* generate keys by running ``ssh-keygen -t rsa -C "$(whoami)@$(hostname)-$(date -I)"`` and supply a passphrase     
+* generate keys by running:
+  
+.. code-block:: bash
+
+    $ ssh-keygen -t rsa -C "$(whoami)@$(hostname)-$(date -I)" 
                                                                                 
-* upload the public key to the server and append it to ``~/.ssh/authorized_keys`` ...             
+* upload the public key to the server and append it to ``~/.ssh/authorized_keys``: 
                                                                                 
 .. code-block:: bash                                                            
                                                                                 
     $ cat ~/.ssh/id_rsa.pub | ssh SERVER "cat >> ~/.ssh/authorized_keys"        
 
-Step 2 - Test
-=============
+2. Test
+-------
 
 **On the client:**
 
 Graphical display managers like ``gdm`` will automatically check a user account for SSH keys upon login. A pop-up box will prompt for the passphrase and the key will be added to the desktop session.
 
-If logging into a console, tell SSH that you have keys by running ``ssh-add`` ...
+If logging into a console, tell SSH that you have keys by running ``ssh-add``:
 
 .. code-block:: bash
 
@@ -98,7 +109,7 @@ If logging into a console, tell SSH that you have keys by running ``ssh-add`` ..
     $ Enter passphrase for /home/gaff/.ssh/id_rsa:
     Identity added: /home/gaff/.ssh/id_rsa (/home/gaff/.ssh/id_rsa)
 
-All SSH sessions launched from this console will access this user key stored in memory. Make sure to test the connection before disabling password logins ...
+All SSH sessions launched from this console will access this user key stored in memory. Make sure to test the connection before disabling password logins:
 
 .. code-block:: bash
 
@@ -109,12 +120,12 @@ All SSH sessions launched from this console will access this user key stored in 
 
 No request to enter a passphrase indicates SSH key authentication is properly configured.    
 
-Step 3 - Disable password logins                                                
-================================
+3. Disable password logins 
+--------------------------
 
 **On the server:**                                                               
                                                                                 
-* edit ``/etc/ssh/sshd_config`` ...                                                
+* edit ``/etc/ssh/sshd_config``:                                         
                                                                                 
 .. code-block:: bash                                                            
                                                                                 
@@ -123,10 +134,14 @@ Step 3 - Disable password logins
     PasswordAuthentication no                                                   
     UsePAM no                                                                   
                                                                                 
-... and restart the SSH server ``sudo systemctl restart sshd.service``                                               
+... and restart the SSH server:
+
+.. code-block:: bash
+
+    $ sudo systemctl restart sshd.service                                               
                                   
-Step 4 - Key management                                                     
-=======================
+4. Key management
+-----------------
 
 `Keychain <http://www.funtoo.org/Keychain>`_ is an OpenSSH key manager. From the Debian package description:
 
@@ -134,9 +149,13 @@ Step 4 - Key management
 
 **On the client:**                                                            
                                                                                 
-* install ``sudo apt-get install keychain``                                             
+* install:
+  
+.. code-block:: bash
+
+    $ sudo apt-get install keychain                                             
                                                                                 
-* configure ``~/.bashrc`` ...                                                           
+* configure ``~/.bashrc``:                                                           
                                                                                 
 .. code-block:: bash                                                            
                                                                                 
@@ -144,9 +163,13 @@ Step 4 - Key management
     keychain ~/.ssh/id_rsa                                                      
     . ~/.keychain/$HOSTNAME-sh                                                  
                                                                                 
-* flush all cached keys from memory with ``keychain --clear``                   
+* flush all cached keys from memory with:
+  
+.. code-block:: bash
+
+    $ keychain --clear                  
                                                                                 
-* if using `tmux <http://www.circuidipity.com/tmux.html>`_ enable persistent SSH key management across sessions by editing ``~/.tmux.conf`` ...                                                   
+* if using `tmux <http://www.circuidipity.com/tmux.html>`_ enable persistent SSH key management across sessions by editing ``~/.tmux.conf``: 
                                                                                 
 .. code-block:: bash                                                            
                                                                                 
