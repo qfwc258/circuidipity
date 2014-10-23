@@ -2,6 +2,7 @@
 Ubuntu 14.04 Minimal Install
 ============================
 
+:date: 2014-07-07 01:23:00
 :tags: ubuntu, linux
 :slug: ubuntu-trusty-install
 :modified: 2014-10-22 22:12:00
