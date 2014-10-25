@@ -1,13 +1,16 @@
-==========================
-From Chromebook to Sidbook
-==========================
+=====================
+Chromebook to Sidbook
+=====================
 
+:date: 2014-05-09 01:23:00
 :slug: c720-sidbook
 :template: article-project
-:tags: chromebook, debian, linux, openbox, shell, programming, github
-:modified: 2014-08-31 01:23:00
+:tags: chromebook, debian, linux
+:modified: 2014-10-25 15:34:00
 
-Replace ChromeOS permanently with the *sid* (unstable) branch of **Debian Linux** on the **Acer C720 Chromebook**.
+**Update:** I am now using **Lubuntu 14.04 LTS** on my Chromebook [`details <http://www.circuidipity.com/c720-lubuntubook.html`_].
+
+Replace Chrome OS permanently with the ``sid/unstable`` branch of **Debian Linux** on the **Acer C720 Chromebook**.
 
 .. image:: images/sidbook.png
     :align: right
@@ -44,7 +47,7 @@ Sources: Creating a `USB stick with multiple Linux installers <http://www.circui
 
 `SeaBIOS <http://www.coreboot.org/SeaBIOS>`_ in combination with **coreboot** provides an open-source legacy BIOS that enables access to the MBR and the ability to install an alternative OS on the Chromebook. All this good stuff involves jumping through a few simple hoops and not trembling in fear at the "scary white screen" that pops up at power up stating that the boot loader detects something is **very very wrong** with the Chromebook and helpfully suggests pressing the spacebar to begin recovery. **Do not press the spacebar** or the Debian installation will be wiped from disk!
 
-There are 2 different methods for configuring SeaBIOS in preparation for installing Debian. The first method uses a few simple commands in the ChromeOS shell to place the Chromebook into **developer mode** and allow booting the USB install media and replacing ChromeOS with Debian. The drawback is that scary screen appears at every boot and you must press ``CTRL+L`` to boot to legacy-mode and onward to GRUB and Debian (and **ignore** the helpful prompt to press spacebar and inadvertently begin the adventure of wiping clean the SSD).
+There are 2 different methods for configuring SeaBIOS in preparation for installing Debian. The first method uses a few simple commands in the Chrome OS shell to place the Chromebook into **developer mode** and allow booting the USB install media and replacing Chrome OS with Debian. The drawback is that scary screen appears at every boot and you must press ``CTRL+L`` to boot to legacy-mode and onward to GRUB and Debian (and **ignore** the helpful prompt to press spacebar and inadvertently begin the adventure of wiping clean the SSD).
 
 The second method involves setting new flags for the write-protected **Google Binary Block** (GBB) in the device firmware. Delay at the boot screen can be reduced to a one second timeout and the legacy-mode BIOS set as the system default (no key combo required). Pressing the spacebar is disabled from doing any harm to Debian (the Chromebook just beeps). The drawback is that it involves the (very simple) removal of the device's bottom cover and the temporary removal of the **write-protect screw** from the motherboard to permit flashing new flags to the GBB... and this may void the Chromebook's warranty (one of the case screws lies underneath a sticker declaring the warranty void if disturbed).
 
@@ -75,11 +78,11 @@ This is what you see...
     Chrome OS is missing or damaged.                                            
     Please insert a recovery USB stick or SD card.                              
 
-* Insert USB recovery media prepared in Step 0 and it will proceed to restore ChromeOS and reboot
-* At default ChromeOS "Welcome!" screen open a terminal ``CTRL+ALT+F2`` (Right-arrow)
+* Insert USB recovery media prepared in Step 0 and it will proceed to restore Chrome OS and reboot
+* At default Chrome OS "Welcome!" screen open a terminal ``CTRL+ALT+F2`` (Right-arrow)
 * Login as ``chronos`` (no password), then enter ``sudo su`` for superuser access
 
-Set new GBB flags using the ``set_gbb_flags.sh`` script in ChromeOS. To enable short **developer mode** screen (1 second timeout) followed by **default legacy mode** boot use these flags:
+Set new GBB flags using the ``set_gbb_flags.sh`` script in Chrome OS. To enable short **developer mode** screen (1 second timeout) followed by **default legacy mode** boot use these flags:
 
 .. code-block:: bash
 
@@ -106,7 +109,7 @@ Sources: `Useful GBB flags <http://www.coreboot.org/pipermail/coreboot/2014-Janu
 2.2 Developer Mode Method
 -------------------------
 
-The alternative to removing the write-protect screw above is to place the Chromebook into developer mode using the ChromeOS shell before booting the USB install media:
+The alternative to removing the write-protect screw above is to place the Chromebook into developer mode using the Chrome OS shell before booting the USB install media:
 
 * With the Chromebook off... Hold down ``ESC+F3`` (Refresh) keys and power on the device
 * Invoke Recovery, and at the Recovery screen press ``Ctrl+D``
