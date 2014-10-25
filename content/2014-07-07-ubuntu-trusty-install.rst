@@ -5,7 +5,7 @@ Ubuntu 14.04 Minimal Install
 :date: 2014-07-07 01:23:00
 :tags: ubuntu, linux
 :slug: ubuntu-trusty-install
-:modified: 2014-10-22 22:12:00
+:modified: 2014-10-24 21:45:00
 
 .. image:: images/ubuntuTrusty.png
     :alt: Ubuntu Trusty Tahr
@@ -13,7 +13,7 @@ Ubuntu 14.04 Minimal Install
     :width: 100px
     :height: 100px
 
-**Ubuntu 14.04 "Trusty Tahr"** is a **long-term support** release (till 2019) of the popular Linux operating system [1]_. I use Ubuntu's `minimal install image <https://help.ubuntu.com/community/Installation/MinimalCD>`_ to create a **lightweight, console-only** base configuration that can be customized for various tasks and alternate desktops.
+**Ubuntu 14.04 "Trusty Tahr"** is a `Long Term Support (LTS) <https://wiki.ubuntu.com/Releases>`_ release of the popular Linux operating system. I use Ubuntu's `minimal install image <https://help.ubuntu.com/community/Installation/MinimalCD>`_ to create a **lightweight, console-only** base configuration that can be customized for various tasks and alternate desktops.
 
 Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire storage device divided into 3 partitions: unencrypted ``root`` and `LUKS <https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup>`_ encrypted ``swap`` + ``home``. 
 
@@ -478,8 +478,3 @@ System will display a passphrase prompt to unlock encrypted ``home`` partition.
     :height: 600px
 
 Happy hacking!
-
-Notes
------
-
-.. [1] `List of releases <https://wiki.ubuntu.com/Releases>`_.
