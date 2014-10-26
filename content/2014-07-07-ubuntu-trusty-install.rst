@@ -28,6 +28,8 @@ Download the `64-bit trusty minimal installer <http://archive.ubuntu.com/ubuntu/
 1. Configure
 ------------
 
+Connect the USB stick and boot the installer:
+
 .. image:: images/screenshot/trustyInstall/100.png
     :align: center
     :alt: Install
