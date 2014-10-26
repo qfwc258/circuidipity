@@ -29,6 +29,8 @@ Download the `64-bit trusty minimal installer <http://archive.ubuntu.com/ubuntu/
 1. Configure
 ------------
 
+Connect the USB stick and boot the installer [2]_:
+
 .. image:: images/screenshot/trustyLubuntubookInstall/100.png
     :align: center
     :alt: Install
@@ -476,3 +478,5 @@ Notes
 -----
 
 .. [1] Specifically in this instance, the Ubuntu console installer provides a random key option for the encrypted swap partition.
+
+.. [2] Installer gets stuck at boot on ``Switched to clocksource tsc`` for a minute or so before resume. `This is fixed post-install <http://www.circuidipity.com/c720-lubuntubook.html>`_ by modifying ``/etc/default/grub`` with kernel option ``tpm_tis.force=1``.
