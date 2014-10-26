@@ -126,7 +126,7 @@ Enable the **USB Boot** and **Legacy BIOS** modes by opening the shell with ``Ct
 .. code-block:: bash
 
     $ sudo crossystem dev_boot_usb=1
-    $ sudo dev_boot_legacy=1
+    $ sudo crossystem dev_boot_legacy=1
 
 Insert the USB stick prepared in Step 1, reboot the Chromebook and press ``CTRL+L`` at the boot screen to enter legacy boot mode.
 
