@@ -4,9 +4,8 @@ Chromebook to Sidbook
 
 :date: 2014-05-09 01:23:00
 :slug: c720-sidbook
-:template: article-project
 :tags: chromebook, debian, linux
-:modified: 2014-10-25 15:34:00
+:modified: 2014-10-26 01:30:00
 
 **Update:** I am now using `Lubuntu 14.04 LTS on my Chromebook <http://www.circuidipity.com/c720-lubuntubook.html>`_.
 
