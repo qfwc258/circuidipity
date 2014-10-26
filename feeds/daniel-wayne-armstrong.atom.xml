@@ -79,7 +79,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 &lt;/ul&gt;
 &lt;p&gt;Enable the &lt;strong&gt;USB Boot&lt;/strong&gt; and &lt;strong&gt;Legacy BIOS&lt;/strong&gt; modes by opening the shell with &lt;tt class="docutils literal"&gt;Ctrl+Alt+T&lt;/tt&gt; and enter &lt;tt class="docutils literal"&gt;shell&lt;/tt&gt;. Set &lt;tt class="docutils literal"&gt;dev_boot_usb&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;dev_boot_legacy&lt;/tt&gt; to active:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo crossystem &lt;span class="nv"&gt;dev_boot_usb&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo &lt;span class="nv"&gt;dev_boot_legacy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo crossystem &lt;span class="nv"&gt;dev_boot_legacy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Insert the USB stick prepared in Step 1, reboot the Chromebook and press &lt;tt class="docutils literal"&gt;CTRL+L&lt;/tt&gt; at the boot screen to enter legacy boot mode.&lt;/p&gt;
 &lt;p&gt;Source: &lt;a class="reference external" href="http://www.chromium.org/chromium-os"&gt;Chromium OS&lt;/a&gt; developer information for the &lt;a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook"&gt;Acer C720 Chromebook&lt;/a&gt;&lt;/p&gt;

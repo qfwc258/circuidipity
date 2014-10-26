@@ -105,7 +105,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 </ul>
 <p>Enable the <strong>USB Boot</strong> and <strong>Legacy BIOS</strong> modes by opening the shell with <tt class="docutils literal">Ctrl+Alt+T</tt> and enter <tt class="docutils literal">shell</tt>. Set <tt class="docutils literal">dev_boot_usb</tt> and <tt class="docutils literal">dev_boot_legacy</tt> to active:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo crossystem <span class="nv">dev_boot_usb</span><span class="o">=</span>1
-<span class="nv">$ </span>sudo <span class="nv">dev_boot_legacy</span><span class="o">=</span>1
+<span class="nv">$ </span>sudo crossystem <span class="nv">dev_boot_legacy</span><span class="o">=</span>1
 </pre></div>
 <p>Insert the USB stick prepared in Step 1, reboot the Chromebook and press <tt class="docutils literal">CTRL+L</tt> at the boot screen to enter legacy boot mode.</p>
 <p>Source: <a class="reference external" href="http://www.chromium.org/chromium-os">Chromium OS</a> developer information for the <a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook">Acer C720 Chromebook</a></p>
