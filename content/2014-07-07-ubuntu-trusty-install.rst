@@ -20,12 +20,10 @@ Below is a visual walk-through of a sample Ubuntu setup that makes use of an ent
 Let's go!
 =========
 
-0. Installer
-------------
+0. Prepare install media
+------------------------
 
-Download a `64-bit minimal installer <http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso>`_ (`32-bit <http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/mini.iso>`_ for older machines) and burn to CD or `flash the image <https://help.ubuntu.com/community/Installation/FromUSBStick>`_ to a USB stick.
-
-An alternative (my choice) is adding the image to a `USB stick with multiple Linux installers <http://www.circuidipity.com/multi-boot-usb.html>`_.
+Download the `64-bit trusty minimal installer <http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso>`_ (`32-bit <http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/mini.iso>`_ for older machines) and burn to CD or `flash the image <https://help.ubuntu.com/community/Installation/FromUSBStick>`_ to a USB stick. An alternative (my choice) is adding the image to a `USB stick with multiple Linux installers <http://www.circuidipity.com/multi-boot-usb.html>`_. Using the minimal console installer vs. the graphical installer provides more options during setup [1]_.
 
 1. Configure
 ------------
@@ -498,3 +496,8 @@ System will display a passphrase prompt to unlock encrypted ``home`` partition:
     :height: 600px
 
 Happy hacking!
+
+Notes
+-----
+
+.. [1] Specifically in this instance, the Ubuntu console installer provides a random key option for the encrypted swap partition.
