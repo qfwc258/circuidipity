@@ -34,10 +34,11 @@
 <h2>Let's go!</h2>
 <div class="section" id="prepare-install-media">
 <h3>0. Prepare install media</h3>
-<p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso">64-bit trusty minimal installer</a> and <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick. An alternative (my choice) is adding the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>. Using the minimal console installer vs. the graphical <a class="reference external" href="https://help.ubuntu.com/community/Lubuntu/GetLubuntu">Lubuntu installer</a> provides more options during setup <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
+<p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso">64-bit trusty minimal installer</a> and <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick. An alternative (my choice) is adding the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>. Using the minimal console installer vs. the graphical <a class="reference external" href="https://help.ubuntu.com/community/Lubuntu/GetLubuntu">Lubuntu installer</a> provides more options during setup <a class="footnote-reference" href="#id3" id="id1">[1]</a>.</p>
 </div>
 <div class="section" id="configure">
 <h3>1. Configure</h3>
+<p>Connect the USB stick and boot the installer <a class="footnote-reference" href="#id4" id="id2">[2]</a>:</p>
 <img alt="Install" class="align-center" src="images/screenshot/trustyLubuntubookInstall/100.png" style="width: 800px; height: 600px;" />
 <img alt="Select Language" class="align-center" src="images/screenshot/trustyLubuntubookInstall/101.png" style="width: 800px; height: 600px;" />
 <img alt="Select Location" class="align-center" src="images/screenshot/trustyLubuntubookInstall/102.png" style="width: 800px; height: 600px;" />
@@ -129,10 +130,16 @@
 </div>
 <div class="section" id="notes">
 <h3>Notes</h3>
-<table class="docutils footnote" frame="void" id="id2" rules="none">
+<table class="docutils footnote" frame="void" id="id3" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Specifically in this instance, the Ubuntu console installer provides a random key option for the encrypted swap partition.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Installer gets stuck at boot on <tt class="docutils literal">Switched to clocksource tsc</tt> for a minute or so before resume. <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">This is fixed post-install</a> by modifying <tt class="docutils literal">/etc/default/grub</tt> with kernel option <tt class="docutils literal">tpm_tis.force=1</tt>.</td></tr>
 </tbody>
 </table>
 </div>
