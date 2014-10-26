@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | From Chromebook to Sidbook</title>
+        <title>Circuidipity | Chromebook to Sidbook</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -23,10 +23,11 @@
 </div>
 
 <!-- article -->
-<h1>From Chromebook to Sidbook</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 31 August 2014</p>
+<h1>Chromebook to Sidbook</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Saturday 25 October 2014</p>
 <div id="article">
-    <p>Replace ChromeOS permanently with the <em>sid</em> (unstable) branch of <strong>Debian Linux</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
+    <p><strong>Update:</strong> I am now using <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Lubuntu 14.04 LTS on my Chromebook</a>.</p>
+<p>Replace Chrome OS permanently with the <tt class="docutils literal">sid/unstable</tt> branch of <strong>Debian Linux</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
 <img alt="Debianized Acer C720" class="align-right" src="images/sidbook.png" style="width: 300px; height: 161px;" />
 <p>Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance using <a class="reference external" href="http://openbox.org/">Openbox</a> window manager.</p>
 <p>There are a few different configurations of this device... mine is the <a class="reference external" href="http://us.acer.com/ac/en/US/content/model-datasheet/NX.SHEAA.002">C720-2848</a> non-touchscreen model with 2GB RAM and 16GB SSD.</p>
@@ -49,7 +50,7 @@
 <div class="section" id="seabios">
 <h3>2. SeaBIOS</h3>
 <p><a class="reference external" href="http://www.coreboot.org/SeaBIOS">SeaBIOS</a> in combination with <strong>coreboot</strong> provides an open-source legacy BIOS that enables access to the MBR and the ability to install an alternative OS on the Chromebook. All this good stuff involves jumping through a few simple hoops and not trembling in fear at the &quot;scary white screen&quot; that pops up at power up stating that the boot loader detects something is <strong>very very wrong</strong> with the Chromebook and helpfully suggests pressing the spacebar to begin recovery. <strong>Do not press the spacebar</strong> or the Debian installation will be wiped from disk!</p>
-<p>There are 2 different methods for configuring SeaBIOS in preparation for installing Debian. The first method uses a few simple commands in the ChromeOS shell to place the Chromebook into <strong>developer mode</strong> and allow booting the USB install media and replacing ChromeOS with Debian. The drawback is that scary screen appears at every boot and you must press <tt class="docutils literal">CTRL+L</tt> to boot to legacy-mode and onward to GRUB and Debian (and <strong>ignore</strong> the helpful prompt to press spacebar and inadvertently begin the adventure of wiping clean the SSD).</p>
+<p>There are 2 different methods for configuring SeaBIOS in preparation for installing Debian. The first method uses a few simple commands in the Chrome OS shell to place the Chromebook into <strong>developer mode</strong> and allow booting the USB install media and replacing Chrome OS with Debian. The drawback is that scary screen appears at every boot and you must press <tt class="docutils literal">CTRL+L</tt> to boot to legacy-mode and onward to GRUB and Debian (and <strong>ignore</strong> the helpful prompt to press spacebar and inadvertently begin the adventure of wiping clean the SSD).</p>
 <p>The second method involves setting new flags for the write-protected <strong>Google Binary Block</strong> (GBB) in the device firmware. Delay at the boot screen can be reduced to a one second timeout and the legacy-mode BIOS set as the system default (no key combo required). Pressing the spacebar is disabled from doing any harm to Debian (the Chromebook just beeps). The drawback is that it involves the (very simple) removal of the device's bottom cover and the temporary removal of the <strong>write-protect screw</strong> from the motherboard to permit flashing new flags to the GBB... and this may void the Chromebook's warranty (one of the case screws lies underneath a sticker declaring the warranty void if disturbed).</p>
 <p>Experimenting with alternate OS installs on the Chromebook I first employed the developer mode method followed by the write-protect screw removal. I prefer configuring the device to default to legacy-mode BIOS but I have employed both methods successfully and describe their respective steps below.</p>
 <p><strong>No guarantees</strong>, though... Hopefully you enjoy equal success!</p>
@@ -71,11 +72,11 @@
 Please insert a recovery USB stick or SD card.
 </pre></div>
 <ul class="simple">
-<li>Insert USB recovery media prepared in Step 0 and it will proceed to restore ChromeOS and reboot</li>
-<li>At default ChromeOS &quot;Welcome!&quot; screen open a terminal <tt class="docutils literal">CTRL+ALT+F2</tt> (Right-arrow)</li>
+<li>Insert USB recovery media prepared in Step 0 and it will proceed to restore Chrome OS and reboot</li>
+<li>At default Chrome OS &quot;Welcome!&quot; screen open a terminal <tt class="docutils literal">CTRL+ALT+F2</tt> (Right-arrow)</li>
 <li>Login as <tt class="docutils literal">chronos</tt> (no password), then enter <tt class="docutils literal">sudo su</tt> for superuser access</li>
 </ul>
-<p>Set new GBB flags using the <tt class="docutils literal">set_gbb_flags.sh</tt> script in ChromeOS. To enable short <strong>developer mode</strong> screen (1 second timeout) followed by <strong>default legacy mode</strong> boot use these flags:</p>
+<p>Set new GBB flags using the <tt class="docutils literal">set_gbb_flags.sh</tt> script in Chrome OS. To enable short <strong>developer mode</strong> screen (1 second timeout) followed by <strong>default legacy mode</strong> boot use these flags:</p>
 <div class="highlight"><pre>GBB_FLAG_DEV_SCREEN_SHORT_DELAY 0×00000001
 GBB_FLAG_FORCE_DEV_SWITCH_ON 0×00000008
 GBB_FLAG_FORCE_DEV_BOOT_LEGACY 0×00000080
@@ -94,7 +95,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 </div>
 <div class="section" id="developer-mode-method">
 <h3>2.2 Developer Mode Method</h3>
-<p>The alternative to removing the write-protect screw above is to place the Chromebook into developer mode using the ChromeOS shell before booting the USB install media:</p>
+<p>The alternative to removing the write-protect screw above is to place the Chromebook into developer mode using the Chrome OS shell before booting the USB install media:</p>
 <ul class="simple">
 <li>With the Chromebook off... Hold down <tt class="docutils literal">ESC+F3</tt> (Refresh) keys and power on the device</li>
 <li>Invoke Recovery, and at the Recovery screen press <tt class="docutils literal">Ctrl+D</tt></li>
@@ -245,10 +246,6 @@ F10
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-chromebook.html">chromebook</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-openbox.html">openbox</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-github.html">github</a>
 </p>
 </div>
 

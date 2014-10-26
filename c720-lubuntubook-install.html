@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Install Lubuntu 14.04 on the Acer C720 Chromebook</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Saturday 25 October 2014</p>
+</div>
+
+<!-- article -->
+<h1>Install Lubuntu 14.04 on the Acer C720 Chromebook</h1>
+<div id="article">
+    <img alt="Ubuntu Trusty Tahr" class="align-left" src="images/ubuntuTrusty.png" style="width: 100px; height: 100px;" />
+<p><strong>See:</strong> <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Chromebook to Lubuntubook</a> for more details on replacing Chrome OS with a full-featured Linux on Chromebooks.</p>
+<p><strong>Ubuntu 14.04 &quot;Trusty Tahr&quot;</strong> is a <a class="reference external" href="https://wiki.ubuntu.com/Releases">Long Term Support (LTS)</a> release of the popular Linux operating system. I use Ubuntu's <a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD">minimal install image</a> to setup the lightweight <a class="reference external" href="http://lubuntu.net/">Lubuntu</a> (Ubuntu + LXDE desktop) distro on the <strong>Acer C720 Chromebook</strong>.</p>
+<p>Below is a visual walk-through of a sample install that makes use of an entire storage device divided into 3 partitions: a <tt class="docutils literal">boot</tt> partition, and <a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a> encrypted <tt class="docutils literal">swap</tt> + <tt class="docutils literal">root</tt>.</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<div class="section" id="prepare-install-media">
+<h3>0. Prepare install media</h3>
+<p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso">64-bit trusty minimal installer</a> and <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick. An alternative (my choice) is adding the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>. Using the minimal console installer vs. the graphical <a class="reference external" href="https://help.ubuntu.com/community/Lubuntu/GetLubuntu">Lubuntu installer</a> provides more options during setup <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
+</div>
+<div class="section" id="configure">
+<h3>1. Configure</h3>
+<img alt="Install" class="align-center" src="images/screenshot/trustyLubuntubookInstall/100.png" style="width: 800px; height: 600px;" />
+<img alt="Select Language" class="align-center" src="images/screenshot/trustyLubuntubookInstall/101.png" style="width: 800px; height: 600px;" />
+<img alt="Select Location" class="align-center" src="images/screenshot/trustyLubuntubookInstall/102.png" style="width: 800px; height: 600px;" />
+<img alt="Configure Keyboard" class="align-center" src="images/screenshot/trustyLubuntubookInstall/103.png" style="width: 800px; height: 600px;" />
+<img alt="Configure Keyboard" class="align-center" src="images/screenshot/trustyLubuntubookInstall/104.png" style="width: 800px; height: 600px;" />
+<img alt="Configure Keyboard" class="align-center" src="images/screenshot/trustyLubuntubookInstall/105.png" style="width: 800px; height: 600px;" />
+<img alt="Hostname" class="align-center" src="images/screenshot/trustyLubuntubookInstall/106.png" style="width: 800px; height: 600px;" />
+<img alt="Mirror Country" class="align-center" src="images/screenshot/trustyLubuntubookInstall/107.png" style="width: 800px; height: 600px;" />
+<img alt="Mirror archive" class="align-center" src="images/screenshot/trustyLubuntubookInstall/108.png" style="width: 800px; height: 600px;" />
+<img alt="Proxy" class="align-center" src="images/screenshot/trustyLubuntubookInstall/109.png" style="width: 800px; height: 600px;" />
+<img alt="Full Name" class="align-center" src="images/screenshot/trustyLubuntubookInstall/110.png" style="width: 800px; height: 600px;" />
+<img alt="Username" class="align-center" src="images/screenshot/trustyLubuntubookInstall/111.png" style="width: 800px; height: 600px;" />
+<img alt="User password" class="align-center" src="images/screenshot/trustyLubuntubookInstall/112.png" style="width: 800px; height: 600px;" />
+<img alt="Verify password" class="align-center" src="images/screenshot/trustyLubuntubookInstall/113.png" style="width: 800px; height: 600px;" />
+<img alt="Encrypt home" class="align-center" src="images/screenshot/trustyLubuntubookInstall/114.png" style="width: 800px; height: 600px;" />
+<img alt="Configure clock" class="align-center" src="images/screenshot/trustyLubuntubookInstall/115.png" style="width: 800px; height: 600px;" />
+<img alt="Select time zone" class="align-center" src="images/screenshot/trustyLubuntubookInstall/116.png" style="width: 800px; height: 600px;" />
+</div>
+<div class="section" id="partitions">
+<h3>2. Partitions</h3>
+<p>In the example below we create 3 partitions on the disk:</p>
+<ul class="simple">
+<li>sda1 is a 300MB <tt class="docutils literal">boot</tt> partition</li>
+<li>sda2 is a 512MB LUKS encrypted <tt class="docutils literal">swap</tt> partition using a <strong>random key</strong></li>
+<li>sda3 uses the remaining space as a LUKS encrypted <tt class="docutils literal">root</tt> partition using a <strong>passphrase</strong></li>
+</ul>
+<img alt="Partitioning method" class="align-center" src="images/screenshot/trustyLubuntubookInstall/200.png" style="width: 800px; height: 600px;" />
+<img alt="Partition disks" class="align-center" src="images/screenshot/trustyLubuntubookInstall/201.png" style="width: 800px; height: 600px;" />
+<img alt="Partition table" class="align-center" src="images/screenshot/trustyLubuntubookInstall/202.png" style="width: 800px; height: 600px;" />
+<img alt="Free space" class="align-center" src="images/screenshot/trustyLubuntubookInstall/203.png" style="width: 800px; height: 600px;" />
+<img alt="New partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/204.png" style="width: 800px; height: 600px;" />
+<img alt="Partition size" class="align-center" src="images/screenshot/trustyLubuntubookInstall/205.png" style="width: 800px; height: 600px;" />
+<img alt="Primary partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/206.png" style="width: 800px; height: 600px;" />
+<img alt="Beginning" class="align-center" src="images/screenshot/trustyLubuntubookInstall/207.png" style="width: 800px; height: 600px;" />
+<img alt="Mount point" class="align-center" src="images/screenshot/trustyLubuntubookInstall/208-1.png" style="width: 800px; height: 600px;" />
+<img alt="Mount point" class="align-center" src="images/screenshot/trustyLubuntubookInstall/208.png" style="width: 800px; height: 600px;" />
+<img alt="Mount options" class="align-center" src="images/screenshot/trustyLubuntubookInstall/209.png" style="width: 800px; height: 600px;" />
+<p>Setting <tt class="docutils literal">Mount options</tt> to <tt class="docutils literal">noatime</tt> decreases write operations and boosts drive speed:</p>
+<img alt="Mount options" class="align-center" src="images/screenshot/trustyLubuntubookInstall/210.png" style="width: 800px; height: 600px;" />
+<img alt="Done setting up partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/211.png" style="width: 800px; height: 600px;" />
+<img alt="Free space" class="align-center" src="images/screenshot/trustyLubuntubookInstall/212.png" style="width: 800px; height: 600px;" />
+<img alt="New partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/213.png" style="width: 800px; height: 600px;" />
+<img alt="Partition size" class="align-center" src="images/screenshot/trustyLubuntubookInstall/214.png" style="width: 800px; height: 600px;" />
+<img alt="Primary partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/215.png" style="width: 800px; height: 600px;" />
+<img alt="Beginning" class="align-center" src="images/screenshot/trustyLubuntubookInstall/216.png" style="width: 800px; height: 600px;" />
+<img alt="Use as" class="align-center" src="images/screenshot/trustyLubuntubookInstall/217.png" style="width: 800px; height: 600px;" />
+<img alt="Encrypt volume" class="align-center" src="images/screenshot/trustyLubuntubookInstall/218.png" style="width: 800px; height: 600px;" />
+<img alt="Encryption key" class="align-center" src="images/screenshot/trustyLubuntubookInstall/219.png" style="width: 800px; height: 600px;" />
+<img alt="Random key" class="align-center" src="images/screenshot/trustyLubuntubookInstall/220.png" style="width: 800px; height: 600px;" />
+<p>If the hard disk has not been securely wiped prior to installing Lubuntu (using a utility like <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">DBAN</a>) you may want to configure <tt class="docutils literal">Erase data: yes</tt>. Note, however, that depending on the size of the disk this operation can last several hours:</p>
+<img alt="Done setting up partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/221.png" style="width: 800px; height: 600px;" />
+<img alt="Free space" class="align-center" src="images/screenshot/trustyLubuntubookInstall/222.png" style="width: 800px; height: 600px;" />
+<img alt="New partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/223.png" style="width: 800px; height: 600px;" />
+<img alt="Partition size" class="align-center" src="images/screenshot/trustyLubuntubookInstall/224.png" style="width: 800px; height: 600px;" />
+<img alt="Primary partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/225.png" style="width: 800px; height: 600px;" />
+<img alt="Use as" class="align-center" src="images/screenshot/trustyLubuntubookInstall/226.png" style="width: 800px; height: 600px;" />
+<img alt="Encrypt volume" class="align-center" src="images/screenshot/trustyLubuntubookInstall/227.png" style="width: 800px; height: 600px;" />
+<img alt="Done setting up partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/228.png" style="width: 800px; height: 600px;" />
+<img alt="Configure encrypted volumes" class="align-center" src="images/screenshot/trustyLubuntubookInstall/229.png" style="width: 800px; height: 600px;" />
+<img alt="Write changes to disk" class="align-center" src="images/screenshot/trustyLubuntubookInstall/230.png" style="width: 800px; height: 600px;" />
+<img alt="Create encrypted volumes" class="align-center" src="images/screenshot/trustyLubuntubookInstall/231.png" style="width: 800px; height: 600px;" />
+<img alt="Devices to encrypt" class="align-center" src="images/screenshot/trustyLubuntubookInstall/232.png" style="width: 800px; height: 600px;" />
+<img alt="Finish encrypt" class="align-center" src="images/screenshot/trustyLubuntubookInstall/233.png" style="width: 800px; height: 600px;" />
+<img alt="Encryption passphrase" class="align-center" src="images/screenshot/trustyLubuntubookInstall/234.png" style="width: 800px; height: 600px;" />
+<img alt="Verify passphrase" class="align-center" src="images/screenshot/trustyLubuntubookInstall/235.png" style="width: 800px; height: 600px;" />
+<img alt="Configure encrypted volume" class="align-center" src="images/screenshot/trustyLubuntubookInstall/236.png" style="width: 800px; height: 600px;" />
+<img alt="Mount point" class="align-center" src="images/screenshot/trustyLubuntubookInstall/237.png" style="width: 800px; height: 600px;" />
+<img alt="Mount root" class="align-center" src="images/screenshot/trustyLubuntubookInstall/238.png" style="width: 800px; height: 600px;" />
+<img alt="Mount options" class="align-center" src="images/screenshot/trustyLubuntubookInstall/239.png" style="width: 800px; height: 600px;" />
+<img alt="noatime" class="align-center" src="images/screenshot/trustyLubuntubookInstall/240.png" style="width: 800px; height: 600px;" />
+<img alt="Done setting up partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/241.png" style="width: 800px; height: 600px;" />
+<img alt="Write changes to disk" class="align-center" src="images/screenshot/trustyLubuntubookInstall/242.png" style="width: 800px; height: 600px;" />
+<img alt="Confirm write" class="align-center" src="images/screenshot/trustyLubuntubookInstall/243.png" style="width: 800px; height: 600px;" />
+</div>
+<div class="section" id="install-packages-and-finish-up">
+<h3>3. Install packages and finish up</h3>
+<img alt="No automatic updates" class="align-center" src="images/screenshot/trustyLubuntubookInstall/300.png" style="width: 800px; height: 600px;" />
+<p>Select <tt class="docutils literal">Lubuntu Desktop</tt>. This task menu can also be accessed post-install by running:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo tasksel
+</pre></div>
+<img alt="Software selection" class="align-center" src="images/screenshot/trustyLubuntubookInstall/301-2.png" style="width: 800px; height: 600px;" />
+<img alt="GRUB" class="align-center" src="images/screenshot/trustyLubuntubookInstall/302.png" style="width: 800px; height: 600px;" />
+<img alt="UTC" class="align-center" src="images/screenshot/trustyLubuntubookInstall/303.png" style="width: 800px; height: 600px;" />
+<img alt="Finish install" class="align-center" src="images/screenshot/trustyLubuntubookInstall/304.png" style="width: 800px; height: 600px;" />
+<p>System will display a passphrase prompt to unlock encrypted <tt class="docutils literal">root</tt> partition:</p>
+<img alt="Enter encrypt passphrase" class="align-center" src="images/screenshot/trustyLubuntubookInstall/305.png" style="width: 800px; height: 600px;" />
+<img alt="Login" class="align-center" src="images/screenshot/trustyLubuntubookInstall/306.png" style="width: 800px; height: 600px;" />
+<p>Happy hacking!</p>
+</div>
+<div class="section" id="notes">
+<h3>Notes</h3>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Specifically in this instance, the Ubuntu console installer provides a random key option for the encrypted swap partition.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-lubuntu.html">lubuntu</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-chromebook.html">chromebook</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/20141023.html">Links of interest</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/c720-lubuntubook.html">Chromebook to Lubuntubook</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2014 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>

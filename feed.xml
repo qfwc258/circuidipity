@@ -1,5 +1,458 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-10-23T00:10:00-04:00</updated><entry><title>Links of interest</title><link href="http://www.circuidipity.com/20141023.html" rel="alternate"></link><updated>2014-10-23T00:10:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-10-23:20141023.html</id><summary type="html">&lt;ul class="simple"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-10-26T00:09:00-04:00</updated><entry><title>Chromebook to Lubuntubook</title><link href="http://www.circuidipity.com/c720-lubuntubook.html" rel="alternate"></link><updated>2014-10-26T00:09:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-10-26:c720-lubuntubook.html</id><summary type="html">&lt;p&gt;Replace &lt;strong&gt;Chrome OS&lt;/strong&gt; permanently with &lt;strong&gt;Lubuntu 14.04 LTS Linux&lt;/strong&gt; on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt;.&lt;/p&gt;
+&lt;img alt="Acer C720 Lubuntubook" class="align-right" src="images/c720-lubuntubook.png" style="width: 300px; height: 157px;" /&gt;
+&lt;p&gt;Running a &lt;a class="reference external" href="http://lubuntu.net/"&gt;full-featured Linux&lt;/a&gt; on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance using the &lt;strong&gt;LXDE&lt;/strong&gt; desktop.&lt;/p&gt;
+&lt;p&gt;This device is available in a few different configurations. Mine is the non-touchscreen model &lt;a class="reference external" href="http://us.acer.com/ac/en/US/content/model-datasheet/NX.SHEAA.002"&gt;C720-2848&lt;/a&gt; with (non-expandable) &lt;strong&gt;2GB RAM&lt;/strong&gt; and a (user-replaceable) &lt;strong&gt;16GB SSD&lt;/strong&gt; &lt;a class="footnote-reference" href="#id10" id="id1"&gt;[1]&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;div class="section" id="recovery-image"&gt;
+&lt;h3&gt;0. Recovery Image&lt;/h3&gt;
+&lt;p&gt;Create a recovery image of Chrome OS (my C720 is model &lt;tt class="docutils literal"&gt;PEPPY &lt;span class="pre"&gt;C6A-N3C-A7O&lt;/span&gt;&lt;/tt&gt;) to enable restoring the Chromebook to its default configuration. This will require a spare USB stick of 2GB or better:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Log into the Chromebook and let it auto update, as there sometimes are firmware updates... check the updating status in the browser at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;chrome://help&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;Insert the USB stick, enter &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;chrome://imageburner&lt;/span&gt;&lt;/tt&gt; and follow the directions to generate a recovery image&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="https://support.google.com/chromebook/answer/1080595?hl=en"&gt;Create a Chromebook recovery image&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prepare-install-media"&gt;
+&lt;h3&gt;1. Prepare install media&lt;/h3&gt;
+&lt;p&gt;Download the &lt;a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso"&gt;64-bit trusty minimal installer&lt;/a&gt; and &lt;a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick"&gt;flash the image&lt;/a&gt; to a USB stick. An alternative (my choice) is adding the image to a &lt;a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html"&gt;USB stick with multiple Linux installers&lt;/a&gt;. Using the minimal console installer vs. the graphical &lt;a class="reference external" href="https://help.ubuntu.com/community/Lubuntu/GetLubuntu"&gt;Lubuntu installer&lt;/a&gt; provides more options during setup &lt;a class="footnote-reference" href="#id11" id="id2"&gt;[2]&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="seabios"&gt;
+&lt;h3&gt;2. SeaBIOS&lt;/h3&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.coreboot.org/SeaBIOS"&gt;SeaBIOS&lt;/a&gt; in combination with &lt;strong&gt;coreboot&lt;/strong&gt; provides an open-source legacy BIOS that enables access to the MBR and the ability to install an alternative OS on the Chromebook. All this good stuff involves jumping through a few simple hoops and not trembling in fear at the &amp;quot;scary white screen&amp;quot; that pops up at power up stating that the boot loader detects something is &lt;strong&gt;very very wrong&lt;/strong&gt; with the Chromebook and helpfully suggests pressing the spacebar to begin recovery. &lt;strong&gt;Do not press the spacebar&lt;/strong&gt; or the Lubuntu installation will be wiped from disk!&lt;/p&gt;
+&lt;p&gt;There are 2 different methods for configuring SeaBIOS in preparation for installing Lubuntu. The first method uses a few simple commands in the Chrome OS shell to place the Chromebook into &lt;strong&gt;developer mode&lt;/strong&gt; and allow booting the USB install media and replacing Chrome OS with Lubuntu. The drawback is that scary screen appears at every boot and you must press &lt;tt class="docutils literal"&gt;CTRL+L&lt;/tt&gt; to boot to legacy-mode and onward to GRUB and Lubuntu (and &lt;strong&gt;ignore&lt;/strong&gt; the helpful prompt to press spacebar and inadvertently begin the adventure of wiping clean the SSD).&lt;/p&gt;
+&lt;p&gt;The second method involves setting new flags for the write-protected &lt;strong&gt;Google Binary Block&lt;/strong&gt; (GBB) in the device firmware. Delay at the boot screen can be reduced to a one second timeout and the legacy-mode BIOS set as the system default (no key combo required). Pressing the spacebar is disabled from doing any harm to Lubuntu (the Chromebook just beeps). The drawback is that it involves the (very simple) removal of the device's bottom cover and the temporary removal of the &lt;strong&gt;write-protect screw&lt;/strong&gt; from the motherboard to permit flashing new flags to the GBB... and this may void the Chromebook's warranty (one of the case screws lies underneath a sticker declaring the warranty void if disturbed).&lt;/p&gt;
+&lt;p&gt;Experimenting with alternate OS installs on the Chromebook I first employed the developer mode method followed by the write-protect screw removal. I prefer configuring the device to default to legacy-mode BIOS but I have employed both methods successfully and describe their respective steps below.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;No guarantees&lt;/strong&gt;, though... Hopefully you enjoy equal success!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="write-protect-screw-method"&gt;
+&lt;h3&gt;2.1 Write-Protect Screw Method&lt;/h3&gt;
+&lt;p&gt;Disconnect power. Turn the Chromebook over facing bottom up and remove the 13 screws (not missing the one hidden under the warranty sticker). Gently pry the case off starting with the seam where the display connects to device. It comes away pretty easy.&lt;/p&gt;
+&lt;p&gt;This is what you see:&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="C720 annotated innards" src="images/c720-chromebook-annotated-innards.png" style="width: 800px; height: 558px;" /&gt;
+&lt;p class="caption"&gt;[ Image: &lt;a class="footnote-reference" href="#id12" id="id4"&gt;[3]&lt;/a&gt; The battery lock screw is #6 and the write-protect screw is #7 ].&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; This will &lt;strong&gt;wipe out&lt;/strong&gt; whatever is installed on the SSD:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Remove the write-protect screw&lt;/li&gt;
+&lt;li&gt;Close back cover using only the battery lock screw to hold in place&lt;/li&gt;
+&lt;li&gt;Re-connect power, boot Chromebook and wait until it displays:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Chrome OS is missing or damaged.
+Please insert a recovery USB stick or SD card.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Insert USB recovery media prepared in Step 0 and it will proceed to restore Chrome OS and reboot&lt;/li&gt;
+&lt;li&gt;At default Chrome OS &amp;quot;Welcome!&amp;quot; screen open a terminal &lt;tt class="docutils literal"&gt;CTRL+ALT+F2&lt;/tt&gt; (Right-arrow)&lt;/li&gt;
+&lt;li&gt;Login as &lt;tt class="docutils literal"&gt;chronos&lt;/tt&gt; (no password), then enter &lt;tt class="docutils literal"&gt;sudo su&lt;/tt&gt; for superuser access&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Set new GBB flags using the &lt;tt class="docutils literal"&gt;set_gbb_flags.sh&lt;/tt&gt; script in Chrome OS. To enable short &lt;strong&gt;developer mode&lt;/strong&gt; screen (1 second timeout) followed by &lt;strong&gt;default legacy mode&lt;/strong&gt; boot use these flags:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;GBB_FLAG_DEV_SCREEN_SHORT_DELAY 0×00000001
+GBB_FLAG_FORCE_DEV_SWITCH_ON 0×00000008
+GBB_FLAG_FORCE_DEV_BOOT_LEGACY 0×00000080
+GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... which adds up to running in the shell:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;set_gbb_flags.sh 0x489
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Shutdown with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# shutdown -h now&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and disconnect the power:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Remove the bottom cover again and reinstall the write-lock screw to protect the BIOS&lt;/li&gt;
+&lt;li&gt;Close cover and reinstall all the case screws&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Re-connect the power, insert the USB stick prepared in Step 1, and power up the Chromebook &lt;a class="footnote-reference" href="#id13" id="id5"&gt;[4]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html"&gt;Useful GBB flags&lt;/a&gt; for &lt;a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-Lubuntu-gnu-linux/"&gt;another new free software machine&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="developer-mode-method"&gt;
+&lt;h3&gt;2.2 Developer Mode Method&lt;/h3&gt;
+&lt;p&gt;The alternative to removing the write-protect screw above is to place the Chromebook into developer mode using the Chrome OS shell before booting the USB install media:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;With the Chromebook off... Hold down &lt;tt class="docutils literal"&gt;ESC+F3&lt;/tt&gt; (Refresh) keys and power on the device&lt;/li&gt;
+&lt;li&gt;Invoke Recovery, and at the Recovery screen press &lt;tt class="docutils literal"&gt;Ctrl+D&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;Device will prompt for confirmation, press &lt;tt class="docutils literal"&gt;ENTER&lt;/tt&gt; and the system reboots into developer mode&lt;/li&gt;
+&lt;li&gt;Scary white boot screen appears and you need to press &lt;tt class="docutils literal"&gt;Ctrl+D&lt;/tt&gt; to continue boot &lt;a class="footnote-reference" href="#id14" id="id6"&gt;[5]&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Enable the &lt;strong&gt;USB Boot&lt;/strong&gt; and &lt;strong&gt;Legacy BIOS&lt;/strong&gt; modes by opening the shell with &lt;tt class="docutils literal"&gt;Ctrl+Alt+T&lt;/tt&gt; and enter &lt;tt class="docutils literal"&gt;shell&lt;/tt&gt;. Set &lt;tt class="docutils literal"&gt;dev_boot_usb&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;dev_boot_legacy&lt;/tt&gt; to active:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo crossystem &lt;span class="nv"&gt;dev_boot_usb&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo &lt;span class="nv"&gt;dev_boot_legacy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Insert the USB stick prepared in Step 1, reboot the Chromebook and press &lt;tt class="docutils literal"&gt;CTRL+L&lt;/tt&gt; at the boot screen to enter legacy boot mode.&lt;/p&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="http://www.chromium.org/chromium-os"&gt;Chromium OS&lt;/a&gt; developer information for the &lt;a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook"&gt;Acer C720 Chromebook&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="install-lubuntu"&gt;
+&lt;h3&gt;3. Install Lubuntu&lt;/h3&gt;
+&lt;p&gt;My &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook-install.html"&gt;visual screenshot tour&lt;/a&gt; of installing Lubuntu 14.04 - a &lt;a class="reference external" href="https://wiki.ubuntu.com/Releases"&gt;Long Term Support (LTS)&lt;/a&gt; release.&lt;/p&gt;
+&lt;p&gt;The Chromebook's SSD is divided into 3 partitions:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;sda1 is a 300MB &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt; partition&lt;/li&gt;
+&lt;li&gt;sda2 is a 512MB LUKS encrypted &lt;tt class="docutils literal"&gt;swap&lt;/tt&gt; partition using a &lt;strong&gt;random key&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;sda3 uses the remaining space as a LUKS encrypted &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; partition using a &lt;strong&gt;passphrase&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="touchpad"&gt;
+&lt;h3&gt;4. Touchpad&lt;/h3&gt;
+&lt;p&gt;Lubuntu installs the &lt;tt class="docutils literal"&gt;3.13&lt;/tt&gt; Linux kernel and does not support the Chromebook's touchpad. Download and install the more recent &lt;tt class="docutils literal"&gt;3.17&lt;/tt&gt; kernel from &lt;a class="reference external" href="https://wiki.ubuntu.com/Kernel/MainlineBuilds"&gt;Ubuntu MainlineBuilds&lt;/a&gt; to fix:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-headers-3.17.1-031701-generic_3.17.1-031701.201410150735_amd64.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-headers-3.17.1-031701_3.17.1-031701.201410150735_all.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-image-3.17.1-031701-generic_3.17.1-031701.201410150735_amd64.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i linux*.deb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and reboot.&lt;/p&gt;
+&lt;p&gt;Create a touchpad configuration file in &lt;tt class="docutils literal"&gt;/etc/X11/xorg.conf.d&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /etc/X11/xorg.conf.d
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo cp /usr/share/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-c720-touchpad.conf
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Modify this file to adjust timeouts, add tap-mouse actions (2-finger tap = right-click, 3-finger tap = middle-click), and 2-finger scrolling.&lt;/p&gt;
+&lt;p&gt;My own sample config:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Section &lt;span class="s2"&gt;&amp;quot;InputClass&amp;quot;&lt;/span&gt;
+    Identifier      &lt;span class="s2"&gt;&amp;quot;touchpad peppy cyapa&amp;quot;&lt;/span&gt;
+    MatchIsTouchpad &lt;span class="s2"&gt;&amp;quot;on&amp;quot;&lt;/span&gt;
+    MatchDevicePath &lt;span class="s2"&gt;&amp;quot;/dev/input/event*&amp;quot;&lt;/span&gt;
+    MatchProduct    &lt;span class="s2"&gt;&amp;quot;cyapa&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;FingerLow&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;FingerHigh&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;VertEdgeScroll&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;0&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;VertTwoFingerScroll&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;HorizTwoFingerScroll&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;AreaRightEdge&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;850&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;AreaLeftEdge&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;50&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;TapButton1&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;TapButton2&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;3&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;TapButton3&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;
+EndSection
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_lubuntubook/etc/X11/xorg.conf.d/50-c720-touchpad.conf"&gt;50-c720-touchpad.conf&lt;/a&gt;, and pages for &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics"&gt;Touchpad Synaptics&lt;/a&gt; and the &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration"&gt;C720&lt;/a&gt; on &lt;a class="reference external" href="https://wiki.archlinux.org/"&gt;ArchWiki&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ssd"&gt;
+&lt;h3&gt;5. SSD&lt;/h3&gt;
+&lt;p&gt;The &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Swappiness"&gt;swappiness&lt;/a&gt; parameter controls the preference of the kernel to move processes out of physical memory to the swap partition. Range is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;0-100&lt;/span&gt;&lt;/tt&gt;, default is set to &lt;tt class="docutils literal"&gt;60&lt;/tt&gt; and lower values cause the kernel to avoid swapping and higher values prompt more frequent swap use.&lt;/p&gt;
+&lt;p&gt;Check the current swappiness value:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cat /proc/sys/vm/swappiness
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To reduce writes on the SSD set a low value of &lt;tt class="docutils literal"&gt;1&lt;/tt&gt; by setting &lt;tt class="docutils literal"&gt;vm.swappiness=1&lt;/tt&gt; in &lt;tt class="docutils literal"&gt;/etc/sysctl.conf&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;TRIM&lt;/strong&gt; optimizes SSD performance and is enabled by adding the &lt;tt class="docutils literal"&gt;discard&lt;/tt&gt; option to &lt;tt class="docutils literal"&gt;/etc/crypttab&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;/etc/fstab&lt;/tt&gt;. Lubuntu auto-magically configures &lt;tt class="docutils literal"&gt;crypttab&lt;/tt&gt; but &lt;tt class="docutils literal"&gt;fstab&lt;/tt&gt; needs to be set manually.&lt;/p&gt;
+&lt;p&gt;Sample &lt;tt class="docutils literal"&gt;fstab&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# &amp;lt;file system&amp;gt; &amp;lt;mount point&amp;gt;   &amp;lt;type&amp;gt;  &amp;lt;options&amp;gt;       &amp;lt;dump&amp;gt;  &amp;lt;pass&amp;gt;&lt;/span&gt;
+/dev/mapper/sda3_crypt /               ext4    noatime,discard,errors&lt;span class="o"&gt;=&lt;/span&gt;remount-ro 0       1
+&lt;span class="c"&gt;# /boot was on /dev/sda1 during installation&lt;/span&gt;
+&lt;span class="nv"&gt;UUID&lt;/span&gt;&lt;span class="o"&gt;=[&lt;/span&gt;some_long_random_string&lt;span class="o"&gt;]&lt;/span&gt; /boot    ext4    noatime,discard         0       2
+/dev/mapper/sda2_crypt none            swap    sw,discard              0       0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After modifying &lt;tt class="docutils literal"&gt;fstab&lt;/tt&gt; update &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/boot/initrd.img-*&lt;/span&gt;&lt;/tt&gt; by running:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-initramfs -u -k all
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="http://www.linuxjournal.com/content/solid-state-drives-get-one-already"&gt;TRIM configuration on solid-state drives&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="suspend"&gt;
+&lt;h3&gt;6. Suspend&lt;/h3&gt;
+&lt;p&gt;To enable suspend-and-resume &lt;a class="footnote-reference" href="#id15" id="id7"&gt;[6]&lt;/a&gt; create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/initramfs-tools/scripts/init-top/unbind_ehci&lt;/span&gt;&lt;/tt&gt; with the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;PREREQ&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+
+prereqs&lt;span class="o"&gt;()&lt;/span&gt;
+&lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;${PREREQ}&amp;quot;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="k"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;1&lt;/span&gt;&lt;span class="k"&gt;}&lt;/span&gt; in
+        prereqs&lt;span class="o"&gt;)&lt;/span&gt;
+                prereqs
+                &lt;span class="nb"&gt;exit &lt;/span&gt;0
+                ;;
+&lt;span class="k"&gt;esac&lt;/span&gt;
+
+log_success_msg &lt;span class="s2"&gt;&amp;quot;Unbind ehci for preventing error&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; -n &lt;span class="s2"&gt;&amp;quot;0000:00:1d.0&amp;quot;&lt;/span&gt; &amp;gt; /sys/bus/pci/drivers/ehci-pci/unbind
+&lt;span class="nb"&gt;exit &lt;/span&gt;0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and make it executable:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo chmod 755 /etc/initramfs-tools/scripts/init-top/unbind_ehci
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Create a new &lt;tt class="docutils literal"&gt;udev&lt;/tt&gt; rule &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/udev/rules.d/10_disable-ehci.rules&lt;/span&gt;&lt;/tt&gt; with the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;ACTION&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;SUBSYSTEM&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pci&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;DRIVER&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ehci_hcd&amp;quot;&lt;/span&gt;, &lt;span class="se"&gt;\&lt;/span&gt;
+    RUN+&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/bin/sh -c &amp;#39;echo -n %k &amp;gt; %S%p/driver/unbind&amp;#39;&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Update &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/boot/initrd.img-*&lt;/span&gt;&lt;/tt&gt; by running:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-initramfs -k all -u
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Configure boot options in &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;quiet splash acpi_osi=Linux acpi_backlight=vendor add_efi_memmap boot=local i915.modeset=1 tpm_tis.force=1 tpm_tis.interrupts=0 nmi_watchdog=panic,lapic intel_pstate=enable&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... save the changes and run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-grub
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A bit of a tug-of-war can erupt between &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-logind&lt;/span&gt;&lt;/tt&gt; and the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;xfce4-power-manager&lt;/span&gt;&lt;/tt&gt; when setting the closing/opening of Lubuntubook's lid to trigger suspend/resume. I grant precedence to the settings in the power manager by disabling the &lt;tt class="docutils literal"&gt;LidSwitch&lt;/tt&gt; event in &lt;tt class="docutils literal"&gt;logind&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Add this line in &lt;tt class="docutils literal"&gt;/etc/systemd/logind.conf&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;HandleLidSwitch&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ignore
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and restart the service:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo restart systemd-logind
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Suspend now works reliably when triggered from Lubuntu's shutdown menu. Chromebook will go to sleep and pushing the power button/opening the lid will resume the system with the desktop locked and a password prompt &lt;a class="footnote-reference" href="#id16" id="id8"&gt;[7]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_lubuntubook/etc/initramfs-tools/scripts/init-top/unbind_ehci"&gt;unbind_ehci&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_lubuntubook/etc/udev/rules.d/10_disable-ehci.rules"&gt;10_disable-ehci.rules&lt;/a&gt;, &lt;a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/ch8eq2o"&gt;C720 suspend tips&lt;/a&gt;, and &lt;a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/2evv1c/updating_ubuntu_kernel_headers_image_etc/ckaf6hx"&gt;configuring grub&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="keyboard-shortcuts"&gt;
+&lt;h3&gt;7. Keyboard Shortcuts&lt;/h3&gt;
+&lt;p&gt;Top row on the keyboard with the shortcut icons (brightness, volume, etc.) identify in Linux as the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;F1-F10&lt;/span&gt;&lt;/tt&gt; keys and the Search key (in the &lt;tt class="docutils literal"&gt;CapsLk&lt;/tt&gt; position) acts as the &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; (Windows) modifier key.&lt;/p&gt;
+&lt;p&gt;Create keyboard shortcuts by first installing:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; - associate keys to shell commands&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;xbacklight&lt;/tt&gt; - set backlight level using RandR&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pulseaudio-utils&lt;/span&gt;&lt;/tt&gt; - manage sound with &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;xvkbd&lt;/tt&gt; - send characters to another client&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install xbindkeys xbacklight pulseaudio-utils xvkbd
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="direction-brightness-volume-page-keys"&gt;
+&lt;h3&gt;7.1 Direction, Brightness, Volume, Page Keys&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xbindkeys -k
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Enable the function keys to modify the sound and brightness settings by creating &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# backward/forward&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\A\[&lt;/span&gt;Left&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+F1
+
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\A\[&lt;/span&gt;Right&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+F2
+
+&lt;span class="c"&gt;# backlight decrease/increase&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;xbacklight -dec 10&amp;quot;&lt;/span&gt;
+F6
+&lt;span class="s2"&gt;&amp;quot;xbacklight -inc 10&amp;quot;&lt;/span&gt;
+F7
+
+&lt;span class="c"&gt;# volume mute/decrease/increase&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo toggle&amp;quot;&lt;/span&gt;
+F8
+&lt;span class="s2"&gt;&amp;quot;pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -- -10%&amp;quot;&lt;/span&gt;
+F9
+&lt;span class="s2"&gt;&amp;quot;pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -- +10%&amp;quot;&lt;/span&gt;
+F10
+
+&lt;span class="c"&gt;# page up/down, home, end&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;#39;\[Page_Up]&amp;#39;&amp;quot;&lt;/span&gt;
+Alt + Up
+
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;#39;\[Page_Down]&amp;#39;&amp;quot;&lt;/span&gt;
+Alt + Down
+
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;#39;\[Home]&amp;#39;&amp;quot;&lt;/span&gt;
+Alt + Left
+
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;#39;\[End]&amp;#39;&amp;quot;&lt;/span&gt;
+Alt + Right
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Enable the new key shortcuts by running:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xbindkeys
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Lubuntu auto-detects &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;  and will run &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; on the next login.&lt;/p&gt;
+&lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_lubuntubook/home/username/xbindkeysrc-chromebook"&gt;xbindkeysrc-chromebook&lt;/a&gt;, &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Xbindkeys"&gt;Xbindkeys&lt;/a&gt;, and another sample &lt;a class="reference external" href="https://github.com/alexpatel/dotfiles/blob/master/xbindkeysrc"&gt;Chromebook-friendly xbindkeysrc&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="power-key"&gt;
+&lt;h3&gt;7.2 Power Key&lt;/h3&gt;
+&lt;p&gt;Power key in upper-right corner ignores any configuration in the window manager and triggers poweroff without delay when pressed (easy to do by accident as its positioned next to &lt;tt class="docutils literal"&gt;backspace&lt;/tt&gt;).&lt;/p&gt;
+&lt;p&gt;If you want to disable the power key edit &lt;tt class="docutils literal"&gt;/etc/systemd/logind.conf&lt;/tt&gt; and set &lt;tt class="docutils literal"&gt;HandlePowerKey=ignore&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="wireless-optional"&gt;
+&lt;h3&gt;8. Wireless (optional)&lt;/h3&gt;
+&lt;p&gt;There are a few settings to modify if you want to monkey with the Chromebook's wireless chipset to improve performance &lt;a class="footnote-reference" href="#id17" id="id9"&gt;[8]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To identify the card and parameters:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;lspci | grep -i net
+01:00.0 Network controller: Qualcomm Atheros AR9462 Wireless Network Adapter &lt;span class="o"&gt;(&lt;/span&gt;rev 01&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;modinfo ath9k | grep parm
+parm:           debug:Debugging mask &lt;span class="o"&gt;(&lt;/span&gt;uint&lt;span class="o"&gt;)&lt;/span&gt;
+parm:           nohwcrypt:Disable hardware encryption &lt;span class="o"&gt;(&lt;/span&gt;int&lt;span class="o"&gt;)&lt;/span&gt;
+parm:           blink:Enable LED blink on activity &lt;span class="o"&gt;(&lt;/span&gt;int&lt;span class="o"&gt;)&lt;/span&gt;
+parm:           btcoex_enable:Enable wifi-BT coexistence &lt;span class="o"&gt;(&lt;/span&gt;int&lt;span class="o"&gt;)&lt;/span&gt;
+parm:           bt_ant_diversity:Enable WLAN/BT RX antenna diversity &lt;span class="o"&gt;(&lt;/span&gt;int&lt;span class="o"&gt;)&lt;/span&gt;
+parm:           ps_enable:Enable WLAN PowerSave &lt;span class="o"&gt;(&lt;/span&gt;int&lt;span class="o"&gt;)&lt;/span&gt;
+parm:           use_chanctx:Enable channel context &lt;span class="k"&gt;for &lt;/span&gt;concurrency &lt;span class="o"&gt;(&lt;/span&gt;int&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Try creating &lt;tt class="docutils literal"&gt;/etc/modprobe.d/ath9k.conf&lt;/tt&gt; with the following options:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;options ath9k &lt;span class="nv"&gt;nohwcrypt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1 &lt;span class="nv"&gt;btcoex_enable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1 &lt;span class="nv"&gt;bt_ant_diversity&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_lubuntubook/etc/modprobe.d/ath9k.conf"&gt;ath9k.conf&lt;/a&gt;, &lt;a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k"&gt;ath9k wireless driver&lt;/a&gt; and &lt;a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex"&gt;bluetooth coexistence&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="helpful-resources"&gt;
+&lt;h3&gt;9. Helpful Resources&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;My personal &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720_lubuntubook"&gt;Lubuntubook configurations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/liangcj/AcerC720CrunchBang"&gt;CrunchBang Linux&lt;/a&gt; on the Acer C720&lt;/li&gt;
+&lt;li&gt;Arch Linux &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook"&gt;C720 installation with useful post-install details&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Ongoing &lt;a class="reference external" href="http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/"&gt;discussion thread about configuring Chromebooks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Turn Chromebooks into &lt;a class="reference external" href="http://blog.codestarter.org/post/93985346780/how-we-turn-199-chromebooks-into-ubuntu-based-code"&gt;Ubuntu-based code learning machines for kids&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h3&gt;Notes&lt;/h3&gt;
+&lt;table class="docutils footnote" frame="void" id="id10" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Device information &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720_lubuntubook/doc"&gt;output of lshw, lspci, and lsusb&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id11" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Specifically in this instance, the Ubuntu console installer provides a random key option for the encrypted swap partition.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id12" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id4"&gt;[3]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Image courtesy of &lt;a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook#TOC-Firmware"&gt;Chromium&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id13" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id5"&gt;[4]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Whenever you remove battery power to the Chromebook (like opening up the case) the hardware clock on the motherboard resets to a future year (mine travelled to 2040). Providing a network connection is up during the Lubuntu installation the system should fetch a correct time from a NTP server. Otherwise fix the &lt;a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-Lubuntu-gnu-linux/"&gt;fallout from an incorrect clock&lt;/a&gt; by re-mounting partitions read-only and correct filesystem timestamps using &lt;tt class="docutils literal"&gt;fsck&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id14" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id6"&gt;[5]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Switching between developer and normal (non-developer) modes will remove user accounts and their associated information from your Chromebook.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id15" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id7"&gt;[6]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Some HOWTOs talk about adding &lt;tt class="docutils literal"&gt;modprobe.blacklist=ehci_hcd,ehci_pci&lt;/tt&gt; but in Ubuntu they are compiled into the kernel. Disabling them early in boot instead appears to do the trick.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id16" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id8"&gt;[7]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;However when suspend is triggered by closing or opening the lid the system correctly suspends and resumes but no screenlock. Attempting to enable suspend in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;light-locker&lt;/span&gt;&lt;/tt&gt; led to a black screen after suspending and required a hard shutdown to recover.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id17" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id9"&gt;[8]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;SSH sessions on the Chromebook often &amp;quot;stall&amp;quot; when the connection has been idle for a short period... taking several seconds to &amp;quot;wake up&amp;quot; again. Creating &lt;tt class="docutils literal"&gt;ath9k.conf&lt;/tt&gt; improved things but more experimenting required.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="chromebook"></category><category term="lubuntu"></category><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>Install Lubuntu 14.04 on the Acer C720 Chromebook</title><link href="http://www.circuidipity.com/c720-lubuntubook-install.html" rel="alternate"></link><updated>2014-10-25T23:55:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-10-25:c720-lubuntubook-install.html</id><summary type="html">&lt;img alt="Ubuntu Trusty Tahr" class="align-left" src="images/ubuntuTrusty.png" style="width: 100px; height: 100px;" /&gt;
+&lt;p&gt;&lt;strong&gt;See:&lt;/strong&gt; &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Chromebook to Lubuntubook&lt;/a&gt; for more details on replacing Chrome OS with a full-featured Linux on Chromebooks.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Ubuntu 14.04 &amp;quot;Trusty Tahr&amp;quot;&lt;/strong&gt; is a &lt;a class="reference external" href="https://wiki.ubuntu.com/Releases"&gt;Long Term Support (LTS)&lt;/a&gt; release of the popular Linux operating system. I use Ubuntu's &lt;a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD"&gt;minimal install image&lt;/a&gt; to setup the lightweight &lt;a class="reference external" href="http://lubuntu.net/"&gt;Lubuntu&lt;/a&gt; (Ubuntu + LXDE desktop) distro on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Below is a visual walk-through of a sample install that makes use of an entire storage device divided into 3 partitions: a &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt; partition, and &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup"&gt;LUKS&lt;/a&gt; encrypted &lt;tt class="docutils literal"&gt;swap&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;root&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;div class="section" id="prepare-install-media"&gt;
+&lt;h3&gt;0. Prepare install media&lt;/h3&gt;
+&lt;p&gt;Download the &lt;a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso"&gt;64-bit trusty minimal installer&lt;/a&gt; and &lt;a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick"&gt;flash the image&lt;/a&gt; to a USB stick. An alternative (my choice) is adding the image to a &lt;a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html"&gt;USB stick with multiple Linux installers&lt;/a&gt;. Using the minimal console installer vs. the graphical &lt;a class="reference external" href="https://help.ubuntu.com/community/Lubuntu/GetLubuntu"&gt;Lubuntu installer&lt;/a&gt; provides more options during setup &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configure"&gt;
+&lt;h3&gt;1. Configure&lt;/h3&gt;
+&lt;img alt="Install" class="align-center" src="images/screenshot/trustyLubuntubookInstall/100.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Select Language" class="align-center" src="images/screenshot/trustyLubuntubookInstall/101.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Select Location" class="align-center" src="images/screenshot/trustyLubuntubookInstall/102.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Configure Keyboard" class="align-center" src="images/screenshot/trustyLubuntubookInstall/103.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Configure Keyboard" class="align-center" src="images/screenshot/trustyLubuntubookInstall/104.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Configure Keyboard" class="align-center" src="images/screenshot/trustyLubuntubookInstall/105.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Hostname" class="align-center" src="images/screenshot/trustyLubuntubookInstall/106.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Mirror Country" class="align-center" src="images/screenshot/trustyLubuntubookInstall/107.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Mirror archive" class="align-center" src="images/screenshot/trustyLubuntubookInstall/108.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Proxy" class="align-center" src="images/screenshot/trustyLubuntubookInstall/109.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Full Name" class="align-center" src="images/screenshot/trustyLubuntubookInstall/110.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Username" class="align-center" src="images/screenshot/trustyLubuntubookInstall/111.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="User password" class="align-center" src="images/screenshot/trustyLubuntubookInstall/112.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Verify password" class="align-center" src="images/screenshot/trustyLubuntubookInstall/113.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Encrypt home" class="align-center" src="images/screenshot/trustyLubuntubookInstall/114.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Configure clock" class="align-center" src="images/screenshot/trustyLubuntubookInstall/115.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Select time zone" class="align-center" src="images/screenshot/trustyLubuntubookInstall/116.png" style="width: 800px; height: 600px;" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="partitions"&gt;
+&lt;h3&gt;2. Partitions&lt;/h3&gt;
+&lt;p&gt;In the example below we create 3 partitions on the disk:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;sda1 is a 300MB &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt; partition&lt;/li&gt;
+&lt;li&gt;sda2 is a 512MB LUKS encrypted &lt;tt class="docutils literal"&gt;swap&lt;/tt&gt; partition using a &lt;strong&gt;random key&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;sda3 uses the remaining space as a LUKS encrypted &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; partition using a &lt;strong&gt;passphrase&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img alt="Partitioning method" class="align-center" src="images/screenshot/trustyLubuntubookInstall/200.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Partition disks" class="align-center" src="images/screenshot/trustyLubuntubookInstall/201.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Partition table" class="align-center" src="images/screenshot/trustyLubuntubookInstall/202.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Free space" class="align-center" src="images/screenshot/trustyLubuntubookInstall/203.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="New partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/204.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Partition size" class="align-center" src="images/screenshot/trustyLubuntubookInstall/205.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Primary partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/206.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Beginning" class="align-center" src="images/screenshot/trustyLubuntubookInstall/207.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Mount point" class="align-center" src="images/screenshot/trustyLubuntubookInstall/208-1.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Mount point" class="align-center" src="images/screenshot/trustyLubuntubookInstall/208.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Mount options" class="align-center" src="images/screenshot/trustyLubuntubookInstall/209.png" style="width: 800px; height: 600px;" /&gt;
+&lt;p&gt;Setting &lt;tt class="docutils literal"&gt;Mount options&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;noatime&lt;/tt&gt; decreases write operations and boosts drive speed:&lt;/p&gt;
+&lt;img alt="Mount options" class="align-center" src="images/screenshot/trustyLubuntubookInstall/210.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Done setting up partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/211.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Free space" class="align-center" src="images/screenshot/trustyLubuntubookInstall/212.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="New partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/213.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Partition size" class="align-center" src="images/screenshot/trustyLubuntubookInstall/214.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Primary partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/215.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Beginning" class="align-center" src="images/screenshot/trustyLubuntubookInstall/216.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Use as" class="align-center" src="images/screenshot/trustyLubuntubookInstall/217.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Encrypt volume" class="align-center" src="images/screenshot/trustyLubuntubookInstall/218.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Encryption key" class="align-center" src="images/screenshot/trustyLubuntubookInstall/219.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Random key" class="align-center" src="images/screenshot/trustyLubuntubookInstall/220.png" style="width: 800px; height: 600px;" /&gt;
+&lt;p&gt;If the hard disk has not been securely wiped prior to installing Lubuntu (using a utility like &lt;a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html"&gt;DBAN&lt;/a&gt;) you may want to configure &lt;tt class="docutils literal"&gt;Erase data: yes&lt;/tt&gt;. Note, however, that depending on the size of the disk this operation can last several hours:&lt;/p&gt;
+&lt;img alt="Done setting up partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/221.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Free space" class="align-center" src="images/screenshot/trustyLubuntubookInstall/222.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="New partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/223.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Partition size" class="align-center" src="images/screenshot/trustyLubuntubookInstall/224.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Primary partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/225.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Use as" class="align-center" src="images/screenshot/trustyLubuntubookInstall/226.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Encrypt volume" class="align-center" src="images/screenshot/trustyLubuntubookInstall/227.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Done setting up partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/228.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Configure encrypted volumes" class="align-center" src="images/screenshot/trustyLubuntubookInstall/229.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Write changes to disk" class="align-center" src="images/screenshot/trustyLubuntubookInstall/230.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Create encrypted volumes" class="align-center" src="images/screenshot/trustyLubuntubookInstall/231.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Devices to encrypt" class="align-center" src="images/screenshot/trustyLubuntubookInstall/232.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Finish encrypt" class="align-center" src="images/screenshot/trustyLubuntubookInstall/233.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Encryption passphrase" class="align-center" src="images/screenshot/trustyLubuntubookInstall/234.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Verify passphrase" class="align-center" src="images/screenshot/trustyLubuntubookInstall/235.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Configure encrypted volume" class="align-center" src="images/screenshot/trustyLubuntubookInstall/236.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Mount point" class="align-center" src="images/screenshot/trustyLubuntubookInstall/237.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Mount root" class="align-center" src="images/screenshot/trustyLubuntubookInstall/238.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Mount options" class="align-center" src="images/screenshot/trustyLubuntubookInstall/239.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="noatime" class="align-center" src="images/screenshot/trustyLubuntubookInstall/240.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Done setting up partition" class="align-center" src="images/screenshot/trustyLubuntubookInstall/241.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Write changes to disk" class="align-center" src="images/screenshot/trustyLubuntubookInstall/242.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Confirm write" class="align-center" src="images/screenshot/trustyLubuntubookInstall/243.png" style="width: 800px; height: 600px;" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="install-packages-and-finish-up"&gt;
+&lt;h3&gt;3. Install packages and finish up&lt;/h3&gt;
+&lt;img alt="No automatic updates" class="align-center" src="images/screenshot/trustyLubuntubookInstall/300.png" style="width: 800px; height: 600px;" /&gt;
+&lt;p&gt;Select &lt;tt class="docutils literal"&gt;Lubuntu Desktop&lt;/tt&gt;. This task menu can also be accessed post-install by running:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo tasksel
+&lt;/pre&gt;&lt;/div&gt;
+&lt;img alt="Software selection" class="align-center" src="images/screenshot/trustyLubuntubookInstall/301-2.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="GRUB" class="align-center" src="images/screenshot/trustyLubuntubookInstall/302.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="UTC" class="align-center" src="images/screenshot/trustyLubuntubookInstall/303.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Finish install" class="align-center" src="images/screenshot/trustyLubuntubookInstall/304.png" style="width: 800px; height: 600px;" /&gt;
+&lt;p&gt;System will display a passphrase prompt to unlock encrypted &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; partition:&lt;/p&gt;
+&lt;img alt="Enter encrypt passphrase" class="align-center" src="images/screenshot/trustyLubuntubookInstall/305.png" style="width: 800px; height: 600px;" /&gt;
+&lt;img alt="Login" class="align-center" src="images/screenshot/trustyLubuntubookInstall/306.png" style="width: 800px; height: 600px;" /&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h3&gt;Notes&lt;/h3&gt;
+&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Specifically in this instance, the Ubuntu console installer provides a random key option for the encrypted swap partition.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="lubuntu"></category><category term="ubuntu"></category><category term="linux"></category><category term="chromebook"></category></entry><entry><title>Links of interest</title><link href="http://www.circuidipity.com/20141023.html" rel="alternate"></link><updated>2014-10-23T00:10:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-10-23:20141023.html</id><summary type="html">&lt;ul class="simple"&gt;
 &lt;li&gt;Reading about Parisian booksellers &lt;a class="reference external" href="http://www.vanityfair.com/culture/2014/11/shakespeare-and-company-paris-george-whitman"&gt;Shakespeare and Company brings back happy memories&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;How SpaceX became a &lt;a class="reference external" href="http://qz.com/281619/what-it-took-for-elon-musks-spacex-to-disrupt-boeing-leapfrog-nasa-and-become-a-serious-space-company/"&gt;serious space company&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;What if age is &lt;a class="reference external" href="http://www.nytimes.com/2014/10/26/magazine/what-if-age-is-nothing-but-a-mind-set.html"&gt;nothing but a mind-set?&lt;/a&gt;&lt;/li&gt;
@@ -190,21 +643,4 @@ vncserver -geometry 1800x1000 -depth 24 -dpi 96
 &lt;li&gt;What the mission to Mars &lt;a class="reference external" href="http://blogs.hbr.org/2014/10/what-the-mission-to-mars-shows-about-indias-innovators/"&gt;shows about India's innovators&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;As a nation progresses, &lt;a class="reference external" href="https://www.ted.com/talks/eric_x_li_a_tale_of_two_political_systems"&gt;it eventually must become a capitalist, multi-party democracy. Right?&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</summary><category term="links"></category></entry><entry><title>Static leases</title><link href="http://www.circuidipity.com/20141001.html" rel="alternate"></link><updated>2014-10-01T00:07:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-10-01:20141001.html</id><summary type="html">&lt;p&gt;My &lt;a class="reference external" href="http://www.circuidipity.com/pingparade1.html"&gt;netbook server&lt;/a&gt; stays put at home and uses a &lt;strong&gt;fixed ip address&lt;/strong&gt;; however &lt;a class="reference external" href="http://www.circuidipity.com/c720-sidbook.html"&gt;Sidbook&lt;/a&gt; bounces between the LAN and the outside world. A router can use a &lt;strong&gt;static lease&lt;/strong&gt; to assign a computer a fixed IP address based on their hardware (MAC) address. This allows Sidbook the flexibility of using DHCP both at home to retrieve a known and consistent IP address (useful for ssh access and running &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/backup-home-server"&gt;backup scripts&lt;/a&gt;) and outside where an unknown range of IP addresses will be assigned at different locations and times.&lt;/p&gt;
-&lt;p&gt;To retrieve the hardware address on a Linux desktop using &lt;strong&gt;Network Manager&lt;/strong&gt;, right-click on the network device icon and select &lt;em&gt;Connection Information&lt;/em&gt;, or run the command &lt;tt class="docutils literal"&gt;ip &lt;span class="pre"&gt;-address&lt;/span&gt;&lt;/tt&gt; in a console for more complete interface description.&lt;/p&gt;
-&lt;p&gt;For a router using &lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;OpenWrt&lt;/a&gt;, ssh into the device and create a static lease in &lt;tt class="docutils literal"&gt;/etc/config/dhcp&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Sample entry:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;config host
-        option name &lt;span class="s1"&gt;&amp;#39;tyrell&amp;#39;&lt;/span&gt;
-        option mac &lt;span class="s1"&gt;&amp;#39;01:2a:b3:4c:55:dd&amp;#39;&lt;/span&gt;
-        option ip &lt;span class="s1"&gt;&amp;#39;192.168.1.55&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Alternately, use the &lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;LuCI&lt;/a&gt; graphical config interface to create a static lease under &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Network-&amp;gt;DHCP&lt;/span&gt; and DNS&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="http://wiki.openwrt.org/doc/uci/dhcp"&gt;DNS and DHCP configuration&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-</summary><category term="networks"></category><category term="openwrt"></category><category term="linux"></category></entry><entry><title>A place for humanity in the stars</title><link href="http://www.circuidipity.com/20140930.html" rel="alternate"></link><updated>2014-09-30T13:49:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-09-30:20140930.html</id><summary type="html">&lt;p&gt;Excerpt from &amp;quot;The Man Who Sold the Moon&amp;quot; by &lt;strong&gt;Cory Doctorow&lt;/strong&gt;, part of the wonderful &lt;a class="reference external" href="http://www.circuidipity.com/20140928.html"&gt;Hieroglyph&lt;/a&gt; story collection:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The Lost Cosmonaut Conspiracy theory holds that a certain number - two? three? - of Russian cosmonauts were killed before Gagarin's successful flight. They say when Gagarin got into the Vostok in 1961, he fully expected to die, but he got in anyway, and not because of the crack of a commissar's pistol. He boarded his death trap because it was his ticket into space. He had gone to what could almost certainly have been his death because of his belief in a better future. A place for humanity in the stars.&lt;/p&gt;
-&lt;p&gt;When you think of a hero, think of Gagarin, strapped into that capsule, the rumble of the jets below him, the mutter of the control tower in his headset, the heavy hand of acceleration hard upon his chest, pushing with increasing, bone-crushing force, the roar of the engines blotting out all sound. Think of him going straight to his death with a smile on his face, and think of him breaking through the atmosphere, the sudden weightlessness, the realization that he had survived. That he was the first human being to go to space.&lt;/p&gt;
-&lt;/blockquote&gt;
-</summary><category term="quotes"></category><category term="space"></category><category term="sf"></category><category term="books"></category></entry></feed>
+</summary><category term="links"></category></entry></feed>

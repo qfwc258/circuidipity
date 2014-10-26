@@ -25,16 +25,16 @@
 
 <!-- article -->
 <h1>Ubuntu 14.04 Minimal Install</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Wednesday 22 October 2014</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Saturday 25 October 2014</p>
 <div id="article">
     <img alt="Ubuntu Trusty Tahr" class="align-left" src="images/ubuntuTrusty.png" style="width: 100px; height: 100px;" />
-<p><strong>Ubuntu 14.04 &quot;Trusty Tahr&quot;</strong> is a <strong>long-term support</strong> release (till 2019) of the popular Linux operating system <a class="footnote-reference" href="#id2" id="id1">[1]</a>. I use Ubuntu's <a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD">minimal install image</a> to create a <strong>lightweight, console-only</strong> base configuration that can be customized for various tasks and alternate desktops.</p>
-<p>Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire storage device divided into 3 partitions: unencrypted <tt class="docutils literal">root</tt> and <a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a> encrypted <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt>.</p>
+<p><strong>Ubuntu 14.04 &quot;Trusty Tahr&quot;</strong> is a <a class="reference external" href="https://wiki.ubuntu.com/Releases">Long Term Support (LTS)</a> release of the popular Linux operating system. I use Ubuntu's <a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD">minimal install image</a> to create a <strong>lightweight, console-only base configuration</strong> that can be customized for various tasks and alternate desktops.</p>
+<p>Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire storage device divided into 3 partitions: a <tt class="docutils literal">root</tt> partition, and <a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a> encrypted <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt>.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<div class="section" id="installer">
-<h3>0. Installer</h3>
-<p>Download a <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso">64-bit Ubuntu mini.iso</a> (<a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/mini.iso">32-bit</a> for older machines) and copy the image to a USB stick or <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">prepare a USB boot device</a>.</p>
+<div class="section" id="prepare-install-media">
+<h3>0. Prepare install media</h3>
+<p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso">64-bit trusty minimal installer</a> (<a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/mini.iso">32-bit</a> for older machines) and burn to CD or <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick. An alternative (my choice) is adding the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>. Using the minimal console installer vs. the graphical installer provides more options during setup <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
 </div>
 <div class="section" id="configure">
 <h3>1. Configure</h3>
@@ -58,11 +58,11 @@
 </div>
 <div class="section" id="partitions">
 <h3>2. Partitions</h3>
-<p>In the example below we create 3 partitions on the disk:</p>
+<p>In the example below I create 3 partitions on the disk:</p>
 <ul class="simple">
 <li>sda1 is a 20GB <tt class="docutils literal">root</tt> partition</li>
-<li>sda5 is a 1GB LUKS encrypted <tt class="docutils literal">swap</tt> partition using a <strong>random key</strong></li>
-<li>sda6 uses the remaining space as a LUKS encrypted <tt class="docutils literal">home</tt> partition using a <strong>passphrase</strong></li>
+<li>sda2 is a 1GB LUKS encrypted <tt class="docutils literal">swap</tt> partition using a <strong>random key</strong></li>
+<li>sda3 uses the remaining space as a LUKS encrypted <tt class="docutils literal">home</tt> partition using a <strong>passphrase</strong></li>
 </ul>
 <img alt="Partitioning method" class="align-center" src="images/screenshot/trustyInstall/200.png" style="width: 800px; height: 600px;" />
 <img alt="Partition disks" class="align-center" src="images/screenshot/trustyInstall/201.png" style="width: 800px; height: 600px;" />
@@ -72,7 +72,7 @@
 <img alt="Partition size" class="align-center" src="images/screenshot/trustyInstall/205.png" style="width: 800px; height: 600px;" />
 <img alt="Primary partition" class="align-center" src="images/screenshot/trustyInstall/206.png" style="width: 800px; height: 600px;" />
 <img alt="Beginning" class="align-center" src="images/screenshot/trustyInstall/207.png" style="width: 800px; height: 600px;" />
-<p>Setting <tt class="docutils literal">Mount options</tt> to <tt class="docutils literal">noatime</tt> decreases write operations and boosts drive speed.</p>
+<p>Setting <tt class="docutils literal">Mount options: noatime</tt> decreases write operations and boosts drive speed:</p>
 <img alt="Mount options" class="align-center" src="images/screenshot/trustyInstall/208.png" style="width: 800px; height: 600px;" />
 <img alt="Mount options" class="align-center" src="images/screenshot/trustyInstall/209.png" style="width: 800px; height: 600px;" />
 <img alt="Done with partition" class="align-center" src="images/screenshot/trustyInstall/210.png" style="width: 800px; height: 600px;" />
@@ -85,7 +85,7 @@
 <img alt="Encrypt volume" class="align-center" src="images/screenshot/trustyInstall/216.png" style="width: 800px; height: 600px;" />
 <img alt="Encrypt key" class="align-center" src="images/screenshot/trustyInstall/217.png" style="width: 800px; height: 600px;" />
 <img alt="Random key" class="align-center" src="images/screenshot/trustyInstall/218.png" style="width: 800px; height: 600px;" />
-<p>If the hard disk has not been securely wiped prior to installing Ubuntu (using a utility like <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">DBAN</a>) you may want to configure <strong>Erase data: yes</strong>. Note, however, that depending on the size of the disk this operation can last several hours.</p>
+<p>If the hard disk has not been securely wiped prior to installing Ubuntu (using a utility like <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">DBAN</a>) you may want to configure <tt class="docutils literal">Erase data: yes</tt>. Note, however, that depending on the size of the disk this operation can last several hours:</p>
 <img alt="Done with partition" class="align-center" src="images/screenshot/trustyInstall/219.png" style="width: 800px; height: 600px;" />
 <img alt="Free space" class="align-center" src="images/screenshot/trustyInstall/220.png" style="width: 800px; height: 600px;" />
 <img alt="New partition" class="align-center" src="images/screenshot/trustyInstall/221.png" style="width: 800px; height: 600px;" />
@@ -107,7 +107,7 @@
 <img alt="Mount home" class="align-center" src="images/screenshot/trustyInstall/236.png" style="width: 800px; height: 600px;" />
 <img alt="Mount options" class="align-center" src="images/screenshot/trustyInstall/237.png" style="width: 800px; height: 600px;" />
 <img alt="Mount options" class="align-center" src="images/screenshot/trustyInstall/238.png" style="width: 800px; height: 600px;" />
-<p><strong>Reserved blocks</strong> can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the 5% reserve set aside by Ubuntu to 1%.</p>
+<p><strong>Reserved blocks</strong> can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the <tt class="docutils literal">5%</tt> default reserve set by Ubuntu to <tt class="docutils literal">1%</tt>:</p>
 <img alt="Reserved blocks" class="align-center" src="images/screenshot/trustyInstall/239.png" style="width: 800px; height: 600px;" />
 <img alt="Percent reserved" class="align-center" src="images/screenshot/trustyInstall/240.png" style="width: 800px; height: 600px;" />
 <img alt="Done with partition" class="align-center" src="images/screenshot/trustyInstall/241.png" style="width: 800px; height: 600px;" />
@@ -121,10 +121,15 @@
 <div class="highlight"><pre><span class="nv">$ </span>sudo tasksel
 </pre></div>
 <img alt="Software selection" class="align-center" src="images/screenshot/trustyInstall/301.png" style="width: 800px; height: 600px;" />
+<p>Or get started making a Linux home server:</p>
+<img alt="Software selection" class="align-center" src="images/screenshot/trustyInstall/301-1.png" style="width: 800px; height: 600px;" />
+<p>Perhaps install a lightweight desktop? I like <a class="reference external" href="http://www.circuidipity.com/tag-lubuntu.html">Lubuntu (Ubuntu + LXDE desktop)</a>:</p>
+<img alt="Software selection" class="align-center" src="images/screenshot/trustyInstall/301-2.png" style="width: 800px; height: 600px;" />
+<p>More packages are downloaded and the installer makes its finishing touches:</p>
 <img alt="GRUB" class="align-center" src="images/screenshot/trustyInstall/302.png" style="width: 800px; height: 600px;" />
 <img alt="UTC" class="align-center" src="images/screenshot/trustyInstall/303.png" style="width: 800px; height: 600px;" />
 <img alt="Finish install" class="align-center" src="images/screenshot/trustyInstall/304.png" style="width: 800px; height: 600px;" />
-<p>System will display a passphrase prompt to unlock encrypted <tt class="docutils literal">home</tt> partition.</p>
+<p>System will display a passphrase prompt to unlock encrypted <tt class="docutils literal">home</tt> partition:</p>
 <img alt="Enter encrypt passphrase" class="align-center" src="images/screenshot/trustyInstall/305.png" style="width: 800px; height: 600px;" />
 <img alt="Login" class="align-center" src="images/screenshot/trustyInstall/306.png" style="width: 800px; height: 600px;" />
 <p>Happy hacking!</p>
@@ -134,13 +139,14 @@
 <table class="docutils footnote" frame="void" id="id2" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="https://wiki.ubuntu.com/Releases">List of releases</a>.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Specifically in this instance, the Ubuntu console installer provides a random key option for the encrypted swap partition.</td></tr>
 </tbody>
 </table>
 </div>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-lubuntu.html">lubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
 </div>
