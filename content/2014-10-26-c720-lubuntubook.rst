@@ -17,7 +17,7 @@ Replace **Chrome OS** permanently with **Lubuntu 14.04 LTS Linux** on the **Acer
 
 Running a `full-featured Linux <http://lubuntu.net/>`_ on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance using the **LXDE** desktop.
 
-This device is available in a few different configurations. Mine is the non-touchscreen model `C720-2848 <http://us.acer.com/ac/en/US/content/model-datasheet/NX.SHEAA.002>`_ with (non-expandable) **2GB RAM** and a (user-replaceable) **16GB SSD** [1]_.
+This device is available in a few different configurations. Mine is the non-touchscreen model **C720-2848** with (non-expandable) **2GB RAM** and a (user-replaceable) **16GB SSD** [1]_.
 
 Let's go!
 =========
@@ -109,7 +109,7 @@ Shutdown with:
 
 Re-connect the power, insert the USB stick prepared in Step 1, and power up the Chromebook [4]_.
 
-Sources: `Useful GBB flags <http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html>`_ for `another new free software machine <https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-Lubuntu-gnu-linux/>`_
+Sources: `Useful GBB flags <http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html>`_ for `another new free software machine <https://blogs.fsfe.org/the_unconventional/2014/04/20/c720-debian/>`_
 
 2.2 Developer Mode Method
 -------------------------
@@ -394,7 +394,7 @@ To identify the card and parameters:
     parm:           ps_enable:Enable WLAN PowerSave (int)
     parm:           use_chanctx:Enable channel context for concurrency (int)
 
-Try creating ``/etc/modprobe.d/ath9k.conf`` with the following options:
+Create ``/etc/modprobe.d/ath9k.conf`` with the following options:
 
 .. code-block:: bash
   
@@ -422,7 +422,7 @@ Notes
 
 .. [3] Image courtesy of `Chromium <http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook#TOC-Firmware>`_.
 
-.. [4] Whenever you remove battery power to the Chromebook (like opening up the case) the hardware clock on the motherboard resets to a future year (mine travelled to 2040). Providing a network connection is up during the Lubuntu installation the system should fetch a correct time from a NTP server. Otherwise fix the `fallout from an incorrect clock <https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-Lubuntu-gnu-linux/>`_ by re-mounting partitions read-only and correct filesystem timestamps using ``fsck``.
+.. [4] Whenever you remove battery power to the Chromebook (like opening up the case) the hardware clock on the motherboard resets to a future year (mine travelled to 2040). Providing a network connection is up during the Lubuntu installation the system should fetch a correct time from a NTP server. Otherwise fix the `fallout from an incorrect clock <https://blogs.fsfe.org/the_unconventional/2014/04/20/c720-debian/>`_ by re-mounting partitions read-only and correct filesystem timestamps using ``fsck``.
 
 .. [5] Switching between developer and normal (non-developer) modes will remove user accounts and their associated information from your Chromebook.
 
