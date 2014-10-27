@@ -27,10 +27,12 @@
 <h1>My tmux cheatsheet</h1>
 <div id="article">
     <img alt="tmux" src="/images/screenshot/tmux_window_pane.png" style="width: 940px; height: 529px;" />
-<p><a class="reference external" href="http://tmux.sourceforge.net/">tmux</a> is a <em>terminal multiplexer</em>. What this means is I can take a single terminal window and create multiple <em>windows</em> (tabs) and further partition a window into horizontal and vertical <em>panes</em>.</p>
-<p>Using <tt class="docutils literal">tmux</tt> I can create terminal sessions with a custom layout of windows / panes / names / running programs, switch between different sessions, and - best of all - <em>detach</em> from a session, log out, return later, <em>re-attach</em> and find the session layout preserved and programs continuing to run in the interim.</p>
-<p><em>Example:</em> I can <tt class="docutils literal">ssh</tt> into my <a class="reference external" href="http://www.circuidipity.com/linux-home-server.html">home server</a>, start a <tt class="docutils literal">tmux</tt> session and create multiple windows, run <a class="reference external" href="http://libtorrent.rakshasa.no/">rtorrent</a> in a window to start seeding a Linux <tt class="docutils literal">iso</tt>, detach from session and server, and return later to find everything in place and the <tt class="docutils literal">iso</tt> uploading.</p>
-<p><em>To install:</em> on Debian run <tt class="docutils literal">sudo <span class="pre">apt-get</span> install tmux</tt>.</p>
+<p><a class="reference external" href="http://tmux.sourceforge.net/">tmux</a> is a <strong>terminal multiplexer</strong>. What this means is I can take a single terminal window and create multiple <strong>windows</strong> (tabs) and further partition a window into horizontal and vertical <strong>panes</strong>.</p>
+<p>Using <tt class="docutils literal">tmux</tt> I can create terminal sessions with a custom layout of windows / panes / names / running programs, switch between different sessions, and - best of all - <strong>detach</strong> from a session, log out, return later, <strong>re-attach</strong> and find the session layout preserved and programs continuing to run in the interim.</p>
+<p><strong>Example:</strong> I can <tt class="docutils literal">ssh</tt> into my <a class="reference external" href="http://www.circuidipity.com/pingparade1.html">home server</a>, start a <tt class="docutils literal">tmux</tt> session and create multiple windows, run <a class="reference external" href="http://libtorrent.rakshasa.no/">rtorrent</a> in a window to start seeding a Linux <tt class="docutils literal">iso</tt>, detach from session and server, and return later to find everything in place and the <tt class="docutils literal">iso</tt> uploading.</p>
+<p><strong>To install:</strong> On Debian run:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install tmux
+</pre></div>
 <p>Commands entered inside a <tt class="docutils literal">tmux</tt> session are preceded by the key combination <tt class="docutils literal"><span class="pre">CTRL-b</span></tt> as the default <tt class="docutils literal">PREFIX</tt> (this can be modified in <tt class="docutils literal">.tmux.conf</tt>).</p>
 <div class="section" id="helpful-commands">
 <h2>Helpful Commands</h2>
@@ -138,7 +140,7 @@
 </div>
 <div class="section" id="configure">
 <h2>Configure</h2>
-<p>Customize <tt class="docutils literal">tmux</tt> by creating a <tt class="docutils literal"><span class="pre">~/.tmux.conf</span></tt> configuration file. Different key combinations, colours, items running in the status bar, activity alerts can be configured with <tt class="docutils literal">command</tt> <tt class="docutils literal">OPTION</tt> ...</p>
+<p>Customize <tt class="docutils literal">tmux</tt> by creating a <tt class="docutils literal"><span class="pre">~/.tmux.conf</span></tt> configuration file. Different key combinations, colours, items running in the status bar, activity alerts can be configured with <tt class="docutils literal">command</tt> <tt class="docutils literal">OPTION</tt>:</p>
 <dl class="docutils">
 <dt><tt class="docutils literal">set <span class="pre">-g</span> OPTION</tt></dt>
 <dd>set OPTION for all tmux sessions</dd>
@@ -151,11 +153,11 @@
 <dt><tt class="docutils literal">bind KEY OPTION</tt></dt>
 <dd>bind KEY to OPTION</dd>
 </dl>
-<p><em>Example:</em> My own <a class="reference external" href="https://github.com/vonbrownie/linux-home-config/blob/master/.tmux.conf">.tmux.conf</a> configuration.</p>
+<p><strong>Example:</strong> My own <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/generic/home/username/.tmux.conf">.tmux.conf</a> configuration.</p>
 </div>
 <div class="section" id="layouts">
 <h2>Layouts</h2>
-<p>Pre-configured layouts can be created to batch together <tt class="docutils literal">tmux</tt> options for custom work environments. Such options might include ...</p>
+<p>Pre-configured layouts can be created to batch together <tt class="docutils literal">tmux</tt> options for custom work environments. Such options might include:</p>
 <dl class="docutils">
 <dt><tt class="docutils literal"><span class="pre">source-file</span> <span class="pre">~/.tmux.conf</span></tt></dt>
 <dd>import settings from my default config</dd>
@@ -166,14 +168,14 @@
 <dt><tt class="docutils literal"><span class="pre">send-keys</span> <span class="pre">-t</span> development:1.0 'vim' <span class="pre">C-m</span></tt></dt>
 <dd>in <em>development</em> run <tt class="docutils literal">vim</tt> in window_1 pane_0 and <tt class="docutils literal"><span class="pre">C-m</span></tt> sends the Carriage Return sequence</dd>
 </dl>
-<p><em>Example:</em> I created a <a class="reference external" href="https://github.com/vonbrownie/tmux-scripts/blob/master/default.conf">default.conf</a> to outline my standard <tt class="docutils literal">tmux</tt> session layout and a simple launcher to create / attach sessions that source the file ...</p>
+<p><strong>Example:</strong> I created a <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/generic/home/username/.tmux.default.conf">tmux.default.conf</a> to outline my standard <tt class="docutils literal">tmux</tt> session layout and a simple launcher to create / attach sessions that source the file:</p>
 <div class="highlight"><pre><span class="c">#!/bin/bash</span>
 <span class="c"># Launch/attach tmux session with $CONFIG</span>
 <span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;$HOME/doc/code/tmux_scripts/default.conf&quot;</span>
 
 tmux -f <span class="nv">$CONFIG</span> attach
 </pre></div>
-<p>Check out <tt class="docutils literal">man tmux</tt> for <em>lots</em> more information. Happy hacking!</p>
+<p>Happy hacking!</p>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>

@@ -28,7 +28,7 @@
     <p>Replace <strong>Chrome OS</strong> permanently with <strong>Lubuntu 14.04 LTS Linux</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
 <img alt="Acer C720 Lubuntubook" class="align-right" src="images/c720-lubuntubook.png" style="width: 300px; height: 157px;" />
 <p>Running a <a class="reference external" href="http://lubuntu.net/">full-featured Linux</a> on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance using the <strong>LXDE</strong> desktop.</p>
-<p>This device is available in a few different configurations. Mine is the non-touchscreen model <a class="reference external" href="http://us.acer.com/ac/en/US/content/model-datasheet/NX.SHEAA.002">C720-2848</a> with (non-expandable) <strong>2GB RAM</strong> and a (user-replaceable) <strong>16GB SSD</strong> <a class="footnote-reference" href="#id10" id="id1">[1]</a>.</p>
+<p>This device is available in a few different configurations. Mine is the non-touchscreen model <strong>C720-2848</strong> with (non-expandable) <strong>2GB RAM</strong> and a (user-replaceable) <strong>16GB SSD</strong> <a class="footnote-reference" href="#id10" id="id1">[1]</a>.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
 <div class="section" id="recovery-image">
@@ -92,7 +92,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <li>Close cover and reinstall all the case screws</li>
 </ul>
 <p>Re-connect the power, insert the USB stick prepared in Step 1, and power up the Chromebook <a class="footnote-reference" href="#id13" id="id5">[4]</a>.</p>
-<p>Sources: <a class="reference external" href="http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html">Useful GBB flags</a> for <a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-Lubuntu-gnu-linux/">another new free software machine</a></p>
+<p>Sources: <a class="reference external" href="http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html">Useful GBB flags</a> for <a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/c720-debian/">another new free software machine</a></p>
 </div>
 <div class="section" id="developer-mode-method">
 <h3>2.2 Developer Mode Method</h3>
@@ -338,7 +338,7 @@ parm:           use_chanctx:Enable channel context <span class="k">for </span>co
 <table class="docutils footnote" frame="void" id="id13" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td>Whenever you remove battery power to the Chromebook (like opening up the case) the hardware clock on the motherboard resets to a future year (mine travelled to 2040). Providing a network connection is up during the Lubuntu installation the system should fetch a correct time from a NTP server. Otherwise fix the <a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/acer-c720-chromebook-Lubuntu-gnu-linux/">fallout from an incorrect clock</a> by re-mounting partitions read-only and correct filesystem timestamps using <tt class="docutils literal">fsck</tt>.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td>Whenever you remove battery power to the Chromebook (like opening up the case) the hardware clock on the motherboard resets to a future year (mine travelled to 2040). Providing a network connection is up during the Lubuntu installation the system should fetch a correct time from a NTP server. Otherwise fix the <a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/c720-debian/">fallout from an incorrect clock</a> by re-mounting partitions read-only and correct filesystem timestamps using <tt class="docutils literal">fsck</tt>.</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id14" rules="none">
