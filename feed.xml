@@ -273,7 +273,7 @@ parm:           bt_ant_diversity:Enable WLAN/BT RX antenna diversity &lt;span cl
 parm:           ps_enable:Enable WLAN PowerSave &lt;span class="o"&gt;(&lt;/span&gt;int&lt;span class="o"&gt;)&lt;/span&gt;
 parm:           use_chanctx:Enable channel context &lt;span class="k"&gt;for &lt;/span&gt;concurrency &lt;span class="o"&gt;(&lt;/span&gt;int&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Try creating &lt;tt class="docutils literal"&gt;/etc/modprobe.d/ath9k.conf&lt;/tt&gt; with the following options:&lt;/p&gt;
+&lt;p&gt;Create &lt;tt class="docutils literal"&gt;/etc/modprobe.d/ath9k.conf&lt;/tt&gt; with the following options:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;options ath9k &lt;span class="nv"&gt;nohwcrypt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1 &lt;span class="nv"&gt;btcoex_enable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1 &lt;span class="nv"&gt;bt_ant_diversity&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_lubuntubook/etc/modprobe.d/ath9k.conf"&gt;ath9k.conf&lt;/a&gt;, &lt;a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k"&gt;ath9k wireless driver&lt;/a&gt; and &lt;a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex"&gt;bluetooth coexistence&lt;/a&gt;&lt;/p&gt;
