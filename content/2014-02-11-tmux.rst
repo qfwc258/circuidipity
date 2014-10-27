@@ -11,13 +11,17 @@ My tmux cheatsheet
     :height: 529px
     :alt: tmux
 
-`tmux <http://tmux.sourceforge.net/>`_ is a *terminal multiplexer*. What this means is I can take a single terminal window and create multiple *windows* (tabs) and further partition a window into horizontal and vertical *panes*.
+`tmux <http://tmux.sourceforge.net/>`_ is a **terminal multiplexer**. What this means is I can take a single terminal window and create multiple **windows** (tabs) and further partition a window into horizontal and vertical **panes**.
 
-Using ``tmux`` I can create terminal sessions with a custom layout of windows / panes / names / running programs, switch between different sessions, and - best of all - *detach* from a session, log out, return later, *re-attach* and find the session layout preserved and programs continuing to run in the interim.
+Using ``tmux`` I can create terminal sessions with a custom layout of windows / panes / names / running programs, switch between different sessions, and - best of all - **detach** from a session, log out, return later, **re-attach** and find the session layout preserved and programs continuing to run in the interim.
 
-*Example:* I can ``ssh`` into my `home server <http://www.circuidipity.com/linux-home-server.html>`_, start a ``tmux`` session and create multiple windows, run `rtorrent <http://libtorrent.rakshasa.no/>`_ in a window to start seeding a Linux ``iso``, detach from session and server, and return later to find everything in place and the ``iso`` uploading.
+**Example:** I can ``ssh`` into my `home server <http://www.circuidipity.com/pingparade1.html>`_, start a ``tmux`` session and create multiple windows, run `rtorrent <http://libtorrent.rakshasa.no/>`_ in a window to start seeding a Linux ``iso``, detach from session and server, and return later to find everything in place and the ``iso`` uploading.
 
-*To install:* on Debian run ``sudo apt-get install tmux``.
+**To install:** On Debian run:
+
+.. code-block:: bash
+
+    $ sudo apt-get install tmux
 
 Commands entered inside a ``tmux`` session are preceded by the key combination ``CTRL-b`` as the default ``PREFIX`` (this can be modified in ``.tmux.conf``).
 
@@ -158,7 +162,7 @@ Copy Mode
 Configure
 =========
 
-Customize ``tmux`` by creating a ``~/.tmux.conf`` configuration file. Different key combinations, colours, items running in the status bar, activity alerts can be configured with ``command`` ``OPTION`` ...
+Customize ``tmux`` by creating a ``~/.tmux.conf`` configuration file. Different key combinations, colours, items running in the status bar, activity alerts can be configured with ``command`` ``OPTION``:
 
 ``set -g OPTION``
     set OPTION for all tmux sessions
@@ -171,12 +175,12 @@ Customize ``tmux`` by creating a ``~/.tmux.conf`` configuration file. Different 
 ``bind KEY OPTION``
     bind KEY to OPTION
 
-*Example:* My own `.tmux.conf <https://github.com/vonbrownie/linux-home-config/blob/master/.tmux.conf>`_ configuration.
+**Example:** My own `.tmux.conf <https://github.com/vonbrownie/linux-post-install/blob/master/extra/generic/home/username/.tmux.conf>`_ configuration.
 
 Layouts
 =======
 
-Pre-configured layouts can be created to batch together ``tmux`` options for custom work environments. Such options might include ...
+Pre-configured layouts can be created to batch together ``tmux`` options for custom work environments. Such options might include:
 
 ``source-file ~/.tmux.conf``
     import settings from my default config
@@ -190,7 +194,7 @@ Pre-configured layouts can be created to batch together ``tmux`` options for cus
 ``send-keys -t development:1.0 'vim' C-m``
     in *development* run ``vim`` in window_1 pane_0 and ``C-m`` sends the Carriage Return sequence
 
-*Example:* I created a `default.conf <https://github.com/vonbrownie/tmux-scripts/blob/master/default.conf>`_ to outline my standard ``tmux`` session layout and a simple launcher to create / attach sessions that source the file ...
+**Example:** I created a `tmux.default.conf <https://github.com/vonbrownie/linux-post-install/blob/master/extra/generic/home/username/.tmux.default.conf>`_ to outline my standard ``tmux`` session layout and a simple launcher to create / attach sessions that source the file:
 
 .. code-block:: bash
 
@@ -200,4 +204,4 @@ Pre-configured layouts can be created to batch together ``tmux`` options for cus
                                                                                        
     tmux -f $CONFIG attach
 
-Check out ``man tmux`` for *lots* more information. Happy hacking!
+Happy hacking!
