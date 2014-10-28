@@ -119,9 +119,9 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <h3>4. Touchpad</h3>
 <p>After installing Debian the C720 touchpad is non-functional and requires compiling new kernel modules and creating a <strong>synaptic touchpad</strong> config file:</p>
 <ul class="simple">
-<li>Compile new kernel modules using the <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_sidbook/scripts/c720-kernel-mods.sh">c720-kernel-mods.sh</a> script... Confirmed <strong>working</strong> in kernel <tt class="docutils literal">3.13.10</tt> and <strong>not working</strong> in <tt class="docutils literal">3.14.x</tt></li>
+<li>Compile new kernel modules using the <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_sidbook/scripts/c720-kernel-mods.sh">c720-kernel-mods.sh</a> script... Confirmed <strong>working</strong> in kernel <tt class="docutils literal">3.13.10</tt> and <strong>not working</strong> in <tt class="docutils literal">3.14.x</tt></li>
 <li>See <a class="reference external" href="http://www.circuidipity.com/20140831.html">Modify the default boot order in GRUB</a> about installing and designating a less-than-recent kernel as the new boot default</li>
-<li>Create touchpad config <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_sidbook/etc/X11/xorg.conf.d/50-c720-touchpad.conf">50-c720-touchpad.conf</a> in <tt class="docutils literal">/etc/X11/xorg.conf.d</tt>:</li>
+<li>Create touchpad config <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_sidbook/etc/X11/xorg.conf.d/50-c720-touchpad.conf">50-c720-touchpad.conf</a> in <tt class="docutils literal">/etc/X11/xorg.conf.d</tt>:</li>
 </ul>
 <div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /etc/X11/xorg.conf.d
 <span class="nv">$ </span>sudo cp /usr/share/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-c720-touchpad.conf
@@ -133,8 +133,8 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <h3>5. Suspend</h3>
 <p>Enable suspend|resume under <strong>systemd</strong> (for sysv-init see <em>Helpful Resources</em> at bottom):</p>
 <ul class="simple">
-<li>Create <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_sidbook/lib/systemd/system-sleep/cros-sound-suspend.sh">cros-sound-suspend.sh</a> (make it executable) in <tt class="docutils literal"><span class="pre">/lib/systemd/system-sleep</span></tt> and...</li>
-<li>... <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_sidbook/etc/tmpfiles.d/cros-acpi-wakeup.conf">cros-acpi-wakeup.conf</a> in <tt class="docutils literal">/etc/tmpfiles.d</tt> to restore sound and touchpad after suspend</li>
+<li>Create <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_sidbook/lib/systemd/system-sleep/cros-sound-suspend.sh">cros-sound-suspend.sh</a> (make it executable) in <tt class="docutils literal"><span class="pre">/lib/systemd/system-sleep</span></tt> and...</li>
+<li>... <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_sidbook/etc/tmpfiles.d/cros-acpi-wakeup.conf">cros-acpi-wakeup.conf</a> in <tt class="docutils literal">/etc/tmpfiles.d</tt> to restore sound and touchpad after suspend</li>
 <li>Configure <tt class="docutils literal">GRUB_CMDLINE_LINUX_DEFAULT</tt> setting in <tt class="docutils literal">/etc/default/grub</tt>:</li>
 </ul>
 <div class="highlight"><pre><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s2">&quot;quiet splash add_efi_memmap boot=local noresume noswap i915.modeset=1 tpm_tis.force=1 tpm_tis.interrupts=0 nmi_watchdog=panic,lapic&quot;</span>
@@ -219,7 +219,7 @@ F10
 <div class="section" id="helpful-resources">
 <h3>7. Helpful Resources</h3>
 <ul class="simple">
-<li>My personal <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720_sidbook">C720 configurations</a></li>
+<li>My personal <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_sidbook">C720 configurations</a></li>
 <li><a class="reference external" href="https://github.com/liangcj/AcerC720CrunchBang">CrunchBang Linux on the Acer C720 Chromebook</a></li>
 <li>Arch Linux <a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook">C720 installation with useful post-install details</a></li>
 <li>Ongoing <a class="reference external" href="http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/">discussion thread about Chromebook configuration for a Debian/Ubuntu-based install</a></li>

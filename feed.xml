@@ -126,7 +126,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
     Option          &lt;span class="s2"&gt;&amp;quot;TapButton3&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;
 EndSection
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_lubuntubook/etc/X11/xorg.conf.d/50-c720-touchpad.conf"&gt;50-c720-touchpad.conf&lt;/a&gt;, and pages for &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics"&gt;Touchpad Synaptics&lt;/a&gt; and the &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration"&gt;C720&lt;/a&gt; on &lt;a class="reference external" href="https://wiki.archlinux.org/"&gt;ArchWiki&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/X11/xorg.conf.d/50-c720-touchpad.conf"&gt;50-c720-touchpad.conf&lt;/a&gt;, and pages for &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics"&gt;Touchpad Synaptics&lt;/a&gt; and the &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration"&gt;C720&lt;/a&gt; on &lt;a class="reference external" href="https://wiki.archlinux.org/"&gt;ArchWiki&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="ssd"&gt;
 &lt;h3&gt;5. SSD&lt;/h3&gt;
@@ -193,7 +193,7 @@ log_success_msg &lt;span class="s2"&gt;&amp;quot;Unbind ehci for preventing erro
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo restart systemd-logind
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Suspend now works reliably when triggered from Lubuntu's shutdown menu. Chromebook will go to sleep and pushing the power button/opening the lid will resume the system with the desktop locked and a password prompt &lt;a class="footnote-reference" href="#id16" id="id8"&gt;[7]&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_lubuntubook/etc/initramfs-tools/scripts/init-top/unbind_ehci"&gt;unbind_ehci&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_lubuntubook/etc/udev/rules.d/10_disable-ehci.rules"&gt;10_disable-ehci.rules&lt;/a&gt;, &lt;a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/ch8eq2o"&gt;C720 suspend tips&lt;/a&gt;, and &lt;a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/2evv1c/updating_ubuntu_kernel_headers_image_etc/ckaf6hx"&gt;configuring grub&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/initramfs-tools/scripts/init-top/unbind_ehci"&gt;unbind_ehci&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/udev/rules.d/10_disable-ehci.rules"&gt;10_disable-ehci.rules&lt;/a&gt;, &lt;a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/ch8eq2o"&gt;C720 suspend tips&lt;/a&gt;, and &lt;a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/2evv1c/updating_ubuntu_kernel_headers_image_etc/ckaf6hx"&gt;configuring grub&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="keyboard-shortcuts"&gt;
 &lt;h3&gt;7. Keyboard Shortcuts&lt;/h3&gt;
@@ -251,7 +251,7 @@ Alt + Right
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xbindkeys
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Lubuntu auto-detects &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;  and will run &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; on the next login.&lt;/p&gt;
-&lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_lubuntubook/home/username/xbindkeysrc-chromebook"&gt;xbindkeysrc-chromebook&lt;/a&gt;, &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Xbindkeys"&gt;Xbindkeys&lt;/a&gt;, and another sample &lt;a class="reference external" href="https://github.com/alexpatel/dotfiles/blob/master/xbindkeysrc"&gt;Chromebook-friendly xbindkeysrc&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/home/username/xbindkeysrc-chromebook"&gt;xbindkeysrc-chromebook&lt;/a&gt;, &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Xbindkeys"&gt;Xbindkeys&lt;/a&gt;, and another sample &lt;a class="reference external" href="https://github.com/alexpatel/dotfiles/blob/master/xbindkeysrc"&gt;Chromebook-friendly xbindkeysrc&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="power-key"&gt;
 &lt;h3&gt;7.2 Power Key&lt;/h3&gt;
@@ -276,12 +276,12 @@ parm:           use_chanctx:Enable channel context &lt;span class="k"&gt;for &lt
 &lt;p&gt;Create &lt;tt class="docutils literal"&gt;/etc/modprobe.d/ath9k.conf&lt;/tt&gt; with the following options:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;options ath9k &lt;span class="nv"&gt;nohwcrypt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1 &lt;span class="nv"&gt;btcoex_enable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1 &lt;span class="nv"&gt;bt_ant_diversity&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/c720_lubuntubook/etc/modprobe.d/ath9k.conf"&gt;ath9k.conf&lt;/a&gt;, &lt;a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k"&gt;ath9k wireless driver&lt;/a&gt; and &lt;a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex"&gt;bluetooth coexistence&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/modprobe.d/ath9k.conf"&gt;ath9k.conf&lt;/a&gt;, &lt;a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k"&gt;ath9k wireless driver&lt;/a&gt; and &lt;a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex"&gt;bluetooth coexistence&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="helpful-resources"&gt;
 &lt;h3&gt;9. Helpful Resources&lt;/h3&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;My personal &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720_lubuntubook"&gt;Lubuntubook configurations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;My personal &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_lubuntubook"&gt;Lubuntubook configurations&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://github.com/liangcj/AcerC720CrunchBang"&gt;CrunchBang Linux&lt;/a&gt; on the Acer C720&lt;/li&gt;
 &lt;li&gt;Arch Linux &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook"&gt;C720 installation with useful post-install details&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Ongoing &lt;a class="reference external" href="http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/"&gt;discussion thread about configuring Chromebooks&lt;/a&gt;&lt;/li&gt;
@@ -294,7 +294,7 @@ parm:           use_chanctx:Enable channel context &lt;span class="k"&gt;for &lt
 &lt;table class="docutils footnote" frame="void" id="id10" rules="none"&gt;
 &lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
 &lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Device information &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/extra/c720_lubuntubook/doc"&gt;output of lshw, lspci, and lsusb&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Device information &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_lubuntubook/doc"&gt;output of lshw, lspci, and lsusb&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;table class="docutils footnote" frame="void" id="id11" rules="none"&gt;
