@@ -21,7 +21,17 @@ Wipe any SanDisk stuff off the device by creating a new partition table with a s
 
     $ sudo mkfs.vfat /dev/sd[device_label]1
 
-1. Auto-mount
+1. UUID
+-------
+
+Retrieve the `Universally Unique Identifer <https://help.ubuntu.com/community/UsingUUID>`_ (UUID) of the USB stick's partition (example uses ``sdb1``):
+
+.. code-block:: bash
+
+    $ sudo blkid | grep sdb1
+    /dev/sdb1: UUID="7168-E0A7" TYPE="vfat"
+
+2. Auto-mount
 -------------
 
 Configure the system to auto-mount the USB stick at boot by creating a new mount point for the device:
@@ -38,7 +48,7 @@ Configure the system to auto-mount the USB stick at boot by creating a new mount
 
 Experiment with the settings. Note that ``nobootwait`` is an ``upstart``-specific option to the ``mountall`` command on `Ubuntu <http://www.circuidipity.com/tag-ubuntu.html>`_ and its derivatives. It enables boot to continue without manual intervention if the device is not found.
 
-2. Boot
+3. Boot
 -------
 
 One wrinkle on the **Acer C720 Chromebook** is that an attached USB storage device makes the laptop always try to boot from USB (and fail) instead of internal storage. There appears to be no way to alter the default boot order in **SeaBIOS** except to rebuild the firmware. Plus I **like** that USB booting actually works on this device! The simple workaround is just hit **ESC** at startup to access the boot menu and manually choose the SSD.
