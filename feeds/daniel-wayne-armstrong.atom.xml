@@ -8,8 +8,15 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkfs.vfat /dev/sd&lt;span class="o"&gt;[&lt;/span&gt;device_label&lt;span class="o"&gt;]&lt;/span&gt;1
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;div class="section" id="uuid"&gt;
+&lt;h2&gt;1. UUID&lt;/h2&gt;
+&lt;p&gt;Retrieve the &lt;a class="reference external" href="https://help.ubuntu.com/community/UsingUUID"&gt;Universally Unique Identifer&lt;/a&gt; (UUID) of the USB stick's partition (example uses &lt;tt class="docutils literal"&gt;sdb1&lt;/tt&gt;):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo blkid | grep sdb1
+/dev/sdb1: &lt;span class="nv"&gt;UUID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;7168-E0A7&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;TYPE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;vfat&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;div class="section" id="auto-mount"&gt;
-&lt;h2&gt;1. Auto-mount&lt;/h2&gt;
+&lt;h2&gt;2. Auto-mount&lt;/h2&gt;
 &lt;p&gt;Configure the system to auto-mount the USB stick at boot by creating a new mount point for the device:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /media/usb-extra
 &lt;/pre&gt;&lt;/div&gt;
@@ -19,7 +26,7 @@
 &lt;p&gt;Experiment with the settings. Note that &lt;tt class="docutils literal"&gt;nobootwait&lt;/tt&gt; is an &lt;tt class="docutils literal"&gt;upstart&lt;/tt&gt;-specific option to the &lt;tt class="docutils literal"&gt;mountall&lt;/tt&gt; command on &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt; and its derivatives. It enables boot to continue without manual intervention if the device is not found.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="boot"&gt;
-&lt;h2&gt;2. Boot&lt;/h2&gt;
+&lt;h2&gt;3. Boot&lt;/h2&gt;
 &lt;p&gt;One wrinkle on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt; is that an attached USB storage device makes the laptop always try to boot from USB (and fail) instead of internal storage. There appears to be no way to alter the default boot order in &lt;strong&gt;SeaBIOS&lt;/strong&gt; except to rebuild the firmware. Plus I &lt;strong&gt;like&lt;/strong&gt; that USB booting actually works on this device! The simple workaround is just hit &lt;strong&gt;ESC&lt;/strong&gt; at startup to access the boot menu and manually choose the SSD.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;

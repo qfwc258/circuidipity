@@ -46,8 +46,15 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <div class="highlight"><pre><span class="nv">$ </span>sudo mkfs.vfat /dev/sd<span class="o">[</span>device_label<span class="o">]</span>1
 </pre></div>
 </div>
+<div class="section" id="uuid">
+<h2>1. UUID</h2>
+<p>Retrieve the <a class="reference external" href="https://help.ubuntu.com/community/UsingUUID">Universally Unique Identifer</a> (UUID) of the USB stick's partition (example uses <tt class="docutils literal">sdb1</tt>):</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo blkid | grep sdb1
+/dev/sdb1: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;7168-E0A7&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;vfat&quot;</span>
+</pre></div>
+</div>
 <div class="section" id="auto-mount">
-<h2>1. Auto-mount</h2>
+<h2>2. Auto-mount</h2>
 <p>Configure the system to auto-mount the USB stick at boot by creating a new mount point for the device:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /media/usb-extra
 </pre></div>
@@ -57,7 +64,7 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <p>Experiment with the settings. Note that <tt class="docutils literal">nobootwait</tt> is an <tt class="docutils literal">upstart</tt>-specific option to the <tt class="docutils literal">mountall</tt> command on <a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html">Ubuntu</a> and its derivatives. It enables boot to continue without manual intervention if the device is not found.</p>
 </div>
 <div class="section" id="boot">
-<h2>2. Boot</h2>
+<h2>3. Boot</h2>
 <p>One wrinkle on the <strong>Acer C720 Chromebook</strong> is that an attached USB storage device makes the laptop always try to boot from USB (and fail) instead of internal storage. There appears to be no way to alter the default boot order in <strong>SeaBIOS</strong> except to rebuild the firmware. Plus I <strong>like</strong> that USB booting actually works on this device! The simple workaround is just hit <strong>ESC</strong> at startup to access the boot menu and manually choose the SSD.</p>
 <p>Happy hacking!</p>
 </div>
