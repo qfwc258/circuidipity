@@ -23,6 +23,23 @@ Projects
 
 .. class:: invisiblelink
 
+    .. image:: images/lubuntu_logo-thumb.png
+        :alt: Lubuntu
+        :width: 150px
+        :height: 150px
+        :align: left
+        :target: lubuntu-trusty-hacks.html
+
+.. raw:: html
+
+    <div class="projectx">
+        <h2>Lubuntu 14.04 LTS Hacks</h2>
+        <p>Small hacks that <a href="lubuntu-trusty-hacks.html">make a great lightweight OS even better...</a></p>
+        <p style="clear:both;"></p>
+    </div>
+
+.. class:: invisiblelink
+
     .. image:: images/c720-lubuntubook-thumb.png
         :alt: Sidbook
         :width: 150px
