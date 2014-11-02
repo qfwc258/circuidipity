@@ -406,6 +406,7 @@ Sources: `ath9k.conf (github.com/vonbrownie) <https://github.com/vonbrownie/linu
 --------------------
 
 * My personal `Lubuntubook configurations (github.com/vonbrownie) <https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_lubuntubook>`_ 
+* A few small hacks I like to do to `make a great OS even better <http://www.circuidipity.com/lubuntu-trusty-hacks.html>`_
 * `CrunchBang Linux <https://github.com/liangcj/AcerC720CrunchBang>`_ on the Acer C720
 * Arch Linux `C720 installation with useful post-install details <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook>`_
 * Ongoing `discussion thread about configuring Chromebooks <http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/>`_ 
