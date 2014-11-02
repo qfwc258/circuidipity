@@ -6,6 +6,7 @@ Chromebook to Lubuntubook
 :slug: c720-lubuntubook
 :template: article-project
 :tags: chromebook, lubuntu, ubuntu, linux
+:modified: 2014-11-02 13:31:00
 
 Replace **Chrome OS** permanently with **Lubuntu 14.04 LTS Linux** on the **Acer C720 Chromebook**.
 
