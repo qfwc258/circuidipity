@@ -1,5 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-10-31T00:11:00-04:00</updated><entry><title>Add USB storage to Chromebooks</title><link href="http://www.circuidipity.com/20141031.html" rel="alternate"></link><updated>2014-10-31T00:11:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-10-31:20141031.html</id><summary type="html">&lt;p&gt;I love my &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Lubuntubook&lt;/a&gt; and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room to shuffle data around. One popular option is to &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;open up the device&lt;/a&gt; and swap in a bigger SSD.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-11-02T00:11:00-04:00</updated><entry><title>16 small hacks after installing Lubuntu 14.04</title><link href="http://www.circuidipity.com/lubuntu-trusty-hacks.html" rel="alternate"></link><updated>2014-11-02T00:11:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-02:lubuntu-trusty-hacks.html</id><summary type="html">&lt;img alt="Lubuntu" class="align-right" src="images/lubuntu_logo.png" style="width: 150px; height: 150px;" /&gt;
+&lt;p&gt;The combination of &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt;  plus the &lt;a class="reference external" href="http://www.circuidipity.com/tag-lxde.html"&gt;LXDE&lt;/a&gt; desktop equals the lightweight and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/tag-lubuntu.html"&gt;Lubuntu&lt;/a&gt;. Its loosely coupled components create a friendly environment for swapping out bits and customizing the interface, and ongoing development of the next-generation &lt;a class="reference external" href="http://lxqt.org/"&gt;LXQt&lt;/a&gt; looks promising!&lt;/p&gt;
+&lt;p&gt;Here are a few small hacks I like to do to make a great OS even better. Modifications are made on a &lt;a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html"&gt;fresh install of Lubuntu 14.04&lt;/a&gt;, which is a &lt;em&gt;Long Term Support&lt;/em&gt; (LTS) release (till April 2017).&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;div class="section" id="update-kernel"&gt;
+&lt;h3&gt;0. Update kernel&lt;/h3&gt;
+&lt;p&gt;Lubuntu installs the &lt;strong&gt;3.13&lt;/strong&gt; Linux kernel which may have incomplete hardware support for newer devices like the &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Acer C720 Chromebook&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Download and install a more recent kernel from &lt;a class="reference external" href="https://wiki.ubuntu.com/Kernel/MainlineBuilds"&gt;Ubuntu MainlineBuilds&lt;/a&gt;. An example using the &lt;strong&gt;3.17&lt;/strong&gt; kernel:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-headers-3.17.1-031701-generic_3.17.1-031701.201410150735_amd64.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-headers-3.17.1-031701_3.17.1-031701.201410150735_all.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-image-3.17.1-031701-generic_3.17.1-031701.201410150735_amd64.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i linux*.deb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and reboot.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="screen-lock"&gt;
+&lt;h3&gt;1. Screen lock&lt;/h3&gt;
+&lt;p&gt;The &lt;strong&gt;light-locker&lt;/strong&gt; screen utility locks the screen when the system has been idle for several minutes regardless of user-defined preferences.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Disable system-wide screen locking:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.bak
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and configure per-user settings in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Preferences-&amp;gt;Light&lt;/span&gt; Locker Settings&lt;/tt&gt;, which are saved to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/autostart/light-locker.desktop&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Sample &lt;tt class="docutils literal"&gt;Exec&lt;/tt&gt; line that locks screen when system-suspend is activated:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;Exec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;light-locker --lock-after-screensaver&lt;span class="o"&gt;=&lt;/span&gt;0 --lock-on-suspend --no-late-locking
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="http://askubuntu.com/questions/502942/lubuntu-enforces-screen-lock"&gt;Lubuntu enforces screen lock&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="editor"&gt;
+&lt;h3&gt;2. Editor&lt;/h3&gt;
+&lt;p&gt;Install full-version of &lt;strong&gt;vim&lt;/strong&gt; text editor and make it the default system editor:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install vim tmux
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-alternatives --config editor
+There are 4 choices &lt;span class="k"&gt;for &lt;/span&gt;the alternative editor &lt;span class="o"&gt;(&lt;/span&gt;providing /usr/bin/editor&lt;span class="o"&gt;)&lt;/span&gt;.
+
+  Selection    Path                Priority   Status
+------------------------------------------------------------
+  0            /bin/nano            40        auto mode
+  1            /bin/ed             -100       manual mode
+  2            /bin/nano            40        manual mode
+* 3            /usr/bin/vim.basic   30        manual mode
+  4            /usr/bin/vim.tiny    10        manual mode
+
+Press enter to keep the current choice&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt;, or &lt;span class="nb"&gt;type &lt;/span&gt;selection number:
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="terminal"&gt;
+&lt;h3&gt;3. Terminal&lt;/h3&gt;
+&lt;p&gt;Substitute lxterminal with &lt;strong&gt;rxvt-unicode&lt;/strong&gt; + &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; terminal multi-plexer and make &lt;strong&gt;urxvt&lt;/strong&gt; the default terminal:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install rxvt-unicode fonts-droid
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-alternatives --config x-terminal-emulator
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.Xresources&lt;/span&gt;&lt;/tt&gt; and set terminal options for fonts, colours, etc.&lt;/p&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.Xresources"&gt;.Xresources (github.com/vonbrownie)&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ssh-keys"&gt;
+&lt;h3&gt;4. SSH keys&lt;/h3&gt;
+&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/pingparade2.html"&gt;Ping Parade #2 -- Keys&lt;/a&gt; for configuring OpenSSH and generating SSH keys for a Lubuntu installation.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="media-player"&gt;
+&lt;h3&gt;5. Media player&lt;/h3&gt;
+&lt;p&gt;Install multimedia codecs and the awesome &lt;strong&gt;vlc&lt;/strong&gt; media player:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install ubuntu-restricted-extras vlc
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="java-runtime-environment"&gt;
+&lt;h3&gt;6. Java Runtime Environment&lt;/h3&gt;
+&lt;p&gt;Install a &lt;strong&gt;JRE&lt;/strong&gt; (default is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openjdk-7-jre&lt;/span&gt;&lt;/tt&gt;):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install default-jre
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="home-bin"&gt;
+&lt;h3&gt;7. $HOME/bin&lt;/h3&gt;
+&lt;p&gt;Create a directory to hold personal scripts that will be added to &lt;tt class="docutils literal"&gt;$PATH&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/bin
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="applications-menu"&gt;
+&lt;h3&gt;8. Applications menu&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Dmenu&lt;/strong&gt; is a menu that can be activated by keyboard shortcut and dynamically narrow the choice of available applications as you type. Part of the &lt;strong&gt;suckless-tools&lt;/strong&gt; package:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install suckless-tools
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dmenu-run.sh&lt;/span&gt;&lt;/tt&gt; shell script to generate a menu. Example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
+dmenu_run -b -i -fn &lt;span class="s1"&gt;&amp;#39;10x20&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    -nb &lt;span class="s1"&gt;&amp;#39;#000000&amp;#39;&lt;/span&gt; -nf &lt;span class="s1"&gt;&amp;#39;#ffffff&amp;#39;&lt;/span&gt; -sb &lt;span class="s1"&gt;&amp;#39;#d64937&amp;#39;&lt;/span&gt; -sf &lt;span class="s1"&gt;&amp;#39;#000000&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and place in &lt;tt class="docutils literal"&gt;$HOME/bin&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dmenu-run.sh"&gt;dmenu-run.sh (github.com/vonbrownie)&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="keyboard-shortcuts"&gt;
+&lt;h3&gt;9. Keyboard shortcuts&lt;/h3&gt;
+&lt;p&gt;Create shortcuts in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.config/openbox/lubuntu-rc.xml&lt;/span&gt;&lt;/tt&gt;. Example for launching &lt;tt class="docutils literal"&gt;dmenu&lt;/tt&gt; with key combo &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ALT-A&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;lt;!-- Keybindings &lt;span class="k"&gt;for &lt;/span&gt;running Run menu --&amp;gt;
+&amp;lt;keybind &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;A-a&amp;quot;&lt;/span&gt;&amp;gt;
+  &amp;lt;action &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Execute&amp;quot;&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span class="nb"&gt;command&lt;/span&gt;&amp;gt;dmenu-run.sh&amp;lt;/command&amp;gt;
+  &amp;lt;/action&amp;gt;
+&amp;lt;/keybind&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-rc.xml"&gt;lubuntu-rc.xml (github.com/vonbrownie)&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="custom-application-launchers"&gt;
+&lt;h3&gt;10. Custom application launchers&lt;/h3&gt;
+&lt;p&gt;Create &lt;tt class="docutils literal"&gt;*.desktop&lt;/tt&gt; files with custom options to launch applications. Make a custom &lt;tt class="docutils literal"&gt;*.desktop&lt;/tt&gt; system-wide location:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /usr/local/share/applications
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A sample &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;rxvt-unicode-custom.desktop&lt;/span&gt;&lt;/tt&gt; launcher contains:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;Desktop Entry&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Urxvt
+&lt;span class="nv"&gt;GenericName&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Terminal
+&lt;span class="nv"&gt;Comment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Use the &lt;span class="nb"&gt;command &lt;/span&gt;line
+&lt;span class="nv"&gt;TryExec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;urxvt
+&lt;span class="nv"&gt;Exec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;urxvt
+&lt;span class="nv"&gt;Icon&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;xterm-color
+&lt;span class="nv"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Application
+&lt;span class="nv"&gt;Categories&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Utility;TerminalEmulator;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="terminate-frozen-applications"&gt;
+&lt;h3&gt;11. Terminate frozen applications&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Xkill&lt;/strong&gt; is a utility for terminating misbehaving X applications. When activated it displays a crosshair cursor that can be maneuvered in place and a click kills the client app that lies beneath.&lt;/p&gt;
+&lt;p&gt;A sample &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/usr/local/share/applications/xkill-custom.desktop&lt;/span&gt;&lt;/tt&gt; launcher:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;Desktop Entry&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Xkill misbehaving apps
+&lt;span class="nv"&gt;Comment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;KILL KILL KILL
+&lt;span class="nv"&gt;Exec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;xkill
+&lt;span class="nv"&gt;Icon&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;system-error
+&lt;span class="nv"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Application
+&lt;span class="nv"&gt;Categories&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;System;Utility;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Save file and the item will appear under Lubuntu's &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Menu-&amp;gt;System&lt;/span&gt; Tools&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="favourites-panel"&gt;
+&lt;h3&gt;12. Favourites panel&lt;/h3&gt;
+&lt;p&gt;Right-click on the LXDE panel and select &lt;tt class="docutils literal"&gt;Create new panel&lt;/tt&gt; to create an extra panel to hold favourite application launchers. Panel configs are store in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.config/lxpanel/Lubuntu/panels&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="customize-the-theme"&gt;
+&lt;h3&gt;13. Customize the theme&lt;/h3&gt;
+&lt;img alt="Lubuntu desktop" class="align-center" src="images/screenshot/lubuntu-1404-numix-desktop.png" style="width: 900px; height: 506px;" /&gt;
+&lt;p&gt;Choose an alternative theme for the Lubuntu desktop. I like &lt;a class="reference external" href="https://numixproject.org/"&gt;Numix&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo add-apt-repository ppa:numix/ppa
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get update
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install numix-gtk-theme numix-icon-theme numix-icon-theme-circle
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Select the new theme in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Menu-&amp;gt;Preferences-&amp;gt;Customize&lt;/span&gt; Look and Feel&lt;/tt&gt; &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="customize-login"&gt;
+&lt;h3&gt;14. Customize login&lt;/h3&gt;
+&lt;p&gt;Login window is managed by &lt;strong&gt;lightdm-gtk-greeter&lt;/strong&gt;. To set a new background image for the login window:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /usr/local/share/wallpapers
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo cp my_new_login_image.jpg /usr/local/share/wallpapers
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Edit &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/lightdm/lightdm-gtk-greeter.conf&lt;/span&gt;&lt;/tt&gt; and configure the new background:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;background&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/local/share/wallpapers/my_new_login_image.jpg
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="auto-mount-external-drives-at-startup"&gt;
+&lt;h3&gt;15. Auto-mount external drives at startup&lt;/h3&gt;
+&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/20141031.html"&gt;Add USB storage to Chromebooks&lt;/a&gt; for an example scenario.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h3&gt;Notes&lt;/h3&gt;
+&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;For application buttons in the panel to display properly with Numix, right-click on the Taskbar, select &lt;tt class="docutils literal"&gt;Taskbar (Window List) Settings&lt;/tt&gt;, and enable &lt;tt class="docutils literal"&gt;Flat buttons&lt;/tt&gt; option.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="lubuntu"></category><category term="ubuntu"></category><category term="linux"></category><category term="lxde"></category></entry><entry><title>Add USB storage to Chromebooks</title><link href="http://www.circuidipity.com/20141031.html" rel="alternate"></link><updated>2014-10-31T00:11:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-10-31:20141031.html</id><summary type="html">&lt;p&gt;I love my &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Lubuntubook&lt;/a&gt; and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room to shuffle data around. One popular option is to &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;open up the device&lt;/a&gt; and swap in a bigger SSD.&lt;/p&gt;
 &lt;p&gt;An alternative is to reserve the internal SSD for the OS and use an external USB storage device for data. I picked up a &lt;a class="reference external" href="http://www.amazon.com/SanDisk-Cruzer-Low-Profile-Drive-SDCZ33-064G-B35/dp/B00FJRS6QY"&gt;SanDisk Cruzer Fit 64GB USB 2.0&lt;/a&gt; which are really tiny devices that barely extrude from the USB port.&lt;/p&gt;
 &lt;p&gt;My plan is to keep the USB stick attached to the Chromebook (extra storage that can be disconnected and re-connected at will) and have Lubuntu auto-mount the device at boot. Steps to get it working:&lt;/p&gt;
 &lt;div class="section" id="partition-and-format"&gt;
@@ -165,7 +337,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
     Option          &lt;span class="s2"&gt;&amp;quot;TapButton3&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;
 EndSection
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/X11/xorg.conf.d/50-c720-touchpad.conf"&gt;50-c720-touchpad.conf&lt;/a&gt;, and pages for &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics"&gt;Touchpad Synaptics&lt;/a&gt; and the &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration"&gt;C720&lt;/a&gt; on &lt;a class="reference external" href="https://wiki.archlinux.org/"&gt;ArchWiki&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/X11/xorg.conf.d/50-c720-touchpad.conf"&gt;50-c720-touchpad.conf (github.com/vonbrownie)&lt;/a&gt;, and pages for &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics"&gt;Touchpad Synaptics&lt;/a&gt; and the &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration"&gt;C720&lt;/a&gt; on &lt;a class="reference external" href="https://wiki.archlinux.org/"&gt;ArchWiki&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="ssd"&gt;
 &lt;h3&gt;5. SSD&lt;/h3&gt;
@@ -232,7 +404,7 @@ log_success_msg &lt;span class="s2"&gt;&amp;quot;Unbind ehci for preventing erro
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo restart systemd-logind
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Suspend now works reliably when triggered from Lubuntu's shutdown menu. Chromebook will go to sleep and pushing the power button/opening the lid will resume the system with the desktop locked and a password prompt &lt;a class="footnote-reference" href="#id16" id="id8"&gt;[7]&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/initramfs-tools/scripts/init-top/unbind_ehci"&gt;unbind_ehci&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/udev/rules.d/10_disable-ehci.rules"&gt;10_disable-ehci.rules&lt;/a&gt;, &lt;a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/ch8eq2o"&gt;C720 suspend tips&lt;/a&gt;, and &lt;a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/2evv1c/updating_ubuntu_kernel_headers_image_etc/ckaf6hx"&gt;configuring grub&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/initramfs-tools/scripts/init-top/unbind_ehci"&gt;unbind_ehci&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/udev/rules.d/10_disable-ehci.rules"&gt;10_disable-ehci.rules (github.com/vonbrownie)&lt;/a&gt;, &lt;a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/ch8eq2o"&gt;C720 suspend tips&lt;/a&gt;, and &lt;a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/2evv1c/updating_ubuntu_kernel_headers_image_etc/ckaf6hx"&gt;configuring grub&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="keyboard-shortcuts"&gt;
 &lt;h3&gt;7. Keyboard Shortcuts&lt;/h3&gt;
@@ -290,7 +462,7 @@ Alt + Right
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xbindkeys
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Lubuntu auto-detects &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;  and will run &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; on the next login.&lt;/p&gt;
-&lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/home/username/xbindkeysrc-chromebook"&gt;xbindkeysrc-chromebook&lt;/a&gt;, &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Xbindkeys"&gt;Xbindkeys&lt;/a&gt;, and another sample &lt;a class="reference external" href="https://github.com/alexpatel/dotfiles/blob/master/xbindkeysrc"&gt;Chromebook-friendly xbindkeysrc&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/home/username/xbindkeysrc-chromebook"&gt;xbindkeysrc-chromebook (github.com/vonbrownie)&lt;/a&gt;, &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Xbindkeys"&gt;Xbindkeys&lt;/a&gt;, and another sample &lt;a class="reference external" href="https://github.com/alexpatel/dotfiles/blob/master/xbindkeysrc"&gt;Chromebook-friendly xbindkeysrc&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="power-key"&gt;
 &lt;h3&gt;7.2 Power Key&lt;/h3&gt;
@@ -315,12 +487,12 @@ parm:           use_chanctx:Enable channel context &lt;span class="k"&gt;for &lt
 &lt;p&gt;Create &lt;tt class="docutils literal"&gt;/etc/modprobe.d/ath9k.conf&lt;/tt&gt; with the following options:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;options ath9k &lt;span class="nv"&gt;nohwcrypt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1 &lt;span class="nv"&gt;btcoex_enable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1 &lt;span class="nv"&gt;bt_ant_diversity&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: Lubuntubook &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/modprobe.d/ath9k.conf"&gt;ath9k.conf&lt;/a&gt;, &lt;a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k"&gt;ath9k wireless driver&lt;/a&gt; and &lt;a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex"&gt;bluetooth coexistence&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/modprobe.d/ath9k.conf"&gt;ath9k.conf (github.com/vonbrownie)&lt;/a&gt;, &lt;a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k"&gt;ath9k wireless driver&lt;/a&gt; and &lt;a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex"&gt;bluetooth coexistence&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="helpful-resources"&gt;
 &lt;h3&gt;9. Helpful Resources&lt;/h3&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;My personal &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_lubuntubook"&gt;Lubuntubook configurations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;My personal &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_lubuntubook"&gt;Lubuntubook configurations (github.com/vonbrownie)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://github.com/liangcj/AcerC720CrunchBang"&gt;CrunchBang Linux&lt;/a&gt; on the Acer C720&lt;/li&gt;
 &lt;li&gt;Arch Linux &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook"&gt;C720 installation with useful post-install details&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Ongoing &lt;a class="reference external" href="http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/"&gt;discussion thread about configuring Chromebooks&lt;/a&gt;&lt;/li&gt;
@@ -593,21 +765,4 @@ initrd &lt;span class="o"&gt;(&lt;/span&gt;loop&lt;span class="o"&gt;)&lt;/span&
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="android"></category><category term="linux"></category></entry><entry><title>Port forwarding</title><link href="http://www.circuidipity.com/20141006.html" rel="alternate"></link><updated>2014-10-06T14:58:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-10-06:20141006.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Port forwarding&lt;/strong&gt; enables &lt;a class="reference external" href="http://www.circuidipity.com/pingparade2.html"&gt;SSH access&lt;/a&gt; to my &lt;a class="reference external" href="http://www.circuidipity.com/pingparade1.html"&gt;home server&lt;/a&gt; from outside the home by forwarding traffic directed at a port on the router (reachable over the Internet by static IP) to the SSH port on the internal server behind a &lt;a class="reference external" href="http://wiki.openwrt.org/doc/uci/firewall"&gt;NAT firewall&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;OpenWrt&lt;/a&gt; port forward configuration is done in &lt;tt class="docutils literal"&gt;/etc/config/firewall&lt;/tt&gt;. A sample entry that redirects port 55555 on the router to port 22 on the server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;config &lt;span class="s1"&gt;&amp;#39;redirect&amp;#39;&lt;/span&gt;
-    option &lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ssh&amp;#39;&lt;/span&gt;
-    option &lt;span class="s1"&gt;&amp;#39;src&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;wan&amp;#39;&lt;/span&gt;
-    option &lt;span class="s1"&gt;&amp;#39;proto&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;tcpudp&amp;#39;&lt;/span&gt;
-    option &lt;span class="s1"&gt;&amp;#39;src_dport&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;55555&amp;#39;&lt;/span&gt;
-    option &lt;span class="s1"&gt;&amp;#39;dest_ip&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;192.168.1.55&amp;#39;&lt;/span&gt;
-    option &lt;span class="s1"&gt;&amp;#39;dest_port&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;22&amp;#39;&lt;/span&gt;
-    option &lt;span class="s1"&gt;&amp;#39;target&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;DNAT&amp;#39;&lt;/span&gt;
-    option &lt;span class="s1"&gt;&amp;#39;dest&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;lan&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Save and make the changes active by running:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# /etc/init.d/firewall restart&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Alternately, setup port forwarding in LuCI under &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Network-&amp;gt;Firewall-&amp;gt;Port&lt;/span&gt; Forwards&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/port.forwarding"&gt;OpenWrt Port Forwarding&lt;/a&gt;&lt;/p&gt;
-</summary><category term="networks"></category><category term="openwrt"></category><category term="linux"></category></entry></feed>
+</summary><category term="android"></category><category term="linux"></category></entry></feed>
