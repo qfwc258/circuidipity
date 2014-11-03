@@ -26,15 +26,11 @@
 <!-- article -->
 <h1>Increase RAM available to Raspberry Pi CPU</h1>
 <div id="article">
-    <p><strong>Raspberry Pi Model B Rev 2</strong> has 512MB RAM that is partitioned between the CPU and the GPU. If the Pi is working as a headless server or the Pi desktop is being accessed via <a class="reference external" href="http://www.circuidipity.com/pingparade5.html">VNC</a> (which doesn't utilize the GPU) the <em>memory split</em> between the two processors can be altered to assign more memory to the CPU for running applications.</p>
-<div class="note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <strong>Pi Camera Module</strong> requires a minimum of 128MB RAM assigned to the GPU.</p>
-</div>
-<p>Default GPU memory on Raspbian is set to 64MB and the minimum recommended to ensure proper operation is 16MB. To modify GPU memory to 16MB either:</p>
+    <p><strong>Raspberry Pi Model B Rev 2</strong> has 512MB RAM that is partitioned between the CPU and the GPU. If the Pi is working as a headless server or the Pi desktop is being accessed via <a class="reference external" href="http://www.circuidipity.com/pingparade5.html">VNC</a> (which doesn't utilize the GPU) the <strong>memory split</strong> between the two processors can be altered to assign more memory to the CPU for running applications.</p>
+<p>Default GPU memory on Raspbian is set to 64MB and the minimum recommended to ensure proper operation is 16MB (<strong>Pi Camera Module</strong> requires a minimum of 128MB RAM). To modify GPU memory to 16MB either:</p>
 <ol class="arabic simple">
 <li>edit <tt class="docutils literal">/boot/config.txt</tt> and set <tt class="docutils literal">gpu_mem=16</tt>; or</li>
-<li>run <tt class="docutils literal">sudo <span class="pre">raspi-config</span></tt> and select <strong>&quot;8 Advanced Options -&gt; A3 Memory Split&quot;</strong> and modify <strong>64</strong> to <strong>16</strong></li>
+<li>run <tt class="docutils literal">sudo <span class="pre">raspi-config</span></tt> and select <tt class="docutils literal">8 Advanced Options <span class="pre">-&gt;</span> A3 Memory Split</tt> and modify <tt class="docutils literal">64</tt> to <tt class="docutils literal">16</tt></li>
 </ol>
 <p>Save the change, reboot the Pi, and enjoy the CPU memory boost!</p>
 <p>Source: <a class="reference external" href="http://elinux.org/RPi_config.txt">RPiconfig</a></p>
