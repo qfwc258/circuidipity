@@ -18,4 +18,4 @@ Helpful Resources
 
 Happy hacking!
 
-Source: `github.com/vonbrownie/linux-post-install <https://github.com/vonbrownie/linux-post-install>`_
+Source: `linux-post-install (github.com/vonbrownie) <https://github.com/vonbrownie/linux-post-install>`_
