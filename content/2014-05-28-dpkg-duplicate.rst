@@ -8,13 +8,13 @@ Duplicate Debian package selection on multiple machines
 
 I am happy with the selection of packages installed on my `Debian-powered laptop <http://www.circuidipity.com/c720-sidbook.html>`_ and discovered an easy method to **duplicate** the configuration on another machine.
 
-On the 'master' machine generate a list of installed packages...
+On the original machine generate a list of installed packages:
 
 .. code-block:: bash
 
     $ dpkg --get-selections | grep -v deinstall > deb-pkg-list.txt
 
-Move the generated list to the target machine. Configure the package manager to duplicate the selection on the new system...
+Move the generated list to the target machine. Configure the package manager to duplicate the selection on the new system:
 
 .. code-block:: bash
 
@@ -30,4 +30,4 @@ I created a `shell script <https://github.com/vonbrownie/linux-home-bin/blob/mas
 
 Happy hacking!
 
-Sources: `dpkgDup <https://github.com/vonbrownie/linux-home-bin/blob/master/dpkgDup>`_, `Debian Administrator's Handbook <http://debian-handbook.info/browse/wheezy/sect.apt-get.html>`_
+Sources: `dpkgDup (github.com/vonbrownie) <https://github.com/vonbrownie/linux-home-bin/blob/master/dpkgDup>`_, `Debian Administrator's Handbook <http://debian-handbook.info/browse/wheezy/sect.apt-get.html>`_
