@@ -27,10 +27,10 @@
 <h1>Duplicate Debian package selection on multiple machines</h1>
 <div id="article">
     <p>I am happy with the selection of packages installed on my <a class="reference external" href="http://www.circuidipity.com/c720-sidbook.html">Debian-powered laptop</a> and discovered an easy method to <strong>duplicate</strong> the configuration on another machine.</p>
-<p>On the 'master' machine generate a list of installed packages...</p>
+<p>On the original machine generate a list of installed packages:</p>
 <div class="highlight"><pre><span class="nv">$ </span>dpkg --get-selections | grep -v deinstall &gt; deb-pkg-list.txt
 </pre></div>
-<p>Move the generated list to the target machine. Configure the package manager to duplicate the selection on the new system...</p>
+<p>Move the generated list to the target machine. Configure the package manager to duplicate the selection on the new system:</p>
 <div class="highlight"><pre><span class="nv">$ PKGS</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
 <span class="nv">$ </span>sudo apt-cache dumpavail &gt; <span class="s2">&quot;$PKGS&quot;</span>
 <span class="nv">$ </span>sudo dpkg --merge-avail <span class="s2">&quot;$PKGS&quot;</span>
@@ -41,7 +41,7 @@
 </pre></div>
 <p>I created a <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dpkgDup">shell script</a> that includes the above steps for generating and restoring package lists.</p>
 <p>Happy hacking!</p>
-<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dpkgDup">dpkgDup</a>, <a class="reference external" href="http://debian-handbook.info/browse/wheezy/sect.apt-get.html">Debian Administrator's Handbook</a></p>
+<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dpkgDup">dpkgDup (github.com/vonbrownie)</a>, <a class="reference external" href="http://debian-handbook.info/browse/wheezy/sect.apt-get.html">Debian Administrator's Handbook</a></p>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
