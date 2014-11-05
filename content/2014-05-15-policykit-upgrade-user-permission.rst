@@ -6,7 +6,7 @@ Policykit upgrade generates user permission problems
 :slug: policykit-upgrade-user-permission
 :tags: debian, linux
 
-After a recent upgrade on my 64-bit systems running Debian Sid/Unstable and Openbox I discovered user permission problems with:
+After a recent upgrade on my 64-bit systems running Debian ``sid/unstable`` and **Openbox** I discovered user permission problems with:
 
 * **nm-applet** - "(32) Not authorized to control networking" - refusing to make new wireless connections
 * **xfce4-power-manager --dump** shows suspend/reboot/shutdown as disabled
@@ -15,20 +15,29 @@ Openbox launches with ``startx`` using ``exec ck-launch-session dbus-launch open
 
 **(Temporary) Fix:** Downgrade the problematic packages from versions ``0.105-5`` to ``0.105-4``.
 
-**Step 0:** Removing the current polkit packages will also remove a number of related packages including network-manager and break the net connection. Previous good ``0.105-4`` versions of the affected packages were still available in ``/var/cache/apt/archives``... otherwise download packages from `snapshot.debian.org <http://snapshot.debian.org/>`_. For 64-bit amd64:
+0. Downgrade
+------------
+
+Removing the current polkit packages will also remove a number of related packages including network-manager and break the net connection. Previous good ``0.105-4`` versions of the affected packages were still available in ``/var/cache/apt/archives``... otherwise download packages from `snapshot.debian.org <http://snapshot.debian.org/>`_. For 64-bit amd64:
 
 * `libpolkit-gobject-1-0:amd64 <http://snapshot.debian.org/archive/debian/20131015T214817Z/pool/main/p/policykit-1/libpolkit-gobject-1-0_0.105-4_amd64.deb>`_
 * `libpolkit-agent-1-0:amd64 <http://snapshot.debian.org/archive/debian/20131015T214817Z/pool/main/p/policykit-1/libpolkit-agent-1-0_0.105-4_amd64.deb>`_
 * `libpolkit-backend-1-0:amd64 <http://snapshot.debian.org/archive/debian/20131015T214817Z/pool/main/p/policykit-1/libpolkit-backend-1-0_0.105-4_amd64.deb>`_
 * `policykit-1 <http://snapshot.debian.org/archive/debian/20131015T214817Z/pool/main/p/policykit-1/policykit-1_0.105-4_amd64.deb>`_
 
-**Step 1:** Remove the troublesome packages. Take note of the dependencies also removed for later restoration:
+1. Remove troublesome packages
+------------------------------
+
+Take note of the dependencies also removed for later restoration:
 
 .. code-block:: bash
 
     $ sudo apt-get remove libpolkit-gobject-1-0:amd64 libpolkit-agent-1-0:amd64 libpolkit-backend-1-0:amd64 policykit-1
 
-**Step 2:** Install the downgrade packages and place them "on hold" to block ``apt-get`` from trying to upgrade again to newer (broken) versions:
+2. Install downgrade packages
+-----------------------------
+
+Place the downgraded packages on hold to block ``apt-get`` from trying to upgrade again to newer (broken) versions:
 
 .. code-block:: bash
 
@@ -42,7 +51,10 @@ Openbox launches with ``startx`` using ``exec ck-launch-session dbus-launch open
     $ echo "policykit-1 hold" | sudo dpkg --set-selections
     $ dpkg get-selections | grep "pol"  # confirm pkgs are now on hold
 
-**Step 3:** Restore dependencies... my own system as an example:
+3. Restore dependencies
+-----------------------
+
+My own system as example:
 
 .. code-block:: bash
 
