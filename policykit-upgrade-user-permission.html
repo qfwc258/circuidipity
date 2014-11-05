@@ -26,24 +26,32 @@
 <!-- article -->
 <h1>Policykit upgrade generates user permission problems</h1>
 <div id="article">
-    <p>After a recent upgrade on my 64-bit systems running Debian Sid/Unstable and Openbox I discovered user permission problems with:</p>
+    <p>After a recent upgrade on my 64-bit systems running Debian <tt class="docutils literal">sid/unstable</tt> and <strong>Openbox</strong> I discovered user permission problems with:</p>
 <ul class="simple">
 <li><strong>nm-applet</strong> - &quot;(32) Not authorized to control networking&quot; - refusing to make new wireless connections</li>
 <li><strong>xfce4-power-manager --dump</strong> shows suspend/reboot/shutdown as disabled</li>
 </ul>
 <p>Openbox launches with <tt class="docutils literal">startx</tt> using <tt class="docutils literal">exec <span class="pre">ck-launch-session</span> <span class="pre">dbus-launch</span> <span class="pre">openbox-session</span></tt> in <tt class="docutils literal"><span class="pre">$HOME/.xinitrc</span></tt>. Online searching for fixes generates a lot of information about policykit, consolekit, and systemd but the current problems narrowed down to the most recent upgrade of polkit-related packages in Debian.</p>
 <p><strong>(Temporary) Fix:</strong> Downgrade the problematic packages from versions <tt class="docutils literal"><span class="pre">0.105-5</span></tt> to <tt class="docutils literal"><span class="pre">0.105-4</span></tt>.</p>
-<p><strong>Step 0:</strong> Removing the current polkit packages will also remove a number of related packages including network-manager and break the net connection. Previous good <tt class="docutils literal"><span class="pre">0.105-4</span></tt> versions of the affected packages were still available in <tt class="docutils literal">/var/cache/apt/archives</tt>... otherwise download packages from <a class="reference external" href="http://snapshot.debian.org/">snapshot.debian.org</a>. For 64-bit amd64:</p>
+<div class="section" id="downgrade">
+<h2>0. Downgrade</h2>
+<p>Removing the current polkit packages will also remove a number of related packages including network-manager and break the net connection. Previous good <tt class="docutils literal"><span class="pre">0.105-4</span></tt> versions of the affected packages were still available in <tt class="docutils literal">/var/cache/apt/archives</tt>... otherwise download packages from <a class="reference external" href="http://snapshot.debian.org/">snapshot.debian.org</a>. For 64-bit amd64:</p>
 <ul class="simple">
 <li><a class="reference external" href="http://snapshot.debian.org/archive/debian/20131015T214817Z/pool/main/p/policykit-1/libpolkit-gobject-1-0_0.105-4_amd64.deb">libpolkit-gobject-1-0:amd64</a></li>
 <li><a class="reference external" href="http://snapshot.debian.org/archive/debian/20131015T214817Z/pool/main/p/policykit-1/libpolkit-agent-1-0_0.105-4_amd64.deb">libpolkit-agent-1-0:amd64</a></li>
 <li><a class="reference external" href="http://snapshot.debian.org/archive/debian/20131015T214817Z/pool/main/p/policykit-1/libpolkit-backend-1-0_0.105-4_amd64.deb">libpolkit-backend-1-0:amd64</a></li>
 <li><a class="reference external" href="http://snapshot.debian.org/archive/debian/20131015T214817Z/pool/main/p/policykit-1/policykit-1_0.105-4_amd64.deb">policykit-1</a></li>
 </ul>
-<p><strong>Step 1:</strong> Remove the troublesome packages. Take note of the dependencies also removed for later restoration:</p>
+</div>
+<div class="section" id="remove-troublesome-packages">
+<h2>1. Remove troublesome packages</h2>
+<p>Take note of the dependencies also removed for later restoration:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get remove libpolkit-gobject-1-0:amd64 libpolkit-agent-1-0:amd64 libpolkit-backend-1-0:amd64 policykit-1
 </pre></div>
-<p><strong>Step 2:</strong> Install the downgrade packages and place them &quot;on hold&quot; to block <tt class="docutils literal"><span class="pre">apt-get</span></tt> from trying to upgrade again to newer (broken) versions:</p>
+</div>
+<div class="section" id="install-downgrade-packages">
+<h2>2. Install downgrade packages</h2>
+<p>Place the downgraded packages on hold to block <tt class="docutils literal"><span class="pre">apt-get</span></tt> from trying to upgrade again to newer (broken) versions:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo dpkg -i libpolkit-gobject-1-0_0.105-4_amd64.deb
 <span class="nv">$ </span>sudo dpkg -i libpolkit-agent-1-0_0.105-4_amd64.deb
 <span class="nv">$ </span>sudo dpkg -i libpolkit-backend-1-0_0.105-4_amd64.deb
@@ -54,11 +62,15 @@
 <span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;policykit-1 hold&quot;</span> | sudo dpkg --set-selections
 <span class="nv">$ </span>dpkg get-selections | grep <span class="s2">&quot;pol&quot;</span>  <span class="c"># confirm pkgs are now on hold</span>
 </pre></div>
-<p><strong>Step 3:</strong> Restore dependencies... my own system as an example:</p>
+</div>
+<div class="section" id="restore-dependencies">
+<h2>3. Restore dependencies</h2>
+<p>My own system as example:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install accountsservice colord consolekit cups-pk-helper gnome-control-center network-manager-gnome <span class="se">\</span>
 packagekit packagekit-tools policykit-1-gnome upower xfce4-power-manager
 </pre></div>
 <p>Source: <a class="reference external" href="http://forums.debian.net/viewtopic.php?f=5&amp;t=114412">UPower Suspend/Hibernate: not authorized</a></p>
+</div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
