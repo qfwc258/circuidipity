@@ -35,187 +35,22 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 
 <!-- latest post -->
 <div id="latestpost">
-        <p class="published"> Sunday 02 November 2014</p>
-        <h1><a href="http://www.circuidipity.com/lubuntu-trusty-hacks.html">16 small hacks after installing Lubuntu 14.04</a></h1>
-        <img alt="Lubuntu" class="align-right" src="images/lubuntu_logo.png" style="width: 150px; height: 150px;" />
-<p>The combination of <a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html">Ubuntu</a>  plus the <a class="reference external" href="http://www.circuidipity.com/tag-lxde.html">LXDE</a> desktop equals the lightweight and cheerful <a class="reference external" href="http://www.circuidipity.com/tag-lubuntu.html">Lubuntu</a>. Its loosely coupled components create a friendly environment for swapping out bits and customizing the interface, and ongoing development of the next-generation <a class="reference external" href="http://lxqt.org/">LXQt</a> looks promising!</p>
-<p>Here are a few small hacks I like to do to make a great OS even better. Modifications are made on a <a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html">fresh install of Lubuntu 14.04</a>, which is a <em>Long Term Support</em> (LTS) release (till April 2017).</p>
-<div class="section" id="let-s-go">
-<h2>Let's go!</h2>
-<div class="section" id="update-kernel">
-<h3>0. Update kernel</h3>
-<p>Lubuntu installs the <strong>3.13</strong> Linux kernel which may have incomplete hardware support for newer devices like the <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Acer C720 Chromebook</a>.</p>
-<p><strong>Fix:</strong> Download and install a more recent kernel from <a class="reference external" href="https://wiki.ubuntu.com/Kernel/MainlineBuilds">Ubuntu MainlineBuilds</a>. An example using the <strong>3.17</strong> kernel:</p>
-<div class="highlight"><pre><span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-headers-3.17.1-031701-generic_3.17.1-031701.201410150735_amd64.deb
-<span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-headers-3.17.1-031701_3.17.1-031701.201410150735_all.deb
-<span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-image-3.17.1-031701-generic_3.17.1-031701.201410150735_amd64.deb
-<span class="nv">$ </span>sudo dpkg -i linux*.deb
-</pre></div>
-<p>... and reboot.</p>
-</div>
-<div class="section" id="screen-lock">
-<h3>1. Screen lock</h3>
-<p>The <strong>light-locker</strong> screen utility locks the screen when the system has been idle for several minutes regardless of user-defined preferences.</p>
-<p><strong>Fix:</strong> Disable system-wide screen locking:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.bak
-</pre></div>
-<p>... and configure per-user settings in <tt class="docutils literal"><span class="pre">Preferences-&gt;Light</span> Locker Settings</tt>, which are saved to <tt class="docutils literal"><span class="pre">~/.config/autostart/light-locker.desktop</span></tt>.</p>
-<p>Sample <tt class="docutils literal">Exec</tt> line that locks screen when system-suspend is activated:</p>
-<div class="highlight"><pre><span class="nv">Exec</span><span class="o">=</span>light-locker --lock-after-screensaver<span class="o">=</span>0 --lock-on-suspend --no-late-locking
-</pre></div>
-<p>Source: <a class="reference external" href="http://askubuntu.com/questions/502942/lubuntu-enforces-screen-lock">Lubuntu enforces screen lock</a></p>
-</div>
-<div class="section" id="editor">
-<h3>2. Editor</h3>
-<p>Install full-version of <strong>vim</strong> text editor and make it the default system editor:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install vim tmux
-<span class="nv">$ </span>sudo update-alternatives --config editor
-There are 4 choices <span class="k">for </span>the alternative editor <span class="o">(</span>providing /usr/bin/editor<span class="o">)</span>.
-
-  Selection    Path                Priority   Status
-------------------------------------------------------------
-  0            /bin/nano            40        auto mode
-  1            /bin/ed             -100       manual mode
-  2            /bin/nano            40        manual mode
-* 3            /usr/bin/vim.basic   30        manual mode
-  4            /usr/bin/vim.tiny    10        manual mode
-
-Press enter to keep the current choice<span class="o">[</span>*<span class="o">]</span>, or <span class="nb">type </span>selection number:
-</pre></div>
-</div>
-<div class="section" id="terminal">
-<h3>3. Terminal</h3>
-<p>Substitute lxterminal with <strong>rxvt-unicode</strong> + <a class="reference external" href="http://www.circuidipity.com/tmux.html">tmux</a> terminal multi-plexer and make <strong>urxvt</strong> the default terminal:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install rxvt-unicode fonts-droid
-<span class="nv">$ </span>sudo update-alternatives --config x-terminal-emulator
-</pre></div>
-<p>Create <tt class="docutils literal"><span class="pre">$HOME/.Xresources</span></tt> and set terminal options for fonts, colours, etc.</p>
-<p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.Xresources">.Xresources (github.com/vonbrownie)</a></p>
-</div>
-<div class="section" id="ssh-keys">
-<h3>4. SSH keys</h3>
-<p>See <a class="reference external" href="http://www.circuidipity.com/pingparade2.html">Ping Parade #2 -- Keys</a> for configuring OpenSSH and generating SSH keys for a Lubuntu installation.</p>
-</div>
-<div class="section" id="media-player">
-<h3>5. Media player</h3>
-<p>Install multimedia codecs and the awesome <strong>vlc</strong> media player:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install ubuntu-restricted-extras vlc
-</pre></div>
-</div>
-<div class="section" id="java-runtime-environment">
-<h3>6. Java Runtime Environment</h3>
-<p>Install a <strong>JRE</strong> (default is <tt class="docutils literal"><span class="pre">openjdk-7-jre</span></tt>):</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install default-jre
-</pre></div>
-</div>
-<div class="section" id="home-bin">
-<h3>7. $HOME/bin</h3>
-<p>Create a directory to hold personal scripts that will be added to <tt class="docutils literal">$PATH</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>mkdir ~/bin
-</pre></div>
-</div>
-<div class="section" id="applications-menu">
-<h3>8. Applications menu</h3>
-<p><strong>Dmenu</strong> is a menu that can be activated by keyboard shortcut and dynamically narrow the choice of available applications as you type. Part of the <strong>suckless-tools</strong> package:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install suckless-tools
-</pre></div>
-<p>Create <tt class="docutils literal"><span class="pre">dmenu-run.sh</span></tt> shell script to generate a menu. Example:</p>
-<div class="highlight"><pre><span class="c">#!/bin/bash</span>
-dmenu_run -b -i -fn <span class="s1">&#39;10x20&#39;</span> <span class="se">\</span>
-    -nb <span class="s1">&#39;#000000&#39;</span> -nf <span class="s1">&#39;#ffffff&#39;</span> -sb <span class="s1">&#39;#d64937&#39;</span> -sf <span class="s1">&#39;#000000&#39;</span>
-</pre></div>
-<p>... and place in <tt class="docutils literal">$HOME/bin</tt>.</p>
-<p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dmenu-run.sh">dmenu-run.sh (github.com/vonbrownie)</a></p>
-</div>
-<div class="section" id="keyboard-shortcuts">
-<h3>9. Keyboard shortcuts</h3>
-<p>Create shortcuts in <tt class="docutils literal"><span class="pre">$HOME/.config/openbox/lubuntu-rc.xml</span></tt>. Example for launching <tt class="docutils literal">dmenu</tt> with key combo <tt class="docutils literal"><span class="pre">ALT-A</span></tt>:</p>
-<div class="highlight"><pre>&lt;!-- Keybindings <span class="k">for </span>running Run menu --&gt;
-&lt;keybind <span class="nv">key</span><span class="o">=</span><span class="s2">&quot;A-a&quot;</span>&gt;
-  &lt;action <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Execute&quot;</span>&gt;
-    &lt;<span class="nb">command</span>&gt;dmenu-run.sh&lt;/command&gt;
-  &lt;/action&gt;
-&lt;/keybind&gt;
-</pre></div>
-<p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-rc.xml">lubuntu-rc.xml (github.com/vonbrownie)</a></p>
-</div>
-<div class="section" id="custom-application-launchers">
-<h3>10. Custom application launchers</h3>
-<p>Create <tt class="docutils literal">*.desktop</tt> files with custom options to launch applications. Make a custom <tt class="docutils literal">*.desktop</tt> system-wide location:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /usr/local/share/applications
-</pre></div>
-<p>A sample <tt class="docutils literal"><span class="pre">rxvt-unicode-custom.desktop</span></tt> launcher contains:</p>
-<div class="highlight"><pre><span class="o">[</span>Desktop Entry<span class="o">]</span>
-<span class="nv">Name</span><span class="o">=</span>Urxvt
-<span class="nv">GenericName</span><span class="o">=</span>Terminal
-<span class="nv">Comment</span><span class="o">=</span>Use the <span class="nb">command </span>line
-<span class="nv">TryExec</span><span class="o">=</span>urxvt
-<span class="nv">Exec</span><span class="o">=</span>urxvt
-<span class="nv">Icon</span><span class="o">=</span>xterm-color
-<span class="nv">Type</span><span class="o">=</span>Application
-<span class="nv">Categories</span><span class="o">=</span>Utility;TerminalEmulator;
-</pre></div>
-</div>
-<div class="section" id="terminate-frozen-applications">
-<h3>11. Terminate frozen applications</h3>
-<p><strong>Xkill</strong> is a utility for terminating misbehaving X applications. When activated it displays a crosshair cursor that can be maneuvered in place and a click kills the client app that lies beneath.</p>
-<p>A sample <tt class="docutils literal"><span class="pre">/usr/local/share/applications/xkill-custom.desktop</span></tt> launcher:</p>
-<div class="highlight"><pre><span class="o">[</span>Desktop Entry<span class="o">]</span>
-<span class="nv">Name</span><span class="o">=</span>Xkill misbehaving apps
-<span class="nv">Comment</span><span class="o">=</span>KILL KILL KILL
-<span class="nv">Exec</span><span class="o">=</span>xkill
-<span class="nv">Icon</span><span class="o">=</span>system-error
-<span class="nv">Type</span><span class="o">=</span>Application
-<span class="nv">Categories</span><span class="o">=</span>System;Utility;
-</pre></div>
-<p>Save file and the item will appear under Lubuntu's <tt class="docutils literal"><span class="pre">Menu-&gt;System</span> Tools</tt>.</p>
-</div>
-<div class="section" id="favourites-panel">
-<h3>12. Favourites panel</h3>
-<p>Right-click on the LXDE panel and select <tt class="docutils literal">Create new panel</tt> to create an extra panel to hold favourite application launchers. Panel configs are store in <tt class="docutils literal"><span class="pre">$HOME/.config/lxpanel/Lubuntu/panels</span></tt>.</p>
-</div>
-<div class="section" id="customize-the-theme">
-<h3>13. Customize the theme</h3>
-<img alt="Lubuntu desktop" class="align-center" src="images/screenshot/lubuntu-1404-numix-desktop.png" style="width: 900px; height: 506px;" />
-<p>Choose an alternative theme for the Lubuntu desktop. I like <a class="reference external" href="https://numixproject.org/">Numix</a>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo add-apt-repository ppa:numix/ppa
-<span class="nv">$ </span>sudo apt-get update
-<span class="nv">$ </span>sudo apt-get install numix-gtk-theme numix-icon-theme numix-icon-theme-circle
-</pre></div>
-<p>Select the new theme in <tt class="docutils literal"><span class="pre">Menu-&gt;Preferences-&gt;Customize</span> Look and Feel</tt> <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
-</div>
-<div class="section" id="customize-login">
-<h3>14. Customize login</h3>
-<p>Login window is managed by <strong>lightdm-gtk-greeter</strong>. To set a new background image for the login window:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /usr/local/share/wallpapers
-<span class="nv">$ </span>sudo cp my_new_login_image.jpg /usr/local/share/wallpapers
-</pre></div>
-<p>Edit <tt class="docutils literal"><span class="pre">/etc/lightdm/lightdm-gtk-greeter.conf</span></tt> and configure the new background:</p>
-<div class="highlight"><pre><span class="nv">background</span><span class="o">=</span>/usr/local/share/wallpapers/my_new_login_image.jpg
-</pre></div>
-</div>
-<div class="section" id="auto-mount-external-drives-at-startup">
-<h3>15. Auto-mount external drives at startup</h3>
-<p>See <a class="reference external" href="http://www.circuidipity.com/20141031.html">Add USB storage to Chromebooks</a> for an example scenario.</p>
-<p>Happy hacking!</p>
-</div>
-<div class="section" id="notes">
-<h3>Notes</h3>
-<table class="docutils footnote" frame="void" id="id2" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>For application buttons in the panel to display properly with Numix, right-click on the Taskbar, select <tt class="docutils literal">Taskbar (Window List) Settings</tt>, and enable <tt class="docutils literal">Flat buttons</tt> option.</td></tr>
-</tbody>
-</table>
-</div>
-</div>
+        <p class="published"> Thursday 06 November 2014</p>
+        <h1><a href="http://www.circuidipity.com/20141106.html">Links of interest</a></h1>
+        <ul class="simple">
+<li>Canadian crowd-funded mission to <a class="reference external" href="https://www.indiegogo.com/projects/northern-light-mission-to-mars#home">land a &quot;beaver&quot; on Mars in 2018</a></li>
+<li><a class="reference external" href="https://www.google.com/culturalinstitute/exhibit/bletchley-park-home-of-the-codebreakers/wRANFg9s?projectId=historic-moments">Home of the codebreakers</a></li>
+<li>There's a difference between <a class="reference external" href="http://sethgodin.typepad.com/seths_blog/2014/11/but-not-people-like-you.html">&quot;people like you&quot; and &quot;you&quot;</a></li>
+<li><a class="reference external" href="http://www.centauri-dreams.org/?p=31887">CubeSats and solar sails</a></li>
+<li>Mysterious <a class="reference external" href="http://www.fastcoexist.com/3036887/out-of-this-world-the-mysterious-mental-side-effects-of-traveling-into-space">mental side-effects of traveling into space</a></li>
+</ul>
 
         <!-- Nav links to previous|next article --> 
         <div id="navmenu">
             <hr />
             <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-                <a href="http://www.circuidipity.com/20141031.html">
-                Add USB storage to Chromebooks</a></p>
+                <a href="http://www.circuidipity.com/lubuntu-trusty-hacks.html">
+                16 small hacks after installing Lubuntu 14.04</a></p>
         </div>
 </div>
 

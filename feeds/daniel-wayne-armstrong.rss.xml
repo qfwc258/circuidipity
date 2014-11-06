@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 02 Nov 2014 13:31:00 -0500</lastBuildDate><item><title>16 small hacks after installing Lubuntu 14.04</title><link>http://www.circuidipity.com/lubuntu-trusty-hacks.html</link><description>&lt;img alt="Lubuntu" class="align-right" src="images/lubuntu_logo.png" style="width: 150px; height: 150px;" /&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 06 Nov 2014 00:31:00 -0500</lastBuildDate><item><title>Links of interest</title><link>http://www.circuidipity.com/20141106.html</link><description>&lt;ul class="simple"&gt;
+&lt;li&gt;Canadian crowd-funded mission to &lt;a class="reference external" href="https://www.indiegogo.com/projects/northern-light-mission-to-mars#home"&gt;land a &amp;quot;beaver&amp;quot; on Mars in 2018&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://www.google.com/culturalinstitute/exhibit/bletchley-park-home-of-the-codebreakers/wRANFg9s?projectId=historic-moments"&gt;Home of the codebreakers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;There's a difference between &lt;a class="reference external" href="http://sethgodin.typepad.com/seths_blog/2014/11/but-not-people-like-you.html"&gt;&amp;quot;people like you&amp;quot; and &amp;quot;you&amp;quot;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.centauri-dreams.org/?p=31887"&gt;CubeSats and solar sails&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Mysterious &lt;a class="reference external" href="http://www.fastcoexist.com/3036887/out-of-this-world-the-mysterious-mental-side-effects-of-traveling-into-space"&gt;mental side-effects of traveling into space&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Thu, 06 Nov 2014 00:31:00 -0500</pubDate><guid>tag:www.circuidipity.com,2014-11-06:20141106.html</guid><category>links</category></item><item><title>16 small hacks after installing Lubuntu 14.04</title><link>http://www.circuidipity.com/lubuntu-trusty-hacks.html</link><description>&lt;img alt="Lubuntu" class="align-right" src="images/lubuntu_logo.png" style="width: 150px; height: 150px;" /&gt;
 &lt;p&gt;The combination of &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt;  plus the &lt;a class="reference external" href="http://www.circuidipity.com/tag-lxde.html"&gt;LXDE&lt;/a&gt; desktop equals the lightweight and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/tag-lubuntu.html"&gt;Lubuntu&lt;/a&gt;. Its loosely coupled components create a friendly environment for swapping out bits and customizing the interface, and ongoing development of the next-generation &lt;a class="reference external" href="http://lxqt.org/"&gt;LXQt&lt;/a&gt; looks promising!&lt;/p&gt;
 &lt;p&gt;Here are a few small hacks I like to do to make a great OS even better. Modifications are made on a &lt;a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html"&gt;fresh install of Lubuntu 14.04&lt;/a&gt;, which is a &lt;em&gt;Long Term Support&lt;/em&gt; (LTS) release (till April 2017).&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
@@ -724,46 +731,4 @@ initrd &lt;span class="o"&gt;(&lt;/span&gt;loop&lt;span class="o"&gt;)&lt;/span&
 &lt;li&gt;Hong Kongers &lt;a class="reference external" href="http://www.nytimes.com/2014/10/08/world/asia/hong-kong-people-looking-in-mirror-see-fading-chinese-identity.html"&gt;look to their city, not China, for identity&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&amp;quot;Hardware hacking hasn't become a hot new thing in China because &lt;a class="reference external" href="https://ello.co/cshirky/post/FQKBh4QMjfaqBM1C4XYnjw"&gt;it never stopped being a regular old thing...&amp;quot;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Thu, 09 Oct 2014 10:03:00 -0400</pubDate><guid>tag:www.circuidipity.com,2014-10-09:20141009.html</guid><category>links</category></item><item><title>Restore stock Android on Nexus 7</title><link>http://www.circuidipity.com/20141008.html</link><description>&lt;p&gt;&lt;strong&gt;Device:&lt;/strong&gt; Nexus 7 2012 (model) -&amp;gt; grouper (device) -&amp;gt; nakasi (device-appropriate Google ROMs)&lt;/p&gt;
-&lt;p&gt;After experimenting a bit with &lt;a class="reference external" href="http://www.cyanogenmod.org/"&gt;CyanogenMod&lt;/a&gt;, my first attempt to restore stock Android to my tablet hit a snag when the flashing procedure stumbled over the included bootloader file in Google's tarball: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;bootloader-grouper-4.23.img&lt;/span&gt;&lt;/tt&gt; packaged in the v4.4.4 &lt;tt class="docutils literal"&gt;KTU84P&lt;/tt&gt; factory image. &lt;a class="reference external" href="http://forum.xda-developers.com/showthread.php?t=2417097&amp;amp;page=7"&gt;The solution&lt;/a&gt; was to download a bootloader extracted from an earlier image and swap out the buggy version in the current image.&lt;/p&gt;
-&lt;div class="section" id="to-successfully-flash-a-factory-image-under-linux"&gt;
-&lt;h2&gt;To successfully flash a factory image under Linux:&lt;/h2&gt;
-&lt;div class="section" id="backup"&gt;
-&lt;h3&gt;0. Backup&lt;/h3&gt;
-&lt;p&gt;This procedure &lt;strong&gt;erases all data&lt;/strong&gt; on the tablet. Google settings will be restored during post-install setup but anything of importance stored in device memory will require backup.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="tools"&gt;
-&lt;h3&gt;1. Tools&lt;/h3&gt;
-&lt;p&gt;Verify that &lt;a class="reference external" href="http://www.circuidipity.com/mtp.html"&gt;MTP&lt;/a&gt; and &lt;a class="reference external" href="http://www.circuidipity.com/adb-fastboot-android.html"&gt;adb + fastboot&lt;/a&gt; are installed.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="image"&gt;
-&lt;h3&gt;2. Image&lt;/h3&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://developers.google.com/android/nexus/images"&gt;Download the latest device-specific factory image&lt;/a&gt; and unpack the tarball. Factory images for my Nexus 7 are code-named &lt;strong&gt;nakasi&lt;/strong&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="replace-bootloader"&gt;
-&lt;h3&gt;3. Replace bootloader&lt;/h3&gt;
-&lt;p&gt;Work around the buggy bootloader by &lt;a class="reference external" href="http://forum.xda-developers.com/showpost.php?p=44903559&amp;amp;postcount=1"&gt;downloading and replacing it with this alternate file&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="fastboot"&gt;
-&lt;h3&gt;4. Fastboot&lt;/h3&gt;
-&lt;p&gt;Connect the tablet. Start adb and restart the tablet in fastboot mode:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;adb start-server
-&lt;span class="nv"&gt;$ &lt;/span&gt;adb reboot bootloader
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="flash-image"&gt;
-&lt;h3&gt;5. Flash image&lt;/h3&gt;
-&lt;p&gt;Navigate to the factory image folder and run:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;./flash-all.sh
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;After flashing is complete the device will reboot into its default factory state.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="helpful-resources"&gt;
-&lt;h3&gt;6. Helpful Resources&lt;/h3&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://developers.google.com/android/nexus/images"&gt;Factory images for Nexus devices&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://forum.xda-developers.com/showthread.php?t=2417097"&gt;Image bootloader problem&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 08 Oct 2014 17:43:00 -0400</pubDate><guid>tag:www.circuidipity.com,2014-10-08:20141008.html</guid><category>android</category><category>linux</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Thu, 09 Oct 2014 10:03:00 -0400</pubDate><guid>tag:www.circuidipity.com,2014-10-09:20141009.html</guid><category>links</category></item></channel></rss>
