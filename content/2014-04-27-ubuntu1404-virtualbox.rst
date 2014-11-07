@@ -28,11 +28,11 @@ Virtualbox kernel modules are built via **Dynamic Kernel Module Support** (`DKMS
     vboxnetflt             23571  0 
     vboxdrv               190057  4 vboxnetflt,vboxnetadp,vboxpci
 
-I add my USERNAME to the ``vboxusers`` group:
+I add ``USERNAME`` to the ``vboxusers`` group:
 
 .. code-block:: bash
 
-    $ sudo adduser YOUR_USERNAME vboxusers
+    $ sudo adduser USERNAME vboxusers
 
 1. Create the Ubuntu GUEST
 ==========================
