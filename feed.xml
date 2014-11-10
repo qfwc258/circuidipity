@@ -1,12 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-11-06T00:31:00-05:00</updated><entry><title>Links of interest</title><link href="http://www.circuidipity.com/20141106.html" rel="alternate"></link><updated>2014-11-06T00:31:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-06:20141106.html</id><summary type="html">&lt;ul class="simple"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-11-10T15:17:00-05:00</updated><entry><title>Dual display configuration in Lubuntu</title><link href="http://www.circuidipity.com/20141110.html" rel="alternate"></link><updated>2014-11-10T15:11:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-10:20141110.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Scenario:&lt;/strong&gt; I connect my &lt;strong&gt;Thinkpad X201&lt;/strong&gt; running Lubuntu and &lt;strong&gt;LXDE&lt;/strong&gt; (resolution: &lt;tt class="docutils literal"&gt;1280x800&lt;/tt&gt;) to an external display (resolution: &lt;tt class="docutils literal"&gt;1920x1200&lt;/tt&gt;) to create: 1) a combined desktop; 2) with &lt;strong&gt;lxpanel&lt;/strong&gt; top aligned and stretched across both displays; 3) and a different wallpaper on each display.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;div class="section" id="xrandr"&gt;
+&lt;h3&gt;0. Xrandr&lt;/h3&gt;
+&lt;p&gt;Output information about connected display devices and supported resolutions using &lt;strong&gt;Xrandr&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xrandr
+Screen 0: minimum 320 x 200, current 3200 x 1200, maximum 32767 x 32767
+LVDS1 connected 1280x800+0+0 &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt; 261mm x 163mm
+    1280x800       60.0*+   50.1
+    1024x768       60.0
+    800x600        60.3     56.2
+    640x480        59.9
+VGA1 connected primary 1920x1200+1280+0 &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt; 593mm x 371mm
+    1920x1200      60.0*+
+    1680x1050      60.0
+    1400x1050      60.0
+    1280x1024      75.0     60.0
+    1440x900       59.9
+    1280x960       60.0
+    1152x864       75.0
+    1024x768       75.1     70.1     60.0
+    832x624        74.6
+    800x600        72.2     75.0     60.3     56.2
+    640x480        75.0     72.8     66.7     60.0
+    720x400        70.1
+HDMI1 disconnected &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt;
+DP1 disconnected &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt;
+VIRTUAL1 disconnected &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="dualdisplay"&gt;
+&lt;h3&gt;1. dualDisplay&lt;/h3&gt;
+&lt;p&gt;Create a &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dualDisplay"&gt;dualDisplay&lt;/a&gt; shell script to generate a combined desktop (with external monitor set as primary display and positioned to the right of laptop display):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="nv"&gt;first_dsply&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;xrandr | grep &lt;span class="s2"&gt;&amp;quot; connected&amp;quot;&lt;/span&gt; | awk &lt;span class="s1"&gt;&amp;#39;FNR == 1 {print $1}&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;second_dsply&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;xrandr | grep &lt;span class="s2"&gt;&amp;quot; connected&amp;quot;&lt;/span&gt; | awk &lt;span class="s1"&gt;&amp;#39;FNR == 2 {print $1}&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;conf_dsply&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;xrandr --output $first_dsply --auto --output $second_dsply --primary&amp;quot;&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -n &lt;span class="nv"&gt;$second_dsply&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;
+&lt;span class="k"&gt;then&lt;/span&gt;
+    &lt;span class="nv"&gt;$conf_dsply&lt;/span&gt; --auto --right-of &lt;span class="nv"&gt;$first_dsply&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Save the script to &lt;tt class="docutils literal"&gt;~/bin&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;/usr/local/bin&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;chmod 755 dualDisplay&lt;/tt&gt; to make it executable.&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dualDisplay"&gt;dualDisplay&lt;/a&gt; and its companion &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/Library.sh"&gt;Library.sh&lt;/a&gt; (github.com/vonbrownie)&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="autostart"&gt;
+&lt;h3&gt;2. Autostart&lt;/h3&gt;
+&lt;p&gt;Add &lt;tt class="docutils literal"&gt;dualDisplay&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/lxsession/Lubuntu/autostart&lt;/span&gt;&lt;/tt&gt; to run script at login.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="wallpaper"&gt;
+&lt;h3&gt;3. Wallpaper&lt;/h3&gt;
+&lt;p&gt;Desktop wallpapers are controlled by &lt;strong&gt;PCManFM&lt;/strong&gt; by default in Lubuntu. To configure a different wallpaper for each display... navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/pcmanfm/lubuntu&lt;/span&gt;&lt;/tt&gt; and modify the &lt;tt class="docutils literal"&gt;wallpaper&lt;/tt&gt; setting in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;desktop-items-*.conf&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;laptop display is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;desktop-items-0.conf&lt;/span&gt;&lt;/tt&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;wallpaper&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/path/to/laptop-wallpaper.jpg
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;external display is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;desktop-items-1.conf&lt;/span&gt;&lt;/tt&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;wallpaper0&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/path/to/external-wallpaper.jpg
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Save all changes and logout. LXDE will now auto-detect at login if a second display is attached and make the necessary adjustments.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="lxde"></category><category term="lubuntu"></category><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>Links of interest</title><link href="http://www.circuidipity.com/20141106.html" rel="alternate"></link><updated>2014-11-06T00:31:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-06:20141106.html</id><summary type="html">&lt;ul class="simple"&gt;
 &lt;li&gt;Canadian crowd-funded mission to &lt;a class="reference external" href="https://www.indiegogo.com/projects/northern-light-mission-to-mars#home"&gt;land a &amp;quot;beaver&amp;quot; on Mars in 2018&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://www.google.com/culturalinstitute/exhibit/bletchley-park-home-of-the-codebreakers/wRANFg9s?projectId=historic-moments"&gt;Home of the codebreakers&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;There's a difference between &lt;a class="reference external" href="http://sethgodin.typepad.com/seths_blog/2014/11/but-not-people-like-you.html"&gt;&amp;quot;people like you&amp;quot; and &amp;quot;you&amp;quot;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.centauri-dreams.org/?p=31887"&gt;CubeSats and solar sails&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Mysterious &lt;a class="reference external" href="http://www.fastcoexist.com/3036887/out-of-this-world-the-mysterious-mental-side-effects-of-traveling-into-space"&gt;mental side-effects of traveling into space&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</summary><category term="links"></category></entry><entry><title>16 small hacks after installing Lubuntu 14.04</title><link href="http://www.circuidipity.com/lubuntu-trusty-hacks.html" rel="alternate"></link><updated>2014-11-02T00:11:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-02:lubuntu-trusty-hacks.html</id><summary type="html">&lt;img alt="Lubuntu" class="align-right" src="images/lubuntu_logo.png" style="width: 150px; height: 150px;" /&gt;
+</summary><category term="links"></category></entry><entry><title>17 small hacks after installing Lubuntu 14.04</title><link href="http://www.circuidipity.com/lubuntu-trusty-hacks.html" rel="alternate"></link><updated>2014-11-10T15:17:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-02:lubuntu-trusty-hacks.html</id><summary type="html">&lt;img alt="Lubuntu" class="align-right" src="images/lubuntu_logo.png" style="width: 150px; height: 150px;" /&gt;
 &lt;p&gt;The combination of &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt;  plus the &lt;a class="reference external" href="http://www.circuidipity.com/tag-lxde.html"&gt;LXDE&lt;/a&gt; desktop equals the lightweight and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/tag-lubuntu.html"&gt;Lubuntu&lt;/a&gt;. Its loosely coupled components create a friendly environment for swapping out bits and customizing the interface, and ongoing development of the next-generation &lt;a class="reference external" href="http://lxqt.org/"&gt;LXQt&lt;/a&gt; looks promising!&lt;/p&gt;
 &lt;p&gt;Here are a few small hacks I like to do to make a great OS even better. Modifications are made on a &lt;a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html"&gt;fresh install of Lubuntu 14.04&lt;/a&gt;, which is a &lt;em&gt;Long Term Support&lt;/em&gt; (LTS) release (till April 2017).&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
@@ -153,8 +221,12 @@ dmenu_run -b -i -fn &lt;span class="s1"&gt;&amp;#39;10x20&amp;#39;&lt;/span&gt; 
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Select the new theme in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Menu-&amp;gt;Preferences-&amp;gt;Customize&lt;/span&gt; Look and Feel&lt;/tt&gt; &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
+&lt;div class="section" id="dual-display"&gt;
+&lt;h3&gt;14. Dual display&lt;/h3&gt;
+&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/20141110.html"&gt;Dual display configuration in Lubuntu&lt;/a&gt; for configuring LXDE to auto-detect at login if a second display is attached and make the necessary adjustments.&lt;/p&gt;
+&lt;/div&gt;
 &lt;div class="section" id="customize-login"&gt;
-&lt;h3&gt;14. Customize login&lt;/h3&gt;
+&lt;h3&gt;15. Customize login&lt;/h3&gt;
 &lt;p&gt;Login window is managed by &lt;strong&gt;lightdm-gtk-greeter&lt;/strong&gt;. To set a new background image for the login window:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /usr/local/share/wallpapers
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo cp my_new_login_image.jpg /usr/local/share/wallpapers
@@ -164,7 +236,7 @@ dmenu_run -b -i -fn &lt;span class="s1"&gt;&amp;#39;10x20&amp;#39;&lt;/span&gt; 
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="auto-mount-external-drives-at-startup"&gt;
-&lt;h3&gt;15. Auto-mount external drives at startup&lt;/h3&gt;
+&lt;h3&gt;16. Auto-mount external drives at startup&lt;/h3&gt;
 &lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/20141031.html"&gt;Add USB storage to Chromebooks&lt;/a&gt; for an example scenario.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
@@ -720,15 +792,5 @@ initrd &lt;span class="o"&gt;(&lt;/span&gt;loop&lt;span class="o"&gt;)&lt;/span&
 &lt;li&gt;How crowdfunding changed &lt;a class="reference external" href="https://www.techinasia.com/play-crowd-crowdfunding-changed-status-quo-chinas-hardware-startups/"&gt;China's hardware startups&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;The &lt;a class="reference external" href="http://blogs.hbr.org/2014/10/the-dark-side-of-efficient-markets/"&gt;dark side of efficient markets&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Xiaomi, the four-year-old smartphone manufacturer, &lt;a class="reference external" href="http://blogs.hbr.org/2014/10/xiaomi-not-apple-is-changing-the-smartphone-industry/"&gt;&amp;quot;thinks different&amp;quot; and rockets ahead in China&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</summary><category term="links"></category></entry><entry><title>Links of interest</title><link href="http://www.circuidipity.com/20141009.html" rel="alternate"></link><updated>2014-10-09T10:03:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-10-09:20141009.html</id><summary type="html">&lt;ul class="simple"&gt;
-&lt;li&gt;How &lt;a class="reference external" href="http://www.ted.com/talks/kevin_slavin_how_algorithms_shape_our_world?language=en"&gt;algorithms shape our world&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Sam Harris on &lt;a class="reference external" href="http://youtu.be/Iwac6Uk-zyk"&gt;separating mindfulness from its religious origins&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Is your &lt;a class="reference external" href="http://www.precisionnutrition.com/carbohydrate-tolerance-genes"&gt;ability to eat carbs determined by your genes?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;What the future of robots &lt;a class="reference external" href="http://www.brainpickings.org/2014/10/06/diane-ackerman-human-age/"&gt;reveals about the human condition&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;New artificial materials &lt;a class="reference external" href="http://singularityhub.com/2014/10/06/new-artificial-materials-open-possibilities-for-manned-space-exploration/"&gt;open possibilities for manned space exploration&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Disruptive technologies that could &lt;a class="reference external" href="http://peterdiamandis.com/post/99317310881/life-or-death"&gt;make medicine more affordable and accessible&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Hong Kongers &lt;a class="reference external" href="http://www.nytimes.com/2014/10/08/world/asia/hong-kong-people-looking-in-mirror-see-fading-chinese-identity.html"&gt;look to their city, not China, for identity&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&amp;quot;Hardware hacking hasn't become a hot new thing in China because &lt;a class="reference external" href="https://ello.co/cshirky/post/FQKBh4QMjfaqBM1C4XYnjw"&gt;it never stopped being a regular old thing...&amp;quot;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </summary><category term="links"></category></entry></feed>
