@@ -1,11 +1,11 @@
 =============================================
-16 small hacks after installing Lubuntu 14.04
+17 small hacks after installing Lubuntu 14.04
 =============================================
 
 :slug: lubuntu-trusty-hacks
 :template: article-project
 :tags: lubuntu, ubuntu, linux, lxde
-:modified: 2014-11-02 00:11:00
+:modified: 2014-11-10 15:17:00
 
 .. image:: images/lubuntu_logo.png
     :align: right
@@ -228,7 +228,12 @@ Choose an alternative theme for the Lubuntu desktop. I like `Numix <https://numi
 
 Select the new theme in ``Menu->Preferences->Customize Look and Feel`` [1]_.
 
-14. Customize login
+14. Dual display
+----------------
+
+See `Dual display configuration in Lubuntu <http://www.circuidipity.com/20141110.html>`_ for configuring LXDE to auto-detect at login if a second display is attached and make the necessary adjustments.
+
+15. Customize login
 -------------------
 
 Login window is managed by **lightdm-gtk-greeter**. To set a new background image for the login window:
@@ -244,7 +249,7 @@ Edit ``/etc/lightdm/lightdm-gtk-greeter.conf`` and configure the new background:
 
     background=/usr/local/share/wallpapers/my_new_login_image.jpg
 
-15. Auto-mount external drives at startup
+16. Auto-mount external drives at startup
 -----------------------------------------
 
 See `Add USB storage to Chromebooks <http://www.circuidipity.com/20141031.html>`_ for an example scenario.
