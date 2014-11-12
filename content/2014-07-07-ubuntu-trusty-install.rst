@@ -5,7 +5,7 @@ Ubuntu 14.04 Minimal Install
 :date: 2014-07-07 01:23:00
 :tags: ubuntu, lubuntu, linux
 :slug: ubuntu-trusty-install
-:modified: 2014-10-25 23:25:00
+:modified: 2014-11-11 20:15:00
 
 .. image:: images/ubuntuTrusty.png
     :alt: Ubuntu Trusty Tahr
@@ -72,7 +72,6 @@ Connect the USB stick and boot the installer:
     :width: 800px
     :height: 600px
 
-
 .. image:: images/screenshot/trustyInstall/107.png
     :alt: Mirror Country
     :align: center
@@ -85,13 +84,13 @@ Connect the USB stick and boot the installer:
     :width: 800px
     :height: 600px
 
-
 .. image:: images/screenshot/trustyInstall/109.png
     :alt: Proxy
     :align: center
     :width: 800px
     :height: 600px
 
+Contents of the Ubuntu minimal installer are now loaded into memory and the USB stick can safely be removed (recommended [2]_). 
 
 .. image:: images/screenshot/trustyInstall/110.png
     :alt: Full Name
@@ -503,3 +502,5 @@ Notes
 -----
 
 .. [1] Specifically in this instance, the Ubuntu console installer provides a random key option for the encrypted swap partition.
+
+.. [2] Partition editor may designate the USB stick as the primary (sda) storage device, which may lead to partitioning and fstab errors.
