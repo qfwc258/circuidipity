@@ -25,7 +25,7 @@
 
 <!-- article -->
 <h1>Ubuntu 14.04 Minimal Install</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Saturday 25 October 2014</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Tuesday 11 November 2014</p>
 <div id="article">
     <img alt="Ubuntu Trusty Tahr" class="align-left" src="images/ubuntuTrusty.png" style="width: 100px; height: 100px;" />
 <p><strong>Ubuntu 14.04 &quot;Trusty Tahr&quot;</strong> is a <a class="reference external" href="https://wiki.ubuntu.com/Releases">Long Term Support (LTS)</a> release of the popular Linux operating system. I use Ubuntu's <a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD">minimal install image</a> to create a <strong>lightweight, console-only base configuration</strong> that can be customized for various tasks and alternate desktops.</p>
@@ -34,7 +34,7 @@
 <h2>Let's go!</h2>
 <div class="section" id="prepare-install-media">
 <h3>0. Prepare install media</h3>
-<p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso">64-bit trusty minimal installer</a> (<a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/mini.iso">32-bit</a> for older machines) and burn to CD or <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick. An alternative (my choice) is adding the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>. Using the minimal console installer vs. the graphical installer provides more options during setup <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
+<p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso">64-bit trusty minimal installer</a> (<a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/mini.iso">32-bit</a> for older machines) and burn to CD or <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick. An alternative (my choice) is adding the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>. Using the minimal console installer vs. the graphical installer provides more options during setup <a class="footnote-reference" href="#id3" id="id1">[1]</a>.</p>
 </div>
 <div class="section" id="configure">
 <h3>1. Configure</h3>
@@ -49,6 +49,7 @@
 <img alt="Mirror Country" class="align-center" src="images/screenshot/trustyInstall/107.png" style="width: 800px; height: 600px;" />
 <img alt="Mirror archive" class="align-center" src="images/screenshot/trustyInstall/108.png" style="width: 800px; height: 600px;" />
 <img alt="Proxy" class="align-center" src="images/screenshot/trustyInstall/109.png" style="width: 800px; height: 600px;" />
+<p>Contents of the Ubuntu minimal installer are now loaded into memory and the USB stick can safely be removed (recommended <a class="footnote-reference" href="#id4" id="id2">[2]</a>).</p>
 <img alt="Full Name" class="align-center" src="images/screenshot/trustyInstall/110.png" style="width: 800px; height: 600px;" />
 <img alt="Username" class="align-center" src="images/screenshot/trustyInstall/111.png" style="width: 800px; height: 600px;" />
 <img alt="User password" class="align-center" src="images/screenshot/trustyInstall/112.png" style="width: 800px; height: 600px;" />
@@ -137,10 +138,16 @@
 </div>
 <div class="section" id="notes">
 <h3>Notes</h3>
-<table class="docutils footnote" frame="void" id="id2" rules="none">
+<table class="docutils footnote" frame="void" id="id3" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Specifically in this instance, the Ubuntu console installer provides a random key option for the encrypted swap partition.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Partition editor may designate the USB stick as the primary (sda) storage device, which may lead to partitioning and fstab errors.</td></tr>
 </tbody>
 </table>
 </div>
