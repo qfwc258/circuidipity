@@ -1,11 +1,11 @@
 =============================================
-17 small hacks after installing Lubuntu 14.04
+19 small hacks after installing Lubuntu 14.04
 =============================================
 
 :slug: lubuntu-trusty-hacks
 :template: article-project
 :tags: lubuntu, ubuntu, linux, lxde
-:modified: 2014-11-10 15:17:00
+:modified: 2014-11-12 02:46:00
 
 .. image:: images/lubuntu_logo.png
     :align: right
@@ -233,8 +233,8 @@ Select the new theme in ``Menu->Preferences->Customize Look and Feel`` [1]_.
 
 See `Dual display configuration in Lubuntu <http://www.circuidipity.com/20141110.html>`_ for configuring LXDE to auto-detect at login if a second display is attached and make the necessary adjustments.
 
-15. Customize login
--------------------
+15. Custom login wallpaper
+--------------------------
 
 Login window is managed by **lightdm-gtk-greeter**. To set a new background image for the login window:
 
@@ -253,6 +253,49 @@ Edit ``/etc/lightdm/lightdm-gtk-greeter.conf`` and configure the new background:
 -----------------------------------------
 
 See `Add USB storage to Chromebooks <http://www.circuidipity.com/20141031.html>`_ for an example scenario.
+
+17. Display GRUB Menu at boot
+-----------------------------
+
+Comment out the ``GRUB_HIDDEN*`` settings in ``/etc/default/grub``:
+
+.. code-block:: bash
+
+    #GRUB_HIDDEN_TIMEOUT=0
+    #GRUB_HIDDEN_TIMEOUT_QUIET=true
+
+Update the GRUB configuration with the new settings:
+
+.. code-block:: bash
+
+    $ sudo update-grub
+
+... and reboot.
+
+18. Custom GRUB colours and splash image
+----------------------------------------
+                                   
+Create ``/boot/grub/custom.cfg`` and set custom GRUB menu colours. Example settings: 
+      
+.. code-block:: bash
+                                                                              
+    set color_normal=yellow/black                                                       
+    set menu_color_normal=yellow/black                                                  
+    set menu_color_highlight=white/green                                                
+                                                                                    
+Pick an image for the GRUB background (see `help.ubuntu.com <https://help.ubuntu.com/community/Grub2/Displays>`_ for restrictions) and save to ``/boot/grub``. Set the new background in ``/etc/default/grub``:
+
+.. code-block:: bash
+                                                                                    
+    GRUB_BACKGROUND="/boot/grub/my_new_grub_image.tga"                                           
+                                            
+Update GRUB:
+
+.. code-block:: bash
+
+    $ sudo update-grub
+                         
+... and reboot.
 
 Happy hacking!
 
