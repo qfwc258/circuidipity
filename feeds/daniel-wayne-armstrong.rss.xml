@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 10 Nov 2014 15:17:00 -0500</lastBuildDate><item><title>Dual display configuration in Lubuntu</title><link>http://www.circuidipity.com/20141110.html</link><description>&lt;p&gt;&lt;strong&gt;Scenario:&lt;/strong&gt; I connect my &lt;strong&gt;Thinkpad X201&lt;/strong&gt; running Lubuntu and &lt;strong&gt;LXDE&lt;/strong&gt; (resolution: &lt;tt class="docutils literal"&gt;1280x800&lt;/tt&gt;) to an external display (resolution: &lt;tt class="docutils literal"&gt;1920x1200&lt;/tt&gt;) to create: 1) a combined desktop; 2) with &lt;strong&gt;lxpanel&lt;/strong&gt; top aligned and stretched across both displays; 3) and a different wallpaper on each display.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 12 Nov 2014 02:46:00 -0500</lastBuildDate><item><title>Dual display configuration in Lubuntu</title><link>http://www.circuidipity.com/20141110.html</link><description>&lt;p&gt;&lt;strong&gt;Scenario:&lt;/strong&gt; I connect my &lt;strong&gt;Thinkpad X201&lt;/strong&gt; running Lubuntu and &lt;strong&gt;LXDE&lt;/strong&gt; (resolution: &lt;tt class="docutils literal"&gt;1280x800&lt;/tt&gt;) to an external display (resolution: &lt;tt class="docutils literal"&gt;1920x1200&lt;/tt&gt;) to create: 1) a combined desktop; 2) with &lt;strong&gt;lxpanel&lt;/strong&gt; top aligned and stretched across both displays; 3) and a different wallpaper on each display.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;div class="section" id="xrandr"&gt;
@@ -74,7 +74,7 @@ VIRTUAL1 disconnected &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted r
 &lt;li&gt;&lt;a class="reference external" href="http://www.centauri-dreams.org/?p=31887"&gt;CubeSats and solar sails&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Mysterious &lt;a class="reference external" href="http://www.fastcoexist.com/3036887/out-of-this-world-the-mysterious-mental-side-effects-of-traveling-into-space"&gt;mental side-effects of traveling into space&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Thu, 06 Nov 2014 00:31:00 -0500</pubDate><guid>tag:www.circuidipity.com,2014-11-06:20141106.html</guid><category>links</category></item><item><title>17 small hacks after installing Lubuntu 14.04</title><link>http://www.circuidipity.com/lubuntu-trusty-hacks.html</link><description>&lt;img alt="Lubuntu" class="align-right" src="images/lubuntu_logo.png" style="width: 150px; height: 150px;" /&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Thu, 06 Nov 2014 00:31:00 -0500</pubDate><guid>tag:www.circuidipity.com,2014-11-06:20141106.html</guid><category>links</category></item><item><title>19 small hacks after installing Lubuntu 14.04</title><link>http://www.circuidipity.com/lubuntu-trusty-hacks.html</link><description>&lt;img alt="Lubuntu" class="align-right" src="images/lubuntu_logo.png" style="width: 150px; height: 150px;" /&gt;
 &lt;p&gt;The combination of &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt;  plus the &lt;a class="reference external" href="http://www.circuidipity.com/tag-lxde.html"&gt;LXDE&lt;/a&gt; desktop equals the lightweight and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/tag-lubuntu.html"&gt;Lubuntu&lt;/a&gt;. Its loosely coupled components create a friendly environment for swapping out bits and customizing the interface, and ongoing development of the next-generation &lt;a class="reference external" href="http://lxqt.org/"&gt;LXQt&lt;/a&gt; looks promising!&lt;/p&gt;
 &lt;p&gt;Here are a few small hacks I like to do to make a great OS even better. Modifications are made on a &lt;a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html"&gt;fresh install of Lubuntu 14.04&lt;/a&gt;, which is a &lt;em&gt;Long Term Support&lt;/em&gt; (LTS) release (till April 2017).&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
@@ -225,8 +225,8 @@ dmenu_run -b -i -fn &lt;span class="s1"&gt;&amp;#39;10x20&amp;#39;&lt;/span&gt; 
 &lt;h3&gt;14. Dual display&lt;/h3&gt;
 &lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/20141110.html"&gt;Dual display configuration in Lubuntu&lt;/a&gt; for configuring LXDE to auto-detect at login if a second display is attached and make the necessary adjustments.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="customize-login"&gt;
-&lt;h3&gt;15. Customize login&lt;/h3&gt;
+&lt;div class="section" id="custom-login-wallpaper"&gt;
+&lt;h3&gt;15. Custom login wallpaper&lt;/h3&gt;
 &lt;p&gt;Login window is managed by &lt;strong&gt;lightdm-gtk-greeter&lt;/strong&gt;. To set a new background image for the login window:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /usr/local/share/wallpapers
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo cp my_new_login_image.jpg /usr/local/share/wallpapers
@@ -238,6 +238,32 @@ dmenu_run -b -i -fn &lt;span class="s1"&gt;&amp;#39;10x20&amp;#39;&lt;/span&gt; 
 &lt;div class="section" id="auto-mount-external-drives-at-startup"&gt;
 &lt;h3&gt;16. Auto-mount external drives at startup&lt;/h3&gt;
 &lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/20141031.html"&gt;Add USB storage to Chromebooks&lt;/a&gt; for an example scenario.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="display-grub-menu-at-boot"&gt;
+&lt;h3&gt;17. Display GRUB Menu at boot&lt;/h3&gt;
+&lt;p&gt;Comment out the &lt;tt class="docutils literal"&gt;GRUB_HIDDEN*&lt;/tt&gt; settings in &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#GRUB_HIDDEN_TIMEOUT=0&lt;/span&gt;
+&lt;span class="c"&gt;#GRUB_HIDDEN_TIMEOUT_QUIET=true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Update the GRUB configuration with the new settings:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-grub
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and reboot.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="custom-grub-colours-and-splash-image"&gt;
+&lt;h3&gt;18. Custom GRUB colours and splash image&lt;/h3&gt;
+&lt;p&gt;Create &lt;tt class="docutils literal"&gt;/boot/grub/custom.cfg&lt;/tt&gt; and set custom GRUB menu colours. Example settings:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;set &lt;/span&gt;&lt;span class="nv"&gt;color_normal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;yellow/black
+&lt;span class="nb"&gt;set &lt;/span&gt;&lt;span class="nv"&gt;menu_color_normal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;yellow/black
+&lt;span class="nb"&gt;set &lt;/span&gt;&lt;span class="nv"&gt;menu_color_highlight&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;white/green
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pick an image for the GRUB background (see &lt;a class="reference external" href="https://help.ubuntu.com/community/Grub2/Displays"&gt;help.ubuntu.com&lt;/a&gt; for restrictions) and save to &lt;tt class="docutils literal"&gt;/boot/grub&lt;/tt&gt;. Set the new background in &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;GRUB_BACKGROUND&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/boot/grub/my_new_grub_image.tga&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Update GRUB:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-grub
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and reboot.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="notes"&gt;
@@ -250,7 +276,7 @@ dmenu_run -b -i -fn &lt;span class="s1"&gt;&amp;#39;10x20&amp;#39;&lt;/span&gt; 
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Mon, 10 Nov 2014 15:17:00 -0500</pubDate><guid>tag:www.circuidipity.com,2014-11-02:lubuntu-trusty-hacks.html</guid><category>lubuntu</category><category>ubuntu</category><category>linux</category><category>lxde</category></item><item><title>Add USB storage to Chromebooks</title><link>http://www.circuidipity.com/20141031.html</link><description>&lt;p&gt;I love my &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Lubuntubook&lt;/a&gt; and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room to shuffle data around. One popular option is to &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;open up the device&lt;/a&gt; and swap in a bigger SSD.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 12 Nov 2014 02:46:00 -0500</pubDate><guid>tag:www.circuidipity.com,2014-11-02:lubuntu-trusty-hacks.html</guid><category>lubuntu</category><category>ubuntu</category><category>linux</category><category>lxde</category></item><item><title>Add USB storage to Chromebooks</title><link>http://www.circuidipity.com/20141031.html</link><description>&lt;p&gt;I love my &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Lubuntubook&lt;/a&gt; and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room to shuffle data around. One popular option is to &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;open up the device&lt;/a&gt; and swap in a bigger SSD.&lt;/p&gt;
 &lt;p&gt;An alternative is to reserve the internal SSD for the OS and use an external USB storage device for data. I picked up a &lt;a class="reference external" href="http://www.amazon.com/SanDisk-Cruzer-Low-Profile-Drive-SDCZ33-064G-B35/dp/B00FJRS6QY"&gt;SanDisk Cruzer Fit 64GB USB 2.0&lt;/a&gt; which are really tiny devices that barely extrude from the USB port.&lt;/p&gt;
 &lt;p&gt;My plan is to keep the USB stick attached to the Chromebook (extra storage that can be disconnected and re-connected at will) and have Lubuntu auto-mount the device at boot. Steps to get it working:&lt;/p&gt;
 &lt;div class="section" id="partition-and-format"&gt;

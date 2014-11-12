@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | 17 small hacks after installing Lubuntu 14.04</title>
+        <title>Circuidipity | 19 small hacks after installing Lubuntu 14.04</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -23,8 +23,8 @@
 </div>
 
 <!-- article -->
-<h1>17 small hacks after installing Lubuntu 14.04</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Monday 10 November 2014</p>
+<h1>19 small hacks after installing Lubuntu 14.04</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Wednesday 12 November 2014</p>
 <div id="article">
     <img alt="Lubuntu" class="align-right" src="images/lubuntu_logo.png" style="width: 150px; height: 150px;" />
 <p>The combination of <a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html">Ubuntu</a>  plus the <a class="reference external" href="http://www.circuidipity.com/tag-lxde.html">LXDE</a> desktop equals the lightweight and cheerful <a class="reference external" href="http://www.circuidipity.com/tag-lubuntu.html">Lubuntu</a>. Its loosely coupled components create a friendly environment for swapping out bits and customizing the interface, and ongoing development of the next-generation <a class="reference external" href="http://lxqt.org/">LXQt</a> looks promising!</p>
@@ -177,8 +177,8 @@ dmenu_run -b -i -fn <span class="s1">&#39;10x20&#39;</span> <span class="se">\</
 <h3>14. Dual display</h3>
 <p>See <a class="reference external" href="http://www.circuidipity.com/20141110.html">Dual display configuration in Lubuntu</a> for configuring LXDE to auto-detect at login if a second display is attached and make the necessary adjustments.</p>
 </div>
-<div class="section" id="customize-login">
-<h3>15. Customize login</h3>
+<div class="section" id="custom-login-wallpaper">
+<h3>15. Custom login wallpaper</h3>
 <p>Login window is managed by <strong>lightdm-gtk-greeter</strong>. To set a new background image for the login window:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /usr/local/share/wallpapers
 <span class="nv">$ </span>sudo cp my_new_login_image.jpg /usr/local/share/wallpapers
@@ -190,6 +190,32 @@ dmenu_run -b -i -fn <span class="s1">&#39;10x20&#39;</span> <span class="se">\</
 <div class="section" id="auto-mount-external-drives-at-startup">
 <h3>16. Auto-mount external drives at startup</h3>
 <p>See <a class="reference external" href="http://www.circuidipity.com/20141031.html">Add USB storage to Chromebooks</a> for an example scenario.</p>
+</div>
+<div class="section" id="display-grub-menu-at-boot">
+<h3>17. Display GRUB Menu at boot</h3>
+<p>Comment out the <tt class="docutils literal">GRUB_HIDDEN*</tt> settings in <tt class="docutils literal">/etc/default/grub</tt>:</p>
+<div class="highlight"><pre><span class="c">#GRUB_HIDDEN_TIMEOUT=0</span>
+<span class="c">#GRUB_HIDDEN_TIMEOUT_QUIET=true</span>
+</pre></div>
+<p>Update the GRUB configuration with the new settings:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo update-grub
+</pre></div>
+<p>... and reboot.</p>
+</div>
+<div class="section" id="custom-grub-colours-and-splash-image">
+<h3>18. Custom GRUB colours and splash image</h3>
+<p>Create <tt class="docutils literal">/boot/grub/custom.cfg</tt> and set custom GRUB menu colours. Example settings:</p>
+<div class="highlight"><pre><span class="nb">set </span><span class="nv">color_normal</span><span class="o">=</span>yellow/black
+<span class="nb">set </span><span class="nv">menu_color_normal</span><span class="o">=</span>yellow/black
+<span class="nb">set </span><span class="nv">menu_color_highlight</span><span class="o">=</span>white/green
+</pre></div>
+<p>Pick an image for the GRUB background (see <a class="reference external" href="https://help.ubuntu.com/community/Grub2/Displays">help.ubuntu.com</a> for restrictions) and save to <tt class="docutils literal">/boot/grub</tt>. Set the new background in <tt class="docutils literal">/etc/default/grub</tt>:</p>
+<div class="highlight"><pre><span class="nv">GRUB_BACKGROUND</span><span class="o">=</span><span class="s2">&quot;/boot/grub/my_new_grub_image.tga&quot;</span>
+</pre></div>
+<p>Update GRUB:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo update-grub
+</pre></div>
+<p>... and reboot.</p>
 <p>Happy hacking!</p>
 </div>
 <div class="section" id="notes">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-11-10T15:17:00-05:00</updated><entry><title>Dual display configuration in Lubuntu</title><link href="http://www.circuidipity.com/20141110.html" rel="alternate"></link><updated>2014-11-10T15:11:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-10:20141110.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Scenario:&lt;/strong&gt; I connect my &lt;strong&gt;Thinkpad X201&lt;/strong&gt; running Lubuntu and &lt;strong&gt;LXDE&lt;/strong&gt; (resolution: &lt;tt class="docutils literal"&gt;1280x800&lt;/tt&gt;) to an external display (resolution: &lt;tt class="docutils literal"&gt;1920x1200&lt;/tt&gt;) to create: 1) a combined desktop; 2) with &lt;strong&gt;lxpanel&lt;/strong&gt; top aligned and stretched across both displays; 3) and a different wallpaper on each display.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-11-12T02:46:00-05:00</updated><entry><title>Dual display configuration in Lubuntu</title><link href="http://www.circuidipity.com/20141110.html" rel="alternate"></link><updated>2014-11-10T15:11:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-10:20141110.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Scenario:&lt;/strong&gt; I connect my &lt;strong&gt;Thinkpad X201&lt;/strong&gt; running Lubuntu and &lt;strong&gt;LXDE&lt;/strong&gt; (resolution: &lt;tt class="docutils literal"&gt;1280x800&lt;/tt&gt;) to an external display (resolution: &lt;tt class="docutils literal"&gt;1920x1200&lt;/tt&gt;) to create: 1) a combined desktop; 2) with &lt;strong&gt;lxpanel&lt;/strong&gt; top aligned and stretched across both displays; 3) and a different wallpaper on each display.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;div class="section" id="xrandr"&gt;
@@ -74,7 +74,7 @@ VIRTUAL1 disconnected &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted r
 &lt;li&gt;&lt;a class="reference external" href="http://www.centauri-dreams.org/?p=31887"&gt;CubeSats and solar sails&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Mysterious &lt;a class="reference external" href="http://www.fastcoexist.com/3036887/out-of-this-world-the-mysterious-mental-side-effects-of-traveling-into-space"&gt;mental side-effects of traveling into space&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</summary><category term="links"></category></entry><entry><title>17 small hacks after installing Lubuntu 14.04</title><link href="http://www.circuidipity.com/lubuntu-trusty-hacks.html" rel="alternate"></link><updated>2014-11-10T15:17:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-02:lubuntu-trusty-hacks.html</id><summary type="html">&lt;img alt="Lubuntu" class="align-right" src="images/lubuntu_logo.png" style="width: 150px; height: 150px;" /&gt;
+</summary><category term="links"></category></entry><entry><title>19 small hacks after installing Lubuntu 14.04</title><link href="http://www.circuidipity.com/lubuntu-trusty-hacks.html" rel="alternate"></link><updated>2014-11-12T02:46:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-02:lubuntu-trusty-hacks.html</id><summary type="html">&lt;img alt="Lubuntu" class="align-right" src="images/lubuntu_logo.png" style="width: 150px; height: 150px;" /&gt;
 &lt;p&gt;The combination of &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt;  plus the &lt;a class="reference external" href="http://www.circuidipity.com/tag-lxde.html"&gt;LXDE&lt;/a&gt; desktop equals the lightweight and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/tag-lubuntu.html"&gt;Lubuntu&lt;/a&gt;. Its loosely coupled components create a friendly environment for swapping out bits and customizing the interface, and ongoing development of the next-generation &lt;a class="reference external" href="http://lxqt.org/"&gt;LXQt&lt;/a&gt; looks promising!&lt;/p&gt;
 &lt;p&gt;Here are a few small hacks I like to do to make a great OS even better. Modifications are made on a &lt;a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html"&gt;fresh install of Lubuntu 14.04&lt;/a&gt;, which is a &lt;em&gt;Long Term Support&lt;/em&gt; (LTS) release (till April 2017).&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
@@ -225,8 +225,8 @@ dmenu_run -b -i -fn &lt;span class="s1"&gt;&amp;#39;10x20&amp;#39;&lt;/span&gt; 
 &lt;h3&gt;14. Dual display&lt;/h3&gt;
 &lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/20141110.html"&gt;Dual display configuration in Lubuntu&lt;/a&gt; for configuring LXDE to auto-detect at login if a second display is attached and make the necessary adjustments.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="customize-login"&gt;
-&lt;h3&gt;15. Customize login&lt;/h3&gt;
+&lt;div class="section" id="custom-login-wallpaper"&gt;
+&lt;h3&gt;15. Custom login wallpaper&lt;/h3&gt;
 &lt;p&gt;Login window is managed by &lt;strong&gt;lightdm-gtk-greeter&lt;/strong&gt;. To set a new background image for the login window:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /usr/local/share/wallpapers
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo cp my_new_login_image.jpg /usr/local/share/wallpapers
@@ -238,6 +238,32 @@ dmenu_run -b -i -fn &lt;span class="s1"&gt;&amp;#39;10x20&amp;#39;&lt;/span&gt; 
 &lt;div class="section" id="auto-mount-external-drives-at-startup"&gt;
 &lt;h3&gt;16. Auto-mount external drives at startup&lt;/h3&gt;
 &lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/20141031.html"&gt;Add USB storage to Chromebooks&lt;/a&gt; for an example scenario.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="display-grub-menu-at-boot"&gt;
+&lt;h3&gt;17. Display GRUB Menu at boot&lt;/h3&gt;
+&lt;p&gt;Comment out the &lt;tt class="docutils literal"&gt;GRUB_HIDDEN*&lt;/tt&gt; settings in &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#GRUB_HIDDEN_TIMEOUT=0&lt;/span&gt;
+&lt;span class="c"&gt;#GRUB_HIDDEN_TIMEOUT_QUIET=true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Update the GRUB configuration with the new settings:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-grub
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and reboot.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="custom-grub-colours-and-splash-image"&gt;
+&lt;h3&gt;18. Custom GRUB colours and splash image&lt;/h3&gt;
+&lt;p&gt;Create &lt;tt class="docutils literal"&gt;/boot/grub/custom.cfg&lt;/tt&gt; and set custom GRUB menu colours. Example settings:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;set &lt;/span&gt;&lt;span class="nv"&gt;color_normal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;yellow/black
+&lt;span class="nb"&gt;set &lt;/span&gt;&lt;span class="nv"&gt;menu_color_normal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;yellow/black
+&lt;span class="nb"&gt;set &lt;/span&gt;&lt;span class="nv"&gt;menu_color_highlight&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;white/green
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pick an image for the GRUB background (see &lt;a class="reference external" href="https://help.ubuntu.com/community/Grub2/Displays"&gt;help.ubuntu.com&lt;/a&gt; for restrictions) and save to &lt;tt class="docutils literal"&gt;/boot/grub&lt;/tt&gt;. Set the new background in &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;GRUB_BACKGROUND&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/boot/grub/my_new_grub_image.tga&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Update GRUB:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-grub
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and reboot.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="notes"&gt;
