@@ -26,11 +26,13 @@
 <!-- article -->
 <h1>Host a blog on GitHub Pages</h1>
 <div id="article">
-    <p><a class="reference external" href="http://pages.github.com/">GitHub Pages</a> is a free web hosting service for projects composed of static files (i.e no database). Combine a Pages <em>repository</em> with <tt class="docutils literal">git</tt> version control and a <em>static site generator</em> like <a class="reference external" href="http://www.circuidipity.com/pelican.html">Pelican</a> and you have one awesome toolset to build a website.</p>
-<p>This is how I configured GitHub Pages to host <em>Circuidipity</em>.</p>
-<div class="section" id="step-0-install-git">
-<h2>Step 0 - Install git</h2>
-<p>Install (on Debian Linux) the <tt class="docutils literal">git</tt> package and write global configuration variables for <tt class="docutils literal">USERNAME</tt> in <tt class="docutils literal"><span class="pre">~/.gitconfig</span></tt> ...</p>
+    <p><a class="reference external" href="http://pages.github.com/">GitHub Pages</a> is a free web hosting service for projects composed of static files (i.e no database). Combine a <strong>Pages repository</strong> with <strong>git</strong> version control and a <strong>static site generator</strong> like <a class="reference external" href="http://www.circuidipity.com/pelican.html">Pelican</a> and you have one awesome toolset to build a website.</p>
+<p>This is how I configured GitHub Pages to host <a class="reference external" href="http://www.circuidipity.com">Circuidipity</a>.</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<div class="section" id="install-git">
+<h3>0. Install git</h3>
+<p>Install (on Debian Linux) the <tt class="docutils literal">git</tt> package and write global configuration variables for <tt class="docutils literal">USERNAME</tt> in <tt class="docutils literal"><span class="pre">~/.gitconfig</span></tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install git git-doc
 <span class="nv">$ </span>git config --global user.name <span class="s2">&quot;USERNAME&quot;</span>
 <span class="nv">$ </span>git config --global user.email USERNAME.EMAIL@example.com
@@ -38,15 +40,15 @@
 <span class="nv">$ </span>git config --global merge.tool vimdiff
 </pre></div>
 </div>
-<div class="section" id="step-1-create-git-repository">
-<h2>Step 1 - Create git repository</h2>
+<div class="section" id="create-git-repository">
+<h3>1. Create git repository</h3>
 <p>Inside my <tt class="docutils literal">pelican</tt>-powered blog project I create 2 new files: <tt class="docutils literal">.gitignore</tt> and <tt class="docutils literal">README.rst</tt>.</p>
-<p>The <tt class="docutils literal">.gitignore</tt> file does exactly what the name implies ... it instructs <tt class="docutils literal">git</tt> which files and directories not to bother tracking in version control. For example I do not want to track ...</p>
+<p>The <tt class="docutils literal">.gitignore</tt> file does exactly what the name implies ... it instructs <tt class="docutils literal">git</tt> which files and directories not to bother tracking in version control. For example I do not want to track:</p>
 <div class="highlight"><pre>*.pid
 *.pyc
 output/
 </pre></div>
-<p>Creating a <tt class="docutils literal">README.rst</tt> will allow GitHub to auto-detect and configure it as the project homepage when we upload our blog contents to the remote repository. Mine looks like ...</p>
+<p>Creating a <tt class="docutils literal">README.rst</tt> will allow GitHub to auto-detect and configure it as the project homepage when we upload our blog contents to the remote repository. Mine looks like:</p>
 <div class="highlight"><pre><span class="gh">www dot circuidipity dot com</span>
 <span class="gh">============================</span>
 
@@ -54,7 +56,7 @@ This repository holds my blog which you can visit at www.circuidipity.com.
 
 It is compiled by <span class="s">`Pelican </span><span class="si">&lt;http://docs.getpelican.com/&gt;</span><span class="s">`_</span> and hosted on <span class="s">`GitHub Pages </span><span class="si">&lt;http://pages.github.com/&gt;</span><span class="s">`_</span>.
 </pre></div>
-<p>Now I <em>create</em> my local repository, <em>add</em> the items I want to track, and execute my first <em>commit</em> ...</p>
+<p>Now I create my local repository, add the items I want to track, and execute my first commit:</p>
 <div class="highlight"><pre><span class="nv">$ </span>git init
 <span class="nv">$ </span>git add README.rst
 <span class="nv">$ </span>git add .gitignore
@@ -67,31 +69,31 @@ It is compiled by <span class="s">`Pelican </span><span class="si">&lt;http://do
 <span class="nv">$ </span>git log  <span class="c"># to view commit history</span>
 </pre></div>
 </div>
-<div class="section" id="step-2-create-github-repository">
-<h2>Step 2 - Create GitHub repository</h2>
+<div class="section" id="create-github-repository">
+<h3>2. Create GitHub repository</h3>
 <p><a class="reference external" href="https://help.github.com/articles/signing-up-for-a-new-github-account">Sign up</a> for a free account on GitHub and <a class="reference external" href="https://help.github.com/articles/creating-a-new-repository">create a new empty repository</a> to hold the blog contents.</p>
-<p>Next I connect my local <tt class="docutils literal">.git</tt> repository to my GitHub remote repository ...</p>
+<p>Next I connect my local <tt class="docutils literal">.git</tt> repository to my GitHub remote repository:</p>
 <div class="highlight"><pre><span class="nv">$ </span>git remote add origin https://github.com/vonbrownie/circuidipity.git
 <span class="nv">$ </span>git remote -v  <span class="c"># confirm local knows about remote</span>
 <span class="nv">$ </span>git push -u origin master
 </pre></div>
 </div>
-<div class="section" id="step-3-configure-pelican-to-use-github-pages">
-<h2>Step 3 - Configure Pelican to use GitHub Pages</h2>
-<p>GitHub offers 2 types of <a class="reference external" href="https://help.github.com/articles/user-organization-and-project-pages">Pages</a> ... <em>User Pages</em> and <em>Project Pages</em>. Each GitHub account can host a single User Page and an unlimited amount of Project Pages. Basically they are identical to the end-user and differ only in their configuration.</p>
-<p>I chose to make my blog a Project Page and the contents are hosted in the <tt class="docutils literal"><span class="pre">gh-pages</span></tt> branch of my GitHub project repository. Pelican makes it easy to create and configure <tt class="docutils literal"><span class="pre">gh-pages</span></tt> using the <a class="reference external" href="https://github.com/davisp/ghp-import">ghp-import</a> Python script ... which I install via <tt class="docutils literal">pip</tt> ...</p>
+<div class="section" id="configure-pelican-to-use-github-pages">
+<h3>3. Configure Pelican to use GitHub Pages</h3>
+<p>GitHub offers 2 types of <a class="reference external" href="https://help.github.com/articles/user-organization-and-project-pages">Pages</a> ... <strong>User Pages</strong> and <strong>Project Pages</strong>. Each GitHub account can host a single User Page and an unlimited amount of Project Pages. Basically they are identical to the end-user and differ only in their configuration.</p>
+<p>I chose to make my blog a Project Page and the contents are hosted in the <tt class="docutils literal"><span class="pre">gh-pages</span></tt> branch of my GitHub project repository. Pelican makes it easy to create and configure <tt class="docutils literal"><span class="pre">gh-pages</span></tt> using the <a class="reference external" href="https://github.com/davisp/ghp-import">ghp-import</a> Python script ... which I install via <tt class="docutils literal">pip</tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>pip install ghp-import
 </pre></div>
-<p>Finally I <em>publish</em> my blog by pushing the files up to GitHub ...</p>
+<p>Finally I publish my blog by pushing the files up to GitHub:</p>
 <div class="highlight"><pre><span class="nv">$ </span>make github
 </pre></div>
 <p>GitHub Pages is now hosting the site at <tt class="docutils literal"><span class="pre">http://USERNAME.github.io/REPOSITORY</span></tt>.</p>
 </div>
-<div class="section" id="step-4-custom-domain-name">
-<h2>Step 4 - Custom domain name</h2>
-<p>Awesome! But I want to use my own <em>Circuidipity</em> custom domain name ... not <tt class="docutils literal">REPOSITORY</tt>.</p>
+<div class="section" id="custom-domain-name">
+<h3>4. Custom domain name</h3>
+<p>Awesome! But I want to use my own custom domain name ... not <tt class="docutils literal">REPOSITORY</tt>.</p>
 <p>GitHub enables <a class="reference external" href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">custom domains</a> by allowing users to create a <tt class="docutils literal">CNAME</tt> file with their domain address that resides in the root directory of <tt class="docutils literal"><span class="pre">gh-pages</span></tt>. Inside my Pelican project folder I create a new <tt class="docutils literal">extra</tt> directory containing a single-line <tt class="docutils literal">CNAME</tt> file with my domain address <tt class="docutils literal">www.circuidipity.com</tt>.</p>
-<p>Next I edit <tt class="docutils literal">pelicanconf.py</tt> to recognize <tt class="docutils literal">CNAME</tt> and place the file in <tt class="docutils literal"><span class="pre">gh-pages</span></tt> when I upload my files ...</p>
+<p>Next I edit <tt class="docutils literal">pelicanconf.py</tt> to recognize <tt class="docutils literal">CNAME</tt> and place the file in <tt class="docutils literal"><span class="pre">gh-pages</span></tt> when I upload my files:</p>
 <div class="highlight"><pre><span class="c"># Static paths will be copied without parsing their contents</span>
 <span class="n">STATIC_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;images&#39;</span><span class="p">,</span> <span class="s">&#39;extra&#39;</span><span class="p">]</span>
 
@@ -100,12 +102,12 @@ It is compiled by <span class="s">`Pelican </span><span class="si">&lt;http://do
     <span class="s">&#39;extra/CNAME&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;path&#39;</span><span class="p">:</span> <span class="s">&#39;CNAME&#39;</span><span class="p">},</span>
 <span class="p">}</span>
 </pre></div>
-<p>Upload my changes to GitHub ...</p>
+<p>Upload my changes to GitHub:</p>
 <div class="highlight"><pre><span class="nv">$ </span>make github
 </pre></div>
 <div class="section" id="domain-registrar">
-<h3>4.1 - Domain Registrar</h3>
-<p>Now the <em>domain name registrar</em> needs to be configured to point to the new GitHub address. <a class="reference external" href="https://www.gandi.net/">Gandi</a> is my registrar and while the details will vary between domain services the steps are basically the same to redirect a custom domain.</p>
+<h4>4.1 - Domain Registrar</h4>
+<p>Now the <strong>domain name registrar</strong> needs to be configured to point to the new GitHub address. <a class="reference external" href="https://www.gandi.net/">Gandi</a> is my registrar and while the details will vary between domain services the steps are basically the same to redirect a custom domain.</p>
 <p>My objective is for the GitHub Pages repository to resolve to <tt class="docutils literal">www.circuidipity.com</tt> and for <tt class="docutils literal">circuidipity.com</tt> to redirect to the <tt class="docutils literal">www</tt> address.</p>
 <p>Using Gandi as an example I will create new <tt class="docutils literal">CNAME</tt> and <tt class="docutils literal">A</tt> records:</p>
 <ul class="simple">
@@ -115,13 +117,14 @@ It is compiled by <span class="s">`Pelican </span><span class="si">&lt;http://do
 <li>modify/add <tt class="docutils literal">A</tt> record to <a class="reference external" href="https://wiki.gandi.net/en/domains/management/domain-as-website/forwarding">permanently redirect</a> the top level domain to <tt class="docutils literal">www</tt> using the Gandi redirect service address <tt class="docutils literal">217.70.184.38</tt></li>
 <li>click <tt class="docutils literal">Use this version</tt> to save all changes and wait a few hours for the DNS modifications to propagate around the world</li>
 </ul>
-<p>It is possible to skip web redirection and set the A record value to point directly to a <a class="reference external" href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">GitHub address</a> but at the loss of <em>dynamic traffic management</em>.</p>
+<p>It is possible to skip web redirection and set the A record value to point directly to a <a class="reference external" href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">GitHub address</a> but at the loss of dynamic traffic management.</p>
 </div>
 </div>
-<div class="section" id="step-5-custom-404">
-<h2>Step 5 - Custom 404</h2>
+<div class="section" id="custom-404">
+<h3>5. Custom 404</h3>
 <p>Configuring a custom domain allows the option of using a <a class="reference external" href="https://help.github.com/articles/custom-404-pages">custom 404 page</a>. Simply create a <tt class="docutils literal">404.html</tt> file in the <tt class="docutils literal"><span class="pre">gh-pages</span></tt> root.</p>
 <p>Happy hacking!</p>
+</div>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-git.html">git</a>
