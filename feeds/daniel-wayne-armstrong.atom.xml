@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-11-15T01:00:00-05:00</updated><entry><title>Pop-up custom menu in LXDE</title><link href="http://www.circuidipity.com/20141115.html" rel="alternate"></link><updated>2014-11-15T01:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-15:20141115.html</id><summary type="html">&lt;p&gt;Create a hotkey-activated custom menu for favourite functions and applications.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-11-15T01:10:00-05:00</updated><entry><title>Pop-up custom menu in LXDE</title><link href="http://www.circuidipity.com/20141115.html" rel="alternate"></link><updated>2014-11-15T01:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-15:20141115.html</id><summary type="html">&lt;p&gt;Create a hotkey-activated custom menu for favourite functions and applications.&lt;/p&gt;
 &lt;p&gt;Copy Openbox's default &lt;tt class="docutils literal"&gt;menu.xml&lt;/tt&gt; and customize:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cp /usr/share/lubuntu/openbox/menu.xml ~/.config/openbox/lubuntu-menu.xml
 &lt;/pre&gt;&lt;/div&gt;
@@ -99,7 +99,7 @@ VIRTUAL1 disconnected &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted r
 &lt;li&gt;&lt;a class="reference external" href="http://www.centauri-dreams.org/?p=31887"&gt;CubeSats and solar sails&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Mysterious &lt;a class="reference external" href="http://www.fastcoexist.com/3036887/out-of-this-world-the-mysterious-mental-side-effects-of-traveling-into-space"&gt;mental side-effects of traveling into space&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</summary><category term="links"></category></entry><entry><title>19 small hacks after installing Lubuntu 14.04</title><link href="http://www.circuidipity.com/lubuntu-trusty-hacks.html" rel="alternate"></link><updated>2014-11-12T02:46:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-02:lubuntu-trusty-hacks.html</id><summary type="html">&lt;img alt="Lubuntu" class="align-right" src="images/lubuntu_logo.png" style="width: 150px; height: 150px;" /&gt;
+</summary><category term="links"></category></entry><entry><title>20 small hacks after installing Lubuntu 14.04</title><link href="http://www.circuidipity.com/lubuntu-trusty-hacks.html" rel="alternate"></link><updated>2014-11-15T01:10:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-02:lubuntu-trusty-hacks.html</id><summary type="html">&lt;img alt="Lubuntu" class="align-right" src="images/lubuntu_logo.png" style="width: 150px; height: 150px;" /&gt;
 &lt;p&gt;The combination of &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt;  plus the &lt;a class="reference external" href="http://www.circuidipity.com/tag-lxde.html"&gt;LXDE&lt;/a&gt; desktop equals the lightweight and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/tag-lubuntu.html"&gt;Lubuntu&lt;/a&gt;. Its loosely coupled components create a friendly environment for swapping out bits and customizing the interface, and ongoing development of the next-generation &lt;a class="reference external" href="http://lxqt.org/"&gt;LXQt&lt;/a&gt; looks promising!&lt;/p&gt;
 &lt;p&gt;Here are a few small hacks I like to do to make a great OS even better. Modifications are made on a &lt;a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html"&gt;fresh install of Lubuntu 14.04&lt;/a&gt;, which is a &lt;em&gt;Long Term Support&lt;/em&gt; (LTS) release (till April 2017).&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
@@ -289,6 +289,10 @@ dmenu_run -b -i -fn &lt;span class="s1"&gt;&amp;#39;10x20&amp;#39;&lt;/span&gt; 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-grub
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... and reboot.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pop-up-menu"&gt;
+&lt;h3&gt;19. Pop-up menu&lt;/h3&gt;
+&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/20141115.html"&gt;Pop-up custom menu in LXDE&lt;/a&gt; to create a hotkey-activated menu for favourite functions and applications.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="notes"&gt;
