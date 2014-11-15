@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-11-13T00:31:00-05:00</updated><entry><title>Links of interest</title><link href="http://www.circuidipity.com/20141113.html" rel="alternate"></link><updated>2014-11-13T00:31:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-13:20141113.html</id><summary type="html">&lt;ul class="simple"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-11-15T01:00:00-05:00</updated><entry><title>Pop-up custom menu in LXDE</title><link href="http://www.circuidipity.com/20141115.html" rel="alternate"></link><updated>2014-11-15T01:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-15:20141115.html</id><summary type="html">&lt;p&gt;Create a hotkey-activated custom menu for favourite functions and applications.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;0.&lt;/strong&gt; Copy Openbox's default &lt;tt class="docutils literal"&gt;menu.xml&lt;/tt&gt; and customize:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cp /usr/share/lubuntu/openbox/menu.xml ~/.config/openbox/lubuntu-menu.xml
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;My &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-menu.xml"&gt;own menu&lt;/a&gt; includes &lt;tt class="docutils literal"&gt;lxpanelctl menu&lt;/tt&gt;, search (using &lt;strong&gt;catfish&lt;/strong&gt;), &lt;em&gt;Recent Files&lt;/em&gt; sub-menu, screenshot utility (&lt;strong&gt;scrot&lt;/strong&gt;), and logout.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; Create a key-combo in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/openbox/lubuntu-rc.xml&lt;/span&gt;&lt;/tt&gt; to activate the menu:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;lt;!-- Keybindings &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;ALT+SPACEBAR &lt;span class="k"&gt;for &lt;/span&gt;Openbox menu --&amp;gt;
+&amp;lt;keybind &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;A-space&amp;quot;&lt;/span&gt;&amp;gt;
+    &amp;lt;action &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ShowMenu&amp;quot;&lt;/span&gt;&amp;gt;
+    &amp;lt;menu&amp;gt;root-menu&amp;lt;/menu&amp;gt;
+    &amp;lt;/action&amp;gt;
+&amp;lt;/keybind&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Reload the new configuration:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;openbox --reconfigure
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-menu.xml"&gt;lubuntu-menu.xml&lt;/a&gt; + &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-rc.xml"&gt;lubuntu-rc.xml&lt;/a&gt; + &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/ob-recent-files-pipemenu"&gt;ob-recent-files-pipemenu&lt;/a&gt; (github.com/vonbrownie), &lt;a class="reference external" href="http://crunchbanglinux.org/wiki/configuring_the_openbox_menu"&gt;Configuring the Openbox Menu&lt;/a&gt; (crunchbanglinux.org)&lt;/p&gt;
+</summary><category term="lubuntu"></category><category term="ubuntu"></category><category term="linux"></category><category term="openbox"></category><category term="lxde"></category></entry><entry><title>Links of interest</title><link href="http://www.circuidipity.com/20141113.html" rel="alternate"></link><updated>2014-11-13T00:31:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-13:20141113.html</id><summary type="html">&lt;ul class="simple"&gt;
 &lt;li&gt;3-D printing a &lt;a class="reference external" href="https://www.youtube.com/watch?v=pk9PWUGkz7o"&gt;lunar (or asteroid) igloo&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://aeon.co/magazine/science/imitation-is-what-makes-us-human-and-creativ/"&gt;&amp;quot;[W]e are dwarves, standing atop a vast heap of dwarves...&amp;quot;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Why I'm &lt;a class="reference external" href="http://www.theguardian.com/world/2014/nov/08/the-expats-who-call-afghanistan-home"&gt;staying in Afghanistan&lt;/a&gt;&lt;/li&gt;
@@ -789,31 +807,4 @@ parm:           use_chanctx:Enable channel context &lt;span class="k"&gt;for &lt
 &lt;li&gt;What if age is &lt;a class="reference external" href="http://www.nytimes.com/2014/10/26/magazine/what-if-age-is-nothing-but-a-mind-set.html"&gt;nothing but a mind-set?&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&amp;quot;In the end, we discovered that it is &lt;a class="reference external" href="http://online.wsj.com/articles/how-does-google-handle-it-for-its-workers-ask-cio-ben-fried-1413751227"&gt;far less expensive to have people who are experts than it is to dumb it down&lt;/a&gt;&amp;quot;&lt;/li&gt;
 &lt;/ul&gt;
-</summary><category term="links"></category></entry><entry><title>Pentium M and PAE</title><link href="http://www.circuidipity.com/20141017.html" rel="alternate"></link><updated>2014-10-17T13:34:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-10-17:20141017.html</id><summary type="html">&lt;p&gt;I have a &lt;strong&gt;Thinkpad X31&lt;/strong&gt; with a &lt;strong&gt;Pentium M&lt;/strong&gt; processor. A standard Ubuntu 14.04 install will bail thinking the machine has a &lt;strong&gt;non-PAE&lt;/strong&gt; processor when in fact the CPU &lt;strong&gt;does&lt;/strong&gt; support PAE extensions but omits reporting the necessary details.&lt;/p&gt;
-&lt;p&gt;From the &lt;a class="reference external" href="https://help.ubuntu.com/community/PAE"&gt;Ubuntu Community Wiki&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-A number of older &lt;a class="reference external" href="https://en.wikipedia.org/wiki/List_of_Intel_Pentium_M_microprocessors"&gt;Pentium M&lt;/a&gt; processors produced around 2003-4 (the Banias family) do not display the PAE flag, and hence a normal installation fails. However, these processors are in fact able to run the latest (and PAE-demanding) kernels if only the installation process is modified a little. The problem is not missing PAE, it's about the processor not displaying its full capabilities.&lt;/blockquote&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://lubuntu.net/"&gt;Lubuntu&lt;/a&gt; is a Ubuntu-based distro using the lightweight LXDE desktop (good match for older machines like the X31) and &lt;a class="reference external" href="https://wiki.ubuntu.com/Lubuntu/AdvancedMethods#Pentium_M_and_Celeron_M"&gt;provides instructions&lt;/a&gt; for adding the &lt;tt class="docutils literal"&gt;forcepae&lt;/tt&gt; kernel option to the Lubuntu installer. This allows the installer to correctly detect a PAE-capable processor and the system to install as desired.&lt;/p&gt;
-&lt;p&gt;My own alternative is to &lt;a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html"&gt;prepare a GRUB-capable USB stick&lt;/a&gt; capable of booting the Lubuntu installer + &lt;a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html"&gt;other Linux images from the same device&lt;/a&gt;. In this scenario I create an entry in &lt;tt class="docutils literal"&gt;grub.cfg&lt;/tt&gt; for Lubuntu to boot with &lt;tt class="docutils literal"&gt;forcepae&lt;/tt&gt; pre-configured:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;menuentry &lt;span class="s2"&gt;&amp;quot;Lubuntu 14.04 LTS - 32bit Installer (&amp;#39;forcepae&amp;#39; for Pentium M)&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-&lt;span class="nb"&gt;set &lt;/span&gt;&lt;span class="nv"&gt;iso&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/iso/lubuntu-14.04.1-desktop-i386.iso&amp;quot;&lt;/span&gt;
-loopback loop &lt;span class="nv"&gt;$iso&lt;/span&gt;
-linux &lt;span class="o"&gt;(&lt;/span&gt;loop&lt;span class="o"&gt;)&lt;/span&gt;/casper/vmlinuz linux &lt;span class="nv"&gt;boot&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;casper iso-scan/filename&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$iso&lt;/span&gt; noprompt noeject forcepae
-initrd &lt;span class="o"&gt;(&lt;/span&gt;loop&lt;span class="o"&gt;)&lt;/span&gt;/casper/initrd.lz
-&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html"&gt;'Transform a USB stick into a boot device packing multiple Linux distros'&lt;/a&gt; for details.&lt;/p&gt;
-&lt;p&gt;Post-install - and &lt;strong&gt;before&lt;/strong&gt; running any upgrades - the PAE flag needs to be set for the CPU, otherwise any attempt at upgrading the kernel will bail (package manager thinks its dealing with a non-PAE processor).&lt;/p&gt;
-&lt;p&gt;Add &lt;tt class="docutils literal"&gt;forcepae&lt;/tt&gt; option to &lt;tt class="docutils literal"&gt;GRUB_CMDLINE_LINUX&lt;/tt&gt; in &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;GRUB_CMDLINE_LINUX&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;forcepae&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Run:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-grub
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and reboot.&lt;/p&gt;
-&lt;p&gt;Confirm that &lt;tt class="docutils literal"&gt;/proc/cpuinfo&lt;/tt&gt; displays the &lt;tt class="docutils literal"&gt;pae&lt;/tt&gt; flag (0=false, 1=true):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cat /proc/cpuinfo | grep -cim1 pae
-&lt;span class="nv"&gt;$ &lt;/span&gt;1
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-</summary><category term="lubuntu"></category><category term="ubuntu"></category><category term="linux"></category></entry></feed>
+</summary><category term="links"></category></entry></feed>
