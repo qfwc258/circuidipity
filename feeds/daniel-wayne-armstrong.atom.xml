@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-11-15T01:00:00-05:00</updated><entry><title>Pop-up custom menu in LXDE</title><link href="http://www.circuidipity.com/20141115.html" rel="alternate"></link><updated>2014-11-15T01:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-15:20141115.html</id><summary type="html">&lt;p&gt;Create a hotkey-activated custom menu for favourite functions and applications.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;0.&lt;/strong&gt; Copy Openbox's default &lt;tt class="docutils literal"&gt;menu.xml&lt;/tt&gt; and customize:&lt;/p&gt;
+&lt;p&gt;Copy Openbox's default &lt;tt class="docutils literal"&gt;menu.xml&lt;/tt&gt; and customize:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cp /usr/share/lubuntu/openbox/menu.xml ~/.config/openbox/lubuntu-menu.xml
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;My &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-menu.xml"&gt;own menu&lt;/a&gt; includes &lt;tt class="docutils literal"&gt;lxpanelctl menu&lt;/tt&gt;, search (using &lt;strong&gt;catfish&lt;/strong&gt;), &lt;em&gt;Recent Files&lt;/em&gt; sub-menu, screenshot utility (&lt;strong&gt;scrot&lt;/strong&gt;), and logout.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; Create a key-combo in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/openbox/lubuntu-rc.xml&lt;/span&gt;&lt;/tt&gt; to activate the menu:&lt;/p&gt;
+&lt;p&gt;Create a key-combo in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/openbox/lubuntu-rc.xml&lt;/span&gt;&lt;/tt&gt; to activate the menu:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&amp;lt;!-- Keybindings &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;ALT+SPACEBAR &lt;span class="k"&gt;for &lt;/span&gt;Openbox menu --&amp;gt;
 &amp;lt;keybind &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;A-space&amp;quot;&lt;/span&gt;&amp;gt;
     &amp;lt;action &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ShowMenu&amp;quot;&lt;/span&gt;&amp;gt;
@@ -12,7 +12,7 @@
     &amp;lt;/action&amp;gt;
 &amp;lt;/keybind&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Reload the new configuration:&lt;/p&gt;
+&lt;p&gt;Reload the new configuration:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;openbox --reconfigure
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;

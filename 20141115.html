@@ -27,11 +27,11 @@
 <h1>Pop-up custom menu in LXDE</h1>
 <div id="article">
     <p>Create a hotkey-activated custom menu for favourite functions and applications.</p>
-<p><strong>0.</strong> Copy Openbox's default <tt class="docutils literal">menu.xml</tt> and customize:</p>
+<p>Copy Openbox's default <tt class="docutils literal">menu.xml</tt> and customize:</p>
 <div class="highlight"><pre><span class="nv">$ </span>cp /usr/share/lubuntu/openbox/menu.xml ~/.config/openbox/lubuntu-menu.xml
 </pre></div>
 <p>My <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-menu.xml">own menu</a> includes <tt class="docutils literal">lxpanelctl menu</tt>, search (using <strong>catfish</strong>), <em>Recent Files</em> sub-menu, screenshot utility (<strong>scrot</strong>), and logout.</p>
-<p><strong>1.</strong> Create a key-combo in <tt class="docutils literal"><span class="pre">~/.config/openbox/lubuntu-rc.xml</span></tt> to activate the menu:</p>
+<p>Create a key-combo in <tt class="docutils literal"><span class="pre">~/.config/openbox/lubuntu-rc.xml</span></tt> to activate the menu:</p>
 <div class="highlight"><pre>&lt;!-- Keybindings <span class="err">&#39;</span>ALT+SPACEBAR <span class="k">for </span>Openbox menu --&gt;
 &lt;keybind <span class="nv">key</span><span class="o">=</span><span class="s2">&quot;A-space&quot;</span>&gt;
     &lt;action <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;ShowMenu&quot;</span>&gt;
@@ -39,7 +39,7 @@
     &lt;/action&gt;
 &lt;/keybind&gt;
 </pre></div>
-<p><strong>2.</strong> Reload the new configuration:</p>
+<p>Reload the new configuration:</p>
 <div class="highlight"><pre><span class="nv">$ </span>openbox --reconfigure
 </pre></div>
 <p>Happy hacking!</p>
