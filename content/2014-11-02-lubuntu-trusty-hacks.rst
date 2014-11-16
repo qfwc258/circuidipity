@@ -1,11 +1,11 @@
 =============================================
-19 small hacks after installing Lubuntu 14.04
+20 small hacks after installing Lubuntu 14.04
 =============================================
 
 :slug: lubuntu-trusty-hacks
 :template: article-project
 :tags: lubuntu, ubuntu, linux, lxde
-:modified: 2014-11-12 02:46:00
+:modified: 2014-11-15 01:10:00
 
 .. image:: images/lubuntu_logo.png
     :align: right
@@ -296,6 +296,11 @@ Update GRUB:
     $ sudo update-grub
                          
 ... and reboot.
+
+19. Pop-up menu
+---------------
+
+See `Pop-up custom menu in LXDE <http://www.circuidipity.com/20141115.html>`_ to create a hotkey-activated menu for favourite functions and applications.
 
 Happy hacking!
 
