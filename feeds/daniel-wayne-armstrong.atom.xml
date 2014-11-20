@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-11-15T01:10:00-05:00</updated><entry><title>Pop-up custom menu in LXDE</title><link href="http://www.circuidipity.com/20141115.html" rel="alternate"></link><updated>2014-11-15T01:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-15:20141115.html</id><summary type="html">&lt;p&gt;Create a hotkey-activated custom menu for favourite functions and applications.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-11-20T00:27:00-05:00</updated><entry><title>Links of interest</title><link href="http://www.circuidipity.com/20141120.html" rel="alternate"></link><updated>2014-11-20T00:27:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-20:20141120.html</id><summary type="html">&lt;ul class="simple"&gt;
+&lt;li&gt;The cost of &lt;a class="reference external" href="http://www.precisionnutrition.com/cost-of-getting-lean"&gt;getting lean&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://opensource.com/life/14/11/linux-lettuce-open-food-seeds"&gt;Free the seeds!&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Challenges to overcome for &lt;a class="reference external" href="http://www.centauri-dreams.org/?p=31971"&gt;long-duration human spaceflight&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;A mathematician and &lt;a class="reference external" href="http://www.thebigquestions.com/2014/11/17/the-generalist/"&gt;his beautiful approach to solving problems&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Star formation in the &lt;a class="reference external" href="http://apod.nasa.gov/apod/ap141118.html"&gt;Tadpole Nebula&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;A cautionary tale of &lt;a class="reference external" href="http://blog.freecodecamp.com/2014/11/a-cautionary-tale-of-learning-to-code.html"&gt;learning to code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://i.imgur.com/xfGY0Fb.jpg"&gt;All space missions in a single awesome image&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</summary><category term="links"></category></entry><entry><title>Pop-up custom menu in LXDE</title><link href="http://www.circuidipity.com/20141115.html" rel="alternate"></link><updated>2014-11-15T01:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-15:20141115.html</id><summary type="html">&lt;p&gt;Create a hotkey-activated custom menu for favourite functions and applications.&lt;/p&gt;
 &lt;p&gt;Copy Openbox's default &lt;tt class="docutils literal"&gt;menu.xml&lt;/tt&gt; and customize:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cp /usr/share/lubuntu/openbox/menu.xml ~/.config/openbox/lubuntu-menu.xml
 &lt;/pre&gt;&lt;/div&gt;
@@ -805,10 +814,4 @@ parm:           use_chanctx:Enable channel context &lt;span class="k"&gt;for &lt
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="lubuntu"></category><category term="ubuntu"></category><category term="linux"></category><category term="chromebook"></category></entry><entry><title>Links of interest</title><link href="http://www.circuidipity.com/20141023.html" rel="alternate"></link><updated>2014-10-23T00:10:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-10-23:20141023.html</id><summary type="html">&lt;ul class="simple"&gt;
-&lt;li&gt;Reading about Parisian booksellers &lt;a class="reference external" href="http://www.vanityfair.com/culture/2014/11/shakespeare-and-company-paris-george-whitman"&gt;Shakespeare and Company brings back happy memories&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;How SpaceX became a &lt;a class="reference external" href="http://qz.com/281619/what-it-took-for-elon-musks-spacex-to-disrupt-boeing-leapfrog-nasa-and-become-a-serious-space-company/"&gt;serious space company&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;What if age is &lt;a class="reference external" href="http://www.nytimes.com/2014/10/26/magazine/what-if-age-is-nothing-but-a-mind-set.html"&gt;nothing but a mind-set?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&amp;quot;In the end, we discovered that it is &lt;a class="reference external" href="http://online.wsj.com/articles/how-does-google-handle-it-for-its-workers-ask-cio-ben-fried-1413751227"&gt;far less expensive to have people who are experts than it is to dumb it down&lt;/a&gt;&amp;quot;&lt;/li&gt;
-&lt;/ul&gt;
-</summary><category term="links"></category></entry></feed>
+</summary><category term="lubuntu"></category><category term="ubuntu"></category><category term="linux"></category><category term="chromebook"></category></entry></feed>
