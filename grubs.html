@@ -25,6 +25,7 @@
 
 <!-- article -->
 <h1>GRUBS Reanimated USB Boot Stick</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Tuesday 25 November 2014</p>
 <div id="article">
     <p><a class="reference external" href="https://github.com/vonbrownie/grubs">GRUBS</a> is a Bash script I created for transforming a USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.</p>
 <p>See: <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">Transform a USB stick into a boot device packing multiple Linux distros</a></p>
@@ -35,23 +36,13 @@
 <li><tt class="docutils literal">rsync</tt></li>
 </ul>
 </div>
-<div class="section" id="installation">
-<h2>Installation</h2>
-<div class="section" id="source">
-<h3>Source</h3>
-<p>To install GRUBS from source:</p>
-<div class="highlight"><pre><span class="gp">$</span> wget -c https://github.com/vonbrownie/grubs/releases/download/v0.9.2/grubs-0.9.2.tar.gz
-<span class="gp">$</span> tar -xvzf grubs-*.tar.gz
-</pre></div>
-</div>
-</div>
 <div class="section" id="usage">
 <h2>Usage</h2>
 <p><strong>Step 0:</strong> Download Linux distro images and place in the <tt class="docutils literal">iso</tt> folder.</p>
 <p><strong>Step 1:</strong> Edit the USB stick's sample <tt class="docutils literal">grub.cfg</tt> with entries for the Linux images to be copied to the device. Each distro is a little bit different in the manner its booted by GRUB.</p>
-<p><strong>Step 2:</strong> Open <tt class="docutils literal">grubs</tt> in a text editor and modify the variables <tt class="docutils literal">ISODIR</tt> and <tt class="docutils literal">CONFIG</tt> to match where <tt class="docutils literal">iso</tt> and <tt class="docutils literal">grub.cfg</tt> are located on your system.</p>
-<p><strong>Step 3:</strong> Just run (as root) <tt class="docutils literal">grubs [DEVICE]</tt>. For example ... to install GRUB and Linux distros on a USB stick identified as <tt class="docutils literal">/dev/sdb1</tt>:</p>
-<div class="highlight"><pre><span class="gp">$</span> sudo grubs sdb1
+<p><strong>Step 2:</strong> Open <tt class="docutils literal">grubs</tt> in a text editor and modify the <tt class="docutils literal">iso_dir</tt> and <tt class="docutils literal">grub_conf</tt> variables to match where <tt class="docutils literal">iso</tt> and <tt class="docutils literal">grub.cfg</tt> are located on your system. Or indicate a temporary location and config with the <tt class="docutils literal"><span class="pre">-i</span></tt> and <tt class="docutils literal"><span class="pre">-c</span></tt> options. See <tt class="docutils literal">grubs <span class="pre">-h</span></tt> for details.</p>
+<p><strong>Step 3:</strong> Run (as root) <tt class="docutils literal">/path/to/grubs [OPTION] DEVICE</tt>. Example... FOO installs GRUB and Linux distros on a USB stick identified as <tt class="docutils literal">/dev/sdb1</tt>:</p>
+<div class="highlight"><pre><span class="gp">$</span> sudo /home/FOO/bin/grubs -i /path/to/linux/iso_images -c /path/to/usb_stick/grub.cfg sdb1
 </pre></div>
 <p>Reboot, select the USB stick (depending on BIOS settings) as boot device and GRUB will display a menu of the installed Linux distro images. Reboot again and return to using your USB stick as a regular storage device.</p>
 </div>
