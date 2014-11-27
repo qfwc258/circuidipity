@@ -188,7 +188,7 @@ My own sample config:
         Option          "TapButton3" "2"
     EndSection
 
-Sources: `50-c720-touchpad.conf (github.com/vonbrownie) <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/X11/xorg.conf.d/50-c720-touchpad.conf>`_, and pages for `Touchpad Synaptics <https://wiki.archlinux.org/index.php/Touchpad_Synaptics>`_ and the `C720 <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration>`_ on `ArchWiki <https://wiki.archlinux.org/>`_
+Sources: `50-c720-touchpad.conf <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/X11/xorg.conf.d/50-c720-touchpad.conf>`_, and pages for `Touchpad Synaptics <https://wiki.archlinux.org/index.php/Touchpad_Synaptics>`_ and the `C720 <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration>`_ on `ArchWiki <https://wiki.archlinux.org/>`_
 
 5. SSD
 ------
@@ -295,7 +295,7 @@ Add this line in ``/etc/systemd/logind.conf``:
 
 Suspend now works reliably when triggered from Lubuntu's shutdown menu. Chromebook will go to sleep and pushing the power button/opening the lid will resume the system with the desktop locked and a password prompt [7]_.
 
-Sources: `unbind_ehci <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/initramfs-tools/scripts/init-top/unbind_ehci>`_ and `10_disable-ehci.rules (github.com/vonbrownie) <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/udev/rules.d/10_disable-ehci.rules>`_, `C720 suspend tips <https://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/ch8eq2o>`_, and `configuring grub <https://www.reddit.com/r/chrubuntu/comments/2evv1c/updating_ubuntu_kernel_headers_image_etc/ckaf6hx>`_
+Sources: `unbind_ehci <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/initramfs-tools/scripts/init-top/unbind_ehci>`_ and `10_disable-ehci.rules <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/udev/rules.d/10_disable-ehci.rules>`_, `C720 suspend tips <https://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/ch8eq2o>`_, and `configuring grub <https://www.reddit.com/r/chrubuntu/comments/2evv1c/updating_ubuntu_kernel_headers_image_etc/ckaf6hx>`_
 
 7. Keyboard Shortcuts
 ---------------------
@@ -366,7 +366,7 @@ Enable the new key shortcuts by running:
 
 Lubuntu auto-detects ``$HOME/.xbindkeysrc``  and will run ``xbindkeys`` on the next login.
 
-Sources: `xbindkeysrc-chromebook (github.com/vonbrownie) <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/home/username/xbindkeysrc-chromebook>`_, `Xbindkeys <https://wiki.archlinux.org/index.php/Xbindkeys>`_, and another sample `Chromebook-friendly xbindkeysrc <https://github.com/alexpatel/dotfiles/blob/master/xbindkeysrc>`_
+Sources: `xbindkeysrc-chromebook <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/home/username/xbindkeysrc-chromebook>`_, `Xbindkeys <https://wiki.archlinux.org/index.php/Xbindkeys>`_, and another sample `Chromebook-friendly xbindkeysrc <https://github.com/alexpatel/dotfiles/blob/master/xbindkeysrc>`_
 
 7.2 Power Key
 -------------
@@ -401,12 +401,12 @@ Create ``/etc/modprobe.d/ath9k.conf`` with the following options:
   
     options ath9k nohwcrypt=1 btcoex_enable=1 bt_ant_diversity=1
 
-Sources: `ath9k.conf (github.com/vonbrownie) <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/modprobe.d/ath9k.conf>`_, `ath9k wireless driver <http://wireless.kernel.org/en/users/Drivers/ath9k>`_ and `bluetooth coexistence <http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex>`_                                                       
+Sources: `ath9k.conf <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/modprobe.d/ath9k.conf>`_, `ath9k wireless driver <http://wireless.kernel.org/en/users/Drivers/ath9k>`_ and `bluetooth coexistence <http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex>`_                                                       
 
 9. Helpful Resources
 --------------------
 
-* My personal `Lubuntubook configurations (github.com/vonbrownie) <https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_lubuntubook>`_ 
+* My personal `Lubuntubook configurations <https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_lubuntubook>`_ 
 * A few small hacks I like to do to `make a great OS even better <http://www.circuidipity.com/lubuntu-trusty-hacks.html>`_
 * `CrunchBang Linux <https://github.com/liangcj/AcerC720CrunchBang>`_ on the Acer C720
 * Arch Linux `C720 installation with useful post-install details <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook>`_
