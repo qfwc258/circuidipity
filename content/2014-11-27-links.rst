@@ -1,0 +1,12 @@
+=================
+Links of interest
+=================
+
+:date: 2014-11-27 16:50:00
+:slug: 20141127
+:tags: links
+
+* `"I'm studying poetry to be a better engineer, and this is why..." <http://mitadmissions.org/blogs/entry/im-studying-poetry-to-be-a-better-engineer-and-this-is-why>`_
+* How to `connect to wireless using Linux command line <http://linuxcommando.blogspot.in/2013/10/how-to-connect-to-wpawpa2-wifi-network.html>`_
+* 'How to Start a Startup' `recommended readings <http://startupclass.samaltman.com/lists/readings/>`_
+* Marked up photographs show `how iconic prints were edited in the darkroom <http://petapixel.com/2013/09/12/marked-photographs-show-iconic-prints-edited-darkroom/>`_
