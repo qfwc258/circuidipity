@@ -1,18 +1,13 @@
-======================
-Ping Parade #2 -- Keys
-======================
+===========================
+Secure login using SSH keys
+===========================
 
 :date: 2014-09-12 01:23:00
 :slug: pingparade2
 :tags: networks, encryption, debian, linux
-:template: article-project-pingparade
+:modified: 2014-12-08 00:02:00
 
-**Create cryptographic keys and disable password logins to make remote machines more secure.**
-
-.. image:: images/pingparade2-0.png
-    :alt: OpenSSH
-    :width: 960px
-    :height: 500px
+`Home Server Hack #1 ... <http://www.circuidipity.com/home-server-hacks.html>`_ Create cryptographic keys and disable password logins to make remote machines more secure.
 
 **OpenSSH** is a toolkit for securing communication with Unix-like remote machines and services and supports authenticating users with a public and private **key pair**. Michael Lucas, author of `OpenSSH Mastery <https://www.michaelwlucas.com/nonfiction/ssh-mastery>`_, describes the risk of passwords in SSH:
 

@@ -1,20 +1,15 @@
-========================
-Ping Parade #3 -- Backup
-========================
+=======
+Backups
+=======
 
 :date: 2014-09-19 01:23:00
 :slug: pingparade3
 :tags: networks, encryption, linux, shell, programming, github
-:template: article-project-pingparade
+:modified: 2014-12-08 00:04:00
 
-**Make automatic backups of important stuff using a dash of shell scripting + rsync + SSH + cron!**
+`Home Server Hack #3 ... <http://www.circuidipity.com/home-server-hacks.html>`_ Make automatic backups of important stuff using a dash of shell scripting + rsync + SSH + cron!
 
-.. image:: images/pingparade3-0.png
-    :alt: Backup
-    :width: 960px
-    :height: 500px
-
-One of the advantages of setting up a `Linux home server <http://www.circuidipity.com/pingparade1.html>`_ is providing a place to do that thing which everyone agrees is important but very few do consistently (or even once): **backups**. Hopefully you never experience any loss of data... but hope is not a plan! A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home directory on my netbook server sitting on the local area network (LAN).
+One of the advantages of setting up a `Linux home server <http://www.circuidipity.com/home-server-hacks.html>`_ is providing a place to do that thing which everyone agrees is important but very few do consistently (or even once): **backups**. Hopefully you never experience any loss of data... but hope is not a plan! A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home directory on my netbook server sitting on the local area network (LAN).
 
 Configure automatic backups:
 ============================

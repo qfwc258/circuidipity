@@ -1,19 +1,11 @@
-=========================
-Ping Parade #4 -- Breaker
-=========================
+=========================================
+Supercharging a home router using OpenWrt
+=========================================
 
 :date: 2014-09-26 21:10:00
 :slug: pingparade4
 :tags: networks, openwrt, linux
-:template: article-project-pingparade
-:modified: 2014-10-06 15:01:00
-
-**Unlock the full potential of your home router using OpenWrt.**
-
-.. image:: images/pingparade4-0.png
-    :alt: OpenWRT
-    :width: 960px
-    :height: 500px
+:modified: 2014-12-08 00:05:00
 
 A **home router** is a much more capable device than its pre-installed software would lead you to believe. `OpenWrt <https://openwrt.org/>`_ is an embedded Linux distribution that converts cheap, energy-efficient, network-capable devices into much more useful hackable computers.
 

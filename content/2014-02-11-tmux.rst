@@ -4,14 +4,15 @@ My tmux cheatsheet
 
 :date: 2014-02-11 01:23:00
 :slug: tmux
-:tags: shell, linux, cheatsheet
+:tags: shell, linux, home server
+:modified: 2014-12-08 00:03:00
 
 .. image:: /images/screenshot/tmux_window_pane.png
     :width: 940px
     :height: 529px
     :alt: tmux
 
-`tmux <http://tmux.sourceforge.net/>`_ is a **terminal multiplexer**. What this means is I can take a single terminal window and create multiple **windows** (tabs) and further partition a window into horizontal and vertical **panes**.
+`Home Server Hack #2 ... <http://www.circuidipity.com/home-server-hacks.html>`_ **Tmux** is a **terminal multiplexer**. What this means is I can take a single terminal window and create multiple **windows** (tabs) and further partition a window into horizontal and vertical **panes**.
 
 Using ``tmux`` I can create terminal sessions with a custom layout of windows / panes / names / running programs, switch between different sessions, and - best of all - **detach** from a session, log out, return later, **re-attach** and find the session layout preserved and programs continuing to run in the interim.
 
