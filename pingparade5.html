@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Ping Parade #5 -- Raspberry</title>
+        <title>Circuidipity | Remote control a Linux desktop using VNC</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -19,17 +19,15 @@
 <!-- breadcrumb trail -->
 <div id="breadcrumb">
     <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
-    <a href="projects.html">Projects</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
-    <a href="pingparade.html">Ping Parade</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
     Friday 03 October 2014</p>
 </div>
 
 <!-- article -->
-<h1>Ping Parade #5 -- Raspberry</h1>
+<h1>Remote control a Linux desktop using VNC</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Monday 08 December 2014</p>
 <div id="article">
-    <p><strong>Remote control a Linux desktop using Virtual Network Computing (VNC).</strong></p>
-<img alt="Raspberry Pi" src="images/pingparade5-0.png" style="width: 960px; height: 500px;" />
-<p><a class="reference external" href="http://www.raspberrypi.org/">Raspberry Pi</a> is a less-than-$50 credit card sized computer that delivers all the power and flexibility of Linux, tools to start programming, and the opportunity to <a class="reference external" href="https://learn.adafruit.com/category/raspberry-pi">explore electronics</a> courtesy of the onboard GPIO pins. There is an active community of Pi enthusiasts and plenty of resources to <a class="reference external" href="http://www.raspberrypi.org/help/">help you get started</a>. I think this plucky little device has real potential as a <a class="reference external" href="http://www.circuidipity.com/pingparade1.html">home server</a>!</p>
+    <p><a class="reference external" href="http://www.raspberrypi.org/">Raspberry Pi</a> is a less-than-$50 credit card sized computer that delivers all the power and flexibility of Linux, tools to start programming, and the opportunity to <a class="reference external" href="https://learn.adafruit.com/category/raspberry-pi">explore electronics</a> courtesy of the onboard GPIO pins. There is an active community of Pi enthusiasts and plenty of resources to <a class="reference external" href="http://www.raspberrypi.org/help/">help you get started</a>. I think this plucky little device has real potential as a <a class="reference external" href="http://www.circuidipity.com/home-server-hacks.html">home server</a>!</p>
 <p>One of the features I really like about the Pi is that the operating system runs off an SD card. Protecting the device's firmware from being mucked up makes it very easy to experiment with different Linux releases and configurations without any fear of bricking the device. I currently run <a class="reference external" href="http://www.raspbian.org/">Raspbian Linux</a> - the default recommendation - on a SanDisk 32GB microSD with adapter but there is an active and growing <a class="reference external" href="http://elinux.org/RPi_Distributions#Available_Distributions">list of alternatives</a>.</p>
 <p>The Pi has connectors for attaching an ethernet cable, USB peripherals such as keyboards and mice, and a monitor or TV permitting the device to serve as a complete standalone desktop computer. An alternative to dedicating input devices and a display to the Pi is to access the device via another computer using <strong>Virtual Networking Computing</strong>. VNC allows remote control of the Pi by transmitting all the display, keyboard, and mouse events to another computer.</p>
 <div class="section" id="to-configure-a-vnc-server-and-client">
