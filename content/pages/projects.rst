@@ -6,18 +6,18 @@ Projects
 
 .. class:: invisiblelink
 
-    .. image:: images/pingparade-thumb.png
-        :alt: Ping Parade
+    .. image:: images/linux-post-install-thumb.png
+        :alt: Home Server Hacks
         :width: 150px
         :height: 150px
         :align: left
-        :target: pingparade.html
+        :target: home-server-hacks.html
 
 .. raw:: html
 
     <div class="projectx">
-        <h2>Ping Parade</h2>
-        <p>The galactic internet <a href="pingparade.html">begins at home...</a></p>
+        <h2>Home Server Hacks</h2>
+        <p>Running your own Linux home server is <a href="home-server-hacks.html">a fun learning experience...</a></p>
         <p style="clear:both;"></p>
     </div>
 
