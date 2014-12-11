@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 08 Dec 2014 01:02:00 -0500</lastBuildDate><item><title>Home Server Hacks</title><link>http://www.circuidipity.com/home-server-hacks.html</link><description>&lt;img alt="Home Server Hacks" class="align-right" src="images/linux-post-install-thumb.png" style="width: 150px; height: 150px;" /&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 11 Dec 2014 13:43:00 -0500</lastBuildDate><item><title>Links of interest</title><link>http://www.circuidipity.com/20141211.html</link><description>&lt;ul class="simple"&gt;
+&lt;li&gt;Margaret Hamilton, &lt;a class="reference external" href="https://medium.com/&amp;#64;3fingeredfox/margaret-hamilton-lead-software-engineer-project-apollo-158754170da8"&gt;lead software engineer of Project Apollo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.bbc.com/future/story/20130401-the-loneliest-human-being"&gt;Most isolated human in history&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Creating &lt;a class="reference external" href="https://events.ccc.de/congress/2014/Fahrplan/events/6156.html"&gt;open hardware 'Fernvale' from reverse-engineering a closed-source SoC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;How to &lt;a class="reference external" href="http://hplusmagazine.com/2014/12/05/review-transforming-humanity-maxwell-leistung/"&gt;upgrade humans right now?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;I love Woz and his child-like wonder and enthusiasm... &lt;a class="reference external" href="http://www.bloomberg.com/video/steve-wozniak-on-steve-jobs-geekiness-and-starting-apple-GVS_jUoTQtGYj9fwLg8dbQ.html"&gt;A walking talking 'Exhibit A' for the Hacker Ethic&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Thu, 11 Dec 2014 13:43:00 -0500</pubDate><guid>tag:www.circuidipity.com,2014-12-11:20141211.html</guid><category>links</category></item><item><title>Home Server Hacks</title><link>http://www.circuidipity.com/home-server-hacks.html</link><description>&lt;img alt="Home Server Hacks" class="align-right" src="images/linux-post-install-thumb.png" style="width: 150px; height: 150px;" /&gt;
 &lt;p&gt;What useful and fun stuff can be done with a &lt;strong&gt;Linux home server&lt;/strong&gt; hosting network services that &lt;strong&gt;you&lt;/strong&gt; control? Let's go explore!&lt;/p&gt;
 &lt;div class="section" id="hacks"&gt;
 &lt;h2&gt;Hacks&lt;/h2&gt;
@@ -337,35 +344,4 @@ dmenu_run -b -i -fn &lt;span class="s1"&gt;&amp;#39;10x20&amp;#39;&lt;/span&gt; 
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sat, 15 Nov 2014 01:10:00 -0500</pubDate><guid>tag:www.circuidipity.com,2014-11-02:lubuntu-trusty-hacks.html</guid><category>lubuntu</category><category>ubuntu</category><category>linux</category><category>lxde</category></item><item><title>Add USB storage to Chromebooks</title><link>http://www.circuidipity.com/20141031.html</link><description>&lt;p&gt;I love my &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Lubuntubook&lt;/a&gt; and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room to shuffle data around. One popular option is to &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;open up the device&lt;/a&gt; and swap in a bigger SSD.&lt;/p&gt;
-&lt;p&gt;An alternative is to reserve the internal SSD for the OS and use an external USB storage device for data. I picked up a &lt;a class="reference external" href="http://www.amazon.com/SanDisk-Cruzer-Low-Profile-Drive-SDCZ33-064G-B35/dp/B00FJRS6QY"&gt;SanDisk Cruzer Fit 64GB USB 2.0&lt;/a&gt; which are really tiny devices that barely extrude from the USB port.&lt;/p&gt;
-&lt;p&gt;My plan is to keep the USB stick attached to the Chromebook (extra storage that can be disconnected and re-connected at will) and have Lubuntu auto-mount the device at boot. Steps to get it working:&lt;/p&gt;
-&lt;div class="section" id="partition-and-format"&gt;
-&lt;h2&gt;0. Partition and format&lt;/h2&gt;
-&lt;p&gt;Wipe any SanDisk stuff off the device by creating a new partition table with a single partition using a partitioning utility (such as &lt;strong&gt;fdisk&lt;/strong&gt;). I chose to format the partition as &lt;strong&gt;FAT32&lt;/strong&gt; for the widest range of compatibility using &lt;strong&gt;mkfs&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkfs.vfat /dev/sd&lt;span class="o"&gt;[&lt;/span&gt;device_label&lt;span class="o"&gt;]&lt;/span&gt;1
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="uuid"&gt;
-&lt;h2&gt;1. UUID&lt;/h2&gt;
-&lt;p&gt;Retrieve the &lt;a class="reference external" href="https://help.ubuntu.com/community/UsingUUID"&gt;Universally Unique Identifer&lt;/a&gt; (UUID) of the USB stick's partition (example uses &lt;tt class="docutils literal"&gt;sdb1&lt;/tt&gt;):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo blkid | grep sdb1
-/dev/sdb1: &lt;span class="nv"&gt;UUID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;7168-E0A7&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;TYPE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;vfat&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="auto-mount"&gt;
-&lt;h2&gt;2. Auto-mount&lt;/h2&gt;
-&lt;p&gt;Configure the system to auto-mount the USB stick at boot by creating a new mount point for the device:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /media/usb-extra
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and create a new entry in &lt;tt class="docutils literal"&gt;/etc/fstab&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;UUID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;7168-E0A7  /media/usb-extra    vfat   rw,user,noatime,uid&lt;span class="o"&gt;=&lt;/span&gt;1000,gid&lt;span class="o"&gt;=&lt;/span&gt;1000,shortname&lt;span class="o"&gt;=&lt;/span&gt;mixed,dmask&lt;span class="o"&gt;=&lt;/span&gt;0077,fmask&lt;span class="o"&gt;=&lt;/span&gt;0133,utf8&lt;span class="o"&gt;=&lt;/span&gt;1,flush,nobootwait  0   0
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Experiment with the settings. Note that &lt;tt class="docutils literal"&gt;nobootwait&lt;/tt&gt; is an &lt;tt class="docutils literal"&gt;upstart&lt;/tt&gt;-specific option to the &lt;tt class="docutils literal"&gt;mountall&lt;/tt&gt; command on &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt; and its derivatives. It enables boot to continue without manual intervention if the device is not found.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="boot"&gt;
-&lt;h2&gt;3. Boot&lt;/h2&gt;
-&lt;p&gt;One wrinkle on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt; is that an attached USB storage device makes the laptop always try to boot from USB (and fail) instead of internal storage. There appears to be no way to alter the default boot order in &lt;strong&gt;SeaBIOS&lt;/strong&gt; except to rebuild the firmware. Plus I &lt;strong&gt;like&lt;/strong&gt; that USB booting actually works on this device! The simple workaround is just hit &lt;strong&gt;ESC&lt;/strong&gt; at startup to access the boot menu and manually choose the SSD.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 31 Oct 2014 00:11:00 -0400</pubDate><guid>tag:www.circuidipity.com,2014-10-31:20141031.html</guid><category>chromebook</category><category>lubuntu</category><category>ubuntu</category><category>linux</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sat, 15 Nov 2014 01:10:00 -0500</pubDate><guid>tag:www.circuidipity.com,2014-11-02:lubuntu-trusty-hacks.html</guid><category>lubuntu</category><category>ubuntu</category><category>linux</category><category>lxde</category></item></channel></rss>
