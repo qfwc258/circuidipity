@@ -6,23 +6,6 @@ Projects
 
 .. class:: invisiblelink
 
-    .. image:: images/linux-post-install-thumb.png
-        :alt: Home Server Hacks
-        :width: 150px
-        :height: 150px
-        :align: left
-        :target: home-server-hacks.html
-
-.. raw:: html
-
-    <div class="projectx">
-        <h2>Home Server Hacks</h2>
-        <p>Running your own Linux home server is <a href="home-server-hacks.html">a fun learning experience...</a></p>
-        <p style="clear:both;"></p>
-    </div>
-
-.. class:: invisiblelink
-
     .. image:: images/lubuntu_logo-thumb.png
         :alt: Lubuntu
         :width: 150px
