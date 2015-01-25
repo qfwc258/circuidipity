@@ -95,7 +95,7 @@ Set new GBB flags using the ``set_gbb_flags.sh`` script in Chrome OS. To enable 
 
 .. code-block:: bash
 
-    set_gbb_flags.sh 0x489
+    /usr/share/vboot/bin/set_gbb_flags.sh 0x489
 
 Shutdown with:
 
@@ -399,7 +399,7 @@ Create ``/etc/modprobe.d/ath9k.conf`` with the following options:
 
 .. code-block:: bash
   
-    options ath9k nohwcrypt=1 btcoex_enable=1 bt_ant_diversity=1
+    options ath9k nohwcrypt=1 blink=1 btcoex_enable=1 enable_diversity=1
 
 Sources: `ath9k.conf <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/modprobe.d/ath9k.conf>`_, `ath9k wireless driver <http://wireless.kernel.org/en/users/Drivers/ath9k>`_ and `bluetooth coexistence <http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex>`_                                                       
 
