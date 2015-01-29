@@ -1,5 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2014-12-18T17:10:00-05:00</updated><entry><title>Links of interest</title><link href="http://www.circuidipity.com/20141218.html" rel="alternate"></link><updated>2014-12-18T17:10:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-12-18:20141218.html</id><summary type="html">&lt;ul class="simple"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-01-29T01:05:00-05:00</updated><entry><title>Run a Raspberry Pi from external USB storage</title><link href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html" rel="alternate"></link><updated>2015-01-29T01:05:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-01-29:run-a-raspberry-pi-from-external-usb-storage.html</id><summary type="html">&lt;p&gt;I am exploring the use of my Raspberry Pi as a 24/7 uptime &lt;strong&gt;home server&lt;/strong&gt;, and one of the hacks I wish to add is using Pi as a cheap and cheerful &lt;strong&gt;network attached storage&lt;/strong&gt; (NAS) device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well? I imagine an always-on Pi would enjoy more robust performance from a hard drive than an SD card.&lt;/p&gt;
+&lt;p&gt;Thanks to all the contributors &lt;a class="reference external" href="http://www.raspberrypi.org/forums/viewtopic.php?f=29&amp;amp;t=44177"&gt;on this discussion thread&lt;/a&gt; I put my plan in motion using:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Raspberry Pi Model B&lt;/li&gt;
+&lt;li&gt;5V 1A microUSB power adapter&lt;/li&gt;
+&lt;li&gt;ethernet cable&lt;/li&gt;
+&lt;li&gt;Raspbian Linux&lt;/li&gt;
+&lt;li&gt;SD card (for /boot)&lt;/li&gt;
+&lt;li&gt;1TB powered USB hard drive&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;div class="section" id="raspbian-linux"&gt;
+&lt;h3&gt;0. Raspbian Linux&lt;/h3&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://downloads.raspberrypi.org/raspbian_latest"&gt;Download&lt;/a&gt; and unpack Raspbian and write the image to a spare 4GB+ SD card:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dd &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1M &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;YYYY-MM-DD-wheezy-raspbian.img &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sdX
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo sync
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="http://www.raspberrypi.org/downloads/"&gt;operating system images&lt;/a&gt;, installing &lt;a class="reference external" href="http://www.raspberrypi.org/documentation/installation/installing-images/linux.md"&gt;images on Linux&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="raspi-config"&gt;
+&lt;h3&gt;1. Raspi-config&lt;/h3&gt;
+&lt;p&gt;Boot the Pi with the newly-minted Raspbian SD card and set a few options in the &lt;strong&gt;raspi-config&lt;/strong&gt; utility:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;4 Internationalisation Options
+    * Change Locale
+    * Change Timezone
+8 Advanced Options
+    * Hostname
+    * Memory Split  &lt;span class="c"&gt;# default is GPU=64MB, for a headless server set GPU=16MB and free more memory for the CPU&lt;/span&gt;
+    * SSH           &lt;span class="c"&gt;# enable SSH server at boot to permit login to Pi over LAN&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Save the new parameters and reboot.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="partitions"&gt;
+&lt;h3&gt;2. Partitions&lt;/h3&gt;
+&lt;p&gt;Filesystem layout on the SD card:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;df -h
+Filesystem      Size  Used Avail Use% Mounted on
+rootfs          2.9G  2.4G  401M  86% /
+/dev/root       2.9G  2.4G  401M  86% /
+devtmpfs        239M     0  239M   0% /dev
+tmpfs            49M  232K   49M   1% /run
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs            97M     0   97M   0% /run/shm
+/dev/mmcblk0p1   56M  9.7M   47M  18% /boot
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I connect my 1TB USB drive to Pi and confirm device detection:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;lsusb
+Bus 001 Device 002: ID 0424:9514 Standard Microsystems Corp.
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp.
+Bus 001 Device 005: ID 152d:2329 JMicron Technology Corp. / JMicron USA Technology Corp. JM20329 SATA Bridge
+&lt;span class="nv"&gt;$ &lt;/span&gt;dmesg
+&lt;span class="o"&gt;[&lt;/span&gt; ... &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; 1000.758503&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.3: new high-speed USB device number 5 using dwc_otg
+&lt;span class="o"&gt;[&lt;/span&gt; 1000.879972&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.3: New USB device found, &lt;span class="nv"&gt;idVendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;152d, &lt;span class="nv"&gt;idProduct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2329
+&lt;span class="o"&gt;[&lt;/span&gt; 1000.880010&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.3: New USB device strings: &lt;span class="nv"&gt;Mfr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1, &lt;span class="nv"&gt;Product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;SerialNumber&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;5
+&lt;span class="o"&gt;[&lt;/span&gt; 1000.880026&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.3: Product: USB to ATA/ATAPI bridge
+&lt;span class="o"&gt;[&lt;/span&gt; 1000.880043&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.3: Manufacturer: JMicron
+&lt;span class="o"&gt;[&lt;/span&gt; 1000.880057&lt;span class="o"&gt;]&lt;/span&gt; usb 1-1.3: SerialNumber: DCA5968053FF
+&lt;span class="o"&gt;[&lt;/span&gt; 1000.887271&lt;span class="o"&gt;]&lt;/span&gt; usb-storage 1-1.3:1.0: USB Mass Storage device detected
+&lt;span class="o"&gt;[&lt;/span&gt; 1000.892548&lt;span class="o"&gt;]&lt;/span&gt; usb-storage 1-1.3:1.0: Quirks match &lt;span class="k"&gt;for &lt;/span&gt;vid 152d pid 2329: 8020
+&lt;span class="o"&gt;[&lt;/span&gt; 1000.892761&lt;span class="o"&gt;]&lt;/span&gt; scsi0 : usb-storage 1-1.3:1.0
+&lt;span class="o"&gt;[&lt;/span&gt; 1001.928635&lt;span class="o"&gt;]&lt;/span&gt; scsi 0:0:0:0: Direct-Access     WDC WD10 EARS-00Y5B1           PQ: 0 ANSI: 2 CCS
+&lt;span class="o"&gt;[&lt;/span&gt; 1001.932571&lt;span class="o"&gt;]&lt;/span&gt; sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; 1953525168 512-byte logical blocks: &lt;span class="o"&gt;(&lt;/span&gt;1.00 TB/931 GiB&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; 1001.933328&lt;span class="o"&gt;]&lt;/span&gt; sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Write Protect is off
+&lt;span class="o"&gt;[&lt;/span&gt; 1001.933365&lt;span class="o"&gt;]&lt;/span&gt; sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Mode Sense: 28 00 00 00
+&lt;span class="o"&gt;[&lt;/span&gt; 1001.934066&lt;span class="o"&gt;]&lt;/span&gt; sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; No Caching mode page found
+&lt;span class="o"&gt;[&lt;/span&gt; 1001.934096&lt;span class="o"&gt;]&lt;/span&gt; sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Assuming drive cache: write through
+&lt;span class="o"&gt;[&lt;/span&gt; 1001.936947&lt;span class="o"&gt;]&lt;/span&gt; sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; No Caching mode page found
+&lt;span class="o"&gt;[&lt;/span&gt; 1001.936984&lt;span class="o"&gt;]&lt;/span&gt; sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Assuming drive cache: write through
+&lt;span class="o"&gt;[&lt;/span&gt; 1001.984646&lt;span class="o"&gt;]&lt;/span&gt; sd 0:0:0:0: Attached scsi generic sg0 &lt;span class="nb"&gt;type &lt;/span&gt;0
+&lt;span class="o"&gt;[&lt;/span&gt; 1002.344655&lt;span class="o"&gt;]&lt;/span&gt;  sda: sda1
+&lt;span class="o"&gt;[&lt;/span&gt; 1002.365186&lt;span class="o"&gt;]&lt;/span&gt; sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; No Caching mode page found
+&lt;span class="o"&gt;[&lt;/span&gt; 1002.365227&lt;span class="o"&gt;]&lt;/span&gt; sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Assuming drive cache: write through
+&lt;span class="o"&gt;[&lt;/span&gt; 1002.365255&lt;span class="o"&gt;]&lt;/span&gt; sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Attached SCSI disk
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Device is &lt;tt class="docutils literal"&gt;sda&lt;/tt&gt;. Use &lt;strong&gt;fdisk&lt;/strong&gt; to create 2 new partitions on the USB drive:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;sda1 - 20GB - Pi root filesystem&lt;/li&gt;
+&lt;li&gt;sda2 - remaining space - file storage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo fdisk /dev/sda
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for &lt;/span&gt;&lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
+
+Disk /dev/sda: 1000.2 GB, 1000204886016 bytes
+255 heads, 63 sectors/track, 121601 cylinders, total 1953525168 sectors
+&lt;span class="nv"&gt;Units&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; sectors of 1 * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 512 bytes
+Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: 512 bytes / 512 bytes
+I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+Device Boot      Start         End      Blocks   Id  System
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for &lt;/span&gt;&lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: n
+Partition &lt;span class="nb"&gt;type&lt;/span&gt;:
+  p   primary &lt;span class="o"&gt;(&lt;/span&gt;0 primary, 0 extended, 4 free&lt;span class="o"&gt;)&lt;/span&gt;
+  e   extended
+Select &lt;span class="o"&gt;(&lt;/span&gt;default p&lt;span class="o"&gt;)&lt;/span&gt;: p
+Partition number &lt;span class="o"&gt;(&lt;/span&gt;1-4, default 1&lt;span class="o"&gt;)&lt;/span&gt;:
+Using default value 1
+First sector &lt;span class="o"&gt;(&lt;/span&gt;2048-1953525167, default 2048&lt;span class="o"&gt;)&lt;/span&gt;:
+Using default value 2048
+Last sector, +sectors or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;2048-1953525167, default 1953525167&lt;span class="o"&gt;)&lt;/span&gt;: +20G
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for &lt;/span&gt;&lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: n
+Partition &lt;span class="nb"&gt;type&lt;/span&gt;:
+  p   primary &lt;span class="o"&gt;(&lt;/span&gt;1 primary, 0 extended, 3 free&lt;span class="o"&gt;)&lt;/span&gt;
+  e   extended
+Select &lt;span class="o"&gt;(&lt;/span&gt;default p&lt;span class="o"&gt;)&lt;/span&gt;: p
+Partition number &lt;span class="o"&gt;(&lt;/span&gt;1-4, default 2&lt;span class="o"&gt;)&lt;/span&gt;:
+Using default value 2
+First sector &lt;span class="o"&gt;(&lt;/span&gt;41945088-1953525167, default 41945088&lt;span class="o"&gt;)&lt;/span&gt;:
+Using default value 41945088
+Last sector, +sectors or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;41945088-1953525167, default 1953525167&lt;span class="o"&gt;)&lt;/span&gt;:
+Using default value 1953525167
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for &lt;/span&gt;&lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
+
+Disk /dev/sda: 1000.2 GB, 1000204886016 bytes
+255 heads, 63 sectors/track, 121601 cylinders, total 1953525168 sectors
+&lt;span class="nv"&gt;Units&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; sectors of 1 * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 512 bytes
+Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: 512 bytes / 512 bytes
+I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+Device Boot      Start         End      Blocks   Id  System
+/dev/sda1            2048    41945087    20971520   83  Linux
+/dev/sda2        41945088  1953525167   955790040   83  Linux
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for &lt;/span&gt;&lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: w
+The partition table has been altered!
+
+Calling ioctl&lt;span class="o"&gt;()&lt;/span&gt; to re-read partition table.
+Syncing disks.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="filesystems"&gt;
+&lt;h3&gt;3. Filesystems&lt;/h3&gt;
+&lt;p&gt;Format the new partitions as &lt;tt class="docutils literal"&gt;ext4&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mke2fs -t ext4 -L rootfs /dev/sda1
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mke2fs -t ext4 -L storage /dev/sda2
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="dev-root"&gt;
+&lt;h3&gt;4. /dev/root&lt;/h3&gt;
+&lt;p&gt;Mount the newly-formatted &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; partition to &lt;tt class="docutils literal"&gt;/mnt&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mount -t ext4 /dev/sda1 /mnt
+&lt;span class="nv"&gt;$ &lt;/span&gt;df -h
+Filesystem      Size  Used Avail Use% Mounted on
+rootfs          2.9G  2.4G  401M  86% /
+/dev/root       2.9G  2.4G  401M  86% /
+devtmpfs        239M     0  239M   0% /dev
+tmpfs            49M  220K   49M   1% /run
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs            97M     0   97M   0% /run/shm
+/dev/mmcblk0p1   56M  9.7M   47M  18% /boot
+/dev/sda1        20G   44M   19G   1% /mnt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Use &lt;strong&gt;rsync&lt;/strong&gt; to copy contents of &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; on the SD card to the &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; partition on the USB device:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo rsync -axv / /mnt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="new-rootfs"&gt;
+&lt;h3&gt;5. New rootfs&lt;/h3&gt;
+&lt;p&gt;Modify options in &lt;tt class="docutils literal"&gt;/boot/cmdline.txt&lt;/tt&gt; - located on the &lt;strong&gt;SD card&lt;/strong&gt; - to point the bootloader to &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; filesystem on the USB device:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Original:
+dwc_otg.lpm_enable&lt;span class="o"&gt;=&lt;/span&gt;0 &lt;span class="nv"&gt;console&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ttyAMA0,115200 &lt;span class="nv"&gt;console&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;tty1 &lt;span class="nv"&gt;root&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/mmcblk0p2 &lt;span class="nv"&gt;rootfstype&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ext4 &lt;span class="nv"&gt;elevator&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;deadline rootwait
+
+Modified:
+dwc_otg.lpm_enable&lt;span class="o"&gt;=&lt;/span&gt;0 &lt;span class="nv"&gt;console&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ttyAMA0,115200 &lt;span class="nv"&gt;console&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;tty1 &lt;span class="nv"&gt;root&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sda1 &lt;span class="nv"&gt;rootfstype&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ext4 &lt;span class="nv"&gt;elevator&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;deadline rootwait &lt;span class="nv"&gt;rootdelay&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;5
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fstab"&gt;
+&lt;h3&gt;6. fstab&lt;/h3&gt;
+&lt;p&gt;Create new mountpoint for the &lt;tt class="docutils literal"&gt;storage&lt;/tt&gt; partition:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /media/USB0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Modify options in &lt;tt class="docutils literal"&gt;/mnt/etc/fstab&lt;/tt&gt; - located on the &lt;strong&gt;USB device&lt;/strong&gt; - to mount &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;storage&lt;/tt&gt; partitions &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt; at boot. Sample configuration for &lt;tt class="docutils literal"&gt;sda1&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;sda2&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;proc            /proc           proc    defaults          0       0
+/dev/mmcblk0p1  /boot           vfat    defaults          0       2
+&lt;span class="c"&gt;# partitions on USB&lt;/span&gt;
+/dev/sda1   /       ext4    defaults,noatime  0       1
+/dev/sda2   /media/USB0  ext4    defaults,noatime  0       0
+&lt;span class="c"&gt;# comment out root filesystem on SD card&lt;/span&gt;
+&lt;span class="c"&gt;#/dev/mmcblk0p2  /               ext4    defaults,noatime  0       1&lt;/span&gt;
+&lt;span class="c"&gt;# a swapfile is not a swap partition, so no using swapon|off from here on, use  dphys-swapfile swap[on|off]  for that&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reboot"&gt;
+&lt;h3&gt;7. Reboot&lt;/h3&gt;
+&lt;p&gt;Save modifications and reboot. Login and check the new filesystem layout:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;df -h
+Filesystem     Type      Size  Used Avail Use% Mounted on
+rootfs         rootfs     20G  2.6G   16G  15% /
+/dev/root      ext4       20G  2.6G   16G  15% /
+devtmpfs       devtmpfs  239M     0  239M   0% /dev
+tmpfs          tmpfs      49M  236K   49M   1% /run
+tmpfs          tmpfs     5.0M     0  5.0M   0% /run/lock
+tmpfs          tmpfs      97M     0   97M   0% /run/shm
+/dev/mmcblk0p1 vfat       56M  9.7M   47M  18% /boot
+/dev/sda2      ext4      898G  343G  510G  41% /media/USB0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="post-install"&gt;
+&lt;h3&gt;8. Post-install&lt;/h3&gt;
+&lt;div class="section" id="password"&gt;
+&lt;h4&gt;8.1 Password&lt;/h4&gt;
+&lt;p&gt;A &lt;tt class="docutils literal"&gt;raspberry&lt;/tt&gt; is a tasty fruit but a lousy password. Change password for username &lt;tt class="docutils literal"&gt;pi&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;passwd
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="sudo"&gt;
+&lt;h4&gt;8.2 Sudo&lt;/h4&gt;
+&lt;p&gt;Default setting in Raspbian is to allow &lt;tt class="docutils literal"&gt;pi&lt;/tt&gt; to use &lt;tt class="docutils literal"&gt;sudo&lt;/tt&gt; without prompting for a password. Disable password-less &lt;tt class="docutils literal"&gt;sudo&lt;/tt&gt; by running:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo visudo -s
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and comment out the &lt;tt class="docutils literal"&gt;NOPASSWD&lt;/tt&gt; entry:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#includedir /etc/sudoers.d&lt;/span&gt;
+&lt;span class="c"&gt;#pi ALL=(ALL) NOPASSWD: ALL&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="upgrade"&gt;
+&lt;h4&gt;8.3 Upgrade&lt;/h4&gt;
+&lt;p&gt;With the newly-configured &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; up-and-running now is a good time to update Raspbian:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get update
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get dist-upgrade
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="static-address"&gt;
+&lt;h4&gt;8.4 Static Address&lt;/h4&gt;
+&lt;p&gt;A Raspberry Pi that is going to stay home and run as a server can be configured to use a &lt;strong&gt;static network address&lt;/strong&gt;. Sample &lt;tt class="docutils literal"&gt;/etc/network/interfaces&lt;/tt&gt; modification that disables &lt;tt class="docutils literal"&gt;dhcp&lt;/tt&gt; and sets ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#iface eth0 inet dhcp&lt;/span&gt;
+auto eth0
+iface eth0 inet static
+    address 192.168.1.88
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h3&gt;Notes&lt;/h3&gt;
+&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Pi requires an SD card to boot... so we continue using original /boot.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="raspberry pi"></category><category term="raspbian"></category><category term="linux"></category></entry><entry><title>Links of interest</title><link href="http://www.circuidipity.com/20141218.html" rel="alternate"></link><updated>2014-12-18T17:10:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-12-18:20141218.html</id><summary type="html">&lt;ul class="simple"&gt;
 &lt;li&gt;&amp;quot;It's people... &lt;a class="reference external" href="http://www.bunniestudios.com/blog/?p=4266"&gt;supply chains are made out of people!&amp;quot;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.rifters.com/crawl/?p=5425"&gt;Electric eel brain hacking&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&amp;quot;If we want to safeguard our languages, stories and ideas against extinction, &lt;a class="reference external" href="http://aeon.co/magazine/culture/can-egyptology-teach-us-to-future-proof-our-culture/"&gt;we had better study Egyptology&amp;quot;&lt;/a&gt;&lt;/li&gt;
@@ -132,210 +385,4 @@ VIRTUAL1 disconnected &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted r
 &lt;li&gt;&lt;a class="reference external" href="http://www.centauri-dreams.org/?p=31887"&gt;CubeSats and solar sails&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Mysterious &lt;a class="reference external" href="http://www.fastcoexist.com/3036887/out-of-this-world-the-mysterious-mental-side-effects-of-traveling-into-space"&gt;mental side-effects of traveling into space&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</summary><category term="links"></category></entry><entry><title>20 small hacks after installing Lubuntu 14.04</title><link href="http://www.circuidipity.com/lubuntu-trusty-hacks.html" rel="alternate"></link><updated>2014-11-15T01:10:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-02:lubuntu-trusty-hacks.html</id><summary type="html">&lt;img alt="Lubuntu" class="align-right" src="images/lubuntu_logo.png" style="width: 150px; height: 150px;" /&gt;
-&lt;p&gt;The combination of &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt;  plus the &lt;a class="reference external" href="http://www.circuidipity.com/tag-lxde.html"&gt;LXDE&lt;/a&gt; desktop equals the lightweight and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/tag-lubuntu.html"&gt;Lubuntu&lt;/a&gt;. Its loosely coupled components create a friendly environment for swapping out bits and customizing the interface, and ongoing development of the next-generation &lt;a class="reference external" href="http://lxqt.org/"&gt;LXQt&lt;/a&gt; looks promising!&lt;/p&gt;
-&lt;p&gt;Here are a few small hacks I like to do to make a great OS even better. Modifications are made on a &lt;a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html"&gt;fresh install of Lubuntu 14.04&lt;/a&gt;, which is a &lt;em&gt;Long Term Support&lt;/em&gt; (LTS) release (till April 2017).&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;div class="section" id="update-kernel"&gt;
-&lt;h3&gt;0. Update kernel&lt;/h3&gt;
-&lt;p&gt;Lubuntu installs the &lt;strong&gt;3.13&lt;/strong&gt; Linux kernel which may have incomplete hardware support for newer devices like the &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Acer C720 Chromebook&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Download and install a more recent kernel from &lt;a class="reference external" href="https://wiki.ubuntu.com/Kernel/MainlineBuilds"&gt;Ubuntu MainlineBuilds&lt;/a&gt;. An example using the &lt;strong&gt;3.17&lt;/strong&gt; kernel:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-headers-3.17.1-031701-generic_3.17.1-031701.201410150735_amd64.deb
-&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-headers-3.17.1-031701_3.17.1-031701.201410150735_all.deb
-&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-image-3.17.1-031701-generic_3.17.1-031701.201410150735_amd64.deb
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i linux*.deb
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and reboot.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="screen-lock"&gt;
-&lt;h3&gt;1. Screen lock&lt;/h3&gt;
-&lt;p&gt;The &lt;strong&gt;light-locker&lt;/strong&gt; screen utility locks the screen when the system has been idle for several minutes regardless of user-defined preferences.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Disable system-wide screen locking:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.bak
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and configure per-user settings in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Preferences-&amp;gt;Light&lt;/span&gt; Locker Settings&lt;/tt&gt;, which are saved to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/autostart/light-locker.desktop&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Sample &lt;tt class="docutils literal"&gt;Exec&lt;/tt&gt; line that locks screen when system-suspend is activated:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;Exec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;light-locker --lock-after-screensaver&lt;span class="o"&gt;=&lt;/span&gt;0 --lock-on-suspend --no-late-locking
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="http://askubuntu.com/questions/502942/lubuntu-enforces-screen-lock"&gt;Lubuntu enforces screen lock&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="editor"&gt;
-&lt;h3&gt;2. Editor&lt;/h3&gt;
-&lt;p&gt;Install full-version of &lt;strong&gt;vim&lt;/strong&gt; text editor and make it the default system editor:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install vim tmux
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-alternatives --config editor
-There are 4 choices &lt;span class="k"&gt;for &lt;/span&gt;the alternative editor &lt;span class="o"&gt;(&lt;/span&gt;providing /usr/bin/editor&lt;span class="o"&gt;)&lt;/span&gt;.
-
-  Selection    Path                Priority   Status
-------------------------------------------------------------
-  0            /bin/nano            40        auto mode
-  1            /bin/ed             -100       manual mode
-  2            /bin/nano            40        manual mode
-* 3            /usr/bin/vim.basic   30        manual mode
-  4            /usr/bin/vim.tiny    10        manual mode
-
-Press enter to keep the current choice&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt;, or &lt;span class="nb"&gt;type &lt;/span&gt;selection number:
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="terminal"&gt;
-&lt;h3&gt;3. Terminal&lt;/h3&gt;
-&lt;p&gt;Substitute lxterminal with &lt;strong&gt;rxvt-unicode&lt;/strong&gt; + &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; terminal multi-plexer and make &lt;strong&gt;urxvt&lt;/strong&gt; the default terminal:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install rxvt-unicode fonts-droid
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-alternatives --config x-terminal-emulator
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.Xresources&lt;/span&gt;&lt;/tt&gt; and set terminal options for fonts, colours, etc.&lt;/p&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.Xresources"&gt;.Xresources (github.com/vonbrownie)&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="ssh-keys"&gt;
-&lt;h3&gt;4. SSH keys&lt;/h3&gt;
-&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/pingparade2.html"&gt;Ping Parade #2 -- Keys&lt;/a&gt; for configuring OpenSSH and generating SSH keys for a Lubuntu installation.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="media-player"&gt;
-&lt;h3&gt;5. Media player&lt;/h3&gt;
-&lt;p&gt;Install multimedia codecs and the awesome &lt;strong&gt;vlc&lt;/strong&gt; media player:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install ubuntu-restricted-extras vlc
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="java-runtime-environment"&gt;
-&lt;h3&gt;6. Java Runtime Environment&lt;/h3&gt;
-&lt;p&gt;Install a &lt;strong&gt;JRE&lt;/strong&gt; (default is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openjdk-7-jre&lt;/span&gt;&lt;/tt&gt;):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install default-jre
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="home-bin"&gt;
-&lt;h3&gt;7. $HOME/bin&lt;/h3&gt;
-&lt;p&gt;Create a directory to hold personal scripts that will be added to &lt;tt class="docutils literal"&gt;$PATH&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/bin
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="applications-menu"&gt;
-&lt;h3&gt;8. Applications menu&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;Dmenu&lt;/strong&gt; is a menu that can be activated by keyboard shortcut and dynamically narrow the choice of available applications as you type. Part of the &lt;strong&gt;suckless-tools&lt;/strong&gt; package:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install suckless-tools
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dmenu-run.sh&lt;/span&gt;&lt;/tt&gt; shell script to generate a menu. Example:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
-dmenu_run -b -i -fn &lt;span class="s1"&gt;&amp;#39;10x20&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-    -nb &lt;span class="s1"&gt;&amp;#39;#000000&amp;#39;&lt;/span&gt; -nf &lt;span class="s1"&gt;&amp;#39;#ffffff&amp;#39;&lt;/span&gt; -sb &lt;span class="s1"&gt;&amp;#39;#d64937&amp;#39;&lt;/span&gt; -sf &lt;span class="s1"&gt;&amp;#39;#000000&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and place in &lt;tt class="docutils literal"&gt;$HOME/bin&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dmenu-run.sh"&gt;dmenu-run.sh (github.com/vonbrownie)&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="keyboard-shortcuts"&gt;
-&lt;h3&gt;9. Keyboard shortcuts&lt;/h3&gt;
-&lt;p&gt;Create shortcuts in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.config/openbox/lubuntu-rc.xml&lt;/span&gt;&lt;/tt&gt;. Example for launching &lt;tt class="docutils literal"&gt;dmenu&lt;/tt&gt; with key combo &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ALT-A&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;lt;!-- Keybindings &lt;span class="k"&gt;for &lt;/span&gt;running Run menu --&amp;gt;
-&amp;lt;keybind &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;A-a&amp;quot;&lt;/span&gt;&amp;gt;
-  &amp;lt;action &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Execute&amp;quot;&lt;/span&gt;&amp;gt;
-    &amp;lt;&lt;span class="nb"&gt;command&lt;/span&gt;&amp;gt;dmenu-run.sh&amp;lt;/command&amp;gt;
-  &amp;lt;/action&amp;gt;
-&amp;lt;/keybind&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-rc.xml"&gt;lubuntu-rc.xml (github.com/vonbrownie)&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="custom-application-launchers"&gt;
-&lt;h3&gt;10. Custom application launchers&lt;/h3&gt;
-&lt;p&gt;Create &lt;tt class="docutils literal"&gt;*.desktop&lt;/tt&gt; files with custom options to launch applications. Make a custom &lt;tt class="docutils literal"&gt;*.desktop&lt;/tt&gt; system-wide location:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /usr/local/share/applications
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;A sample &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;rxvt-unicode-custom.desktop&lt;/span&gt;&lt;/tt&gt; launcher contains:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;Desktop Entry&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Urxvt
-&lt;span class="nv"&gt;GenericName&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Terminal
-&lt;span class="nv"&gt;Comment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Use the &lt;span class="nb"&gt;command &lt;/span&gt;line
-&lt;span class="nv"&gt;TryExec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;urxvt
-&lt;span class="nv"&gt;Exec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;urxvt
-&lt;span class="nv"&gt;Icon&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;xterm-color
-&lt;span class="nv"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Application
-&lt;span class="nv"&gt;Categories&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Utility;TerminalEmulator;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="terminate-frozen-applications"&gt;
-&lt;h3&gt;11. Terminate frozen applications&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;Xkill&lt;/strong&gt; is a utility for terminating misbehaving X applications. When activated it displays a crosshair cursor that can be maneuvered in place and a click kills the client app that lies beneath.&lt;/p&gt;
-&lt;p&gt;A sample &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/usr/local/share/applications/xkill-custom.desktop&lt;/span&gt;&lt;/tt&gt; launcher:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;Desktop Entry&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Xkill misbehaving apps
-&lt;span class="nv"&gt;Comment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;KILL KILL KILL
-&lt;span class="nv"&gt;Exec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;xkill
-&lt;span class="nv"&gt;Icon&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;system-error
-&lt;span class="nv"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Application
-&lt;span class="nv"&gt;Categories&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;System;Utility;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Save file and the item will appear under Lubuntu's &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Menu-&amp;gt;System&lt;/span&gt; Tools&lt;/tt&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="favourites-panel"&gt;
-&lt;h3&gt;12. Favourites panel&lt;/h3&gt;
-&lt;p&gt;Right-click on the LXDE panel and select &lt;tt class="docutils literal"&gt;Create new panel&lt;/tt&gt; to create an extra panel to hold favourite application launchers. Panel configs are store in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.config/lxpanel/Lubuntu/panels&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="customize-the-theme"&gt;
-&lt;h3&gt;13. Customize the theme&lt;/h3&gt;
-&lt;img alt="Lubuntu desktop" class="align-center" src="images/screenshot/lubuntu-1404-numix-desktop.png" style="width: 900px; height: 506px;" /&gt;
-&lt;p&gt;Choose an alternative theme for the Lubuntu desktop. I like &lt;a class="reference external" href="https://numixproject.org/"&gt;Numix&lt;/a&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo add-apt-repository ppa:numix/ppa
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get update
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install numix-gtk-theme numix-icon-theme numix-icon-theme-circle
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Select the new theme in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Menu-&amp;gt;Preferences-&amp;gt;Customize&lt;/span&gt; Look and Feel&lt;/tt&gt; &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="dual-display"&gt;
-&lt;h3&gt;14. Dual display&lt;/h3&gt;
-&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/20141110.html"&gt;Dual display configuration in Lubuntu&lt;/a&gt; for configuring LXDE to auto-detect at login if a second display is attached and make the necessary adjustments.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="custom-login-wallpaper"&gt;
-&lt;h3&gt;15. Custom login wallpaper&lt;/h3&gt;
-&lt;p&gt;Login window is managed by &lt;strong&gt;lightdm-gtk-greeter&lt;/strong&gt;. To set a new background image for the login window:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /usr/local/share/wallpapers
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo cp my_new_login_image.jpg /usr/local/share/wallpapers
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Edit &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/lightdm/lightdm-gtk-greeter.conf&lt;/span&gt;&lt;/tt&gt; and configure the new background:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;background&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/local/share/wallpapers/my_new_login_image.jpg
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="auto-mount-external-drives-at-startup"&gt;
-&lt;h3&gt;16. Auto-mount external drives at startup&lt;/h3&gt;
-&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/20141031.html"&gt;Add USB storage to Chromebooks&lt;/a&gt; for an example scenario.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="display-grub-menu-at-boot"&gt;
-&lt;h3&gt;17. Display GRUB Menu at boot&lt;/h3&gt;
-&lt;p&gt;Comment out the &lt;tt class="docutils literal"&gt;GRUB_HIDDEN*&lt;/tt&gt; settings in &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#GRUB_HIDDEN_TIMEOUT=0&lt;/span&gt;
-&lt;span class="c"&gt;#GRUB_HIDDEN_TIMEOUT_QUIET=true&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Update the GRUB configuration with the new settings:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-grub
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and reboot.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="custom-grub-colours-and-splash-image"&gt;
-&lt;h3&gt;18. Custom GRUB colours and splash image&lt;/h3&gt;
-&lt;p&gt;Create &lt;tt class="docutils literal"&gt;/boot/grub/custom.cfg&lt;/tt&gt; and set custom GRUB menu colours. Example settings:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;set &lt;/span&gt;&lt;span class="nv"&gt;color_normal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;yellow/black
-&lt;span class="nb"&gt;set &lt;/span&gt;&lt;span class="nv"&gt;menu_color_normal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;yellow/black
-&lt;span class="nb"&gt;set &lt;/span&gt;&lt;span class="nv"&gt;menu_color_highlight&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;white/green
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Pick an image for the GRUB background (see &lt;a class="reference external" href="https://help.ubuntu.com/community/Grub2/Displays"&gt;help.ubuntu.com&lt;/a&gt; for restrictions) and save to &lt;tt class="docutils literal"&gt;/boot/grub&lt;/tt&gt;. Set the new background in &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;GRUB_BACKGROUND&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/boot/grub/my_new_grub_image.tga&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Update GRUB:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-grub
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and reboot.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="pop-up-menu"&gt;
-&lt;h3&gt;19. Pop-up menu&lt;/h3&gt;
-&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/20141115.html"&gt;Pop-up custom menu in LXDE&lt;/a&gt; to create a hotkey-activated menu for favourite functions and applications.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h3&gt;Notes&lt;/h3&gt;
-&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;For application buttons in the panel to display properly with Numix, right-click on the Taskbar, select &lt;tt class="docutils literal"&gt;Taskbar (Window List) Settings&lt;/tt&gt;, and enable &lt;tt class="docutils literal"&gt;Flat buttons&lt;/tt&gt; option.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</summary><category term="lubuntu"></category><category term="ubuntu"></category><category term="linux"></category><category term="lxde"></category></entry></feed>
+</summary><category term="links"></category></entry></feed>
