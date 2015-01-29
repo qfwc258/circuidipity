@@ -25,37 +25,41 @@
 
 <!-- article -->
 <h1>Add USB storage to Chromebooks</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 29 January 2015</p>
 <div id="article">
-    <p>I love my <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Lubuntubook</a> and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room to shuffle data around. One popular option is to <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">open up the device</a> and swap in a bigger SSD.</p>
+    <p>I love my <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Lubuntubook</a> and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room. One popular option is to <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">open up the device</a> and swap in a bigger SSD.</p>
 <p>An alternative is to reserve the internal SSD for the OS and use an external USB storage device for data. I picked up a <a class="reference external" href="http://www.amazon.com/SanDisk-Cruzer-Low-Profile-Drive-SDCZ33-064G-B35/dp/B00FJRS6QY">SanDisk Cruzer Fit 64GB USB 2.0</a> which are really tiny devices that barely extrude from the USB port.</p>
-<p>My plan is to keep the USB stick attached to the Chromebook (extra storage that can be disconnected and re-connected at will) and have Lubuntu auto-mount the device at boot. Steps to get it working:</p>
-<div class="section" id="partition-and-format">
-<h2>0. Partition and format</h2>
-<p>Wipe any SanDisk stuff off the device by creating a new partition table with a single partition using a partitioning utility (such as <strong>fdisk</strong>). I chose to format the partition as <strong>FAT32</strong> for the widest range of compatibility using <strong>mkfs</strong>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mkfs.vfat /dev/sd<span class="o">[</span>device_label<span class="o">]</span>1
+<p>My plan is to keep the USB stick attached to the Chromebook (extra storage that can be disconnected and re-connected at will) and have Lubuntu auto-mount the device at boot.</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<div class="section" id="filesystem">
+<h3>0. Filesystem</h3>
+<p>Device has a single partition that I re-format as <tt class="docutils literal">ext4</tt>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mke2fs -t ext4 /dev/sdX1
 </pre></div>
 </div>
 <div class="section" id="uuid">
-<h2>1. UUID</h2>
+<h3>1. UUID</h3>
 <p>Retrieve the <a class="reference external" href="https://help.ubuntu.com/community/UsingUUID">Universally Unique Identifer</a> (UUID) of the USB stick's partition (example uses <tt class="docutils literal">sdb1</tt>):</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo blkid | grep sdb1
-/dev/sdb1: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;7168-E0A7&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;vfat&quot;</span>
+/dev/sdb1: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;3e75240d-97b6-49cb-af21-fac25d574851&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;ext4&quot;</span>
 </pre></div>
 </div>
 <div class="section" id="auto-mount">
-<h2>2. Auto-mount</h2>
-<p>Configure the system to auto-mount the USB stick at boot by creating a new mount point for the device:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /media/usb-extra
+<h3>2. Auto-mount</h3>
+<p>Configure system to auto-mount USB stick at boot by creating a new mountpoint for the device:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /media/USB0
 </pre></div>
 <p>... and create a new entry in <tt class="docutils literal">/etc/fstab</tt>:</p>
-<div class="highlight"><pre><span class="nv">UUID</span><span class="o">=</span>7168-E0A7  /media/usb-extra    vfat   rw,user,noatime,uid<span class="o">=</span>1000,gid<span class="o">=</span>1000,shortname<span class="o">=</span>mixed,dmask<span class="o">=</span>0077,fmask<span class="o">=</span>0133,utf8<span class="o">=</span>1,flush,nobootwait  0   0
+<div class="highlight"><pre><span class="nv">UUID</span><span class="o">=</span>3e75240d-97b6-49cb-af21-fac25d574851 /media/USB0 ext4 rw,exec,noatime,nobootwait 0 0
 </pre></div>
-<p>Experiment with the settings. Note that <tt class="docutils literal">nobootwait</tt> is an <tt class="docutils literal">upstart</tt>-specific option to the <tt class="docutils literal">mountall</tt> command on <a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html">Ubuntu</a> and its derivatives. It enables boot to continue without manual intervention if the device is not found.</p>
+<p>Note that <tt class="docutils literal">nobootwait</tt> is an <tt class="docutils literal">upstart</tt>-specific option to the <tt class="docutils literal">mountall</tt> command on <a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html">Ubuntu</a> and its derivatives. It enables boot to continue without manual intervention if the device is not found.</p>
 </div>
 <div class="section" id="boot">
-<h2>3. Boot</h2>
-<p>One wrinkle on the <strong>Acer C720 Chromebook</strong> is that an attached USB storage device makes the laptop always try to boot from USB (and fail) instead of internal storage. There appears to be no way to alter the default boot order in <strong>SeaBIOS</strong> except to rebuild the firmware. Plus I <strong>like</strong> that USB booting actually works on this device! The simple workaround is just hit <strong>ESC</strong> at startup to access the boot menu and manually choose the SSD.</p>
+<h3>3. Boot</h3>
+<p>One wrinkle on the Chromebook is that attaching a USB stick makes the laptop always try to boot (and fail) from USB instead of internal storage. There appears to be no way to alter the default boot order in <strong>SeaBIOS</strong> except to rebuild the firmware. Plus I like that the USB boot option actually works! Simple workaround is just hit <tt class="docutils literal">ESC</tt> key at startup to access boot menu and manually choose the SSD.</p>
 <p>Happy hacking!</p>
+</div>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-chromebook.html">chromebook</a>
