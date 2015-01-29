@@ -4,7 +4,7 @@ Run a Raspberry Pi from external USB storage
 
 :date: 2015-01-29 01:05:00
 :slug: run-a-raspberry-pi-from-external-usb-storage
-:tags: raspberry pi, raspbian, linux
+:tags: raspberry pi, raspbian, linux, networks
 
 I am exploring the use of my Raspberry Pi as a 24/7 uptime **home server**, and one of the hacks I wish to add is using Pi as a cheap and cheerful **network attached storage** (NAS) device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well? I imagine an always-on Pi would enjoy more robust performance from a hard drive than an SD card.
 
