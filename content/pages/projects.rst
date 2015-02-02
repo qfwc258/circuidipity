@@ -6,6 +6,23 @@ Projects
 
 .. class:: invisiblelink
 
+    .. image:: images/raspberry-pi-home-server-thumb.png
+        :alt: Raspberry Pi Home Server
+        :width: 150px
+        :height: 150px
+        :align: left
+        :target: raspberry-pi-home-server.html
+
+.. raw:: html
+
+    <div class="projectx">
+        <h2>There's no place like [a Raspberry Pi] Home [Server]</h2>
+        <p>Raspberry Pi <a href="raspberry-pi-home-server.html">home server...</a></p>
+        <p style="clear:both;"></p>
+    </div>
+
+.. class:: invisiblelink
+
     .. image:: images/lubuntu_logo-thumb.png
         :alt: Lubuntu
         :width: 150px
