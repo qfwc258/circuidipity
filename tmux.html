@@ -25,13 +25,13 @@
 
 <!-- article -->
 <h1>My tmux cheatsheet</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Monday 08 December 2014</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 01 February 2015</p>
 <div id="article">
     <img alt="tmux" src="/images/screenshot/tmux_window_pane.png" style="width: 940px; height: 529px;" />
-<p><a class="reference external" href="http://www.circuidipity.com/home-server-hacks.html">Home Server Hack #2 ...</a> <strong>Tmux</strong> is a <strong>terminal multiplexer</strong>. What this means is I can take a single terminal window and create multiple <strong>windows</strong> (tabs) and further partition a window into horizontal and vertical <strong>panes</strong>.</p>
+<p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #2 &gt;&gt;</a> <strong>Tmux</strong> is a <strong>terminal multiplexer</strong>. What this means is I can take a single terminal window and create multiple <strong>windows</strong> (tabs) and further partition a window into horizontal and vertical <strong>panes</strong>.</p>
 <p>Using <tt class="docutils literal">tmux</tt> I can create terminal sessions with a custom layout of windows / panes / names / running programs, switch between different sessions, and - best of all - <strong>detach</strong> from a session, log out, return later, <strong>re-attach</strong> and find the session layout preserved and programs continuing to run in the interim.</p>
-<p><strong>Example:</strong> I can <tt class="docutils literal">ssh</tt> into my <a class="reference external" href="http://www.circuidipity.com/pingparade1.html">home server</a>, start a <tt class="docutils literal">tmux</tt> session and create multiple windows, run <a class="reference external" href="http://libtorrent.rakshasa.no/">rtorrent</a> in a window to start seeding a Linux <tt class="docutils literal">iso</tt>, detach from session and server, and return later to find everything in place and the <tt class="docutils literal">iso</tt> uploading.</p>
-<p><strong>To install:</strong> On Debian run:</p>
+<p><strong>Example:</strong> I can <tt class="docutils literal">ssh</tt> into my <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">home server</a>, start a <tt class="docutils literal">tmux</tt> session and create multiple windows, run <a class="reference external" href="http://libtorrent.rakshasa.no/">rtorrent</a> in a window to start seeding a Linux <tt class="docutils literal">iso</tt>, detach from session and server, and return later to find everything in place and the <tt class="docutils literal">iso</tt> uploading.</p>
+<p><strong>To install:</strong> On Debian-powered distros run:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install tmux
 </pre></div>
 <p>Commands entered inside a <tt class="docutils literal">tmux</tt> session are preceded by the key combination <tt class="docutils literal"><span class="pre">CTRL-b</span></tt> as the default <tt class="docutils literal">PREFIX</tt> (this can be modified in <tt class="docutils literal">.tmux.conf</tt>).</p>
@@ -122,7 +122,9 @@
 <dt><tt class="docutils literal">ENTER</tt></dt>
 <dd>exit copy mode</dd>
 </dl>
-<p><strong>Inside command mode ...</strong></p>
+</div>
+<div class="section" id="inside-command-mode">
+<h3>Inside command mode...</h3>
 <dl class="docutils">
 <dt><tt class="docutils literal"><span class="pre">show-buffer</span></tt></dt>
 <dd>display buffer_0 contents</dd>
@@ -181,7 +183,7 @@ tmux -f <span class="nv">$CONFIG</span> attach
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-home-server.html">home server</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-networks.html">networks</a>
 </p>
 </div>
 

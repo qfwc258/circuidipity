@@ -1,5 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 29 Jan 2015 01:05:00 -0500</lastBuildDate><item><title>Run a Raspberry Pi from external USB storage</title><link>http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html</link><description>&lt;p&gt;I am exploring the use of my Raspberry Pi as a 24/7 uptime &lt;strong&gt;home server&lt;/strong&gt;, and one of the hacks I wish to add is using Pi as a cheap and cheerful &lt;strong&gt;network attached storage&lt;/strong&gt; (NAS) device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well? I imagine an always-on Pi would enjoy more robust performance from a hard drive than an SD card.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 02 Feb 2015 00:05:00 -0500</lastBuildDate><item><title>Secure remote access using SSH keys</title><link>http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #1 &amp;gt;&amp;gt;&lt;/a&gt; Create cryptographic keys and disable password logins to make remote machines more secure.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;OpenSSH&lt;/strong&gt; is a toolkit for securing communication with Unix-like remote machines and services and supports authenticating users with a public and private &lt;strong&gt;key pair&lt;/strong&gt;. Michael Lucas, author of &lt;a class="reference external" href="https://www.michaelwlucas.com/nonfiction/ssh-mastery"&gt;OpenSSH Mastery&lt;/a&gt;, describes the risk of passwords in SSH:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For the last few years, a network of compromised machines dubbed the &amp;quot;Hail Mary Cloud&amp;quot; has scanned the Internet for SSH servers. When a member of this cloud finds an SSH server, it lets the other machines in the network know about it. The cloud then methodically tries possible usernames and passwords. One host on the network tries a few times, then another, then another. Blocking individual IP addresses is not a useful defense, because each address is used only a few times.&lt;/p&gt;
+&lt;p&gt;Any one attempt has low odds of guessing successfully. The attempts are constant. They never end. Eventually [some automated attacker] will get lucky and break into your server. It might be tomorrow, or next year, but it _will_ happen. To stop these types of attacks, you can either use packet filtering to block public access to your SSH server, or you can eliminate passwords on your servers. User keys let you eliminate passwords.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="section" id="to-configure-ssh-key-authentication-between-a-home-server-and-client"&gt;
+&lt;h2&gt;To configure SSH key authentication between a home server and client:&lt;/h2&gt;
+&lt;div class="section" id="install"&gt;
+&lt;h3&gt;0. Install&lt;/h3&gt;
+&lt;p&gt;Home server is a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi running Raspbian&lt;/a&gt; and client is a &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Chromebook running Lubuntu 14.04&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="section" id="on-the-server"&gt;
+&lt;h4&gt;On the server:&lt;/h4&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;install &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openssh-server&lt;/span&gt;&lt;/tt&gt; (pre-installed in Raspbian) and create an SSH configuration in the home directory of users who requires access to the system:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install openssh-server
+&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/.ssh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod 700 ~/.ssh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; touch ~/.ssh/authorized_keys &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod 600 ~/.ssh/authorized_keys
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;collect key fingerprints from the server:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-keygen -lf /etc/ssh/ssh_host_dsa_key.pub &amp;gt;&amp;gt; ~/.ssh/keys.txt
+&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub &amp;gt;&amp;gt; ~/.ssh/keys.txt
+&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-keygen -lf /etc/ssh/ssh_host_rsa_key.pub &amp;gt;&amp;gt; ~/.ssh/keys.txt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and give &lt;tt class="docutils literal"&gt;keys.txt&lt;/tt&gt; to users to compare signature when connecting for the first time&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;optional:&lt;/strong&gt; edit &lt;tt class="docutils literal"&gt;/etc/ssh/sshd_config&lt;/tt&gt; adding specific users to be granted system access (&lt;strong&gt;disabling&lt;/strong&gt; all others by default):&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;AllowUsers USERNAME1 USERNAME2
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Save and restart SSH with the new config by running:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/ssh restart
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="on-the-client"&gt;
+&lt;h4&gt;On the client:&lt;/h4&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;install &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openssh-client&lt;/span&gt;&lt;/tt&gt; and create the SSH folder in the user home directory:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install openssh-client
+&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/.ssh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod 700 ~/.ssh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;optional:&lt;/strong&gt; create an entry in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/config&lt;/span&gt;&lt;/tt&gt; with the login options for a server - for example:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Host raspberry
+HostName 192.168.1.88
+Port 22
+User pi
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="generate-keys"&gt;
+&lt;h3&gt;1. Generate keys&lt;/h3&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h4&gt;On the client:&lt;/h4&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;generate keys by running:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-keygen -t rsa -C &lt;span class="s2"&gt;&amp;quot;$(whoami)@$(hostname)-$(date -I)&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;upload the public key to the server and append it to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/authorized_keys&lt;/span&gt;&lt;/tt&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cat ~/.ssh/id_rsa.pub | ssh SERVER &lt;span class="s2"&gt;&amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="test"&gt;
+&lt;h3&gt;2. Test&lt;/h3&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h4&gt;On the client:&lt;/h4&gt;
+&lt;p&gt;Graphical display managers like &lt;tt class="docutils literal"&gt;gdm&lt;/tt&gt; will automatically check a user account for SSH keys upon login. A pop-up box will prompt for the passphrase and the key will be added to the desktop session.&lt;/p&gt;
+&lt;p&gt;If logging into a console, tell SSH that you have keys by running &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-add&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-add
+&lt;span class="nv"&gt;$ &lt;/span&gt;Enter passphrase &lt;span class="k"&gt;for&lt;/span&gt; /home/gaff/.ssh/id_rsa:
+Identity added: /home/gaff/.ssh/id_rsa &lt;span class="o"&gt;(&lt;/span&gt;/home/gaff/.ssh/id_rsa&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;All SSH sessions launched from this console will access this user key stored in memory. Make sure to test the connection before disabling password logins:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh 192.168.1.88
+Last login: Thu Sep 11 23:46:28 2014 from kambei.lan
+&lt;span class="nv"&gt;$ &lt;/span&gt;uname -n
+pi
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;No request to enter a passphrase indicates SSH key authentication is properly configured.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="disable-password-logins"&gt;
+&lt;h3&gt;3. Disable password logins&lt;/h3&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h4&gt;On the server:&lt;/h4&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;edit &lt;tt class="docutils literal"&gt;/etc/ssh/sshd_config&lt;/tt&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;PubkeyAuthentication yes
+ChallengeResponseAuthentication no
+PasswordAuthentication no
+UsePAM no
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and restart the SSH server:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/ssh restart
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="key-management"&gt;
+&lt;h3&gt;4. Key management&lt;/h3&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.funtoo.org/Keychain"&gt;Keychain&lt;/a&gt; is an OpenSSH key manager. From the package description:&lt;/p&gt;
+&lt;blockquote&gt;
+When keychain is run, it checks for a running ssh-agent, otherwise it starts one. It saves the ssh-agent environment variables to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.keychain/$HOSTNAME-sh&lt;/span&gt;&lt;/tt&gt;, so that subsequent logins and non-interactive shells such as cron jobs can source the file and make passwordless ssh connections.  In addition, when keychain runs, it verifies that the key files specified on the command-line are known to ssh-agent, otherwise it loads them, prompting you for a password if necessary.&lt;/blockquote&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h4&gt;On the client:&lt;/h4&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;install:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install keychain
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;configure &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bashrc&lt;/span&gt;&lt;/tt&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# setup keychain - ssh-agent management&lt;/span&gt;
+keychain ~/.ssh/id_rsa
+. ~/.keychain/&lt;span class="nv"&gt;$HOSTNAME&lt;/span&gt;-sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;flush all cached keys from memory with:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;keychain --clear
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;if using &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; enable persistent SSH key management across sessions by editing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.tmux.conf&lt;/span&gt;&lt;/tt&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;set&lt;/span&gt;-option -g update-environment &lt;span class="s2"&gt;&amp;quot;DISPLAY SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Mon, 02 Feb 2015 00:05:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-02:secure-remote-access-using-ssh-keys.html</guid><category>networks</category><category>linux</category></item><item><title>There's no place like [a Raspberry Pi] Home [Server]</title><link>http://www.circuidipity.com/raspberry-pi-home-server.html</link><description>&lt;img alt="Raspberry Pi Home Server" class="align-right" src="images/raspberry-pi-home-server.png" style="width: 300px; height: 300px;" /&gt;
+&lt;p&gt;Running your own Linux-powered &lt;strong&gt;home server&lt;/strong&gt; is a fun learning experience about how networks work and using a &lt;a class="reference external" href="http://www.raspberrypi.org/"&gt;Raspberry Pi&lt;/a&gt; is a cheap and cheerful way to get the job done!&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;ol class="arabic simple" start="0"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html"&gt;Move the root filesystem to external USB storage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;Secure remote access using SSH keys&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;Multiple terminal windows using tmux&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 01 Feb 2015 23:03:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-01:raspberry-pi-home-server.html</guid><category>raspberry pi</category><category>networks</category></item><item><title>Run a Raspberry Pi from external USB storage</title><link>http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #0 &amp;gt;&amp;gt;&lt;/a&gt; I am exploring the use of my Raspberry Pi as a 24/7 uptime &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;home server&lt;/a&gt;, and one of the hacks I wish to add is using Pi as a cheap and cheerful &lt;strong&gt;network attached storage&lt;/strong&gt; (NAS) device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well? I imagine an always-on Pi would enjoy more robust performance from a hard drive than an SD card.&lt;/p&gt;
 &lt;p&gt;Thanks to all the contributors &lt;a class="reference external" href="http://www.raspberrypi.org/forums/viewtopic.php?f=29&amp;amp;t=44177"&gt;on this discussion thread&lt;/a&gt; I put my plan in motion using:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Raspberry Pi Model B&lt;/li&gt;
@@ -252,7 +401,7 @@ iface eth0 inet static
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Thu, 29 Jan 2015 01:05:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-01-29:run-a-raspberry-pi-from-external-usb-storage.html</guid><category>raspberry pi</category><category>raspbian</category><category>linux</category><category>networks</category></item><item><title>Links of interest</title><link>http://www.circuidipity.com/20141218.html</link><description>&lt;ul class="simple"&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sat, 31 Jan 2015 22:41:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-01-29:run-a-raspberry-pi-from-external-usb-storage.html</guid><category>raspberry pi</category><category>raspbian</category><category>linux</category><category>networks</category></item><item><title>Links of interest</title><link>http://www.circuidipity.com/20141218.html</link><description>&lt;ul class="simple"&gt;
 &lt;li&gt;&amp;quot;It's people... &lt;a class="reference external" href="http://www.bunniestudios.com/blog/?p=4266"&gt;supply chains are made out of people!&amp;quot;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.rifters.com/crawl/?p=5425"&gt;Electric eel brain hacking&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&amp;quot;If we want to safeguard our languages, stories and ideas against extinction, &lt;a class="reference external" href="http://aeon.co/magazine/culture/can-egyptology-teach-us-to-future-proof-our-culture/"&gt;we had better study Egyptology&amp;quot;&lt;/a&gt;&lt;/li&gt;
@@ -310,79 +459,4 @@ iface eth0 inet static
 &lt;li&gt;&lt;a class="reference external" href="http://nautil.us/issue/1/what-makes-you-so-special/encounters-with-the-posthuman"&gt;Encounters with the transhuman&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;A visit to the &lt;a class="reference external" href="http://bldgblog.blogspot.ca/2014/11/amongst-machines-visit-to-tesla-factory.html"&gt;Tesla factory&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Thu, 13 Nov 2014 00:31:00 -0500</pubDate><guid>tag:www.circuidipity.com,2014-11-13:20141113.html</guid><category>links</category></item><item><title>Dual display configuration in Lubuntu</title><link>http://www.circuidipity.com/20141110.html</link><description>&lt;p&gt;&lt;strong&gt;Scenario:&lt;/strong&gt; I connect my &lt;strong&gt;Thinkpad X201&lt;/strong&gt; running Lubuntu and &lt;strong&gt;LXDE&lt;/strong&gt; (resolution: &lt;tt class="docutils literal"&gt;1280x800&lt;/tt&gt;) to an external display (resolution: &lt;tt class="docutils literal"&gt;1920x1200&lt;/tt&gt;) to create: 1) a combined desktop; 2) with &lt;strong&gt;lxpanel&lt;/strong&gt; top aligned and stretched across both displays; 3) and a different wallpaper on each display.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;div class="section" id="xrandr"&gt;
-&lt;h3&gt;0. Xrandr&lt;/h3&gt;
-&lt;p&gt;Output information about connected display devices and supported resolutions using &lt;strong&gt;Xrandr&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xrandr
-Screen 0: minimum 320 x 200, current 3200 x 1200, maximum 32767 x 32767
-LVDS1 connected 1280x800+0+0 &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt; 261mm x 163mm
-    1280x800       60.0*+   50.1
-    1024x768       60.0
-    800x600        60.3     56.2
-    640x480        59.9
-VGA1 connected primary 1920x1200+1280+0 &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt; 593mm x 371mm
-    1920x1200      60.0*+
-    1680x1050      60.0
-    1400x1050      60.0
-    1280x1024      75.0     60.0
-    1440x900       59.9
-    1280x960       60.0
-    1152x864       75.0
-    1024x768       75.1     70.1     60.0
-    832x624        74.6
-    800x600        72.2     75.0     60.3     56.2
-    640x480        75.0     72.8     66.7     60.0
-    720x400        70.1
-HDMI1 disconnected &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt;
-DP1 disconnected &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt;
-VIRTUAL1 disconnected &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="dualdisplay"&gt;
-&lt;h3&gt;1. dualDisplay&lt;/h3&gt;
-&lt;p&gt;Create a &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dualDisplay"&gt;dualDisplay&lt;/a&gt; shell script to generate a combined desktop (with external monitor set as primary display and positioned to the right of laptop display):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
-&lt;span class="nv"&gt;first_dsply&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;xrandr | grep &lt;span class="s2"&gt;&amp;quot; connected&amp;quot;&lt;/span&gt; | awk &lt;span class="s1"&gt;&amp;#39;FNR == 1 {print $1}&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
-&lt;span class="nv"&gt;second_dsply&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;xrandr | grep &lt;span class="s2"&gt;&amp;quot; connected&amp;quot;&lt;/span&gt; | awk &lt;span class="s1"&gt;&amp;#39;FNR == 2 {print $1}&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
-&lt;span class="nv"&gt;conf_dsply&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;xrandr --output $first_dsply --auto --output $second_dsply --primary&amp;quot;&lt;/span&gt;
-
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -n &lt;span class="nv"&gt;$second_dsply&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;
-&lt;span class="k"&gt;then&lt;/span&gt;
-    &lt;span class="nv"&gt;$conf_dsply&lt;/span&gt; --auto --right-of &lt;span class="nv"&gt;$first_dsply&lt;/span&gt;
-&lt;span class="k"&gt;fi&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Save the script to &lt;tt class="docutils literal"&gt;~/bin&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;/usr/local/bin&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;chmod 755 dualDisplay&lt;/tt&gt; to make it executable.&lt;/p&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dualDisplay"&gt;dualDisplay&lt;/a&gt; and its companion &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/Library.sh"&gt;Library.sh&lt;/a&gt; (github.com/vonbrownie)&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="autostart"&gt;
-&lt;h3&gt;2. Autostart&lt;/h3&gt;
-&lt;p&gt;Add &lt;tt class="docutils literal"&gt;dualDisplay&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/lxsession/Lubuntu/autostart&lt;/span&gt;&lt;/tt&gt; to run script at login.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="wallpaper"&gt;
-&lt;h3&gt;3. Wallpaper&lt;/h3&gt;
-&lt;p&gt;Desktop wallpapers are controlled by &lt;strong&gt;PCManFM&lt;/strong&gt; by default in Lubuntu. To configure a different wallpaper for each display... navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/pcmanfm/lubuntu&lt;/span&gt;&lt;/tt&gt; and modify the &lt;tt class="docutils literal"&gt;wallpaper&lt;/tt&gt; setting in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;desktop-items-*.conf&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;laptop display is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;desktop-items-0.conf&lt;/span&gt;&lt;/tt&gt;:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;wallpaper&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/path/to/laptop-wallpaper.jpg
-&lt;/pre&gt;&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;external display is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;desktop-items-1.conf&lt;/span&gt;&lt;/tt&gt;:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;wallpaper0&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/path/to/external-wallpaper.jpg
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Save all changes and logout. LXDE will now auto-detect at login if a second display is attached and make the necessary adjustments.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Mon, 10 Nov 2014 15:11:00 -0500</pubDate><guid>tag:www.circuidipity.com,2014-11-10:20141110.html</guid><category>lxde</category><category>lubuntu</category><category>ubuntu</category><category>linux</category></item><item><title>Links of interest</title><link>http://www.circuidipity.com/20141106.html</link><description>&lt;ul class="simple"&gt;
-&lt;li&gt;Canadian crowd-funded mission to &lt;a class="reference external" href="https://www.indiegogo.com/projects/northern-light-mission-to-mars#home"&gt;land a &amp;quot;beaver&amp;quot; on Mars in 2018&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://www.google.com/culturalinstitute/exhibit/bletchley-park-home-of-the-codebreakers/wRANFg9s?projectId=historic-moments"&gt;Home of the codebreakers&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;There's a difference between &lt;a class="reference external" href="http://sethgodin.typepad.com/seths_blog/2014/11/but-not-people-like-you.html"&gt;&amp;quot;people like you&amp;quot; and &amp;quot;you&amp;quot;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.centauri-dreams.org/?p=31887"&gt;CubeSats and solar sails&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Mysterious &lt;a class="reference external" href="http://www.fastcoexist.com/3036887/out-of-this-world-the-mysterious-mental-side-effects-of-traveling-into-space"&gt;mental side-effects of traveling into space&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Thu, 06 Nov 2014 00:31:00 -0500</pubDate><guid>tag:www.circuidipity.com,2014-11-06:20141106.html</guid><category>links</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Thu, 13 Nov 2014 00:31:00 -0500</pubDate><guid>tag:www.circuidipity.com,2014-11-13:20141113.html</guid><category>links</category></item></channel></rss>
