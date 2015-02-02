@@ -4,7 +4,7 @@ A place for humanity in the stars
 
 :date: 2014-09-30 13:49:00
 :slug: 20140930
-:tags: quotes, space, sf, books
+:tags: quotes
 
 Excerpt from "The Man Who Sold the Moon" by **Cory Doctorow**, part of the wonderful `Hieroglyph <http://www.circuidipity.com/20140928.html>`_ story collection:
 

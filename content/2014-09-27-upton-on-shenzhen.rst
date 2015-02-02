@@ -4,7 +4,7 @@ Upton on Shenzhen
 
 :date: 2014-09-27 13:32:00
 :slug: 20140927
-:tags: shenzhen, china, raspberry pi, electronics, quotes
+:tags: quotes
 
 **Eben Upton**, co-founder of **Raspberry Pi**, on hardware hacker-friendly **Shenzhen**:
 

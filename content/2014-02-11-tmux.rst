@@ -4,21 +4,21 @@ My tmux cheatsheet
 
 :date: 2014-02-11 01:23:00
 :slug: tmux
-:tags: shell, linux, home server
-:modified: 2014-12-08 00:03:00
+:tags: shell, linux, networks
+:modified: 2015-02-01 23:01:00
 
 .. image:: /images/screenshot/tmux_window_pane.png
     :width: 940px
     :height: 529px
     :alt: tmux
 
-`Home Server Hack #2 ... <http://www.circuidipity.com/home-server-hacks.html>`_ **Tmux** is a **terminal multiplexer**. What this means is I can take a single terminal window and create multiple **windows** (tabs) and further partition a window into horizontal and vertical **panes**.
+`Raspberry Pi Home Server Hack #2 >> <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ **Tmux** is a **terminal multiplexer**. What this means is I can take a single terminal window and create multiple **windows** (tabs) and further partition a window into horizontal and vertical **panes**.
 
 Using ``tmux`` I can create terminal sessions with a custom layout of windows / panes / names / running programs, switch between different sessions, and - best of all - **detach** from a session, log out, return later, **re-attach** and find the session layout preserved and programs continuing to run in the interim.
 
-**Example:** I can ``ssh`` into my `home server <http://www.circuidipity.com/pingparade1.html>`_, start a ``tmux`` session and create multiple windows, run `rtorrent <http://libtorrent.rakshasa.no/>`_ in a window to start seeding a Linux ``iso``, detach from session and server, and return later to find everything in place and the ``iso`` uploading.
+**Example:** I can ``ssh`` into my `home server <http://www.circuidipity.com/raspberry-pi-home-server.html>`_, start a ``tmux`` session and create multiple windows, run `rtorrent <http://libtorrent.rakshasa.no/>`_ in a window to start seeding a Linux ``iso``, detach from session and server, and return later to find everything in place and the ``iso`` uploading.
 
-**To install:** On Debian run:
+**To install:** On Debian-powered distros run:
 
 .. code-block:: bash
 
@@ -30,7 +30,7 @@ Helpful Commands
 ================
 
 Sessions
---------
+++++++++
 
 ``tmux new -s blogging``
     start new session with the name *blogging*
@@ -60,7 +60,7 @@ Sessions
     show every session, window, pane, etc...
 
 Windows and Panes
------------------
++++++++++++++++++
 
 ``tmux new -s blogging -n vim``
     create session *blogging* with a window named *vim*
@@ -108,13 +108,13 @@ Windows and Panes
     close current window ... if last window the session terminates
 
 Command Mode
-------------
+++++++++++++
 
 ``PREFIX`` ``:``
     enter command mode
 
 Copy Mode
----------
++++++++++
 
 ``PREFIX`` ``[``
     enter copy mode
@@ -140,7 +140,8 @@ Copy Mode
 ``ENTER``
     exit copy mode
 
-**Inside command mode ...**
+Inside command mode...
+++++++++++++++++++++++
 
 ``show-buffer``
     display buffer_0 contents

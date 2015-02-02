@@ -4,7 +4,7 @@ Ship or sails adapted to the heavenly breezes
 
 :date: 2014-07-10 01:23:00
 :slug: heavenly-breezes
-:tags: quotes, space
+:tags: quotes
 
 **Johannes Kepler** in a letter to **Galileo Galilei** - *Conversation with the Messenger from the Stars* - dated 19 April 1610:
 

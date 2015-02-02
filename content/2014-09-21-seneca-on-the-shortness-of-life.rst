@@ -4,7 +4,7 @@ He did not have a long voyage, just a long tossing about
 
 :date: 2014-09-21 13:14:00
 :slug: 20140921
-:tags: books, philosophy, quotes
+:tags: quotes
 
 .. image:: images/20140921-2-seneca.png
     :align: right

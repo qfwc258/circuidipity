@@ -4,7 +4,7 @@
 
 :date: 2014-09-28 14:49:00
 :slug: 20140928
-:tags: books, sf, quotes
+:tags: quotes
 
 .. image:: images/20140928-0.jpg
     :align: right
