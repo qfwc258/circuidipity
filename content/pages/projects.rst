@@ -17,7 +17,7 @@ Projects
 
     <div class="projectx">
         <h2>There's no place like [a Raspberry Pi] Home [Server]</h2>
-        <p>Raspberry Pi <a href="raspberry-pi-home-server.html">home server...</a></p>
+        <p>Run your own <a href="raspberry-pi-home-server.html">Linux-powered home server...</a></p>
         <p style="clear:both;"></p>
     </div>
 
