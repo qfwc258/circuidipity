@@ -7,7 +7,7 @@ Backups
 :tags: networks, encryption, linux, shell, programming, github
 :modified: 2014-12-08 00:04:00
 
-`Home Server Hack #3 ... <http://www.circuidipity.com/home-server-hacks.html>`_ Make automatic backups of important stuff using a dash of shell scripting + rsync + SSH + cron!
+Make automatic backups of important stuff using a dash of shell scripting + rsync + SSH + cron!
 
 One of the advantages of setting up a `Linux home server <http://www.circuidipity.com/home-server-hacks.html>`_ is providing a place to do that thing which everyone agrees is important but very few do consistently (or even once): **backups**. Hopefully you never experience any loss of data... but hope is not a plan! A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home directory on my netbook server sitting on the local area network (LAN).
 

@@ -7,7 +7,7 @@ Give new life to old laptops as Linux home servers
 :tags: networks, debian, linux
 :modified: 2014-12-08 00:01:00
 
-`Home Server Hack #0 ... <http://www.circuidipity.com/home-server-hacks.html>`_ Running your own Linux home server is a fun learning experience and offers several advantages.
+Running your own Linux home server is a fun learning experience and offers several advantages.
 
 It is cheap if you already have a spare machine. Or search for inexpensive, second-hand netbooks now that the short-lived craze for these lightweight devices has well and truly passed. An old netbook or laptop - retired in favour of more current and powerful machines - can still deliver plenty of *oomph* for running a personal server. Netbooks are frugal with power and come equipped with multiple network interfaces and their own built-in UPS/battery! I have been using an Asus 900HA netbook equipped with 1GM RAM and (user-replaced) 500GB hard drive for the past few years as a 24/7 home server.
 
