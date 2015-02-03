@@ -1,5 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-02-02T00:40:00-05:00</updated><entry><title>Secure remote access using SSH keys</title><link href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html" rel="alternate"></link><updated>2015-02-02T00:05:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-02:secure-remote-access-using-ssh-keys.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #1 &amp;gt;&amp;gt;&lt;/a&gt; Create cryptographic keys and disable password logins to make remote machines more secure.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-02-03T00:10:00-05:00</updated><entry><title>Backup /home</title><link href="http://www.circuidipity.com/backup-home.html" rel="alternate"></link><updated>2015-02-03T00:10:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-03:backup-home.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #3 &amp;gt;&amp;gt;&lt;/a&gt; Make automatic backups of &lt;tt class="docutils literal"&gt;/home&lt;/tt&gt; using a dash of shell scripting + rsync + SSH + cron!&lt;/p&gt;
+&lt;p&gt;One of the advantages of setting up a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Linux home server&lt;/a&gt; is providing an always-available location to store backups of important files. A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my Chromebook's home directory on the local area network (LAN) server.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;div class="section" id="ssh"&gt;
+&lt;h3&gt;0. SSH&lt;/h3&gt;
+&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;Raspberry Pi Home Server Hack #1 -- Secure remote access using SSH keys&lt;/a&gt; to configure SSH for encrypted connections between (Pi) server and (Chromebook) client. &lt;tt class="docutils literal"&gt;Keychain&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-agent&lt;/span&gt;&lt;/tt&gt;  make it easy to use a passphrase-protected &lt;strong&gt;encryption key&lt;/strong&gt; in automated scripts.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="script"&gt;
+&lt;h3&gt;1. Script&lt;/h3&gt;
+&lt;div class="section" id="on-the-server"&gt;
+&lt;h4&gt;On the server:&lt;/h4&gt;
+&lt;p&gt;Create a backup directory to hold the contents of &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/backup-home
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="on-the-client"&gt;
+&lt;h4&gt;On the client:&lt;/h4&gt;
+&lt;p&gt;Create a backup script that uses the &lt;tt class="docutils literal"&gt;rsync&lt;/tt&gt; file-copy tool. A sample &lt;tt class="docutils literal"&gt;myRsync&lt;/tt&gt; script to backup &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt; includes:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;load the details of the SSH key stored in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.keychain/$HOSTNAME-sh&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;mirror &lt;tt class="docutils literal"&gt;$HOME/&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;SERVER_ADDR:~/backup-home/&lt;/span&gt;&lt;/tt&gt; using options &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--archive&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--delete&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;exclude certain items from the backup like &lt;tt class="docutils literal"&gt;cache&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;trash&lt;/tt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; Take care nothing important is wiped out using &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--delete&lt;/span&gt;&lt;/tt&gt;. First run &lt;tt class="docutils literal"&gt;rsync&lt;/tt&gt; in a console with option &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--dry-run&lt;/span&gt;&lt;/tt&gt; to test settings (example SERVER_ADDR &lt;tt class="docutils literal"&gt;pi&amp;#64;192.168.1.88&lt;/tt&gt;):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;rsync --verbose --archive --delete --dry-run &lt;span class="k"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;HOME&lt;/span&gt;&lt;span class="k"&gt;}&lt;/span&gt;/ pi@192.168.1.88:~/backup-home/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sample script:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="c"&gt;# ~/bin/myRsync&lt;/span&gt;
+&lt;span class="nv"&gt;ssh_agent&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;${HOME}/.keychain/$HOSTNAME-sh&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;rsync_options&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;--verbose --archive --delete&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;rsync_exclude&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;--exclude=*[Cc]ache* --exclude=*[Tt]rash*&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;rsync_src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;${HOME}/&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;rsync_dest&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pi@192.168.1.88:~/backup_home/&amp;quot;&lt;/span&gt;
+
+. &lt;span class="nv"&gt;$ssh_agent&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;date&lt;span class="k"&gt;)&lt;/span&gt;
+rsync &lt;span class="nv"&gt;$rsync_options&lt;/span&gt; &lt;span class="nv"&gt;$rsync_exclude&lt;/span&gt; &lt;span class="nv"&gt;$rsync_src&lt;/span&gt; &lt;span class="nv"&gt;$rsync_dest&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Place the script in &lt;tt class="docutils literal"&gt;$HOME/bin&lt;/tt&gt; and make it executable. Run manually at least once to test:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;chmod 744 ~/bin/myRsync
+&lt;span class="nv"&gt;$ &lt;/span&gt;~/bin/myRsync
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="automate"&gt;
+&lt;h3&gt;2. Automate&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Cron&lt;/strong&gt; is a daemon that runs programs at specified times. Use the command &lt;tt class="docutils literal"&gt;crontab &lt;span class="pre"&gt;-e&lt;/span&gt;&lt;/tt&gt; to setup &lt;tt class="docutils literal"&gt;myRsync&lt;/tt&gt; to auto-run with the following parameters:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;perform a daily backup at &lt;tt class="docutils literal"&gt;23:55&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;log program activity by redirecting output to &lt;tt class="docutils literal"&gt;/home/my_username/cron.log&lt;/tt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# To define the time you can provide concrete values for&lt;/span&gt;
+&lt;span class="c"&gt;# minute (m), hour (h), day of month (dom), month (mon),&lt;/span&gt;
+&lt;span class="c"&gt;# and day of week (dow) or use &amp;#39;*&amp;#39; in these fields (for &amp;#39;any&amp;#39;).#&lt;/span&gt;
+&lt;span class="c"&gt;#&lt;/span&gt;
+&lt;span class="c"&gt;# Output of the crontab jobs (including errors) is sent through&lt;/span&gt;
+&lt;span class="c"&gt;# email to the user the crontab file belongs to (unless redirected).&lt;/span&gt;
+&lt;span class="c"&gt;#&lt;/span&gt;
+&lt;span class="c"&gt;# For more information see the manual pages of crontab(5) and cron(8)&lt;/span&gt;
+&lt;span class="c"&gt;#&lt;/span&gt;
+&lt;span class="c"&gt;# m h  dom mon dow   command&lt;/span&gt;
+
+&lt;span class="c"&gt;# Daily backup of $HOME to the netbook server&lt;/span&gt;
+55 23 * * * /home/my_username/bin/myRsync &amp;gt;&amp;gt; /home/my_username/cron.log
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A more complete &lt;tt class="docutils literal"&gt;myRsync&lt;/tt&gt; script can be &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/myRsync"&gt;found on Github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="networks"></category><category term="linux"></category><category term="shell"></category><category term="programming"></category><category term="github"></category></entry><entry><title>Secure remote access using SSH keys</title><link href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html" rel="alternate"></link><updated>2015-02-02T00:05:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-02:secure-remote-access-using-ssh-keys.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #1 &amp;gt;&amp;gt;&lt;/a&gt; Create cryptographic keys and disable password logins to make remote machines more secure.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;OpenSSH&lt;/strong&gt; is a toolkit for securing communication with Unix-like remote machines and services and supports authenticating users with a public and private &lt;strong&gt;key pair&lt;/strong&gt;. Michael Lucas, author of &lt;a class="reference external" href="https://www.michaelwlucas.com/nonfiction/ssh-mastery"&gt;OpenSSH Mastery&lt;/a&gt;, describes the risk of passwords in SSH:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;For the last few years, a network of compromised machines dubbed the &amp;quot;Hail Mary Cloud&amp;quot; has scanned the Internet for SSH servers. When a member of this cloud finds an SSH server, it lets the other machines in the network know about it. The cloud then methodically tries possible usernames and passwords. One host on the network tries a few times, then another, then another. Blocking individual IP addresses is not a useful defense, because each address is used only a few times.&lt;/p&gt;
@@ -138,7 +209,7 @@ keychain ~/.ssh/id_rsa
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="networks"></category><category term="linux"></category></entry><entry><title>There's no place like [a Raspberry Pi] Home [Server]</title><link href="http://www.circuidipity.com/raspberry-pi-home-server.html" rel="alternate"></link><updated>2015-02-02T00:40:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-01:raspberry-pi-home-server.html</id><summary type="html">&lt;img alt="Raspberry Pi Home Server" class="align-right" src="images/raspberry-pi-home-server.png" style="width: 300px; height: 300px;" /&gt;
+</summary><category term="networks"></category><category term="linux"></category></entry><entry><title>There's no place like [a Raspberry Pi] Home [Server]</title><link href="http://www.circuidipity.com/raspberry-pi-home-server.html" rel="alternate"></link><updated>2015-02-03T00:02:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-01:raspberry-pi-home-server.html</id><summary type="html">&lt;img alt="Raspberry Pi Home Server" class="align-right" src="images/raspberry-pi-home-server.png" style="width: 300px; height: 300px;" /&gt;
 &lt;p&gt;&lt;em&gt;Work-in-progress&lt;/em&gt;: Running your own Linux-powered &lt;strong&gt;home server&lt;/strong&gt; is a fun learning experience about how networks work and using a &lt;a class="reference external" href="http://www.raspberrypi.org/"&gt;Raspberry Pi&lt;/a&gt; is a cheap and cheerful way to get the job done!&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
@@ -146,7 +217,9 @@ keychain ~/.ssh/id_rsa
 &lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html"&gt;Move the root filesystem to external USB storage&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;Secure remote access using SSH keys&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;Multiple terminal windows using tmux&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/backup-home.html"&gt;Backup /home&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 </summary><category term="raspberry pi"></category><category term="networks"></category></entry><entry><title>Run a Raspberry Pi from external USB storage</title><link href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html" rel="alternate"></link><updated>2015-01-31T22:41:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-01-29:run-a-raspberry-pi-from-external-usb-storage.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #0 &amp;gt;&amp;gt;&lt;/a&gt; I am exploring the use of my Raspberry Pi as a 24/7 uptime &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;home server&lt;/a&gt;, and one of the hacks I wish to add is using Pi as a cheap and cheerful &lt;strong&gt;network attached storage&lt;/strong&gt; (NAS) device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well? I imagine an always-on Pi would enjoy more robust performance from a hard drive than an SD card.&lt;/p&gt;
 &lt;p&gt;Thanks to all the contributors &lt;a class="reference external" href="http://www.raspberrypi.org/forums/viewtopic.php?f=29&amp;amp;t=44177"&gt;on this discussion thread&lt;/a&gt; I put my plan in motion using:&lt;/p&gt;
@@ -452,11 +525,4 @@ iface eth0 inet static
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-menu.xml"&gt;lubuntu-menu.xml&lt;/a&gt; + &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-rc.xml"&gt;lubuntu-rc.xml&lt;/a&gt; + &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/ob-recent-files-pipemenu"&gt;ob-recent-files-pipemenu&lt;/a&gt; (github.com/vonbrownie), &lt;a class="reference external" href="http://crunchbanglinux.org/wiki/configuring_the_openbox_menu"&gt;Configuring the Openbox Menu&lt;/a&gt; (crunchbanglinux.org)&lt;/p&gt;
-</summary><category term="lubuntu"></category><category term="ubuntu"></category><category term="linux"></category><category term="openbox"></category><category term="lxde"></category></entry><entry><title>Links of interest</title><link href="http://www.circuidipity.com/20141113.html" rel="alternate"></link><updated>2014-11-13T00:31:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-13:20141113.html</id><summary type="html">&lt;ul class="simple"&gt;
-&lt;li&gt;3-D printing a &lt;a class="reference external" href="https://www.youtube.com/watch?v=pk9PWUGkz7o"&gt;lunar (or asteroid) igloo&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://aeon.co/magazine/science/imitation-is-what-makes-us-human-and-creativ/"&gt;&amp;quot;[We] are dwarves, standing atop a vast heap of dwarves...&amp;quot;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Why I'm &lt;a class="reference external" href="http://www.theguardian.com/world/2014/nov/08/the-expats-who-call-afghanistan-home"&gt;staying in Afghanistan&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://nautil.us/issue/1/what-makes-you-so-special/encounters-with-the-posthuman"&gt;Encounters with the transhuman&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;A visit to the &lt;a class="reference external" href="http://bldgblog.blogspot.ca/2014/11/amongst-machines-visit-to-tesla-factory.html"&gt;Tesla factory&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</summary><category term="links"></category></entry></feed>
+</summary><category term="lubuntu"></category><category term="ubuntu"></category><category term="linux"></category><category term="openbox"></category><category term="lxde"></category></entry></feed>
