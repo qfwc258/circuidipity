@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-02-03T00:10:00-05:00</updated><entry><title>Backup /home</title><link href="http://www.circuidipity.com/backup-home.html" rel="alternate"></link><updated>2015-02-03T00:10:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-03:backup-home.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #3 &amp;gt;&amp;gt;&lt;/a&gt; Make automatic backups of &lt;tt class="docutils literal"&gt;/home&lt;/tt&gt; using a dash of shell scripting + rsync + SSH + cron!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-02-04T00:02:00-05:00</updated><entry><title>Links of interest</title><link href="http://www.circuidipity.com/links-20150204.html" rel="alternate"></link><updated>2015-02-04T00:02:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-04:links-20150204.html</id><summary type="html">&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.ted.com/talks/deb_roy_the_birth_of_a_word"&gt;Birth of a word&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Pleasure from &lt;a class="reference external" href="http://www.brainpickings.org/2015/01/07/glenn-kurtz-practicing/"&gt;practicing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;How NASA brought the &lt;a class="reference external" href="http://arstechnica.com/science/2013/04/how-nasa-brought-the-monstrous-f-1-moon-rocket-back-to-life/"&gt;F-1 monster moon rocket engine back to life&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Panoramic view of the &lt;a class="reference external" href="http://hubblesite.org/newscenter/archive/releases/2015/02"&gt;Andromeda Galaxy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;MOOC &lt;a class="reference external" href="http://www.marsdd.com/news-and-insights/what-mooc-should-become/"&gt;jumps into the POOL&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;From bacteria to &lt;a class="reference external" href="https://www.youtube.com/watch?v=0HJPilemNns"&gt;interstellar war&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Nazi spy &lt;a class="reference external" href="http://www.strangehistory.net/2010/06/27/nazi-kurt-captured-in-arctic-circle-in-1981/"&gt;captured in Labrador in 1981&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&amp;quot;Ten Years to the Singularity if we &lt;a class="reference external" href="http://goertzel.org/TenYearsToTheSingularity.pdf"&gt;Really Really Try&amp;quot; (PDF)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Influence of &lt;a class="reference external" href="http://onlinelibrary.wiley.com/enhanced/doi/10.1002/bies.201400071/"&gt;gut bacteria on eating decisions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</summary><category term="links"></category></entry><entry><title>Backup /home</title><link href="http://www.circuidipity.com/backup-home.html" rel="alternate"></link><updated>2015-02-03T00:10:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-03:backup-home.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #3 &amp;gt;&amp;gt;&lt;/a&gt; Make automatic backups of &lt;tt class="docutils literal"&gt;/home&lt;/tt&gt; using a dash of shell scripting + rsync + SSH + cron!&lt;/p&gt;
 &lt;p&gt;One of the advantages of setting up a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Linux home server&lt;/a&gt; is providing an always-available location to store backups of important files. A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my Chromebook's home directory on the local area network (LAN) server.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
@@ -507,22 +518,4 @@ iface eth0 inet static
 &lt;li&gt;A cautionary tale of &lt;a class="reference external" href="http://blog.freecodecamp.com/2014/11/a-cautionary-tale-of-learning-to-code.html"&gt;learning to code&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://i.imgur.com/xfGY0Fb.jpg"&gt;All space missions in a single awesome image&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</summary><category term="links"></category></entry><entry><title>Pop-up custom menu in LXDE</title><link href="http://www.circuidipity.com/20141115.html" rel="alternate"></link><updated>2014-11-15T01:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-15:20141115.html</id><summary type="html">&lt;p&gt;Create a hotkey-activated custom menu for favourite functions and applications.&lt;/p&gt;
-&lt;p&gt;Copy Openbox's default &lt;tt class="docutils literal"&gt;menu.xml&lt;/tt&gt; and customize:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cp /usr/share/lubuntu/openbox/menu.xml ~/.config/openbox/lubuntu-menu.xml
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;My &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-menu.xml"&gt;own menu&lt;/a&gt; includes &lt;tt class="docutils literal"&gt;lxpanelctl menu&lt;/tt&gt;, search (using &lt;strong&gt;catfish&lt;/strong&gt;), &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/ob-recent-files-pipemenu"&gt;Recent Files&lt;/a&gt; sub-menu, screenshot utility (&lt;strong&gt;scrot&lt;/strong&gt;), and logout.&lt;/p&gt;
-&lt;p&gt;Create a key-combo in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/openbox/lubuntu-rc.xml&lt;/span&gt;&lt;/tt&gt; to activate the menu:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;lt;!-- Keybindings &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;ALT+SPACEBAR &lt;span class="k"&gt;for &lt;/span&gt;Openbox menu --&amp;gt;
-&amp;lt;keybind &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;A-space&amp;quot;&lt;/span&gt;&amp;gt;
-    &amp;lt;action &lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ShowMenu&amp;quot;&lt;/span&gt;&amp;gt;
-    &amp;lt;menu&amp;gt;root-menu&amp;lt;/menu&amp;gt;
-    &amp;lt;/action&amp;gt;
-&amp;lt;/keybind&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reload the new configuration:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;openbox --reconfigure
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-menu.xml"&gt;lubuntu-menu.xml&lt;/a&gt; + &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-rc.xml"&gt;lubuntu-rc.xml&lt;/a&gt; + &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/ob-recent-files-pipemenu"&gt;ob-recent-files-pipemenu&lt;/a&gt; (github.com/vonbrownie), &lt;a class="reference external" href="http://crunchbanglinux.org/wiki/configuring_the_openbox_menu"&gt;Configuring the Openbox Menu&lt;/a&gt; (crunchbanglinux.org)&lt;/p&gt;
-</summary><category term="lubuntu"></category><category term="ubuntu"></category><category term="linux"></category><category term="openbox"></category><category term="lxde"></category></entry></feed>
+</summary><category term="links"></category></entry></feed>
