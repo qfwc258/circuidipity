@@ -27,7 +27,7 @@
 <h1>Network Attached Storage using a Raspberry Pi and SSHFS</h1>
 <div id="article">
     <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #4 &gt;&gt;</a> Connect a Pi to external USB storage and create a cheap, cheerful, encrypted traffic NAS device via <strong>SSH Filesystem (SSHFS)</strong>.</p>
-<p>With a <a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html">Pi-attached 1TB hard drive</a> hosting a properly configured <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">SSH server</a> nothing extra is required server-side. On my Chromebook I install SSHFS, add my username to the FUSE group, and create a local <tt class="docutils literal">piNAS</tt> mountpoint for the remote filesystem:</p>
+<p>With a <a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html">Pi-attached 1TB hard drive</a> hosting a properly configured <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">SSH server</a> nothing extra is required server-side. On my Chromebook I install SSHFS, add my username to the <tt class="docutils literal">FUSE</tt> group, and create a local <tt class="docutils literal">piNAS</tt> mountpoint for the remote filesystem:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install sshfs
 <span class="nv">$ </span>sudo adduser USERNAME fuse
 <span class="nv">$ </span>mkdir ~/piNAS
