@@ -32,13 +32,13 @@ option update_url       &lt;span class="s2"&gt;&amp;quot;http://www.duckdns.org/
 option use_syslog       &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Start the daemon:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;sh
-. /usr/lib/ddns/dynamic_dns_functions.sh &lt;span class="c"&gt;# note the leading period&lt;/span&gt;
-start_daemon_for_all_ddns_sections &lt;span class="s2"&gt;&amp;quot;wan&amp;quot;&lt;/span&gt;
-&lt;span class="nb"&gt;exit&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# sh&lt;/span&gt;
+&lt;span class="c"&gt;# . /usr/lib/ddns/dynamic_dns_functions.sh&lt;/span&gt;
+&lt;span class="c"&gt;# start_daemon_for_all_ddns_sections &amp;quot;wan&amp;quot;&lt;/span&gt;
+&lt;span class="c"&gt;# exit&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Test:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;/usr/lib/ddns/dynamic_dns_updater.sh duckdns
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# /usr/lib/ddns/dynamic_dns_updater.sh duckdns&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;In OpenWRT's &lt;tt class="docutils literal"&gt;LuCI&lt;/tt&gt; interface navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;System-&amp;gt;Startup&lt;/span&gt;&lt;/tt&gt; and enable DDNS to ensure the router continues to send IP address changes after reboot and hotplug events.&lt;/p&gt;
 &lt;p&gt;Source: &lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/ddns.client"&gt;OpenWRT DDNS client&lt;/a&gt;&lt;/p&gt;

@@ -59,13 +59,13 @@ option update_url       <span class="s2">&quot;http://www.duckdns.org/update?dom
 option use_syslog       <span class="s2">&quot;1&quot;</span>
 </pre></div>
 <p>Start the daemon:</p>
-<div class="highlight"><pre>sh
-. /usr/lib/ddns/dynamic_dns_functions.sh <span class="c"># note the leading period</span>
-start_daemon_for_all_ddns_sections <span class="s2">&quot;wan&quot;</span>
-<span class="nb">exit</span>
+<div class="highlight"><pre><span class="c"># sh</span>
+<span class="c"># . /usr/lib/ddns/dynamic_dns_functions.sh</span>
+<span class="c"># start_daemon_for_all_ddns_sections &quot;wan&quot;</span>
+<span class="c"># exit</span>
 </pre></div>
 <p>Test:</p>
-<div class="highlight"><pre>/usr/lib/ddns/dynamic_dns_updater.sh duckdns
+<div class="highlight"><pre><span class="c"># /usr/lib/ddns/dynamic_dns_updater.sh duckdns</span>
 </pre></div>
 <p>In OpenWRT's <tt class="docutils literal">LuCI</tt> interface navigate to <tt class="docutils literal"><span class="pre">System-&gt;Startup</span></tt> and enable DDNS to ensure the router continues to send IP address changes after reboot and hotplug events.</p>
 <p>Source: <a class="reference external" href="http://wiki.openwrt.org/doc/howto/ddns.client">OpenWRT DDNS client</a></p>
