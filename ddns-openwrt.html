@@ -27,17 +27,17 @@
 <h1>Dynamic DNS and OpenWRT</h1>
 <div id="article">
     <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #5 &gt;&gt;</a> Access a home server from anywhere using Dynamic DNS (DDNS).</p>
-<p>My Raspberry Pi server sits behind a router assigned a <strong>dynamic IP address</strong> by the ISP. If I want to connect to my Pi over the Internet from anywhere in the world I can use a <strong>DDNS service</strong> to create a domain name that automatically updates the IP address in the background whenever it changes and redirect Internet traffic to the new location.</p>
+<p>My Raspberry Pi server sits behind a router assigned a <strong>dynamic IP address</strong> by the ISP. If I want to connect to my Pi over the Internet from anywhere in the world I can use a <strong>DDNS service</strong> to create a domain name that automatically updates the IP address in the background whenever it changes and redirect traffic to the new location.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
 <div class="section" id="select-a-ddns-service">
 <h3>0. Select a DDNS service</h3>
-<p>I chose <a class="reference external" href="http://www.duckdns.org/">duckdns.org</a>, a free DDNS service that allows the creation of up to 4 domains in the format <tt class="docutils literal">your_subdomain_choice.duckdns.org</tt>. Example: Create the subdomain <tt class="docutils literal">myPiHomeServer</tt> and later - after configuring the router - when entering <tt class="docutils literal">myPiHomeServer.duckdns.org</tt> I will be redirected to the current IP address assigned to my home network.</p>
+<p>I chose the free DDNS service <a class="reference external" href="http://www.duckdns.org/">duckdns.org</a> which permits the creation of up to 4 domains in the format <tt class="docutils literal">your_subdomain_choice.duckdns.org</tt>. Example: Create the subdomain <tt class="docutils literal">myPiHomeServer</tt> and later - after configuring the router - when entering <tt class="docutils literal">myPiHomeServer.duckdns.org</tt> I will be redirected to the current IP address assigned to my home network.</p>
 <p>Make note of <a class="reference external" href="http://www.duckdns.org/install.jsp">http://www.duckdns.org/install.jsp</a> (while logged in) for customized settings useful for configuring the router for DDNS.</p>
 </div>
 <div class="section" id="configure-openwrt-for-notification">
 <h3>1. Configure OpenWRT for notification</h3>
-<p>Different routers configure DDNS differently but the goal is the same: the ability to notify the DDNS service when the IP address assigned by the ISP is modified. I am using an <a class="reference external" href="http://www.circuidipity.com/pingparade4.html">OpenWRT-powered router</a> and these are the steps to configure OpenWRT to use duckdns DDNS:</p>
+<p>Different routers configure DDNS differently but the goal is the same: the ability to notify the DDNS service whenever the IP address assigned by the ISP is modified. I am using an <a class="reference external" href="http://www.circuidipity.com/pingparade4.html">OpenWRT-powered router</a> and these are the steps to configure OpenWRT to use duckdns DDNS:</p>
 <p>Install DDNS packages:</p>
 <div class="highlight"><pre><span class="c"># opkg update</span>
 <span class="c"># opkg install luci-app-ddns ddns-scripts</span>
