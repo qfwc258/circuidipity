@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-02-05T18:30:00-05:00</updated><entry><title>Network Attached Storage using a Raspberry Pi and SSHFS</title><link href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html" rel="alternate"></link><updated>2015-02-05T18:28:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-05:nas-raspberry-pi-sshfs.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #4 &amp;gt;&amp;gt;&lt;/a&gt; Connect a Pi to external USB storage and create a cheap, cheerful, encrypted traffic NAS device via &lt;strong&gt;SSH Filesystem (SSHFS)&lt;/strong&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-02-06T00:04:00-05:00</updated><entry><title>Dynamic DNS and OpenWRT</title><link href="http://www.circuidipity.com/ddns-openwrt.html" rel="alternate"></link><updated>2015-02-06T00:02:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-06:ddns-openwrt.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #5 &amp;gt;&amp;gt;&lt;/a&gt; Access a home server from anywhere using Dynamic DNS (DDNS).&lt;/p&gt;
+&lt;p&gt;My Raspberry Pi server sits behind a router assigned a &lt;strong&gt;dynamic IP address&lt;/strong&gt; by the ISP. If I want to connect to my Pi over the Internet from anywhere in the world I can use a &lt;strong&gt;DDNS service&lt;/strong&gt; to create a domain name that automatically updates the IP address in the background whenever it changes and redirect Internet traffic to the new location.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;div class="section" id="select-a-ddns-service"&gt;
+&lt;h3&gt;0. Select a DDNS service&lt;/h3&gt;
+&lt;p&gt;I chose &lt;a class="reference external" href="http://www.duckdns.org/"&gt;duckdns.org&lt;/a&gt;, a free DDNS service that allows the creation of up to 4 domains in the format &lt;tt class="docutils literal"&gt;your_subdomain_choice.duckdns.org&lt;/tt&gt;. Example: Create the subdomain &lt;tt class="docutils literal"&gt;myPiHomeServer&lt;/tt&gt; and later - after configuring the router - when entering &lt;tt class="docutils literal"&gt;myPiHomeServer.duckdns.org&lt;/tt&gt; I will be redirected to the current IP address assigned to my home network.&lt;/p&gt;
+&lt;p&gt;Make note of &lt;a class="reference external" href="http://www.duckdns.org/install.jsp"&gt;http://www.duckdns.org/install.jsp&lt;/a&gt; (while logged in) for customized settings useful for configuring the router for DDNS.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configure-openwrt-for-notification"&gt;
+&lt;h3&gt;1. Configure OpenWRT for notification&lt;/h3&gt;
+&lt;p&gt;Different routers configure DDNS differently but the goal is the same: the ability to notify the DDNS service when the IP address assigned by the ISP is modified. I am using an &lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;OpenWRT-powered router&lt;/a&gt; and these are the steps to configure OpenWRT to use duckdns DDNS:&lt;/p&gt;
+&lt;p&gt;Install DDNS packages:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# opkg update&lt;/span&gt;
+&lt;span class="c"&gt;# opkg install luci-app-ddns ddns-scripts&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Use the customized settings from &lt;a class="reference external" href="http://www.duckdns.org/install.jsp"&gt;http://www.duckdns.org/install.jsp&lt;/a&gt; to configure &lt;tt class="docutils literal"&gt;/etc/config/ddns&lt;/tt&gt;. Sample entry for &lt;tt class="docutils literal"&gt;myPiHomeServer&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;config service          &lt;span class="s2"&gt;&amp;quot;duckdns&amp;quot;&lt;/span&gt;
+option enabled          &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;
+option service_name     &lt;span class="s2"&gt;&amp;quot;duckdns.org&amp;quot;&lt;/span&gt;
+option domain           &lt;span class="s2"&gt;&amp;quot;myPiHomeServer&amp;quot;&lt;/span&gt;
+option username         &lt;span class="s2"&gt;&amp;quot;NA&amp;quot;&lt;/span&gt;
+option password         &lt;span class="s2"&gt;&amp;quot;string_of_letters_and_digits&amp;quot;&lt;/span&gt;
+option ip_source        &lt;span class="s2"&gt;&amp;quot;network&amp;quot;&lt;/span&gt;
+option ip_network       &lt;span class="s2"&gt;&amp;quot;wan&amp;quot;&lt;/span&gt;
+option force_interval   &lt;span class="s2"&gt;&amp;quot;72&amp;quot;&lt;/span&gt;
+option force_unit       &lt;span class="s2"&gt;&amp;quot;hours&amp;quot;&lt;/span&gt;
+option check_interval   &lt;span class="s2"&gt;&amp;quot;10&amp;quot;&lt;/span&gt;
+option check_unit       &lt;span class="s2"&gt;&amp;quot;minutes&amp;quot;&lt;/span&gt;
+option update_url       &lt;span class="s2"&gt;&amp;quot;http://www.duckdns.org/update?domains=[DOMAIN]&amp;amp;token=[PASSWORD]&amp;amp;ip=[IP]&amp;quot;&lt;/span&gt;
+option use_syslog       &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In OpenWRT's &lt;tt class="docutils literal"&gt;LuCI&lt;/tt&gt; interface navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;System-&amp;gt;Startup&lt;/span&gt;&lt;/tt&gt; and enable DDNS to ensure the router continues to send IP address changes after reboot and hotplug events.&lt;/p&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/ddns.client"&gt;OpenWRT DDNS client&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="port-forwarding"&gt;
+&lt;h3&gt;2. Port forwarding&lt;/h3&gt;
+&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;port forwarding HOWTO&lt;/a&gt; to configure OpenWRT to forward traffic directed at one of the router's ports to the listening port on the Pi home server. Example: configure port &lt;tt class="docutils literal"&gt;55555&lt;/tt&gt; on the router to connect to the &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH server&lt;/a&gt; listening on port &lt;tt class="docutils literal"&gt;22&lt;/tt&gt; on the Pi.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="networks"></category><category term="openwrt"></category><category term="linux"></category></entry><entry><title>Network Attached Storage using a Raspberry Pi and SSHFS</title><link href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html" rel="alternate"></link><updated>2015-02-05T18:28:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-05:nas-raspberry-pi-sshfs.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #4 &amp;gt;&amp;gt;&lt;/a&gt; Connect a Pi to external USB storage and create a cheap, cheerful, encrypted traffic NAS device via &lt;strong&gt;SSH Filesystem (SSHFS)&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;With a &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html"&gt;Pi-attached 1TB hard drive&lt;/a&gt; hosting a properly configured &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH server&lt;/a&gt; nothing extra is required server-side. On my laptop I install SSHFS, add my username to the &lt;tt class="docutils literal"&gt;FUSE&lt;/tt&gt; group, and create a local &lt;tt class="docutils literal"&gt;piNAS&lt;/tt&gt; mountpoint for the remote filesystem:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install sshfs
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser USERNAME fuse
@@ -235,7 +276,7 @@ keychain ~/.ssh/id_rsa
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="networks"></category><category term="linux"></category></entry><entry><title>There's no place like [a Raspberry Pi] Home [Server]</title><link href="http://www.circuidipity.com/raspberry-pi-home-server.html" rel="alternate"></link><updated>2015-02-05T18:30:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-01:raspberry-pi-home-server.html</id><summary type="html">&lt;img alt="Raspberry Pi Home Server" class="align-right" src="images/raspberry-pi-home-server.png" style="width: 300px; height: 300px;" /&gt;
+</summary><category term="networks"></category><category term="linux"></category></entry><entry><title>There's no place like [a Raspberry Pi] Home [Server]</title><link href="http://www.circuidipity.com/raspberry-pi-home-server.html" rel="alternate"></link><updated>2015-02-06T00:04:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-01:raspberry-pi-home-server.html</id><summary type="html">&lt;img alt="Raspberry Pi Home Server" class="align-right" src="images/raspberry-pi-home-server.png" style="width: 300px; height: 300px;" /&gt;
 &lt;p&gt;&lt;em&gt;Work-in-progress&lt;/em&gt;: Running your own Linux-powered &lt;strong&gt;home server&lt;/strong&gt; is a fun learning experience about how networks work and using a &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspberry-pi.html"&gt;Raspberry Pi&lt;/a&gt; is a cheap and cheerful way to get the job done!&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
@@ -245,6 +286,7 @@ keychain ~/.ssh/id_rsa
 &lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;Multiple terminal windows using tmux&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/backup-home.html"&gt;Backup /home&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;Network attached storage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html"&gt;Access from anywhere in the world using dynamic DNS&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
@@ -518,11 +560,5 @@ iface eth0 inet static
 &lt;li&gt;Black Beauty, the shiny &lt;a class="reference external" href="http://www.sciencemag.org/content/346/6213/1044.full"&gt;4.4-billion-year-old rock from Mars&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;How Europe is &lt;a class="reference external" href="http://www.washingtonpost.com/blogs/worldviews/wp/2014/12/04/watch-how-europe-is-greener-now-than-100-years-ago/"&gt;greener now than 100 years ago&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Soyuz: &lt;a class="reference external" href="http://www.bbc.com/future/story/20141202-the-greatest-spacecraft-ever"&gt;Soviet Space Survivor&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</summary><category term="links"></category></entry><entry><title>Links of interest</title><link href="http://www.circuidipity.com/20141127.html" rel="alternate"></link><updated>2014-11-27T16:50:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-11-27:20141127.html</id><summary type="html">&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://mitadmissions.org/blogs/entry/im-studying-poetry-to-be-a-better-engineer-and-this-is-why"&gt;&amp;quot;I'm studying poetry to be a better engineer, and this is why...&amp;quot;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;How to &lt;a class="reference external" href="http://linuxcommando.blogspot.in/2013/10/how-to-connect-to-wpawpa2-wifi-network.html"&gt;connect to wireless using Linux command line&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;'How to Start a Startup' &lt;a class="reference external" href="http://startupclass.samaltman.com/lists/readings/"&gt;recommended readings&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Marked up photographs show &lt;a class="reference external" href="http://petapixel.com/2013/09/12/marked-photographs-show-iconic-prints-edited-darkroom/"&gt;how iconic prints were edited in the darkroom&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </summary><category term="links"></category></entry></feed>

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Daniel Wayne Armstrong</title>
+        <title>Circuidipity | Dynamic DNS and OpenWRT</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -16,28 +16,17 @@
 <body>
         <!-- content -->
 
-<!-- greeting -->
-<div id="siteheader">
-        <img class="whoami" src="/theme/images/whoami.png" />
-    <div id="sitegreeting">
-<p><span class="whoa">Howdy!</span><br />
-My name is <span class="noWrap"><span class="whoa">Daniel Wayne Armstrong</span></span>.
-I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    </div>
-<!-- menu -->
-    <div id="sitemenu">
-<p><a href="archives.html">Archives</a>
-&nbsp;<a href="projects.html">Projects</a>
-&nbsp;<a href="/colophon.html">Colophon</a>
-&nbsp;<a href="feed.xml"><i class="fa fa-rss"></i></a>
-&nbsp;<a href="https://twitter.com/circuidipity"><i class="fa fa-twitter"></i></a>
-&nbsp;<a href="https://github.com/vonbrownie"><i class="fa fa-github-alt"></i></a></p>    </div>
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Friday 06 February 2015</p>
 </div>
 
-<!-- latest post -->
-<div id="latestpost">
-        <p class="published"> Friday 06 February 2015</p>
-        <h1><a href="http://www.circuidipity.com/ddns-openwrt.html">Dynamic DNS and OpenWRT</a></h1>
-        <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #5 &gt;&gt;</a> Access a home server from anywhere using Dynamic DNS (DDNS).</p>
+<!-- article -->
+<h1>Dynamic DNS and OpenWRT</h1>
+<div id="article">
+    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #5 &gt;&gt;</a> Access a home server from anywhere using Dynamic DNS (DDNS).</p>
 <p>My Raspberry Pi server sits behind a router assigned a <strong>dynamic IP address</strong> by the ISP. If I want to connect to my Pi over the Internet from anywhere in the world I can use a <strong>DDNS service</strong> to create a domain name that automatically updates the IP address in the background whenever it changes and redirect Internet traffic to the new location.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
@@ -79,13 +68,17 @@ option use_syslog       <span class="s2">&quot;1&quot;</span>
 </div>
 </div>
 
-        <!-- Nav links to previous|next article --> 
-        <div id="navmenu">
-            <hr />
-            <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-                <a href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html">
-                Network Attached Storage using a Raspberry Pi and SSHFS</a></p>
-        </div>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-networks.html">networks</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-openwrt.html">openwrt</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html">Network Attached Storage using a Raspberry Pi and SSHFS</a></p>
 </div>
 
 
