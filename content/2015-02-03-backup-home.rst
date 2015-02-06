@@ -8,7 +8,7 @@ Backup /home
 
 `Raspberry Pi Home Server Hack #3 >> <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Make automatic backups of ``/home`` using a dash of shell scripting + rsync + SSH + cron!
 
-One of the advantages of setting up a `Linux home server <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ is providing an always-available location to store backups of important files. A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my Chromebook's home directory on the local area network (LAN) server.
+One of the advantages of setting up a `Linux home server <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ is providing an always-available location to store backups of important files. A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home directory on the local area network (LAN) server.
 
 Let's go!
 =========
@@ -16,7 +16,7 @@ Let's go!
 0. SSH
 ------
 
-See `Raspberry Pi Home Server Hack #1 -- Secure remote access using SSH keys <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_ to configure SSH for encrypted connections between (Pi) server and (Chromebook) client. ``Keychain`` + ``ssh-agent``  make it easy to use a passphrase-protected **encryption key** in automated scripts.
+See `Raspberry Pi Home Server Hack #1 -- Secure remote access using SSH keys <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_ to configure SSH for encrypted connections between (Pi) server and (laptop) client. ``Keychain`` + ``ssh-agent``  make it easy to use a passphrase-protected **encryption key** in automated scripts.
 
 1. Script
 ---------

@@ -8,7 +8,7 @@ Network Attached Storage using a Raspberry Pi and SSHFS
 
 `Raspberry Pi Home Server Hack #4 >> <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Connect a Pi to external USB storage and create a cheap, cheerful, encrypted traffic NAS device via **SSH Filesystem (SSHFS)**.
 
-With a `Pi-attached 1TB hard drive <http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html>`_ hosting a properly configured `SSH server <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_ nothing extra is required server-side. On my Chromebook I install SSHFS, add my username to the ``FUSE`` group, and create a local ``piNAS`` mountpoint for the remote filesystem:
+With a `Pi-attached 1TB hard drive <http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html>`_ hosting a properly configured `SSH server <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_ nothing extra is required server-side. On my laptop I install SSHFS, add my username to the ``FUSE`` group, and create a local ``piNAS`` mountpoint for the remote filesystem:
 
 .. code-block:: bash
 
@@ -30,6 +30,6 @@ To detach from remote storage unmount the drive using ``fusermount``:
 
     $ fusermount -u ~/piNAS                       
                                                                            
-Raspberry Pi + SSHFS is no speed demon but its very usable. On my Chromebook connected to the LAN via wireless I am able to run Rhythmbox playing music and videos in VLC that are remotely hosted on the Pi.
+Raspberry Pi + SSHFS is no speed demon but its very usable. On my laptop connected to the LAN via wireless I am able to run Rhythmbox playing music and videos in VLC that are remotely hosted on the Pi.
 
 Happy hacking!
