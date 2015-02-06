@@ -5,7 +5,7 @@ Supercharging a home router using OpenWrt
 :date: 2014-09-26 21:10:00
 :slug: pingparade4
 :tags: networks, openwrt, linux
-:modified: 2014-12-08 00:05:00
+:modified: 2015-02-05 23:28:00
 
 A **home router** is a much more capable device than its pre-installed software would lead you to believe. `OpenWrt <https://openwrt.org/>`_ is an embedded Linux distribution that converts cheap, energy-efficient, network-capable devices into much more useful hackable computers.
 
@@ -86,7 +86,7 @@ LuCI's default web server **uhttpd** is configured in ``/etc/config/uhttpd`` and
 4. Configuration
 ----------------
 
-Secure access to the router using `SSH key authentication <http://www.circuidipity.com/pingparade2.html>`_. Create `static leases <http://www.circuidipity.com/20141001.html>`_ for hosts using DHCP and setup `port forwarding <http://www.circuidipity.com/20141006.html>`_ to reach devices behind the firewall from the world-at-large.
+Secure access to the router using `SSH key authentication <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_. Create `static leases <http://www.circuidipity.com/20141001.html>`_ for hosts using DHCP and setup `port forwarding <http://www.circuidipity.com/20141006.html>`_ to reach devices behind the firewall from the world-at-large.
 
 Its exciting what you can do with these consumer routers once you let it sink in that - with a few dollars and OpenWrt - you have an extremely configurable general purpose computer.
 
