@@ -5,6 +5,7 @@ Dynamic DNS and OpenWRT
 :date: 2015-02-06 00:02:00
 :slug: ddns-openwrt
 :tags: networks, openwrt, linux
+:modifed: 2015-02-08 18:08:00 
 
 `Raspberry Pi Home Server Hack #5 >> <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Access a home server from anywhere using Dynamic DNS (DDNS).
 
@@ -23,7 +24,7 @@ Make note of http://www.duckdns.org/install.jsp (while logged in) for customized
 1. Configure OpenWRT for notification
 -------------------------------------
 
-Different routers configure DDNS differently but the goal is the same: the ability to notify the DDNS service whenever the IP address assigned by the ISP is modified. I am using an `OpenWRT-powered router <http://www.circuidipity.com/pingparade4.html>`_ and these are the steps to configure OpenWRT to use duckdns DDNS:
+Different routers configure DDNS differently but the goal is the same: the ability to notify the DDNS service whenever the IP address assigned by the ISP is modified. I am using an `OpenWRT-powered router <http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html>`_ and these are the steps to configure OpenWRT to use duckdns DDNS:
 
 Install DDNS packages:
 
@@ -50,7 +51,22 @@ Use the customized settings from http://www.duckdns.org/install.jsp to configure
     option check_unit       "minutes"
     option update_url       "http://www.duckdns.org/update?domains=[DOMAIN]&token=[PASSWORD]&ip=[IP]"
     option use_syslog       "1"
-                                                                              
+
+Start the daemon:
+
+.. code-block:: bash
+
+    # sh
+    # . /usr/lib/ddns/dynamic_dns_functions.sh
+    # start_daemon_for_all_ddns_sections "wan"
+    # exit
+
+Test:
+
+.. code-block:: bash
+
+    # /usr/lib/ddns/dynamic_dns_updater.sh duckdns
+
 In OpenWRT's ``LuCI`` interface navigate to ``System->Startup`` and enable DDNS to ensure the router continues to send IP address changes after reboot and hotplug events.
                                                                                     
 Source: `OpenWRT DDNS client <http://wiki.openwrt.org/doc/howto/ddns.client>`_

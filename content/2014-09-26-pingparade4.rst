@@ -1,13 +1,13 @@
-=========================================
-Supercharging a home router using OpenWrt
-=========================================
+==============================================
+Supercharge a home router using OpenWrt Part 1
+==============================================
 
 :date: 2014-09-26 21:10:00
 :slug: pingparade4
 :tags: networks, openwrt, linux
-:modified: 2015-02-05 23:28:00
+:modified: 2015-02-08 18:12:00
 
-A **home router** is a much more capable device than its pre-installed software would lead you to believe. `OpenWrt <https://openwrt.org/>`_ is an embedded Linux distribution that converts cheap, energy-efficient, network-capable devices into much more useful hackable computers.
+`UPDATE: A new router (TL-WDR3600) means a new OpenWrt install << <http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html>`_  A **home router** is a much more capable device than its pre-installed software would lead you to believe. `OpenWrt <https://openwrt.org/>`_ is an embedded Linux distribution that converts cheap, energy-efficient, network-capable devices into much more useful hackable computers.
 
 Getting its start hacking the original `Linksys WRT54G <https://en.wikipedia.org/wiki/Linksys_WRT54G_series#WRT54G>`_, OpenWrt and its volunteer developers now support a `wide and growing range of hardware <http://wiki.openwrt.org/toh/start>`_. The project hosts software packages that lay out a smorgasboard of extra possibilities: more network tools with more fine-grained controls, plus a range of server capabilities... manage printers, connect external USB drives for backup, host files/torrents/VOIP/VPNs.
 
