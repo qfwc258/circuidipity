@@ -15,7 +15,7 @@
 &lt;div class="section" id="download-install-image"&gt;
 &lt;h3&gt;0. Download install image&lt;/h3&gt;
 &lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; OpenWrt builds different install images for different devices. Consult the &lt;a class="reference external" href="http://wiki.openwrt.org/toh/start"&gt;Table of Hardware&lt;/a&gt; to confirm that your router is supported and read the wiki entry for your particular device to identify the correct image. It is &lt;strong&gt;easy to brick a device&lt;/strong&gt; (render inoperable) using an incorrect install image.&lt;/p&gt;
-&lt;p&gt;TL-WDR3600 is an &lt;strong&gt;ar71xx&lt;/strong&gt; device. Latest version (2015-02-08) of OpenWrt is &lt;strong&gt;v14.07 &amp;quot;Barrie Breaker&amp;quot;&lt;/strong&gt; and TL-WDR3600 is an &lt;strong&gt;ar71xx&lt;/strong&gt; device. Download the appropriate install image:&lt;/p&gt;
+&lt;p&gt;Latest version (2015-02-08) of OpenWrt is &lt;strong&gt;v14.07 &amp;quot;Barrie Breaker&amp;quot;&lt;/strong&gt; and TL-WDR3600 is an &lt;strong&gt;ar71xx&lt;/strong&gt; device. Download the appropriate install image:&lt;/p&gt;
 &lt;p&gt;[Link] &lt;a class="reference external" href="https://downloads.openwrt.org/barrier_breaker/14.07/ar71xx/generic/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin"&gt;openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="flash-router"&gt;
