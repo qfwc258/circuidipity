@@ -1,5 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-02-08T18:16:00-05:00</updated><entry><title>Supercharge a home router using OpenWrt Part 2</title><link href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html" rel="alternate"></link><updated>2015-02-08T18:16:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-08:supercharge-a-home-router-using-openwrt-pt2.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;PREVIOUS: TL-WR841N router &amp;lt;&amp;lt;&lt;/a&gt; A &lt;strong&gt;home router&lt;/strong&gt; is a much more capable device than its pre-installed software would lead you to believe. &lt;a class="reference external" href="https://openwrt.org/"&gt;OpenWrt&lt;/a&gt; is an embedded Linux distribution that converts cheap, energy-efficient, network-capable devices into much more useful hackable computers.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-02-09T18:29:00-05:00</updated><entry><title>PHP + Nginx + PostgreSQL</title><link href="http://www.circuidipity.com/php-nginx-postgresql.html" rel="alternate"></link><updated>2015-02-09T18:29:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-09:php-nginx-postgresql.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #6 &amp;gt;&amp;gt;&lt;/a&gt; As a pre-requisite to host web applications like &lt;a class="reference external" href="http://tt-rss.org/redmine/projects/tt-rss/wiki"&gt;Tiny Tiny RSS&lt;/a&gt; on my Raspberry Pi I install &lt;strong&gt;PHP&lt;/strong&gt;, the lightweight web server &lt;strong&gt;Nginx&lt;/strong&gt;, and the &lt;strong&gt;PostgreSQL&lt;/strong&gt; database.&lt;/p&gt;
+&lt;div class="section" id="php"&gt;
+&lt;h2&gt;0. PHP&lt;/h2&gt;
+&lt;p&gt;Install:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get update
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install php5 php5-fpm php-apc php5-curl php5-cli php5-pgsql php5-gd php5-mcrypt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To improve security &lt;a class="footnote-reference" href="#id3" id="id1"&gt;[1]&lt;/a&gt; edit &lt;tt class="docutils literal"&gt;/etc/php5/fpm/php.ini&lt;/tt&gt; and change &lt;strong&gt;pathinfo&lt;/strong&gt; to &lt;tt class="docutils literal"&gt;0&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;cgi.fix_pathinfo&lt;span class="o"&gt;=&lt;/span&gt;0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Restart PHP:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/php5-fpm restart
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="nginx"&gt;
+&lt;h2&gt;1. Nginx&lt;/h2&gt;
+&lt;p&gt;Install:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install nginx
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/nginx start
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To verify that the web server is running, open a browser and navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://your.raspberry.pi.ip&lt;/span&gt;&lt;/tt&gt;. If you see &lt;tt class="docutils literal"&gt;Welcome to Nginx&lt;/tt&gt; the server is installed correctly. Nginx is capable of serving up many different web domains or &lt;strong&gt;server blocks&lt;/strong&gt; (virtual hosts) from the same server: block content is placed in subfolders located in &lt;tt class="docutils literal"&gt;/usr/share/nginx/www&lt;/tt&gt;, configuration in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available&lt;/span&gt;&lt;/tt&gt;, and a server block is made active by setting a symbolic link in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-enabled&lt;/span&gt;&lt;/tt&gt; to its config file.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="postgresql"&gt;
+&lt;h2&gt;2. PostgreSQL&lt;/h2&gt;
+&lt;p&gt;Install:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get postgresql
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Login and change password for the &lt;tt class="docutils literal"&gt;postgresql&lt;/tt&gt; user:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo -u postgres psql postgres
+&lt;span class="se"&gt;\p&lt;/span&gt;assword postgres  &lt;span class="c"&gt;# hit enter and enter password&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;PostgreSQL maintains its own users and passwords, which are separate from the Pi's user accounts. It is not required that your PostgreSQL users match the Pi users. &lt;a class="footnote-reference" href="#id4" id="id2"&gt;[2]&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Reload:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/postgresql reload
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h2&gt;Notes&lt;/h2&gt;
+&lt;table class="docutils footnote" frame="void" id="id3" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-14-04"&gt;How to install the LEMP stack on Ubuntu&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id4" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm"&gt;Practical PostgreSQL database&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+</summary><category term="networks"></category><category term="web"></category><category term="linux"></category></entry><entry><title>Supercharge a home router using OpenWrt Part 2</title><link href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html" rel="alternate"></link><updated>2015-02-08T18:16:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-08:supercharge-a-home-router-using-openwrt-pt2.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;PREVIOUS: TL-WR841N router &amp;lt;&amp;lt;&lt;/a&gt; A &lt;strong&gt;home router&lt;/strong&gt; is a much more capable device than its pre-installed software would lead you to believe. &lt;a class="reference external" href="https://openwrt.org/"&gt;OpenWrt&lt;/a&gt; is an embedded Linux distribution that converts cheap, energy-efficient, network-capable devices into much more useful hackable computers.&lt;/p&gt;
 &lt;p&gt;Getting its start hacking the original &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Linksys_WRT54G_series#WRT54G"&gt;Linksys WRT54G&lt;/a&gt;, OpenWrt and its volunteer developers now support a &lt;a class="reference external" href="http://wiki.openwrt.org/toh/start"&gt;wide and growing range of hardware&lt;/a&gt;. The project hosts software packages that lay out a smorgasboard of extra possibilities: more network tools with more fine-grained controls, plus a range of server capabilities... manage printers, connect external USB drives for backup, host files/torrents/VOIP/VPNs.&lt;/p&gt;
 &lt;p&gt;I am exploring an OpenWrt-supported &lt;a class="reference external" href="http://wiki.openwrt.org/toh/tp-link/tl-wdr3600"&gt;TP-Link TL-WDR3600&lt;/a&gt; router:&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -341,7 +393,7 @@ keychain ~/.ssh/id_rsa
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="networks"></category><category term="linux"></category></entry><entry><title>There's no place like [a Raspberry Pi] Home [Server]</title><link href="http://www.circuidipity.com/raspberry-pi-home-server.html" rel="alternate"></link><updated>2015-02-06T00:04:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-01:raspberry-pi-home-server.html</id><summary type="html">&lt;img alt="Raspberry Pi Home Server" class="align-right" src="images/raspberry-pi-home-server.png" style="width: 300px; height: 300px;" /&gt;
+</summary><category term="networks"></category><category term="linux"></category></entry><entry><title>There's no place like [a Raspberry Pi] Home [Server]</title><link href="http://www.circuidipity.com/raspberry-pi-home-server.html" rel="alternate"></link><updated>2015-02-09T18:11:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-01:raspberry-pi-home-server.html</id><summary type="html">&lt;img alt="Raspberry Pi Home Server" class="align-right" src="images/raspberry-pi-home-server.png" style="width: 300px; height: 300px;" /&gt;
 &lt;p&gt;&lt;em&gt;Work-in-progress&lt;/em&gt;: Running your own Linux-powered &lt;strong&gt;home server&lt;/strong&gt; is a fun learning experience about how networks work and using a &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspberry-pi.html"&gt;Raspberry Pi&lt;/a&gt; is a cheap and cheerful way to get the job done!&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
@@ -352,6 +404,7 @@ keychain ~/.ssh/id_rsa
 &lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/backup-home.html"&gt;Backup /home&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;Network attached storage&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html"&gt;Access from anywhere in the world using dynamic DNS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;Web server and database&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
@@ -612,12 +665,5 @@ iface eth0 inet static
 &lt;li&gt;&amp;quot;It's people... &lt;a class="reference external" href="http://www.bunniestudios.com/blog/?p=4266"&gt;supply chains are made out of people!&amp;quot;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.rifters.com/crawl/?p=5425"&gt;Electric eel brain hacking&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&amp;quot;If we want to safeguard our languages, stories and ideas against extinction, &lt;a class="reference external" href="http://aeon.co/magazine/culture/can-egyptology-teach-us-to-future-proof-our-culture/"&gt;we had better study Egyptology&amp;quot;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</summary><category term="links"></category></entry><entry><title>Links of interest</title><link href="http://www.circuidipity.com/20141211.html" rel="alternate"></link><updated>2014-12-11T13:43:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-12-11:20141211.html</id><summary type="html">&lt;ul class="simple"&gt;
-&lt;li&gt;Margaret Hamilton, &lt;a class="reference external" href="https://medium.com/&amp;#64;3fingeredfox/margaret-hamilton-lead-software-engineer-project-apollo-158754170da8"&gt;lead software engineer of Project Apollo&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.bbc.com/future/story/20130401-the-loneliest-human-being"&gt;Most isolated human in history&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Creating &lt;a class="reference external" href="https://events.ccc.de/congress/2014/Fahrplan/events/6156.html"&gt;open hardware 'Fernvale' from reverse-engineering a closed-source SoC&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;How to &lt;a class="reference external" href="http://hplusmagazine.com/2014/12/05/review-transforming-humanity-maxwell-leistung/"&gt;upgrade humans right now&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;I love Woz and his child-like wonder and enthusiasm... &lt;a class="reference external" href="http://www.bloomberg.com/video/steve-wozniak-on-steve-jobs-geekiness-and-starting-apple-GVS_jUoTQtGYj9fwLg8dbQ.html"&gt;A walking talking 'Exhibit A' for the Hacker Ethic&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </summary><category term="links"></category></entry></feed>
