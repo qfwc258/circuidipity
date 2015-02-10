@@ -19,7 +19,12 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install nginx
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/nginx start
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To verify that the web server is running, open a browser and navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://your.raspberry.pi.ip&lt;/span&gt;&lt;/tt&gt;. If you see &lt;tt class="docutils literal"&gt;Welcome to Nginx&lt;/tt&gt; the server is installed correctly. Nginx is capable of serving up many different web domains or &lt;strong&gt;server blocks&lt;/strong&gt; (virtual hosts) from the same server: block content is placed in subfolders located in &lt;tt class="docutils literal"&gt;/usr/share/nginx/www&lt;/tt&gt;, configuration in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available&lt;/span&gt;&lt;/tt&gt;, and a server block is made active by setting a symbolic link in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-enabled&lt;/span&gt;&lt;/tt&gt; to its config file.&lt;/p&gt;
+&lt;p&gt;To verify that the web server is running, open a browser and navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://your.raspberry.pi.ip&lt;/span&gt;&lt;/tt&gt;. If you see &lt;tt class="docutils literal"&gt;Welcome to Nginx&lt;/tt&gt; the server is installed correctly. Nginx is capable of serving up many different web domains or &lt;strong&gt;server blocks&lt;/strong&gt; (virtual hosts) from the same server:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;block content is placed in subfolders located in &lt;tt class="docutils literal"&gt;/usr/share/nginx/www&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;configuration in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;a server block is made active by setting a symbolic link in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-enabled&lt;/span&gt;&lt;/tt&gt; to its config file&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="postgresql"&gt;
 &lt;h2&gt;2. PostgreSQL&lt;/h2&gt;

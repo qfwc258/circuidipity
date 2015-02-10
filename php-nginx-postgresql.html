@@ -46,7 +46,12 @@
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install nginx
 <span class="nv">$ </span>sudo /etc/init.d/nginx start
 </pre></div>
-<p>To verify that the web server is running, open a browser and navigate to <tt class="docutils literal"><span class="pre">http://your.raspberry.pi.ip</span></tt>. If you see <tt class="docutils literal">Welcome to Nginx</tt> the server is installed correctly. Nginx is capable of serving up many different web domains or <strong>server blocks</strong> (virtual hosts) from the same server: block content is placed in subfolders located in <tt class="docutils literal">/usr/share/nginx/www</tt>, configuration in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available</span></tt>, and a server block is made active by setting a symbolic link in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-enabled</span></tt> to its config file.</p>
+<p>To verify that the web server is running, open a browser and navigate to <tt class="docutils literal"><span class="pre">http://your.raspberry.pi.ip</span></tt>. If you see <tt class="docutils literal">Welcome to Nginx</tt> the server is installed correctly. Nginx is capable of serving up many different web domains or <strong>server blocks</strong> (virtual hosts) from the same server:</p>
+<ul class="simple">
+<li>block content is placed in subfolders located in <tt class="docutils literal">/usr/share/nginx/www</tt></li>
+<li>configuration in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available</span></tt></li>
+<li>a server block is made active by setting a symbolic link in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-enabled</span></tt> to its config file</li>
+</ul>
 </div>
 <div class="section" id="postgresql">
 <h2>2. PostgreSQL</h2>
