@@ -44,7 +44,7 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get update
 <span class="nv">$ </span>sudo apt-get install php5 php5-fpm php-apc php5-curl php5-cli php5-pgsql php5-gd php5-mcrypt
 </pre></div>
-<p>To improve security <a class="footnote-reference" href="#id3" id="id1">[1]</a> edit <tt class="docutils literal">/etc/php5/fpm/php.ini</tt> and change <strong>pathinfo</strong> to <tt class="docutils literal">0</tt>:</p>
+<p>To improve security edit <tt class="docutils literal">/etc/php5/fpm/php.ini</tt> and change <strong>pathinfo</strong> to <tt class="docutils literal">0</tt>:</p>
 <div class="highlight"><pre>cgi.fix_pathinfo<span class="o">=</span>0
 </pre></div>
 <p>Restart PHP:</p>
@@ -57,15 +57,67 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install nginx
 <span class="nv">$ </span>sudo /etc/init.d/nginx start
 </pre></div>
-<p>To verify that the web server is running, open a browser and navigate to <tt class="docutils literal"><span class="pre">http://your.raspberry.pi.ip</span></tt>. If you see <tt class="docutils literal">Welcome to Nginx</tt> the server is installed correctly. Nginx is capable of serving up many different web domains or <strong>server blocks</strong> (virtual hosts) from the same server:</p>
+<p>To verify that the web server is running, open a browser and navigate to <tt class="docutils literal"><span class="pre">http://YOUR.RASPBERRY.IP.ADDRESS</span></tt>. If you see <tt class="docutils literal">Welcome to Nginx</tt> the server is installed correctly.</p>
+</div>
+<div class="section" id="host-multiple-domains">
+<h2>2. Host multiple domains</h2>
+<p>Nginx is capable of serving up multiple web domains or <strong>server blocks</strong> (virtual hosts) from the same server:</p>
 <ul class="simple">
 <li>block content is placed in subfolders located in <tt class="docutils literal">/usr/share/nginx/www</tt></li>
 <li>configuration in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available</span></tt></li>
 <li>a server block is made active by setting a symbolic link in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-enabled</span></tt> to its config file</li>
 </ul>
+<p>When combined with a <a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html">free DDNS service</a> (I like <a class="reference external" href="http://duckdns.org/">duckdns.org</a>) multiple custom domains can be hosted on a home server.</p>
+<p>Steps to create a sample <tt class="docutils literal">myHomePi</tt> server block:</p>
+<div class="section" id="cname">
+<h3>2.1 CNAME</h3>
+<p>Create a new <strong>CNAME</strong> record at the domain registrar to redirect (example) <tt class="docutils literal">www.myhomepi.com</tt> to <tt class="docutils literal">myhomepi.duckdns.org</tt>.</p>
+</div>
+<div class="section" id="document-root">
+<h3>2.2 Document Root</h3>
+<p>Create a new root directory to hold the contents of <tt class="docutils literal">myHomePi</tt>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /usr/share/nginx/www/myHomePi
+<span class="nv">$ </span>sudo chown -R <span class="nv">$USER</span>.<span class="nv">$USER</span> /usr/share/nginx/www/myHomePi
+</pre></div>
+</div>
+<div class="section" id="index-html">
+<h3>2.3 Index.html</h3>
+<p>Create a sample <tt class="docutils literal">/usr/share/nginx/www/myHomePi/index.html</tt>:</p>
+<div class="highlight"><pre>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;myHomePi&lt;/title&gt;
+&lt;/head&gt;
+&lt;body <span class="nv">bgcolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span> <span class="nv">text</span><span class="o">=</span><span class="s2">&quot;black&quot;</span>&gt;
+&lt;center&gt;&lt;h1&gt;Welcome to myHomePi!&lt;/h1&gt;&lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+</div>
+<div class="section" id="server-block">
+<h3>2.4 Server Block</h3>
+<p>I use <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/default</span></tt> as a template for the new <tt class="docutils literal">myHomePi</tt> configuration:</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /etc/nginx/sites-available
+<span class="nv">$ </span>sudo cp default myHomePi
+</pre></div>
+<p>Modify these lines for the custom domain:</p>
+<div class="highlight"><pre>listen 80;
+</pre></div>
+<div class="highlight"><pre>server_name www.myHomePi.com;
+</pre></div>
+<p>Activate the new server block:</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /etc/nginx/sites-enabled
+<span class="nv">$ </span>sudo ln -s ../sites-available/myHomePi
+<span class="nv">$ </span>sudo /etc/init.d/nginx restart
+</pre></div>
+</div>
+<div class="section" id="port-forwarding">
+<h3>2.5 Port Forwarding</h3>
+<p>Configure <a class="reference external" href="http://www.circuidipity.com/20141006.html">port forwarding on the home router</a> to redirect traffic on port 80 to the internal IP address of the nginx server. Point your browser to <tt class="docutils literal">www.myHomePi.com</tt>. Success (hopefully)! :-)</p>
+<p>Repeat the above steps to add more domains. The limiting factor is the <strong>upload bandwidth</strong> provided by the home ISP (typically a fraction of the download speed).</p>
+</div>
 </div>
 <div class="section" id="postgresql">
-<h2>2. PostgreSQL</h2>
+<h2>3. PostgreSQL</h2>
 <p>Install:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get postgresql
 </pre></div>
@@ -73,26 +125,20 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <div class="highlight"><pre><span class="nv">$ </span>sudo -u postgres psql postgres
 <span class="se">\p</span>assword postgres  <span class="c"># hit enter and enter password</span>
 </pre></div>
-<p>PostgreSQL maintains its own users and passwords, which are separate from the Pi's user accounts. It is not required that your PostgreSQL users match the Pi users. <a class="footnote-reference" href="#id4" id="id2">[2]</a></p>
+<p>PostgreSQL maintains its own users and passwords, which are separate from the Pi's user accounts. It is not required that your PostgreSQL users match the Pi users.</p>
 <p>Reload:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo /etc/init.d/postgresql reload
 </pre></div>
-<p>Happy hacking!</p>
 </div>
-<div class="section" id="notes">
-<h2>Notes</h2>
-<table class="docutils footnote" frame="void" id="id3" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-14-04">How to install the LEMP stack on Ubuntu</a></td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id4" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><a class="reference external" href="http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm">Practical PostgreSQL database</a></td></tr>
-</tbody>
-</table>
+<div class="section" id="helpful-resources">
+<h2>4. Helpful resources</h2>
+<ul class="simple">
+<li><a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-14-04">How to install the LEMP stack on Ubuntu</a></li>
+<li><a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-14-04-lts">Set up Nginx Server Blocks</a></li>
+<li><a class="reference external" href="http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm">Practical PostgreSQL database</a></li>
+<li><a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html">DDNS and OpenWrt</a></li>
+</ul>
+<p>Happy hacking!</p>
 </div>
 
         <!-- Nav links to previous|next article --> 

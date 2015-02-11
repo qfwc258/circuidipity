@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 09 Feb 2015 18:29:00 -0500</lastBuildDate><item><title>PHP + Nginx + PostgreSQL</title><link>http://www.circuidipity.com/php-nginx-postgresql.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #6 &amp;gt;&amp;gt;&lt;/a&gt; As a pre-requisite to host web applications like &lt;a class="reference external" href="http://tt-rss.org/redmine/projects/tt-rss/wiki"&gt;Tiny Tiny RSS&lt;/a&gt; on my Raspberry Pi I install &lt;strong&gt;PHP&lt;/strong&gt;, the lightweight web server &lt;strong&gt;Nginx&lt;/strong&gt;, and the &lt;strong&gt;PostgreSQL&lt;/strong&gt; database.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 10 Feb 2015 20:06:00 -0500</lastBuildDate><item><title>PHP + Nginx + PostgreSQL</title><link>http://www.circuidipity.com/php-nginx-postgresql.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #6 &amp;gt;&amp;gt;&lt;/a&gt; As a pre-requisite to host web applications like &lt;a class="reference external" href="http://tt-rss.org/redmine/projects/tt-rss/wiki"&gt;Tiny Tiny RSS&lt;/a&gt; on my Raspberry Pi I install &lt;strong&gt;PHP&lt;/strong&gt;, the lightweight web server &lt;strong&gt;Nginx&lt;/strong&gt;, and the &lt;strong&gt;PostgreSQL&lt;/strong&gt; database.&lt;/p&gt;
 &lt;div class="section" id="php"&gt;
 &lt;h2&gt;0. PHP&lt;/h2&gt;
 &lt;p&gt;Install:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get update
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install php5 php5-fpm php-apc php5-curl php5-cli php5-pgsql php5-gd php5-mcrypt
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To improve security &lt;a class="footnote-reference" href="#id3" id="id1"&gt;[1]&lt;/a&gt; edit &lt;tt class="docutils literal"&gt;/etc/php5/fpm/php.ini&lt;/tt&gt; and change &lt;strong&gt;pathinfo&lt;/strong&gt; to &lt;tt class="docutils literal"&gt;0&lt;/tt&gt;:&lt;/p&gt;
+&lt;p&gt;To improve security edit &lt;tt class="docutils literal"&gt;/etc/php5/fpm/php.ini&lt;/tt&gt; and change &lt;strong&gt;pathinfo&lt;/strong&gt; to &lt;tt class="docutils literal"&gt;0&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;cgi.fix_pathinfo&lt;span class="o"&gt;=&lt;/span&gt;0
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Restart PHP:&lt;/p&gt;
@@ -19,15 +19,67 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install nginx
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/nginx start
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To verify that the web server is running, open a browser and navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://your.raspberry.pi.ip&lt;/span&gt;&lt;/tt&gt;. If you see &lt;tt class="docutils literal"&gt;Welcome to Nginx&lt;/tt&gt; the server is installed correctly. Nginx is capable of serving up many different web domains or &lt;strong&gt;server blocks&lt;/strong&gt; (virtual hosts) from the same server:&lt;/p&gt;
+&lt;p&gt;To verify that the web server is running, open a browser and navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://YOUR.RASPBERRY.IP.ADDRESS&lt;/span&gt;&lt;/tt&gt;. If you see &lt;tt class="docutils literal"&gt;Welcome to Nginx&lt;/tt&gt; the server is installed correctly.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="host-multiple-domains"&gt;
+&lt;h2&gt;2. Host multiple domains&lt;/h2&gt;
+&lt;p&gt;Nginx is capable of serving up multiple web domains or &lt;strong&gt;server blocks&lt;/strong&gt; (virtual hosts) from the same server:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;block content is placed in subfolders located in &lt;tt class="docutils literal"&gt;/usr/share/nginx/www&lt;/tt&gt;&lt;/li&gt;
 &lt;li&gt;configuration in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
 &lt;li&gt;a server block is made active by setting a symbolic link in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-enabled&lt;/span&gt;&lt;/tt&gt; to its config file&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;When combined with a &lt;a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html"&gt;free DDNS service&lt;/a&gt; (I like &lt;a class="reference external" href="http://duckdns.org/"&gt;duckdns.org&lt;/a&gt;) multiple custom domains can be hosted on a home server.&lt;/p&gt;
+&lt;p&gt;Steps to create a sample &lt;tt class="docutils literal"&gt;myHomePi&lt;/tt&gt; server block:&lt;/p&gt;
+&lt;div class="section" id="cname"&gt;
+&lt;h3&gt;2.1 CNAME&lt;/h3&gt;
+&lt;p&gt;Create a new &lt;strong&gt;CNAME&lt;/strong&gt; record at the domain registrar to redirect (example) &lt;tt class="docutils literal"&gt;www.myhomepi.com&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;myhomepi.duckdns.org&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="document-root"&gt;
+&lt;h3&gt;2.2 Document Root&lt;/h3&gt;
+&lt;p&gt;Create a new root directory to hold the contents of &lt;tt class="docutils literal"&gt;myHomePi&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /usr/share/nginx/www/myHomePi
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo chown -R &lt;span class="nv"&gt;$USER&lt;/span&gt;.&lt;span class="nv"&gt;$USER&lt;/span&gt; /usr/share/nginx/www/myHomePi
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="index-html"&gt;
+&lt;h3&gt;2.3 Index.html&lt;/h3&gt;
+&lt;p&gt;Create a sample &lt;tt class="docutils literal"&gt;/usr/share/nginx/www/myHomePi/index.html&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;lt;html&amp;gt;
+&amp;lt;head&amp;gt;
+&amp;lt;title&amp;gt;myHomePi&amp;lt;/title&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body &lt;span class="nv"&gt;bgcolor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;white&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;text&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&amp;gt;
+&amp;lt;center&amp;gt;&amp;lt;h1&amp;gt;Welcome to myHomePi!&amp;lt;/h1&amp;gt;&amp;lt;/center&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="server-block"&gt;
+&lt;h3&gt;2.4 Server Block&lt;/h3&gt;
+&lt;p&gt;I use &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available/default&lt;/span&gt;&lt;/tt&gt; as a template for the new &lt;tt class="docutils literal"&gt;myHomePi&lt;/tt&gt; configuration:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /etc/nginx/sites-available
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo cp default myHomePi
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Modify these lines for the custom domain:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;listen 80;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;server_name www.myHomePi.com;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Activate the new server block:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /etc/nginx/sites-enabled
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo ln -s ../sites-available/myHomePi
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/nginx restart
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="port-forwarding"&gt;
+&lt;h3&gt;2.5 Port Forwarding&lt;/h3&gt;
+&lt;p&gt;Configure &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;port forwarding on the home router&lt;/a&gt; to redirect traffic on port 80 to the internal IP address of the nginx server. Point your browser to &lt;tt class="docutils literal"&gt;www.myHomePi.com&lt;/tt&gt;. Success (hopefully)! :-)&lt;/p&gt;
+&lt;p&gt;Repeat the above steps to add more domains. The limiting factor is the &lt;strong&gt;upload bandwidth&lt;/strong&gt; provided by the home ISP (typically a fraction of the download speed).&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="postgresql"&gt;
-&lt;h2&gt;2. PostgreSQL&lt;/h2&gt;
+&lt;h2&gt;3. PostgreSQL&lt;/h2&gt;
 &lt;p&gt;Install:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get postgresql
 &lt;/pre&gt;&lt;/div&gt;
@@ -35,28 +87,22 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo -u postgres psql postgres
 &lt;span class="se"&gt;\p&lt;/span&gt;assword postgres  &lt;span class="c"&gt;# hit enter and enter password&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;PostgreSQL maintains its own users and passwords, which are separate from the Pi's user accounts. It is not required that your PostgreSQL users match the Pi users. &lt;a class="footnote-reference" href="#id4" id="id2"&gt;[2]&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;PostgreSQL maintains its own users and passwords, which are separate from the Pi's user accounts. It is not required that your PostgreSQL users match the Pi users.&lt;/p&gt;
 &lt;p&gt;Reload:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/postgresql reload
 &lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="helpful-resources"&gt;
+&lt;h2&gt;4. Helpful resources&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-14-04"&gt;How to install the LEMP stack on Ubuntu&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-14-04-lts"&gt;Set up Nginx Server Blocks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm"&gt;Practical PostgreSQL database&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html"&gt;DDNS and OpenWrt&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h2&gt;Notes&lt;/h2&gt;
-&lt;table class="docutils footnote" frame="void" id="id3" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-14-04"&gt;How to install the LEMP stack on Ubuntu&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table class="docutils footnote" frame="void" id="id4" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm"&gt;Practical PostgreSQL database&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Mon, 09 Feb 2015 18:29:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-09:php-nginx-postgresql.html</guid><category>networks</category><category>web</category><category>linux</category></item><item><title>Supercharge a home router using OpenWrt Part 2</title><link>http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;PREVIOUS: TL-WR841N router &amp;lt;&amp;lt;&lt;/a&gt; A &lt;strong&gt;home router&lt;/strong&gt; is a much more capable device than its pre-installed software would lead you to believe. &lt;a class="reference external" href="https://openwrt.org/"&gt;OpenWrt&lt;/a&gt; is an embedded Linux distribution that converts cheap, energy-efficient, network-capable devices into much more useful hackable computers.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Tue, 10 Feb 2015 20:06:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-09:php-nginx-postgresql.html</guid><category>networks</category><category>web</category><category>linux</category></item><item><title>Supercharge a home router using OpenWrt Part 2</title><link>http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;PREVIOUS: TL-WR841N router &amp;lt;&amp;lt;&lt;/a&gt; A &lt;strong&gt;home router&lt;/strong&gt; is a much more capable device than its pre-installed software would lead you to believe. &lt;a class="reference external" href="https://openwrt.org/"&gt;OpenWrt&lt;/a&gt; is an embedded Linux distribution that converts cheap, energy-efficient, network-capable devices into much more useful hackable computers.&lt;/p&gt;
 &lt;p&gt;Getting its start hacking the original &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Linksys_WRT54G_series#WRT54G"&gt;Linksys WRT54G&lt;/a&gt;, OpenWrt and its volunteer developers now support a &lt;a class="reference external" href="http://wiki.openwrt.org/toh/start"&gt;wide and growing range of hardware&lt;/a&gt;. The project hosts software packages that lay out a smorgasboard of extra possibilities: more network tools with more fine-grained controls, plus a range of server capabilities... manage printers, connect external USB drives for backup, host files/torrents/VOIP/VPNs.&lt;/p&gt;
 &lt;p&gt;I am exploring an OpenWrt-supported &lt;a class="reference external" href="http://wiki.openwrt.org/toh/tp-link/tl-wdr3600"&gt;TP-Link TL-WDR3600&lt;/a&gt; router:&lt;/p&gt;
 &lt;ul class="simple"&gt;
