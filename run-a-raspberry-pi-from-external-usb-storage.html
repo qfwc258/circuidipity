@@ -39,8 +39,9 @@
 </ul>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
+</div>
 <div class="section" id="raspbian-linux">
-<h3>0. Raspbian Linux</h3>
+<h2>0. Raspbian Linux</h2>
 <p><a class="reference external" href="http://downloads.raspberrypi.org/raspbian_latest">Download</a> and unpack Raspbian and write the image to a spare 4GB+ SD card:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo dd <span class="nv">bs</span><span class="o">=</span>1M <span class="k">if</span><span class="o">=</span>YYYY-MM-DD-wheezy-raspbian.img <span class="nv">of</span><span class="o">=</span>/dev/sdX
 <span class="nv">$ </span>sudo sync
@@ -48,7 +49,7 @@
 <p>Sources: <a class="reference external" href="http://www.raspberrypi.org/downloads/">operating system images</a>, installing <a class="reference external" href="http://www.raspberrypi.org/documentation/installation/installing-images/linux.md">images on Linux</a></p>
 </div>
 <div class="section" id="raspi-config">
-<h3>1. Raspi-config</h3>
+<h2>1. Raspi-config</h2>
 <p>Boot the Pi with the newly-minted Raspbian SD card and set a few options in the <strong>raspi-config</strong> utility:</p>
 <div class="highlight"><pre>4 Internationalisation Options
     * Change Locale
@@ -61,7 +62,7 @@
 <p>Save the new parameters and reboot.</p>
 </div>
 <div class="section" id="partitions">
-<h3>2. Partitions</h3>
+<h2>2. Partitions</h2>
 <p>Filesystem layout on the SD card:</p>
 <div class="highlight"><pre><span class="nv">$ </span>df -h
 Filesystem      Size  Used Avail Use% Mounted on
@@ -166,14 +167,14 @@ Syncing disks.
 </pre></div>
 </div>
 <div class="section" id="filesystems">
-<h3>3. Filesystems</h3>
+<h2>3. Filesystems</h2>
 <p>Format the new partitions as <tt class="docutils literal">ext4</tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo mke2fs -t ext4 -L rootfs /dev/sda1
 <span class="nv">$ </span>sudo mke2fs -t ext4 -L storage /dev/sda2
 </pre></div>
 </div>
 <div class="section" id="dev-root">
-<h3>4. /dev/root</h3>
+<h2>4. /dev/root</h2>
 <p>Mount the newly-formatted <tt class="docutils literal">rootfs</tt> partition to <tt class="docutils literal">/mnt</tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo mount -t ext4 /dev/sda1 /mnt
 <span class="nv">$ </span>df -h
@@ -192,7 +193,7 @@ tmpfs            97M     0   97M   0% /run/shm
 </pre></div>
 </div>
 <div class="section" id="new-rootfs">
-<h3>5. New rootfs</h3>
+<h2>5. New rootfs</h2>
 <p>Modify options in <tt class="docutils literal">/boot/cmdline.txt</tt> - located on the <strong>SD card</strong> - to point the bootloader to <tt class="docutils literal">root</tt> filesystem on the USB device:</p>
 <div class="highlight"><pre>Original:
 dwc_otg.lpm_enable<span class="o">=</span>0 <span class="nv">console</span><span class="o">=</span>ttyAMA0,115200 <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">root</span><span class="o">=</span>/dev/mmcblk0p2 <span class="nv">rootfstype</span><span class="o">=</span>ext4 <span class="nv">elevator</span><span class="o">=</span>deadline rootwait
@@ -202,7 +203,7 @@ dwc_otg.lpm_enable<span class="o">=</span>0 <span class="nv">console</span><span
 </pre></div>
 </div>
 <div class="section" id="fstab">
-<h3>6. fstab</h3>
+<h2>6. fstab</h2>
 <p>Create new mountpoint for the <tt class="docutils literal">storage</tt> partition:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /media/USB0
 </pre></div>
@@ -218,7 +219,7 @@ dwc_otg.lpm_enable<span class="o">=</span>0 <span class="nv">console</span><span
 </pre></div>
 </div>
 <div class="section" id="reboot">
-<h3>7. Reboot</h3>
+<h2>7. Reboot</h2>
 <p>Save modifications and reboot. Login and check the new filesystem layout:</p>
 <div class="highlight"><pre><span class="nv">$ </span>df -h
 Filesystem     Type      Size  Used Avail Use% Mounted on
@@ -233,15 +234,15 @@ tmpfs          tmpfs      97M     0   97M   0% /run/shm
 </pre></div>
 </div>
 <div class="section" id="post-install">
-<h3>8. Post-install</h3>
+<h2>8. Post-install</h2>
 <div class="section" id="password">
-<h4>8.1 Password</h4>
+<h3>8.1 Password</h3>
 <p>A <tt class="docutils literal">raspberry</tt> is a tasty fruit but a lousy password. Change password for username <tt class="docutils literal">pi</tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>passwd
 </pre></div>
 </div>
 <div class="section" id="sudo">
-<h4>8.2 Sudo</h4>
+<h3>8.2 Sudo</h3>
 <p>Default setting in Raspbian is to allow <tt class="docutils literal">pi</tt> to use <tt class="docutils literal">sudo</tt> without prompting for a password. Disable password-less <tt class="docutils literal">sudo</tt> by running:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo visudo -s
 </pre></div>
@@ -251,14 +252,14 @@ tmpfs          tmpfs      97M     0   97M   0% /run/shm
 </pre></div>
 </div>
 <div class="section" id="upgrade">
-<h4>8.3 Upgrade</h4>
+<h3>8.3 Upgrade</h3>
 <p>With the newly-configured <tt class="docutils literal">rootfs</tt> up-and-running now is a good time to update Raspbian:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get update
 <span class="nv">$ </span>sudo apt-get dist-upgrade
 </pre></div>
 </div>
 <div class="section" id="static-address">
-<h4>8.4 Static Address</h4>
+<h3>8.4 Static Address</h3>
 <p>A Raspberry Pi that is going to stay home and run as a server can be configured to use a <strong>static network address</strong>. Sample <tt class="docutils literal">/etc/network/interfaces</tt> modification that disables <tt class="docutils literal">dhcp</tt> and sets ip address <tt class="docutils literal">192.168.1.88</tt>:</p>
 <div class="highlight"><pre><span class="c">#iface eth0 inet dhcp</span>
 auto eth0
@@ -269,13 +270,12 @@ iface eth0 inet static
 </pre></div>
 <p>Happy hacking!</p>
 </div>
-</div>
 <div class="section" id="notes">
 <h3>Notes</h3>
 <table class="docutils footnote" frame="void" id="id2" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Pi requires an SD card to boot... so we continue using original /boot.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Pi requires an SD card to boot... so we continue using original <tt class="docutils literal">/boot</tt>.</td></tr>
 </tbody>
 </table>
 </div>

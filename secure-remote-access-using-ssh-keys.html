@@ -32,13 +32,15 @@
 <p>For the last few years, a network of compromised machines dubbed the &quot;Hail Mary Cloud&quot; has scanned the Internet for SSH servers. When a member of this cloud finds an SSH server, it lets the other machines in the network know about it. The cloud then methodically tries possible usernames and passwords. One host on the network tries a few times, then another, then another. Blocking individual IP addresses is not a useful defense, because each address is used only a few times.</p>
 <p>Any one attempt has low odds of guessing successfully. The attempts are constant. They never end. Eventually [some automated attacker] will get lucky and break into your server. It might be tomorrow, or next year, but it _will_ happen. To stop these types of attacks, you can either use packet filtering to block public access to your SSH server, or you can eliminate passwords on your servers. User keys let you eliminate passwords.</p>
 </blockquote>
-<div class="section" id="to-configure-ssh-key-authentication-between-a-home-server-and-client">
-<h2>To configure SSH key authentication between a home server and client:</h2>
+<p>Configuring SSH key authentication between a home server and client sounds like a good idea.</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+</div>
 <div class="section" id="install">
-<h3>0. Install</h3>
+<h2>0. Install</h2>
 <p>Home server is a <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi running Raspbian</a> and client is a <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Chromebook running Lubuntu 14.04</a>.</p>
 <div class="section" id="on-the-server">
-<h4>On the server:</h4>
+<h3>On the server:</h3>
 <ul class="simple">
 <li>install <tt class="docutils literal"><span class="pre">openssh-server</span></tt> (pre-installed in Raspbian) and create an SSH configuration in the home directory of users who requires access to the system:</li>
 </ul>
@@ -63,7 +65,7 @@
 </pre></div>
 </div>
 <div class="section" id="on-the-client">
-<h4>On the client:</h4>
+<h3>On the client:</h3>
 <ul class="simple">
 <li>install <tt class="docutils literal"><span class="pre">openssh-client</span></tt> and create the SSH folder in the user home directory:</li>
 </ul>
@@ -81,9 +83,9 @@ User pi
 </div>
 </div>
 <div class="section" id="generate-keys">
-<h3>1. Generate keys</h3>
+<h2>1. Generate keys</h2>
 <div class="section" id="id1">
-<h4>On the client:</h4>
+<h3>On the client:</h3>
 <ul class="simple">
 <li>generate keys by running:</li>
 </ul>
@@ -97,9 +99,9 @@ User pi
 </div>
 </div>
 <div class="section" id="test">
-<h3>2. Test</h3>
+<h2>2. Test</h2>
 <div class="section" id="id2">
-<h4>On the client:</h4>
+<h3>On the client:</h3>
 <p>Graphical display managers like <tt class="docutils literal">gdm</tt> will automatically check a user account for SSH keys upon login. A pop-up box will prompt for the passphrase and the key will be added to the desktop session.</p>
 <p>If logging into a console, tell SSH that you have keys by running <tt class="docutils literal"><span class="pre">ssh-add</span></tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>ssh-add
@@ -116,9 +118,9 @@ pi
 </div>
 </div>
 <div class="section" id="disable-password-logins">
-<h3>3. Disable password logins</h3>
+<h2>3. Disable password logins</h2>
 <div class="section" id="id3">
-<h4>On the server:</h4>
+<h3>On the server:</h3>
 <ul class="simple">
 <li>edit <tt class="docutils literal">/etc/ssh/sshd_config</tt>:</li>
 </ul>
@@ -133,12 +135,12 @@ UsePAM no
 </div>
 </div>
 <div class="section" id="key-management">
-<h3>4. Key management</h3>
+<h2>4. Key management</h2>
 <p><a class="reference external" href="http://www.funtoo.org/Keychain">Keychain</a> is an OpenSSH key manager. From the package description:</p>
 <blockquote>
 When keychain is run, it checks for a running ssh-agent, otherwise it starts one. It saves the ssh-agent environment variables to <tt class="docutils literal"><span class="pre">~/.keychain/$HOSTNAME-sh</span></tt>, so that subsequent logins and non-interactive shells such as cron jobs can source the file and make passwordless ssh connections.  In addition, when keychain runs, it verifies that the key files specified on the command-line are known to ssh-agent, otherwise it loads them, prompting you for a password if necessary.</blockquote>
 <div class="section" id="id4">
-<h4>On the client:</h4>
+<h3>On the client:</h3>
 <ul class="simple">
 <li>install:</li>
 </ul>
@@ -162,7 +164,6 @@ keychain ~/.ssh/id_rsa
 <div class="highlight"><pre><span class="nb">set</span>-option -g update-environment <span class="s2">&quot;DISPLAY SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY&quot;</span>
 </pre></div>
 <p>Happy hacking!</p>
-</div>
 </div>
 </div>
 

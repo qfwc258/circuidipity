@@ -1,5 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-02-10T20:39:00-05:00</updated><entry><title>PHP + Nginx + PostgreSQL</title><link href="http://www.circuidipity.com/php-nginx-postgresql.html" rel="alternate"></link><updated>2015-02-10T20:39:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-09:php-nginx-postgresql.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #6 &amp;gt;&amp;gt;&lt;/a&gt; As a pre-requisite to host web applications like &lt;a class="reference external" href="http://tt-rss.org/redmine/projects/tt-rss/wiki"&gt;Tiny Tiny RSS&lt;/a&gt; on my Raspberry Pi I install &lt;strong&gt;PHP&lt;/strong&gt;, the lightweight web server &lt;strong&gt;Nginx&lt;/strong&gt;, and the &lt;strong&gt;PostgreSQL&lt;/strong&gt; database.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-02-11T18:40:00-05:00</updated><entry><title>Tiny Tiny RSS</title><link href="http://www.circuidipity.com/ttrss.html" rel="alternate"></link><updated>2015-02-11T18:40:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-11:ttrss.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #7 &amp;gt;&amp;gt;&lt;/a&gt; Install and self-host the &lt;a class="reference external" href="http://tt-rss.org/redmine/projects/tt-rss/wiki"&gt;Tiny Tiny RSS&lt;/a&gt; news reader and aggregator and access news feeds from anywhere.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div class="section" id="web-server-and-database"&gt;
+&lt;h2&gt;0. Web server and database&lt;/h2&gt;
+&lt;p&gt;TTRSS is a PHP application that require a proxy web server and a database back-end to store content. See &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;PHP + Nginx + PostgreSQL&lt;/a&gt; for necessay pre-requites to host TTRSS. &lt;a class="footnote-reference" href="#id6" id="id2"&gt;[1]&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="database"&gt;
+&lt;h2&gt;1. Database&lt;/h2&gt;
+&lt;p&gt;Create a new PostgreSQL database to hold the content of RSS feeds. Launch the interactive console front-end &lt;tt class="docutils literal"&gt;psql&lt;/tt&gt; and create a new user &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;www-data&lt;/span&gt;&lt;/tt&gt; &lt;a class="footnote-reference" href="#id7" id="id3"&gt;[2]&lt;/a&gt; and database &lt;tt class="docutils literal"&gt;ttrss&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo -u postgres psql
+&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# CREATE USER &amp;quot;www-data&amp;quot; WITH PASSWORD &amp;#39;password&amp;#39;;  # &amp;#39;poboh1066&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# CREATE DATABASE ttrss WITH OWNER &amp;quot;www-data&amp;quot;;&lt;/span&gt;
+&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# GRANT ALL PRIVILEGES ON DATABASE ttrss to &amp;quot;www-data&amp;quot;;&lt;/span&gt;
+&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# \quit&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="peer-authentication"&gt;
+&lt;h3&gt;1.1 Peer authentication&lt;/h3&gt;
+&lt;p&gt;Later when running the TTRSS &lt;tt class="docutils literal"&gt;update.php&lt;/tt&gt; script you may run into &lt;tt class="docutils literal"&gt;Peer authentication failed for user&lt;/tt&gt; errors. Fix this issue by editing &lt;tt class="docutils literal"&gt;/etc/postgresql/9.1/main/pg_hba.conf&lt;/tt&gt; and change &lt;tt class="docutils literal"&gt;peer&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# &amp;quot;local&amp;quot; is for Unix domain socket connections only&lt;/span&gt;
+&lt;span class="nb"&gt;local   &lt;/span&gt;all             all                                     peer
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... to &lt;tt class="docutils literal"&gt;trust&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;local   &lt;/span&gt;all             all                                     trust
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Save and reload the database server:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/postgresql reload
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="http://askubuntu.com/questions/274441/pg-connect-unable-to-connect-to-postgresql-server"&gt;Unable to connect to postgresql server&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ttrss"&gt;
+&lt;h2&gt;2. TTRSS&lt;/h2&gt;
+&lt;p&gt;Download the latest &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Tiny-Tiny-RSS-X.X.X.tar.gz&lt;/span&gt;&lt;/tt&gt; from &lt;a class="reference external" href="https://github.com/gothfox/Tiny-Tiny-RSS/releases"&gt;Releases&lt;/a&gt;, unpack, and change permissions:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;tar xvzf Tiny-Tiny-RSS-X.X.X.tar.gz
+&lt;span class="nv"&gt;$ &lt;/span&gt;mv Tiny-Tiny-RSS-X.X.X ttrss
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;ttrss
+&lt;span class="nv"&gt;$ &lt;/span&gt;chmod -R 777 cache/images/ cache/js/ cache/export/ cache/upload/ feed-icons/ lock/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="nginx"&gt;
+&lt;h2&gt;3. Nginx&lt;/h2&gt;
+&lt;p&gt;Move the &lt;tt class="docutils literal"&gt;ttrss&lt;/tt&gt; directory into Nginx's &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;document root&lt;/a&gt; directory:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mv ../ttrss /usr/share/nginx/www
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo chown -R www-data.www-data /usr/share/nginx/www/ttrss
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Create a &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;server block&lt;/a&gt; (virtual host) for TTRSS. Sample &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available/ttrss&lt;/span&gt;&lt;/tt&gt; &lt;a class="footnote-reference" href="#id8" id="id4"&gt;[3]&lt;/a&gt; configuration:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;server &lt;span class="o"&gt;{&lt;/span&gt;
+    listen  80; &lt;span class="c"&gt;## listen for ipv4; this line is default and implied&lt;/span&gt;
+
+    root /usr/share/nginx/www/ttrss;
+    index index.html index.htm index.php;
+
+    access_log /var/log/nginx/ttrss_access.log;
+    error_log /var/log/nginx/ttrss_error.log info;
+
+    server_name localhost;
+
+    location / &lt;span class="o"&gt;{&lt;/span&gt;
+        index           index.php;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    location ~ &lt;span class="se"&gt;\.&lt;/span&gt;php&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;
+        try_files &lt;span class="nv"&gt;$uri&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 404; &lt;span class="c"&gt;#Prevents autofixing of path which could be used for exploit&lt;/span&gt;
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_index index.php;
+        include /etc/nginx/fastcgi_params;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Save changes and enable the new block:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /etc/nginx/sites-enabled
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo ln -s /etc/nginx/sites-available/ttrss
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/nginx restart
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configure"&gt;
+&lt;h2&gt;4. Configure&lt;/h2&gt;
+&lt;p&gt;Navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://YOUR.SERVER.IP.ADDRESS&lt;/span&gt;&lt;/tt&gt; and configure TTRSS:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Database &lt;span class="nb"&gt;type&lt;/span&gt;: &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="k"&gt;select &lt;/span&gt;PostgreSQL&lt;span class="o"&gt;]&lt;/span&gt;
+Username: www-data
+Password: &lt;span class="o"&gt;[&lt;/span&gt;database password created earlier&lt;span class="o"&gt;]&lt;/span&gt;
+Database Name: ttrss
+Hostname: &lt;span class="o"&gt;[&lt;/span&gt;leave blank&lt;span class="o"&gt;]&lt;/span&gt;
+Port: 5432
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Press &lt;tt class="docutils literal"&gt;Test configuration&lt;/tt&gt; button, then &lt;tt class="docutils literal"&gt;Initialize database&lt;/tt&gt;, and finally &lt;tt class="docutils literal"&gt;Save configuration&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Navigate back to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://YOUR.SERVER.IP.ADDRESS&lt;/span&gt;&lt;/tt&gt; and login &lt;tt class="docutils literal"&gt;Username: &amp;quot;admin&amp;quot; Password: &amp;quot;password&amp;quot;&lt;/tt&gt;. In the top-right go to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Actions-&amp;gt;Preferences&lt;/span&gt;&lt;/tt&gt; to make further changes to the default settings. Create a new user account for RSS reading (vs logging in all the time as &lt;tt class="docutils literal"&gt;admin&lt;/tt&gt;) and change the &lt;tt class="docutils literal"&gt;admin&lt;/tt&gt; password.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="updates"&gt;
+&lt;h2&gt;5. Updates&lt;/h2&gt;
+&lt;p&gt;Configure TTRSS to periodically update the RSS feeds with new content. First, test the included &lt;tt class="docutils literal"&gt;update.php&lt;/tt&gt; script:
+To have ttrss periodically update the feeds... test the update.php script:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;/usr/bin/php /usr/share/nginx/www/ttrss/update.php --feeds --quiet
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If the script returns no errors use &lt;tt class="docutils literal"&gt;cron&lt;/tt&gt; to run the script periodically. Add a new job to &lt;tt class="docutils literal"&gt;crontab&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;crontab -e
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sample TTRSS job:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;*/30 * * * * /usr/bin/php /usr/share/nginx/www/ttrss/update.php --feeds --quiet
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="helpful-resources"&gt;
+&lt;h2&gt;6. Helpful resources&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-ttrss-with-nginx-for-debian-7-on-a-vps"&gt;How to install TTRSS with Nginx for Debian&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://davidbeath.com/posts/installing-tiny-tiny-rss-from-scratch.html"&gt;Installing TTRSS from scratch&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;PHP + Nginx + PostgreSQL&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Happy news reading (and hacking)!&lt;/p&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h3&gt;Notes&lt;/h3&gt;
+&lt;table class="docutils footnote" frame="void" id="id6" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Alternative host setups can replace &lt;tt class="docutils literal"&gt;nginx&lt;/tt&gt; web server with &lt;tt class="docutils literal"&gt;apache&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;postgresql&lt;/tt&gt; database with &lt;tt class="docutils literal"&gt;mysql&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;sqlite&lt;/tt&gt;. However the TTRSS community recommends the above combination as the optimal setup for lightweight servers like the Raspberry Pi.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id7" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id3"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;PostgreSQL maintains its own users and passwords, which are separate from the Linux user accounts. It is not required that your PostgreSQL usernames match the Linux usernames. See &lt;a class="reference external" href="http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm"&gt;Practical PostgreSQL     database&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id8" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id4"&gt;[3]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Make TTRSS hosted on a home server accessible from the outside over the web by configuring a &lt;strong&gt;dynamic DNS&lt;/strong&gt; service (I like &lt;a class="reference external" href="http://www.duckdns.org/"&gt;duckdns.org&lt;/a&gt;). Example: Create a &lt;tt class="docutils literal"&gt;myhomepi&lt;/tt&gt; domain on the DDNS service and modify &lt;tt class="docutils literal"&gt;server_name localhost;&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;server_name myhomepi.duckdns.org;&lt;/tt&gt;. See &lt;a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html"&gt;DDNS and OpenWrt&lt;/a&gt; for details.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="networks"></category><category term="web"></category><category term="linux"></category></entry><entry><title>PHP + Nginx + PostgreSQL</title><link href="http://www.circuidipity.com/php-nginx-postgresql.html" rel="alternate"></link><updated>2015-02-11T17:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-09:php-nginx-postgresql.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #6 &amp;gt;&amp;gt;&lt;/a&gt; As a pre-requisite to host web applications like &lt;a class="reference external" href="http://www.circuidipity.com/ttrss.html"&gt;Tiny Tiny RSS&lt;/a&gt; on my Raspberry Pi I install &lt;strong&gt;PHP&lt;/strong&gt;, the lightweight web server &lt;strong&gt;Nginx&lt;/strong&gt;, and the &lt;strong&gt;PostgreSQL&lt;/strong&gt; database.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;/div&gt;
 &lt;div class="section" id="php"&gt;
 &lt;h2&gt;0. PHP&lt;/h2&gt;
 &lt;p&gt;Install:&lt;/p&gt;
@@ -83,12 +220,21 @@
 &lt;p&gt;Install:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get postgresql
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Login and change password for the &lt;tt class="docutils literal"&gt;postgresql&lt;/tt&gt; user:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo -u postgres psql postgres
-&lt;span class="se"&gt;\p&lt;/span&gt;assword postgres  &lt;span class="c"&gt;# hit enter and enter password&lt;/span&gt;
+&lt;p&gt;Launch the PostgreSQL interactive console front-end &lt;tt class="docutils literal"&gt;psql&lt;/tt&gt; as &lt;tt class="docutils literal"&gt;postgres&lt;/tt&gt; user and set a new password:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo -u postgres psql
+&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# \password postgres&lt;/span&gt;
+Enter new password: &lt;span class="o"&gt;[&lt;/span&gt;newpasswd&lt;span class="o"&gt;]&lt;/span&gt;
+Enter it again: &lt;span class="o"&gt;[&lt;/span&gt;newpasswd&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# \quit&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;PostgreSQL maintains its own users and passwords, which are separate from the Pi's user accounts. It is not required that your PostgreSQL users match the Pi users.&lt;/p&gt;
-&lt;p&gt;Reload:&lt;/p&gt;
+&lt;p&gt;To create a new user &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;www-data&lt;/span&gt;&lt;/tt&gt; &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt; and database &lt;tt class="docutils literal"&gt;mydb&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo -u postgres psql
+&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# CREATE USER &amp;quot;www-data&amp;quot; WITH PASSWORD &amp;#39;newpasswd&amp;#39;;&lt;/span&gt;
+&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# CREATE DATABASE mydb WITH OWNER &amp;quot;www-data&amp;quot;;&lt;/span&gt;
+&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# GRANT ALL PRIVILEGES ON DATABASE mydb to &amp;quot;www-data&amp;quot;;&lt;/span&gt;
+&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# \quit&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Save any changes and reload the database server:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/postgresql reload
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -97,14 +243,24 @@
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-14-04"&gt;How to install the LEMP stack on Ubuntu&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-14-04-lts"&gt;Set up Nginx Server Blocks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://help.ubuntu.com/community/PostgreSQL"&gt;PostgreSQL and Ubuntu&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm"&gt;Practical PostgreSQL database&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html"&gt;DDNS and OpenWrt&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h3&gt;Notes&lt;/h3&gt;
+&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;PostgreSQL maintains its own users and passwords, which are separate from the Linux user accounts. It is not required that your PostgreSQL usernames match the Linux usernames. See &lt;a class="reference external" href="http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm"&gt;Practical PostgreSQL database&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 </summary><category term="networks"></category><category term="web"></category><category term="linux"></category></entry><entry><title>Supercharge a home router using OpenWrt Part 2</title><link href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html" rel="alternate"></link><updated>2015-02-08T18:16:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-08:supercharge-a-home-router-using-openwrt-pt2.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;PREVIOUS: TL-WR841N router &amp;lt;&amp;lt;&lt;/a&gt; A &lt;strong&gt;home router&lt;/strong&gt; is a much more capable device than its pre-installed software would lead you to believe. &lt;a class="reference external" href="https://openwrt.org/"&gt;OpenWrt&lt;/a&gt; is an embedded Linux distribution that converts cheap, energy-efficient, network-capable devices into much more useful hackable computers.&lt;/p&gt;
 &lt;p&gt;Getting its start hacking the original &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Linksys_WRT54G_series#WRT54G"&gt;Linksys WRT54G&lt;/a&gt;, OpenWrt and its volunteer developers now support a &lt;a class="reference external" href="http://wiki.openwrt.org/toh/start"&gt;wide and growing range of hardware&lt;/a&gt;. The project hosts software packages that lay out a smorgasboard of extra possibilities: more network tools with more fine-grained controls, plus a range of server capabilities... manage printers, connect external USB drives for backup, host files/torrents/VOIP/VPNs.&lt;/p&gt;
-&lt;p&gt;I am exploring an OpenWrt-supported &lt;a class="reference external" href="http://wiki.openwrt.org/toh/tp-link/tl-wdr3600"&gt;TP-Link TL-WDR3600&lt;/a&gt; router:&lt;/p&gt;
+&lt;p&gt;I replaced the default firmware and now exploring an OpenWrt-supported &lt;a class="reference external" href="http://wiki.openwrt.org/toh/tp-link/tl-wdr3600"&gt;TP-Link TL-WDR3600&lt;/a&gt; router:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;dual 2.4GHz 802.11bgn and 5GHz 802.11an wifi with detachable antennas&lt;/li&gt;
 &lt;li&gt;4 Port 10/100/1000 LAN&lt;/li&gt;
@@ -113,20 +269,21 @@
 &lt;li&gt;64 MB Flash + 128MB RAM&lt;/li&gt;
 &lt;li&gt;[my device has] firmware: 3.13.34 build 130909 rel. 53148n hardware &lt;strong&gt;version: v1.5&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="section" id="to-replace-the-default-router-firmware-with-openwrt"&gt;
-&lt;h2&gt;To replace the default router firmware with OpenWrt:&lt;/h2&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;/div&gt;
 &lt;div class="section" id="download-install-image"&gt;
-&lt;h3&gt;0. Download install image&lt;/h3&gt;
+&lt;h2&gt;0. Download install image&lt;/h2&gt;
 &lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; OpenWrt builds different install images for different devices. Consult the &lt;a class="reference external" href="http://wiki.openwrt.org/toh/start"&gt;Table of Hardware&lt;/a&gt; to confirm that your router is supported and read the wiki entry for your particular device to identify the correct image. It is &lt;strong&gt;easy to brick a device&lt;/strong&gt; (render inoperable) using an incorrect install image.&lt;/p&gt;
 &lt;p&gt;Latest version (2015-02-08) of OpenWrt is &lt;strong&gt;v14.07 &amp;quot;Barrie Breaker&amp;quot;&lt;/strong&gt; and TL-WDR3600 is an &lt;strong&gt;ar71xx&lt;/strong&gt; device. Download the appropriate install image:&lt;/p&gt;
 &lt;p&gt;[Link] &lt;a class="reference external" href="https://downloads.openwrt.org/barrier_breaker/14.07/ar71xx/generic/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin"&gt;openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="flash-router"&gt;
-&lt;h3&gt;1. Flash router&lt;/h3&gt;
+&lt;h2&gt;1. Flash router&lt;/h2&gt;
 &lt;p&gt;Log into the TP-Link router web interface &lt;tt class="docutils literal"&gt;address=192.168.0.1&lt;/tt&gt; &lt;tt class="docutils literal"&gt;user=admin&lt;/tt&gt; &lt;tt class="docutils literal"&gt;password=admin&lt;/tt&gt; navigate to the update page and select the downloaded &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openwrt-*-squashfs-factory.bin&lt;/span&gt;&lt;/tt&gt; firmware image as the update package. Allow several minutes for the device to write the new OpenWrt firmware; when finished the device will reboot and accessible at new IP address &lt;tt class="docutils literal"&gt;192.168.1.1&lt;/tt&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="first-login"&gt;
-&lt;h3&gt;2. First login&lt;/h3&gt;
+&lt;h2&gt;2. First login&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/firstlogin"&gt;Use telnet (no password) to login for the first time&lt;/a&gt; to the new OpenWrt installation. Use &lt;tt class="docutils literal"&gt;passwd&lt;/tt&gt; to create a new root password. After changing the password telnet is disabled. Exit and re-login using SSH:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh root@192.168.1.1
 &lt;/pre&gt;&lt;/div&gt;
@@ -139,7 +296,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="web-interface"&gt;
-&lt;h3&gt;3. Web interface&lt;/h3&gt;
+&lt;h2&gt;3. Web interface&lt;/h2&gt;
 &lt;p&gt;OpenWrt can be further configured in the console or the &lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/luci.essentials"&gt;LuCI web interface&lt;/a&gt;. LuCI is included by default in the WDR3600 image, otherwise it can be installed using the &lt;tt class="docutils literal"&gt;opkg&lt;/tt&gt; package manager:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# opkg update&lt;/span&gt;
 &lt;span class="c"&gt;# opkg install luci&lt;/span&gt;
@@ -152,23 +309,23 @@
 &lt;img alt="LuCI login" src="images/pingparade4-1.png" style="width: 960px; height: 300px;" /&gt;
 &lt;/div&gt;
 &lt;div class="section" id="configuration"&gt;
-&lt;h3&gt;4. Configuration&lt;/h3&gt;
+&lt;h2&gt;4. Configuration&lt;/h2&gt;
 &lt;p&gt;Secure access to the router using &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH key authentication&lt;/a&gt;. Create &lt;a class="reference external" href="http://www.circuidipity.com/20141001.html"&gt;static leases&lt;/a&gt; for hosts using DHCP and setup &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;port forwarding&lt;/a&gt; to reach devices behind the firewall from the world-at-large.&lt;/p&gt;
 &lt;p&gt;Its exciting what you can do with these consumer routers once you let it sink in that - with a few dollars and OpenWrt - you have an extremely configurable general purpose computer.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 </summary><category term="networks"></category><category term="openwrt"></category><category term="linux"></category></entry><entry><title>Dynamic DNS and OpenWRT</title><link href="http://www.circuidipity.com/ddns-openwrt.html" rel="alternate"></link><updated>2015-02-06T00:02:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-06:ddns-openwrt.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #5 &amp;gt;&amp;gt;&lt;/a&gt; Access a home server from anywhere using Dynamic DNS (DDNS).&lt;/p&gt;
 &lt;p&gt;My Raspberry Pi server sits behind a router assigned a &lt;strong&gt;dynamic IP address&lt;/strong&gt; by the ISP. If I want to connect to my Pi over the Internet from anywhere in the world I can use a &lt;strong&gt;DDNS service&lt;/strong&gt; to create a domain name that automatically updates the IP address in the background whenever it changes and redirect traffic to the new location.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;/div&gt;
 &lt;div class="section" id="select-a-ddns-service"&gt;
-&lt;h3&gt;0. Select a DDNS service&lt;/h3&gt;
+&lt;h2&gt;0. Select a DDNS service&lt;/h2&gt;
 &lt;p&gt;I chose the free DDNS service &lt;a class="reference external" href="http://www.duckdns.org/"&gt;duckdns.org&lt;/a&gt; which permits the creation of up to 4 domains in the format &lt;tt class="docutils literal"&gt;your_subdomain_choice.duckdns.org&lt;/tt&gt;. Example: Create the subdomain &lt;tt class="docutils literal"&gt;myPiHomeServer&lt;/tt&gt; and later - after configuring the router - when entering &lt;tt class="docutils literal"&gt;myPiHomeServer.duckdns.org&lt;/tt&gt; I will be redirected to the current IP address assigned to my home network.&lt;/p&gt;
 &lt;p&gt;Make note of &lt;a class="reference external" href="http://www.duckdns.org/install.jsp"&gt;http://www.duckdns.org/install.jsp&lt;/a&gt; (while logged in) for customized settings useful for configuring the router for DDNS.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="configure-openwrt-for-notification"&gt;
-&lt;h3&gt;1. Configure OpenWRT for notification&lt;/h3&gt;
+&lt;h2&gt;1. Configure OpenWRT for notification&lt;/h2&gt;
 &lt;p&gt;Different routers configure DDNS differently but the goal is the same: the ability to notify the DDNS service whenever the IP address assigned by the ISP is modified. I am using an &lt;a class="reference external" href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html"&gt;OpenWRT-powered router&lt;/a&gt; and these are the steps to configure OpenWRT to use duckdns DDNS:&lt;/p&gt;
 &lt;p&gt;Install DDNS packages:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# opkg update&lt;/span&gt;
@@ -203,10 +360,9 @@ option use_syslog       &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt
 &lt;p&gt;Source: &lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/ddns.client"&gt;OpenWRT DDNS client&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="port-forwarding"&gt;
-&lt;h3&gt;2. Port forwarding&lt;/h3&gt;
+&lt;h2&gt;2. Port forwarding&lt;/h2&gt;
 &lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;port forwarding HOWTO&lt;/a&gt; to configure OpenWRT to forward traffic directed at one of the router's ports to the listening port on the Pi home server. Example: configure port &lt;tt class="docutils literal"&gt;55555&lt;/tt&gt; on the router to connect to the &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH server&lt;/a&gt; listening on port &lt;tt class="docutils literal"&gt;22&lt;/tt&gt; on the Pi.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 </summary><category term="networks"></category><category term="openwrt"></category><category term="linux"></category></entry><entry><title>Network Attached Storage using a Raspberry Pi and SSHFS</title><link href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html" rel="alternate"></link><updated>2015-02-05T18:28:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-05:nas-raspberry-pi-sshfs.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #4 &amp;gt;&amp;gt;&lt;/a&gt; Connect a Pi to external USB storage and create a cheap, cheerful, encrypted traffic NAS device via &lt;strong&gt;SSH Filesystem (SSHFS)&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;With a &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html"&gt;Pi-attached 1TB hard drive&lt;/a&gt; hosting a properly configured &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH server&lt;/a&gt; nothing extra is required server-side. On my laptop I install SSHFS, add my username to the &lt;tt class="docutils literal"&gt;FUSE&lt;/tt&gt; group, and create a local &lt;tt class="docutils literal"&gt;piNAS&lt;/tt&gt; mountpoint for the remote filesystem:&lt;/p&gt;
@@ -238,20 +394,21 @@ option use_syslog       &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt
 &lt;p&gt;One of the advantages of setting up a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Linux home server&lt;/a&gt; is providing an always-available location to store backups of important files. A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home directory on the local area network (LAN) server.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;/div&gt;
 &lt;div class="section" id="ssh"&gt;
-&lt;h3&gt;0. SSH&lt;/h3&gt;
-&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;Raspberry Pi Home Server Hack #1 -- Secure remote access using SSH keys&lt;/a&gt; to configure SSH for encrypted connections between (Pi) server and (laptop) client. &lt;tt class="docutils literal"&gt;Keychain&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-agent&lt;/span&gt;&lt;/tt&gt;  make it easy to use a passphrase-protected &lt;strong&gt;encryption key&lt;/strong&gt; in automated scripts.&lt;/p&gt;
+&lt;h2&gt;0. SSH&lt;/h2&gt;
+&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;Secure remote access using SSH keys&lt;/a&gt; to configure SSH for encrypted connections between (Pi) server and (laptop) client. &lt;tt class="docutils literal"&gt;Keychain&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-agent&lt;/span&gt;&lt;/tt&gt;  make it easy to use a passphrase-protected &lt;strong&gt;encryption key&lt;/strong&gt; in automated scripts.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="script"&gt;
-&lt;h3&gt;1. Script&lt;/h3&gt;
+&lt;h2&gt;1. Script&lt;/h2&gt;
 &lt;div class="section" id="on-the-server"&gt;
-&lt;h4&gt;On the server:&lt;/h4&gt;
+&lt;h3&gt;On the server:&lt;/h3&gt;
 &lt;p&gt;Create a backup directory to hold the contents of &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/backup-home
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="on-the-client"&gt;
-&lt;h4&gt;On the client:&lt;/h4&gt;
+&lt;h3&gt;On the client:&lt;/h3&gt;
 &lt;p&gt;Create a backup script that uses the &lt;tt class="docutils literal"&gt;rsync&lt;/tt&gt; file-copy tool. A sample &lt;tt class="docutils literal"&gt;myRsync&lt;/tt&gt; script to backup &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt; includes:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;load the details of the SSH key stored in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.keychain/$HOSTNAME-sh&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
@@ -281,7 +438,7 @@ rsync &lt;span class="nv"&gt;$rsync_options&lt;/span&gt; &lt;span class="nv"&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="automate"&gt;
-&lt;h3&gt;2. Automate&lt;/h3&gt;
+&lt;h2&gt;2. Automate&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Cron&lt;/strong&gt; is a daemon that runs programs at specified times. Use the command &lt;tt class="docutils literal"&gt;crontab &lt;span class="pre"&gt;-e&lt;/span&gt;&lt;/tt&gt; to setup &lt;tt class="docutils literal"&gt;myRsync&lt;/tt&gt; to auto-run with the following parameters:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;perform a daily backup at &lt;tt class="docutils literal"&gt;23:55&lt;/tt&gt;&lt;/li&gt;
@@ -304,20 +461,21 @@ rsync &lt;span class="nv"&gt;$rsync_options&lt;/span&gt; &lt;span class="nv"&gt;
 &lt;p&gt;I stashed a more complete &lt;tt class="docutils literal"&gt;myRsync&lt;/tt&gt; &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/myRsync"&gt;script on Github&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;
 </summary><category term="networks"></category><category term="linux"></category><category term="shell"></category><category term="programming"></category><category term="github"></category></entry><entry><title>Secure remote access using SSH keys</title><link href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html" rel="alternate"></link><updated>2015-02-02T00:05:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-02:secure-remote-access-using-ssh-keys.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #1 &amp;gt;&amp;gt;&lt;/a&gt; Create cryptographic keys and disable password logins to make remote machines more secure.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;OpenSSH&lt;/strong&gt; is a toolkit for securing communication with Unix-like remote machines and services and supports authenticating users with a public and private &lt;strong&gt;key pair&lt;/strong&gt;. Michael Lucas, author of &lt;a class="reference external" href="https://www.michaelwlucas.com/nonfiction/ssh-mastery"&gt;OpenSSH Mastery&lt;/a&gt;, describes the risk of passwords in SSH:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;For the last few years, a network of compromised machines dubbed the &amp;quot;Hail Mary Cloud&amp;quot; has scanned the Internet for SSH servers. When a member of this cloud finds an SSH server, it lets the other machines in the network know about it. The cloud then methodically tries possible usernames and passwords. One host on the network tries a few times, then another, then another. Blocking individual IP addresses is not a useful defense, because each address is used only a few times.&lt;/p&gt;
 &lt;p&gt;Any one attempt has low odds of guessing successfully. The attempts are constant. They never end. Eventually [some automated attacker] will get lucky and break into your server. It might be tomorrow, or next year, but it _will_ happen. To stop these types of attacks, you can either use packet filtering to block public access to your SSH server, or you can eliminate passwords on your servers. User keys let you eliminate passwords.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class="section" id="to-configure-ssh-key-authentication-between-a-home-server-and-client"&gt;
-&lt;h2&gt;To configure SSH key authentication between a home server and client:&lt;/h2&gt;
+&lt;p&gt;Configuring SSH key authentication between a home server and client sounds like a good idea.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;/div&gt;
 &lt;div class="section" id="install"&gt;
-&lt;h3&gt;0. Install&lt;/h3&gt;
+&lt;h2&gt;0. Install&lt;/h2&gt;
 &lt;p&gt;Home server is a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi running Raspbian&lt;/a&gt; and client is a &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Chromebook running Lubuntu 14.04&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="section" id="on-the-server"&gt;
-&lt;h4&gt;On the server:&lt;/h4&gt;
+&lt;h3&gt;On the server:&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;install &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openssh-server&lt;/span&gt;&lt;/tt&gt; (pre-installed in Raspbian) and create an SSH configuration in the home directory of users who requires access to the system:&lt;/li&gt;
 &lt;/ul&gt;
@@ -342,7 +500,7 @@ rsync &lt;span class="nv"&gt;$rsync_options&lt;/span&gt; &lt;span class="nv"&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="on-the-client"&gt;
-&lt;h4&gt;On the client:&lt;/h4&gt;
+&lt;h3&gt;On the client:&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;install &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openssh-client&lt;/span&gt;&lt;/tt&gt; and create the SSH folder in the user home directory:&lt;/li&gt;
 &lt;/ul&gt;
@@ -360,9 +518,9 @@ User pi
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="generate-keys"&gt;
-&lt;h3&gt;1. Generate keys&lt;/h3&gt;
+&lt;h2&gt;1. Generate keys&lt;/h2&gt;
 &lt;div class="section" id="id1"&gt;
-&lt;h4&gt;On the client:&lt;/h4&gt;
+&lt;h3&gt;On the client:&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;generate keys by running:&lt;/li&gt;
 &lt;/ul&gt;
@@ -376,9 +534,9 @@ User pi
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="test"&gt;
-&lt;h3&gt;2. Test&lt;/h3&gt;
+&lt;h2&gt;2. Test&lt;/h2&gt;
 &lt;div class="section" id="id2"&gt;
-&lt;h4&gt;On the client:&lt;/h4&gt;
+&lt;h3&gt;On the client:&lt;/h3&gt;
 &lt;p&gt;Graphical display managers like &lt;tt class="docutils literal"&gt;gdm&lt;/tt&gt; will automatically check a user account for SSH keys upon login. A pop-up box will prompt for the passphrase and the key will be added to the desktop session.&lt;/p&gt;
 &lt;p&gt;If logging into a console, tell SSH that you have keys by running &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-add&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-add
@@ -395,9 +553,9 @@ pi
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="disable-password-logins"&gt;
-&lt;h3&gt;3. Disable password logins&lt;/h3&gt;
+&lt;h2&gt;3. Disable password logins&lt;/h2&gt;
 &lt;div class="section" id="id3"&gt;
-&lt;h4&gt;On the server:&lt;/h4&gt;
+&lt;h3&gt;On the server:&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;edit &lt;tt class="docutils literal"&gt;/etc/ssh/sshd_config&lt;/tt&gt;:&lt;/li&gt;
 &lt;/ul&gt;
@@ -412,12 +570,12 @@ UsePAM no
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="key-management"&gt;
-&lt;h3&gt;4. Key management&lt;/h3&gt;
+&lt;h2&gt;4. Key management&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://www.funtoo.org/Keychain"&gt;Keychain&lt;/a&gt; is an OpenSSH key manager. From the package description:&lt;/p&gt;
 &lt;blockquote&gt;
 When keychain is run, it checks for a running ssh-agent, otherwise it starts one. It saves the ssh-agent environment variables to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.keychain/$HOSTNAME-sh&lt;/span&gt;&lt;/tt&gt;, so that subsequent logins and non-interactive shells such as cron jobs can source the file and make passwordless ssh connections.  In addition, when keychain runs, it verifies that the key files specified on the command-line are known to ssh-agent, otherwise it loads them, prompting you for a password if necessary.&lt;/blockquote&gt;
 &lt;div class="section" id="id4"&gt;
-&lt;h4&gt;On the client:&lt;/h4&gt;
+&lt;h3&gt;On the client:&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;install:&lt;/li&gt;
 &lt;/ul&gt;
@@ -443,8 +601,7 @@ keychain ~/.ssh/id_rsa
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-</summary><category term="networks"></category><category term="linux"></category></entry><entry><title>There's no place like [a Raspberry Pi] Home [Server]</title><link href="http://www.circuidipity.com/raspberry-pi-home-server.html" rel="alternate"></link><updated>2015-02-09T18:11:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-01:raspberry-pi-home-server.html</id><summary type="html">&lt;img alt="Raspberry Pi Home Server" class="align-right" src="images/raspberry-pi-home-server.png" style="width: 300px; height: 300px;" /&gt;
+</summary><category term="networks"></category><category term="linux"></category></entry><entry><title>There's no place like [a Raspberry Pi] Home [Server]</title><link href="http://www.circuidipity.com/raspberry-pi-home-server.html" rel="alternate"></link><updated>2015-02-11T17:13:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-01:raspberry-pi-home-server.html</id><summary type="html">&lt;img alt="Raspberry Pi Home Server" class="align-right" src="images/raspberry-pi-home-server.png" style="width: 300px; height: 300px;" /&gt;
 &lt;p&gt;&lt;em&gt;Work-in-progress&lt;/em&gt;: Running your own Linux-powered &lt;strong&gt;home server&lt;/strong&gt; is a fun learning experience about how networks work and using a &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspberry-pi.html"&gt;Raspberry Pi&lt;/a&gt; is a cheap and cheerful way to get the job done!&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
@@ -456,6 +613,7 @@ keychain ~/.ssh/id_rsa
 &lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;Network attached storage&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html"&gt;Access from anywhere in the world using dynamic DNS&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;Web server and database&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/ttrss.html"&gt;RSS reader and aggregator&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
@@ -471,8 +629,9 @@ keychain ~/.ssh/id_rsa
 &lt;/ul&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;/div&gt;
 &lt;div class="section" id="raspbian-linux"&gt;
-&lt;h3&gt;0. Raspbian Linux&lt;/h3&gt;
+&lt;h2&gt;0. Raspbian Linux&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://downloads.raspberrypi.org/raspbian_latest"&gt;Download&lt;/a&gt; and unpack Raspbian and write the image to a spare 4GB+ SD card:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dd &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1M &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;YYYY-MM-DD-wheezy-raspbian.img &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sdX
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo sync
@@ -480,7 +639,7 @@ keychain ~/.ssh/id_rsa
 &lt;p&gt;Sources: &lt;a class="reference external" href="http://www.raspberrypi.org/downloads/"&gt;operating system images&lt;/a&gt;, installing &lt;a class="reference external" href="http://www.raspberrypi.org/documentation/installation/installing-images/linux.md"&gt;images on Linux&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="raspi-config"&gt;
-&lt;h3&gt;1. Raspi-config&lt;/h3&gt;
+&lt;h2&gt;1. Raspi-config&lt;/h2&gt;
 &lt;p&gt;Boot the Pi with the newly-minted Raspbian SD card and set a few options in the &lt;strong&gt;raspi-config&lt;/strong&gt; utility:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;4 Internationalisation Options
     * Change Locale
@@ -493,7 +652,7 @@ keychain ~/.ssh/id_rsa
 &lt;p&gt;Save the new parameters and reboot.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="partitions"&gt;
-&lt;h3&gt;2. Partitions&lt;/h3&gt;
+&lt;h2&gt;2. Partitions&lt;/h2&gt;
 &lt;p&gt;Filesystem layout on the SD card:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;df -h
 Filesystem      Size  Used Avail Use% Mounted on
@@ -598,14 +757,14 @@ Syncing disks.
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="filesystems"&gt;
-&lt;h3&gt;3. Filesystems&lt;/h3&gt;
+&lt;h2&gt;3. Filesystems&lt;/h2&gt;
 &lt;p&gt;Format the new partitions as &lt;tt class="docutils literal"&gt;ext4&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mke2fs -t ext4 -L rootfs /dev/sda1
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo mke2fs -t ext4 -L storage /dev/sda2
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="dev-root"&gt;
-&lt;h3&gt;4. /dev/root&lt;/h3&gt;
+&lt;h2&gt;4. /dev/root&lt;/h2&gt;
 &lt;p&gt;Mount the newly-formatted &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; partition to &lt;tt class="docutils literal"&gt;/mnt&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mount -t ext4 /dev/sda1 /mnt
 &lt;span class="nv"&gt;$ &lt;/span&gt;df -h
@@ -624,7 +783,7 @@ tmpfs            97M     0   97M   0% /run/shm
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="new-rootfs"&gt;
-&lt;h3&gt;5. New rootfs&lt;/h3&gt;
+&lt;h2&gt;5. New rootfs&lt;/h2&gt;
 &lt;p&gt;Modify options in &lt;tt class="docutils literal"&gt;/boot/cmdline.txt&lt;/tt&gt; - located on the &lt;strong&gt;SD card&lt;/strong&gt; - to point the bootloader to &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; filesystem on the USB device:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;Original:
 dwc_otg.lpm_enable&lt;span class="o"&gt;=&lt;/span&gt;0 &lt;span class="nv"&gt;console&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ttyAMA0,115200 &lt;span class="nv"&gt;console&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;tty1 &lt;span class="nv"&gt;root&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/mmcblk0p2 &lt;span class="nv"&gt;rootfstype&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ext4 &lt;span class="nv"&gt;elevator&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;deadline rootwait
@@ -634,7 +793,7 @@ dwc_otg.lpm_enable&lt;span class="o"&gt;=&lt;/span&gt;0 &lt;span class="nv"&gt;c
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="fstab"&gt;
-&lt;h3&gt;6. fstab&lt;/h3&gt;
+&lt;h2&gt;6. fstab&lt;/h2&gt;
 &lt;p&gt;Create new mountpoint for the &lt;tt class="docutils literal"&gt;storage&lt;/tt&gt; partition:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /media/USB0
 &lt;/pre&gt;&lt;/div&gt;
@@ -650,7 +809,7 @@ dwc_otg.lpm_enable&lt;span class="o"&gt;=&lt;/span&gt;0 &lt;span class="nv"&gt;c
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="reboot"&gt;
-&lt;h3&gt;7. Reboot&lt;/h3&gt;
+&lt;h2&gt;7. Reboot&lt;/h2&gt;
 &lt;p&gt;Save modifications and reboot. Login and check the new filesystem layout:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;df -h
 Filesystem     Type      Size  Used Avail Use% Mounted on
@@ -665,15 +824,15 @@ tmpfs          tmpfs      97M     0   97M   0% /run/shm
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="post-install"&gt;
-&lt;h3&gt;8. Post-install&lt;/h3&gt;
+&lt;h2&gt;8. Post-install&lt;/h2&gt;
 &lt;div class="section" id="password"&gt;
-&lt;h4&gt;8.1 Password&lt;/h4&gt;
+&lt;h3&gt;8.1 Password&lt;/h3&gt;
 &lt;p&gt;A &lt;tt class="docutils literal"&gt;raspberry&lt;/tt&gt; is a tasty fruit but a lousy password. Change password for username &lt;tt class="docutils literal"&gt;pi&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;passwd
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="sudo"&gt;
-&lt;h4&gt;8.2 Sudo&lt;/h4&gt;
+&lt;h3&gt;8.2 Sudo&lt;/h3&gt;
 &lt;p&gt;Default setting in Raspbian is to allow &lt;tt class="docutils literal"&gt;pi&lt;/tt&gt; to use &lt;tt class="docutils literal"&gt;sudo&lt;/tt&gt; without prompting for a password. Disable password-less &lt;tt class="docutils literal"&gt;sudo&lt;/tt&gt; by running:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo visudo -s
 &lt;/pre&gt;&lt;/div&gt;
@@ -683,14 +842,14 @@ tmpfs          tmpfs      97M     0   97M   0% /run/shm
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="upgrade"&gt;
-&lt;h4&gt;8.3 Upgrade&lt;/h4&gt;
+&lt;h3&gt;8.3 Upgrade&lt;/h3&gt;
 &lt;p&gt;With the newly-configured &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; up-and-running now is a good time to update Raspbian:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get update
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get dist-upgrade
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="static-address"&gt;
-&lt;h4&gt;8.4 Static Address&lt;/h4&gt;
+&lt;h3&gt;8.4 Static Address&lt;/h3&gt;
 &lt;p&gt;A Raspberry Pi that is going to stay home and run as a server can be configured to use a &lt;strong&gt;static network address&lt;/strong&gt;. Sample &lt;tt class="docutils literal"&gt;/etc/network/interfaces&lt;/tt&gt; modification that disables &lt;tt class="docutils literal"&gt;dhcp&lt;/tt&gt; and sets ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#iface eth0 inet dhcp&lt;/span&gt;
 auto eth0
@@ -701,20 +860,14 @@ iface eth0 inet static
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;
 &lt;div class="section" id="notes"&gt;
 &lt;h3&gt;Notes&lt;/h3&gt;
 &lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
 &lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
 &lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Pi requires an SD card to boot... so we continue using original /boot.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Pi requires an SD card to boot... so we continue using original &lt;tt class="docutils literal"&gt;/boot&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="raspberry pi"></category><category term="raspbian"></category><category term="linux"></category><category term="networks"></category></entry><entry><title>Links of interest</title><link href="http://www.circuidipity.com/20141218.html" rel="alternate"></link><updated>2014-12-18T17:10:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2014-12-18:20141218.html</id><summary type="html">&lt;ul class="simple"&gt;
-&lt;li&gt;&amp;quot;It's people... &lt;a class="reference external" href="http://www.bunniestudios.com/blog/?p=4266"&gt;supply chains are made out of people!&amp;quot;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.rifters.com/crawl/?p=5425"&gt;Electric eel brain hacking&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&amp;quot;If we want to safeguard our languages, stories and ideas against extinction, &lt;a class="reference external" href="http://aeon.co/magazine/culture/can-egyptology-teach-us-to-future-proof-our-culture/"&gt;we had better study Egyptology&amp;quot;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</summary><category term="links"></category></entry></feed>
+</summary><category term="raspberry pi"></category><category term="raspbian"></category><category term="linux"></category><category term="networks"></category></entry></feed>

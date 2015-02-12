@@ -25,9 +25,12 @@
 
 <!-- article -->
 <h1>PHP + Nginx + PostgreSQL</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Tuesday 10 February 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Wednesday 11 February 2015</p>
 <div id="article">
-    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #6 &gt;&gt;</a> As a pre-requisite to host web applications like <a class="reference external" href="http://tt-rss.org/redmine/projects/tt-rss/wiki">Tiny Tiny RSS</a> on my Raspberry Pi I install <strong>PHP</strong>, the lightweight web server <strong>Nginx</strong>, and the <strong>PostgreSQL</strong> database.</p>
+    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #6 &gt;&gt;</a> As a pre-requisite to host web applications like <a class="reference external" href="http://www.circuidipity.com/ttrss.html">Tiny Tiny RSS</a> on my Raspberry Pi I install <strong>PHP</strong>, the lightweight web server <strong>Nginx</strong>, and the <strong>PostgreSQL</strong> database.</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+</div>
 <div class="section" id="php">
 <h2>0. PHP</h2>
 <p>Install:</p>
@@ -111,12 +114,21 @@
 <p>Install:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get postgresql
 </pre></div>
-<p>Login and change password for the <tt class="docutils literal">postgresql</tt> user:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo -u postgres psql postgres
-<span class="se">\p</span>assword postgres  <span class="c"># hit enter and enter password</span>
+<p>Launch the PostgreSQL interactive console front-end <tt class="docutils literal">psql</tt> as <tt class="docutils literal">postgres</tt> user and set a new password:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo -u postgres psql
+<span class="nv">postgres</span><span class="o">=</span><span class="c"># \password postgres</span>
+Enter new password: <span class="o">[</span>newpasswd<span class="o">]</span>
+Enter it again: <span class="o">[</span>newpasswd<span class="o">]</span>
+<span class="nv">postgres</span><span class="o">=</span><span class="c"># \quit</span>
 </pre></div>
-<p>PostgreSQL maintains its own users and passwords, which are separate from the Pi's user accounts. It is not required that your PostgreSQL users match the Pi users.</p>
-<p>Reload:</p>
+<p>To create a new user <tt class="docutils literal"><span class="pre">www-data</span></tt> <a class="footnote-reference" href="#id2" id="id1">[1]</a> and database <tt class="docutils literal">mydb</tt>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo -u postgres psql
+<span class="nv">postgres</span><span class="o">=</span><span class="c"># CREATE USER &quot;www-data&quot; WITH PASSWORD &#39;newpasswd&#39;;</span>
+<span class="nv">postgres</span><span class="o">=</span><span class="c"># CREATE DATABASE mydb WITH OWNER &quot;www-data&quot;;</span>
+<span class="nv">postgres</span><span class="o">=</span><span class="c"># GRANT ALL PRIVILEGES ON DATABASE mydb to &quot;www-data&quot;;</span>
+<span class="nv">postgres</span><span class="o">=</span><span class="c"># \quit</span>
+</pre></div>
+<p>Save any changes and reload the database server:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo /etc/init.d/postgresql reload
 </pre></div>
 </div>
@@ -125,10 +137,20 @@
 <ul class="simple">
 <li><a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-14-04">How to install the LEMP stack on Ubuntu</a></li>
 <li><a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-14-04-lts">Set up Nginx Server Blocks</a></li>
+<li><a class="reference external" href="https://help.ubuntu.com/community/PostgreSQL">PostgreSQL and Ubuntu</a></li>
 <li><a class="reference external" href="http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm">Practical PostgreSQL database</a></li>
 <li><a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html">DDNS and OpenWrt</a></li>
 </ul>
 <p>Happy hacking!</p>
+<div class="section" id="notes">
+<h3>Notes</h3>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>PostgreSQL maintains its own users and passwords, which are separate from the Linux user accounts. It is not required that your PostgreSQL usernames match the Linux usernames. See <a class="reference external" href="http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm">Practical PostgreSQL database</a>.</td></tr>
+</tbody>
+</table>
+</div>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-networks.html">networks</a>
@@ -142,6 +164,8 @@
     <hr />
     <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
         <a href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html">Supercharge a home router using OpenWrt Part 2</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/ttrss.html">Tiny Tiny RSS</a></p>
 </div>
 
 
