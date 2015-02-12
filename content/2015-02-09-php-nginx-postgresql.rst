@@ -5,9 +5,12 @@ PHP + Nginx + PostgreSQL
 :date: 2015-02-09 18:29:00
 :slug: php-nginx-postgresql
 :tags: networks, web, linux
-:modified: 2015-02-10 20:39:00
+:modified: 2015-02-11 17:00:00
 
-`Raspberry Pi Home Server Hack #6 >> <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ As a pre-requisite to host web applications like `Tiny Tiny RSS <http://tt-rss.org/redmine/projects/tt-rss/wiki>`_ on my Raspberry Pi I install **PHP**, the lightweight web server **Nginx**, and the **PostgreSQL** database.
+`Raspberry Pi Home Server Hack #6 >> <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ As a requirement to host web applications like `Tiny Tiny RSS <http://www.circuidipity.com/ttrss.html>`_ on my Raspberry Pi I install **PHP**, the lightweight web server **Nginx**, and the **PostgreSQL** database.
+
+Let's go!
+=========
 
 0. PHP
 ======
@@ -131,17 +134,27 @@ Install:
 
     $ sudo apt-get postgresql                                                       
                                                                                     
-Login and change password for the ``postgresql`` user:                                 
-                                                                                    
+Launch the PostgreSQL interactive console front-end ``psql`` as ``postgres`` user and set a new password:                                 
+
 .. code-block:: bash
 
-    $ sudo -u postgres psql postgres                                                
-    \password postgres  # hit enter and enter password                              
+    $ sudo -u postgres psql                                               
+    postgres=# \password postgres
+    Enter new password: [newpasswd]
+    Enter it again: [newpasswd]
+    postgres=# \quit
                                                                                     
-                                                                                    
-PostgreSQL maintains its own users and passwords, which are separate from the Pi's user accounts. It is not required that your PostgreSQL users match the Pi users.
-                                                                                    
-Reload:                                                             
+To create a new user ``www-data`` [1]_ and database ``mydb``:
+
+.. code-block:: bash                                                               
+    
+    $ sudo -u postgres psql                                                                                
+    postgres=# CREATE USER "www-data" WITH PASSWORD 'newpasswd';  
+    postgres=# CREATE DATABASE mydb WITH OWNER "www-data";                         
+    postgres=# GRANT ALL PRIVILEGES ON DATABASE mydb to "www-data";                
+    postgres=# \quit
+                      
+Save any changes and reload the database server:                                                             
                                                                                     
 .. code-block:: bash
 
@@ -152,7 +165,13 @@ Reload:
 
 * `How to install the LEMP stack on Ubuntu <https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-14-04>`_
 * `Set up Nginx Server Blocks <https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-14-04-lts>`_
+* `PostgreSQL and Ubuntu <https://help.ubuntu.com/community/PostgreSQL>`_
 * `Practical PostgreSQL database <http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm>`_
 * `DDNS and OpenWrt <http://www.circuidipity.com/ddns-openwrt.html>`_
 
 Happy hacking!
+
+Notes
+-----
+
+.. [1] PostgreSQL maintains its own users and passwords, which are separate from the Linux user accounts. It is not required that your PostgreSQL usernames match the Linux usernames. See `Practical PostgreSQL database <http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm>`_.
