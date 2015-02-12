@@ -5,7 +5,7 @@
 &lt;/div&gt;
 &lt;div class="section" id="web-server-and-database"&gt;
 &lt;h2&gt;0. Web server and database&lt;/h2&gt;
-&lt;p&gt;TTRSS is a PHP application that require a proxy web server and a database back-end to store content. See &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;PHP + Nginx + PostgreSQL&lt;/a&gt; for necessay pre-requites to host TTRSS. &lt;a class="footnote-reference" href="#id6" id="id2"&gt;[1]&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;TTRSS is a PHP application that require a proxy web server and a database back-end to store content. See &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;PHP + Nginx + PostgreSQL&lt;/a&gt; for necessary prerequites to host TTRSS. &lt;a class="footnote-reference" href="#id6" id="id2"&gt;[1]&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="database"&gt;
 &lt;h2&gt;1. Database&lt;/h2&gt;
@@ -133,7 +133,7 @@ To have ttrss periodically update the feeds... test the update.php script:&lt;/p
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 11 Feb 2015 18:40:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-11:ttrss.html</guid><category>networks</category><category>web</category><category>linux</category></item><item><title>PHP + Nginx + PostgreSQL</title><link>http://www.circuidipity.com/php-nginx-postgresql.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #6 &amp;gt;&amp;gt;&lt;/a&gt; As a pre-requisite to host web applications like &lt;a class="reference external" href="http://www.circuidipity.com/ttrss.html"&gt;Tiny Tiny RSS&lt;/a&gt; on my Raspberry Pi I install &lt;strong&gt;PHP&lt;/strong&gt;, the lightweight web server &lt;strong&gt;Nginx&lt;/strong&gt;, and the &lt;strong&gt;PostgreSQL&lt;/strong&gt; database.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 11 Feb 2015 18:40:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-11:ttrss.html</guid><category>networks</category><category>web</category><category>linux</category></item><item><title>PHP + Nginx + PostgreSQL</title><link>http://www.circuidipity.com/php-nginx-postgresql.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #6 &amp;gt;&amp;gt;&lt;/a&gt; As a requirement to host web applications like &lt;a class="reference external" href="http://www.circuidipity.com/ttrss.html"&gt;Tiny Tiny RSS&lt;/a&gt; on my Raspberry Pi I install &lt;strong&gt;PHP&lt;/strong&gt;, the lightweight web server &lt;strong&gt;Nginx&lt;/strong&gt;, and the &lt;strong&gt;PostgreSQL&lt;/strong&gt; database.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;/div&gt;
