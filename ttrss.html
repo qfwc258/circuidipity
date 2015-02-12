@@ -38,7 +38,7 @@
 <h2>1. Database</h2>
 <p>Create a new PostgreSQL database to hold the content of RSS feeds. Launch the interactive console front-end <tt class="docutils literal">psql</tt> and create a new user <tt class="docutils literal"><span class="pre">www-data</span></tt> <a class="footnote-reference" href="#id7" id="id3">[2]</a> and database <tt class="docutils literal">ttrss</tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo -u postgres psql
-<span class="nv">postgres</span><span class="o">=</span><span class="c"># CREATE USER &quot;www-data&quot; WITH PASSWORD &#39;newpassword&#39;;</span>
+<span class="nv">postgres</span><span class="o">=</span><span class="c"># CREATE USER &quot;www-data&quot; WITH PASSWORD &#39;newpasswd&#39;;</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c"># CREATE DATABASE ttrss WITH OWNER &quot;www-data&quot;;</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c"># GRANT ALL PRIVILEGES ON DATABASE ttrss to &quot;www-data&quot;;</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c"># \quit</span>
@@ -137,7 +137,7 @@ To have ttrss periodically update the feeds... test the update.php script:</p>
 <li><a class="reference external" href="https://davidbeath.com/posts/installing-tiny-tiny-rss-from-scratch.html">Installing TTRSS from scratch</a></li>
 <li><a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">PHP + Nginx + PostgreSQL</a></li>
 </ul>
-<p>Happy news reading (and hacking)!</p>
+<p>Happy reading (and hacking)!</p>
 <div class="section" id="notes">
 <h3>Notes</h3>
 <table class="docutils footnote" frame="void" id="id6" rules="none">

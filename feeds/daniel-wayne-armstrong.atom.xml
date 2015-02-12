@@ -11,7 +11,7 @@
 &lt;h2&gt;1. Database&lt;/h2&gt;
 &lt;p&gt;Create a new PostgreSQL database to hold the content of RSS feeds. Launch the interactive console front-end &lt;tt class="docutils literal"&gt;psql&lt;/tt&gt; and create a new user &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;www-data&lt;/span&gt;&lt;/tt&gt; &lt;a class="footnote-reference" href="#id7" id="id3"&gt;[2]&lt;/a&gt; and database &lt;tt class="docutils literal"&gt;ttrss&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo -u postgres psql
-&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# CREATE USER &amp;quot;www-data&amp;quot; WITH PASSWORD &amp;#39;newpassword&amp;#39;;&lt;/span&gt;
+&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# CREATE USER &amp;quot;www-data&amp;quot; WITH PASSWORD &amp;#39;newpasswd&amp;#39;;&lt;/span&gt;
 &lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# CREATE DATABASE ttrss WITH OWNER &amp;quot;www-data&amp;quot;;&lt;/span&gt;
 &lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# GRANT ALL PRIVILEGES ON DATABASE ttrss to &amp;quot;www-data&amp;quot;;&lt;/span&gt;
 &lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# \quit&lt;/span&gt;
@@ -110,7 +110,7 @@ To have ttrss periodically update the feeds... test the update.php script:&lt;/p
 &lt;li&gt;&lt;a class="reference external" href="https://davidbeath.com/posts/installing-tiny-tiny-rss-from-scratch.html"&gt;Installing TTRSS from scratch&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;PHP + Nginx + PostgreSQL&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Happy news reading (and hacking)!&lt;/p&gt;
+&lt;p&gt;Happy reading (and hacking)!&lt;/p&gt;
 &lt;div class="section" id="notes"&gt;
 &lt;h3&gt;Notes&lt;/h3&gt;
 &lt;table class="docutils footnote" frame="void" id="id6" rules="none"&gt;
