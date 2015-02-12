@@ -1,0 +1,170 @@
+=============
+Tiny Tiny RSS
+=============
+
+:date: 2015-02-11 18:40:00
+:slug: ttrss
+:tags: networks, web, linux
+
+`Raspberry Pi Home Server Hack #7 >> <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Install and self-host the `Tiny Tiny RSS <http://tt-rss.org/redmine/projects/tt-rss/wiki>`_ news reader and aggregator and access news feeds from anywhere.
+
+Let's go!
+=========
+
+0. Web server and database
+==========================
+
+TTRSS is a PHP application that require a proxy web server and a database back-end to store content. See `PHP + Nginx + PostgreSQL <http://www.circuidipity.com/php-nginx-postgresql.html>`_ for necessary prerequites to host TTRSS. [1]_
+
+1. Database
+===========
+
+Create a new PostgreSQL database to hold the content of RSS feeds. Launch the interactive console front-end ``psql`` and create a new user ``www-data`` [2]_ and database ``ttrss``:
+
+.. code-block:: bash
+
+    $ sudo -u postgres psql
+    postgres=# CREATE USER "www-data" WITH PASSWORD 'newpasswd';   
+    postgres=# CREATE DATABASE ttrss WITH OWNER "www-data";                         
+    postgres=# GRANT ALL PRIVILEGES ON DATABASE ttrss to "www-data";                
+    postgres=# \quit                                                                
+
+1.1 Peer authentication
+-----------------------
+
+Later when running the TTRSS ``update.php`` script you may run into ``Peer authentication failed for user`` errors. Fix this issue by editing ``/etc/postgresql/9.1/main/pg_hba.conf`` and change ``peer``:
+
+.. code-block:: bash
+                                                                                    
+    # "local" is for Unix domain socket connections only                            
+    local   all             all                                     peer            
+                                                                                    
+... to ``trust``:                                                             
+
+.. code-block:: bash
+                                                                                    
+    local   all             all                                     trust           
+                                                                                    
+Save and reload the database server:                                                            
+
+.. code-block:: bash
+                                                                                    
+    $ sudo /etc/init.d/postgresql reload                                            
+                                                                                    
+Source: `Unable to connect to postgresql server <http://askubuntu.com/questions/274441/pg-connect-unable-to-connect-to-postgresql-server>`_
+           
+2. TTRSS
+========
+                                                                                    
+Download the latest ``Tiny-Tiny-RSS-X.X.X.tar.gz`` from `Releases <https://github.com/gothfox/Tiny-Tiny-RSS/releases>`_, unpack, and change permissions:
+
+.. code-block:: bash
+                                                                                    
+    $ tar xvzf Tiny-Tiny-RSS-X.X.X.tar.gz                                           
+    $ mv Tiny-Tiny-RSS-X.X.X ttrss                                                  
+    $ cd ttrss                                                                      
+    $ chmod -R 777 cache/images/ cache/js/ cache/export/ cache/upload/ feed-icons/ lock/
+
+3. Nginx
+========
+
+Move the ``ttrss`` directory into Nginx's `document root <http://www.circuidipity.com/php-nginx-postgresql.html>`_ directory:
+
+.. code-block:: bash
+
+    $ mv ../ttrss /usr/share/nginx/www                                              
+    $ sudo chown -R www-data.www-data /usr/share/nginx/www/ttrss                    
+    
+Create a `server block <http://www.circuidipity.com/php-nginx-postgresql.html>`_ (virtual host) for TTRSS. Sample ``/etc/nginx/sites-available/ttrss`` [3]_ configuration:
+    
+.. code-block:: bash
+                                                                                    
+    server {                                                                        
+        listen  80; ## listen for ipv4; this line is default and implied            
+                                                                                    
+        root /usr/share/nginx/www/ttrss;
+        index index.html index.htm index.php;                                       
+                                                                                    
+        access_log /var/log/nginx/ttrss_access.log;                                 
+        error_log /var/log/nginx/ttrss_error.log info;                              
+                                                                                    
+        server_name localhost;                                                      
+                                                                                    
+        location / {                                                                
+            index           index.php;                                              
+        }                                                                           
+                                                                                    
+        location ~ \.php$ {                                                         
+            try_files $uri = 404; #Prevents autofixing of path which could be used for exploit
+            fastcgi_pass unix:/var/run/php5-fpm.sock;                               
+            fastcgi_index index.php;                                                
+            include /etc/nginx/fastcgi_params;                                      
+        }                                                                           
+                                                                                    
+    }                                                                               
+                                                                                    
+Save changes and enable the new block:                                                                         
+
+.. code-block:: bash
+                                                                                    
+    $ cd /etc/nginx/sites-enabled                                               
+    $ sudo ln -s /etc/nginx/sites-available/ttrss                                       
+    $ sudo /etc/init.d/nginx restart                                            
+
+4. Configure
+============
+
+Navigate to ``http://YOUR.SERVER.IP.ADDRESS`` and configure TTRSS:
+
+.. code-block:: bash
+                                                                                
+    Database type: [select PostgreSQL]                                                
+    Username: www-data                                                              
+    Password: [database password created earlier]                                         
+    Database Name: ttrss                                                            
+    Hostname: [leave blank]                                                           
+    Port: 5432          
+
+Press ``Test configuration`` button, then ``Initialize database``, and finally ``Save configuration``.
+
+Navigate back to ``http://YOUR.SERVER.IP.ADDRESS`` and login ``Username: "admin" Password: "password"``. In the top-right go to ``Actions->Preferences`` to make further changes to the default settings. Create a new user account for RSS reading (vs logging in all the time as ``admin``) and change the ``admin`` password.
+
+5. Updates
+==========
+
+Configure TTRSS to periodically update the RSS feeds with new content. First, test the included ``update.php`` script:
+To have ttrss periodically update the feeds... test the update.php script:      
+
+.. code-block:: bash
+                                                                                
+    $ /usr/bin/php /usr/share/nginx/www/ttrss/update.php --feeds --quiet            
+                                                                                
+If the script returns no errors use ``cron`` to run the script periodically. Add a new job to ``crontab``:
+
+.. code-block:: bash
+
+    $ crontab -e
+
+Sample TTRSS job:
+                                                                               
+.. code-block:: bash
+
+    */30 * * * * /usr/bin/php /usr/share/nginx/www/ttrss/update.php --feeds --quiet
+
+6. Helpful resources
+====================
+                                                            
+* `How to install TTRSS with Nginx for Debian <https://www.digitalocean.com/community/tutorials/how-to-install-ttrss-with-nginx-for-debian-7-on-a-vps>`_
+* `Installing TTRSS from scratch <https://davidbeath.com/posts/installing-tiny-tiny-rss-from-scratch.html>`_
+* `PHP + Nginx + PostgreSQL <http://www.circuidipity.com/php-nginx-postgresql.html>`_
+
+Happy reading (and hacking)!
+
+Notes
+-----
+
+.. [1] Alternative host setups can replace ``nginx`` web server with ``apache`` and ``postgresql`` database with ``mysql`` or ``sqlite``. However the TTRSS community recommends the above combination as the optimal setup for lightweight servers like the Raspberry Pi. 
+
+.. [2] PostgreSQL maintains its own users and passwords, which are separate from the Linux user accounts. It is not required that your PostgreSQL usernames match the Linux usernames. See `Practical PostgreSQL     database <http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm>`_.
+
+.. [3] Make TTRSS hosted on a home server accessible from the outside over the web by configuring a **dynamic DNS** service (I like `duckdns.org <http://www.duckdns.org/>`_). Example: Create a ``myhomepi`` domain on the DDNS service and modify ``server_name localhost;`` to ``server_name myhomepi.duckdns.org;``. See `DDNS and OpenWrt <http://www.circuidipity.com/ddns-openwrt.html>`_ for details.
