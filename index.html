@@ -49,7 +49,7 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <h2>1. Database</h2>
 <p>Create a new PostgreSQL database to hold the content of RSS feeds. Launch the interactive console front-end <tt class="docutils literal">psql</tt> and create a new user <tt class="docutils literal"><span class="pre">www-data</span></tt> <a class="footnote-reference" href="#id7" id="id3">[2]</a> and database <tt class="docutils literal">ttrss</tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo -u postgres psql
-<span class="nv">postgres</span><span class="o">=</span><span class="c"># CREATE USER &quot;www-data&quot; WITH PASSWORD &#39;password&#39;;  # &#39;poboh1066&#39;</span>
+<span class="nv">postgres</span><span class="o">=</span><span class="c"># CREATE USER &quot;www-data&quot; WITH PASSWORD &#39;newpassword&#39;;</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c"># CREATE DATABASE ttrss WITH OWNER &quot;www-data&quot;;</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c"># GRANT ALL PRIVILEGES ON DATABASE ttrss to &quot;www-data&quot;;</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c"># \quit</span>
