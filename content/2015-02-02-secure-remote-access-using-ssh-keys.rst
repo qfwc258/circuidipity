@@ -14,16 +14,17 @@ Secure remote access using SSH keys
 
     Any one attempt has low odds of guessing successfully. The attempts are constant. They never end. Eventually [some automated attacker] will get lucky and break into your server. It might be tomorrow, or next year, but it _will_ happen. To stop these types of attacks, you can either use packet filtering to block public access to your SSH server, or you can eliminate passwords on your servers. User keys let you eliminate passwords.
 
-To configure SSH key authentication between a home server and client:
-=====================================================================
+Configuring SSH key authentication between a home server and client sounds like a good idea.
+
+Let's go!
+=========
 
 0. Install                                             
-----------
-
+==========
 Home server is a `Raspberry Pi running Raspbian <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ and client is a `Chromebook running Lubuntu 14.04 <http://www.circuidipity.com/c720-lubuntubook.html>`_.
 
 On the server:
-++++++++++++++
+--------------
                
 * install ``openssh-server`` (pre-installed in Raspbian) and create an SSH configuration in the home directory of users who requires access to the system:
 
@@ -55,7 +56,7 @@ Save and restart SSH with the new config by running:
     $ sudo /etc/init.d/ssh restart                    
                                                                                     
 On the client:
-++++++++++++++
+--------------
 
 * install ``openssh-client`` and create the SSH folder in the user home directory:
 
@@ -74,10 +75,10 @@ On the client:
     User pi                                                                      
      
 1. Generate keys
-----------------
+================
 
 On the client:
-++++++++++++++
+--------------
                                                                                 
 * generate keys by running:
   
@@ -92,10 +93,10 @@ On the client:
     $ cat ~/.ssh/id_rsa.pub | ssh SERVER "cat >> ~/.ssh/authorized_keys"        
 
 2. Test
--------
+=======
 
 On the client:
-++++++++++++++
+--------------
 
 Graphical display managers like ``gdm`` will automatically check a user account for SSH keys upon login. A pop-up box will prompt for the passphrase and the key will be added to the desktop session.
 
@@ -119,10 +120,10 @@ All SSH sessions launched from this console will access this user key stored in 
 No request to enter a passphrase indicates SSH key authentication is properly configured.    
 
 3. Disable password logins 
---------------------------
+==========================
 
 On the server:
-++++++++++++++
+--------------
                                                                                 
 * edit ``/etc/ssh/sshd_config``:                                         
                                                                                 
@@ -140,14 +141,14 @@ On the server:
     $ sudo /etc/init.d/ssh restart                                             
                                   
 4. Key management
------------------
+=================
 
 `Keychain <http://www.funtoo.org/Keychain>`_ is an OpenSSH key manager. From the package description:
 
     When keychain is run, it checks for a running ssh-agent, otherwise it starts one. It saves the ssh-agent environment variables to ``~/.keychain/$HOSTNAME-sh``, so that subsequent logins and non-interactive shells such as cron jobs can source the file and make passwordless ssh connections.  In addition, when keychain runs, it verifies that the key files specified on the command-line are known to ssh-agent, otherwise it loads them, prompting you for a password if necessary.
 
 On the client:
-++++++++++++++
+--------------
                                                                                 
 * install:
   

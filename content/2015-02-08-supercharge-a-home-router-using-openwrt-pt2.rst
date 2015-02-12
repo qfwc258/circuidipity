@@ -10,7 +10,7 @@ Supercharge a home router using OpenWrt Part 2
 
 Getting its start hacking the original `Linksys WRT54G <https://en.wikipedia.org/wiki/Linksys_WRT54G_series#WRT54G>`_, OpenWrt and its volunteer developers now support a `wide and growing range of hardware <http://wiki.openwrt.org/toh/start>`_. The project hosts software packages that lay out a smorgasboard of extra possibilities: more network tools with more fine-grained controls, plus a range of server capabilities... manage printers, connect external USB drives for backup, host files/torrents/VOIP/VPNs.
 
-I am exploring an OpenWrt-supported `TP-Link TL-WDR3600 <http://wiki.openwrt.org/toh/tp-link/tl-wdr3600>`_ router:
+I replaced the default firmware and now exploring an OpenWrt-supported `TP-Link TL-WDR3600 <http://wiki.openwrt.org/toh/tp-link/tl-wdr3600>`_ router:
 
 * dual 2.4GHz 802.11bgn and 5GHz 802.11an wifi with detachable antennas
 * 4 Port 10/100/1000 LAN
@@ -19,11 +19,11 @@ I am exploring an OpenWrt-supported `TP-Link TL-WDR3600 <http://wiki.openwrt.org
 * 64 MB Flash + 128MB RAM
 * [my device has] firmware: 3.13.34 build 130909 rel. 53148n hardware **version: v1.5**
 
-To replace the default router firmware with OpenWrt:
-====================================================
+Let's go!
+=========
 
 0. Download install image
--------------------------
+=========================
 
 .. role:: warning
 
@@ -34,12 +34,12 @@ Latest version (2015-02-08) of OpenWrt is **v14.07 "Barrie Breaker"** and TL-WDR
 [Link] `openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin <https://downloads.openwrt.org/barrier_breaker/14.07/ar71xx/generic/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin>`_
 
 1. Flash router
----------------
+===============
 
 Log into the TP-Link router web interface ``address=192.168.0.1`` ``user=admin`` ``password=admin`` navigate to the update page and select the downloaded ``openwrt-*-squashfs-factory.bin`` firmware image as the update package. Allow several minutes for the device to write the new OpenWrt firmware; when finished the device will reboot and accessible at new IP address ``192.168.1.1``.
 
 2. First login
---------------
+==============
 
 `Use telnet (no password) to login for the first time <http://wiki.openwrt.org/doc/howto/firstlogin>`_ to the new OpenWrt installation. Use ``passwd`` to create a new root password. After changing the password telnet is disabled. Exit and re-login using SSH:
 
@@ -58,7 +58,7 @@ Log into the TP-Link router web interface ``address=192.168.0.1`` ``user=admin``
     # ifup wan
 
 3. Web interface
-----------------
+================
 
 OpenWrt can be further configured in the console or the `LuCI web interface <http://wiki.openwrt.org/doc/howto/luci.essentials>`_. LuCI is included by default in the WDR3600 image, otherwise it can be installed using the ``opkg`` package manager:
 
@@ -82,7 +82,7 @@ LuCI's default web server **uhttpd** is configured in ``/etc/config/uhttpd`` and
     :height: 300px
 
 4. Configuration
-----------------
+================
 
 Secure access to the router using `SSH key authentication <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_. Create `static leases <http://www.circuidipity.com/20141001.html>`_ for hosts using DHCP and setup `port forwarding <http://www.circuidipity.com/20141006.html>`_ to reach devices behind the firewall from the world-at-large.
 

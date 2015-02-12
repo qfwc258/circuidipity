@@ -14,15 +14,15 @@ Let's go!
 =========
 
 0. SSH
-------
+======
 
-See `Raspberry Pi Home Server Hack #1 -- Secure remote access using SSH keys <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_ to configure SSH for encrypted connections between (Pi) server and (laptop) client. ``Keychain`` + ``ssh-agent``  make it easy to use a passphrase-protected **encryption key** in automated scripts.
+See `Secure remote access using SSH keys <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_ to configure SSH for encrypted connections between (Pi) server and (laptop) client. ``Keychain`` + ``ssh-agent``  make it easy to use a passphrase-protected **encryption key** in automated scripts.
 
 1. Script
----------
+=========
 
 On the server:
-++++++++++++++
+--------------
 
 Create a backup directory to hold the contents of ``$HOME``:
 
@@ -31,7 +31,7 @@ Create a backup directory to hold the contents of ``$HOME``:
     $ mkdir ~/backup-home
 
 On the client:
-++++++++++++++
+--------------
 
 Create a backup script that uses the ``rsync`` file-copy tool. A sample ``myRsync`` script to backup ``$HOME`` includes:
 
@@ -71,7 +71,7 @@ Place the script in ``$HOME/bin`` and make it executable. Run manually at least 
     $ ~/bin/myRsync
 
 2. Automate
------------
+===========
 
 **Cron** is a daemon that runs programs at specified times. Use the command ``crontab -e`` to setup ``myRsync`` to auto-run with the following parameters:
 

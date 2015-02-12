@@ -5,7 +5,7 @@ There's no place like [a Raspberry Pi] Home [Server]
 :slug: raspberry-pi-home-server
 :tags: raspberry pi, networks
 :template: article-project
-:modified: 2015-02-09 18:11:00
+:modified: 2015-02-11 17:13:00
 
 .. image:: images/raspberry-pi-home-server.png
     :align: right
@@ -25,5 +25,6 @@ Let's go!
 4. `Network attached storage <http://www.circuidipity.com/nas-raspberry-pi-sshfs.html>`_
 5. `Access from anywhere in the world using dynamic DNS <http://www.circuidipity.com/ddns-openwrt.html>`_
 6. `Web server and database <http://www.circuidipity.com/php-nginx-postgresql.html>`_
+7. `RSS reader and aggregator <http://www.circuidipity.com/ttrss.html>`_
 
 Happy hacking!

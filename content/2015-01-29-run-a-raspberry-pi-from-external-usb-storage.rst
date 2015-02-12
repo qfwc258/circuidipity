@@ -22,7 +22,7 @@ Let's go!
 =========
                                                                                     
 0. Raspbian Linux
------------------
+=================
 
 `Download <http://downloads.raspberrypi.org/raspbian_latest>`_ and unpack Raspbian and write the image to a spare 4GB+ SD card: 
 
@@ -34,7 +34,7 @@ Let's go!
 Sources: `operating system images <http://www.raspberrypi.org/downloads/>`_, installing `images on Linux <http://www.raspberrypi.org/documentation/installation/installing-images/linux.md>`_
 
 1. Raspi-config
----------------
+===============
 
 Boot the Pi with the newly-minted Raspbian SD card and set a few options in the **raspi-config** utility:
 
@@ -51,7 +51,7 @@ Boot the Pi with the newly-minted Raspbian SD card and set a few options in the 
 Save the new parameters and reboot.
 
 2. Partitions
--------------
+=============
 
 Filesystem layout on the SD card:
 
@@ -164,7 +164,7 @@ Device is ``sda``. Use **fdisk** to create 2 new partitions on the USB drive:
     Syncing disks.            
 
 3. Filesystems
---------------
+==============
 
 Format the new partitions as ``ext4``:
 
@@ -173,8 +173,8 @@ Format the new partitions as ``ext4``:
     $ sudo mke2fs -t ext4 -L rootfs /dev/sda1                                       
     $ sudo mke2fs -t ext4 -L storage /dev/sda2                                      
 
-4. /dev/root 
-------------
+4. /dev/root
+============
 
 Mount the newly-formatted ``rootfs`` partition to ``/mnt``:
 
@@ -199,7 +199,7 @@ Use **rsync** to copy contents of ``root`` on the SD card to the ``rootfs`` part
     $ sudo rsync -axv / /mnt
 
 5. New rootfs
--------------
+=============
 
 Modify options in ``/boot/cmdline.txt`` - located on the **SD card** - to point the bootloader to ``root`` filesystem on the USB device:
 
@@ -211,8 +211,8 @@ Modify options in ``/boot/cmdline.txt`` - located on the **SD card** - to point 
     Modified:
     dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=/dev/sda1 rootfstype=ext4 elevator=deadline rootwait rootdelay=5
 
-6. fstab 
---------
+6. fstab
+========
 
 Create new mountpoint for the ``storage`` partition:
 
@@ -234,7 +234,7 @@ Modify options in ``/mnt/etc/fstab`` - located on the **USB device** - to mount 
     # a swapfile is not a swap partition, so no using swapon|off from here on, use  dphys-swapfile swap[on|off]  for that
 
 7. Reboot
----------
+=========
 
 Save modifications and reboot. Login and check the new filesystem layout:
 
@@ -252,10 +252,10 @@ Save modifications and reboot. Login and check the new filesystem layout:
     /dev/sda2      ext4      898G  343G  510G  41% /media/USB0
                                                                          
 8. Post-install
----------------
+===============
 
 8.1 Password
-++++++++++++
+------------
 
 A ``raspberry`` is a tasty fruit but a lousy password. Change password for username ``pi``:
 
@@ -264,7 +264,7 @@ A ``raspberry`` is a tasty fruit but a lousy password. Change password for usern
     $ passwd
                                                                                 
 8.2 Sudo
-++++++++
+--------
 
 Default setting in Raspbian is to allow ``pi`` to use ``sudo`` without prompting for a password. Disable password-less ``sudo`` by running: 
 
@@ -280,7 +280,7 @@ Default setting in Raspbian is to allow ``pi`` to use ``sudo`` without prompting
     #pi ALL=(ALL) NOPASSWD: ALL
 
 8.3 Upgrade
-+++++++++++
+-----------
 
 With the newly-configured ``rootfs`` up-and-running now is a good time to update Raspbian:
 
@@ -290,7 +290,7 @@ With the newly-configured ``rootfs`` up-and-running now is a good time to update
     $ sudo apt-get dist-upgrade
 
 8.4 Static Address
-++++++++++++++++++
+------------------
 
 A Raspberry Pi that is going to stay home and run as a server can be configured to use a **static network address**. Sample ``/etc/network/interfaces`` modification that disables ``dhcp`` and sets ip address ``192.168.1.88``:
 
@@ -308,4 +308,4 @@ Happy hacking!
 Notes
 -----
 
-.. [1] Pi requires an SD card to boot... so we continue using original /boot.
+.. [1] Pi requires an SD card to boot... so we continue using original ``/boot``.

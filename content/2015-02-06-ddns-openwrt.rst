@@ -15,14 +15,14 @@ Let's go!
 =========
 
 0. Select a DDNS service
-------------------------
+========================
 
 I chose the free DDNS service `duckdns.org <http://www.duckdns.org/>`_ which permits the creation of up to 4 domains in the format ``your_subdomain_choice.duckdns.org``. Example: Create the subdomain ``myPiHomeServer`` and later - after configuring the router - when entering ``myPiHomeServer.duckdns.org`` I will be redirected to the current IP address assigned to my home network.
 
 Make note of http://www.duckdns.org/install.jsp (while logged in) for customized settings useful for configuring the router for DDNS.
 
 1. Configure OpenWRT for notification
--------------------------------------
+=====================================
 
 Different routers configure DDNS differently but the goal is the same: the ability to notify the DDNS service whenever the IP address assigned by the ISP is modified. I am using an `OpenWRT-powered router <http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html>`_ and these are the steps to configure OpenWRT to use duckdns DDNS:
 
@@ -72,7 +72,7 @@ In OpenWRT's ``LuCI`` interface navigate to ``System->Startup`` and enable DDNS 
 Source: `OpenWRT DDNS client <http://wiki.openwrt.org/doc/howto/ddns.client>`_
 
 2. Port forwarding
-------------------
+==================
 
 See `port forwarding HOWTO <http://www.circuidipity.com/20141006.html>`_ to configure OpenWRT to forward traffic directed at one of the router's ports to the listening port on the Pi home server. Example: configure port ``55555`` on the router to connect to the `SSH server <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_ listening on port ``22`` on the Pi.
 
