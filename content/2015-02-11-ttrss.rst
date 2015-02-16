@@ -6,7 +6,7 @@ Tiny Tiny RSS
 :slug: ttrss
 :tags: networks, web, linux
 
-`Raspberry Pi Home Server Hack #7 >> <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Install and self-host the **Tiny Tiny RSS** news reader and aggregator and access news feeds from anywhere.
+`Raspberry Pi Home Server Hack #7 >> <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Install and self-host the **Tiny Tiny RSS** news reader and aggregator and access news feeds over the web from anywhere.
 
 Let's go!
 =========

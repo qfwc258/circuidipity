@@ -5,6 +5,7 @@ Secure remote access using SSH keys
 :date: 2015-02-02 00:05:00
 :slug: secure-remote-access-using-ssh-keys
 :tags: networks, linux
+:modified: 2015-02-16 10:30:00
 
 `Raspberry Pi Home Server Hack #1 >> <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Create cryptographic keys and disable password logins to make remote machines more secure.
 
@@ -23,8 +24,8 @@ Let's go!
 ==========
 Home server is a `Raspberry Pi running Raspbian <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ and client is a `Chromebook running Lubuntu 14.04 <http://www.circuidipity.com/c720-lubuntubook.html>`_.
 
-On the server:
---------------
+On the server
+-------------
                
 * install ``openssh-server`` (pre-installed in Raspbian) and create an SSH configuration in the home directory of users who requires access to the system:
 
@@ -53,10 +54,10 @@ Save and restart SSH with the new config by running:
 
 .. code-block:: bash
 
-    $ sudo /etc/init.d/ssh restart                    
+    $ sudo service ssh restart                    
                                                                                     
-On the client:
---------------
+On the client
+-------------
 
 * install ``openssh-client`` and create the SSH folder in the user home directory:
 
@@ -77,8 +78,8 @@ On the client:
 1. Generate keys
 ================
 
-On the client:
---------------
+On the client
+-------------
                                                                                 
 * generate keys by running:
   
@@ -95,8 +96,8 @@ On the client:
 2. Test
 =======
 
-On the client:
---------------
+On the client
+-------------
 
 Graphical display managers like ``gdm`` will automatically check a user account for SSH keys upon login. A pop-up box will prompt for the passphrase and the key will be added to the desktop session.
 
@@ -122,8 +123,8 @@ No request to enter a passphrase indicates SSH key authentication is properly co
 3. Disable password logins 
 ==========================
 
-On the server:
---------------
+On the server
+-------------
                                                                                 
 * edit ``/etc/ssh/sshd_config``:                                         
                                                                                 
@@ -138,7 +139,7 @@ On the server:
 
 .. code-block:: bash
 
-    $ sudo /etc/init.d/ssh restart                                             
+    $ sudo service ssh restart                                             
                                   
 4. Key management
 =================
@@ -147,8 +148,8 @@ On the server:
 
     When keychain is run, it checks for a running ssh-agent, otherwise it starts one. It saves the ssh-agent environment variables to ``~/.keychain/$HOSTNAME-sh``, so that subsequent logins and non-interactive shells such as cron jobs can source the file and make passwordless ssh connections.  In addition, when keychain runs, it verifies that the key files specified on the command-line are known to ssh-agent, otherwise it loads them, prompting you for a password if necessary.
 
-On the client:
---------------
+On the client
+-------------
                                                                                 
 * install:
   
