@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 11 Feb 2015 18:40:00 -0500</lastBuildDate><item><title>Tiny Tiny RSS</title><link>http://www.circuidipity.com/ttrss.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #7 &amp;gt;&amp;gt;&lt;/a&gt; Install and self-host the &lt;strong&gt;Tiny Tiny RSS&lt;/strong&gt; news reader and aggregator and access news feeds over the web from anywhere.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 16 Feb 2015 10:30:00 -0500</lastBuildDate><item><title>Tiny Tiny RSS</title><link>http://www.circuidipity.com/ttrss.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #7 &amp;gt;&amp;gt;&lt;/a&gt; Install and self-host the &lt;strong&gt;Tiny Tiny RSS&lt;/strong&gt; news reader and aggregator and access news feeds over the web from anywhere.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;/div&gt;
@@ -475,7 +475,7 @@ rsync &lt;span class="nv"&gt;$rsync_options&lt;/span&gt; &lt;span class="nv"&gt;
 &lt;h2&gt;0. Install&lt;/h2&gt;
 &lt;p&gt;Home server is a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi running Raspbian&lt;/a&gt; and client is a &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Chromebook running Lubuntu 14.04&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="section" id="on-the-server"&gt;
-&lt;h3&gt;On the server:&lt;/h3&gt;
+&lt;h3&gt;On the server&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;install &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openssh-server&lt;/span&gt;&lt;/tt&gt; (pre-installed in Raspbian) and create an SSH configuration in the home directory of users who requires access to the system:&lt;/li&gt;
 &lt;/ul&gt;
@@ -496,11 +496,11 @@ rsync &lt;span class="nv"&gt;$rsync_options&lt;/span&gt; &lt;span class="nv"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;AllowUsers USERNAME1 USERNAME2
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Save and restart SSH with the new config by running:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/ssh restart
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service ssh restart
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="on-the-client"&gt;
-&lt;h3&gt;On the client:&lt;/h3&gt;
+&lt;h3&gt;On the client&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;install &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openssh-client&lt;/span&gt;&lt;/tt&gt; and create the SSH folder in the user home directory:&lt;/li&gt;
 &lt;/ul&gt;
@@ -520,7 +520,7 @@ User pi
 &lt;div class="section" id="generate-keys"&gt;
 &lt;h2&gt;1. Generate keys&lt;/h2&gt;
 &lt;div class="section" id="id1"&gt;
-&lt;h3&gt;On the client:&lt;/h3&gt;
+&lt;h3&gt;On the client&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;generate keys by running:&lt;/li&gt;
 &lt;/ul&gt;
@@ -536,7 +536,7 @@ User pi
 &lt;div class="section" id="test"&gt;
 &lt;h2&gt;2. Test&lt;/h2&gt;
 &lt;div class="section" id="id2"&gt;
-&lt;h3&gt;On the client:&lt;/h3&gt;
+&lt;h3&gt;On the client&lt;/h3&gt;
 &lt;p&gt;Graphical display managers like &lt;tt class="docutils literal"&gt;gdm&lt;/tt&gt; will automatically check a user account for SSH keys upon login. A pop-up box will prompt for the passphrase and the key will be added to the desktop session.&lt;/p&gt;
 &lt;p&gt;If logging into a console, tell SSH that you have keys by running &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-add&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-add
@@ -555,7 +555,7 @@ pi
 &lt;div class="section" id="disable-password-logins"&gt;
 &lt;h2&gt;3. Disable password logins&lt;/h2&gt;
 &lt;div class="section" id="id3"&gt;
-&lt;h3&gt;On the server:&lt;/h3&gt;
+&lt;h3&gt;On the server&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;edit &lt;tt class="docutils literal"&gt;/etc/ssh/sshd_config&lt;/tt&gt;:&lt;/li&gt;
 &lt;/ul&gt;
@@ -565,7 +565,7 @@ PasswordAuthentication no
 UsePAM no
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... and restart the SSH server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/ssh restart
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service ssh restart
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -575,7 +575,7 @@ UsePAM no
 &lt;blockquote&gt;
 When keychain is run, it checks for a running ssh-agent, otherwise it starts one. It saves the ssh-agent environment variables to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.keychain/$HOSTNAME-sh&lt;/span&gt;&lt;/tt&gt;, so that subsequent logins and non-interactive shells such as cron jobs can source the file and make passwordless ssh connections.  In addition, when keychain runs, it verifies that the key files specified on the command-line are known to ssh-agent, otherwise it loads them, prompting you for a password if necessary.&lt;/blockquote&gt;
 &lt;div class="section" id="id4"&gt;
-&lt;h3&gt;On the client:&lt;/h3&gt;
+&lt;h3&gt;On the client&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;install:&lt;/li&gt;
 &lt;/ul&gt;
@@ -601,7 +601,7 @@ keychain ~/.ssh/id_rsa
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Mon, 02 Feb 2015 00:05:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-02:secure-remote-access-using-ssh-keys.html</guid><category>networks</category><category>linux</category></item><item><title>There's no place like [a Raspberry Pi] Home [Server]</title><link>http://www.circuidipity.com/raspberry-pi-home-server.html</link><description>&lt;img alt="Raspberry Pi Home Server" class="align-right" src="images/raspberry-pi-home-server.png" style="width: 300px; height: 300px;" /&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Mon, 16 Feb 2015 10:30:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-02:secure-remote-access-using-ssh-keys.html</guid><category>networks</category><category>linux</category></item><item><title>There's no place like [a Raspberry Pi] Home [Server]</title><link>http://www.circuidipity.com/raspberry-pi-home-server.html</link><description>&lt;img alt="Raspberry Pi Home Server" class="align-right" src="images/raspberry-pi-home-server.png" style="width: 300px; height: 300px;" /&gt;
 &lt;p&gt;&lt;em&gt;Work-in-progress&lt;/em&gt;: Running your own Linux-powered &lt;strong&gt;home server&lt;/strong&gt; is a fun learning experience about how networks work and using a &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspberry-pi.html"&gt;Raspberry Pi&lt;/a&gt; is a cheap and cheerful way to get the job done!&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;

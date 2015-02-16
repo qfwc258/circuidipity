@@ -25,6 +25,7 @@
 
 <!-- article -->
 <h1>Secure remote access using SSH keys</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Monday 16 February 2015</p>
 <div id="article">
     <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #1 &gt;&gt;</a> Create cryptographic keys and disable password logins to make remote machines more secure.</p>
 <p><strong>OpenSSH</strong> is a toolkit for securing communication with Unix-like remote machines and services and supports authenticating users with a public and private <strong>key pair</strong>. Michael Lucas, author of <a class="reference external" href="https://www.michaelwlucas.com/nonfiction/ssh-mastery">OpenSSH Mastery</a>, describes the risk of passwords in SSH:</p>
@@ -40,7 +41,7 @@
 <h2>0. Install</h2>
 <p>Home server is a <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi running Raspbian</a> and client is a <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Chromebook running Lubuntu 14.04</a>.</p>
 <div class="section" id="on-the-server">
-<h3>On the server:</h3>
+<h3>On the server</h3>
 <ul class="simple">
 <li>install <tt class="docutils literal"><span class="pre">openssh-server</span></tt> (pre-installed in Raspbian) and create an SSH configuration in the home directory of users who requires access to the system:</li>
 </ul>
@@ -61,11 +62,11 @@
 <div class="highlight"><pre>AllowUsers USERNAME1 USERNAME2
 </pre></div>
 <p>Save and restart SSH with the new config by running:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo /etc/init.d/ssh restart
+<div class="highlight"><pre><span class="nv">$ </span>sudo service ssh restart
 </pre></div>
 </div>
 <div class="section" id="on-the-client">
-<h3>On the client:</h3>
+<h3>On the client</h3>
 <ul class="simple">
 <li>install <tt class="docutils literal"><span class="pre">openssh-client</span></tt> and create the SSH folder in the user home directory:</li>
 </ul>
@@ -85,7 +86,7 @@ User pi
 <div class="section" id="generate-keys">
 <h2>1. Generate keys</h2>
 <div class="section" id="id1">
-<h3>On the client:</h3>
+<h3>On the client</h3>
 <ul class="simple">
 <li>generate keys by running:</li>
 </ul>
@@ -101,7 +102,7 @@ User pi
 <div class="section" id="test">
 <h2>2. Test</h2>
 <div class="section" id="id2">
-<h3>On the client:</h3>
+<h3>On the client</h3>
 <p>Graphical display managers like <tt class="docutils literal">gdm</tt> will automatically check a user account for SSH keys upon login. A pop-up box will prompt for the passphrase and the key will be added to the desktop session.</p>
 <p>If logging into a console, tell SSH that you have keys by running <tt class="docutils literal"><span class="pre">ssh-add</span></tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>ssh-add
@@ -120,7 +121,7 @@ pi
 <div class="section" id="disable-password-logins">
 <h2>3. Disable password logins</h2>
 <div class="section" id="id3">
-<h3>On the server:</h3>
+<h3>On the server</h3>
 <ul class="simple">
 <li>edit <tt class="docutils literal">/etc/ssh/sshd_config</tt>:</li>
 </ul>
@@ -130,7 +131,7 @@ PasswordAuthentication no
 UsePAM no
 </pre></div>
 <p>... and restart the SSH server:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo /etc/init.d/ssh restart
+<div class="highlight"><pre><span class="nv">$ </span>sudo service ssh restart
 </pre></div>
 </div>
 </div>
@@ -140,7 +141,7 @@ UsePAM no
 <blockquote>
 When keychain is run, it checks for a running ssh-agent, otherwise it starts one. It saves the ssh-agent environment variables to <tt class="docutils literal"><span class="pre">~/.keychain/$HOSTNAME-sh</span></tt>, so that subsequent logins and non-interactive shells such as cron jobs can source the file and make passwordless ssh connections.  In addition, when keychain runs, it verifies that the key files specified on the command-line are known to ssh-agent, otherwise it loads them, prompting you for a password if necessary.</blockquote>
 <div class="section" id="id4">
-<h3>On the client:</h3>
+<h3>On the client</h3>
 <ul class="simple">
 <li>install:</li>
 </ul>
