@@ -32,7 +32,7 @@ Create a new PostgreSQL database to hold the content of RSS feeds. Launch the in
 1.1 Peer authentication
 -----------------------
 
-Later when running the TTRSS ``update.php`` script you may run into ``Peer authentication failed for user`` errors. Fix this issue by editing ``/etc/postgresql/9.1/main/pg_hba.conf`` and change ``peer``:
+Later when running the TTRSS ``update.php`` script you may run into ``Peer authentication failed for user`` errors. Fix this issue by editing ``/etc/postgresql/9.*/main/pg_hba.conf`` and change ``peer``:
 
 .. code-block:: bash
                                                                                     
@@ -49,7 +49,7 @@ Save and reload the database server:
 
 .. code-block:: bash
                                                                                     
-    $ sudo /etc/init.d/postgresql reload                                            
+    $ sudo service postgresql reload                                            
                                                                                     
 Source: `Unable to connect to postgresql server <http://askubuntu.com/questions/274441/pg-connect-unable-to-connect-to-postgresql-server>`_
            
@@ -72,7 +72,7 @@ Move the ``ttrss`` directory into Nginx's `document root <http://www.circuidipit
 
 .. code-block:: bash
 
-    $ mv ../ttrss /usr/share/nginx/www                                              
+    $ sudo mv ../ttrss /usr/share/nginx/www/                                              
     $ sudo chown -R www-data.www-data /usr/share/nginx/www/ttrss                    
     
 Create a `server block <http://www.circuidipity.com/php-nginx-postgresql.html>`_ (virtual host) for TTRSS. Sample ``/etc/nginx/sites-available/ttrss`` [3]_ configuration:
@@ -109,12 +109,12 @@ Save changes and enable the new block:
                                                                                     
     $ cd /etc/nginx/sites-enabled                                               
     $ sudo ln -s /etc/nginx/sites-available/ttrss                                       
-    $ sudo /etc/init.d/nginx restart                                            
+    $ sudo service nginx restart                                            
 
 4. Configure
 ============
 
-Navigate to ``http://YOUR.SERVER.IP.ADDRESS`` and configure TTRSS:
+Navigate to ``http://your.server.ip.address`` and configure TTRSS:
 
 .. code-block:: bash
                                                                                 
@@ -132,8 +132,7 @@ Navigate back to ``http://YOUR.SERVER.IP.ADDRESS`` and login ``Username: "admin"
 5. Updates
 ==========
 
-Configure TTRSS to periodically update the RSS feeds with new content. First, test the included ``update.php`` script:
-To have ttrss periodically update the feeds... test the update.php script:      
+Configure TTRSS to periodically update the RSS feeds with new content. First, test the included ``update.php`` script:  
 
 .. code-block:: bash
                                                                                 

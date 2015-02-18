@@ -32,7 +32,7 @@ Restart PHP:
                                                                                     
 .. code-block:: bash
 
-    $ sudo /etc/init.d/php5-fpm restart                                             
+    $ sudo service php5-fpm restart                                             
                                                                                     
 1. Nginx
 ========
@@ -42,9 +42,9 @@ Install:
 .. code-block:: bash
 
     $ sudo apt-get install nginx                                                    
-    $ sudo /etc/init.d/nginx start                                                  
+    $ sudo service nginx start                                                  
                                                                                     
-To verify that the web server is running, open a browser and navigate to ``http://YOUR.RASPBERRY.IP.ADDRESS``. If you see ``Welcome to Nginx`` the server is installed correctly.
+To verify that the web server is running, open a browser and navigate to ``http://your.raspberry.ip.address``. If you see ``Welcome to nginx!`` the server is installed correctly.
 
 2. Host multiple domains
 ========================
@@ -116,7 +116,7 @@ Activate the new server block:
 
     $ cd /etc/nginx/sites-enabled
     $ sudo ln -s ../sites-available/myHomePi
-    $ sudo /etc/init.d/nginx restart
+    $ sudo service nginx restart
 
 2.5 Port Forwarding
 -------------------
@@ -132,7 +132,7 @@ Install:
                                                                                     
 .. code-block:: bash
 
-    $ sudo apt-get postgresql                                                       
+    $ sudo apt-get install postgresql                                                       
                                                                                     
 Launch the PostgreSQL interactive console front-end ``psql`` as ``postgres`` user and set a new password:                                 
 
@@ -158,7 +158,7 @@ Save any changes and reload the database server:
                                                                                     
 .. code-block:: bash
 
-    $ sudo /etc/init.d/postgresql reload
+    $ sudo service postgresql reload
 
 4. Helpful resources
 ====================
