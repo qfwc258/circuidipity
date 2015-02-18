@@ -18,7 +18,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="section" id="peer-authentication"&gt;
 &lt;h3&gt;1.1 Peer authentication&lt;/h3&gt;
-&lt;p&gt;Later when running the TTRSS &lt;tt class="docutils literal"&gt;update.php&lt;/tt&gt; script you may run into &lt;tt class="docutils literal"&gt;Peer authentication failed for user&lt;/tt&gt; errors. Fix this issue by editing &lt;tt class="docutils literal"&gt;/etc/postgresql/9.1/main/pg_hba.conf&lt;/tt&gt; and change &lt;tt class="docutils literal"&gt;peer&lt;/tt&gt;:&lt;/p&gt;
+&lt;p&gt;Later when running the TTRSS &lt;tt class="docutils literal"&gt;update.php&lt;/tt&gt; script you may run into &lt;tt class="docutils literal"&gt;Peer authentication failed for user&lt;/tt&gt; errors. Fix this issue by editing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/postgresql/9.*/main/pg_hba.conf&lt;/span&gt;&lt;/tt&gt; and change &lt;tt class="docutils literal"&gt;peer&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# &amp;quot;local&amp;quot; is for Unix domain socket connections only&lt;/span&gt;
 &lt;span class="nb"&gt;local   &lt;/span&gt;all             all                                     peer
 &lt;/pre&gt;&lt;/div&gt;
@@ -26,7 +26,7 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;local   &lt;/span&gt;all             all                                     trust
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Save and reload the database server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/postgresql reload
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service postgresql reload
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Source: &lt;a class="reference external" href="http://askubuntu.com/questions/274441/pg-connect-unable-to-connect-to-postgresql-server"&gt;Unable to connect to postgresql server&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -43,7 +43,7 @@
 &lt;div class="section" id="nginx"&gt;
 &lt;h2&gt;3. Nginx&lt;/h2&gt;
 &lt;p&gt;Move the &lt;tt class="docutils literal"&gt;ttrss&lt;/tt&gt; directory into Nginx's &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;document root&lt;/a&gt; directory:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mv ../ttrss /usr/share/nginx/www
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mv ../ttrss /usr/share/nginx/www/
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo chown -R www-data.www-data /usr/share/nginx/www/ttrss
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Create a &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;server block&lt;/a&gt; (virtual host) for TTRSS. Sample &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available/ttrss&lt;/span&gt;&lt;/tt&gt; &lt;a class="footnote-reference" href="#id8" id="id4"&gt;[3]&lt;/a&gt; configuration:&lt;/p&gt;
@@ -74,12 +74,12 @@
 &lt;p&gt;Save changes and enable the new block:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /etc/nginx/sites-enabled
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo ln -s /etc/nginx/sites-available/ttrss
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/nginx restart
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service nginx restart
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="configure"&gt;
 &lt;h2&gt;4. Configure&lt;/h2&gt;
-&lt;p&gt;Navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://YOUR.SERVER.IP.ADDRESS&lt;/span&gt;&lt;/tt&gt; and configure TTRSS:&lt;/p&gt;
+&lt;p&gt;Navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://your.server.ip.address&lt;/span&gt;&lt;/tt&gt; and configure TTRSS:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;Database &lt;span class="nb"&gt;type&lt;/span&gt;: &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="k"&gt;select &lt;/span&gt;PostgreSQL&lt;span class="o"&gt;]&lt;/span&gt;
 Username: www-data
 Password: &lt;span class="o"&gt;[&lt;/span&gt;database password created earlier&lt;span class="o"&gt;]&lt;/span&gt;
@@ -92,8 +92,7 @@ Port: 5432
 &lt;/div&gt;
 &lt;div class="section" id="updates"&gt;
 &lt;h2&gt;5. Updates&lt;/h2&gt;
-&lt;p&gt;Configure TTRSS to periodically update the RSS feeds with new content. First, test the included &lt;tt class="docutils literal"&gt;update.php&lt;/tt&gt; script:
-To have ttrss periodically update the feeds... test the update.php script:&lt;/p&gt;
+&lt;p&gt;Configure TTRSS to periodically update the RSS feeds with new content. First, test the included &lt;tt class="docutils literal"&gt;update.php&lt;/tt&gt; script:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;/usr/bin/php /usr/share/nginx/www/ttrss/update.php --feeds --quiet
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If the script returns no errors use &lt;tt class="docutils literal"&gt;cron&lt;/tt&gt; to run the script periodically. Add a new job to &lt;tt class="docutils literal"&gt;crontab&lt;/tt&gt;:&lt;/p&gt;
@@ -147,16 +146,16 @@ To have ttrss periodically update the feeds... test the update.php script:&lt;/p
 &lt;div class="highlight"&gt;&lt;pre&gt;cgi.fix_pathinfo&lt;span class="o"&gt;=&lt;/span&gt;0
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Restart PHP:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/php5-fpm restart
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service php5-fpm restart
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="nginx"&gt;
 &lt;h2&gt;1. Nginx&lt;/h2&gt;
 &lt;p&gt;Install:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install nginx
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/nginx start
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service nginx start
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To verify that the web server is running, open a browser and navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://YOUR.RASPBERRY.IP.ADDRESS&lt;/span&gt;&lt;/tt&gt;. If you see &lt;tt class="docutils literal"&gt;Welcome to Nginx&lt;/tt&gt; the server is installed correctly.&lt;/p&gt;
+&lt;p&gt;To verify that the web server is running, open a browser and navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://your.raspberry.ip.address&lt;/span&gt;&lt;/tt&gt;. If you see &lt;tt class="docutils literal"&gt;Welcome to nginx!&lt;/tt&gt; the server is installed correctly.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="host-multiple-domains"&gt;
 &lt;h2&gt;2. Host multiple domains&lt;/h2&gt;
@@ -206,7 +205,7 @@ To have ttrss periodically update the feeds... test the update.php script:&lt;/p
 &lt;p&gt;Activate the new server block:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /etc/nginx/sites-enabled
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo ln -s ../sites-available/myHomePi
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/nginx restart
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service nginx restart
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="port-forwarding"&gt;
@@ -218,7 +217,7 @@ To have ttrss periodically update the feeds... test the update.php script:&lt;/p
 &lt;div class="section" id="postgresql"&gt;
 &lt;h2&gt;3. PostgreSQL&lt;/h2&gt;
 &lt;p&gt;Install:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get postgresql
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install postgresql
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Launch the PostgreSQL interactive console front-end &lt;tt class="docutils literal"&gt;psql&lt;/tt&gt; as &lt;tt class="docutils literal"&gt;postgres&lt;/tt&gt; user and set a new password:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo -u postgres psql
@@ -235,7 +234,7 @@ Enter it again: &lt;span class="o"&gt;[&lt;/span&gt;newpasswd&lt;span class="o"&
 &lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# \quit&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Save any changes and reload the database server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /etc/init.d/postgresql reload
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service postgresql reload
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="helpful-resources"&gt;

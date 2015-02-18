@@ -56,7 +56,7 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 </pre></div>
 <div class="section" id="peer-authentication">
 <h3>1.1 Peer authentication</h3>
-<p>Later when running the TTRSS <tt class="docutils literal">update.php</tt> script you may run into <tt class="docutils literal">Peer authentication failed for user</tt> errors. Fix this issue by editing <tt class="docutils literal">/etc/postgresql/9.1/main/pg_hba.conf</tt> and change <tt class="docutils literal">peer</tt>:</p>
+<p>Later when running the TTRSS <tt class="docutils literal">update.php</tt> script you may run into <tt class="docutils literal">Peer authentication failed for user</tt> errors. Fix this issue by editing <tt class="docutils literal"><span class="pre">/etc/postgresql/9.*/main/pg_hba.conf</span></tt> and change <tt class="docutils literal">peer</tt>:</p>
 <div class="highlight"><pre><span class="c"># &quot;local&quot; is for Unix domain socket connections only</span>
 <span class="nb">local   </span>all             all                                     peer
 </pre></div>
@@ -64,7 +64,7 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <div class="highlight"><pre><span class="nb">local   </span>all             all                                     trust
 </pre></div>
 <p>Save and reload the database server:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo /etc/init.d/postgresql reload
+<div class="highlight"><pre><span class="nv">$ </span>sudo service postgresql reload
 </pre></div>
 <p>Source: <a class="reference external" href="http://askubuntu.com/questions/274441/pg-connect-unable-to-connect-to-postgresql-server">Unable to connect to postgresql server</a></p>
 </div>
@@ -81,7 +81,7 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <div class="section" id="nginx">
 <h2>3. Nginx</h2>
 <p>Move the <tt class="docutils literal">ttrss</tt> directory into Nginx's <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">document root</a> directory:</p>
-<div class="highlight"><pre><span class="nv">$ </span>mv ../ttrss /usr/share/nginx/www
+<div class="highlight"><pre><span class="nv">$ </span>sudo mv ../ttrss /usr/share/nginx/www/
 <span class="nv">$ </span>sudo chown -R www-data.www-data /usr/share/nginx/www/ttrss
 </pre></div>
 <p>Create a <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">server block</a> (virtual host) for TTRSS. Sample <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/ttrss</span></tt> <a class="footnote-reference" href="#id8" id="id4">[3]</a> configuration:</p>
@@ -112,12 +112,12 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <p>Save changes and enable the new block:</p>
 <div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /etc/nginx/sites-enabled
 <span class="nv">$ </span>sudo ln -s /etc/nginx/sites-available/ttrss
-<span class="nv">$ </span>sudo /etc/init.d/nginx restart
+<span class="nv">$ </span>sudo service nginx restart
 </pre></div>
 </div>
 <div class="section" id="configure">
 <h2>4. Configure</h2>
-<p>Navigate to <tt class="docutils literal"><span class="pre">http://YOUR.SERVER.IP.ADDRESS</span></tt> and configure TTRSS:</p>
+<p>Navigate to <tt class="docutils literal"><span class="pre">http://your.server.ip.address</span></tt> and configure TTRSS:</p>
 <div class="highlight"><pre>Database <span class="nb">type</span>: <span class="o">[</span><span class="k">select </span>PostgreSQL<span class="o">]</span>
 Username: www-data
 Password: <span class="o">[</span>database password created earlier<span class="o">]</span>
@@ -130,8 +130,7 @@ Port: 5432
 </div>
 <div class="section" id="updates">
 <h2>5. Updates</h2>
-<p>Configure TTRSS to periodically update the RSS feeds with new content. First, test the included <tt class="docutils literal">update.php</tt> script:
-To have ttrss periodically update the feeds... test the update.php script:</p>
+<p>Configure TTRSS to periodically update the RSS feeds with new content. First, test the included <tt class="docutils literal">update.php</tt> script:</p>
 <div class="highlight"><pre><span class="nv">$ </span>/usr/bin/php /usr/share/nginx/www/ttrss/update.php --feeds --quiet
 </pre></div>
 <p>If the script returns no errors use <tt class="docutils literal">cron</tt> to run the script periodically. Add a new job to <tt class="docutils literal">crontab</tt>:</p>

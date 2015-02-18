@@ -41,16 +41,16 @@
 <div class="highlight"><pre>cgi.fix_pathinfo<span class="o">=</span>0
 </pre></div>
 <p>Restart PHP:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo /etc/init.d/php5-fpm restart
+<div class="highlight"><pre><span class="nv">$ </span>sudo service php5-fpm restart
 </pre></div>
 </div>
 <div class="section" id="nginx">
 <h2>1. Nginx</h2>
 <p>Install:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install nginx
-<span class="nv">$ </span>sudo /etc/init.d/nginx start
+<span class="nv">$ </span>sudo service nginx start
 </pre></div>
-<p>To verify that the web server is running, open a browser and navigate to <tt class="docutils literal"><span class="pre">http://YOUR.RASPBERRY.IP.ADDRESS</span></tt>. If you see <tt class="docutils literal">Welcome to Nginx</tt> the server is installed correctly.</p>
+<p>To verify that the web server is running, open a browser and navigate to <tt class="docutils literal"><span class="pre">http://your.raspberry.ip.address</span></tt>. If you see <tt class="docutils literal">Welcome to nginx!</tt> the server is installed correctly.</p>
 </div>
 <div class="section" id="host-multiple-domains">
 <h2>2. Host multiple domains</h2>
@@ -100,7 +100,7 @@
 <p>Activate the new server block:</p>
 <div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /etc/nginx/sites-enabled
 <span class="nv">$ </span>sudo ln -s ../sites-available/myHomePi
-<span class="nv">$ </span>sudo /etc/init.d/nginx restart
+<span class="nv">$ </span>sudo service nginx restart
 </pre></div>
 </div>
 <div class="section" id="port-forwarding">
@@ -112,7 +112,7 @@
 <div class="section" id="postgresql">
 <h2>3. PostgreSQL</h2>
 <p>Install:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get postgresql
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install postgresql
 </pre></div>
 <p>Launch the PostgreSQL interactive console front-end <tt class="docutils literal">psql</tt> as <tt class="docutils literal">postgres</tt> user and set a new password:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo -u postgres psql
@@ -129,7 +129,7 @@ Enter it again: <span class="o">[</span>newpasswd<span class="o">]</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c"># \quit</span>
 </pre></div>
 <p>Save any changes and reload the database server:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo /etc/init.d/postgresql reload
+<div class="highlight"><pre><span class="nv">$ </span>sudo service postgresql reload
 </pre></div>
 </div>
 <div class="section" id="helpful-resources">
