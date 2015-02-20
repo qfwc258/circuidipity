@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 16 Feb 2015 10:30:00 -0500</lastBuildDate><item><title>Tiny Tiny RSS</title><link>http://www.circuidipity.com/ttrss.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #7 &amp;gt;&amp;gt;&lt;/a&gt; Install and self-host the &lt;strong&gt;Tiny Tiny RSS&lt;/strong&gt; news reader and aggregator and access news feeds over the web from anywhere.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 19 Feb 2015 19:46:00 -0500</lastBuildDate><item><title>Tiny Tiny RSS</title><link>http://www.circuidipity.com/ttrss.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #7 &amp;gt;&amp;gt;&lt;/a&gt; Install and self-host the &lt;strong&gt;Tiny Tiny RSS&lt;/strong&gt; news reader and aggregator and access news feeds over the web from anywhere.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;/div&gt;
@@ -601,23 +601,37 @@ keychain ~/.ssh/id_rsa
 &lt;/div&gt;
 &lt;/div&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Mon, 16 Feb 2015 10:30:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-02:secure-remote-access-using-ssh-keys.html</guid><category>networks</category><category>linux</category></item><item><title>There's no place like [a Raspberry Pi] Home [Server]</title><link>http://www.circuidipity.com/raspberry-pi-home-server.html</link><description>&lt;img alt="Raspberry Pi Home Server" class="align-right" src="images/raspberry-pi-home-server.png" style="width: 300px; height: 300px;" /&gt;
-&lt;p&gt;&lt;em&gt;Work-in-progress&lt;/em&gt;: Running your own Linux-powered &lt;strong&gt;home server&lt;/strong&gt; is a fun learning experience about how networks work and using a &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspberry-pi.html"&gt;Raspberry Pi&lt;/a&gt; is a cheap and cheerful way to get the job done!&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Work-in-progress&lt;/em&gt;: Running your own &lt;strong&gt;Linux-powered home server&lt;/strong&gt; is a fun learning experience about how networks work and using a &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspberry-pi.html"&gt;Raspberry Pi&lt;/a&gt; is a cheap and cheerful way to get the job done!&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;ol class="arabic simple" start="0"&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html"&gt;Move the root filesystem to external USB storage&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;Secure remote access using SSH keys&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;Multiple terminal windows using tmux&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/backup-home.html"&gt;Backup /home&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;Network attached storage&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html"&gt;Access from anywhere in the world using dynamic DNS&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;Web server and database&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/ttrss.html"&gt;RSS reader and aggregator&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h3&gt;0. &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html"&gt;Move the root filesystem to external USB storage&lt;/a&gt;&lt;/h3&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 11 Feb 2015 17:13:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-01:raspberry-pi-home-server.html</guid><category>raspberry pi</category><category>networks</category></item><item><title>Run a Raspberry Pi from external USB storage</title><link>http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #0 &amp;gt;&amp;gt;&lt;/a&gt; I am exploring the use of my Raspberry Pi as a 24/7 uptime &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;home server&lt;/a&gt;, and one of the hacks I wish to add is using Pi as a cheap and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;network attached storage (NAS)&lt;/a&gt; device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well? I imagine an always-on Pi would enjoy more robust performance from a hard drive than an SD card.&lt;/p&gt;
-&lt;p&gt;Thanks to all the contributors &lt;a class="reference external" href="http://www.raspberrypi.org/forums/viewtopic.php?f=29&amp;amp;t=44177"&gt;on this discussion thread&lt;/a&gt; I put my plan in motion using:&lt;/p&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h3&gt;1. &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;Secure remote access using SSH keys&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h3&gt;2. &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;Multiple terminal windows using tmux&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h3&gt;3. &lt;a class="reference external" href="http://www.circuidipity.com/backup-home.html"&gt;Backup /home&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h3&gt;4. &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;Network attached storage&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id6"&gt;
+&lt;h3&gt;5. &lt;a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html"&gt;Access from anywhere in the world using dynamic DNS&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id7"&gt;
+&lt;h3&gt;6. &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;Web server and database&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id8"&gt;
+&lt;h3&gt;7. &lt;a class="reference external" href="http://www.circuidipity.com/ttrss.html"&gt;RSS reader and aggregator&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Happy hacking!&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Thu, 19 Feb 2015 19:46:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-01:raspberry-pi-home-server.html</guid><category>raspberry pi</category><category>networks</category><category>linux</category></item><item><title>Run a Raspberry Pi from external USB storage</title><link>http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #0 &amp;gt;&amp;gt;&lt;/a&gt; I am exploring the use of my Pi as &lt;strong&gt;24/7 uptime home server&lt;/strong&gt; and one of the hacks I wish to add is using Pi as a cheap and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;network attached storage (NAS)&lt;/a&gt; device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?&lt;/p&gt;
+&lt;p&gt;I imagine an always-on Pi would enjoy more robust performance from a hard drive than an SD card. Thanks to all the contributors &lt;a class="reference external" href="http://www.raspberrypi.org/forums/viewtopic.php?f=29&amp;amp;t=44177"&gt;on this discussion thread&lt;/a&gt; I put my plan in motion using:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Raspberry Pi Model B&lt;/li&gt;
 &lt;li&gt;5V 1A microUSB power adapter&lt;/li&gt;
@@ -869,4 +883,4 @@ iface eth0 inet static
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Thu, 05 Feb 2015 17:21:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-01-29:run-a-raspberry-pi-from-external-usb-storage.html</guid><category>raspberry pi</category><category>raspbian</category><category>linux</category><category>networks</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Thu, 19 Feb 2015 19:09:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-01-29:run-a-raspberry-pi-from-external-usb-storage.html</guid><category>raspberry pi</category><category>raspbian</category><category>linux</category><category>networks</category></item></channel></rss>
