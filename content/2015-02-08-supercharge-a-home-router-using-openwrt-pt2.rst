@@ -36,7 +36,7 @@ Latest version (2015-02-08) of OpenWrt is **v14.07 "Barrie Breaker"** and TL-WDR
 1. Flash router
 ===============
 
-Log into the TP-Link router web interface ``address=192.168.0.1`` ``user=admin`` ``password=admin`` navigate to the update page and select the downloaded ``openwrt-*-squashfs-factory.bin`` firmware image as the update package. Allow several minutes for the device to write the new OpenWrt firmware; when finished the device will reboot and accessible at new IP address ``192.168.1.1``.
+Log into the TP-Link router web interface ``address=192.168.0.1`` ``user=admin`` ``password=admin`` navigate to the update page ``System Tools->Firmware Upgrade`` and select the downloaded ``openwrt-*-squashfs-factory.bin`` firmware image as the update package. Allow several minutes for the device to write the new OpenWrt firmware; when finished the device will reboot and accessible at new IP address ``192.168.1.1``.
 
 2. First login
 ==============
