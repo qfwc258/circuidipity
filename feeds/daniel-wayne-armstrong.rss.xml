@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 19 Feb 2015 19:46:00 -0500</lastBuildDate><item><title>Tiny Tiny RSS</title><link>http://www.circuidipity.com/ttrss.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #7 &amp;gt;&amp;gt;&lt;/a&gt; Install and self-host the &lt;strong&gt;Tiny Tiny RSS&lt;/strong&gt; news reader and aggregator and access news feeds over the web from anywhere.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 20 Feb 2015 23:34:00 -0500</lastBuildDate><item><title>Tiny Tiny RSS</title><link>http://www.circuidipity.com/ttrss.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #7 &amp;gt;&amp;gt;&lt;/a&gt; Install and self-host the &lt;strong&gt;Tiny Tiny RSS&lt;/strong&gt; news reader and aggregator and access news feeds over the web from anywhere.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;/div&gt;
@@ -279,7 +279,7 @@ Enter it again: &lt;span class="o"&gt;[&lt;/span&gt;newpasswd&lt;span class="o"&
 &lt;/div&gt;
 &lt;div class="section" id="flash-router"&gt;
 &lt;h2&gt;1. Flash router&lt;/h2&gt;
-&lt;p&gt;Log into the TP-Link router web interface &lt;tt class="docutils literal"&gt;address=192.168.0.1&lt;/tt&gt; &lt;tt class="docutils literal"&gt;user=admin&lt;/tt&gt; &lt;tt class="docutils literal"&gt;password=admin&lt;/tt&gt; navigate to the update page and select the downloaded &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openwrt-*-squashfs-factory.bin&lt;/span&gt;&lt;/tt&gt; firmware image as the update package. Allow several minutes for the device to write the new OpenWrt firmware; when finished the device will reboot and accessible at new IP address &lt;tt class="docutils literal"&gt;192.168.1.1&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Log into the TP-Link router web interface &lt;tt class="docutils literal"&gt;address=192.168.0.1&lt;/tt&gt; &lt;tt class="docutils literal"&gt;user=admin&lt;/tt&gt; &lt;tt class="docutils literal"&gt;password=admin&lt;/tt&gt; navigate to the update page &lt;tt class="docutils literal"&gt;System &lt;span class="pre"&gt;Tools-&amp;gt;Firmware&lt;/span&gt; Upgrade&lt;/tt&gt; and select the downloaded &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openwrt-*-squashfs-factory.bin&lt;/span&gt;&lt;/tt&gt; firmware image as the update package. Allow several minutes for the device to write the new OpenWrt firmware; when finished the device will reboot and accessible at new IP address &lt;tt class="docutils literal"&gt;192.168.1.1&lt;/tt&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="first-login"&gt;
 &lt;h2&gt;2. First login&lt;/h2&gt;
@@ -461,28 +461,23 @@ rsync &lt;span class="nv"&gt;$rsync_options&lt;/span&gt; &lt;span class="nv"&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Tue, 03 Feb 2015 00:10:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-03:backup-home.html</guid><category>networks</category><category>linux</category><category>shell</category><category>programming</category><category>github</category></item><item><title>Secure remote access using SSH keys</title><link>http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #1 &amp;gt;&amp;gt;&lt;/a&gt; Create cryptographic keys and disable password logins to make remote machines more secure.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;OpenSSH&lt;/strong&gt; is a toolkit for securing communication with Unix-like remote machines and services and supports authenticating users with a public and private &lt;strong&gt;key pair&lt;/strong&gt;. Michael Lucas, author of &lt;a class="reference external" href="https://www.michaelwlucas.com/nonfiction/ssh-mastery"&gt;OpenSSH Mastery&lt;/a&gt;, describes the risk of passwords in SSH:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;For the last few years, a network of compromised machines dubbed the &amp;quot;Hail Mary Cloud&amp;quot; has scanned the Internet for SSH servers. When a member of this cloud finds an SSH server, it lets the other machines in the network know about it. The cloud then methodically tries possible usernames and passwords. One host on the network tries a few times, then another, then another. Blocking individual IP addresses is not a useful defense, because each address is used only a few times.&lt;/p&gt;
-&lt;p&gt;Any one attempt has low odds of guessing successfully. The attempts are constant. They never end. Eventually [some automated attacker] will get lucky and break into your server. It might be tomorrow, or next year, but it _will_ happen. To stop these types of attacks, you can either use packet filtering to block public access to your SSH server, or you can eliminate passwords on your servers. User keys let you eliminate passwords.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Configuring SSH key authentication between a home server and client sounds like a good idea.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Setup:&lt;/strong&gt; &lt;em&gt;Remote server&lt;/em&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi&lt;/a&gt; running Raspbian Linux configured for SSH logins from a &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Chromebook&lt;/a&gt; &lt;em&gt;local client&lt;/em&gt; running Lubuntu 14.04.&lt;/p&gt;
+&lt;p&gt;Server options: username &lt;tt class="docutils literal"&gt;pi&lt;/tt&gt;, ip address &lt;tt class="docutils literal"&gt;192.168.1.33&lt;/tt&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="install"&gt;
 &lt;h2&gt;0. Install&lt;/h2&gt;
-&lt;p&gt;Home server is a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi running Raspbian&lt;/a&gt; and client is a &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Chromebook running Lubuntu 14.04&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="section" id="on-the-server"&gt;
 &lt;h3&gt;On the server&lt;/h3&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;install &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openssh-server&lt;/span&gt;&lt;/tt&gt; (pre-installed in Raspbian) and create an SSH configuration in the home directory of users who requires access to the system:&lt;/li&gt;
+&lt;li&gt;install &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openssh-server&lt;/span&gt;&lt;/tt&gt; and create an SSH configuration in the home directory of users who requires access to the system:&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install openssh-server
 &lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/.ssh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod 700 ~/.ssh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; touch ~/.ssh/authorized_keys &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod 600 ~/.ssh/authorized_keys
 &lt;/pre&gt;&lt;/div&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;collect key fingerprints from the server:&lt;/li&gt;
+&lt;li&gt;collect key fingerprints:&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-keygen -lf /etc/ssh/ssh_host_dsa_key.pub &amp;gt;&amp;gt; ~/.ssh/keys.txt
 &lt;span class="nv"&gt;$ &lt;/span&gt;ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub &amp;gt;&amp;gt; ~/.ssh/keys.txt
@@ -490,11 +485,11 @@ rsync &lt;span class="nv"&gt;$rsync_options&lt;/span&gt; &lt;span class="nv"&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... and give &lt;tt class="docutils literal"&gt;keys.txt&lt;/tt&gt; to users to compare signature when connecting for the first time&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;&lt;strong&gt;optional:&lt;/strong&gt; edit &lt;tt class="docutils literal"&gt;/etc/ssh/sshd_config&lt;/tt&gt; adding specific users to be granted system access (&lt;strong&gt;disabling&lt;/strong&gt; all others by default):&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;optional:&lt;/em&gt; specify usernames in &lt;tt class="docutils literal"&gt;/etc/ssh/sshd_config&lt;/tt&gt; to be granted system access (&lt;strong&gt;disabling&lt;/strong&gt; all others by default):&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;AllowUsers USERNAME1 USERNAME2
+&lt;div class="highlight"&gt;&lt;pre&gt;AllowUsers pi user2 user3
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Save and restart SSH with the new config by running:&lt;/p&gt;
+&lt;p&gt;Save and restart SSH with new configuration:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service ssh restart
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -507,53 +502,55 @@ rsync &lt;span class="nv"&gt;$rsync_options&lt;/span&gt; &lt;span class="nv"&gt;
 &lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/.ssh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod 700 ~/.ssh
 &lt;/pre&gt;&lt;/div&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;&lt;strong&gt;optional:&lt;/strong&gt; create an entry in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/config&lt;/span&gt;&lt;/tt&gt; with the login options for a server - for example:&lt;/li&gt;
+&lt;li&gt;create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/config&lt;/span&gt;&lt;/tt&gt; to hold &lt;em&gt;aliases&lt;/em&gt; with the login options for a server - sample entry for the Pi:&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Host raspberry
-HostName 192.168.1.88
+&lt;div class="highlight"&gt;&lt;pre&gt;Host raspberry.lan
+HostName 192.168.1.33
 Port 22
 User pi
 &lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Test SSH password login to Pi server:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh raspberry.lan
+pi@192.168.1.33&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;s password:
+Last login: Thu Feb 19 18:07:48 2015 from chromebook.lan
+&lt;span class="err"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;em&gt;optional:&lt;/em&gt; see &lt;a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html"&gt;Access from anywhere in the world using dynamic DNS&lt;/a&gt; for configuring access to the Pi from &lt;em&gt;outside&lt;/em&gt; the LAN&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="generate-keys"&gt;
-&lt;h2&gt;1. Generate keys&lt;/h2&gt;
+&lt;div class="section" id="keys"&gt;
+&lt;h2&gt;1. Keys&lt;/h2&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h3&gt;On the client&lt;/h3&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;generate keys by running:&lt;/li&gt;
+&lt;li&gt;generate SSH keys:&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-keygen -t rsa -C &lt;span class="s2"&gt;&amp;quot;$(whoami)@$(hostname)-$(date -I)&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;upload the public key to the server and append it to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/authorized_keys&lt;/span&gt;&lt;/tt&gt;:&lt;/li&gt;
+&lt;li&gt;upload the &lt;em&gt;public key&lt;/em&gt; to the server and append to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/authorized_keys&lt;/span&gt;&lt;/tt&gt;:&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cat ~/.ssh/id_rsa.pub | ssh SERVER &lt;span class="s2"&gt;&amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cat ~/.ssh/id_rsa.pub | ssh raspberry.lan &lt;span class="s2"&gt;&amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="test"&gt;
-&lt;h2&gt;2. Test&lt;/h2&gt;
-&lt;div class="section" id="id2"&gt;
-&lt;h3&gt;On the client&lt;/h3&gt;
 &lt;p&gt;Graphical display managers like &lt;tt class="docutils literal"&gt;gdm&lt;/tt&gt; will automatically check a user account for SSH keys upon login. A pop-up box will prompt for the passphrase and the key will be added to the desktop session.&lt;/p&gt;
 &lt;p&gt;If logging into a console, tell SSH that you have keys by running &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-add&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-add
-&lt;span class="nv"&gt;$ &lt;/span&gt;Enter passphrase &lt;span class="k"&gt;for&lt;/span&gt; /home/gaff/.ssh/id_rsa:
-Identity added: /home/gaff/.ssh/id_rsa &lt;span class="o"&gt;(&lt;/span&gt;/home/gaff/.ssh/id_rsa&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;Enter passphrase &lt;span class="k"&gt;for&lt;/span&gt; /home/username/.ssh/id_rsa:
+Identity added: /home/username/.ssh/id_rsa &lt;span class="o"&gt;(&lt;/span&gt;/home/username/.ssh/id_rsa&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;All SSH sessions launched from this console will access this user key stored in memory. Make sure to test the connection before disabling password logins:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh 192.168.1.88
-Last login: Thu Sep 11 23:46:28 2014 from kambei.lan
-&lt;span class="nv"&gt;$ &lt;/span&gt;uname -n
-pi
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh raspberry.lan
+Last login: Thu Feb 19 18:22:42 2015 from chromebook.lan
+&lt;span class="err"&gt;$&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;No request to enter a passphrase indicates SSH key authentication is properly configured.&lt;/p&gt;
+&lt;p&gt;No passphrase request indicates SSH key authentication is properly configured.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="disable-password-logins"&gt;
-&lt;h2&gt;3. Disable password logins&lt;/h2&gt;
-&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;2. Disable password logins&lt;/h2&gt;
+&lt;div class="section" id="id2"&gt;
 &lt;h3&gt;On the server&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;edit &lt;tt class="docutils literal"&gt;/etc/ssh/sshd_config&lt;/tt&gt;:&lt;/li&gt;
@@ -563,17 +560,17 @@ ChallengeResponseAuthentication no
 PasswordAuthentication no
 UsePAM no
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and restart the SSH server:&lt;/p&gt;
+&lt;p&gt;... and restart SSH:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service ssh restart
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="key-management"&gt;
-&lt;h2&gt;4. Key management&lt;/h2&gt;
+&lt;h2&gt;3. Key management&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://www.funtoo.org/Keychain"&gt;Keychain&lt;/a&gt; is an OpenSSH key manager. From the package description:&lt;/p&gt;
 &lt;blockquote&gt;
 When keychain is run, it checks for a running ssh-agent, otherwise it starts one. It saves the ssh-agent environment variables to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.keychain/$HOSTNAME-sh&lt;/span&gt;&lt;/tt&gt;, so that subsequent logins and non-interactive shells such as cron jobs can source the file and make passwordless ssh connections.  In addition, when keychain runs, it verifies that the key files specified on the command-line are known to ssh-agent, otherwise it loads them, prompting you for a password if necessary.&lt;/blockquote&gt;
-&lt;div class="section" id="id4"&gt;
+&lt;div class="section" id="id3"&gt;
 &lt;h3&gt;On the client&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;install:&lt;/li&gt;
@@ -593,14 +590,14 @@ keychain ~/.ssh/id_rsa
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;keychain --clear
 &lt;/pre&gt;&lt;/div&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;if using &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; enable persistent SSH key management across sessions by editing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.tmux.conf&lt;/span&gt;&lt;/tt&gt;:&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;optional:&lt;/em&gt; if using &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; enable persistent SSH key management across sessions by editing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.tmux.conf&lt;/span&gt;&lt;/tt&gt;:&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;set&lt;/span&gt;-option -g update-environment &lt;span class="s2"&gt;&amp;quot;DISPLAY SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Mon, 16 Feb 2015 10:30:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-02:secure-remote-access-using-ssh-keys.html</guid><category>networks</category><category>linux</category></item><item><title>There's no place like [a Raspberry Pi] Home [Server]</title><link>http://www.circuidipity.com/raspberry-pi-home-server.html</link><description>&lt;img alt="Raspberry Pi Home Server" class="align-right" src="images/raspberry-pi-home-server.png" style="width: 300px; height: 300px;" /&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 20 Feb 2015 23:34:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-02:secure-remote-access-using-ssh-keys.html</guid><category>networks</category><category>linux</category><category>raspberry pi</category></item><item><title>There's no place like [a Raspberry Pi] Home [Server]</title><link>http://www.circuidipity.com/raspberry-pi-home-server.html</link><description>&lt;img alt="Raspberry Pi Home Server" class="align-right" src="images/raspberry-pi-home-server.png" style="width: 300px; height: 300px;" /&gt;
 &lt;p&gt;&lt;em&gt;Work-in-progress&lt;/em&gt;: Running your own &lt;strong&gt;Linux-powered home server&lt;/strong&gt; is a fun learning experience about how networks work and using a &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspberry-pi.html"&gt;Raspberry Pi&lt;/a&gt; is a cheap and cheerful way to get the job done!&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
