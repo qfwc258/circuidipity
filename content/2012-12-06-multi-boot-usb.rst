@@ -36,8 +36,7 @@ The new ``FAT32`` partition is mounted and I create a ``boot`` folder for GRUB a
     $ mkdir boot iso
 
 2. Install GRUB
----------------
-
+===============
 Install GRUB to the **Master Boot Record (MBR)** of the USB stick:
 
 .. code-block:: bash
@@ -45,7 +44,7 @@ Install GRUB to the **Master Boot Record (MBR)** of the USB stick:
     $ sudo grub-install --force --no-floppy --boot-directory=/media/my_username/boot /dev/sdX
 
 3. Copy Linux images
---------------------
+====================
 
 Download and copy Linux ISO images to the newly-created ``iso`` folder on the USB stick. For example I have installed on my own USB stick:
 
@@ -56,7 +55,7 @@ Download and copy Linux ISO images to the newly-created ``iso`` folder on the US
 * **Memtest86+** - Diagnostic tool for `testing RAM <http://www.memtest.org/>`_
 
 4. Create grub.cfg
-------------------
+==================
 
 Create a ``grub.cfg`` with entries for the Linux images copied to the USB stick. Each distro is a little bit different in the manner its booted by GRUB. Using my own example above I have created:
 
@@ -140,7 +139,7 @@ Save ``grub.cfg`` to the USB stick at ``/media/my_username/boot/grub``.
 All done! Reboot, select the USB stick (depending on BIOS settings) as boot device and GRUB will display a menu of the installed Linux distro images. Reboot again and return to using your USB stick as a regular storage device.
 
 GRUBS Reanimated USB Boot Stick
--------------------------------
+===============================
 
 I made a Bash script called `GRUBS <https://github.com/vonbrownie/grubs>`_ that creates multi-boot Linux USB sticks using the above steps and placed it on `GitHub <https://github.com/vonbrownie/grubs>`_.
 
