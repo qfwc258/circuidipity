@@ -6,7 +6,7 @@ Chromebook to Lubuntubook
 :slug: c720-lubuntubook
 :template: article-project
 :tags: chromebook, lubuntu, ubuntu, linux
-:modified: 2014-11-02 13:31:00
+:modified: 2015-02-25 17:18:00
 
 Replace **Chrome OS** permanently with **Lubuntu 14.04 LTS Linux** on the **Acer C720 Chromebook**.
 
@@ -24,7 +24,7 @@ Let's go!
 =========
 
 0. Recovery Image
------------------
+=================
 
 Create a recovery image of Chrome OS (my C720 is model ``PEPPY C6A-N3C-A7O``) to enable restoring the Chromebook to its default configuration. This will require a spare USB stick of 2GB or better:
 
@@ -34,12 +34,12 @@ Create a recovery image of Chrome OS (my C720 is model ``PEPPY C6A-N3C-A7O``) to
 Source: `Create a Chromebook recovery image <https://support.google.com/chromebook/answer/1080595?hl=en>`_ 
 
 1. Prepare install media
-------------------------
+========================
 
-Download the `64-bit trusty minimal installer <http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso>`_ and `flash the image <https://help.ubuntu.com/community/Installation/FromUSBStick>`_ to a USB stick. An alternative (my choice) is adding the image to a `USB stick with multiple Linux installers <http://www.circuidipity.com/multi-boot-usb.html>`_. Using the minimal console installer vs. the graphical `Lubuntu installer <https://help.ubuntu.com/community/Lubuntu/GetLubuntu>`_ provides more options during setup [2]_.
+Download the `64-bit Trusty Tahr minimal installer <http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso>`_ and `flash the image <https://help.ubuntu.com/community/Installation/FromUSBStick>`_ to a USB stick. An alternative (my choice) is adding the image to a `USB stick with multiple Linux installers <http://www.circuidipity.com/multi-boot-usb.html>`_. Using the minimal console installer vs. the graphical `Lubuntu installer <https://help.ubuntu.com/community/Lubuntu/GetLubuntu>`_ provides more options during setup [2]_.
 
 2. SeaBIOS
-----------
+==========
 
 `SeaBIOS <http://www.coreboot.org/SeaBIOS>`_ in combination with **coreboot** provides an open-source legacy BIOS that enables access to the MBR and the ability to install an alternative OS on the Chromebook. All this good stuff involves jumping through a few simple hoops and not trembling in fear at the "scary white screen" that pops up at power up stating that the boot loader detects something is **very very wrong** with the Chromebook and helpfully suggests pressing the spacebar to begin recovery. **Do not press the spacebar** or the Lubuntu installation will be wiped from disk!
 
@@ -49,7 +49,7 @@ The second method involves setting new flags for the write-protected **Google Bi
 
 Experimenting with alternate OS installs on the Chromebook I first employed the developer mode method followed by the write-protect screw removal. I prefer configuring the device to default to legacy-mode BIOS but I have employed both methods successfully and describe their respective steps below.
 
-**No guarantees**, though... Hopefully you enjoy equal success!
+**No guarantees** though... Hopefully you enjoy equal success!
 
 2.1 Write-Protect Screw Method
 ------------------------------
@@ -134,26 +134,26 @@ Insert the USB stick prepared in Step 1, reboot the Chromebook and press ``CTRL+
 Source: `Chromium OS <http://www.chromium.org/chromium-os>`_ developer information for the `Acer C720 Chromebook <http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook>`_
 
 3. Install Lubuntu
-------------------
+==================
 
 My `visual screenshot tour <http://www.circuidipity.com/c720-lubuntubook-install.html>`_ of installing Lubuntu 14.04 - a `Long Term Support (LTS) <https://wiki.ubuntu.com/Releases>`_ release.
 
-The Chromebook's SSD is divided into 3 partitions:
+Chromebook's SSD is divided into 3 partitions:
 
-* sda1 is a 300MB ``boot`` partition 
-* sda2 is a 512MB LUKS encrypted ``swap`` partition using a **random key**
+* sda1 is a 256MB ``boot`` partition 
+* sda2 is a 1GB LUKS encrypted ``swap`` partition using a **random key**
 * sda3 uses the remaining space as a LUKS encrypted ``root`` partition using a **passphrase**
 
 4. Touchpad
------------
+===========
 
-Lubuntu installs the ``3.13`` Linux kernel and does not support the Chromebook's touchpad. Download and install the more recent ``3.17`` kernel from `Ubuntu MainlineBuilds <https://wiki.ubuntu.com/Kernel/MainlineBuilds>`_ to fix:
+Lubuntu installs the ``3.13`` Linux kernel and does not support the Chromebook's touchpad. Download and install the more recent ``3.19`` kernel from `Ubuntu MainlineBuilds <https://wiki.ubuntu.com/Kernel/MainlineBuilds>`_ to fix:
 
-.. code-block:: bash                                                                
-                                                                                    
-    $ wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-headers-3.17.1-031701-generic_3.17.1-031701.201410150735_amd64.deb
-    $ wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-headers-3.17.1-031701_3.17.1-031701.201410150735_all.deb
-    $ wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-image-3.17.1-031701-generic_3.17.1-031701.201410150735_amd64.deb
+.. code-block:: bash
+
+    $ wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19-vivid/linux-headers-3.19.0-031900-generic_3.19.0-031900.201502091451_amd64.deb
+    $ wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19-vivid/linux-headers-3.19.0-031900_3.19.0-031900.201502091451_all.deb
+    $ wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19-vivid/linux-image-3.19.0-031900-generic_3.19.0-031900.201502091451_amd64.deb
     $ sudo dpkg -i linux*.deb                                                       
                                                                                     
 ... and reboot.                                                       
@@ -167,7 +167,7 @@ Create a touchpad configuration file in ``/etc/X11/xorg.conf.d``:
 
 Modify this file to adjust timeouts, add tap-mouse actions (2-finger tap = right-click, 3-finger tap = middle-click), and 2-finger scrolling.
 
-My own sample config:
+Sample config:
 
 .. code-block:: bash
 
@@ -191,7 +191,7 @@ My own sample config:
 Sources: `50-c720-touchpad.conf <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/X11/xorg.conf.d/50-c720-touchpad.conf>`_, and pages for `Touchpad Synaptics <https://wiki.archlinux.org/index.php/Touchpad_Synaptics>`_ and the `C720 <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration>`_ on `ArchWiki <https://wiki.archlinux.org/>`_
 
 5. SSD
-------
+======
 
 The `swappiness <https://en.wikipedia.org/wiki/Swappiness>`_ parameter controls the preference of the kernel to move processes out of physical memory to the swap partition. Range is ``0-100``, default is set to ``60`` and lower values cause the kernel to avoid swapping and higher values prompt more frequent swap use.
 
@@ -224,7 +224,7 @@ After modifying ``fstab`` update ``/boot/initrd.img-*`` by running:
 Source: `TRIM configuration on solid-state drives <http://www.linuxjournal.com/content/solid-state-drives-get-one-already>`_
 
 6. Suspend
-----------
+==========
 
 To enable suspend-and-resume [6]_ create ``/etc/initramfs-tools/scripts/init-top/unbind_ehci`` with the following:
 
@@ -298,7 +298,7 @@ Suspend now works reliably when triggered from Lubuntu's shutdown menu. Chromebo
 Sources: `unbind_ehci <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/initramfs-tools/scripts/init-top/unbind_ehci>`_ and `10_disable-ehci.rules <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/udev/rules.d/10_disable-ehci.rules>`_, `C720 suspend tips <https://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/ch8eq2o>`_, and `configuring grub <https://www.reddit.com/r/chrubuntu/comments/2evv1c/updating_ubuntu_kernel_headers_image_etc/ckaf6hx>`_
 
 7. Keyboard Shortcuts
----------------------
+=====================
 
 Top row on the keyboard with the shortcut icons (brightness, volume, etc.) identify in Linux as the ``F1-F10`` keys and the Search key (in the ``CapsLk`` position) acts as the ``Super`` (Windows) modifier key.
 
@@ -375,12 +375,10 @@ Power key in upper-right corner ignores any configuration in the window manager 
 
 If you want to disable the power key edit ``/etc/systemd/logind.conf`` and set ``HandlePowerKey=ignore``.
 
-8. Wireless (optional)
-----------------------
+8. Wireless
+===========
 
-There are a few settings to modify if you want to monkey with the Chromebook's wireless chipset to improve performance [8]_.
-
-To identify the card and parameters:
+There are a few settings to modify to improve performance of Chromebook's wireless chipset [8]_. Identify the card and parameters:
 
 .. code-block:: bash
 
@@ -404,7 +402,7 @@ Create ``/etc/modprobe.d/ath9k.conf`` with the following options:
 Sources: `ath9k.conf <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/modprobe.d/ath9k.conf>`_, `ath9k wireless driver <http://wireless.kernel.org/en/users/Drivers/ath9k>`_ and `bluetooth coexistence <http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex>`_                                                       
 
 9. Helpful Resources
---------------------
+====================
 
 * My personal `Lubuntubook configurations <https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_lubuntubook>`_ 
 * A few small hacks I like to do to `make a great OS even better <http://www.circuidipity.com/lubuntu-trusty-hacks.html>`_
