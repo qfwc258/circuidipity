@@ -1,14 +1,16 @@
-=========================
-Chromebook to Lubuntubook
-=========================
+===========================
+Chromebook to (L)ubuntubook
+===========================
 
 :date: 2014-10-26 00:09:00
 :slug: c720-lubuntubook
 :template: article-project
 :tags: chromebook, lubuntu, ubuntu, linux
-:modified: 2015-02-25 17:18:00
+:modified: 2015-02-25 18:30:00
 
-Replace **Chrome OS** permanently with **Lubuntu 14.04 LTS Linux** on the **Acer C720 Chromebook**.
+**Update (2015-02-25):** Switched to Ubuntu's default **Unity** desktop. Modification steps remain the same.
+
+Replace **Chrome OS** permanently with **(L)ubuntu 14.04 LTS Linux** on the **Acer C720 Chromebook**.
 
 .. image:: images/c720-lubuntubook.png
     :align: right
@@ -16,7 +18,7 @@ Replace **Chrome OS** permanently with **Lubuntu 14.04 LTS Linux** on the **Acer
     :width: 300px
     :height: 157px
 
-Running a `full-featured Linux <http://lubuntu.net/>`_ on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance using the **LXDE** desktop.
+Running a **full-featured Linux** on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance using the LXDE desktop.
 
 This device is available in a few different configurations. Mine is the non-touchscreen model **C720-2848** with (non-expandable) **2GB RAM** and a (user-replaceable) **16GB SSD** [1]_.
 
@@ -138,7 +140,9 @@ Source: `Chromium OS <http://www.chromium.org/chromium-os>`_ developer informati
 
 My `visual screenshot tour <http://www.circuidipity.com/c720-lubuntubook-install.html>`_ of installing Lubuntu 14.04 - a `Long Term Support (LTS) <https://wiki.ubuntu.com/Releases>`_ release.
 
-Chromebook's SSD is divided into 3 partitions:
+**Alternative:** At the ``tasksel`` stage select a different desktop: Ubuntu (Unity), Xubuntu, etc.
+
+Chromebook's SSD will be divided into 3 partitions:
 
 * sda1 is a 256MB ``boot`` partition 
 * sda2 is a 1GB LUKS encrypted ``swap`` partition using a **random key**
@@ -405,7 +409,6 @@ Sources: `ath9k.conf <https://github.com/vonbrownie/linux-post-install/blob/mast
 ====================
 
 * My personal `Lubuntubook configurations <https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_lubuntubook>`_ 
-* A few small hacks I like to do to `make a great OS even better <http://www.circuidipity.com/lubuntu-trusty-hacks.html>`_
 * `CrunchBang Linux <https://github.com/liangcj/AcerC720CrunchBang>`_ on the Acer C720
 * Arch Linux `C720 installation with useful post-install details <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook>`_
 * Ongoing `discussion thread about configuring Chromebooks <http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/>`_ 
