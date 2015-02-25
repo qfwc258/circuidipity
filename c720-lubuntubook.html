@@ -24,7 +24,7 @@
 
 <!-- article -->
 <h1>Chromebook to Lubuntubook</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 02 November 2014</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Wednesday 25 February 2015</p>
 <div id="article">
     <p>Replace <strong>Chrome OS</strong> permanently with <strong>Lubuntu 14.04 LTS Linux</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
 <img alt="Acer C720 Lubuntubook" class="align-right" src="images/c720-lubuntubook.png" style="width: 300px; height: 157px;" />
@@ -32,8 +32,9 @@
 <p>This device is available in a few different configurations. Mine is the non-touchscreen model <strong>C720-2848</strong> with (non-expandable) <strong>2GB RAM</strong> and a (user-replaceable) <strong>16GB SSD</strong> <a class="footnote-reference" href="#id10" id="id1">[1]</a>.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
+</div>
 <div class="section" id="recovery-image">
-<h3>0. Recovery Image</h3>
+<h2>0. Recovery Image</h2>
 <p>Create a recovery image of Chrome OS (my C720 is model <tt class="docutils literal">PEPPY <span class="pre">C6A-N3C-A7O</span></tt>) to enable restoring the Chromebook to its default configuration. This will require a spare USB stick of 2GB or better:</p>
 <ul class="simple">
 <li>Log into the Chromebook and let it auto update, as there sometimes are firmware updates... check the updating status in the browser at <tt class="docutils literal"><span class="pre">chrome://help</span></tt></li>
@@ -42,17 +43,16 @@
 <p>Source: <a class="reference external" href="https://support.google.com/chromebook/answer/1080595?hl=en">Create a Chromebook recovery image</a></p>
 </div>
 <div class="section" id="prepare-install-media">
-<h3>1. Prepare install media</h3>
-<p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso">64-bit trusty minimal installer</a> and <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick. An alternative (my choice) is adding the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>. Using the minimal console installer vs. the graphical <a class="reference external" href="https://help.ubuntu.com/community/Lubuntu/GetLubuntu">Lubuntu installer</a> provides more options during setup <a class="footnote-reference" href="#id11" id="id2">[2]</a>.</p>
+<h2>1. Prepare install media</h2>
+<p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso">64-bit Trusty Tahr minimal installer</a> and <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick. An alternative (my choice) is adding the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>. Using the minimal console installer vs. the graphical <a class="reference external" href="https://help.ubuntu.com/community/Lubuntu/GetLubuntu">Lubuntu installer</a> provides more options during setup <a class="footnote-reference" href="#id11" id="id2">[2]</a>.</p>
 </div>
 <div class="section" id="seabios">
-<h3>2. SeaBIOS</h3>
+<h2>2. SeaBIOS</h2>
 <p><a class="reference external" href="http://www.coreboot.org/SeaBIOS">SeaBIOS</a> in combination with <strong>coreboot</strong> provides an open-source legacy BIOS that enables access to the MBR and the ability to install an alternative OS on the Chromebook. All this good stuff involves jumping through a few simple hoops and not trembling in fear at the &quot;scary white screen&quot; that pops up at power up stating that the boot loader detects something is <strong>very very wrong</strong> with the Chromebook and helpfully suggests pressing the spacebar to begin recovery. <strong>Do not press the spacebar</strong> or the Lubuntu installation will be wiped from disk!</p>
 <p>There are 2 different methods for configuring SeaBIOS in preparation for installing Lubuntu. The first method uses a few simple commands in the Chrome OS shell to place the Chromebook into <strong>developer mode</strong> and allow booting the USB install media and replacing Chrome OS with Lubuntu. The drawback is that scary screen appears at every boot and you must press <tt class="docutils literal">CTRL+L</tt> to boot to legacy-mode and onward to GRUB and Lubuntu (and <strong>ignore</strong> the helpful prompt to press spacebar and inadvertently begin the adventure of wiping clean the SSD).</p>
 <p>The second method involves setting new flags for the write-protected <strong>Google Binary Block</strong> (GBB) in the device firmware. Delay at the boot screen can be reduced to a one second timeout and the legacy-mode BIOS set as the system default (no key combo required). Pressing the spacebar is disabled from doing any harm to Lubuntu (the Chromebook just beeps). The drawback is that it involves the (very simple) removal of the device's bottom cover and the temporary removal of the <strong>write-protect screw</strong> from the motherboard to permit flashing new flags to the GBB... and this may void the Chromebook's warranty (one of the case screws lies underneath a sticker declaring the warranty void if disturbed).</p>
 <p>Experimenting with alternate OS installs on the Chromebook I first employed the developer mode method followed by the write-protect screw removal. I prefer configuring the device to default to legacy-mode BIOS but I have employed both methods successfully and describe their respective steps below.</p>
-<p><strong>No guarantees</strong>, though... Hopefully you enjoy equal success!</p>
-</div>
+<p><strong>No guarantees</strong> though... Hopefully you enjoy equal success!</p>
 <div class="section" id="write-protect-screw-method">
 <h3>2.1 Write-Protect Screw Method</h3>
 <p>Disconnect power. Turn the Chromebook over facing bottom up and remove the 13 screws (not missing the one hidden under the warranty sticker). Gently pry the case off starting with the seam where the display connects to device. It comes away pretty easy.</p>
@@ -111,22 +111,23 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <p>Insert the USB stick prepared in Step 1, reboot the Chromebook and press <tt class="docutils literal">CTRL+L</tt> at the boot screen to enter legacy boot mode.</p>
 <p>Source: <a class="reference external" href="http://www.chromium.org/chromium-os">Chromium OS</a> developer information for the <a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook">Acer C720 Chromebook</a></p>
 </div>
+</div>
 <div class="section" id="install-lubuntu">
-<h3>3. Install Lubuntu</h3>
+<h2>3. Install Lubuntu</h2>
 <p>My <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook-install.html">visual screenshot tour</a> of installing Lubuntu 14.04 - a <a class="reference external" href="https://wiki.ubuntu.com/Releases">Long Term Support (LTS)</a> release.</p>
-<p>The Chromebook's SSD is divided into 3 partitions:</p>
+<p>Chromebook's SSD is divided into 3 partitions:</p>
 <ul class="simple">
-<li>sda1 is a 300MB <tt class="docutils literal">boot</tt> partition</li>
-<li>sda2 is a 512MB LUKS encrypted <tt class="docutils literal">swap</tt> partition using a <strong>random key</strong></li>
+<li>sda1 is a 256MB <tt class="docutils literal">boot</tt> partition</li>
+<li>sda2 is a 1GB LUKS encrypted <tt class="docutils literal">swap</tt> partition using a <strong>random key</strong></li>
 <li>sda3 uses the remaining space as a LUKS encrypted <tt class="docutils literal">root</tt> partition using a <strong>passphrase</strong></li>
 </ul>
 </div>
 <div class="section" id="touchpad">
-<h3>4. Touchpad</h3>
-<p>Lubuntu installs the <tt class="docutils literal">3.13</tt> Linux kernel and does not support the Chromebook's touchpad. Download and install the more recent <tt class="docutils literal">3.17</tt> kernel from <a class="reference external" href="https://wiki.ubuntu.com/Kernel/MainlineBuilds">Ubuntu MainlineBuilds</a> to fix:</p>
-<div class="highlight"><pre><span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-headers-3.17.1-031701-generic_3.17.1-031701.201410150735_amd64.deb
-<span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-headers-3.17.1-031701_3.17.1-031701.201410150735_all.deb
-<span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-image-3.17.1-031701-generic_3.17.1-031701.201410150735_amd64.deb
+<h2>4. Touchpad</h2>
+<p>Lubuntu installs the <tt class="docutils literal">3.13</tt> Linux kernel and does not support the Chromebook's touchpad. Download and install the more recent <tt class="docutils literal">3.19</tt> kernel from <a class="reference external" href="https://wiki.ubuntu.com/Kernel/MainlineBuilds">Ubuntu MainlineBuilds</a> to fix:</p>
+<div class="highlight"><pre><span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19-vivid/linux-headers-3.19.0-031900-generic_3.19.0-031900.201502091451_amd64.deb
+<span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19-vivid/linux-headers-3.19.0-031900_3.19.0-031900.201502091451_all.deb
+<span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19-vivid/linux-image-3.19.0-031900-generic_3.19.0-031900.201502091451_amd64.deb
 <span class="nv">$ </span>sudo dpkg -i linux*.deb
 </pre></div>
 <p>... and reboot.</p>
@@ -135,7 +136,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <span class="nv">$ </span>sudo cp /usr/share/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-c720-touchpad.conf
 </pre></div>
 <p>Modify this file to adjust timeouts, add tap-mouse actions (2-finger tap = right-click, 3-finger tap = middle-click), and 2-finger scrolling.</p>
-<p>My own sample config:</p>
+<p>Sample config:</p>
 <div class="highlight"><pre>Section <span class="s2">&quot;InputClass&quot;</span>
     Identifier      <span class="s2">&quot;touchpad peppy cyapa&quot;</span>
     MatchIsTouchpad <span class="s2">&quot;on&quot;</span>
@@ -156,7 +157,7 @@ EndSection
 <p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/X11/xorg.conf.d/50-c720-touchpad.conf">50-c720-touchpad.conf</a>, and pages for <a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics">Touchpad Synaptics</a> and the <a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration">C720</a> on <a class="reference external" href="https://wiki.archlinux.org/">ArchWiki</a></p>
 </div>
 <div class="section" id="ssd">
-<h3>5. SSD</h3>
+<h2>5. SSD</h2>
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Swappiness">swappiness</a> parameter controls the preference of the kernel to move processes out of physical memory to the swap partition. Range is <tt class="docutils literal"><span class="pre">0-100</span></tt>, default is set to <tt class="docutils literal">60</tt> and lower values cause the kernel to avoid swapping and higher values prompt more frequent swap use.</p>
 <p>Check the current swappiness value:</p>
 <div class="highlight"><pre><span class="nv">$ </span>cat /proc/sys/vm/swappiness
@@ -176,7 +177,7 @@ EndSection
 <p>Source: <a class="reference external" href="http://www.linuxjournal.com/content/solid-state-drives-get-one-already">TRIM configuration on solid-state drives</a></p>
 </div>
 <div class="section" id="suspend">
-<h3>6. Suspend</h3>
+<h2>6. Suspend</h2>
 <p>To enable suspend-and-resume <a class="footnote-reference" href="#id15" id="id7">[6]</a> create <tt class="docutils literal"><span class="pre">/etc/initramfs-tools/scripts/init-top/unbind_ehci</span></tt> with the following:</p>
 <div class="highlight"><pre><span class="nv">PREREQ</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
 
@@ -223,7 +224,7 @@ log_success_msg <span class="s2">&quot;Unbind ehci for preventing error&quot;</s
 <p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/initramfs-tools/scripts/init-top/unbind_ehci">unbind_ehci</a> and <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/udev/rules.d/10_disable-ehci.rules">10_disable-ehci.rules</a>, <a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/ch8eq2o">C720 suspend tips</a>, and <a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/2evv1c/updating_ubuntu_kernel_headers_image_etc/ckaf6hx">configuring grub</a></p>
 </div>
 <div class="section" id="keyboard-shortcuts">
-<h3>7. Keyboard Shortcuts</h3>
+<h2>7. Keyboard Shortcuts</h2>
 <p>Top row on the keyboard with the shortcut icons (brightness, volume, etc.) identify in Linux as the <tt class="docutils literal"><span class="pre">F1-F10</span></tt> keys and the Search key (in the <tt class="docutils literal">CapsLk</tt> position) acts as the <tt class="docutils literal">Super</tt> (Windows) modifier key.</p>
 <p>Create keyboard shortcuts by first installing:</p>
 <ul class="simple">
@@ -234,7 +235,6 @@ log_success_msg <span class="s2">&quot;Unbind ehci for preventing error&quot;</s
 </ul>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xbindkeys xbacklight pulseaudio-utils xvkbd
 </pre></div>
-</div>
 <div class="section" id="direction-brightness-volume-page-keys">
 <h3>7.1 Direction, Brightness, Volume, Page Keys</h3>
 <div class="highlight"><pre><span class="nv">$ </span>xbindkeys -k
@@ -285,10 +285,10 @@ Alt + Right
 <p>Power key in upper-right corner ignores any configuration in the window manager and triggers poweroff without delay when pressed (easy to do by accident as its positioned next to <tt class="docutils literal">backspace</tt>).</p>
 <p>If you want to disable the power key edit <tt class="docutils literal">/etc/systemd/logind.conf</tt> and set <tt class="docutils literal">HandlePowerKey=ignore</tt>.</p>
 </div>
-<div class="section" id="wireless-optional">
-<h3>8. Wireless (optional)</h3>
-<p>There are a few settings to modify if you want to monkey with the Chromebook's wireless chipset to improve performance <a class="footnote-reference" href="#id17" id="id9">[8]</a>.</p>
-<p>To identify the card and parameters:</p>
+</div>
+<div class="section" id="wireless">
+<h2>8. Wireless</h2>
+<p>There are a few settings to modify to improve performance of Chromebook's wireless chipset <a class="footnote-reference" href="#id17" id="id9">[8]</a>. Identify the card and parameters:</p>
 <div class="highlight"><pre><span class="nv">$ </span>lspci | grep -i net
 01:00.0 Network controller: Qualcomm Atheros AR9462 Wireless Network Adapter <span class="o">(</span>rev 01<span class="o">)</span>
 <span class="nv">$ </span>modinfo ath9k | grep parm
@@ -306,7 +306,7 @@ parm:           use_chanctx:Enable channel context <span class="k">for </span>co
 <p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/modprobe.d/ath9k.conf">ath9k.conf</a>, <a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k">ath9k wireless driver</a> and <a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex">bluetooth coexistence</a></p>
 </div>
 <div class="section" id="helpful-resources">
-<h3>9. Helpful Resources</h3>
+<h2>9. Helpful Resources</h2>
 <ul class="simple">
 <li>My personal <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_lubuntubook">Lubuntubook configurations</a></li>
 <li>A few small hacks I like to do to <a class="reference external" href="http://www.circuidipity.com/lubuntu-trusty-hacks.html">make a great OS even better</a></li>
@@ -316,7 +316,6 @@ parm:           use_chanctx:Enable channel context <span class="k">for </span>co
 <li>Turn Chromebooks into <a class="reference external" href="http://blog.codestarter.org/post/93985346780/how-we-turn-199-chromebooks-into-ubuntu-based-code">Ubuntu-based code learning machines for kids</a></li>
 </ul>
 <p>Happy hacking!</p>
-</div>
 <div class="section" id="notes">
 <h3>Notes</h3>
 <table class="docutils footnote" frame="void" id="id10" rules="none">
