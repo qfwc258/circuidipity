@@ -2,9 +2,9 @@
 20 small hacks after installing Lubuntu 14.04
 =============================================
 
+:date: 2014-11-02 00:12:00
 :slug: lubuntu-trusty-hacks
-:template: article-project
-:tags: lubuntu, ubuntu, linux, lxde
+:tags: lubuntu, ubuntu, linux
 :modified: 2014-11-15 01:10:00
 
 .. image:: images/lubuntu_logo.png
@@ -21,7 +21,7 @@ Let's go!
 =========
 
 0. Update kernel
-----------------
+================
 
 Lubuntu installs the **3.13** Linux kernel which may have incomplete hardware support for newer devices like the `Acer C720 Chromebook <http://www.circuidipity.com/c720-lubuntubook.html>`_.
 
@@ -37,7 +37,7 @@ Lubuntu installs the **3.13** Linux kernel which may have incomplete hardware su
 ... and reboot.
 
 1. Screen lock
---------------
+==============
 
 The **light-locker** screen utility locks the screen when the system has been idle for several minutes regardless of user-defined preferences.
 
@@ -58,7 +58,7 @@ Sample ``Exec`` line that locks screen when system-suspend is activated:
 Source: `Lubuntu enforces screen lock <http://askubuntu.com/questions/502942/lubuntu-enforces-screen-lock>`_
 
 2. Editor
----------
+=========
 
 Install full-version of **vim** text editor and make it the default system editor:
 
@@ -93,12 +93,12 @@ Create ``$HOME/.Xresources`` and set terminal options for fonts, colours, etc.
 Source: `.Xresources (github.com/vonbrownie) <https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.Xresources>`_
 
 4. SSH keys
------------
+===========
 
-See `Ping Parade #2 -- Keys <http://www.circuidipity.com/pingparade2.html>`_ for configuring OpenSSH and generating SSH keys for a Lubuntu installation.
+See `Secure remote access using SSH keys <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_ for configuring OpenSSH and generating SSH keys for a Lubuntu installation.
 
 5. Media player
----------------
+===============
 
 Install multimedia codecs and the awesome **vlc** media player:
 
@@ -107,7 +107,7 @@ Install multimedia codecs and the awesome **vlc** media player:
     $ sudo apt-get install ubuntu-restricted-extras vlc
 
 6. Java Runtime Environment
----------------------------
+===========================
 
 Install a **JRE** (default is ``openjdk-7-jre``):
 
@@ -116,7 +116,7 @@ Install a **JRE** (default is ``openjdk-7-jre``):
     $ sudo apt-get install default-jre
 
 7. $HOME/bin
-------------
+============
 
 Create a directory to hold personal scripts that will be added to ``$PATH``:
 
@@ -125,7 +125,7 @@ Create a directory to hold personal scripts that will be added to ``$PATH``:
     $ mkdir ~/bin
 
 8. Applications menu
---------------------
+====================
 
 **Dmenu** is a menu that can be activated by keyboard shortcut and dynamically narrow the choice of available applications as you type. Part of the **suckless-tools** package:
 
@@ -143,10 +143,10 @@ Create ``dmenu-run.sh`` shell script to generate a menu. Example:
 
 ... and place in ``$HOME/bin``.
 
-Source: `dmenu-run.sh (github.com/vonbrownie) <https://github.com/vonbrownie/linux-home-bin/blob/master/dmenu-run.sh>`_
+Source: `dmenu-run.sh <https://github.com/vonbrownie/linux-home-bin/blob/master/dmenu-run.sh>`_
 
 9. Keyboard shortcuts
----------------------
+=====================
 
 Create shortcuts in ``$HOME/.config/openbox/lubuntu-rc.xml``. Example for launching ``dmenu`` with key combo ``ALT-A``:
 
@@ -159,10 +159,10 @@ Create shortcuts in ``$HOME/.config/openbox/lubuntu-rc.xml``. Example for launch
       </action>
     </keybind>
 
-Source: `lubuntu-rc.xml (github.com/vonbrownie) <https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-rc.xml>`_
+Source: `lubuntu-rc.xml <https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-rc.xml>`_
 
 10. Custom application launchers
---------------------------------
+================================
 
 Create ``*.desktop`` files with custom options to launch applications. Make a custom ``*.desktop`` system-wide location:
 
@@ -184,9 +184,8 @@ A sample ``rxvt-unicode-custom.desktop`` launcher contains:
     Type=Application
     Categories=Utility;TerminalEmulator;
 
-
 11. Terminate frozen applications
----------------------------------
+=================================
 
 **Xkill** is a utility for terminating misbehaving X applications. When activated it displays a crosshair cursor that can be maneuvered in place and a click kills the client app that lies beneath.
  
@@ -205,12 +204,12 @@ A sample ``/usr/local/share/applications/xkill-custom.desktop`` launcher:
 Save file and the item will appear under Lubuntu's ``Menu->System Tools``.
  
 12. Favourites panel
---------------------
+====================
 
 Right-click on the LXDE panel and select ``Create new panel`` to create an extra panel to hold favourite application launchers. Panel configs are store in ``$HOME/.config/lxpanel/Lubuntu/panels``.
 
 13. Customize the theme
------------------------
+=======================
 
 .. image:: images/screenshot/lubuntu-1404-numix-desktop.png
     :align: center
@@ -229,12 +228,12 @@ Choose an alternative theme for the Lubuntu desktop. I like `Numix <https://numi
 Select the new theme in ``Menu->Preferences->Customize Look and Feel`` [1]_.
 
 14. Dual display
-----------------
+================
 
 See `Dual display configuration in Lubuntu <http://www.circuidipity.com/20141110.html>`_ for configuring LXDE to auto-detect at login if a second display is attached and make the necessary adjustments.
 
 15. Custom login wallpaper
---------------------------
+==========================
 
 Login window is managed by **lightdm-gtk-greeter**. To set a new background image for the login window:
 
@@ -250,12 +249,12 @@ Edit ``/etc/lightdm/lightdm-gtk-greeter.conf`` and configure the new background:
     background=/usr/local/share/wallpapers/my_new_login_image.jpg
 
 16. Auto-mount external drives at startup
------------------------------------------
+=========================================
 
 See `Add USB storage to Chromebooks <http://www.circuidipity.com/20141031.html>`_ for an example scenario.
 
 17. Display GRUB Menu at boot
------------------------------
+=============================
 
 Comment out the ``GRUB_HIDDEN*`` settings in ``/etc/default/grub``:
 
@@ -273,8 +272,8 @@ Update the GRUB configuration with the new settings:
 ... and reboot.
 
 18. Custom GRUB colours and splash image
-----------------------------------------
-                                   
+========================================
+
 Create ``/boot/grub/custom.cfg`` and set custom GRUB menu colours. Example settings: 
       
 .. code-block:: bash
@@ -298,7 +297,7 @@ Update GRUB:
 ... and reboot.
 
 19. Pop-up menu
----------------
+===============
 
 See `Pop-up custom menu in LXDE <http://www.circuidipity.com/20141115.html>`_ to create a hotkey-activated menu for favourite functions and applications.
 
