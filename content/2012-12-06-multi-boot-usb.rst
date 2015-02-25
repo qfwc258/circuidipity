@@ -3,9 +3,9 @@ Transform a USB stick into a boot device packing multiple Linux distros
 =======================================================================
 
 :date: 2012-12-06 01:23:00
-:tags: gparted, ubuntu, dban, debian, linux, shell
+:tags: linux, shell, ubuntu, debian
 :slug: multi-boot-usb
-:modified: 2014-11-25 00:43:00
+:modified: 2015-02-25 16:53:00
 
 In 5 easy steps I transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.
 
@@ -13,11 +13,11 @@ In 5 easy steps I transform a standard USB stick into a dual-purpose device that
 
 :warning:`WARNING!` In this HOWTO the USB stick is identified as **sdX** and contains a single partition **sdX1**. Make careful note of the drive and partition labels on your system. The following steps will **destroy all data** currently stored on the device.
 
-To boot Linux distro images using GRUB:
-=======================================
+Let's go!
+=========
 
 0. Select device and create filesystem
---------------------------------------
+======================================
 
 Create a ``FAT32`` partition on the unmounted USB stick:
 
@@ -26,13 +26,13 @@ Create a ``FAT32`` partition on the unmounted USB stick:
     $ sudo mkfs.vfat -n multiboot /dev/sdX1
 
 1. Create boot and iso folders
-------------------------------
+==============================
 
-The new ``FAT32`` partition is mounted and I create a ``boot`` folder for GRUB and a ``iso`` folder to hold my Linux distro images:
+The new ``FAT32`` partition is mounted and I create a ``boot`` folder for GRUB and a ``iso`` folder to hold Linux distro images. Example using ``/media/my_username`` as the mountpoint:
 
 .. code-block:: bash
 
-    $ cd MOUNTPOINT
+    $ cd /media/my_username
     $ mkdir boot iso
 
 2. Install GRUB
@@ -42,7 +42,7 @@ Install GRUB to the **Master Boot Record (MBR)** of the USB stick:
 
 .. code-block:: bash
 
-    $ sudo grub-install --force --no-floppy --boot-directory=MOUNTPOINT/boot /dev/sdX
+    $ sudo grub-install --force --no-floppy --boot-directory=/media/my_username/boot /dev/sdX
 
 3. Copy Linux images
 --------------------
@@ -135,7 +135,7 @@ Create a ``grub.cfg`` with entries for the Linux images copied to the USB stick.
         linux16 /boot/memtest86+-4.20.bin
     }
 
-Save ``grub.cfg`` to the USB stick at ``MOUNTPOINT/boot/grub``.
+Save ``grub.cfg`` to the USB stick at ``/media/my_username/boot/grub``.
 
 All done! Reboot, select the USB stick (depending on BIOS settings) as boot device and GRUB will display a menu of the installed Linux distro images. Reboot again and return to using your USB stick as a regular storage device.
 
