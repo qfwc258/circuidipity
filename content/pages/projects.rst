@@ -33,7 +33,7 @@ Projects
 .. raw:: html
 
     <div class="projectx">
-        <h2>Chromebook to Lubuntubook</h2>
-        <p>Replace Chrome OS with Lubuntu Linux on the <a href="c720-lubuntubook.html">Acer C720 Chromebook...</a></p>
+        <h2>Chromebook to (L)ubuntubook</h2>
+        <p>Replace Chrome OS with full-featured Linux on the <a href="c720-lubuntubook.html">Acer C720 Chromebook...</a></p>
         <p style="clear:both;"></p>
     </div>
