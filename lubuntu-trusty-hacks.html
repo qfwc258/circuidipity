@@ -19,7 +19,8 @@
 <!-- breadcrumb trail -->
 <div id="breadcrumb">
     <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
-    <a href="projects.html">Projects</a></p>
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Sunday 02 November 2014</p>
 </div>
 
 <!-- article -->
@@ -31,8 +32,9 @@
 <p>Here are a few small hacks I like to do to make a great OS even better. Modifications are made on a <a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html">fresh install of Lubuntu 14.04</a>, which is a <em>Long Term Support</em> (LTS) release (till April 2017).</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
+</div>
 <div class="section" id="update-kernel">
-<h3>0. Update kernel</h3>
+<h2>0. Update kernel</h2>
 <p>Lubuntu installs the <strong>3.13</strong> Linux kernel which may have incomplete hardware support for newer devices like the <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Acer C720 Chromebook</a>.</p>
 <p><strong>Fix:</strong> Download and install a more recent kernel from <a class="reference external" href="https://wiki.ubuntu.com/Kernel/MainlineBuilds">Ubuntu MainlineBuilds</a>. An example using the <strong>3.17</strong> kernel:</p>
 <div class="highlight"><pre><span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.17.1-utopic/linux-headers-3.17.1-031701-generic_3.17.1-031701.201410150735_amd64.deb
@@ -43,7 +45,7 @@
 <p>... and reboot.</p>
 </div>
 <div class="section" id="screen-lock">
-<h3>1. Screen lock</h3>
+<h2>1. Screen lock</h2>
 <p>The <strong>light-locker</strong> screen utility locks the screen when the system has been idle for several minutes regardless of user-defined preferences.</p>
 <p><strong>Fix:</strong> Disable system-wide screen locking:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.bak
@@ -55,7 +57,7 @@
 <p>Source: <a class="reference external" href="http://askubuntu.com/questions/502942/lubuntu-enforces-screen-lock">Lubuntu enforces screen lock</a></p>
 </div>
 <div class="section" id="editor">
-<h3>2. Editor</h3>
+<h2>2. Editor</h2>
 <p>Install full-version of <strong>vim</strong> text editor and make it the default system editor:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install vim tmux
 <span class="nv">$ </span>sudo update-alternatives --config editor
@@ -71,7 +73,6 @@ There are 4 choices <span class="k">for </span>the alternative editor <span clas
 
 Press enter to keep the current choice<span class="o">[</span>*<span class="o">]</span>, or <span class="nb">type </span>selection number:
 </pre></div>
-</div>
 <div class="section" id="terminal">
 <h3>3. Terminal</h3>
 <p>Substitute lxterminal with <strong>rxvt-unicode</strong> + <a class="reference external" href="http://www.circuidipity.com/tmux.html">tmux</a> terminal multi-plexer and make <strong>urxvt</strong> the default terminal:</p>
@@ -81,30 +82,31 @@ Press enter to keep the current choice<span class="o">[</span>*<span class="o">]
 <p>Create <tt class="docutils literal"><span class="pre">$HOME/.Xresources</span></tt> and set terminal options for fonts, colours, etc.</p>
 <p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.Xresources">.Xresources (github.com/vonbrownie)</a></p>
 </div>
+</div>
 <div class="section" id="ssh-keys">
-<h3>4. SSH keys</h3>
-<p>See <a class="reference external" href="http://www.circuidipity.com/pingparade2.html">Ping Parade #2 -- Keys</a> for configuring OpenSSH and generating SSH keys for a Lubuntu installation.</p>
+<h2>4. SSH keys</h2>
+<p>See <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">Secure remote access using SSH keys</a> for configuring OpenSSH and generating SSH keys for a Lubuntu installation.</p>
 </div>
 <div class="section" id="media-player">
-<h3>5. Media player</h3>
+<h2>5. Media player</h2>
 <p>Install multimedia codecs and the awesome <strong>vlc</strong> media player:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install ubuntu-restricted-extras vlc
 </pre></div>
 </div>
 <div class="section" id="java-runtime-environment">
-<h3>6. Java Runtime Environment</h3>
+<h2>6. Java Runtime Environment</h2>
 <p>Install a <strong>JRE</strong> (default is <tt class="docutils literal"><span class="pre">openjdk-7-jre</span></tt>):</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install default-jre
 </pre></div>
 </div>
 <div class="section" id="home-bin">
-<h3>7. $HOME/bin</h3>
+<h2>7. $HOME/bin</h2>
 <p>Create a directory to hold personal scripts that will be added to <tt class="docutils literal">$PATH</tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>mkdir ~/bin
 </pre></div>
 </div>
 <div class="section" id="applications-menu">
-<h3>8. Applications menu</h3>
+<h2>8. Applications menu</h2>
 <p><strong>Dmenu</strong> is a menu that can be activated by keyboard shortcut and dynamically narrow the choice of available applications as you type. Part of the <strong>suckless-tools</strong> package:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install suckless-tools
 </pre></div>
@@ -114,10 +116,10 @@ dmenu_run -b -i -fn <span class="s1">&#39;10x20&#39;</span> <span class="se">\</
     -nb <span class="s1">&#39;#000000&#39;</span> -nf <span class="s1">&#39;#ffffff&#39;</span> -sb <span class="s1">&#39;#d64937&#39;</span> -sf <span class="s1">&#39;#000000&#39;</span>
 </pre></div>
 <p>... and place in <tt class="docutils literal">$HOME/bin</tt>.</p>
-<p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dmenu-run.sh">dmenu-run.sh (github.com/vonbrownie)</a></p>
+<p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dmenu-run.sh">dmenu-run.sh</a></p>
 </div>
 <div class="section" id="keyboard-shortcuts">
-<h3>9. Keyboard shortcuts</h3>
+<h2>9. Keyboard shortcuts</h2>
 <p>Create shortcuts in <tt class="docutils literal"><span class="pre">$HOME/.config/openbox/lubuntu-rc.xml</span></tt>. Example for launching <tt class="docutils literal">dmenu</tt> with key combo <tt class="docutils literal"><span class="pre">ALT-A</span></tt>:</p>
 <div class="highlight"><pre>&lt;!-- Keybindings <span class="k">for </span>running Run menu --&gt;
 &lt;keybind <span class="nv">key</span><span class="o">=</span><span class="s2">&quot;A-a&quot;</span>&gt;
@@ -126,10 +128,10 @@ dmenu_run -b -i -fn <span class="s1">&#39;10x20&#39;</span> <span class="se">\</
   &lt;/action&gt;
 &lt;/keybind&gt;
 </pre></div>
-<p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-rc.xml">lubuntu-rc.xml (github.com/vonbrownie)</a></p>
+<p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-rc.xml">lubuntu-rc.xml</a></p>
 </div>
 <div class="section" id="custom-application-launchers">
-<h3>10. Custom application launchers</h3>
+<h2>10. Custom application launchers</h2>
 <p>Create <tt class="docutils literal">*.desktop</tt> files with custom options to launch applications. Make a custom <tt class="docutils literal">*.desktop</tt> system-wide location:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /usr/local/share/applications
 </pre></div>
@@ -146,7 +148,7 @@ dmenu_run -b -i -fn <span class="s1">&#39;10x20&#39;</span> <span class="se">\</
 </pre></div>
 </div>
 <div class="section" id="terminate-frozen-applications">
-<h3>11. Terminate frozen applications</h3>
+<h2>11. Terminate frozen applications</h2>
 <p><strong>Xkill</strong> is a utility for terminating misbehaving X applications. When activated it displays a crosshair cursor that can be maneuvered in place and a click kills the client app that lies beneath.</p>
 <p>A sample <tt class="docutils literal"><span class="pre">/usr/local/share/applications/xkill-custom.desktop</span></tt> launcher:</p>
 <div class="highlight"><pre><span class="o">[</span>Desktop Entry<span class="o">]</span>
@@ -160,11 +162,11 @@ dmenu_run -b -i -fn <span class="s1">&#39;10x20&#39;</span> <span class="se">\</
 <p>Save file and the item will appear under Lubuntu's <tt class="docutils literal"><span class="pre">Menu-&gt;System</span> Tools</tt>.</p>
 </div>
 <div class="section" id="favourites-panel">
-<h3>12. Favourites panel</h3>
+<h2>12. Favourites panel</h2>
 <p>Right-click on the LXDE panel and select <tt class="docutils literal">Create new panel</tt> to create an extra panel to hold favourite application launchers. Panel configs are store in <tt class="docutils literal"><span class="pre">$HOME/.config/lxpanel/Lubuntu/panels</span></tt>.</p>
 </div>
 <div class="section" id="customize-the-theme">
-<h3>13. Customize the theme</h3>
+<h2>13. Customize the theme</h2>
 <img alt="Lubuntu desktop" class="align-center" src="images/screenshot/lubuntu-1404-numix-desktop.png" style="width: 900px; height: 506px;" />
 <p>Choose an alternative theme for the Lubuntu desktop. I like <a class="reference external" href="https://numixproject.org/">Numix</a>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo add-apt-repository ppa:numix/ppa
@@ -174,11 +176,11 @@ dmenu_run -b -i -fn <span class="s1">&#39;10x20&#39;</span> <span class="se">\</
 <p>Select the new theme in <tt class="docutils literal"><span class="pre">Menu-&gt;Preferences-&gt;Customize</span> Look and Feel</tt> <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
 </div>
 <div class="section" id="dual-display">
-<h3>14. Dual display</h3>
+<h2>14. Dual display</h2>
 <p>See <a class="reference external" href="http://www.circuidipity.com/20141110.html">Dual display configuration in Lubuntu</a> for configuring LXDE to auto-detect at login if a second display is attached and make the necessary adjustments.</p>
 </div>
 <div class="section" id="custom-login-wallpaper">
-<h3>15. Custom login wallpaper</h3>
+<h2>15. Custom login wallpaper</h2>
 <p>Login window is managed by <strong>lightdm-gtk-greeter</strong>. To set a new background image for the login window:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /usr/local/share/wallpapers
 <span class="nv">$ </span>sudo cp my_new_login_image.jpg /usr/local/share/wallpapers
@@ -188,11 +190,11 @@ dmenu_run -b -i -fn <span class="s1">&#39;10x20&#39;</span> <span class="se">\</
 </pre></div>
 </div>
 <div class="section" id="auto-mount-external-drives-at-startup">
-<h3>16. Auto-mount external drives at startup</h3>
+<h2>16. Auto-mount external drives at startup</h2>
 <p>See <a class="reference external" href="http://www.circuidipity.com/20141031.html">Add USB storage to Chromebooks</a> for an example scenario.</p>
 </div>
 <div class="section" id="display-grub-menu-at-boot">
-<h3>17. Display GRUB Menu at boot</h3>
+<h2>17. Display GRUB Menu at boot</h2>
 <p>Comment out the <tt class="docutils literal">GRUB_HIDDEN*</tt> settings in <tt class="docutils literal">/etc/default/grub</tt>:</p>
 <div class="highlight"><pre><span class="c">#GRUB_HIDDEN_TIMEOUT=0</span>
 <span class="c">#GRUB_HIDDEN_TIMEOUT_QUIET=true</span>
@@ -203,7 +205,7 @@ dmenu_run -b -i -fn <span class="s1">&#39;10x20&#39;</span> <span class="se">\</
 <p>... and reboot.</p>
 </div>
 <div class="section" id="custom-grub-colours-and-splash-image">
-<h3>18. Custom GRUB colours and splash image</h3>
+<h2>18. Custom GRUB colours and splash image</h2>
 <p>Create <tt class="docutils literal">/boot/grub/custom.cfg</tt> and set custom GRUB menu colours. Example settings:</p>
 <div class="highlight"><pre><span class="nb">set </span><span class="nv">color_normal</span><span class="o">=</span>yellow/black
 <span class="nb">set </span><span class="nv">menu_color_normal</span><span class="o">=</span>yellow/black
@@ -218,10 +220,9 @@ dmenu_run -b -i -fn <span class="s1">&#39;10x20&#39;</span> <span class="se">\</
 <p>... and reboot.</p>
 </div>
 <div class="section" id="pop-up-menu">
-<h3>19. Pop-up menu</h3>
+<h2>19. Pop-up menu</h2>
 <p>See <a class="reference external" href="http://www.circuidipity.com/20141115.html">Pop-up custom menu in LXDE</a> to create a hotkey-activated menu for favourite functions and applications.</p>
 <p>Happy hacking!</p>
-</div>
 <div class="section" id="notes">
 <h3>Notes</h3>
 <table class="docutils footnote" frame="void" id="id2" rules="none">
@@ -236,7 +237,6 @@ dmenu_run -b -i -fn <span class="s1">&#39;10x20&#39;</span> <span class="se">\</
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-lubuntu.html">lubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-lxde.html">lxde</a>
 </p>
 </div>
 

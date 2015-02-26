@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Chromebook to Lubuntubook</title>
+        <title>Circuidipity | Chromebook to (L)ubuntubook</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -23,12 +23,13 @@
 </div>
 
 <!-- article -->
-<h1>Chromebook to Lubuntubook</h1>
+<h1>Chromebook to (L)ubuntubook</h1>
     <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Wednesday 25 February 2015</p>
 <div id="article">
-    <p>Replace <strong>Chrome OS</strong> permanently with <strong>Lubuntu 14.04 LTS Linux</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
+    <p><strong>Update:</strong> Switched to Ubuntu's default <strong>Unity</strong> desktop. Modification steps remain the same. <tt class="docutils literal"><span class="pre">(2015-02-25)</span></tt></p>
+<p>Replace <strong>Chrome OS</strong> permanently with <strong>(L)ubuntu 14.04 LTS Linux</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
 <img alt="Acer C720 Lubuntubook" class="align-right" src="images/c720-lubuntubook.png" style="width: 300px; height: 157px;" />
-<p>Running a <a class="reference external" href="http://lubuntu.net/">full-featured Linux</a> on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance using the <strong>LXDE</strong> desktop.</p>
+<p>Running a <strong>full-featured Linux</strong> on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance using the LXDE desktop.</p>
 <p>This device is available in a few different configurations. Mine is the non-touchscreen model <strong>C720-2848</strong> with (non-expandable) <strong>2GB RAM</strong> and a (user-replaceable) <strong>16GB SSD</strong> <a class="footnote-reference" href="#id10" id="id1">[1]</a>.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
@@ -115,9 +116,10 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <div class="section" id="install-lubuntu">
 <h2>3. Install Lubuntu</h2>
 <p>My <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook-install.html">visual screenshot tour</a> of installing Lubuntu 14.04 - a <a class="reference external" href="https://wiki.ubuntu.com/Releases">Long Term Support (LTS)</a> release.</p>
-<p>Chromebook's SSD is divided into 3 partitions:</p>
+<p><strong>Alternative:</strong> At the <tt class="docutils literal">tasksel</tt> stage select a different desktop: Ubuntu (Unity), Xubuntu, etc.</p>
+<p>Chromebook's SSD will be divided into 3 partitions:</p>
 <ul class="simple">
-<li>sda1 is a 256MB <tt class="docutils literal">boot</tt> partition</li>
+<li>sda1 is a 300MB <tt class="docutils literal">boot</tt> partition</li>
 <li>sda2 is a 1GB LUKS encrypted <tt class="docutils literal">swap</tt> partition using a <strong>random key</strong></li>
 <li>sda3 uses the remaining space as a LUKS encrypted <tt class="docutils literal">root</tt> partition using a <strong>passphrase</strong></li>
 </ul>
@@ -309,7 +311,6 @@ parm:           use_chanctx:Enable channel context <span class="k">for </span>co
 <h2>9. Helpful Resources</h2>
 <ul class="simple">
 <li>My personal <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_lubuntubook">Lubuntubook configurations</a></li>
-<li>A few small hacks I like to do to <a class="reference external" href="http://www.circuidipity.com/lubuntu-trusty-hacks.html">make a great OS even better</a></li>
 <li><a class="reference external" href="https://github.com/liangcj/AcerC720CrunchBang">CrunchBang Linux</a> on the Acer C720</li>
 <li>Arch Linux <a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook">C720 installation with useful post-install details</a></li>
 <li>Ongoing <a class="reference external" href="http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/">discussion thread about configuring Chromebooks</a></li>
