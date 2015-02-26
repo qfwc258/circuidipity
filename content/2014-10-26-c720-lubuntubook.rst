@@ -8,7 +8,7 @@ Chromebook to (L)ubuntubook
 :tags: chromebook, lubuntu, ubuntu, linux
 :modified: 2015-02-25 18:30:00
 
-**Update (2015-02-25):** Switched to Ubuntu's default **Unity** desktop. Modification steps remain the same.
+**Update:** Switched to Ubuntu's default **Unity** desktop. Modification steps remain the same. ``(2015-02-25)``
 
 Replace **Chrome OS** permanently with **(L)ubuntu 14.04 LTS Linux** on the **Acer C720 Chromebook**.
 
@@ -144,7 +144,7 @@ My `visual screenshot tour <http://www.circuidipity.com/c720-lubuntubook-install
 
 Chromebook's SSD will be divided into 3 partitions:
 
-* sda1 is a 256MB ``boot`` partition 
+* sda1 is a 300MB ``boot`` partition 
 * sda2 is a 1GB LUKS encrypted ``swap`` partition using a **random key**
 * sda3 uses the remaining space as a LUKS encrypted ``root`` partition using a **passphrase**
 
