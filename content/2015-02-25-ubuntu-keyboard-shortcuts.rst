@@ -6,7 +6,13 @@ Ubuntu Keyboard Shortcuts
 :slug: ubuntu-keyboard-shortcuts
 :tags: ubuntu, linux
 
-I am exploring **keyboard shortcuts** to improve workflow efficiency and happy to discover that Ubuntu's **Unity** desktop is configured very keyboard-friendly by default. Below are the Ubuntu/application key combos that I find most useful...
+.. image:: images/logo-ubuntu_cof-white_orange-hex-4.png
+    :align: right
+    :alt: Ubuntu
+    :width: 214px
+    :height: 214px
+
+I am exploring **keyboard shortcuts** to improve workflow efficiency and happy to discover that Ubuntu's **Unity** desktop is configured very keyboard-friendly by default. Here are the Ubuntu/application key combos that I find most useful...
 
 Launcher
 ========
