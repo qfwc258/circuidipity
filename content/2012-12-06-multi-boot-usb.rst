@@ -5,7 +5,7 @@ Transform a USB stick into a boot device packing multiple Linux distros
 :date: 2012-12-06 01:23:00
 :tags: linux, shell, ubuntu, debian
 :slug: multi-boot-usb
-:modified: 2015-02-25 16:53:00
+:modified: 2015-02-26 20:53:00
 
 In 5 easy steps I transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.
 
@@ -23,25 +23,25 @@ Create a ``FAT32`` partition on the unmounted USB stick:
 
 .. code-block:: bash
 
-    $ sudo mkfs.vfat -n multiboot /dev/sdX1
+    $ sudo mkfs.vfat -n MULTIBOOT /dev/sdX1
 
 1. Create boot and iso folders
 ==============================
 
-The new ``FAT32`` partition is mounted and I create a ``boot`` folder for GRUB and a ``iso`` folder to hold Linux distro images. Example using ``/media/my_username`` as the mountpoint:
+New ``FAT32`` partition is mounted and I create a ``boot`` folder for GRUB and a ``iso`` folder to hold Linux distro images. Example using ``/media/USB0`` as mountpoint:
 
 .. code-block:: bash
 
-    $ cd /media/my_username
-    $ mkdir boot iso
+    $ mkdir /media/USB0/{boot,iso}
 
 2. Install GRUB
 ===============
+
 Install GRUB to the **Master Boot Record (MBR)** of the USB stick:
 
 .. code-block:: bash
 
-    $ sudo grub-install --force --no-floppy --boot-directory=/media/my_username/boot /dev/sdX
+    $ sudo grub-install --force --no-floppy --root-directory=/media/USB0 /dev/sdX
 
 3. Copy Linux images
 ====================
@@ -136,12 +136,12 @@ Create a ``grub.cfg`` with entries for the Linux images copied to the USB stick.
 
 Save ``grub.cfg`` to the USB stick at ``/media/my_username/boot/grub``.
 
-All done! Reboot, select the USB stick (depending on BIOS settings) as boot device and GRUB will display a menu of the installed Linux distro images. Reboot again and return to using your USB stick as a regular storage device.
+All done! Reboot, select the USB stick (depends on BIOS) as boot device and GRUB will display a menu of the installed Linux distro images. Reboot again and return to using your USB stick as a regular storage device.
 
-GRUBS Reanimated USB Boot Stick
-===============================
+5. GRUBS Reanimated USB Boot Stick
+==================================
 
-I made a Bash script called `GRUBS <https://github.com/vonbrownie/grubs>`_ that creates multi-boot Linux USB sticks using the above steps and placed it on `GitHub <https://github.com/vonbrownie/grubs>`_.
+I made the `'GRUBS' shell script <https://github.com/vonbrownie/grubs>`_ that creates multi-boot Linux USB sticks using the above steps and placed it on `GitHub <https://github.com/vonbrownie/grubs>`_.
 
 Happy hacking!
 
