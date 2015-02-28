@@ -26,12 +26,12 @@
 <!-- article -->
 <h1>A bit of unplanned Grub2 surgery</h1>
 <div id="article">
-    <p>PROBLEM: Late night experiments <a class="reference external" href="http://www.circuidipity.com/grubs.html">loading GRUB on USB sticks</a> resulted in mucking up Grub on my <strong>primary</strong> machine. After a reboot instead of a boot menu I was greeted with:</p>
+    <p><strong>PROBLEM:</strong> Late night experiments <a class="reference external" href="http://www.circuidipity.com/grubs.html">loading GRUB on USB sticks</a> resulted in mucking up Grub on my <strong>primary</strong> machine. After a reboot instead of a boot menu I was greeted with:</p>
 <div class="highlight"><pre>grub &gt;
 </pre></div>
 <p>Whoops.</p>
-<p>My Ubuntubook is running Ubuntu 14.04 LTS with a boot partition on <tt class="docutils literal">sda1</tt>, LUKS-encrypted root on <tt class="docutils literal">sda3</tt>, and the <tt class="docutils literal">3.19.0</tt> Linux kernel. Since the boot loader hadn't fallen into rescue mode there was hope that the essential stuff was in place but for some reason the config was not being read. A quick <tt class="docutils literal">ls</tt> in the Grub shell confirmed that <tt class="docutils literal">/boot/grub/grub.cfg</tt>, kernels, initrd were present.</p>
-<p>FIX: After a few tries I found the right parameters for a manual boot... specifically <tt class="docutils literal"><span class="pre">root=/dev/mapper/sda3_crypt</span></tt> NOT <tt class="docutils literal"><span class="pre">root=/dev/sda3</span></tt>:</p>
+<p>Ubuntubook is running Ubuntu 14.04 LTS with a boot partition on <tt class="docutils literal">sda1</tt>, LUKS-encrypted root on <tt class="docutils literal">sda3</tt>, and the <tt class="docutils literal">3.19.0</tt> Linux kernel. Since the boot loader hadn't fallen into rescue mode there was hope that the essential stuff was in place but for some reason the config was not being read. A quick <tt class="docutils literal">ls</tt> in the Grub shell confirmed that <tt class="docutils literal">/boot/grub/grub.cfg</tt>, kernels, initrd files were present.</p>
+<p><strong>FIX:</strong> After a few tries I found the right parameters for a manual boot... specifically <tt class="docutils literal"><span class="pre">root=/dev/mapper/sda3_crypt</span></tt> NOT <tt class="docutils literal"><span class="pre">root=/dev/sda3</span></tt>:</p>
 <div class="highlight"><pre>grub&gt; linux <span class="o">(</span>hd0,1<span class="o">)</span>/vmlinuz-3.19.0-031900-generic <span class="nv">root</span><span class="o">=</span>/dev/mapper/sda3_crypt ro
 grub&gt; initrd <span class="o">(</span>hd0,1<span class="o">)</span>/initrd.img-3.19.0-031900-generic
 grub&gt; boot
