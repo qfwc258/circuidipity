@@ -18,7 +18,7 @@ Using ``tmux`` I can create terminal sessions with a custom layout of windows / 
 
 **Example:** I can ``ssh`` into my `home server <http://www.circuidipity.com/raspberry-pi-home-server.html>`_, start a ``tmux`` session and create multiple windows, run `rtorrent <http://libtorrent.rakshasa.no/>`_ in a window to start seeding a Linux ``iso``, detach from session and server, and return later to find everything in place and the ``iso`` uploading.
 
-**To install:** On Debian-powered distros run:
+**To install:** On Ubuntu/Debian:
 
 .. code-block:: bash
 
