@@ -25,11 +25,12 @@
 
 <!-- article -->
 <h1>PHP + Nginx + PostgreSQL</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Wednesday 11 February 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 01 March 2015</p>
 <div id="article">
-    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #6 &gt;&gt;</a> As a requirement to host web applications like <a class="reference external" href="http://www.circuidipity.com/ttrss.html">Tiny Tiny RSS</a> on my Raspberry Pi I install <strong>PHP</strong>, the lightweight web server <strong>Nginx</strong>, and the <strong>PostgreSQL</strong> database.</p>
+    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #6 .:</a> As a requirement to host web applications like <a class="reference external" href="http://www.circuidipity.com/ttrss.html">Tiny Tiny RSS</a> on my Raspberry Pi I install <strong>PHP</strong>, the lightweight web server <strong>Nginx</strong>, and the <strong>PostgreSQL</strong> database.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
+<p><strong>Server</strong> is a <a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html">Raspberry Pi 2</a> running Ubuntu 14.04 LTS located at ip address <tt class="docutils literal">192.168.1.88</tt>.</p>
 </div>
 <div class="section" id="php">
 <h2>0. PHP</h2>
@@ -50,62 +51,65 @@
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install nginx
 <span class="nv">$ </span>sudo service nginx start
 </pre></div>
-<p>To verify that the web server is running, open a browser and navigate to <tt class="docutils literal"><span class="pre">http://your.raspberry.ip.address</span></tt>. If you see <tt class="docutils literal">Welcome to nginx!</tt> the server is installed correctly.</p>
+<p>To verify that the web server is running, open a browser and navigate to (example) <tt class="docutils literal"><span class="pre">http://192.168.1.88</span></tt>. If you see <tt class="docutils literal">Welcome to nginx!</tt> the server is installed correctly.</p>
 </div>
 <div class="section" id="host-multiple-domains">
 <h2>2. Host multiple domains</h2>
 <p>Nginx is capable of serving up multiple web domains or <strong>server blocks</strong> (virtual hosts) from the same server:</p>
 <ul class="simple">
-<li>block content is placed in subfolders located in <tt class="docutils literal">/usr/share/nginx/www</tt></li>
+<li>block content is placed in subfolders located in <tt class="docutils literal">/usr/share/nginx/html</tt></li>
 <li>configuration in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available</span></tt></li>
 <li>a server block is made active by setting a symbolic link in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-enabled</span></tt> to its config file</li>
 </ul>
 <p>When combined with a <a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html">free DDNS service</a> (I like <a class="reference external" href="http://duckdns.org/">duckdns.org</a>) multiple custom domains can be hosted on a home server.</p>
-<p>Steps to create a sample <tt class="docutils literal">myHomePi</tt> server block to host <tt class="docutils literal">www.myhomepi.com</tt>:</p>
+<p>Example: create a sample <tt class="docutils literal">my2pi</tt> server block to host <tt class="docutils literal">www.my2pi.com</tt>:</p>
 <div class="section" id="cname">
 <h3>2.1 CNAME</h3>
-<p>Create a new <strong>CNAME</strong> record at the domain registrar to redirect (example) <tt class="docutils literal">www.myhomepi.com</tt> to <tt class="docutils literal">myhomepi.duckdns.org</tt>.</p>
+<p>Create a new <strong>CNAME</strong> record at the domain registrar to redirect <tt class="docutils literal">www.my2pi.com</tt> to <tt class="docutils literal">my2pi.duckdns.org</tt>.</p>
 </div>
 <div class="section" id="document-root">
 <h3>2.2 Document Root</h3>
-<p>Create a new root directory to hold the contents of <tt class="docutils literal">myHomePi</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /usr/share/nginx/www/myHomePi
-<span class="nv">$ </span>sudo chown -R <span class="nv">$USER</span>.<span class="nv">$USER</span> /usr/share/nginx/www/myHomePi
+<p>Create a new root directory to hold the contents of <tt class="docutils literal">my2pi</tt>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /usr/share/nginx/html/my2pi
+<span class="nv">$ </span>sudo chown -R <span class="nv">$USER</span>.<span class="nv">$USER</span> /usr/share/nginx/html/my2pi
 </pre></div>
 </div>
 <div class="section" id="index-html">
 <h3>2.3 Index.html</h3>
-<p>Create a sample <tt class="docutils literal">/usr/share/nginx/www/myHomePi/index.html</tt>:</p>
+<p>Create a sample <tt class="docutils literal">/usr/share/nginx/html/my2pi/index.html</tt>:</p>
 <div class="highlight"><pre>&lt;html&gt;
 &lt;head&gt;
-&lt;title&gt;myHomePi&lt;/title&gt;
+&lt;title&gt;My Pi 2 Home&lt;/title&gt;
 &lt;/head&gt;
 &lt;body <span class="nv">bgcolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span> <span class="nv">text</span><span class="o">=</span><span class="s2">&quot;black&quot;</span>&gt;
-&lt;center&gt;&lt;h1&gt;Welcome to myHomePi!&lt;/h1&gt;&lt;/center&gt;
+&lt;center&gt;&lt;h1&gt;Welcome to My Pi 2 Home!&lt;/h1&gt;&lt;/center&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </pre></div>
 </div>
 <div class="section" id="server-block">
 <h3>2.4 Server Block</h3>
-<p>I use <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/default</span></tt> as a template for the new <tt class="docutils literal">myHomePi</tt> configuration:</p>
+<p>I use <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/default</span></tt> as a template for the new <tt class="docutils literal">my2pi</tt> configuration:</p>
 <div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /etc/nginx/sites-available
-<span class="nv">$ </span>sudo cp default myHomePi
+<span class="nv">$ </span>sudo cp default my2pi
 </pre></div>
 <p>Modify these lines for the custom domain:</p>
 <div class="highlight"><pre>listen 80;
-</pre></div>
-<div class="highlight"><pre>server_name www.myHomePi.com;
+
+root /usr/share/nginx/html/my2pi;
+index index.html index.htm;
+
+server_name www.my2pi.com;
 </pre></div>
 <p>Activate the new server block:</p>
 <div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /etc/nginx/sites-enabled
-<span class="nv">$ </span>sudo ln -s ../sites-available/myHomePi
+<span class="nv">$ </span>sudo ln -s ../sites-available/my2pi
 <span class="nv">$ </span>sudo service nginx restart
 </pre></div>
 </div>
 <div class="section" id="port-forwarding">
 <h3>2.5 Port Forwarding</h3>
-<p>Configure <a class="reference external" href="http://www.circuidipity.com/20141006.html">port forwarding on the home router</a> to redirect traffic on port 80 to the internal IP address of the nginx server. Point your browser to <tt class="docutils literal">www.myHomePi.com</tt>. Success (hopefully)! :-)</p>
+<p>Configure <a class="reference external" href="http://www.circuidipity.com/20141006.html">port forwarding on the home router</a> to redirect traffic on port 80 to the internal IP address of the nginx server. Point your browser to <tt class="docutils literal">www.my2pi.com</tt>. Success (hopefully)!</p>
 <p>Repeat the above steps to add more domains. The limiting factor is the <strong>upload bandwidth</strong> provided by the home ISP (typically a fraction of the download speed).</p>
 </div>
 </div>
@@ -121,7 +125,7 @@ Enter new password: <span class="o">[</span>newpasswd<span class="o">]</span>
 Enter it again: <span class="o">[</span>newpasswd<span class="o">]</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c"># \quit</span>
 </pre></div>
-<p>To create a new user <tt class="docutils literal"><span class="pre">www-data</span></tt> <a class="footnote-reference" href="#id2" id="id1">[1]</a> and database <tt class="docutils literal">mydb</tt>:</p>
+<p>Example: To create a new user <tt class="docutils literal"><span class="pre">www-data</span></tt> <a class="footnote-reference" href="#id2" id="id1">[1]</a> and database <tt class="docutils literal">mydb</tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo -u postgres psql
 <span class="nv">postgres</span><span class="o">=</span><span class="c"># CREATE USER &quot;www-data&quot; WITH PASSWORD &#39;newpasswd&#39;;</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c"># CREATE DATABASE mydb WITH OWNER &quot;www-data&quot;;</span>
@@ -155,6 +159,7 @@ Enter it again: <span class="o">[</span>newpasswd<span class="o">]</span>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-networks.html">networks</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-web.html">web</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
 </div>

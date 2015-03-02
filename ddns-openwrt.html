@@ -26,28 +26,28 @@
 <!-- article -->
 <h1>Dynamic DNS and OpenWRT</h1>
 <div id="article">
-    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #5 &gt;&gt;</a> Access a home server from anywhere using Dynamic DNS (DDNS).</p>
+    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #5 .:</a> Access a home server from anywhere using Dynamic DNS (DDNS).</p>
 <p>My Raspberry Pi server sits behind a router assigned a <strong>dynamic IP address</strong> by the ISP. If I want to connect to my Pi over the Internet from anywhere in the world I can use a <strong>DDNS service</strong> to create a domain name that automatically updates the IP address in the background whenever it changes and redirect traffic to the new location.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
 </div>
 <div class="section" id="select-a-ddns-service">
 <h2>0. Select a DDNS service</h2>
-<p>I chose the free DDNS service <a class="reference external" href="http://www.duckdns.org/">duckdns.org</a> which permits the creation of up to 4 domains in the format <tt class="docutils literal">your_subdomain_choice.duckdns.org</tt>. Example: Create the subdomain <tt class="docutils literal">myPiHomeServer</tt> and later - after configuring the router - when entering <tt class="docutils literal">myPiHomeServer.duckdns.org</tt> I will be redirected to the current IP address assigned to my home network.</p>
+<p>I chose the free DDNS service <a class="reference external" href="http://www.duckdns.org/">duckdns.org</a> which permits the creation of up to 4 domains in the format <tt class="docutils literal">your_subdomain_choice.duckdns.org</tt>. Example: Create the subdomain <tt class="docutils literal">mypihomeserver</tt> and later - after configuring the router - when entering <tt class="docutils literal">mypihomeserver.duckdns.org</tt> I will be redirected to the current IP address assigned to my home network.</p>
 <p>Make note of <a class="reference external" href="http://www.duckdns.org/install.jsp">http://www.duckdns.org/install.jsp</a> (while logged in) for customized settings useful for configuring the router for DDNS.</p>
 </div>
 <div class="section" id="configure-openwrt-for-notification">
 <h2>1. Configure OpenWRT for notification</h2>
-<p>Different routers configure DDNS differently but the goal is the same: the ability to notify the DDNS service whenever the IP address assigned by the ISP is modified. I am using an <a class="reference external" href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html">OpenWRT-powered router</a> and these are the steps to configure OpenWRT to use duckdns DDNS:</p>
+<p>Different routers configure DDNS differently but the goal is the same: the ability to notify the DDNS service whenever the IP address assigned by the ISP is modified. I am using an <a class="reference external" href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html">OpenWRT-powered router</a> and these are the steps to configure OpenWRT to use duckdns DDNS.</p>
 <p>Install DDNS packages:</p>
 <div class="highlight"><pre><span class="c"># opkg update</span>
 <span class="c"># opkg install luci-app-ddns ddns-scripts</span>
 </pre></div>
-<p>Use the customized settings from <a class="reference external" href="http://www.duckdns.org/install.jsp">http://www.duckdns.org/install.jsp</a> to configure <tt class="docutils literal">/etc/config/ddns</tt>. Sample entry for <tt class="docutils literal">myPiHomeServer</tt>:</p>
+<p>Use the customized settings from <a class="reference external" href="http://www.duckdns.org/install.jsp">http://www.duckdns.org/install.jsp</a> to configure <tt class="docutils literal">/etc/config/ddns</tt>:</p>
 <div class="highlight"><pre>config service          <span class="s2">&quot;duckdns&quot;</span>
 option enabled          <span class="s2">&quot;1&quot;</span>
 option service_name     <span class="s2">&quot;duckdns.org&quot;</span>
-option domain           <span class="s2">&quot;myPiHomeServer&quot;</span>
+option domain           <span class="s2">&quot;mypihomeserver&quot;</span>
 option username         <span class="s2">&quot;NA&quot;</span>
 option password         <span class="s2">&quot;string_of_letters_and_digits&quot;</span>
 option ip_source        <span class="s2">&quot;network&quot;</span>
@@ -59,7 +59,7 @@ option check_unit       <span class="s2">&quot;minutes&quot;</span>
 option update_url       <span class="s2">&quot;http://www.duckdns.org/update?domains=[DOMAIN]&amp;token=[PASSWORD]&amp;ip=[IP]&quot;</span>
 option use_syslog       <span class="s2">&quot;1&quot;</span>
 </pre></div>
-<p>Start the daemon:</p>
+<p>Start daemon:</p>
 <div class="highlight"><pre><span class="c"># sh</span>
 <span class="c"># . /usr/lib/ddns/dynamic_dns_functions.sh</span>
 <span class="c"># start_daemon_for_all_ddns_sections &quot;wan&quot;</span>

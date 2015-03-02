@@ -1,5 +1,323 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-02-27T18:40:00-05:00</updated><entry><title>A bit of unplanned Grub2 surgery</title><link href="http://www.circuidipity.com/20150227.html" rel="alternate"></link><updated>2015-02-27T18:40:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-27:20150227.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;PROBLEM:&lt;/strong&gt; Late night experiments &lt;a class="reference external" href="http://www.circuidipity.com/grubs.html"&gt;loading GRUB on USB sticks&lt;/a&gt; resulted in mucking up Grub on my &lt;strong&gt;primary&lt;/strong&gt; machine. After a reboot instead of a boot menu I was greeted with:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-03-02T00:05:00-05:00</updated><entry><title>Run a Raspberry Pi 2 from external USB storage</title><link href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html" rel="alternate"></link><updated>2015-03-02T00:05:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-02:run-a-raspberry-pi-2-from-external-usb-storage.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #0 .:&lt;/a&gt; I am exploring the use of my Pi as &lt;strong&gt;24/7 uptime home server&lt;/strong&gt; and one of the hacks I wish to add is using Pi as a cheap and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;network attached storage (NAS)&lt;/a&gt; device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?&lt;/p&gt;
+&lt;p&gt;I imagine an always-on Pi would enjoy more robust performance from a hard drive than SD card. &lt;a class="footnote-reference" href="#id4" id="id1"&gt;[1]&lt;/a&gt; I put my plan in motion using:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Raspberry Pi 2 Model B&lt;/li&gt;
+&lt;li&gt;5V 2A microUSB power adapter&lt;/li&gt;
+&lt;li&gt;Ubuntu 14.04 Linux&lt;/li&gt;
+&lt;li&gt;4GB microSD card (for initial setup and future &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt; partition)&lt;/li&gt;
+&lt;li&gt;1TB powered USB hard drive&lt;/li&gt;
+&lt;li&gt;ethernet cable&lt;/li&gt;
+&lt;li&gt;HDMI display + USB keyboard (for initial setup)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;With the move to ARMv7 the Raspberry Pi 2 is now capable of running the ARM port of Ubuntu. A community-created &lt;a class="reference external" href="https://wiki.ubuntu.com/ARM/RaspberryPi"&gt;Ubuntu 14.04 LTS minimal image&lt;/a&gt; with an updated &lt;tt class="docutils literal"&gt;3.18&lt;/tt&gt; kernel and firmware suitable for Pi 2 is now available. &lt;a class="footnote-reference" href="#id5" id="id2"&gt;[2]&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="download"&gt;
+&lt;h2&gt;0. Download&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Using Linux:&lt;/strong&gt; Import the &lt;a class="reference external" href="http://www.finnie.org/2015/02/16/raspberry-pi-2-update-ubuntu-14-04-image-available/"&gt;lead developer's&lt;/a&gt; GPG key:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --keyserver pgp.mit.edu --recv-key 86AE8D98
+gpg: keyring &lt;span class="sb"&gt;`&lt;/span&gt;/home/username/.gnupg/secring.gpg&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; created
+gpg: requesting key 86AE8D98 from hkp server pgp.mit.edu
+gpg: /home/username/.gnupg/trustdb.gpg: trustdb created
+gpg: key 86AE8D98: public key &lt;span class="s2"&gt;&amp;quot;Ryan Finnie &amp;lt;ryan@finnie.org&amp;gt;&amp;quot;&lt;/span&gt; imported
+gpg: no ultimately trusted keys found
+gpg: Total number processed: 1
+gpg:               imported: 1  &lt;span class="o"&gt;(&lt;/span&gt;RSA: 1&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --fingerprint 86AE8D98
+pub   4096R/86AE8D98 2012-04-11
+Key &lt;span class="nv"&gt;fingerprint&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 42E2 C8DE 8C17 3AB1 02F5  2C6E 7E60 A3A6 86AE 8D98
+uid                  Ryan Finnie &amp;lt;ryan@finnie.org&amp;gt;
+uid                  Ryan Finnie &amp;lt;ryan.finnie@canonical.com&amp;gt;
+uid                  &lt;span class="o"&gt;[&lt;/span&gt;jpeg image of size 1669&lt;span class="o"&gt;]&lt;/span&gt;
+sub   4096R/C50F6695 2012-04-11
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Download the &lt;a class="reference external" href="http://www.finnie.org/software/raspberrypi/"&gt;latest ubuntu-trusty image and GPG signature&lt;/a&gt; for Pi 2:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://www.finnie.org/software/raspberrypi/2015-02-19-ubuntu-trusty.zip
+&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://www.finnie.org/software/raspberrypi/2015-02-19-ubuntu-trusty.zip.asc
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Verify and unpack the image:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --verify 2015-02-19-ubuntu-trusty.zip.asc 2015-02-19-ubuntu-trusty.zip
+gpg: Signature made Thu 19 Feb 2015 12:46:09 PM EST using RSA key ID 86AE8D98
+gpg: Good signature from &lt;span class="s2"&gt;&amp;quot;Ryan Finnie &amp;lt;ryan@finnie.org&amp;gt;&amp;quot;&lt;/span&gt;
+gpg:                 aka &lt;span class="s2"&gt;&amp;quot;Ryan Finnie &amp;lt;ryan.finnie@canonical.com&amp;gt;&amp;quot;&lt;/span&gt;
+gpg:                 aka &lt;span class="s2"&gt;&amp;quot;[jpeg image of size 1669]&amp;quot;&lt;/span&gt;
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 42E2 C8DE 8C17 3AB1 02F5  2C6E 7E60 A3A6 86AE 8D98
+&lt;span class="nv"&gt;$ &lt;/span&gt;unzip 2015-02-19-ubuntu-trusty.zip
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="install-to-sd-card"&gt;
+&lt;h2&gt;1. Install to SD card&lt;/h2&gt;
+&lt;p&gt;In lieu of the usual &lt;tt class="docutils literal"&gt;dd&lt;/tt&gt; I use &lt;a class="reference external" href="https://source.tizen.org/documentation/reference/bmaptool/bmap-tools-project"&gt;bmap-tools&lt;/a&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;2015-02-19-ubuntu-trusty.bmap&lt;/span&gt;&lt;/tt&gt; to write &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;2015-02-19-ubuntu-trusty.img&lt;/span&gt;&lt;/tt&gt; to the SD card. &lt;strong&gt;Advantages:&lt;/strong&gt; speed boost, and bmaptool's inability to write to mounted devices (in case you pick a wrong device/partition like, say, your &lt;em&gt;home&lt;/em&gt; drive... &lt;tt class="docutils literal"&gt;dd&lt;/tt&gt;'s nickname &lt;em&gt;disk destroyer&lt;/em&gt; is no idle boast):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install bmap-tools
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo bmaptool copy --bmap 2015-02-19-ubuntu-trusty.bmap 2015-02-19-ubuntu-trusty.img /dev/sdX
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pi-boot"&gt;
+&lt;h2&gt;2. Pi Boot&lt;/h2&gt;
+&lt;p&gt;Login username and password are both &lt;tt class="docutils literal"&gt;ubuntu&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Filesystem layout on the SD card:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/mmcblk0p2  1.7G  456M  1.1G  30% /
+devtmpfs        458M  4.0K  458M   1% /dev
+none            4.0K     0  4.0K   0% /sys/fs/cgroup
+none             93M  260K   93M   1% /run
+none            5.0M     0  5.0M   0% /run/lock
+none            462M     0  462M   0% /run/shm
+none            100M     0  100M   0% /run/user
+/dev/mmcblk0p1   64M  9.7M   55M  16% /boot/firmware
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="partition-external-hard-drive"&gt;
+&lt;h2&gt;3. Partition external hard drive&lt;/h2&gt;
+&lt;p&gt;I connect the 1TB USB hard drive to Pi and confirm device detection:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;lsusb
+Bus 001 Device 002: ID 0424:9514 Standard Microsystems Corp.
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp.
+Bus 001 Device 005: ID 152d:2329 JMicron Technology Corp. / JMicron USA Technology Corp. JM20329 SATA Bridge
+&lt;span class="nv"&gt;$ &lt;/span&gt;dmesg -t
+&lt;span class="o"&gt;[&lt;/span&gt; ... &lt;span class="o"&gt;]&lt;/span&gt;
+usb 1-1.3: new high-speed USB device number 5 using dwc_otg
+usb 1-1.3: New USB device found, &lt;span class="nv"&gt;idVendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;152d, &lt;span class="nv"&gt;idProduct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2329
+usb 1-1.3: New USB device strings: &lt;span class="nv"&gt;Mfr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1, &lt;span class="nv"&gt;Product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;SerialNumber&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;5
+usb 1-1.3: Product: USB to ATA/ATAPI bridge
+usb 1-1.3: Manufacturer: JMicron
+usb 1-1.3: SerialNumber: DCA5968053FF
+usb-storage 1-1.3:1.0: USB Mass Storage device detected
+usb-storage 1-1.3:1.0: Quirks match &lt;span class="k"&gt;for &lt;/span&gt;vid 152d pid 2329: 8020
+scsi0 : usb-storage 1-1.3:1.0
+scsi 0:0:0:0: Direct-Access     WDC WD10 EARS-00Y5B1           PQ: 0 ANSI: 2 CCS
+sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; 1953525168 512-byte logical blocks: &lt;span class="o"&gt;(&lt;/span&gt;1.00 TB/931 GiB&lt;span class="o"&gt;)&lt;/span&gt;
+sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Write Protect is off
+sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Mode Sense: 28 00 00 00
+sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; No Caching mode page found
+sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Assuming drive cache: write through
+sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; No Caching mode page found
+sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Assuming drive cache: write through
+sd 0:0:0:0: Attached scsi generic sg0 &lt;span class="nb"&gt;type &lt;/span&gt;0
+sda: sda1
+sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; No Caching mode page found
+sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Assuming drive cache: write through
+sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Attached SCSI disk
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Device is &lt;tt class="docutils literal"&gt;sda&lt;/tt&gt;. Use &lt;strong&gt;fdisk&lt;/strong&gt; to create 2 new partitions on the USB drive:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;sda1 - 20GB - root filesystem&lt;/li&gt;
+&lt;li&gt;sda2 - remaining space - storage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo fdisk /dev/sda
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for &lt;/span&gt;&lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
+
+Disk /dev/sda: 1000.2 GB, 1000204886016 bytes
+255 heads, 63 sectors/track, 121601 cylinders, total 1953525168 sectors
+&lt;span class="nv"&gt;Units&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; sectors of 1 * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 512 bytes
+Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: 512 bytes / 512 bytes
+I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+Device Boot      Start         End      Blocks   Id  System
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for &lt;/span&gt;&lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: n
+Partition &lt;span class="nb"&gt;type&lt;/span&gt;:
+  p   primary &lt;span class="o"&gt;(&lt;/span&gt;0 primary, 0 extended, 4 free&lt;span class="o"&gt;)&lt;/span&gt;
+  e   extended
+Select &lt;span class="o"&gt;(&lt;/span&gt;default p&lt;span class="o"&gt;)&lt;/span&gt;: p
+Partition number &lt;span class="o"&gt;(&lt;/span&gt;1-4, default 1&lt;span class="o"&gt;)&lt;/span&gt;:
+Using default value 1
+First sector &lt;span class="o"&gt;(&lt;/span&gt;2048-1953525167, default 2048&lt;span class="o"&gt;)&lt;/span&gt;:
+Using default value 2048
+Last sector, +sectors or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;2048-1953525167, default 1953525167&lt;span class="o"&gt;)&lt;/span&gt;: +20G
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for &lt;/span&gt;&lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: n
+Partition &lt;span class="nb"&gt;type&lt;/span&gt;:
+  p   primary &lt;span class="o"&gt;(&lt;/span&gt;1 primary, 0 extended, 3 free&lt;span class="o"&gt;)&lt;/span&gt;
+  e   extended
+Select &lt;span class="o"&gt;(&lt;/span&gt;default p&lt;span class="o"&gt;)&lt;/span&gt;: p
+Partition number &lt;span class="o"&gt;(&lt;/span&gt;1-4, default 2&lt;span class="o"&gt;)&lt;/span&gt;:
+Using default value 2
+First sector &lt;span class="o"&gt;(&lt;/span&gt;41945088-1953525167, default 41945088&lt;span class="o"&gt;)&lt;/span&gt;:
+Using default value 41945088
+Last sector, +sectors or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;41945088-1953525167, default 1953525167&lt;span class="o"&gt;)&lt;/span&gt;:
+Using default value 1953525167
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for &lt;/span&gt;&lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
+
+Disk /dev/sda: 1000.2 GB, 1000204886016 bytes
+255 heads, 63 sectors/track, 121601 cylinders, total 1953525168 sectors
+&lt;span class="nv"&gt;Units&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; sectors of 1 * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 512 bytes
+Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: 512 bytes / 512 bytes
+I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+Device Boot      Start         End      Blocks   Id  System
+/dev/sda1            2048    41945087    20971520   83  Linux
+/dev/sda2        41945088  1953525167   955790040   83  Linux
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for &lt;/span&gt;&lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: w
+The partition table has been altered!
+
+Calling ioctl&lt;span class="o"&gt;()&lt;/span&gt; to re-read partition table.
+Syncing disks.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Format the new partitions using filesystem &lt;tt class="docutils literal"&gt;ext4&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mke2fs -t ext4 -L rootfs /dev/sda1
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mke2fs -t ext4 -L storage /dev/sda2
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="rsync"&gt;
+&lt;h2&gt;4. Rsync&lt;/h2&gt;
+&lt;p&gt;Mount the newly-formatted &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; partition to &lt;tt class="docutils literal"&gt;/mnt&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mount -t ext4 /dev/sda1 /mnt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Use &lt;strong&gt;rsync&lt;/strong&gt; to copy contents of &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; on the SD card to the &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; partition on the USB device:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo rsync -axv / /mnt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="new-rootfs"&gt;
+&lt;h2&gt;5. New rootfs&lt;/h2&gt;
+&lt;div class="section" id="on-the-sd-card"&gt;
+&lt;h3&gt;5.1 On the SD card&lt;/h3&gt;
+&lt;p&gt;Modify options in &lt;tt class="docutils literal"&gt;/boot/cmdline.txt&lt;/tt&gt; to point the bootloader to &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; filesystem on the USB device:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Original:
+dwc_otg.lpm_enable&lt;span class="o"&gt;=&lt;/span&gt;0 &lt;span class="nv"&gt;console&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;tty1 &lt;span class="nv"&gt;root&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/mmcblk0p2 rootwait
+
+Modified:
+dwc_otg.lpm_enable&lt;span class="o"&gt;=&lt;/span&gt;0 &lt;span class="nv"&gt;console&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;tty1 &lt;span class="nv"&gt;root&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sda1 rootwait &lt;span class="nv"&gt;rootdelay&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;5
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="on-the-usb-hard-drive"&gt;
+&lt;h3&gt;5.2 On the USB hard drive&lt;/h3&gt;
+&lt;p&gt;Create new mountpoint for the &lt;tt class="docutils literal"&gt;storage&lt;/tt&gt; partition:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /mnt/media/USB0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Modify options in &lt;tt class="docutils literal"&gt;/mnt/etc/fstab&lt;/tt&gt; to mount &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;storage&lt;/tt&gt; partitions at boot. &lt;a class="footnote-reference" href="#id6" id="id3"&gt;[3]&lt;/a&gt; Example for &lt;tt class="docutils literal"&gt;sda1&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;sda2&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;proc            /proc           proc    defaults          0       0
+&lt;span class="c"&gt;# comment out root filesystem on SD card&lt;/span&gt;
+&lt;span class="c"&gt;#/dev/mmcblk0p2  /               ext4    defaults,noatime  0       1&lt;/span&gt;
+&lt;span class="c"&gt;# partitions on USB hard drive&lt;/span&gt;
+/dev/sda1       /       ext4    defaults,noatime          0       1
+/dev/sda2       /media/USB0 ext4    defaults,noatime      0       0
+/dev/mmcblk0p1  /boot/firmware  vfat    defaults          0       2
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reboot"&gt;
+&lt;h2&gt;6. Reboot&lt;/h2&gt;
+&lt;p&gt;Save modifications and reboot:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo reboot
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Log in and check out the new filesystem layout:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1        20G  590M   18G   4% /
+devtmpfs        458M  4.0K  458M   1% /dev
+none            4.0K     0  4.0K   0% /sys/fs/cgroup
+none             93M  280K   93M   1% /run
+/dev/sda2       898G  326G  527G  39% /media/USB0
+none            5.0M     0  5.0M   0% /run/lock
+none            462M     0  462M   0% /run/shm
+none            100M     0  100M   0% /run/user
+/dev/mmcblk0p1   64M  9.9M   55M  16% /boot/firmware
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="post-install"&gt;
+&lt;h2&gt;7. Post-install&lt;/h2&gt;
+&lt;div class="section" id="administrator"&gt;
+&lt;h3&gt;7.1 Administrator&lt;/h3&gt;
+&lt;p&gt;Ubuntu is a great operating system but a not-so-great username and a lousy password. Example: change default username/group &lt;tt class="docutils literal"&gt;ubuntu&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;pi&lt;/tt&gt; and set a new password.&lt;/p&gt;
+&lt;p&gt;Unlock &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; account by setting a new password:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo passwd root
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Log out and back in as &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; and configure &lt;tt class="docutils literal"&gt;pi&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# usermod -l pi -m -d /home/pi ubuntu&lt;/span&gt;
+&lt;span class="c"&gt;# groupmod -n pi ubuntu&lt;/span&gt;
+&lt;span class="c"&gt;# passwd pi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Optional:&lt;/strong&gt; Re-lock &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; by disabling the password:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo passwd -dl root
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="hostname"&gt;
+&lt;h3&gt;7.2 Hostname&lt;/h3&gt;
+&lt;p&gt;Example: Modify hostname &lt;tt class="docutils literal"&gt;ubuntu&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;raspberry&lt;/tt&gt; in &lt;tt class="docutils literal"&gt;/etc/hostname&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;/etc/hosts&lt;/tt&gt; and restart the &lt;tt class="docutils literal"&gt;hostname&lt;/tt&gt; service:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service hostname restart
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Log out and back in and hostname &lt;tt class="docutils literal"&gt;raspberry&lt;/tt&gt; is visible.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="timezone"&gt;
+&lt;h3&gt;7.3 Timezone&lt;/h3&gt;
+&lt;p&gt;Default timezone is &lt;tt class="docutils literal"&gt;UTC&lt;/tt&gt;. Modify to appropriate value:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cat /etc/timezone
+Etc/UTC
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg-reconfigure tzdata  &lt;span class="c"&gt;# ...and follow the interactive menu to set (example) &amp;#39;America/Toronto&amp;#39;...&lt;/span&gt;
+
+Current default &lt;span class="nb"&gt;time &lt;/span&gt;zone: &lt;span class="s1"&gt;&amp;#39;America/Toronto&amp;#39;&lt;/span&gt;
+Local &lt;span class="nb"&gt;time &lt;/span&gt;is now:      Sun Mar  1 18:28:32 EST 2015.
+Universal Time is now:  Sun Mar  1 23:28:32 UTC 2015.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="upgrade"&gt;
+&lt;h3&gt;7.4 Upgrade&lt;/h3&gt;
+&lt;p&gt;With the newly-configured &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; up-and-running now is a good time to update Ubuntu:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get update
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get dist-upgrade
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="swap"&gt;
+&lt;h3&gt;7.5 Swap&lt;/h3&gt;
+&lt;p&gt;Ubuntu on Pi does not include a swap partition/file. Generate a (default) 2GB &lt;tt class="docutils literal"&gt;/var/swap&lt;/tt&gt; file at boot by installing:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install dphys-swapfile
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="static-address"&gt;
+&lt;h3&gt;7.6 Static Address&lt;/h3&gt;
+&lt;p&gt;A Raspberry Pi that is going to stay home and run as a server can be configured to use a &lt;strong&gt;static network address&lt;/strong&gt;. Sample &lt;tt class="docutils literal"&gt;/etc/network/interfaces&lt;/tt&gt; modification that disables &lt;tt class="docutils literal"&gt;dhcp&lt;/tt&gt; and sets ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt; and connects to a router (that handles DNS) at &lt;tt class="docutils literal"&gt;192.168.1.1&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#iface eth0 inet dhcp&lt;/span&gt;
+auto eth0
+iface eth0 inet static
+    address 192.168.1.88
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+    dns-nameservers 192.168.1.1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="openssh-server"&gt;
+&lt;h3&gt;7.7 OpenSSH Server&lt;/h3&gt;
+&lt;p&gt;Install and configure SSH for remote access to our (soon-to-be) headless Pi home server:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install openssh-server
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check out &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;securing access to remote servers using SSH keys&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h3&gt;Notes&lt;/h3&gt;
+&lt;table class="docutils footnote" frame="void" id="id4" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.raspberrypi.org/forums/viewtopic.php?f=29&amp;amp;t=44177"&gt;Discussion thread (raspberrypi.org/forums)&lt;/a&gt; about moving root to external USB storage.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id5" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html"&gt;Version 1&lt;/a&gt; used Raspbian on a Raspberry Pi Model B.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id6" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id3"&gt;[3]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Pi requires an SD card to boot so we continue using original &lt;tt class="docutils literal"&gt;/boot&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="raspberry pi"></category><category term="ubuntu"></category><category term="linux"></category><category term="networks"></category></entry><entry><title>A bit of unplanned Grub2 surgery</title><link href="http://www.circuidipity.com/20150227.html" rel="alternate"></link><updated>2015-02-27T18:40:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-27:20150227.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;PROBLEM:&lt;/strong&gt; Late night experiments &lt;a class="reference external" href="http://www.circuidipity.com/grubs.html"&gt;loading GRUB on USB sticks&lt;/a&gt; resulted in mucking up Grub on my &lt;strong&gt;primary&lt;/strong&gt; machine. After a reboot instead of a boot menu I was greeted with:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;grub &amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Whoops.&lt;/p&gt;
@@ -160,9 +478,10 @@ grub&amp;gt; boot
 &lt;p&gt;Next thing is to start working on my touch-typing!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>Tiny Tiny RSS</title><link href="http://www.circuidipity.com/ttrss.html" rel="alternate"></link><updated>2015-02-11T18:40:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-11:ttrss.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #7 &amp;gt;&amp;gt;&lt;/a&gt; Install and self-host the &lt;strong&gt;Tiny Tiny RSS&lt;/strong&gt; news reader and aggregator and access news feeds over the web from anywhere.&lt;/p&gt;
+</summary><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>Tiny Tiny RSS</title><link href="http://www.circuidipity.com/ttrss.html" rel="alternate"></link><updated>2015-03-01T20:37:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-11:ttrss.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #7 .:&lt;/a&gt; Install and self-host the &lt;strong&gt;Tiny Tiny RSS&lt;/strong&gt; news reader and aggregator and access news feeds over the web from anywhere.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Server&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html"&gt;Raspberry Pi 2&lt;/a&gt; running Ubuntu 14.04 LTS located at ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="web-server-and-database"&gt;
 &lt;h2&gt;0. Web server and database&lt;/h2&gt;
@@ -179,14 +498,15 @@ grub&amp;gt; boot
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="section" id="peer-authentication"&gt;
 &lt;h3&gt;1.1 Peer authentication&lt;/h3&gt;
-&lt;p&gt;Later when running the TTRSS &lt;tt class="docutils literal"&gt;update.php&lt;/tt&gt; script you may run into &lt;tt class="docutils literal"&gt;Peer authentication failed for user&lt;/tt&gt; errors. Fix this issue by editing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/postgresql/9.*/main/pg_hba.conf&lt;/span&gt;&lt;/tt&gt; and change &lt;tt class="docutils literal"&gt;peer&lt;/tt&gt;:&lt;/p&gt;
+&lt;p&gt;Later when running the TTRSS &lt;tt class="docutils literal"&gt;update.php&lt;/tt&gt; script you may run into &lt;tt class="docutils literal"&gt;Peer authentication failed for user&lt;/tt&gt; errors. Fix this issue by editing &lt;tt class="docutils literal"&gt;/etc/postgresql/9.3/main/pg_hba.conf&lt;/tt&gt; and change &lt;tt class="docutils literal"&gt;peer&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# &amp;quot;local&amp;quot; is for Unix domain socket connections only&lt;/span&gt;
 &lt;span class="nb"&gt;local   &lt;/span&gt;all             all                                     peer
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... to &lt;tt class="docutils literal"&gt;trust&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;local   &lt;/span&gt;all             all                                     trust
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# &amp;quot;local&amp;quot; is for Unix domain socket connections only&lt;/span&gt;
+&lt;span class="nb"&gt;local   &lt;/span&gt;all             all                                     trust
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Save and reload the database server:&lt;/p&gt;
+&lt;p&gt;Reload the database server:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service postgresql reload
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Source: &lt;a class="reference external" href="http://askubuntu.com/questions/274441/pg-connect-unable-to-connect-to-postgresql-server"&gt;Unable to connect to postgresql server&lt;/a&gt;&lt;/p&gt;
@@ -204,20 +524,20 @@ grub&amp;gt; boot
 &lt;div class="section" id="nginx"&gt;
 &lt;h2&gt;3. Nginx&lt;/h2&gt;
 &lt;p&gt;Move the &lt;tt class="docutils literal"&gt;ttrss&lt;/tt&gt; directory into Nginx's &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;document root&lt;/a&gt; directory:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mv ../ttrss /usr/share/nginx/www/
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo chown -R www-data.www-data /usr/share/nginx/www/ttrss
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mv ../ttrss /usr/share/nginx/html/
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo chown -R www-data.www-data /usr/share/nginx/html/ttrss
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Create a &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;server block&lt;/a&gt; (virtual host) for TTRSS. Sample &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available/ttrss&lt;/span&gt;&lt;/tt&gt; &lt;a class="footnote-reference" href="#id8" id="id4"&gt;[3]&lt;/a&gt; configuration:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;server &lt;span class="o"&gt;{&lt;/span&gt;
-    listen  80; &lt;span class="c"&gt;## listen for ipv4; this line is default and implied&lt;/span&gt;
+    listen 80; &lt;span class="c"&gt;## listen for ipv4; this line is default and implied&lt;/span&gt;
 
-    root /usr/share/nginx/www/ttrss;
+    root /usr/share/nginx/html/ttrss;
     index index.html index.htm index.php;
 
     access_log /var/log/nginx/ttrss_access.log;
     error_log /var/log/nginx/ttrss_error.log info;
 
-    server_name localhost;
+    server_name ttrss.*;
 
     location / &lt;span class="o"&gt;{&lt;/span&gt;
         index           index.php;
@@ -240,7 +560,11 @@ grub&amp;gt; boot
 &lt;/div&gt;
 &lt;div class="section" id="configure"&gt;
 &lt;h2&gt;4. Configure&lt;/h2&gt;
-&lt;p&gt;Navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://your.server.ip.address&lt;/span&gt;&lt;/tt&gt; and configure TTRSS:&lt;/p&gt;
+&lt;p&gt;Example configuration for LAN access to the Pi home server at ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt; hosting ttrss.&lt;/p&gt;
+&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/hosts&lt;/tt&gt; on the &lt;strong&gt;client&lt;/strong&gt; device making the connection:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;192.168.1.88 ttrss.local
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://ttrss.local&lt;/span&gt;&lt;/tt&gt; and configure TTRSS:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;Database &lt;span class="nb"&gt;type&lt;/span&gt;: &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="k"&gt;select &lt;/span&gt;PostgreSQL&lt;span class="o"&gt;]&lt;/span&gt;
 Username: www-data
 Password: &lt;span class="o"&gt;[&lt;/span&gt;database password created earlier&lt;span class="o"&gt;]&lt;/span&gt;
@@ -249,18 +573,18 @@ Hostname: &lt;span class="o"&gt;[&lt;/span&gt;leave blank&lt;span class="o"&gt;]
 Port: 5432
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Press &lt;tt class="docutils literal"&gt;Test configuration&lt;/tt&gt; button, then &lt;tt class="docutils literal"&gt;Initialize database&lt;/tt&gt;, and finally &lt;tt class="docutils literal"&gt;Save configuration&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Navigate back to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://YOUR.SERVER.IP.ADDRESS&lt;/span&gt;&lt;/tt&gt; and login &lt;tt class="docutils literal"&gt;Username: &amp;quot;admin&amp;quot; Password: &amp;quot;password&amp;quot;&lt;/tt&gt;. In the top-right go to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Actions-&amp;gt;Preferences&lt;/span&gt;&lt;/tt&gt; to make further changes to the default settings. Create a new user account for RSS reading (vs logging in all the time as &lt;tt class="docutils literal"&gt;admin&lt;/tt&gt;) and change the &lt;tt class="docutils literal"&gt;admin&lt;/tt&gt; password.&lt;/p&gt;
+&lt;p&gt;Navigate back to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://ttrss.local&lt;/span&gt;&lt;/tt&gt; and log back in with username &lt;tt class="docutils literal"&gt;admin&lt;/tt&gt; and password &lt;tt class="docutils literal"&gt;password&lt;/tt&gt;. In the top-right go to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Actions-&amp;gt;Preferences&lt;/span&gt;&lt;/tt&gt; to make further changes to the default settings. Create a new user account for RSS reading (vs logging in all the time as &lt;tt class="docutils literal"&gt;admin&lt;/tt&gt;) and change the default password.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="updates"&gt;
 &lt;h2&gt;5. Updates&lt;/h2&gt;
 &lt;p&gt;Configure TTRSS to periodically update the RSS feeds with new content. First, test the included &lt;tt class="docutils literal"&gt;update.php&lt;/tt&gt; script:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;/usr/bin/php /usr/share/nginx/www/ttrss/update.php --feeds --quiet
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;/usr/bin/php /usr/share/nginx/html/ttrss/update.php --feeds --quiet
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If the script returns no errors use &lt;tt class="docutils literal"&gt;cron&lt;/tt&gt; to run the script periodically. Add a new job to &lt;tt class="docutils literal"&gt;crontab&lt;/tt&gt;:&lt;/p&gt;
+&lt;p&gt;If the script returns no errors add a new job to &lt;tt class="docutils literal"&gt;cron&lt;/tt&gt; to run script periodically:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;crontab -e
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Sample TTRSS job:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;*/30 * * * * /usr/bin/php /usr/share/nginx/www/ttrss/update.php --feeds --quiet
+&lt;div class="highlight"&gt;&lt;pre&gt;10 * * * * /usr/bin/php /usr/share/nginx/html/ttrss/update.php --feeds --quiet
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="helpful-resources"&gt;
@@ -293,9 +617,10 @@ Port: 5432
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="networks"></category><category term="web"></category><category term="linux"></category></entry><entry><title>PHP + Nginx + PostgreSQL</title><link href="http://www.circuidipity.com/php-nginx-postgresql.html" rel="alternate"></link><updated>2015-02-11T17:00:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-09:php-nginx-postgresql.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #6 &amp;gt;&amp;gt;&lt;/a&gt; As a requirement to host web applications like &lt;a class="reference external" href="http://www.circuidipity.com/ttrss.html"&gt;Tiny Tiny RSS&lt;/a&gt; on my Raspberry Pi I install &lt;strong&gt;PHP&lt;/strong&gt;, the lightweight web server &lt;strong&gt;Nginx&lt;/strong&gt;, and the &lt;strong&gt;PostgreSQL&lt;/strong&gt; database.&lt;/p&gt;
+</summary><category term="networks"></category><category term="web"></category><category term="ubuntu"></category><category term="linux"></category><category term="raspberry pi"></category></entry><entry><title>PHP + Nginx + PostgreSQL</title><link href="http://www.circuidipity.com/php-nginx-postgresql.html" rel="alternate"></link><updated>2015-03-01T19:48:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-09:php-nginx-postgresql.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #6 .:&lt;/a&gt; As a requirement to host web applications like &lt;a class="reference external" href="http://www.circuidipity.com/ttrss.html"&gt;Tiny Tiny RSS&lt;/a&gt; on my Raspberry Pi I install &lt;strong&gt;PHP&lt;/strong&gt;, the lightweight web server &lt;strong&gt;Nginx&lt;/strong&gt;, and the &lt;strong&gt;PostgreSQL&lt;/strong&gt; database.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Server&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html"&gt;Raspberry Pi 2&lt;/a&gt; running Ubuntu 14.04 LTS located at ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="php"&gt;
 &lt;h2&gt;0. PHP&lt;/h2&gt;
@@ -316,62 +641,65 @@ Port: 5432
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install nginx
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo service nginx start
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To verify that the web server is running, open a browser and navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://your.raspberry.ip.address&lt;/span&gt;&lt;/tt&gt;. If you see &lt;tt class="docutils literal"&gt;Welcome to nginx!&lt;/tt&gt; the server is installed correctly.&lt;/p&gt;
+&lt;p&gt;To verify that the web server is running, open a browser and navigate to (example) &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://192.168.1.88&lt;/span&gt;&lt;/tt&gt;. If you see &lt;tt class="docutils literal"&gt;Welcome to nginx!&lt;/tt&gt; the server is installed correctly.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="host-multiple-domains"&gt;
 &lt;h2&gt;2. Host multiple domains&lt;/h2&gt;
 &lt;p&gt;Nginx is capable of serving up multiple web domains or &lt;strong&gt;server blocks&lt;/strong&gt; (virtual hosts) from the same server:&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;block content is placed in subfolders located in &lt;tt class="docutils literal"&gt;/usr/share/nginx/www&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;block content is placed in subfolders located in &lt;tt class="docutils literal"&gt;/usr/share/nginx/html&lt;/tt&gt;&lt;/li&gt;
 &lt;li&gt;configuration in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
 &lt;li&gt;a server block is made active by setting a symbolic link in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-enabled&lt;/span&gt;&lt;/tt&gt; to its config file&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;When combined with a &lt;a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html"&gt;free DDNS service&lt;/a&gt; (I like &lt;a class="reference external" href="http://duckdns.org/"&gt;duckdns.org&lt;/a&gt;) multiple custom domains can be hosted on a home server.&lt;/p&gt;
-&lt;p&gt;Steps to create a sample &lt;tt class="docutils literal"&gt;myHomePi&lt;/tt&gt; server block to host &lt;tt class="docutils literal"&gt;www.myhomepi.com&lt;/tt&gt;:&lt;/p&gt;
+&lt;p&gt;Example: create a sample &lt;tt class="docutils literal"&gt;my2pi&lt;/tt&gt; server block to host &lt;tt class="docutils literal"&gt;www.my2pi.com&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="section" id="cname"&gt;
 &lt;h3&gt;2.1 CNAME&lt;/h3&gt;
-&lt;p&gt;Create a new &lt;strong&gt;CNAME&lt;/strong&gt; record at the domain registrar to redirect (example) &lt;tt class="docutils literal"&gt;www.myhomepi.com&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;myhomepi.duckdns.org&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Create a new &lt;strong&gt;CNAME&lt;/strong&gt; record at the domain registrar to redirect &lt;tt class="docutils literal"&gt;www.my2pi.com&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;my2pi.duckdns.org&lt;/tt&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="document-root"&gt;
 &lt;h3&gt;2.2 Document Root&lt;/h3&gt;
-&lt;p&gt;Create a new root directory to hold the contents of &lt;tt class="docutils literal"&gt;myHomePi&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /usr/share/nginx/www/myHomePi
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo chown -R &lt;span class="nv"&gt;$USER&lt;/span&gt;.&lt;span class="nv"&gt;$USER&lt;/span&gt; /usr/share/nginx/www/myHomePi
+&lt;p&gt;Create a new root directory to hold the contents of &lt;tt class="docutils literal"&gt;my2pi&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /usr/share/nginx/html/my2pi
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo chown -R &lt;span class="nv"&gt;$USER&lt;/span&gt;.&lt;span class="nv"&gt;$USER&lt;/span&gt; /usr/share/nginx/html/my2pi
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="index-html"&gt;
 &lt;h3&gt;2.3 Index.html&lt;/h3&gt;
-&lt;p&gt;Create a sample &lt;tt class="docutils literal"&gt;/usr/share/nginx/www/myHomePi/index.html&lt;/tt&gt;:&lt;/p&gt;
+&lt;p&gt;Create a sample &lt;tt class="docutils literal"&gt;/usr/share/nginx/html/my2pi/index.html&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&amp;lt;html&amp;gt;
 &amp;lt;head&amp;gt;
-&amp;lt;title&amp;gt;myHomePi&amp;lt;/title&amp;gt;
+&amp;lt;title&amp;gt;My Pi 2 Home&amp;lt;/title&amp;gt;
 &amp;lt;/head&amp;gt;
 &amp;lt;body &lt;span class="nv"&gt;bgcolor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;white&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;text&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&amp;gt;
-&amp;lt;center&amp;gt;&amp;lt;h1&amp;gt;Welcome to myHomePi!&amp;lt;/h1&amp;gt;&amp;lt;/center&amp;gt;
+&amp;lt;center&amp;gt;&amp;lt;h1&amp;gt;Welcome to My Pi 2 Home!&amp;lt;/h1&amp;gt;&amp;lt;/center&amp;gt;
 &amp;lt;/body&amp;gt;
 &amp;lt;/html&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="server-block"&gt;
 &lt;h3&gt;2.4 Server Block&lt;/h3&gt;
-&lt;p&gt;I use &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available/default&lt;/span&gt;&lt;/tt&gt; as a template for the new &lt;tt class="docutils literal"&gt;myHomePi&lt;/tt&gt; configuration:&lt;/p&gt;
+&lt;p&gt;I use &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available/default&lt;/span&gt;&lt;/tt&gt; as a template for the new &lt;tt class="docutils literal"&gt;my2pi&lt;/tt&gt; configuration:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /etc/nginx/sites-available
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo cp default myHomePi
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo cp default my2pi
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Modify these lines for the custom domain:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;listen 80;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;server_name www.myHomePi.com;
+
+root /usr/share/nginx/html/my2pi;
+index index.html index.htm;
+
+server_name www.my2pi.com;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Activate the new server block:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /etc/nginx/sites-enabled
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo ln -s ../sites-available/myHomePi
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo ln -s ../sites-available/my2pi
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo service nginx restart
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="port-forwarding"&gt;
 &lt;h3&gt;2.5 Port Forwarding&lt;/h3&gt;
-&lt;p&gt;Configure &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;port forwarding on the home router&lt;/a&gt; to redirect traffic on port 80 to the internal IP address of the nginx server. Point your browser to &lt;tt class="docutils literal"&gt;www.myHomePi.com&lt;/tt&gt;. Success (hopefully)! :-)&lt;/p&gt;
+&lt;p&gt;Configure &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;port forwarding on the home router&lt;/a&gt; to redirect traffic on port 80 to the internal IP address of the nginx server. Point your browser to &lt;tt class="docutils literal"&gt;www.my2pi.com&lt;/tt&gt;. Success (hopefully)!&lt;/p&gt;
 &lt;p&gt;Repeat the above steps to add more domains. The limiting factor is the &lt;strong&gt;upload bandwidth&lt;/strong&gt; provided by the home ISP (typically a fraction of the download speed).&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -387,7 +715,7 @@ Enter new password: &lt;span class="o"&gt;[&lt;/span&gt;newpasswd&lt;span class=
 Enter it again: &lt;span class="o"&gt;[&lt;/span&gt;newpasswd&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# \quit&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To create a new user &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;www-data&lt;/span&gt;&lt;/tt&gt; &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt; and database &lt;tt class="docutils literal"&gt;mydb&lt;/tt&gt;:&lt;/p&gt;
+&lt;p&gt;Example: To create a new user &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;www-data&lt;/span&gt;&lt;/tt&gt; &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt; and database &lt;tt class="docutils literal"&gt;mydb&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo -u postgres psql
 &lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# CREATE USER &amp;quot;www-data&amp;quot; WITH PASSWORD &amp;#39;newpasswd&amp;#39;;&lt;/span&gt;
 &lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# CREATE DATABASE mydb WITH OWNER &amp;quot;www-data&amp;quot;;&lt;/span&gt;
@@ -418,7 +746,7 @@ Enter it again: &lt;span class="o"&gt;[&lt;/span&gt;newpasswd&lt;span class="o"&
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="networks"></category><category term="web"></category><category term="linux"></category></entry><entry><title>Supercharge a home router using OpenWrt Part 2</title><link href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html" rel="alternate"></link><updated>2015-02-08T18:16:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-08:supercharge-a-home-router-using-openwrt-pt2.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;PREVIOUS: TL-WR841N router &amp;lt;&amp;lt;&lt;/a&gt; A &lt;strong&gt;home router&lt;/strong&gt; is a much more capable device than its pre-installed software would lead you to believe. &lt;a class="reference external" href="https://openwrt.org/"&gt;OpenWrt&lt;/a&gt; is an embedded Linux distribution that converts cheap, energy-efficient, network-capable devices into much more useful hackable computers.&lt;/p&gt;
+</summary><category term="networks"></category><category term="web"></category><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>Supercharge a home router using OpenWrt Part 2</title><link href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html" rel="alternate"></link><updated>2015-02-08T18:16:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-08:supercharge-a-home-router-using-openwrt-pt2.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;PREVIOUS: TL-WR841N router &amp;lt;&amp;lt;&lt;/a&gt; A &lt;strong&gt;home router&lt;/strong&gt; is a much more capable device than its pre-installed software would lead you to believe. &lt;a class="reference external" href="https://openwrt.org/"&gt;OpenWrt&lt;/a&gt; is an embedded Linux distribution that converts cheap, energy-efficient, network-capable devices into much more useful hackable computers.&lt;/p&gt;
 &lt;p&gt;Getting its start hacking the original &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Linksys_WRT54G_series#WRT54G"&gt;Linksys WRT54G&lt;/a&gt;, OpenWrt and its volunteer developers now support a &lt;a class="reference external" href="http://wiki.openwrt.org/toh/start"&gt;wide and growing range of hardware&lt;/a&gt;. The project hosts software packages that lay out a smorgasboard of extra possibilities: more network tools with more fine-grained controls, plus a range of server capabilities... manage printers, connect external USB drives for backup, host files/torrents/VOIP/VPNs.&lt;/p&gt;
 &lt;p&gt;I replaced the default firmware and now exploring an OpenWrt-supported &lt;a class="reference external" href="http://wiki.openwrt.org/toh/tp-link/tl-wdr3600"&gt;TP-Link TL-WDR3600&lt;/a&gt; router:&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -474,28 +802,28 @@ Enter it again: &lt;span class="o"&gt;[&lt;/span&gt;newpasswd&lt;span class="o"&
 &lt;p&gt;Its exciting what you can do with these consumer routers once you let it sink in that - with a few dollars and OpenWrt - you have an extremely configurable general purpose computer.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="networks"></category><category term="openwrt"></category><category term="linux"></category></entry><entry><title>Dynamic DNS and OpenWRT</title><link href="http://www.circuidipity.com/ddns-openwrt.html" rel="alternate"></link><updated>2015-02-06T00:02:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-06:ddns-openwrt.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #5 &amp;gt;&amp;gt;&lt;/a&gt; Access a home server from anywhere using Dynamic DNS (DDNS).&lt;/p&gt;
+</summary><category term="networks"></category><category term="openwrt"></category><category term="linux"></category></entry><entry><title>Dynamic DNS and OpenWRT</title><link href="http://www.circuidipity.com/ddns-openwrt.html" rel="alternate"></link><updated>2015-02-06T00:02:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-06:ddns-openwrt.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #5 .:&lt;/a&gt; Access a home server from anywhere using Dynamic DNS (DDNS).&lt;/p&gt;
 &lt;p&gt;My Raspberry Pi server sits behind a router assigned a &lt;strong&gt;dynamic IP address&lt;/strong&gt; by the ISP. If I want to connect to my Pi over the Internet from anywhere in the world I can use a &lt;strong&gt;DDNS service&lt;/strong&gt; to create a domain name that automatically updates the IP address in the background whenever it changes and redirect traffic to the new location.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;/div&gt;
 &lt;div class="section" id="select-a-ddns-service"&gt;
 &lt;h2&gt;0. Select a DDNS service&lt;/h2&gt;
-&lt;p&gt;I chose the free DDNS service &lt;a class="reference external" href="http://www.duckdns.org/"&gt;duckdns.org&lt;/a&gt; which permits the creation of up to 4 domains in the format &lt;tt class="docutils literal"&gt;your_subdomain_choice.duckdns.org&lt;/tt&gt;. Example: Create the subdomain &lt;tt class="docutils literal"&gt;myPiHomeServer&lt;/tt&gt; and later - after configuring the router - when entering &lt;tt class="docutils literal"&gt;myPiHomeServer.duckdns.org&lt;/tt&gt; I will be redirected to the current IP address assigned to my home network.&lt;/p&gt;
+&lt;p&gt;I chose the free DDNS service &lt;a class="reference external" href="http://www.duckdns.org/"&gt;duckdns.org&lt;/a&gt; which permits the creation of up to 4 domains in the format &lt;tt class="docutils literal"&gt;your_subdomain_choice.duckdns.org&lt;/tt&gt;. Example: Create the subdomain &lt;tt class="docutils literal"&gt;mypihomeserver&lt;/tt&gt; and later - after configuring the router - when entering &lt;tt class="docutils literal"&gt;mypihomeserver.duckdns.org&lt;/tt&gt; I will be redirected to the current IP address assigned to my home network.&lt;/p&gt;
 &lt;p&gt;Make note of &lt;a class="reference external" href="http://www.duckdns.org/install.jsp"&gt;http://www.duckdns.org/install.jsp&lt;/a&gt; (while logged in) for customized settings useful for configuring the router for DDNS.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="configure-openwrt-for-notification"&gt;
 &lt;h2&gt;1. Configure OpenWRT for notification&lt;/h2&gt;
-&lt;p&gt;Different routers configure DDNS differently but the goal is the same: the ability to notify the DDNS service whenever the IP address assigned by the ISP is modified. I am using an &lt;a class="reference external" href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html"&gt;OpenWRT-powered router&lt;/a&gt; and these are the steps to configure OpenWRT to use duckdns DDNS:&lt;/p&gt;
+&lt;p&gt;Different routers configure DDNS differently but the goal is the same: the ability to notify the DDNS service whenever the IP address assigned by the ISP is modified. I am using an &lt;a class="reference external" href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html"&gt;OpenWRT-powered router&lt;/a&gt; and these are the steps to configure OpenWRT to use duckdns DDNS.&lt;/p&gt;
 &lt;p&gt;Install DDNS packages:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# opkg update&lt;/span&gt;
 &lt;span class="c"&gt;# opkg install luci-app-ddns ddns-scripts&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Use the customized settings from &lt;a class="reference external" href="http://www.duckdns.org/install.jsp"&gt;http://www.duckdns.org/install.jsp&lt;/a&gt; to configure &lt;tt class="docutils literal"&gt;/etc/config/ddns&lt;/tt&gt;. Sample entry for &lt;tt class="docutils literal"&gt;myPiHomeServer&lt;/tt&gt;:&lt;/p&gt;
+&lt;p&gt;Use the customized settings from &lt;a class="reference external" href="http://www.duckdns.org/install.jsp"&gt;http://www.duckdns.org/install.jsp&lt;/a&gt; to configure &lt;tt class="docutils literal"&gt;/etc/config/ddns&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;config service          &lt;span class="s2"&gt;&amp;quot;duckdns&amp;quot;&lt;/span&gt;
 option enabled          &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;
 option service_name     &lt;span class="s2"&gt;&amp;quot;duckdns.org&amp;quot;&lt;/span&gt;
-option domain           &lt;span class="s2"&gt;&amp;quot;myPiHomeServer&amp;quot;&lt;/span&gt;
+option domain           &lt;span class="s2"&gt;&amp;quot;mypihomeserver&amp;quot;&lt;/span&gt;
 option username         &lt;span class="s2"&gt;&amp;quot;NA&amp;quot;&lt;/span&gt;
 option password         &lt;span class="s2"&gt;&amp;quot;string_of_letters_and_digits&amp;quot;&lt;/span&gt;
 option ip_source        &lt;span class="s2"&gt;&amp;quot;network&amp;quot;&lt;/span&gt;
@@ -507,7 +835,7 @@ option check_unit       &lt;span class="s2"&gt;&amp;quot;minutes&amp;quot;&lt;/s
 option update_url       &lt;span class="s2"&gt;&amp;quot;http://www.duckdns.org/update?domains=[DOMAIN]&amp;amp;token=[PASSWORD]&amp;amp;ip=[IP]&amp;quot;&lt;/span&gt;
 option use_syslog       &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Start the daemon:&lt;/p&gt;
+&lt;p&gt;Start daemon:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# sh&lt;/span&gt;
 &lt;span class="c"&gt;# . /usr/lib/ddns/dynamic_dns_functions.sh&lt;/span&gt;
 &lt;span class="c"&gt;# start_daemon_for_all_ddns_sections &amp;quot;wan&amp;quot;&lt;/span&gt;
@@ -524,22 +852,22 @@ option use_syslog       &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt
 &lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;port forwarding HOWTO&lt;/a&gt; to configure OpenWRT to forward traffic directed at one of the router's ports to the listening port on the Pi home server. Example: configure port &lt;tt class="docutils literal"&gt;55555&lt;/tt&gt; on the router to connect to the &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH server&lt;/a&gt; listening on port &lt;tt class="docutils literal"&gt;22&lt;/tt&gt; on the Pi.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="networks"></category><category term="openwrt"></category><category term="linux"></category></entry><entry><title>Network Attached Storage using a Raspberry Pi and SSHFS</title><link href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html" rel="alternate"></link><updated>2015-02-05T18:28:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-05:nas-raspberry-pi-sshfs.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #4 &amp;gt;&amp;gt;&lt;/a&gt; Connect a Pi to external USB storage and create a cheap, cheerful, encrypted traffic NAS device via &lt;strong&gt;SSH Filesystem (SSHFS)&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;With a &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html"&gt;Pi-attached 1TB hard drive&lt;/a&gt; hosting a properly configured &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH server&lt;/a&gt; nothing extra is required server-side. On my laptop I install SSHFS, add my username to the &lt;tt class="docutils literal"&gt;FUSE&lt;/tt&gt; group, and create a local &lt;tt class="docutils literal"&gt;piNAS&lt;/tt&gt; mountpoint for the remote filesystem:&lt;/p&gt;
+</summary><category term="networks"></category><category term="openwrt"></category><category term="linux"></category></entry><entry><title>Network Attached Storage using a Raspberry Pi and SSHFS</title><link href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html" rel="alternate"></link><updated>2015-03-01T19:29:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-05:nas-raspberry-pi-sshfs.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #4 .:&lt;/a&gt; Connect a Pi to external USB storage and create a cheap, cheerful, encrypted traffic NAS device via &lt;strong&gt;SSH Filesystem (SSHFS)&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;With a &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html"&gt;Pi-attached 1TB hard drive&lt;/a&gt; hosting a properly configured &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH server&lt;/a&gt; nothing extra is required server-side. Example: install SSHFS, add username &lt;tt class="docutils literal"&gt;pi&lt;/tt&gt; to the &lt;tt class="docutils literal"&gt;FUSE&lt;/tt&gt; group, and create a &lt;tt class="docutils literal"&gt;~/NAS&lt;/tt&gt; mountpoint for the remote filesystem:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install sshfs
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser USERNAME fuse
-&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/piNAS
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser pi fuse
+&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/NAS
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Log out and back in for new permissions to be activated. To mount the Pi-hosted remote filesystem to the Chromebook:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sshfs -o &lt;span class="nv"&gt;idmap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;user ip_address_of_the_Pi:/media/your_external_usb_storage ~/piNAS
+&lt;p&gt;Log out and back in for new permissions to be activated. To mount the Pi-hosted remote filesystem at ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt; to the laptop:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sshfs -o &lt;span class="nv"&gt;idmap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;user 192.168.1.88:/media/external_usb_storage ~/NAS
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Contents of the remote hard drive now appear as local directories and files on the Chromebook. Data transfer between server and client is SSH-encrypted.&lt;/p&gt;
-&lt;p&gt;To detach from remote storage unmount the drive using &lt;tt class="docutils literal"&gt;fusermount&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;fusermount -u ~/piNAS
+&lt;p&gt;Contents of the remote hard drive now appear as local directories and files on the laptop. Data transfer between server and client is SSH-encrypted.&lt;/p&gt;
+&lt;p&gt;Use &lt;tt class="docutils literal"&gt;fusermount&lt;/tt&gt; to detach from the remote storage:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;fusermount -u ~/NAS
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Raspberry Pi + SSHFS is no speed demon but its very usable. On my laptop connected to the LAN via wireless I am able to run Rhythmbox playing music and videos in VLC that are remotely hosted on the Pi.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-</summary><category term="networks"></category><category term="raspberry pi"></category><category term="linux"></category></entry><entry><title>Links of interest</title><link href="http://www.circuidipity.com/links-20150204.html" rel="alternate"></link><updated>2015-02-04T00:02:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-04:links-20150204.html</id><summary type="html">&lt;ul class="simple"&gt;
+</summary><category term="networks"></category><category term="raspberry pi"></category><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>Links of interest</title><link href="http://www.circuidipity.com/links-20150204.html" rel="alternate"></link><updated>2015-02-04T00:02:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-04:links-20150204.html</id><summary type="html">&lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.ted.com/talks/deb_roy_the_birth_of_a_word"&gt;Birth of a word&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Overcoming &lt;a class="reference external" href="http://www.brainpickings.org/2015/01/07/glenn-kurtz-practicing/"&gt;imposter syndrome&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;How NASA brought the &lt;a class="reference external" href="http://arstechnica.com/science/2013/04/how-nasa-brought-the-monstrous-f-1-moon-rocket-back-to-life/"&gt;F-1 monster moon rocket engine back to life&lt;/a&gt;&lt;/li&gt;
@@ -547,36 +875,37 @@ option use_syslog       &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt
 &lt;li&gt;MOOC &lt;a class="reference external" href="http://www.marsdd.com/news-and-insights/what-mooc-should-become/"&gt;jumps into the POOL&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;From bacteria to &lt;a class="reference external" href="https://www.youtube.com/watch?v=0HJPilemNns"&gt;interstellar war&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Nazi spy &lt;a class="reference external" href="http://www.strangehistory.net/2010/06/27/nazi-kurt-captured-in-arctic-circle-in-1981/"&gt;captured in Labrador in 1981&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&amp;quot;Ten Years to the Singularity if we &lt;a class="reference external" href="http://goertzel.org/TenYearsToTheSingularity.pdf"&gt;Really Really Try&amp;quot; (PDF)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&amp;quot;Ten Years to the Singularity &lt;a class="reference external" href="http://goertzel.org/TenYearsToTheSingularity.pdf"&gt;if we Really Really Try&amp;quot;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Influence of &lt;a class="reference external" href="http://onlinelibrary.wiley.com/enhanced/doi/10.1002/bies.201400071/"&gt;gut bacteria on eating decisions&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</summary><category term="links"></category></entry><entry><title>Backup /home</title><link href="http://www.circuidipity.com/backup-home.html" rel="alternate"></link><updated>2015-02-03T00:10:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-03:backup-home.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #3 &amp;gt;&amp;gt;&lt;/a&gt; Make automatic backups of &lt;tt class="docutils literal"&gt;/home&lt;/tt&gt; using a dash of shell scripting + rsync + SSH + cron!&lt;/p&gt;
-&lt;p&gt;One of the advantages of setting up a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Linux home server&lt;/a&gt; is providing an always-available location to store backups of important files. A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home directory on the local area network (LAN) server.&lt;/p&gt;
+</summary><category term="links"></category></entry><entry><title>Backup home</title><link href="http://www.circuidipity.com/backup-home.html" rel="alternate"></link><updated>2015-03-01T19:13:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-03:backup-home.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #3 .:&lt;/a&gt; Make automatic backups of a &lt;strong&gt;home folder&lt;/strong&gt; using a dash of shell scripting + rsync + SSH + cron!&lt;/p&gt;
+&lt;p&gt;One of the advantages of setting up a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Linux home server&lt;/a&gt; is providing an always-available location to store backups of important files. A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home folder on the local area network (LAN) server.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Backup server&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html"&gt;Raspberry Pi 2&lt;/a&gt; connected to a &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;1TB external USB hard drive&lt;/a&gt; running Ubuntu 14.04 LTS located at ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt; with username &lt;tt class="docutils literal"&gt;pi&lt;/tt&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="ssh"&gt;
 &lt;h2&gt;0. SSH&lt;/h2&gt;
-&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;Secure remote access using SSH keys&lt;/a&gt; to configure SSH for encrypted connections between (Pi) server and (laptop) client. &lt;tt class="docutils literal"&gt;Keychain&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-agent&lt;/span&gt;&lt;/tt&gt;  make it easy to use a passphrase-protected &lt;strong&gt;encryption key&lt;/strong&gt; in automated scripts.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;Secure remote access using SSH keys&lt;/a&gt; to configure SSH for encrypted connections between (Pi) server and (laptop) client. &lt;tt class="docutils literal"&gt;Keychain&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-agent&lt;/span&gt;&lt;/tt&gt;  make it easy to use a passphrase-protected &lt;strong&gt;encryption key&lt;/strong&gt; in automated scripts.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="script"&gt;
 &lt;h2&gt;1. Script&lt;/h2&gt;
 &lt;div class="section" id="on-the-server"&gt;
-&lt;h3&gt;On the server:&lt;/h3&gt;
-&lt;p&gt;Create a backup directory to hold the contents of &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt;:&lt;/p&gt;
+&lt;h3&gt;1.1 On the server&lt;/h3&gt;
+&lt;p&gt;Create a backup directory to hold the contents of &lt;tt class="docutils literal"&gt;HOME&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/backup-home
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="on-the-client"&gt;
-&lt;h3&gt;On the client:&lt;/h3&gt;
-&lt;p&gt;Create a backup script that uses the &lt;tt class="docutils literal"&gt;rsync&lt;/tt&gt; file-copy tool. A sample &lt;tt class="docutils literal"&gt;myRsync&lt;/tt&gt; script to backup &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt; includes:&lt;/p&gt;
+&lt;h3&gt;1.2 On the client&lt;/h3&gt;
+&lt;p&gt;Create a backup script that uses &lt;tt class="docutils literal"&gt;rsync&lt;/tt&gt; file-copy tool. A sample &lt;tt class="docutils literal"&gt;myRsync&lt;/tt&gt; script to backup &lt;tt class="docutils literal"&gt;HOME&lt;/tt&gt; includes:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;load the details of the SSH key stored in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.keychain/$HOSTNAME-sh&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;mirror &lt;tt class="docutils literal"&gt;$HOME/&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;SERVER_ADDR:~/backup-home/&lt;/span&gt;&lt;/tt&gt; using options &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--archive&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--delete&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;mirror &lt;tt class="docutils literal"&gt;$HOME/&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;192.168.1.88:~/backup-home/&lt;/span&gt;&lt;/tt&gt; using options &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--archive&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--delete&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
 &lt;li&gt;exclude certain items from the backup like &lt;tt class="docutils literal"&gt;cache&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;trash&lt;/tt&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; Take care nothing important is wiped out using &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--delete&lt;/span&gt;&lt;/tt&gt;. First run &lt;tt class="docutils literal"&gt;rsync&lt;/tt&gt; in a console with option &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--dry-run&lt;/span&gt;&lt;/tt&gt; to test settings (example SERVER_ADDR &lt;tt class="docutils literal"&gt;pi&amp;#64;192.168.1.88&lt;/tt&gt;):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;rsync --verbose --archive --delete --dry-run &lt;span class="k"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;HOME&lt;/span&gt;&lt;span class="k"&gt;}&lt;/span&gt;/ pi@192.168.1.88:~/backup-home/
+&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; Take care nothing important is wiped out using &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--delete&lt;/span&gt;&lt;/tt&gt;. First run &lt;tt class="docutils literal"&gt;rsync&lt;/tt&gt; in a console with option &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--dry-run&lt;/span&gt;&lt;/tt&gt; to test settings:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;rsync --verbose --archive --delete --dry-run ~/ pi@192.168.1.88:~/backup-home/
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Sample script:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
@@ -591,7 +920,7 @@ option use_syslog       &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt
 &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;date&lt;span class="k"&gt;)&lt;/span&gt;
 rsync &lt;span class="nv"&gt;$rsync_options&lt;/span&gt; &lt;span class="nv"&gt;$rsync_exclude&lt;/span&gt; &lt;span class="nv"&gt;$rsync_src&lt;/span&gt; &lt;span class="nv"&gt;$rsync_dest&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Place the script in &lt;tt class="docutils literal"&gt;$HOME/bin&lt;/tt&gt; and make it executable. Run manually at least once to test:&lt;/p&gt;
+&lt;p&gt;Place the script in &lt;tt class="docutils literal"&gt;~/bin&lt;/tt&gt; and make it executable. Run manually at least once to test:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;chmod 744 ~/bin/myRsync
 &lt;span class="nv"&gt;$ &lt;/span&gt;~/bin/myRsync
 &lt;/pre&gt;&lt;/div&gt;
@@ -602,7 +931,7 @@ rsync &lt;span class="nv"&gt;$rsync_options&lt;/span&gt; &lt;span class="nv"&gt;
 &lt;p&gt;&lt;strong&gt;Cron&lt;/strong&gt; is a daemon that runs programs at specified times. Use the command &lt;tt class="docutils literal"&gt;crontab &lt;span class="pre"&gt;-e&lt;/span&gt;&lt;/tt&gt; to setup &lt;tt class="docutils literal"&gt;myRsync&lt;/tt&gt; to auto-run with the following parameters:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;perform a daily backup at &lt;tt class="docutils literal"&gt;23:55&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;log program activity by redirecting output to &lt;tt class="docutils literal"&gt;/home/my_username/cron.log&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;log program activity by redirecting output to &lt;tt class="docutils literal"&gt;/home/pi/cron.log&lt;/tt&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# To define the time you can provide concrete values for&lt;/span&gt;
 &lt;span class="c"&gt;# minute (m), hour (h), day of month (dom), month (mon),&lt;/span&gt;
@@ -616,146 +945,9 @@ rsync &lt;span class="nv"&gt;$rsync_options&lt;/span&gt; &lt;span class="nv"&gt;
 &lt;span class="c"&gt;# m h  dom mon dow   command&lt;/span&gt;
 
 &lt;span class="c"&gt;# Daily backup of $HOME to the netbook server&lt;/span&gt;
-55 23 * * * /home/my_username/bin/myRsync &amp;gt;&amp;gt; /home/my_username/cron.log
+55 23 * * * /home/pi/bin/myRsync &amp;gt;&amp;gt; /home/pi/cron.log
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I stashed a more complete &lt;tt class="docutils literal"&gt;myRsync&lt;/tt&gt; &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/myRsync"&gt;script on Github&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="networks"></category><category term="linux"></category><category term="shell"></category><category term="programming"></category><category term="github"></category></entry><entry><title>Secure remote access using SSH keys</title><link href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html" rel="alternate"></link><updated>2015-02-20T23:34:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-02:secure-remote-access-using-ssh-keys.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #1 &amp;gt;&amp;gt;&lt;/a&gt; Create cryptographic keys and disable password logins to make remote machines more secure.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Setup:&lt;/strong&gt; &lt;em&gt;Remote server&lt;/em&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi&lt;/a&gt; running Raspbian Linux configured for SSH logins from a &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Chromebook&lt;/a&gt; &lt;em&gt;local client&lt;/em&gt; running Lubuntu 14.04.&lt;/p&gt;
-&lt;p&gt;Server options: username &lt;tt class="docutils literal"&gt;pi&lt;/tt&gt;, ip address &lt;tt class="docutils literal"&gt;192.168.1.33&lt;/tt&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="install"&gt;
-&lt;h2&gt;0. Install&lt;/h2&gt;
-&lt;div class="section" id="on-the-server"&gt;
-&lt;h3&gt;On the server&lt;/h3&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;install &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openssh-server&lt;/span&gt;&lt;/tt&gt; and create an SSH configuration in the home directory of users who requires access to the system:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install openssh-server
-&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/.ssh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod 700 ~/.ssh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; touch ~/.ssh/authorized_keys &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod 600 ~/.ssh/authorized_keys
-&lt;/pre&gt;&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;collect key fingerprints:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-keygen -lf /etc/ssh/ssh_host_dsa_key.pub &amp;gt;&amp;gt; ~/.ssh/keys.txt
-&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub &amp;gt;&amp;gt; ~/.ssh/keys.txt
-&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-keygen -lf /etc/ssh/ssh_host_rsa_key.pub &amp;gt;&amp;gt; ~/.ssh/keys.txt
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and give &lt;tt class="docutils literal"&gt;keys.txt&lt;/tt&gt; to users to compare signature when connecting for the first time&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;em&gt;optional:&lt;/em&gt; specify usernames in &lt;tt class="docutils literal"&gt;/etc/ssh/sshd_config&lt;/tt&gt; to be granted system access (&lt;strong&gt;disabling&lt;/strong&gt; all others by default):&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;AllowUsers pi user2 user3
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Save and restart SSH with new configuration:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service ssh restart
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="on-the-client"&gt;
-&lt;h3&gt;On the client&lt;/h3&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;install &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;openssh-client&lt;/span&gt;&lt;/tt&gt; and create the SSH folder in the user home directory:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install openssh-client
-&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/.ssh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod 700 ~/.ssh
-&lt;/pre&gt;&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/config&lt;/span&gt;&lt;/tt&gt; to hold &lt;em&gt;aliases&lt;/em&gt; with the login options for a server - sample entry for the Pi:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Host raspberry.lan
-HostName 192.168.1.33
-Port 22
-User pi
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Test SSH password login to Pi server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh raspberry.lan
-pi@192.168.1.33&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;s password:
-Last login: Thu Feb 19 18:07:48 2015 from chromebook.lan
-&lt;span class="err"&gt;$&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;em&gt;optional:&lt;/em&gt; see &lt;a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html"&gt;Access from anywhere in the world using dynamic DNS&lt;/a&gt; for configuring access to the Pi from &lt;em&gt;outside&lt;/em&gt; the LAN&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="keys"&gt;
-&lt;h2&gt;1. Keys&lt;/h2&gt;
-&lt;div class="section" id="id1"&gt;
-&lt;h3&gt;On the client&lt;/h3&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;generate SSH keys:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-keygen -t rsa -C &lt;span class="s2"&gt;&amp;quot;$(whoami)@$(hostname)-$(date -I)&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;upload the &lt;em&gt;public key&lt;/em&gt; to the server and append to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/authorized_keys&lt;/span&gt;&lt;/tt&gt;:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cat ~/.ssh/id_rsa.pub | ssh raspberry.lan &lt;span class="s2"&gt;&amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Graphical display managers like &lt;tt class="docutils literal"&gt;gdm&lt;/tt&gt; will automatically check a user account for SSH keys upon login. A pop-up box will prompt for the passphrase and the key will be added to the desktop session.&lt;/p&gt;
-&lt;p&gt;If logging into a console, tell SSH that you have keys by running &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-add&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh-add
-&lt;span class="nv"&gt;$ &lt;/span&gt;Enter passphrase &lt;span class="k"&gt;for&lt;/span&gt; /home/username/.ssh/id_rsa:
-Identity added: /home/username/.ssh/id_rsa &lt;span class="o"&gt;(&lt;/span&gt;/home/username/.ssh/id_rsa&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;All SSH sessions launched from this console will access this user key stored in memory. Make sure to test the connection before disabling password logins:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ssh raspberry.lan
-Last login: Thu Feb 19 18:22:42 2015 from chromebook.lan
-&lt;span class="err"&gt;$&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;No passphrase request indicates SSH key authentication is properly configured.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="disable-password-logins"&gt;
-&lt;h2&gt;2. Disable password logins&lt;/h2&gt;
-&lt;div class="section" id="id2"&gt;
-&lt;h3&gt;On the server&lt;/h3&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;edit &lt;tt class="docutils literal"&gt;/etc/ssh/sshd_config&lt;/tt&gt;:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;PubkeyAuthentication yes
-ChallengeResponseAuthentication no
-PasswordAuthentication no
-UsePAM no
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and restart SSH:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service ssh restart
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="key-management"&gt;
-&lt;h2&gt;3. Key management&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://www.funtoo.org/Keychain"&gt;Keychain&lt;/a&gt; is an OpenSSH key manager. From the package description:&lt;/p&gt;
-&lt;blockquote&gt;
-When keychain is run, it checks for a running ssh-agent, otherwise it starts one. It saves the ssh-agent environment variables to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.keychain/$HOSTNAME-sh&lt;/span&gt;&lt;/tt&gt;, so that subsequent logins and non-interactive shells such as cron jobs can source the file and make passwordless ssh connections.  In addition, when keychain runs, it verifies that the key files specified on the command-line are known to ssh-agent, otherwise it loads them, prompting you for a password if necessary.&lt;/blockquote&gt;
-&lt;div class="section" id="id3"&gt;
-&lt;h3&gt;On the client&lt;/h3&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;install:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install keychain
-&lt;/pre&gt;&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;configure &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bashrc&lt;/span&gt;&lt;/tt&gt;:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# setup keychain - ssh-agent management&lt;/span&gt;
-keychain ~/.ssh/id_rsa
-. ~/.keychain/&lt;span class="nv"&gt;$HOSTNAME&lt;/span&gt;-sh
-&lt;/pre&gt;&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;flush all cached keys from memory with:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;keychain --clear
-&lt;/pre&gt;&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;em&gt;optional:&lt;/em&gt; if using &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; enable persistent SSH key management across sessions by editing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.tmux.conf&lt;/span&gt;&lt;/tt&gt;:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;set&lt;/span&gt;-option -g update-environment &lt;span class="s2"&gt;&amp;quot;DISPLAY SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</summary><category term="networks"></category><category term="linux"></category><category term="raspberry pi"></category></entry></feed>
+</summary><category term="networks"></category><category term="ubuntu"></category><category term="linux"></category><category term="shell"></category><category term="programming"></category><category term="github"></category><category term="raspberry pi"></category></entry></feed>

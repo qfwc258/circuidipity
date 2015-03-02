@@ -25,25 +25,27 @@
 
 <!-- article -->
 <h1>Network Attached Storage using a Raspberry Pi and SSHFS</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 01 March 2015</p>
 <div id="article">
-    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #4 &gt;&gt;</a> Connect a Pi to external USB storage and create a cheap, cheerful, encrypted traffic NAS device via <strong>SSH Filesystem (SSHFS)</strong>.</p>
-<p>With a <a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html">Pi-attached 1TB hard drive</a> hosting a properly configured <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">SSH server</a> nothing extra is required server-side. On my laptop I install SSHFS, add my username to the <tt class="docutils literal">FUSE</tt> group, and create a local <tt class="docutils literal">piNAS</tt> mountpoint for the remote filesystem:</p>
+    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #4 .:</a> Connect a Pi to external USB storage and create a cheap, cheerful, encrypted traffic NAS device via <strong>SSH Filesystem (SSHFS)</strong>.</p>
+<p>With a <a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html">Pi-attached 1TB hard drive</a> hosting a properly configured <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">SSH server</a> nothing extra is required server-side. Example: install SSHFS, add username <tt class="docutils literal">pi</tt> to the <tt class="docutils literal">FUSE</tt> group, and create a <tt class="docutils literal">~/NAS</tt> mountpoint for the remote filesystem:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install sshfs
-<span class="nv">$ </span>sudo adduser USERNAME fuse
-<span class="nv">$ </span>mkdir ~/piNAS
+<span class="nv">$ </span>sudo adduser pi fuse
+<span class="nv">$ </span>mkdir ~/NAS
 </pre></div>
-<p>Log out and back in for new permissions to be activated. To mount the Pi-hosted remote filesystem to the Chromebook:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sshfs -o <span class="nv">idmap</span><span class="o">=</span>user ip_address_of_the_Pi:/media/your_external_usb_storage ~/piNAS
+<p>Log out and back in for new permissions to be activated. To mount the Pi-hosted remote filesystem at ip address <tt class="docutils literal">192.168.1.88</tt> to the laptop:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sshfs -o <span class="nv">idmap</span><span class="o">=</span>user 192.168.1.88:/media/external_usb_storage ~/NAS
 </pre></div>
-<p>Contents of the remote hard drive now appear as local directories and files on the Chromebook. Data transfer between server and client is SSH-encrypted.</p>
-<p>To detach from remote storage unmount the drive using <tt class="docutils literal">fusermount</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>fusermount -u ~/piNAS
+<p>Contents of the remote hard drive now appear as local directories and files on the laptop. Data transfer between server and client is SSH-encrypted.</p>
+<p>Use <tt class="docutils literal">fusermount</tt> to detach from the remote storage:</p>
+<div class="highlight"><pre><span class="nv">$ </span>fusermount -u ~/NAS
 </pre></div>
 <p>Raspberry Pi + SSHFS is no speed demon but its very usable. On my laptop connected to the LAN via wireless I am able to run Rhythmbox playing music and videos in VLC that are remotely hosted on the Pi.</p>
 <p>Happy hacking!</p>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-networks.html">networks</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-raspberry-pi.html">raspberry pi</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
 </div>

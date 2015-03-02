@@ -25,9 +25,10 @@
 
 <!-- article -->
 <h1>Run a Raspberry Pi from external USB storage</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 19 February 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 01 March 2015</p>
 <div id="article">
-    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #0 &gt;&gt;</a> I am exploring the use of my Pi as <strong>24/7 uptime home server</strong> and one of the hacks I wish to add is using Pi as a cheap and cheerful <a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html">network attached storage (NAS)</a> device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?</p>
+    <p><strong>Update:</strong> Home server now <a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html">upgraded to Raspberry Pi 2</a>. <tt class="docutils literal"><span class="pre">(2015-03-01)</span></tt></p>
+<p>I am exploring the use of my Pi as <strong>24/7 uptime home server</strong> and one of the hacks I wish to add is using Pi as a cheap and cheerful <a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html">network attached storage (NAS)</a> device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?</p>
 <p>I imagine an always-on Pi would enjoy more robust performance from a hard drive than an SD card. Thanks to all the contributors <a class="reference external" href="http://www.raspberrypi.org/forums/viewtopic.php?f=29&amp;t=44177">on this discussion thread</a> I put my plan in motion using:</p>
 <ul class="simple">
 <li>Raspberry Pi Model B</li>
@@ -82,28 +83,28 @@ Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp.
 Bus 001 Device 005: ID 152d:2329 JMicron Technology Corp. / JMicron USA Technology Corp. JM20329 SATA Bridge
 <span class="nv">$ </span>dmesg
 <span class="o">[</span> ... <span class="o">]</span>
-<span class="o">[</span> 1000.758503<span class="o">]</span> usb 1-1.3: new high-speed USB device number 5 using dwc_otg
-<span class="o">[</span> 1000.879972<span class="o">]</span> usb 1-1.3: New USB device found, <span class="nv">idVendor</span><span class="o">=</span>152d, <span class="nv">idProduct</span><span class="o">=</span>2329
-<span class="o">[</span> 1000.880010<span class="o">]</span> usb 1-1.3: New USB device strings: <span class="nv">Mfr</span><span class="o">=</span>1, <span class="nv">Product</span><span class="o">=</span>2, <span class="nv">SerialNumber</span><span class="o">=</span>5
-<span class="o">[</span> 1000.880026<span class="o">]</span> usb 1-1.3: Product: USB to ATA/ATAPI bridge
-<span class="o">[</span> 1000.880043<span class="o">]</span> usb 1-1.3: Manufacturer: JMicron
-<span class="o">[</span> 1000.880057<span class="o">]</span> usb 1-1.3: SerialNumber: DCA5968053FF
-<span class="o">[</span> 1000.887271<span class="o">]</span> usb-storage 1-1.3:1.0: USB Mass Storage device detected
-<span class="o">[</span> 1000.892548<span class="o">]</span> usb-storage 1-1.3:1.0: Quirks match <span class="k">for </span>vid 152d pid 2329: 8020
-<span class="o">[</span> 1000.892761<span class="o">]</span> scsi0 : usb-storage 1-1.3:1.0
-<span class="o">[</span> 1001.928635<span class="o">]</span> scsi 0:0:0:0: Direct-Access     WDC WD10 EARS-00Y5B1           PQ: 0 ANSI: 2 CCS
-<span class="o">[</span> 1001.932571<span class="o">]</span> sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> 1953525168 512-byte logical blocks: <span class="o">(</span>1.00 TB/931 GiB<span class="o">)</span>
-<span class="o">[</span> 1001.933328<span class="o">]</span> sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Write Protect is off
-<span class="o">[</span> 1001.933365<span class="o">]</span> sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Mode Sense: 28 00 00 00
-<span class="o">[</span> 1001.934066<span class="o">]</span> sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> No Caching mode page found
-<span class="o">[</span> 1001.934096<span class="o">]</span> sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Assuming drive cache: write through
-<span class="o">[</span> 1001.936947<span class="o">]</span> sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> No Caching mode page found
-<span class="o">[</span> 1001.936984<span class="o">]</span> sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Assuming drive cache: write through
-<span class="o">[</span> 1001.984646<span class="o">]</span> sd 0:0:0:0: Attached scsi generic sg0 <span class="nb">type </span>0
-<span class="o">[</span> 1002.344655<span class="o">]</span>  sda: sda1
-<span class="o">[</span> 1002.365186<span class="o">]</span> sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> No Caching mode page found
-<span class="o">[</span> 1002.365227<span class="o">]</span> sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Assuming drive cache: write through
-<span class="o">[</span> 1002.365255<span class="o">]</span> sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Attached SCSI disk
+usb 1-1.3: new high-speed USB device number 5 using dwc_otg
+usb 1-1.3: New USB device found, <span class="nv">idVendor</span><span class="o">=</span>152d, <span class="nv">idProduct</span><span class="o">=</span>2329
+usb 1-1.3: New USB device strings: <span class="nv">Mfr</span><span class="o">=</span>1, <span class="nv">Product</span><span class="o">=</span>2, <span class="nv">SerialNumber</span><span class="o">=</span>5
+usb 1-1.3: Product: USB to ATA/ATAPI bridge
+usb 1-1.3: Manufacturer: JMicron
+usb 1-1.3: SerialNumber: DCA5968053FF
+usb-storage 1-1.3:1.0: USB Mass Storage device detected
+usb-storage 1-1.3:1.0: Quirks match <span class="k">for </span>vid 152d pid 2329: 8020
+scsi0 : usb-storage 1-1.3:1.0
+scsi 0:0:0:0: Direct-Access     WDC WD10 EARS-00Y5B1           PQ: 0 ANSI: 2 CCS
+sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> 1953525168 512-byte logical blocks: <span class="o">(</span>1.00 TB/931 GiB<span class="o">)</span>
+sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Write Protect is off
+sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Mode Sense: 28 00 00 00
+sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> No Caching mode page found
+sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Assuming drive cache: write through
+sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> No Caching mode page found
+sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Assuming drive cache: write through
+sd 0:0:0:0: Attached scsi generic sg0 <span class="nb">type </span>0
+sda: sda1
+sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> No Caching mode page found
+sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Assuming drive cache: write through
+sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Attached SCSI disk
 </pre></div>
 <p>Device is <tt class="docutils literal">sda</tt>. Use <strong>fdisk</strong> to create 2 new partitions on the USB drive:</p>
 <ul class="simple">
@@ -205,7 +206,7 @@ dwc_otg.lpm_enable<span class="o">=</span>0 <span class="nv">console</span><span
 <div class="section" id="fstab">
 <h2>6. fstab</h2>
 <p>Create new mountpoint for the <tt class="docutils literal">storage</tt> partition:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /media/USB0
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /mnt/media/USB0
 </pre></div>
 <p>Modify options in <tt class="docutils literal">/mnt/etc/fstab</tt> - located on the <strong>USB device</strong> - to mount <tt class="docutils literal">rootfs</tt> and <tt class="docutils literal">storage</tt> partitions <a class="footnote-reference" href="#id2" id="id1">[1]</a> at boot. Sample configuration for <tt class="docutils literal">sda1</tt> and <tt class="docutils literal">sda2</tt>:</p>
 <div class="highlight"><pre>proc            /proc           proc    defaults          0       0

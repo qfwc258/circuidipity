@@ -25,10 +25,12 @@
 
 <!-- article -->
 <h1>Tiny Tiny RSS</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 01 March 2015</p>
 <div id="article">
-    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #7 &gt;&gt;</a> Install and self-host the <strong>Tiny Tiny RSS</strong> news reader and aggregator and access news feeds over the web from anywhere.</p>
+    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #7 .:</a> Install and self-host the <strong>Tiny Tiny RSS</strong> news reader and aggregator and access news feeds over the web from anywhere.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
+<p><strong>Server</strong> is a <a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html">Raspberry Pi 2</a> running Ubuntu 14.04 LTS located at ip address <tt class="docutils literal">192.168.1.88</tt>.</p>
 </div>
 <div class="section" id="web-server-and-database">
 <h2>0. Web server and database</h2>
@@ -45,14 +47,15 @@
 </pre></div>
 <div class="section" id="peer-authentication">
 <h3>1.1 Peer authentication</h3>
-<p>Later when running the TTRSS <tt class="docutils literal">update.php</tt> script you may run into <tt class="docutils literal">Peer authentication failed for user</tt> errors. Fix this issue by editing <tt class="docutils literal"><span class="pre">/etc/postgresql/9.*/main/pg_hba.conf</span></tt> and change <tt class="docutils literal">peer</tt>:</p>
+<p>Later when running the TTRSS <tt class="docutils literal">update.php</tt> script you may run into <tt class="docutils literal">Peer authentication failed for user</tt> errors. Fix this issue by editing <tt class="docutils literal">/etc/postgresql/9.3/main/pg_hba.conf</tt> and change <tt class="docutils literal">peer</tt>:</p>
 <div class="highlight"><pre><span class="c"># &quot;local&quot; is for Unix domain socket connections only</span>
 <span class="nb">local   </span>all             all                                     peer
 </pre></div>
 <p>... to <tt class="docutils literal">trust</tt>:</p>
-<div class="highlight"><pre><span class="nb">local   </span>all             all                                     trust
+<div class="highlight"><pre><span class="c"># &quot;local&quot; is for Unix domain socket connections only</span>
+<span class="nb">local   </span>all             all                                     trust
 </pre></div>
-<p>Save and reload the database server:</p>
+<p>Reload the database server:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo service postgresql reload
 </pre></div>
 <p>Source: <a class="reference external" href="http://askubuntu.com/questions/274441/pg-connect-unable-to-connect-to-postgresql-server">Unable to connect to postgresql server</a></p>
@@ -70,20 +73,20 @@
 <div class="section" id="nginx">
 <h2>3. Nginx</h2>
 <p>Move the <tt class="docutils literal">ttrss</tt> directory into Nginx's <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">document root</a> directory:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mv ../ttrss /usr/share/nginx/www/
-<span class="nv">$ </span>sudo chown -R www-data.www-data /usr/share/nginx/www/ttrss
+<div class="highlight"><pre><span class="nv">$ </span>sudo mv ../ttrss /usr/share/nginx/html/
+<span class="nv">$ </span>sudo chown -R www-data.www-data /usr/share/nginx/html/ttrss
 </pre></div>
 <p>Create a <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">server block</a> (virtual host) for TTRSS. Sample <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/ttrss</span></tt> <a class="footnote-reference" href="#id8" id="id4">[3]</a> configuration:</p>
 <div class="highlight"><pre>server <span class="o">{</span>
-    listen  80; <span class="c">## listen for ipv4; this line is default and implied</span>
+    listen 80; <span class="c">## listen for ipv4; this line is default and implied</span>
 
-    root /usr/share/nginx/www/ttrss;
+    root /usr/share/nginx/html/ttrss;
     index index.html index.htm index.php;
 
     access_log /var/log/nginx/ttrss_access.log;
     error_log /var/log/nginx/ttrss_error.log info;
 
-    server_name localhost;
+    server_name ttrss.*;
 
     location / <span class="o">{</span>
         index           index.php;
@@ -106,7 +109,11 @@
 </div>
 <div class="section" id="configure">
 <h2>4. Configure</h2>
-<p>Navigate to <tt class="docutils literal"><span class="pre">http://your.server.ip.address</span></tt> and configure TTRSS:</p>
+<p>Example configuration for LAN access to the Pi home server at ip address <tt class="docutils literal">192.168.1.88</tt> hosting ttrss.</p>
+<p>Modify <tt class="docutils literal">/etc/hosts</tt> on the <strong>client</strong> device making the connection:</p>
+<div class="highlight"><pre>192.168.1.88 ttrss.local
+</pre></div>
+<p>Navigate to <tt class="docutils literal"><span class="pre">http://ttrss.local</span></tt> and configure TTRSS:</p>
 <div class="highlight"><pre>Database <span class="nb">type</span>: <span class="o">[</span><span class="k">select </span>PostgreSQL<span class="o">]</span>
 Username: www-data
 Password: <span class="o">[</span>database password created earlier<span class="o">]</span>
@@ -115,18 +122,18 @@ Hostname: <span class="o">[</span>leave blank<span class="o">]</span>
 Port: 5432
 </pre></div>
 <p>Press <tt class="docutils literal">Test configuration</tt> button, then <tt class="docutils literal">Initialize database</tt>, and finally <tt class="docutils literal">Save configuration</tt>.</p>
-<p>Navigate back to <tt class="docutils literal"><span class="pre">http://YOUR.SERVER.IP.ADDRESS</span></tt> and login <tt class="docutils literal">Username: &quot;admin&quot; Password: &quot;password&quot;</tt>. In the top-right go to <tt class="docutils literal"><span class="pre">Actions-&gt;Preferences</span></tt> to make further changes to the default settings. Create a new user account for RSS reading (vs logging in all the time as <tt class="docutils literal">admin</tt>) and change the <tt class="docutils literal">admin</tt> password.</p>
+<p>Navigate back to <tt class="docutils literal"><span class="pre">http://ttrss.local</span></tt> and log back in with username <tt class="docutils literal">admin</tt> and password <tt class="docutils literal">password</tt>. In the top-right go to <tt class="docutils literal"><span class="pre">Actions-&gt;Preferences</span></tt> to make further changes to the default settings. Create a new user account for RSS reading (vs logging in all the time as <tt class="docutils literal">admin</tt>) and change the default password.</p>
 </div>
 <div class="section" id="updates">
 <h2>5. Updates</h2>
 <p>Configure TTRSS to periodically update the RSS feeds with new content. First, test the included <tt class="docutils literal">update.php</tt> script:</p>
-<div class="highlight"><pre><span class="nv">$ </span>/usr/bin/php /usr/share/nginx/www/ttrss/update.php --feeds --quiet
+<div class="highlight"><pre><span class="nv">$ </span>/usr/bin/php /usr/share/nginx/html/ttrss/update.php --feeds --quiet
 </pre></div>
-<p>If the script returns no errors use <tt class="docutils literal">cron</tt> to run the script periodically. Add a new job to <tt class="docutils literal">crontab</tt>:</p>
+<p>If the script returns no errors add a new job to <tt class="docutils literal">cron</tt> to run script periodically:</p>
 <div class="highlight"><pre><span class="nv">$ </span>crontab -e
 </pre></div>
 <p>Sample TTRSS job:</p>
-<div class="highlight"><pre>*/30 * * * * /usr/bin/php /usr/share/nginx/www/ttrss/update.php --feeds --quiet
+<div class="highlight"><pre>10 * * * * /usr/bin/php /usr/share/nginx/html/ttrss/update.php --feeds --quiet
 </pre></div>
 </div>
 <div class="section" id="helpful-resources">
@@ -162,7 +169,9 @@ Port: 5432
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-networks.html">networks</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-web.html">web</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-raspberry-pi.html">raspberry pi</a>
 </p>
 </div>
 

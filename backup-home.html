@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Backup /home</title>
+        <title>Circuidipity | Backup home</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -24,35 +24,37 @@
 </div>
 
 <!-- article -->
-<h1>Backup /home</h1>
+<h1>Backup home</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 01 March 2015</p>
 <div id="article">
-    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #3 &gt;&gt;</a> Make automatic backups of <tt class="docutils literal">/home</tt> using a dash of shell scripting + rsync + SSH + cron!</p>
-<p>One of the advantages of setting up a <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Linux home server</a> is providing an always-available location to store backups of important files. A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home directory on the local area network (LAN) server.</p>
+    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #3 .:</a> Make automatic backups of a <strong>home folder</strong> using a dash of shell scripting + rsync + SSH + cron!</p>
+<p>One of the advantages of setting up a <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Linux home server</a> is providing an always-available location to store backups of important files. A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home folder on the local area network (LAN) server.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
+<p><strong>Backup server</strong> is a <a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html">Raspberry Pi 2</a> connected to a <a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html">1TB external USB hard drive</a> running Ubuntu 14.04 LTS located at ip address <tt class="docutils literal">192.168.1.88</tt> with username <tt class="docutils literal">pi</tt>.</p>
 </div>
 <div class="section" id="ssh">
 <h2>0. SSH</h2>
-<p>See <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">Secure remote access using SSH keys</a> to configure SSH for encrypted connections between (Pi) server and (laptop) client. <tt class="docutils literal">Keychain</tt> + <tt class="docutils literal"><span class="pre">ssh-agent</span></tt>  make it easy to use a passphrase-protected <strong>encryption key</strong> in automated scripts.</p>
+<p><a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">Secure remote access using SSH keys</a> to configure SSH for encrypted connections between (Pi) server and (laptop) client. <tt class="docutils literal">Keychain</tt> + <tt class="docutils literal"><span class="pre">ssh-agent</span></tt>  make it easy to use a passphrase-protected <strong>encryption key</strong> in automated scripts.</p>
 </div>
 <div class="section" id="script">
 <h2>1. Script</h2>
 <div class="section" id="on-the-server">
-<h3>On the server:</h3>
-<p>Create a backup directory to hold the contents of <tt class="docutils literal">$HOME</tt>:</p>
+<h3>1.1 On the server</h3>
+<p>Create a backup directory to hold the contents of <tt class="docutils literal">HOME</tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>mkdir ~/backup-home
 </pre></div>
 </div>
 <div class="section" id="on-the-client">
-<h3>On the client:</h3>
-<p>Create a backup script that uses the <tt class="docutils literal">rsync</tt> file-copy tool. A sample <tt class="docutils literal">myRsync</tt> script to backup <tt class="docutils literal">$HOME</tt> includes:</p>
+<h3>1.2 On the client</h3>
+<p>Create a backup script that uses <tt class="docutils literal">rsync</tt> file-copy tool. A sample <tt class="docutils literal">myRsync</tt> script to backup <tt class="docutils literal">HOME</tt> includes:</p>
 <ul class="simple">
 <li>load the details of the SSH key stored in <tt class="docutils literal"><span class="pre">$HOME/.keychain/$HOSTNAME-sh</span></tt></li>
-<li>mirror <tt class="docutils literal">$HOME/</tt> to <tt class="docutils literal"><span class="pre">SERVER_ADDR:~/backup-home/</span></tt> using options <tt class="docutils literal"><span class="pre">--archive</span></tt> and <tt class="docutils literal"><span class="pre">--delete</span></tt></li>
+<li>mirror <tt class="docutils literal">$HOME/</tt> to <tt class="docutils literal"><span class="pre">192.168.1.88:~/backup-home/</span></tt> using options <tt class="docutils literal"><span class="pre">--archive</span></tt> and <tt class="docutils literal"><span class="pre">--delete</span></tt></li>
 <li>exclude certain items from the backup like <tt class="docutils literal">cache</tt> and <tt class="docutils literal">trash</tt></li>
 </ul>
-<p><span class="warning">WARNING!</span> Take care nothing important is wiped out using <tt class="docutils literal"><span class="pre">--delete</span></tt>. First run <tt class="docutils literal">rsync</tt> in a console with option <tt class="docutils literal"><span class="pre">--dry-run</span></tt> to test settings (example SERVER_ADDR <tt class="docutils literal">pi&#64;192.168.1.88</tt>):</p>
-<div class="highlight"><pre><span class="nv">$ </span>rsync --verbose --archive --delete --dry-run <span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/ pi@192.168.1.88:~/backup-home/
+<p><span class="warning">WARNING!</span> Take care nothing important is wiped out using <tt class="docutils literal"><span class="pre">--delete</span></tt>. First run <tt class="docutils literal">rsync</tt> in a console with option <tt class="docutils literal"><span class="pre">--dry-run</span></tt> to test settings:</p>
+<div class="highlight"><pre><span class="nv">$ </span>rsync --verbose --archive --delete --dry-run ~/ pi@192.168.1.88:~/backup-home/
 </pre></div>
 <p>Sample script:</p>
 <div class="highlight"><pre><span class="c">#!/bin/bash</span>
@@ -67,7 +69,7 @@
 <span class="nb">echo</span> <span class="k">$(</span>date<span class="k">)</span>
 rsync <span class="nv">$rsync_options</span> <span class="nv">$rsync_exclude</span> <span class="nv">$rsync_src</span> <span class="nv">$rsync_dest</span>
 </pre></div>
-<p>Place the script in <tt class="docutils literal">$HOME/bin</tt> and make it executable. Run manually at least once to test:</p>
+<p>Place the script in <tt class="docutils literal">~/bin</tt> and make it executable. Run manually at least once to test:</p>
 <div class="highlight"><pre><span class="nv">$ </span>chmod 744 ~/bin/myRsync
 <span class="nv">$ </span>~/bin/myRsync
 </pre></div>
@@ -78,7 +80,7 @@ rsync <span class="nv">$rsync_options</span> <span class="nv">$rsync_exclude</sp
 <p><strong>Cron</strong> is a daemon that runs programs at specified times. Use the command <tt class="docutils literal">crontab <span class="pre">-e</span></tt> to setup <tt class="docutils literal">myRsync</tt> to auto-run with the following parameters:</p>
 <ul class="simple">
 <li>perform a daily backup at <tt class="docutils literal">23:55</tt></li>
-<li>log program activity by redirecting output to <tt class="docutils literal">/home/my_username/cron.log</tt></li>
+<li>log program activity by redirecting output to <tt class="docutils literal">/home/pi/cron.log</tt></li>
 </ul>
 <div class="highlight"><pre><span class="c"># To define the time you can provide concrete values for</span>
 <span class="c"># minute (m), hour (h), day of month (dom), month (mon),</span>
@@ -92,17 +94,19 @@ rsync <span class="nv">$rsync_options</span> <span class="nv">$rsync_exclude</sp
 <span class="c"># m h  dom mon dow   command</span>
 
 <span class="c"># Daily backup of $HOME to the netbook server</span>
-55 23 * * * /home/my_username/bin/myRsync &gt;&gt; /home/my_username/cron.log
+55 23 * * * /home/pi/bin/myRsync &gt;&gt; /home/pi/cron.log
 </pre></div>
 <p>I stashed a more complete <tt class="docutils literal">myRsync</tt> <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/myRsync">script on Github</a>.</p>
 <p>Happy hacking!</p>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-networks.html">networks</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-github.html">github</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-raspberry-pi.html">raspberry pi</a>
 </p>
 </div>
 
