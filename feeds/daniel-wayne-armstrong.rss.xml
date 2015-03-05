@@ -1,5 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 02 Mar 2015 00:05:00 -0500</lastBuildDate><item><title>Run a Raspberry Pi 2 from external USB storage</title><link>http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #0 .:&lt;/a&gt; I am exploring the use of my Pi as &lt;strong&gt;24/7 uptime home server&lt;/strong&gt; and one of the hacks I wish to add is using Pi as a cheap and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;network attached storage (NAS)&lt;/a&gt; device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 04 Mar 2015 20:40:00 -0500</lastBuildDate><item><title>Brother MFC-J450DW All-In-One Printer/Scanner</title><link>http://www.circuidipity.com/brother-mfc-j450dw-printer-scanner.html</link><description>&lt;p&gt;Connect a &lt;strong&gt;Brother MFC-J450DW&lt;/strong&gt; to a repurposed netbook as server running Ubuntu 14.04 LTS and configure as printer/scanner for a home network.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div class="section" id="cups-sane"&gt;
+&lt;h2&gt;0. CUPS + SANE&lt;/h2&gt;
+&lt;p&gt;Attach the Brother device to server:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;dmesg -t
+&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
+usb 5-1: new high-speed USB device number 4 using ehci-pci
+usb 5-1: New USB device found, &lt;span class="nv"&gt;idVendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;04f9, &lt;span class="nv"&gt;idProduct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;02fa
+usb 5-1: New USB device strings: &lt;span class="nv"&gt;Mfr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1, &lt;span class="nv"&gt;Product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;SerialNumber&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;3
+usb 5-1: Product: MFC-J450DW
+usb 5-1: Manufacturer: Brother
+usb 5-1: SerialNumber: BROH4F240529
+usblp 5-1:1.0: usblp0: USB Bidirectional printer dev 4 &lt;span class="k"&gt;if &lt;/span&gt;0 alt 0 proto 2 vid 0x04F9 pid 0x02FA
+usbcore: registered new interface driver usblp
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Install CUPS (printer) and SANE (scanner) packages and grant (example) &lt;tt class="docutils literal"&gt;username&lt;/tt&gt; admin privileges:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install cups cups-bsd sane-utils libsane-extras
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username lp
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username lpadmin
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username scanner
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="brother-drivers"&gt;
+&lt;h2&gt;1. Brother drivers&lt;/h2&gt;
+&lt;p&gt;Download the &lt;strong&gt;Driver Install Tool&lt;/strong&gt; from &lt;a class="reference external" href="http://support.brother.com/g/b/downloadtop.aspx?c=us&amp;amp;lang=en&amp;amp;prod=mfcj450dw_us"&gt;Brother MFC-J450DW Downloads&lt;/a&gt; and install drivers:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gunzip linux-brprinter-installer-*.gz
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo su
+&lt;span class="c"&gt;# bash linux-brprinter-installer-2.0.0-1&lt;/span&gt;
+Input model name -&amp;gt;MFC-J450DW
+
+You are going to install following packages.
+    mfcj450dwlpr-3.0.0-1.i386.deb
+    mfcj450dwcupswrapper-3.0.0-1.i386.deb
+    brscan4-0.4.2-1.i386.deb
+    brscan-skey-0.2.4-1.i386.deb
+OK? &lt;span class="o"&gt;[&lt;/span&gt;y/N&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;y
+&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
+Will you specify the Device URI? &lt;span class="o"&gt;[&lt;/span&gt;Y/n&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;Y
+
+0: ipps
+1: https
+2: http
+3: ipp14
+4: lpd
+5: ipp
+6: socket
+7: usb://Brother/MFC-J450DW?serial&lt;span class="o"&gt;=&lt;/span&gt;BROH4F240529
+8: smb
+9 &lt;span class="o"&gt;(&lt;/span&gt;I&lt;span class="o"&gt;)&lt;/span&gt;: Specify IP address.
+10 &lt;span class="o"&gt;(&lt;/span&gt;A&lt;span class="o"&gt;)&lt;/span&gt;: Auto. &lt;span class="o"&gt;(&lt;/span&gt;usb://Brother/MFC-J450DW?serial&lt;span class="o"&gt;=&lt;/span&gt;BROH4F240529&lt;span class="o"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;select &lt;/span&gt;the number of destination Device URI. -&amp;gt;10
+
+lpadmin -p MFCJ450DW -v usb://Brother/MFC-J450DW?serial&lt;span class="o"&gt;=&lt;/span&gt;BROH4F240529 -E
+Test Print? &lt;span class="o"&gt;[&lt;/span&gt;y/N&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;y
+
+
+lpadmin -p MFCJ450DW -v usb://Brother/MFC-J450DW?serial&lt;span class="o"&gt;=&lt;/span&gt;BROH4F240529 -E
+Test Print? &lt;span class="o"&gt;[&lt;/span&gt;y/N&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;y
+
+&lt;span class="nb"&gt;wait &lt;/span&gt;5s.
+lpr -P MFCJ450DW /usr/share/cups/data/testprint
+You are going to install following packages.
+    brscan4-0.4.2-1.i386.deb
+&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
+Do you agree? &lt;span class="o"&gt;[&lt;/span&gt;Y/n&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;Y
+
+You are going to install following packages.
+    brscan-skey-0.2.4-1.i386.deb
+&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
+Do you agree? &lt;span class="o"&gt;[&lt;/span&gt;Y/n&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;Y
+&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
+Hit Enter/Return key.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Problem:&lt;/strong&gt; Scanner stuck in low-res mode using Linux scanner clients. &lt;strong&gt;Simple-scan&lt;/strong&gt; would not scan above 300dpi and would throw constant error messages. &lt;strong&gt;Xsane&lt;/strong&gt; would not scan at all and throw &lt;tt class="docutils literal"&gt;out of memory&lt;/tt&gt; errors. Turns out the Brother installer downloaded and installed an outdated, buggy scanner driver - &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;brscan4-0.4.2-1.i386.deb&lt;/span&gt;&lt;/tt&gt; - when a newer &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;brscan4-0.4.3-*.i386.deb&lt;/span&gt;&lt;/tt&gt; driver exists.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Remove the buggy driver and manually install the updated package:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service saned stop
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -P brscan4
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i brscan4-0.4.3-0.i386.deb
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service saned start
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="http://technik.blogs.nde.ag/2013/12/06/brother-dcp-j925dw-problems-when-scanning-via-sane/"&gt;Problems when scanning via SANE&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="printer-config"&gt;
+&lt;h2&gt;2. Printer config&lt;/h2&gt;
+&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/cups/cupsd.conf&lt;/tt&gt; to listen for connections from any device on the home network. Example for home server at ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Only listen for connections from the local machine.&lt;/span&gt;
+&lt;span class="c"&gt;#Listen localhost:631&lt;/span&gt;
+Listen *:631
+
+&lt;span class="c"&gt;# Show shared printers on the local network.&lt;/span&gt;
+Browsing On
+BrowseLocalProtocols dnssd
+
+&lt;span class="c"&gt;# Web interface setting...&lt;/span&gt;
+WebInterface Yes
+
+&lt;span class="c"&gt;# Restrict access to the server...&lt;/span&gt;
+&amp;lt;Location /&amp;gt;
+  Order allow,deny
+  Allow 192.168.1.*
+&amp;lt;/Location&amp;gt;
+
+&lt;span class="c"&gt;# Restrict access to the admin pages...&lt;/span&gt;
+&amp;lt;Location /admin&amp;gt;
+  Order allow,deny
+  Allow 192.168.1.*
+&amp;lt;/Location&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Restart CUPS:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service cups restart
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Admin functions available at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://192.168.1.88:631/admin&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="scanner-config"&gt;
+&lt;h2&gt;3. Scanner config&lt;/h2&gt;
+&lt;div class="section" id="on-the-server"&gt;
+&lt;h3&gt;On the server&lt;/h3&gt;
+&lt;p&gt;Detect attached device using &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;sane-find-scanner&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;scanimage&lt;/tt&gt; (I find that if one fails discovery the other usually works):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sane-find-scanner
+found USB scanner &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;vendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0x04f9 &lt;span class="o"&gt;[&lt;/span&gt;Brother&lt;span class="o"&gt;]&lt;/span&gt;, &lt;span class="nv"&gt;product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0x02fa &lt;span class="o"&gt;[&lt;/span&gt;MFC-J450DW&lt;span class="o"&gt;])&lt;/span&gt; at libusb:005:00
+&lt;span class="nv"&gt;$ &lt;/span&gt;scanimage -L
+device &lt;span class="sb"&gt;`&lt;/span&gt;brother4:bus1;dev1&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; is a Brother MFC-J450DW USB scanner
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/default/saned&lt;/tt&gt; to run SANE as server:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;RUN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;yes
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/sane.d/saned.conf&lt;/tt&gt; to share the scanner over the network:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## Access list&lt;/span&gt;
+192.168.1.0/24
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Add entry for Brother scanners to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/lib/udev/rules.d/40-libsane.rules&lt;/span&gt;&lt;/tt&gt; at the point in file just before the bit &lt;tt class="docutils literal"&gt;# The following rule will &lt;span class="pre"&gt;disable...&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Brother scanners&lt;/span&gt;
+ATTRS&lt;span class="o"&gt;{&lt;/span&gt;idVendor&lt;span class="o"&gt;}==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;04f9&amp;quot;&lt;/span&gt;, ENV&lt;span class="o"&gt;{&lt;/span&gt;libsane_matched&lt;span class="o"&gt;}=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;yes&amp;quot;&lt;/span&gt;
+
+&lt;span class="c"&gt;# The following rule will disable...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot server (simply restarting the &lt;tt class="docutils literal"&gt;udev&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;saned&lt;/tt&gt; services fails to work):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo reboot
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Run a test:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;scanimage --format&lt;span class="o"&gt;=&lt;/span&gt;tiff &amp;gt; test.tiff
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="on-the-client"&gt;
+&lt;h3&gt;On the client&lt;/h3&gt;
+&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/sane.d/net.conf&lt;/tt&gt; to point your device towards the server ip address:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;connect_timeout&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 60
+&lt;span class="c"&gt;## saned hosts&lt;/span&gt;
+192.168.1.88
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Run a test using &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;simple-scan&lt;/span&gt;&lt;/tt&gt; included by default in Ubuntu.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 04 Mar 2015 20:40:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-03-04:brother-mfc-j450dw-printer-scanner.html</guid><category>ubuntu</category><category>linux</category><category>networks</category></item><item><title>Run a Raspberry Pi 2 from external USB storage</title><link>http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #0 .:&lt;/a&gt; I am exploring the use of my Pi as &lt;strong&gt;24/7 uptime home server&lt;/strong&gt; and one of the hacks I wish to add is using Pi as a cheap and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;network attached storage (NAS)&lt;/a&gt; device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?&lt;/p&gt;
 &lt;p&gt;I imagine an always-on Pi would enjoy more robust performance from a hard drive than SD card. &lt;a class="footnote-reference" href="#id4" id="id1"&gt;[1]&lt;/a&gt; I put my plan in motion using:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Raspberry Pi 2 Model B&lt;/li&gt;
@@ -879,76 +1037,4 @@ option use_syslog       &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt
 &lt;li&gt;&amp;quot;Ten Years to the Singularity &lt;a class="reference external" href="http://goertzel.org/TenYearsToTheSingularity.pdf"&gt;if we Really Really Try&amp;quot;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Influence of &lt;a class="reference external" href="http://onlinelibrary.wiley.com/enhanced/doi/10.1002/bies.201400071/"&gt;gut bacteria on eating decisions&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 04 Feb 2015 00:02:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-04:links-20150204.html</guid><category>links</category></item><item><title>Backup home</title><link>http://www.circuidipity.com/backup-home.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #3 .:&lt;/a&gt; Make automatic backups of a &lt;strong&gt;home folder&lt;/strong&gt; using a dash of shell scripting + rsync + SSH + cron!&lt;/p&gt;
-&lt;p&gt;One of the advantages of setting up a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Linux home server&lt;/a&gt; is providing an always-available location to store backups of important files. A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home folder on the local area network (LAN) server.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Backup server&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html"&gt;Raspberry Pi 2&lt;/a&gt; connected to a &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;1TB external USB hard drive&lt;/a&gt; running Ubuntu 14.04 LTS located at ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt; with username &lt;tt class="docutils literal"&gt;pi&lt;/tt&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="ssh"&gt;
-&lt;h2&gt;0. SSH&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;Secure remote access using SSH keys&lt;/a&gt; to configure SSH for encrypted connections between (Pi) server and (laptop) client. &lt;tt class="docutils literal"&gt;Keychain&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ssh-agent&lt;/span&gt;&lt;/tt&gt;  make it easy to use a passphrase-protected &lt;strong&gt;encryption key&lt;/strong&gt; in automated scripts.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="script"&gt;
-&lt;h2&gt;1. Script&lt;/h2&gt;
-&lt;div class="section" id="on-the-server"&gt;
-&lt;h3&gt;1.1 On the server&lt;/h3&gt;
-&lt;p&gt;Create a backup directory to hold the contents of &lt;tt class="docutils literal"&gt;HOME&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/backup-home
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="on-the-client"&gt;
-&lt;h3&gt;1.2 On the client&lt;/h3&gt;
-&lt;p&gt;Create a backup script that uses &lt;tt class="docutils literal"&gt;rsync&lt;/tt&gt; file-copy tool. A sample &lt;tt class="docutils literal"&gt;myRsync&lt;/tt&gt; script to backup &lt;tt class="docutils literal"&gt;HOME&lt;/tt&gt; includes:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;load the details of the SSH key stored in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;$HOME/.keychain/$HOSTNAME-sh&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;mirror &lt;tt class="docutils literal"&gt;$HOME/&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;192.168.1.88:~/backup-home/&lt;/span&gt;&lt;/tt&gt; using options &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--archive&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--delete&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;exclude certain items from the backup like &lt;tt class="docutils literal"&gt;cache&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;trash&lt;/tt&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; Take care nothing important is wiped out using &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--delete&lt;/span&gt;&lt;/tt&gt;. First run &lt;tt class="docutils literal"&gt;rsync&lt;/tt&gt; in a console with option &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--dry-run&lt;/span&gt;&lt;/tt&gt; to test settings:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;rsync --verbose --archive --delete --dry-run ~/ pi@192.168.1.88:~/backup-home/
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sample script:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
-&lt;span class="c"&gt;# ~/bin/myRsync&lt;/span&gt;
-&lt;span class="nv"&gt;ssh_agent&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;${HOME}/.keychain/$HOSTNAME-sh&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;rsync_options&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;--verbose --archive --delete&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;rsync_exclude&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;--exclude=*[Cc]ache* --exclude=*[Tt]rash*&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;rsync_src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;${HOME}/&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;rsync_dest&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pi@192.168.1.88:~/backup_home/&amp;quot;&lt;/span&gt;
-
-. &lt;span class="nv"&gt;$ssh_agent&lt;/span&gt;
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;date&lt;span class="k"&gt;)&lt;/span&gt;
-rsync &lt;span class="nv"&gt;$rsync_options&lt;/span&gt; &lt;span class="nv"&gt;$rsync_exclude&lt;/span&gt; &lt;span class="nv"&gt;$rsync_src&lt;/span&gt; &lt;span class="nv"&gt;$rsync_dest&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Place the script in &lt;tt class="docutils literal"&gt;~/bin&lt;/tt&gt; and make it executable. Run manually at least once to test:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;chmod 744 ~/bin/myRsync
-&lt;span class="nv"&gt;$ &lt;/span&gt;~/bin/myRsync
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="automate"&gt;
-&lt;h2&gt;2. Automate&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Cron&lt;/strong&gt; is a daemon that runs programs at specified times. Use the command &lt;tt class="docutils literal"&gt;crontab &lt;span class="pre"&gt;-e&lt;/span&gt;&lt;/tt&gt; to setup &lt;tt class="docutils literal"&gt;myRsync&lt;/tt&gt; to auto-run with the following parameters:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;perform a daily backup at &lt;tt class="docutils literal"&gt;23:55&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;log program activity by redirecting output to &lt;tt class="docutils literal"&gt;/home/pi/cron.log&lt;/tt&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# To define the time you can provide concrete values for&lt;/span&gt;
-&lt;span class="c"&gt;# minute (m), hour (h), day of month (dom), month (mon),&lt;/span&gt;
-&lt;span class="c"&gt;# and day of week (dow) or use &amp;#39;*&amp;#39; in these fields (for &amp;#39;any&amp;#39;).#&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# Output of the crontab jobs (including errors) is sent through&lt;/span&gt;
-&lt;span class="c"&gt;# email to the user the crontab file belongs to (unless redirected).&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# For more information see the manual pages of crontab(5) and cron(8)&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# m h  dom mon dow   command&lt;/span&gt;
-
-&lt;span class="c"&gt;# Daily backup of $HOME to the netbook server&lt;/span&gt;
-55 23 * * * /home/pi/bin/myRsync &amp;gt;&amp;gt; /home/pi/cron.log
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I stashed a more complete &lt;tt class="docutils literal"&gt;myRsync&lt;/tt&gt; &lt;a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/myRsync"&gt;script on Github&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 01 Mar 2015 19:13:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-03:backup-home.html</guid><category>networks</category><category>ubuntu</category><category>linux</category><category>shell</category><category>programming</category><category>github</category><category>raspberry pi</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 04 Feb 2015 00:02:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-04:links-20150204.html</guid><category>links</category></item></channel></rss>
