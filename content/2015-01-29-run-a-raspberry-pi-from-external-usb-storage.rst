@@ -5,9 +5,11 @@ Run a Raspberry Pi from external USB storage
 :date: 2015-01-29 01:05:00
 :slug: run-a-raspberry-pi-from-external-usb-storage
 :tags: raspberry pi, raspbian, linux, networks
-:modified: 2015-02-19 19:09:00
+:modified: 2015-03-01 18:40:00
 
-`Raspberry Pi Home Server Hack #0 >> <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ I am exploring the use of my Pi as **24/7 uptime home server** and one of the hacks I wish to add is using Pi as a cheap and cheerful `network attached storage (NAS) <http://www.circuidipity.com/nas-raspberry-pi-sshfs.html>`_ device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?
+**Update:** Home server now `upgraded to Raspberry Pi 2 <http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html>`_. ``(2015-03-01)``
+
+I am exploring the use of my Pi as **24/7 uptime home server** and one of the hacks I wish to add is using Pi as a cheap and cheerful `network attached storage (NAS) <http://www.circuidipity.com/nas-raspberry-pi-sshfs.html>`_ device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?
 
 I imagine an always-on Pi would enjoy more robust performance from a hard drive than an SD card. Thanks to all the contributors `on this discussion thread <http://www.raspberrypi.org/forums/viewtopic.php?f=29&t=44177>`_ I put my plan in motion using:
 
@@ -78,28 +80,28 @@ I connect my 1TB USB drive to Pi and confirm device detection:
     Bus 001 Device 005: ID 152d:2329 JMicron Technology Corp. / JMicron USA Technology Corp. JM20329 SATA Bridge
     $ dmesg                                                                         
     [ ... ]                                                                         
-    [ 1000.758503] usb 1-1.3: new high-speed USB device number 5 using dwc_otg      
-    [ 1000.879972] usb 1-1.3: New USB device found, idVendor=152d, idProduct=2329   
-    [ 1000.880010] usb 1-1.3: New USB device strings: Mfr=1, Product=2, SerialNumber=5
-    [ 1000.880026] usb 1-1.3: Product: USB to ATA/ATAPI bridge                      
-    [ 1000.880043] usb 1-1.3: Manufacturer: JMicron                                 
-    [ 1000.880057] usb 1-1.3: SerialNumber: DCA5968053FF                            
-    [ 1000.887271] usb-storage 1-1.3:1.0: USB Mass Storage device detected          
-    [ 1000.892548] usb-storage 1-1.3:1.0: Quirks match for vid 152d pid 2329: 8020  
-    [ 1000.892761] scsi0 : usb-storage 1-1.3:1.0                                    
-    [ 1001.928635] scsi 0:0:0:0: Direct-Access     WDC WD10 EARS-00Y5B1           PQ: 0 ANSI: 2 CCS
-    [ 1001.932571] sd 0:0:0:0: [sda] 1953525168 512-byte logical blocks: (1.00 TB/931 GiB)
-    [ 1001.933328] sd 0:0:0:0: [sda] Write Protect is off                           
-    [ 1001.933365] sd 0:0:0:0: [sda] Mode Sense: 28 00 00 00                        
-    [ 1001.934066] sd 0:0:0:0: [sda] No Caching mode page found                     
-    [ 1001.934096] sd 0:0:0:0: [sda] Assuming drive cache: write through            
-    [ 1001.936947] sd 0:0:0:0: [sda] No Caching mode page found                     
-    [ 1001.936984] sd 0:0:0:0: [sda] Assuming drive cache: write through            
-    [ 1001.984646] sd 0:0:0:0: Attached scsi generic sg0 type 0                     
-    [ 1002.344655]  sda: sda1                                                       
-    [ 1002.365186] sd 0:0:0:0: [sda] No Caching mode page found                     
-    [ 1002.365227] sd 0:0:0:0: [sda] Assuming drive cache: write through            
-    [ 1002.365255] sd 0:0:0:0: [sda] Attached SCSI disk                             
+    usb 1-1.3: new high-speed USB device number 5 using dwc_otg      
+    usb 1-1.3: New USB device found, idVendor=152d, idProduct=2329   
+    usb 1-1.3: New USB device strings: Mfr=1, Product=2, SerialNumber=5
+    usb 1-1.3: Product: USB to ATA/ATAPI bridge                      
+    usb 1-1.3: Manufacturer: JMicron                                 
+    usb 1-1.3: SerialNumber: DCA5968053FF                            
+    usb-storage 1-1.3:1.0: USB Mass Storage device detected          
+    usb-storage 1-1.3:1.0: Quirks match for vid 152d pid 2329: 8020  
+    scsi0 : usb-storage 1-1.3:1.0                                    
+    scsi 0:0:0:0: Direct-Access     WDC WD10 EARS-00Y5B1           PQ: 0 ANSI: 2 CCS
+    sd 0:0:0:0: [sda] 1953525168 512-byte logical blocks: (1.00 TB/931 GiB)
+    sd 0:0:0:0: [sda] Write Protect is off                           
+    sd 0:0:0:0: [sda] Mode Sense: 28 00 00 00                        
+    sd 0:0:0:0: [sda] No Caching mode page found                     
+    sd 0:0:0:0: [sda] Assuming drive cache: write through            
+    sd 0:0:0:0: [sda] No Caching mode page found                     
+    sd 0:0:0:0: [sda] Assuming drive cache: write through            
+    sd 0:0:0:0: Attached scsi generic sg0 type 0                     
+    sda: sda1                                                       
+    sd 0:0:0:0: [sda] No Caching mode page found                     
+    sd 0:0:0:0: [sda] Assuming drive cache: write through            
+    sd 0:0:0:0: [sda] Attached SCSI disk                             
    
 Device is ``sda``. Use **fdisk** to create 2 new partitions on the USB drive:
 
@@ -218,7 +220,7 @@ Create new mountpoint for the ``storage`` partition:
 
 .. code-block:: bash
 
-    $ sudo mkdir /media/USB0
+    $ sudo mkdir /mnt/media/USB0
 
 Modify options in ``/mnt/etc/fstab`` - located on the **USB device** - to mount ``rootfs`` and ``storage`` partitions [1]_ at boot. Sample configuration for ``sda1`` and ``sda2``:
 

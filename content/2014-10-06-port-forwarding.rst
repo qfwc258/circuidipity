@@ -29,9 +29,9 @@ Save and make the changes active by running:
 
     # /etc/init.d/firewall restart
 
-Alternately, setup port forwarding in LuCI under ``Network->Firewall->Port Forwards``.
+**Alternative:** setup port forwarding in LuCI under ``Network->Firewall->Port Forwards``.
 
-Example-in-action: To SSH login outside the home enter ``ssh -p 55555 my.external.ip.address`` and the connection will be forwarded to the Pi server.
+Example: SSH login outside the home enter ``ssh -p 55555 my.external.ip.address`` and the connection will be forwarded to the Pi server.
 
 Happy hacking!
 

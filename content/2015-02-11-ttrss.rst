@@ -4,12 +4,15 @@ Tiny Tiny RSS
 
 :date: 2015-02-11 18:40:00
 :slug: ttrss
-:tags: networks, web, linux
+:tags: networks, web, ubuntu, linux, raspberry pi
+:modified: 2015-03-01 20:37:00
 
-`Raspberry Pi Home Server Hack #7 >> <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Install and self-host the **Tiny Tiny RSS** news reader and aggregator and access news feeds over the web from anywhere.
+`Raspberry Pi Home Server Hack #7 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Install and self-host the **Tiny Tiny RSS** news reader and aggregator and access news feeds over the web from anywhere.
 
 Let's go!
 =========
+
+**Server** is a `Raspberry Pi 2 <http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html>`_ running Ubuntu 14.04 LTS located at ip address ``192.168.1.88``.
 
 0. Web server and database
 ==========================
@@ -32,7 +35,7 @@ Create a new PostgreSQL database to hold the content of RSS feeds. Launch the in
 1.1 Peer authentication
 -----------------------
 
-Later when running the TTRSS ``update.php`` script you may run into ``Peer authentication failed for user`` errors. Fix this issue by editing ``/etc/postgresql/9.*/main/pg_hba.conf`` and change ``peer``:
+Later when running the TTRSS ``update.php`` script you may run into ``Peer authentication failed for user`` errors. Fix this issue by editing ``/etc/postgresql/9.3/main/pg_hba.conf`` and change ``peer``:
 
 .. code-block:: bash
                                                                                     
@@ -42,10 +45,11 @@ Later when running the TTRSS ``update.php`` script you may run into ``Peer authe
 ... to ``trust``:                                                             
 
 .. code-block:: bash
-                                                                                    
+
+    # "local" is for Unix domain socket connections only
     local   all             all                                     trust           
                                                                                     
-Save and reload the database server:                                                            
+Reload the database server:                                                            
 
 .. code-block:: bash
                                                                                     
@@ -72,23 +76,23 @@ Move the ``ttrss`` directory into Nginx's `document root <http://www.circuidipit
 
 .. code-block:: bash
 
-    $ sudo mv ../ttrss /usr/share/nginx/www/                                              
-    $ sudo chown -R www-data.www-data /usr/share/nginx/www/ttrss                    
+    $ sudo mv ../ttrss /usr/share/nginx/html/                                              
+    $ sudo chown -R www-data.www-data /usr/share/nginx/html/ttrss                    
     
 Create a `server block <http://www.circuidipity.com/php-nginx-postgresql.html>`_ (virtual host) for TTRSS. Sample ``/etc/nginx/sites-available/ttrss`` [3]_ configuration:
     
 .. code-block:: bash
                                                                                     
     server {                                                                        
-        listen  80; ## listen for ipv4; this line is default and implied            
+        listen 80; ## listen for ipv4; this line is default and implied            
                                                                                     
-        root /usr/share/nginx/www/ttrss;
+        root /usr/share/nginx/html/ttrss;
         index index.html index.htm index.php;                                       
                                                                                     
         access_log /var/log/nginx/ttrss_access.log;                                 
         error_log /var/log/nginx/ttrss_error.log info;                              
                                                                                     
-        server_name localhost;                                                      
+        server_name ttrss.*;                                                      
                                                                                     
         location / {                                                                
             index           index.php;                                              
@@ -114,7 +118,15 @@ Save changes and enable the new block:
 4. Configure
 ============
 
-Navigate to ``http://your.server.ip.address`` and configure TTRSS:
+Example configuration for LAN access to the Pi home server at ip address ``192.168.1.88`` hosting ttrss.
+
+Modify ``/etc/hosts`` on the **client** device making the connection:
+
+.. code-block:: bash
+
+    192.168.1.88 ttrss.local
+
+Navigate to ``http://ttrss.local`` and configure TTRSS:
 
 .. code-block:: bash
                                                                                 
@@ -127,7 +139,7 @@ Navigate to ``http://your.server.ip.address`` and configure TTRSS:
 
 Press ``Test configuration`` button, then ``Initialize database``, and finally ``Save configuration``.
 
-Navigate back to ``http://YOUR.SERVER.IP.ADDRESS`` and login ``Username: "admin" Password: "password"``. In the top-right go to ``Actions->Preferences`` to make further changes to the default settings. Create a new user account for RSS reading (vs logging in all the time as ``admin``) and change the ``admin`` password.
+Navigate back to ``http://ttrss.local`` and log back in with username ``admin`` and password ``password``. In the top-right go to ``Actions->Preferences`` to make further changes to the default settings. Create a new user account for RSS reading (vs logging in all the time as ``admin``) and change the default password.
 
 5. Updates
 ==========
@@ -136,9 +148,9 @@ Configure TTRSS to periodically update the RSS feeds with new content. First, te
 
 .. code-block:: bash
                                                                                 
-    $ /usr/bin/php /usr/share/nginx/www/ttrss/update.php --feeds --quiet            
+    $ /usr/bin/php /usr/share/nginx/html/ttrss/update.php --feeds --quiet            
                                                                                 
-If the script returns no errors use ``cron`` to run the script periodically. Add a new job to ``crontab``:
+If the script returns no errors add a new job to ``cron`` to run script periodically:
 
 .. code-block:: bash
 
@@ -148,7 +160,7 @@ Sample TTRSS job:
                                                                                
 .. code-block:: bash
 
-    */30 * * * * /usr/bin/php /usr/share/nginx/www/ttrss/update.php --feeds --quiet
+    10 * * * * /usr/bin/php /usr/share/nginx/html/ttrss/update.php --feeds --quiet
 
 6. Helpful resources
 ====================

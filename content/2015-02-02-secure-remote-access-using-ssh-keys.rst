@@ -4,17 +4,17 @@ Secure remote access using SSH keys
 
 :date: 2015-02-02 00:05:00
 :slug: secure-remote-access-using-ssh-keys
-:tags: networks, linux, raspberry pi
-:modified: 2015-02-20 23:34:00
+:tags: networks, ubuntu, linux, raspberry pi
+:modified: 2015-03-01 18:56:00
 
-`Raspberry Pi Home Server Hack #1 >> <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Create cryptographic keys and disable password logins to make remote machines more secure.
+`Raspberry Pi Home Server Hack #1 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Create cryptographic keys and disable password logins to make remote machines more secure.
 
 Let's go!
 =========
 
-**Setup:** *Remote server* is a `Raspberry Pi <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ running Raspbian Linux configured for SSH logins from a `Chromebook <http://www.circuidipity.com/c720-lubuntubook.html>`_ *local client* running Lubuntu 14.04.
+**Server** is a `Raspberry Pi 2 <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ configured for SSH logins from an `Ubuntubook <http://www.circuidipity.com/c720-lubuntubook.html>`_ **client**. Both devices are running Ubuntu 14.04 LTS.
 
-Server options: username ``pi``, ip address ``192.168.1.33``
+**Server options:** username ``pi``, ip address ``192.168.1.88``
 
 0. Install
 ==========
@@ -22,14 +22,14 @@ Server options: username ``pi``, ip address ``192.168.1.33``
 On the server
 -------------
 
-* install ``openssh-server`` and create an SSH configuration in the home directory of users who requires access to the system:
+Install ``openssh-server`` and create an SSH configuration in the home directory of users who requires access to the system:
 
 .. code-block:: bash                                                                
                                                                                     
     $ sudo apt-get install openssh-server                                           
     $ mkdir ~/.ssh && chmod 700 ~/.ssh && touch ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys
                                                                                     
-* collect key fingerprints:                                                      
+Collect key fingerprints:                                                      
                                                                                     
 .. code-block:: bash                                                                
                                                                                     
@@ -37,9 +37,9 @@ On the server
     $ ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub >> ~/.ssh/keys.txt             
     $ ssh-keygen -lf /etc/ssh/ssh_host_rsa_key.pub >> ~/.ssh/keys.txt               
                                                                                     
-... and give ``keys.txt`` to users to compare signature when connecting for the first time            
+... and give ``keys.txt`` to users to compare signature when connecting for the first time.            
                                                                                     
-* *optional:* specify usernames in ``/etc/ssh/sshd_config`` to be granted system access (**disabling** all others by default):
+**Optional:** specify usernames in ``/etc/ssh/sshd_config`` to be granted system access (**disabling** all others by default):
 
 .. code-block:: bash
                                                                                     
@@ -54,19 +54,19 @@ Save and restart SSH with new configuration:
 On the client
 -------------
 
-* install ``openssh-client`` and create the SSH folder in the user home directory:
+Install ``openssh-client`` and create the SSH folder in the user home directory:
 
 .. code-block:: bash                                                                
                                                                                     
   $ sudo apt-get install openssh-client                                             
   $ mkdir ~/.ssh && chmod 700 ~/.ssh                                                
                                                                                     
-* create ``~/.ssh/config`` to hold *aliases* with the login options for a server - sample entry for the Pi:                          
+Create ``~/.ssh/config`` to hold **aliases** with the login options for a server. Example:                          
 
 .. code-block:: bash                                                                
                                                                                     
     Host raspberry.lan                                                                   
-    HostName 192.168.1.33                                                        
+    HostName 192.168.1.88                                                        
     Port 22                                                                      
     User pi
 
@@ -75,11 +75,11 @@ Test SSH password login to Pi server:
 .. code-block:: bash
 
     $ ssh raspberry.lan
-    pi@192.168.1.33's password: 
+    pi@192.168.1.88's password: 
     Last login: Thu Feb 19 18:07:48 2015 from chromebook.lan
     $
 
-* *optional:* see `Access from anywhere in the world using dynamic DNS <http://www.circuidipity.com/ddns-openwrt.html>`_ for configuring access to the Pi from *outside* the LAN
+**Optional:** Check out `using dynamic DNS <http://www.circuidipity.com/ddns-openwrt.html>`_ for configuring access to the Pi from anywhere in the world.
 
 1. Keys
 =======
@@ -87,13 +87,13 @@ Test SSH password login to Pi server:
 On the client
 -------------
                                                                                 
-* generate SSH keys:
+Generate SSH keys:
   
 .. code-block:: bash
 
     $ ssh-keygen -t rsa -C "$(whoami)@$(hostname)-$(date -I)" 
                                                                                 
-* upload the *public key* to the server and append to ``~/.ssh/authorized_keys``: 
+Upload the **public key** to the server and append to ``~/.ssh/authorized_keys``: 
                                                                                 
 .. code-block:: bash                                                            
                                                                                 
@@ -106,8 +106,8 @@ If logging into a console, tell SSH that you have keys by running ``ssh-add``:
 .. code-block:: bash
 
     $ ssh-add
-    $ Enter passphrase for /home/username/.ssh/id_rsa:
-    Identity added: /home/username/.ssh/id_rsa (/home/username/.ssh/id_rsa)
+    $ Enter passphrase for /home/pi/.ssh/id_rsa:
+    Identity added: /home/pi/.ssh/id_rsa (/home/pi/.ssh/id_rsa)
 
 All SSH sessions launched from this console will access this user key stored in memory. Make sure to test the connection before disabling password logins:
 
@@ -125,7 +125,7 @@ No passphrase request indicates SSH key authentication is properly configured.
 On the server
 -------------
                                                                                 
-* edit ``/etc/ssh/sshd_config``:                                         
+Make the following modifications in ``/etc/ssh/sshd_config``:                                         
                                                                                 
 .. code-block:: bash                                                            
                                                                                 
@@ -134,7 +134,7 @@ On the server
     PasswordAuthentication no                                                   
     UsePAM no                                                                   
                                                                                 
-... and restart SSH:
+Restart SSH:
 
 .. code-block:: bash
 
@@ -150,13 +150,13 @@ On the server
 On the client
 -------------
                                                                                 
-* install:
+Install:
   
 .. code-block:: bash
 
     $ sudo apt-get install keychain                                             
                                                                                 
-* configure ``~/.bashrc``:                                                           
+Configure ``~/.bashrc``:                                                           
                                                                                 
 .. code-block:: bash                                                            
                                                                                 
@@ -164,13 +164,13 @@ On the client
     keychain ~/.ssh/id_rsa                                                      
     . ~/.keychain/$HOSTNAME-sh                                                  
                                                                                 
-* flush all cached keys from memory with:
+Flush all cached keys from memory:
   
 .. code-block:: bash
 
     $ keychain --clear                  
                                                                                 
-* *optional:* if using `tmux <http://www.circuidipity.com/tmux.html>`_ enable persistent SSH key management across sessions by editing ``~/.tmux.conf``: 
+**Optional:** if using `tmux <http://www.circuidipity.com/tmux.html>`_ enable persistent SSH key management across sessions by editing ``~/.tmux.conf``: 
                                                                                 
 .. code-block:: bash                                                            
                                                                                 

@@ -4,13 +4,15 @@ PHP + Nginx + PostgreSQL
 
 :date: 2015-02-09 18:29:00
 :slug: php-nginx-postgresql
-:tags: networks, web, linux
-:modified: 2015-02-11 17:00:00
+:tags: networks, web, ubuntu, linux
+:modified: 2015-03-01 19:48:00
 
-`Raspberry Pi Home Server Hack #6 >> <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ As a requirement to host web applications like `Tiny Tiny RSS <http://www.circuidipity.com/ttrss.html>`_ on my Raspberry Pi I install **PHP**, the lightweight web server **Nginx**, and the **PostgreSQL** database.
+`Raspberry Pi Home Server Hack #6 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ As a requirement to host web applications like `Tiny Tiny RSS <http://www.circuidipity.com/ttrss.html>`_ on my Raspberry Pi I install **PHP**, the lightweight web server **Nginx**, and the **PostgreSQL** database.
 
 Let's go!
 =========
+
+**Server** is a `Raspberry Pi 2 <http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html>`_ running Ubuntu 14.04 LTS located at ip address ``192.168.1.88``.
 
 0. PHP
 ======
@@ -44,61 +46,61 @@ Install:
     $ sudo apt-get install nginx                                                    
     $ sudo service nginx start                                                  
                                                                                     
-To verify that the web server is running, open a browser and navigate to ``http://your.raspberry.ip.address``. If you see ``Welcome to nginx!`` the server is installed correctly.
+To verify that the web server is running, open a browser and navigate to (example) ``http://192.168.1.88``. If you see ``Welcome to nginx!`` the server is installed correctly.
 
 2. Host multiple domains
 ========================
 
 Nginx is capable of serving up multiple web domains or **server blocks** (virtual hosts) from the same server:
 
-* block content is placed in subfolders located in ``/usr/share/nginx/www``
+* block content is placed in subfolders located in ``/usr/share/nginx/html``
 * configuration in ``/etc/nginx/sites-available``
 * a server block is made active by setting a symbolic link in ``/etc/nginx/sites-enabled`` to its config file
 
 When combined with a `free DDNS service <http://www.circuidipity.com/ddns-openwrt.html>`_ (I like `duckdns.org <http://duckdns.org/>`_) multiple custom domains can be hosted on a home server.
 
-Steps to create a sample ``myHomePi`` server block to host ``www.myhomepi.com``:
+Example: create a sample ``my2pi`` server block to host ``www.my2pi.com``:
 
 2.1 CNAME
 ---------
 
-Create a new **CNAME** record at the domain registrar to redirect (example) ``www.myhomepi.com`` to ``myhomepi.duckdns.org``.
+Create a new **CNAME** record at the domain registrar to redirect ``www.my2pi.com`` to ``my2pi.duckdns.org``.
 
 2.2 Document Root
 -----------------
 
-Create a new root directory to hold the contents of ``myHomePi``:
+Create a new root directory to hold the contents of ``my2pi``:
 
 .. code-block:: bash
 
-    $ sudo mkdir /usr/share/nginx/www/myHomePi
-    $ sudo chown -R $USER.$USER /usr/share/nginx/www/myHomePi
+    $ sudo mkdir /usr/share/nginx/html/my2pi
+    $ sudo chown -R $USER.$USER /usr/share/nginx/html/my2pi
 
 2.3 Index.html
 --------------
 
-Create a sample ``/usr/share/nginx/www/myHomePi/index.html``:
+Create a sample ``/usr/share/nginx/html/my2pi/index.html``:
 
 .. code-block:: bash
 
     <html>
     <head>
-    <title>myHomePi</title>
+    <title>My Pi 2 Home</title>
     </head>
     <body bgcolor="white" text="black">
-    <center><h1>Welcome to myHomePi!</h1></center>
+    <center><h1>Welcome to My Pi 2 Home!</h1></center>
     </body>
     </html>
 
 2.4 Server Block
 ----------------
 
-I use ``/etc/nginx/sites-available/default`` as a template for the new ``myHomePi`` configuration:
+I use ``/etc/nginx/sites-available/default`` as a template for the new ``my2pi`` configuration:
 
 .. code-block:: bash
 
     $ cd /etc/nginx/sites-available
-    $ sudo cp default myHomePi
+    $ sudo cp default my2pi
 
 Modify these lines for the custom domain:
 
@@ -106,22 +108,23 @@ Modify these lines for the custom domain:
 
     listen 80;
 
-.. code-block:: bash
+    root /usr/share/nginx/html/my2pi;                                           
+    index index.html index.htm;
 
-    server_name www.myHomePi.com; 
+    server_name www.my2pi.com; 
 
 Activate the new server block:
 
 .. code-block:: bash
 
     $ cd /etc/nginx/sites-enabled
-    $ sudo ln -s ../sites-available/myHomePi
+    $ sudo ln -s ../sites-available/my2pi
     $ sudo service nginx restart
 
 2.5 Port Forwarding
 -------------------
 
-Configure `port forwarding on the home router <http://www.circuidipity.com/20141006.html>`_ to redirect traffic on port 80 to the internal IP address of the nginx server. Point your browser to ``www.myHomePi.com``. Success (hopefully)! :-)
+Configure `port forwarding on the home router <http://www.circuidipity.com/20141006.html>`_ to redirect traffic on port 80 to the internal IP address of the nginx server. Point your browser to ``www.my2pi.com``. Success (hopefully)!
 
 Repeat the above steps to add more domains. The limiting factor is the **upload bandwidth** provided by the home ISP (typically a fraction of the download speed).
 
@@ -144,7 +147,7 @@ Launch the PostgreSQL interactive console front-end ``psql`` as ``postgres`` use
     Enter it again: [newpasswd]
     postgres=# \quit
                                                                                     
-To create a new user ``www-data`` [1]_ and database ``mydb``:
+Example: To create a new user ``www-data`` [1]_ and database ``mydb``:
 
 .. code-block:: bash                                                               
     
