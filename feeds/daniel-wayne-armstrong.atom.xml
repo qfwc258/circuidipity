@@ -1,5 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-03-04T20:40:00-05:00</updated><entry><title>Brother MFC-J450DW All-In-One Printer/Scanner</title><link href="http://www.circuidipity.com/brother-mfc-j450dw-printer-scanner.html" rel="alternate"></link><updated>2015-03-04T20:40:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-04:brother-mfc-j450dw-printer-scanner.html</id><summary type="html">&lt;p&gt;Connect a &lt;strong&gt;Brother MFC-J450DW&lt;/strong&gt; to a repurposed netbook as server running Ubuntu 14.04 LTS and configure as printer/scanner for a home network.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-03-09T18:17:00-04:00</updated><entry><title>Samsung CLP-310 Printer</title><link href="http://www.circuidipity.com/samsung-clp-310-printer.html" rel="alternate"></link><updated>2015-03-09T18:17:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-09:samsung-clp-310-printer.html</id><summary type="html">&lt;p&gt;Connect a &lt;strong&gt;Samsung CLP-310&lt;/strong&gt; to a repurposed netbook as server running Ubuntu 14.04 LTS and configure as printer for a home network.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div class="section" id="cups"&gt;
+&lt;h2&gt;0. CUPS&lt;/h2&gt;
+&lt;p&gt;Attach the Samsung device to server:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;dmesg -t
+&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
+usb 1-2: new high-speed USB device number 6 using ehci-pci
+usb 1-2: New USB device found, &lt;span class="nv"&gt;idVendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;04e8, &lt;span class="nv"&gt;idProduct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;328e
+usb 1-2: New USB device strings: &lt;span class="nv"&gt;Mfr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1, &lt;span class="nv"&gt;Product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;SerialNumber&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;3
+usb 1-2: Product: CLP-310 Series
+usb 1-2: Manufacturer: Samsung Electronics Co., Ltd.
+usb 1-2: SerialNumber: 149CBAGS200219Y
+usblp 1-2:1.0: usblp0: USB Bidirectional printer dev 6 &lt;span class="k"&gt;if &lt;/span&gt;0 alt 0 proto 2 vid 0x04E8 pid 0x328E
+usbcore: registered new interface driver usblp
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Install CUPS (print server) and the &lt;a class="reference external" href="https://www.openprinting.org/printer/Samsung/Samsung-CLP-310"&gt;recommended driver&lt;/a&gt; &lt;tt class="docutils literal"&gt;splix&lt;/tt&gt; and grant (example) &lt;tt class="docutils literal"&gt;username&lt;/tt&gt; admin privileges:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install cups cups-bsd printer-driver-splix
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username lp
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username lpadmin
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username scanner
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="printer-config"&gt;
+&lt;h2&gt;1. Printer config&lt;/h2&gt;
+&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/cups/cupsd.conf&lt;/tt&gt; to listen for connections from any device on the home network. Example for home server at ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Only listen for connections from the local machine.&lt;/span&gt;
+&lt;span class="c"&gt;#Listen localhost:631&lt;/span&gt;
+Listen *:631
+
+&lt;span class="c"&gt;# Show shared printers on the local network.&lt;/span&gt;
+Browsing On
+BrowseLocalProtocols dnssd
+
+&lt;span class="c"&gt;# Web interface setting...&lt;/span&gt;
+WebInterface Yes
+
+&lt;span class="c"&gt;# Restrict access to the server...&lt;/span&gt;
+&amp;lt;Location /&amp;gt;
+  Order allow,deny
+  Allow 192.168.1.*
+&amp;lt;/Location&amp;gt;
+
+&lt;span class="c"&gt;# Restrict access to the admin pages...&lt;/span&gt;
+&amp;lt;Location /admin&amp;gt;
+  Order allow,deny
+  Allow 192.168.1.*
+&amp;lt;/Location&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Restart CUPS:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service cups restart
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Admin functions available at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://192.168.1.88:631/admin&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="ubuntu"></category><category term="linux"></category><category term="networks"></category></entry><entry><title>Brother MFC-J450DW All-In-One Printer/Scanner</title><link href="http://www.circuidipity.com/brother-mfc-j450dw-printer-scanner.html" rel="alternate"></link><updated>2015-03-04T20:40:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-04:brother-mfc-j450dw-printer-scanner.html</id><summary type="html">&lt;p&gt;Connect a &lt;strong&gt;Brother MFC-J450DW&lt;/strong&gt; to a repurposed netbook as server running Ubuntu 14.04 LTS and configure as printer/scanner for a home network.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;/div&gt;
@@ -1026,15 +1083,4 @@ option use_syslog       &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Raspberry Pi + SSHFS is no speed demon but its very usable. On my laptop connected to the LAN via wireless I am able to run Rhythmbox playing music and videos in VLC that are remotely hosted on the Pi.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-</summary><category term="networks"></category><category term="raspberry pi"></category><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>Links of interest</title><link href="http://www.circuidipity.com/links-20150204.html" rel="alternate"></link><updated>2015-02-04T00:02:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-04:links-20150204.html</id><summary type="html">&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.ted.com/talks/deb_roy_the_birth_of_a_word"&gt;Birth of a word&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Overcoming &lt;a class="reference external" href="http://www.brainpickings.org/2015/01/07/glenn-kurtz-practicing/"&gt;imposter syndrome&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;How NASA brought the &lt;a class="reference external" href="http://arstechnica.com/science/2013/04/how-nasa-brought-the-monstrous-f-1-moon-rocket-back-to-life/"&gt;F-1 monster moon rocket engine back to life&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Panoramic view of the &lt;a class="reference external" href="http://hubblesite.org/newscenter/archive/releases/2015/02"&gt;Andromeda Galaxy&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;MOOC &lt;a class="reference external" href="http://www.marsdd.com/news-and-insights/what-mooc-should-become/"&gt;jumps into the POOL&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;From bacteria to &lt;a class="reference external" href="https://www.youtube.com/watch?v=0HJPilemNns"&gt;interstellar war&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Nazi spy &lt;a class="reference external" href="http://www.strangehistory.net/2010/06/27/nazi-kurt-captured-in-arctic-circle-in-1981/"&gt;captured in Labrador in 1981&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&amp;quot;Ten Years to the Singularity &lt;a class="reference external" href="http://goertzel.org/TenYearsToTheSingularity.pdf"&gt;if we Really Really Try&amp;quot;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Influence of &lt;a class="reference external" href="http://onlinelibrary.wiley.com/enhanced/doi/10.1002/bies.201400071/"&gt;gut bacteria on eating decisions&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</summary><category term="links"></category></entry></feed>
+</summary><category term="networks"></category><category term="raspberry pi"></category><category term="ubuntu"></category><category term="linux"></category></entry></feed>
