@@ -1,16 +1,14 @@
-===========================
-Chromebook to (L)ubuntubook
-===========================
+=========================
+Chromebook to Lubuntubook
+=========================
 
 :date: 2014-10-26 00:09:00
 :slug: c720-lubuntubook
 :template: article-project
 :tags: chromebook, lubuntu, ubuntu, linux
-:modified: 2015-02-25 18:30:00
+:modified: 2015-03-16 10:20:00
 
-**Update:** Switched to Ubuntu's default **Unity** desktop. Modification steps remain the same. ``(2015-02-25)``
-
-Replace **Chrome OS** permanently with **(L)ubuntu 14.04 LTS Linux** on the **Acer C720 Chromebook**.
+Replace **Chrome OS** permanently with **Lubuntu 14.04 LTS Linux** on the **Acer C720 Chromebook**.
 
 .. image:: images/c720-lubuntubook.png
     :align: right
@@ -433,4 +431,4 @@ Notes
 
 .. [7] However when suspend is triggered by closing or opening the lid the system correctly suspends and resumes but no screenlock. Attempting to enable suspend in ``light-locker`` led to a black screen after suspending and required a hard shutdown to recover.
 
-.. [8] SSH sessions on the Chromebook often "stall" when the connection has been idle for a short period... taking several seconds to "wake up" again. Creating ``ath9k.conf`` improved things but more experimenting required.
+.. [8] SSH sessions on the Chromebook often "stall" when the connection has been idle for a short period... taking several seconds to "wake up" again. Creating ``ath9k.conf`` improved things.
