@@ -105,7 +105,7 @@ Gnome Terminal
     close tab
 
 Bash 
-++++
+----
 
 ``Control-A``
     move to the start of the line
@@ -132,7 +132,7 @@ Bash
     reverse incremental search of history
 
 Tmux
-++++
+----
 
 My `tmux cheatsheet <http://www.circuidipity.com/tmux.html>`_.
 
