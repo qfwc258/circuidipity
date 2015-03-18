@@ -59,10 +59,10 @@
 <p>Sample script:</p>
 <div class="highlight"><pre><span class="c">#!/bin/bash</span>
 <span class="c"># ~/bin/myRsync</span>
-<span class="nv">ssh_agent</span><span class="o">=</span><span class="s2">&quot;${HOME}/.keychain/$HOSTNAME-sh&quot;</span>
+<span class="nv">ssh_agent</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span><span class="s2">/.keychain/</span><span class="nv">$HOSTNAME</span><span class="s2">-sh&quot;</span>
 <span class="nv">rsync_options</span><span class="o">=</span><span class="s2">&quot;--verbose --archive --delete&quot;</span>
 <span class="nv">rsync_exclude</span><span class="o">=</span><span class="s2">&quot;--exclude=*[Cc]ache* --exclude=*[Tt]rash*&quot;</span>
-<span class="nv">rsync_src</span><span class="o">=</span><span class="s2">&quot;${HOME}/&quot;</span>
+<span class="nv">rsync_src</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span><span class="s2">/&quot;</span>
 <span class="nv">rsync_dest</span><span class="o">=</span><span class="s2">&quot;pi@192.168.1.88:~/backup_home/&quot;</span>
 
 . <span class="nv">$ssh_agent</span>
@@ -70,7 +70,7 @@
 rsync <span class="nv">$rsync_options</span> <span class="nv">$rsync_exclude</span> <span class="nv">$rsync_src</span> <span class="nv">$rsync_dest</span>
 </pre></div>
 <p>Place the script in <tt class="docutils literal">~/bin</tt> and make it executable. Run manually at least once to test:</p>
-<div class="highlight"><pre><span class="nv">$ </span>chmod 744 ~/bin/myRsync
+<div class="highlight"><pre><span class="nv">$ </span>chmod <span class="m">744</span> ~/bin/myRsync
 <span class="nv">$ </span>~/bin/myRsync
 </pre></div>
 </div>
@@ -94,7 +94,7 @@ rsync <span class="nv">$rsync_options</span> <span class="nv">$rsync_exclude</sp
 <span class="c"># m h  dom mon dow   command</span>
 
 <span class="c"># Daily backup of $HOME to the netbook server</span>
-55 23 * * * /home/pi/bin/myRsync &gt;&gt; /home/pi/cron.log
+<span class="m">55</span> <span class="m">23</span> * * * /home/pi/bin/myRsync &gt;&gt; /home/pi/cron.log
 </pre></div>
 <p>I stashed a more complete <tt class="docutils literal">myRsync</tt> <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/myRsync">script on Github</a>.</p>
 <p>Happy hacking!</p>

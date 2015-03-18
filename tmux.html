@@ -174,7 +174,7 @@
 <p><strong>Example:</strong> I created a <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/generic/home/username/.tmux.default.conf">tmux.default.conf</a> to outline my standard <tt class="docutils literal">tmux</tt> session layout and a simple launcher to create / attach sessions that source the file:</p>
 <div class="highlight"><pre><span class="c">#!/bin/bash</span>
 <span class="c"># Launch/attach tmux session with $CONFIG</span>
-<span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;$HOME/doc/code/tmux_scripts/default.conf&quot;</span>
+<span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/doc/code/tmux_scripts/default.conf&quot;</span>
 
 tmux -f <span class="nv">$CONFIG</span> attach
 </pre></div>

@@ -79,10 +79,10 @@
 <p>Create a sample <tt class="docutils literal">/usr/share/nginx/html/my2pi/index.html</tt>:</p>
 <div class="highlight"><pre>&lt;html&gt;
 &lt;head&gt;
-&lt;title&gt;My Pi 2 Home&lt;/title&gt;
+&lt;title&gt;My Pi <span class="m">2</span> Home&lt;/title&gt;
 &lt;/head&gt;
 &lt;body <span class="nv">bgcolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span> <span class="nv">text</span><span class="o">=</span><span class="s2">&quot;black&quot;</span>&gt;
-&lt;center&gt;&lt;h1&gt;Welcome to My Pi 2 Home!&lt;/h1&gt;&lt;/center&gt;
+&lt;center&gt;&lt;h1&gt;Welcome to My Pi <span class="m">2</span> Home!&lt;/h1&gt;&lt;/center&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </pre></div>
@@ -94,12 +94,12 @@
 <span class="nv">$ </span>sudo cp default my2pi
 </pre></div>
 <p>Modify these lines for the custom domain:</p>
-<div class="highlight"><pre>listen 80;
+<div class="highlight"><pre>listen 80<span class="p">;</span>
 
-root /usr/share/nginx/html/my2pi;
-index index.html index.htm;
+root /usr/share/nginx/html/my2pi<span class="p">;</span>
+index index.html index.htm<span class="p">;</span>
 
-server_name www.my2pi.com;
+server_name www.my2pi.com<span class="p">;</span>
 </pre></div>
 <p>Activate the new server block:</p>
 <div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /etc/nginx/sites-enabled

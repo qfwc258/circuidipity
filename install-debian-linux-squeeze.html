@@ -35,7 +35,7 @@
 <p>I like to start with a <em>lightweight minimal</em> installation of Debian.</p>
 <p><a class="reference external" href="http://www.debian.org/distrib/">Download</a> one of the many versions of the Debian installation images. In this HOWTO example I select <tt class="docutils literal">i386</tt> as my target architecture and I use the small <tt class="docutils literal">businesscard.iso</tt>: <a class="reference external" href="http://cdimage.debian.org/debian-cd/current/i386/bt-cd/debian-6.0.3-i386-businesscard.iso.torrent">Torrent</a> | <a class="reference external" href="http://cdimage.debian.org/debian-cd/current/i386/iso-cd/debian-6.0.3-i386-businesscard.iso">Direct download</a></p>
 <p>Download the <a class="reference external" href="http://cdimage.debian.org/debian-cd/current/i386/iso-cd/MD5SUMS">MD5SUMS</a> file and confirm the Debian <tt class="docutils literal">businesscard.iso</tt> is a &quot;good&quot; copy by running:</p>
-<div class="highlight"><pre><span class="nv">$ </span>md5sum debian-VERSION-i386-businesscard.iso; cat MD5SUMS | grep businesscard
+<div class="highlight"><pre><span class="nv">$ </span>md5sum debian-VERSION-i386-businesscard.iso<span class="p">;</span> cat MD5SUMS <span class="p">|</span> grep businesscard
 </pre></div>
 <p>Ensure the two strings of numbers match before proceeding.</p>
 </div>
@@ -78,7 +78,7 @@ sda3 - remaining space - home partition - filesystem: ext4, noatime, reserved bl
 <h3>Install the base system</h3>
 <p>No need to include every driver under the sun. Just let the system load what is needed:</p>
 <div class="highlight"><pre>Drivers to include in the initrd:
-targeted: only include drivers needed <span class="k">for </span>this system
+targeted: only include drivers needed <span class="k">for</span> this system
 </pre></div>
 </div>
 <div class="section" id="configure-the-package-manager">
@@ -153,7 +153,7 @@ yourusername     <span class="nv">ALL</span><span class="o">=</span>NOPASSWD: /s
 <div class="highlight"><pre><span class="nv">$ </span>ifconfig eth0 down
 <span class="nv">$ </span>iwconfig
 <span class="nv">$ </span>ifconfig wlan0 up
-<span class="nv">$ </span>iwlist wlan0 scan | less
+<span class="nv">$ </span>iwlist wlan0 scan <span class="p">|</span> less
 <span class="nv">$ </span>iwconfig wlan0 essid <span class="s2">&quot;ACCESSPOINT&quot;</span>
 <span class="nv">$ </span>iwconfig wlan0
 <span class="nv">$ </span>dhclient wlan0
@@ -210,7 +210,7 @@ yourusername     <span class="nv">ALL</span><span class="o">=</span>NOPASSWD: /s
 <div class="section" id="xorg">
 <h3>Xorg</h3>
 <p>Discover your machine's video card:</p>
-<div class="highlight"><pre><span class="nv">$ </span>lspci -v | grep <span class="s2">&quot;VGA compatible controller&quot;</span>
+<div class="highlight"><pre><span class="nv">$ </span>lspci -v <span class="p">|</span> grep <span class="s2">&quot;VGA compatible controller&quot;</span>
 </pre></div>
 <p><em>Using an open-source video driver</em></p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xorg

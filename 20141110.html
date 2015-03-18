@@ -33,7 +33,7 @@
 <h3>0. Xrandr</h3>
 <p>Output information about connected display devices and supported resolutions using <strong>Xrandr</strong>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>xrandr
-Screen 0: minimum 320 x 200, current 3200 x 1200, maximum 32767 x 32767
+Screen 0: minimum <span class="m">320</span> x 200, current <span class="m">3200</span> x 1200, maximum <span class="m">32767</span> x 32767
 LVDS1 connected 1280x800+0+0 <span class="o">(</span>normal left inverted right x axis y axis<span class="o">)</span> 261mm x 163mm
     1280x800       60.0*+   50.1
     1024x768       60.0
@@ -61,9 +61,9 @@ VIRTUAL1 disconnected <span class="o">(</span>normal left inverted right x axis 
 <h3>1. dualDisplay</h3>
 <p>Create a <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dualDisplay">dualDisplay</a> shell script to generate a combined desktop (with external monitor set as primary display and positioned to the right of laptop display):</p>
 <div class="highlight"><pre><span class="c">#!/bin/bash</span>
-<span class="nv">first_dsply</span><span class="o">=</span><span class="k">$(</span>xrandr | grep <span class="s2">&quot; connected&quot;</span> | awk <span class="s1">&#39;FNR == 1 {print $1}&#39;</span><span class="k">)</span>
-<span class="nv">second_dsply</span><span class="o">=</span><span class="k">$(</span>xrandr | grep <span class="s2">&quot; connected&quot;</span> | awk <span class="s1">&#39;FNR == 2 {print $1}&#39;</span><span class="k">)</span>
-<span class="nv">conf_dsply</span><span class="o">=</span><span class="s2">&quot;xrandr --output $first_dsply --auto --output $second_dsply --primary&quot;</span>
+<span class="nv">first_dsply</span><span class="o">=</span><span class="k">$(</span>xrandr <span class="p">|</span> grep <span class="s2">&quot; connected&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;FNR == 1 {print $1}&#39;</span><span class="k">)</span>
+<span class="nv">second_dsply</span><span class="o">=</span><span class="k">$(</span>xrandr <span class="p">|</span> grep <span class="s2">&quot; connected&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;FNR == 2 {print $1}&#39;</span><span class="k">)</span>
+<span class="nv">conf_dsply</span><span class="o">=</span><span class="s2">&quot;xrandr --output </span><span class="nv">$first_dsply</span><span class="s2"> --auto --output </span><span class="nv">$second_dsply</span><span class="s2"> --primary&quot;</span>
 
 <span class="k">if</span> <span class="o">[[</span> -n <span class="nv">$second_dsply</span> <span class="o">]]</span>
 <span class="k">then</span>

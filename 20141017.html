@@ -49,7 +49,7 @@ initrd <span class="o">(</span>loop<span class="o">)</span>/casper/initrd.lz
 </pre></div>
 <p>... and reboot.</p>
 <p>Confirm that <tt class="docutils literal">/proc/cpuinfo</tt> displays the <tt class="docutils literal">pae</tt> flag (0=false, 1=true):</p>
-<div class="highlight"><pre><span class="nv">$ </span>cat /proc/cpuinfo | grep -cim1 pae
+<div class="highlight"><pre><span class="nv">$ </span>cat /proc/cpuinfo <span class="p">|</span> grep -cim1 pae
 <span class="nv">$ </span>1
 </pre></div>
 <p>Happy hacking!</p>

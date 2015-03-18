@@ -52,7 +52,7 @@
 <p>Generate an RSA user-key pair:</p>
 <div class="highlight"><pre><span class="nv">$ </span>mkdir ~/.ssh
 <span class="nv">$ </span><span class="nb">cd</span> ~/.ssh
-<span class="nv">$ </span>ssh-keygen -v -t rsa -b 2048 -C username@hostname
+<span class="nv">$ </span>ssh-keygen -v -t rsa -b <span class="m">2048</span> -C username@hostname
 </pre></div>
 <p>Transfer the newly-generated public-key to any remote machine running SSH server. <tt class="docutils literal">Keychain</tt> is a front-end to <tt class="docutils literal"><span class="pre">ssh-add</span></tt> that exists through an entire uptime across all sessions. To source ssh-keychain at startup edit <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt>:</p>
 <div class="highlight"><pre>keychain ~/.ssh/id_rsa

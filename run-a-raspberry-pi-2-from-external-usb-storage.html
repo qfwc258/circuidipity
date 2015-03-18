@@ -51,7 +51,7 @@ gpg: /home/username/.gnupg/trustdb.gpg: trustdb created
 gpg: key 86AE8D98: public key <span class="s2">&quot;Ryan Finnie &lt;ryan@finnie.org&gt;&quot;</span> imported
 gpg: no ultimately trusted keys found
 gpg: Total number processed: 1
-gpg:               imported: 1  <span class="o">(</span>RSA: 1<span class="o">)</span>
+gpg:               imported: <span class="m">1</span>  <span class="o">(</span>RSA: 1<span class="o">)</span>
 <span class="nv">$ </span>gpg --fingerprint 86AE8D98
 pub   4096R/86AE8D98 2012-04-11
 Key <span class="nv">fingerprint</span> <span class="o">=</span> 42E2 C8DE 8C17 3AB1 02F5  2C6E 7E60 A3A6 86AE 8D98
@@ -66,7 +66,7 @@ sub   4096R/C50F6695 2012-04-11
 </pre></div>
 <p>Verify and unpack the image:</p>
 <div class="highlight"><pre><span class="nv">$ </span>gpg --verify 2015-02-19-ubuntu-trusty.zip.asc 2015-02-19-ubuntu-trusty.zip
-gpg: Signature made Thu 19 Feb 2015 12:46:09 PM EST using RSA key ID 86AE8D98
+gpg: Signature made Thu <span class="m">19</span> Feb <span class="m">2015</span> 12:46:09 PM EST using RSA key ID 86AE8D98
 gpg: Good signature from <span class="s2">&quot;Ryan Finnie &lt;ryan@finnie.org&gt;&quot;</span>
 gpg:                 aka <span class="s2">&quot;Ryan Finnie &lt;ryan.finnie@canonical.com&gt;&quot;</span>
 gpg:                 aka <span class="s2">&quot;[jpeg image of size 1669]&quot;</span>
@@ -91,11 +91,11 @@ Primary key fingerprint: 42E2 C8DE 8C17 3AB1 02F5  2C6E 7E60 A3A6 86AE 8D98
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/mmcblk0p2  1.7G  456M  1.1G  30% /
 devtmpfs        458M  4.0K  458M   1% /dev
-none            4.0K     0  4.0K   0% /sys/fs/cgroup
+none            4.0K     <span class="m">0</span>  4.0K   0% /sys/fs/cgroup
 none             93M  260K   93M   1% /run
-none            5.0M     0  5.0M   0% /run/lock
-none            462M     0  462M   0% /run/shm
-none            100M     0  100M   0% /run/user
+none            5.0M     <span class="m">0</span>  5.0M   0% /run/lock
+none            462M     <span class="m">0</span>  462M   0% /run/shm
+none            100M     <span class="m">0</span>  100M   0% /run/user
 /dev/mmcblk0p1   64M  9.7M   55M  16% /boot/firmware
 </pre></div>
 </div>
@@ -103,25 +103,25 @@ none            100M     0  100M   0% /run/user
 <h2>3. Partition external hard drive</h2>
 <p>I connect the 1TB USB hard drive to Pi and confirm device detection:</p>
 <div class="highlight"><pre><span class="nv">$ </span>lsusb
-Bus 001 Device 002: ID 0424:9514 Standard Microsystems Corp.
-Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp.
-Bus 001 Device 005: ID 152d:2329 JMicron Technology Corp. / JMicron USA Technology Corp. JM20329 SATA Bridge
+Bus <span class="m">001</span> Device 002: ID 0424:9514 Standard Microsystems Corp.
+Bus <span class="m">001</span> Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus <span class="m">001</span> Device 003: ID 0424:ec00 Standard Microsystems Corp.
+Bus <span class="m">001</span> Device 005: ID 152d:2329 JMicron Technology Corp. / JMicron USA Technology Corp. JM20329 SATA Bridge
 <span class="nv">$ </span>dmesg -t
 <span class="o">[</span> ... <span class="o">]</span>
-usb 1-1.3: new high-speed USB device number 5 using dwc_otg
+usb 1-1.3: new high-speed USB device number <span class="m">5</span> using dwc_otg
 usb 1-1.3: New USB device found, <span class="nv">idVendor</span><span class="o">=</span>152d, <span class="nv">idProduct</span><span class="o">=</span>2329
 usb 1-1.3: New USB device strings: <span class="nv">Mfr</span><span class="o">=</span>1, <span class="nv">Product</span><span class="o">=</span>2, <span class="nv">SerialNumber</span><span class="o">=</span>5
 usb 1-1.3: Product: USB to ATA/ATAPI bridge
 usb 1-1.3: Manufacturer: JMicron
 usb 1-1.3: SerialNumber: DCA5968053FF
 usb-storage 1-1.3:1.0: USB Mass Storage device detected
-usb-storage 1-1.3:1.0: Quirks match <span class="k">for </span>vid 152d pid 2329: 8020
+usb-storage 1-1.3:1.0: Quirks match <span class="k">for</span> vid 152d pid 2329: 8020
 scsi0 : usb-storage 1-1.3:1.0
-scsi 0:0:0:0: Direct-Access     WDC WD10 EARS-00Y5B1           PQ: 0 ANSI: 2 CCS
-sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> 1953525168 512-byte logical blocks: <span class="o">(</span>1.00 TB/931 GiB<span class="o">)</span>
+scsi 0:0:0:0: Direct-Access     WDC WD10 EARS-00Y5B1           PQ: <span class="m">0</span> ANSI: <span class="m">2</span> CCS
+sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> <span class="m">1953525168</span> 512-byte logical blocks: <span class="o">(</span>1.00 TB/931 GiB<span class="o">)</span>
 sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Write Protect is off
-sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Mode Sense: 28 00 00 00
+sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Mode Sense: <span class="m">28</span> <span class="m">00</span> <span class="m">00</span> 00
 sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> No Caching mode page found
 sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Assuming drive cache: write through
 sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> No Caching mode page found
@@ -139,20 +139,20 @@ sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Attached SCSI di
 </ul>
 <div class="highlight"><pre><span class="nv">$ </span>sudo fdisk /dev/sda
 
-Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: p
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: p
 
-Disk /dev/sda: 1000.2 GB, 1000204886016 bytes
-255 heads, 63 sectors/track, 121601 cylinders, total 1953525168 sectors
-<span class="nv">Units</span> <span class="o">=</span> sectors of 1 * <span class="nv">512</span> <span class="o">=</span> 512 bytes
-Sector size <span class="o">(</span>logical/physical<span class="o">)</span>: 512 bytes / 512 bytes
-I/O size <span class="o">(</span>minimum/optimal<span class="o">)</span>: 512 bytes / 512 bytes
+Disk /dev/sda: 1000.2 GB, <span class="m">1000204886016</span> bytes
+<span class="m">255</span> heads, <span class="m">63</span> sectors/track, <span class="m">121601</span> cylinders, total <span class="m">1953525168</span> sectors
+<span class="nv">Units</span> <span class="o">=</span> sectors of <span class="m">1</span> * <span class="nv">512</span> <span class="o">=</span> <span class="m">512</span> bytes
+Sector size <span class="o">(</span>logical/physical<span class="o">)</span>: <span class="m">512</span> bytes / <span class="m">512</span> bytes
+I/O size <span class="o">(</span>minimum/optimal<span class="o">)</span>: <span class="m">512</span> bytes / <span class="m">512</span> bytes
 Disk identifier: 0x00000000
 
 Device Boot      Start         End      Blocks   Id  System
 
-Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: n
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: n
 Partition <span class="nb">type</span>:
-  p   primary <span class="o">(</span>0 primary, 0 extended, 4 free<span class="o">)</span>
+  p   primary <span class="o">(</span><span class="m">0</span> primary, <span class="m">0</span> extended, <span class="m">4</span> free<span class="o">)</span>
   e   extended
 Select <span class="o">(</span>default p<span class="o">)</span>: p
 Partition number <span class="o">(</span>1-4, default 1<span class="o">)</span>:
@@ -161,9 +161,9 @@ First sector <span class="o">(</span>2048-1953525167, default 2048<span class="o
 Using default value 2048
 Last sector, +sectors or +size<span class="o">{</span>K,M,G<span class="o">}</span> <span class="o">(</span>2048-1953525167, default 1953525167<span class="o">)</span>: +20G
 
-Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: n
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: n
 Partition <span class="nb">type</span>:
-  p   primary <span class="o">(</span>1 primary, 0 extended, 3 free<span class="o">)</span>
+  p   primary <span class="o">(</span><span class="m">1</span> primary, <span class="m">0</span> extended, <span class="m">3</span> free<span class="o">)</span>
   e   extended
 Select <span class="o">(</span>default p<span class="o">)</span>: p
 Partition number <span class="o">(</span>1-4, default 2<span class="o">)</span>:
@@ -173,20 +173,20 @@ Using default value 41945088
 Last sector, +sectors or +size<span class="o">{</span>K,M,G<span class="o">}</span> <span class="o">(</span>41945088-1953525167, default 1953525167<span class="o">)</span>:
 Using default value 1953525167
 
-Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: p
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: p
 
-Disk /dev/sda: 1000.2 GB, 1000204886016 bytes
-255 heads, 63 sectors/track, 121601 cylinders, total 1953525168 sectors
-<span class="nv">Units</span> <span class="o">=</span> sectors of 1 * <span class="nv">512</span> <span class="o">=</span> 512 bytes
-Sector size <span class="o">(</span>logical/physical<span class="o">)</span>: 512 bytes / 512 bytes
-I/O size <span class="o">(</span>minimum/optimal<span class="o">)</span>: 512 bytes / 512 bytes
+Disk /dev/sda: 1000.2 GB, <span class="m">1000204886016</span> bytes
+<span class="m">255</span> heads, <span class="m">63</span> sectors/track, <span class="m">121601</span> cylinders, total <span class="m">1953525168</span> sectors
+<span class="nv">Units</span> <span class="o">=</span> sectors of <span class="m">1</span> * <span class="nv">512</span> <span class="o">=</span> <span class="m">512</span> bytes
+Sector size <span class="o">(</span>logical/physical<span class="o">)</span>: <span class="m">512</span> bytes / <span class="m">512</span> bytes
+I/O size <span class="o">(</span>minimum/optimal<span class="o">)</span>: <span class="m">512</span> bytes / <span class="m">512</span> bytes
 Disk identifier: 0x00000000
 
 Device Boot      Start         End      Blocks   Id  System
-/dev/sda1            2048    41945087    20971520   83  Linux
-/dev/sda2        41945088  1953525167   955790040   83  Linux
+/dev/sda1            <span class="m">2048</span>    <span class="m">41945087</span>    <span class="m">20971520</span>   <span class="m">83</span>  Linux
+/dev/sda2        <span class="m">41945088</span>  <span class="m">1953525167</span>   <span class="m">955790040</span>   <span class="m">83</span>  Linux
 
-Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: w
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: w
 The partition table has been altered!
 
 Calling ioctl<span class="o">()</span> to re-read partition table.
@@ -212,10 +212,10 @@ Syncing disks.
 <h3>5.1 On the SD card</h3>
 <p>Modify options in <tt class="docutils literal">/boot/cmdline.txt</tt> to point the bootloader to <tt class="docutils literal">root</tt> filesystem on the USB device:</p>
 <div class="highlight"><pre>Original:
-dwc_otg.lpm_enable<span class="o">=</span>0 <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">root</span><span class="o">=</span>/dev/mmcblk0p2 rootwait
+dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span> <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">root</span><span class="o">=</span>/dev/mmcblk0p2 rootwait
 
 Modified:
-dwc_otg.lpm_enable<span class="o">=</span>0 <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">root</span><span class="o">=</span>/dev/sda1 rootwait <span class="nv">rootdelay</span><span class="o">=</span>5
+dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span> <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">root</span><span class="o">=</span>/dev/sda1 rootwait <span class="nv">rootdelay</span><span class="o">=</span>5
 </pre></div>
 </div>
 <div class="section" id="on-the-usb-hard-drive">
@@ -224,13 +224,13 @@ dwc_otg.lpm_enable<span class="o">=</span>0 <span class="nv">console</span><span
 <div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /mnt/media/USB0
 </pre></div>
 <p>Modify options in <tt class="docutils literal">/mnt/etc/fstab</tt> to mount <tt class="docutils literal">rootfs</tt> and <tt class="docutils literal">storage</tt> partitions at boot. <a class="footnote-reference" href="#id6" id="id3">[3]</a> Example for <tt class="docutils literal">sda1</tt> and <tt class="docutils literal">sda2</tt>:</p>
-<div class="highlight"><pre>proc            /proc           proc    defaults          0       0
+<div class="highlight"><pre>proc            /proc           proc    defaults          <span class="m">0</span>       0
 <span class="c"># comment out root filesystem on SD card</span>
 <span class="c">#/dev/mmcblk0p2  /               ext4    defaults,noatime  0       1</span>
 <span class="c"># partitions on USB hard drive</span>
-/dev/sda1       /       ext4    defaults,noatime          0       1
-/dev/sda2       /media/USB0 ext4    defaults,noatime      0       0
-/dev/mmcblk0p1  /boot/firmware  vfat    defaults          0       2
+/dev/sda1       /       ext4    defaults,noatime          <span class="m">0</span>       1
+/dev/sda2       /media/USB0 ext4    defaults,noatime      <span class="m">0</span>       0
+/dev/mmcblk0p1  /boot/firmware  vfat    defaults          <span class="m">0</span>       2
 </pre></div>
 </div>
 </div>
@@ -244,12 +244,12 @@ dwc_otg.lpm_enable<span class="o">=</span>0 <span class="nv">console</span><span
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/sda1        20G  590M   18G   4% /
 devtmpfs        458M  4.0K  458M   1% /dev
-none            4.0K     0  4.0K   0% /sys/fs/cgroup
+none            4.0K     <span class="m">0</span>  4.0K   0% /sys/fs/cgroup
 none             93M  280K   93M   1% /run
 /dev/sda2       898G  326G  527G  39% /media/USB0
-none            5.0M     0  5.0M   0% /run/lock
-none            462M     0  462M   0% /run/shm
-none            100M     0  100M   0% /run/user
+none            5.0M     <span class="m">0</span>  5.0M   0% /run/lock
+none            462M     <span class="m">0</span>  462M   0% /run/shm
+none            100M     <span class="m">0</span>  100M   0% /run/user
 /dev/mmcblk0p1   64M  9.9M   55M  16% /boot/firmware
 </pre></div>
 </div>
@@ -285,8 +285,8 @@ Etc/UTC
 <span class="nv">$ </span>sudo dpkg-reconfigure tzdata  <span class="c"># ...and follow the interactive menu to set (example) &#39;America/Toronto&#39;...</span>
 
 Current default <span class="nb">time </span>zone: <span class="s1">&#39;America/Toronto&#39;</span>
-Local <span class="nb">time </span>is now:      Sun Mar  1 18:28:32 EST 2015.
-Universal Time is now:  Sun Mar  1 23:28:32 UTC 2015.
+Local <span class="nb">time </span>is now:      Sun Mar  <span class="m">1</span> 18:28:32 EST 2015.
+Universal Time is now:  Sun Mar  <span class="m">1</span> 23:28:32 UTC 2015.
 </pre></div>
 </div>
 <div class="section" id="upgrade">

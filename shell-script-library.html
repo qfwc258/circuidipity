@@ -30,8 +30,8 @@
     <p>Programming languages like Python can make use of <em>libraries</em> of code to add ready-to-go capabilities to programs. Shell scripts don't use libraries but I learned this week it is possible to <em>source</em> a file in a shell script and add functions to the script as if they were entered directly (vs spawning a subshell). Very useful in creating your own library equivalent for the shell!</p>
 <p>There are several functions I have created in previous scripts that are self-contained in their logic and can be re-used over and over again. This function - for example - adds a test whether or not the user executing a script has root privileges ...</p>
 <div class="highlight"><pre>test_root<span class="o">()</span> <span class="o">{</span>
-<span class="k">if</span> <span class="o">[[</span> <span class="nv">$UID</span> -ne 0 <span class="o">]]</span>; <span class="k">then</span>
-<span class="k">    </span><span class="nb">printf</span> <span class="s2">&quot;\n$( penguinista ) .: $NAME requires ROOT privileges to do its job.\n&quot;</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="nv">$UID</span> -ne <span class="m">0</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">printf</span> <span class="s2">&quot;\n</span><span class="k">$(</span> penguinista <span class="k">)</span><span class="s2"> .: </span><span class="nv">$NAME</span><span class="s2"> requires ROOT privileges to do its job.\n&quot;</span>
     <span class="nb">exit</span>
 <span class="k">fi</span>
 <span class="o">}</span>

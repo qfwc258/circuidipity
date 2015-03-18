@@ -67,7 +67,7 @@
 <div class="highlight"><pre><span class="nv">$ </span>tar xvzf Tiny-Tiny-RSS-X.X.X.tar.gz
 <span class="nv">$ </span>mv Tiny-Tiny-RSS-X.X.X ttrss
 <span class="nv">$ </span><span class="nb">cd </span>ttrss
-<span class="nv">$ </span>chmod -R 777 cache/images/ cache/js/ cache/export/ cache/upload/ feed-icons/ lock/
+<span class="nv">$ </span>chmod -R <span class="m">777</span> cache/images/ cache/js/ cache/export/ cache/upload/ feed-icons/ lock/
 </pre></div>
 </div>
 <div class="section" id="nginx">
@@ -78,25 +78,25 @@
 </pre></div>
 <p>Create a <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">server block</a> (virtual host) for TTRSS. Sample <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/ttrss</span></tt> <a class="footnote-reference" href="#id8" id="id4">[3]</a> configuration:</p>
 <div class="highlight"><pre>server <span class="o">{</span>
-    listen 80; <span class="c">## listen for ipv4; this line is default and implied</span>
+    listen 80<span class="p">;</span> <span class="c">## listen for ipv4; this line is default and implied</span>
 
-    root /usr/share/nginx/html/ttrss;
-    index index.html index.htm index.php;
+    root /usr/share/nginx/html/ttrss<span class="p">;</span>
+    index index.html index.htm index.php<span class="p">;</span>
 
-    access_log /var/log/nginx/ttrss_access.log;
-    error_log /var/log/nginx/ttrss_error.log info;
+    access_log /var/log/nginx/ttrss_access.log<span class="p">;</span>
+    error_log /var/log/nginx/ttrss_error.log info<span class="p">;</span>
 
-    server_name ttrss.*;
+    server_name ttrss.*<span class="p">;</span>
 
     location / <span class="o">{</span>
-        index           index.php;
+        index           index.php<span class="p">;</span>
     <span class="o">}</span>
 
     location ~ <span class="se">\.</span>php<span class="nv">$ </span><span class="o">{</span>
-        try_files <span class="nv">$uri</span> <span class="o">=</span> 404; <span class="c">#Prevents autofixing of path which could be used for exploit</span>
-        fastcgi_pass unix:/var/run/php5-fpm.sock;
-        fastcgi_index index.php;
-        include /etc/nginx/fastcgi_params;
+        try_files <span class="nv">$uri</span> <span class="o">=</span> 404<span class="p">;</span> <span class="c">#Prevents autofixing of path which could be used for exploit</span>
+        fastcgi_pass unix:/var/run/php5-fpm.sock<span class="p">;</span>
+        fastcgi_index index.php<span class="p">;</span>
+        include /etc/nginx/fastcgi_params<span class="p">;</span>
     <span class="o">}</span>
 
 <span class="o">}</span>
@@ -114,7 +114,7 @@
 <div class="highlight"><pre>192.168.1.88 ttrss.local
 </pre></div>
 <p>Navigate to <tt class="docutils literal"><span class="pre">http://ttrss.local</span></tt> and configure TTRSS:</p>
-<div class="highlight"><pre>Database <span class="nb">type</span>: <span class="o">[</span><span class="k">select </span>PostgreSQL<span class="o">]</span>
+<div class="highlight"><pre>Database <span class="nb">type</span>: <span class="o">[</span><span class="k">select</span> PostgreSQL<span class="o">]</span>
 Username: www-data
 Password: <span class="o">[</span>database password created earlier<span class="o">]</span>
 Database Name: ttrss
@@ -133,7 +133,7 @@ Port: 5432
 <div class="highlight"><pre><span class="nv">$ </span>crontab -e
 </pre></div>
 <p>Sample TTRSS job:</p>
-<div class="highlight"><pre>10 * * * * /usr/bin/php /usr/share/nginx/html/ttrss/update.php --feeds --quiet
+<div class="highlight"><pre><span class="m">10</span> * * * * /usr/bin/php /usr/share/nginx/html/ttrss/update.php --feeds --quiet
 </pre></div>
 </div>
 <div class="section" id="helpful-resources">

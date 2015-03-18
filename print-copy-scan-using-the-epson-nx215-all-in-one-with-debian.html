@@ -53,7 +53,7 @@
 </pre></div>
 <p>Copy the downloaded <em>PostScript Printer Description (PPD)</em> file to <tt class="docutils literal">/etc/cups/ppd</tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo cp Epson-Stylus_NX215-pipslite-en.ppd /etc/cups/ppd/
-<span class="nv">$ </span>sudo chmod 644 /etc/cups/ppd/Epson-Stylus_NX215-pipslite-en.ppd
+<span class="nv">$ </span>sudo chmod <span class="m">644</span> /etc/cups/ppd/Epson-Stylus_NX215-pipslite-en.ppd
 <span class="nv">$ </span>sudo /etc/init.d/cups restart
 </pre></div>
 </div>
@@ -68,12 +68,12 @@
 <span class="o">[</span>418676.596376<span class="o">]</span> usb 1-1: Manufacturer: EPSON
 <span class="o">[</span>418676.596378<span class="o">]</span> usb 1-1: SerialNumber: 4C39544B3033343183
 <span class="o">[</span>418676.596487<span class="o">]</span> usb 1-1: configuration <span class="c">#1 chosen from 1 choice</span>
-<span class="o">[</span>418676.604068<span class="o">]</span> usblp0: USB Bidirectional printer dev 8 <span class="k">if </span>1 alt 0 proto 2 vid 0x04B8 pid 0x084F
-<span class="o">[</span>418676.605087<span class="o">]</span> scsi11 : SCSI emulation <span class="k">for </span>USB Mass Storage devices
+<span class="o">[</span>418676.604068<span class="o">]</span> usblp0: USB Bidirectional printer dev <span class="m">8</span> <span class="k">if</span> <span class="m">1</span> alt <span class="m">0</span> proto <span class="m">2</span> vid 0x04B8 pid 0x084F
+<span class="o">[</span>418676.605087<span class="o">]</span> scsi11 : SCSI emulation <span class="k">for</span> USB Mass Storage devices
 <span class="o">[</span>418676.605194<span class="o">]</span> usb-storage: device found at 8
-<span class="o">[</span>418676.605196<span class="o">]</span> usb-storage: waiting <span class="k">for </span>device to settle before scanning
+<span class="o">[</span>418676.605196<span class="o">]</span> usb-storage: waiting <span class="k">for</span> device to settle before scanning
 <span class="o">[</span>418681.604309<span class="o">]</span> usb-storage: device scan <span class="nb">complete</span>
-<span class="o">[</span>418681.606512<span class="o">]</span> scsi 11:0:0:0: Direct-Access     EPSON    Stylus Storage   1.00 PQ: 0 ANSI: 2
+<span class="o">[</span>418681.606512<span class="o">]</span> scsi 11:0:0:0: Direct-Access     EPSON    Stylus Storage   1.00 PQ: <span class="m">0</span> ANSI: 2
 <span class="o">[</span>418681.607084<span class="o">]</span> sd 11:0:0:0: Attached scsi generic sg6 <span class="nb">type </span>0
 <span class="o">[</span>418681.613113<span class="o">]</span> sd 11:0:0:0: <span class="o">[</span>sdf<span class="o">]</span> Attached SCSI removable disk
 </pre></div>

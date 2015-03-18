@@ -132,7 +132,7 @@
 <div class="highlight"><pre><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s2">&quot;quiet acpi_osi=Linux acpi_backlight=vendor&quot;</span>
 </pre></div>
 <p>Save your changes and run <tt class="docutils literal">sudo <span class="pre">update-grub2</span></tt>. Reboot... login... and run ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo <span class="sb">`</span><span class="nb">echo </span>15 &gt; /sys/class/backlight/eeepc/brightness<span class="sb">`</span>
+<div class="highlight"><pre><span class="nv">$ </span>sudo <span class="sb">`</span><span class="nb">echo </span><span class="m">15</span> &gt; /sys/class/backlight/eeepc/brightness<span class="sb">`</span>
 </pre></div>
 </div>
 <div class="section" id="touchpad">
@@ -144,7 +144,7 @@ N: <span class="nv">Name</span><span class="o">=</span><span class="s2">&quot;Sy
 </pre></div>
 <p>Use <tt class="docutils literal">xinput</tt> to determine the properties of the touchpad and add new functions ...</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xinput
-<span class="nv">$ </span>xinput --list | grep Synaptic     <span class="c"># determine ``DEVICE_ID`` of the touchpad ... on the 1001P its ``id=13``)</span>
+<span class="nv">$ </span>xinput --list <span class="p">|</span> grep Synaptic     <span class="c"># determine ``DEVICE_ID`` of the touchpad ... on the 1001P its ``id=13``)</span>
 <span class="nv">$ </span>xinput --list-props 13
 </pre></div>
 <p>Create a shell script using xinput to configure the touchpad for left-middle-right mouse clicks with finger taps and two-finger scrolling, save it in <tt class="docutils literal">~/bin</tt> and source it to run at login. On my 1001P running Fluxbox window manager I add the line <tt class="docutils literal">touchpad_config &amp;</tt> to <tt class="docutils literal"><span class="pre">~/.fluxbox/startup</span></tt>.</p>
@@ -162,12 +162,12 @@ N: <span class="nv">Name</span><span class="o">=</span><span class="s2">&quot;Sy
 <p>I noticed a frequent clicking noise from the drive heads on my netbook. Digging online reveals discussion about over-aggressive power management settings on hard drives that rapidly mount/unmount/remount and gradually wear out the drive. Feedback suggests that laptop drives are good for roughly ~600000 <em>load_cycles</em>.</p>
 <p>To check the drive and alter management settings ...</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install smartmontools hdparm
-<span class="nv">$ </span>sudo smartctl -a /dev/sda | egrep -i <span class="s1">&#39;Power_On_Hours|Load_Cycle_Count&#39;</span>
+<span class="nv">$ </span>sudo smartctl -a /dev/sda <span class="p">|</span> egrep -i <span class="s1">&#39;Power_On_Hours|Load_Cycle_Count&#39;</span>
 </pre></div>
 <p>In my situation I felt <tt class="docutils literal">Load_Cycle_Count</tt> was increasing too rapidly and I found the <em>click-click-click</em> of the drive every few seconds a nuisance. I use <tt class="docutils literal">hdparm</tt> to set powersaving mode to less aggressive tactics... which eliminated the clicking <tt class="docutils literal">hdparm <span class="pre">-B</span> 254 /dev/sda</tt>.</p>
 <p>To make the change permanent edit <tt class="docutils literal">/etc/hdparm.conf</tt> by adding to the end of the file ...</p>
 <div class="highlight"><pre>command_line <span class="o">{</span>
-    hdparm -q -B 254 /dev/sda
+    hdparm -q -B <span class="m">254</span> /dev/sda
 </pre></div>
 </div>
 </div>

@@ -80,8 +80,8 @@
 <p><em>s3-website-us-east-1.amazonaws.com</em> is for accessing the website feature. If you just want S3 you can use <em>s3.amazonaws.com</em>.</p>
 <p>Allow a bit of time for your changes to propagate through the global network of DNS servers ... check your modifications by running <tt class="docutils literal">host</tt> (cool little DNS hookup utility) ...</p>
 <div class="highlight"><pre><span class="nv">$ </span>host www.circuidipity.com
-www.circuidipity.com is an <span class="nb">alias </span><span class="k">for </span>www.circuidipity.com.s3-website-us-east-1.amazonaws.com.
-www.circuidipity.com.s3-website-us-east-1.amazonaws.com is an <span class="nb">alias </span><span class="k">for </span>s3-website-us-east-1.amazonaws.com.
+www.circuidipity.com is an <span class="nb">alias </span><span class="k">for</span> www.circuidipity.com.s3-website-us-east-1.amazonaws.com.
+www.circuidipity.com.s3-website-us-east-1.amazonaws.com is an <span class="nb">alias </span><span class="k">for</span> s3-website-us-east-1.amazonaws.com.
 s3-website-us-east-1.amazonaws.com has address 207.171.163.149
 </pre></div>
 <p>So <tt class="docutils literal">CNAME www</tt> is working ... <em>dy-naaa-MITE!</em> But a <tt class="docutils literal">CNAME</tt> cannot point to a <em>naked domain</em> (circuidipity.com).</p>

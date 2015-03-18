@@ -76,7 +76,7 @@ Log file is /home/USERNAME/.vnc/HOSTNAME:1.log
 <h3>2. Optimize</h3>
 <p>On the Pi create <tt class="docutils literal">myVNCserver</tt> with desired vncserver settings and place in <tt class="docutils literal">~/bin</tt>:</p>
 <div class="highlight"><pre><span class="c">#!/bin/sh</span>
-vncserver -geometry 1800x1000 -depth 24 -dpi 96
+vncserver -geometry 1800x1000 -depth <span class="m">24</span> -dpi 96
 </pre></div>
 <p>Note that <tt class="docutils literal"><span class="pre">-geometry</span></tt> can be set to whatever is desired</p>
 <p>With this setup VNC can be started and halted on demand. To have VNC auto-start at boot consult the <a class="reference external" href="http://www.raspberrypi.org/documentation/remote-access/vnc/">Pi documentation</a> for a sample <tt class="docutils literal">/etc/init.d</tt> script. Since I plan to run my Pi as a headless server and rarely access the desktop I will just start VNC when I need it.</p>

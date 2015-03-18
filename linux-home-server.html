@@ -77,7 +77,7 @@ sda3 - remaining space - home partition - filesystem: ext4, noatime, reserved bl
 <h3>Install the base system</h3>
 <p>No need to include every driver under the sun. Just let the system load what is needed ...</p>
 <div class="highlight"><pre>Drivers to include in the initrd:
-targeted: only include drivers needed <span class="k">for </span>this system
+targeted: only include drivers needed <span class="k">for</span> this system
 </pre></div>
 </div>
 <div class="section" id="software-selection">
@@ -124,7 +124,7 @@ terminal multiplexer: it enables a number of terminals (or windows), each runnin
 <p>Generate an RSA user-key pair ...</p>
 <div class="highlight"><pre><span class="nv">$ </span>mkdir ~/.ssh
 <span class="nv">$ </span><span class="nb">cd</span> ~/.ssh
-<span class="nv">$ </span>ssh-keygen -v -t rsa -b 2048 -C USERNAME@HOSTNAME
+<span class="nv">$ </span>ssh-keygen -v -t rsa -b <span class="m">2048</span> -C USERNAME@HOSTNAME
 </pre></div>
 <p>Transfer the newly-generated public-key to your new home server. <em>Keychain</em> is a front-end to <tt class="docutils literal"><span class="pre">ssh-add</span></tt> that exists through an entire uptime across all sessions. To source ssh-keychain at startup edit <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt> ...</p>
 <div class="highlight"><pre>keychain ~/.ssh/id_rsa

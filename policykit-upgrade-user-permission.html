@@ -56,11 +56,11 @@
 <span class="nv">$ </span>sudo dpkg -i libpolkit-agent-1-0_0.105-4_amd64.deb
 <span class="nv">$ </span>sudo dpkg -i libpolkit-backend-1-0_0.105-4_amd64.deb
 <span class="nv">$ </span>sudo dpkg -i policykit-1_0.105-4_amd64.deb
-<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;libpolkit-gobject-1-0:amd64 hold&quot;</span> | sudo dpkg --set-selections
-<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;libpolkit-agent-1-0:amd64 hold&quot;</span> | sudo dpkg --set-selections
-<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;libpolkit-backend-1-0:amd64 hold&quot;</span> | sudo dpkg --set-selections
-<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;policykit-1 hold&quot;</span> | sudo dpkg --set-selections
-<span class="nv">$ </span>dpkg get-selections | grep <span class="s2">&quot;pol&quot;</span>  <span class="c"># confirm pkgs are now on hold</span>
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;libpolkit-gobject-1-0:amd64 hold&quot;</span> <span class="p">|</span> sudo dpkg --set-selections
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;libpolkit-agent-1-0:amd64 hold&quot;</span> <span class="p">|</span> sudo dpkg --set-selections
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;libpolkit-backend-1-0:amd64 hold&quot;</span> <span class="p">|</span> sudo dpkg --set-selections
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;policykit-1 hold&quot;</span> <span class="p">|</span> sudo dpkg --set-selections
+<span class="nv">$ </span>dpkg get-selections <span class="p">|</span> grep <span class="s2">&quot;pol&quot;</span>  <span class="c"># confirm pkgs are now on hold</span>
 </pre></div>
 </div>
 <div class="section" id="restore-dependencies">

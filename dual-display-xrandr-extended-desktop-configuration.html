@@ -39,22 +39,22 @@
 <div class="highlight"><pre><span class="c">#!/bin/bash</span>
 <span class="c"># Enable|disable extended desktop using XRandR</span>
 
-<span class="nv">PRIMARY</span><span class="o">=</span><span class="k">$(</span>xrandr | grep <span class="s2">&quot; connected&quot;</span> | awk <span class="s1">&#39;FNR == 1 {print $1}&#39;</span><span class="k">)</span>
-<span class="nv">SECOND</span><span class="o">=</span><span class="k">$(</span>xrandr | grep <span class="s2">&quot; connected&quot;</span> | awk <span class="s1">&#39;FNR == 2 {print $1}&#39;</span><span class="k">)</span>
-<span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;xrandr --output $PRIMARY --auto --primary --output $SECOND&quot;</span>
+<span class="nv">PRIMARY</span><span class="o">=</span><span class="k">$(</span>xrandr <span class="p">|</span> grep <span class="s2">&quot; connected&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;FNR == 1 {print $1}&#39;</span><span class="k">)</span>
+<span class="nv">SECOND</span><span class="o">=</span><span class="k">$(</span>xrandr <span class="p">|</span> grep <span class="s2">&quot; connected&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;FNR == 2 {print $1}&#39;</span><span class="k">)</span>
+<span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;xrandr --output </span><span class="nv">$PRIMARY</span><span class="s2"> --auto --primary --output </span><span class="nv">$SECOND</span><span class="s2">&quot;</span>
 
-<span class="k">if</span> <span class="o">[[</span> -n <span class="nv">$SECOND</span> <span class="o">]]</span>; <span class="k">then</span>
-<span class="k">    if</span> <span class="o">[</span> <span class="s2">&quot;$1&quot;</span> !<span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span>; <span class="k">then</span>
-<span class="k">        case</span> <span class="nv">$1</span> in
+<span class="k">if</span> <span class="o">[[</span> -n <span class="nv">$SECOND</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> !<span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="k">case</span> <span class="nv">$1</span> in
             -q <span class="o">)</span>    <span class="nv">$CONFIG</span> --off
                     <span class="nb">exit</span>
-                    ;;
-            * <span class="o">)</span>     <span class="nb">printf</span> <span class="s2">&quot;ERROR: &#39;$1&#39; is an invalid option\n&quot;</span>
+                    <span class="p">;;</span>
+            * <span class="o">)</span>     <span class="nb">printf</span> <span class="s2">&quot;ERROR: &#39;</span><span class="nv">$1</span><span class="s2">&#39; is an invalid option\n&quot;</span>
                     <span class="nb">printf</span> <span class="s2">&quot;Option: &#39;-q&#39; disables an extended desktop\n&quot;</span>
                     <span class="nb">exit </span>1
-                    ;;
+                    <span class="p">;;</span>
         <span class="k">esac</span>
-<span class="k">    else</span>
+    <span class="k">else</span>
         <span class="nv">$CONFIG</span> --auto --right-of <span class="nv">$PRIMARY</span>
     <span class="k">fi</span>
 <span class="k">fi</span>

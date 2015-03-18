@@ -35,13 +35,13 @@
 <p>Attach the Brother device to server:</p>
 <div class="highlight"><pre><span class="nv">$ </span>dmesg -t
 <span class="o">[</span>...snip...<span class="o">]</span>
-usb 5-1: new high-speed USB device number 4 using ehci-pci
+usb 5-1: new high-speed USB device number <span class="m">4</span> using ehci-pci
 usb 5-1: New USB device found, <span class="nv">idVendor</span><span class="o">=</span>04f9, <span class="nv">idProduct</span><span class="o">=</span>02fa
 usb 5-1: New USB device strings: <span class="nv">Mfr</span><span class="o">=</span>1, <span class="nv">Product</span><span class="o">=</span>2, <span class="nv">SerialNumber</span><span class="o">=</span>3
 usb 5-1: Product: MFC-J450DW
 usb 5-1: Manufacturer: Brother
 usb 5-1: SerialNumber: BROH4F240529
-usblp 5-1:1.0: usblp0: USB Bidirectional printer dev 4 <span class="k">if </span>0 alt 0 proto 2 vid 0x04F9 pid 0x02FA
+usblp 5-1:1.0: usblp0: USB Bidirectional printer dev <span class="m">4</span> <span class="k">if</span> <span class="m">0</span> alt <span class="m">0</span> proto <span class="m">2</span> vid 0x04F9 pid 0x02FA
 usbcore: registered new interface driver usblp
 </pre></div>
 <p>Install CUPS (printer) and SANE (scanner) packages and grant (example) <tt class="docutils literal">username</tt> admin privileges:</p>
@@ -77,10 +77,10 @@ Will you specify the Device URI? <span class="o">[</span>Y/n<span class="o">]</s
 6: socket
 7: usb://Brother/MFC-J450DW?serial<span class="o">=</span>BROH4F240529
 8: smb
-9 <span class="o">(</span>I<span class="o">)</span>: Specify IP address.
-10 <span class="o">(</span>A<span class="o">)</span>: Auto. <span class="o">(</span>usb://Brother/MFC-J450DW?serial<span class="o">=</span>BROH4F240529<span class="o">)</span>
+<span class="m">9</span> <span class="o">(</span>I<span class="o">)</span>: Specify IP address.
+<span class="m">10</span> <span class="o">(</span>A<span class="o">)</span>: Auto. <span class="o">(</span>usb://Brother/MFC-J450DW?serial<span class="o">=</span>BROH4F240529<span class="o">)</span>
 
-<span class="k">select </span>the number of destination Device URI. -&gt;10
+<span class="k">select</span> the number of destination Device URI. -&gt;10
 
 lpadmin -p MFCJ450DW -v usb://Brother/MFC-J450DW?serial<span class="o">=</span>BROH4F240529 -E
 Test Print? <span class="o">[</span>y/N<span class="o">]</span> -&gt;y
@@ -151,7 +151,7 @@ WebInterface Yes
 <div class="highlight"><pre><span class="nv">$ </span>sane-find-scanner
 found USB scanner <span class="o">(</span><span class="nv">vendor</span><span class="o">=</span>0x04f9 <span class="o">[</span>Brother<span class="o">]</span>, <span class="nv">product</span><span class="o">=</span>0x02fa <span class="o">[</span>MFC-J450DW<span class="o">])</span> at libusb:005:00
 <span class="nv">$ </span>scanimage -L
-device <span class="sb">`</span>brother4:bus1;dev1<span class="err">&#39;</span> is a Brother MFC-J450DW USB scanner
+device <span class="sb">`</span>brother4:bus1<span class="p">;</span>dev1<span class="err">&#39;</span> is a Brother MFC-J450DW USB scanner
 </pre></div>
 <p>Modify <tt class="docutils literal">/etc/default/saned</tt> to run SANE as server:</p>
 <div class="highlight"><pre><span class="nv">RUN</span><span class="o">=</span>yes

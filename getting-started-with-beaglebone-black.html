@@ -38,31 +38,31 @@
 <p>BeagleBone Black is designed to get the Linux user up-and-running quickly. Within a few minutes of unboxing the device I was using the provided USB cable to connect the device to my host computer (running Debian <tt class="docutils literal">sid</tt>). BBB mounts as a usb-storage device and provides a usbnet virtual-ethernet interface running a DHCP server.</p>
 <p>Some post-connection HOST output of interest ...</p>
 <div class="highlight"><pre><span class="nv">$ </span>cat /var/log/kern.log
-Sep  1 16:58:17 kambei kernel: <span class="o">[</span>455195.036280<span class="o">]</span> usb 1-1.2: new high-speed USB device number 20 using ehci-pci
-Sep  1 16:58:18 kambei kernel: <span class="o">[</span>455195.129344<span class="o">]</span> usb 1-1.2: New USB device found, <span class="nv">idVendor</span><span class="o">=</span>1d6b, <span class="nv">idProduct</span><span class="o">=</span>0104
-Sep  1 16:58:18 kambei kernel: <span class="o">[</span>455195.129350<span class="o">]</span> usb 1-1.2: New USB device strings: <span class="nv">Mfr</span><span class="o">=</span>2, <span class="nv">Product</span><span class="o">=</span>3, <span class="nv">SerialNumber</span><span class="o">=</span>4
-Sep  1 16:58:18 kambei kernel: <span class="o">[</span>455195.129355<span class="o">]</span> usb 1-1.2: Product: BeagleBoneBlack
-Sep  1 16:58:18 kambei kernel: <span class="o">[</span>455195.129358<span class="o">]</span> usb 1-1.2: Manufacturer: Circuitco
-Sep  1 16:58:18 kambei kernel: <span class="o">[</span>455195.129361<span class="o">]</span> usb 1-1.2: SerialNumber: 5A-1713BBBK2013
-Sep  1 16:58:18 kambei kernel: <span class="o">[</span>455195.133166<span class="o">]</span> rndis_host 1-1.2:1.0 eth1: register <span class="s1">&#39;rndis_host&#39;</span> at usb-0000:00:1a.0-1.2, RNDIS device, c8:a0:30:ac:1d:6f
-Sep  1 16:58:18 kambei kernel: <span class="o">[</span>455195.133843<span class="o">]</span> cdc_acm 1-1.2:1.2: This device cannot <span class="k">do </span>calls on its own. It is not a modem.
-Sep  1 16:58:18 kambei kernel: <span class="o">[</span>455195.133917<span class="o">]</span> cdc_acm 1-1.2:1.2: ttyACM0: USB ACM device
-Sep  1 16:58:18 kambei kernel: <span class="o">[</span>455195.135249<span class="o">]</span> usb-storage 1-1.2:1.4: USB Mass Storage device detected
-Sep  1 16:58:18 kambei kernel: <span class="o">[</span>455195.135458<span class="o">]</span> scsi20 : usb-storage 1-1.2:1.4
-Sep  1 16:58:19 kambei kernel: <span class="o">[</span>455196.133604<span class="o">]</span> scsi 20:0:0:0: Direct-Access     Linux    File-CD Gadget   0308 PQ: 0 ANSI: 2
-Sep  1 16:58:19 kambei kernel: <span class="o">[</span>455196.134045<span class="o">]</span> sd 20:0:0:0: Attached scsi generic sg1 <span class="nb">type </span>0
-Sep  1 16:58:19 kambei kernel: <span class="o">[</span>455196.135313<span class="o">]</span> sd 20:0:0:0: <span class="o">[</span>sdb<span class="o">]</span> 144522 512-byte logical blocks: <span class="o">(</span>73.9 MB/70.5 MiB<span class="o">)</span>
-Sep  1 16:58:19 kambei kernel: <span class="o">[</span>455196.136080<span class="o">]</span> sd 20:0:0:0: <span class="o">[</span>sdb<span class="o">]</span> Write Protect is off
-Sep  1 16:58:19 kambei kernel: <span class="o">[</span>455196.136089<span class="o">]</span> sd 20:0:0:0: <span class="o">[</span>sdb<span class="o">]</span> Mode Sense: 0f 00 00 00
-Sep  1 16:58:19 kambei kernel: <span class="o">[</span>455196.136840<span class="o">]</span> sd 20:0:0:0: <span class="o">[</span>sdb<span class="o">]</span> Write cache: enabled, <span class="nb">read </span>cache: enabled, doesn<span class="err">&#39;</span>t support DPO or FUA
-Sep  1 16:58:19 kambei kernel: <span class="o">[</span>455196.147108<span class="o">]</span>  sdb:
-Sep  1 16:58:19 kambei kernel: <span class="o">[</span>455196.149998<span class="o">]</span> sd 20:0:0:0: <span class="o">[</span>sdb<span class="o">]</span> Attached SCSI removable disk
+Sep  <span class="m">1</span> 16:58:17 kambei kernel: <span class="o">[</span>455195.036280<span class="o">]</span> usb 1-1.2: new high-speed USB device number <span class="m">20</span> using ehci-pci
+Sep  <span class="m">1</span> 16:58:18 kambei kernel: <span class="o">[</span>455195.129344<span class="o">]</span> usb 1-1.2: New USB device found, <span class="nv">idVendor</span><span class="o">=</span>1d6b, <span class="nv">idProduct</span><span class="o">=</span>0104
+Sep  <span class="m">1</span> 16:58:18 kambei kernel: <span class="o">[</span>455195.129350<span class="o">]</span> usb 1-1.2: New USB device strings: <span class="nv">Mfr</span><span class="o">=</span>2, <span class="nv">Product</span><span class="o">=</span>3, <span class="nv">SerialNumber</span><span class="o">=</span>4
+Sep  <span class="m">1</span> 16:58:18 kambei kernel: <span class="o">[</span>455195.129355<span class="o">]</span> usb 1-1.2: Product: BeagleBoneBlack
+Sep  <span class="m">1</span> 16:58:18 kambei kernel: <span class="o">[</span>455195.129358<span class="o">]</span> usb 1-1.2: Manufacturer: Circuitco
+Sep  <span class="m">1</span> 16:58:18 kambei kernel: <span class="o">[</span>455195.129361<span class="o">]</span> usb 1-1.2: SerialNumber: 5A-1713BBBK2013
+Sep  <span class="m">1</span> 16:58:18 kambei kernel: <span class="o">[</span>455195.133166<span class="o">]</span> rndis_host 1-1.2:1.0 eth1: register <span class="s1">&#39;rndis_host&#39;</span> at usb-0000:00:1a.0-1.2, RNDIS device, c8:a0:30:ac:1d:6f
+Sep  <span class="m">1</span> 16:58:18 kambei kernel: <span class="o">[</span>455195.133843<span class="o">]</span> cdc_acm 1-1.2:1.2: This device cannot <span class="k">do</span> calls on its own. It is not a modem.
+Sep  <span class="m">1</span> 16:58:18 kambei kernel: <span class="o">[</span>455195.133917<span class="o">]</span> cdc_acm 1-1.2:1.2: ttyACM0: USB ACM device
+Sep  <span class="m">1</span> 16:58:18 kambei kernel: <span class="o">[</span>455195.135249<span class="o">]</span> usb-storage 1-1.2:1.4: USB Mass Storage device detected
+Sep  <span class="m">1</span> 16:58:18 kambei kernel: <span class="o">[</span>455195.135458<span class="o">]</span> scsi20 : usb-storage 1-1.2:1.4
+Sep  <span class="m">1</span> 16:58:19 kambei kernel: <span class="o">[</span>455196.133604<span class="o">]</span> scsi 20:0:0:0: Direct-Access     Linux    File-CD Gadget   <span class="m">0308</span> PQ: <span class="m">0</span> ANSI: 2
+Sep  <span class="m">1</span> 16:58:19 kambei kernel: <span class="o">[</span>455196.134045<span class="o">]</span> sd 20:0:0:0: Attached scsi generic sg1 <span class="nb">type </span>0
+Sep  <span class="m">1</span> 16:58:19 kambei kernel: <span class="o">[</span>455196.135313<span class="o">]</span> sd 20:0:0:0: <span class="o">[</span>sdb<span class="o">]</span> <span class="m">144522</span> 512-byte logical blocks: <span class="o">(</span>73.9 MB/70.5 MiB<span class="o">)</span>
+Sep  <span class="m">1</span> 16:58:19 kambei kernel: <span class="o">[</span>455196.136080<span class="o">]</span> sd 20:0:0:0: <span class="o">[</span>sdb<span class="o">]</span> Write Protect is off
+Sep  <span class="m">1</span> 16:58:19 kambei kernel: <span class="o">[</span>455196.136089<span class="o">]</span> sd 20:0:0:0: <span class="o">[</span>sdb<span class="o">]</span> Mode Sense: 0f <span class="m">00</span> <span class="m">00</span> 00
+Sep  <span class="m">1</span> 16:58:19 kambei kernel: <span class="o">[</span>455196.136840<span class="o">]</span> sd 20:0:0:0: <span class="o">[</span>sdb<span class="o">]</span> Write cache: enabled, <span class="nb">read </span>cache: enabled, doesn<span class="err">&#39;</span>t support DPO or FUA
+Sep  <span class="m">1</span> 16:58:19 kambei kernel: <span class="o">[</span>455196.147108<span class="o">]</span>  sdb:
+Sep  <span class="m">1</span> 16:58:19 kambei kernel: <span class="o">[</span>455196.149998<span class="o">]</span> sd 20:0:0:0: <span class="o">[</span>sdb<span class="o">]</span> Attached SCSI removable disk
 <span class="nv">$ </span>lsusb
-Bus 001 Device 020: ID 1d6b:0104 Linux Foundation Multifunction Composite Gadget
+Bus <span class="m">001</span> Device 020: ID 1d6b:0104 Linux Foundation Multifunction Composite Gadget
 <span class="nv">$ </span>mount
 /dev/sdb on /media/dwa/BEAGLEBONE <span class="nb">type </span>vfat <span class="o">(</span>rw,nosuid,nodev,relatime,uid<span class="o">=</span>1000,gid<span class="o">=</span>1000,fmask<span class="o">=</span>0022,dmask<span class="o">=</span>0077,codepage<span class="o">=</span>437,iocharset<span class="o">=</span>utf8,shortname<span class="o">=</span>mixed,showexec,utf8,flush,errors<span class="o">=</span>remount-ro,uhelper<span class="o">=</span>udisks2<span class="o">)</span>
 <span class="nv">$ </span>ls /dev/ttyA*
-crw-rw---T 1 root dialout 166, 0 Aug 18 13:30 /dev/ttyACM0
+crw-rw---T <span class="m">1</span> root dialout 166, <span class="m">0</span> Aug <span class="m">18</span> 13:30 /dev/ttyACM0
 <span class="nv">$ </span>ifconfig
 eth0      Link encap:Ethernet  HWaddr f0:de:f1:15:e8:51
           inet addr:192.168.1.4  Bcast:192.168.1.255  Mask:255.255.255.0
@@ -147,13 +147,13 @@ usb0      Link encap:Ethernet  HWaddr BA:E1:A2:37:43:15
 
 <span class="c"># Configure IP forwarding on HOST</span>
 sudo iptables -A POSTROUTING -t nat -j MASQUERADE
-<span class="nb">echo </span>1 | sudo tee /proc/sys/net/ipv4/ip_forward &gt; /dev/null
+<span class="nb">echo </span><span class="m">1</span> <span class="p">|</span> sudo tee /proc/sys/net/ipv4/ip_forward &gt; /dev/null
 
 <span class="c"># Copy ssh key to BBB for passwordless logins</span>
 ssh-copy-id root@<span class="nv">$bbbAddr</span>
 
 <span class="c"># Configure BBB to use HOST as gateway</span>
-ssh root@<span class="nv">$bbbAddr</span> <span class="s2">&quot;/sbin/route add default gw $hostAddr&quot;</span>
+ssh root@<span class="nv">$bbbAddr</span> <span class="s2">&quot;/sbin/route add default gw </span><span class="nv">$hostAddr</span><span class="s2">&quot;</span>
 
 <span class="c"># Backup and substitute BBB resolv.conf with HOST resolv.conf</span>
 ssh root@<span class="nv">$bbbAddr</span> <span class="s2">&quot;mv -n /etc/resolv.conf /etc/resolv.conf.bak&quot;</span>
@@ -294,7 +294,7 @@ Next DST change: DST ends <span class="o">(</span>the clock jumps one hour backw
 <div class="section" id="drm-debug">
 <h2>drm.debug</h2>
 <p><em>Issue:</em> A whole pile of these messages were filling dmesg ...</p>
-<div class="highlight"><pre><span class="o">[</span>Mon Aug 26 03:34:00 2013<span class="o">]</span> <span class="o">[</span>drm:output_poll_execute<span class="o">]</span>, <span class="o">[</span>CONNECTOR:5:HDMI-A-1<span class="o">]</span> status updated from 2 to 2
+<div class="highlight"><pre><span class="o">[</span>Mon Aug <span class="m">26</span> 03:34:00 2013<span class="o">]</span> <span class="o">[</span>drm:output_poll_execute<span class="o">]</span>, <span class="o">[</span>CONNECTOR:5:HDMI-A-1<span class="o">]</span> status updated from <span class="m">2</span> to 2
 </pre></div>
 <p>... repeating every few seconds.</p>
 <p><em>Fix:</em> These debugging messages can safely be turned off by editing <tt class="docutils literal">uEnv.txt</tt> located on the <tt class="docutils literal">mmcblk0p1</tt> partition (<strong>not</strong> the <tt class="docutils literal">uEnv.txt</tt> found in <tt class="docutils literal">boot</tt>).</p>

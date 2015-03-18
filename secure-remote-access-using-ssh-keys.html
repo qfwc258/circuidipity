@@ -39,7 +39,7 @@
 <h3>On the server</h3>
 <p>Install <tt class="docutils literal"><span class="pre">openssh-server</span></tt> and create an SSH configuration in the home directory of users who requires access to the system:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install openssh-server
-<span class="nv">$ </span>mkdir ~/.ssh <span class="o">&amp;&amp;</span> chmod 700 ~/.ssh <span class="o">&amp;&amp;</span> touch ~/.ssh/authorized_keys <span class="o">&amp;&amp;</span> chmod 600 ~/.ssh/authorized_keys
+<span class="nv">$ </span>mkdir ~/.ssh <span class="o">&amp;&amp;</span> chmod <span class="m">700</span> ~/.ssh <span class="o">&amp;&amp;</span> touch ~/.ssh/authorized_keys <span class="o">&amp;&amp;</span> chmod <span class="m">600</span> ~/.ssh/authorized_keys
 </pre></div>
 <p>Collect key fingerprints:</p>
 <div class="highlight"><pre><span class="nv">$ </span>ssh-keygen -lf /etc/ssh/ssh_host_dsa_key.pub &gt;&gt; ~/.ssh/keys.txt
@@ -58,7 +58,7 @@
 <h3>On the client</h3>
 <p>Install <tt class="docutils literal"><span class="pre">openssh-client</span></tt> and create the SSH folder in the user home directory:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install openssh-client
-<span class="nv">$ </span>mkdir ~/.ssh <span class="o">&amp;&amp;</span> chmod 700 ~/.ssh
+<span class="nv">$ </span>mkdir ~/.ssh <span class="o">&amp;&amp;</span> chmod <span class="m">700</span> ~/.ssh
 </pre></div>
 <p>Create <tt class="docutils literal"><span class="pre">~/.ssh/config</span></tt> to hold <strong>aliases</strong> with the login options for a server. Example:</p>
 <div class="highlight"><pre>Host raspberry.lan
@@ -69,7 +69,7 @@ User pi
 <p>Test SSH password login to Pi server:</p>
 <div class="highlight"><pre><span class="nv">$ </span>ssh raspberry.lan
 pi@192.168.1.88<span class="err">&#39;</span>s password:
-Last login: Thu Feb 19 18:07:48 2015 from chromebook.lan
+Last login: Thu Feb <span class="m">19</span> 18:07:48 <span class="m">2015</span> from chromebook.lan
 <span class="err">$</span>
 </pre></div>
 <p><strong>Optional:</strong> Check out <a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html">using dynamic DNS</a> for configuring access to the Pi from anywhere in the world.</p>
@@ -80,10 +80,10 @@ Last login: Thu Feb 19 18:07:48 2015 from chromebook.lan
 <div class="section" id="id1">
 <h3>On the client</h3>
 <p>Generate SSH keys:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ssh-keygen -t rsa -C <span class="s2">&quot;$(whoami)@$(hostname)-$(date -I)&quot;</span>
+<div class="highlight"><pre><span class="nv">$ </span>ssh-keygen -t rsa -C <span class="s2">&quot;</span><span class="k">$(</span>whoami<span class="k">)</span><span class="s2">@</span><span class="k">$(</span>hostname<span class="k">)</span><span class="s2">-</span><span class="k">$(</span>date -I<span class="k">)</span><span class="s2">&quot;</span>
 </pre></div>
 <p>Upload the <strong>public key</strong> to the server and append to <tt class="docutils literal"><span class="pre">~/.ssh/authorized_keys</span></tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>cat ~/.ssh/id_rsa.pub | ssh raspberry.lan <span class="s2">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span>
+<div class="highlight"><pre><span class="nv">$ </span>cat ~/.ssh/id_rsa.pub <span class="p">|</span> ssh raspberry.lan <span class="s2">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span>
 </pre></div>
 <p>Graphical display managers like <tt class="docutils literal">gdm</tt> will automatically check a user account for SSH keys upon login. A pop-up box will prompt for the passphrase and the key will be added to the desktop session.</p>
 <p>If logging into a console, tell SSH that you have keys by running <tt class="docutils literal"><span class="pre">ssh-add</span></tt>:</p>
@@ -93,7 +93,7 @@ Identity added: /home/pi/.ssh/id_rsa <span class="o">(</span>/home/pi/.ssh/id_rs
 </pre></div>
 <p>All SSH sessions launched from this console will access this user key stored in memory. Make sure to test the connection before disabling password logins:</p>
 <div class="highlight"><pre><span class="nv">$ </span>ssh raspberry.lan
-Last login: Thu Feb 19 18:22:42 2015 from chromebook.lan
+Last login: Thu Feb <span class="m">19</span> 18:22:42 <span class="m">2015</span> from chromebook.lan
 <span class="err">$</span>
 </pre></div>
 <p>No passphrase request indicates SSH key authentication is properly configured.</p>

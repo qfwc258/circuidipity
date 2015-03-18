@@ -36,7 +36,7 @@
 </pre></div>
 <p>Now I can use RVM to install the latest stable version of Ruby <tt class="docutils literal">rvm install 1.9.3</tt>.</p>
 <p>The current system-wide install of Ruby is <tt class="docutils literal"><span class="pre">1.8.7.352-2</span></tt> ... To test my new RVM configuration and confirm that I am using my later, freshly-installed version I run:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">type </span>rvm | head -n 1
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">type </span>rvm <span class="p">|</span> head -n 1
 rvm is a <span class="k">function</span>
 <span class="nv">$ </span>ruby -v
 ruby 1.9.3p194 <span class="o">(</span>2012-04-20 revision 35410<span class="o">)</span> <span class="o">[</span>x86_64-linux<span class="o">]</span>
@@ -52,7 +52,7 @@ ruby 1.9.3p194 <span class="o">(</span>2012-04-20 revision 35410<span class="o">
 </ul>
 <p><strong>To Fix:</strong></p>
 <p>1/ Copy the RVM function in <tt class="docutils literal"><span class="pre">~/.bash_login</span></tt> ...</p>
-<div class="highlight"><pre><span class="o">[[</span> -s <span class="s2">&quot;$HOME/.rvm/scripts/rvm&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> . <span class="s2">&quot;$HOME/.rvm/scripts/rvm&quot;</span>
+<div class="highlight"><pre><span class="o">[[</span> -s <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.rvm/scripts/rvm&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> . <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.rvm/scripts/rvm&quot;</span>
 </pre></div>
 <p>... and place it at the end of <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt></p>
 <p>2/ Remove <tt class="docutils literal"><span class="pre">~/.bash_login</span></tt></p>

@@ -52,7 +52,7 @@
 <span class="nv">$ </span>sudo mkdir /media/crypt
 </pre></div>
 <p>Unmount the drive and create an entry in <tt class="docutils literal">/etc/fstab</tt> for the new custom mount point ...</p>
-<div class="highlight"><pre>/dev/mapper/luks_crypto_STRING  /media/crypt    auto    users,noauto,noatime    0   0
+<div class="highlight"><pre>/dev/mapper/luks_crypto_STRING  /media/crypt    auto    users,noauto,noatime    <span class="m">0</span>   0
 </pre></div>
 <p>Next time the drive is auto-mounted it will be assigned to <tt class="docutils literal">/media/crypt</tt>.</p>
 

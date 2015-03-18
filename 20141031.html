@@ -41,7 +41,7 @@
 <div class="section" id="uuid">
 <h3>1. UUID</h3>
 <p>Retrieve the <a class="reference external" href="https://help.ubuntu.com/community/UsingUUID">Universally Unique Identifer</a> (UUID) of the USB stick's partition (example uses <tt class="docutils literal">sdb1</tt>):</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo blkid | grep sdb1
+<div class="highlight"><pre><span class="nv">$ </span>sudo blkid <span class="p">|</span> grep sdb1
 /dev/sdb1: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;3e75240d-97b6-49cb-af21-fac25d574851&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;ext4&quot;</span>
 </pre></div>
 </div>
@@ -51,7 +51,7 @@
 <div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /media/USB0
 </pre></div>
 <p>... and create a new entry in <tt class="docutils literal">/etc/fstab</tt>:</p>
-<div class="highlight"><pre><span class="nv">UUID</span><span class="o">=</span>3e75240d-97b6-49cb-af21-fac25d574851 /media/USB0 ext4 rw,exec,noatime,nobootwait 0 0
+<div class="highlight"><pre><span class="nv">UUID</span><span class="o">=</span>3e75240d-97b6-49cb-af21-fac25d574851 /media/USB0 ext4 rw,exec,noatime,nobootwait <span class="m">0</span> 0
 </pre></div>
 <p>Note that <tt class="docutils literal">nobootwait</tt> is an <tt class="docutils literal">upstart</tt>-specific option to the <tt class="docutils literal">mountall</tt> command on <a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html">Ubuntu</a> and its derivatives. It enables boot to continue without manual intervention if the device is not found.</p>
 </div>

@@ -52,7 +52,7 @@
 </pre></div>
 <p>... and configure per-user settings in <tt class="docutils literal"><span class="pre">Preferences-&gt;Light</span> Locker Settings</tt>, which are saved to <tt class="docutils literal"><span class="pre">~/.config/autostart/light-locker.desktop</span></tt>.</p>
 <p>Sample <tt class="docutils literal">Exec</tt> line that locks screen when system-suspend is activated:</p>
-<div class="highlight"><pre><span class="nv">Exec</span><span class="o">=</span>light-locker --lock-after-screensaver<span class="o">=</span>0 --lock-on-suspend --no-late-locking
+<div class="highlight"><pre><span class="nv">Exec</span><span class="o">=</span>light-locker --lock-after-screensaver<span class="o">=</span><span class="m">0</span> --lock-on-suspend --no-late-locking
 </pre></div>
 <p>Source: <a class="reference external" href="http://askubuntu.com/questions/502942/lubuntu-enforces-screen-lock">Lubuntu enforces screen lock</a></p>
 </div>
@@ -61,15 +61,15 @@
 <p>Install full-version of <strong>vim</strong> text editor and make it the default system editor:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install vim tmux
 <span class="nv">$ </span>sudo update-alternatives --config editor
-There are 4 choices <span class="k">for </span>the alternative editor <span class="o">(</span>providing /usr/bin/editor<span class="o">)</span>.
+There are <span class="m">4</span> choices <span class="k">for</span> the alternative editor <span class="o">(</span>providing /usr/bin/editor<span class="o">)</span>.
 
   Selection    Path                Priority   Status
 ------------------------------------------------------------
-  0            /bin/nano            40        auto mode
-  1            /bin/ed             -100       manual mode
-  2            /bin/nano            40        manual mode
-* 3            /usr/bin/vim.basic   30        manual mode
-  4            /usr/bin/vim.tiny    10        manual mode
+  <span class="m">0</span>            /bin/nano            <span class="m">40</span>        auto mode
+  <span class="m">1</span>            /bin/ed             -100       manual mode
+  <span class="m">2</span>            /bin/nano            <span class="m">40</span>        manual mode
+* <span class="m">3</span>            /usr/bin/vim.basic   <span class="m">30</span>        manual mode
+  <span class="m">4</span>            /usr/bin/vim.tiny    <span class="m">10</span>        manual mode
 
 Press enter to keep the current choice<span class="o">[</span>*<span class="o">]</span>, or <span class="nb">type </span>selection number:
 </pre></div>
@@ -121,7 +121,7 @@ dmenu_run -b -i -fn <span class="s1">&#39;10x20&#39;</span> <span class="se">\</
 <div class="section" id="keyboard-shortcuts">
 <h2>9. Keyboard shortcuts</h2>
 <p>Create shortcuts in <tt class="docutils literal"><span class="pre">$HOME/.config/openbox/lubuntu-rc.xml</span></tt>. Example for launching <tt class="docutils literal">dmenu</tt> with key combo <tt class="docutils literal"><span class="pre">ALT-A</span></tt>:</p>
-<div class="highlight"><pre>&lt;!-- Keybindings <span class="k">for </span>running Run menu --&gt;
+<div class="highlight"><pre>&lt;!-- Keybindings <span class="k">for</span> running Run menu --&gt;
 &lt;keybind <span class="nv">key</span><span class="o">=</span><span class="s2">&quot;A-a&quot;</span>&gt;
   &lt;action <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Execute&quot;</span>&gt;
     &lt;<span class="nb">command</span>&gt;dmenu-run.sh&lt;/command&gt;
@@ -144,7 +144,7 @@ dmenu_run -b -i -fn <span class="s1">&#39;10x20&#39;</span> <span class="se">\</
 <span class="nv">Exec</span><span class="o">=</span>urxvt
 <span class="nv">Icon</span><span class="o">=</span>xterm-color
 <span class="nv">Type</span><span class="o">=</span>Application
-<span class="nv">Categories</span><span class="o">=</span>Utility;TerminalEmulator;
+<span class="nv">Categories</span><span class="o">=</span>Utility<span class="p">;</span>TerminalEmulator<span class="p">;</span>
 </pre></div>
 </div>
 <div class="section" id="terminate-frozen-applications">
@@ -157,7 +157,7 @@ dmenu_run -b -i -fn <span class="s1">&#39;10x20&#39;</span> <span class="se">\</
 <span class="nv">Exec</span><span class="o">=</span>xkill
 <span class="nv">Icon</span><span class="o">=</span>system-error
 <span class="nv">Type</span><span class="o">=</span>Application
-<span class="nv">Categories</span><span class="o">=</span>System;Utility;
+<span class="nv">Categories</span><span class="o">=</span>System<span class="p">;</span>Utility<span class="p">;</span>
 </pre></div>
 <p>Save file and the item will appear under Lubuntu's <tt class="docutils literal"><span class="pre">Menu-&gt;System</span> Tools</tt>.</p>
 </div>

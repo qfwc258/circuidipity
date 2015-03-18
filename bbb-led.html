@@ -95,18 +95,18 @@ active_low  direction  edge  power  subsystem  uevent  value
 <span class="c"># Blink an LED on breadboard</span>
 
 <span class="nv">PIN</span><span class="o">=</span><span class="s2">&quot;44&quot;</span> <span class="c"># P8_12 is gpio1[12] = (32 * 1) + 12 = 44</span>
-<span class="nv">GPIOPIN</span><span class="o">=</span><span class="s2">&quot;/sys/class/gpio/gpio$PIN&quot;</span>
+<span class="nv">GPIOPIN</span><span class="o">=</span><span class="s2">&quot;/sys/class/gpio/gpio</span><span class="nv">$PIN</span><span class="s2">&quot;</span>
 
-<span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;$GPIOPIN&quot;</span> <span class="o">]</span>; <span class="k">then</span>
-<span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;Blinking LED connected to Pin $PIN ...&quot;</span>
+<span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="nv">$GPIOPIN</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Blinking LED connected to Pin </span><span class="nv">$PIN</span><span class="s2"> ...&quot;</span>
 <span class="k">else</span>
-<span class="k">    </span><span class="nb">echo</span> <span class="nv">$PIN</span> &gt; /sys/class/gpio/export
-    <span class="nb">echo</span> <span class="s2">&quot;Blinking LED connected to Pin $PIN ...&quot;</span>
+    <span class="nb">echo</span> <span class="nv">$PIN</span> &gt; /sys/class/gpio/export
+    <span class="nb">echo</span> <span class="s2">&quot;Blinking LED connected to Pin </span><span class="nv">$PIN</span><span class="s2"> ...&quot;</span>
     sleep 1
 <span class="k">fi</span>
 
-<span class="k">while </span><span class="nb">true</span>; <span class="k">do</span>
-<span class="k">    </span><span class="nb">echo </span>high &gt; <span class="nv">$GPIOPIN</span>/direction
+<span class="k">while</span> <span class="nb">true</span><span class="p">;</span> <span class="k">do</span>
+    <span class="nb">echo </span>high &gt; <span class="nv">$GPIOPIN</span>/direction
     sleep 2
     <span class="nb">echo </span>low &gt; <span class="nv">$GPIOPIN</span>/direction
     sleep 2

@@ -69,12 +69,12 @@ helpInfo <span class="o">()</span> <span class="o">{</span>
 <span class="o">}</span>
 
 searchMethod <span class="o">()</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">[[</span> <span class="nv">$searchLimit</span> <span class="o">=</span>~ <span class="o">[</span>m<span class="o">]</span><span class="nv">$ </span><span class="o">]]</span>; <span class="k">then</span>
-<span class="k">            </span><span class="nv">findTime</span><span class="o">=</span><span class="s2">&quot;find . -type f -mmin ${searchLimit%m}&quot;</span>
-        <span class="k">elif</span> <span class="o">[[</span> <span class="nv">$searchLimit</span> <span class="o">=</span>~ <span class="o">[</span>d<span class="o">]</span><span class="nv">$ </span><span class="o">]]</span>; <span class="k">then</span>
-<span class="k">            </span><span class="nv">findTime</span><span class="o">=</span><span class="s2">&quot;find . -type f -mtime ${searchLimit%d}&quot;</span>
+        <span class="k">if</span> <span class="o">[[</span> <span class="nv">$searchLimit</span> <span class="o">=</span>~ <span class="o">[</span>m<span class="o">]</span><span class="nv">$ </span><span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+            <span class="nv">findTime</span><span class="o">=</span><span class="s2">&quot;find . -type f -mmin </span><span class="si">${</span><span class="nv">searchLimit</span><span class="p">%m</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">elif</span> <span class="o">[[</span> <span class="nv">$searchLimit</span> <span class="o">=</span>~ <span class="o">[</span>d<span class="o">]</span><span class="nv">$ </span><span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+            <span class="nv">findTime</span><span class="o">=</span><span class="s2">&quot;find . -type f -mtime </span><span class="si">${</span><span class="nv">searchLimit</span><span class="p">%d</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">else</span>
-<span class="k">            </span><span class="nv">findTime</span><span class="o">=</span><span class="s2">&quot;find . -type f&quot;</span>
+            <span class="nv">findTime</span><span class="o">=</span><span class="s2">&quot;find . -type f&quot;</span>
         <span class="k">fi</span>
 <span class="o">}</span>
 
@@ -92,47 +92,47 @@ penguinista <span class="o">()</span> <span class="o">{</span>
 
 <span class="c"># &#39;$#&#39; is a shell variable containing total number of items on command line minus the command($0) itself</span>
 <span class="c"># &#39;shift&#39; is a shell builtin that shifts all the positional parameters down by one</span>
-<span class="k">if</span> <span class="o">[[</span> <span class="nv">$1</span> !<span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span>; <span class="k">then</span>
-<span class="k">    while</span> <span class="o">[[</span> <span class="nv">$# </span>-gt 0 <span class="o">]]</span>; <span class="k">do</span>
-<span class="k">        case</span> <span class="nv">$1</span> in
-            <span class="o">[</span>+-<span class="o">]</span>+<span class="o">([</span>0-9<span class="o">])[</span>md<span class="o">]</span> | -a | --all <span class="o">)</span>     <span class="nv">searchLimit</span><span class="o">=</span><span class="nv">$1</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="nv">$1</span> !<span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="k">while</span> <span class="o">[[</span> <span class="nv">$# </span>-gt <span class="m">0</span> <span class="o">]]</span><span class="p">;</span> <span class="k">do</span>
+        <span class="k">case</span> <span class="nv">$1</span> in
+            <span class="o">[</span>+-<span class="o">]</span>+<span class="o">([</span>0-9<span class="o">])[</span>md<span class="o">]</span> <span class="p">|</span> -a <span class="p">|</span> --all <span class="o">)</span>     <span class="nv">searchLimit</span><span class="o">=</span><span class="nv">$1</span>
                                                 searchMethod
                                                 <span class="nb">shift</span>
-                                                ;;
-            -l | --list <span class="o">)</span>                       <span class="nv">listOnly</span><span class="o">=</span>1
+                                                <span class="p">;;</span>
+            -l <span class="p">|</span> --list <span class="o">)</span>                       <span class="nv">listOnly</span><span class="o">=</span>1
                                                 <span class="nb">shift</span>
-                                                ;;
-            -z | --compress <span class="o">)</span>                   <span class="nv">compress</span><span class="o">=</span>1
+                                                <span class="p">;;</span>
+            -z <span class="p">|</span> --compress <span class="o">)</span>                   <span class="nv">compress</span><span class="o">=</span>1
                                                 <span class="nb">shift</span>
-                                                ;;
-            -h | --help <span class="o">)</span>                       helpInfo
+                                                <span class="p">;;</span>
+            -h <span class="p">|</span> --help <span class="o">)</span>                       helpInfo
                                                 <span class="nb">exit</span>
-                                                ;;
+                                                <span class="p">;;</span>
             * <span class="o">)</span>                                 <span class="nb">echo</span> <span class="s2">&quot;ERROR: Invalid option(s) specified ...&quot;</span>
                                                 <span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
                                                 helpInfo
                                                 <span class="nb">exit </span>1
-                                                ;;
+                                                <span class="p">;;</span>
             <span class="k">esac</span>
-<span class="k">        done</span>
+        <span class="k">done</span>
 <span class="k">else</span>
-<span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;ERROR: tarTime requires at least 1 parameter ...&quot;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;ERROR: tarTime requires at least 1 parameter ...&quot;</span>
     <span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
     helpInfo
     <span class="nb">exit </span>1
 <span class="k">fi</span>
 
-<span class="k">if</span> <span class="o">[[</span> <span class="nv">$listOnly</span> -eq 1 <span class="o">]]</span>; <span class="k">then</span>
-<span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;These are the files that will be copied to the tar archive ...&quot;</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="nv">$listOnly</span> -eq <span class="m">1</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;These are the files that will be copied to the tar archive ...&quot;</span>
     <span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
     <span class="nv">$findTime</span>
 <span class="k">else</span>
-<span class="k">    if</span> <span class="o">[[</span> <span class="nv">$compress</span> -eq 1 <span class="o">]]</span>; <span class="k">then</span>
-        <span class="nv">$findTime</span> -exec tar -czf <span class="k">${</span><span class="nv">filename</span><span class="k">}</span>.gz <span class="s1">&#39;{}&#39;</span> <span class="se">\+</span>
+    <span class="k">if</span> <span class="o">[[</span> <span class="nv">$compress</span> -eq <span class="m">1</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nv">$findTime</span> -exec tar -czf <span class="si">${</span><span class="nv">filename</span><span class="si">}</span>.gz <span class="s1">&#39;{}&#39;</span> <span class="se">\+</span>
     <span class="k">else</span>
         <span class="nv">$findTime</span> -exec tar -cf <span class="nv">$filename</span> <span class="s1">&#39;{}&#39;</span> <span class="se">\+</span>
     <span class="k">fi</span>
-<span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;$(penguinista)  &#39;$(ls -t *.tar* | head -n 1 | awk &#39; { print ( $(NF) ) }&#39;)&#39; was generated.&quot;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;</span><span class="k">$(</span>penguinista<span class="k">)</span><span class="s2">  &#39;</span><span class="k">$(</span>ls -t *.tar* <span class="p">|</span> head -n <span class="m">1</span> <span class="p">|</span> awk <span class="s1">&#39; { print ( $(NF) ) }&#39;</span><span class="k">)</span><span class="s2">&#39; was generated.&quot;</span>
 <span class="k">fi</span>
 </pre></div>
 <div class="section" id="examples">

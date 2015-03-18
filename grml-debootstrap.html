@@ -63,15 +63,15 @@
 print
 mklabel gpt
 unit mib
-mkpart primary 1 3
-name 1 grub
-<span class="nb">set </span>1 bios_grub on
-mkpart primary 3 203
-name 2 boot
-mkpart primary 203 1203
-name 3 swap
-mkpart primary 1203 -1
-name 4 root
+mkpart primary <span class="m">1</span> 3
+name <span class="m">1</span> grub
+<span class="nb">set </span><span class="m">1</span> bios_grub on
+mkpart primary <span class="m">3</span> 203
+name <span class="m">2</span> boot
+mkpart primary <span class="m">203</span> 1203
+name <span class="m">3</span> swap
+mkpart primary <span class="m">1203</span> -1
+name <span class="m">4</span> root
 print
 quit
 </pre></div>
@@ -84,7 +84,7 @@ quit
 <div class="section" id="cryptsetup">
 <h2>2. Cryptsetup</h2>
 <p>Configure the newly-created root partition for encrypted storage and create filesystems for <tt class="docutils literal">boot</tt> and <tt class="docutils literal"><span class="pre">crypt-root</span></tt>:</p>
-<div class="highlight"><pre>cryptsetup luksFormat -c aes-xts-plain64 -s 256 /dev/sda4
+<div class="highlight"><pre>cryptsetup luksFormat -c aes-xts-plain64 -s <span class="m">256</span> /dev/sda4
 cryptsetup luksOpen /dev/sda4 crypt_root
 mkfs.ext4 /dev/sda2
 mkfs.ext4 /dev/mapper/crypt_root
