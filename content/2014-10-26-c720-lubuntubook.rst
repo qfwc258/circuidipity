@@ -6,7 +6,7 @@ Chromebook to Lubuntubook
 :slug: c720-lubuntubook
 :template: article-project
 :tags: chromebook, lubuntu, ubuntu, linux
-:modified: 2015-03-16 10:20:00
+:modified: 2015-03-26 20:54:00
 
 Replace **Chrome OS** permanently with **Lubuntu 14.04 LTS Linux** on the **Acer C720 Chromebook**.
 
@@ -399,7 +399,7 @@ Create ``/etc/modprobe.d/ath9k.conf`` with the following options:
 
 .. code-block:: bash
   
-    options ath9k nohwcrypt=1 blink=1 btcoex_enable=1 enable_diversity=1
+    options ath9k bt_ant_diversity=1 ps_enable=0
 
 Sources: `ath9k.conf <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/modprobe.d/ath9k.conf>`_, `ath9k wireless driver <http://wireless.kernel.org/en/users/Drivers/ath9k>`_ and `bluetooth coexistence <http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex>`_                                                       
 
