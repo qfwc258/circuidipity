@@ -1,5 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-03-09T18:17:00-04:00</updated><entry><title>Samsung CLP-310 Printer</title><link href="http://www.circuidipity.com/samsung-clp-310-printer.html" rel="alternate"></link><updated>2015-03-09T18:17:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-09:samsung-clp-310-printer.html</id><summary type="html">&lt;p&gt;Connect a &lt;strong&gt;Samsung CLP-310&lt;/strong&gt; to a repurposed netbook as server running Ubuntu 14.04 LTS and configure as printer for a home network.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-03-26T21:00:00-04:00</updated><entry><title>Arch Linux installation with encrypted root + swap</title><link href="http://www.circuidipity.com/arch-install-encrypt.html" rel="alternate"></link><updated>2015-03-26T21:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-26:arch-install-encrypt.html</id><summary type="html">&lt;p&gt;My notes for installing &lt;strong&gt;Arch Linux&lt;/strong&gt; that follow a condensed path through the &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_guide"&gt;Beginner's Guide&lt;/a&gt; plus extra steps to configure LUKS-encrypted root + swap.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Target:&lt;/strong&gt; Acer C720-2848 Chromebook (16GB SSD) with &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Chrome OS removed and ready for full-featured Linux&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prepare-install-media"&gt;
+&lt;h2&gt;0. Prepare install media&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://www.archlinux.org/download/"&gt;Download&lt;/a&gt; the combined 32+64bit installer and flash the image to a USB stick:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dd &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4M &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;archlinux*-dual.iso &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sdX
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configure-net-connection"&gt;
+&lt;h2&gt;1. Configure net connection&lt;/h2&gt;
+&lt;p&gt;Connect the USB stick and boot the installer. Identify the name of the device net interfaces:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# ip link&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Chromebook wireless interface is &lt;tt class="docutils literal"&gt;wlp1s0&lt;/tt&gt;. Connect to an access point using &lt;tt class="docutils literal"&gt;netctl&lt;/tt&gt; and its interactive &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;wifi-menu&lt;/span&gt;&lt;/tt&gt; utility:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# wifi-menu&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prepare-storage-device-for-luks-encryption"&gt;
+&lt;h2&gt;2. Prepare storage device for LUKS encryption&lt;/h2&gt;
+&lt;p&gt;Secure wipe storage before installation (16GB SSD took 22-23 minutes):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# cryptsetup open --type plain /dev/sdX container&lt;/span&gt;
+&lt;span class="c"&gt;# dd if=/dev/zero of=/dev/mapper/container&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Upon completion close the container:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# cryptsetup close /dev/mapper/container&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Dm-crypt/Drive_preparation"&gt;Dm-crypt drive preparation&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="partition-storage"&gt;
+&lt;h2&gt;3. Partition storage&lt;/h2&gt;
+&lt;p&gt;Detect storage devices:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# lsblk&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;SSD identified as &lt;tt class="docutils literal"&gt;sda&lt;/tt&gt;. Use &lt;tt class="docutils literal"&gt;gpt&lt;/tt&gt; to create a 4 partition layout:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;sda1 - 1M - BIOS boot partition (type: &lt;tt class="docutils literal"&gt;ef02&lt;/tt&gt;)&lt;/li&gt;
+&lt;li&gt;sda2 - 300M - boot (unencrypted)&lt;/li&gt;
+&lt;li&gt;sda3 - 1GB - swap (encrypted)&lt;/li&gt;
+&lt;li&gt;sda4 - remaining space - root (encrypted)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Normally I create a separate partition for &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt; but on smaller storage devices I make a single encrypted &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; and a (required) unencrypted &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# gdisk /dev/sda&lt;/span&gt;
+o &lt;span class="o"&gt;(&lt;/span&gt;new partition table&lt;span class="o"&gt;)&lt;/span&gt;
+n
++1M
+ef02
+...
+w
+q
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prepare-encrypted-root"&gt;
+&lt;h2&gt;4. Prepare encrypted root&lt;/h2&gt;
+&lt;p&gt;Using above partition layout:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# cryptsetup -y -v luksFormat /dev/sda4&lt;/span&gt;
+&lt;span class="c"&gt;# cryptsetup open /dev/sda4 cryptroot&lt;/span&gt;
+&lt;span class="c"&gt;# mkfs.ext4 /dev/mapper/cryptroot&lt;/span&gt;
+&lt;span class="c"&gt;# mount -t ext4 /dev/mapper/cryptroot /mnt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prepare-boot"&gt;
+&lt;h2&gt;5. Prepare boot&lt;/h2&gt;
+&lt;p&gt;Setup:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# mkfs.ext4 /dev/sda2&lt;/span&gt;
+&lt;span class="c"&gt;# mkdir /mnt/boot&lt;/span&gt;
+&lt;span class="c"&gt;# mount -t ext4 /dev/sda2 /mnt/boot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="install"&gt;
+&lt;h2&gt;6. Install&lt;/h2&gt;
+&lt;p&gt;Install the Arch base system:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# pacstrap -i /mnt base base-devel&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fstab"&gt;
+&lt;h2&gt;7. Fstab&lt;/h2&gt;
+&lt;p&gt;Generate a base &lt;tt class="docutils literal"&gt;/etc/fstab&lt;/tt&gt; and modify:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# genfstab -U -p /mnt &amp;gt;&amp;gt; /mnt/etc/fstab&lt;/span&gt;
+&lt;span class="c"&gt;# nano /mnt/etc/fstab&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="chroot-into-base-system"&gt;
+&lt;h2&gt;8. Chroot into base system&lt;/h2&gt;
+&lt;p&gt;Chroot into the freshly-installed Arch base system to configure:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# arch-chroot /mnt /bin/bash&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="locale"&gt;
+&lt;h2&gt;9. Locale&lt;/h2&gt;
+&lt;p&gt;Configure a locale suitable for the region:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# nano /etc/locale.gen&lt;/span&gt;
+...
+en_CA.UTF-8 UTF-8
+...
+&lt;span class="c"&gt;# locale-gen&lt;/span&gt;
+&lt;span class="c"&gt;# echo LANG=en_CA.UTF-8 &amp;gt; /etc/locale.conf&lt;/span&gt;
+&lt;span class="c"&gt;# export LANG=en_CA.UTF-8&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="time-zone"&gt;
+&lt;h2&gt;10. Time zone&lt;/h2&gt;
+&lt;p&gt;Configure local time:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# ln -s /usr/share/zoneinfo/Canada/Eastern /etc/localtime&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="hardware-clock"&gt;
+&lt;h2&gt;11. Hardware clock&lt;/h2&gt;
+&lt;p&gt;Set the hardware clock to UTC:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# hwclock --systohc --utc&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="hostname"&gt;
+&lt;h2&gt;12. Hostname&lt;/h2&gt;
+&lt;p&gt;Make a name for the new Arch installation:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# echo myhostname &amp;gt; /etc/hostname&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and modify &lt;tt class="docutils literal"&gt;/etc/hosts&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#&amp;lt;ip-address&amp;gt; &amp;lt;hostname.domain.org&amp;gt; &amp;lt;hostname&amp;gt;&lt;/span&gt;
+127.0.0.1 localhost.localdomain localhost myhostname
+::1   localhost.localdomain localhost myhostname
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="network"&gt;
+&lt;h2&gt;13. Network&lt;/h2&gt;
+&lt;p&gt;Chromebook wireless interface is an Atheros &lt;tt class="docutils literal"&gt;AR9462&lt;/tt&gt; using the &lt;tt class="docutils literal"&gt;ath9k&lt;/tt&gt; kernel module. It does not require separate firmware.&lt;/p&gt;
+&lt;p&gt;Install wireless tools:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# pacman -S iw wpa_supplicant dialog&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Wait until after reboot&lt;/strong&gt; to configure interface with &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;wifi-menu&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="initial-ramdisk"&gt;
+&lt;h2&gt;14. Initial ramdisk&lt;/h2&gt;
+&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/mkinitcpio.conf&lt;/tt&gt; by adding an &lt;tt class="docutils literal"&gt;encrypt&lt;/tt&gt; hook before &lt;tt class="docutils literal"&gt;filesystems&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;HOOKS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;... encrypt ... filesystems ...&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Re-generate the initramfs image:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# mkinitcpio -p linux&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="password"&gt;
+&lt;h2&gt;15. Password&lt;/h2&gt;
+&lt;p&gt;Set root password:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# passwd&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="bootloader"&gt;
+&lt;h2&gt;16. Bootloader&lt;/h2&gt;
+&lt;p&gt;Download GRUB:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# pacman -S grub os-prober&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Configure &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt; to handle encrypted root:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;GRUB_CMDLINE_LINUX&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;cryptdevice=/dev/sda4:cryptroot&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Install GRUB to storage device and auto-generate &lt;tt class="docutils literal"&gt;grub.cfg&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# grub-install --target=i386-pc --recheck /dev/sda&lt;/span&gt;
+&lt;span class="c"&gt;# grub-mkconfig -o /boot/grub/grub.cfg&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prepare-non-root-encrypted-partitions"&gt;
+&lt;h2&gt;17. Prepare non-root encrypted partitions&lt;/h2&gt;
+&lt;p&gt;Add encrypted swap to &lt;tt class="docutils literal"&gt;/etc/crypttab&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;swap    /dev/sda3   /dev/urandom    swap,cipher&lt;span class="o"&gt;=&lt;/span&gt;aes-cbc-essiv:sha256,size&lt;span class="o"&gt;=&lt;/span&gt;256
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and modify &lt;tt class="docutils literal"&gt;/etc/fstab&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;/dev/mapper/swap    none    swap    sw      &lt;span class="m"&gt;0&lt;/span&gt; 0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="unmount-and-reboot"&gt;
+&lt;h2&gt;18. Unmount and reboot&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# exit&lt;/span&gt;
+&lt;span class="c"&gt;# umount /mnt/boot&lt;/span&gt;
+&lt;span class="c"&gt;# umount /mnt&lt;/span&gt;
+&lt;span class="c"&gt;# cryptsetup close /dev/mapper/cryptroot&lt;/span&gt;
+&lt;span class="c"&gt;# reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Welcome to Arch. Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="arch"></category><category term="linux"></category><category term="chromebook"></category></entry><entry><title>Samsung CLP-310 Printer</title><link href="http://www.circuidipity.com/samsung-clp-310-printer.html" rel="alternate"></link><updated>2015-03-09T18:17:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-09:samsung-clp-310-printer.html</id><summary type="html">&lt;p&gt;Connect a &lt;strong&gt;Samsung CLP-310&lt;/strong&gt; to a repurposed netbook as server running Ubuntu 14.04 LTS and configure as printer for a home network.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;/div&gt;
@@ -1068,19 +1248,4 @@ option use_syslog       &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt
 &lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;port forwarding HOWTO&lt;/a&gt; to configure OpenWRT to forward traffic directed at one of the router's ports to the listening port on the Pi home server. Example: configure port &lt;tt class="docutils literal"&gt;55555&lt;/tt&gt; on the router to connect to the &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH server&lt;/a&gt; listening on port &lt;tt class="docutils literal"&gt;22&lt;/tt&gt; on the Pi.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="networks"></category><category term="openwrt"></category><category term="linux"></category></entry><entry><title>Network Attached Storage using a Raspberry Pi and SSHFS</title><link href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html" rel="alternate"></link><updated>2015-03-01T19:29:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-05:nas-raspberry-pi-sshfs.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #4 .:&lt;/a&gt; Connect a Pi to external USB storage and create a cheap, cheerful, encrypted traffic NAS device via &lt;strong&gt;SSH Filesystem (SSHFS)&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;With a &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html"&gt;Pi-attached 1TB hard drive&lt;/a&gt; hosting a properly configured &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH server&lt;/a&gt; nothing extra is required server-side. Example: install SSHFS, add username &lt;tt class="docutils literal"&gt;pi&lt;/tt&gt; to the &lt;tt class="docutils literal"&gt;FUSE&lt;/tt&gt; group, and create a &lt;tt class="docutils literal"&gt;~/NAS&lt;/tt&gt; mountpoint for the remote filesystem:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install sshfs
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser pi fuse
-&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir ~/NAS
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Log out and back in for new permissions to be activated. To mount the Pi-hosted remote filesystem at ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt; to the laptop:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sshfs -o &lt;span class="nv"&gt;idmap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;user 192.168.1.88:/media/external_usb_storage ~/NAS
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Contents of the remote hard drive now appear as local directories and files on the laptop. Data transfer between server and client is SSH-encrypted.&lt;/p&gt;
-&lt;p&gt;Use &lt;tt class="docutils literal"&gt;fusermount&lt;/tt&gt; to detach from the remote storage:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;fusermount -u ~/NAS
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Raspberry Pi + SSHFS is no speed demon but its very usable. On my laptop connected to the LAN via wireless I am able to run Rhythmbox playing music and videos in VLC that are remotely hosted on the Pi.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-</summary><category term="networks"></category><category term="raspberry pi"></category><category term="ubuntu"></category><category term="linux"></category></entry></feed>
+</summary><category term="networks"></category><category term="openwrt"></category><category term="linux"></category></entry></feed>

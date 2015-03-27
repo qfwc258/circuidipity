@@ -24,7 +24,7 @@
 
 <!-- article -->
 <h1>Chromebook to Lubuntubook</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Monday 16 March 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 26 March 2015</p>
 <div id="article">
     <p>Replace <strong>Chrome OS</strong> permanently with <strong>Lubuntu 14.04 LTS Linux</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
 <img alt="Acer C720 Lubuntubook" class="align-right" src="images/c720-lubuntubook.png" style="width: 300px; height: 157px;" />
@@ -302,7 +302,7 @@ parm:           ps_enable:Enable WLAN PowerSave <span class="o">(</span>int<span
 parm:           use_chanctx:Enable channel context <span class="k">for</span> concurrency <span class="o">(</span>int<span class="o">)</span>
 </pre></div>
 <p>Create <tt class="docutils literal">/etc/modprobe.d/ath9k.conf</tt> with the following options:</p>
-<div class="highlight"><pre>options ath9k <span class="nv">nohwcrypt</span><span class="o">=</span><span class="m">1</span> <span class="nv">blink</span><span class="o">=</span><span class="m">1</span> <span class="nv">btcoex_enable</span><span class="o">=</span><span class="m">1</span> <span class="nv">enable_diversity</span><span class="o">=</span>1
+<div class="highlight"><pre>options ath9k <span class="nv">bt_ant_diversity</span><span class="o">=</span><span class="m">1</span> <span class="nv">ps_enable</span><span class="o">=</span>0
 </pre></div>
 <p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/modprobe.d/ath9k.conf">ath9k.conf</a>, <a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k">ath9k wireless driver</a> and <a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex">bluetooth coexistence</a></p>
 </div>
