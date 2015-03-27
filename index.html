@@ -40,16 +40,16 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
         <p>My notes for installing <strong>Arch Linux</strong> that follow a condensed path through the <a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_guide">Beginner's Guide</a> plus extra steps to configure LUKS-encrypted root + swap.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p><strong>Target:</strong> Acer C720-2848 Chromebook (16GB SSD) with <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Chrome OS removed and ready for full-featured Linux</a>.</p>
+<p><strong>Target:</strong> Acer <tt class="docutils literal"><span class="pre">C720-2848</span></tt> Chromebook (16GB SSD) with <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Chrome OS removed and ready for full-featured Linux</a>.</p>
 </div>
-<div class="section" id="prepare-install-media">
-<h2>0. Prepare install media</h2>
+<div class="section" id="install-media">
+<h2>0.Install media</h2>
 <p><a class="reference external" href="https://www.archlinux.org/download/">Download</a> the combined 32+64bit installer and flash the image to a USB stick:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo dd <span class="nv">bs</span><span class="o">=</span>4M <span class="k">if</span><span class="o">=</span>archlinux*-dual.iso <span class="nv">of</span><span class="o">=</span>/dev/sdX
 </pre></div>
 </div>
-<div class="section" id="configure-net-connection">
-<h2>1. Configure net connection</h2>
+<div class="section" id="net-connection">
+<h2>1. Net connection</h2>
 <p>Connect the USB stick and boot the installer. Identify the name of the device net interfaces:</p>
 <div class="highlight"><pre><span class="c"># ip link</span>
 </pre></div>
@@ -57,8 +57,8 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <div class="highlight"><pre><span class="c"># wifi-menu</span>
 </pre></div>
 </div>
-<div class="section" id="prepare-storage-device-for-luks-encryption">
-<h2>2. Prepare storage device for LUKS encryption</h2>
+<div class="section" id="wipe-storage">
+<h2>2. Wipe storage</h2>
 <p>Secure wipe storage before installation (16GB SSD took 22-23 minutes):</p>
 <div class="highlight"><pre><span class="c"># cryptsetup open --type plain /dev/sdX container</span>
 <span class="c"># dd if=/dev/zero of=/dev/mapper/container</span>
@@ -68,8 +68,8 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 </pre></div>
 <p>Source: <a class="reference external" href="https://wiki.archlinux.org/index.php/Dm-crypt/Drive_preparation">Dm-crypt drive preparation</a></p>
 </div>
-<div class="section" id="partition-storage">
-<h2>3. Partition storage</h2>
+<div class="section" id="partition">
+<h2>3. Partition</h2>
 <p>Detect storage devices:</p>
 <div class="highlight"><pre><span class="c"># lsblk</span>
 </pre></div>
@@ -91,8 +91,8 @@ w
 q
 </pre></div>
 </div>
-<div class="section" id="prepare-encrypted-root">
-<h2>4. Prepare encrypted root</h2>
+<div class="section" id="encrypted-root">
+<h2>4. Encrypted root</h2>
 <p>Using above partition layout:</p>
 <div class="highlight"><pre><span class="c"># cryptsetup -y -v luksFormat /dev/sda4</span>
 <span class="c"># cryptsetup open /dev/sda4 cryptroot</span>
@@ -100,8 +100,8 @@ q
 <span class="c"># mount -t ext4 /dev/mapper/cryptroot /mnt</span>
 </pre></div>
 </div>
-<div class="section" id="prepare-boot">
-<h2>5. Prepare boot</h2>
+<div class="section" id="boot">
+<h2>5. Boot</h2>
 <p>Setup:</p>
 <div class="highlight"><pre><span class="c"># mkfs.ext4 /dev/sda2</span>
 <span class="c"># mkdir /mnt/boot</span>
@@ -121,8 +121,8 @@ q
 <span class="c"># nano /mnt/etc/fstab</span>
 </pre></div>
 </div>
-<div class="section" id="chroot-into-base-system">
-<h2>8. Chroot into base system</h2>
+<div class="section" id="chroot">
+<h2>8. Chroot</h2>
 <p>Chroot into the freshly-installed Arch base system to configure:</p>
 <div class="highlight"><pre><span class="c"># arch-chroot /mnt /bin/bash</span>
 </pre></div>
