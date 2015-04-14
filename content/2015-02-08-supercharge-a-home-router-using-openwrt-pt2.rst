@@ -31,7 +31,7 @@ Let's go!
 
 :warning:`WARNING!` OpenWrt builds different install images for different devices. Consult the `Table of Hardware <http://wiki.openwrt.org/toh/start>`_ to confirm that your router is supported and read the wiki entry for your particular device to identify the correct image. It is **easy to brick a device** (render inoperable) using an incorrect install image.
 
-Latest version (2015-02-08) of OpenWrt is **v14.07 "Barrie Breaker"** and TL-WDR3600 is an **ar71xx** device. Download the appropriate install image:
+Latest version (2015-02-08) of OpenWrt is **v14.07 "Barrier Breaker"** and TL-WDR3600 is an **ar71xx** device. Download the appropriate install image:
 
 [Link] `openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin <https://downloads.openwrt.org/barrier_breaker/14.07/ar71xx/generic/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin>`_
 

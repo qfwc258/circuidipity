@@ -77,12 +77,8 @@ Normally I create a separate partition for ``$HOME`` but on smaller storage devi
 
     # gdisk /dev/sda
     o (new partition table)
-    n
-    +1M
-    ef02
     ...
     w
-    q
 
 4. Encrypted root
 =================
@@ -251,13 +247,13 @@ Add encrypted swap to ``/etc/crypttab``:
 
 .. code-block:: bash
 
-    swap    /dev/sda3   /dev/urandom    swap,cipher=aes-cbc-essiv:sha256,size=256
+    cryptswap    /dev/sda3   /dev/urandom    swap,cipher=aes-cbc-essiv:sha256,size=256
 
 ... and modify ``/etc/fstab``:
 
 .. code-block:: bash
 
-    /dev/mapper/swap    none    swap    sw      0 0
+    /dev/mapper/cryptswap    none    swap    sw      0 0
 
 18. Unmount and reboot
 ======================
