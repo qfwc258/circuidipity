@@ -6,7 +6,7 @@ Chromebook to Lubuntubook
 :slug: c720-lubuntubook
 :template: article-project
 :tags: chromebook, lubuntu, ubuntu, linux
-:modified: 2015-03-26 20:54:00
+:modified: 2015-04-14 12:38:00
 
 Replace **Chrome OS** permanently with **Lubuntu 14.04 LTS Linux** on the **Acer C720 Chromebook**.
 
@@ -153,9 +153,9 @@ Lubuntu installs the ``3.13`` Linux kernel and does not support the Chromebook's
 
 .. code-block:: bash
 
-    $ wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19-vivid/linux-headers-3.19.0-031900-generic_3.19.0-031900.201502091451_amd64.deb
-    $ wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19-vivid/linux-headers-3.19.0-031900_3.19.0-031900.201502091451_all.deb
-    $ wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19-vivid/linux-image-3.19.0-031900-generic_3.19.0-031900.201502091451_amd64.deb
+    $ wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19.4-vivid/linux-headers-3.19.4-031904-generic_3.19.4-031904.201504131440_amd64.deb
+    $ wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19.4-vivid/linux-headers-3.19.4-031904_3.19.4-031904.201504131440_all.deb
+    $ wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19.4-vivid/linux-image-3.19.4-031904-generic_3.19.4-031904.201504131440_amd64.deb
     $ sudo dpkg -i linux*.deb                                                       
                                                                                     
 ... and reboot.                                                       
