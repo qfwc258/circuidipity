@@ -83,12 +83,8 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <p>Normally I create a separate partition for <tt class="docutils literal">$HOME</tt> but on smaller storage devices I make a single encrypted <tt class="docutils literal">root</tt> and a (required) unencrypted <tt class="docutils literal">boot</tt>:</p>
 <div class="highlight"><pre><span class="c"># gdisk /dev/sda</span>
 o <span class="o">(</span>new partition table<span class="o">)</span>
-n
-+1M
-ef02
 ...
 w
-q
 </pre></div>
 </div>
 <div class="section" id="encrypted-root">
@@ -201,10 +197,10 @@ en_CA.UTF-8 UTF-8
 <div class="section" id="prepare-non-root-encrypted-partitions">
 <h2>17. Prepare non-root encrypted partitions</h2>
 <p>Add encrypted swap to <tt class="docutils literal">/etc/crypttab</tt>:</p>
-<div class="highlight"><pre>swap    /dev/sda3   /dev/urandom    swap,cipher<span class="o">=</span>aes-cbc-essiv:sha256,size<span class="o">=</span>256
+<div class="highlight"><pre>cryptswap    /dev/sda3   /dev/urandom    swap,cipher<span class="o">=</span>aes-cbc-essiv:sha256,size<span class="o">=</span>256
 </pre></div>
 <p>... and modify <tt class="docutils literal">/etc/fstab</tt>:</p>
-<div class="highlight"><pre>/dev/mapper/swap    none    swap    sw      <span class="m">0</span> 0
+<div class="highlight"><pre>/dev/mapper/cryptswap    none    swap    sw      <span class="m">0</span> 0
 </pre></div>
 </div>
 <div class="section" id="unmount-and-reboot">

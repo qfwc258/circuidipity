@@ -45,12 +45,8 @@
 &lt;p&gt;Normally I create a separate partition for &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt; but on smaller storage devices I make a single encrypted &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; and a (required) unencrypted &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# gdisk /dev/sda&lt;/span&gt;
 o &lt;span class="o"&gt;(&lt;/span&gt;new partition table&lt;span class="o"&gt;)&lt;/span&gt;
-n
-+1M
-ef02
 ...
 w
-q
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="encrypted-root"&gt;
@@ -163,10 +159,10 @@ en_CA.UTF-8 UTF-8
 &lt;div class="section" id="prepare-non-root-encrypted-partitions"&gt;
 &lt;h2&gt;17. Prepare non-root encrypted partitions&lt;/h2&gt;
 &lt;p&gt;Add encrypted swap to &lt;tt class="docutils literal"&gt;/etc/crypttab&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;swap    /dev/sda3   /dev/urandom    swap,cipher&lt;span class="o"&gt;=&lt;/span&gt;aes-cbc-essiv:sha256,size&lt;span class="o"&gt;=&lt;/span&gt;256
+&lt;div class="highlight"&gt;&lt;pre&gt;cryptswap    /dev/sda3   /dev/urandom    swap,cipher&lt;span class="o"&gt;=&lt;/span&gt;aes-cbc-essiv:sha256,size&lt;span class="o"&gt;=&lt;/span&gt;256
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... and modify &lt;tt class="docutils literal"&gt;/etc/fstab&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;/dev/mapper/swap    none    swap    sw      &lt;span class="m"&gt;0&lt;/span&gt; 0
+&lt;div class="highlight"&gt;&lt;pre&gt;/dev/mapper/cryptswap    none    swap    sw      &lt;span class="m"&gt;0&lt;/span&gt; 0
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="unmount-and-reboot"&gt;

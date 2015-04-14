@@ -126,9 +126,9 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <div class="section" id="touchpad">
 <h2>4. Touchpad</h2>
 <p>Lubuntu installs the <tt class="docutils literal">3.13</tt> Linux kernel and does not support the Chromebook's touchpad. Download and install the more recent <tt class="docutils literal">3.19</tt> kernel from <a class="reference external" href="https://wiki.ubuntu.com/Kernel/MainlineBuilds">Ubuntu MainlineBuilds</a> to fix:</p>
-<div class="highlight"><pre><span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19-vivid/linux-headers-3.19.0-031900-generic_3.19.0-031900.201502091451_amd64.deb
-<span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19-vivid/linux-headers-3.19.0-031900_3.19.0-031900.201502091451_all.deb
-<span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19-vivid/linux-image-3.19.0-031900-generic_3.19.0-031900.201502091451_amd64.deb
+<div class="highlight"><pre><span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19.4-vivid/linux-headers-3.19.4-031904-generic_3.19.4-031904.201504131440_amd64.deb
+<span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19.4-vivid/linux-headers-3.19.4-031904_3.19.4-031904.201504131440_all.deb
+<span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19.4-vivid/linux-image-3.19.4-031904-generic_3.19.4-031904.201504131440_amd64.deb
 <span class="nv">$ </span>sudo dpkg -i linux*.deb
 </pre></div>
 <p>... and reboot.</p>
