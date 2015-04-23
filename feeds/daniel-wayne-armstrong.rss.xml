@@ -5,7 +5,7 @@
 &lt;p&gt;&lt;strong&gt;Target:&lt;/strong&gt; Acer &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;C720-2848&lt;/span&gt;&lt;/tt&gt; Chromebook (16GB SSD) with &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Chrome OS removed and ready for full-featured Linux&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="install-media"&gt;
-&lt;h2&gt;0.Install media&lt;/h2&gt;
+&lt;h2&gt;0. Install media&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://www.archlinux.org/download/"&gt;Download&lt;/a&gt; the combined 32+64bit installer and flash the image to a USB stick:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dd &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4M &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;archlinux*-dual.iso &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sdX
 &lt;/pre&gt;&lt;/div&gt;
