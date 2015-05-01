@@ -13,8 +13,8 @@ Let's go!
 
 **Target:** Acer ``C720-2848`` Chromebook (16GB SSD) with `Chrome OS removed and ready for full-featured Linux <http://www.circuidipity.com/c720-lubuntubook.html>`_.
 
-0.Install media
-===============
+0. Install media
+================
 
 `Download <https://www.archlinux.org/download/>`_ the combined 32+64bit installer and flash the image to a USB stick:
 

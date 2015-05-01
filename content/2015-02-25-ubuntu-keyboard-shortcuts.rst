@@ -158,7 +158,7 @@ At home I connect my `Ubuntubook <http://www.circuidipity.com/c720-lubuntubook.h
 
 .. code-block:: bash
 
-    $ sudo compizconfig-settings-manager compiz-plugins-extra
+    $ sudo apt-get install compizconfig-settings-manager compiz-plugins-extra
 
 Open the Dash and run ``compiz settings manager``. Enable and select the ``Window Management -> Put`` plugin and configure a key shortcut for ``Put to Next Output``.
 
