@@ -35,191 +35,67 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 
 <!-- latest post -->
 <div id="latestpost">
-        <p class="published"> Thursday 26 March 2015</p>
-        <h1><a href="http://www.circuidipity.com/arch-install-encrypt.html">Arch Linux installation with encrypted root + swap</a></h1>
-        <p>My notes for installing <strong>Arch Linux</strong> that follow a condensed path through the <a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_guide">Beginner's Guide</a> plus extra steps to configure LUKS-encrypted root + swap.</p>
-<div class="section" id="let-s-go">
-<h2>Let's go!</h2>
-<p><strong>Target:</strong> Acer <tt class="docutils literal"><span class="pre">C720-2848</span></tt> Chromebook (16GB SSD) with <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Chrome OS removed and ready for full-featured Linux</a>.</p>
-</div>
-<div class="section" id="install-media">
-<h2>0. Install media</h2>
-<p><a class="reference external" href="https://www.archlinux.org/download/">Download</a> the combined 32+64bit installer and flash the image to a USB stick:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo dd <span class="nv">bs</span><span class="o">=</span>4M <span class="k">if</span><span class="o">=</span>archlinux*-dual.iso <span class="nv">of</span><span class="o">=</span>/dev/sdX
+        <p class="published"> Friday 01 May 2015</p>
+        <h1><a href="http://www.circuidipity.com/encrypt-external-drive.html">Configure an encrypted external USB hard drive in Linux</a></h1>
+        <p>Using an external USB hard drive is part of my personal backup plan (the other part is backing up to a <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">home server</a>). I actually use 2 multi-terabyte drives. One drive is in my possession and the other drive I store offsite at a friend's home. Periodically I swap the drives and update the data.</p>
+<p>To guard against loss or theft its a good idea to <strong>encrypt</strong> the hard drive. I prepare the device using <strong>Linux Unified Key Setup (LUKS)</strong> and the <tt class="docutils literal">cryptsetup</tt> utility.</p>
+<p><span class="warning">WARNING!</span> Make careful note of the drive and partition labels. The following steps will <strong>destroy all data</strong> currently stored on the drive.</p>
+<div class="section" id="prepare">
+<h2>0. Prepare</h2>
+<p>Download <tt class="docutils literal">cryptsetup</tt> if not already installed. Connect the external drive, leave it <strong>unmounted</strong>, and make note of the device label (<tt class="docutils literal">sdb</tt>, <tt class="docutils literal">sdc</tt> ...):</p>
+<div class="highlight"><pre><span class="nv">$ </span>lsblk
 </pre></div>
-</div>
-<div class="section" id="net-connection">
-<h2>1. Net connection</h2>
-<p>Connect the USB stick and boot the installer. Identify the name of the device net interfaces:</p>
-<div class="highlight"><pre><span class="c"># ip link</span>
+<p><strong>Optional:</strong> Overwrite the device with zeros for added security. This can take several hours depending on storage size. <strong>Random number generation</strong> is even more secure but takes much longer:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo dd <span class="nv">bs</span><span class="o">=</span>4M <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>/dev/sdX
 </pre></div>
-<p>Chromebook wireless interface is <tt class="docutils literal">wlp1s0</tt>. Connect to an access point using <tt class="docutils literal">netctl</tt> and its interactive <tt class="docutils literal"><span class="pre">wifi-menu</span></tt> utility:</p>
-<div class="highlight"><pre><span class="c"># wifi-menu</span>
-</pre></div>
-</div>
-<div class="section" id="wipe-storage">
-<h2>2. Wipe storage</h2>
-<p>Secure wipe storage before installation (16GB SSD took 22-23 minutes):</p>
-<div class="highlight"><pre><span class="c"># cryptsetup open --type plain /dev/sdX container</span>
-<span class="c"># dd if=/dev/zero of=/dev/mapper/container</span>
-</pre></div>
-<p>Upon completion close the container:</p>
-<div class="highlight"><pre><span class="c"># cryptsetup close /dev/mapper/container</span>
-</pre></div>
-<p>Source: <a class="reference external" href="https://wiki.archlinux.org/index.php/Dm-crypt/Drive_preparation">Dm-crypt drive preparation</a></p>
 </div>
 <div class="section" id="partition">
-<h2>3. Partition</h2>
-<p>Detect storage devices:</p>
-<div class="highlight"><pre><span class="c"># lsblk</span>
-</pre></div>
-<p>SSD identified as <tt class="docutils literal">sda</tt>. Use <tt class="docutils literal">gpt</tt> to create a 4 partition layout:</p>
-<ul class="simple">
-<li>sda1 - 1M - BIOS boot partition (type: <tt class="docutils literal">ef02</tt>)</li>
-<li>sda2 - 300M - boot (unencrypted)</li>
-<li>sda3 - 1GB - swap (encrypted)</li>
-<li>sda4 - remaining space - root (encrypted)</li>
-</ul>
-<p>Normally I create a separate partition for <tt class="docutils literal">$HOME</tt> but on smaller storage devices I make a single encrypted <tt class="docutils literal">root</tt> and a (required) unencrypted <tt class="docutils literal">boot</tt>:</p>
-<div class="highlight"><pre><span class="c"># gdisk /dev/sda</span>
-o <span class="o">(</span>new partition table<span class="o">)</span>
-...
-w
+<h2>1. Partition</h2>
+<p>Create a single partition using a favourite partitioning utility (<tt class="docutils literal">fdisk</tt>, <tt class="docutils literal">gparted</tt>...) that fills the entire drive. Encrypt the partition and assign a password:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo cryptsetup luksFormat /dev/sdX1
+<span class="nv">$ </span>sudo cryptsetup luksOpen /dev/sdX1 sdX1_crypt
 </pre></div>
 </div>
-<div class="section" id="encrypted-root">
-<h2>4. Encrypted root</h2>
-<p>Using above partition layout:</p>
-<div class="highlight"><pre><span class="c"># cryptsetup -y -v luksFormat /dev/sda4</span>
-<span class="c"># cryptsetup open /dev/sda4 cryptroot</span>
-<span class="c"># mkfs.ext4 /dev/mapper/cryptroot</span>
-<span class="c"># mount -t ext4 /dev/mapper/cryptroot /mnt</span>
+<div class="section" id="filesystem">
+<h2>2. Filesystem</h2>
+<p>Install a filesystem (example: <tt class="docutils literal">ext4</tt>) <a class="footnote-reference" href="#id2" id="id1">[1]</a> and mount the partition to gain access to the storage:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkfs.ext4 -E <span class="nv">lazy_itable_init</span><span class="o">=</span>0,lazy_journal_init<span class="o">=</span><span class="m">0</span> /dev/mapper/sdX1_crypt
+<span class="nv">$ </span>sudo mount -t ext4 /dev/mapper/sdX1_crypt /mnt
+</pre></div>
+<p>Before disconnecting the drive the partition must be unmounted and the encrypted device must be closed:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo umount /mnt
+<span class="nv">$ </span>sudo cryptsetup luksClose /dev/mapper/sdX1_crypt
 </pre></div>
 </div>
-<div class="section" id="boot">
-<h2>5. Boot</h2>
-<p>Setup:</p>
-<div class="highlight"><pre><span class="c"># mkfs.ext4 /dev/sda2</span>
-<span class="c"># mkdir /mnt/boot</span>
-<span class="c"># mount -t ext4 /dev/sda2 /mnt/boot</span>
+<div class="section" id="mountpoint">
+<h2>3. Mountpoint</h2>
+<p>A file manager like <tt class="docutils literal">nautilus</tt> will auto-mount and unmount encrypted partitions. For crafting a backup script it is useful to assign a <strong>default mountpoint</strong> to the encrypted partition... that is, whenever the USB drive is connected it will always be mounted to the same location.</p>
+<p>Mount the encrypted drive. Retrieve the UUID string for the encrypted partition, and create a custom mountpoint (example: <tt class="docutils literal">/media/usb_crypt</tt>):</p>
+<div class="highlight"><pre><span class="nv">$ </span>ls /dev/disk/by-uuid/ <span class="p">|</span> grep dm-  <span class="c"># outputs &#39;&lt;STRING&gt; -&gt; ../../dm-X&#39;</span>
+<span class="nv">$ </span>sudo mkdir /media/usb_crypt
 </pre></div>
+<p>Unmount the drive and create an entry in <tt class="docutils literal">/etc/fstab</tt> for the new custom mount point ...</p>
+<div class="highlight"><pre><span class="nv">UUID</span><span class="o">=</span>&lt;STRING&gt;   /media/usb_crypt    ext4    rw.users,noauto,noatime    <span class="m">0</span>   0
+</pre></div>
+<p>Next time the drive is auto-mounted it will be assigned to <tt class="docutils literal">/media/usb_crypt</tt>.</p>
+<p>Happy hacking!</p>
 </div>
-<div class="section" id="install">
-<h2>6. Install</h2>
-<p>Install the Arch base system:</p>
-<div class="highlight"><pre><span class="c"># pacstrap -i /mnt base base-devel</span>
-</pre></div>
-</div>
-<div class="section" id="fstab">
-<h2>7. Fstab</h2>
-<p>Generate a base <tt class="docutils literal">/etc/fstab</tt> and modify:</p>
-<div class="highlight"><pre><span class="c"># genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab</span>
-<span class="c"># nano /mnt/etc/fstab</span>
-</pre></div>
-</div>
-<div class="section" id="chroot">
-<h2>8. Chroot</h2>
-<p>Chroot into the freshly-installed Arch base system to configure:</p>
-<div class="highlight"><pre><span class="c"># arch-chroot /mnt /bin/bash</span>
-</pre></div>
-</div>
-<div class="section" id="locale">
-<h2>9. Locale</h2>
-<p>Configure a locale suitable for the region:</p>
-<div class="highlight"><pre><span class="c"># nano /etc/locale.gen</span>
-...
-en_CA.UTF-8 UTF-8
-...
-<span class="c"># locale-gen</span>
-<span class="c"># echo LANG=en_CA.UTF-8 &gt; /etc/locale.conf</span>
-<span class="c"># export LANG=en_CA.UTF-8</span>
-</pre></div>
-</div>
-<div class="section" id="time-zone">
-<h2>10. Time zone</h2>
-<p>Configure local time:</p>
-<div class="highlight"><pre><span class="c"># ln -s /usr/share/zoneinfo/Canada/Eastern /etc/localtime</span>
-</pre></div>
-</div>
-<div class="section" id="hardware-clock">
-<h2>11. Hardware clock</h2>
-<p>Set the hardware clock to UTC:</p>
-<div class="highlight"><pre><span class="c"># hwclock --systohc --utc</span>
-</pre></div>
-</div>
-<div class="section" id="hostname">
-<h2>12. Hostname</h2>
-<p>Make a name for the new Arch installation:</p>
-<div class="highlight"><pre><span class="c"># echo myhostname &gt; /etc/hostname</span>
-</pre></div>
-<p>... and modify <tt class="docutils literal">/etc/hosts</tt>:</p>
-<div class="highlight"><pre><span class="c">#&lt;ip-address&gt; &lt;hostname.domain.org&gt; &lt;hostname&gt;</span>
-127.0.0.1 localhost.localdomain localhost myhostname
-::1   localhost.localdomain localhost myhostname
-</pre></div>
-</div>
-<div class="section" id="network">
-<h2>13. Network</h2>
-<p>Chromebook wireless interface is an Atheros <tt class="docutils literal">AR9462</tt> using the <tt class="docutils literal">ath9k</tt> kernel module. It does not require separate firmware.</p>
-<p>Install wireless tools:</p>
-<div class="highlight"><pre><span class="c"># pacman -S iw wpa_supplicant dialog</span>
-</pre></div>
-<p><strong>Wait until after reboot</strong> to configure interface with <tt class="docutils literal"><span class="pre">wifi-menu</span></tt>.</p>
-</div>
-<div class="section" id="initial-ramdisk">
-<h2>14. Initial ramdisk</h2>
-<p>Modify <tt class="docutils literal">/etc/mkinitcpio.conf</tt> by adding an <tt class="docutils literal">encrypt</tt> hook before <tt class="docutils literal">filesystems</tt>:</p>
-<div class="highlight"><pre><span class="nv">HOOKS</span><span class="o">=</span><span class="s2">&quot;... encrypt ... filesystems ...&quot;</span>
-</pre></div>
-<p>Re-generate the initramfs image:</p>
-<div class="highlight"><pre><span class="c"># mkinitcpio -p linux</span>
-</pre></div>
-</div>
-<div class="section" id="password">
-<h2>15. Password</h2>
-<p>Set root password:</p>
-<div class="highlight"><pre><span class="c"># passwd</span>
-</pre></div>
-</div>
-<div class="section" id="bootloader">
-<h2>16. Bootloader</h2>
-<p>Download GRUB:</p>
-<div class="highlight"><pre><span class="c"># pacman -S grub os-prober</span>
-</pre></div>
-<p>Configure <tt class="docutils literal">/etc/default/grub</tt> to handle encrypted root:</p>
-<div class="highlight"><pre><span class="nv">GRUB_CMDLINE_LINUX</span><span class="o">=</span><span class="s2">&quot;cryptdevice=/dev/sda4:cryptroot&quot;</span>
-</pre></div>
-<p>Install GRUB to storage device and auto-generate <tt class="docutils literal">grub.cfg</tt>:</p>
-<div class="highlight"><pre><span class="c"># grub-install --target=i386-pc --recheck /dev/sda</span>
-<span class="c"># grub-mkconfig -o /boot/grub/grub.cfg</span>
-</pre></div>
-</div>
-<div class="section" id="prepare-non-root-encrypted-partitions">
-<h2>17. Prepare non-root encrypted partitions</h2>
-<p>Add encrypted swap to <tt class="docutils literal">/etc/crypttab</tt>:</p>
-<div class="highlight"><pre>cryptswap    /dev/sda3   /dev/urandom    swap,cipher<span class="o">=</span>aes-cbc-essiv:sha256,size<span class="o">=</span>256
-</pre></div>
-<p>... and modify <tt class="docutils literal">/etc/fstab</tt>:</p>
-<div class="highlight"><pre>/dev/mapper/cryptswap    none    swap    sw      <span class="m">0</span> 0
-</pre></div>
-</div>
-<div class="section" id="unmount-and-reboot">
-<h2>18. Unmount and reboot</h2>
-<div class="highlight"><pre><span class="c"># exit</span>
-<span class="c"># umount /mnt/boot</span>
-<span class="c"># umount /mnt</span>
-<span class="c"># cryptsetup close /dev/mapper/cryptroot</span>
-<span class="c"># reboot</span>
-</pre></div>
-<p>Welcome to Arch. Happy hacking!</p>
+<div class="section" id="notes">
+<h2>Notes</h2>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Writing <tt class="docutils literal">ext4</tt> with options <tt class="docutils literal">lazy_itable_init=0,lazy_journal_init=0</tt> initializes the inodes and journal at creation time vs a gradual process during mount times. If you wonder why your newly-formatted drive's activity LED is blinking away... install and run <tt class="docutils literal">iotop</tt> and take note of <tt class="docutils literal">ext4lazyinit</tt> and <a class="reference external" href="https://www.thomas-krenn.com/en/wiki/Ext4_Filesystem#Lazy_Initialization">Lazy Initialization</a>.</td></tr>
+</tbody>
+</table>
 </div>
 
         <!-- Nav links to previous|next article --> 
         <div id="navmenu">
             <hr />
             <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-                <a href="http://www.circuidipity.com/samsung-clp-310-printer.html">
-                Samsung CLP-310 Printer</a></p>
+                <a href="http://www.circuidipity.com/arch-install-encrypt.html">
+                Arch Linux installation with encrypted root + swap</a></p>
         </div>
 </div>
 

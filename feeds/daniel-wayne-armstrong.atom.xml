@@ -1,5 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-03-26T21:00:00-04:00</updated><entry><title>Arch Linux installation with encrypted root + swap</title><link href="http://www.circuidipity.com/arch-install-encrypt.html" rel="alternate"></link><updated>2015-03-26T21:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-26:arch-install-encrypt.html</id><summary type="html">&lt;p&gt;My notes for installing &lt;strong&gt;Arch Linux&lt;/strong&gt; that follow a condensed path through the &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_guide"&gt;Beginner's Guide&lt;/a&gt; plus extra steps to configure LUKS-encrypted root + swap.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-05-01T00:23:00-04:00</updated><entry><title>Configure an encrypted external USB hard drive in Linux</title><link href="http://www.circuidipity.com/encrypt-external-drive.html" rel="alternate"></link><updated>2015-05-01T00:23:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-05-01:encrypt-external-drive.html</id><summary type="html">&lt;p&gt;Using an external USB hard drive is part of my personal backup plan (the other part is backing up to a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;home server&lt;/a&gt;). I actually use 2 multi-terabyte drives. One drive is in my possession and the other drive I store offsite at a friend's home. Periodically I swap the drives and update the data.&lt;/p&gt;
+&lt;p&gt;To guard against loss or theft its a good idea to &lt;strong&gt;encrypt&lt;/strong&gt; the hard drive. I prepare the device using &lt;strong&gt;Linux Unified Key Setup (LUKS)&lt;/strong&gt; and the &lt;tt class="docutils literal"&gt;cryptsetup&lt;/tt&gt; utility.&lt;/p&gt;
+&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; Make careful note of the drive and partition labels. The following steps will &lt;strong&gt;destroy all data&lt;/strong&gt; currently stored on the drive.&lt;/p&gt;
+&lt;div class="section" id="prepare"&gt;
+&lt;h2&gt;0. Prepare&lt;/h2&gt;
+&lt;p&gt;Download &lt;tt class="docutils literal"&gt;cryptsetup&lt;/tt&gt; if not already installed. Connect the external drive, leave it &lt;strong&gt;unmounted&lt;/strong&gt;, and make note of the device label (&lt;tt class="docutils literal"&gt;sdb&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;sdc&lt;/tt&gt; ...):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;lsblk
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Optional:&lt;/strong&gt; Overwrite the device with zeros for added security. This can take several hours depending on storage size. &lt;strong&gt;Random number generation&lt;/strong&gt; is even more secure but takes much longer:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dd &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4M &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/zero &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sdX
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="partition"&gt;
+&lt;h2&gt;1. Partition&lt;/h2&gt;
+&lt;p&gt;Create a single partition using a favourite partitioning utility (&lt;tt class="docutils literal"&gt;fdisk&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;gparted&lt;/tt&gt;...) that fills the entire drive. Encrypt the partition and assign a password:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo cryptsetup luksFormat /dev/sdX1
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo cryptsetup luksOpen /dev/sdX1 sdX1_crypt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="filesystem"&gt;
+&lt;h2&gt;2. Filesystem&lt;/h2&gt;
+&lt;p&gt;Install a filesystem (example: &lt;tt class="docutils literal"&gt;ext4&lt;/tt&gt;) &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt; and mount the partition to gain access to the storage:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkfs.ext4 -E &lt;span class="nv"&gt;lazy_itable_init&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0,lazy_journal_init&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; /dev/mapper/sdX1_crypt
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mount -t ext4 /dev/mapper/sdX1_crypt /mnt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Before disconnecting the drive the partition must be unmounted and the encrypted device must be closed:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo umount /mnt
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo cryptsetup luksClose /dev/mapper/sdX1_crypt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="mountpoint"&gt;
+&lt;h2&gt;3. Mountpoint&lt;/h2&gt;
+&lt;p&gt;A file manager like &lt;tt class="docutils literal"&gt;nautilus&lt;/tt&gt; will auto-mount and unmount encrypted partitions. For crafting a backup script it is useful to assign a &lt;strong&gt;default mountpoint&lt;/strong&gt; to the encrypted partition... that is, whenever the USB drive is connected it will always be mounted to the same location.&lt;/p&gt;
+&lt;p&gt;Mount the encrypted drive. Retrieve the UUID string for the encrypted partition, and create a custom mountpoint (example: &lt;tt class="docutils literal"&gt;/media/usb_crypt&lt;/tt&gt;):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;ls /dev/disk/by-uuid/ &lt;span class="p"&gt;|&lt;/span&gt; grep dm-  &lt;span class="c"&gt;# outputs &amp;#39;&amp;lt;STRING&amp;gt; -&amp;gt; ../../dm-X&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /media/usb_crypt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Unmount the drive and create an entry in &lt;tt class="docutils literal"&gt;/etc/fstab&lt;/tt&gt; for the new custom mount point ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;UUID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;STRING&amp;gt;   /media/usb_crypt    ext4    rw.users,noauto,noatime    &lt;span class="m"&gt;0&lt;/span&gt;   0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next time the drive is auto-mounted it will be assigned to &lt;tt class="docutils literal"&gt;/media/usb_crypt&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h2&gt;Notes&lt;/h2&gt;
+&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Writing &lt;tt class="docutils literal"&gt;ext4&lt;/tt&gt; with options &lt;tt class="docutils literal"&gt;lazy_itable_init=0,lazy_journal_init=0&lt;/tt&gt; initializes the inodes and journal at creation time vs a gradual process during mount times. If you wonder why your newly-formatted drive's activity LED is blinking away... install and run &lt;tt class="docutils literal"&gt;iotop&lt;/tt&gt; and take note of &lt;tt class="docutils literal"&gt;ext4lazyinit&lt;/tt&gt; and &lt;a class="reference external" href="https://www.thomas-krenn.com/en/wiki/Ext4_Filesystem#Lazy_Initialization"&gt;Lazy Initialization&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+</summary><category term="linux"></category></entry><entry><title>Arch Linux installation with encrypted root + swap</title><link href="http://www.circuidipity.com/arch-install-encrypt.html" rel="alternate"></link><updated>2015-03-26T21:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-26:arch-install-encrypt.html</id><summary type="html">&lt;p&gt;My notes for installing &lt;strong&gt;Arch Linux&lt;/strong&gt; that follow a condensed path through the &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Beginners%27_guide"&gt;Beginner's Guide&lt;/a&gt; plus extra steps to configure LUKS-encrypted root + swap.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Target:&lt;/strong&gt; Acer &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;C720-2848&lt;/span&gt;&lt;/tt&gt; Chromebook (16GB SSD) with &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Chrome OS removed and ready for full-featured Linux&lt;/a&gt;.&lt;/p&gt;
@@ -844,7 +896,7 @@ grub&amp;gt; boot
 &lt;div class="section" id="move-windows-between-displays"&gt;
 &lt;h3&gt;Move windows between displays&lt;/h3&gt;
 &lt;p&gt;At home I connect my &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Ubuntubook&lt;/a&gt; to an external 24&amp;quot; display to form a combined desktop across the 2 devices. I use &lt;strong&gt;Compiz&lt;/strong&gt; to create a &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Control-Super-W&lt;/span&gt;&lt;/tt&gt; key combo to move windows back and forth between displays:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo compizconfig-settings-manager compiz-plugins-extra
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install compizconfig-settings-manager compiz-plugins-extra
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Open the Dash and run &lt;tt class="docutils literal"&gt;compiz settings manager&lt;/tt&gt;. Enable and select the &lt;tt class="docutils literal"&gt;Window Management &lt;span class="pre"&gt;-&amp;gt;&lt;/span&gt; Put&lt;/tt&gt; plugin and configure a key shortcut for &lt;tt class="docutils literal"&gt;Put to Next Output&lt;/tt&gt;.&lt;/p&gt;
 &lt;img alt="Compiz Put Plugin" class="align-center" src="images/compiz_put.png" style="width: 899px; height: 565px;" /&gt;
@@ -1192,56 +1244,6 @@ Enter it again: &lt;span class="o"&gt;[&lt;/span&gt;newpasswd&lt;span class="o"&
 &lt;h2&gt;4. Configuration&lt;/h2&gt;
 &lt;p&gt;Secure access to the router using &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH key authentication&lt;/a&gt;. Create &lt;a class="reference external" href="http://www.circuidipity.com/20141001.html"&gt;static leases&lt;/a&gt; for hosts using DHCP and setup &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;port forwarding&lt;/a&gt; to reach devices behind the firewall from the world-at-large.&lt;/p&gt;
 &lt;p&gt;Its exciting what you can do with these consumer routers once you let it sink in that - with a few dollars and OpenWrt - you have an extremely configurable general purpose computer.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="networks"></category><category term="openwrt"></category><category term="linux"></category></entry><entry><title>Dynamic DNS and OpenWRT</title><link href="http://www.circuidipity.com/ddns-openwrt.html" rel="alternate"></link><updated>2015-02-06T00:02:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-06:ddns-openwrt.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #5 .:&lt;/a&gt; Access a home server from anywhere using Dynamic DNS (DDNS).&lt;/p&gt;
-&lt;p&gt;My Raspberry Pi server sits behind a router assigned a &lt;strong&gt;dynamic IP address&lt;/strong&gt; by the ISP. If I want to connect to my Pi over the Internet from anywhere in the world I can use a &lt;strong&gt;DDNS service&lt;/strong&gt; to create a domain name that automatically updates the IP address in the background whenever it changes and redirect traffic to the new location.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div class="section" id="select-a-ddns-service"&gt;
-&lt;h2&gt;0. Select a DDNS service&lt;/h2&gt;
-&lt;p&gt;I chose the free DDNS service &lt;a class="reference external" href="http://www.duckdns.org/"&gt;duckdns.org&lt;/a&gt; which permits the creation of up to 4 domains in the format &lt;tt class="docutils literal"&gt;your_subdomain_choice.duckdns.org&lt;/tt&gt;. Example: Create the subdomain &lt;tt class="docutils literal"&gt;mypihomeserver&lt;/tt&gt; and later - after configuring the router - when entering &lt;tt class="docutils literal"&gt;mypihomeserver.duckdns.org&lt;/tt&gt; I will be redirected to the current IP address assigned to my home network.&lt;/p&gt;
-&lt;p&gt;Make note of &lt;a class="reference external" href="http://www.duckdns.org/install.jsp"&gt;http://www.duckdns.org/install.jsp&lt;/a&gt; (while logged in) for customized settings useful for configuring the router for DDNS.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="configure-openwrt-for-notification"&gt;
-&lt;h2&gt;1. Configure OpenWRT for notification&lt;/h2&gt;
-&lt;p&gt;Different routers configure DDNS differently but the goal is the same: the ability to notify the DDNS service whenever the IP address assigned by the ISP is modified. I am using an &lt;a class="reference external" href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html"&gt;OpenWRT-powered router&lt;/a&gt; and these are the steps to configure OpenWRT to use duckdns DDNS.&lt;/p&gt;
-&lt;p&gt;Install DDNS packages:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# opkg update&lt;/span&gt;
-&lt;span class="c"&gt;# opkg install luci-app-ddns ddns-scripts&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Use the customized settings from &lt;a class="reference external" href="http://www.duckdns.org/install.jsp"&gt;http://www.duckdns.org/install.jsp&lt;/a&gt; to configure &lt;tt class="docutils literal"&gt;/etc/config/ddns&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;config service          &lt;span class="s2"&gt;&amp;quot;duckdns&amp;quot;&lt;/span&gt;
-option enabled          &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;
-option service_name     &lt;span class="s2"&gt;&amp;quot;duckdns.org&amp;quot;&lt;/span&gt;
-option domain           &lt;span class="s2"&gt;&amp;quot;mypihomeserver&amp;quot;&lt;/span&gt;
-option username         &lt;span class="s2"&gt;&amp;quot;NA&amp;quot;&lt;/span&gt;
-option password         &lt;span class="s2"&gt;&amp;quot;string_of_letters_and_digits&amp;quot;&lt;/span&gt;
-option ip_source        &lt;span class="s2"&gt;&amp;quot;network&amp;quot;&lt;/span&gt;
-option ip_network       &lt;span class="s2"&gt;&amp;quot;wan&amp;quot;&lt;/span&gt;
-option force_interval   &lt;span class="s2"&gt;&amp;quot;72&amp;quot;&lt;/span&gt;
-option force_unit       &lt;span class="s2"&gt;&amp;quot;hours&amp;quot;&lt;/span&gt;
-option check_interval   &lt;span class="s2"&gt;&amp;quot;10&amp;quot;&lt;/span&gt;
-option check_unit       &lt;span class="s2"&gt;&amp;quot;minutes&amp;quot;&lt;/span&gt;
-option update_url       &lt;span class="s2"&gt;&amp;quot;http://www.duckdns.org/update?domains=[DOMAIN]&amp;amp;token=[PASSWORD]&amp;amp;ip=[IP]&amp;quot;&lt;/span&gt;
-option use_syslog       &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Start daemon:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# sh&lt;/span&gt;
-&lt;span class="c"&gt;# . /usr/lib/ddns/dynamic_dns_functions.sh&lt;/span&gt;
-&lt;span class="c"&gt;# start_daemon_for_all_ddns_sections &amp;quot;wan&amp;quot;&lt;/span&gt;
-&lt;span class="c"&gt;# exit&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Test:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# /usr/lib/ddns/dynamic_dns_updater.sh duckdns&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In OpenWRT's &lt;tt class="docutils literal"&gt;LuCI&lt;/tt&gt; interface navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;System-&amp;gt;Startup&lt;/span&gt;&lt;/tt&gt; and enable DDNS to ensure the router continues to send IP address changes after reboot and hotplug events.&lt;/p&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="http://wiki.openwrt.org/doc/howto/ddns.client"&gt;OpenWRT DDNS client&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="port-forwarding"&gt;
-&lt;h2&gt;2. Port forwarding&lt;/h2&gt;
-&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;port forwarding HOWTO&lt;/a&gt; to configure OpenWRT to forward traffic directed at one of the router's ports to the listening port on the Pi home server. Example: configure port &lt;tt class="docutils literal"&gt;55555&lt;/tt&gt; on the router to connect to the &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH server&lt;/a&gt; listening on port &lt;tt class="docutils literal"&gt;22&lt;/tt&gt; on the Pi.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 </summary><category term="networks"></category><category term="openwrt"></category><category term="linux"></category></entry></feed>

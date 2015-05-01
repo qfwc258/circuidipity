@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Configure an encrypted external hard drive in Linux</title>
+        <title>Circuidipity | Configure an encrypted external USB hard drive in Linux</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -20,44 +20,66 @@
 <div id="breadcrumb">
     <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
     <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
-    Wednesday 14 December 2011</p>
+    Friday 01 May 2015</p>
 </div>
 
 <!-- article -->
-<h1>Configure an encrypted external hard drive in Linux</h1>
+<h1>Configure an encrypted external USB hard drive in Linux</h1>
 <div id="article">
-    <p>Using an external USB-connected hard drive is part of my personal backup plan (the other part is backups to a <a class="reference external" href="http://www.circuidipity.com/linux-home-server.html">home server</a>).</p>
-<p>I actually use 2 one terabyte drives. One drive is in my possession and the other drive I store at a friend's home. Periodically I swap the drives and update the data via the <em>sneakernet</em>.</p>
-<p>To guard against loss or theft its a good idea to <em>encrypt</em> the hard drive. I prepare the device using <em>Linux Unified Key Setup (LUKS)</em> and the <tt class="docutils literal">cryptsetup</tt> utility.</p>
-<p><span class="warning">WARNING!</span> In this example the external hard drive is identified as <em>sdb</em> and contains a single partition <em>sdb1</em>. Make careful note of the drive and partition labels on <strong>your system</strong> as they can be very different. The following steps will <strong>destroy all data</strong> currently stored on the drive.</p>
-<p>Download the cryptsetup package if not already installed. Connect the external drive, make note of drive labels (<tt class="docutils literal">sdb</tt>, <tt class="docutils literal">sdb1</tt> ...), and erase/overwrite the drive.</p>
-<p>Filling the drive with zeros can take several hours depending on storage size. <em>Random number generation</em> is even more secure but takes much longer ...</p>
-<div class="highlight"><pre><span class="c"># dd if=/dev/zero of=/dev/sdb bs=1M</span>
+    <p>Using an external USB hard drive is part of my personal backup plan (the other part is backing up to a <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">home server</a>). I actually use 2 multi-terabyte drives. One drive is in my possession and the other drive I store offsite at a friend's home. Periodically I swap the drives and update the data.</p>
+<p>To guard against loss or theft its a good idea to <strong>encrypt</strong> the hard drive. I prepare the device using <strong>Linux Unified Key Setup (LUKS)</strong> and the <tt class="docutils literal">cryptsetup</tt> utility.</p>
+<p><span class="warning">WARNING!</span> Make careful note of the drive and partition labels. The following steps will <strong>destroy all data</strong> currently stored on the drive.</p>
+<div class="section" id="prepare">
+<h2>0. Prepare</h2>
+<p>Download <tt class="docutils literal">cryptsetup</tt> if not already installed. Connect the external drive, leave it <strong>unmounted</strong>, and make note of the device label (<tt class="docutils literal">sdb</tt>, <tt class="docutils literal">sdc</tt> ...):</p>
+<div class="highlight"><pre><span class="nv">$ </span>lsblk
 </pre></div>
-<p>Create a single partition that fills the entire drive. Encrypt that newly-created partition and assign a password ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo cryptsetup luksFormat /dev/sdb1
-<span class="nv">$ </span>sudo cryptsetup luksOpen /dev/sdb1 sdb1_crypt
+<p><strong>Optional:</strong> Overwrite the device with zeros for added security. This can take several hours depending on storage size. <strong>Random number generation</strong> is even more secure but takes much longer:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo dd <span class="nv">bs</span><span class="o">=</span>4M <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>/dev/sdX
 </pre></div>
-<p>Install a filesystem (I use <tt class="docutils literal">ext4</tt>) and mount the partition to gain access to the storage ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mkfs -t ext4 /dev/mapper/sdb1_crypt
-<span class="nv">$ </span>sudo mount /dev/mapper/sdb1_crypt /mnt
+</div>
+<div class="section" id="partition">
+<h2>1. Partition</h2>
+<p>Create a single partition using a favourite partitioning utility (<tt class="docutils literal">fdisk</tt>, <tt class="docutils literal">gparted</tt>...) that fills the entire drive. Encrypt the partition and assign a password:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo cryptsetup luksFormat /dev/sdX1
+<span class="nv">$ </span>sudo cryptsetup luksOpen /dev/sdX1 sdX1_crypt
 </pre></div>
-<p>Before disconnecting the drive the partition must be unmounted and the encrypted device must be closed ...</p>
+</div>
+<div class="section" id="filesystem">
+<h2>2. Filesystem</h2>
+<p>Install a filesystem (example: <tt class="docutils literal">ext4</tt>) <a class="footnote-reference" href="#id2" id="id1">[1]</a> and mount the partition to gain access to the storage:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkfs.ext4 -E <span class="nv">lazy_itable_init</span><span class="o">=</span>0,lazy_journal_init<span class="o">=</span><span class="m">0</span> /dev/mapper/sdX1_crypt
+<span class="nv">$ </span>sudo mount -t ext4 /dev/mapper/sdX1_crypt /mnt
+</pre></div>
+<p>Before disconnecting the drive the partition must be unmounted and the encrypted device must be closed:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo umount /mnt
-<span class="nv">$ </span>sudo cryptsetup luksClose /dev/mapper/sdb1_crypt
+<span class="nv">$ </span>sudo cryptsetup luksClose /dev/mapper/sdX1_crypt
 </pre></div>
-<p>A file manager like <a class="reference external" href="http://thunar.xfce.org/">Thunar</a> can automatically mount and unmount encrypted partitions. For scripting purposes its useful to assign a <em>default mount point</em> for the encrypted drive ... that is, whenever the drive is plugged into your system it will always be mounted in the same location.</p>
-<p>Mount the encrypted drive, retrieve the LUKS string for the partition, and create a custom mount point (<tt class="docutils literal">/media/crypt</tt> in my example) ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>ls /dev/mapper/luks*      <span class="c"># outputs &#39;/dev/mapper/luks_crypto_STRING&#39;</span>
-<span class="nv">$ </span>sudo mkdir /media/crypt
+</div>
+<div class="section" id="mountpoint">
+<h2>3. Mountpoint</h2>
+<p>A file manager like <tt class="docutils literal">nautilus</tt> will auto-mount and unmount encrypted partitions. For crafting a backup script it is useful to assign a <strong>default mountpoint</strong> to the encrypted partition... that is, whenever the USB drive is connected it will always be mounted to the same location.</p>
+<p>Mount the encrypted drive. Retrieve the UUID string for the encrypted partition, and create a custom mountpoint (example: <tt class="docutils literal">/media/usb_crypt</tt>):</p>
+<div class="highlight"><pre><span class="nv">$ </span>ls /dev/disk/by-uuid/ <span class="p">|</span> grep dm-  <span class="c"># outputs &#39;&lt;STRING&gt; -&gt; ../../dm-X&#39;</span>
+<span class="nv">$ </span>sudo mkdir /media/usb_crypt
 </pre></div>
 <p>Unmount the drive and create an entry in <tt class="docutils literal">/etc/fstab</tt> for the new custom mount point ...</p>
-<div class="highlight"><pre>/dev/mapper/luks_crypto_STRING  /media/crypt    auto    users,noauto,noatime    <span class="m">0</span>   0
+<div class="highlight"><pre><span class="nv">UUID</span><span class="o">=</span>&lt;STRING&gt;   /media/usb_crypt    ext4    rw.users,noauto,noatime    <span class="m">0</span>   0
 </pre></div>
-<p>Next time the drive is auto-mounted it will be assigned to <tt class="docutils literal">/media/crypt</tt>.</p>
+<p>Next time the drive is auto-mounted it will be assigned to <tt class="docutils literal">/media/usb_crypt</tt>.</p>
+<p>Happy hacking!</p>
+</div>
+<div class="section" id="notes">
+<h2>Notes</h2>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Writing <tt class="docutils literal">ext4</tt> with options <tt class="docutils literal">lazy_itable_init=0,lazy_journal_init=0</tt> initializes the inodes and journal at creation time vs a gradual process during mount times. If you wonder why your newly-formatted drive's activity LED is blinking away... install and run <tt class="docutils literal">iotop</tt> and take note of <tt class="docutils literal">ext4lazyinit</tt> and <a class="reference external" href="https://www.thomas-krenn.com/en/wiki/Ext4_Filesystem#Lazy_Initialization">Lazy Initialization</a>.</td></tr>
+</tbody>
+</table>
+</div>
 
-    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-encryption.html">encryption</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
 </div>
 
@@ -65,9 +87,7 @@
 <div id="navmenu">
     <hr />
     <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-        <a href="http://www.circuidipity.com/linux-home-server.html">Make an old netbook or laptop into a Linux home server</a></p>
-    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
-        <a href="http://www.circuidipity.com/going-going-gandi-done.html">Going ... going ... Gandi ... done!</a></p>
+        <a href="http://www.circuidipity.com/arch-install-encrypt.html">Arch Linux installation with encrypted root + swap</a></p>
 </div>
 
 
