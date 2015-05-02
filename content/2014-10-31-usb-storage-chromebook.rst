@@ -4,14 +4,14 @@ Add USB storage to Chromebooks
 
 :date: 2014-10-31 00:11:00
 :slug: 20141031
-:tags: chromebook, lubuntu, ubuntu, linux
-:modified: 2015-01-29 11:56:00
+:tags: chromebook, ubuntu, linux
+:modified: 2015-05-02 17:45:00
 
-I love my `Lubuntubook <http://www.circuidipity.com/c720-lubuntubook.html>`_ and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room. One popular option is to `open up the device <http://www.circuidipity.com/c720-lubuntubook.html>`_ and swap in a bigger SSD.                                                                                    
+I love my `Ubuntubook <http://www.circuidipity.com/c720-ubuntubook.html>`_ and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room. One popular option is to `open up the device <http://www.circuidipity.com/c720-ubuntubook.html>`_ and swap in a bigger SSD.                                                                                    
 
 An alternative is to reserve the internal SSD for the OS and use an external USB storage device for data. I picked up a `SanDisk Cruzer Fit 64GB USB 2.0 <http://www.amazon.com/SanDisk-Cruzer-Low-Profile-Drive-SDCZ33-064G-B35/dp/B00FJRS6QY>`_ which are really tiny devices that barely extrude from the USB port.
 
-My plan is to keep the USB stick attached to the Chromebook (extra storage that can be disconnected and re-connected at will) and have Lubuntu auto-mount the device at boot.
+My plan is to keep the USB stick attached to the Chromebook (extra storage that can be disconnected and re-connected at will) and have Ubuntu auto-mount the device at boot.
 
 Let's go!
 =========

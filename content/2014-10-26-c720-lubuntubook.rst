@@ -4,9 +4,10 @@ Chromebook to Lubuntubook
 
 :date: 2014-10-26 00:09:00
 :slug: c720-lubuntubook
-:template: article-project
 :tags: chromebook, lubuntu, ubuntu, linux
-:modified: 2015-04-14 12:38:00
+:modified: 2015-05-02 16:38:00
+
+**Update:** Now running `Ubuntu 15.04 'Vivid Vervet' <http://www.circuidipity.com/c720-ubuntubook.html>`_ on my Chromebook. I like it!
 
 Replace **Chrome OS** permanently with **Lubuntu 14.04 LTS Linux** on the **Acer C720 Chromebook**.
 

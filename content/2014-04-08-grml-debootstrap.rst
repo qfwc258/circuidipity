@@ -8,7 +8,7 @@ Install Debian using grml-debootstrap
 
 `Grml <http://grml.org/>`_ is a Debian-based Linux distribution optimized for running off USB sticks and taking care of sysadmin duties. One of its cool programs that I have been exploring is `grml-debootstrap <http://grml.org/grml-debootstrap/>`_ ... a console application that makes it very easy to set custom options and install Debian.
 
-Here is a step-by-step process using grml-debootstrap to implement the following sample Debian minimal install on the 16GB solid-state drive (SSD) of my `Acer C720 Chromebook <http://http://www.circuidipity.com/c720-sidbook.html>`_:
+Here is a step-by-step process using grml-debootstrap to implement the following sample Debian minimal install on the 16GB solid-state drive (SSD) of my **Acer C720 Chromebook**:
 
 * create encrypted root + swap
 * install Debian ``wheezy/stable``

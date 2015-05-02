@@ -5,6 +5,7 @@ Install Lubuntu 14.04 on the Acer C720 Chromebook
 :date: 2014-10-25 23:55:00
 :slug: c720-lubuntubook-install
 :tags: lubuntu, ubuntu, linux, chromebook
+:modified: 2015-05-02 17:16:00
 
 .. image:: images/ubuntuTrusty.png
     :alt: Ubuntu Trusty Tahr
@@ -433,6 +434,8 @@ Select ``Lubuntu Desktop``. This task menu can also be accessed post-install by 
 .. code-block:: bash
 
     $ sudo tasksel
+
+**Alternative:** Or select a different desktop: the **Ubuntu** flagship release (Unity), Xubuntu (XFCE), etc...
 
 .. image:: images/screenshot/trustyLubuntubookInstall/301-2.png
     :alt: Software selection
