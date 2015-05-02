@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Chromebook to Lubuntubook</title>
+        <title>Circuidipity | Chromebook to Ubuntubook</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -19,21 +19,19 @@
 <!-- breadcrumb trail -->
 <div id="breadcrumb">
     <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
-    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
-    Sunday 26 October 2014</p>
+    <a href="projects.html">Projects</a></p>
 </div>
 
 <!-- article -->
-<h1>Chromebook to Lubuntubook</h1>
+<h1>Chromebook to Ubuntubook</h1>
     <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Saturday 02 May 2015</p>
 <div id="article">
-    <p><strong>Update:</strong> Now running <a class="reference external" href="http://www.circuidipity.com/c720-ubuntubook.html">Ubuntu 15.04 'Vivid Vervet'</a> on my Chromebook. I like it!</p>
-<p>Replace <strong>Chrome OS</strong> permanently with <strong>Lubuntu 14.04 LTS Linux</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
-<img alt="Acer C720 Lubuntubook" class="align-right" src="images/c720-lubuntubook.png" style="width: 300px; height: 157px;" />
-<p>Running a <strong>full-featured Linux</strong> on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance using the LXDE desktop.</p>
-<p>This device is available in a few different configurations. Mine is the non-touchscreen model <strong>C720-2848</strong> with (non-expandable) <strong>2GB RAM</strong> and a (user-replaceable) <strong>16GB SSD</strong> <a class="footnote-reference" href="#id10" id="id1">[1]</a>.</p>
+    <p>Replace <strong>Chrome OS</strong> permanently with <strong>Ubuntu 15.04 Linux</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
+<img alt="Ubuntu 15.04 Vivid Vervet" class="align-right" src="images/vivid-icon.png" style="width: 250px; height: 250px;" />
+<p>Running a <strong>full-featured Linux</strong> on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with Debian, followed by <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Lubuntu 14.04</a> and <a class="reference external" href="http://www.circuidipity.com/arch-install-encrypt.html">Arch</a>, and now experimenting with Ubuntu's latest and greatest and the <strong>Unity</strong> desktop.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
+<p>This device is available in a few different configurations. Mine is the non-touchscreen model <strong>C720-2848</strong> with (non-expandable) <strong>2GB RAM</strong> and a (user-replaceable) <strong>16GB SSD</strong> <a class="footnote-reference" href="#id8" id="id1">[1]</a>.</p>
 </div>
 <div class="section" id="recovery-image">
 <h2>0. Recovery Image</h2>
@@ -46,13 +44,13 @@
 </div>
 <div class="section" id="prepare-install-media">
 <h2>1. Prepare install media</h2>
-<p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso">64-bit Trusty Tahr minimal installer</a> and <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick. An alternative (my choice) is adding the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>. Using the minimal console installer vs. the graphical <a class="reference external" href="https://help.ubuntu.com/community/Lubuntu/GetLubuntu">Lubuntu installer</a> provides more options during setup <a class="footnote-reference" href="#id11" id="id2">[2]</a>.</p>
+<p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/vivid/main/installer-amd64/current/images/netboot/mini.iso">64-bit 'Vivid Vervet' minimal installer</a> and <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick. An alternative (my choice) is adding the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>. Using the minimal console installer (requires network connection) vs. the graphical <a class="reference external" href="https://help.ubuntu.com/community/Ubuntu/GetUbuntu">Ubuntu installer</a> provides more options during setup <a class="footnote-reference" href="#id9" id="id2">[2]</a> and downloads all the latest packages.</p>
 </div>
 <div class="section" id="seabios">
 <h2>2. SeaBIOS</h2>
-<p><a class="reference external" href="http://www.coreboot.org/SeaBIOS">SeaBIOS</a> in combination with <strong>coreboot</strong> provides an open-source legacy BIOS that enables access to the MBR and the ability to install an alternative OS on the Chromebook. All this good stuff involves jumping through a few simple hoops and not trembling in fear at the &quot;scary white screen&quot; that pops up at power up stating that the boot loader detects something is <strong>very very wrong</strong> with the Chromebook and helpfully suggests pressing the spacebar to begin recovery. <strong>Do not press the spacebar</strong> or the Lubuntu installation will be wiped from disk!</p>
-<p>There are 2 different methods for configuring SeaBIOS in preparation for installing Lubuntu. The first method uses a few simple commands in the Chrome OS shell to place the Chromebook into <strong>developer mode</strong> and allow booting the USB install media and replacing Chrome OS with Lubuntu. The drawback is that scary screen appears at every boot and you must press <tt class="docutils literal">CTRL+L</tt> to boot to legacy-mode and onward to GRUB and Lubuntu (and <strong>ignore</strong> the helpful prompt to press spacebar and inadvertently begin the adventure of wiping clean the SSD).</p>
-<p>The second method involves setting new flags for the write-protected <strong>Google Binary Block</strong> (GBB) in the device firmware. Delay at the boot screen can be reduced to a one second timeout and the legacy-mode BIOS set as the system default (no key combo required). Pressing the spacebar is disabled from doing any harm to Lubuntu (the Chromebook just beeps). The drawback is that it involves the (very simple) removal of the device's bottom cover and the temporary removal of the <strong>write-protect screw</strong> from the motherboard to permit flashing new flags to the GBB... and this may void the Chromebook's warranty (one of the case screws lies underneath a sticker declaring the warranty void if disturbed).</p>
+<p><a class="reference external" href="http://www.coreboot.org/SeaBIOS">SeaBIOS</a> in combination with <strong>coreboot</strong> provides an open-source legacy BIOS that enables access to the MBR and the ability to install an alternative OS on the Chromebook. All this good stuff involves jumping through a few simple hoops and not trembling in fear at the &quot;scary white screen&quot; that pops up at power up stating that the boot loader detects something is <strong>very very wrong</strong> with the Chromebook and helpfully suggests pressing the spacebar to begin recovery. <strong>Do not press the spacebar</strong> or the Ubuntu installation will be wiped from disk!</p>
+<p>There are 2 different methods for configuring SeaBIOS in preparation for installing Ubuntu. The first method uses a few simple commands in the Chrome OS shell to place the Chromebook into <strong>developer mode</strong> and allow booting the USB install media and replacing Chrome OS with Ubuntu. The drawback is that scary screen appears at every boot and you must press <tt class="docutils literal">CTRL+L</tt> to boot to legacy-mode and onward to GRUB and Ubuntu (and <strong>ignore</strong> the helpful prompt to press spacebar and inadvertently begin the adventure of wiping clean the SSD).</p>
+<p>The second method involves setting new flags for the write-protected <strong>Google Binary Block</strong> (GBB) in the device firmware. Delay at the boot screen can be reduced to a one second timeout and the legacy-mode BIOS set as the system default (no key combo required). Pressing the spacebar is disabled from doing any harm to Ubuntu (the Chromebook just beeps). The drawback is that it involves the (very simple) removal of the device's bottom cover and the temporary removal of the <strong>write-protect screw</strong> from the motherboard to permit flashing new flags to the GBB... and this may void the Chromebook's warranty (one of the case screws lies underneath a sticker declaring the warranty void if disturbed).</p>
 <p>Experimenting with alternate OS installs on the Chromebook I first employed the developer mode method followed by the write-protect screw removal. I prefer configuring the device to default to legacy-mode BIOS but I have employed both methods successfully and describe their respective steps below.</p>
 <p><strong>No guarantees</strong> though... Hopefully you enjoy equal success!</p>
 <div class="section" id="write-protect-screw-method">
@@ -61,7 +59,7 @@
 <p>This is what you see:</p>
 <div class="figure">
 <img alt="C720 annotated innards" src="images/c720-chromebook-annotated-innards.png" style="width: 800px; height: 558px;" />
-<p class="caption">[ Image: <a class="footnote-reference" href="#id12" id="id4">[3]</a> The battery lock screw is #6 and the write-protect screw is #7 ].</p>
+<p class="caption">[ Image: <a class="footnote-reference" href="#id10" id="id4">[3]</a> The battery lock screw is #6 and the write-protect screw is #7 ].</p>
 </div>
 <p><span class="warning">WARNING!</span> This will <strong>wipe out</strong> whatever is installed on the SSD:</p>
 <ul class="simple">
@@ -94,7 +92,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <li>Remove the bottom cover again and reinstall the write-lock screw to protect the BIOS</li>
 <li>Close cover and reinstall all the case screws</li>
 </ul>
-<p>Re-connect the power, insert the USB stick prepared in Step 1, and power up the Chromebook <a class="footnote-reference" href="#id13" id="id5">[4]</a>.</p>
+<p>Re-connect the power, insert the USB stick prepared in Step 1, and power up the Chromebook <a class="footnote-reference" href="#id11" id="id5">[4]</a>.</p>
 <p>Sources: <a class="reference external" href="http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html">Useful GBB flags</a> for <a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/c720-debian/">another new free software machine</a></p>
 </div>
 <div class="section" id="developer-mode-method">
@@ -104,7 +102,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <li>With the Chromebook off... Hold down <tt class="docutils literal">ESC+F3</tt> (Refresh) keys and power on the device</li>
 <li>Invoke Recovery, and at the Recovery screen press <tt class="docutils literal">Ctrl+D</tt></li>
 <li>Device will prompt for confirmation, press <tt class="docutils literal">ENTER</tt> and the system reboots into developer mode</li>
-<li>Scary white boot screen appears and you need to press <tt class="docutils literal">Ctrl+D</tt> to continue boot <a class="footnote-reference" href="#id14" id="id6">[5]</a></li>
+<li>Scary white boot screen appears and you need to press <tt class="docutils literal">Ctrl+D</tt> to continue boot <a class="footnote-reference" href="#id12" id="id6">[5]</a></li>
 </ul>
 <p>Enable the <strong>USB Boot</strong> and <strong>Legacy BIOS</strong> modes by opening the shell with <tt class="docutils literal">Ctrl+Alt+T</tt> and enter <tt class="docutils literal">shell</tt>. Set <tt class="docutils literal">dev_boot_usb</tt> and <tt class="docutils literal">dev_boot_legacy</tt> to active:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo crossystem <span class="nv">dev_boot_usb</span><span class="o">=</span>1
@@ -114,10 +112,10 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <p>Source: <a class="reference external" href="http://www.chromium.org/chromium-os">Chromium OS</a> developer information for the <a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook">Acer C720 Chromebook</a></p>
 </div>
 </div>
-<div class="section" id="install-lubuntu">
-<h2>3. Install Lubuntu</h2>
-<p>My <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook-install.html">visual screenshot tour</a> of installing Lubuntu 14.04 - a <a class="reference external" href="https://wiki.ubuntu.com/Releases">Long Term Support (LTS)</a> release.</p>
-<p><strong>Alternative:</strong> At the <tt class="docutils literal">tasksel</tt> stage select a different desktop: Ubuntu (Unity), Xubuntu, etc.</p>
+<div class="section" id="install-ubuntu">
+<h2>3. Install Ubuntu</h2>
+<p>My <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook-install.html">visual screenshot tour</a> of installing Ubuntu 14.04 - a <a class="reference external" href="https://wiki.ubuntu.com/Releases">Long Term Support (LTS)</a> release. Install steps remain the same for 15.04.</p>
+<p><strong>Alternative:</strong> At the <tt class="docutils literal">tasksel</tt> stage select a different desktop: <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Lubuntu (LXDE)</a>, Xubuntu (XFCE), etc.</p>
 <p>Chromebook's SSD will be divided into 3 partitions:</p>
 <ul class="simple">
 <li>sda1 is a 300MB <tt class="docutils literal">boot</tt> partition</li>
@@ -127,14 +125,11 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 </div>
 <div class="section" id="touchpad">
 <h2>4. Touchpad</h2>
-<p>Lubuntu installs the <tt class="docutils literal">3.13</tt> Linux kernel and does not support the Chromebook's touchpad. Download and install the more recent <tt class="docutils literal">3.19</tt> kernel from <a class="reference external" href="https://wiki.ubuntu.com/Kernel/MainlineBuilds">Ubuntu MainlineBuilds</a> to fix:</p>
-<div class="highlight"><pre><span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19.4-vivid/linux-headers-3.19.4-031904-generic_3.19.4-031904.201504131440_amd64.deb
-<span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19.4-vivid/linux-headers-3.19.4-031904_3.19.4-031904.201504131440_all.deb
-<span class="nv">$ </span>wget -c http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.19.4-vivid/linux-image-3.19.4-031904-generic_3.19.4-031904.201504131440_amd64.deb
-<span class="nv">$ </span>sudo dpkg -i linux*.deb
+<p>Ubuntu 15.04 installs Linux kernel <tt class="docutils literal">3.19</tt> with built-in support for the Chromebook's touchpad. Per-session modifications of touchpad settings can be made using <tt class="docutils literal">synclient</tt>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>synclient                 <span class="c"># display current settings</span>
+<span class="nv">$ </span>synclient <span class="nv">TapButton3</span><span class="o">=</span><span class="m">2</span>    <span class="c"># 3-finger tap = middle-click</span>
 </pre></div>
-<p>... and reboot.</p>
-<p>Create a touchpad configuration file in <tt class="docutils literal">/etc/X11/xorg.conf.d</tt>:</p>
+<p>To make any desired touchpad settings permanent create a configuration file in <tt class="docutils literal">/etc/X11/xorg.conf.d</tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /etc/X11/xorg.conf.d
 <span class="nv">$ </span>sudo cp /usr/share/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-c720-touchpad.conf
 </pre></div>
@@ -157,7 +152,12 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
     Option          <span class="s2">&quot;TapButton3&quot;</span> <span class="s2">&quot;2&quot;</span>
 EndSection
 </pre></div>
-<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/X11/xorg.conf.d/50-c720-touchpad.conf">50-c720-touchpad.conf</a>, and pages for <a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics">Touchpad Synaptics</a> and the <a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration">C720</a> on <a class="reference external" href="https://wiki.archlinux.org/">ArchWiki</a></p>
+<p><strong>Problem:</strong> My 3-finger middle-click option required a manual reset each session.</p>
+<p><strong>Fix:</strong> Stop the Gnome Settings daemon from overiding <tt class="docutils literal"><span class="pre">50-c720-touchpad.conf</span></tt>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>gsettings <span class="nb">set </span>org.gnome.settings-daemon.plugins.mouse active <span class="nb">false</span>
+</pre></div>
+<p>Logout and back in. It works!</p>
+<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_ubuntubook/etc/X11/xorg.conf.d/50-c720-touchpad.conf">50-c720-touchpad.conf</a>, and pages for <a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics">Touchpad Synaptics</a> and the <a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration">C720 Chromebook</a> on <a class="reference external" href="https://wiki.archlinux.org/">ArchWiki</a></p>
 </div>
 <div class="section" id="ssd">
 <h2>5. SSD</h2>
@@ -166,7 +166,7 @@ EndSection
 <div class="highlight"><pre><span class="nv">$ </span>cat /proc/sys/vm/swappiness
 </pre></div>
 <p>To reduce writes on the SSD set a low value of <tt class="docutils literal">1</tt> by setting <tt class="docutils literal">vm.swappiness=1</tt> in <tt class="docutils literal">/etc/sysctl.conf</tt>.</p>
-<p><strong>TRIM</strong> optimizes SSD performance and is enabled by adding the <tt class="docutils literal">discard</tt> option to <tt class="docutils literal">/etc/crypttab</tt> and <tt class="docutils literal">/etc/fstab</tt>. Lubuntu auto-magically configures <tt class="docutils literal">crypttab</tt> but <tt class="docutils literal">fstab</tt> needs to be set manually.</p>
+<p><strong>TRIM</strong> optimizes SSD performance and is enabled by adding the <tt class="docutils literal">discard</tt> option to <tt class="docutils literal">/etc/crypttab</tt> and <tt class="docutils literal">/etc/fstab</tt>. Ubuntu auto-magically configures <tt class="docutils literal">crypttab</tt> but <tt class="docutils literal">fstab</tt> needs to be set manually.</p>
 <p>Sample <tt class="docutils literal">fstab</tt>:</p>
 <div class="highlight"><pre><span class="c"># &lt;file system&gt; &lt;mount point&gt;   &lt;type&gt;  &lt;options&gt;       &lt;dump&gt;  &lt;pass&gt;</span>
 /dev/mapper/sda3_crypt /               ext4    noatime,discard,errors<span class="o">=</span>remount-ro <span class="m">0</span>       1
@@ -181,50 +181,40 @@ EndSection
 </div>
 <div class="section" id="suspend">
 <h2>6. Suspend</h2>
-<p>To enable suspend-and-resume <a class="footnote-reference" href="#id15" id="id7">[6]</a> create <tt class="docutils literal"><span class="pre">/etc/initramfs-tools/scripts/init-top/unbind_ehci</span></tt> with the following:</p>
-<div class="highlight"><pre><span class="nv">PREREQ</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<p><strong>Problem:</strong> Suspend-and-resume generates a stream of errors:</p>
+<div class="highlight"><pre>ehci-pci 0000:00:1d.0: port <span class="m">1</span> resume error -19
+ehci-pci 0000:00:1d.0: port <span class="m">2</span> resume error -19
+usb usb3-port1: over-current condition
+usb usb3-port1: connect-debounce failed
+usb usb3-port2: over-current condition
+usb usb3-port2: connect-debounce failed
+</pre></div>
+<p>... and blocks the Chromebook from executing a proper restart/shutdown.</p>
+<p><strong>FIX:</strong> Create <tt class="docutils literal"><span class="pre">/lib/systemd/system-sleep/ehci-pci.sh</span></tt> <a class="footnote-reference" href="#id13" id="id7">[6]</a>:</p>
+<div class="highlight"><pre><span class="c">#!/bin/bash</span>
 
-prereqs<span class="o">()</span>
-<span class="o">{</span>
-        <span class="nb">echo</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">PREREQ</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="o">}</span>
-
-<span class="k">case</span> <span class="si">${</span><span class="nv">1</span><span class="si">}</span> in
-        prereqs<span class="o">)</span>
-                prereqs
-                <span class="nb">exit </span>0
-                <span class="p">;;</span>
+<span class="k">case</span> <span class="nv">$1</span>/<span class="nv">$2</span> in
+    pre/*<span class="o">)</span>
+    <span class="c"># Unbind ehci for preventing error</span>
+    <span class="nb">echo</span> -n <span class="s2">&quot;0000:00:1d.0&quot;</span> <span class="p">|</span> tee /sys/bus/pci/drivers/ehci-pci/unbind
+    <span class="p">;;</span>
+    post/*<span class="o">)</span>
+    <span class="c"># Bind ehci for preventing error</span>
+    <span class="nb">echo</span> -n <span class="s2">&quot;0000:00:1d.0&quot;</span> <span class="p">|</span> tee /sys/bus/pci/drivers/ehci-pci/bind
+    <span class="p">;;</span>
 <span class="k">esac</span>
-
-log_success_msg <span class="s2">&quot;Unbind ehci for preventing error&quot;</span>
-<span class="nb">echo</span> -n <span class="s2">&quot;0000:00:1d.0&quot;</span> &gt; /sys/bus/pci/drivers/ehci-pci/unbind
-<span class="nb">exit </span>0
 </pre></div>
 <p>... and make it executable:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo chmod <span class="m">755</span> /etc/initramfs-tools/scripts/init-top/unbind_ehci
-</pre></div>
-<p>Create a new <tt class="docutils literal">udev</tt> rule <tt class="docutils literal"><span class="pre">/etc/udev/rules.d/10_disable-ehci.rules</span></tt> with the following:</p>
-<div class="highlight"><pre><span class="nv">ACTION</span><span class="o">==</span><span class="s2">&quot;add&quot;</span>, <span class="nv">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;pci&quot;</span>, <span class="nv">DRIVER</span><span class="o">==</span><span class="s2">&quot;ehci_hcd&quot;</span>, <span class="se">\</span>
-    RUN+<span class="o">=</span><span class="s2">&quot;/bin/sh -c &#39;echo -n %k &gt; %S%p/driver/unbind&#39;&quot;</span>
-</pre></div>
-<p>Update <tt class="docutils literal"><span class="pre">/boot/initrd.img-*</span></tt> by running:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo update-initramfs -k all -u
+<div class="highlight"><pre><span class="nv">$ </span>sudo chmod <span class="m">755</span> /lib/systemd/system-sleep/ehci-pci.sh
 </pre></div>
 <p>Configure boot options in <tt class="docutils literal">/etc/default/grub</tt>:</p>
-<div class="highlight"><pre><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s2">&quot;quiet splash acpi_osi=Linux acpi_backlight=vendor add_efi_memmap boot=local i915.modeset=1 tpm_tis.force=1 tpm_tis.interrupts=0 nmi_watchdog=panic,lapic intel_pstate=enable&quot;</span>
+<div class="highlight"><pre><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s2">&quot;quiet splash tpm_tis.force=1&quot;</span>
 </pre></div>
 <p>... save the changes and run:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo update-grub
 </pre></div>
-<p>A bit of a tug-of-war can erupt between <tt class="docutils literal"><span class="pre">systemd-logind</span></tt> and the <tt class="docutils literal"><span class="pre">xfce4-power-manager</span></tt> when setting the closing/opening of Lubuntubook's lid to trigger suspend/resume. I grant precedence to the settings in the power manager by disabling the <tt class="docutils literal">LidSwitch</tt> event in <tt class="docutils literal">logind</tt>.</p>
-<p>Add this line in <tt class="docutils literal">/etc/systemd/logind.conf</tt>:</p>
-<div class="highlight"><pre><span class="nv">HandleLidSwitch</span><span class="o">=</span>ignore
-</pre></div>
-<p>... and restart the service:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo restart systemd-logind
-</pre></div>
-<p>Suspend now works reliably when triggered from Lubuntu's shutdown menu. Chromebook will go to sleep and pushing the power button/opening the lid will resume the system with the desktop locked and a password prompt <a class="footnote-reference" href="#id16" id="id8">[7]</a>.</p>
-<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/initramfs-tools/scripts/init-top/unbind_ehci">unbind_ehci</a> and <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/udev/rules.d/10_disable-ehci.rules">10_disable-ehci.rules</a>, <a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/ch8eq2o">C720 suspend tips</a>, and <a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/2evv1c/updating_ubuntu_kernel_headers_image_etc/ckaf6hx">configuring grub</a></p>
+<p>Suspend now works reliably when triggered from Ubuntu's shutdown menu or closing the lid and will resume the system with the desktop locked and a password prompt.</p>
+<p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_ubuntubook/lib/systemd/system-sleep/ehci-pci.sh">ehci-pci.sh</a></p>
 </div>
 <div class="section" id="keyboard-shortcuts">
 <h2>7. Keyboard Shortcuts</h2>
@@ -243,7 +233,9 @@ log_success_msg <span class="s2">&quot;Unbind ehci for preventing error&quot;</s
 <div class="highlight"><pre><span class="nv">$ </span>xbindkeys -k
 </pre></div>
 <p>Enable the function keys to modify the sound and brightness settings by creating <tt class="docutils literal"><span class="pre">$HOME/.xbindkeysrc</span></tt>:</p>
-<div class="highlight"><pre><span class="c"># backward/forward</span>
+<div class="highlight"><pre><span class="c"># ~/.xbindkeysrc</span>
+
+<span class="c"># backward/forward</span>
 <span class="s2">&quot;xvkbd -xsendevent -text &quot;</span><span class="se">\A\[</span>Left<span class="o">]</span><span class="s2">&quot;&quot;</span>
 F1
 
@@ -257,11 +249,15 @@ F6
 F7
 
 <span class="c"># volume mute/decrease/increase</span>
+<span class="c"># pactl - control a running pulseaudio server</span>
+<span class="c"># pactl list sinks - retrieve info</span>
+<span class="c"># on my c770 chromebook... single audio sink is &#39;Sink #0&#39;</span>
+<span class="c"># named &#39;alsa_output.pci-0000_00_1b.0.analog-stereo&#39;</span>
 <span class="s2">&quot;pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo toggle&quot;</span>
 F8
-<span class="s2">&quot;pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -- -10%&quot;</span>
+<span class="s2">&quot;pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -10%&quot;</span>
 F9
-<span class="s2">&quot;pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -- +10%&quot;</span>
+<span class="s2">&quot;pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +10%&quot;</span>
 F10
 
 <span class="c"># page up/down, home, end</span>
@@ -280,8 +276,8 @@ Alt + Right
 <p>Enable the new key shortcuts by running:</p>
 <div class="highlight"><pre><span class="nv">$ </span>xbindkeys
 </pre></div>
-<p>Lubuntu auto-detects <tt class="docutils literal"><span class="pre">$HOME/.xbindkeysrc</span></tt>  and will run <tt class="docutils literal">xbindkeys</tt> on the next login.</p>
-<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/home/username/xbindkeysrc-chromebook">xbindkeysrc-chromebook</a>, <a class="reference external" href="https://wiki.archlinux.org/index.php/Xbindkeys">Xbindkeys</a>, and another sample <a class="reference external" href="https://github.com/alexpatel/dotfiles/blob/master/xbindkeysrc">Chromebook-friendly xbindkeysrc</a></p>
+<p>Ubuntu auto-detects <tt class="docutils literal"><span class="pre">$HOME/.xbindkeysrc</span></tt>  and will run <tt class="docutils literal">xbindkeys</tt> on the next login.</p>
+<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_ubuntubook/home/username/.xbindkeysrc">xbindkeysrc</a>, <a class="reference external" href="https://wiki.archlinux.org/index.php/Xbindkeys">Xbindkeys</a>, and another sample <a class="reference external" href="https://github.com/alexpatel/dotfiles/blob/master/xbindkeysrc">Chromebook-friendly xbindkeysrc</a></p>
 </div>
 <div class="section" id="power-key">
 <h3>7.2 Power Key</h3>
@@ -291,7 +287,7 @@ Alt + Right
 </div>
 <div class="section" id="wireless">
 <h2>8. Wireless</h2>
-<p>There are a few settings to modify to improve performance of Chromebook's wireless chipset <a class="footnote-reference" href="#id17" id="id9">[8]</a>. Identify the card and parameters:</p>
+<p>There are a few settings to modify to improve performance of Chromebook's wireless chipset. Identify the card and parameters:</p>
 <div class="highlight"><pre><span class="nv">$ </span>lspci <span class="p">|</span> grep -i net
 01:00.0 Network controller: Qualcomm Atheros AR9462 Wireless Network Adapter <span class="o">(</span>rev 01<span class="o">)</span>
 <span class="nv">$ </span>modinfo ath9k <span class="p">|</span> grep parm
@@ -306,73 +302,58 @@ parm:           use_chanctx:Enable channel context <span class="k">for</span> co
 <p>Create <tt class="docutils literal">/etc/modprobe.d/ath9k.conf</tt> with the following options:</p>
 <div class="highlight"><pre>options ath9k <span class="nv">bt_ant_diversity</span><span class="o">=</span><span class="m">1</span> <span class="nv">ps_enable</span><span class="o">=</span>0
 </pre></div>
-<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/modprobe.d/ath9k.conf">ath9k.conf</a>, <a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k">ath9k wireless driver</a> and <a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex">bluetooth coexistence</a></p>
+<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_ubuntubook/etc/modprobe.d/ath9k.conf">ath9k.conf</a>, <a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k">ath9k wireless driver</a> and <a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex">bluetooth coexistence</a></p>
 </div>
 <div class="section" id="helpful-resources">
 <h2>9. Helpful Resources</h2>
 <ul class="simple">
-<li>My personal <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_lubuntubook">Lubuntubook configurations</a></li>
-<li><a class="reference external" href="https://github.com/liangcj/AcerC720CrunchBang">CrunchBang Linux</a> on the Acer C720</li>
-<li>Arch Linux <a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook">C720 installation with useful post-install details</a></li>
-<li>Ongoing <a class="reference external" href="http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/">discussion thread about configuring Chromebooks</a></li>
+<li>My former <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Lubuntu 14.04 LTS install on the Chromebook</a> and configuration (under <tt class="docutils literal">upstart</tt> init vs <tt class="docutils literal">systemd</tt> in the current 15.04)</li>
+<li>Arch Linux C720 installation with <a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook">useful post-install details</a></li>
 <li>Turn Chromebooks into <a class="reference external" href="http://blog.codestarter.org/post/93985346780/how-we-turn-199-chromebooks-into-ubuntu-based-code">Ubuntu-based code learning machines for kids</a></li>
 </ul>
 <p>Happy hacking!</p>
 <div class="section" id="notes">
 <h3>Notes</h3>
-<table class="docutils footnote" frame="void" id="id10" rules="none">
+<table class="docutils footnote" frame="void" id="id8" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Device information <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_lubuntubook/doc">output of lshw, lspci, and lsusb</a>.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Device information <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_ubuntubook/doc">output of lshw, lspci, and lsusb</a>.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id11" rules="none">
+<table class="docutils footnote" frame="void" id="id9" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Specifically in this instance, the Ubuntu console installer provides a random key option for the encrypted swap partition.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id12" rules="none">
+<table class="docutils footnote" frame="void" id="id10" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>Image courtesy of <a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook#TOC-Firmware">Chromium</a>.</td></tr>
 </tbody>
 </table>
+<table class="docutils footnote" frame="void" id="id11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td>Whenever you remove battery power to the Chromebook (like opening up the case) the hardware clock on the motherboard resets to a future year (mine travelled to 2040). Providing a network connection is up during the Ubuntu installation the system should fetch a correct time from a NTP server. Otherwise fix the <a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/c720-debian/">fallout from an incorrect clock</a> by re-mounting partitions read-only and correct filesystem timestamps using <tt class="docutils literal">fsck</tt>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id12" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[5]</a></td><td>Switching between developer and normal (non-developer) modes will remove user accounts and their associated information from the Chromebook.</td></tr>
+</tbody>
+</table>
 <table class="docutils footnote" frame="void" id="id13" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td>Whenever you remove battery power to the Chromebook (like opening up the case) the hardware clock on the motherboard resets to a future year (mine travelled to 2040). Providing a network connection is up during the Lubuntu installation the system should fetch a correct time from a NTP server. Otherwise fix the <a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/c720-debian/">fallout from an incorrect clock</a> by re-mounting partitions read-only and correct filesystem timestamps using <tt class="docutils literal">fsck</tt>.</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id14" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id6">[5]</a></td><td>Switching between developer and normal (non-developer) modes will remove user accounts and their associated information from your Chromebook.</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id15" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id7">[6]</a></td><td>Some HOWTOs talk about adding <tt class="docutils literal">modprobe.blacklist=ehci_hcd,ehci_pci</tt> but in Ubuntu they are compiled into the kernel. Disabling them early in boot instead appears to do the trick.</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id16" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id8">[7]</a></td><td>However when suspend is triggered by closing or opening the lid the system correctly suspends and resumes but no screenlock. Attempting to enable suspend in <tt class="docutils literal"><span class="pre">light-locker</span></tt> led to a black screen after suspending and required a hard shutdown to recover.</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id17" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id9">[8]</a></td><td>SSH sessions on the Chromebook often &quot;stall&quot; when the connection has been idle for a short period... taking several seconds to &quot;wake up&quot; again. Creating <tt class="docutils literal">ath9k.conf</tt> improved things.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id7">[6]</a></td><td>Some HOWTOs talk about adding <tt class="docutils literal">modprobe.blacklist=ehci_hcd,ehci_pci</tt> but in Ubuntu they are compiled into the kernel.</td></tr>
 </tbody>
 </table>
 </div>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-chromebook.html">chromebook</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-lubuntu.html">lubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
@@ -382,9 +363,7 @@ parm:           use_chanctx:Enable channel context <span class="k">for</span> co
 <div id="navmenu">
     <hr />
     <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-        <a href="http://www.circuidipity.com/c720-lubuntubook-install.html">Install Lubuntu 14.04 on the Acer C720 Chromebook</a></p>
-    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
-        <a href="http://www.circuidipity.com/20141030.html">Links of interest</a></p>
+        <a href="http://www.circuidipity.com/encrypt-external-drive.html">Configure an encrypted external USB hard drive in Linux</a></p>
 </div>
 
 
