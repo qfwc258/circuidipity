@@ -25,7 +25,7 @@
 
 <!-- article -->
 <h1>My tmux cheatsheet</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 01 February 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 25 June 2015</p>
 <div id="article">
     <img alt="tmux" src="/images/screenshot/tmux_window_pane.png" style="width: 940px; height: 529px;" />
 <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #2 .:</a> <strong>Tmux</strong> is a <strong>terminal multiplexer</strong>. What this means is I can take a single terminal window and create multiple <strong>windows</strong> (tabs) and further partition a window into horizontal and vertical <strong>panes</strong>.</p>
@@ -156,7 +156,7 @@
 <dt><tt class="docutils literal">bind KEY OPTION</tt></dt>
 <dd>bind KEY to OPTION</dd>
 </dl>
-<p><strong>Example:</strong> My own <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/generic/home/username/.tmux.conf">.tmux.conf</a> configuration.</p>
+<p><strong>Example:</strong> My own <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.tmux.conf">.tmux.conf</a> configuration.</p>
 </div>
 <div class="section" id="layouts">
 <h2>Layouts</h2>
@@ -171,7 +171,7 @@
 <dt><tt class="docutils literal"><span class="pre">send-keys</span> <span class="pre">-t</span> development:1.0 'vim' <span class="pre">C-m</span></tt></dt>
 <dd>in <em>development</em> run <tt class="docutils literal">vim</tt> in window_1 pane_0 and <tt class="docutils literal"><span class="pre">C-m</span></tt> sends the Carriage Return sequence</dd>
 </dl>
-<p><strong>Example:</strong> I created a <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/extra/generic/home/username/.tmux.default.conf">tmux.default.conf</a> to outline my standard <tt class="docutils literal">tmux</tt> session layout and a simple launcher to create / attach sessions that source the file:</p>
+<p><strong>Example:</strong> I created a <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.tmux.default.conf">tmux.default.conf</a> to outline my standard <tt class="docutils literal">tmux</tt> session layout and a simple launcher to create / attach sessions that source the file:</p>
 <div class="highlight"><pre><span class="c">#!/bin/bash</span>
 <span class="c"># Launch/attach tmux session with $CONFIG</span>
 <span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/doc/code/tmux_scripts/default.conf&quot;</span>
