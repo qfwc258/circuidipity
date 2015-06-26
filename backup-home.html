@@ -25,7 +25,7 @@
 
 <!-- article -->
 <h1>Backup home</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 01 March 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Friday 26 June 2015</p>
 <div id="article">
     <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #3 .:</a> Make automatic backups of a <strong>home folder</strong> using a dash of shell scripting + rsync + SSH + cron!</p>
 <p>One of the advantages of setting up a <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Linux home server</a> is providing an always-available location to store backups of important files. A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home folder on the local area network (LAN) server.</p>
@@ -96,7 +96,6 @@ rsync <span class="nv">$rsync_options</span> <span class="nv">$rsync_exclude</sp
 <span class="c"># Daily backup of $HOME to the netbook server</span>
 <span class="m">55</span> <span class="m">23</span> * * * /home/pi/bin/myRsync &gt;&gt; /home/pi/cron.log
 </pre></div>
-<p>I stashed a more complete <tt class="docutils literal">myRsync</tt> <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/myRsync">script on Github</a>.</p>
 <p>Happy hacking!</p>
 </div>
 
@@ -105,7 +104,6 @@ rsync <span class="nv">$rsync_options</span> <span class="nv">$rsync_exclude</sp
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-github.html">github</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-raspberry-pi.html">raspberry pi</a>
 </p>
 </div>
