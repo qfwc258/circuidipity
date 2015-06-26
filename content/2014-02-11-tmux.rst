@@ -5,7 +5,7 @@ My tmux cheatsheet
 :date: 2014-02-11 01:23:00
 :slug: tmux
 :tags: shell, linux, networks
-:modified: 2015-02-01 23:01:00
+:modified: 2015-06-25 23:38:00
 
 .. image:: /images/screenshot/tmux_window_pane.png
     :width: 940px
@@ -177,7 +177,7 @@ Customize ``tmux`` by creating a ``~/.tmux.conf`` configuration file. Different 
 ``bind KEY OPTION``
     bind KEY to OPTION
 
-**Example:** My own `.tmux.conf <https://github.com/vonbrownie/linux-post-install/blob/master/extra/generic/home/username/.tmux.conf>`_ configuration.
+**Example:** My own `.tmux.conf <https://github.com/vonbrownie/dotfiles/blob/master/.tmux.conf>`_ configuration.
 
 Layouts
 =======
@@ -196,7 +196,7 @@ Pre-configured layouts can be created to batch together ``tmux`` options for cus
 ``send-keys -t development:1.0 'vim' C-m``
     in *development* run ``vim`` in window_1 pane_0 and ``C-m`` sends the Carriage Return sequence
 
-**Example:** I created a `tmux.default.conf <https://github.com/vonbrownie/linux-post-install/blob/master/extra/generic/home/username/.tmux.default.conf>`_ to outline my standard ``tmux`` session layout and a simple launcher to create / attach sessions that source the file:
+**Example:** I created a `tmux.default.conf <https://github.com/vonbrownie/dotfiles/blob/master/.tmux.default.conf>`_ to outline my standard ``tmux`` session layout and a simple launcher to create / attach sessions that source the file:
 
 .. code-block:: bash
 
