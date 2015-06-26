@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Daniel Wayne Armstrong</title>
+        <title>Circuidipity | OpenWrt router as bridged repeater using relayd</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -16,28 +16,17 @@
 <body>
         <!-- content -->
 
-<!-- greeting -->
-<div id="siteheader">
-        <img class="whoami" src="/theme/images/whoami.png" />
-    <div id="sitegreeting">
-<p><span class="whoa">Howdy!</span><br />
-My name is <span class="noWrap"><span class="whoa">Daniel Wayne Armstrong</span></span>.
-I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    </div>
-<!-- menu -->
-    <div id="sitemenu">
-<p><a href="archives.html">Archives</a>
-&nbsp;<a href="projects.html">Projects</a>
-&nbsp;<a href="/colophon.html">Colophon</a>
-&nbsp;<a href="feed.xml"><i class="fa fa-rss"></i></a>
-&nbsp;<a href="https://twitter.com/circuidipity"><i class="fa fa-twitter"></i></a>
-&nbsp;<a href="https://github.com/vonbrownie"><i class="fa fa-github-alt"></i></a></p>    </div>
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Friday 26 June 2015</p>
 </div>
 
-<!-- latest post -->
-<div id="latestpost">
-        <p class="published"> Friday 26 June 2015</p>
-        <h1><a href="http://www.circuidipity.com/openwrt-bridged-repeater.html">OpenWrt router as bridged repeater using relayd</a></h1>
-        <p>Extend the range of a wireless network using a cheap and cheerful router running <a class="reference external" href="http://www.circuidipity.com/tag-openwrt.html">OpenWrt</a> as a <strong>bridged repeater</strong>. All client devices use the same IP address range and are capable of communicating with each other.</p>
+<!-- article -->
+<h1>OpenWrt router as bridged repeater using relayd</h1>
+<div id="article">
+    <p>Extend the range of a wireless network using a cheap and cheerful router running <a class="reference external" href="http://www.circuidipity.com/tag-openwrt.html">OpenWrt</a> as a <strong>bridged repeater</strong>. All client devices use the same IP address range and are capable of communicating with each other.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
 <p>Wireless access points: <strong>PrimaryAP</strong> is a <a class="reference external" href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html">TP-Link TL-WDR3600</a> with IP address <tt class="docutils literal">192.168.1.1</tt> + wireless channel <tt class="docutils literal">11</tt> and the <strong>RepeaterAP</strong> is a <a class="reference external" href="http://www.circuidipity.com/pingparade4.html">TP-Link TL-WR841N</a> (~$20CAN on sale). Both devices are running OpenWrt.</p>
@@ -165,13 +154,17 @@ config dhcp <span class="s1">&#39;wan&#39;</span>
 <p>Happy hacking!</p>
 </div>
 
-        <!-- Nav links to previous|next article --> 
-        <div id="navmenu">
-            <hr />
-            <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-                <a href="http://www.circuidipity.com/c720-ubuntubook.html">
-                Chromebook to Ubuntubook</a></p>
-        </div>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-openwrt.html">openwrt</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-networks.html">networks</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/c720-ubuntubook.html">Chromebook to Ubuntubook</a></p>
 </div>
 
 

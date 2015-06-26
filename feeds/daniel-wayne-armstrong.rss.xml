@@ -1,5 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Sat, 02 May 2015 17:30:00 -0400</lastBuildDate><item><title>Chromebook to Ubuntubook</title><link>http://www.circuidipity.com/c720-ubuntubook.html</link><description>&lt;p&gt;Replace &lt;strong&gt;Chrome OS&lt;/strong&gt; permanently with &lt;strong&gt;Ubuntu 15.04 Linux&lt;/strong&gt; on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt;.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 26 Jun 2015 00:00:00 -0400</lastBuildDate><item><title>OpenWrt router as bridged repeater using relayd</title><link>http://www.circuidipity.com/openwrt-bridged-repeater.html</link><description>&lt;p&gt;Extend the range of a wireless network using a cheap and cheerful router running &lt;a class="reference external" href="http://www.circuidipity.com/tag-openwrt.html"&gt;OpenWrt&lt;/a&gt; as a &lt;strong&gt;bridged repeater&lt;/strong&gt;. All client devices use the same IP address range and are capable of communicating with each other.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Wireless access points: &lt;strong&gt;PrimaryAP&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html"&gt;TP-Link TL-WDR3600&lt;/a&gt; with IP address &lt;tt class="docutils literal"&gt;192.168.1.1&lt;/tt&gt; + wireless channel &lt;tt class="docutils literal"&gt;11&lt;/tt&gt; and the &lt;strong&gt;RepeaterAP&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;TP-Link TL-WR841N&lt;/a&gt; (~$20CAN on sale). Both devices are running OpenWrt.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://forum.openwrt.org/viewtopic.php?id=39077"&gt;This thread&lt;/a&gt; was a big help in cutting through the confusion and getting everything hopping! Basically there are 2 types of repeater scenarios to consider:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;em&gt;non-bridged&lt;/em&gt; repeater - works on all radios... devices connected to the &lt;em&gt;RepeaterAP&lt;/em&gt; see the &lt;em&gt;PrimaryAP&lt;/em&gt; devices, &lt;em&gt;PrimaryAP&lt;/em&gt; devices do not see &lt;em&gt;RepeaterAP&lt;/em&gt; devices&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;bridged&lt;/em&gt; repeater - works for most radios... everything sees everything&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All configuration is done on the secondary router to setup device as a bridged repeater.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="install-relayd"&gt;
+&lt;h2&gt;0. Install relayd&lt;/h2&gt;
+&lt;p&gt;Access the internet by connecting an ethernet cable from the secondary router's WAN port to the primary router. Login and install relayd:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# opkg update&lt;/span&gt;
+&lt;span class="c"&gt;# opkg install relayd&lt;/span&gt;
+&lt;span class="c"&gt;# /etc/init.d/relayd enable&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configure-wireless"&gt;
+&lt;h2&gt;1. Configure wireless&lt;/h2&gt;
+&lt;p&gt;Sample &lt;tt class="docutils literal"&gt;/etc/config/wireless&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;config wifi-device &lt;span class="s1"&gt;&amp;#39;radio0&amp;#39;&lt;/span&gt;
+    option &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;mac80211&amp;#39;&lt;/span&gt;
+    option channel &lt;span class="s1"&gt;&amp;#39;11&amp;#39;&lt;/span&gt;     &lt;span class="c"&gt;# Important! Match with the channel set on PrimaryAP&lt;/span&gt;
+    option hwmode &lt;span class="s1"&gt;&amp;#39;11g&amp;#39;&lt;/span&gt;
+    option path &lt;span class="s1"&gt;&amp;#39;platform/ar934x_wmac&amp;#39;&lt;/span&gt;
+    option htmode &lt;span class="s1"&gt;&amp;#39;HT20&amp;#39;&lt;/span&gt;
+    option txpower &lt;span class="s1"&gt;&amp;#39;30&amp;#39;&lt;/span&gt;
+    option country &lt;span class="s1"&gt;&amp;#39;US&amp;#39;&lt;/span&gt;
+
+config wifi-iface
+    option device &lt;span class="s1"&gt;&amp;#39;radio0&amp;#39;&lt;/span&gt;
+    option network &lt;span class="s1"&gt;&amp;#39;wwan&amp;#39;&lt;/span&gt;
+    option encryption &lt;span class="s1"&gt;&amp;#39;psk2&amp;#39;&lt;/span&gt;
+    option key &lt;span class="s1"&gt;&amp;#39;*********************&amp;#39;&lt;/span&gt;
+    option mode &lt;span class="s1"&gt;&amp;#39;sta&amp;#39;&lt;/span&gt;
+    option ssid &lt;span class="s1"&gt;&amp;#39;PrimaryAP&amp;#39;&lt;/span&gt;
+
+config wifi-iface
+    option device &lt;span class="s1"&gt;&amp;#39;radio0&amp;#39;&lt;/span&gt;
+    option network &lt;span class="s1"&gt;&amp;#39;lan&amp;#39;&lt;/span&gt;
+    option encryption &lt;span class="s1"&gt;&amp;#39;psk2&amp;#39;&lt;/span&gt;
+    option key &lt;span class="s1"&gt;&amp;#39;*****************&amp;#39;&lt;/span&gt;
+    option mode &lt;span class="s1"&gt;&amp;#39;ap&amp;#39;&lt;/span&gt;
+    option ssid &lt;span class="s1"&gt;&amp;#39;RepeaterAP&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configure-network"&gt;
+&lt;h2&gt;2. Configure network&lt;/h2&gt;
+&lt;p&gt;Sample &lt;tt class="docutils literal"&gt;/etc/config/network&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;config interface &lt;span class="s1"&gt;&amp;#39;loopback&amp;#39;&lt;/span&gt;
+    option ifname &lt;span class="s1"&gt;&amp;#39;lo&amp;#39;&lt;/span&gt;
+    option proto &lt;span class="s1"&gt;&amp;#39;static&amp;#39;&lt;/span&gt;
+    option ipaddr &lt;span class="s1"&gt;&amp;#39;127.0.0.1&amp;#39;&lt;/span&gt;
+    option netmask &lt;span class="s1"&gt;&amp;#39;255.0.0.0&amp;#39;&lt;/span&gt;
+
+config interface &lt;span class="s1"&gt;&amp;#39;lan&amp;#39;&lt;/span&gt;
+    option ifname &lt;span class="s1"&gt;&amp;#39;eth0&amp;#39;&lt;/span&gt;
+    option force_link &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
+    option &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;bridge&amp;#39;&lt;/span&gt;
+    option proto &lt;span class="s1"&gt;&amp;#39;static&amp;#39;&lt;/span&gt;
+    option ip6assign &lt;span class="s1"&gt;&amp;#39;60&amp;#39;&lt;/span&gt;
+    option ipaddr &lt;span class="s1"&gt;&amp;#39;192.168.10.1&amp;#39;&lt;/span&gt;    &lt;span class="c"&gt;# for relayd... requires 192.168.x.x address but not used by clients&lt;/span&gt;
+    option gateway &lt;span class="s1"&gt;&amp;#39;192.168.1.1&amp;#39;&lt;/span&gt;    &lt;span class="c"&gt;# ip address of PrimaryAP&lt;/span&gt;
+    option netmask &lt;span class="s1"&gt;&amp;#39;255.255.255.0&amp;#39;&lt;/span&gt;
+    option dns &lt;span class="s1"&gt;&amp;#39;192.168.1.1&amp;#39;&lt;/span&gt;
+
+config interface &lt;span class="s1"&gt;&amp;#39;wwan&amp;#39;&lt;/span&gt;
+    option proto &lt;span class="s1"&gt;&amp;#39;static&amp;#39;&lt;/span&gt;
+    option ipaddr &lt;span class="s1"&gt;&amp;#39;192.168.1.254&amp;#39;&lt;/span&gt;
+    option netmask &lt;span class="s1"&gt;&amp;#39;255.255.255.0&amp;#39;&lt;/span&gt;
+    option gateway &lt;span class="s1"&gt;&amp;#39;192.168.1.1&amp;#39;&lt;/span&gt;
+
+config interface &lt;span class="s1"&gt;&amp;#39;stabridge&amp;#39;&lt;/span&gt;
+    option proto &lt;span class="s1"&gt;&amp;#39;relay&amp;#39;&lt;/span&gt;
+    option network &lt;span class="s1"&gt;&amp;#39;lan wwan&amp;#39;&lt;/span&gt;
+    option ipaddr &lt;span class="s1"&gt;&amp;#39;192.168.1.254&amp;#39;&lt;/span&gt;   &lt;span class="c"&gt;# static ip assigned from PrimaryAP address range&lt;/span&gt;
+
+config switch
+    option name &lt;span class="s1"&gt;&amp;#39;switch0&amp;#39;&lt;/span&gt;
+    option reset &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
+    option enable_vlan &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
+
+config switch_vlan
+    option device &lt;span class="s1"&gt;&amp;#39;switch0&amp;#39;&lt;/span&gt;
+    option vlan &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
+    option ports &lt;span class="s1"&gt;&amp;#39;0 1 2 3 4&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configure-dhcp"&gt;
+&lt;h2&gt;3. Configure DHCP&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;PrimaryAP&lt;/em&gt; will handle DHCP for the combined network. Sample &lt;tt class="docutils literal"&gt;/etc/config/dhcp&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;config dhcp &lt;span class="s1"&gt;&amp;#39;lan&amp;#39;&lt;/span&gt;
+    option interface &lt;span class="s1"&gt;&amp;#39;lan&amp;#39;&lt;/span&gt;
+    option start &lt;span class="s1"&gt;&amp;#39;100&amp;#39;&lt;/span&gt;
+    option limit &lt;span class="s1"&gt;&amp;#39;150&amp;#39;&lt;/span&gt;
+    option leasetime &lt;span class="s1"&gt;&amp;#39;12h&amp;#39;&lt;/span&gt;
+    option ignore &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
+
+config dhcp &lt;span class="s1"&gt;&amp;#39;wan&amp;#39;&lt;/span&gt;
+    option interface &lt;span class="s1"&gt;&amp;#39;wan&amp;#39;&lt;/span&gt;
+    option ignore &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reboot"&gt;
+&lt;h2&gt;4. Reboot&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;PrimaryAP&lt;/em&gt; will handle firewall and dnsmasq for the combined network. Disable the services on &lt;em&gt;RepeaterAP&lt;/em&gt; to avoid conflicts:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# /etc/init.d/firewall stop&lt;/span&gt;
+&lt;span class="c"&gt;# /etc/init.d/firewall disable&lt;/span&gt;
+&lt;span class="c"&gt;# /etc/init.d/dnsmasq stop&lt;/span&gt;
+&lt;span class="c"&gt;# /etc/init.d/dnsmasq disable&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot router:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;OK! Connect to the new &lt;em&gt;RepeaterAP&lt;/em&gt; and the device will be assigned an IP address on the &lt;em&gt;PrimaryAP&lt;/em&gt;'s now-extended network. All rules and services on &lt;em&gt;PrimaryAP&lt;/em&gt; will flow through to devices connected via &lt;em&gt;RepeaterAP&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="helpful-resources"&gt;
+&lt;h2&gt;5. Helpful resources&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;My &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/openwrt/bridged_repeater/etc/config/wireless"&gt;wireless&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/openwrt/bridged_repeater/etc/config/network"&gt;network&lt;/a&gt;, and &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/openwrt/bridged_repeater/etc/config/dhcp"&gt;dhcp&lt;/a&gt; configs&lt;/li&gt;
+&lt;li&gt;OpenWrt forum thread on &lt;a class="reference external" href="https://forum.openwrt.org/viewtopic.php?id=39077"&gt;bridged and simple repeater configurations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://wiki.openwrt.org/doc/recipes/relayclient"&gt;Routed Client with relayd (Pseudobridge)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 26 Jun 2015 00:00:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-06-26:openwrt-bridged-repeater.html</guid><category>openwrt</category><category>linux</category><category>networks</category></item><item><title>Chromebook to Ubuntubook</title><link>http://www.circuidipity.com/c720-ubuntubook.html</link><description>&lt;p&gt;Replace &lt;strong&gt;Chrome OS&lt;/strong&gt; permanently with &lt;strong&gt;Ubuntu 15.04 Linux&lt;/strong&gt; on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt;.&lt;/p&gt;
 &lt;img alt="Ubuntu 15.04 Vivid Vervet" class="align-right" src="images/vivid-icon.png" style="width: 250px; height: 250px;" /&gt;
 &lt;p&gt;Running a &lt;strong&gt;full-featured Linux&lt;/strong&gt; on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with Debian, followed by &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Lubuntu 14.04&lt;/a&gt; and &lt;a class="reference external" href="http://www.circuidipity.com/arch-install-encrypt.html"&gt;Arch&lt;/a&gt;, and now experimenting with Ubuntu's latest and greatest and the &lt;strong&gt;Unity&lt;/strong&gt; desktop.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
@@ -1386,133 +1513,4 @@ Port: 5432
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 01 Mar 2015 20:37:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-11:ttrss.html</guid><category>networks</category><category>web</category><category>ubuntu</category><category>linux</category><category>raspberry pi</category></item><item><title>PHP + Nginx + PostgreSQL</title><link>http://www.circuidipity.com/php-nginx-postgresql.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #6 .:&lt;/a&gt; As a requirement to host web applications like &lt;a class="reference external" href="http://www.circuidipity.com/ttrss.html"&gt;Tiny Tiny RSS&lt;/a&gt; on my Raspberry Pi I install &lt;strong&gt;PHP&lt;/strong&gt;, the lightweight web server &lt;strong&gt;Nginx&lt;/strong&gt;, and the &lt;strong&gt;PostgreSQL&lt;/strong&gt; database.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Server&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html"&gt;Raspberry Pi 2&lt;/a&gt; running Ubuntu 14.04 LTS located at ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="php"&gt;
-&lt;h2&gt;0. PHP&lt;/h2&gt;
-&lt;p&gt;Install:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get update
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install php5 php5-fpm php-apc php5-curl php5-cli php5-pgsql php5-gd php5-mcrypt
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To improve security edit &lt;tt class="docutils literal"&gt;/etc/php5/fpm/php.ini&lt;/tt&gt; and change &lt;strong&gt;pathinfo&lt;/strong&gt; to &lt;tt class="docutils literal"&gt;0&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;cgi.fix_pathinfo&lt;span class="o"&gt;=&lt;/span&gt;0
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Restart PHP:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service php5-fpm restart
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="nginx"&gt;
-&lt;h2&gt;1. Nginx&lt;/h2&gt;
-&lt;p&gt;Install:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install nginx
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service nginx start
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To verify that the web server is running, open a browser and navigate to (example) &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://192.168.1.88&lt;/span&gt;&lt;/tt&gt;. If you see &lt;tt class="docutils literal"&gt;Welcome to nginx!&lt;/tt&gt; the server is installed correctly.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="host-multiple-domains"&gt;
-&lt;h2&gt;2. Host multiple domains&lt;/h2&gt;
-&lt;p&gt;Nginx is capable of serving up multiple web domains or &lt;strong&gt;server blocks&lt;/strong&gt; (virtual hosts) from the same server:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;block content is placed in subfolders located in &lt;tt class="docutils literal"&gt;/usr/share/nginx/html&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;configuration in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;a server block is made active by setting a symbolic link in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-enabled&lt;/span&gt;&lt;/tt&gt; to its config file&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;When combined with a &lt;a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html"&gt;free DDNS service&lt;/a&gt; (I like &lt;a class="reference external" href="http://duckdns.org/"&gt;duckdns.org&lt;/a&gt;) multiple custom domains can be hosted on a home server.&lt;/p&gt;
-&lt;p&gt;Example: create a sample &lt;tt class="docutils literal"&gt;my2pi&lt;/tt&gt; server block to host &lt;tt class="docutils literal"&gt;www.my2pi.com&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="section" id="cname"&gt;
-&lt;h3&gt;2.1 CNAME&lt;/h3&gt;
-&lt;p&gt;Create a new &lt;strong&gt;CNAME&lt;/strong&gt; record at the domain registrar to redirect &lt;tt class="docutils literal"&gt;www.my2pi.com&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;my2pi.duckdns.org&lt;/tt&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="document-root"&gt;
-&lt;h3&gt;2.2 Document Root&lt;/h3&gt;
-&lt;p&gt;Create a new root directory to hold the contents of &lt;tt class="docutils literal"&gt;my2pi&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /usr/share/nginx/html/my2pi
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo chown -R &lt;span class="nv"&gt;$USER&lt;/span&gt;.&lt;span class="nv"&gt;$USER&lt;/span&gt; /usr/share/nginx/html/my2pi
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="index-html"&gt;
-&lt;h3&gt;2.3 Index.html&lt;/h3&gt;
-&lt;p&gt;Create a sample &lt;tt class="docutils literal"&gt;/usr/share/nginx/html/my2pi/index.html&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;lt;html&amp;gt;
-&amp;lt;head&amp;gt;
-&amp;lt;title&amp;gt;My Pi &lt;span class="m"&gt;2&lt;/span&gt; Home&amp;lt;/title&amp;gt;
-&amp;lt;/head&amp;gt;
-&amp;lt;body &lt;span class="nv"&gt;bgcolor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;white&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;text&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&amp;gt;
-&amp;lt;center&amp;gt;&amp;lt;h1&amp;gt;Welcome to My Pi &lt;span class="m"&gt;2&lt;/span&gt; Home!&amp;lt;/h1&amp;gt;&amp;lt;/center&amp;gt;
-&amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="server-block"&gt;
-&lt;h3&gt;2.4 Server Block&lt;/h3&gt;
-&lt;p&gt;I use &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available/default&lt;/span&gt;&lt;/tt&gt; as a template for the new &lt;tt class="docutils literal"&gt;my2pi&lt;/tt&gt; configuration:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /etc/nginx/sites-available
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo cp default my2pi
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Modify these lines for the custom domain:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;listen 80&lt;span class="p"&gt;;&lt;/span&gt;
-
-root /usr/share/nginx/html/my2pi&lt;span class="p"&gt;;&lt;/span&gt;
-index index.html index.htm&lt;span class="p"&gt;;&lt;/span&gt;
-
-server_name www.my2pi.com&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Activate the new server block:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /etc/nginx/sites-enabled
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo ln -s ../sites-available/my2pi
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service nginx restart
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="port-forwarding"&gt;
-&lt;h3&gt;2.5 Port Forwarding&lt;/h3&gt;
-&lt;p&gt;Configure &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;port forwarding on the home router&lt;/a&gt; to redirect traffic on port 80 to the internal IP address of the nginx server. Point your browser to &lt;tt class="docutils literal"&gt;www.my2pi.com&lt;/tt&gt;. Success (hopefully)!&lt;/p&gt;
-&lt;p&gt;Repeat the above steps to add more domains. The limiting factor is the &lt;strong&gt;upload bandwidth&lt;/strong&gt; provided by the home ISP (typically a fraction of the download speed).&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="postgresql"&gt;
-&lt;h2&gt;3. PostgreSQL&lt;/h2&gt;
-&lt;p&gt;Install:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install postgresql
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Launch the PostgreSQL interactive console front-end &lt;tt class="docutils literal"&gt;psql&lt;/tt&gt; as &lt;tt class="docutils literal"&gt;postgres&lt;/tt&gt; user and set a new password:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo -u postgres psql
-&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# \password postgres&lt;/span&gt;
-Enter new password: &lt;span class="o"&gt;[&lt;/span&gt;newpasswd&lt;span class="o"&gt;]&lt;/span&gt;
-Enter it again: &lt;span class="o"&gt;[&lt;/span&gt;newpasswd&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# \quit&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Example: To create a new user &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;www-data&lt;/span&gt;&lt;/tt&gt; &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt; and database &lt;tt class="docutils literal"&gt;mydb&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo -u postgres psql
-&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# CREATE USER &amp;quot;www-data&amp;quot; WITH PASSWORD &amp;#39;newpasswd&amp;#39;;&lt;/span&gt;
-&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# CREATE DATABASE mydb WITH OWNER &amp;quot;www-data&amp;quot;;&lt;/span&gt;
-&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# GRANT ALL PRIVILEGES ON DATABASE mydb to &amp;quot;www-data&amp;quot;;&lt;/span&gt;
-&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# \quit&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Save any changes and reload the database server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service postgresql reload
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="helpful-resources"&gt;
-&lt;h2&gt;4. Helpful resources&lt;/h2&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-14-04"&gt;How to install the LEMP stack on Ubuntu&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-14-04-lts"&gt;Set up Nginx Server Blocks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://help.ubuntu.com/community/PostgreSQL"&gt;PostgreSQL and Ubuntu&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm"&gt;Practical PostgreSQL database&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html"&gt;DDNS and OpenWrt&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h3&gt;Notes&lt;/h3&gt;
-&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;PostgreSQL maintains its own users and passwords, which are separate from the Linux user accounts. It is not required that your PostgreSQL usernames match the Linux usernames. See &lt;a class="reference external" href="http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm"&gt;Practical PostgreSQL database&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 01 Mar 2015 19:48:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-09:php-nginx-postgresql.html</guid><category>networks</category><category>web</category><category>ubuntu</category><category>linux</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 01 Mar 2015 20:37:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-11:ttrss.html</guid><category>networks</category><category>web</category><category>ubuntu</category><category>linux</category><category>raspberry pi</category></item></channel></rss>
