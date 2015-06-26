@@ -4,8 +4,8 @@ Backup home
 
 :date: 2015-02-03 00:10:00
 :slug: backup-home
-:tags: networks, ubuntu, linux, shell, programming, github, raspberry pi
-:modified: 2015-03-01 19:13:00
+:tags: networks, ubuntu, linux, shell, programming, raspberry pi
+:modified: 2015-06-26 00:11:00
 
 `Raspberry Pi Home Server Hack #3 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Make automatic backups of a **home folder** using a dash of shell scripting + rsync + SSH + cron!
 
@@ -96,7 +96,5 @@ Place the script in ``~/bin`` and make it executable. Run manually at least once
                                                                                    
     # Daily backup of $HOME to the netbook server                                
     55 23 * * * /home/pi/bin/myRsync >> /home/pi/cron.log
-
-I stashed a more complete ``myRsync`` `script on Github <https://github.com/vonbrownie/linux-home-bin/blob/master/myRsync>`_.
 
 Happy hacking!
