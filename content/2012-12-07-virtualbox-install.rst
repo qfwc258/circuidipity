@@ -2,7 +2,7 @@
 Debian and Virtualbox
 =====================
 
-:tags: virtual environments, debian, linux
+:tags: virtualbox, debian, linux
 :slug: virtualbox-install
 :modified: 2014-04-27 01:23:00
 
