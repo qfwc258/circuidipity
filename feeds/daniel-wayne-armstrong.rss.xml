@@ -1,5 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 26 Jun 2015 00:00:00 -0400</lastBuildDate><item><title>OpenWrt router as bridged repeater using relayd</title><link>http://www.circuidipity.com/openwrt-bridged-repeater.html</link><description>&lt;p&gt;Extend the range of a wireless network using a cheap and cheerful router running &lt;a class="reference external" href="http://www.circuidipity.com/tag-openwrt.html"&gt;OpenWrt&lt;/a&gt; as a &lt;strong&gt;bridged repeater&lt;/strong&gt;. All client devices use the same IP address range and are capable of communicating with each other.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 03 Jul 2015 19:27:00 -0400</lastBuildDate><item><title>Minimal Raspbian Jessie</title><link>http://www.circuidipity.com/minimal-raspbian-jessie.html</link><description>&lt;p&gt;Setup a minimal &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspbian.html"&gt;Raspbian&lt;/a&gt; configuration on the &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspberry-pi.html"&gt;Raspberry Pi&lt;/a&gt; using &lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst"&gt;raspbian-ua-netinst&lt;/a&gt; (ideal start for a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;home server&lt;/a&gt;) with the latest packages from &lt;a class="reference external" href="http://www.circuidipity.com/tag-debian.html"&gt;Debian&lt;/a&gt; &lt;tt class="docutils literal"&gt;jessie/stable&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;The netinstaller runs unattended (no display/keyboard required) with the pre-configured option of installing rootfs to external USB storage. Upon completion the Pi reboots with DHCP and OpenSSH for remote access.&lt;/p&gt;
+&lt;p&gt;I put my plan in motion using:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Raspberry Pi 2 Model B&lt;/li&gt;
+&lt;li&gt;5V 2A microUSB power adapter&lt;/li&gt;
+&lt;li&gt;8GB microSD card&lt;/li&gt;
+&lt;li&gt;ethernet cable&lt;/li&gt;
+&lt;li&gt;raspbian-ua-netinst&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prepare-the-microsd"&gt;
+&lt;h2&gt;0. Prepare the microSD&lt;/h2&gt;
+&lt;p&gt;MicroSD card is prepared on a host running Debian. &lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst/releases/"&gt;Download&lt;/a&gt; the latest &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;raspbian-ua-netinst-vX.X.X.img.xz&lt;/span&gt;&lt;/tt&gt; and flash the image to the card:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# xzcat /path/to/raspbian-ua-netinst-&amp;lt;latest-version-number&amp;gt;.img.xz &amp;gt; /dev/sdX &amp;amp;&amp;amp; sync&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="customize-the-install-optional"&gt;
+&lt;h2&gt;1. Customize the install (optional)&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst#installer-customization"&gt;Default settings&lt;/a&gt; for the netinstaller can be customized by creating &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;installer-config.txt&lt;/span&gt;&lt;/tt&gt; in the root directory of the newly-prepared microSD. Remove newly-formatted card, re-insert, mount &lt;tt class="docutils literal"&gt;sdX1&lt;/tt&gt;, add the config.&lt;/p&gt;
+&lt;p&gt;Add only the settings to be changed from their defaults (example):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;packages&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;vim,tmux
+&lt;span class="nv"&gt;hostname&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;MyHostname
+&lt;span class="nv"&gt;bootsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;+256M
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A second &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;post-install.txt&lt;/span&gt;&lt;/tt&gt; shell script can also be created alongside &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;installer-config.txt&lt;/span&gt;&lt;/tt&gt; that will run after installation is complete but before the Pi reboots.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="install-and-configure"&gt;
+&lt;h2&gt;2. Install and configure&lt;/h2&gt;
+&lt;p&gt;Insert microSD in the Pi and power up. Netinstaller typically runs under 15 minutes &lt;a class="footnote-reference" href="#id3" id="id1"&gt;[1]&lt;/a&gt; to setup a base configuration before rebooting the Pi.&lt;/p&gt;
+&lt;p&gt;SSH into the newly-configured Pi (default &lt;tt class="docutils literal"&gt;login: root&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;password: raspbian&lt;/tt&gt;). Details of the install are logged in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/var/log/raspbian-ua-netinst.log&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Configure &lt;a class="footnote-reference" href="#id4" id="id2"&gt;[2]&lt;/a&gt;:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;a new root password: &lt;tt class="docutils literal"&gt;passwd&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;default locale: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dpkg-reconfigure&lt;/span&gt; locales&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;timezone: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dpkg-reconfigure&lt;/span&gt; tzdata&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;create 1GB swap file: &lt;tt class="docutils literal"&gt;dd &lt;span class="pre"&gt;if=/dev/zero&lt;/span&gt; &lt;span class="pre"&gt;of=/swap&lt;/span&gt; bs=1M count=1024 &amp;amp;&amp;amp; mkswap /swap&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;enable swap file at boot: &lt;tt class="docutils literal"&gt;echo &amp;quot;/swap none swap sw 0 0&amp;quot; &amp;gt;&amp;gt; /etc/fstab&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;enable hardware random number generator: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-get&lt;/span&gt; &lt;span class="pre"&gt;-y&lt;/span&gt; install &lt;span class="pre"&gt;rng-tools&lt;/span&gt; &amp;amp;&amp;amp; echo &lt;span class="pre"&gt;&amp;quot;bcm2708-rng&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/modules&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;add new user: &lt;tt class="docutils literal"&gt;adduser USERNAME&lt;/tt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="upgrade"&gt;
+&lt;h2&gt;3. Upgrade&lt;/h2&gt;
+&lt;p&gt;Stable release of Raspbian (2015-07-03) is currently built on older Debian &lt;tt class="docutils literal"&gt;wheezy&lt;/tt&gt; packages. Upgrade to the &lt;tt class="docutils literal"&gt;jessie/stable&lt;/tt&gt; branch by first modifying &lt;tt class="docutils literal"&gt;/etc/apt/sources.list&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# cp /etc/apt/sources.list /etc/apt/sources.list.bak&lt;/span&gt;
+&lt;span class="c"&gt;# echo &amp;quot;deb http://mirrordirector.raspbian.org/raspbian jessie main contrib non-free firmware rpi&amp;quot; &amp;gt; /etc/apt/sources.list&lt;/span&gt;
+&lt;span class="c"&gt;# echo &amp;quot;deb http://archive.raspbian.org/raspbian jessie main&amp;quot; &amp;gt;&amp;gt; /etc/apt/sources.list&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Update the package lists and upgrade:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# apt-get update &amp;amp;&amp;amp; apt-get -y dist-upgrade &amp;amp;&amp;amp; apt-get -y autoremove&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h2&gt;Notes&lt;/h2&gt;
+&lt;table class="docutils footnote" frame="void" id="id3" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;First attempt (unattended upgrade straight to &lt;tt class="docutils literal"&gt;jessie&lt;/tt&gt;) took 236min! Second attempt (no custom config) took 112min.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;I poked around to see if there was something wonky with the microSD... first using &lt;tt class="docutils literal"&gt;badlocks&lt;/tt&gt; (read-only test):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# badblocks -vs /dev/sdb&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+79434
+79435
+79436
+79437
+&lt;span class="k"&gt;done&lt;/span&gt;
+Pass completed, &lt;span class="m"&gt;6424&lt;/span&gt; bad blocks found. &lt;span class="o"&gt;(&lt;/span&gt;6424/0/0 errors&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Second test was creating/writing an image to the card (see &lt;a class="reference external" href="http://projects.nuschkys.net/2012/05/15/testing-a-new-sd-card-under-linux/"&gt;&amp;quot;Testing a new SD card under Linux&amp;quot;&lt;/a&gt;) but it bombed right away:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# dd if=/dev/urandom of=test_sd.tmp bs=1024 count=8000000&lt;/span&gt;
+8000000+0 records in
+8000000+0 records out
+&lt;span class="m"&gt;8192000000&lt;/span&gt; bytes &lt;span class="o"&gt;(&lt;/span&gt;8.2 GB&lt;span class="o"&gt;)&lt;/span&gt; copied, 597.98 s, 13.7 MB/s
+&lt;span class="c"&gt;# dd if=test_sd.tmp of=/dev/sdb bs=1024 count=8000000&lt;/span&gt;
+dd: error writing ‘/dev/sdb’: Input/output error
+73017+0 records in
+73016+0 records out
+&lt;span class="m"&gt;74768384&lt;/span&gt; bytes &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;75&lt;/span&gt; MB&lt;span class="o"&gt;)&lt;/span&gt; copied, 44.9678 s, 1.7 MB/s
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Conclusion: &lt;em&gt;definitely&lt;/em&gt; wonky. :-) Replace with a good microSD and install took 12min.&lt;/p&gt;
+&lt;table class="docutils footnote" frame="void" id="id4" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;I created a &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/scripts/raspbian-post-install.sh"&gt;post-install script&lt;/a&gt; for configuring the base install and upgrading to &lt;tt class="docutils literal"&gt;jessie&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 03 Jul 2015 19:27:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-07-03:minimal-raspbian-jessie.html</guid><category>raspbian</category><category>debian</category><category>linux</category><category>raspberry pi</category><category>networks</category></item><item><title>OpenWrt router as bridged repeater using relayd</title><link>http://www.circuidipity.com/openwrt-bridged-repeater.html</link><description>&lt;p&gt;Extend the range of a wireless network using a cheap and cheerful router running &lt;a class="reference external" href="http://www.circuidipity.com/tag-openwrt.html"&gt;OpenWrt&lt;/a&gt; as a &lt;strong&gt;bridged repeater&lt;/strong&gt;. All client devices use the same IP address range and are capable of communicating with each other.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Wireless access points: &lt;strong&gt;PrimaryAP&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html"&gt;TP-Link TL-WDR3600&lt;/a&gt; with IP address &lt;tt class="docutils literal"&gt;192.168.1.1&lt;/tt&gt; + wireless channel &lt;tt class="docutils literal"&gt;11&lt;/tt&gt; and the &lt;strong&gt;RepeaterAP&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;TP-Link TL-WR841N&lt;/a&gt; (~$20CAN on sale). Both devices are running OpenWrt.&lt;/p&gt;
@@ -1374,143 +1468,4 @@ grub&amp;gt; boot
 &lt;p&gt;Next thing is to start working on my touch-typing!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 25 Feb 2015 19:47:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-25:ubuntu-keyboard-shortcuts.html</guid><category>ubuntu</category><category>linux</category></item><item><title>Tiny Tiny RSS</title><link>http://www.circuidipity.com/ttrss.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #7 .:&lt;/a&gt; Install and self-host the &lt;strong&gt;Tiny Tiny RSS&lt;/strong&gt; news reader and aggregator and access news feeds over the web from anywhere.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Server&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html"&gt;Raspberry Pi 2&lt;/a&gt; running Ubuntu 14.04 LTS located at ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="web-server-and-database"&gt;
-&lt;h2&gt;0. Web server and database&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://tt-rss.org/redmine/projects/tt-rss/wiki"&gt;Tiny Tiny RSS&lt;/a&gt; is a PHP application that require a proxy web server and a database back-end to store content. See &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;PHP + Nginx + PostgreSQL&lt;/a&gt; for necessary prerequites to host TTRSS. &lt;a class="footnote-reference" href="#id6" id="id2"&gt;[1]&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="database"&gt;
-&lt;h2&gt;1. Database&lt;/h2&gt;
-&lt;p&gt;Create a new PostgreSQL database to hold the content of RSS feeds. Launch the interactive console front-end &lt;tt class="docutils literal"&gt;psql&lt;/tt&gt; and create a new user &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;www-data&lt;/span&gt;&lt;/tt&gt; &lt;a class="footnote-reference" href="#id7" id="id3"&gt;[2]&lt;/a&gt; and database &lt;tt class="docutils literal"&gt;ttrss&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo -u postgres psql
-&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# CREATE USER &amp;quot;www-data&amp;quot; WITH PASSWORD &amp;#39;newpasswd&amp;#39;;&lt;/span&gt;
-&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# CREATE DATABASE ttrss WITH OWNER &amp;quot;www-data&amp;quot;;&lt;/span&gt;
-&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# GRANT ALL PRIVILEGES ON DATABASE ttrss to &amp;quot;www-data&amp;quot;;&lt;/span&gt;
-&lt;span class="nv"&gt;postgres&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="c"&gt;# \quit&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="section" id="peer-authentication"&gt;
-&lt;h3&gt;1.1 Peer authentication&lt;/h3&gt;
-&lt;p&gt;Later when running the TTRSS &lt;tt class="docutils literal"&gt;update.php&lt;/tt&gt; script you may run into &lt;tt class="docutils literal"&gt;Peer authentication failed for user&lt;/tt&gt; errors. Fix this issue by editing &lt;tt class="docutils literal"&gt;/etc/postgresql/9.3/main/pg_hba.conf&lt;/tt&gt; and change &lt;tt class="docutils literal"&gt;peer&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# &amp;quot;local&amp;quot; is for Unix domain socket connections only&lt;/span&gt;
-&lt;span class="nb"&gt;local   &lt;/span&gt;all             all                                     peer
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... to &lt;tt class="docutils literal"&gt;trust&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# &amp;quot;local&amp;quot; is for Unix domain socket connections only&lt;/span&gt;
-&lt;span class="nb"&gt;local   &lt;/span&gt;all             all                                     trust
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reload the database server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service postgresql reload
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="http://askubuntu.com/questions/274441/pg-connect-unable-to-connect-to-postgresql-server"&gt;Unable to connect to postgresql server&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="ttrss"&gt;
-&lt;h2&gt;2. TTRSS&lt;/h2&gt;
-&lt;p&gt;Download the latest &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Tiny-Tiny-RSS-X.X.X.tar.gz&lt;/span&gt;&lt;/tt&gt; from &lt;a class="reference external" href="https://github.com/gothfox/Tiny-Tiny-RSS/releases"&gt;Releases&lt;/a&gt;, unpack, and change permissions:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;tar xvzf Tiny-Tiny-RSS-X.X.X.tar.gz
-&lt;span class="nv"&gt;$ &lt;/span&gt;mv Tiny-Tiny-RSS-X.X.X ttrss
-&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;ttrss
-&lt;span class="nv"&gt;$ &lt;/span&gt;chmod -R &lt;span class="m"&gt;777&lt;/span&gt; cache/images/ cache/js/ cache/export/ cache/upload/ feed-icons/ lock/
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="nginx"&gt;
-&lt;h2&gt;3. Nginx&lt;/h2&gt;
-&lt;p&gt;Move the &lt;tt class="docutils literal"&gt;ttrss&lt;/tt&gt; directory into Nginx's &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;document root&lt;/a&gt; directory:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mv ../ttrss /usr/share/nginx/html/
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo chown -R www-data.www-data /usr/share/nginx/html/ttrss
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Create a &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;server block&lt;/a&gt; (virtual host) for TTRSS. Sample &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available/ttrss&lt;/span&gt;&lt;/tt&gt; &lt;a class="footnote-reference" href="#id8" id="id4"&gt;[3]&lt;/a&gt; configuration:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;server &lt;span class="o"&gt;{&lt;/span&gt;
-    listen 80&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;## listen for ipv4; this line is default and implied&lt;/span&gt;
-
-    root /usr/share/nginx/html/ttrss&lt;span class="p"&gt;;&lt;/span&gt;
-    index index.html index.htm index.php&lt;span class="p"&gt;;&lt;/span&gt;
-
-    access_log /var/log/nginx/ttrss_access.log&lt;span class="p"&gt;;&lt;/span&gt;
-    error_log /var/log/nginx/ttrss_error.log info&lt;span class="p"&gt;;&lt;/span&gt;
-
-    server_name ttrss.*&lt;span class="p"&gt;;&lt;/span&gt;
-
-    location / &lt;span class="o"&gt;{&lt;/span&gt;
-        index           index.php&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="o"&gt;}&lt;/span&gt;
-
-    location ~ &lt;span class="se"&gt;\.&lt;/span&gt;php&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;
-        try_files &lt;span class="nv"&gt;$uri&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 404&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;#Prevents autofixing of path which could be used for exploit&lt;/span&gt;
-        fastcgi_pass unix:/var/run/php5-fpm.sock&lt;span class="p"&gt;;&lt;/span&gt;
-        fastcgi_index index.php&lt;span class="p"&gt;;&lt;/span&gt;
-        include /etc/nginx/fastcgi_params&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="o"&gt;}&lt;/span&gt;
-
-&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Save changes and enable the new block:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /etc/nginx/sites-enabled
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo ln -s /etc/nginx/sites-available/ttrss
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service nginx restart
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="configure"&gt;
-&lt;h2&gt;4. Configure&lt;/h2&gt;
-&lt;p&gt;Example configuration for LAN access to the Pi home server at ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt; hosting ttrss.&lt;/p&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/hosts&lt;/tt&gt; on the &lt;strong&gt;client&lt;/strong&gt; device making the connection:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;192.168.1.88 ttrss.local
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://ttrss.local&lt;/span&gt;&lt;/tt&gt; and configure TTRSS:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Database &lt;span class="nb"&gt;type&lt;/span&gt;: &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt; PostgreSQL&lt;span class="o"&gt;]&lt;/span&gt;
-Username: www-data
-Password: &lt;span class="o"&gt;[&lt;/span&gt;database password created earlier&lt;span class="o"&gt;]&lt;/span&gt;
-Database Name: ttrss
-Hostname: &lt;span class="o"&gt;[&lt;/span&gt;leave blank&lt;span class="o"&gt;]&lt;/span&gt;
-Port: 5432
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Press &lt;tt class="docutils literal"&gt;Test configuration&lt;/tt&gt; button, then &lt;tt class="docutils literal"&gt;Initialize database&lt;/tt&gt;, and finally &lt;tt class="docutils literal"&gt;Save configuration&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Navigate back to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://ttrss.local&lt;/span&gt;&lt;/tt&gt; and log back in with username &lt;tt class="docutils literal"&gt;admin&lt;/tt&gt; and password &lt;tt class="docutils literal"&gt;password&lt;/tt&gt;. In the top-right go to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Actions-&amp;gt;Preferences&lt;/span&gt;&lt;/tt&gt; to make further changes to the default settings. Create a new user account for RSS reading (vs logging in all the time as &lt;tt class="docutils literal"&gt;admin&lt;/tt&gt;) and change the default password.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="updates"&gt;
-&lt;h2&gt;5. Updates&lt;/h2&gt;
-&lt;p&gt;Configure TTRSS to periodically update the RSS feeds with new content. First, test the included &lt;tt class="docutils literal"&gt;update.php&lt;/tt&gt; script:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;/usr/bin/php /usr/share/nginx/html/ttrss/update.php --feeds --quiet
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If the script returns no errors add a new job to &lt;tt class="docutils literal"&gt;cron&lt;/tt&gt; to run script periodically:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;crontab -e
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sample TTRSS job:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="m"&gt;10&lt;/span&gt; * * * * /usr/bin/php /usr/share/nginx/html/ttrss/update.php --feeds --quiet
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="helpful-resources"&gt;
-&lt;h2&gt;6. Helpful resources&lt;/h2&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-ttrss-with-nginx-for-debian-7-on-a-vps"&gt;How to install TTRSS with Nginx for Debian&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://davidbeath.com/posts/installing-tiny-tiny-rss-from-scratch.html"&gt;Installing TTRSS from scratch&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;PHP + Nginx + PostgreSQL&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Happy reading (and hacking)!&lt;/p&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h3&gt;Notes&lt;/h3&gt;
-&lt;table class="docutils footnote" frame="void" id="id6" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Alternative host setups can replace &lt;tt class="docutils literal"&gt;nginx&lt;/tt&gt; web server with &lt;tt class="docutils literal"&gt;apache&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;postgresql&lt;/tt&gt; database with &lt;tt class="docutils literal"&gt;mysql&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;sqlite&lt;/tt&gt;. However the TTRSS community recommends the above combination as the optimal setup for lightweight servers like the Raspberry Pi.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table class="docutils footnote" frame="void" id="id7" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id3"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;PostgreSQL maintains its own users and passwords, which are separate from the Linux user accounts. It is not required that your PostgreSQL usernames match the Linux usernames. See &lt;a class="reference external" href="http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm"&gt;Practical PostgreSQL     database&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table class="docutils footnote" frame="void" id="id8" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id4"&gt;[3]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Make TTRSS hosted on a home server accessible from the outside over the web by configuring a &lt;strong&gt;dynamic DNS&lt;/strong&gt; service (I like &lt;a class="reference external" href="http://www.duckdns.org/"&gt;duckdns.org&lt;/a&gt;). Example: Create a &lt;tt class="docutils literal"&gt;myhomepi&lt;/tt&gt; domain on the DDNS service and modify &lt;tt class="docutils literal"&gt;server_name localhost;&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;server_name myhomepi.duckdns.org;&lt;/tt&gt;. See &lt;a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html"&gt;DDNS and OpenWrt&lt;/a&gt; for details.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 01 Mar 2015 20:37:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-11:ttrss.html</guid><category>networks</category><category>web</category><category>ubuntu</category><category>linux</category><category>raspberry pi</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 25 Feb 2015 19:47:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-25:ubuntu-keyboard-shortcuts.html</guid><category>ubuntu</category><category>linux</category></item></channel></rss>
