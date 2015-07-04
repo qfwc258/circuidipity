@@ -11,7 +11,7 @@ Setup a minimal `Raspbian <http://www.circuidipity.com/tag-raspbian.html>`_ conf
 Let's go!
 =========
 
-The netinstaller runs unattended (no display/keyboard required) with the pre-configured option of installing rootfs to external USB storage. Upon completion the Pi reboots with DHCP and OpenSSH for remote access.
+The netinstaller runs unattended (no display/keyboard required) with the option of installing `rootfs to external USB storage <http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html>`_. Upon completion the Pi reboots with DHCP and OpenSSH for remote access.
 
 I put my plan in motion using:
 
@@ -84,7 +84,7 @@ Reboot.
 Happy hacking!
 
 Notes
-=====
+-----
 
 .. [1] First attempt (unattended upgrade straight to ``jessie``) took 236min! Second attempt (no custom config) took 112min.
 
