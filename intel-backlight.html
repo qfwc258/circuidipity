@@ -28,15 +28,16 @@
 <div id="article">
     <p>There are issues with some Intel video cards <tt class="docutils literal"><span class="pre">xserver-xorg-video-intel</span></tt> and <tt class="docutils literal">KMS</tt> and the default <tt class="docutils literal">2.6.32 kernel</tt> in Debian <tt class="docutils literal">squeeze</tt>.</p>
 <p>On my Intel-equipped <a class="reference external" href="http://www.circuidipity.com/debian-linux-on-the-asus-eeepc-1001p.html">Asus netbook</a> booting from GRUB or starting an X session can result in a black screen and completely unresponsive system. A temporary fix is to edit the booting GRUB entry and add <tt class="docutils literal">acpi=off</tt> to the kernel line.</p>
-<p>A more permanent fix is to configure the backlight by editing <tt class="docutils literal">GRUB_CMDLINE_LINUX_DEFAULT</tt> in <tt class="docutils literal">/etc/default/grub</tt> ...</p>
+<p>A more permanent fix is to configure the backlight by editing <tt class="docutils literal">GRUB_CMDLINE_LINUX_DEFAULT</tt> in <tt class="docutils literal">/etc/default/grub</tt>:</p>
 <div class="highlight"><pre><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s2">&quot;quiet acpi_osi=Linux acpi_backlight=vendor&quot;</span>
 </pre></div>
 <p>Update the grub configuration by running <tt class="docutils literal">sudo <span class="pre">update-grub2</span></tt> and reboot.</p>
-<p>Increase the brightness setting to maximum visibility. For example ... on my netbook&lt;/a&gt; I run ...</p>
+<p>Increase the brightness setting to maximum visibility. For example ... on my netbook I run:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo <span class="nb">echo </span><span class="m">15</span> &gt; /sys/class/backlight/eeepc/brightness
 </pre></div>
 
-    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
 </div>
 
