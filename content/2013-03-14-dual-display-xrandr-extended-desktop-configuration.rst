@@ -3,7 +3,7 @@ DualDisplay - Extended desktop configuration
 ============================================
 
 :date: 2013-03-14 01:23:00
-:tags: shell, programming, github, linux
+:tags: shell, programming, linux
 :slug: dual-display-xrandr-extended-desktop-configuration
 
 Bash shell scripting strikes me as a good place for a Linux user to start to learn programming. Diving into the command line unlocks the power of Linux, makes it malleable to the user, and you pick up some history of how Unix came to be what it is today. Design ideas like *everything is a file* and *pipes* are incredibly useful for taking simple discrete components and stringing them together to build something new and awesome!
@@ -47,5 +47,3 @@ So I used some new tricks gleaned from *TLCL* to create ``dualDisplay``. I requi
 Make the script executable and drop it in ``$HOME/bin``.
 
 Run ``dualDisplay`` or ``dualDisplay -q`` at the command line to enable|disable PRIMARY + SECOND. For Openbox I add the command to ``~/.config/openbox/autostart`` and now it launches and stitches together the Thinkpad's LCD and external display into a extended desktop whenever I enter the X environment.
-
-Source: `dualDisplay <https://github.com/vonbrownie/linux-home-bin/blob/master/dualDisplay>`_

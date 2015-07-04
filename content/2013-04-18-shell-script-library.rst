@@ -2,7 +2,7 @@
 A library for shell scripts
 ===========================
 
-:tags: shell, programming, github, linux
+:tags: shell, programming, linux
 :slug: shell-script-library
 :modified: 2014-04-12 01:23:00
 
@@ -30,5 +30,3 @@ When I create a new shell script and want to access this library of functions I 
 ... and its contents are now available for inclusion in every script that needs it. Write once and use everywhere.
 
 Sourcing a library file for the shell reminds me of HTML templates and CSS stylesheets for websites. Adding new functions or making improvements to existing ones in a single location means the changes ripple across every script that calls upon that location.
-
-Source: `A library of functions for shell scripts in $HOME/bin <https://github.com/vonbrownie/linux-home-bin/blob/master/Library.sh>`_

@@ -4,7 +4,7 @@ Raspberry Pi Plate
 
 :date: 2014-07-03 01:23:00
 :slug: pi-plate
-:tags: raspberry pi, 3D printing, electronics
+:tags: raspberry pi, electronics
 
 .. image:: images/pi_plate_300.jpg
     :align: right

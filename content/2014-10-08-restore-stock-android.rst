@@ -3,8 +3,8 @@ Restore stock Android on Nexus 7
 ================================
 
 :date: 2014-10-08 17:43:00
-:slug: 20141008
-:tags: android, linux
+:slug: restore-stock-android-on-nexus-7
+:tags: android, debian, linux
 
 **Device:** Nexus 7 2012 (model) -> grouper (device) -> nakasi (device-appropriate Google ROMs)                   
 

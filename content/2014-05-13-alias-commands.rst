@@ -4,7 +4,7 @@ Creating new commands with alias
 
 :date: 2014-05-13 01:23:00
 :slug: alias-commands
-:tags: shell, linux
+:tags: shell, debian, linux
 
 An **alias** is useful for setting desirable options for a shell command or creating new commands using the structure ``alias name='string``. Multiple commands can be placed on a single line by separating them with a semicolon ``alias name='command0; command1; command2``.
 

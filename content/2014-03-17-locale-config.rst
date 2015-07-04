@@ -4,7 +4,7 @@ Locale configuration
 
 :date: 2014-03-17 01:23:00
 :slug: locale-config
-:tags: shell, linux
+:tags: shell, debian, linux
 
 **Locales** are used to define language settings in Linux.                      
                                                                                 

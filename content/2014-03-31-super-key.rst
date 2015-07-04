@@ -4,7 +4,7 @@ Stop SHOUTING and convert Caps_Lock into a Super key
 
 :date: 2014-03-31 01:23:00
 :slug: super-key
-:tags: shell, linux
+:tags: openbox, debian, linux
 
 For my Openbox `rc.xml configuration <https://github.com/vonbrownie/linux-home-config/blob/master/.config/openbox/rc.xml>`_ I frequently enlist the ``Super`` (Windows) key in creating hotkey combos. Since the ``Caps_Lock`` key is larger, better placed, and rarely used I transformed it into another ``Super`` modifier key. An added bonus is that I can preserve my hotkeys configuration on keyboards lacking a dedicated ``Super`` key (example: my old Thinkpad X31) plus the new Chromebooks have a dedicated ``Search`` key in the old ``Caps_Lock`` location that by default acts as a ``Super`` key under Linux.
 
@@ -19,6 +19,5 @@ For my Openbox `rc.xml configuration <https://github.com/vonbrownie/linux-home-c
     add mod4 = Super_L                                                          
                                                                                 
 Test the new setting by running ``xmodmap ~/.xmodmap``. Place the command in ``/home/USER/.xinitrc`` to auto-load when running ``startx``. 
-                                                                                
                          
 Source: `A super key for people with real keyboards <http://www.danplanet.com/blog/2011/04/14/a-super-key-for-people-with-real-keyboards/>`_

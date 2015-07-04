@@ -4,7 +4,7 @@ Policykit upgrade generates user permission problems
 
 :date: 2014-05-15 01:23:00
 :slug: policykit-upgrade-user-permission
-:tags: debian, linux
+:tags: openbox, debian, linux
 
 After a recent upgrade on my 64-bit systems running Debian ``sid/unstable`` and **Openbox** I discovered user permission problems with:
 

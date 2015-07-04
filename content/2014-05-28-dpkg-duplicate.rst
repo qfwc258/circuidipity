@@ -4,7 +4,7 @@ Duplicate Debian package selection on multiple machines
 
 :date: 2014-05-28 01:23:00
 :slug: dpkg-duplicate
-:tags: debian, linux, shell, programming, github
+:tags: debian, linux, shell
 
 I am happy with the selection of packages installed on my `Debian-powered laptop <http://www.circuidipity.com/c720-sidbook.html>`_ and discovered an easy method to **duplicate** the configuration on another machine.
 
@@ -26,8 +26,6 @@ Move the generated list to the target machine. Configure the package manager to 
     $ sudo dpkg --set-selections < deb-pkg-list.txt
     $ sudo apt-get dselect-upgrade
 
-I created a `shell script <https://github.com/vonbrownie/linux-home-bin/blob/master/dpkgDup>`_ that includes the above steps for generating and restoring package lists.
-
 Happy hacking!
 
-Sources: `dpkgDup (github.com/vonbrownie) <https://github.com/vonbrownie/linux-home-bin/blob/master/dpkgDup>`_, `Debian Administrator's Handbook <http://debian-handbook.info/browse/wheezy/sect.apt-get.html>`_
+Sources: `Debian Administrator's Handbook <http://debian-handbook.info/browse/wheezy/sect.apt-get.html>`_

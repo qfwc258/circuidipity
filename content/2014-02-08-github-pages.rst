@@ -4,7 +4,7 @@ Host a blog on GitHub Pages
 
 :date: 2014-02-08 01:23:00
 :slug: github-pages
-:tags: git, github, pelican, web, networks
+:tags: pelican, git, networks, debian, linux
 
 `GitHub Pages <http://pages.github.com/>`_ is a free web hosting service for projects composed of static files (i.e no database). Combine a **Pages repository** with **git** version control and a **static site generator** like `Pelican <http://www.circuidipity.com/pelican.html>`_ and you have one awesome toolset to build a website.
 
@@ -122,8 +122,8 @@ Upload my changes to GitHub:
 
     $ make github
 
-4.1 - Domain Registrar
-++++++++++++++++++++++
+4.1 Domain Registrar
+--------------------
 
 Now the **domain name registrar** needs to be configured to point to the new GitHub address. `Gandi <https://www.gandi.net/>`_ is my registrar and while the details will vary between domain services the steps are basically the same to redirect a custom domain. 
 

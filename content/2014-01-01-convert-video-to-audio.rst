@@ -3,7 +3,7 @@ Convert video file(s) to MP3 audio
 ==================================
 
 :date: 2014-01-01 01:23:00
-:tags: shell, programming, github, linux
+:tags: shell, programming, linux
 :slug: convert-video-to-audio
 
 A simple script I made to convert downloaded YouTube videos to MP3s:
@@ -18,5 +18,3 @@ A simple script I made to convert downloaded YouTube videos to MP3s:
     done
 
 Requires ``ffmpeg`` and ``libmp3lame0``.
-
-Source: `v2a <https://github.com/vonbrownie/linux-home-bin/blob/master/v2a>`_ (github.com/vonbrownie)

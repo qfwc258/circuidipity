@@ -3,7 +3,7 @@ Transform a USB stick into a boot device packing multiple Linux distros
 =======================================================================
 
 :date: 2012-12-06 01:23:00
-:tags: linux, shell, ubuntu, debian
+:tags: linux, shell, programming, ubuntu, debian
 :slug: multi-boot-usb
 :modified: 2015-02-26 20:53:00
 
@@ -141,7 +141,7 @@ All done! Reboot, select the USB stick (depends on BIOS) as boot device and GRUB
 5. GRUBS Reanimated USB Boot Stick
 ==================================
 
-I made the `'GRUBS' shell script <https://github.com/vonbrownie/grubs>`_ that creates multi-boot Linux USB sticks using the above steps and placed it on `GitHub <https://github.com/vonbrownie/grubs>`_.
+I created the `GRUBS shell script <https://github.com/vonbrownie/grubs>`_ that creates multi-boot Linux USB sticks using the above steps and placed it on GitHub.
 
 Happy hacking!
 

@@ -2,7 +2,7 @@
 FunkyGoodTimer - A simple (but funky) graphical countdown timer
 ===============================================================
 
-:tags: shell, programming, github, linux
+:tags: shell, programming, linux
 :slug: funkygoodtimer
 :modified: 2014-04-19 01:23:00
 

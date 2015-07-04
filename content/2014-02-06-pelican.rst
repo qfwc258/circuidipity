@@ -4,7 +4,7 @@ Build a blog using the Pelican static site generator
 
 :date: 2014-02-06 01:23:00
 :slug: pelican
-:tags: pelican, web, python, linux, networks
+:tags: pelican, python, networks, debian, linux
 
 `Pelican <http://docs.getpelican.com/en/3.3.0/>`_ is a Python-powered **static site generator**. I design the look and layout of this site using CSS and `Jinja2 <http://jinja.pocoo.org/docs/>`_ templates and write my posts as plaintext files using `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ and Pelican compiles the contents into HTML output suitable for a blog.
 

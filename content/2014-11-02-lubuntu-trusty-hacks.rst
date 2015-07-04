@@ -4,7 +4,7 @@
 
 :date: 2014-11-02 00:12:00
 :slug: lubuntu-trusty-hacks
-:tags: lubuntu, ubuntu, linux
+:tags: lxde, lubuntu, ubuntu, linux
 :modified: 2014-11-15 01:10:00
 
 .. image:: images/lubuntu_logo.png

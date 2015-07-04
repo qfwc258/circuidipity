@@ -2,7 +2,7 @@
 Debian Wheezy Minimal Install
 =============================
 
-:tags: debian, linux, shell, programming, github
+:tags: debian, linux, shell, programming
 :slug: install-debian-wheezy-screenshot-tour
 :modified: 2014-08-06 01:23:00
 
