@@ -23,7 +23,7 @@ All configuration is done on the secondary router to setup device as a bridged r
 0. Install relayd
 =================
 
-Access the internet by connecting an ethernet cable from the secondary router's WAN port to the primary router. Login and install relayd:
+Access the internet by connecting an ethernet cable from the secondary router's WAN port to the primary router. Login and install ``relayd``:
 
 .. code-block:: bash
 
