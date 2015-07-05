@@ -25,12 +25,12 @@
 
 <!-- article -->
 <h1>PHP + Nginx + PostgreSQL</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 01 March 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 05 July 2015</p>
 <div id="article">
     <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #6 .:</a> As a requirement to host web applications like <a class="reference external" href="http://www.circuidipity.com/ttrss.html">Tiny Tiny RSS</a> on my Raspberry Pi I install <strong>PHP</strong>, the lightweight web server <strong>Nginx</strong>, and the <strong>PostgreSQL</strong> database.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p><strong>Server</strong> is a <a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html">Raspberry Pi 2</a> running Ubuntu 14.04 LTS located at ip address <tt class="docutils literal">192.168.1.88</tt>.</p>
+<p><strong>Server</strong> is a <a class="reference external" href="http://www.circuidipity.com/tag-raspberry-pi.html">Raspberry Pi 2</a> (example: <tt class="docutils literal">ip_address:192.168.1.88</tt>) running <a class="reference external" href="http://www.circuidipity.com/tag-raspbian.html">Raspbian</a>.</p>
 </div>
 <div class="section" id="php">
 <h2>0. PHP</h2>
@@ -38,20 +38,20 @@
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get update
 <span class="nv">$ </span>sudo apt-get install php5 php5-fpm php-apc php5-curl php5-cli php5-pgsql php5-gd php5-mcrypt
 </pre></div>
-<p>To improve security edit <tt class="docutils literal">/etc/php5/fpm/php.ini</tt> and change <strong>pathinfo</strong> to <tt class="docutils literal">0</tt>:</p>
+<p>Improve security by editing <tt class="docutils literal">/etc/php5/fpm/php.ini</tt> and modifying <strong>pathinfo</strong> to <tt class="docutils literal">0</tt>:</p>
 <div class="highlight"><pre>cgi.fix_pathinfo<span class="o">=</span>0
 </pre></div>
 <p>Restart PHP:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo service php5-fpm restart
+<div class="highlight"><pre><span class="nv">$ </span>sudo systemctl restart php5-fpm
 </pre></div>
 </div>
 <div class="section" id="nginx">
 <h2>1. Nginx</h2>
 <p>Install:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install nginx
-<span class="nv">$ </span>sudo service nginx start
+<span class="nv">$ </span>sudo systemctl start nginx
 </pre></div>
-<p>To verify that the web server is running, open a browser and navigate to (example) <tt class="docutils literal"><span class="pre">http://192.168.1.88</span></tt>. If you see <tt class="docutils literal">Welcome to nginx!</tt> the server is installed correctly.</p>
+<p>Verify web server is running by opening a browser and navigating to (example) <tt class="docutils literal"><span class="pre">http://192.168.1.88</span></tt>. If you see <tt class="docutils literal">Welcome to nginx!</tt> the server is installed correctly.</p>
 </div>
 <div class="section" id="host-multiple-domains">
 <h2>2. Host multiple domains</h2>
@@ -109,8 +109,7 @@ server_name www.my2pi.com<span class="p">;</span>
 </div>
 <div class="section" id="port-forwarding">
 <h3>2.5 Port Forwarding</h3>
-<p>Configure <a class="reference external" href="http://www.circuidipity.com/20141006.html">port forwarding on the home router</a> to redirect traffic on port 80 to the internal IP address of the nginx server. Point your browser to <tt class="docutils literal">www.my2pi.com</tt>. Success (hopefully)!</p>
-<p>Repeat the above steps to add more domains. The limiting factor is the <strong>upload bandwidth</strong> provided by the home ISP (typically a fraction of the download speed).</p>
+<p>Configure <a class="reference external" href="http://www.circuidipity.com/20141006.html">port forwarding on the home router</a> to redirect traffic on port 80 to the internal IP address of the nginx server. Repeat the above steps to add more domains. The limiting factor is the <strong>upload bandwidth</strong> provided by the home ISP (typically a fraction of the download speed).</p>
 </div>
 </div>
 <div class="section" id="postgresql">
@@ -125,15 +124,15 @@ Enter new password: <span class="o">[</span>newpasswd<span class="o">]</span>
 Enter it again: <span class="o">[</span>newpasswd<span class="o">]</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c"># \quit</span>
 </pre></div>
-<p>Example: To create a new user <tt class="docutils literal"><span class="pre">www-data</span></tt> <a class="footnote-reference" href="#id2" id="id1">[1]</a> and database <tt class="docutils literal">mydb</tt>:</p>
+<p>Example: Create new <tt class="docutils literal"><span class="pre">user:www-data</span></tt> and <tt class="docutils literal">database:mydb</tt>: <a class="footnote-reference" href="#id2" id="id1">[1]</a></p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo -u postgres psql
 <span class="nv">postgres</span><span class="o">=</span><span class="c"># CREATE USER &quot;www-data&quot; WITH PASSWORD &#39;newpasswd&#39;;</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c"># CREATE DATABASE mydb WITH OWNER &quot;www-data&quot;;</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c"># GRANT ALL PRIVILEGES ON DATABASE mydb to &quot;www-data&quot;;</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c"># \quit</span>
 </pre></div>
-<p>Save any changes and reload the database server:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo service postgresql reload
+<p>Save any changes and reload server:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo systemctl restart postgresql.service
 </pre></div>
 </div>
 <div class="section" id="helpful-resources">
@@ -158,9 +157,10 @@ Enter it again: <span class="o">[</span>newpasswd<span class="o">]</span>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-networks.html">networks</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-web.html">web</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-raspbian.html">raspbian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-raspberry-pi.html">raspberry pi</a>
 </p>
 </div>
 

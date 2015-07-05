@@ -25,8 +25,12 @@
 
 <!-- article -->
 <h1>Run a Raspberry Pi 2 from external USB storage</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 05 July 2015</p>
 <div id="article">
-    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #0 .:</a> I am exploring the use of my Pi as <strong>24/7 uptime home server</strong> and one of the hacks I wish to add is using Pi as a cheap and cheerful <a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html">network attached storage (NAS)</a> device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?</p>
+    <p><strong>Update:</strong> Home server <a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html">now running Raspbian</a>.</p>
+<p>I am exploring the use of my Pi as <strong>24/7 uptime home server</strong> and one of the hacks I wish to add is using Pi as a cheap and cheerful <a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html">network attached storage (NAS)</a> device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
 <p>I imagine an always-on Pi would enjoy more robust performance from a hard drive than SD card. <a class="footnote-reference" href="#id4" id="id1">[1]</a> I put my plan in motion using:</p>
 <ul class="simple">
 <li>Raspberry Pi 2 Model B</li>
@@ -37,8 +41,6 @@
 <li>ethernet cable</li>
 <li>HDMI display + USB keyboard (for initial setup)</li>
 </ul>
-<div class="section" id="let-s-go">
-<h2>Let's go!</h2>
 <p>With the move to ARMv7 the Raspberry Pi 2 is now capable of running the ARM port of Ubuntu. A community-created <a class="reference external" href="https://wiki.ubuntu.com/ARM/RaspberryPi">Ubuntu 14.04 LTS minimal image</a> with an updated <tt class="docutils literal">3.18</tt> kernel and firmware suitable for Pi 2 is now available. <a class="footnote-reference" href="#id5" id="id2">[2]</a></p>
 </div>
 <div class="section" id="download">

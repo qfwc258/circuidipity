@@ -25,13 +25,12 @@
 
 <!-- article -->
 <h1>Secure remote access using SSH keys</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 01 March 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 05 July 2015</p>
 <div id="article">
-    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #1 .:</a> Create cryptographic keys and disable password logins to make remote machines more secure.</p>
+    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #1 .:</a> Create <strong>cryptographic keys</strong> and disable password logins to make remote machines more secure.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p><strong>Server</strong> is a <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi 2</a> configured for SSH logins from an <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Ubuntubook</a> <strong>client</strong>. Both devices are running Ubuntu 14.04 LTS.</p>
-<p><strong>Server options:</strong> username <tt class="docutils literal">pi</tt>, ip address <tt class="docutils literal">192.168.1.88</tt></p>
+<p><strong>Server</strong> is a <a class="reference external" href="http://www.circuidipity.com/tag-raspberry-pi.html">Raspberry Pi 2</a> running <a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage-using-raspbian.html">Raspbian</a> configured for SSH logins (<tt class="docutils literal">login:pi/ip_address:192.168.1.88</tt>) from a <strong>client</strong> running <a class="reference external" href="http://www.circuidipity.com/tag-debian.html">Debian</a>.</p>
 </div>
 <div class="section" id="install">
 <h2>0. Install</h2>
@@ -47,32 +46,26 @@
 <span class="nv">$ </span>ssh-keygen -lf /etc/ssh/ssh_host_rsa_key.pub &gt;&gt; ~/.ssh/keys.txt
 </pre></div>
 <p>... and give <tt class="docutils literal">keys.txt</tt> to users to compare signature when connecting for the first time.</p>
-<p><strong>Optional:</strong> specify usernames in <tt class="docutils literal">/etc/ssh/sshd_config</tt> to be granted system access (<strong>disabling</strong> all others by default):</p>
-<div class="highlight"><pre>AllowUsers pi user2 user3
-</pre></div>
-<p>Save and restart SSH with new configuration:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo service ssh restart
-</pre></div>
 </div>
 <div class="section" id="on-the-client">
 <h3>On the client</h3>
-<p>Install <tt class="docutils literal"><span class="pre">openssh-client</span></tt> and create the SSH folder in the user home directory:</p>
+<p>Install <tt class="docutils literal"><span class="pre">openssh-client</span></tt> and create the SSH folder in <tt class="docutils literal">home</tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install openssh-client
 <span class="nv">$ </span>mkdir ~/.ssh <span class="o">&amp;&amp;</span> chmod <span class="m">700</span> ~/.ssh
 </pre></div>
-<p>Create <tt class="docutils literal"><span class="pre">~/.ssh/config</span></tt> to hold <strong>aliases</strong> with the login options for a server. Example:</p>
+<p>Create <tt class="docutils literal"><span class="pre">~/.ssh/config</span></tt> to hold <strong>aliases</strong> with the login options for a server (example):</p>
 <div class="highlight"><pre>Host raspberry.lan
 HostName 192.168.1.88
 Port 22
 User pi
 </pre></div>
-<p>Test SSH password login to Pi server:</p>
+<p>Test SSH password login to the server:</p>
 <div class="highlight"><pre><span class="nv">$ </span>ssh raspberry.lan
 pi@192.168.1.88<span class="err">&#39;</span>s password:
 Last login: Thu Feb <span class="m">19</span> 18:07:48 <span class="m">2015</span> from chromebook.lan
 <span class="err">$</span>
 </pre></div>
-<p><strong>Optional:</strong> Check out <a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html">using dynamic DNS</a> for configuring access to the Pi from anywhere in the world.</p>
+<p><strong>Optional:</strong> Use <a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html">Dynamic DNS (DDNS)</a> for configuring access to the server from anywhere in the world.</p>
 </div>
 </div>
 <div class="section" id="keys">
@@ -96,7 +89,7 @@ Identity added: /home/pi/.ssh/id_rsa <span class="o">(</span>/home/pi/.ssh/id_rs
 Last login: Thu Feb <span class="m">19</span> 18:22:42 <span class="m">2015</span> from chromebook.lan
 <span class="err">$</span>
 </pre></div>
-<p>No passphrase request indicates SSH key authentication is properly configured.</p>
+<p>No request for passphrase indicates SSH key authentication is properly configured.</p>
 </div>
 </div>
 <div class="section" id="disable-password-logins">
@@ -110,7 +103,7 @@ PasswordAuthentication no
 UsePAM no
 </pre></div>
 <p>Restart SSH:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo service ssh restart
+<div class="highlight"><pre><span class="nv">$ </span>sudo systemctl restart ssh
 </pre></div>
 </div>
 </div>
@@ -140,7 +133,8 @@ keychain ~/.ssh/id_rsa
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-networks.html">networks</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-raspbian.html">raspbian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-raspberry-pi.html">raspberry pi</a>
 </p>

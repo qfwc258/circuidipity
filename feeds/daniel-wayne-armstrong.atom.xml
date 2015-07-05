@@ -1,8 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-07-03T19:27:00-04:00</updated><entry><title>Minimal Raspbian Jessie</title><link href="http://www.circuidipity.com/minimal-raspbian-jessie.html" rel="alternate"></link><updated>2015-07-03T19:27:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-03:minimal-raspbian-jessie.html</id><summary type="html">&lt;p&gt;Setup a minimal &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspbian.html"&gt;Raspbian&lt;/a&gt; configuration on the &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspberry-pi.html"&gt;Raspberry Pi&lt;/a&gt; using &lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst"&gt;raspbian-ua-netinst&lt;/a&gt; (ideal start for a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;home server&lt;/a&gt;) with the latest packages from &lt;a class="reference external" href="http://www.circuidipity.com/tag-debian.html"&gt;Debian&lt;/a&gt; &lt;tt class="docutils literal"&gt;jessie/stable&lt;/tt&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-07-05T17:11:00-04:00</updated><entry><title>Run a Raspberry Pi 2 from external USB storage using Raspbian</title><link href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html" rel="alternate"></link><updated>2015-07-05T15:53:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-05:run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #0 .:&lt;/a&gt; I am exploring the use of my Pi as &lt;strong&gt;24/7 uptime home server&lt;/strong&gt; and one of the hacks I wish to add is using Pi as a cheap and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;network attached storage (NAS)&lt;/a&gt; device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi rootfs and run it from there as well?&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;The netinstaller runs unattended (no display/keyboard required) with the pre-configured option of installing rootfs to external USB storage. Upon completion the Pi reboots with DHCP and OpenSSH for remote access.&lt;/p&gt;
+&lt;p&gt;I imagine a 24/7 uptime Pi enjoys more storage and robust performance operating from hard drive storage vs a microSD card. &lt;a class="footnote-reference" href="#id5" id="id1"&gt;[1]&lt;/a&gt; I put my plan in motion using:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Raspberry Pi 2 Model B&lt;/li&gt;
+&lt;li&gt;5V 2A microUSB power adapter&lt;/li&gt;
+&lt;li&gt;8GB microSD card (for initial setup and &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt; partition) &lt;a class="footnote-reference" href="#id6" id="id2"&gt;[2]&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;1TB powered USB hard drive&lt;/li&gt;
+&lt;li&gt;ethernet cable&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst"&gt;raspbian-ua-netinst&lt;/a&gt; &lt;a class="footnote-reference" href="#id7" id="id3"&gt;[3]&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Setup a minimal &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspbian.html"&gt;Raspbian&lt;/a&gt; configuration using the latest packages drawn from &lt;a class="reference external" href="http://www.circuidipity.com/tag-debian.html"&gt;Debian&lt;/a&gt; &lt;tt class="docutils literal"&gt;jessie/stable&lt;/tt&gt;  with &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;raspbian-ua-netinst&lt;/span&gt;&lt;/tt&gt;. The netinstaller runs unattended (no display/keyboard required) with the option of installing rootfs to external USB storage. Upon completion the Pi reboots with DHCP and OpenSSH for remote access.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prepare-the-microsd"&gt;
+&lt;h2&gt;0. Prepare the microSD&lt;/h2&gt;
+&lt;p&gt;MicroSD card is prepared on a host running Debian. &lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst/releases/"&gt;Download&lt;/a&gt; the latest &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;raspbian-ua-netinst-vX.X.X.img.xz&lt;/span&gt;&lt;/tt&gt; and flash image to the card (example &lt;tt class="docutils literal"&gt;sdX&lt;/tt&gt;):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# apt-get install xz-utils&lt;/span&gt;
+&lt;span class="c"&gt;# xzcat /path/to/raspbian-ua-netinst-&amp;lt;latest-version-number&amp;gt;.img.xz &amp;gt; /dev/sdX &amp;amp;&amp;amp; sync&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="customize-the-install"&gt;
+&lt;h2&gt;1. Customize the install&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst#installer-customization"&gt;Default settings&lt;/a&gt; for the netinstaller are customized by creating &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;installer-config.txt&lt;/span&gt;&lt;/tt&gt; in the root directory of the newly-prepared microSD. Remove card, re-insert, mount &lt;tt class="docutils literal"&gt;sdX1&lt;/tt&gt;, add the config.&lt;/p&gt;
+&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; Netinstaller reformats drive and installs rootfs to &lt;tt class="docutils literal"&gt;sda1&lt;/tt&gt;. Omit if you want a single partition that fills the entire drive (vs separate &lt;tt class="docutils literal"&gt;home&lt;/tt&gt; partition I create later on). Either way... &lt;strong&gt;all data will be wiped from the drive&lt;/strong&gt;. Make any backups you need to make.&lt;/p&gt;
+&lt;p&gt;Add only the settings to be changed from their defaults. Example that creates a 256MB &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt; on the microSD and 24GB &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; on the USB:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;packages&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;vim,tmux
+&lt;span class="nv"&gt;hostname&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;MyHostname
+&lt;span class="nv"&gt;bootsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;+256M
+&lt;span class="nv"&gt;rootsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;+24000M
+&lt;span class="nv"&gt;usbroot&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A second &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;post-install.txt&lt;/span&gt;&lt;/tt&gt; shell script can also be created alongside &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;installer-config.txt&lt;/span&gt;&lt;/tt&gt; that will run after installation is complete but before the Pi reboots.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="install-and-configure"&gt;
+&lt;h2&gt;2. Install and configure&lt;/h2&gt;
+&lt;p&gt;I connect the 1TB hard drive to Pi, insert microSD, and power up. Netinstaller typically runs under 15 minutes to setup a base configuration before rebooting the Pi.&lt;/p&gt;
+&lt;p&gt;SSH into the newly-configured Pi (default &lt;tt class="docutils literal"&gt;login: root&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;password: raspbian&lt;/tt&gt;). Details of the install are logged in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/var/log/raspbian-ua-netinst.log&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Configure: &lt;a class="footnote-reference" href="#id8" id="id4"&gt;[4]&lt;/a&gt;&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;a new root password: &lt;tt class="docutils literal"&gt;passwd&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;default locale: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dpkg-reconfigure&lt;/span&gt; locales&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;timezone: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dpkg-reconfigure&lt;/span&gt; tzdata&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;create 1GB swap file: &lt;tt class="docutils literal"&gt;dd &lt;span class="pre"&gt;if=/dev/zero&lt;/span&gt; &lt;span class="pre"&gt;of=/swap&lt;/span&gt; bs=1M count=1024 &amp;amp;&amp;amp; mkswap /swap&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;enable swap file at boot: &lt;tt class="docutils literal"&gt;echo &amp;quot;/swap none swap sw 0 0&amp;quot; &amp;gt;&amp;gt; /etc/fstab&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;hardware random number generator: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-get&lt;/span&gt; &lt;span class="pre"&gt;-y&lt;/span&gt; install &lt;span class="pre"&gt;rng-tools&lt;/span&gt; &amp;amp;&amp;amp; echo &lt;span class="pre"&gt;&amp;quot;bcm2708-rng&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/modules&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;add new user: &lt;tt class="docutils literal"&gt;adduser USERNAME&lt;/tt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="upgrade"&gt;
+&lt;h2&gt;3. Upgrade&lt;/h2&gt;
+&lt;p&gt;Stable release of Raspbian (2015-07-03) is currently built on older Debian &lt;tt class="docutils literal"&gt;wheezy&lt;/tt&gt; packages. Upgrade to the &lt;tt class="docutils literal"&gt;jessie/stable&lt;/tt&gt; branch by first modifying &lt;tt class="docutils literal"&gt;/etc/apt/sources.list&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# cp /etc/apt/sources.list /etc/apt/sources.list.bak&lt;/span&gt;
+&lt;span class="c"&gt;# echo &amp;quot;deb http://mirrordirector.raspbian.org/raspbian jessie main contrib non-free firmware rpi&amp;quot; &amp;gt; /etc/apt/sources.list&lt;/span&gt;
+&lt;span class="c"&gt;# echo &amp;quot;deb http://archive.raspbian.org/raspbian jessie main&amp;quot; &amp;gt;&amp;gt; /etc/apt/sources.list&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Update the package lists and upgrade:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# apt-get update &amp;amp;&amp;amp; apt-get -y dist-upgrade &amp;amp;&amp;amp; apt-get -y autoremove&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="partition-external-usb-drive"&gt;
+&lt;h2&gt;4. Partition external USB drive&lt;/h2&gt;
+&lt;p&gt;Device is &lt;tt class="docutils literal"&gt;sda&lt;/tt&gt;. Use &lt;strong&gt;fdisk&lt;/strong&gt; to create a new partition for &lt;tt class="docutils literal"&gt;home&lt;/tt&gt; on the USB:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;sda1 - 24GB - &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; - created by &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;raspbian-ua-netinst&lt;/span&gt;&lt;/tt&gt; using &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;installer-config.txt&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;sda2 - remaining space - &lt;tt class="docutils literal"&gt;home&lt;/tt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# fdisk /dev/sda&lt;/span&gt;
+
+Welcome to fdisk &lt;span class="o"&gt;(&lt;/span&gt;util-linux 2.25.2&lt;span class="o"&gt;)&lt;/span&gt;.
+Changes will remain in memory only, &lt;span class="k"&gt;until&lt;/span&gt; you decide to write them.
+Be careful before using the write command.
+
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
+Disk /dev/sda: 931.5 GiB, &lt;span class="m"&gt;1000204886016&lt;/span&gt; bytes, &lt;span class="m"&gt;1953525168&lt;/span&gt; sectors
+Units: sectors of &lt;span class="m"&gt;1&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;512&lt;/span&gt; bytes
+Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
+I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
+Disklabel &lt;span class="nb"&gt;type&lt;/span&gt;: dos
+Disk identifier: 0x00000000
+
+Device     Boot Start      End  Sectors  Size Id Type
+/dev/sda1          &lt;span class="m"&gt;63&lt;/span&gt; &lt;span class="m"&gt;46893734&lt;/span&gt; &lt;span class="m"&gt;46893672&lt;/span&gt; 22.4G &lt;span class="m"&gt;83&lt;/span&gt; Linux
+
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: n
+Partition &lt;span class="nb"&gt;type&lt;/span&gt;
+&lt;span class="nb"&gt;    &lt;/span&gt;p   primary &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; primary, &lt;span class="m"&gt;0&lt;/span&gt; extended, &lt;span class="m"&gt;3&lt;/span&gt; free&lt;span class="o"&gt;)&lt;/span&gt;
+    e   extended &lt;span class="o"&gt;(&lt;/span&gt;container &lt;span class="k"&gt;for&lt;/span&gt; logical partitions&lt;span class="o"&gt;)&lt;/span&gt;
+Select &lt;span class="o"&gt;(&lt;/span&gt;default p&lt;span class="o"&gt;)&lt;/span&gt;: p
+Partition number &lt;span class="o"&gt;(&lt;/span&gt;2-4, default 2&lt;span class="o"&gt;)&lt;/span&gt;:
+First sector &lt;span class="o"&gt;(&lt;/span&gt;46893735-1953525167, default 46895104&lt;span class="o"&gt;)&lt;/span&gt;:
+Last sector, +sectors or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G,T,P&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;46895104-1953525167, default 1953525167&lt;span class="o"&gt;)&lt;/span&gt;:
+
+Created a new partition &lt;span class="m"&gt;2&lt;/span&gt; of &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Linux&amp;#39;&lt;/span&gt; and of size 909.2 GiB.
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
+Disk /dev/sda: 931.5 GiB, &lt;span class="m"&gt;1000204886016&lt;/span&gt; bytes, &lt;span class="m"&gt;1953525168&lt;/span&gt; sectors
+Units: sectors of &lt;span class="m"&gt;1&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;512&lt;/span&gt; bytes
+Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
+I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
+Disklabel &lt;span class="nb"&gt;type&lt;/span&gt;: dos
+Disk identifier: 0x00000000
+
+Device     Boot    Start        End    Sectors   Size Id Type
+/dev/sda1             &lt;span class="m"&gt;63&lt;/span&gt;   &lt;span class="m"&gt;46893734&lt;/span&gt;   &lt;span class="m"&gt;46893672&lt;/span&gt;  22.4G &lt;span class="m"&gt;83&lt;/span&gt; Linux
+/dev/sda2       &lt;span class="m"&gt;46895104&lt;/span&gt; &lt;span class="m"&gt;1953525167&lt;/span&gt; &lt;span class="m"&gt;1906630064&lt;/span&gt; 909.2G &lt;span class="m"&gt;83&lt;/span&gt; Linux
+
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: w
+The partition table has been altered.
+Calling ioctl&lt;span class="o"&gt;()&lt;/span&gt; to re-read partition table.
+Re-reading the partition table failed.: Device or resource busy
+
+The kernel still uses the old table. The new table will be used at the next reboot or after you run partprobe&lt;span class="o"&gt;(&lt;/span&gt;8&lt;span class="o"&gt;)&lt;/span&gt; or kpartx&lt;span class="o"&gt;(&lt;/span&gt;8&lt;span class="o"&gt;)&lt;/span&gt;.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="move-home"&gt;
+&lt;h2&gt;5. Move home&lt;/h2&gt;
+&lt;p&gt;Format new partition using &lt;tt class="docutils literal"&gt;ext4&lt;/tt&gt; filesystem:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# mkfs.ext4 -E lazy_itable_init=0,lazy_journal_init=0 /dev/sda2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Mount partition and move over any contents in &lt;tt class="docutils literal"&gt;/home&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# mount -t ext4 /dev/sda2 /mnt &amp;amp;&amp;amp; mv /home/* /mnt/ &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; umount /mnt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Configure &lt;tt class="docutils literal"&gt;fstab&lt;/tt&gt; and mount new location of &lt;tt class="docutils literal"&gt;home&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# echo &amp;quot;/dev/sda2 /home ext4 noatime 0 2&amp;quot; &amp;gt;&amp;gt; /etc/fstab &amp;amp;&amp;amp; mount /home&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="static-address"&gt;
+&lt;h2&gt;6. Static address&lt;/h2&gt;
+&lt;p&gt;A Raspberry Pi that is going to stay home and run as a server can be configured to use a &lt;strong&gt;static network address&lt;/strong&gt;. Sample &lt;tt class="docutils literal"&gt;/etc/network/interfaces&lt;/tt&gt; modification that disables &lt;tt class="docutils literal"&gt;dhcp&lt;/tt&gt; and sets ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt; and connects to a router (that handles DNS) at &lt;tt class="docutils literal"&gt;192.168.1.1&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#iface eth0 inet dhcp&lt;/span&gt;
+auto eth0
+iface eth0 inet static
+    address 192.168.1.88
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+    dns-nameservers 192.168.1.1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="openssh"&gt;
+&lt;h2&gt;7. OpenSSH&lt;/h2&gt;
+&lt;p&gt;Secure access to remote servers &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;using SSH keys&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h3&gt;Notes&lt;/h3&gt;
+&lt;table class="docutils footnote" frame="void" id="id5" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.raspberrypi.org/forums/viewtopic.php?f=29&amp;amp;t=44177"&gt;Discussion thread&lt;/a&gt; about moving root to external USB storage.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id6" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Pi 2 requires microSD card at boot so we continue using original &lt;tt class="docutils literal"&gt;/boot&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id7" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id3"&gt;[3]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html"&gt;Version 1&lt;/a&gt; of HOWTO used Raspbian on a Raspberry Pi Model B. With the Pi 2 moving to ARMv7 I used a &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html"&gt;minimal Ubuntu 14.04&lt;/a&gt; installer for Version 2.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id8" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id4"&gt;[4]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;I created a &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/scripts/raspbian-post-install.sh"&gt;post-install script&lt;/a&gt; for configuring the base install and upgrading to &lt;tt class="docutils literal"&gt;jessie&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="raspberry pi"></category><category term="raspbian"></category><category term="debian"></category><category term="linux"></category><category term="networks"></category></entry><entry><title>Minimal Raspbian Jessie</title><link href="http://www.circuidipity.com/minimal-raspbian-jessie.html" rel="alternate"></link><updated>2015-07-03T19:27:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-03:minimal-raspbian-jessie.html</id><summary type="html">&lt;p&gt;Setup a minimal &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspbian.html"&gt;Raspbian&lt;/a&gt; configuration on the &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspberry-pi.html"&gt;Raspberry Pi&lt;/a&gt; using &lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst"&gt;raspbian-ua-netinst&lt;/a&gt; (ideal start for a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;home server&lt;/a&gt;) with the latest packages from &lt;a class="reference external" href="http://www.circuidipity.com/tag-debian.html"&gt;Debian&lt;/a&gt; &lt;tt class="docutils literal"&gt;jessie/stable&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;The netinstaller runs unattended (no display/keyboard required) with the option of installing &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html"&gt;rootfs to external USB storage&lt;/a&gt;. Upon completion the Pi reboots with DHCP and OpenSSH for remote access.&lt;/p&gt;
 &lt;p&gt;I put my plan in motion using:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Raspberry Pi 2 Model B&lt;/li&gt;
@@ -55,9 +231,8 @@
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Reboot.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
 &lt;div class="section" id="notes"&gt;
-&lt;h2&gt;Notes&lt;/h2&gt;
+&lt;h3&gt;Notes&lt;/h3&gt;
 &lt;table class="docutils footnote" frame="void" id="id3" rules="none"&gt;
 &lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
 &lt;tbody valign="top"&gt;
@@ -93,6 +268,7 @@ dd: error writing ‘/dev/sdb’: Input/output error
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 </summary><category term="raspbian"></category><category term="debian"></category><category term="linux"></category><category term="raspberry pi"></category><category term="networks"></category></entry><entry><title>OpenWrt router as bridged repeater using relayd</title><link href="http://www.circuidipity.com/openwrt-bridged-repeater.html" rel="alternate"></link><updated>2015-06-26T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-06-26:openwrt-bridged-repeater.html</id><summary type="html">&lt;p&gt;Extend the range of a wireless network using a cheap and cheerful router running &lt;a class="reference external" href="http://www.circuidipity.com/tag-openwrt.html"&gt;OpenWrt&lt;/a&gt; as a &lt;strong&gt;bridged repeater&lt;/strong&gt;. All client devices use the same IP address range and are capable of communicating with each other.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
@@ -106,7 +282,7 @@ dd: error writing ‘/dev/sdb’: Input/output error
 &lt;/div&gt;
 &lt;div class="section" id="install-relayd"&gt;
 &lt;h2&gt;0. Install relayd&lt;/h2&gt;
-&lt;p&gt;Access the internet by connecting an ethernet cable from the secondary router's WAN port to the primary router. Login and install relayd:&lt;/p&gt;
+&lt;p&gt;Access the internet by connecting an ethernet cable from the secondary router's WAN port to the primary router. Login and install &lt;tt class="docutils literal"&gt;relayd&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# opkg update&lt;/span&gt;
 &lt;span class="c"&gt;# opkg install relayd&lt;/span&gt;
 &lt;span class="c"&gt;# /etc/init.d/relayd enable&lt;/span&gt;
@@ -222,10 +398,10 @@ config dhcp &lt;span class="s1"&gt;&amp;#39;wan&amp;#39;&lt;/span&gt;
 &lt;/div&gt;
 </summary><category term="openwrt"></category><category term="linux"></category><category term="networks"></category></entry><entry><title>Chromebook to Ubuntubook</title><link href="http://www.circuidipity.com/c720-ubuntubook.html" rel="alternate"></link><updated>2015-05-02T17:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-05-02:c720-ubuntubook.html</id><summary type="html">&lt;p&gt;Replace &lt;strong&gt;Chrome OS&lt;/strong&gt; permanently with &lt;strong&gt;Ubuntu 15.04 Linux&lt;/strong&gt; on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt;.&lt;/p&gt;
 &lt;img alt="Ubuntu 15.04 Vivid Vervet" class="align-right" src="images/vivid-icon.png" style="width: 250px; height: 250px;" /&gt;
-&lt;p&gt;Running a &lt;strong&gt;full-featured Linux&lt;/strong&gt; on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with Debian, followed by &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Lubuntu 14.04&lt;/a&gt; and &lt;a class="reference external" href="http://www.circuidipity.com/arch-install-encrypt.html"&gt;Arch&lt;/a&gt;, and now experimenting with Ubuntu's latest and greatest and the &lt;strong&gt;Unity&lt;/strong&gt; desktop.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;This device is available in a few different configurations. Mine is the non-touchscreen model &lt;strong&gt;C720-2848&lt;/strong&gt; with (non-expandable) &lt;strong&gt;2GB RAM&lt;/strong&gt; and a (user-replaceable) &lt;strong&gt;16GB SSD&lt;/strong&gt; &lt;a class="footnote-reference" href="#id8" id="id1"&gt;[1]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with Debian, followed by &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Lubuntu 14.04&lt;/a&gt; and &lt;a class="reference external" href="http://www.circuidipity.com/arch-install-encrypt.html"&gt;Arch&lt;/a&gt;, and now experimenting with Ubuntu's latest and greatest and the &lt;strong&gt;Unity&lt;/strong&gt; desktop.&lt;/p&gt;
+&lt;p&gt;This device is available in a few different configurations. Mine is the non-touchscreen model &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;C720-2848&lt;/span&gt;&lt;/tt&gt; with (non-expandable) &lt;strong&gt;2GB RAM&lt;/strong&gt; and a (user-replaceable) &lt;strong&gt;16GB SSD&lt;/strong&gt; &lt;a class="footnote-reference" href="#id8" id="id1"&gt;[1]&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="recovery-image"&gt;
 &lt;h2&gt;0. Recovery Image&lt;/h2&gt;
@@ -547,8 +723,11 @@ parm:           use_chanctx:Enable channel context &lt;span class="k"&gt;for&lt;
 &lt;/div&gt;
 &lt;/div&gt;
 </summary><category term="chromebook"></category><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>Configure an encrypted external USB hard drive in Linux</title><link href="http://www.circuidipity.com/encrypt-external-drive.html" rel="alternate"></link><updated>2015-05-01T00:23:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-05-01:encrypt-external-drive.html</id><summary type="html">&lt;p&gt;Using an external USB hard drive is part of my personal backup plan (the other part is backing up to a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;home server&lt;/a&gt;). I actually use 2 multi-terabyte drives. One drive is in my possession and the other drive I store offsite at a friend's home. Periodically I swap the drives and update the data.&lt;/p&gt;
-&lt;p&gt;To guard against loss or theft its a good idea to &lt;strong&gt;encrypt&lt;/strong&gt; the hard drive. I prepare the device using &lt;strong&gt;Linux Unified Key Setup (LUKS)&lt;/strong&gt; and the &lt;tt class="docutils literal"&gt;cryptsetup&lt;/tt&gt; utility.&lt;/p&gt;
-&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; Make careful note of the drive and partition labels. The following steps will &lt;strong&gt;destroy all data&lt;/strong&gt; currently stored on the drive.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;To guard against loss or theft its a good idea to encrypt the hard drive. I prepare the device using &lt;strong&gt;Linux Unified Key Setup&lt;/strong&gt; (LUKS) and the &lt;tt class="docutils literal"&gt;cryptsetup&lt;/tt&gt; utility.&lt;/p&gt;
+&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; Make careful note of the drive and partition labels. The following steps &lt;strong&gt;will destroy all data&lt;/strong&gt; currently stored on the drive.&lt;/p&gt;
+&lt;/div&gt;
 &lt;div class="section" id="prepare"&gt;
 &lt;h2&gt;0. Prepare&lt;/h2&gt;
 &lt;p&gt;Download &lt;tt class="docutils literal"&gt;cryptsetup&lt;/tt&gt; if not already installed. Connect the external drive, leave it &lt;strong&gt;unmounted&lt;/strong&gt;, and make note of the device label (&lt;tt class="docutils literal"&gt;sdb&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;sdc&lt;/tt&gt; ...):&lt;/p&gt;
@@ -774,7 +953,7 @@ en_CA.UTF-8 UTF-8
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Welcome to Arch. Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="arch"></category><category term="linux"></category><category term="chromebook"></category></entry><entry><title>Samsung CLP-310 Printer</title><link href="http://www.circuidipity.com/samsung-clp-310-printer.html" rel="alternate"></link><updated>2015-03-09T18:17:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-09:samsung-clp-310-printer.html</id><summary type="html">&lt;p&gt;Connect a &lt;strong&gt;Samsung CLP-310&lt;/strong&gt; to a repurposed netbook as server running Ubuntu 14.04 LTS and configure as printer for a home network.&lt;/p&gt;
+</summary><category term="arch"></category><category term="linux"></category><category term="chromebook"></category></entry><entry><title>Samsung CLP-310 Printer</title><link href="http://www.circuidipity.com/samsung-clp-310-printer.html" rel="alternate"></link><updated>2015-03-09T18:17:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-09:samsung-clp-310-printer.html</id><summary type="html">&lt;p&gt;Connect a &lt;strong&gt;Samsung CLP-310&lt;/strong&gt; to server running Ubuntu 14.04 LTS and configure as printer for a home network.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;/div&gt;
@@ -831,7 +1010,7 @@ WebInterface Yes
 &lt;p&gt;Admin functions available at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://192.168.1.88:631/admin&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="ubuntu"></category><category term="linux"></category><category term="networks"></category></entry><entry><title>Brother MFC-J450DW All-In-One Printer/Scanner</title><link href="http://www.circuidipity.com/brother-mfc-j450dw-printer-scanner.html" rel="alternate"></link><updated>2015-03-04T20:40:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-04:brother-mfc-j450dw-printer-scanner.html</id><summary type="html">&lt;p&gt;Connect a &lt;strong&gt;Brother MFC-J450DW&lt;/strong&gt; to a repurposed netbook as server running Ubuntu 14.04 LTS and configure as printer/scanner for a home network.&lt;/p&gt;
+</summary><category term="ubuntu"></category><category term="linux"></category><category term="networks"></category></entry><entry><title>Brother MFC-J450DW All-In-One Printer/Scanner</title><link href="http://www.circuidipity.com/brother-mfc-j450dw-printer-scanner.html" rel="alternate"></link><updated>2015-03-04T20:40:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-04:brother-mfc-j450dw-printer-scanner.html</id><summary type="html">&lt;p&gt;Connect a &lt;strong&gt;Brother MFC-J450DW&lt;/strong&gt; to server running Ubuntu 14.04 LTS and configure as printer+scanner for a home network.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;/div&gt;
@@ -989,7 +1168,10 @@ ATTRS&lt;span class="o"&gt;{&lt;/span&gt;idVendor&lt;span class="o"&gt;}==&lt;/s
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="ubuntu"></category><category term="linux"></category><category term="networks"></category></entry><entry><title>Run a Raspberry Pi 2 from external USB storage</title><link href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html" rel="alternate"></link><updated>2015-03-02T00:05:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-02:run-a-raspberry-pi-2-from-external-usb-storage.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #0 .:&lt;/a&gt; I am exploring the use of my Pi as &lt;strong&gt;24/7 uptime home server&lt;/strong&gt; and one of the hacks I wish to add is using Pi as a cheap and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;network attached storage (NAS)&lt;/a&gt; device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?&lt;/p&gt;
+</summary><category term="ubuntu"></category><category term="linux"></category><category term="networks"></category></entry><entry><title>Run a Raspberry Pi 2 from external USB storage</title><link href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html" rel="alternate"></link><updated>2015-07-05T17:11:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-02:run-a-raspberry-pi-2-from-external-usb-storage.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; Home server &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html"&gt;now running Raspbian&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I am exploring the use of my Pi as &lt;strong&gt;24/7 uptime home server&lt;/strong&gt; and one of the hacks I wish to add is using Pi as a cheap and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;network attached storage (NAS)&lt;/a&gt; device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;I imagine an always-on Pi would enjoy more robust performance from a hard drive than SD card. &lt;a class="footnote-reference" href="#id4" id="id1"&gt;[1]&lt;/a&gt; I put my plan in motion using:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Raspberry Pi 2 Model B&lt;/li&gt;
@@ -1000,8 +1182,6 @@ ATTRS&lt;span class="o"&gt;{&lt;/span&gt;idVendor&lt;span class="o"&gt;}==&lt;/s
 &lt;li&gt;ethernet cable&lt;/li&gt;
 &lt;li&gt;HDMI display + USB keyboard (for initial setup)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;With the move to ARMv7 the Raspberry Pi 2 is now capable of running the ARM port of Ubuntu. A community-created &lt;a class="reference external" href="https://wiki.ubuntu.com/ARM/RaspberryPi"&gt;Ubuntu 14.04 LTS minimal image&lt;/a&gt; with an updated &lt;tt class="docutils literal"&gt;3.18&lt;/tt&gt; kernel and firmware suitable for Pi 2 is now available. &lt;a class="footnote-reference" href="#id5" id="id2"&gt;[2]&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="download"&gt;
@@ -1307,11 +1487,11 @@ iface eth0 inet static
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="raspberry pi"></category><category term="ubuntu"></category><category term="linux"></category><category term="networks"></category></entry><entry><title>A bit of unplanned Grub2 surgery</title><link href="http://www.circuidipity.com/20150227.html" rel="alternate"></link><updated>2015-02-27T18:40:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-27:20150227.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;PROBLEM:&lt;/strong&gt; Late night experiments &lt;a class="reference external" href="http://www.circuidipity.com/grubs.html"&gt;loading GRUB on USB sticks&lt;/a&gt; resulted in mucking up Grub on my &lt;strong&gt;primary&lt;/strong&gt; machine. After a reboot instead of a boot menu I was greeted with:&lt;/p&gt;
+</summary><category term="raspberry pi"></category><category term="ubuntu"></category><category term="linux"></category><category term="networks"></category></entry><entry><title>A bit of unplanned Grub2 surgery</title><link href="http://www.circuidipity.com/20150227.html" rel="alternate"></link><updated>2015-02-27T18:40:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-27:20150227.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;PROBLEM:&lt;/strong&gt; Late night experiments &lt;a class="reference external" href="http://www.circuidipity.com/grubs.html"&gt;loading GRUB on USB sticks&lt;/a&gt; resulted in mucking up Grub on my host machine. After a reboot instead of a boot menu I was greeted with:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;grub &amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Whoops.&lt;/p&gt;
-&lt;p&gt;Ubuntubook is running Ubuntu 14.04 LTS with a boot partition on &lt;tt class="docutils literal"&gt;sda1&lt;/tt&gt;, LUKS-encrypted root on &lt;tt class="docutils literal"&gt;sda3&lt;/tt&gt;, and the &lt;tt class="docutils literal"&gt;3.19.0&lt;/tt&gt; Linux kernel. Since the boot loader hadn't fallen into rescue mode there was hope that the essential stuff was in place but for some reason the config was not being read. A quick &lt;tt class="docutils literal"&gt;ls&lt;/tt&gt; in the Grub shell confirmed that &lt;tt class="docutils literal"&gt;/boot/grub/grub.cfg&lt;/tt&gt;, kernels, initrd files were present.&lt;/p&gt;
+&lt;p&gt;Host boot partition is &lt;tt class="docutils literal"&gt;sda1&lt;/tt&gt;, LUKS-encrypted root is &lt;tt class="docutils literal"&gt;sda3&lt;/tt&gt;, and runs Linux kernel &lt;tt class="docutils literal"&gt;3.19.0&lt;/tt&gt;. Since the boot loader hadn't fallen into rescue mode there was hope that the essential stuff was in place but for some reason the config was not being read. A quick &lt;tt class="docutils literal"&gt;ls&lt;/tt&gt; in the Grub shell confirmed that &lt;tt class="docutils literal"&gt;/boot/grub/grub.cfg&lt;/tt&gt;, kernels, initrd files were present.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;FIX:&lt;/strong&gt; After a few tries I found the right parameters for a manual boot... specifically &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;root=/dev/mapper/sda3_crypt&lt;/span&gt;&lt;/tt&gt; NOT &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;root=/dev/sda3&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;grub&amp;gt; linux &lt;span class="o"&gt;(&lt;/span&gt;hd0,1&lt;span class="o"&gt;)&lt;/span&gt;/vmlinuz-3.19.0-031900-generic &lt;span class="nv"&gt;root&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/mapper/sda3_crypt ro
 grub&amp;gt; initrd &lt;span class="o"&gt;(&lt;/span&gt;hd0,1&lt;span class="o"&gt;)&lt;/span&gt;/initrd.img-3.19.0-031900-generic
@@ -1324,148 +1504,4 @@ grub&amp;gt; boot
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Reboot and back in business!&lt;/p&gt;
 &lt;p&gt;Source: &lt;a class="reference external" href="https://help.ubuntu.com/community/Grub2/Troubleshooting#Post_Boot_Follow_Up"&gt;Grub 2 Troubleshooting - Post Boot Follow Up&lt;/a&gt;&lt;/p&gt;
-</summary><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>Ubuntu Keyboard Shortcuts</title><link href="http://www.circuidipity.com/ubuntu-keyboard-shortcuts.html" rel="alternate"></link><updated>2015-02-25T19:47:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-02-25:ubuntu-keyboard-shortcuts.html</id><summary type="html">&lt;img alt="Ubuntu" class="align-right" src="images/logo-ubuntu_cof-white_orange-hex-4.png" style="width: 214px; height: 214px;" /&gt;
-&lt;p&gt;I am exploring &lt;strong&gt;keyboard shortcuts&lt;/strong&gt; to improve workflow efficiency and happy to discover that Ubuntu's &lt;strong&gt;Unity&lt;/strong&gt; desktop is configured very keyboard-friendly by default. Here are the Ubuntu/application key combos that I find most useful...&lt;/p&gt;
-&lt;div class="section" id="launcher"&gt;
-&lt;h2&gt;Launcher&lt;/h2&gt;
-&lt;dl class="docutils"&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;Super&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;open Dash&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;Super(Hold)&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;display shortcuts&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Super-Tab&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;switch between Launcher applications&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Super-(1-9)&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;run application (1-9) on Launcher&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Alt-F2&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;run command&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;/div&gt;
-&lt;div class="section" id="switching"&gt;
-&lt;h2&gt;Switching&lt;/h2&gt;
-&lt;dl class="docutils"&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Alt-Tab&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;switch between running apps&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Control-Alt-Tab&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;switch between running apps from all workspaces&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Super-S&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;show and select workspaces&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Control-Alt-(Left,Right,Up,Down)&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;navigate between workspaces&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;/div&gt;
-&lt;div class="section" id="windows"&gt;
-&lt;h2&gt;Windows&lt;/h2&gt;
-&lt;dl class="docutils"&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Super-W&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;show windows in current workspace&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Shift-Super-W&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;show windows in all workspaces&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Control-Super-Up&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;maximize window&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Control-Super-Down&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;minimize window&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Alt-Space&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;open window menu&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Alt-F4&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;close window&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;/div&gt;
-&lt;div class="section" id="applications"&gt;
-&lt;h2&gt;Applications&lt;/h2&gt;
-&lt;div class="section" id="firefox"&gt;
-&lt;h3&gt;Firefox&lt;/h3&gt;
-&lt;dl class="docutils"&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Control-T&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;open new tab&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Control-Tab&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;switch tab&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Shift-Control-Tab&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;switch tab backwards&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Control-W&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;close tab&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Control-L&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;enter new address/search&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;F5&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;reload page&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;/div&gt;
-&lt;div class="section" id="gnome-terminal"&gt;
-&lt;h3&gt;Gnome Terminal&lt;/h3&gt;
-&lt;dl class="docutils"&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Shift-Control-T&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;open new tab&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Alt-(1-9)&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;switch to tab {1-9}&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Shift-Control-W&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;close tab&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;/div&gt;
-&lt;div class="section" id="bash"&gt;
-&lt;h3&gt;Bash&lt;/h3&gt;
-&lt;dl class="docutils"&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Control-A&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;move to the start of the line&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Control-E&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;move to the end of the line&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Alt-B&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;move back one word&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Alt-F&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;move forward one word&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Control-W&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;erase a word&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Control-U&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;erase a line&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Control-L&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;clear screen&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Control-R&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;reverse incremental search of history&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;/div&gt;
-&lt;div class="section" id="tmux"&gt;
-&lt;h3&gt;Tmux&lt;/h3&gt;
-&lt;p&gt;My &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux cheatsheet&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="gnome-screenshot"&gt;
-&lt;h3&gt;Gnome Screenshot&lt;/h3&gt;
-&lt;dl class="docutils"&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;PrtScr&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;screenshot&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Alt-PrtScr&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;window screenshot&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Shift-PrtScr&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;selected area screenshot&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="custom"&gt;
-&lt;h2&gt;Custom&lt;/h2&gt;
-&lt;div class="section" id="move-windows-between-displays"&gt;
-&lt;h3&gt;Move windows between displays&lt;/h3&gt;
-&lt;p&gt;At home I connect my &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Ubuntubook&lt;/a&gt; to an external 24&amp;quot; display to form a combined desktop across the 2 devices. I use &lt;strong&gt;Compiz&lt;/strong&gt; to create a &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Control-Super-W&lt;/span&gt;&lt;/tt&gt; key combo to move windows back and forth between displays:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install compizconfig-settings-manager compiz-plugins-extra
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Open the Dash and run &lt;tt class="docutils literal"&gt;compiz settings manager&lt;/tt&gt;. Enable and select the &lt;tt class="docutils literal"&gt;Window Management &lt;span class="pre"&gt;-&amp;gt;&lt;/span&gt; Put&lt;/tt&gt; plugin and configure a key shortcut for &lt;tt class="docutils literal"&gt;Put to Next Output&lt;/tt&gt;.&lt;/p&gt;
-&lt;img alt="Compiz Put Plugin" class="align-center" src="images/compiz_put.png" style="width: 899px; height: 565px;" /&gt;
-&lt;img alt="Compiz Put to Next Output" class="align-center" src="images/compiz_put_next.png" style="width: 899px; height: 565px;" /&gt;
-&lt;p&gt;Built-in screen &lt;tt class="docutils literal"&gt;(1366x768)&lt;/tt&gt; and external display &lt;tt class="docutils literal"&gt;(1920x1080)&lt;/tt&gt; form a combined desktop of different resolutions. Select &lt;tt class="docutils literal"&gt;Put &lt;span class="pre"&gt;-&amp;gt;&lt;/span&gt; Misc. Options &lt;span class="pre"&gt;-&amp;gt;&lt;/span&gt; Activate &amp;quot;Avoid Offscreen&amp;quot;&lt;/tt&gt; to ensure maximized windows are properly resized when moved between displays.&lt;/p&gt;
-&lt;p&gt;Logout and back in to activate modifications.&lt;/p&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="http://askubuntu.com/questions/141752/keyboard-shortcut-to-move-windows-between-monitors"&gt;Move windows between monitors&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="chromebook-keyboard-shortcuts"&gt;
-&lt;h3&gt;Chromebook keyboard shortcuts&lt;/h3&gt;
-&lt;p&gt;Top row on my Ubuntubook keyboard has a series of shortcut icons (brightness, volume, etc.) that identify in Linux as the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;F1-F10&lt;/span&gt;&lt;/tt&gt; keys and the &lt;tt class="docutils literal"&gt;Search&lt;/tt&gt; key (in the &lt;tt class="docutils literal"&gt;CapsLk&lt;/tt&gt; position) acts as &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; (Windows) modifier key.&lt;/p&gt;
-&lt;p&gt;Enable these keyboard shortcuts in Ubuntu by first installing:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; - associate keys to shell commands&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;xbacklight&lt;/tt&gt; - set backlight level using RandR&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pulseaudio-utils&lt;/span&gt;&lt;/tt&gt; - manage sound with pactl&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;xvkbd&lt;/tt&gt; - send characters to another client&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install xbindkeys xbacklight pulseaudio-utils xvkbd
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Chromebook to (L)ubuntubook&lt;/a&gt; for a sample configuration.&lt;/p&gt;
-&lt;p&gt;Next thing is to start working on my touch-typing!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</summary><category term="ubuntu"></category><category term="linux"></category></entry></feed>
+</summary><category term="debian"></category><category term="linux"></category></entry></feed>

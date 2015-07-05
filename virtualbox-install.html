@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Debian and Virtualbox</title>
+        <title>Circuidipity | Virtualbox</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -24,11 +24,14 @@
 </div>
 
 <!-- article -->
-<h1>Debian and Virtualbox</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 27 April 2014</p>
+<h1>Virtualbox</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 05 July 2015</p>
 <div id="article">
-    <p><a class="reference external" href="https://www.virtualbox.org/">Virtualbox</a> is virtualization software that allows a Linux user to HOST multiple GUEST operating systems as <strong>virtual machines</strong> (VMs). Its a cool tool for playing with different Linux distros and experimenting with configurations.</p>
-<p>In this HOWTO I install Virtualbox on a 64-bit Debian HOST and create a Debian GUEST virtual machine.</p>
+    <p><a class="reference external" href="https://www.virtualbox.org/">Virtualbox</a> is virtualization software that allows a Linux user to HOST multiple GUEST operating systems as <a class="reference external" href="http://www.circuidipity.com/tag-vm.html">virtual machines (VMs)</a>. Its a cool tool for playing with different Linux distros and experimenting with configurations.</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<p>In this HOWTO I install Virtualbox on a 64-bit <a class="reference external" href="http://www.circuidipity.com/tag-debian.html">Debian</a> HOST and create a Debian GUEST virtual machine.</p>
+</div>
 <div class="section" id="install-virtualbox-on-host">
 <h2>0. Install VirtualBox on HOST</h2>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install build-essential dkms module-assistant linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span>
@@ -42,37 +45,45 @@ vboxnetflt             <span class="m">23571</span>  0
 vboxdrv               <span class="m">190057</span>  <span class="m">4</span> vboxnetflt,vboxnetadp,vboxpci
 </pre></div>
 <p>I add my USERNAME to the <tt class="docutils literal">vboxusers</tt> group:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo adduser YOUR_USERNAME vboxusers
+<div class="highlight"><pre><span class="nv">$ </span>sudo adduser USERNAME vboxusers
 </pre></div>
 </div>
 <div class="section" id="create-the-debian-guest">
 <h2>1. Create the Debian GUEST</h2>
-<p><strong>Default Machine Folder</strong> where VM images are stored is <tt class="docutils literal">$HOME/Virtualbox VMs</tt> (this can be modified in <tt class="docutils literal"><span class="pre">File-&gt;Preferences-&gt;General</span></tt>).</p>
-<p>See the <a class="reference external" href="http://www.virtualbox.org/manual/UserManual.html">User Manual</a> for creating a GUEST virtual machine. I use the <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/">Debian mini.iso installer</a> to create a new virtual machine with a minimal system configuration. The installer auto-detects it is being configured as a virtualbox GUEST and installs the necessary <tt class="docutils literal"><span class="pre">virtualbox-guest-{dkms,utils,x11}</span></tt> packages.</p>
+<p><strong>Default Machine Folder</strong> where VM images are stored is <tt class="docutils literal">~/Virtualbox VMs</tt> (this can be modified in <tt class="docutils literal"><span class="pre">File-&gt;Preferences-&gt;General</span></tt>).</p>
+<p>See the <a class="reference external" href="http://www.virtualbox.org/manual/UserManual.html">User Manual</a> for creating a GUEST virtual machine. I use the <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/mini.iso">mini.iso installer</a> to create a new virtual machine with a minimal system configuration.</p>
 </div>
 <div class="section" id="guest-additions">
 <h2>2. GUEST Additions</h2>
+<div class="section" id="on-the-guest">
+<h3>On the GUEST</h3>
 <p><strong>Guest Additions</strong> provide extra features such as the ability to tweak display settings and add a shared folder that can accessed by both HOST and GUEST machines.</p>
-<p>I ran into a situation with my Debian 32-bit virtual machine where the installer created virtualbox kernel modules for <tt class="docutils literal"><span class="pre">linux-image-686-pae</span></tt> but not the <tt class="docutils literal">486</tt> kernel I ended up using. Confirm that the current kernel has the necessary modules:</p>
+<p>Install on GUEST:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install virtualbox-guest-<span class="o">{</span>dkms,utils,x11<span class="o">}</span>
+<span class="nv">$ </span>sudo adduser USERNAME vboxsf
+</pre></div>
+<p>I ran into a situation with Debian 32-bit virtual machine where the installer created virtualbox kernel modules for <tt class="docutils literal"><span class="pre">linux-image-686-pae</span></tt> but not the <tt class="docutils literal">486</tt> kernel I ended up using. Confirm that the current kernel has the necessary modules:</p>
 <div class="highlight"><pre><span class="nv">$ </span>modinfo /lib/modules/<span class="k">$(</span>uname -r<span class="k">)</span>/updates/dkms/vbox*
 </pre></div>
 <p>If they are missing like they were for me ... use DKMS to build them:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install build-essential dkms module-assistant linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span>
 <span class="nv">$ </span>sudo m-a prepare
-<span class="nv">$ </span>sudo adduser YOUR_USERNAME vboxsf
 </pre></div>
 <p>If the virtualbox modules need to be rebuilt for any reason for the running kernel:</p>
 <div class="highlight"><pre><span class="nv">$ </span>uname -r <span class="p">|</span> sudo xargs -n1 /usr/lib/dkms/dkms_autoinstaller start
 </pre></div>
-<p>Reboot Debian GUEST and <tt class="docutils literal">vbox</tt> drivers should now be loaded:</p>
+<p>Reboot GUEST and <tt class="docutils literal">vbox</tt> drivers should now be loaded:</p>
 <div class="highlight"><pre><span class="nv">$ </span>lsmod <span class="p">|</span> grep vbox
 vboxguest
 vboxsf
 vboxvideo
 </pre></div>
 </div>
+</div>
 <div class="section" id="guest-configuration">
 <h2>3. GUEST Configuration</h2>
+<div class="section" id="display">
+<h3>3.1 Display</h3>
 <p>Tweak display settings by going to the Virtualbox <tt class="docutils literal"><span class="pre">Machine-&gt;Settings...-&gt;Display</span></tt> setting and move the slider to add more video memory and enable 3d acceleration.</p>
 <img alt="Display Settings" src="images/20121207-display.png" style="width: 662px; height: 502px;" />
 <p>With VirtualBox guest additions the display and resolution can be changed when running X:</p>
@@ -87,9 +98,23 @@ vboxvideo
 VBoxClient --display <span class="p">&amp;</span>
 VBoxClient --seamless <span class="p">&amp;</span>
 </pre></div>
-<p>Next create a shared folder on HOST. Make it accessible to GUEST by going to <tt class="docutils literal"><span class="pre">Machine-&gt;Settings...-&gt;Shared</span> Folders</tt> and click <tt class="docutils literal">Add Shared Folder</tt> and <tt class="docutils literal"><span class="pre">Auto-Mount</span></tt>.</p>
+</div>
+<div class="section" id="console">
+<h3>3.2 Console</h3>
+<p>Debian GUEST in console mode defaults to a small 80x40 window. Resize by rebooting GUEST and:</p>
+<ul class="simple">
+<li>GRUB screen: hit <tt class="docutils literal">c</tt> to enter command mode</li>
+<li><tt class="docutils literal">grub&gt;</tt>: run <tt class="docutils literal">vbeinfo</tt> to display supported resolutions (example: <tt class="docutils literal">1152x864x32</tt>)</li>
+<li><tt class="docutils literal">/etc/default/grub</tt>: add <tt class="docutils literal">GRUB_GFXMODE=1152x864x32</tt> and <tt class="docutils literal">GRUB_GFXPAYLOAD_LINUX=keep</tt></li>
+<li>save changes: run <tt class="docutils literal"><span class="pre">update-grub</span></tt> and reboot</li>
+</ul>
+</div>
+<div class="section" id="shared-folder">
+<h3>3.3 Shared folder</h3>
+<p>Create a shared folder on HOST. Make it accessible to GUEST by going to <tt class="docutils literal"><span class="pre">Machine-&gt;Settings...-&gt;Shared</span> Folders</tt> and click <tt class="docutils literal">Add Shared Folder</tt> and <tt class="docutils literal"><span class="pre">Auto-Mount</span></tt>.</p>
 <img alt="Shared Folder Settings" src="images/20121207-shared-folders.png" style="width: 662px; height: 502px;" />
 <p>Happy hacking!</p>
+</div>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-virtualbox.html">virtualbox</a>

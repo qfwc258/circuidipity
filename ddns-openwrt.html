@@ -26,15 +26,15 @@
 <!-- article -->
 <h1>Dynamic DNS and OpenWRT</h1>
 <div id="article">
-    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #5 .:</a> Access a home server from anywhere using Dynamic DNS (DDNS).</p>
-<p>My Raspberry Pi server sits behind a router assigned a <strong>dynamic IP address</strong> by the ISP. If I want to connect to my Pi over the Internet from anywhere in the world I can use a <strong>DDNS service</strong> to create a domain name that automatically updates the IP address in the background whenever it changes and redirect traffic to the new location.</p>
+    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #5 .:</a> Access a home server from anywhere using <strong>Dynamic DNS</strong> (DDNS).</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
+<p>My Raspberry Pi server sits behind a router assigned a <strong>dynamic IP address</strong> by the ISP. If I want to connect to my Pi over the Internet from anywhere in the world I can use a <strong>DDNS service</strong> to create a domain name that automatically updates the IP address in the background whenever it changes and redirect traffic to the new location.</p>
 </div>
 <div class="section" id="select-a-ddns-service">
 <h2>0. Select a DDNS service</h2>
 <p>I chose the free DDNS service <a class="reference external" href="http://www.duckdns.org/">duckdns.org</a> which permits the creation of up to 4 domains in the format <tt class="docutils literal">your_subdomain_choice.duckdns.org</tt>. Example: Create the subdomain <tt class="docutils literal">mypihomeserver</tt> and later - after configuring the router - when entering <tt class="docutils literal">mypihomeserver.duckdns.org</tt> I will be redirected to the current IP address assigned to my home network.</p>
-<p>Make note of <a class="reference external" href="http://www.duckdns.org/install.jsp">http://www.duckdns.org/install.jsp</a> (while logged in) for customized settings useful for configuring the router for DDNS.</p>
+<p>Make note of <a class="reference external" href="http://www.duckdns.org/install.jsp">duckdns.org/install</a> (while logged in) for customized settings useful for configuring the router for DDNS.</p>
 </div>
 <div class="section" id="configure-openwrt-for-notification">
 <h2>1. Configure OpenWRT for notification</h2>
@@ -43,7 +43,7 @@
 <div class="highlight"><pre><span class="c"># opkg update</span>
 <span class="c"># opkg install luci-app-ddns ddns-scripts</span>
 </pre></div>
-<p>Use the customized settings from <a class="reference external" href="http://www.duckdns.org/install.jsp">http://www.duckdns.org/install.jsp</a> to configure <tt class="docutils literal">/etc/config/ddns</tt>:</p>
+<p>Use the customized settings from <a class="reference external" href="http://www.duckdns.org/install.jsp">duckdns.org/install</a> to configure <tt class="docutils literal">/etc/config/ddns</tt>:</p>
 <div class="highlight"><pre>config service          <span class="s2">&quot;duckdns&quot;</span>
 option enabled          <span class="s2">&quot;1&quot;</span>
 option service_name     <span class="s2">&quot;duckdns.org&quot;</span>
@@ -73,7 +73,7 @@ option use_syslog       <span class="s2">&quot;1&quot;</span>
 </div>
 <div class="section" id="port-forwarding">
 <h2>2. Port forwarding</h2>
-<p>See <a class="reference external" href="http://www.circuidipity.com/20141006.html">port forwarding HOWTO</a> to configure OpenWRT to forward traffic directed at one of the router's ports to the listening port on the Pi home server. Example: configure port <tt class="docutils literal">55555</tt> on the router to connect to the <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">SSH server</a> listening on port <tt class="docutils literal">22</tt> on the Pi.</p>
+<p><a class="reference external" href="http://www.circuidipity.com/20141006.html">Port forwarding</a> configures OpenWRT to forward traffic directed at one of the router's ports to the listening port on the Pi home server. Example: configure <tt class="docutils literal">port:55555</tt> on router to connect to the <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">SSH server</a> listening on <tt class="docutils literal">port:22</tt> on Pi.</p>
 <p>Happy hacking!</p>
 </div>
 
