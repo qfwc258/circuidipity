@@ -2,11 +2,15 @@
 Virtualbox
 ==========
 
+:date: 2012-12-07 00:11:00
 :tags: virtualbox, vm, debian, linux
 :slug: virtualbox-install
 :modified: 2015-07-05 03:46:00
 
 `Virtualbox <https://www.virtualbox.org/>`_ is virtualization software that allows a Linux user to HOST multiple GUEST operating systems as `virtual machines (VMs) <http://www.circuidipity.com/tag-vm.html>`_. Its a cool tool for playing with different Linux distros and experimenting with configurations.
+
+Let's go!
+=========
 
 In this HOWTO I install Virtualbox on a 64-bit `Debian <http://www.circuidipity.com/tag-debian.html>`_ HOST and create a Debian GUEST virtual machine.
 
@@ -118,7 +122,7 @@ If GUEST does not use a graphical login manager to launch its desktop then modif
 3.2 Console
 -----------
 
-Debian GUEST in console mode defaults to a small 80x40 window. To resize, reboot GUEST:
+Debian GUEST in console mode defaults to a small 80x40 window. Resize by rebooting GUEST and:
 
 * GRUB screen: hit ``c`` to enter command mode
 * ``grub>``: run ``vbeinfo`` to display supported resolutions (example: ``1152x864x32``)

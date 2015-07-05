@@ -5,8 +5,14 @@ Run a Raspberry Pi 2 from external USB storage
 :date: 2015-03-02 00:05:00
 :slug: run-a-raspberry-pi-2-from-external-usb-storage
 :tags: raspberry pi, ubuntu, linux, networks
+:modified: 2015-07-05 17:11:00
 
-`Raspberry Pi Home Server Hack #0 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ I am exploring the use of my Pi as **24/7 uptime home server** and one of the hacks I wish to add is using Pi as a cheap and cheerful `network attached storage (NAS) <http://www.circuidipity.com/nas-raspberry-pi-sshfs.html>`_ device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?
+**Update:** Home server `now running Raspbian <http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html>`_.
+
+I am exploring the use of my Pi as **24/7 uptime home server** and one of the hacks I wish to add is using Pi as a cheap and cheerful `network attached storage (NAS) <http://www.circuidipity.com/nas-raspberry-pi-sshfs.html>`_ device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?
+
+Let's go!
+=========
 
 I imagine an always-on Pi would enjoy more robust performance from a hard drive than SD card. [1]_ I put my plan in motion using:
 
@@ -17,9 +23,6 @@ I imagine an always-on Pi would enjoy more robust performance from a hard drive 
 * 1TB powered USB hard drive
 * ethernet cable
 * HDMI display + USB keyboard (for initial setup) 
-
-Let's go!
-=========
 
 With the move to ARMv7 the Raspberry Pi 2 is now capable of running the ARM port of Ubuntu. A community-created `Ubuntu 14.04 LTS minimal image <https://wiki.ubuntu.com/ARM/RaspberryPi>`_ with an updated ``3.18`` kernel and firmware suitable for Pi 2 is now available. [2]_
 

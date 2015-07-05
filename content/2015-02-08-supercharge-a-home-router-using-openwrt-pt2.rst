@@ -6,9 +6,12 @@ Supercharge a home router using OpenWrt Part 2
 :slug: supercharge-a-home-router-using-openwrt-pt2
 :tags: networks, openwrt, linux
 
-**Previous:** `TL-WR841N <http://www.circuidipity.com/pingparade4.html>`_
+**Previous router:** `TL-WR841N <http://www.circuidipity.com/pingparade4.html>`_
 
 A **home router** is a much more capable device than its pre-installed software would lead you to believe. `OpenWrt <https://openwrt.org/>`_ is an embedded Linux distribution that converts cheap, energy-efficient, network-capable devices into much more useful hackable computers.
+
+Let's go!
+=========
 
 Getting its start hacking the original `Linksys WRT54G <https://en.wikipedia.org/wiki/Linksys_WRT54G_series#WRT54G>`_, OpenWrt and its volunteer developers now support a `wide and growing range of hardware <http://wiki.openwrt.org/toh/start>`_. The project hosts software packages that lay out a smorgasboard of extra possibilities: more network tools with more fine-grained controls, plus a range of server capabilities... manage printers, connect external USB drives for backup, host files/torrents/VOIP/VPNs.
 
@@ -20,9 +23,6 @@ I replaced the default firmware and now exploring an OpenWrt-supported `TP-Link 
 * 2 USB 2.0 Ports
 * 64 MB Flash + 128MB RAM
 * [my device has] firmware: 3.13.34 build 130909 rel. 53148n hardware **version: v1.5**
-
-Let's go!
-=========
 
 0. Download install image
 =========================

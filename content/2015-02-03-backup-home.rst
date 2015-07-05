@@ -4,39 +4,39 @@ Backup home
 
 :date: 2015-02-03 00:10:00
 :slug: backup-home
-:tags: networks, ubuntu, linux, shell, programming, raspberry pi
-:modified: 2015-06-26 00:11:00
+:tags: networks, raspbian, debian, linux, shell, programming, raspberry pi
+:modified: 2015-07-05 16:11:00
 
-`Raspberry Pi Home Server Hack #3 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Make automatic backups of a **home folder** using a dash of shell scripting + rsync + SSH + cron!
-
-One of the advantages of setting up a `Linux home server <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ is providing an always-available location to store backups of important files. A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home folder on the local area network (LAN) server.
+`Raspberry Pi Home Server Hack #3 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Make **automatic backups** of a home folder using a dash of shell scripting + rsync + SSH + cron!
 
 Let's go!
 =========
 
-**Backup server** is a `Raspberry Pi 2 <http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html>`_ connected to a `1TB external USB hard drive <http://www.circuidipity.com/nas-raspberry-pi-sshfs.html>`_ running Ubuntu 14.04 LTS located at ip address ``192.168.1.88`` with username ``pi``.
+One of the advantages of setting up a `Linux home server <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ is providing a 24/7 uptime location to store backups of important files. A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home folder over the local area network (LAN).
+
+**Server** is a `Raspberry Pi 2 <http://www.circuidipity.com/tag-raspberry-pi.html>`_ (example: ``login:pi/ip_address:192.168.1.88``) connected to a `1TB USB hard drive <http://www.circuidipity.com/nas-raspberry-pi-sshfs.html>`_ running `Raspbian <http://www.circuidipity.com/tag-raspbian.html>`_.
 
 0. SSH
 ======
 
-`Secure remote access using SSH keys <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_ to configure SSH for encrypted connections between (Pi) server and (laptop) client. ``Keychain`` + ``ssh-agent``  make it easy to use a passphrase-protected **encryption key** in automated scripts.
+`Secure remote access using keys <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_ to configure SSH for encrypted connections between server and client. ``Keychain`` makes it easy to use a passphrase-protected encryption key in automated scripts.
 
 1. Script
 =========
 
-1.1 On the server
------------------
+On the server
+-------------
 
-Create a backup directory to hold the contents of ``HOME``:
+Create a backup directory to hold the contents of ``home``:
 
 .. code-block:: bash
 
     $ mkdir ~/backup-home
 
-1.2 On the client
------------------
+On the client
+-------------
 
-Create a backup script that uses ``rsync`` file-copy tool. A sample ``myRsync`` script to backup ``HOME`` includes:
+Create a backup script using the ``rsync`` file-copy tool. A sample ``myRsync`` script to backup ``HOME`` includes:
 
 * load the details of the SSH key stored in ``$HOME/.keychain/$HOSTNAME-sh``
 * mirror ``$HOME/`` to ``192.168.1.88:~/backup-home/`` using options ``--archive`` and ``--delete``
@@ -76,10 +76,10 @@ Place the script in ``~/bin`` and make it executable. Run manually at least once
 2. Automate
 ===========
 
-**Cron** is a daemon that runs programs at specified times. Use the command ``crontab -e`` to setup ``myRsync`` to auto-run with the following parameters:
+**Cron** is a daemon that runs programs at specified times. Use the command ``crontab -e`` to setup ``myRsync`` to auto-run with the following parameters (example):
 
 * perform a daily backup at ``23:55``
-* log program activity by redirecting output to ``/home/pi/cron.log``
+* log program activity by redirecting output to ``/home/USERNAME/cron.log``
 
 .. code-block:: bash
 
@@ -95,6 +95,6 @@ Place the script in ``~/bin`` and make it executable. Run manually at least once
     # m h  dom mon dow   command                                                       
                                                                                    
     # Daily backup of $HOME to the netbook server                                
-    55 23 * * * /home/pi/bin/myRsync >> /home/pi/cron.log
+    55 23 * * * /home/username/bin/myRsync >> /home/username/cron.log
 
 Happy hacking!

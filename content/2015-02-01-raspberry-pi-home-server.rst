@@ -56,6 +56,6 @@ Host web applications using PHP + Nginx + PostgreSQL.
 7. `RSS reader <http://www.circuidipity.com/ttrss.html>`_
 ------------------------------------------------------------------------
 
-Access news feeds over the web with the Tiny Tiny RSS news reader.
+Access news feeds over the web with Tiny Tiny RSS news reader.
 
 **Happy hacking!**

@@ -6,7 +6,7 @@ Brother MFC-J450DW All-In-One Printer/Scanner
 :slug: brother-mfc-j450dw-printer-scanner
 :tags: ubuntu, linux, networks
 
-Connect a **Brother MFC-J450DW** to a repurposed netbook as server running Ubuntu 14.04 LTS and configure as printer/scanner for a home network.
+Connect a **Brother MFC-J450DW** to server running Ubuntu 14.04 LTS and configure as printer+scanner for a home network.
 
 Let's go!
 =========

@@ -6,7 +6,7 @@ Samsung CLP-310 Printer
 :slug: samsung-clp-310-printer
 :tags: ubuntu, linux, networks
 
-Connect a **Samsung CLP-310** to a repurposed netbook as server running Ubuntu 14.04 LTS and configure as printer for a home network.
+Connect a **Samsung CLP-310** to server running Ubuntu 14.04 LTS and configure as printer for a home network.
 
 Let's go!
 =========

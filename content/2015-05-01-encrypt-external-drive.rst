@@ -8,11 +8,14 @@ Configure an encrypted external USB hard drive in Linux
 
 Using an external USB hard drive is part of my personal backup plan (the other part is backing up to a `home server <http://www.circuidipity.com/raspberry-pi-home-server.html>`_). I actually use 2 multi-terabyte drives. One drive is in my possession and the other drive I store offsite at a friend's home. Periodically I swap the drives and update the data.
 
-To guard against loss or theft its a good idea to **encrypt** the hard drive. I prepare the device using **Linux Unified Key Setup (LUKS)** and the ``cryptsetup`` utility.
+Let's go!
+=========
+
+To guard against loss or theft its a good idea to encrypt the hard drive. I prepare the device using **Linux Unified Key Setup** (LUKS) and the ``cryptsetup`` utility.
 
 .. role:: warning
 
-:warning:`WARNING!` Make careful note of the drive and partition labels. The following steps will **destroy all data** currently stored on the drive.
+:warning:`WARNING!` Make careful note of the drive and partition labels. The following steps **will destroy all data** currently stored on the drive.
 
 0. Prepare
 ==========

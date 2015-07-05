@@ -4,15 +4,15 @@ PHP + Nginx + PostgreSQL
 
 :date: 2015-02-09 18:29:00
 :slug: php-nginx-postgresql
-:tags: networks, web, ubuntu, linux
-:modified: 2015-03-01 19:48:00
+:tags: networks, raspbian, debian, linux, raspberry pi
+:modified: 2015-07-05 16:41:00
 
 `Raspberry Pi Home Server Hack #6 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ As a requirement to host web applications like `Tiny Tiny RSS <http://www.circuidipity.com/ttrss.html>`_ on my Raspberry Pi I install **PHP**, the lightweight web server **Nginx**, and the **PostgreSQL** database.
 
 Let's go!
 =========
 
-**Server** is a `Raspberry Pi 2 <http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html>`_ running Ubuntu 14.04 LTS located at ip address ``192.168.1.88``.
+**Server** is a `Raspberry Pi 2 <http://www.circuidipity.com/tag-raspberry-pi.html>`_ (example: ``ip_address:192.168.1.88``) running `Raspbian <http://www.circuidipity.com/tag-raspbian.html>`_.
 
 0. PHP
 ======
@@ -24,7 +24,7 @@ Install:
     $ sudo apt-get update
     $ sudo apt-get install php5 php5-fpm php-apc php5-curl php5-cli php5-pgsql php5-gd php5-mcrypt
 
-To improve security edit ``/etc/php5/fpm/php.ini`` and change **pathinfo** to ``0``:                          
+Improve security by editing ``/etc/php5/fpm/php.ini`` and modifying **pathinfo** to ``0``:                          
                                                                                 
 .. code-block:: bash
 
@@ -34,7 +34,7 @@ Restart PHP:
                                                                                     
 .. code-block:: bash
 
-    $ sudo service php5-fpm restart                                             
+    $ sudo systemctl restart php5-fpm                                           
                                                                                     
 1. Nginx
 ========
@@ -44,9 +44,9 @@ Install:
 .. code-block:: bash
 
     $ sudo apt-get install nginx                                                    
-    $ sudo service nginx start                                                  
+    $ sudo systemctl start nginx                                                  
                                                                                     
-To verify that the web server is running, open a browser and navigate to (example) ``http://192.168.1.88``. If you see ``Welcome to nginx!`` the server is installed correctly.
+Verify web server is running by opening a browser and navigating to (example) ``http://192.168.1.88``. If you see ``Welcome to nginx!`` the server is installed correctly.
 
 2. Host multiple domains
 ========================
@@ -124,9 +124,7 @@ Activate the new server block:
 2.5 Port Forwarding
 -------------------
 
-Configure `port forwarding on the home router <http://www.circuidipity.com/20141006.html>`_ to redirect traffic on port 80 to the internal IP address of the nginx server. Point your browser to ``www.my2pi.com``. Success (hopefully)!
-
-Repeat the above steps to add more domains. The limiting factor is the **upload bandwidth** provided by the home ISP (typically a fraction of the download speed).
+Configure `port forwarding on the home router <http://www.circuidipity.com/20141006.html>`_ to redirect traffic on port 80 to the internal IP address of the nginx server. Repeat the above steps to add more domains. The limiting factor is the **upload bandwidth** provided by the home ISP (typically a fraction of the download speed).
 
 3. PostgreSQL
 =============
@@ -147,7 +145,7 @@ Launch the PostgreSQL interactive console front-end ``psql`` as ``postgres`` use
     Enter it again: [newpasswd]
     postgres=# \quit
                                                                                     
-Example: To create a new user ``www-data`` [1]_ and database ``mydb``:
+Example: Create new ``user:www-data`` and ``database:mydb``: [1]_
 
 .. code-block:: bash                                                               
     
@@ -157,11 +155,11 @@ Example: To create a new user ``www-data`` [1]_ and database ``mydb``:
     postgres=# GRANT ALL PRIVILEGES ON DATABASE mydb to "www-data";                
     postgres=# \quit
                       
-Save any changes and reload the database server:                                                             
+Save any changes and reload server:                                                             
                                                                                     
 .. code-block:: bash
 
-    $ sudo service postgresql reload
+    $ sudo systemctl restart postgresql.service
 
 4. Helpful resources
 ====================

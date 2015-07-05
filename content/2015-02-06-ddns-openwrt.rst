@@ -7,19 +7,19 @@ Dynamic DNS and OpenWRT
 :tags: networks, openwrt, linux
 :modifed: 2015-02-08 18:08:00 
 
-`Raspberry Pi Home Server Hack #5 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Access a home server from anywhere using Dynamic DNS (DDNS).
-
-My Raspberry Pi server sits behind a router assigned a **dynamic IP address** by the ISP. If I want to connect to my Pi over the Internet from anywhere in the world I can use a **DDNS service** to create a domain name that automatically updates the IP address in the background whenever it changes and redirect traffic to the new location.
+`Raspberry Pi Home Server Hack #5 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Access a home server from anywhere using **Dynamic DNS** (DDNS).
 
 Let's go!
 =========
+
+My Raspberry Pi server sits behind a router assigned a **dynamic IP address** by the ISP. If I want to connect to my Pi over the Internet from anywhere in the world I can use a **DDNS service** to create a domain name that automatically updates the IP address in the background whenever it changes and redirect traffic to the new location.
 
 0. Select a DDNS service
 ========================
 
 I chose the free DDNS service `duckdns.org <http://www.duckdns.org/>`_ which permits the creation of up to 4 domains in the format ``your_subdomain_choice.duckdns.org``. Example: Create the subdomain ``mypihomeserver`` and later - after configuring the router - when entering ``mypihomeserver.duckdns.org`` I will be redirected to the current IP address assigned to my home network.
 
-Make note of http://www.duckdns.org/install.jsp (while logged in) for customized settings useful for configuring the router for DDNS.
+Make note of `duckdns.org/install <http://www.duckdns.org/install.jsp>`_ (while logged in) for customized settings useful for configuring the router for DDNS.
 
 1. Configure OpenWRT for notification
 =====================================
@@ -33,7 +33,7 @@ Install DDNS packages:
     # opkg update                                                                         
     # opkg install luci-app-ddns ddns-scripts                                             
                                                                                     
-Use the customized settings from http://www.duckdns.org/install.jsp to configure ``/etc/config/ddns``:
+Use the customized settings from `duckdns.org/install <http://www.duckdns.org/install.jsp>`_ to configure ``/etc/config/ddns``:
       
 .. code-block:: bash
 
@@ -74,6 +74,6 @@ Source: `OpenWRT DDNS client <http://wiki.openwrt.org/doc/howto/ddns.client>`_
 2. Port forwarding
 ==================
 
-See `port forwarding HOWTO <http://www.circuidipity.com/20141006.html>`_ to configure OpenWRT to forward traffic directed at one of the router's ports to the listening port on the Pi home server. Example: configure port ``55555`` on the router to connect to the `SSH server <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_ listening on port ``22`` on the Pi.
+`Port forwarding <http://www.circuidipity.com/20141006.html>`_ configures OpenWRT to forward traffic directed at one of the router's ports to the listening port on the Pi home server. Example: configure ``port:55555`` on router to connect to the `SSH server <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_ listening on ``port:22`` on Pi.
 
 Happy hacking!

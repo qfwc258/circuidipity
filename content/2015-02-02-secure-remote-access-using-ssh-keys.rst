@@ -4,17 +4,15 @@ Secure remote access using SSH keys
 
 :date: 2015-02-02 00:05:00
 :slug: secure-remote-access-using-ssh-keys
-:tags: networks, ubuntu, linux, raspberry pi
-:modified: 2015-03-01 18:56:00
+:tags: networks, raspbian, debian, linux, raspberry pi
+:modified: 2015-07-05 16:02:00
 
-`Raspberry Pi Home Server Hack #1 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Create cryptographic keys and disable password logins to make remote machines more secure.
+`Raspberry Pi Home Server Hack #1 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Create **cryptographic keys** and disable password logins to make remote machines more secure.
 
 Let's go!
 =========
 
-**Server** is a `Raspberry Pi 2 <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ configured for SSH logins from an `Ubuntubook <http://www.circuidipity.com/c720-lubuntubook.html>`_ **client**. Both devices are running Ubuntu 14.04 LTS.
-
-**Server options:** username ``pi``, ip address ``192.168.1.88``
+**Server** is a `Raspberry Pi 2 <http://www.circuidipity.com/tag-raspberry-pi.html>`_ running `Raspbian <http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage-using-raspbian.html>`_ configured for SSH logins (``login:pi/ip_address:192.168.1.88``) from a **client** running `Debian <http://www.circuidipity.com/tag-debian.html>`_.
 
 0. Install
 ==========
@@ -39,29 +37,17 @@ Collect key fingerprints:
                                                                                     
 ... and give ``keys.txt`` to users to compare signature when connecting for the first time.            
                                                                                     
-**Optional:** specify usernames in ``/etc/ssh/sshd_config`` to be granted system access (**disabling** all others by default):
-
-.. code-block:: bash
-                                                                                    
-    AllowUsers pi user2 user3
-
-Save and restart SSH with new configuration:
-
-.. code-block:: bash
-
-    $ sudo service ssh restart
-                                                                                    
 On the client
 -------------
 
-Install ``openssh-client`` and create the SSH folder in the user home directory:
+Install ``openssh-client`` and create the SSH folder in ``home``:
 
 .. code-block:: bash                                                                
                                                                                     
   $ sudo apt-get install openssh-client                                             
   $ mkdir ~/.ssh && chmod 700 ~/.ssh                                                
                                                                                     
-Create ``~/.ssh/config`` to hold **aliases** with the login options for a server. Example:                          
+Create ``~/.ssh/config`` to hold **aliases** with the login options for a server (example):                          
 
 .. code-block:: bash                                                                
                                                                                     
@@ -70,7 +56,7 @@ Create ``~/.ssh/config`` to hold **aliases** with the login options for a server
     Port 22                                                                      
     User pi
 
-Test SSH password login to Pi server:
+Test SSH password login to the server:
 
 .. code-block:: bash
 
@@ -79,7 +65,7 @@ Test SSH password login to Pi server:
     Last login: Thu Feb 19 18:07:48 2015 from chromebook.lan
     $
 
-**Optional:** Check out `using dynamic DNS <http://www.circuidipity.com/ddns-openwrt.html>`_ for configuring access to the Pi from anywhere in the world.
+**Optional:** Use `Dynamic DNS (DDNS) <http://www.circuidipity.com/ddns-openwrt.html>`_ for configuring access to the server from anywhere in the world.
 
 1. Keys
 =======
@@ -117,7 +103,7 @@ All SSH sessions launched from this console will access this user key stored in 
     Last login: Thu Feb 19 18:22:42 2015 from chromebook.lan
     $
 
-No passphrase request indicates SSH key authentication is properly configured.    
+No request for passphrase indicates SSH key authentication is properly configured.    
 
 2. Disable password logins 
 ==========================
@@ -138,8 +124,8 @@ Restart SSH:
 
 .. code-block:: bash
 
-    $ sudo service ssh restart                                     
-                                  
+    $ sudo systemctl restart ssh
+
 3. Key management
 =================
 

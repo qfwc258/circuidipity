@@ -16,12 +16,12 @@ Replace **Chrome OS** permanently with **Ubuntu 15.04 Linux** on the **Acer C720
     :width: 250px
     :height: 250px
 
-Running a **full-featured Linux** on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with Debian, followed by `Lubuntu 14.04 <http://www.circuidipity.com/c720-lubuntubook.html>`_ and `Arch <http://www.circuidipity.com/arch-install-encrypt.html>`_, and now experimenting with Ubuntu's latest and greatest and the **Unity** desktop.
-
 Let's go!
 =========
 
-This device is available in a few different configurations. Mine is the non-touchscreen model **C720-2848** with (non-expandable) **2GB RAM** and a (user-replaceable) **16GB SSD** [1]_.
+Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with Debian, followed by `Lubuntu 14.04 <http://www.circuidipity.com/c720-lubuntubook.html>`_ and `Arch <http://www.circuidipity.com/arch-install-encrypt.html>`_, and now experimenting with Ubuntu's latest and greatest and the **Unity** desktop.
+
+This device is available in a few different configurations. Mine is the non-touchscreen model ``C720-2848`` with (non-expandable) **2GB RAM** and a (user-replaceable) **16GB SSD** [1]_.
 
 0. Recovery Image
 =================

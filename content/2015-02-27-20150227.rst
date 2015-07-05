@@ -4,9 +4,9 @@ A bit of unplanned Grub2 surgery
 
 :date: 2015-02-27 18:40:00
 :slug: 20150227
-:tags: ubuntu, linux
+:tags: debian, linux
 
-**PROBLEM:** Late night experiments `loading GRUB on USB sticks <http://www.circuidipity.com/grubs.html>`_ resulted in mucking up Grub on my **primary** machine. After a reboot instead of a boot menu I was greeted with:
+**PROBLEM:** Late night experiments `loading GRUB on USB sticks <http://www.circuidipity.com/grubs.html>`_ resulted in mucking up Grub on my host machine. After a reboot instead of a boot menu I was greeted with:
 
 .. code-block:: bash
 
@@ -14,7 +14,7 @@ A bit of unplanned Grub2 surgery
 
 Whoops.
 
-Ubuntubook is running Ubuntu 14.04 LTS with a boot partition on ``sda1``, LUKS-encrypted root on ``sda3``, and the ``3.19.0`` Linux kernel. Since the boot loader hadn't fallen into rescue mode there was hope that the essential stuff was in place but for some reason the config was not being read. A quick ``ls`` in the Grub shell confirmed that ``/boot/grub/grub.cfg``, kernels, initrd files were present.
+Host boot partition is ``sda1``, LUKS-encrypted root is ``sda3``, and runs Linux kernel ``3.19.0``. Since the boot loader hadn't fallen into rescue mode there was hope that the essential stuff was in place but for some reason the config was not being read. A quick ``ls`` in the Grub shell confirmed that ``/boot/grub/grub.cfg``, kernels, initrd files were present.
 
 **FIX:** After a few tries I found the right parameters for a manual boot... specifically ``root=/dev/mapper/sda3_crypt`` NOT ``root=/dev/sda3``:
 
