@@ -33,8 +33,7 @@
 </pre></div>
 <p>Move the generated list to the target machine. Configure the package manager <a class="footnote-reference" href="#id4" id="id2">[2]</a> to duplicate the selection:</p>
 <div class="highlight"><pre><span class="nv">$ PKGS</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
-<span class="nv">$ </span>sudo apt-cache dumpavail &gt; <span class="s2">&quot;</span><span class="nv">$PKGS</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> sudo dpkg --merge-avail <span class="s2">&quot;</span><span class="nv">$PKGS</span><span class="s2">&quot;</span>
-<span class="nv">$ </span>sudo rm <span class="s2">&quot;</span><span class="nv">$PKGS</span><span class="s2">&quot;</span>
+<span class="nv">$ </span>sudo apt-cache dumpavail &gt; <span class="s2">&quot;</span><span class="nv">$PKGS</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> sudo dpkg --merge-avail <span class="s2">&quot;</span><span class="nv">$PKGS</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> sudo rm <span class="s2">&quot;</span><span class="nv">$PKGS</span><span class="s2">&quot;</span>
 <span class="nv">$ </span>sudo dpkg --clear-selections <span class="o">&amp;&amp;</span> sudo dpkg --set-selections &lt; pkg-list.txt
 <span class="nv">$ </span>sudo apt-get dselect-upgrade
 </pre></div>
