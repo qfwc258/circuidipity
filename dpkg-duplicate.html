@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Duplicate Debian package selection on multiple machines</title>
+        <title>Circuidipity | Duplicate package selection in Debian</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -24,23 +24,36 @@
 </div>
 
 <!-- article -->
-<h1>Duplicate Debian package selection on multiple machines</h1>
+<h1>Duplicate package selection in Debian</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Monday 06 July 2015</p>
 <div id="article">
-    <p>I am happy with the selection of packages installed on my <a class="reference external" href="http://www.circuidipity.com/c720-sidbook.html">Debian-powered laptop</a> and discovered an easy method to <strong>duplicate</strong> the configuration on another machine.</p>
-<p>On the original machine generate a list of installed packages:</p>
-<div class="highlight"><pre><span class="nv">$ </span>dpkg --get-selections <span class="p">|</span> grep -v deinstall &gt; deb-pkg-list.txt
+    <p>I am happy with the selection of packages installed on my primary Debian box and discovered an easy method <a class="footnote-reference" href="#id3" id="id1">[1]</a> to duplicate the setup on a secondary machine.</p>
+<p>Generate a list of installed packages on the original:</p>
+<div class="highlight"><pre><span class="nv">$ </span>dpkg --get-selections <span class="p">|</span> grep -v deinstall &gt; pkg-list.txt
 </pre></div>
-<p>Move the generated list to the target machine. Configure the package manager to duplicate the selection on the new system:</p>
+<p>Move the generated list to the target machine. Configure the package manager <a class="footnote-reference" href="#id4" id="id2">[2]</a> to duplicate the selection:</p>
 <div class="highlight"><pre><span class="nv">$ PKGS</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
-<span class="nv">$ </span>sudo apt-cache dumpavail &gt; <span class="s2">&quot;</span><span class="nv">$PKGS</span><span class="s2">&quot;</span>
-<span class="nv">$ </span>sudo dpkg --merge-avail <span class="s2">&quot;</span><span class="nv">$PKGS</span><span class="s2">&quot;</span>
-<span class="nv">$ </span>sudo rm -f <span class="s2">&quot;</span><span class="nv">$PKGS</span><span class="s2">&quot;</span>
-<span class="nv">$ </span>sudo dpkg --clear-selections
-<span class="nv">$ </span>sudo dpkg --set-selections &lt; deb-pkg-list.txt
+<span class="nv">$ </span>sudo apt-cache dumpavail &gt; <span class="s2">&quot;</span><span class="nv">$PKGS</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> sudo dpkg --merge-avail <span class="s2">&quot;</span><span class="nv">$PKGS</span><span class="s2">&quot;</span>
+<span class="nv">$ </span>sudo rm <span class="s2">&quot;</span><span class="nv">$PKGS</span><span class="s2">&quot;</span>
+<span class="nv">$ </span>sudo dpkg --clear-selections <span class="o">&amp;&amp;</span> sudo dpkg --set-selections &lt; pkg-list.txt
 <span class="nv">$ </span>sudo apt-get dselect-upgrade
 </pre></div>
 <p>Happy hacking!</p>
-<p>Sources: <a class="reference external" href="http://debian-handbook.info/browse/wheezy/sect.apt-get.html">Debian Administrator's Handbook</a></p>
+<div class="section" id="notes">
+<h2>Notes</h2>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Source: <a class="reference external" href="http://debian-handbook.info/browse/wheezy/sect.apt-get.html">Debian Administrator's Handbook</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Added an option to supply [PACKAGE_LIST] to my <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/scripts/debian-post-install.sh">debian-post-install script</a></td></tr>
+</tbody>
+</table>
+</div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
