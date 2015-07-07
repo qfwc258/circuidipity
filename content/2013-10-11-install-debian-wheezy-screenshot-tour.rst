@@ -1,6 +1,6 @@
-=============================
-Debian Wheezy Minimal Install
-=============================
+==============
+Minimal Debian
+==============
 
 :tags: debian, linux, shell, programming
 :slug: install-debian-wheezy-screenshot-tour
@@ -13,14 +13,14 @@ Debian Wheezy Minimal Install
 
     [Image: Debian Vader, courtesy `jschild <http://jschild.deviantart.com/art/Facebook-cover-debian-Darth-Vader-380351614>`_].
 
-`Debian GNU/Linux <http://www.debian.org>`_ is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like `Ubuntu <http://www.circuidipity.com/ubuntu-trusty-install.html>`_ build their edifices on solid Debian *awesomesauce*.
+`Debian GNU/Linux <http://www.debian.org>`_ is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like `Ubuntu <http://www.circuidipity.com/tag-ubuntu.html>`_ build their distributions on solid Debian **awesomesauce**.
 
-There are 3 **release branches** - ``stable``, ``testing``, and ``unstable`` - and the current stable branch goes by the name **wheezy**. I use Debian's `minimal install image <http://www.circuidipity.com/multi-boot-usb.html>`_ to create a **lightweight, console-only** base configuration that can be customized for various tasks and desktops.
+There are 3 **release branches** - ``stable``, ``testing``, and ``unstable`` - and the current stable branch is ``wheezy``. I use Debian's `minimal install image <http://www.circuidipity.com/multi-boot-usb.html>`_ to create a **lightweight, console-only** base configuration that can be customized for various tasks and desktops.
 
 Below is a visual walk-through of a sample Debian setup that makes use of an entire storage device divided into 3 partitions: an unencrypted **root** and `LUKS <https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup>`_ encrypted **home** + **swap**.
 
-Step 0 - Installer
-==================
+0. Installer
+============
 
 Download a `64bit <http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/mini.iso>`_  (`32bit <http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/mini.iso>`_ for older machines) Debian **mini.iso** and burn the image to a CD or `prepare a USB boot device <http://www.circuidipity.com/multi-boot-usb.html>`_.
 
@@ -481,6 +481,6 @@ If an **encrypted home** partition was created in Step 2 the system will display
     :width: 800px
     :height: 600px
 
-I have created a `post-install shell script <https://github.com/vonbrownie/linux-post-install/blob/master/debian-post-install-main.sh>`_ that can be used to configure tracking of Debian's stable, testing, or unstable branch with the option of installing the **Openbox** window manager + extra applications suitable for a desktop environment.
+I have created a `post-install shell script <https://github.com/vonbrownie/linux-post-install/blob/master/scripts/debian-post-install.sh>`_ that can be used to configure tracking of Debian's ``stable``, ``testing``, or ``unstable`` branch.
 
 Happy hacking!
