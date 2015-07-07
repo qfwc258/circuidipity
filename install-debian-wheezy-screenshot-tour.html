@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Debian Wheezy Minimal Install</title>
+        <title>Circuidipity | Minimal Debian</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -24,18 +24,18 @@
 </div>
 
 <!-- article -->
-<h1>Debian Wheezy Minimal Install</h1>
+<h1>Minimal Debian</h1>
     <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Wednesday 06 August 2014</p>
 <div id="article">
     <div class="figure">
 <img alt="Debian Vader" src="images/debianVader.png" style="width: 960px; height: 355px;" />
 <p class="caption">[Image: Debian Vader, courtesy <a class="reference external" href="http://jschild.deviantart.com/art/Facebook-cover-debian-Darth-Vader-380351614">jschild</a>].</p>
 </div>
-<p><a class="reference external" href="http://www.debian.org">Debian GNU/Linux</a> is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like <a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html">Ubuntu</a> build their edifices on solid Debian <em>awesomesauce</em>.</p>
-<p>There are 3 <strong>release branches</strong> - <tt class="docutils literal">stable</tt>, <tt class="docutils literal">testing</tt>, and <tt class="docutils literal">unstable</tt> - and the current stable branch goes by the name <strong>wheezy</strong>. I use Debian's <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">minimal install image</a> to create a <strong>lightweight, console-only</strong> base configuration that can be customized for various tasks and desktops.</p>
+<p><a class="reference external" href="http://www.debian.org">Debian GNU/Linux</a> is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like <a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html">Ubuntu</a> build their distributions on solid Debian <strong>awesomesauce</strong>.</p>
+<p>There are 3 <strong>release branches</strong> - <tt class="docutils literal">stable</tt>, <tt class="docutils literal">testing</tt>, and <tt class="docutils literal">unstable</tt> - and the current stable branch is <tt class="docutils literal">wheezy</tt>. I use Debian's <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">minimal install image</a> to create a <strong>lightweight, console-only</strong> base configuration that can be customized for various tasks and desktops.</p>
 <p>Below is a visual walk-through of a sample Debian setup that makes use of an entire storage device divided into 3 partitions: an unencrypted <strong>root</strong> and <a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a> encrypted <strong>home</strong> + <strong>swap</strong>.</p>
-<div class="section" id="step-0-installer">
-<h2>Step 0 - Installer</h2>
+<div class="section" id="installer">
+<h2>0. Installer</h2>
 <p>Download a <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/mini.iso">64bit</a>  (<a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/mini.iso">32bit</a> for older machines) Debian <strong>mini.iso</strong> and burn the image to a CD or <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">prepare a USB boot device</a>.</p>
 </div>
 <div class="section" id="step-1-go">
@@ -129,7 +129,7 @@
 <p>If an <strong>encrypted home</strong> partition was created in Step 2 the system will display a passphrase prompt to unlock the partition.</p>
 <img alt="Enter encrypt passphrase" class="align-center" src="images/screenshot/wheezyInstall/55.png" style="width: 800px; height: 600px;" />
 <img alt="Login" class="align-center" src="images/screenshot/wheezyInstall/56.png" style="width: 800px; height: 600px;" />
-<p>I have created a <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/debian-post-install-main.sh">post-install shell script</a> that can be used to configure tracking of Debian's stable, testing, or unstable branch with the option of installing the <strong>Openbox</strong> window manager + extra applications suitable for a desktop environment.</p>
+<p>I have created a <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/scripts/debian-post-install.sh">post-install shell script</a> that can be used to configure tracking of Debian's <tt class="docutils literal">stable</tt>, <tt class="docutils literal">testing</tt>, or <tt class="docutils literal">unstable</tt> branch.</p>
 <p>Happy hacking!</p>
 </div>
 
