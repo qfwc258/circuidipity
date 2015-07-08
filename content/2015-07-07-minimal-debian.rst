@@ -139,9 +139,9 @@ The minimal console installer (requires network connection) downloads all the la
 
 In the example below I create 3 partitions on the disk:
 
-* sda1 is a 20GB ``root`` partition 
-* sda5 is a 1GB LUKS encrypted ``swap`` partition using a **random key**
-* sda6 uses the remaining space as a LUKS encrypted ``home`` partition using a **passphrase**
+* ``sda1`` configured as 20GB ``root``
+* ``sda5`` configured as 1GB LUKS encrypted ``swap`` with ``random key``
+* ``sda6`` uses remaining space as LUKS encrypted ``home`` with ``passphrase``
 
 .. image:: images/screenshot/debianInstall/18.png
     :alt: Partitioning method
