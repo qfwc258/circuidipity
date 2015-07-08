@@ -343,9 +343,9 @@ Enable new key shortcuts:
 
     $ xbindkeys
 
-Debian auto-detects ``~/.xbindkeysrc``  and will run ``xbindkeys`` on the next login. [10]_
+Place ``xbindkeys`` in ``~/.xinitrc`` to load configuration at ``startx``. [10]_
 
-Source: `.xbindkeysrc.chromebook <https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook>`_
+Source: `.xbindkeysrc.chromebook <https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook>`_ and `.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_
 
 7.2 Power Key
 -------------
