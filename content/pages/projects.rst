@@ -23,17 +23,17 @@ Projects
 
 .. class:: invisiblelink
 
-    .. image:: images/vivid-icon-thumb.png
-        :alt: Ubuntubook
+    .. image:: images/jessiebook-thumb.1.png
+        :alt: Jessiebook
         :width: 150px
         :height: 150px
         :align: left
-        :target: c720-ubuntubook.html
+        :target: c720-chromebook-to-jessiebook.html
 
 .. raw:: html
 
     <div class="projectx">
-        <h2>Chromebook to Ubuntubook</h2>
-        <p>Replace Chrome with full-featured Linux on the <a href="c720-ubuntubook.html">Acer C720 Chromebook...</a></p>
+        <h2>Chromebook to Jessiebook</h2>
+        <p>Replace Chrome with full-featured Linux on the <a href="c720-chromebook-to-jessiebook.html">Acer C720 Chromebook...</a></p>
         <p style="clear:both;"></p>
     </div>
