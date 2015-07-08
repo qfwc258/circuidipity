@@ -1,5 +1,356 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-07-07T15:43:00-04:00</updated><entry><title>Minimal Debian</title><link href="http://www.circuidipity.com/minimal-debian.html" rel="alternate"></link><updated>2015-07-07T15:43:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-07:minimal-debian.html</id><summary type="html">&lt;div class="figure"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-07-08T10:45:00-04:00</updated><entry><title>Chromebook to Jessiebook</title><link href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html" rel="alternate"></link><updated>2015-07-08T10:45:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-08:c720-chromebook-to-jessiebook.html</id><summary type="html">&lt;p&gt;Replace &lt;strong&gt;Chrome OS&lt;/strong&gt; permanently with &lt;strong&gt;Debian&lt;/strong&gt; on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt;.&lt;/p&gt;
+&lt;img alt="jessiebook" class="align-right" src="images/jessiebook.png" style="width: 300px; height: 161px;" /&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with Debian, followed by &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Lubuntu&lt;/a&gt;, &lt;a class="reference external" href="http://www.circuidipity.com/arch-install-encrypt.html"&gt;Arch&lt;/a&gt;, &lt;a class="reference external" href="http://www.circuidipity.com/c720-ubuntubook.html"&gt;Ubuntu&lt;/a&gt;, and have now returned to the latest Debian &lt;tt class="docutils literal"&gt;jessie/stable&lt;/tt&gt; release.&lt;/p&gt;
+&lt;p&gt;This device is available in a few different configurations. Mine is the non-touchscreen model &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;C720-2848&lt;/span&gt;&lt;/tt&gt; with (non-expandable) 2GB RAM and a (user-replaceable) 16GB SSD.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="recovery-image"&gt;
+&lt;h2&gt;0. Recovery Image&lt;/h2&gt;
+&lt;p&gt;Create a recovery image of Chrome OS (my C720 is model &lt;tt class="docutils literal"&gt;PEPPY &lt;span class="pre"&gt;C6A-N3C-A7O&lt;/span&gt;&lt;/tt&gt;) to enable restoring the Chromebook to its default configuration. &lt;a class="footnote-reference" href="#id13" id="id1"&gt;[1]&lt;/a&gt; This will require a spare USB stick of 2GB or better:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Log into the Chromebook and let it auto update, as there sometimes are firmware updates... check the updating status in the browser at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;chrome://help&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;Insert the USB stick, enter &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;chrome://imageburner&lt;/span&gt;&lt;/tt&gt; and follow the directions to generate a recovery image&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prepare-install-media"&gt;
+&lt;h2&gt;1. Prepare install media&lt;/h2&gt;
+&lt;p&gt;Download the &lt;a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/mini.iso"&gt;64-bit minimal installer&lt;/a&gt; and &lt;a class="reference external" href="https://www.debian.org/releases/stable/amd64/ch04s03.html.en"&gt;flash the image&lt;/a&gt; to a USB stick. An alternative (my choice) is adding the image to a &lt;a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html"&gt;USB stick with multiple Linux installers&lt;/a&gt;. Using the minimal console installer (requires network connection) downloads all the latest packages during setup.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="seabios"&gt;
+&lt;h2&gt;2. SeaBIOS&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.coreboot.org/SeaBIOS"&gt;SeaBIOS&lt;/a&gt; in combination with &lt;strong&gt;Coreboot&lt;/strong&gt; provides an open-source legacy BIOS that enables access to the MBR and the ability to install an alternative OS on the Chromebook. All this good stuff involves jumping through a few simple hoops and not trembling in fear at the &amp;quot;scary white screen&amp;quot; that pops up at power up stating that the boot loader detects something is &lt;strong&gt;very very wrong&lt;/strong&gt; with the Chromebook and helpfully suggests pressing the spacebar to begin recovery. &lt;strong&gt;Do not press the spacebar&lt;/strong&gt; or the Debian installation will be wiped from disk!&lt;/p&gt;
+&lt;p&gt;There are 2 different methods for configuring SeaBIOS in preparation for installing Debian. First method uses a few simple commands in the Chrome OS shell to place the Chromebook into &lt;strong&gt;developer mode&lt;/strong&gt; and allow booting the USB install media and replacing Chrome OS with Debian. The drawback is that scary screen appears at every boot and you must press &lt;tt class="docutils literal"&gt;CTRL+L&lt;/tt&gt; to boot to legacy-mode and onward to GRUB and Debian (and &lt;strong&gt;ignore&lt;/strong&gt; the helpful prompt to press spacebar and inadvertently begin the adventure of wiping clean the SSD).&lt;/p&gt;
+&lt;p&gt;Second method involves setting new flags for the write-protected &lt;strong&gt;Google Binary Block&lt;/strong&gt; (GBB) in the device firmware. Delay at the boot screen can be reduced to a one second timeout and the legacy-mode BIOS set as the system default (no key combo required). Pressing the spacebar is disabled from doing any harm to Debian (the Chromebook just beeps). The drawback is that it involves the (very simple) removal of the device's bottom cover and the temporary removal of the &lt;strong&gt;write-protect screw&lt;/strong&gt; from the motherboard to permit flashing new flags to the GBB... and this may void the Chromebook's warranty (one of the case screws lies underneath a sticker declaring the warranty void if disturbed).&lt;/p&gt;
+&lt;p&gt;Experimenting with alternate OS installs on the Chromebook I first employed the developer mode method followed by the write-protect screw removal. I prefer configuring the device to default to legacy-mode BIOS but I have employed both methods successfully and describe their respective steps below.&lt;/p&gt;
+&lt;div class="section" id="write-protect-screw-method"&gt;
+&lt;h3&gt;2.1 Write-Protect Screw Method&lt;/h3&gt;
+&lt;p&gt;Disconnect power. Turn the Chromebook over facing bottom up and remove the 13 screws (not missing the one hidden under the warranty sticker). Gently pry the case off starting with the seam where the display connects to device. It comes away pretty easy.&lt;/p&gt;
+&lt;p&gt;This is what you see:&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="C720 annotated innards" src="images/c720-chromebook-annotated-innards.png" style="width: 800px; height: 558px;" /&gt;
+&lt;p class="caption"&gt;[ Image: &lt;a class="footnote-reference" href="#id15" id="id3"&gt;[2]&lt;/a&gt; The battery lock screw is #6 and the write-protect screw is #7 ].&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; This will &lt;strong&gt;wipe out&lt;/strong&gt; whatever is installed on the SSD:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Remove the write-protect screw&lt;/li&gt;
+&lt;li&gt;Close back cover using only the battery lock screw to hold in place&lt;/li&gt;
+&lt;li&gt;Re-connect power, boot Chromebook and wait until it displays:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Chrome OS is missing or damaged.
+Please insert a recovery USB stick or SD card.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Insert USB recovery media prepared in Step 0 and it will proceed to restore Chrome OS and reboot&lt;/li&gt;
+&lt;li&gt;At default Chrome OS &amp;quot;Welcome!&amp;quot; screen open a terminal &lt;tt class="docutils literal"&gt;CTRL+ALT+F2&lt;/tt&gt; (Right-arrow)&lt;/li&gt;
+&lt;li&gt;Login as &lt;tt class="docutils literal"&gt;chronos&lt;/tt&gt; (no password), then enter &lt;tt class="docutils literal"&gt;sudo su&lt;/tt&gt; for superuser access&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Set new GBB flags &lt;a class="footnote-reference" href="#id16" id="id4"&gt;[3]&lt;/a&gt; using the &lt;tt class="docutils literal"&gt;set_gbb_flags.sh&lt;/tt&gt; script in Chrome OS. Enable short &lt;strong&gt;developer mode&lt;/strong&gt; screen (1 second timeout) followed by &lt;strong&gt;default legacy mode&lt;/strong&gt; boot by using these flags:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;GBB_FLAG_DEV_SCREEN_SHORT_DELAY 0×00000001
+GBB_FLAG_FORCE_DEV_SWITCH_ON 0×00000008
+GBB_FLAG_FORCE_DEV_BOOT_LEGACY 0×00000080
+GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... which adds up to running in the shell:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;/usr/share/vboot/bin/set_gbb_flags.sh 0x489
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Shutdown:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# shutdown -h now&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and disconnect the power:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Remove the bottom cover again and reinstall the write-lock screw to protect the BIOS&lt;/li&gt;
+&lt;li&gt;Close cover and reinstall all the case screws&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Re-connect power, insert USB stick prepared in Step 1, and power up Chromebook. &lt;a class="footnote-reference" href="#id17" id="id5"&gt;[4]&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="developer-mode-method"&gt;
+&lt;h3&gt;2.2 Developer Mode Method&lt;/h3&gt;
+&lt;p&gt;The alternative to removing the write-protect screw above is to place the Chromebook into developer mode &lt;a class="footnote-reference" href="#id18" id="id6"&gt;[5]&lt;/a&gt; using the Chrome OS shell before booting the USB install media:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;With the Chromebook off... Hold down &lt;tt class="docutils literal"&gt;ESC+F3&lt;/tt&gt; (Refresh) keys and power on the device&lt;/li&gt;
+&lt;li&gt;Invoke Recovery, and at the Recovery screen press &lt;tt class="docutils literal"&gt;Ctrl+D&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;Device will prompt for confirmation, press &lt;tt class="docutils literal"&gt;ENTER&lt;/tt&gt; and the system reboots into developer mode&lt;/li&gt;
+&lt;li&gt;Scary white boot screen appears and you need to press &lt;tt class="docutils literal"&gt;Ctrl+D&lt;/tt&gt; to continue boot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Enable the &lt;strong&gt;USB Boot&lt;/strong&gt; and &lt;strong&gt;Legacy BIOS&lt;/strong&gt; modes by opening the shell with &lt;tt class="docutils literal"&gt;Ctrl+Alt+T&lt;/tt&gt; and enter &lt;tt class="docutils literal"&gt;shell&lt;/tt&gt;. Set &lt;tt class="docutils literal"&gt;dev_boot_usb&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;dev_boot_legacy&lt;/tt&gt; to active:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo crossystem &lt;span class="nv"&gt;dev_boot_usb&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo crossystem &lt;span class="nv"&gt;dev_boot_legacy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Insert USB stick prepared in Step 1, reboot the Chromebook and press &lt;tt class="docutils literal"&gt;CTRL+L&lt;/tt&gt; at the boot screen to enter legacy boot mode. &lt;a class="footnote-reference" href="#id19" id="id7"&gt;[6]&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="install-debian"&gt;
+&lt;h2&gt;3. Install Debian&lt;/h2&gt;
+&lt;p&gt;My &lt;a class="reference external" href="http://www.circuidipity.com/minimal-debian.html"&gt;visual screenshot tour&lt;/a&gt; installing Debian &lt;tt class="docutils literal"&gt;jessie/stable&lt;/tt&gt;. Due to Chromebook's small storage capacity, however, I use a different 3-partition layout:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;sda1&lt;/tt&gt; configured as 300MB &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;sda2&lt;/tt&gt; configured as 2GB LUKS encrypted &lt;tt class="docutils literal"&gt;swap&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;random key&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;sda3&lt;/tt&gt; uses remaining space as LUKS encrypted &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;passphrase&lt;/tt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="touchpad"&gt;
+&lt;h2&gt;4. Touchpad&lt;/h2&gt;
+&lt;p&gt;Debian &lt;tt class="docutils literal"&gt;jessie/stable&lt;/tt&gt; installs Linux kernel 3.16 with backported support for Chromebook touchpad. Per-session modifications of touchpad settings can be made using &lt;tt class="docutils literal"&gt;synclient&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;synclient                 &lt;span class="c"&gt;# display current settings&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;synclient &lt;span class="nv"&gt;TapButton3&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;    &lt;span class="c"&gt;# 3-finger tap = middle-click&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Make any desired touchpad settings permanent by creating &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/X11/xorg.conf.d/50-c720-touchpad.conf&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /etc/X11/xorg.conf.d
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo cp /usr/share/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-c720-touchpad.conf
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Modify to adjust timeouts, add tap-mouse actions (2-finger tap = right-click, 3-finger tap = middle-click), and 2-finger scrolling. &lt;a class="footnote-reference" href="#id20" id="id8"&gt;[7]&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Section &lt;span class="s2"&gt;&amp;quot;InputClass&amp;quot;&lt;/span&gt;
+    Identifier      &lt;span class="s2"&gt;&amp;quot;touchpad peppy cyapa&amp;quot;&lt;/span&gt;
+    MatchIsTouchpad &lt;span class="s2"&gt;&amp;quot;on&amp;quot;&lt;/span&gt;
+    MatchDevicePath &lt;span class="s2"&gt;&amp;quot;/dev/input/event*&amp;quot;&lt;/span&gt;
+    MatchProduct    &lt;span class="s2"&gt;&amp;quot;cyapa&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;FingerLow&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;FingerHigh&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;VertEdgeScroll&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;0&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;VertTwoFingerScroll&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;HorizTwoFingerScroll&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;AreaRightEdge&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;850&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;AreaLeftEdge&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;50&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;TapButton1&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;TapButton2&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;3&amp;quot;&lt;/span&gt;
+    Option          &lt;span class="s2"&gt;&amp;quot;TapButton3&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;
+EndSection
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/etc/X11/xorg.conf.d/50-c720-touchpad.conf"&gt;50-c720-touchpad.conf&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ssd"&gt;
+&lt;h2&gt;5. SSD&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://en.wikipedia.org/wiki/Swappiness"&gt;Swappiness&lt;/a&gt; parameter controls the preference of the kernel to move processes out of physical memory to the swap partition. Range is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;0-100&lt;/span&gt;&lt;/tt&gt;, default is set to &lt;tt class="docutils literal"&gt;60&lt;/tt&gt; and lower values cause the kernel to avoid swapping and higher values prompt more frequent swap use.&lt;/p&gt;
+&lt;p&gt;Check current swappiness value:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cat /proc/sys/vm/swappiness
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reduce SSD writes by setting a low value of &lt;tt class="docutils literal"&gt;vm.swappiness=1&lt;/tt&gt; in &lt;tt class="docutils literal"&gt;/etc/sysctl.conf&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;TRIM&lt;/strong&gt; optimizes SSD performance &lt;a class="footnote-reference" href="#id21" id="id9"&gt;[8]&lt;/a&gt; and is enabled by adding the &lt;tt class="docutils literal"&gt;discard&lt;/tt&gt; option to &lt;tt class="docutils literal"&gt;/etc/crypttab&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;/etc/fstab&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Example &lt;tt class="docutils literal"&gt;crypttab&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sda2_crypt /dev/sda2 /dev/urandom &lt;span class="nv"&gt;cipher&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;aes-xts-plain64,size&lt;span class="o"&gt;=&lt;/span&gt;256,discard,swap
+sda3_crypt &lt;span class="nv"&gt;UUID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;STRING&amp;gt; none luks,discard
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Example &lt;tt class="docutils literal"&gt;fstab&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# &amp;lt;file system&amp;gt; &amp;lt;mount point&amp;gt;   &amp;lt;type&amp;gt;  &amp;lt;options&amp;gt;       &amp;lt;dump&amp;gt;  &amp;lt;pass&amp;gt;&lt;/span&gt;
+/dev/mapper/sda3_crypt /               ext4    noatime,discard,errors&lt;span class="o"&gt;=&lt;/span&gt;remount-ro &lt;span class="m"&gt;0&lt;/span&gt;       1
+&lt;span class="nv"&gt;UUID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;STRING&amp;gt; /boot                    ext4    noatime,discard         &lt;span class="m"&gt;0&lt;/span&gt;       2
+/dev/mapper/sda2_crypt none            swap    sw,discard              &lt;span class="m"&gt;0&lt;/span&gt;       0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Update &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/boot/initrd.img-*&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-initramfs -u -k all
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="suspend"&gt;
+&lt;h2&gt;6. Suspend&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Problem:&lt;/strong&gt; Suspend-and-resume generates a stream of errors:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ehci-pci 0000:00:1d.0: port &lt;span class="m"&gt;1&lt;/span&gt; resume error -19
+ehci-pci 0000:00:1d.0: port &lt;span class="m"&gt;2&lt;/span&gt; resume error -19
+usb usb3-port1: over-current condition
+usb usb3-port1: connect-debounce failed
+usb usb3-port2: over-current condition
+usb usb3-port2: connect-debounce failed
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and blocks Jessiebook from executing a proper restart/shutdown.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;FIX:&lt;/strong&gt; &lt;a class="footnote-reference" href="#id22" id="id10"&gt;[9]&lt;/a&gt; Create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/lib/systemd/system-sleep/ehci-pci.sh&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="nv"&gt;$1&lt;/span&gt;/&lt;span class="nv"&gt;$2&lt;/span&gt; in
+    pre/*&lt;span class="o"&gt;)&lt;/span&gt;
+    &lt;span class="c"&gt;# Unbind ehci for preventing error&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; -n &lt;span class="s2"&gt;&amp;quot;0000:00:1d.0&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; tee /sys/bus/pci/drivers/ehci-pci/unbind
+    &lt;span class="p"&gt;;;&lt;/span&gt;
+    post/*&lt;span class="o"&gt;)&lt;/span&gt;
+    &lt;span class="c"&gt;# Bind ehci for preventing error&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; -n &lt;span class="s2"&gt;&amp;quot;0000:00:1d.0&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; tee /sys/bus/pci/drivers/ehci-pci/bind
+    &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;span class="k"&gt;esac&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Make the script executable:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo chmod &lt;span class="m"&gt;755&lt;/span&gt; /lib/systemd/system-sleep/ehci-pci.sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Configure boot options in &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;tpm_tis.force=1&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Update GRUB:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-grub
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/lib/systemd/system-sleep/ehci-pci.sh"&gt;ehci-pci.sh&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="keyboard-shortcuts"&gt;
+&lt;h2&gt;7. Keyboard Shortcuts&lt;/h2&gt;
+&lt;p&gt;Top row on the keyboard with the shortcut icons (&lt;tt class="docutils literal"&gt;Brightness&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;Volume&lt;/tt&gt;, etc.) identify in Linux as &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;F1-F10&lt;/span&gt;&lt;/tt&gt; keys and the &lt;tt class="docutils literal"&gt;Search&lt;/tt&gt; key (in &lt;tt class="docutils literal"&gt;CapsLk&lt;/tt&gt; position) acts as &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; (Windows) modifier key.&lt;/p&gt;
+&lt;p&gt;Create keyboard shortcuts by first installing:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; - associate keys to shell commands&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;xbacklight&lt;/tt&gt; - set backlight level using RandR&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pulseaudio-utils&lt;/span&gt;&lt;/tt&gt; - manage sound with &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;xvkbd&lt;/tt&gt; - send characters to another client&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install xbindkeys xbacklight pulseaudio-utils xvkbd
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="direction-brightness-volume-page-keys"&gt;
+&lt;h3&gt;7.1 Direction, Brightness, Volume, Page Keys&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xbindkeys -k
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Enable function keys to modify sound and brightness settings by creating &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# backward/forward&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\A\[&lt;/span&gt;Left&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+F1
+
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\A\[&lt;/span&gt;Right&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+F2
+
+&lt;span class="c"&gt;# screenshots&lt;/span&gt;
+&lt;span class="c"&gt;# desktop&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;scrot &amp;#39;%Y-%m-%dT%H%M%S.png&amp;#39; -e &amp;#39;mv &lt;/span&gt;&lt;span class="nv"&gt;$f&lt;/span&gt;&lt;span class="s2"&gt; ~/Downloads &amp;amp;&amp;amp; eog ~/Downloads/&lt;/span&gt;&lt;span class="nv"&gt;$f&lt;/span&gt;&lt;span class="s2"&gt;&amp;#39;&amp;quot;&lt;/span&gt;
+Alt + F4
+&lt;span class="c"&gt;# active Window&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;scrot -d 4 -u -z &amp;#39;%Y-%m-%dT%H%M%S.png&amp;#39; -e &amp;#39;mv &lt;/span&gt;&lt;span class="nv"&gt;$f&lt;/span&gt;&lt;span class="s2"&gt; ~/Downloads &amp;amp;&amp;amp; eog ~/Downloads/&lt;/span&gt;&lt;span class="nv"&gt;$f&lt;/span&gt;&lt;span class="s2"&gt;&amp;#39;&amp;quot;&lt;/span&gt;
+Control + F4
+
+&lt;span class="c"&gt;# backlight decrease/increase&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;xbacklight -dec 10&amp;quot;&lt;/span&gt;
+F6
+&lt;span class="s2"&gt;&amp;quot;xbacklight -inc 10&amp;quot;&lt;/span&gt;
+F7
+
+&lt;span class="c"&gt;# volume mute/decrease/increase&lt;/span&gt;
+&lt;span class="c"&gt;# paVolume - https://github.com/vonbrownie/homebin/blob/master/paVolume&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;paVolume -m&amp;quot;&lt;/span&gt;
+F8
+&lt;span class="s2"&gt;&amp;quot;paVolume -d&amp;quot;&lt;/span&gt;
+F9
+&lt;span class="s2"&gt;&amp;quot;paVolume -u&amp;quot;&lt;/span&gt;
+F10
+
+&lt;span class="c"&gt;# page up/down, home, end&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;#39;\[Page_Up]&amp;#39;&amp;quot;&lt;/span&gt;
+Alt + Up
+
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;#39;\[Page_Down]&amp;#39;&amp;quot;&lt;/span&gt;
+Alt + Down
+
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;#39;\[Home]&amp;#39;&amp;quot;&lt;/span&gt;
+Alt + Left
+
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;#39;\[End]&amp;#39;&amp;quot;&lt;/span&gt;
+Alt + Right
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Enable new key shortcuts:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xbindkeys
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Debian auto-detects &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;  and will run &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; on the next login. &lt;a class="footnote-reference" href="#id23" id="id11"&gt;[10]&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook"&gt;.xbindkeysrc.chromebook&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="power-key"&gt;
+&lt;h3&gt;7.2 Power Key&lt;/h3&gt;
+&lt;p&gt;Power key in upper-right corner ignores any configuration in the window manager and triggers poweroff without delay when pressed (easy to do by accident as its positioned next to &lt;tt class="docutils literal"&gt;backspace&lt;/tt&gt;).&lt;/p&gt;
+&lt;p&gt;If you want to disable the power key edit &lt;tt class="docutils literal"&gt;/etc/systemd/logind.conf&lt;/tt&gt; and set &lt;tt class="docutils literal"&gt;HandlePowerKey=ignore&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="wireless"&gt;
+&lt;h2&gt;8. Wireless&lt;/h2&gt;
+&lt;p&gt;There are a few settings to modify to improve performance of Chromebook's wireless chipset. &lt;a class="footnote-reference" href="#id24" id="id12"&gt;[11]&lt;/a&gt; Identify the card and parameters:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;lspci &lt;span class="p"&gt;|&lt;/span&gt; grep -i net
+01:00.0 Network controller: Qualcomm Atheros AR9462 Wireless Network Adapter &lt;span class="o"&gt;(&lt;/span&gt;rev 01&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;modinfo ath9k &lt;span class="p"&gt;|&lt;/span&gt; grep parm
+parm:           debug:Debugging mask &lt;span class="o"&gt;(&lt;/span&gt;uint&lt;span class="o"&gt;)&lt;/span&gt;
+parm:           nohwcrypt:Disable hardware encryption &lt;span class="o"&gt;(&lt;/span&gt;int&lt;span class="o"&gt;)&lt;/span&gt;
+parm:           blink:Enable LED blink on activity &lt;span class="o"&gt;(&lt;/span&gt;int&lt;span class="o"&gt;)&lt;/span&gt;
+parm:           btcoex_enable:Enable wifi-BT coexistence &lt;span class="o"&gt;(&lt;/span&gt;int&lt;span class="o"&gt;)&lt;/span&gt;
+parm:           bt_ant_diversity:Enable WLAN/BT RX antenna diversity &lt;span class="o"&gt;(&lt;/span&gt;int&lt;span class="o"&gt;)&lt;/span&gt;
+parm:           ps_enable:Enable WLAN PowerSave &lt;span class="o"&gt;(&lt;/span&gt;int&lt;span class="o"&gt;)&lt;/span&gt;
+parm:           use_chanctx:Enable channel context &lt;span class="k"&gt;for&lt;/span&gt; concurrency &lt;span class="o"&gt;(&lt;/span&gt;int&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Create &lt;tt class="docutils literal"&gt;/etc/modprobe.d/ath9k.conf&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;options ath9k &lt;span class="nv"&gt;bt_ant_diversity&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="nv"&gt;ps_enable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/etc/modprobe.d/ath9k.conf"&gt;ath9k.conf&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="helpful-resources"&gt;
+&lt;h2&gt;9. Helpful Resources&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Specs: output of &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lshw.txt"&gt;lshw&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lspci.txt"&gt;lspci&lt;/a&gt;, and &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lsusb.txt"&gt;lsusb&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Arch Linux C720 installation with useful &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook"&gt;post-install details&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Turn Chromebooks into &lt;a class="reference external" href="http://blog.codestarter.org/how-we-turn-199-chromebooks-into-ubuntu-based/"&gt;Ubuntu-based code learning machines for kids&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;My earlier install and configuration of &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Lubuntu 14.04 LTS&lt;/a&gt; under &lt;tt class="docutils literal"&gt;upstart&lt;/tt&gt; (vs &lt;tt class="docutils literal"&gt;systemd&lt;/tt&gt; in Debian)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h3&gt;Notes&lt;/h3&gt;
+&lt;table class="docutils footnote" frame="void" id="id13" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Create a Chromebook &lt;a class="reference external" href="https://support.google.com/chromebook/answer/1080595?hl=en"&gt;recovery image&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id15" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id3"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Image courtesy of &lt;a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook#TOC-Firmware"&gt;Chromium&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id16" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id4"&gt;[3]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Useful &lt;a class="reference external" href="http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html"&gt;GBB flags&lt;/a&gt; for &lt;a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/c720-debian/"&gt;another new free software machine&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id17" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id5"&gt;[4]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Whenever you remove battery power to the Chromebook (like opening up the case) the hardware clock on the motherboard resets to a future year (mine travelled to 2040). Providing a network connection is up during the Debian installation the system should fetch a correct time from a NTP server. Otherwise fix the &lt;a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/c720-debian/"&gt;fallout from an incorrect clock&lt;/a&gt; by re-mounting partitions read-only and correct filesystem timestamps using &lt;tt class="docutils literal"&gt;fsck&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id18" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id6"&gt;[5]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Switching between developer and normal (non-developer) modes will remove user accounts and their associated information from the Chromebook.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id19" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id7"&gt;[6]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.chromium.org/chromium-os"&gt;Chromium OS&lt;/a&gt; developer information for the &lt;a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook"&gt;Acer C720 Chromebook&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id20" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id8"&gt;[7]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Entries for &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics"&gt;Touchpad Synaptics&lt;/a&gt; and the &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration"&gt;C720 Chromebook&lt;/a&gt; on &lt;a class="reference external" href="https://wiki.archlinux.org/"&gt;ArchWiki&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id21" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id9"&gt;[8]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.linuxjournal.com/content/solid-state-drives-get-one-already"&gt;TRIM configuration on solid-state drives&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id22" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id10"&gt;[9]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Some HOWTOs talk about adding &lt;tt class="docutils literal"&gt;modprobe.blacklist=ehci_hcd,ehci_pci&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id23" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id11"&gt;[10]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Xbindkeys"&gt;Xbindkeys&lt;/a&gt;, and another sample &lt;a class="reference external" href="https://github.com/alexpatel/dotfiles/blob/master/xbindkeysrc"&gt;Chromebook-friendly xbindkeysrc&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id24" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id12"&gt;[11]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Wireless &lt;a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k"&gt;ath9k driver&lt;/a&gt; and &lt;a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex"&gt;bluetooth coexistence&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="chromebook"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Minimal Debian</title><link href="http://www.circuidipity.com/minimal-debian.html" rel="alternate"></link><updated>2015-07-07T15:43:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-07:minimal-debian.html</id><summary type="html">&lt;div class="figure"&gt;
 &lt;img alt="Debian Vader" src="images/debianVader.png" style="width: 960px; height: 355px;" /&gt;
 &lt;p class="caption"&gt;[Image courtesy &lt;a class="reference external" href="http://jschild.deviantart.com/art/Facebook-cover-debian-Darth-Vader-380351614"&gt;jschild&lt;/a&gt;].&lt;/p&gt;
 &lt;/div&gt;
@@ -38,9 +389,9 @@
 &lt;h2&gt;2. Partitions&lt;/h2&gt;
 &lt;p&gt;In the example below I create 3 partitions on the disk:&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;sda1 is a 20GB &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; partition&lt;/li&gt;
-&lt;li&gt;sda5 is a 1GB LUKS encrypted &lt;tt class="docutils literal"&gt;swap&lt;/tt&gt; partition using a &lt;strong&gt;random key&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;sda6 uses the remaining space as a LUKS encrypted &lt;tt class="docutils literal"&gt;home&lt;/tt&gt; partition using a &lt;strong&gt;passphrase&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;sda1&lt;/tt&gt; configured as 20GB &lt;tt class="docutils literal"&gt;root&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;sda5&lt;/tt&gt; configured as 1GB LUKS encrypted &lt;tt class="docutils literal"&gt;swap&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;random key&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;sda6&lt;/tt&gt; uses remaining space as LUKS encrypted &lt;tt class="docutils literal"&gt;home&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;passphrase&lt;/tt&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;img alt="Partitioning method" class="align-center" src="images/screenshot/debianInstall/18.png" style="width: 800px; height: 600px;" /&gt;
 &lt;img alt="Partition disks" class="align-center" src="images/screenshot/debianInstall/19.png" style="width: 800px; height: 600px;" /&gt;
@@ -508,7 +859,8 @@ config dhcp &lt;span class="s1"&gt;&amp;#39;wan&amp;#39;&lt;/span&gt;
 &lt;/ul&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="openwrt"></category><category term="linux"></category><category term="networks"></category></entry><entry><title>Chromebook to Ubuntubook</title><link href="http://www.circuidipity.com/c720-ubuntubook.html" rel="alternate"></link><updated>2015-05-02T17:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-05-02:c720-ubuntubook.html</id><summary type="html">&lt;p&gt;Replace &lt;strong&gt;Chrome OS&lt;/strong&gt; permanently with &lt;strong&gt;Ubuntu 15.04 Linux&lt;/strong&gt; on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt;.&lt;/p&gt;
+</summary><category term="openwrt"></category><category term="linux"></category><category term="networks"></category></entry><entry><title>Chromebook to Ubuntubook</title><link href="http://www.circuidipity.com/c720-ubuntubook.html" rel="alternate"></link><updated>2015-07-08T10:18:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-05-02:c720-ubuntubook.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; Now running &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Debian 'Jessie'&lt;/a&gt; on my Chromebook.&lt;/p&gt;
+&lt;p&gt;Replace &lt;strong&gt;Chrome OS&lt;/strong&gt; permanently with &lt;strong&gt;Ubuntu 15.04 Linux&lt;/strong&gt; on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt;.&lt;/p&gt;
 &lt;img alt="Ubuntu 15.04 Vivid Vervet" class="align-right" src="images/vivid-icon.png" style="width: 250px; height: 250px;" /&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
@@ -1280,323 +1632,4 @@ ATTRS&lt;span class="o"&gt;{&lt;/span&gt;idVendor&lt;span class="o"&gt;}==&lt;/s
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="ubuntu"></category><category term="linux"></category><category term="networks"></category></entry><entry><title>Run a Raspberry Pi 2 from external USB storage</title><link href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html" rel="alternate"></link><updated>2015-07-05T17:11:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-02:run-a-raspberry-pi-2-from-external-usb-storage.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; Home server &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html"&gt;now running Raspbian&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I am exploring the use of my Pi as &lt;strong&gt;24/7 uptime home server&lt;/strong&gt; and one of the hacks I wish to add is using Pi as a cheap and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;network attached storage (NAS)&lt;/a&gt; device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;I imagine an always-on Pi would enjoy more robust performance from a hard drive than SD card. &lt;a class="footnote-reference" href="#id4" id="id1"&gt;[1]&lt;/a&gt; I put my plan in motion using:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Raspberry Pi 2 Model B&lt;/li&gt;
-&lt;li&gt;5V 2A microUSB power adapter&lt;/li&gt;
-&lt;li&gt;Ubuntu 14.04 Linux&lt;/li&gt;
-&lt;li&gt;4GB microSD card (for initial setup and future &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt; partition)&lt;/li&gt;
-&lt;li&gt;1TB powered USB hard drive&lt;/li&gt;
-&lt;li&gt;ethernet cable&lt;/li&gt;
-&lt;li&gt;HDMI display + USB keyboard (for initial setup)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;With the move to ARMv7 the Raspberry Pi 2 is now capable of running the ARM port of Ubuntu. A community-created &lt;a class="reference external" href="https://wiki.ubuntu.com/ARM/RaspberryPi"&gt;Ubuntu 14.04 LTS minimal image&lt;/a&gt; with an updated &lt;tt class="docutils literal"&gt;3.18&lt;/tt&gt; kernel and firmware suitable for Pi 2 is now available. &lt;a class="footnote-reference" href="#id5" id="id2"&gt;[2]&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="download"&gt;
-&lt;h2&gt;0. Download&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Using Linux:&lt;/strong&gt; Import the &lt;a class="reference external" href="http://www.finnie.org/2015/02/16/raspberry-pi-2-update-ubuntu-14-04-image-available/"&gt;lead developer's&lt;/a&gt; GPG key:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --keyserver pgp.mit.edu --recv-key 86AE8D98
-gpg: keyring &lt;span class="sb"&gt;`&lt;/span&gt;/home/username/.gnupg/secring.gpg&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; created
-gpg: requesting key 86AE8D98 from hkp server pgp.mit.edu
-gpg: /home/username/.gnupg/trustdb.gpg: trustdb created
-gpg: key 86AE8D98: public key &lt;span class="s2"&gt;&amp;quot;Ryan Finnie &amp;lt;ryan@finnie.org&amp;gt;&amp;quot;&lt;/span&gt; imported
-gpg: no ultimately trusted keys found
-gpg: Total number processed: 1
-gpg:               imported: &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="o"&gt;(&lt;/span&gt;RSA: 1&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --fingerprint 86AE8D98
-pub   4096R/86AE8D98 2012-04-11
-Key &lt;span class="nv"&gt;fingerprint&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 42E2 C8DE 8C17 3AB1 02F5  2C6E 7E60 A3A6 86AE 8D98
-uid                  Ryan Finnie &amp;lt;ryan@finnie.org&amp;gt;
-uid                  Ryan Finnie &amp;lt;ryan.finnie@canonical.com&amp;gt;
-uid                  &lt;span class="o"&gt;[&lt;/span&gt;jpeg image of size 1669&lt;span class="o"&gt;]&lt;/span&gt;
-sub   4096R/C50F6695 2012-04-11
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Download the &lt;a class="reference external" href="http://www.finnie.org/software/raspberrypi/"&gt;latest ubuntu-trusty image and GPG signature&lt;/a&gt; for Pi 2:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://www.finnie.org/software/raspberrypi/2015-02-19-ubuntu-trusty.zip
-&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://www.finnie.org/software/raspberrypi/2015-02-19-ubuntu-trusty.zip.asc
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Verify and unpack the image:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --verify 2015-02-19-ubuntu-trusty.zip.asc 2015-02-19-ubuntu-trusty.zip
-gpg: Signature made Thu &lt;span class="m"&gt;19&lt;/span&gt; Feb &lt;span class="m"&gt;2015&lt;/span&gt; 12:46:09 PM EST using RSA key ID 86AE8D98
-gpg: Good signature from &lt;span class="s2"&gt;&amp;quot;Ryan Finnie &amp;lt;ryan@finnie.org&amp;gt;&amp;quot;&lt;/span&gt;
-gpg:                 aka &lt;span class="s2"&gt;&amp;quot;Ryan Finnie &amp;lt;ryan.finnie@canonical.com&amp;gt;&amp;quot;&lt;/span&gt;
-gpg:                 aka &lt;span class="s2"&gt;&amp;quot;[jpeg image of size 1669]&amp;quot;&lt;/span&gt;
-gpg: WARNING: This key is not certified with a trusted signature!
-gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: 42E2 C8DE 8C17 3AB1 02F5  2C6E 7E60 A3A6 86AE 8D98
-&lt;span class="nv"&gt;$ &lt;/span&gt;unzip 2015-02-19-ubuntu-trusty.zip
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="install-to-sd-card"&gt;
-&lt;h2&gt;1. Install to SD card&lt;/h2&gt;
-&lt;p&gt;In lieu of the usual &lt;tt class="docutils literal"&gt;dd&lt;/tt&gt; I use &lt;a class="reference external" href="https://source.tizen.org/documentation/reference/bmaptool/bmap-tools-project"&gt;bmap-tools&lt;/a&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;2015-02-19-ubuntu-trusty.bmap&lt;/span&gt;&lt;/tt&gt; to write &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;2015-02-19-ubuntu-trusty.img&lt;/span&gt;&lt;/tt&gt; to the SD card. &lt;strong&gt;Advantages:&lt;/strong&gt; speed boost, and bmaptool's inability to write to mounted devices (in case you pick a wrong device/partition like, say, your &lt;em&gt;home&lt;/em&gt; drive... &lt;tt class="docutils literal"&gt;dd&lt;/tt&gt;'s nickname &lt;em&gt;disk destroyer&lt;/em&gt; is no idle boast):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install bmap-tools
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo bmaptool copy --bmap 2015-02-19-ubuntu-trusty.bmap 2015-02-19-ubuntu-trusty.img /dev/sdX
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="pi-boot"&gt;
-&lt;h2&gt;2. Pi Boot&lt;/h2&gt;
-&lt;p&gt;Login username and password are both &lt;tt class="docutils literal"&gt;ubuntu&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Filesystem layout on the SD card:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;df -h
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/mmcblk0p2  1.7G  456M  1.1G  30% /
-devtmpfs        458M  4.0K  458M   1% /dev
-none            4.0K     &lt;span class="m"&gt;0&lt;/span&gt;  4.0K   0% /sys/fs/cgroup
-none             93M  260K   93M   1% /run
-none            5.0M     &lt;span class="m"&gt;0&lt;/span&gt;  5.0M   0% /run/lock
-none            462M     &lt;span class="m"&gt;0&lt;/span&gt;  462M   0% /run/shm
-none            100M     &lt;span class="m"&gt;0&lt;/span&gt;  100M   0% /run/user
-/dev/mmcblk0p1   64M  9.7M   55M  16% /boot/firmware
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="partition-external-hard-drive"&gt;
-&lt;h2&gt;3. Partition external hard drive&lt;/h2&gt;
-&lt;p&gt;I connect the 1TB USB hard drive to Pi and confirm device detection:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;lsusb
-Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 002: ID 0424:9514 Standard Microsystems Corp.
-Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 003: ID 0424:ec00 Standard Microsystems Corp.
-Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 005: ID 152d:2329 JMicron Technology Corp. / JMicron USA Technology Corp. JM20329 SATA Bridge
-&lt;span class="nv"&gt;$ &lt;/span&gt;dmesg -t
-&lt;span class="o"&gt;[&lt;/span&gt; ... &lt;span class="o"&gt;]&lt;/span&gt;
-usb 1-1.3: new high-speed USB device number &lt;span class="m"&gt;5&lt;/span&gt; using dwc_otg
-usb 1-1.3: New USB device found, &lt;span class="nv"&gt;idVendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;152d, &lt;span class="nv"&gt;idProduct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2329
-usb 1-1.3: New USB device strings: &lt;span class="nv"&gt;Mfr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1, &lt;span class="nv"&gt;Product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;SerialNumber&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;5
-usb 1-1.3: Product: USB to ATA/ATAPI bridge
-usb 1-1.3: Manufacturer: JMicron
-usb 1-1.3: SerialNumber: DCA5968053FF
-usb-storage 1-1.3:1.0: USB Mass Storage device detected
-usb-storage 1-1.3:1.0: Quirks match &lt;span class="k"&gt;for&lt;/span&gt; vid 152d pid 2329: 8020
-scsi0 : usb-storage 1-1.3:1.0
-scsi 0:0:0:0: Direct-Access     WDC WD10 EARS-00Y5B1           PQ: &lt;span class="m"&gt;0&lt;/span&gt; ANSI: &lt;span class="m"&gt;2&lt;/span&gt; CCS
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="m"&gt;1953525168&lt;/span&gt; 512-byte logical blocks: &lt;span class="o"&gt;(&lt;/span&gt;1.00 TB/931 GiB&lt;span class="o"&gt;)&lt;/span&gt;
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Write Protect is off
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Mode Sense: &lt;span class="m"&gt;28&lt;/span&gt; &lt;span class="m"&gt;00&lt;/span&gt; &lt;span class="m"&gt;00&lt;/span&gt; 00
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; No Caching mode page found
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Assuming drive cache: write through
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; No Caching mode page found
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Assuming drive cache: write through
-sd 0:0:0:0: Attached scsi generic sg0 &lt;span class="nb"&gt;type &lt;/span&gt;0
-sda: sda1
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; No Caching mode page found
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Assuming drive cache: write through
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Attached SCSI disk
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Device is &lt;tt class="docutils literal"&gt;sda&lt;/tt&gt;. Use &lt;strong&gt;fdisk&lt;/strong&gt; to create 2 new partitions on the USB drive:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;sda1 - 20GB - root filesystem&lt;/li&gt;
-&lt;li&gt;sda2 - remaining space - storage&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo fdisk /dev/sda
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
-
-Disk /dev/sda: 1000.2 GB, &lt;span class="m"&gt;1000204886016&lt;/span&gt; bytes
-&lt;span class="m"&gt;255&lt;/span&gt; heads, &lt;span class="m"&gt;63&lt;/span&gt; sectors/track, &lt;span class="m"&gt;121601&lt;/span&gt; cylinders, total &lt;span class="m"&gt;1953525168&lt;/span&gt; sectors
-&lt;span class="nv"&gt;Units&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; sectors of &lt;span class="m"&gt;1&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Disk identifier: 0x00000000
-
-Device Boot      Start         End      Blocks   Id  System
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: n
-Partition &lt;span class="nb"&gt;type&lt;/span&gt;:
-  p   primary &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; primary, &lt;span class="m"&gt;0&lt;/span&gt; extended, &lt;span class="m"&gt;4&lt;/span&gt; free&lt;span class="o"&gt;)&lt;/span&gt;
-  e   extended
-Select &lt;span class="o"&gt;(&lt;/span&gt;default p&lt;span class="o"&gt;)&lt;/span&gt;: p
-Partition number &lt;span class="o"&gt;(&lt;/span&gt;1-4, default 1&lt;span class="o"&gt;)&lt;/span&gt;:
-Using default value 1
-First sector &lt;span class="o"&gt;(&lt;/span&gt;2048-1953525167, default 2048&lt;span class="o"&gt;)&lt;/span&gt;:
-Using default value 2048
-Last sector, +sectors or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;2048-1953525167, default 1953525167&lt;span class="o"&gt;)&lt;/span&gt;: +20G
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: n
-Partition &lt;span class="nb"&gt;type&lt;/span&gt;:
-  p   primary &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; primary, &lt;span class="m"&gt;0&lt;/span&gt; extended, &lt;span class="m"&gt;3&lt;/span&gt; free&lt;span class="o"&gt;)&lt;/span&gt;
-  e   extended
-Select &lt;span class="o"&gt;(&lt;/span&gt;default p&lt;span class="o"&gt;)&lt;/span&gt;: p
-Partition number &lt;span class="o"&gt;(&lt;/span&gt;1-4, default 2&lt;span class="o"&gt;)&lt;/span&gt;:
-Using default value 2
-First sector &lt;span class="o"&gt;(&lt;/span&gt;41945088-1953525167, default 41945088&lt;span class="o"&gt;)&lt;/span&gt;:
-Using default value 41945088
-Last sector, +sectors or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;41945088-1953525167, default 1953525167&lt;span class="o"&gt;)&lt;/span&gt;:
-Using default value 1953525167
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
-
-Disk /dev/sda: 1000.2 GB, &lt;span class="m"&gt;1000204886016&lt;/span&gt; bytes
-&lt;span class="m"&gt;255&lt;/span&gt; heads, &lt;span class="m"&gt;63&lt;/span&gt; sectors/track, &lt;span class="m"&gt;121601&lt;/span&gt; cylinders, total &lt;span class="m"&gt;1953525168&lt;/span&gt; sectors
-&lt;span class="nv"&gt;Units&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; sectors of &lt;span class="m"&gt;1&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Disk identifier: 0x00000000
-
-Device Boot      Start         End      Blocks   Id  System
-/dev/sda1            &lt;span class="m"&gt;2048&lt;/span&gt;    &lt;span class="m"&gt;41945087&lt;/span&gt;    &lt;span class="m"&gt;20971520&lt;/span&gt;   &lt;span class="m"&gt;83&lt;/span&gt;  Linux
-/dev/sda2        &lt;span class="m"&gt;41945088&lt;/span&gt;  &lt;span class="m"&gt;1953525167&lt;/span&gt;   &lt;span class="m"&gt;955790040&lt;/span&gt;   &lt;span class="m"&gt;83&lt;/span&gt;  Linux
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: w
-The partition table has been altered!
-
-Calling ioctl&lt;span class="o"&gt;()&lt;/span&gt; to re-read partition table.
-Syncing disks.
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Format the new partitions using filesystem &lt;tt class="docutils literal"&gt;ext4&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mke2fs -t ext4 -L rootfs /dev/sda1
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mke2fs -t ext4 -L storage /dev/sda2
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="rsync"&gt;
-&lt;h2&gt;4. Rsync&lt;/h2&gt;
-&lt;p&gt;Mount the newly-formatted &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; partition to &lt;tt class="docutils literal"&gt;/mnt&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mount -t ext4 /dev/sda1 /mnt
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Use &lt;strong&gt;rsync&lt;/strong&gt; to copy contents of &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; on the SD card to the &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; partition on the USB device:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo rsync -axv / /mnt
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="new-rootfs"&gt;
-&lt;h2&gt;5. New rootfs&lt;/h2&gt;
-&lt;div class="section" id="on-the-sd-card"&gt;
-&lt;h3&gt;5.1 On the SD card&lt;/h3&gt;
-&lt;p&gt;Modify options in &lt;tt class="docutils literal"&gt;/boot/cmdline.txt&lt;/tt&gt; to point the bootloader to &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; filesystem on the USB device:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Original:
-dwc_otg.lpm_enable&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;console&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;tty1 &lt;span class="nv"&gt;root&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/mmcblk0p2 rootwait
-
-Modified:
-dwc_otg.lpm_enable&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;console&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;tty1 &lt;span class="nv"&gt;root&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sda1 rootwait &lt;span class="nv"&gt;rootdelay&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;5
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="on-the-usb-hard-drive"&gt;
-&lt;h3&gt;5.2 On the USB hard drive&lt;/h3&gt;
-&lt;p&gt;Create new mountpoint for the &lt;tt class="docutils literal"&gt;storage&lt;/tt&gt; partition:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /mnt/media/USB0
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Modify options in &lt;tt class="docutils literal"&gt;/mnt/etc/fstab&lt;/tt&gt; to mount &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;storage&lt;/tt&gt; partitions at boot. &lt;a class="footnote-reference" href="#id6" id="id3"&gt;[3]&lt;/a&gt; Example for &lt;tt class="docutils literal"&gt;sda1&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;sda2&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;proc            /proc           proc    defaults          &lt;span class="m"&gt;0&lt;/span&gt;       0
-&lt;span class="c"&gt;# comment out root filesystem on SD card&lt;/span&gt;
-&lt;span class="c"&gt;#/dev/mmcblk0p2  /               ext4    defaults,noatime  0       1&lt;/span&gt;
-&lt;span class="c"&gt;# partitions on USB hard drive&lt;/span&gt;
-/dev/sda1       /       ext4    defaults,noatime          &lt;span class="m"&gt;0&lt;/span&gt;       1
-/dev/sda2       /media/USB0 ext4    defaults,noatime      &lt;span class="m"&gt;0&lt;/span&gt;       0
-/dev/mmcblk0p1  /boot/firmware  vfat    defaults          &lt;span class="m"&gt;0&lt;/span&gt;       2
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="reboot"&gt;
-&lt;h2&gt;6. Reboot&lt;/h2&gt;
-&lt;p&gt;Save modifications and reboot:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo reboot
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Log in and check out the new filesystem layout:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;df -h
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/sda1        20G  590M   18G   4% /
-devtmpfs        458M  4.0K  458M   1% /dev
-none            4.0K     &lt;span class="m"&gt;0&lt;/span&gt;  4.0K   0% /sys/fs/cgroup
-none             93M  280K   93M   1% /run
-/dev/sda2       898G  326G  527G  39% /media/USB0
-none            5.0M     &lt;span class="m"&gt;0&lt;/span&gt;  5.0M   0% /run/lock
-none            462M     &lt;span class="m"&gt;0&lt;/span&gt;  462M   0% /run/shm
-none            100M     &lt;span class="m"&gt;0&lt;/span&gt;  100M   0% /run/user
-/dev/mmcblk0p1   64M  9.9M   55M  16% /boot/firmware
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="post-install"&gt;
-&lt;h2&gt;7. Post-install&lt;/h2&gt;
-&lt;div class="section" id="administrator"&gt;
-&lt;h3&gt;7.1 Administrator&lt;/h3&gt;
-&lt;p&gt;Ubuntu is a great operating system but a not-so-great username and a lousy password. Example: change default username/group &lt;tt class="docutils literal"&gt;ubuntu&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;pi&lt;/tt&gt; and set a new password.&lt;/p&gt;
-&lt;p&gt;Unlock &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; account by setting a new password:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo passwd root
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Log out and back in as &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; and configure &lt;tt class="docutils literal"&gt;pi&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# usermod -l pi -m -d /home/pi ubuntu&lt;/span&gt;
-&lt;span class="c"&gt;# groupmod -n pi ubuntu&lt;/span&gt;
-&lt;span class="c"&gt;# passwd pi&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Optional:&lt;/strong&gt; Re-lock &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; by disabling the password:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo passwd -dl root
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="hostname"&gt;
-&lt;h3&gt;7.2 Hostname&lt;/h3&gt;
-&lt;p&gt;Example: Modify hostname &lt;tt class="docutils literal"&gt;ubuntu&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;raspberry&lt;/tt&gt; in &lt;tt class="docutils literal"&gt;/etc/hostname&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;/etc/hosts&lt;/tt&gt; and restart the &lt;tt class="docutils literal"&gt;hostname&lt;/tt&gt; service:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service hostname restart
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Log out and back in and hostname &lt;tt class="docutils literal"&gt;raspberry&lt;/tt&gt; is visible.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="timezone"&gt;
-&lt;h3&gt;7.3 Timezone&lt;/h3&gt;
-&lt;p&gt;Default timezone is &lt;tt class="docutils literal"&gt;UTC&lt;/tt&gt;. Modify to appropriate value:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cat /etc/timezone
-Etc/UTC
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg-reconfigure tzdata  &lt;span class="c"&gt;# ...and follow the interactive menu to set (example) &amp;#39;America/Toronto&amp;#39;...&lt;/span&gt;
-
-Current default &lt;span class="nb"&gt;time &lt;/span&gt;zone: &lt;span class="s1"&gt;&amp;#39;America/Toronto&amp;#39;&lt;/span&gt;
-Local &lt;span class="nb"&gt;time &lt;/span&gt;is now:      Sun Mar  &lt;span class="m"&gt;1&lt;/span&gt; 18:28:32 EST 2015.
-Universal Time is now:  Sun Mar  &lt;span class="m"&gt;1&lt;/span&gt; 23:28:32 UTC 2015.
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="upgrade"&gt;
-&lt;h3&gt;7.4 Upgrade&lt;/h3&gt;
-&lt;p&gt;With the newly-configured &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; up-and-running now is a good time to update Ubuntu:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get update
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get dist-upgrade
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="swap"&gt;
-&lt;h3&gt;7.5 Swap&lt;/h3&gt;
-&lt;p&gt;Ubuntu on Pi does not include a swap partition/file. Generate a (default) 2GB &lt;tt class="docutils literal"&gt;/var/swap&lt;/tt&gt; file at boot by installing:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install dphys-swapfile
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="static-address"&gt;
-&lt;h3&gt;7.6 Static Address&lt;/h3&gt;
-&lt;p&gt;A Raspberry Pi that is going to stay home and run as a server can be configured to use a &lt;strong&gt;static network address&lt;/strong&gt;. Sample &lt;tt class="docutils literal"&gt;/etc/network/interfaces&lt;/tt&gt; modification that disables &lt;tt class="docutils literal"&gt;dhcp&lt;/tt&gt; and sets ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt; and connects to a router (that handles DNS) at &lt;tt class="docutils literal"&gt;192.168.1.1&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#iface eth0 inet dhcp&lt;/span&gt;
-auto eth0
-iface eth0 inet static
-    address 192.168.1.88
-    netmask 255.255.255.0
-    gateway 192.168.1.1
-    dns-nameservers 192.168.1.1
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="openssh-server"&gt;
-&lt;h3&gt;7.7 OpenSSH Server&lt;/h3&gt;
-&lt;p&gt;Install and configure SSH for remote access to our (soon-to-be) headless Pi home server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install openssh-server
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Check out &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;securing access to remote servers using SSH keys&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h3&gt;Notes&lt;/h3&gt;
-&lt;table class="docutils footnote" frame="void" id="id4" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.raspberrypi.org/forums/viewtopic.php?f=29&amp;amp;t=44177"&gt;Discussion thread (raspberrypi.org/forums)&lt;/a&gt; about moving root to external USB storage.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table class="docutils footnote" frame="void" id="id5" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html"&gt;Version 1&lt;/a&gt; used Raspbian on a Raspberry Pi Model B.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table class="docutils footnote" frame="void" id="id6" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id3"&gt;[3]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Pi requires an SD card to boot so we continue using original &lt;tt class="docutils literal"&gt;/boot&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</summary><category term="raspberry pi"></category><category term="ubuntu"></category><category term="linux"></category><category term="networks"></category></entry></feed>
+</summary><category term="ubuntu"></category><category term="linux"></category><category term="networks"></category></entry></feed>
