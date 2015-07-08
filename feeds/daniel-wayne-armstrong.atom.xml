@@ -243,8 +243,8 @@ Alt + Right
 &lt;p&gt;Enable new key shortcuts:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xbindkeys
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Debian auto-detects &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;  and will run &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; on the next login. &lt;a class="footnote-reference" href="#id23" id="id11"&gt;[10]&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook"&gt;.xbindkeysrc.chromebook&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Place &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; to load configuration at &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt;. &lt;a class="footnote-reference" href="#id23" id="id11"&gt;[10]&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook"&gt;.xbindkeysrc.chromebook&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="power-key"&gt;
 &lt;h3&gt;7.2 Power Key&lt;/h3&gt;
