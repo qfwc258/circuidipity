@@ -1,5 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-07-08T10:45:00-04:00</updated><entry><title>Chromebook to Jessiebook</title><link href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html" rel="alternate"></link><updated>2015-07-08T10:45:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-08:c720-chromebook-to-jessiebook.html</id><summary type="html">&lt;p&gt;Replace &lt;strong&gt;Chrome OS&lt;/strong&gt; permanently with &lt;strong&gt;Debian&lt;/strong&gt; on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-07-10T00:12:00-04:00</updated><entry><title>Shell script: paVolume</title><link href="http://www.circuidipity.com/pavolume.html" rel="alternate"></link><updated>2015-07-10T00:12:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-10:pavolume.html</id><summary type="html">&lt;p&gt;My original intent was to manage sound on &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Jessiebook&lt;/a&gt; by binding the commands to the multimedia keys in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;. Instead &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; calls a standalone script created to control PulseAudio volume (and thus useful beyond just &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt;): &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;paVolume&lt;/a&gt;&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Script requirements: &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt; (packaged in Debian), &lt;tt class="docutils literal"&gt;pamixer&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt; (GitHub).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pactl"&gt;
+&lt;h2&gt;0. pactl&lt;/h2&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt; controls a PulseAudio sound server and is included in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pulseaudio-utils&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install pulseaudio-utils
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pamixer"&gt;
+&lt;h2&gt;1. pamixer&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/cdemoulins/pamixer"&gt;pamixer&lt;/a&gt; is a PulseAudio console mixer. Compile dependencies:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install build-essential libpulse-dev libboost-program-options1.55.0 libboost-program-options-dev
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Download source and compile:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git clone https://cdemoulins@github.com/cdemoulins/pamixer.git
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;pamixer
+&lt;span class="nv"&gt;$ &lt;/span&gt;make
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;No &lt;tt class="docutils literal"&gt;make install&lt;/tt&gt;. Place the resulting &lt;tt class="docutils literal"&gt;pamixer&lt;/tt&gt; in PATH (I use &lt;tt class="docutils literal"&gt;~/bin&lt;/tt&gt;).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="volnoti"&gt;
+&lt;h2&gt;2. volnoti&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/davidbrazdil/volnoti"&gt;volnoti&lt;/a&gt; is a lightweight volume notification. Compile dependencies:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install libdbus-glib-1-dev libgtk2.0-dev libgdk-pixbuf2.0-dev autoconf automake
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Download:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git clone git://github.com/davidbrazdil/volnoti.git
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;volnoti
+&lt;span class="nv"&gt;$ &lt;/span&gt;./prepare.sh
+&lt;span class="nv"&gt;$ &lt;/span&gt;./configure --prefix&lt;span class="o"&gt;=&lt;/span&gt;/usr
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Apply this fix &lt;a class="footnote-reference" href="#id5" id="id3"&gt;[1]&lt;/a&gt; to the source:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;src
+&lt;span class="nv"&gt;$ &lt;/span&gt;rm value-client-stub.h &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make value-client-stub.h
+&lt;span class="nv"&gt;$ &lt;/span&gt;rm value-daemon-stub.h &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make value-daemon-stub.h
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ..
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Compile source (and I use &lt;a class="reference external" href="https://packages.debian.org/jessie/checkinstall"&gt;checkinstall&lt;/a&gt; to make a &lt;tt class="docutils literal"&gt;deb&lt;/tt&gt; package and install):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;make
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo checkinstall make install
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Start &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt; daemon:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;volnoti
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Configure daemon to auto-start at desktop launch (example: &lt;strong&gt;i3&lt;/strong&gt; - add to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.i3/config&lt;/span&gt;&lt;/tt&gt;):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Auto-start applications&lt;/span&gt;
+&lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id volnoti -t 2
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;3. paVolume&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;Script posted to GitHub&lt;/a&gt;. Download and place in PATH. Run &lt;tt class="docutils literal"&gt;paVolume &lt;span class="pre"&gt;-h&lt;/span&gt;&lt;/tt&gt; for options.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h3&gt;Notes&lt;/h3&gt;
+&lt;table class="docutils footnote" frame="void" id="id5" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id3"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Ubuntu forums: &lt;a class="reference external" href="http://ubuntuforums.org/showthread.php?t=2215264&amp;amp;s=7aa2dfa8b89411472598e737c38f1475&amp;amp;p=12978792#post12978792"&gt;Error when using make &amp;quot;client.c:108:5: error: too many arguments to function&amp;quot;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="debian"></category><category term="linux"></category><category term="shell"></category><category term="programming"></category></entry><entry><title>Chromebook to Jessiebook</title><link href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html" rel="alternate"></link><updated>2015-07-10T00:01:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-08:c720-chromebook-to-jessiebook.html</id><summary type="html">&lt;p&gt;Replace &lt;strong&gt;Chrome OS&lt;/strong&gt; permanently with &lt;strong&gt;Debian&lt;/strong&gt; on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt;.&lt;/p&gt;
 &lt;img alt="jessiebook" class="align-right" src="images/jessiebook.png" style="width: 300px; height: 161px;" /&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
@@ -1473,163 +1539,5 @@ WebInterface Yes
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Admin functions available at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://192.168.1.88:631/admin&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="ubuntu"></category><category term="linux"></category><category term="networks"></category></entry><entry><title>Brother MFC-J450DW All-In-One Printer/Scanner</title><link href="http://www.circuidipity.com/brother-mfc-j450dw-printer-scanner.html" rel="alternate"></link><updated>2015-03-04T20:40:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-04:brother-mfc-j450dw-printer-scanner.html</id><summary type="html">&lt;p&gt;Connect a &lt;strong&gt;Brother MFC-J450DW&lt;/strong&gt; to server running Ubuntu 14.04 LTS and configure as printer+scanner for a home network.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div class="section" id="cups-sane"&gt;
-&lt;h2&gt;0. CUPS + SANE&lt;/h2&gt;
-&lt;p&gt;Attach the Brother device to server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;dmesg -t
-&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
-usb 5-1: new high-speed USB device number &lt;span class="m"&gt;4&lt;/span&gt; using ehci-pci
-usb 5-1: New USB device found, &lt;span class="nv"&gt;idVendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;04f9, &lt;span class="nv"&gt;idProduct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;02fa
-usb 5-1: New USB device strings: &lt;span class="nv"&gt;Mfr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1, &lt;span class="nv"&gt;Product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;SerialNumber&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;3
-usb 5-1: Product: MFC-J450DW
-usb 5-1: Manufacturer: Brother
-usb 5-1: SerialNumber: BROH4F240529
-usblp 5-1:1.0: usblp0: USB Bidirectional printer dev &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; alt &lt;span class="m"&gt;0&lt;/span&gt; proto &lt;span class="m"&gt;2&lt;/span&gt; vid 0x04F9 pid 0x02FA
-usbcore: registered new interface driver usblp
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Install CUPS (printer) and SANE (scanner) packages and grant (example) &lt;tt class="docutils literal"&gt;username&lt;/tt&gt; admin privileges:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install cups cups-bsd sane-utils libsane-extras
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username lp
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username lpadmin
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username scanner
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="brother-drivers"&gt;
-&lt;h2&gt;1. Brother drivers&lt;/h2&gt;
-&lt;p&gt;Download the &lt;strong&gt;Driver Install Tool&lt;/strong&gt; from &lt;a class="reference external" href="http://support.brother.com/g/b/downloadtop.aspx?c=us&amp;amp;lang=en&amp;amp;prod=mfcj450dw_us"&gt;Brother MFC-J450DW Downloads&lt;/a&gt; and install drivers:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gunzip linux-brprinter-installer-*.gz
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo su
-&lt;span class="c"&gt;# bash linux-brprinter-installer-2.0.0-1&lt;/span&gt;
-Input model name -&amp;gt;MFC-J450DW
-
-You are going to install following packages.
-    mfcj450dwlpr-3.0.0-1.i386.deb
-    mfcj450dwcupswrapper-3.0.0-1.i386.deb
-    brscan4-0.4.2-1.i386.deb
-    brscan-skey-0.2.4-1.i386.deb
-OK? &lt;span class="o"&gt;[&lt;/span&gt;y/N&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;y
-&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
-Will you specify the Device URI? &lt;span class="o"&gt;[&lt;/span&gt;Y/n&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;Y
-
-0: ipps
-1: https
-2: http
-3: ipp14
-4: lpd
-5: ipp
-6: socket
-7: usb://Brother/MFC-J450DW?serial&lt;span class="o"&gt;=&lt;/span&gt;BROH4F240529
-8: smb
-&lt;span class="m"&gt;9&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;I&lt;span class="o"&gt;)&lt;/span&gt;: Specify IP address.
-&lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;A&lt;span class="o"&gt;)&lt;/span&gt;: Auto. &lt;span class="o"&gt;(&lt;/span&gt;usb://Brother/MFC-J450DW?serial&lt;span class="o"&gt;=&lt;/span&gt;BROH4F240529&lt;span class="o"&gt;)&lt;/span&gt;
-
-&lt;span class="k"&gt;select&lt;/span&gt; the number of destination Device URI. -&amp;gt;10
-
-lpadmin -p MFCJ450DW -v usb://Brother/MFC-J450DW?serial&lt;span class="o"&gt;=&lt;/span&gt;BROH4F240529 -E
-Test Print? &lt;span class="o"&gt;[&lt;/span&gt;y/N&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;y
-
-
-lpadmin -p MFCJ450DW -v usb://Brother/MFC-J450DW?serial&lt;span class="o"&gt;=&lt;/span&gt;BROH4F240529 -E
-Test Print? &lt;span class="o"&gt;[&lt;/span&gt;y/N&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;y
-
-&lt;span class="nb"&gt;wait &lt;/span&gt;5s.
-lpr -P MFCJ450DW /usr/share/cups/data/testprint
-You are going to install following packages.
-    brscan4-0.4.2-1.i386.deb
-&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
-Do you agree? &lt;span class="o"&gt;[&lt;/span&gt;Y/n&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;Y
-
-You are going to install following packages.
-    brscan-skey-0.2.4-1.i386.deb
-&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
-Do you agree? &lt;span class="o"&gt;[&lt;/span&gt;Y/n&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;Y
-&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
-Hit Enter/Return key.
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Problem:&lt;/strong&gt; Scanner stuck in low-res mode using Linux scanner clients. &lt;strong&gt;Simple-scan&lt;/strong&gt; would not scan above 300dpi and would throw constant error messages. &lt;strong&gt;Xsane&lt;/strong&gt; would not scan at all and throw &lt;tt class="docutils literal"&gt;out of memory&lt;/tt&gt; errors. Turns out the Brother installer downloaded and installed an outdated, buggy scanner driver - &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;brscan4-0.4.2-1.i386.deb&lt;/span&gt;&lt;/tt&gt; - when a newer &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;brscan4-0.4.3-*.i386.deb&lt;/span&gt;&lt;/tt&gt; driver exists.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Remove the buggy driver and manually install the updated package:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service saned stop
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -P brscan4
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i brscan4-0.4.3-0.i386.deb
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service saned start
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="http://technik.blogs.nde.ag/2013/12/06/brother-dcp-j925dw-problems-when-scanning-via-sane/"&gt;Problems when scanning via SANE&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="printer-config"&gt;
-&lt;h2&gt;2. Printer config&lt;/h2&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/cups/cupsd.conf&lt;/tt&gt; to listen for connections from any device on the home network. Example for home server at ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Only listen for connections from the local machine.&lt;/span&gt;
-&lt;span class="c"&gt;#Listen localhost:631&lt;/span&gt;
-Listen *:631
-
-&lt;span class="c"&gt;# Show shared printers on the local network.&lt;/span&gt;
-Browsing On
-BrowseLocalProtocols dnssd
-
-&lt;span class="c"&gt;# Web interface setting...&lt;/span&gt;
-WebInterface Yes
-
-&lt;span class="c"&gt;# Restrict access to the server...&lt;/span&gt;
-&amp;lt;Location /&amp;gt;
-  Order allow,deny
-  Allow 192.168.1.*
-&amp;lt;/Location&amp;gt;
-
-&lt;span class="c"&gt;# Restrict access to the admin pages...&lt;/span&gt;
-&amp;lt;Location /admin&amp;gt;
-  Order allow,deny
-  Allow 192.168.1.*
-&amp;lt;/Location&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Restart CUPS:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service cups restart
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Admin functions available at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://192.168.1.88:631/admin&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="scanner-config"&gt;
-&lt;h2&gt;3. Scanner config&lt;/h2&gt;
-&lt;div class="section" id="on-the-server"&gt;
-&lt;h3&gt;On the server&lt;/h3&gt;
-&lt;p&gt;Detect attached device using &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;sane-find-scanner&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;scanimage&lt;/tt&gt; (I find that if one fails discovery the other usually works):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sane-find-scanner
-found USB scanner &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;vendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0x04f9 &lt;span class="o"&gt;[&lt;/span&gt;Brother&lt;span class="o"&gt;]&lt;/span&gt;, &lt;span class="nv"&gt;product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0x02fa &lt;span class="o"&gt;[&lt;/span&gt;MFC-J450DW&lt;span class="o"&gt;])&lt;/span&gt; at libusb:005:00
-&lt;span class="nv"&gt;$ &lt;/span&gt;scanimage -L
-device &lt;span class="sb"&gt;`&lt;/span&gt;brother4:bus1&lt;span class="p"&gt;;&lt;/span&gt;dev1&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; is a Brother MFC-J450DW USB scanner
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/default/saned&lt;/tt&gt; to run SANE as server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;RUN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;yes
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/sane.d/saned.conf&lt;/tt&gt; to share the scanner over the network:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## Access list&lt;/span&gt;
-192.168.1.0/24
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Add entry for Brother scanners to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/lib/udev/rules.d/40-libsane.rules&lt;/span&gt;&lt;/tt&gt; at the point in file just before the bit &lt;tt class="docutils literal"&gt;# The following rule will &lt;span class="pre"&gt;disable...&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Brother scanners&lt;/span&gt;
-ATTRS&lt;span class="o"&gt;{&lt;/span&gt;idVendor&lt;span class="o"&gt;}==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;04f9&amp;quot;&lt;/span&gt;, ENV&lt;span class="o"&gt;{&lt;/span&gt;libsane_matched&lt;span class="o"&gt;}=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;yes&amp;quot;&lt;/span&gt;
-
-&lt;span class="c"&gt;# The following rule will disable...&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reboot server (simply restarting the &lt;tt class="docutils literal"&gt;udev&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;saned&lt;/tt&gt; services fails to work):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo reboot
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Run a test:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;scanimage --format&lt;span class="o"&gt;=&lt;/span&gt;tiff &amp;gt; test.tiff
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="on-the-client"&gt;
-&lt;h3&gt;On the client&lt;/h3&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/sane.d/net.conf&lt;/tt&gt; to point your device towards the server ip address:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;connect_timeout&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 60
-&lt;span class="c"&gt;## saned hosts&lt;/span&gt;
-192.168.1.88
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Run a test using &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;simple-scan&lt;/span&gt;&lt;/tt&gt; included by default in Ubuntu.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 </summary><category term="ubuntu"></category><category term="linux"></category><category term="networks"></category></entry></feed>
