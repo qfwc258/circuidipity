@@ -1,0 +1,101 @@
+=======================
+Shell script: paVolume
+=======================
+
+:date: 2015-07-10 00:12:00
+:slug: pavolume
+:tags: debian, linux, shell, programming
+
+My original intent was to manage sound on `Jessiebook <http://www.circuidipity.com/c720-chromebook-to-jessiebook.html>`_ by binding the commands to the multimedia keys in ``~/.xbindkeysrc``. Instead ``xbindkeys`` calls a standalone script created to control PulseAudio volume (and thus useful beyond just ``xbindkeys``): `paVolume <https://github.com/vonbrownie/homebin/blob/master/paVolume>`_
+
+Let's go!
+=========
+
+Script requirements: ``pactl`` (packaged in Debian), ``pamixer``, and ``volnoti`` (GitHub).
+
+0. pactl
+========
+
+``pactl`` controls a PulseAudio sound server and is included in ``pulseaudio-utils``:
+
+.. code-block:: bash
+
+    $ sudo apt-get install pulseaudio-utils
+
+1. pamixer
+==========
+
+`pamixer <https://github.com/cdemoulins/pamixer>`_ is a PulseAudio console mixer. Compile dependencies:
+
+.. code-block:: bash
+
+    $ sudo apt-get install build-essential libpulse-dev libboost-program-options1.55.0 libboost-program-options-dev
+
+Download source and compile:
+
+.. code-block:: bash
+
+    $ git clone https://cdemoulins@github.com/cdemoulins/pamixer.git
+    $ cd pamixer
+    $ make
+
+No ``make install``. Place the resulting ``pamixer`` in PATH (I use ``~/bin``).
+
+2. volnoti
+==========
+
+`volnoti <https://github.com/davidbrazdil/volnoti>`_ is a lightweight volume notification. Compile dependencies:
+
+.. code-block:: bash
+
+    $ sudo apt-get install libdbus-glib-1-dev libgtk2.0-dev libgdk-pixbuf2.0-dev autoconf automake
+
+Download:
+
+.. code-block:: bash
+
+    $ git clone git://github.com/davidbrazdil/volnoti.git
+    $ cd volnoti
+    $ ./prepare.sh
+    $ ./configure --prefix=/usr
+
+Apply this fix [1]_ to the source:
+
+.. code-block:: bash
+
+    $ cd src
+    $ rm value-client-stub.h && make value-client-stub.h
+    $ rm value-daemon-stub.h && make value-daemon-stub.h
+    $ cd ..
+
+Compile source (and I use `checkinstall <https://packages.debian.org/jessie/checkinstall>`_ to make a ``deb`` package and install):
+
+.. code-block:: bash
+
+    $ make
+    $ sudo checkinstall make install
+
+Start ``volnoti`` daemon:
+
+.. code-block:: bash
+
+    $ volnoti
+
+Configure daemon to auto-start at desktop launch (example: **i3** - add to ``~/.i3/config``):
+
+.. code-block:: bash
+
+    # Auto-start applications                                                             
+    exec --no-startup-id volnoti -t 2
+
+3. paVolume
+===========
+
+`Script posted to GitHub <https://github.com/vonbrownie/homebin/blob/master/paVolume>`_. Download and place in PATH. Run ``paVolume -h`` for options.
+
+Happy hacking!
+
+Notes
+-----
+
+.. [1] Ubuntu forums: `Error when using make "client.c:108:5: error: too many arguments to function" <http://ubuntuforums.org/showthread.php?t=2215264&s=7aa2dfa8b89411472598e737c38f1475&p=12978792#post12978792>`_
