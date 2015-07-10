@@ -6,7 +6,7 @@ Shell script: paVolume
 :slug: pavolume
 :tags: debian, linux, shell, programming
 
-My original intent was to manage sound on `Jessiebook <http://www.circuidipity.com/c720-chromebook-to-jessiebook.html>`_ by binding the commands to the multimedia keys in ``~/.xbindkeysrc``. Instead ``xbindkeys`` calls a standalone script created to control PulseAudio volume (and thus useful beyond just ``xbindkeys``): `paVolume <https://github.com/vonbrownie/homebin/blob/master/paVolume>`_
+My original intent was to manage sound on `Jessiebook <http://www.circuidipity.com/c720-chromebook-to-jessiebook.html>`_ by binding the commands to the multimedia keys in ``~/.xbindkeysrc``. Instead ``xbindkeys`` calls a standalone script I created to control PulseAudio volume (and thus useful beyond just ``xbindkeys``): `paVolume <https://github.com/vonbrownie/homebin/blob/master/paVolume>`_
 
 Let's go!
 =========
