@@ -98,3 +98,5 @@ Place the script in ``~/bin`` and make it executable. Run manually at least once
     55 23 * * * /home/username/bin/myRsync >> /home/username/cron.log
 
 Happy hacking!
+
+Source: `myRsync <https://github.com/vonbrownie/homebin/blob/master/myRsync>`_
