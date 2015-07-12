@@ -171,4 +171,4 @@ Time is UP. Get UP! Choose to reset the timer or quit.
     :alt: Time is UP alert
     :align: center
 
-Source: `funkyGoodTimer <https://github.com/vonbrownie/linux-home-bin/blob/master/funkyGoodTimer>`_
+Happy hacking!
