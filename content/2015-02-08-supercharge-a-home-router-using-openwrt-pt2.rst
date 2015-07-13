@@ -22,7 +22,7 @@ I replaced the default firmware and now exploring an OpenWrt-supported `TP-Link 
 * 1 Port 10/100/1000 WAN
 * 2 USB 2.0 Ports
 * 64 MB Flash + 128MB RAM
-* [my device has] firmware: 3.13.34 build 130909 rel. 53148n hardware **version: v1.5**
+* [my device has] firmware: 3.13.34 build 130909 rel. 53148n hardware version: v1.5
 
 0. Download install image
 =========================
@@ -31,25 +31,25 @@ I replaced the default firmware and now exploring an OpenWrt-supported `TP-Link 
 
 :warning:`WARNING!` OpenWrt builds different install images for different devices. Consult the `Table of Hardware <http://wiki.openwrt.org/toh/start>`_ to confirm that your router is supported and read the wiki entry for your particular device to identify the correct image. It is **easy to brick a device** (render inoperable) using an incorrect install image.
 
-Latest version (2015-02-08) of OpenWrt is **v14.07 "Barrier Breaker"** and TL-WDR3600 is an **ar71xx** device. Download the appropriate install image:
+Latest version (2015-02-08) of OpenWrt is ``v14.07 "Barrier Breaker"`` and TL-WDR3600 is an ``ar71xx`` device. Download the appropriate install image:
 
 [Link] `openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin <https://downloads.openwrt.org/barrier_breaker/14.07/ar71xx/generic/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin>`_
 
 1. Flash router
 ===============
 
-Log into the TP-Link router web interface ``address=192.168.0.1`` ``user=admin`` ``password=admin`` navigate to the update page ``System Tools->Firmware Upgrade`` and select the downloaded ``openwrt-*-squashfs-factory.bin`` firmware image as the update package. Allow several minutes for the device to write the new OpenWrt firmware; when finished the device will reboot and accessible at new IP address ``192.168.1.1``.
+Log into the TP-Link router web interface - ``address=192.168.0.1 / user=admin / password=admin`` - navigate to the update page ``System Tools->Firmware Upgrade`` and select the downloaded ``openwrt-*-squashfs-factory.bin`` firmware image as the update package. Allow several minutes for the device to write the new OpenWrt firmware; when finished the device will reboot and accessible at new IP address ``192.168.1.1``.
 
 2. First login
 ==============
 
-`Use telnet (no password) to login for the first time <http://wiki.openwrt.org/doc/howto/firstlogin>`_ to the new OpenWrt installation. Use ``passwd`` to create a new root password. After changing the password telnet is disabled. Exit and re-login using SSH:
+Use telnet (no password) to `login for the first time <http://wiki.openwrt.org/doc/howto/firstlogin>`_ to OpenWrt. Use ``passwd`` to create a new root password. After changing the password telnet is disabled. Exit and re-login using SSH:
 
 .. code-block:: bash
 
     $ ssh root@192.168.1.1
 
-`Setup your internet connection <http://wiki.openwrt.org/doc/howto/internet.connection>`_ either by editing ``/etc/config/network`` or using OpenWrt's **Unified Configuration Interface (UCI)**. Using my DSL (pppoe) as an example:
+`Setup your internet connection <http://wiki.openwrt.org/doc/howto/internet.connection>`_ either by editing ``/etc/config/network`` or using OpenWrt's **Unified Configuration Interface (UCI)**. Example setup using DSL (pppoe):
 
 .. code-block:: bash
 
@@ -76,7 +76,7 @@ If installed manually LuCI will not be running:
     # /etc/init.d/uhttpd start    # start the web server
     # /etc/init.d/uhttpd enable   # auto-start at boot
 
-LuCI's default web server **uhttpd** is configured in ``/etc/config/uhttpd`` and LuCI itself is configured in ``/etc/config/luci``.
+LuCI's default web server ``uhttpd`` is configured in ``/etc/config/uhttpd`` and LuCI itself is configured in ``/etc/config/luci``.
 
 .. image:: images/pingparade4-1.png
     :alt: LuCI login
