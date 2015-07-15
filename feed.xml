@@ -1,5 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-07-10T00:12:00-04:00</updated><entry><title>Shell script: paVolume</title><link href="http://www.circuidipity.com/pavolume.html" rel="alternate"></link><updated>2015-07-10T00:12:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-10:pavolume.html</id><summary type="html">&lt;p&gt;My original intent was to manage sound on &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Jessiebook&lt;/a&gt; by binding the commands to the multimedia keys in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;. Instead &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; calls a standalone script I created to control PulseAudio volume (and thus useful beyond just &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt;): &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;paVolume&lt;/a&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-07-15T16:14:00-04:00</updated><entry><title>ThinkPad USB Keyboard with TrackPoint</title><link href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html" rel="alternate"></link><updated>2015-07-15T16:14:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-15:thinkpad-usb-keyboard-trackpoint.html</id><summary type="html">&lt;p&gt;An external ThinkPad keyboard minus the ThinkPad with the classic TrackPoint + built-in Left/Middle/Right mouse buttons. Its attached to my Debian desktop and I want to change the behaviour of a few keys using &lt;tt class="docutils literal"&gt;xmodmap&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Atach the keyboard:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;lsusb &lt;span class="p"&gt;|&lt;/span&gt; grep -i keyboard
+Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 002: ID 17ef:6009 Lenovo ThinkPad Keyboard with TrackPoint
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="caps-lock-and-xmodmap"&gt;
+&lt;h2&gt;0. Caps_Lock and xmodmap&lt;/h2&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt; occupies a prime location and - seeing as I do not carry on many ALL CAPS conversations - the key can be repurposed for better use. I use &lt;tt class="docutils literal"&gt;xmodmap&lt;/tt&gt; to modify the keymap and transform the key into another &lt;tt class="docutils literal"&gt;BackSpace&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Retrieve current keymap (and the &lt;tt class="docutils literal"&gt;keycode&lt;/tt&gt; for &lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt;):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xmodmap -pke
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+keycode  &lt;span class="nv"&gt;66&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Caps_Lock NoSymbol Caps_Lock
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Output for &lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt; using &lt;tt class="docutils literal"&gt;xev&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;KeyPress event, serial 32, synthetic NO, window 0x1600001,
+    root 0xb4, subw 0x0, &lt;span class="nb"&gt;time &lt;/span&gt;578277182, &lt;span class="o"&gt;(&lt;/span&gt;137,-6&lt;span class="o"&gt;)&lt;/span&gt;, root:&lt;span class="o"&gt;(&lt;/span&gt;781,12&lt;span class="o"&gt;)&lt;/span&gt;,
+    state 0x0, keycode &lt;span class="m"&gt;66&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;keysym 0xffe5, Caps_Lock&lt;span class="o"&gt;)&lt;/span&gt;, same_screen YES,
+    XLookupString gives &lt;span class="m"&gt;0&lt;/span&gt; bytes:
+    XmbLookupString gives &lt;span class="m"&gt;0&lt;/span&gt; bytes:
+     XFilterEvent returns: False
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Making &lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt; into &lt;tt class="docutils literal"&gt;BackSpace&lt;/tt&gt; is a 3-part process: &lt;strong&gt;remap&lt;/strong&gt; the key, remove the &lt;strong&gt;lock&lt;/strong&gt; on the key, and make it a &lt;strong&gt;repeating&lt;/strong&gt; key.&lt;/p&gt;
+&lt;p&gt;Test a new key modification in the current Xsession:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xmodmap -e &lt;span class="s2"&gt;&amp;quot;keycode 66 = BackSpace&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; xmodmap -e &lt;span class="s2"&gt;&amp;quot;clear Lock&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; xset r 66
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Make the change sticky by adding the keymapping to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xmodmap&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;! Modify Caps_Lock into Backspace
+keycode &lt;span class="nv"&gt;66&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; BackSpace
+clear Lock
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; to load keymap at &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;xmodmap ~/.xmodmap &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; xset r 66
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.usb-thinkpad"&gt;.xmodmap.usb-thinkpad&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="multimedia-keys-and-xbindkeys"&gt;
+&lt;h2&gt;1. Multimedia keys and xbindkeys&lt;/h2&gt;
+&lt;p&gt;This keyboard includes mediaplayer+volume keys. Create keyboard shortcuts for these multimedia keys by installing:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; - associate keys to shell commands&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pulseaudio-utils&lt;/span&gt;&lt;/tt&gt; - manage sound with &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;rhythmbox-plugins&lt;/span&gt;&lt;/tt&gt; - (optional) player controls&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install xbindkeys pulseaudio-utils rhythmbox-plugins
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;rhythmbox-plugins&lt;/span&gt;&lt;/tt&gt; the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Fn+{Play,Pause,Previous,Next,Stop}&lt;/span&gt;&lt;/tt&gt; controls &amp;quot;just work&amp;quot; with the audio player. I use &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; to associate new functions to keys.&lt;/p&gt;
+&lt;p&gt;Retrieve the &lt;tt class="docutils literal"&gt;keycodes&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;keysyms&lt;/tt&gt; of the volume keys:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xmodmap -pke &lt;span class="p"&gt;|&lt;/span&gt; egrep -i &lt;span class="s1"&gt;&amp;#39;volume|mute&amp;#39;&lt;/span&gt;
+keycode &lt;span class="nv"&gt;121&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; XF86AudioMute NoSymbol XF86AudioMute
+keycode &lt;span class="nv"&gt;122&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; XF86AudioLowerVolume NoSymbol XF86AudioLowerVolume
+keycode &lt;span class="nv"&gt;123&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; XF86AudioRaiseVolume NoSymbol XF86AudioRaiseVolume
+keycode &lt;span class="nv"&gt;198&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; XF86AudioMicMute NoSymbol XF86AudioMicMute
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I create a &lt;a class="reference external" href="http://www.circuidipity.com/pavolume.html"&gt;standalone script&lt;/a&gt; to control PulseAudio volume and associate the new command &lt;tt class="docutils literal"&gt;paVolume&lt;/tt&gt; and its options to volume keys in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Mute/lower/raise volume&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;paVolume -m&amp;quot;&lt;/span&gt;
+XF86AudioMute
+&lt;span class="s2"&gt;&amp;quot;paVolume -d&amp;quot;&lt;/span&gt;
+XF86AudioLowerVolume
+&lt;span class="s2"&gt;&amp;quot;paVolume -u&amp;quot;&lt;/span&gt;
+XF86AudioRaiseVolume
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Add command &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; to load the new configuration at &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.usb-thinkpad"&gt;.xbindkeysrc.usb-thinkpad&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;paVolume&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="trackpoint"&gt;
+&lt;h2&gt;2. TrackPoint&lt;/h2&gt;
+&lt;p&gt;TrackPoint is auto-detected but slow. Customize pointer settings by installing &lt;tt class="docutils literal"&gt;xinput&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install xinput
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Discover &lt;tt class="docutils literal"&gt;DEVICE &amp;lt;ID&amp;gt;&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;xinput list | grep pointer&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&amp;lt;ID&amp;gt; PROPERTIES&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;xinput &lt;span class="pre"&gt;list-props&lt;/span&gt; &amp;lt;ID&amp;gt;&lt;/tt&gt;. TrackPoint sensitivity is modified using the &lt;tt class="docutils literal"&gt;Device Accel Constant Deceleration&lt;/tt&gt; property:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xinput list &lt;span class="p"&gt;|&lt;/span&gt; grep pointer
+⎡ Virtual core pointer                          &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;    &lt;span class="o"&gt;[&lt;/span&gt;master pointer  &lt;span class="o"&gt;(&lt;/span&gt;3&lt;span class="o"&gt;)]&lt;/span&gt;
+⎜   ↳ Virtual core XTEST pointer                &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;    &lt;span class="o"&gt;[&lt;/span&gt;slave  pointer  &lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)]&lt;/span&gt;
+⎜   ↳ Lite-On Technology Corp. ThinkPad USB Keyboard with TrackPoint    &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;   &lt;span class="o"&gt;[&lt;/span&gt;slave  pointer  &lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)]&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;xinput list-props &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s2"&gt;&amp;quot;Device Accel Constant Deceleration&amp;quot;&lt;/span&gt;
+        Device Accel Constant Deceleration &lt;span class="o"&gt;(&lt;/span&gt;251&lt;span class="o"&gt;)&lt;/span&gt;:       1.000000
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Test a new setting with &lt;tt class="docutils literal"&gt;xinput &lt;span class="pre"&gt;set-prop&lt;/span&gt; ID &amp;quot;Device Accel Constant Deceleration&amp;quot; SETTING&lt;/tt&gt;. Example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xinput &lt;span class="nb"&gt;set&lt;/span&gt;-prop &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Device Accel Constant Deceleration&amp;quot;&lt;/span&gt; 0.50
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Make the change sticky by adding the command to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="debian"></category><category term="linux"></category></entry><entry><title>Shell script: paVolume</title><link href="http://www.circuidipity.com/pavolume.html" rel="alternate"></link><updated>2015-07-10T00:12:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-10:pavolume.html</id><summary type="html">&lt;p&gt;My original intent was to manage sound on &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Jessiebook&lt;/a&gt; by binding the commands to the multimedia keys in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;. Instead &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; calls a standalone script I created to control PulseAudio volume (and thus useful beyond just &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt;): &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;paVolume&lt;/a&gt;&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Script requirements: &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt; (packaged in Debian), &lt;tt class="docutils literal"&gt;pamixer&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt; (GitHub).&lt;/p&gt;
@@ -1483,61 +1571,4 @@ en_CA.UTF-8 UTF-8
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Welcome to Arch. Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="arch"></category><category term="linux"></category><category term="chromebook"></category></entry><entry><title>Samsung CLP-310 Printer</title><link href="http://www.circuidipity.com/samsung-clp-310-printer.html" rel="alternate"></link><updated>2015-03-09T18:17:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-09:samsung-clp-310-printer.html</id><summary type="html">&lt;p&gt;Connect a &lt;strong&gt;Samsung CLP-310&lt;/strong&gt; to server running Ubuntu 14.04 LTS and configure as printer for a home network.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div class="section" id="cups"&gt;
-&lt;h2&gt;0. CUPS&lt;/h2&gt;
-&lt;p&gt;Attach the Samsung device to server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;dmesg -t
-&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
-usb 1-2: new high-speed USB device number &lt;span class="m"&gt;6&lt;/span&gt; using ehci-pci
-usb 1-2: New USB device found, &lt;span class="nv"&gt;idVendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;04e8, &lt;span class="nv"&gt;idProduct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;328e
-usb 1-2: New USB device strings: &lt;span class="nv"&gt;Mfr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1, &lt;span class="nv"&gt;Product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;SerialNumber&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;3
-usb 1-2: Product: CLP-310 Series
-usb 1-2: Manufacturer: Samsung Electronics Co., Ltd.
-usb 1-2: SerialNumber: 149CBAGS200219Y
-usblp 1-2:1.0: usblp0: USB Bidirectional printer dev &lt;span class="m"&gt;6&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; alt &lt;span class="m"&gt;0&lt;/span&gt; proto &lt;span class="m"&gt;2&lt;/span&gt; vid 0x04E8 pid 0x328E
-usbcore: registered new interface driver usblp
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Install CUPS (print server) and the &lt;a class="reference external" href="https://www.openprinting.org/printer/Samsung/Samsung-CLP-310"&gt;recommended driver&lt;/a&gt; &lt;tt class="docutils literal"&gt;splix&lt;/tt&gt; and grant (example) &lt;tt class="docutils literal"&gt;username&lt;/tt&gt; admin privileges:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install cups cups-bsd printer-driver-splix
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username lp
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username lpadmin
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username scanner
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="printer-config"&gt;
-&lt;h2&gt;1. Printer config&lt;/h2&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/cups/cupsd.conf&lt;/tt&gt; to listen for connections from any device on the home network. Example for home server at ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Only listen for connections from the local machine.&lt;/span&gt;
-&lt;span class="c"&gt;#Listen localhost:631&lt;/span&gt;
-Listen *:631
-
-&lt;span class="c"&gt;# Show shared printers on the local network.&lt;/span&gt;
-Browsing On
-BrowseLocalProtocols dnssd
-
-&lt;span class="c"&gt;# Web interface setting...&lt;/span&gt;
-WebInterface Yes
-
-&lt;span class="c"&gt;# Restrict access to the server...&lt;/span&gt;
-&amp;lt;Location /&amp;gt;
-  Order allow,deny
-  Allow 192.168.1.*
-&amp;lt;/Location&amp;gt;
-
-&lt;span class="c"&gt;# Restrict access to the admin pages...&lt;/span&gt;
-&amp;lt;Location /admin&amp;gt;
-  Order allow,deny
-  Allow 192.168.1.*
-&amp;lt;/Location&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Restart CUPS:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service cups restart
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Admin functions available at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://192.168.1.88:631/admin&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="ubuntu"></category><category term="linux"></category><category term="network"></category></entry></feed>
+</summary><category term="arch"></category><category term="linux"></category><category term="chromebook"></category></entry></feed>
