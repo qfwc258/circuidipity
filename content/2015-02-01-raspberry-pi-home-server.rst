@@ -3,7 +3,7 @@ There's no place like [a Raspberry Pi] Home [Server]
 ====================================================
 
 :slug: raspberry-pi-home-server
-:tags: raspberry pi, networks, raspbian, debian, linux
+:tags: raspberry pi, network, raspbian, debian, linux
 :template: article-project
 :modified: 2015-07-05 14:57:00
 

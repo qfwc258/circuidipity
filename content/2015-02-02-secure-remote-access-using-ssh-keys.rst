@@ -4,7 +4,7 @@ Secure remote access using SSH keys
 
 :date: 2015-02-02 00:05:00
 :slug: secure-remote-access-using-ssh-keys
-:tags: networks, raspbian, debian, linux, raspberry pi
+:tags: network, raspbian, debian, linux, raspberry pi
 :modified: 2015-07-05 16:02:00
 
 `Raspberry Pi Home Server Hack #1 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Create **cryptographic keys** and disable password logins to make remote machines more secure.

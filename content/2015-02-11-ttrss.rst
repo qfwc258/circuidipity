@@ -4,7 +4,7 @@ Tiny Tiny RSS
 
 :date: 2015-02-11 18:40:00
 :slug: ttrss
-:tags: networks, raspbian, debian, linux, raspberry pi
+:tags: network, raspbian, debian, linux, raspberry pi
 :modified: 2015-07-05 16:51:00
 
 `Raspberry Pi Home Server Hack #7 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Install and self-host the **Tiny Tiny RSS** news reader and gain access to news feeds over the web.

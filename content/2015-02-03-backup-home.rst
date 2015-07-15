@@ -4,7 +4,7 @@ Backup home
 
 :date: 2015-02-03 00:10:00
 :slug: backup-home
-:tags: networks, raspbian, debian, linux, shell, programming, raspberry pi
+:tags: network, raspbian, debian, linux, shell, programming, raspberry pi
 :modified: 2015-07-05 16:11:00
 
 `Raspberry Pi Home Server Hack #3 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Make **automatic backups** of a home folder using a dash of shell scripting + rsync + SSH + cron!

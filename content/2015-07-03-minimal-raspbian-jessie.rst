@@ -4,7 +4,7 @@ Minimal Raspbian Jessie
 
 :date: 2015-07-03 19:27:00
 :slug: minimal-raspbian-jessie
-:tags: raspbian, debian, linux, raspberry pi, networks
+:tags: raspbian, debian, linux, raspberry pi, network
 
 Setup a minimal `Raspbian <http://www.circuidipity.com/tag-raspbian.html>`_ configuration on the `Raspberry Pi <http://www.circuidipity.com/tag-raspberry-pi.html>`_ using `raspbian-ua-netinst <https://github.com/debian-pi/raspbian-ua-netinst>`_ (ideal start for a `home server <http://www.circuidipity.com/raspberry-pi-home-server.html>`_) with the latest packages from `Debian <http://www.circuidipity.com/tag-debian.html>`_ ``jessie/stable``. 
 

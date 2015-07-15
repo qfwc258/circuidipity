@@ -4,7 +4,7 @@ Supercharge a home router using OpenWrt Part 2
 
 :date: 2015-02-08 18:16:00
 :slug: supercharge-a-home-router-using-openwrt-pt2
-:tags: networks, openwrt, linux
+:tags: network, openwrt, linux
 
 **Previous router:** `TL-WR841N <http://www.circuidipity.com/pingparade4.html>`_
 

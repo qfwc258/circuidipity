@@ -4,7 +4,7 @@ PHP + Nginx + PostgreSQL
 
 :date: 2015-02-09 18:29:00
 :slug: php-nginx-postgresql
-:tags: networks, raspbian, debian, linux, raspberry pi
+:tags: network, raspbian, debian, linux, raspberry pi
 :modified: 2015-07-05 16:41:00
 
 `Raspberry Pi Home Server Hack #6 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ As a requirement to host web applications like `Tiny Tiny RSS <http://www.circuidipity.com/ttrss.html>`_ on my Raspberry Pi I install **PHP**, the lightweight web server **Nginx**, and the **PostgreSQL** database.

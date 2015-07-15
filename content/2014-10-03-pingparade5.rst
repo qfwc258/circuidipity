@@ -4,7 +4,7 @@ Remote control a Linux desktop using VNC
 
 :date: 2014-10-03 00:07:00
 :slug: pingparade5
-:tags: networks, raspberry pi, raspbian, linux
+:tags: network, raspberry pi, raspbian, linux
 :modified: 2014-12-08 00:06:00
 
 `Raspberry Pi <http://www.raspberrypi.org/>`_ is a less-than-$50 credit card sized computer that delivers all the power and flexibility of Linux, tools to start programming, and the opportunity to `explore electronics <https://learn.adafruit.com/category/raspberry-pi>`_ courtesy of the onboard GPIO pins. There is an active community of Pi enthusiasts and plenty of resources to `help you get started <http://www.raspberrypi.org/help/>`_. I think this plucky little device has real potential as a `home server <http://www.circuidipity.com/home-server-hacks.html>`_!
