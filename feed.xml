@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-07-15T16:14:00-04:00</updated><entry><title>ThinkPad USB Keyboard with TrackPoint</title><link href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html" rel="alternate"></link><updated>2015-07-15T16:14:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-15:thinkpad-usb-keyboard-trackpoint.html</id><summary type="html">&lt;p&gt;An external ThinkPad keyboard minus the ThinkPad with the classic TrackPoint + built-in Left/Middle/Right mouse buttons. Its attached to my Debian desktop and I want to change the behaviour of a few keys using &lt;tt class="docutils literal"&gt;xmodmap&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-07-15T16:14:00-04:00</updated><entry><title>ThinkPad USB Keyboard with TrackPoint</title><link href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html" rel="alternate"></link><updated>2015-07-15T16:14:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-15:thinkpad-usb-keyboard-trackpoint.html</id><summary type="html">&lt;p&gt;An external ThinkPad keyboard minus the ThinkPad with the classic TrackPoint + Left/Middle/Right mouse buttons. Its attached to my Debian desktop and I want to change the behaviour of a few keys using &lt;tt class="docutils literal"&gt;xmodmap&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt;.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Atach the keyboard:&lt;/p&gt;
+&lt;p&gt;Attach the keyboard:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;lsusb &lt;span class="p"&gt;|&lt;/span&gt; grep -i keyboard
 Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 002: ID 17ef:6009 Lenovo ThinkPad Keyboard with TrackPoint
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="caps-lock-and-xmodmap"&gt;
 &lt;h2&gt;0. Caps_Lock and xmodmap&lt;/h2&gt;
-&lt;p&gt;&lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt; occupies a prime location and - seeing as I do not carry on many ALL CAPS conversations - the key can be repurposed for better use. I use &lt;tt class="docutils literal"&gt;xmodmap&lt;/tt&gt; to modify the keymap and transform the key into another &lt;tt class="docutils literal"&gt;BackSpace&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt; occupies a prime location and - seeing as I do not carry on many ALL CAPS conversations - the key can be repurposed for better use. I use &lt;tt class="docutils literal"&gt;xmodmap&lt;/tt&gt; to modify the keymap and transform the key into &lt;tt class="docutils literal"&gt;BackSpace&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;Retrieve current keymap (and the &lt;tt class="docutils literal"&gt;keycode&lt;/tt&gt; for &lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt;):&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xmodmap -pke
 &lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;

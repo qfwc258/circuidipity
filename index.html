@@ -37,17 +37,17 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <div id="latestpost">
         <p class="published"> Wednesday 15 July 2015</p>
         <h1><a href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html">ThinkPad USB Keyboard with TrackPoint</a></h1>
-        <p>An external ThinkPad keyboard minus the ThinkPad with the classic TrackPoint + built-in Left/Middle/Right mouse buttons. Its attached to my Debian desktop and I want to change the behaviour of a few keys using <tt class="docutils literal">xmodmap</tt> and <tt class="docutils literal">xbindkeys</tt>.</p>
+        <p>An external ThinkPad keyboard minus the ThinkPad with the classic TrackPoint + Left/Middle/Right mouse buttons. Its attached to my Debian desktop and I want to change the behaviour of a few keys using <tt class="docutils literal">xmodmap</tt> and <tt class="docutils literal">xbindkeys</tt>.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p>Atach the keyboard:</p>
+<p>Attach the keyboard:</p>
 <div class="highlight"><pre><span class="nv">$ </span>lsusb <span class="p">|</span> grep -i keyboard
 Bus <span class="m">001</span> Device 002: ID 17ef:6009 Lenovo ThinkPad Keyboard with TrackPoint
 </pre></div>
 </div>
 <div class="section" id="caps-lock-and-xmodmap">
 <h2>0. Caps_Lock and xmodmap</h2>
-<p><tt class="docutils literal">Caps_Lock</tt> occupies a prime location and - seeing as I do not carry on many ALL CAPS conversations - the key can be repurposed for better use. I use <tt class="docutils literal">xmodmap</tt> to modify the keymap and transform the key into another <tt class="docutils literal">BackSpace</tt>.</p>
+<p><tt class="docutils literal">Caps_Lock</tt> occupies a prime location and - seeing as I do not carry on many ALL CAPS conversations - the key can be repurposed for better use. I use <tt class="docutils literal">xmodmap</tt> to modify the keymap and transform the key into <tt class="docutils literal">BackSpace</tt>.</p>
 <p>Retrieve current keymap (and the <tt class="docutils literal">keycode</tt> for <tt class="docutils literal">Caps_Lock</tt>):</p>
 <div class="highlight"><pre><span class="nv">$ </span>xmodmap -pke
 <span class="o">[</span>...<span class="o">]</span>
