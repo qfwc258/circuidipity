@@ -6,7 +6,7 @@ ThinkPad USB Keyboard with TrackPoint
 :slug: thinkpad-usb-keyboard-trackpoint
 :tags: debian, linux
 
-An external ThinkPad keyboard minus the ThinkPad with the classic TrackPoint + Left/Middle/Right mouse buttons. Its attached to my Debian desktop and I want to change the behaviour of a few keys using ``xmodmap`` and ``xbindkeys``.
+An external ThinkPad keyboard minus the ThinkPad with the classic TrackPoint + Left/Middle/Right mouse buttons. Its attached to my Debian desktop and I want to change the behaviour of a few keys.
 
 Let's go!
 =========
