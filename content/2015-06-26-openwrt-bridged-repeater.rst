@@ -4,14 +4,14 @@ OpenWrt router as bridged repeater using relayd
 
 :date: 2015-06-26
 :slug: openwrt-bridged-repeater
-:tags: openwrt, linux, network
+:tags: router, openwrt, linux, network
 
 Extend the range of a wireless network using a cheap and cheerful router running `OpenWrt <http://www.circuidipity.com/tag-openwrt.html>`_ as a **bridged repeater**. All client devices use the same IP address range and are capable of communicating with each other.
 
 Let's go!
 =========
 
-Wireless access points: **PrimaryAP** is a `TP-Link TL-WDR3600 <http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html>`_ with IP address ``192.168.1.1`` + wireless channel ``11`` and the **RepeaterAP** is a `TP-Link TL-WR841N <http://www.circuidipity.com/pingparade4.html>`_ (~$20CAN on sale). Both devices are running OpenWrt.
+Wireless access points: **PrimaryAP** is a `TP-Link TL-WDR3600 <http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html>`_ with IP address ``192.168.1.1`` + wireless channel ``11`` and the **RepeaterAP** is a `TP-Link TL-WR841N <http://www.circuidipity.com/pingparade4.html>`_ (~$25CAN). Both devices are running OpenWrt.
 
 `This thread <https://forum.openwrt.org/viewtopic.php?id=39077>`_ was a big help in cutting through the confusion and getting everything hopping! Basically there are 2 types of repeater scenarios to consider:
 
