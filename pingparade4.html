@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Supercharge a home router using OpenWrt Part 1</title>
+        <title>Circuidipity | Supercharge a home router using OpenWrt</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -24,19 +24,18 @@
 </div>
 
 <!-- article -->
-<h1>Supercharge a home router using OpenWrt Part 1</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Monday 13 July 2015</p>
+<h1>Supercharge a home router using OpenWrt</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 16 July 2015</p>
 <div id="article">
-    <p><strong>Update:</strong>  A new router (TL-WDR3600) means <a class="reference external" href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html">a new OpenWrt install</a>.</p>
-<p>A <strong>home router</strong> is a much more capable device than its pre-installed software would lead you to believe. I replace the default firmware with <a class="reference external" href="https://openwrt.org/">OpenWrt</a>: an embedded Linux distribution that converts cheap, energy-efficient, network-capable devices into much more useful hackable computers.</p>
+    <p>A home router is a much more capable device than its pre-installed software would lead you to believe. I replace a device's default firmware with <a class="reference external" href="https://openwrt.org/">OpenWrt</a>: an embedded Linux distribution that converts energy-efficient, network-capable devices into much more useful hackable computers.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
 <p>Getting its start hacking the original <a class="reference external" href="https://en.wikipedia.org/wiki/Linksys_WRT54G_series#WRT54G">Linksys WRT54G</a>, OpenWrt and its volunteer developers now support a <a class="reference external" href="http://wiki.openwrt.org/toh/start">wide and growing range of hardware</a>. The project hosts software packages that lay out a smorgasboard of extra possibilities: more network tools with more fine-grained controls, plus a range of server capabilities... manage printers, connect external USB drives for backup, host files/torrents/VOIP/VPNs.</p>
-<p>I am currently using an OpenWrt-supported <a class="reference external" href="http://wiki.openwrt.org/toh/tp-link/tl-wr841nd">TP-Link TL-WR841N</a> wireless N router, an inexpensive ($20-25CDN) device with:</p>
+<p>I am currently using an OpenWrt-supported <a class="reference external" href="http://wiki.openwrt.org/toh/tp-link/tl-wr841nd">TP-Link TL-WR841N</a> wireless N router, an inexpensive ~$25CAN device with:</p>
 <ul class="simple">
 <li>2 antennas (on the otherwise identical TL-WR841ND they are detachable)</li>
-<li>4 Port 100/10 LAN</li>
-<li>1 Port 100/10 WAN</li>
+<li>4 Port 10/100 LAN</li>
+<li>1 Port WAN</li>
 <li>4 MB Flash + 32MB RAM</li>
 <li>[my device has] firmware: 3.14.3 build 131011 rel. 55505n hardware version: v8</li>
 </ul>
@@ -44,8 +43,8 @@
 <div class="section" id="download-install-image">
 <h3>0. Download install image</h3>
 <p><span class="warning">WARNING!</span> OpenWrt builds different install images for different devices. Consult the <a class="reference external" href="http://wiki.openwrt.org/toh/start">Table of Hardware</a> to confirm your router is supported and read the wiki entry for your particular device to identify the correct image. It is <strong>easy to brick a device</strong> (render inoperable) using an incorrect install image.</p>
-<p>TL-WR841N is an <strong>ar71xx</strong> device. Download the most recent VERSION (<tt class="docutils literal">14.07</tt> as of 2014-10-02):</p>
-<p>[Link] <a class="reference external" href="http://downloads.openwrt.org/barrier_breaker/14.07/ar71xx/generic/openwrt-ar71xx-generic-tl-wr841n-v8-squashfs-factory.bin">openwrt-ar71xx-generic-tl-wr841n-v8-squashfs-factory.bin</a></p>
+<p>TL-WR841N is an <strong>ar71xx</strong> device. Brand-new OpenWrt installs use the <tt class="docutils literal"><span class="pre">*-squashfs-factory.bin</span></tt> image... download the latest RELEASE (<tt class="docutils literal">14.07</tt> as of 2014-10-02):</p>
+<p>Source: <a class="reference external" href="http://downloads.openwrt.org/barrier_breaker/14.07/ar71xx/generic/openwrt-ar71xx-generic-tl-wr841n-v8-squashfs-factory.bin">openwrt-ar71xx-generic-tl-wr841n-v8-squashfs-factory.bin</a></p>
 </div>
 <div class="section" id="flash-router">
 <h3>1. Flash router</h3>
@@ -56,7 +55,7 @@
 <p>Use <tt class="docutils literal">telnet</tt> (no password) to <a class="reference external" href="http://wiki.openwrt.org/doc/howto/firstlogin">login for the first time</a> to OpenWrt. Use <tt class="docutils literal">passwd</tt> to create a new root password. Once the password is properly configured telnet is disabled. Exit and re-login using SSH:</p>
 <div class="highlight"><pre><span class="nv">$ </span>ssh root@192.168.1.1
 </pre></div>
-<p><a class="reference external" href="http://wiki.openwrt.org/doc/howto/internet.connection">Setup your internet connection</a> either by editing <tt class="docutils literal">/etc/config/network</tt> or using OpenWrt's <strong>Unified Configuration Interface (UCI)</strong>. Example setup using DSL (pppoe):</p>
+<p><a class="reference external" href="http://wiki.openwrt.org/doc/howto/internet.connection">Setup your internet connection</a> either by editing <tt class="docutils literal">/etc/config/network</tt> or using OpenWrt's <strong>Unified Configuration Interface</strong> (UCI). Example (pppoe) setup:</p>
 <div class="highlight"><pre><span class="c"># uci set network.wan.proto=pppoe</span>
 <span class="c"># uci set network.wan.username=&#39;USERNAME@myisp.su&#39;</span>
 <span class="c"># uci set network.wan.password=&#39;PASSWORD&#39;</span>
@@ -66,7 +65,7 @@
 </div>
 <div class="section" id="web-interface">
 <h3>3. Web interface</h3>
-<p>OpenWrt can be configured in the console or install the optional <a class="reference external" href="http://wiki.openwrt.org/doc/howto/luci.essentials">LuCI web interface</a> using the <strong>opkg</strong> package manager <a class="footnote-reference" href="#id2" id="id1">[1]</a>:</p>
+<p>OpenWrt can be configured in the console or install the optional <a class="reference external" href="http://wiki.openwrt.org/doc/howto/luci.essentials">LuCI web interface</a> using the <strong>opkg</strong> package manager: <a class="footnote-reference" href="#id2" id="id1">[1]</a></p>
 <div class="highlight"><pre><span class="c"># opkg update</span>
 <span class="c"># opkg install luci</span>
 </pre></div>
@@ -77,10 +76,11 @@
 <p>LuCI's default web server <strong>uhttpd</strong> is configured in <tt class="docutils literal">/etc/config/uhttpd</tt> and LuCI itself is configured in <tt class="docutils literal">/etc/config/luci</tt>.</p>
 <img alt="LuCI login" src="images/pingparade4-1.png" style="width: 960px; height: 300px;" />
 </div>
-<div class="section" id="configuration">
-<h3>4. Configuration</h3>
+<div class="section" id="post-install">
+<h3>4. Post-install</h3>
 <p>Secure access to the router using <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">SSH key authentication</a>. Create <a class="reference external" href="http://www.circuidipity.com/20141001.html">static leases</a> for hosts using DHCP and setup <a class="reference external" href="http://www.circuidipity.com/20141006.html">port forwarding</a> to reach devices behind the firewall from the outside world.</p>
 <p>Its exciting what you can do with these consumer routers once you let it sink in that - with a few dollars and OpenWrt - you have an extremely configurable general purpose computer.</p>
+<p><strong>Update:</strong>  A new router (TL-WDR3600) means <a class="reference external" href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html">a new OpenWrt install</a>.</p>
 <p>Happy hacking!</p>
 </div>
 <div class="section" id="notes">
@@ -95,6 +95,7 @@
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-openwrt.html">openwrt</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-router.html">router</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
 </p>
