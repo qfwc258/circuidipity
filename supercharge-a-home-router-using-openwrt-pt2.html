@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Supercharge a home router using OpenWrt Part 2</title>
+        <title>Circuidipity | OpenWrt surgery on more home routers</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -24,69 +24,74 @@
 </div>
 
 <!-- article -->
-<h1>Supercharge a home router using OpenWrt Part 2</h1>
+<h1>OpenWrt surgery on more home routers</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 16 July 2015</p>
 <div id="article">
-    <p><strong>Previous router:</strong> <a class="reference external" href="http://www.circuidipity.com/pingparade4.html">TL-WR841N</a></p>
-<p>A <strong>home router</strong> is a much more capable device than its pre-installed software would lead you to believe. <a class="reference external" href="https://openwrt.org/">OpenWrt</a> is an embedded Linux distribution that converts cheap, energy-efficient, network-capable devices into much more useful hackable computers.</p>
-<div class="section" id="let-s-go">
-<h2>Let's go!</h2>
-<p>Getting its start hacking the original <a class="reference external" href="https://en.wikipedia.org/wiki/Linksys_WRT54G_series#WRT54G">Linksys WRT54G</a>, OpenWrt and its volunteer developers now support a <a class="reference external" href="http://wiki.openwrt.org/toh/start">wide and growing range of hardware</a>. The project hosts software packages that lay out a smorgasboard of extra possibilities: more network tools with more fine-grained controls, plus a range of server capabilities... manage printers, connect external USB drives for backup, host files/torrents/VOIP/VPNs.</p>
-<p>I replaced the default firmware and now exploring an OpenWrt-supported <a class="reference external" href="http://wiki.openwrt.org/toh/tp-link/tl-wdr3600">TP-Link TL-WDR3600</a> router:</p>
-<ul class="simple">
-<li>dual 2.4GHz 802.11bgn and 5GHz 802.11an wifi with detachable antennas</li>
-<li>4 Port 10/100/1000 LAN</li>
-<li>1 Port 10/100/1000 WAN</li>
-<li>2 USB 2.0 Ports</li>
-<li>64 MB Flash + 128MB RAM</li>
-<li>[my device has] firmware: 3.13.34 build 130909 rel. 53148n hardware version: v1.5</li>
-</ul>
+    <p>Home routers are more capable than default firmware would lead you to believe. I replace that firmware with <a class="reference external" href="https://openwrt.org/">OpenWrt</a>: an embedded Linux distribution that converts energy-efficient, network-capable devices into much more useful hackable computers.</p>
+<div class="section" id="install-and-first-login">
+<h2>Install and first login</h2>
+<p><a class="reference external" href="http://www.circuidipity.com/pingparade4.html">Supercharge a home router using OpenWrt</a> on a <strong>TP-Link TL-WR841N</strong> (~$25CAN) I currently use as a <a class="reference external" href="http://www.circuidipity.com/openwrt-bridged-repeater.html">bridged repeater</a>.</p>
 </div>
-<div class="section" id="download-install-image">
-<h2>0. Download install image</h2>
+<div class="section" id="more-routers">
+<h2>More routers</h2>
 <p><span class="warning">WARNING!</span> OpenWrt builds different install images for different devices. Consult the <a class="reference external" href="http://wiki.openwrt.org/toh/start">Table of Hardware</a> to confirm that your router is supported and read the wiki entry for your particular device to identify the correct image. It is <strong>easy to brick a device</strong> (render inoperable) using an incorrect install image.</p>
-<p>Latest version (2015-02-08) of OpenWrt is <tt class="docutils literal">v14.07 &quot;Barrier Breaker&quot;</tt> and TL-WDR3600 is an <tt class="docutils literal">ar71xx</tt> device. Download the appropriate install image:</p>
-<p>[Link] <a class="reference external" href="https://downloads.openwrt.org/barrier_breaker/14.07/ar71xx/generic/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin">openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin</a></p>
-</div>
-<div class="section" id="flash-router">
-<h2>1. Flash router</h2>
-<p>Log into the TP-Link router web interface - <tt class="docutils literal">address=192.168.0.1 / user=admin / password=admin</tt> - navigate to the update page <tt class="docutils literal">System <span class="pre">Tools-&gt;Firmware</span> Upgrade</tt> and select the downloaded <tt class="docutils literal"><span class="pre">openwrt-*-squashfs-factory.bin</span></tt> firmware image as the update package. Allow several minutes for the device to write the new OpenWrt firmware; when finished the device will reboot and accessible at new IP address <tt class="docutils literal">192.168.1.1</tt>.</p>
-</div>
-<div class="section" id="first-login">
-<h2>2. First login</h2>
-<p>Use telnet (no password) to <a class="reference external" href="http://wiki.openwrt.org/doc/howto/firstlogin">login for the first time</a> to OpenWrt. Use <tt class="docutils literal">passwd</tt> to create a new root password. After changing the password telnet is disabled. Exit and re-login using SSH:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ssh root@192.168.1.1
+<div class="section" id="tp-link-tl-mr3420">
+<h3>TP-Link TL-MR3420</h3>
+<p>Specs:</p>
+<ul class="simple">
+<li>802.11bgn with (2) detachable antennas</li>
+<li>4 Port 10/100 LAN</li>
+<li>1 Port WAN</li>
+<li>1 USB 2.0 Port</li>
+<li>hardware version: 1.2</li>
+<li>running <tt class="docutils literal">Chaos Calmer <span class="pre">15.05-rc2</span></tt>: <a class="reference external" href="https://downloads.openwrt.org/chaos_calmer/15.05-rc2/ar71xx/generic/openwrt-15.05-rc2-ar71xx-generic-tl-mr3420-v1-squashfs-factory.bin">openwrt-15.05-rc2-ar71xx-generic-tl-mr3420-v1-squashfs-factory.bin</a></li>
+</ul>
+<p>Router was acquired used and its default TP-Link firmware had been previously configured:</p>
+<ul class="simple">
+<li>Reset router to factory defaults <tt class="docutils literal">System <span class="pre">Tools-&gt;Factory</span> Defaults</tt> and device reboots</li>
+<li>Access at address <tt class="docutils literal">192.168.1.1</tt> with <tt class="docutils literal">user: admin / password: admin</tt></li>
+<li>Use <tt class="docutils literal">System <span class="pre">Tools-&gt;Firmware</span> Upgrade</tt> to upload the OpenWrt image and flash router</li>
+</ul>
+<p>If the TP-Link uploader balks at the OpenWrt image filename (mine did) then rename the file to a TP-Link-compatible firmware name. Example:</p>
+<div class="highlight"><pre><span class="nv">$ </span>mv openwrt*squashfs-factory.bin mr3420v1_en_3_13_1_up<span class="se">\(</span>121123<span class="se">\)</span>.bin
 </pre></div>
-<p><a class="reference external" href="http://wiki.openwrt.org/doc/howto/internet.connection">Setup your internet connection</a> either by editing <tt class="docutils literal">/etc/config/network</tt> or using OpenWrt's <strong>Unified Configuration Interface (UCI)</strong>. Example setup using DSL (pppoe):</p>
-<div class="highlight"><pre><span class="c"># uci set network.wan.proto=pppoe</span>
-<span class="c"># uci set network.wan.username=&#39;yougotthisfromyour@isp.su&#39;</span>
-<span class="c"># uci set network.wan.password=&#39;yourpassword&#39;</span>
-<span class="c"># uci commit network</span>
-<span class="c"># ifup wan</span>
-</pre></div>
+<p>My intention is to use this router on a separate address range attached to my home LAN as a playground for network experiments.</p>
 </div>
-<div class="section" id="web-interface">
-<h2>3. Web interface</h2>
-<p>OpenWrt can be further configured in the console or the <a class="reference external" href="http://wiki.openwrt.org/doc/howto/luci.essentials">LuCI web interface</a>. LuCI is included by default in the WDR3600 image, otherwise it can be installed using the <tt class="docutils literal">opkg</tt> package manager:</p>
-<div class="highlight"><pre><span class="c"># opkg update</span>
-<span class="c"># opkg install luci</span>
-</pre></div>
-<p>If installed manually LuCI will not be running:</p>
-<div class="highlight"><pre><span class="c"># /etc/init.d/uhttpd start    # start the web server</span>
-<span class="c"># /etc/init.d/uhttpd enable   # auto-start at boot</span>
-</pre></div>
-<p>LuCI's default web server <tt class="docutils literal">uhttpd</tt> is configured in <tt class="docutils literal">/etc/config/uhttpd</tt> and LuCI itself is configured in <tt class="docutils literal">/etc/config/luci</tt>.</p>
-<img alt="LuCI login" src="images/pingparade4-1.png" style="width: 960px; height: 300px;" />
+<div class="section" id="tp-link-tl-wr1043nd">
+<h3>TP-Link TL-WR1043ND</h3>
+<p>Specs:</p>
+<ul class="simple">
+<li>802.11bgn with (3) detachable antennas</li>
+<li>4 Port 10/100/1000 LAN</li>
+<li>1 Port WAN</li>
+<li>1 USB 2.0 Port</li>
+<li>8MB Flash + 32MB RAM</li>
+<li>hardware version: v1.8</li>
+<li>running <tt class="docutils literal">Barrier Breaker v14.07</tt>: <a class="reference external" href="https://downloads.openwrt.org/barrier_breaker/14.07/ar71xx/generic/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin">openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin</a></li>
+</ul>
+<p>This is my primary home router.</p>
 </div>
-<div class="section" id="configuration">
-<h2>4. Configuration</h2>
-<p>Secure access to the router using <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">SSH key authentication</a>. Create <a class="reference external" href="http://www.circuidipity.com/20141001.html">static leases</a> for hosts using DHCP and setup <a class="reference external" href="http://www.circuidipity.com/20141006.html">port forwarding</a> to reach devices behind the firewall from the world-at-large.</p>
-<p>Its exciting what you can do with these consumer routers once you let it sink in that - with a few dollars and OpenWrt - you have an extremely configurable general purpose computer.</p>
+<div class="section" id="tp-link-tl-wdr3600">
+<h3>TP-Link TL-WDR3600</h3>
+<p>Specs:</p>
+<ul class="simple">
+<li>dual 2.4GHz 802.11bgn and 5GHz 802.11an with (2) detachable antennas</li>
+<li>4 Port 10/100/1000 LAN</li>
+<li>1 Port WAN</li>
+<li>2 USB 2.0 Ports</li>
+<li>64MB Flash + 128MB RAM</li>
+<li>hardware version: v1.5</li>
+<li>running <tt class="docutils literal">Barrier Breaker v14.07</tt>: <a class="reference external" href="https://downloads.openwrt.org/barrier_breaker/14.07/ar71xx/generic/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin">openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin</a></li>
+</ul>
+<p>I have setup this router model for family members and friends.</p>
 <p>Happy hacking!</p>
 </div>
+</div>
 
-    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-openwrt.html">openwrt</a>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-openwrt.html">openwrt</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-router.html">router</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
 </p>
 </div>
 
