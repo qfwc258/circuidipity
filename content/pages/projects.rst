@@ -23,6 +23,23 @@ Projects
 
 .. class:: invisiblelink
 
+    .. image:: images/supercharge-router-thumb.png
+        :alt: Supercharge router with OpenWrt
+        :width: 150px
+        :height: 150px
+        :align: left
+        :target: pingparade4.html
+
+.. raw:: html
+
+    <div class="projectx">
+        <h2>Supercharge a home router using OpenWrt</h2>
+        <p>Many are more capable than default firmware <a href="pingparade4.html">would lead you to believe...</a></p>
+        <p style="clear:both;"></p>
+    </div>
+
+.. class:: invisiblelink
+
     .. image:: images/jessiebook-thumb.1.png
         :alt: Jessiebook
         :width: 150px
