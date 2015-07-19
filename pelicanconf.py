@@ -48,15 +48,13 @@ ARCHIVES_URL = 'archives.html'
 ARCHIVES_SAVE_AS = 'archives.html'
 PROJECTS_URL = 'projects.html'
 PROJECTS_SAVE_AS = 'projects.html'
-PINGPARADE_URL = 'pingparade.html'
-PINGPARADE_SAVE_AS = 'pingparade.html'
 
 # Contact
 EMAIL_ADDR = 'daniel at circuidipity dot com'
 
 # Plugins
-PLUGIN_PATH = '/home/dwa/code/pelican-plugins'
-PLUGINS = ['neighbors']
+PLUGIN_PATHS = ['/home/dwa/code/pelican-plugins']
+PLUGINS = ['neighbors', 'tag_cloud']
 
 # Theme
 THEME = '/home/dwa/code/pelican-themes/orangespresso'
@@ -74,5 +72,6 @@ GITHUB_URL = 'https://github.com/vonbrownie'
 
 # Tag cloud
 TAG_CLOUD_STEPS = 4
+TAG_CLOUD_SORTING = 'alphabetically'
 
 #DEFAULT_PAGINATION = 10
