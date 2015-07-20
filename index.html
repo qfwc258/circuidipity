@@ -50,10 +50,15 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 </div>
 <div class="section" id="import">
 <h2>Import</h2>
-<p><strong>Method 0:</strong> If the location of the developer's public key is known, I can directly import the key into my keyring (<tt class="docutils literal"><span class="pre">~/.gnupg/pubring.gpg</span></tt>):</p>
+<div class="section" id="method-0">
+<h3>Method 0</h3>
+<p>If the location of the developer's public key is known, I can directly import the key into my keyring (<tt class="docutils literal"><span class="pre">~/.gnupg/pubring.gpg</span></tt>):</p>
 <div class="highlight"><pre><span class="nv">$ </span>gpg --keyserver x-hkp://pool.sks-keyservers.net --recv-keys 0xC2300F7B
 </pre></div>
-<p><strong>Method 1:</strong> Identify the public key used to generate the signature:</p>
+</div>
+<div class="section" id="method-1">
+<h3>Method 1</h3>
+<p>Identify the public key used to generate the signature:</p>
 <div class="highlight"><pre><span class="nv">$ </span>gpg --verify jessie-rpi2-20150705.img.gz.asc
 gpg: Signature made Sun <span class="m">05</span> Jul <span class="m">2015</span> 09:06:01 AM EDT using RSA key ID C2300F7B
 gpg: Can<span class="err">&#39;</span>t check signature: public key not found
@@ -73,6 +78,7 @@ gpg: no ultimately trusted keys found
 gpg: Total number processed: 1
 gpg:               imported: <span class="m">1</span>  <span class="o">(</span>RSA: 1<span class="o">)</span>
 </pre></div>
+</div>
 </div>
 <div class="section" id="verify">
 <h2>Verify</h2>
