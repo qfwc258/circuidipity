@@ -12,15 +12,10 @@
 &lt;/div&gt;
 &lt;div class="section" id="import"&gt;
 &lt;h2&gt;Import&lt;/h2&gt;
-&lt;div class="section" id="method-0"&gt;
-&lt;h3&gt;Method 0&lt;/h3&gt;
-&lt;p&gt;If the location of the developer's public key is known, I can directly import the key into my keyring (&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.gnupg/pubring.gpg&lt;/span&gt;&lt;/tt&gt;):&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Method 0:&lt;/strong&gt; If the location of the developer's public key is known, I can directly import the key into my keyring (&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.gnupg/pubring.gpg&lt;/span&gt;&lt;/tt&gt;):&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --keyserver x-hkp://pool.sks-keyservers.net --recv-keys 0xC2300F7B
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="method-1"&gt;
-&lt;h3&gt;Method 1&lt;/h3&gt;
-&lt;p&gt;Identify the public key used to generate the signature:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Method 1:&lt;/strong&gt; Identify the public key used to generate the signature:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --verify jessie-rpi2-20150705.img.gz.asc
 gpg: Signature made Sun &lt;span class="m"&gt;05&lt;/span&gt; Jul &lt;span class="m"&gt;2015&lt;/span&gt; 09:06:01 AM EDT using RSA key ID C2300F7B
 gpg: Can&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;t check signature: public key not found
@@ -40,7 +35,6 @@ gpg: no ultimately trusted keys found
 gpg: Total number processed: 1
 gpg:               imported: &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="o"&gt;(&lt;/span&gt;RSA: 1&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="verify"&gt;
 &lt;h2&gt;Verify&lt;/h2&gt;
