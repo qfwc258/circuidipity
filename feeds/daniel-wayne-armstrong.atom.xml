@@ -1,5 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-07-20T15:18:00-04:00</updated><entry><title>1000 cool bits</title><link href="http://www.circuidipity.com/20150720.html" rel="alternate"></link><updated>2015-07-20T15:18:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-20:20150720.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-07-21T17:19:00-04:00</updated><entry><title>Resize rootfs on Raspberry Pi</title><link href="http://www.circuidipity.com/resize-rootfs-raspberry-pi.html" rel="alternate"></link><updated>2015-07-21T17:19:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-21:resize-rootfs-raspberry-pi.html</id><summary type="html">&lt;p&gt;Resize a mounted partition to take full advantage of the storage capacity of a microSD card.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Debian developer Sjoerd Simons has created a &lt;a class="reference external" href="http://sjoerd.luon.net/posts/2015/02/debian-jessie-on-rpi2/"&gt;Jessie minimal image&lt;/a&gt; with an updated 3.18 Linux kernel and firmware suitable for Pi 2. I install the image file to a 32GB microSD card, insert card into my Pi and reboot, log in and inspect the filesystem layout:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       2.8G  555M  2.1G  21% /
+devtmpfs        459M     &lt;span class="m"&gt;0&lt;/span&gt;  459M   0% /dev
+tmpfs           463M     &lt;span class="m"&gt;0&lt;/span&gt;  463M   0% /dev/shm
+tmpfs           463M  312K  463M   1% /run
+tmpfs           5.0M     &lt;span class="m"&gt;0&lt;/span&gt;  5.0M   0% /run/lock
+tmpfs           463M     &lt;span class="m"&gt;0&lt;/span&gt;  463M   0% /sys/fs/cgroup
+/dev/mmcblk0p1  121M  9.7M  112M   9% /boot/firmware
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Install image inflates into a 2.8GB partition; using only a fraction of available capacity. I will use &lt;tt class="docutils literal"&gt;fdisk&lt;/tt&gt; to repartition the microSD to use all storage and &lt;tt class="docutils literal"&gt;resize2fs&lt;/tt&gt; to expand &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; into its new accomodations!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="repartition"&gt;
+&lt;h2&gt;0. Repartition&lt;/h2&gt;
+&lt;p&gt;Repartitioning the mounted filesytem using &lt;tt class="docutils literal"&gt;fdisk&lt;/tt&gt; on the Pi involves:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;delete the current &lt;tt class="docutils literal"&gt;mmcblk0p2&lt;/tt&gt; partition containing &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;create a new partition &lt;strong&gt;beginning at the same sector as the old partition&lt;/strong&gt; that uses all remaining space&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;mmcblk0p1&lt;/tt&gt; - containing &lt;tt class="docutils literal"&gt;/boot/firmware&lt;/tt&gt; - remains untouched&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; Ensure the start sector remains identical (example: mine below is &lt;tt class="docutils literal"&gt;249856&lt;/tt&gt; on the old and new versions of &lt;tt class="docutils literal"&gt;mmcblk0p2&lt;/tt&gt; or there is a high probability the operation will fail and all data lost.&lt;/p&gt;
+&lt;p&gt;A sample run-through on my own microSD:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# fdisk /dev/mmcblk0&lt;/span&gt;
+
+Welcome to fdisk &lt;span class="o"&gt;(&lt;/span&gt;util-linux 2.25.2&lt;span class="o"&gt;)&lt;/span&gt;.
+Changes will remain in memory only, &lt;span class="k"&gt;until&lt;/span&gt; you decide to write them.
+Be careful before using the write command.
+
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
+Disk /dev/mmcblk0: 29.7 GiB, &lt;span class="m"&gt;31914983424&lt;/span&gt; bytes, &lt;span class="m"&gt;62333952&lt;/span&gt; sectors
+Units: sectors of &lt;span class="m"&gt;1&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;512&lt;/span&gt; bytes
+Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
+I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
+Disklabel &lt;span class="nb"&gt;type&lt;/span&gt;: dos
+Disk identifier: 0xc96ffe28
+
+Device         Boot  Start     End Sectors  Size Id Type
+/dev/mmcblk0p1        &lt;span class="m"&gt;2048&lt;/span&gt;  &lt;span class="m"&gt;249855&lt;/span&gt;  &lt;span class="m"&gt;247808&lt;/span&gt;  121M  e W95 FAT16 &lt;span class="o"&gt;(&lt;/span&gt;LBA&lt;span class="o"&gt;)&lt;/span&gt;
+/dev/mmcblk0p2      &lt;span class="m"&gt;249856&lt;/span&gt; &lt;span class="m"&gt;6291455&lt;/span&gt; &lt;span class="m"&gt;6041600&lt;/span&gt;  2.9G &lt;span class="m"&gt;83&lt;/span&gt; Linux
+
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: d
+Partition number &lt;span class="o"&gt;(&lt;/span&gt;1,2, default 2&lt;span class="o"&gt;)&lt;/span&gt;:
+
+Partition &lt;span class="m"&gt;2&lt;/span&gt; has been deleted.
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: n
+Partition &lt;span class="nb"&gt;type&lt;/span&gt;
+&lt;span class="nb"&gt;   &lt;/span&gt;p   primary &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; primary, &lt;span class="m"&gt;0&lt;/span&gt; extended, &lt;span class="m"&gt;3&lt;/span&gt; free&lt;span class="o"&gt;)&lt;/span&gt;
+   e   extended &lt;span class="o"&gt;(&lt;/span&gt;container &lt;span class="k"&gt;for&lt;/span&gt; logical partitions&lt;span class="o"&gt;)&lt;/span&gt;
+Select &lt;span class="o"&gt;(&lt;/span&gt;default p&lt;span class="o"&gt;)&lt;/span&gt;:
+
+Using default response p.
+Partition number &lt;span class="o"&gt;(&lt;/span&gt;2-4, default 2&lt;span class="o"&gt;)&lt;/span&gt;:
+First sector &lt;span class="o"&gt;(&lt;/span&gt;249856-62333951, default 249856&lt;span class="o"&gt;)&lt;/span&gt;: 249856
+Last sector, +sectors or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G,T,P&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;249856-62333951, default 62333951&lt;span class="o"&gt;)&lt;/span&gt;:
+
+Created a new partition &lt;span class="m"&gt;2&lt;/span&gt; of &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Linux&amp;#39;&lt;/span&gt; and of size 29.6 GiB.
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
+Disk /dev/mmcblk0: 29.7 GiB, &lt;span class="m"&gt;31914983424&lt;/span&gt; bytes, &lt;span class="m"&gt;62333952&lt;/span&gt; sectors
+Units: sectors of &lt;span class="m"&gt;1&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;512&lt;/span&gt; bytes
+Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
+I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
+Disklabel &lt;span class="nb"&gt;type&lt;/span&gt;: dos
+Disk identifier: 0xc96ffe28
+
+Device         Boot  Start      End  Sectors  Size Id Type
+/dev/mmcblk0p1        &lt;span class="m"&gt;2048&lt;/span&gt;   &lt;span class="m"&gt;249855&lt;/span&gt;   &lt;span class="m"&gt;247808&lt;/span&gt;  121M  e W95 FAT16 &lt;span class="o"&gt;(&lt;/span&gt;LBA&lt;span class="o"&gt;)&lt;/span&gt;
+/dev/mmcblk0p2      &lt;span class="m"&gt;249856&lt;/span&gt; &lt;span class="m"&gt;62333951&lt;/span&gt; &lt;span class="m"&gt;62084096&lt;/span&gt; 29.6G &lt;span class="m"&gt;83&lt;/span&gt; Linux
+
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: w
+The partition table has been altered.
+Calling ioctl&lt;span class="o"&gt;()&lt;/span&gt; to re-read partition table.
+Re-reading the partition table failed.: Device or resource busy
+
+The kernel still uses the old table. The new table will be used at the next reboot or after you run partprobe&lt;span class="o"&gt;(&lt;/span&gt;8&lt;span class="o"&gt;)&lt;/span&gt; or kpartx&lt;span class="o"&gt;(&lt;/span&gt;8&lt;span class="o"&gt;)&lt;/span&gt;.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... aaaand reboot!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="resize"&gt;
+&lt;h2&gt;1. Resize&lt;/h2&gt;
+&lt;p&gt;Expand &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; to use the new capacity:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# resize2fs /dev/mmcblk0p2&lt;/span&gt;
+resize2fs 1.42.12 &lt;span class="o"&gt;(&lt;/span&gt;29-Aug-2014&lt;span class="o"&gt;)&lt;/span&gt;
+Filesystem at /dev/mmcblk0p2 is mounted on /&lt;span class="p"&gt;;&lt;/span&gt; on-line resizing required
+&lt;span class="nv"&gt;old_desc_blocks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 1, &lt;span class="nv"&gt;new_desc_blocks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 2
+The filesystem on /dev/mmcblk0p2 is now &lt;span class="m"&gt;7760512&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;4k&lt;span class="o"&gt;)&lt;/span&gt; blocks long.
+
+&lt;span class="c"&gt;# df -h&lt;/span&gt;
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root        30G  561M   28G   2% /
+devtmpfs        459M     &lt;span class="m"&gt;0&lt;/span&gt;  459M   0% /dev
+tmpfs           463M     &lt;span class="m"&gt;0&lt;/span&gt;  463M   0% /dev/shm
+tmpfs           463M  312K  463M   1% /run
+tmpfs           5.0M     &lt;span class="m"&gt;0&lt;/span&gt;  5.0M   0% /run/lock
+tmpfs           463M     &lt;span class="m"&gt;0&lt;/span&gt;  463M   0% /sys/fs/cgroup
+/dev/mmcblk0p1  121M  9.7M  112M   9% /boot/firmware
+&lt;span class="c"&gt;#&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="https://raspberrypi.stackexchange.com/questions/499/how-can-i-resize-my-root-partition"&gt;https://raspberrypi.stackexchange.com/questions/499/how-can-i-resize-my-root-partition&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="debian"></category><category term="linux"></category><category term="raspberry pi"></category></entry><entry><title>1000 cool bits</title><link href="http://www.circuidipity.com/20150720.html" rel="alternate"></link><updated>2015-07-20T15:18:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-20:20150720.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
 &lt;h2&gt;0001&lt;/h2&gt;
 &lt;p&gt;&lt;tt class="docutils literal"&gt;Iceweasel&lt;/tt&gt; alerts current flash was out-of-date and insecure -- Debian &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;flashplugin-nonfree&lt;/span&gt;&lt;/tt&gt; package does not auto-update.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Fix&lt;/strong&gt; Run update:&lt;/p&gt;
@@ -81,9 +189,13 @@ iface eth0 inet static
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="bits"></category></entry><entry><title>Verify a PGP signature with GnuPG</title><link href="http://www.circuidipity.com/verify-pgp-signature-gnupg.html" rel="alternate"></link><updated>2015-07-19T11:33:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-19:verify-pgp-signature-gnupg.html</id><summary type="html">&lt;p&gt;Using a &lt;strong&gt;PGP private/public keypair&lt;/strong&gt; to create a &lt;strong&gt;digital signature&lt;/strong&gt; for a file certifies its integrity. Adding a signature to software available for download heightens confidence that everything is OK! A developer signs a package with their private key and the receiver verifies the signature with the public key. If the package has been modified or corrupted in transmission the verification will fail.&lt;/p&gt;
+</summary><category term="bits"></category></entry><entry><title>Verify a PGP signature with GnuPG</title><link href="http://www.circuidipity.com/verify-pgp-signature-gnupg.html" rel="alternate"></link><updated>2015-07-19T11:33:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-19:verify-pgp-signature-gnupg.html</id><summary type="html">&lt;p&gt;Using a &lt;strong&gt;PGP private/public keypair&lt;/strong&gt; to create a &lt;strong&gt;digital signature&lt;/strong&gt; for a file certifies its integrity. Adding a signature to software available for download heightens confidence that everything is OK!&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;A developer signs a package with their private key and the receiver verifies the signature with the public key. If the package has been modified or corrupted in transmission the verification will fail.&lt;/p&gt;
+&lt;/div&gt;
 &lt;div class="section" id="download"&gt;
-&lt;h2&gt;Download&lt;/h2&gt;
+&lt;h2&gt;0. Download&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;GnuPG&lt;/strong&gt; is used to verify PGP signatures:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install gnupg
 &lt;/pre&gt;&lt;/div&gt;
@@ -93,11 +205,16 @@ iface eth0 inet static
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="import"&gt;
-&lt;h2&gt;Import&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Method 0:&lt;/strong&gt; If the location of the developer's public key is known, I can directly import the key into my keyring (&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.gnupg/pubring.gpg&lt;/span&gt;&lt;/tt&gt;):&lt;/p&gt;
+&lt;h2&gt;1. Import&lt;/h2&gt;
+&lt;div class="section" id="method-0"&gt;
+&lt;h3&gt;Method 0&lt;/h3&gt;
+&lt;p&gt;If the location of the developer's public key is known, I can directly import the key into my keyring (&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.gnupg/pubring.gpg&lt;/span&gt;&lt;/tt&gt;):&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --keyserver x-hkp://pool.sks-keyservers.net --recv-keys 0xC2300F7B
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Method 1:&lt;/strong&gt; Identify the public key used to generate the signature:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="method-1"&gt;
+&lt;h3&gt;Method 1&lt;/h3&gt;
+&lt;p&gt;Identify the public key used to generate the signature:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --verify jessie-rpi2-20150705.img.gz.asc
 gpg: Signature made Sun &lt;span class="m"&gt;05&lt;/span&gt; Jul &lt;span class="m"&gt;2015&lt;/span&gt; 09:06:01 AM EDT using RSA key ID C2300F7B
 gpg: Can&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;t check signature: public key not found
@@ -118,8 +235,9 @@ gpg: Total number processed: 1
 gpg:               imported: &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="o"&gt;(&lt;/span&gt;RSA: 1&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 &lt;div class="section" id="verify"&gt;
-&lt;h2&gt;Verify&lt;/h2&gt;
+&lt;h2&gt;2. Verify&lt;/h2&gt;
 &lt;p&gt;List keys in my keyring:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --list-keys
 /home/dwa/.gnupg/pubring.gpg
@@ -1139,131 +1257,4 @@ dd: error writing ‘/dev/sdb’: Input/output error
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="raspbian"></category><category term="debian"></category><category term="linux"></category><category term="raspberry pi"></category><category term="network"></category></entry><entry><title>OpenWrt router as bridged repeater using relayd</title><link href="http://www.circuidipity.com/openwrt-bridged-repeater.html" rel="alternate"></link><updated>2015-06-26T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-06-26:openwrt-bridged-repeater.html</id><summary type="html">&lt;p&gt;Extend the range of a wireless network using a cheap and cheerful router running &lt;a class="reference external" href="http://www.circuidipity.com/tag-openwrt.html"&gt;OpenWrt&lt;/a&gt; as a &lt;strong&gt;bridged repeater&lt;/strong&gt;. All client devices use the same IP address range and are capable of communicating with each other.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Wireless access points: &lt;strong&gt;PrimaryAP&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html"&gt;TP-Link TL-WDR3600&lt;/a&gt; with IP address &lt;tt class="docutils literal"&gt;192.168.1.1&lt;/tt&gt; + wireless channel &lt;tt class="docutils literal"&gt;11&lt;/tt&gt; and the &lt;strong&gt;RepeaterAP&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;TP-Link TL-WR841N&lt;/a&gt; (~$25CAN). Both devices are running OpenWrt.&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://forum.openwrt.org/viewtopic.php?id=39077"&gt;This thread&lt;/a&gt; was a big help in cutting through the confusion and getting everything hopping! Basically there are 2 types of repeater scenarios to consider:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;em&gt;non-bridged&lt;/em&gt; repeater - works on all radios... devices connected to the &lt;em&gt;RepeaterAP&lt;/em&gt; see the &lt;em&gt;PrimaryAP&lt;/em&gt; devices, &lt;em&gt;PrimaryAP&lt;/em&gt; devices do not see &lt;em&gt;RepeaterAP&lt;/em&gt; devices&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;bridged&lt;/em&gt; repeater - works for most radios... everything sees everything&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;All configuration is done on the secondary router to setup device as a bridged repeater.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="install-relayd"&gt;
-&lt;h2&gt;0. Install relayd&lt;/h2&gt;
-&lt;p&gt;Access the internet by connecting an ethernet cable from the secondary router's WAN port to the primary router. Login and install &lt;tt class="docutils literal"&gt;relayd&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# opkg update&lt;/span&gt;
-&lt;span class="c"&gt;# opkg install relayd&lt;/span&gt;
-&lt;span class="c"&gt;# /etc/init.d/relayd enable&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="configure-wireless"&gt;
-&lt;h2&gt;1. Configure wireless&lt;/h2&gt;
-&lt;p&gt;Sample &lt;tt class="docutils literal"&gt;/etc/config/wireless&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;config wifi-device &lt;span class="s1"&gt;&amp;#39;radio0&amp;#39;&lt;/span&gt;
-    option &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;mac80211&amp;#39;&lt;/span&gt;
-    option channel &lt;span class="s1"&gt;&amp;#39;11&amp;#39;&lt;/span&gt;     &lt;span class="c"&gt;# Important! Match with the channel set on PrimaryAP&lt;/span&gt;
-    option hwmode &lt;span class="s1"&gt;&amp;#39;11g&amp;#39;&lt;/span&gt;
-    option path &lt;span class="s1"&gt;&amp;#39;platform/ar934x_wmac&amp;#39;&lt;/span&gt;
-    option htmode &lt;span class="s1"&gt;&amp;#39;HT20&amp;#39;&lt;/span&gt;
-    option txpower &lt;span class="s1"&gt;&amp;#39;30&amp;#39;&lt;/span&gt;
-    option country &lt;span class="s1"&gt;&amp;#39;US&amp;#39;&lt;/span&gt;
-
-config wifi-iface
-    option device &lt;span class="s1"&gt;&amp;#39;radio0&amp;#39;&lt;/span&gt;
-    option network &lt;span class="s1"&gt;&amp;#39;wwan&amp;#39;&lt;/span&gt;
-    option encryption &lt;span class="s1"&gt;&amp;#39;psk2&amp;#39;&lt;/span&gt;
-    option key &lt;span class="s1"&gt;&amp;#39;*********************&amp;#39;&lt;/span&gt;
-    option mode &lt;span class="s1"&gt;&amp;#39;sta&amp;#39;&lt;/span&gt;
-    option ssid &lt;span class="s1"&gt;&amp;#39;PrimaryAP&amp;#39;&lt;/span&gt;
-
-config wifi-iface
-    option device &lt;span class="s1"&gt;&amp;#39;radio0&amp;#39;&lt;/span&gt;
-    option network &lt;span class="s1"&gt;&amp;#39;lan&amp;#39;&lt;/span&gt;
-    option encryption &lt;span class="s1"&gt;&amp;#39;psk2&amp;#39;&lt;/span&gt;
-    option key &lt;span class="s1"&gt;&amp;#39;*****************&amp;#39;&lt;/span&gt;
-    option mode &lt;span class="s1"&gt;&amp;#39;ap&amp;#39;&lt;/span&gt;
-    option ssid &lt;span class="s1"&gt;&amp;#39;RepeaterAP&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="configure-network"&gt;
-&lt;h2&gt;2. Configure network&lt;/h2&gt;
-&lt;p&gt;Sample &lt;tt class="docutils literal"&gt;/etc/config/network&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;config interface &lt;span class="s1"&gt;&amp;#39;loopback&amp;#39;&lt;/span&gt;
-    option ifname &lt;span class="s1"&gt;&amp;#39;lo&amp;#39;&lt;/span&gt;
-    option proto &lt;span class="s1"&gt;&amp;#39;static&amp;#39;&lt;/span&gt;
-    option ipaddr &lt;span class="s1"&gt;&amp;#39;127.0.0.1&amp;#39;&lt;/span&gt;
-    option netmask &lt;span class="s1"&gt;&amp;#39;255.0.0.0&amp;#39;&lt;/span&gt;
-
-config interface &lt;span class="s1"&gt;&amp;#39;lan&amp;#39;&lt;/span&gt;
-    option ifname &lt;span class="s1"&gt;&amp;#39;eth0&amp;#39;&lt;/span&gt;
-    option force_link &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
-    option &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;bridge&amp;#39;&lt;/span&gt;
-    option proto &lt;span class="s1"&gt;&amp;#39;static&amp;#39;&lt;/span&gt;
-    option ip6assign &lt;span class="s1"&gt;&amp;#39;60&amp;#39;&lt;/span&gt;
-    option ipaddr &lt;span class="s1"&gt;&amp;#39;192.168.10.1&amp;#39;&lt;/span&gt;    &lt;span class="c"&gt;# for relayd... requires 192.168.x.x address but not used by clients&lt;/span&gt;
-    option gateway &lt;span class="s1"&gt;&amp;#39;192.168.1.1&amp;#39;&lt;/span&gt;    &lt;span class="c"&gt;# ip address of PrimaryAP&lt;/span&gt;
-    option netmask &lt;span class="s1"&gt;&amp;#39;255.255.255.0&amp;#39;&lt;/span&gt;
-    option dns &lt;span class="s1"&gt;&amp;#39;192.168.1.1&amp;#39;&lt;/span&gt;
-
-config interface &lt;span class="s1"&gt;&amp;#39;wwan&amp;#39;&lt;/span&gt;
-    option proto &lt;span class="s1"&gt;&amp;#39;static&amp;#39;&lt;/span&gt;
-    option ipaddr &lt;span class="s1"&gt;&amp;#39;192.168.1.254&amp;#39;&lt;/span&gt;
-    option netmask &lt;span class="s1"&gt;&amp;#39;255.255.255.0&amp;#39;&lt;/span&gt;
-    option gateway &lt;span class="s1"&gt;&amp;#39;192.168.1.1&amp;#39;&lt;/span&gt;
-
-config interface &lt;span class="s1"&gt;&amp;#39;stabridge&amp;#39;&lt;/span&gt;
-    option proto &lt;span class="s1"&gt;&amp;#39;relay&amp;#39;&lt;/span&gt;
-    option network &lt;span class="s1"&gt;&amp;#39;lan wwan&amp;#39;&lt;/span&gt;
-    option ipaddr &lt;span class="s1"&gt;&amp;#39;192.168.1.254&amp;#39;&lt;/span&gt;   &lt;span class="c"&gt;# static ip assigned from PrimaryAP address range&lt;/span&gt;
-
-config switch
-    option name &lt;span class="s1"&gt;&amp;#39;switch0&amp;#39;&lt;/span&gt;
-    option reset &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
-    option enable_vlan &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
-
-config switch_vlan
-    option device &lt;span class="s1"&gt;&amp;#39;switch0&amp;#39;&lt;/span&gt;
-    option vlan &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
-    option ports &lt;span class="s1"&gt;&amp;#39;0 1 2 3 4&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="configure-dhcp"&gt;
-&lt;h2&gt;3. Configure DHCP&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;PrimaryAP&lt;/em&gt; will handle DHCP for the combined network. Sample &lt;tt class="docutils literal"&gt;/etc/config/dhcp&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;config dhcp &lt;span class="s1"&gt;&amp;#39;lan&amp;#39;&lt;/span&gt;
-    option interface &lt;span class="s1"&gt;&amp;#39;lan&amp;#39;&lt;/span&gt;
-    option start &lt;span class="s1"&gt;&amp;#39;100&amp;#39;&lt;/span&gt;
-    option limit &lt;span class="s1"&gt;&amp;#39;150&amp;#39;&lt;/span&gt;
-    option leasetime &lt;span class="s1"&gt;&amp;#39;12h&amp;#39;&lt;/span&gt;
-    option ignore &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
-
-config dhcp &lt;span class="s1"&gt;&amp;#39;wan&amp;#39;&lt;/span&gt;
-    option interface &lt;span class="s1"&gt;&amp;#39;wan&amp;#39;&lt;/span&gt;
-    option ignore &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="reboot"&gt;
-&lt;h2&gt;4. Reboot&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;PrimaryAP&lt;/em&gt; will handle firewall and dnsmasq for the combined network. Disable the services on &lt;em&gt;RepeaterAP&lt;/em&gt; to avoid conflicts:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# /etc/init.d/firewall stop&lt;/span&gt;
-&lt;span class="c"&gt;# /etc/init.d/firewall disable&lt;/span&gt;
-&lt;span class="c"&gt;# /etc/init.d/dnsmasq stop&lt;/span&gt;
-&lt;span class="c"&gt;# /etc/init.d/dnsmasq disable&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reboot router:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# reboot&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;OK! Connect to the new &lt;em&gt;RepeaterAP&lt;/em&gt; and the device will be assigned an IP address on the &lt;em&gt;PrimaryAP&lt;/em&gt;'s now-extended network. All rules and services on &lt;em&gt;PrimaryAP&lt;/em&gt; will flow through to devices connected via &lt;em&gt;RepeaterAP&lt;/em&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="helpful-resources"&gt;
-&lt;h2&gt;5. Helpful resources&lt;/h2&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;My &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/openwrt/bridged_repeater/etc/config/wireless"&gt;wireless&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/openwrt/bridged_repeater/etc/config/network"&gt;network&lt;/a&gt;, and &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/openwrt/bridged_repeater/etc/config/dhcp"&gt;dhcp&lt;/a&gt; configs&lt;/li&gt;
-&lt;li&gt;OpenWrt forum thread on &lt;a class="reference external" href="https://forum.openwrt.org/viewtopic.php?id=39077"&gt;bridged and simple repeater configurations&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://wiki.openwrt.org/doc/recipes/relayclient"&gt;Routed Client with relayd (Pseudobridge)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="router"></category><category term="openwrt"></category><category term="linux"></category><category term="network"></category></entry></feed>
+</summary><category term="raspbian"></category><category term="debian"></category><category term="linux"></category><category term="raspberry pi"></category><category term="network"></category></entry></feed>

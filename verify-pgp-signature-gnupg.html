@@ -26,9 +26,13 @@
 <!-- article -->
 <h1>Verify a PGP signature with GnuPG</h1>
 <div id="article">
-    <p>Using a <strong>PGP private/public keypair</strong> to create a <strong>digital signature</strong> for a file certifies its integrity. Adding a signature to software available for download heightens confidence that everything is OK! A developer signs a package with their private key and the receiver verifies the signature with the public key. If the package has been modified or corrupted in transmission the verification will fail.</p>
+    <p>Using a <strong>PGP private/public keypair</strong> to create a <strong>digital signature</strong> for a file certifies its integrity. Adding a signature to software available for download heightens confidence that everything is OK!</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<p>A developer signs a package with their private key and the receiver verifies the signature with the public key. If the package has been modified or corrupted in transmission the verification will fail.</p>
+</div>
 <div class="section" id="download">
-<h2>Download</h2>
+<h2>0. Download</h2>
 <p><strong>GnuPG</strong> is used to verify PGP signatures:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install gnupg
 </pre></div>
@@ -38,11 +42,16 @@
 </pre></div>
 </div>
 <div class="section" id="import">
-<h2>Import</h2>
-<p><strong>Method 0:</strong> If the location of the developer's public key is known, I can directly import the key into my keyring (<tt class="docutils literal"><span class="pre">~/.gnupg/pubring.gpg</span></tt>):</p>
+<h2>1. Import</h2>
+<div class="section" id="method-0">
+<h3>Method 0</h3>
+<p>If the location of the developer's public key is known, I can directly import the key into my keyring (<tt class="docutils literal"><span class="pre">~/.gnupg/pubring.gpg</span></tt>):</p>
 <div class="highlight"><pre><span class="nv">$ </span>gpg --keyserver x-hkp://pool.sks-keyservers.net --recv-keys 0xC2300F7B
 </pre></div>
-<p><strong>Method 1:</strong> Identify the public key used to generate the signature:</p>
+</div>
+<div class="section" id="method-1">
+<h3>Method 1</h3>
+<p>Identify the public key used to generate the signature:</p>
 <div class="highlight"><pre><span class="nv">$ </span>gpg --verify jessie-rpi2-20150705.img.gz.asc
 gpg: Signature made Sun <span class="m">05</span> Jul <span class="m">2015</span> 09:06:01 AM EDT using RSA key ID C2300F7B
 gpg: Can<span class="err">&#39;</span>t check signature: public key not found
@@ -63,8 +72,9 @@ gpg: Total number processed: 1
 gpg:               imported: <span class="m">1</span>  <span class="o">(</span>RSA: 1<span class="o">)</span>
 </pre></div>
 </div>
+</div>
 <div class="section" id="verify">
-<h2>Verify</h2>
+<h2>2. Verify</h2>
 <p>List keys in my keyring:</p>
 <div class="highlight"><pre><span class="nv">$ </span>gpg --list-keys
 /home/dwa/.gnupg/pubring.gpg
