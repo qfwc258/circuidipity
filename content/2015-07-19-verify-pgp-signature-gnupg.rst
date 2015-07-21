@@ -6,10 +6,15 @@ Verify a PGP signature with GnuPG
 :slug: verify-pgp-signature-gnupg
 :tags: debian, linux
 
-Using a **PGP private/public keypair** to create a **digital signature** for a file certifies its integrity. Adding a signature to software available for download heightens confidence that everything is OK! A developer signs a package with their private key and the receiver verifies the signature with the public key. If the package has been modified or corrupted in transmission the verification will fail.
+Using a **PGP private/public keypair** to create a **digital signature** for a file certifies its integrity. Adding a signature to software available for download heightens confidence that everything is OK!
 
-Download
-========
+Let's go!
+=========
+
+A developer signs a package with their private key and the receiver verifies the signature with the public key. If the package has been modified or corrupted in transmission the verification will fail.
+
+0. Download
+============
 
 **GnuPG** is used to verify PGP signatures:
 
@@ -24,16 +29,22 @@ Download
     $ wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.gz                 
     $ wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.gz.asc             
 
-Import
-======
+1. Import
+=========
 
-**Method 0:** If the location of the developer's public key is known, I can directly import the key into my keyring (``~/.gnupg/pubring.gpg``):
+Method 0
+--------
+
+If the location of the developer's public key is known, I can directly import the key into my keyring (``~/.gnupg/pubring.gpg``):
 
 .. code-block:: bash
 
     $ gpg --keyserver x-hkp://pool.sks-keyservers.net --recv-keys 0xC2300F7B
                                                                                          
-**Method 1:** Identify the public key used to generate the signature:
+Method 1
+--------
+
+Identify the public key used to generate the signature:
 
 .. code-block:: bash
                                                 
@@ -59,8 +70,8 @@ Public key is ``0xC2300F7B``. Run a key search [1]_ and import:
     gpg: Total number processed: 1                                                       
     gpg:               imported: 1  (RSA: 1)                                             
 
-Verify
-======
+2. Verify
+=========
                                                                                      
 List keys in my keyring:
 
