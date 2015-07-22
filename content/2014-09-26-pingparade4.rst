@@ -6,7 +6,7 @@ Supercharge a home router using OpenWrt
 :slug: pingparade4
 :template: article-project
 :tags: router, openwrt, linux, network
-:modified: 2015-07-16 10:00:00
+:modified: 2015-07-22 09:49:00
 
 .. image:: images/supercharge-router.png
     :alt: Supercharge router with OpenWrt
@@ -104,6 +104,7 @@ Its exciting what you can do with these consumer routers once you let it sink in
 * `Static leases <http://www.circuidipity.com/20141001.html>`_ for hosts using DHCP
 * `Port forwarding <http://www.circuidipity.com/20141006.html>`_ to reach `devices behind the firewall <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ from the outside world
 * Extend the range of a wireless network using an OpenWrt router as a `bridged repeater <http://www.circuidipity.com/openwrt-bridged-repeater.html>`_
+* Went one hack too far? `"Resetting a TP-Link WR841N" <http://gilesorr.com/blog/wr841n-reset.html>`_
 
 Happy hacking!
 
