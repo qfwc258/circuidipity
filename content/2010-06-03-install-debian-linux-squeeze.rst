@@ -3,7 +3,7 @@ Install Debian Squeeze GNU/Linux
 ================================
 
 :date: 2010-06-03 01:23:00
-:tags: debian, linux
+:tags: debian, linux, install
 :slug: install-debian-linux-squeeze
 
 Happy news! On February 6, 2011 the word came down: "After 24 months of constant development, the Debian Project is proud to present its new `stable version 6.0 'Squeeze' <http://www.debian.org/News/2011/20110205a>`_".

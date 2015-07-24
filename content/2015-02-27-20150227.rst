@@ -4,7 +4,7 @@ A bit of unplanned Grub2 surgery
 
 :date: 2015-02-27 18:40:00
 :slug: 20150227
-:tags: debian, linux
+:tags: grub, bootloader, debian, linux
 
 **PROBLEM:** Late night experiments `loading GRUB on USB sticks <http://www.circuidipity.com/grubs.html>`_ resulted in mucking up Grub on my host machine. After a reboot instead of a boot menu I was greeted with:
 

@@ -4,7 +4,7 @@ Modify the default boot order in GRUB
 
 :date: 2014-08-31 01:23:00
 :slug: 20140831
-:tags: debian, linux, chromebook
+:tags: grub, bootloader, debian, linux, chromebook
 
 My Chromebook running Debian requires a less-than-recent kernel (3.13.10) that supports compiling modules for the laptop's touchpad. After installing a kernel retrieved from `snapshot.debian.org <http://www.circuidipity.com/snapshot-debian.html>`_ the GRUB boot manager auto-generates a menuentry for the new kernel but defaults to booting the most recent kernel available.
 

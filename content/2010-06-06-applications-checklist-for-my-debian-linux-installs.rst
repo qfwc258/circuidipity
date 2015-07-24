@@ -3,7 +3,7 @@ Applications checklist for my Debian Squeeze installs
 =====================================================
 
 :date: 2010-06-06 01:23:00
-:tags: debian, linux
+:tags: debian, linux, install
 :slug: applications-checklist-for-my-debian-linux-installs
 
 These are some Linux applications I like to include with a `desktop installation <http://www.circuidipity.com/install-debian-linux-squeeze.html>`_ of Debian Squeeze.

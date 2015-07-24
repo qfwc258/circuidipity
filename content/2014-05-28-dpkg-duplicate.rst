@@ -4,7 +4,7 @@ Duplicate package selection in Debian
 
 :date: 2014-05-28 01:23:00
 :slug: dpkg-duplicate
-:tags: debian, linux, shell
+:tags: debian, linux, install, shell
 :modified: 2015-07-06 13:25
 
 I am happy with the selection of packages installed on my primary Debian box and discovered an easy method [1]_ to duplicate the setup on a secondary machine.
