@@ -4,7 +4,7 @@ Give new life to old laptops as Linux home servers
 
 :date: 2014-09-05 01:23:00
 :slug: pingparade1
-:tags: network, debian, install, linux, netbook
+:tags: netbook, debian, linux, network
 :modified: 2014-12-08 00:01:00
 
 Running your own Linux home server is a fun learning experience and offers several advantages.

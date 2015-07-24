@@ -4,7 +4,7 @@ OpenWrt router as bridged repeater using relayd
 
 :date: 2015-06-26
 :slug: openwrt-bridged-repeater
-:tags: router, openwrt, linux, network
+:tags: openwrt, router, linux, network
 
 Extend the range of a wireless network using a cheap and cheerful router running `OpenWrt <http://www.circuidipity.com/tag-openwrt.html>`_ as a **bridged repeater**. All client devices use the same IP address range and are capable of communicating with each other.
 

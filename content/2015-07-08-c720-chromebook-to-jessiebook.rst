@@ -5,7 +5,7 @@ Chromebook to Jessiebook
 :date: 2015-07-08 10:45:00
 :slug: c720-chromebook-to-jessiebook
 :template: article-project
-:tags: chromebook, debian, linux
+:tags: acer, chromebook, debian, linux
 :modified: 2015-07-10 00:01:00
 
 Replace **Chrome OS** permanently with **Debian** on the **Acer C720 Chromebook**.

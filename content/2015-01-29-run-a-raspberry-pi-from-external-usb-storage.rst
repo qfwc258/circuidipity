@@ -4,7 +4,7 @@ Run a Raspberry Pi from external USB storage
 
 :date: 2015-01-29 01:05:00
 :slug: run-a-raspberry-pi-from-external-usb-storage
-:tags: raspberry pi, raspbian, debian, install, linux, network
+:tags: raspberry pi, raspbian, debian, linux, network
 :modified: 2015-07-05 15:56:00
 
 **Update:** Home server now `upgraded to Raspberry Pi 2 <http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html>`_.

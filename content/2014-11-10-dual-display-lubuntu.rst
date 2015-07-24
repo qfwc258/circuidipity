@@ -4,7 +4,7 @@ Dual display configuration in Lubuntu
 
 :date: 2014-11-10 15:11:00
 :slug: dual-display-lubuntu
-:tags: graphics, lxde, lubuntu, ubuntu, linux
+:tags: graphics, lxde, lubuntu, ubuntu, linux, lenovo, thinkpad
 
 **Scenario:** I connect my **Thinkpad X201** running Lubuntu and **LXDE** (resolution: ``1280x800``) to an external display (resolution: ``1920x1200``) to create: 1) a combined desktop; 2) with **lxpanel** top aligned and stretched across both displays; 3) and a different wallpaper on each display.
 

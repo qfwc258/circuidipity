@@ -4,7 +4,7 @@ Ubuntu Keyboard Shortcuts
 
 :date: 2015-02-25 19:47:00
 :slug: ubuntu-keyboard-shortcuts
-:tags: ubuntu, linux
+:tags: cheatsheet, ubuntu, linux
 
 .. image:: images/logo-ubuntu_cof-white_orange-hex-4.png
     :align: right

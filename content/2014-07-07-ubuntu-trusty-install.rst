@@ -3,7 +3,7 @@ Ubuntu 14.04 Minimal Install
 ============================
 
 :date: 2014-07-07 01:23:00
-:tags: ubuntu, lubuntu, install, linux
+:tags: ubuntu, lubuntu, linux, luks, crypto
 :slug: ubuntu-trusty-install
 :modified: 2014-11-11 20:15:00
 

@@ -4,7 +4,7 @@ Chromebook to Lubuntubook
 
 :date: 2014-10-26 00:09:00
 :slug: c720-lubuntubook
-:tags: chromebook, lubuntu, ubuntu, install, linux
+:tags: chromebook, acer, lubuntu, ubuntu, linux
 :modified: 2015-07-08 10:14:00
 
 **Update:** Now running `Debian 'Jessie' <http://www.circuidipity.com/c720-chromebook-to-jessiebook.html>`_ on my Chromebook.

@@ -3,7 +3,7 @@ Dual-display configuration using Nvidia + Twinview
 ==================================================
 
 :date: 2011-03-03 01:23:00
-:tags: graphics, debian, linux
+:tags: nvidia, graphics, debian, linux
 :slug: twinview
 
 Use monitors of different resolutions and combine them into one desktop.

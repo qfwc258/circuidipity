@@ -4,7 +4,7 @@ Minimal Debian
 
 :date: 2015-07-07 15:43
 :slug: minimal-debian
-:tags: debian, linux, shell, programming
+:tags: debian, linux, luks, crypto, shell, programming
 
 .. figure:: images/debianVader.png
     :alt: Debian Vader

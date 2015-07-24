@@ -3,7 +3,7 @@ Great fun getting started with Jekyll
 =====================================
 
 :date: 2012-06-07 01:23:00
-:tags: blog, ruby, network, linux
+:tags: blog, jekyll, ruby, network, linux
 :slugs: jekyll-static-website-generator
 
 I discovered a cool tool named *Jekyll* that I am now using to generate my website. From the `README <https://github.com/mojombo/jekyll#readme>`_ ...
