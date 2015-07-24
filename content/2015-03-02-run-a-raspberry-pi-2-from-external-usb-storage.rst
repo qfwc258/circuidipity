@@ -5,9 +5,9 @@ Run a Raspberry Pi 2 from external USB storage
 :date: 2015-03-02 00:05:00
 :slug: run-a-raspberry-pi-2-from-external-usb-storage
 :tags: raspberry pi, ubuntu, linux, network
-:modified: 2015-07-05 17:11:00
+:modified: 2015-07-24 12:34:00
 
-**Update:** Home server `now running Raspbian <http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html>`_.
+**Update:** Pi now running `Debian Jessie <http://www.circuidipity.com/raspberry-pi-usb-debian-jessie.html>`_.
 
 I am exploring the use of my Pi as **24/7 uptime home server** and one of the hacks I wish to add is using Pi as a cheap and cheerful `network attached storage (NAS) <http://www.circuidipity.com/nas-raspberry-pi-sshfs.html>`_ device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?
 
