@@ -4,8 +4,8 @@ Backup home
 
 :date: 2015-02-03 00:10:00
 :slug: backup-home
-:tags: ssh, crypto, network, raspbian, debian, linux, shell, programming, raspberry pi
-:modified: 2015-07-05 16:11:00
+:tags: ssh, crypto, network, debian, linux, shell, programming, raspberry pi
+:modified: 2015-07-25 18:36:00
 
 `Raspberry Pi Home Server Hack #3 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Make **automatic backups** of a home folder using a dash of shell scripting + rsync + SSH + cron!
 
@@ -14,7 +14,7 @@ Let's go!
 
 One of the advantages of setting up a `Linux home server <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ is providing a 24/7 uptime location to store backups of important files. A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home folder over the local area network (LAN).
 
-**Server** is a `Raspberry Pi 2 <http://www.circuidipity.com/tag-raspberry-pi.html>`_ (example: ``login:pi/ip_address:192.168.1.88``) connected to a `1TB USB hard drive <http://www.circuidipity.com/nas-raspberry-pi-sshfs.html>`_ running `Raspbian <http://www.circuidipity.com/tag-raspbian.html>`_.
+**Server** is a `Raspberry Pi 2 <http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html>`_ (example: ``login:pi/ip_address:192.168.1.88``) connected to a `1TB USB hard drive <http://www.circuidipity.com/nas-raspberry-pi-sshfs.html>`_ running **Debian**.
 
 0. SSH
 ======
