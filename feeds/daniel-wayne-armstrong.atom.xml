@@ -1,5 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-07-22T13:48:00-04:00</updated><entry><title>Debian Jessie on Raspberry Pi 2</title><link href="http://www.circuidipity.com/debian-jessie-raspberry-pi-2.html" rel="alternate"></link><updated>2015-07-22T13:48:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-22:debian-jessie-raspberry-pi-2.html</id><summary type="html">&lt;p&gt;With the move to ARMv7 I am now capable of running the official ARM port of Debian (with Pi-friendly kernel+firmware) on my Raspberry Pi 2!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-07-25T18:25:00-04:00</updated><entry><title>Run a Raspberry Pi from USB storage v4.0</title><link href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html" rel="alternate"></link><updated>2015-07-25T18:25:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-25:raspberry-pi-usb-storage-v4.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #0 .:&lt;/a&gt; I am exploring the use of my Pi as &lt;strong&gt;24/7 uptime home server&lt;/strong&gt;. Hard drives offer a more robust storage media than a Pi's default choice of microSD cards and that is what I decide to use. &lt;a class="footnote-reference" href="#id3" id="id1"&gt;[1]&lt;/a&gt; I put my plan in motion using &lt;strong&gt;Debian&lt;/strong&gt; and move &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; from a microSD to a powered 1TB USB 3.5&amp;quot; hard drive with encrypted storage.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Current setup:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Raspberry Pi 2 Model B&lt;/li&gt;
+&lt;li&gt;5V 2A microUSB power adapter&lt;/li&gt;
+&lt;li&gt;ethernet cable&lt;/li&gt;
+&lt;li&gt;HDMI display + USB keyboard (initial setup)&lt;/li&gt;
+&lt;li&gt;USB hard drive with 3 partitions: &lt;tt class="docutils literal"&gt;root&lt;/tt&gt;, encrypted &lt;tt class="docutils literal"&gt;swap&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;storage&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;Debian &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;jessie-rpi2-20150705&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;4GB microSD card (initial setup and &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt; partition)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Previous versions:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;v3.0 - &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html"&gt;Pi 2 Model B + Raspbian&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;v2.0 - &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html"&gt;Pi 2 Model B + Ubuntu&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;v1.0 - &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html"&gt;Pi Model B + Raspbian&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="debian"&gt;
+&lt;h2&gt;0. Debian&lt;/h2&gt;
+&lt;p&gt;With the move to ARMv7 the Pi 2 is now capable of running the official Debian &lt;strong&gt;armhf&lt;/strong&gt; port. Debian developer Sjoerd Simons has created a &lt;a class="reference external" href="http://sjoerd.luon.net/posts/2015/02/debian-jessie-on-rpi2/"&gt;Jessie minimal image&lt;/a&gt; with an updated 3.18 Linux kernel and firmware suitable for Pi 2.&lt;/p&gt;
+&lt;p&gt;Start here: &lt;a class="reference external" href="http://www.circuidipity.com/debian-jessie-raspberry-pi-2.html"&gt;Install and configure Jessie on a microSD&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="partition"&gt;
+&lt;h2&gt;1. Partition&lt;/h2&gt;
+&lt;p&gt;I connect the USB drive to Pi and confirm detection:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# lsblk&lt;/span&gt;
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda           8:0    &lt;span class="m"&gt;0&lt;/span&gt; 931.5G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+└─sda1        8:1    &lt;span class="m"&gt;0&lt;/span&gt; 931.5G  &lt;span class="m"&gt;0&lt;/span&gt; part
+mmcblk0     179:0    &lt;span class="m"&gt;0&lt;/span&gt;   7.6G  &lt;span class="m"&gt;0&lt;/span&gt; disk
+├─mmcblk0p1 179:1    &lt;span class="m"&gt;0&lt;/span&gt;   121M  &lt;span class="m"&gt;0&lt;/span&gt; part /boot/firmware
+└─mmcblk0p2 179:2    &lt;span class="m"&gt;0&lt;/span&gt;   2.9G  &lt;span class="m"&gt;0&lt;/span&gt; part /
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Device is &lt;tt class="docutils literal"&gt;sda&lt;/tt&gt; with a single &lt;tt class="docutils literal"&gt;sda1&lt;/tt&gt; partition. Use &lt;tt class="docutils literal"&gt;fdisk&lt;/tt&gt; to create 3 new partitions on the USB drive:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;sda1 - 20GB - future &lt;tt class="docutils literal"&gt;root&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;sda2 - 2GB - future encrypted &lt;tt class="docutils literal"&gt;swap&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;sda3 - remaining space - future encrypted &lt;tt class="docutils literal"&gt;storage&lt;/tt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sample walk-through:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# fdisk /dev/sda&lt;/span&gt;
+
+Welcome to fdisk &lt;span class="o"&gt;(&lt;/span&gt;util-linux 2.25.2&lt;span class="o"&gt;)&lt;/span&gt;.
+Changes will remain in memory only, &lt;span class="k"&gt;until&lt;/span&gt; you decide to write them.
+Be careful before using the write command.
+
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
+Disk /dev/sda: 931.5 GiB, &lt;span class="m"&gt;1000204886016&lt;/span&gt; bytes, &lt;span class="m"&gt;1953525168&lt;/span&gt; sectors
+Units: sectors of &lt;span class="m"&gt;1&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;512&lt;/span&gt; bytes
+Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
+I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
+Disklabel &lt;span class="nb"&gt;type&lt;/span&gt;: dos
+Disk identifier: 0x00000000
+
+Device     Boot Start        End    Sectors   Size Id Type
+/dev/sda1        &lt;span class="m"&gt;2048&lt;/span&gt; &lt;span class="m"&gt;1953525167&lt;/span&gt; &lt;span class="m"&gt;1953523120&lt;/span&gt; 931.5G &lt;span class="m"&gt;83&lt;/span&gt; Linux
+
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: d
+Selected partition 1
+Partition &lt;span class="m"&gt;1&lt;/span&gt; has been deleted.
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: n
+Partition &lt;span class="nb"&gt;type&lt;/span&gt;
+&lt;span class="nb"&gt;    &lt;/span&gt;p   primary &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; primary, &lt;span class="m"&gt;0&lt;/span&gt; extended, &lt;span class="m"&gt;4&lt;/span&gt; free&lt;span class="o"&gt;)&lt;/span&gt;
+    e   extended &lt;span class="o"&gt;(&lt;/span&gt;container &lt;span class="k"&gt;for&lt;/span&gt; logical partitions&lt;span class="o"&gt;)&lt;/span&gt;
+Select &lt;span class="o"&gt;(&lt;/span&gt;default p&lt;span class="o"&gt;)&lt;/span&gt;: p
+Partition number &lt;span class="o"&gt;(&lt;/span&gt;1-4, default 1&lt;span class="o"&gt;)&lt;/span&gt;:
+First sector &lt;span class="o"&gt;(&lt;/span&gt;2048-1953525167, default 2048&lt;span class="o"&gt;)&lt;/span&gt;:
+Last sector, +sectors or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G,T,P&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;2048-1953525167, default 1953525167&lt;span class="o"&gt;)&lt;/span&gt;: +20G
+
+Created a new partition &lt;span class="m"&gt;1&lt;/span&gt; of &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Linux&amp;#39;&lt;/span&gt; and of size &lt;span class="m"&gt;20&lt;/span&gt; GiB.
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: n
+Partition &lt;span class="nb"&gt;type&lt;/span&gt;
+&lt;span class="nb"&gt;    &lt;/span&gt;p   primary &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; primary, &lt;span class="m"&gt;0&lt;/span&gt; extended, &lt;span class="m"&gt;3&lt;/span&gt; free&lt;span class="o"&gt;)&lt;/span&gt;
+    e   extended &lt;span class="o"&gt;(&lt;/span&gt;container &lt;span class="k"&gt;for&lt;/span&gt; logical partitions&lt;span class="o"&gt;)&lt;/span&gt;
+Select &lt;span class="o"&gt;(&lt;/span&gt;default p&lt;span class="o"&gt;)&lt;/span&gt;: p
+Partition number &lt;span class="o"&gt;(&lt;/span&gt;2-4, default 2&lt;span class="o"&gt;)&lt;/span&gt;:
+First sector &lt;span class="o"&gt;(&lt;/span&gt;41945088-1953525167, default 41945088&lt;span class="o"&gt;)&lt;/span&gt;:
+Last sector, +sectors or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G,T,P&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;41945088-1953525167, default 1953525167&lt;span class="o"&gt;)&lt;/span&gt;: +1G
+
+Created a new partition &lt;span class="m"&gt;2&lt;/span&gt; of &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Linux&amp;#39;&lt;/span&gt; and of size &lt;span class="m"&gt;1&lt;/span&gt; GiB.
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: n
+Partition &lt;span class="nb"&gt;type&lt;/span&gt;
+&lt;span class="nb"&gt;    &lt;/span&gt;p   primary &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt; primary, &lt;span class="m"&gt;0&lt;/span&gt; extended, &lt;span class="m"&gt;2&lt;/span&gt; free&lt;span class="o"&gt;)&lt;/span&gt;
+    e   extended &lt;span class="o"&gt;(&lt;/span&gt;container &lt;span class="k"&gt;for&lt;/span&gt; logical partitions&lt;span class="o"&gt;)&lt;/span&gt;
+Select &lt;span class="o"&gt;(&lt;/span&gt;default p&lt;span class="o"&gt;)&lt;/span&gt;: p
+Partition number &lt;span class="o"&gt;(&lt;/span&gt;3,4, default 3&lt;span class="o"&gt;)&lt;/span&gt;:
+First sector &lt;span class="o"&gt;(&lt;/span&gt;44042240-1953525167, default 44042240&lt;span class="o"&gt;)&lt;/span&gt;:
+Last sector, +sectors or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G,T,P&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;44042240-1953525167, default 1953525167&lt;span class="o"&gt;)&lt;/span&gt;:
+
+Created a new partition &lt;span class="m"&gt;3&lt;/span&gt; of &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Linux&amp;#39;&lt;/span&gt; and of size 910.5 GiB.
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
+Disk /dev/sda: 931.5 GiB, &lt;span class="m"&gt;1000204886016&lt;/span&gt; bytes, &lt;span class="m"&gt;1953525168&lt;/span&gt; sectors
+Units: sectors of &lt;span class="m"&gt;1&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;512&lt;/span&gt; bytes
+Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
+I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
+Disklabel &lt;span class="nb"&gt;type&lt;/span&gt;: dos
+Disk identifier: 0x00000000
+
+Device     Boot    Start        End    Sectors   Size Id Type
+/dev/sda1           &lt;span class="m"&gt;2048&lt;/span&gt;   &lt;span class="m"&gt;41945087&lt;/span&gt;   &lt;span class="m"&gt;41943040&lt;/span&gt;    20G &lt;span class="m"&gt;83&lt;/span&gt; Linux
+/dev/sda2       &lt;span class="m"&gt;41945088&lt;/span&gt;   &lt;span class="m"&gt;44042239&lt;/span&gt;    &lt;span class="m"&gt;2097152&lt;/span&gt;     1G &lt;span class="m"&gt;83&lt;/span&gt; Linux
+/dev/sda3       &lt;span class="m"&gt;44042240&lt;/span&gt; &lt;span class="m"&gt;1953525167&lt;/span&gt; &lt;span class="m"&gt;1909482928&lt;/span&gt; 910.5G &lt;span class="m"&gt;83&lt;/span&gt; Linux
+
+
+Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: w
+The partition table has been altered.
+Calling ioctl&lt;span class="o"&gt;()&lt;/span&gt; to re-read partition table.
+Syncing disks.
+
+&lt;span class="c"&gt;#&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="root"&gt;
+&lt;h2&gt;2. Root&lt;/h2&gt;
+&lt;p&gt;Format the future &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; partition using filesystem &lt;tt class="docutils literal"&gt;ext4&lt;/tt&gt; and mount:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# mke2fs -t ext4 -L rootfs /dev/sda1&lt;/span&gt;
+&lt;span class="c"&gt;# mount -t ext4 /dev/sda1 /mnt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Modify options in &lt;tt class="docutils literal"&gt;/boot/firmware/cmdline.txt&lt;/tt&gt; to point the bootloader to &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; filesystem on the USB device:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Original:
+dwc_otg.lpm_enable&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;console&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ttyAMA0,115200 &lt;span class="nv"&gt;console&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;tty1 &lt;span class="nv"&gt;root&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/mmcblk0p2 rootwait net.ifnames&lt;span class="o"&gt;=&lt;/span&gt;1
+
+Modified:
+dwc_otg.lpm_enable&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;console&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ttyAMA0,115200 &lt;span class="nv"&gt;console&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;tty1 &lt;span class="nv"&gt;root&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sda1 rootwait &lt;span class="nv"&gt;rootdelay&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;5
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Comment out &lt;tt class="docutils literal"&gt;mmcblk0p2&lt;/tt&gt; and point to the new &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; partition in &lt;tt class="docutils literal"&gt;/etc/fstab&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#/dev/mmcblk0p2  / ext4 relatime,errors=remount-ro,discard 0 1&lt;/span&gt;
+/dev/sda1 / ext4 relatime,errors&lt;span class="o"&gt;=&lt;/span&gt;remount-ro &lt;span class="m"&gt;0&lt;/span&gt; 1
+/dev/mmcblk0p1 /boot/firmware vfat defaults &lt;span class="m"&gt;0&lt;/span&gt; 2
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Use &lt;tt class="docutils literal"&gt;rsync&lt;/tt&gt; to duplicate contents of &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; on the microSD &lt;a class="footnote-reference" href="#id4" id="id2"&gt;[2]&lt;/a&gt; to the &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; partition on the USB hard drive:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# apt-get -y install rsync&lt;/span&gt;
+&lt;span class="c"&gt;# rsync --exclude=firmware/* -axv / /mnt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="luks-encryption"&gt;
+&lt;h2&gt;3. LUKS encryption&lt;/h2&gt;
+&lt;p&gt;Root is unencrypted to allow &lt;strong&gt;unattended boots&lt;/strong&gt; of the server (otherwise the Pi would hang waiting for a passphrase that never arrives). A LUKS-encrypted &lt;tt class="docutils literal"&gt;swap&lt;/tt&gt; is added with a &lt;strong&gt;randomly-generated key&lt;/strong&gt; and post-boot I log in and mount a LUKS-encrypted &lt;tt class="docutils literal"&gt;storage&lt;/tt&gt; partition using a passphrase.&lt;/p&gt;
+&lt;div class="section" id="storage"&gt;
+&lt;h3&gt;3.1 Storage&lt;/h3&gt;
+&lt;p&gt;Encrypt the partition, assign a passphrase, and format using filesystem &lt;tt class="docutils literal"&gt;ext4&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# apt-get -y install cryptsetup&lt;/span&gt;
+&lt;span class="c"&gt;# cryptsetup luksFormat /dev/sda3&lt;/span&gt;
+&lt;span class="c"&gt;# cryptsetup luksOpen /dev/sda3 sda3_crypt&lt;/span&gt;
+&lt;span class="c"&gt;# mkfs.ext4 -L storage /dev/mapper/sda3_crypt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Create a mountpoint and mount the partition:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# mkdir /media/sda3_crypt &amp;amp;&amp;amp; mount -t ext4 /dev/mapper/sda3_crypt /media/sda3_crypt/&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Unmounting:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# umount /media/sda3_crypt &amp;amp;&amp;amp; cryptsetup luksClose /dev/mapper/sda3_crypt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="swap"&gt;
+&lt;h3&gt;3.2 Swap&lt;/h3&gt;
+&lt;p&gt;Configure the secure wiping of the swap partition, auto-generation of a new random key, and swap activation at boot:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# echo &amp;quot;sda2_crypt /dev/sda2 /dev/urandom cipher=aes-xts-plain64,size=256,swap&amp;quot; &amp;gt;&amp;gt; /etc/crypttab&lt;/span&gt;
+&lt;span class="c"&gt;# echo &amp;quot;/dev/mapper/sda2_crypt none swap sw 0 0&amp;quot; &amp;gt;&amp;gt; /etc/fstab&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reboot"&gt;
+&lt;h2&gt;4. Reboot&lt;/h2&gt;
+&lt;p&gt;Aaaand reboot!&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Log in and check the new filesystem layout:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root        20G  646M   18G   4% /
+devtmpfs        459M     &lt;span class="m"&gt;0&lt;/span&gt;  459M   0% /dev
+tmpfs           463M     &lt;span class="m"&gt;0&lt;/span&gt;  463M   0% /dev/shm
+tmpfs           463M  340K  463M   1% /run
+tmpfs           5.0M     &lt;span class="m"&gt;0&lt;/span&gt;  5.0M   0% /run/lock
+tmpfs           463M     &lt;span class="m"&gt;0&lt;/span&gt;  463M   0% /sys/fs/cgroup
+/dev/mmcblk0p1  121M  9.7M  112M   9% /boot/firmware
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="static-address"&gt;
+&lt;h2&gt;5. Static Address&lt;/h2&gt;
+&lt;p&gt;Assign a Pi home server a &lt;strong&gt;static network address&lt;/strong&gt;. Sample &lt;tt class="docutils literal"&gt;/etc/network/interfaces&lt;/tt&gt; that disables &lt;tt class="docutils literal"&gt;dhcp&lt;/tt&gt;, sets ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt;, and connects to a router (managing DNS) at &lt;tt class="docutils literal"&gt;192.168.1.1&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;auto eth0
+iface eth0 inet static
+    address 192.168.1.88
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+    dns-nameservers 192.168.1.1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h3&gt;Notes&lt;/h3&gt;
+&lt;table class="docutils footnote" frame="void" id="id3" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.raspberrypi.org/forums/viewtopic.php?f=29&amp;amp;t=44177"&gt;Discussion thread (raspberrypi.org/forums)&lt;/a&gt; about moving root to external USB storage.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id4" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Raspberry Pi requires an SD card to boot and the bootloader expects certain config files to reside on a &lt;tt class="docutils literal"&gt;vfat&lt;/tt&gt; formatted partition. This particular Debian &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;jessie-rpi2-DATE.img&lt;/span&gt;&lt;/tt&gt; installs the necessary files in &lt;tt class="docutils literal"&gt;mmcblk0p1&lt;/tt&gt; and mounts this partition to &lt;tt class="docutils literal"&gt;/boot/firmware&lt;/tt&gt;. You can inspect the image partition layout, contents, and make modifications before installing to a microSD: &lt;a class="reference external" href="https://raspberrypi.stackexchange.com/questions/13137/how-can-i-mount-a-raspberry-pi-linux-distro-image"&gt;How can I mount a Raspberry Pi linux distro image?&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="raspberry pi"></category><category term="debian"></category><category term="linux"></category><category term="luks"></category><category term="crypto"></category><category term="network"></category></entry><entry><title>Debian Jessie on Raspberry Pi 2</title><link href="http://www.circuidipity.com/debian-jessie-raspberry-pi-2.html" rel="alternate"></link><updated>2015-07-25T17:48:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-22:debian-jessie-raspberry-pi-2.html</id><summary type="html">&lt;p&gt;With the move to ARMv7 I am now capable of running the official ARM port of Debian (with Pi-friendly kernel+firmware) on my Raspberry Pi 2!&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Debian developer Sjoerd Simons has created a &lt;a class="reference external" href="http://sjoerd.luon.net/posts/2015/02/debian-jessie-on-rpi2/"&gt;Jessie minimal image&lt;/a&gt; with an updated 3.18 Linux kernel and firmware suitable for Pi 2.&lt;/p&gt;
@@ -46,6 +260,7 @@ tmpfs           463M     &lt;span class="m"&gt;0&lt;/span&gt;  463M   0% /sys/fs
 /dev/mmcblk0p1  121M  9.7M  112M   9% /boot/firmware
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Install image inflates into a 2.8GB partition; using only a fraction of available capacity. I use &lt;tt class="docutils literal"&gt;fdisk&lt;/tt&gt; to repartition the microSD to use all storage and &lt;tt class="docutils literal"&gt;resize2fs&lt;/tt&gt; to &lt;a class="reference external" href="http://www.circuidipity.com/resize-rootfs-raspberry-pi.html"&gt;expand rootfs into its new accomodations&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Alternative: &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html"&gt;Run a Raspberry Pi from USB storage&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="post-install"&gt;
 &lt;h2&gt;3. Post-install&lt;/h2&gt;
@@ -1103,180 +1318,4 @@ parm:           use_chanctx:Enable channel context &lt;span class="k"&gt;for&lt;
 &lt;p&gt;I created a &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/scripts/debian-post-install.sh"&gt;post-install shell script&lt;/a&gt; to configure or upgrade (to &lt;tt class="docutils literal"&gt;testing&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;sid&lt;/tt&gt;) a fresh setup.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="debian"></category><category term="linux"></category><category term="luks"></category><category term="crypto"></category><category term="shell"></category><category term="programming"></category></entry><entry><title>Run a Raspberry Pi 2 from external USB storage using Raspbian</title><link href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html" rel="alternate"></link><updated>2015-07-05T15:53:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-05:run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #0 .:&lt;/a&gt; I am exploring the use of my Pi as &lt;strong&gt;24/7 uptime home server&lt;/strong&gt; and one of the hacks I wish to add is using Pi as a cheap and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;network attached storage (NAS)&lt;/a&gt; device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi rootfs and run it from there as well?&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;I imagine a 24/7 uptime Pi enjoys more storage and robust performance operating from hard drive storage vs a microSD card. &lt;a class="footnote-reference" href="#id5" id="id1"&gt;[1]&lt;/a&gt; I put my plan in motion using:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Raspberry Pi 2 Model B&lt;/li&gt;
-&lt;li&gt;5V 2A microUSB power adapter&lt;/li&gt;
-&lt;li&gt;8GB microSD card (for initial setup and &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt; partition) &lt;a class="footnote-reference" href="#id6" id="id2"&gt;[2]&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;1TB powered USB hard drive&lt;/li&gt;
-&lt;li&gt;ethernet cable&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst"&gt;raspbian-ua-netinst&lt;/a&gt; &lt;a class="footnote-reference" href="#id7" id="id3"&gt;[3]&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Setup a minimal &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspbian.html"&gt;Raspbian&lt;/a&gt; configuration using the latest packages drawn from &lt;a class="reference external" href="http://www.circuidipity.com/tag-debian.html"&gt;Debian&lt;/a&gt; &lt;tt class="docutils literal"&gt;jessie/stable&lt;/tt&gt;  with &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;raspbian-ua-netinst&lt;/span&gt;&lt;/tt&gt;. The netinstaller runs unattended (no display/keyboard required) with the option of installing rootfs to external USB storage. Upon completion the Pi reboots with DHCP and OpenSSH for remote access.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="prepare-the-microsd"&gt;
-&lt;h2&gt;0. Prepare the microSD&lt;/h2&gt;
-&lt;p&gt;MicroSD card is prepared on a host running Debian. &lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst/releases/"&gt;Download&lt;/a&gt; the latest &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;raspbian-ua-netinst-vX.X.X.img.xz&lt;/span&gt;&lt;/tt&gt; and flash image to the card (example &lt;tt class="docutils literal"&gt;sdX&lt;/tt&gt;):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# apt-get install xz-utils&lt;/span&gt;
-&lt;span class="c"&gt;# xzcat /path/to/raspbian-ua-netinst-&amp;lt;latest-version-number&amp;gt;.img.xz &amp;gt; /dev/sdX &amp;amp;&amp;amp; sync&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="customize-the-install"&gt;
-&lt;h2&gt;1. Customize the install&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst#installer-customization"&gt;Default settings&lt;/a&gt; for the netinstaller are customized by creating &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;installer-config.txt&lt;/span&gt;&lt;/tt&gt; in the root directory of the newly-prepared microSD. Remove card, re-insert, mount &lt;tt class="docutils literal"&gt;sdX1&lt;/tt&gt;, add the config.&lt;/p&gt;
-&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; Netinstaller reformats drive and installs rootfs to &lt;tt class="docutils literal"&gt;sda1&lt;/tt&gt;. Omit if you want a single partition that fills the entire drive (vs separate &lt;tt class="docutils literal"&gt;home&lt;/tt&gt; partition I create later on). Either way... &lt;strong&gt;all data will be wiped from the drive&lt;/strong&gt;. Make any backups you need to make.&lt;/p&gt;
-&lt;p&gt;Add only the settings to be changed from their defaults. Example that creates a 256MB &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt; on the microSD and 24GB &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; on the USB:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;packages&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;vim,tmux
-&lt;span class="nv"&gt;hostname&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;MyHostname
-&lt;span class="nv"&gt;bootsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;+256M
-&lt;span class="nv"&gt;rootsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;+24000M
-&lt;span class="nv"&gt;usbroot&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;A second &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;post-install.txt&lt;/span&gt;&lt;/tt&gt; shell script can also be created alongside &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;installer-config.txt&lt;/span&gt;&lt;/tt&gt; that will run after installation is complete but before the Pi reboots.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="install-and-configure"&gt;
-&lt;h2&gt;2. Install and configure&lt;/h2&gt;
-&lt;p&gt;I connect the 1TB hard drive to Pi, insert microSD, and power up. Netinstaller typically runs under 15 minutes to setup a base configuration before rebooting the Pi.&lt;/p&gt;
-&lt;p&gt;SSH into the newly-configured Pi (default &lt;tt class="docutils literal"&gt;login: root&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;password: raspbian&lt;/tt&gt;). Details of the install are logged in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/var/log/raspbian-ua-netinst.log&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Configure: &lt;a class="footnote-reference" href="#id8" id="id4"&gt;[4]&lt;/a&gt;&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;a new root password: &lt;tt class="docutils literal"&gt;passwd&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;default locale: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dpkg-reconfigure&lt;/span&gt; locales&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;timezone: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dpkg-reconfigure&lt;/span&gt; tzdata&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;create 1GB swap file: &lt;tt class="docutils literal"&gt;dd &lt;span class="pre"&gt;if=/dev/zero&lt;/span&gt; &lt;span class="pre"&gt;of=/swap&lt;/span&gt; bs=1M count=1024 &amp;amp;&amp;amp; mkswap /swap&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;enable swap file at boot: &lt;tt class="docutils literal"&gt;echo &amp;quot;/swap none swap sw 0 0&amp;quot; &amp;gt;&amp;gt; /etc/fstab&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;hardware random number generator: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-get&lt;/span&gt; &lt;span class="pre"&gt;-y&lt;/span&gt; install &lt;span class="pre"&gt;rng-tools&lt;/span&gt; &amp;amp;&amp;amp; echo &lt;span class="pre"&gt;&amp;quot;bcm2708-rng&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/modules&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;add new user: &lt;tt class="docutils literal"&gt;adduser USERNAME&lt;/tt&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="upgrade"&gt;
-&lt;h2&gt;3. Upgrade&lt;/h2&gt;
-&lt;p&gt;Stable release of Raspbian (2015-07-03) is currently built on older Debian &lt;tt class="docutils literal"&gt;wheezy&lt;/tt&gt; packages. Upgrade to the &lt;tt class="docutils literal"&gt;jessie/stable&lt;/tt&gt; branch by first modifying &lt;tt class="docutils literal"&gt;/etc/apt/sources.list&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# cp /etc/apt/sources.list /etc/apt/sources.list.bak&lt;/span&gt;
-&lt;span class="c"&gt;# echo &amp;quot;deb http://mirrordirector.raspbian.org/raspbian jessie main contrib non-free firmware rpi&amp;quot; &amp;gt; /etc/apt/sources.list&lt;/span&gt;
-&lt;span class="c"&gt;# echo &amp;quot;deb http://archive.raspbian.org/raspbian jessie main&amp;quot; &amp;gt;&amp;gt; /etc/apt/sources.list&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Update the package lists and upgrade:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# apt-get update &amp;amp;&amp;amp; apt-get -y dist-upgrade &amp;amp;&amp;amp; apt-get -y autoremove&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reboot.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="partition-external-usb-drive"&gt;
-&lt;h2&gt;4. Partition external USB drive&lt;/h2&gt;
-&lt;p&gt;Device is &lt;tt class="docutils literal"&gt;sda&lt;/tt&gt;. Use &lt;strong&gt;fdisk&lt;/strong&gt; to create a new partition for &lt;tt class="docutils literal"&gt;home&lt;/tt&gt; on the USB:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;sda1 - 24GB - &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; - created by &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;raspbian-ua-netinst&lt;/span&gt;&lt;/tt&gt; using &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;installer-config.txt&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;sda2 - remaining space - &lt;tt class="docutils literal"&gt;home&lt;/tt&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# fdisk /dev/sda&lt;/span&gt;
-
-Welcome to fdisk &lt;span class="o"&gt;(&lt;/span&gt;util-linux 2.25.2&lt;span class="o"&gt;)&lt;/span&gt;.
-Changes will remain in memory only, &lt;span class="k"&gt;until&lt;/span&gt; you decide to write them.
-Be careful before using the write command.
-
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
-Disk /dev/sda: 931.5 GiB, &lt;span class="m"&gt;1000204886016&lt;/span&gt; bytes, &lt;span class="m"&gt;1953525168&lt;/span&gt; sectors
-Units: sectors of &lt;span class="m"&gt;1&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Disklabel &lt;span class="nb"&gt;type&lt;/span&gt;: dos
-Disk identifier: 0x00000000
-
-Device     Boot Start      End  Sectors  Size Id Type
-/dev/sda1          &lt;span class="m"&gt;63&lt;/span&gt; &lt;span class="m"&gt;46893734&lt;/span&gt; &lt;span class="m"&gt;46893672&lt;/span&gt; 22.4G &lt;span class="m"&gt;83&lt;/span&gt; Linux
-
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: n
-Partition &lt;span class="nb"&gt;type&lt;/span&gt;
-&lt;span class="nb"&gt;    &lt;/span&gt;p   primary &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; primary, &lt;span class="m"&gt;0&lt;/span&gt; extended, &lt;span class="m"&gt;3&lt;/span&gt; free&lt;span class="o"&gt;)&lt;/span&gt;
-    e   extended &lt;span class="o"&gt;(&lt;/span&gt;container &lt;span class="k"&gt;for&lt;/span&gt; logical partitions&lt;span class="o"&gt;)&lt;/span&gt;
-Select &lt;span class="o"&gt;(&lt;/span&gt;default p&lt;span class="o"&gt;)&lt;/span&gt;: p
-Partition number &lt;span class="o"&gt;(&lt;/span&gt;2-4, default 2&lt;span class="o"&gt;)&lt;/span&gt;:
-First sector &lt;span class="o"&gt;(&lt;/span&gt;46893735-1953525167, default 46895104&lt;span class="o"&gt;)&lt;/span&gt;:
-Last sector, +sectors or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G,T,P&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;46895104-1953525167, default 1953525167&lt;span class="o"&gt;)&lt;/span&gt;:
-
-Created a new partition &lt;span class="m"&gt;2&lt;/span&gt; of &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Linux&amp;#39;&lt;/span&gt; and of size 909.2 GiB.
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
-Disk /dev/sda: 931.5 GiB, &lt;span class="m"&gt;1000204886016&lt;/span&gt; bytes, &lt;span class="m"&gt;1953525168&lt;/span&gt; sectors
-Units: sectors of &lt;span class="m"&gt;1&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Disklabel &lt;span class="nb"&gt;type&lt;/span&gt;: dos
-Disk identifier: 0x00000000
-
-Device     Boot    Start        End    Sectors   Size Id Type
-/dev/sda1             &lt;span class="m"&gt;63&lt;/span&gt;   &lt;span class="m"&gt;46893734&lt;/span&gt;   &lt;span class="m"&gt;46893672&lt;/span&gt;  22.4G &lt;span class="m"&gt;83&lt;/span&gt; Linux
-/dev/sda2       &lt;span class="m"&gt;46895104&lt;/span&gt; &lt;span class="m"&gt;1953525167&lt;/span&gt; &lt;span class="m"&gt;1906630064&lt;/span&gt; 909.2G &lt;span class="m"&gt;83&lt;/span&gt; Linux
-
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: w
-The partition table has been altered.
-Calling ioctl&lt;span class="o"&gt;()&lt;/span&gt; to re-read partition table.
-Re-reading the partition table failed.: Device or resource busy
-
-The kernel still uses the old table. The new table will be used at the next reboot or after you run partprobe&lt;span class="o"&gt;(&lt;/span&gt;8&lt;span class="o"&gt;)&lt;/span&gt; or kpartx&lt;span class="o"&gt;(&lt;/span&gt;8&lt;span class="o"&gt;)&lt;/span&gt;.
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reboot.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="move-home"&gt;
-&lt;h2&gt;5. Move home&lt;/h2&gt;
-&lt;p&gt;Format new partition using &lt;tt class="docutils literal"&gt;ext4&lt;/tt&gt; filesystem:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# mkfs.ext4 -E lazy_itable_init=0,lazy_journal_init=0 /dev/sda2&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Mount partition and move over any contents in &lt;tt class="docutils literal"&gt;/home&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# mount -t ext4 /dev/sda2 /mnt &amp;amp;&amp;amp; mv /home/* /mnt/ &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; umount /mnt&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Configure &lt;tt class="docutils literal"&gt;fstab&lt;/tt&gt; and mount new location of &lt;tt class="docutils literal"&gt;home&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# echo &amp;quot;/dev/sda2 /home ext4 noatime 0 2&amp;quot; &amp;gt;&amp;gt; /etc/fstab &amp;amp;&amp;amp; mount /home&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="static-address"&gt;
-&lt;h2&gt;6. Static address&lt;/h2&gt;
-&lt;p&gt;A Raspberry Pi that is going to stay home and run as a server can be configured to use a &lt;strong&gt;static network address&lt;/strong&gt;. Sample &lt;tt class="docutils literal"&gt;/etc/network/interfaces&lt;/tt&gt; modification that disables &lt;tt class="docutils literal"&gt;dhcp&lt;/tt&gt; and sets ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt; and connects to a router (that handles DNS) at &lt;tt class="docutils literal"&gt;192.168.1.1&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#iface eth0 inet dhcp&lt;/span&gt;
-auto eth0
-iface eth0 inet static
-    address 192.168.1.88
-    netmask 255.255.255.0
-    gateway 192.168.1.1
-    dns-nameservers 192.168.1.1
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="openssh"&gt;
-&lt;h2&gt;7. OpenSSH&lt;/h2&gt;
-&lt;p&gt;Secure access to remote servers &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;using SSH keys&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h3&gt;Notes&lt;/h3&gt;
-&lt;table class="docutils footnote" frame="void" id="id5" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.raspberrypi.org/forums/viewtopic.php?f=29&amp;amp;t=44177"&gt;Discussion thread&lt;/a&gt; about moving root to external USB storage.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table class="docutils footnote" frame="void" id="id6" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Pi 2 requires microSD card at boot so we continue using original &lt;tt class="docutils literal"&gt;/boot&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table class="docutils footnote" frame="void" id="id7" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id3"&gt;[3]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html"&gt;Version 1&lt;/a&gt; of HOWTO used Raspbian on a Raspberry Pi Model B. With the Pi 2 moving to ARMv7 I used a &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html"&gt;minimal Ubuntu 14.04&lt;/a&gt; installer for Version 2.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table class="docutils footnote" frame="void" id="id8" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id4"&gt;[4]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;I created a &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/scripts/raspbian-post-install.sh"&gt;post-install script&lt;/a&gt; for configuring the base install and upgrading to &lt;tt class="docutils literal"&gt;jessie&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</summary><category term="raspberry pi"></category><category term="raspbian"></category><category term="debian"></category><category term="linux"></category><category term="network"></category></entry></feed>
+</summary><category term="debian"></category><category term="linux"></category><category term="luks"></category><category term="crypto"></category><category term="shell"></category><category term="programming"></category></entry></feed>

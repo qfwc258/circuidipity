@@ -25,6 +25,7 @@
 
 <!-- article -->
 <h1>Debian Jessie on Raspberry Pi 2</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Saturday 25 July 2015</p>
 <div id="article">
     <p>With the move to ARMv7 I am now capable of running the official ARM port of Debian (with Pi-friendly kernel+firmware) on my Raspberry Pi 2!</p>
 <div class="section" id="let-s-go">
@@ -73,6 +74,7 @@ tmpfs           463M     <span class="m">0</span>  463M   0% /sys/fs/cgroup
 /dev/mmcblk0p1  121M  9.7M  112M   9% /boot/firmware
 </pre></div>
 <p>Install image inflates into a 2.8GB partition; using only a fraction of available capacity. I use <tt class="docutils literal">fdisk</tt> to repartition the microSD to use all storage and <tt class="docutils literal">resize2fs</tt> to <a class="reference external" href="http://www.circuidipity.com/resize-rootfs-raspberry-pi.html">expand rootfs into its new accomodations</a>!</p>
+<p>Alternative: <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html">Run a Raspberry Pi from USB storage</a></p>
 </div>
 <div class="section" id="post-install">
 <h2>3. Post-install</h2>
@@ -154,6 +156,8 @@ flash-kernel:
     <hr />
     <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
         <a href="http://www.circuidipity.com/resize-rootfs-raspberry-pi.html">Resize rootfs on Raspberry Pi</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html">Run a Raspberry Pi from USB storage v4.0</a></p>
 </div>
 
 
