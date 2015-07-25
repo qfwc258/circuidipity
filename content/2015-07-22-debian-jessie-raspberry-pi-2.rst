@@ -5,6 +5,7 @@ Debian Jessie on Raspberry Pi 2
 :date: 2015-07-22 13:48:00
 :slug: debian-jessie-raspberry-pi-2
 :tags: debian, linux, raspberry pi
+:modified: 2015-07-25 17:48:00
 
 With the move to ARMv7 I am now capable of running the official ARM port of Debian (with Pi-friendly kernel+firmware) on my Raspberry Pi 2! 
 
@@ -70,6 +71,8 @@ Filesystem layout [1]_ on the microSD card:
     /dev/mmcblk0p1  121M  9.7M  112M   9% /boot/firmware 
 
 Install image inflates into a 2.8GB partition; using only a fraction of available capacity. I use ``fdisk`` to repartition the microSD to use all storage and ``resize2fs`` to `expand rootfs into its new accomodations <http://www.circuidipity.com/resize-rootfs-raspberry-pi.html>`_!
+
+Alternative: `Run a Raspberry Pi from USB storage <http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html>`_
 
 3. Post-install
 ===============
