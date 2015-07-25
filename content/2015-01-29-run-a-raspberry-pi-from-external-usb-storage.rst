@@ -5,7 +5,7 @@ Run a Raspberry Pi from USB storage v1.0
 :date: 2015-01-29 01:05:00
 :slug: run-a-raspberry-pi-from-external-usb-storage
 :tags: raspberry pi, raspbian, debian, linux, network
-:modified: 2015-07-24 14:09:00
+:modified: 2015-07-25 17:59:00
 
 **Update:** Home server now upgraded to **Raspberry Pi 2** running `Debian Jessie <http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html>`_.
 
