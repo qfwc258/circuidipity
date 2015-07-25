@@ -3,9 +3,9 @@ There's no place like [a Raspberry Pi] Home [Server]
 ====================================================
 
 :slug: raspberry-pi-home-server
-:tags: raspberry pi, network, raspbian, debian, linux
+:tags: raspberry pi, network, debian, linux
 :template: article-project
-:modified: 2015-07-05 14:57:00
+:modified: 2015-07-25 17:57:00
 
 .. image:: images/raspberry-pi-home-server.png
     :align: right
@@ -18,8 +18,8 @@ Running your own **Linux home server** is a fun learning experience about how ne
 Let's go!
 =========
 
-0. `Host rootfs on external USB storage <http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html>`_
-------------------------------------------------------------------------------------------------------------------------------------------
+0. `Host rootfs on external USB storage <http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html>`_
+--------------------------------------------------------------------------------------------------------
 
 24/7 uptime Pi enjoys more storage and robust performance operating from hard drive storage.
 
