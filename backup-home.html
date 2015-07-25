@@ -25,13 +25,13 @@
 
 <!-- article -->
 <h1>Backup home</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 05 July 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Saturday 25 July 2015</p>
 <div id="article">
     <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #3 .:</a> Make <strong>automatic backups</strong> of a home folder using a dash of shell scripting + rsync + SSH + cron!</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
 <p>One of the advantages of setting up a <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Linux home server</a> is providing a 24/7 uptime location to store backups of important files. A little peace of mind can be gained in a few steps as I describe the simple backup solution I use to automatically mirror my laptop's home folder over the local area network (LAN).</p>
-<p><strong>Server</strong> is a <a class="reference external" href="http://www.circuidipity.com/tag-raspberry-pi.html">Raspberry Pi 2</a> (example: <tt class="docutils literal">login:pi/ip_address:192.168.1.88</tt>) connected to a <a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html">1TB USB hard drive</a> running <a class="reference external" href="http://www.circuidipity.com/tag-raspbian.html">Raspbian</a>.</p>
+<p><strong>Server</strong> is a <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html">Raspberry Pi 2</a> (example: <tt class="docutils literal">login:pi/ip_address:192.168.1.88</tt>) connected to a <a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html">1TB USB hard drive</a> running <strong>Debian</strong>.</p>
 </div>
 <div class="section" id="ssh">
 <h2>0. SSH</h2>
@@ -103,7 +103,6 @@ rsync <span class="nv">$rsync_options</span> <span class="nv">$rsync_exclude</sp
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ssh.html">ssh</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-crypto.html">crypto</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-raspbian.html">raspbian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
