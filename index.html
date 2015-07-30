@@ -38,38 +38,29 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
         <p class="published"> Thursday 30 July 2015</p>
         <h1><a href="http://www.circuidipity.com/raspberry-pi-ram-irqbalance.html">Raspberry Pi RAM gobbled up by irqbalance</a></h1>
         <p><strong>Problem:</strong> After a few days uptime my Pi sees hundreds of MB gobbled up by the <tt class="docutils literal">irqbalance</tt> daemon (which balances interrupts across multiple CPUs). Package version is <tt class="docutils literal"><span class="pre">1.0.6-3</span></tt> on Debian <tt class="docutils literal">jessie/armhf</tt> (same version also in <tt class="docutils literal">sid</tt>) and its a <a class="reference external" href="https://bugs.launchpad.net/ubuntu/+source/irqbalance/+bug/1247107">known bug</a>.</p>
-<p><strong>Fix:</strong> 0. Restart <tt class="docutils literal">irqbalance</tt> in nightly cron job;</p>
-<ol class="arabic simple">
-<li>Compile and install a newer, patched version (my choice)...</li>
-</ol>
+<p><strong>Fix:</strong></p>
 <ul class="simple">
-<li>Install development tools on the Pi:</li>
+<li>Restart <tt class="docutils literal">irqbalance</tt> in nightly cron job, or...</li>
+<li>Compile and install a newer, patched version (my choice)</li>
 </ul>
+<p>Install development tools on the Pi:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install build-essential autogen automake libtool pkg-config checkinstall
 </pre></div>
-<ul class="simple">
-<li><a class="reference external" href="https://github.com/Irqbalance/irqbalance">Download source</a> and unpack:</li>
-</ul>
+<p><a class="reference external" href="https://github.com/Irqbalance/irqbalance">Download source</a> and unpack:</p>
 <div class="highlight"><pre><span class="nv">$ </span>wget https://github.com/Irqbalance/irqbalance/archive/v1.0.9.tar.gz <span class="o">&amp;&amp;</span> tar xvzf v1.0.9.tar.gz
 </pre></div>
-<ul class="simple">
-<li>Remove buggy <tt class="docutils literal">irqbalance</tt>:</li>
-</ul>
+<p>Remove buggy <tt class="docutils literal">irqbalance</tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo systemctl stop irqbalance
 <span class="nv">$ </span>sudo apt-get --purge remove irqbalance
 </pre></div>
-<ul class="simple">
-<li><strong>Checkinstall</strong> is an easy way to make Debian packages (for localhost). Compile and (check)install:</li>
-</ul>
+<p><strong>Checkinstall</strong> is an easy way to make Debian packages (for localhost). Compile and (check)install:</p>
 <div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>irqbalance-1.0.9
 <span class="nv">$ </span>/autogen.sh
 <span class="nv">$ </span>./configure
 <span class="nv">$ </span>make
 <span class="nv">$ </span>sudo checkinstall make install
 </pre></div>
-<ul class="simple">
-<li>Start new <tt class="docutils literal">irqbalance</tt>:</li>
-</ul>
+<p>Start new <tt class="docutils literal">irqbalance</tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo /usr/local/sbin/irqbalance <span class="p">&amp;</span>
 </pre></div>
 <p>I have been running the daemon for a few days now and it stays around 0.6% memory usage vs <strong>20%</strong> (and growing) of the previous packaged version.</p>

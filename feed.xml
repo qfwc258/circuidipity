@@ -1,37 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-07-30T14:28:00-04:00</updated><entry><title>Raspberry Pi RAM gobbled up by irqbalance</title><link href="http://www.circuidipity.com/raspberry-pi-ram-irqbalance.html" rel="alternate"></link><updated>2015-07-30T14:28:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-30:raspberry-pi-ram-irqbalance.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Problem:&lt;/strong&gt; After a few days uptime my Pi sees hundreds of MB gobbled up by the &lt;tt class="docutils literal"&gt;irqbalance&lt;/tt&gt; daemon (which balances interrupts across multiple CPUs). Package version is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;1.0.6-3&lt;/span&gt;&lt;/tt&gt; on Debian &lt;tt class="docutils literal"&gt;jessie/armhf&lt;/tt&gt; (same version also in &lt;tt class="docutils literal"&gt;sid&lt;/tt&gt;) and its a &lt;a class="reference external" href="https://bugs.launchpad.net/ubuntu/+source/irqbalance/+bug/1247107"&gt;known bug&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; 0. Restart &lt;tt class="docutils literal"&gt;irqbalance&lt;/tt&gt; in nightly cron job;&lt;/p&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;Compile and install a newer, patched version (my choice)...&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt;&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;Install development tools on the Pi:&lt;/li&gt;
+&lt;li&gt;Restart &lt;tt class="docutils literal"&gt;irqbalance&lt;/tt&gt; in nightly cron job, or...&lt;/li&gt;
+&lt;li&gt;Compile and install a newer, patched version (my choice)&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;Install development tools on the Pi:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install build-essential autogen automake libtool pkg-config checkinstall
 &lt;/pre&gt;&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://github.com/Irqbalance/irqbalance"&gt;Download source&lt;/a&gt; and unpack:&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/Irqbalance/irqbalance"&gt;Download source&lt;/a&gt; and unpack:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;wget https://github.com/Irqbalance/irqbalance/archive/v1.0.9.tar.gz &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; tar xvzf v1.0.9.tar.gz
 &lt;/pre&gt;&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Remove buggy &lt;tt class="docutils literal"&gt;irqbalance&lt;/tt&gt;:&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Remove buggy &lt;tt class="docutils literal"&gt;irqbalance&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo systemctl stop irqbalance
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get --purge remove irqbalance
 &lt;/pre&gt;&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;strong&gt;Checkinstall&lt;/strong&gt; is an easy way to make Debian packages (for localhost). Compile and (check)install:&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Checkinstall&lt;/strong&gt; is an easy way to make Debian packages (for localhost). Compile and (check)install:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;irqbalance-1.0.9
 &lt;span class="nv"&gt;$ &lt;/span&gt;/autogen.sh
 &lt;span class="nv"&gt;$ &lt;/span&gt;./configure
 &lt;span class="nv"&gt;$ &lt;/span&gt;make
 &lt;span class="nv"&gt;$ &lt;/span&gt;sudo checkinstall make install
 &lt;/pre&gt;&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Start new &lt;tt class="docutils literal"&gt;irqbalance&lt;/tt&gt;:&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Start new &lt;tt class="docutils literal"&gt;irqbalance&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo /usr/local/sbin/irqbalance &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I have been running the daemon for a few days now and it stays around 0.6% memory usage vs &lt;strong&gt;20%&lt;/strong&gt; (and growing) of the previous packaged version.&lt;/p&gt;
