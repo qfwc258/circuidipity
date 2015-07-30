@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Daniel Wayne Armstrong</title>
+        <title>Circuidipity | Raspberry Pi RAM gobbled up by irqbalance</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -16,28 +16,17 @@
 <body>
         <!-- content -->
 
-<!-- greeting -->
-<div id="siteheader">
-        <img class="whoami" src="/theme/images/whoami.png" />
-    <div id="sitegreeting">
-<p><span class="whoa">Howdy!</span><br />
-My name is <span class="noWrap"><span class="whoa">Daniel Wayne Armstrong</span></span>.
-I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    </div>
-<!-- menu -->
-    <div id="sitemenu">
-<p><a href="archives.html">Archives</a>
-&nbsp;<a href="projects.html">Projects</a>
-&nbsp;<a href="/colophon.html">Colophon</a>
-&nbsp;<a href="feed.xml"><i class="fa fa-rss"></i></a>
-&nbsp;<a href="https://twitter.com/circuidipity"><i class="fa fa-twitter"></i></a>
-&nbsp;<a href="https://github.com/vonbrownie"><i class="fa fa-github-alt"></i></a></p>    </div>
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Thursday 30 July 2015</p>
 </div>
 
-<!-- latest post -->
-<div id="latestpost">
-        <p class="published"> Thursday 30 July 2015</p>
-        <h1><a href="http://www.circuidipity.com/raspberry-pi-ram-irqbalance.html">Raspberry Pi RAM gobbled up by irqbalance</a></h1>
-        <p><strong>Problem:</strong> After a few days uptime my Pi sees hundreds of MB gobbled up by the <tt class="docutils literal">irqbalance</tt> daemon (which balances interrupts across multiple CPUs). Package version is <tt class="docutils literal"><span class="pre">1.0.6-3</span></tt> on Debian <tt class="docutils literal">jessie/armhf</tt> (same version also in <tt class="docutils literal">sid</tt>) and its a <a class="reference external" href="https://bugs.launchpad.net/ubuntu/+source/irqbalance/+bug/1247107">known bug</a>.</p>
+<!-- article -->
+<h1>Raspberry Pi RAM gobbled up by irqbalance</h1>
+<div id="article">
+    <p><strong>Problem:</strong> After a few days uptime my Pi sees hundreds of MB gobbled up by the <tt class="docutils literal">irqbalance</tt> daemon (which balances interrupts across multiple CPUs). Package version is <tt class="docutils literal"><span class="pre">1.0.6-3</span></tt> on Debian <tt class="docutils literal">jessie/armhf</tt> (same version also in <tt class="docutils literal">sid</tt>) and its a <a class="reference external" href="https://bugs.launchpad.net/ubuntu/+source/irqbalance/+bug/1247107">known bug</a>.</p>
 <p><strong>Fix:</strong> 0) Could restart <tt class="docutils literal">irqbalance</tt> in nightly cron job;</p>
 <ol class="arabic simple">
 <li>Compile and install a newer, patched version (my choice)...</li>
@@ -75,13 +64,17 @@ I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    
 <p>I have been running the daemon for a few days now and it stays around 0.6% memory usage vs <strong>20%</strong> (and growing) of the previous packaged version.</p>
 <p>Happy hacking!</p>
 
-        <!-- Nav links to previous|next article --> 
-        <div id="navmenu">
-            <hr />
-            <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-                <a href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html">
-                Run a Raspberry Pi from USB storage v4.0</a></p>
-        </div>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-raspberry-pi.html">raspberry pi</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html">Run a Raspberry Pi from USB storage v4.0</a></p>
 </div>
 
 
