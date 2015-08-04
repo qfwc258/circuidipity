@@ -25,6 +25,7 @@
 
 <!-- article -->
 <h1>Raspberry Pi RAM gobbled up by irqbalance</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Tuesday 04 August 2015</p>
 <div id="article">
     <p><strong>Problem:</strong> After a few days uptime my Pi sees hundreds of MB gobbled up by the <tt class="docutils literal">irqbalance</tt> daemon (which balances interrupts across multiple CPUs). Package version is <tt class="docutils literal"><span class="pre">1.0.6-3</span></tt> on Debian <tt class="docutils literal">jessie/armhf</tt> and its a <a class="reference external" href="https://bugs.launchpad.net/ubuntu/+source/irqbalance/+bug/1247107">known bug</a>.</p>
 <p><strong>Fix:</strong> <strong>0)</strong> Restart <tt class="docutils literal">irqbalance</tt> in nightly cron job, or <strong>1)</strong> Compile and install a newer, patched version (my choice).</p>
@@ -48,6 +49,7 @@
 <p>Start new <tt class="docutils literal">irqbalance</tt>:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo /usr/local/sbin/irqbalance <span class="p">&amp;</span>
 </pre></div>
+<p>Optional: Configure the daemon for <a class="reference external" href="http://www.circuidipity.com/writing-systemd-service-files.html">systemd control and auto-start at boot</a>.</p>
 <p>I have been running the daemon for a few days now and it stays around 0.6% memory usage vs <strong>20%</strong> (and growing) of the previous packaged version.</p>
 <p>Happy hacking!</p>
 
@@ -62,6 +64,8 @@
     <hr />
     <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
         <a href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html">Run a Raspberry Pi from USB storage v4.0</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/writing-systemd-service-files.html">Writing systemd service files</a></p>
 </div>
 
 
