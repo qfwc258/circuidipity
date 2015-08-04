@@ -5,6 +5,7 @@ Raspberry Pi RAM gobbled up by irqbalance
 :date: 2015-07-30 14:50:00
 :slug: raspberry-pi-ram-irqbalance
 :tags: raspberry pi, debian, linux
+:modified: 2015-08-04 16:34
 
 **Problem:** After a few days uptime my Pi sees hundreds of MB gobbled up by the ``irqbalance`` daemon (which balances interrupts across multiple CPUs). Package version is ``1.0.6-3`` on Debian ``jessie/armhf`` and its a `known bug <https://bugs.launchpad.net/ubuntu/+source/irqbalance/+bug/1247107>`_.
 
@@ -44,6 +45,8 @@ Start new ``irqbalance``:
 .. code-block:: bash
 
     $ sudo /usr/local/sbin/irqbalance &
+
+Optional: Configure the daemon for `systemd control and auto-start at boot <http://www.circuidipity.com/writing-systemd-service-files.html>`_.
 
 I have been running the daemon for a few days now and it stays around 0.6% memory usage vs **20%** (and growing) of the previous packaged version.
 
