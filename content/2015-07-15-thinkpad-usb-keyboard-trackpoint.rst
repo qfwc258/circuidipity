@@ -65,7 +65,7 @@ Modify ``~/.xinitrc`` to load keymap at ``startx``:
 
     xmodmap ~/.xmodmap && xset r 66                                   
 
-Sources: `.xmodmap.usb-thinkpad <https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.usb-thinkpad>`_, `.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_
+Sources: `.xmodmap <https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap>`_, `.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_
 
 1. Multimedia keys and xbindkeys
 ================================
@@ -106,7 +106,7 @@ I create a `standalone script <http://www.circuidipity.com/pavolume.html>`_ to c
 
 Add command ``xbindkeys`` to ``~/.xinitrc`` to load the new configuration at ``startx``.
 
-Sources: `.xbindkeysrc.usb-thinkpad <https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.usb-thinkpad>`_, `paVolume <https://github.com/vonbrownie/homebin/blob/master/paVolume>`_
+Sources: `.xbindkeysrc <https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc>`_, `paVolume <https://github.com/vonbrownie/homebin/blob/master/paVolume>`_
 
 2. TrackPoint
 =============

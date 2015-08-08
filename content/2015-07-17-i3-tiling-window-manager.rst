@@ -34,13 +34,13 @@ At launch I have configured i3 to run a script to detect/setup a second display 
 .. code-block:: bash
 
     # Auto-start
-    exec_always --no-startup-id $HOME/bin/dlDsply
-    exec --no-startup-id $HOME/bin/startxX
+    exec_always --no-startup-id $HOME/bin/dldsply
+    exec --no-startup-id $HOME/bin/startX
     # Start a terminal
     #bindsym $mod+Return exec i3-sensible-terminal
     bindsym $mod+Return exec urxvt
 
-Sources: `.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_, `dlDsply <https://github.com/vonbrownie/homebin/blob/master/dldsply>`_, `startxX <https://github.com/vonbrownie/homebin/blob/master/startxX>`_
+Sources: `.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_, `dldsply <https://github.com/vonbrownie/homebin/blob/master/dldsply>`_, `startX <https://github.com/vonbrownie/homebin/blob/master/startX>`_
 
 Containers
 ==========

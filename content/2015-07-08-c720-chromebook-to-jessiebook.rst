@@ -6,7 +6,7 @@ Chromebook to Jessiebook
 :slug: c720-chromebook-to-jessiebook
 :template: article-project
 :tags: acer, chromebook, debian, linux
-:modified: 2015-07-10 00:01:00
+:modified: 2015-08-07 20:38:00
 
 Replace **Chrome OS** permanently with **Debian** on the **Acer C720 Chromebook**.
 
@@ -346,7 +346,7 @@ Enable new key shortcuts:
 
 Place ``xbindkeys`` in ``~/.xinitrc`` to load configuration at ``startx``. [10]_
 
-Source: `.xbindkeysrc.chromebook <https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook>`_ and `.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_
+Sources: `.xbindkeysrc <https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc>`_ and `.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_
 
 7.2 Power Key
 -------------
