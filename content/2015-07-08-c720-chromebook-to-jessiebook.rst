@@ -5,8 +5,8 @@ Chromebook to Jessiebook
 :date: 2015-07-08 10:45:00
 :slug: c720-chromebook-to-jessiebook
 :template: article-project
-:tags: acer, chromebook, debian, linux
-:modified: 2015-08-07 20:38:00
+:tags: chromebook, debian, linux
+:modified: 2015-08-10 15:07:00
 
 Replace **Chrome OS** permanently with **Debian** on the **Acer C720 Chromebook**.
 
@@ -388,6 +388,7 @@ Source: `ath9k.conf <https://github.com/vonbrownie/linux-post-install/blob/maste
 * Arch Linux C720 installation with useful `post-install details <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook>`_
 * Turn Chromebooks into `Ubuntu-based code learning machines for kids <http://blog.codestarter.org/how-we-turn-199-chromebooks-into-ubuntu-based/>`_
 * My earlier install and configuration of `Lubuntu 14.04 LTS <http://www.circuidipity.com/c720-lubuntubook.html>`_ under ``upstart`` (vs ``systemd`` in Debian) 
+* Create shell scripts to configure Chromebook `when it leaves and returns home <http://www.circuidipity.com/chromebook-liftoff-splashdown.html>`_
 
 Happy hacking!
 
