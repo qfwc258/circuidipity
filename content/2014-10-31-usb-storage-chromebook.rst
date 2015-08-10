@@ -1,60 +1,84 @@
-==============================
-Add USB storage to Chromebooks
-==============================
+========================================
+Add encrypted USB storage to Chromebooks
+========================================
 
 :date: 2014-10-31 00:11:00
 :slug: 20141031
-:tags: chromebook, ubuntu, linux
-:modified: 2015-05-02 17:45:00
+:tags: luks, crypto, chromebook, debian, linux
+:modified: 2015-08-10 14:45:00
 
-I love my `Ubuntubook <http://www.circuidipity.com/c720-ubuntubook.html>`_ and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room. One popular option is to `open up the device <http://www.circuidipity.com/c720-ubuntubook.html>`_ and swap in a bigger SSD.                                                                                    
+I love my `Jessiebook <http://www.circuidipity.com/c720-chromebook-to-jessiebook.html>`_ and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room. One popular option is to open up the device and swap in a bigger SSD.                                                                                    
 
-An alternative is to reserve the internal SSD for the OS and use an external USB storage device for data. I picked up a `SanDisk Cruzer Fit 64GB USB 2.0 <http://www.amazon.com/SanDisk-Cruzer-Low-Profile-Drive-SDCZ33-064G-B35/dp/B00FJRS6QY>`_ which are really tiny devices that barely extrude from the USB port.
-
-My plan is to keep the USB stick attached to the Chromebook (extra storage that can be disconnected and re-connected at will) and have Ubuntu auto-mount the device at boot.
+An alternative is to reserve the internal SSD for the OS and use an external USB storage device for data. My plan is to keep the USB stick attached to the Chromebook to provide extra storage that can be disconnected and re-connected at will.
 
 Let's go!
 =========
 
-0. Filesystem
--------------
+I picked up a **SanDisk Cruzer Fit 64GB USB 2.0**  which are really tiny devices that barely extrude from the USB port. To guard against loss or theft its a good idea to encrypt the USB stick. I prepare the device using **Linux Unified Key Setup** (LUKS) and the ``cryptsetup`` utility.
 
-Device has a single partition that I re-format as ``ext4``:
+.. role:: warning
 
-.. code-block:: bash
+:warning:`WARNING!` Make careful note of the drive and partition labels. The following steps **will destroy all data** currently stored on the drive.
 
-    $ sudo mke2fs -t ext4 /dev/sdX1
+0. Prepare
+==========
 
-1. UUID
--------
-
-Retrieve the `Universally Unique Identifer <https://help.ubuntu.com/community/UsingUUID>`_ (UUID) of the USB stick's partition (example uses ``sdb1``):
+Download ``cryptsetup`` if not already installed. Connect the USB stick, leave it **unmounted**, and make note of the device label (``sdb``, ``sdc`` ...):
 
 .. code-block:: bash
 
-    $ sudo blkid | grep sdb1
-    /dev/sdb1: UUID="3e75240d-97b6-49cb-af21-fac25d574851" TYPE="ext4"
+    $ lsblk
 
-2. Auto-mount
--------------
+1. Partition
+============
 
-Configure system to auto-mount USB stick at boot by creating a new mountpoint for the device:
-
-.. code-block:: bash
-
-    $ sudo mkdir /media/USB0
-
-... and create a new entry in ``/etc/fstab``:
+Create a single partition using ``fdisk`` or ``gparted`` that fills the entire drive. Encrypt the partition and assign a password:
 
 .. code-block:: bash
 
-    UUID=3e75240d-97b6-49cb-af21-fac25d574851 /media/USB0 ext4 rw,exec,noatime,nobootwait 0 0
+    $ sudo cryptsetup luksFormat /dev/sdX1
+    $ sudo cryptsetup luksOpen /dev/sdX1 sdX1_crypt
 
-Note that ``nobootwait`` is an ``upstart``-specific option to the ``mountall`` command on `Ubuntu <http://www.circuidipity.com/tag-ubuntu.html>`_ and its derivatives. It enables boot to continue without manual intervention if the device is not found.
+2. Filesystem
+=============
 
-3. Boot
--------
+Install a filesystem (example: ``ext4``) [1]_ and mount the partition to gain access to the storage:
 
-One wrinkle on the Chromebook is that attaching a USB stick makes the laptop always try to boot (and fail) from USB instead of internal storage. There appears to be no way to alter the default boot order in **SeaBIOS** except to rebuild the firmware. Plus I like that the USB boot option actually works! Simple workaround is just hit ``ESC`` key at startup to access boot menu and manually choose the SSD.
+.. code-block:: bash
+
+    $ sudo mkfs.ext4 -E lazy_itable_init=0,lazy_journal_init=0 /dev/mapper/sdX1_crypt
+    $ sudo mount -t ext4 /dev/mapper/sdX1_crypt /mnt
+
+Before disconnecting the drive the partition must be unmounted and the encrypted device must be closed:
+
+.. code-block:: bash
+
+    $ sudo umount /mnt
+    $ sudo cryptsetup luksClose /dev/mapper/sdX1_crypt
+
+3. Mountpoint
+=============
+
+Create a custom mountpoint (example ``/media/USB``):
+
+.. code-block:: bash
+
+    $ sudo mkdir /media/USB
+
+Add entry in ``/etc/fstab`` for mountpoint:
+
+.. code-block:: bash
+
+    /dev/mapper/sdX1_crypt  /media/USB   ext4    rw,user,exec,noatime,noauto,data=ordered        0       0
+
+4. Boot
+=======
+
+One wrinkle on the Chromebook is that attaching a USB stick makes the device always try to boot (and fail) from USB instead of internal storage. There appears to be no way to alter the default boot order in **SeaBIOS** except to rebuild the firmware. Plus I like that the USB boot option actually works! Simple workaround is just hit ``ESC`` key at startup to access boot menu and manually choose the SSD.
 
 Happy hacking!
+
+Notes
+-----
+
+.. [1] Writing ``ext4`` with options ``lazy_itable_init=0,lazy_journal_init=0`` initializes the inodes and journal at creation time vs a gradual process during mount times. If you wonder why your newly-formatted drive's activity LED is blinking away... install and run ``iotop`` and take note of ``ext4lazyinit`` and `Lazy Initialization <https://www.thomas-krenn.com/en/wiki/Ext4_Filesystem#Lazy_Initialization>`_.
