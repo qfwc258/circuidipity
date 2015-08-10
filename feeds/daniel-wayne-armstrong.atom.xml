@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-08-04T16:34:00-04:00</updated><entry><title>Writing systemd service files</title><link href="http://www.circuidipity.com/writing-systemd-service-files.html" rel="alternate"></link><updated>2015-08-04T16:28:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-04:writing-systemd-service-files.html</id><summary type="html">&lt;p&gt;Allow &lt;strong&gt;systemd&lt;/strong&gt; and its &lt;tt class="docutils literal"&gt;systemctl&lt;/tt&gt; command to start, stop, and report the status of a daemon by creating a &lt;strong&gt;service file&lt;/strong&gt; in &lt;tt class="docutils literal"&gt;/etc/systemd/system&lt;/tt&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-08-10T15:12:00-04:00</updated><entry><title>Chromebook liftoff and splashdown</title><link href="http://www.circuidipity.com/chromebook-liftoff-splashdown.html" rel="alternate"></link><updated>2015-08-10T15:12:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-10:chromebook-liftoff-splashdown.html</id><summary type="html">&lt;p&gt;Create shell scripts to configure a Debian-powered Chromebook when it leaves and returns home.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;After spending a few months on a used desktop I am back on &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Jessiebook&lt;/a&gt; as my primary computer. I am exploring the idea of taking a cheap(er) and cheerful device like a Chromebook - replacing Chrome OS with full-featured Linux - as a starting point and add/subtract layers of capabilities depending on location and circumstance.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="outward-bound"&gt;
+&lt;h2&gt;Outward bound...&lt;/h2&gt;
+&lt;p&gt;I created the &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/liftoff"&gt;liftoff&lt;/a&gt; script to prepare Chromebook before leaving home that syncs a few working directories to a &lt;a class="reference external" href="http://www.circuidipity.com/20141031.html"&gt;USB stick for extra offline storage&lt;/a&gt;. Online access makes available the services of a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi home server&lt;/a&gt; via SSH.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="and-return-home"&gt;
+&lt;h2&gt;... and return home&lt;/h2&gt;
+&lt;p&gt;Running &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/splashdown"&gt;splashdown&lt;/a&gt; folds the Chromebook back into the home network:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;contents of USB stick are synced with (former desktop converted to headless) server&lt;/li&gt;
+&lt;li&gt;1TB hard drive on server made available to Chromebook using &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;SSHFS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Chromebook hardware is augmented by:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html"&gt;ThinkPad USB keyboard&lt;/a&gt; with built-in Trackpoint and 3-button mouse&lt;/li&gt;
+&lt;li&gt;external 28&amp;quot; display configured for &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dldsply"&gt;dual-desktop&lt;/a&gt; mode running &lt;a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html"&gt;i3 window manager&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;add server's 8GB RAM into the mix by running remote X apps on local display with X11 forwarding&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After 18 months of light-now-daily use I am very happy with my Chromebook. Free software makes modest hardware go a long way.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="chromebook"></category><category term="shell"></category><category term="programming"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Writing systemd service files</title><link href="http://www.circuidipity.com/writing-systemd-service-files.html" rel="alternate"></link><updated>2015-08-04T16:28:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-04:writing-systemd-service-files.html</id><summary type="html">&lt;p&gt;Allow &lt;strong&gt;systemd&lt;/strong&gt; and its &lt;tt class="docutils literal"&gt;systemctl&lt;/tt&gt; command to start, stop, and report the status of a daemon by creating a &lt;strong&gt;service file&lt;/strong&gt; in &lt;tt class="docutils literal"&gt;/etc/systemd/system&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt; Setup the &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-ram-irqbalance.html"&gt;irqbalance daemon I installed on my Raspberry Pi&lt;/a&gt; for systemd control by creating &lt;tt class="docutils literal"&gt;/etc/systemd/system/irqbalance.service&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;Unit&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;span class="nv"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Daemon to distribute hardware interrupts across multi-CPUs
@@ -666,13 +691,13 @@ Primary key fingerprint: &lt;span class="m"&gt;2870&lt;/span&gt; A31B EA9D BCF2 
 &lt;h2&gt;Auto-start applications&lt;/h2&gt;
 &lt;p&gt;At launch I have configured i3 to run a script to detect/setup a second display if attached (using &lt;tt class="docutils literal"&gt;xrandr&lt;/tt&gt;), open a terminal, and run any extra commands as determined by &lt;tt class="docutils literal"&gt;$HOSTNAME&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Auto-start&lt;/span&gt;
-exec_always --no-startup-id &lt;span class="nv"&gt;$HOME&lt;/span&gt;/bin/dlDsply
-&lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id &lt;span class="nv"&gt;$HOME&lt;/span&gt;/bin/startxX
+exec_always --no-startup-id &lt;span class="nv"&gt;$HOME&lt;/span&gt;/bin/dldsply
+&lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id &lt;span class="nv"&gt;$HOME&lt;/span&gt;/bin/startX
 &lt;span class="c"&gt;# Start a terminal&lt;/span&gt;
 &lt;span class="c"&gt;#bindsym $mod+Return exec i3-sensible-terminal&lt;/span&gt;
 bindsym &lt;span class="nv"&gt;$mod&lt;/span&gt;+Return &lt;span class="nb"&gt;exec &lt;/span&gt;urxvt
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dldsply"&gt;dlDsply&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/startxX"&gt;startxX&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dldsply"&gt;dldsply&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/startX"&gt;startX&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="containers"&gt;
 &lt;h2&gt;Containers&lt;/h2&gt;
@@ -787,7 +812,7 @@ clear Lock
 &lt;p&gt;Modify &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; to load keymap at &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;xmodmap ~/.xmodmap &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; xset r 66
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.usb-thinkpad"&gt;.xmodmap.usb-thinkpad&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap"&gt;.xmodmap&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="multimedia-keys-and-xbindkeys"&gt;
 &lt;h2&gt;1. Multimedia keys and xbindkeys&lt;/h2&gt;
@@ -817,7 +842,7 @@ XF86AudioLowerVolume
 XF86AudioRaiseVolume
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Add command &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; to load the new configuration at &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.usb-thinkpad"&gt;.xbindkeysrc.usb-thinkpad&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;paVolume&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc"&gt;.xbindkeysrc&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;paVolume&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="trackpoint"&gt;
 &lt;h2&gt;2. TrackPoint&lt;/h2&gt;
@@ -838,70 +863,4 @@ XF86AudioRaiseVolume
 &lt;p&gt;Make the change sticky by adding the command to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="thinkpad"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Shell script: paVolume</title><link href="http://www.circuidipity.com/pavolume.html" rel="alternate"></link><updated>2015-07-10T00:12:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-10:pavolume.html</id><summary type="html">&lt;p&gt;My original intent was to manage sound on &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Jessiebook&lt;/a&gt; by binding the commands to the multimedia keys in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;. Instead &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; calls a standalone script I created to control PulseAudio volume (and thus useful beyond just &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt;): &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;paVolume&lt;/a&gt;&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Script requirements: &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt; (packaged in Debian), &lt;tt class="docutils literal"&gt;pamixer&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt; (GitHub).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="pactl"&gt;
-&lt;h2&gt;0. pactl&lt;/h2&gt;
-&lt;p&gt;&lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt; controls a PulseAudio sound server and is included in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pulseaudio-utils&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install pulseaudio-utils
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="pamixer"&gt;
-&lt;h2&gt;1. pamixer&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/cdemoulins/pamixer"&gt;pamixer&lt;/a&gt; is a PulseAudio console mixer. Compile dependencies:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install build-essential libpulse-dev libboost-program-options1.55.0 libboost-program-options-dev
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Download source and compile:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git clone https://cdemoulins@github.com/cdemoulins/pamixer.git
-&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;pamixer
-&lt;span class="nv"&gt;$ &lt;/span&gt;make
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;No &lt;tt class="docutils literal"&gt;make install&lt;/tt&gt;. Place the resulting &lt;tt class="docutils literal"&gt;pamixer&lt;/tt&gt; in PATH (I use &lt;tt class="docutils literal"&gt;~/bin&lt;/tt&gt;).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="volnoti"&gt;
-&lt;h2&gt;2. volnoti&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/davidbrazdil/volnoti"&gt;volnoti&lt;/a&gt; is a lightweight volume notification. Compile dependencies:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install libdbus-glib-1-dev libgtk2.0-dev libgdk-pixbuf2.0-dev autoconf automake
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Download:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git clone git://github.com/davidbrazdil/volnoti.git
-&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;volnoti
-&lt;span class="nv"&gt;$ &lt;/span&gt;./prepare.sh
-&lt;span class="nv"&gt;$ &lt;/span&gt;./configure --prefix&lt;span class="o"&gt;=&lt;/span&gt;/usr
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Apply this fix &lt;a class="footnote-reference" href="#id5" id="id3"&gt;[1]&lt;/a&gt; to the source:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;src
-&lt;span class="nv"&gt;$ &lt;/span&gt;rm value-client-stub.h &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make value-client-stub.h
-&lt;span class="nv"&gt;$ &lt;/span&gt;rm value-daemon-stub.h &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make value-daemon-stub.h
-&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ..
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Compile source (and I use &lt;a class="reference external" href="https://packages.debian.org/jessie/checkinstall"&gt;checkinstall&lt;/a&gt; to make a &lt;tt class="docutils literal"&gt;deb&lt;/tt&gt; package and install):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;make
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo checkinstall make install
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Start &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt; daemon:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;volnoti
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Configure daemon to auto-start at desktop launch (example: &lt;strong&gt;i3&lt;/strong&gt; - add to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.i3/config&lt;/span&gt;&lt;/tt&gt;):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Auto-start applications&lt;/span&gt;
-&lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id volnoti -t 2
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id4"&gt;
-&lt;h2&gt;3. paVolume&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;Script posted to GitHub&lt;/a&gt;. Download and place in PATH. Run &lt;tt class="docutils literal"&gt;paVolume &lt;span class="pre"&gt;-h&lt;/span&gt;&lt;/tt&gt; for options.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h3&gt;Notes&lt;/h3&gt;
-&lt;table class="docutils footnote" frame="void" id="id5" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id3"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Ubuntu forums: &lt;a class="reference external" href="http://ubuntuforums.org/showthread.php?t=2215264&amp;amp;s=7aa2dfa8b89411472598e737c38f1475&amp;amp;p=12978792#post12978792"&gt;Error when using make &amp;quot;client.c:108:5: error: too many arguments to function&amp;quot;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</summary><category term="debian"></category><category term="linux"></category><category term="shell"></category><category term="programming"></category></entry></feed>
+</summary><category term="thinkpad"></category><category term="debian"></category><category term="linux"></category></entry></feed>

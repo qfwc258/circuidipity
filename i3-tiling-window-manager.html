@@ -42,13 +42,13 @@
 <h2>Auto-start applications</h2>
 <p>At launch I have configured i3 to run a script to detect/setup a second display if attached (using <tt class="docutils literal">xrandr</tt>), open a terminal, and run any extra commands as determined by <tt class="docutils literal">$HOSTNAME</tt>:</p>
 <div class="highlight"><pre><span class="c"># Auto-start</span>
-exec_always --no-startup-id <span class="nv">$HOME</span>/bin/dlDsply
-<span class="nb">exec</span> --no-startup-id <span class="nv">$HOME</span>/bin/startxX
+exec_always --no-startup-id <span class="nv">$HOME</span>/bin/dldsply
+<span class="nb">exec</span> --no-startup-id <span class="nv">$HOME</span>/bin/startX
 <span class="c"># Start a terminal</span>
 <span class="c">#bindsym $mod+Return exec i3-sensible-terminal</span>
 bindsym <span class="nv">$mod</span>+Return <span class="nb">exec </span>urxvt
 </pre></div>
-<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc">.xinitrc</a>, <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dldsply">dlDsply</a>, <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/startxX">startxX</a></p>
+<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc">.xinitrc</a>, <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dldsply">dldsply</a>, <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/startX">startX</a></p>
 </div>
 <div class="section" id="containers">
 <h2>Containers</h2>

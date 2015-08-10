@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Add USB storage to Chromebooks</title>
+        <title>Circuidipity | Add encrypted USB storage to Chromebooks</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -24,46 +24,68 @@
 </div>
 
 <!-- article -->
-<h1>Add USB storage to Chromebooks</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Saturday 02 May 2015</p>
+<h1>Add encrypted USB storage to Chromebooks</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Monday 10 August 2015</p>
 <div id="article">
-    <p>I love my <a class="reference external" href="http://www.circuidipity.com/c720-ubuntubook.html">Ubuntubook</a> and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room. One popular option is to <a class="reference external" href="http://www.circuidipity.com/c720-ubuntubook.html">open up the device</a> and swap in a bigger SSD.</p>
-<p>An alternative is to reserve the internal SSD for the OS and use an external USB storage device for data. I picked up a <a class="reference external" href="http://www.amazon.com/SanDisk-Cruzer-Low-Profile-Drive-SDCZ33-064G-B35/dp/B00FJRS6QY">SanDisk Cruzer Fit 64GB USB 2.0</a> which are really tiny devices that barely extrude from the USB port.</p>
-<p>My plan is to keep the USB stick attached to the Chromebook (extra storage that can be disconnected and re-connected at will) and have Ubuntu auto-mount the device at boot.</p>
+    <p>I love my <a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html">Jessiebook</a> and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room. One popular option is to open up the device and swap in a bigger SSD.</p>
+<p>An alternative is to reserve the internal SSD for the OS and use an external USB storage device for data. My plan is to keep the USB stick attached to the Chromebook to provide extra storage that can be disconnected and re-connected at will.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
+<p>I picked up a <strong>SanDisk Cruzer Fit 64GB USB 2.0</strong>  which are really tiny devices that barely extrude from the USB port. To guard against loss or theft its a good idea to encrypt the USB stick. I prepare the device using <strong>Linux Unified Key Setup</strong> (LUKS) and the <tt class="docutils literal">cryptsetup</tt> utility.</p>
+<p><span class="warning">WARNING!</span> Make careful note of the drive and partition labels. The following steps <strong>will destroy all data</strong> currently stored on the drive.</p>
+</div>
+<div class="section" id="prepare">
+<h2>0. Prepare</h2>
+<p>Download <tt class="docutils literal">cryptsetup</tt> if not already installed. Connect the USB stick, leave it <strong>unmounted</strong>, and make note of the device label (<tt class="docutils literal">sdb</tt>, <tt class="docutils literal">sdc</tt> ...):</p>
+<div class="highlight"><pre><span class="nv">$ </span>lsblk
+</pre></div>
+</div>
+<div class="section" id="partition">
+<h2>1. Partition</h2>
+<p>Create a single partition using <tt class="docutils literal">fdisk</tt> or <tt class="docutils literal">gparted</tt> that fills the entire drive. Encrypt the partition and assign a password:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo cryptsetup luksFormat /dev/sdX1
+<span class="nv">$ </span>sudo cryptsetup luksOpen /dev/sdX1 sdX1_crypt
+</pre></div>
+</div>
 <div class="section" id="filesystem">
-<h3>0. Filesystem</h3>
-<p>Device has a single partition that I re-format as <tt class="docutils literal">ext4</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mke2fs -t ext4 /dev/sdX1
+<h2>2. Filesystem</h2>
+<p>Install a filesystem (example: <tt class="docutils literal">ext4</tt>) <a class="footnote-reference" href="#id2" id="id1">[1]</a> and mount the partition to gain access to the storage:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkfs.ext4 -E <span class="nv">lazy_itable_init</span><span class="o">=</span>0,lazy_journal_init<span class="o">=</span><span class="m">0</span> /dev/mapper/sdX1_crypt
+<span class="nv">$ </span>sudo mount -t ext4 /dev/mapper/sdX1_crypt /mnt
+</pre></div>
+<p>Before disconnecting the drive the partition must be unmounted and the encrypted device must be closed:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo umount /mnt
+<span class="nv">$ </span>sudo cryptsetup luksClose /dev/mapper/sdX1_crypt
 </pre></div>
 </div>
-<div class="section" id="uuid">
-<h3>1. UUID</h3>
-<p>Retrieve the <a class="reference external" href="https://help.ubuntu.com/community/UsingUUID">Universally Unique Identifer</a> (UUID) of the USB stick's partition (example uses <tt class="docutils literal">sdb1</tt>):</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo blkid <span class="p">|</span> grep sdb1
-/dev/sdb1: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;3e75240d-97b6-49cb-af21-fac25d574851&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;ext4&quot;</span>
+<div class="section" id="mountpoint">
+<h2>3. Mountpoint</h2>
+<p>Create a custom mountpoint (example <tt class="docutils literal">/media/USB</tt>):</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /media/USB
 </pre></div>
-</div>
-<div class="section" id="auto-mount">
-<h3>2. Auto-mount</h3>
-<p>Configure system to auto-mount USB stick at boot by creating a new mountpoint for the device:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /media/USB0
+<p>Add entry in <tt class="docutils literal">/etc/fstab</tt> for mountpoint:</p>
+<div class="highlight"><pre>/dev/mapper/sdX1_crypt  /media/USB   ext4    rw,user,exec,noatime,noauto,data<span class="o">=</span>ordered        <span class="m">0</span>       0
 </pre></div>
-<p>... and create a new entry in <tt class="docutils literal">/etc/fstab</tt>:</p>
-<div class="highlight"><pre><span class="nv">UUID</span><span class="o">=</span>3e75240d-97b6-49cb-af21-fac25d574851 /media/USB0 ext4 rw,exec,noatime,nobootwait <span class="m">0</span> 0
-</pre></div>
-<p>Note that <tt class="docutils literal">nobootwait</tt> is an <tt class="docutils literal">upstart</tt>-specific option to the <tt class="docutils literal">mountall</tt> command on <a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html">Ubuntu</a> and its derivatives. It enables boot to continue without manual intervention if the device is not found.</p>
 </div>
 <div class="section" id="boot">
-<h3>3. Boot</h3>
-<p>One wrinkle on the Chromebook is that attaching a USB stick makes the laptop always try to boot (and fail) from USB instead of internal storage. There appears to be no way to alter the default boot order in <strong>SeaBIOS</strong> except to rebuild the firmware. Plus I like that the USB boot option actually works! Simple workaround is just hit <tt class="docutils literal">ESC</tt> key at startup to access boot menu and manually choose the SSD.</p>
+<h2>4. Boot</h2>
+<p>One wrinkle on the Chromebook is that attaching a USB stick makes the device always try to boot (and fail) from USB instead of internal storage. There appears to be no way to alter the default boot order in <strong>SeaBIOS</strong> except to rebuild the firmware. Plus I like that the USB boot option actually works! Simple workaround is just hit <tt class="docutils literal">ESC</tt> key at startup to access boot menu and manually choose the SSD.</p>
 <p>Happy hacking!</p>
+<div class="section" id="notes">
+<h3>Notes</h3>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Writing <tt class="docutils literal">ext4</tt> with options <tt class="docutils literal">lazy_itable_init=0,lazy_journal_init=0</tt> initializes the inodes and journal at creation time vs a gradual process during mount times. If you wonder why your newly-formatted drive's activity LED is blinking away... install and run <tt class="docutils literal">iotop</tt> and take note of <tt class="docutils literal">ext4lazyinit</tt> and <a class="reference external" href="https://www.thomas-krenn.com/en/wiki/Ext4_Filesystem#Lazy_Initialization">Lazy Initialization</a>.</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 
-    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-chromebook.html">chromebook</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-luks.html">luks</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-crypto.html">crypto</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-chromebook.html">chromebook</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
 </div>
