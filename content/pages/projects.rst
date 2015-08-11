@@ -34,7 +34,7 @@ Projects
 
     <div class="projectx">
         <h2>Supercharge a home router using OpenWrt</h2>
-        <p>Many are more capable than default firmware <a href="pingparade4.html">would lead you to believe...</a></p>
+        <p>Many are <a href="pingparade4.html">more capable than default firmware would lead you to believe...</a></p>
         <p style="clear:both;"></p>
     </div>
 
@@ -51,6 +51,6 @@ Projects
 
     <div class="projectx">
         <h2>Chromebook to Jessiebook</h2>
-        <p>Replace Chrome with full-featured Linux on the <a href="c720-chromebook-to-jessiebook.html">Acer C720 Chromebook...</a></p>
+        <p>Replace Chrome with <a href="c720-chromebook-to-jessiebook.html">full-featured Linux on the Acer C720 Chromebook...</a></p>
         <p style="clear:both;"></p>
     </div>
