@@ -3,7 +3,7 @@ Debian Linux on the Asus EEEPC 1001P
 ====================================
 
 :date: 2010-06-10 01:23:00
-:tags: debian, linux, asus, netbook
+:tags: debian, linux
 :slug: debian-linux-on-the-asus-eeepc-1001p
 
 I recently acquired an *Asus EEEPC 1001P-MU17* netbook and replaced the marginal crippled operating system it included with `Debian GNU/Linux <http://www.circuidipity.com/install-debian-linux-squeeze.html>`_.

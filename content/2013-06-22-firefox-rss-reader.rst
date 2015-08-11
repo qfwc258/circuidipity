@@ -3,7 +3,7 @@ Firefox as RSS reader
 =====================
 
 :date: 2013-06-22 01:23:00
-:tags: iceweasel, browser, mozilla, rss
+:tags: mozilla
 :slug: firefox-rss-reader
 
 Google Reader is going dark at the end of this month and I need to find an alternative for consuming my RSS feeds. A `recent article in LWN <http://lwn.net/Articles/553761/>`_ explores the idea of using Firefox via extensions as an RSS reader and one of several options that caught my interest is *Digest*:

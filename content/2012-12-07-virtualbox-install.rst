@@ -3,7 +3,7 @@ Virtualbox
 ==========
 
 :date: 2012-12-07 00:11:00
-:tags: virtualbox, vm, debian, linux
+:tags: vm, debian, linux
 :slug: virtualbox-install
 :modified: 2015-07-05 03:46:00
 

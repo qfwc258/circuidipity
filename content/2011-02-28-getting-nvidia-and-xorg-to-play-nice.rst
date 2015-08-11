@@ -3,7 +3,7 @@ Getting Nvidia and xorg to play nice
 ====================================
 
 :date: 2011-02-28 01:23:00
-:tags: nvidia, graphics, debian, linux
+:tags: graphics, debian, linux
 :slug: getting-nvidia-and-xorg-to-play-nice
 
 Configure a Nvidia graphics card for use in Debian.

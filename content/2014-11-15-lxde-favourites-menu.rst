@@ -4,7 +4,7 @@ Pop-up custom menu in LXDE
 
 :date: 2014-11-15 01:00:00
 :slug: 20141115
-:tags: lubuntu, ubuntu, linux, openbox, lxde
+:tags: lubuntu, linux, openbox, lxde
 
 Create a hotkey-activated custom menu for favourite functions and applications.
 

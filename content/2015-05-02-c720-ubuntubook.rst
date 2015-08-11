@@ -4,7 +4,7 @@ Chromebook to Ubuntubook
 
 :date: 2015-05-02 17:30:00
 :slug: c720-ubuntubook
-:tags: acer, chromebook, ubuntu, linux
+:tags: chromebook, ubuntu, linux
 :modified: 2015-07-08 10:18:00
 
 **Update:** Now running `Debian 'Jessie' <http://www.circuidipity.com/c720-chromebook-to-jessiebook.html>`_ on my Chromebook.

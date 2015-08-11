@@ -4,7 +4,7 @@ Writing systemd service files
 
 :date: 2015-08-04 16:28:00
 :slug: writing-systemd-service-files
-:tags: systemd, debian, linux
+:tags: linux
 
 Allow **systemd** and its ``systemctl`` command to start, stop, and report the status of a daemon by creating a **service file** in ``/etc/systemd/system``.
 

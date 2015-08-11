@@ -3,7 +3,7 @@ Install Ruby on Debian using RVM
 ================================
 
 :date: 2012-05-31 01:23:00
-:tags: ruby, programming, rvm, debian, linux
+:tags: ruby, programming, debian, linux
 :slug: install-ruby-on-debian-wheezy-using-rvm
 
 I have a small bit of shell scripting fu and have acquired the taste for more programming. `Ruby <http://www.ruby-lang.org/en/>`_ has the reputation for being a friendly language to newbies and I have decided to give it a go.
