@@ -1,5 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 11 Aug 2015 15:43:00 -0400</lastBuildDate><item><title>Run remote X applications on a local display</title><link>http://www.circuidipity.com/x11-forwarding-ssh.html</link><description>&lt;p&gt;Run remote X applications on a local display with X11 forwarding over SSH.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 12 Aug 2015 01:27:00 -0400</lastBuildDate><item><title>Incremental backups</title><link>http://www.circuidipity.com/incremental-backups-rsnapshot.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #3 .:&lt;/a&gt; Make incremental and automatic backups of a home folder using &lt;strong&gt;rsnapshot + cron&lt;/strong&gt; (and manual backups via &lt;strong&gt;public transit&lt;/strong&gt;).&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Backup strategy &lt;strong&gt;Version 0&lt;/strong&gt; for my home folder was &lt;strong&gt;rsync&lt;/strong&gt; + &lt;strong&gt;portable&lt;/strong&gt; + &lt;strong&gt;subway&lt;/strong&gt;. That is, I would simply make a periodic, manual sync of files using &lt;strong&gt;rsync&lt;/strong&gt; from my primary computer to a &lt;strong&gt;portable&lt;/strong&gt; encrypted &lt;a class="reference external" href="http://www.circuidipity.com/encrypt-external-drive.html"&gt;USB hard drive&lt;/a&gt;. Then ride the &lt;strong&gt;subway&lt;/strong&gt; to a family/friend's place and swap drives (offsite backup).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Version 1&lt;/strong&gt; expanded to &lt;strong&gt;cron&lt;/strong&gt; + &lt;strong&gt;rsync&lt;/strong&gt; + &lt;strong&gt;Raspberry Pi&lt;/strong&gt; + &lt;strong&gt;portable&lt;/strong&gt; + &lt;strong&gt;subway&lt;/strong&gt;. One of the advantages of setting up a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi home server&lt;/a&gt; is providing a 24/7 uptime location to automatically (using &lt;strong&gt;cron&lt;/strong&gt;) mirror my laptop's home folder over the local area network (LAN).&lt;/p&gt;
+&lt;p&gt;These backups are &lt;strong&gt;snapshots&lt;/strong&gt; of home at a particular date. Pi server has a backup of 24 hours or less, the USB drive has another snapshot a few weeks old, the offsite another snapshot from a month ago. But there is no ordered progression of backups from Day 2 to Day 3, Week 4, Month 5, etc. One alternative is to every day stash an entire backup of my home folder but its a sub-optimal use of resources and would quickly fill a hard drive.&lt;/p&gt;
+&lt;p&gt;A much better solution is to use &lt;a class="reference external" href="http://rsnapshot.org/"&gt;rsnapshot&lt;/a&gt;  to make &lt;strong&gt;incremental backups&lt;/strong&gt; and my backup strategy &lt;strong&gt;Version 2&lt;/strong&gt; now incorporates:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;cron&lt;/strong&gt; + &lt;strong&gt;rsnapshot&lt;/strong&gt; + &lt;strong&gt;cron&lt;/strong&gt; + &lt;strong&gt;rsync&lt;/strong&gt; + &lt;strong&gt;Raspberry Pi&lt;/strong&gt; + &lt;strong&gt;portable&lt;/strong&gt; + &lt;strong&gt;subway&lt;/strong&gt;;&lt;/li&gt;
+&lt;li&gt;nightly a cron job runs &lt;tt class="docutils literal"&gt;rsnapshot&lt;/tt&gt; to sync &lt;tt class="docutils literal"&gt;/home/&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;/etc/&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;/my/backup/location/daily.0/&lt;/tt&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;daily.0&lt;/tt&gt; increments to &lt;tt class="docutils literal"&gt;daily.1&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;daily.1&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;daily.2&lt;/tt&gt;, etc. (retention set to 7 days)&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--hard-links&lt;/span&gt;&lt;/tt&gt; is how &lt;tt class="docutils literal"&gt;rsnapshot&lt;/tt&gt; performs its minimal-storage-magic... if a file remains unchanged in the next backup a hard link is created so subsequent backups only contain modified files and links;&lt;/li&gt;
+&lt;li&gt;in the wee morning hours another cron job syncs &lt;tt class="docutils literal"&gt;/my/backup/location/&lt;/tt&gt; to Pi server;&lt;/li&gt;
+&lt;li&gt;every Saturday &lt;tt class="docutils literal"&gt;daily.6&lt;/tt&gt; rotates to &lt;tt class="docutils literal"&gt;weekly.0&lt;/tt&gt; (and &lt;tt class="docutils literal"&gt;weekly.0&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;weekly.1&lt;/tt&gt; ... with 4 week retention);&lt;/li&gt;
+&lt;li&gt;on the 1st of the month &lt;tt class="docutils literal"&gt;weekly.3&lt;/tt&gt; rotates to &lt;tt class="docutils literal"&gt;month.0&lt;/tt&gt; (12 month retention);&lt;/li&gt;
+&lt;li&gt;every week or so I sync &lt;tt class="docutils literal"&gt;/my/backup/location/&lt;/tt&gt; to the USB drive;&lt;/li&gt;
+&lt;li&gt;every month or so I ride the subway to offsite storage and swap drives&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;0. Rsnapshot&lt;/h2&gt;
+&lt;p&gt;Install &lt;tt class="docutils literal"&gt;rsnapshot&lt;/tt&gt;, make a directory to store backups, and make a copy of the default config file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install rsnapshot
+&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir /my/backup/location
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo cp /etc/rsnapshot.conf /etc/rsnapshot.conf.default
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/rsnapshot.conf&lt;/tt&gt; (important to separate fields with &lt;strong&gt;TABS&lt;/strong&gt; not spaces). Example of a few tweaks:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;snapshot_root   /my/backup/location
+
+cmd_cp          /bin/cp
+cmd_rm          /bin/rm
+cmd_rsync       /usr/bin/rsync
+cmd_du          /usr/bin/du
+cmd_rsnapshot_diff      /usr/bin/rsnapshot-diff
+
+retain  daily   7
+retain  weekly  4
+retain  monthly 12
+
+exclude_file    /home/USER/.rsyncExclude  &lt;span class="c"&gt;# ...and create this file with list of things to exclude from backup&lt;/span&gt;
+
+link_dest       1
+
+sync_first      &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="c"&gt;# allows better recovery in the event that rsnapshot is interrupted (see: ``man rsnapshot``)&lt;/span&gt;
+
+&lt;span class="c"&gt;# LOCALHOST&lt;/span&gt;
+backup  /home/          localhost/
+backup  /etc/           localhost/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check config syntax and run backup test:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo rsnapshot configtest
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo rsnapshot -t sync
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If everything checks out OK go ahead and run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo rsnapshot sync &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo rsnapshot daily &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; rsnapshot du
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Automate backups by running (as root user) &lt;tt class="docutils literal"&gt;crontab &lt;span class="pre"&gt;-e&lt;/span&gt;&lt;/tt&gt; and create a job for &lt;tt class="docutils literal"&gt;rsnapshot&lt;/tt&gt;. Sample job:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# m h  dom mon dow   command&lt;/span&gt;
+&lt;span class="m"&gt;50&lt;/span&gt; &lt;span class="m"&gt;23&lt;/span&gt; * * *     /usr/bin/rsnapshot sync &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; /usr/bin/rsnapshot daily
+&lt;span class="m"&gt;40&lt;/span&gt; &lt;span class="m"&gt;22&lt;/span&gt; * * &lt;span class="m"&gt;6&lt;/span&gt;     /usr/bin/rsnapshot weekly
+&lt;span class="m"&gt;30&lt;/span&gt; &lt;span class="m"&gt;21&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; * *     /usr/bin/rsnapshot monthly
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="backup-the-backup"&gt;
+&lt;h2&gt;1. Backup the backup&lt;/h2&gt;
+&lt;p&gt;Rsnapshot operates as a &lt;strong&gt;pull&lt;/strong&gt; program: it pulls in backups from local and remote devices. Instead of juggling access permissions to allow the rsnapshot server to talk with other devices I decided to limit &lt;tt class="docutils literal"&gt;rsnapshot&lt;/tt&gt; to making backups on &lt;tt class="docutils literal"&gt;localhost&lt;/tt&gt; and use &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;my already-configured SSH key setup&lt;/a&gt; to &lt;strong&gt;push&lt;/strong&gt; a snapshot of the backup to my Raspberry Pi for remote storage.&lt;/p&gt;
+&lt;div class="section" id="on-the-pi"&gt;
+&lt;h3&gt;1.1 On the Pi&lt;/h3&gt;
+&lt;p&gt;Create a directory to store the backup:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir /path/to/backup
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="on-localhost"&gt;
+&lt;h3&gt;1.2 On localhost&lt;/h3&gt;
+&lt;p&gt;Set the ip address and hostname of the Pi server in &lt;tt class="docutils literal"&gt;/etc/hosts&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;192.168.1.88    raspberry.server
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Test synching &lt;tt class="docutils literal"&gt;/my/backup/location/&lt;/tt&gt; on &lt;tt class="docutils literal"&gt;localhost&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;raspberry.server:/path/to/backup/&lt;/span&gt;&lt;/tt&gt; with the &lt;tt class="docutils literal"&gt;rsync &lt;span class="pre"&gt;--dry-run&lt;/span&gt;&lt;/tt&gt; option (I exclude &lt;tt class="docutils literal"&gt;/etc/&lt;/tt&gt; from the backup):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;rsync --dry-run --archive --hard-links --numeric-ids --delete --exclude&lt;span class="o"&gt;=&lt;/span&gt;etc/ --verbose /my/backup/location/ raspberry.server:/path/to/backup/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If everything checks out OK drop &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--dry-run&lt;/span&gt;&lt;/tt&gt; and re-run the command to make a proper backup.&lt;/p&gt;
+&lt;p&gt;I use &lt;tt class="docutils literal"&gt;keychain&lt;/tt&gt; to manage &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH keys for password-less logins to the Pi&lt;/a&gt;. Create a &lt;tt class="docutils literal"&gt;backupSnap.sh&lt;/tt&gt; shell script and place in &lt;tt class="docutils literal"&gt;~/bin&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
+. &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;HOME&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/.keychain/&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;HOSTNAME&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;-sh
+rsync --archive --hard-links --numeric-ids --delete --exclude&lt;span class="o"&gt;=&lt;/span&gt;etc/ /my/backup/location/ &lt;span class="nv"&gt;$1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Automate the backups by creating a cron job (example that runs daily at 04:50):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# m h  dom mon dow   command&lt;/span&gt;
+&lt;span class="m"&gt;50&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; * * *  /home/USERNAME/bin/backupSnap.sh raspberry.server:/path/to/backup/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="external-drive-and-offsite-storage"&gt;
+&lt;h2&gt;2. External drive and offsite storage&lt;/h2&gt;
+&lt;p&gt;I connect my USB drive and sync the backup to the device:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;/home/USERNAME/bin/backupSnap.sh /media/USB/path/to/backup/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and take my hard drive for &lt;a class="reference external" href="http://ttc.ca/Routes/General_Information/Maps/index.jsp"&gt;a ride on the subway&lt;/a&gt; to say hello to my offsite storage!&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 12 Aug 2015 01:27:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-08-12:incremental-backups-rsnapshot.html</guid><category>network</category><category>ssh</category><category>crypto</category><category>debian</category><category>linux</category><category>raspberry pi</category></item><item><title>Run remote X applications on a local display</title><link>http://www.circuidipity.com/x11-forwarding-ssh.html</link><description>&lt;p&gt;Run remote X applications on a local display with X11 forwarding over SSH.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;I give my &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Jessiebook's smallish amount of RAM&lt;/a&gt; a bit of a break by enlisting other machines on my home network to run X apps. Once &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH is properly configured&lt;/a&gt; it is easy to use X11 forwarding to have apps running on the server show up on the client's local display.&lt;/p&gt;
@@ -714,104 +814,4 @@ Primary key fingerprint: &lt;span class="m"&gt;2870&lt;/span&gt; A31B EA9D BCF2 
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 19 Jul 2015 11:33:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-07-19:verify-pgp-signature-gnupg.html</guid><category>crypto</category><category>debian</category><category>linux</category></item><item><title>Lightweight and a delight: i3 tiling window manager</title><link>http://www.circuidipity.com/i3-tiling-window-manager.html</link><description>&lt;p&gt;As a former &lt;strong&gt;Fluxbox&lt;/strong&gt; and &lt;strong&gt;Openbox&lt;/strong&gt; user I can understand the love for a lightweight, minimal window manager where I can &amp;quot;paint&amp;quot; my applications across the screen.&lt;/p&gt;
-&lt;p&gt;Subsequently I wandered through &lt;strong&gt;Xfce&lt;/strong&gt; and &lt;strong&gt;LXDE&lt;/strong&gt; and all the way to the other end of the scale with Ubuntu's &lt;em&gt;all-in&lt;/em&gt; desktop environment &lt;strong&gt;Unity&lt;/strong&gt;. I was curious about &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Tiling_window_manager"&gt;tiling window managers&lt;/a&gt; but never quite grokked the advantage from screenshots: seeing consoles arranged in a grid made me think &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; a better choice for &lt;em&gt;that&lt;/em&gt; task, and why would I want to watch a video in a reduced square in the corner of a screen?&lt;/p&gt;
-&lt;p&gt;And then I tried &lt;a class="reference external" href="https://i3wm.org/"&gt;i3&lt;/a&gt; and realized I have found my new default desktop:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;startx&lt;/tt&gt; to X almost instantaneous on &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Jessiebook&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;loads sensible defaults and - thanks to the excellent &lt;a class="reference external" href="https://i3wm.org/docs/userguide.html"&gt;User's Guide&lt;/a&gt; - easy to customize via text files&lt;/li&gt;
-&lt;li&gt;toggle between &lt;strong&gt;tiled&lt;/strong&gt;, &lt;strong&gt;tabbed&lt;/strong&gt; (my default), &lt;strong&gt;stacked&lt;/strong&gt;, and &lt;strong&gt;floating&lt;/strong&gt; mode (see User's Guide)&lt;/li&gt;
-&lt;li&gt;even if you rarely use applications in a tiled arrangement, i3 handles maximized windows, desktops, and multiple displays extremely well via keyboard&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Still want to use a mouse here-and-there? Hey, i3 is flexible and OK with that. Provides a statusbar, but you can swap it out for an &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/I3#i3bar_alternatives"&gt;alternative&lt;/a&gt; or run none at all.&lt;/p&gt;
-&lt;p&gt;Starting out I find myself mostly happy with the &lt;a class="reference external" href="https://i3wm.org/docs/userguide.html#_default_keybindings"&gt;default keybindings&lt;/a&gt; and behaviour; making only a few adjustments and additions to my &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.i3/config&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.i3/config"&gt;.i3/config&lt;/a&gt; and statusbar (for Jessiebook) &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.i3status.conf.chromebook"&gt;.i3status.conf&lt;/a&gt;&lt;/p&gt;
-&lt;div class="section" id="auto-start-applications"&gt;
-&lt;h2&gt;Auto-start applications&lt;/h2&gt;
-&lt;p&gt;At launch I have configured i3 to run a script to detect/setup a second display if attached (using &lt;tt class="docutils literal"&gt;xrandr&lt;/tt&gt;), open a terminal, and run any extra commands as determined by &lt;tt class="docutils literal"&gt;$HOSTNAME&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Auto-start&lt;/span&gt;
-exec_always --no-startup-id &lt;span class="nv"&gt;$HOME&lt;/span&gt;/bin/dldsply
-&lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id &lt;span class="nv"&gt;$HOME&lt;/span&gt;/bin/startX
-&lt;span class="c"&gt;# Start a terminal&lt;/span&gt;
-&lt;span class="c"&gt;#bindsym $mod+Return exec i3-sensible-terminal&lt;/span&gt;
-bindsym &lt;span class="nv"&gt;$mod&lt;/span&gt;+Return &lt;span class="nb"&gt;exec &lt;/span&gt;urxvt
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dldsply"&gt;dldsply&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/startX"&gt;startX&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="containers"&gt;
-&lt;h2&gt;Containers&lt;/h2&gt;
-&lt;p&gt;Arrange containers (windows):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Layout mode for new containers&lt;/span&gt;
-workspace_layout tabbed
-&lt;span class="c"&gt;# Enable floating mode&lt;/span&gt;
-for_window &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Remmina&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; floating &lt;span class="nb"&gt;enable&lt;/span&gt;
-for_window &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Remmina&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; border normal
-for_window &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;VirtualBox&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; floating &lt;span class="nb"&gt;enable&lt;/span&gt;
-for_window &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;VirtualBox&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; border normal
-for_window &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Vlc&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; floating &lt;span class="nb"&gt;enable&lt;/span&gt;
-for_window &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Vlc&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; border normal
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="styling"&gt;
-&lt;h2&gt;Styling&lt;/h2&gt;
-&lt;p&gt;Fonts:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;font pango:Terminus 11px
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Colours:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Colours&lt;/span&gt;
-&lt;span class="c"&gt;# class                   border  backgrd text    indicator&lt;/span&gt;
-client.focused            &lt;span class="c"&gt;#1793d0 #1793d0 #ffffff #2e9ef4&lt;/span&gt;
-client.focused_inactive   &lt;span class="c"&gt;#333333 #333333 #ffffff #484e50&lt;/span&gt;
-client.unfocused          &lt;span class="c"&gt;#2d2d2d #2d2d2d #ffffff #292d2e&lt;/span&gt;
-client.urgent             &lt;span class="c"&gt;#2f343a #900000 #ffffff #900000&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Applications:&lt;/p&gt;
-&lt;p&gt;Use &lt;tt class="docutils literal"&gt;lxappearance&lt;/tt&gt; to setup the &lt;strong&gt;Clearlooks&lt;/strong&gt; theme and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;qtconfig-qt4&lt;/span&gt;&lt;/tt&gt; to configure QT apps to use the &lt;tt class="docutils literal"&gt;GTK+&lt;/tt&gt; default theme:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install gnome-themes-standard gtk2-engines lxappearance qt4-qtconfig
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Launcher:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;bindsym &lt;span class="nv"&gt;$mod&lt;/span&gt;+d &lt;span class="nb"&gt;exec &lt;/span&gt;dmenu_run -fn &lt;span class="s1"&gt;&amp;#39;Terminus 11&amp;#39;&lt;/span&gt; -nb &lt;span class="s1"&gt;&amp;#39;#2d2d2d&amp;#39;&lt;/span&gt; -nf &lt;span class="s1"&gt;&amp;#39;#ffffff&amp;#39;&lt;/span&gt; -sb &lt;span class="s1"&gt;&amp;#39;#1793d0&amp;#39;&lt;/span&gt; -sf &lt;span class="s1"&gt;&amp;#39;#ffffff&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="sound"&gt;
-&lt;h2&gt;Sound&lt;/h2&gt;
-&lt;p&gt;I use &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; and a standalone &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;shell script&lt;/a&gt; to control PulseAudio volume levels and notifications.&lt;/p&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="http://www.circuidipity.com/pavolume.html"&gt;paVolume&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="screenshots"&gt;
-&lt;h2&gt;Screenshots&lt;/h2&gt;
-&lt;p&gt;Take screenshots using &lt;tt class="docutils literal"&gt;scrot&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;eog&lt;/tt&gt; displays images:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install scrot eog
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Keybindings:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Screenshot&lt;/span&gt;
-&lt;span class="c"&gt;# * desktop&lt;/span&gt;
-bindsym --release Print &lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id scrot &lt;span class="s1"&gt;&amp;#39;%Y-%m-%dT%H%M%S.png&amp;#39;&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;mv $f ~/Downloads &amp;amp;&amp;amp; eog ~/Downloads/$f&amp;#39;&lt;/span&gt;
-&lt;span class="c"&gt;# * active Window&lt;/span&gt;
-bindsym --release &lt;span class="nv"&gt;$mod&lt;/span&gt;+Print &lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id scrot -d &lt;span class="m"&gt;4&lt;/span&gt; -u -z &lt;span class="s1"&gt;&amp;#39;%Y-%m-%dT%H%M%S.png&amp;#39;&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;mv $f ~/Downloads &amp;amp;&amp;amp; eog ~/Downloads/$f&amp;#39;&lt;/span&gt;
-&lt;span class="c"&gt;# * selected area... (click and move mouse)&lt;/span&gt;
-bindsym --release Shift+Print &lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id scrot -s &lt;span class="s1"&gt;&amp;#39;%Y-%m-%dT%H%M%S.png&amp;#39;&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;mv $f ~/Downloads &amp;amp;&amp;amp; eog ~/Downloads/$f&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="lockscreen-logout-suspend-reboot-shutdown"&gt;
-&lt;h2&gt;LockScreen/Logout/Suspend/Reboot/Shutdown&lt;/h2&gt;
-&lt;p&gt;Debian's i3 metapackage installs &lt;tt class="docutils literal"&gt;i3lock&lt;/tt&gt; to handle locking screens (&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-i&lt;/span&gt; IMAGE.png&lt;/tt&gt; adds a lockscreen wallpaper) and &lt;tt class="docutils literal"&gt;systemctl&lt;/tt&gt; deals with system suspend/reboot/shutdown:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;$Locker&lt;/span&gt; i3lock -i ~/.i3lock.png &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sleep 1
-&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;$mode_system&lt;/span&gt; System &lt;span class="o"&gt;(&lt;/span&gt;l&lt;span class="o"&gt;)&lt;/span&gt; lock, &lt;span class="o"&gt;(&lt;/span&gt;e&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nb"&gt;logout&lt;/span&gt;, &lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nb"&gt;suspend&lt;/span&gt;, &lt;span class="o"&gt;(&lt;/span&gt;r&lt;span class="o"&gt;)&lt;/span&gt; reboot, &lt;span class="o"&gt;(&lt;/span&gt;Shift+s&lt;span class="o"&gt;)&lt;/span&gt; shutdown
-mode &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$mode_system&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-    bindsym l &lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id &lt;span class="nv"&gt;$Locker&lt;/span&gt;, mode &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;
-    bindsym e &lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id i3-msg &lt;span class="nb"&gt;exit&lt;/span&gt;, mode &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;
-    bindsym s &lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id &lt;span class="nv"&gt;$Locker&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sync &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; systemctl &lt;span class="nb"&gt;suspend&lt;/span&gt;, mode &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;
-    bindsym r &lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id systemctl reboot, mode &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;
-    bindsym Shift+s &lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id systemctl poweroff -i, mode &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;
-
-    &lt;span class="c"&gt;# back to normal: Enter or Escape&lt;/span&gt;
-    bindsym Return mode &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;
-    bindsym Escape mode &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
-bindsym &lt;span class="nv"&gt;$mod&lt;/span&gt;+Pause mode &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$mode_system&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/I3#Shutdown.2C_reboot.2C_lock_screen"&gt;i3 shutdown&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 17 Jul 2015 00:20:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-07-17:i3-tiling-window-manager.html</guid><category>i3</category><category>debian</category><category>linux</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 19 Jul 2015 11:33:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-07-19:verify-pgp-signature-gnupg.html</guid><category>crypto</category><category>debian</category><category>linux</category></item></channel></rss>
