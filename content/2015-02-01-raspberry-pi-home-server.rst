@@ -5,7 +5,7 @@ There's no place like [a Raspberry Pi] Home [Server]
 :slug: raspberry-pi-home-server
 :tags: raspberry pi, network, debian, linux
 :template: article-project
-:modified: 2015-07-25 17:57:00
+:modified: 2015-08-12 00:37:00
 
 .. image:: images/raspberry-pi-home-server.png
     :align: right
@@ -33,10 +33,10 @@ Use cryptographic keys to make remote machines more secure.
 
 Terminal multiplexor for creating, detaching, re-attaching work areas.
 
-3. `Backup home <http://www.circuidipity.com/backup-home.html>`_
-----------------------------------------------------------------
+3. `Backup home <http://www.circuidipity.com/incremental-backups-rsnapshot.html>`_
+----------------------------------------------------------------------------------
 
-Automatic backups of a home folder using a dash of shell scripting.
+Make incremental and automatic backups of a home folder using rsnapshot + cron.
 
 4. `Network attached storage <http://www.circuidipity.com/nas-raspberry-pi-sshfs.html>`_
 ----------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ Use a DDNS service to automatically update an IP address.
 Host web applications using PHP + Nginx + PostgreSQL.
 
 7. `RSS reader <http://www.circuidipity.com/ttrss.html>`_
-------------------------------------------------------------------------
+---------------------------------------------------------
 
 Access news feeds over the web with Tiny Tiny RSS news reader.
 
