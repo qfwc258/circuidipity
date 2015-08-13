@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 12 Aug 2015 01:27:00 -0400</lastBuildDate><item><title>Incremental backups</title><link>http://www.circuidipity.com/incremental-backups-rsnapshot.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #3 .:&lt;/a&gt; Make incremental and automatic backups of a home folder using &lt;strong&gt;rsnapshot + cron&lt;/strong&gt; (and manual backups via &lt;strong&gt;public transit&lt;/strong&gt;).&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 13 Aug 2015 15:12:00 -0400</lastBuildDate><item><title>I would rather be ashes than dust</title><link>http://www.circuidipity.com/rather-ashes-than-dust.html</link><description>&lt;img alt="Soyuz night launch" class="align-right" src="images/soyuz-at-night-2.png" /&gt;
+&lt;p&gt;&lt;strong&gt;Jack London (1876-1916):&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;I would rather be ashes than dust;&lt;/div&gt;
+&lt;div class="line"&gt;I would rather that my spark should&lt;/div&gt;
+&lt;div class="line"&gt;burn out in a brilliant blaze than it&lt;/div&gt;
+&lt;div class="line"&gt;should be stifled by dry-rot; I would&lt;/div&gt;
+&lt;div class="line"&gt;rather be in a superb meteor; every&lt;/div&gt;
+&lt;div class="line"&gt;atom of me in a magnificent glow&lt;/div&gt;
+&lt;div class="line"&gt;than in a sleepy and permanent&lt;/div&gt;
+&lt;div class="line"&gt;planet; the proper function of man is&lt;/div&gt;
+&lt;div class="line"&gt;to live, not to exist; I shall not waste&lt;/div&gt;
+&lt;div class="line"&gt;my days in trying to prolong them;&lt;/div&gt;
+&lt;div class="line"&gt;I shall USE my time.&lt;/div&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Thu, 13 Aug 2015 15:12:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-08-13:rather-ashes-than-dust.html</guid><category>quotes</category></item><item><title>Incremental backups</title><link>http://www.circuidipity.com/incremental-backups-rsnapshot.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #3 .:&lt;/a&gt; Make incremental and automatic backups of a home folder using &lt;strong&gt;rsnapshot + cron&lt;/strong&gt; (and manual backups via &lt;strong&gt;public transit&lt;/strong&gt;).&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Backup strategy &lt;strong&gt;Version 0&lt;/strong&gt; for my home folder was &lt;strong&gt;rsync&lt;/strong&gt; + &lt;strong&gt;portable&lt;/strong&gt; + &lt;strong&gt;subway&lt;/strong&gt;. That is, I would simply make a periodic, manual sync of files using &lt;strong&gt;rsync&lt;/strong&gt; from my primary computer to a &lt;strong&gt;portable&lt;/strong&gt; encrypted &lt;a class="reference external" href="http://www.circuidipity.com/encrypt-external-drive.html"&gt;USB hard drive&lt;/a&gt;. Then ride the &lt;strong&gt;subway&lt;/strong&gt; to a family/friend's place and swap drives (offsite backup).&lt;/p&gt;
@@ -3022,21 +3039,4 @@ iface eth0 inet static
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 24 Jul 2015 12:34:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-03-02:run-a-raspberry-pi-2-from-external-usb-storage.html</guid><category>raspberry pi</category><category>ubuntu</category><category>linux</category><category>network</category></item><item><title>A bit of unplanned Grub2 surgery</title><link>http://www.circuidipity.com/20150227.html</link><description>&lt;p&gt;&lt;strong&gt;PROBLEM:&lt;/strong&gt; Late night experiments &lt;a class="reference external" href="http://www.circuidipity.com/grubs.html"&gt;loading GRUB on USB sticks&lt;/a&gt; resulted in mucking up Grub on my host machine. After a reboot instead of a boot menu I was greeted with:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;grub &amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Whoops.&lt;/p&gt;
-&lt;p&gt;Host boot partition is &lt;tt class="docutils literal"&gt;sda1&lt;/tt&gt;, LUKS-encrypted root is &lt;tt class="docutils literal"&gt;sda3&lt;/tt&gt;, and runs Linux kernel &lt;tt class="docutils literal"&gt;3.19.0&lt;/tt&gt;. Since the boot loader hadn't fallen into rescue mode there was hope that the essential stuff was in place but for some reason the config was not being read. A quick &lt;tt class="docutils literal"&gt;ls&lt;/tt&gt; in the Grub shell confirmed that &lt;tt class="docutils literal"&gt;/boot/grub/grub.cfg&lt;/tt&gt;, kernels, initrd files were present.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;FIX:&lt;/strong&gt; After a few tries I found the right parameters for a manual boot... specifically &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;root=/dev/mapper/sda3_crypt&lt;/span&gt;&lt;/tt&gt; NOT &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;root=/dev/sda3&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;grub&amp;gt; linux &lt;span class="o"&gt;(&lt;/span&gt;hd0,1&lt;span class="o"&gt;)&lt;/span&gt;/vmlinuz-3.19.0-031900-generic &lt;span class="nv"&gt;root&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/mapper/sda3_crypt ro
-grub&amp;gt; initrd &lt;span class="o"&gt;(&lt;/span&gt;hd0,1&lt;span class="o"&gt;)&lt;/span&gt;/initrd.img-3.19.0-031900-generic
-grub&amp;gt; boot
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Boot process begins, pauses for the LUKS passphrase prompt to unlock root, and makes it to the login screen. Good stuff.&lt;/p&gt;
-&lt;p&gt;Examine &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt; and everything looks OK. Update and &lt;strong&gt;reinstall grub&lt;/strong&gt; to the MBR:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-grub
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo grub-install /dev/sda
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reboot and back in business!&lt;/p&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://help.ubuntu.com/community/Grub2/Troubleshooting#Post_Boot_Follow_Up"&gt;Grub 2 Troubleshooting - Post Boot Follow Up&lt;/a&gt;&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 27 Feb 2015 18:40:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-02-27:20150227.html</guid><category>grub</category><category>bootloader</category><category>debian</category><category>linux</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 24 Jul 2015 12:34:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-03-02:run-a-raspberry-pi-2-from-external-usb-storage.html</guid><category>raspberry pi</category><category>ubuntu</category><category>linux</category><category>network</category></item></channel></rss>
