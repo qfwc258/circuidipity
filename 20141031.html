@@ -25,13 +25,13 @@
 
 <!-- article -->
 <h1>Add encrypted USB storage to Chromebooks</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Monday 10 August 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Wednesday 12 August 2015</p>
 <div id="article">
     <p>I love my <a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html">Jessiebook</a> and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room. One popular option is to open up the device and swap in a bigger SSD.</p>
 <p>An alternative is to reserve the internal SSD for the OS and use an external USB storage device for data. My plan is to keep the USB stick attached to the Chromebook to provide extra storage that can be disconnected and re-connected at will.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p>I picked up a <strong>SanDisk Cruzer Fit 64GB USB 2.0</strong>  which are really tiny devices that barely extrude from the USB port. To guard against loss or theft its a good idea to encrypt the USB stick. I prepare the device using <strong>Linux Unified Key Setup</strong> (LUKS) and the <tt class="docutils literal">cryptsetup</tt> utility.</p>
+<p>I picked up a <strong>SanDisk Ultra Fit 64GB USB 3.0</strong>  which are really tiny devices that barely extrude from the USB port. To guard against loss or theft its a good idea to encrypt the USB stick. I prepare the device using <strong>Linux Unified Key Setup</strong> (LUKS) and the <tt class="docutils literal">cryptsetup</tt> utility.</p>
 <p><span class="warning">WARNING!</span> Make careful note of the drive and partition labels. The following steps <strong>will destroy all data</strong> currently stored on the drive.</p>
 </div>
 <div class="section" id="prepare">
