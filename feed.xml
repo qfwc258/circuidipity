@@ -1,5 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-08-13T15:12:00-04:00</updated><entry><title>I would rather be ashes than dust</title><link href="http://www.circuidipity.com/rather-ashes-than-dust.html" rel="alternate"></link><updated>2015-08-13T15:12:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-13:rather-ashes-than-dust.html</id><summary type="html">&lt;img alt="Soyuz night launch" class="align-right" src="images/soyuz-at-night-2.png" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-08-19T00:28:00-04:00</updated><entry><title>Install CyanogenMod on Nexus 4</title><link href="http://www.circuidipity.com/install-cyanogenmod-nexus-4.html" rel="alternate"></link><updated>2015-08-19T00:28:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-19:install-cyanogenmod-nexus-4.html</id><summary type="html">&lt;p&gt;Replace stock Android with CyanogenMod on the Nexus 4 using Linux.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Thanks to a &lt;strong&gt;very generous friend&lt;/strong&gt; who upgraded to a new smartphone I now have her old Google Nexus 4. I have dabbled with alternative Android firmwares in the past, and was inspired to give CyaonogenMod a go on this phone after reading &lt;a class="reference external" href="https://lwn.net/Articles/602521/"&gt;Android without the mothership [LWN.net]&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="download"&gt;
+&lt;h2&gt;0. Download&lt;/h2&gt;
+&lt;p&gt;I install CyanogenMod from a host running Debian. Download &lt;tt class="docutils literal"&gt;adb&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;fastboot&lt;/tt&gt; install tools:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install android-tools-adb android-tools-fastboot
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Nexus 4 device is code-named &lt;tt class="docutils literal"&gt;mako&lt;/tt&gt;. Download:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;a recovery image (TWRP) - &lt;a class="reference external" href="https://twrp.me/devices/lgnexus4.html"&gt;https://twrp.me/devices/lgnexus4.html&lt;/a&gt; (&lt;a class="reference external" href="https://dl.twrp.me/mako/"&gt;latest is 2.8.7.0&lt;/a&gt; as of 7/29)&lt;/li&gt;
+&lt;li&gt;the Cyanogenmod ROM nightly build &lt;a class="reference external" href="https://download.cyanogenmod.org/?device=mako&amp;amp;type="&gt;specific to this device&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="developer-options"&gt;
+&lt;h2&gt;1. Developer Options&lt;/h2&gt;
+&lt;p&gt;On the Nexus I enable developer options by navigating to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Settings-&amp;gt;About&lt;/span&gt; phone&lt;/tt&gt;, click to open and make +7 taps on &lt;strong&gt;Build&lt;/strong&gt; number. Displays &lt;tt class="docutils literal"&gt;You are now a developer&lt;/tt&gt;. Return to settings and &lt;tt class="docutils literal"&gt;Developer Options&lt;/tt&gt; is now visible. Click to open and activate &lt;tt class="docutils literal"&gt;USB debugging&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="connect-device"&gt;
+&lt;h2&gt;2. Connect device&lt;/h2&gt;
+&lt;p&gt;Connect phone to host via USB:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;lsusb &lt;span class="p"&gt;|&lt;/span&gt; grep -i nexus
+Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 003: ID 18d1:4ee2 Google Inc. Nexus &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;debug&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;adb devices -l
+* daemon not running. starting it now on port &lt;span class="m"&gt;5037&lt;/span&gt; *
+* daemon started successfully *
+List of devices attached
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;       offline usb:1-12
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Confirm &lt;tt class="docutils literal"&gt;Allow usb debugging&lt;/tt&gt; in pop-up on the phone. Re-run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;adb devices -l
+List of devices attached
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;       device usb:1-12 product:occam model:Nexus_4 device:mako
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="unlock-bootloader"&gt;
+&lt;h2&gt;3. Unlock bootloader&lt;/h2&gt;
+&lt;p&gt;Boot the device into &lt;strong&gt;fastboot&lt;/strong&gt; mode:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;adb reboot bootloader
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Once device is in fastboot mode, verify host sees device and unlock:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;fastboot devices -l
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;       fastboot usb:1-12
+&lt;span class="nv"&gt;$ &lt;/span&gt;fastboot oem unlock
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="install-twrp"&gt;
+&lt;h2&gt;4. Install TWRP&lt;/h2&gt;
+&lt;p&gt;While in fastboot mode flash the TWRP recovery image:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;fastboot flash recovery twrp-VERSION-mako.img
+sending &lt;span class="s1"&gt;&amp;#39;recovery&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;9028&lt;/span&gt; KB&lt;span class="o"&gt;)&lt;/span&gt;...
+OKAY &lt;span class="o"&gt;[&lt;/span&gt;  0.287s&lt;span class="o"&gt;]&lt;/span&gt;
+writing &lt;span class="s1"&gt;&amp;#39;recovery&amp;#39;&lt;/span&gt;...
+OKAY &lt;span class="o"&gt;[&lt;/span&gt;  0.501s&lt;span class="o"&gt;]&lt;/span&gt;
+finished. total &lt;span class="nb"&gt;time&lt;/span&gt;: 0.787s
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot the bootloader:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;fastboot reboot-bootloader
+rebooting into bootloader...
+OKAY &lt;span class="o"&gt;[&lt;/span&gt;  0.001s&lt;span class="o"&gt;]&lt;/span&gt;
+finished. total &lt;span class="nb"&gt;time&lt;/span&gt;: 0.001s
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Use the device volume keys to navigate to &lt;strong&gt;Recovery&lt;/strong&gt; mode and power key to select. TWRP recovery starts. Tap &lt;strong&gt;Wipe&lt;/strong&gt; and swipe to start &lt;strong&gt;Factory Reset&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="install-cyanogenmod"&gt;
+&lt;h2&gt;5. Install CyanogenMod&lt;/h2&gt;
+&lt;p&gt;Copy the CyanogenMod distribution zip file into device:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;adb push cm-12.1-VERSION-NIGHTLY-mako.zip /sdcard
+&lt;span class="m"&gt;3753&lt;/span&gt; KB/s &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;263171832&lt;/span&gt; bytes in 68.465s&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Return to TWRP main menu and tap &lt;strong&gt;Install&lt;/strong&gt;. Search in file system for the freshly-installed zip and tap to select. Tap checkbox Zip file signature verification and swipe to confirm flash. The message &lt;tt class="docutils literal"&gt;Successfull&lt;/tt&gt; should appear. Tap &lt;tt class="docutils literal"&gt;Reboot System&lt;/tt&gt; and device boots into CyanogenMod.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="android"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>I would rather be ashes than dust</title><link href="http://www.circuidipity.com/rather-ashes-than-dust.html" rel="alternate"></link><updated>2015-08-13T15:12:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-13:rather-ashes-than-dust.html</id><summary type="html">&lt;img alt="Soyuz night launch" class="align-right" src="images/soyuz-at-night-2.png" /&gt;
 &lt;p&gt;&lt;strong&gt;Jack London (1876-1916):&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;div class="line-block"&gt;
@@ -2720,323 +2795,4 @@ ATTRS&lt;span class="o"&gt;{&lt;/span&gt;idVendor&lt;span class="o"&gt;}==&lt;/s
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="ubuntu"></category><category term="linux"></category><category term="network"></category></entry><entry><title>Run a Raspberry Pi 2 from USB storage v2.0</title><link href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html" rel="alternate"></link><updated>2015-07-24T12:34:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-02:run-a-raspberry-pi-2-from-external-usb-storage.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; Pi now running &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html"&gt;Debian Jessie&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I am exploring the use of my Pi as &lt;strong&gt;24/7 uptime home server&lt;/strong&gt; and one of the hacks I wish to add is using Pi as a cheap and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;network attached storage (NAS)&lt;/a&gt; device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi root filesystem and run it from there as well?&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;I imagine an always-on Pi would enjoy more robust performance from a hard drive than SD card. &lt;a class="footnote-reference" href="#id4" id="id1"&gt;[1]&lt;/a&gt; I put my plan in motion using:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Raspberry Pi 2 Model B&lt;/li&gt;
-&lt;li&gt;5V 2A microUSB power adapter&lt;/li&gt;
-&lt;li&gt;Ubuntu 14.04 Linux&lt;/li&gt;
-&lt;li&gt;4GB microSD card (for initial setup and future &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt; partition)&lt;/li&gt;
-&lt;li&gt;1TB powered USB hard drive&lt;/li&gt;
-&lt;li&gt;ethernet cable&lt;/li&gt;
-&lt;li&gt;HDMI display + USB keyboard (for initial setup)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;With the move to ARMv7 the Raspberry Pi 2 is now capable of running the ARM port of Ubuntu. A community-created &lt;a class="reference external" href="https://wiki.ubuntu.com/ARM/RaspberryPi"&gt;Ubuntu 14.04 LTS minimal image&lt;/a&gt; with an updated &lt;tt class="docutils literal"&gt;3.18&lt;/tt&gt; kernel and firmware suitable for Pi 2 is now available. &lt;a class="footnote-reference" href="#id5" id="id2"&gt;[2]&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="download"&gt;
-&lt;h2&gt;0. Download&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Using Linux:&lt;/strong&gt; Import the &lt;a class="reference external" href="http://www.finnie.org/2015/02/16/raspberry-pi-2-update-ubuntu-14-04-image-available/"&gt;lead developer's&lt;/a&gt; GPG key:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --keyserver pgp.mit.edu --recv-key 86AE8D98
-gpg: keyring &lt;span class="sb"&gt;`&lt;/span&gt;/home/username/.gnupg/secring.gpg&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; created
-gpg: requesting key 86AE8D98 from hkp server pgp.mit.edu
-gpg: /home/username/.gnupg/trustdb.gpg: trustdb created
-gpg: key 86AE8D98: public key &lt;span class="s2"&gt;&amp;quot;Ryan Finnie &amp;lt;ryan@finnie.org&amp;gt;&amp;quot;&lt;/span&gt; imported
-gpg: no ultimately trusted keys found
-gpg: Total number processed: 1
-gpg:               imported: &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="o"&gt;(&lt;/span&gt;RSA: 1&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --fingerprint 86AE8D98
-pub   4096R/86AE8D98 2012-04-11
-Key &lt;span class="nv"&gt;fingerprint&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 42E2 C8DE 8C17 3AB1 02F5  2C6E 7E60 A3A6 86AE 8D98
-uid                  Ryan Finnie &amp;lt;ryan@finnie.org&amp;gt;
-uid                  Ryan Finnie &amp;lt;ryan.finnie@canonical.com&amp;gt;
-uid                  &lt;span class="o"&gt;[&lt;/span&gt;jpeg image of size 1669&lt;span class="o"&gt;]&lt;/span&gt;
-sub   4096R/C50F6695 2012-04-11
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Download the &lt;a class="reference external" href="http://www.finnie.org/software/raspberrypi/"&gt;latest ubuntu-trusty image and GPG signature&lt;/a&gt; for Pi 2:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://www.finnie.org/software/raspberrypi/2015-02-19-ubuntu-trusty.zip
-&lt;span class="nv"&gt;$ &lt;/span&gt;wget -c http://www.finnie.org/software/raspberrypi/2015-02-19-ubuntu-trusty.zip.asc
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Verify and unpack the image:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --verify 2015-02-19-ubuntu-trusty.zip.asc 2015-02-19-ubuntu-trusty.zip
-gpg: Signature made Thu &lt;span class="m"&gt;19&lt;/span&gt; Feb &lt;span class="m"&gt;2015&lt;/span&gt; 12:46:09 PM EST using RSA key ID 86AE8D98
-gpg: Good signature from &lt;span class="s2"&gt;&amp;quot;Ryan Finnie &amp;lt;ryan@finnie.org&amp;gt;&amp;quot;&lt;/span&gt;
-gpg:                 aka &lt;span class="s2"&gt;&amp;quot;Ryan Finnie &amp;lt;ryan.finnie@canonical.com&amp;gt;&amp;quot;&lt;/span&gt;
-gpg:                 aka &lt;span class="s2"&gt;&amp;quot;[jpeg image of size 1669]&amp;quot;&lt;/span&gt;
-gpg: WARNING: This key is not certified with a trusted signature!
-gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: 42E2 C8DE 8C17 3AB1 02F5  2C6E 7E60 A3A6 86AE 8D98
-&lt;span class="nv"&gt;$ &lt;/span&gt;unzip 2015-02-19-ubuntu-trusty.zip
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="install-to-sd-card"&gt;
-&lt;h2&gt;1. Install to SD card&lt;/h2&gt;
-&lt;p&gt;In lieu of the usual &lt;tt class="docutils literal"&gt;dd&lt;/tt&gt; I use &lt;a class="reference external" href="https://source.tizen.org/documentation/reference/bmaptool/bmap-tools-project"&gt;bmap-tools&lt;/a&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;2015-02-19-ubuntu-trusty.bmap&lt;/span&gt;&lt;/tt&gt; to write &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;2015-02-19-ubuntu-trusty.img&lt;/span&gt;&lt;/tt&gt; to the SD card. &lt;strong&gt;Advantages:&lt;/strong&gt; speed boost, and bmaptool's inability to write to mounted devices (in case you pick a wrong device/partition like, say, your &lt;em&gt;home&lt;/em&gt; drive... &lt;tt class="docutils literal"&gt;dd&lt;/tt&gt;'s nickname &lt;em&gt;disk destroyer&lt;/em&gt; is no idle boast):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install bmap-tools
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo bmaptool copy --bmap 2015-02-19-ubuntu-trusty.bmap 2015-02-19-ubuntu-trusty.img /dev/sdX
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="pi-boot"&gt;
-&lt;h2&gt;2. Pi Boot&lt;/h2&gt;
-&lt;p&gt;Login username and password are both &lt;tt class="docutils literal"&gt;ubuntu&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Filesystem layout on the SD card:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;df -h
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/mmcblk0p2  1.7G  456M  1.1G  30% /
-devtmpfs        458M  4.0K  458M   1% /dev
-none            4.0K     &lt;span class="m"&gt;0&lt;/span&gt;  4.0K   0% /sys/fs/cgroup
-none             93M  260K   93M   1% /run
-none            5.0M     &lt;span class="m"&gt;0&lt;/span&gt;  5.0M   0% /run/lock
-none            462M     &lt;span class="m"&gt;0&lt;/span&gt;  462M   0% /run/shm
-none            100M     &lt;span class="m"&gt;0&lt;/span&gt;  100M   0% /run/user
-/dev/mmcblk0p1   64M  9.7M   55M  16% /boot/firmware
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="partition-external-hard-drive"&gt;
-&lt;h2&gt;3. Partition external hard drive&lt;/h2&gt;
-&lt;p&gt;I connect the 1TB USB hard drive to Pi and confirm device detection:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;lsusb
-Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 002: ID 0424:9514 Standard Microsystems Corp.
-Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 003: ID 0424:ec00 Standard Microsystems Corp.
-Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 005: ID 152d:2329 JMicron Technology Corp. / JMicron USA Technology Corp. JM20329 SATA Bridge
-&lt;span class="nv"&gt;$ &lt;/span&gt;dmesg -t
-&lt;span class="o"&gt;[&lt;/span&gt; ... &lt;span class="o"&gt;]&lt;/span&gt;
-usb 1-1.3: new high-speed USB device number &lt;span class="m"&gt;5&lt;/span&gt; using dwc_otg
-usb 1-1.3: New USB device found, &lt;span class="nv"&gt;idVendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;152d, &lt;span class="nv"&gt;idProduct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2329
-usb 1-1.3: New USB device strings: &lt;span class="nv"&gt;Mfr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1, &lt;span class="nv"&gt;Product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;SerialNumber&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;5
-usb 1-1.3: Product: USB to ATA/ATAPI bridge
-usb 1-1.3: Manufacturer: JMicron
-usb 1-1.3: SerialNumber: DCA5968053FF
-usb-storage 1-1.3:1.0: USB Mass Storage device detected
-usb-storage 1-1.3:1.0: Quirks match &lt;span class="k"&gt;for&lt;/span&gt; vid 152d pid 2329: 8020
-scsi0 : usb-storage 1-1.3:1.0
-scsi 0:0:0:0: Direct-Access     WDC WD10 EARS-00Y5B1           PQ: &lt;span class="m"&gt;0&lt;/span&gt; ANSI: &lt;span class="m"&gt;2&lt;/span&gt; CCS
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="m"&gt;1953525168&lt;/span&gt; 512-byte logical blocks: &lt;span class="o"&gt;(&lt;/span&gt;1.00 TB/931 GiB&lt;span class="o"&gt;)&lt;/span&gt;
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Write Protect is off
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Mode Sense: &lt;span class="m"&gt;28&lt;/span&gt; &lt;span class="m"&gt;00&lt;/span&gt; &lt;span class="m"&gt;00&lt;/span&gt; 00
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; No Caching mode page found
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Assuming drive cache: write through
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; No Caching mode page found
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Assuming drive cache: write through
-sd 0:0:0:0: Attached scsi generic sg0 &lt;span class="nb"&gt;type &lt;/span&gt;0
-sda: sda1
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; No Caching mode page found
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Assuming drive cache: write through
-sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Attached SCSI disk
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Device is &lt;tt class="docutils literal"&gt;sda&lt;/tt&gt;. Use &lt;strong&gt;fdisk&lt;/strong&gt; to create 2 new partitions on the USB drive:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;sda1 - 20GB - root filesystem&lt;/li&gt;
-&lt;li&gt;sda2 - remaining space - storage&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo fdisk /dev/sda
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
-
-Disk /dev/sda: 1000.2 GB, &lt;span class="m"&gt;1000204886016&lt;/span&gt; bytes
-&lt;span class="m"&gt;255&lt;/span&gt; heads, &lt;span class="m"&gt;63&lt;/span&gt; sectors/track, &lt;span class="m"&gt;121601&lt;/span&gt; cylinders, total &lt;span class="m"&gt;1953525168&lt;/span&gt; sectors
-&lt;span class="nv"&gt;Units&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; sectors of &lt;span class="m"&gt;1&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Disk identifier: 0x00000000
-
-Device Boot      Start         End      Blocks   Id  System
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: n
-Partition &lt;span class="nb"&gt;type&lt;/span&gt;:
-  p   primary &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; primary, &lt;span class="m"&gt;0&lt;/span&gt; extended, &lt;span class="m"&gt;4&lt;/span&gt; free&lt;span class="o"&gt;)&lt;/span&gt;
-  e   extended
-Select &lt;span class="o"&gt;(&lt;/span&gt;default p&lt;span class="o"&gt;)&lt;/span&gt;: p
-Partition number &lt;span class="o"&gt;(&lt;/span&gt;1-4, default 1&lt;span class="o"&gt;)&lt;/span&gt;:
-Using default value 1
-First sector &lt;span class="o"&gt;(&lt;/span&gt;2048-1953525167, default 2048&lt;span class="o"&gt;)&lt;/span&gt;:
-Using default value 2048
-Last sector, +sectors or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;2048-1953525167, default 1953525167&lt;span class="o"&gt;)&lt;/span&gt;: +20G
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: n
-Partition &lt;span class="nb"&gt;type&lt;/span&gt;:
-  p   primary &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; primary, &lt;span class="m"&gt;0&lt;/span&gt; extended, &lt;span class="m"&gt;3&lt;/span&gt; free&lt;span class="o"&gt;)&lt;/span&gt;
-  e   extended
-Select &lt;span class="o"&gt;(&lt;/span&gt;default p&lt;span class="o"&gt;)&lt;/span&gt;: p
-Partition number &lt;span class="o"&gt;(&lt;/span&gt;1-4, default 2&lt;span class="o"&gt;)&lt;/span&gt;:
-Using default value 2
-First sector &lt;span class="o"&gt;(&lt;/span&gt;41945088-1953525167, default 41945088&lt;span class="o"&gt;)&lt;/span&gt;:
-Using default value 41945088
-Last sector, +sectors or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;41945088-1953525167, default 1953525167&lt;span class="o"&gt;)&lt;/span&gt;:
-Using default value 1953525167
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
-
-Disk /dev/sda: 1000.2 GB, &lt;span class="m"&gt;1000204886016&lt;/span&gt; bytes
-&lt;span class="m"&gt;255&lt;/span&gt; heads, &lt;span class="m"&gt;63&lt;/span&gt; sectors/track, &lt;span class="m"&gt;121601&lt;/span&gt; cylinders, total &lt;span class="m"&gt;1953525168&lt;/span&gt; sectors
-&lt;span class="nv"&gt;Units&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; sectors of &lt;span class="m"&gt;1&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Disk identifier: 0x00000000
-
-Device Boot      Start         End      Blocks   Id  System
-/dev/sda1            &lt;span class="m"&gt;2048&lt;/span&gt;    &lt;span class="m"&gt;41945087&lt;/span&gt;    &lt;span class="m"&gt;20971520&lt;/span&gt;   &lt;span class="m"&gt;83&lt;/span&gt;  Linux
-/dev/sda2        &lt;span class="m"&gt;41945088&lt;/span&gt;  &lt;span class="m"&gt;1953525167&lt;/span&gt;   &lt;span class="m"&gt;955790040&lt;/span&gt;   &lt;span class="m"&gt;83&lt;/span&gt;  Linux
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: w
-The partition table has been altered!
-
-Calling ioctl&lt;span class="o"&gt;()&lt;/span&gt; to re-read partition table.
-Syncing disks.
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Format the new partitions using filesystem &lt;tt class="docutils literal"&gt;ext4&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mke2fs -t ext4 -L rootfs /dev/sda1
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mke2fs -t ext4 -L storage /dev/sda2
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="rsync"&gt;
-&lt;h2&gt;4. Rsync&lt;/h2&gt;
-&lt;p&gt;Mount the newly-formatted &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; partition to &lt;tt class="docutils literal"&gt;/mnt&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mount -t ext4 /dev/sda1 /mnt
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Use &lt;strong&gt;rsync&lt;/strong&gt; to copy contents of &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; on the SD card to the &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; partition on the USB device:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo rsync -axv / /mnt
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="new-rootfs"&gt;
-&lt;h2&gt;5. New rootfs&lt;/h2&gt;
-&lt;div class="section" id="on-the-sd-card"&gt;
-&lt;h3&gt;5.1 On the SD card&lt;/h3&gt;
-&lt;p&gt;Modify options in &lt;tt class="docutils literal"&gt;/boot/cmdline.txt&lt;/tt&gt; to point the bootloader to &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; filesystem on the USB device:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Original:
-dwc_otg.lpm_enable&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;console&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;tty1 &lt;span class="nv"&gt;root&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/mmcblk0p2 rootwait
-
-Modified:
-dwc_otg.lpm_enable&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;console&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;tty1 &lt;span class="nv"&gt;root&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sda1 rootwait &lt;span class="nv"&gt;rootdelay&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;5
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="on-the-usb-hard-drive"&gt;
-&lt;h3&gt;5.2 On the USB hard drive&lt;/h3&gt;
-&lt;p&gt;Create new mountpoint for the &lt;tt class="docutils literal"&gt;storage&lt;/tt&gt; partition:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /mnt/media/USB0
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Modify options in &lt;tt class="docutils literal"&gt;/mnt/etc/fstab&lt;/tt&gt; to mount &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;storage&lt;/tt&gt; partitions at boot. &lt;a class="footnote-reference" href="#id6" id="id3"&gt;[3]&lt;/a&gt; Example for &lt;tt class="docutils literal"&gt;sda1&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;sda2&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;proc            /proc           proc    defaults          &lt;span class="m"&gt;0&lt;/span&gt;       0
-&lt;span class="c"&gt;# comment out root filesystem on SD card&lt;/span&gt;
-&lt;span class="c"&gt;#/dev/mmcblk0p2  /               ext4    defaults,noatime  0       1&lt;/span&gt;
-&lt;span class="c"&gt;# partitions on USB hard drive&lt;/span&gt;
-/dev/sda1       /       ext4    defaults,noatime          &lt;span class="m"&gt;0&lt;/span&gt;       1
-/dev/sda2       /media/USB0 ext4    defaults,noatime      &lt;span class="m"&gt;0&lt;/span&gt;       0
-/dev/mmcblk0p1  /boot/firmware  vfat    defaults          &lt;span class="m"&gt;0&lt;/span&gt;       2
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="reboot"&gt;
-&lt;h2&gt;6. Reboot&lt;/h2&gt;
-&lt;p&gt;Save modifications and reboot:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo reboot
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Log in and check out the new filesystem layout:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;df -h
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/sda1        20G  590M   18G   4% /
-devtmpfs        458M  4.0K  458M   1% /dev
-none            4.0K     &lt;span class="m"&gt;0&lt;/span&gt;  4.0K   0% /sys/fs/cgroup
-none             93M  280K   93M   1% /run
-/dev/sda2       898G  326G  527G  39% /media/USB0
-none            5.0M     &lt;span class="m"&gt;0&lt;/span&gt;  5.0M   0% /run/lock
-none            462M     &lt;span class="m"&gt;0&lt;/span&gt;  462M   0% /run/shm
-none            100M     &lt;span class="m"&gt;0&lt;/span&gt;  100M   0% /run/user
-/dev/mmcblk0p1   64M  9.9M   55M  16% /boot/firmware
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="post-install"&gt;
-&lt;h2&gt;7. Post-install&lt;/h2&gt;
-&lt;div class="section" id="administrator"&gt;
-&lt;h3&gt;7.1 Administrator&lt;/h3&gt;
-&lt;p&gt;Ubuntu is a great operating system but a not-so-great username and a lousy password. Example: change default username/group &lt;tt class="docutils literal"&gt;ubuntu&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;pi&lt;/tt&gt; and set a new password.&lt;/p&gt;
-&lt;p&gt;Unlock &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; account by setting a new password:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo passwd root
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Log out and back in as &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; and configure &lt;tt class="docutils literal"&gt;pi&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# usermod -l pi -m -d /home/pi ubuntu&lt;/span&gt;
-&lt;span class="c"&gt;# groupmod -n pi ubuntu&lt;/span&gt;
-&lt;span class="c"&gt;# passwd pi&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Optional:&lt;/strong&gt; Re-lock &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; by disabling the password:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo passwd -dl root
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="hostname"&gt;
-&lt;h3&gt;7.2 Hostname&lt;/h3&gt;
-&lt;p&gt;Example: Modify hostname &lt;tt class="docutils literal"&gt;ubuntu&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;raspberry&lt;/tt&gt; in &lt;tt class="docutils literal"&gt;/etc/hostname&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;/etc/hosts&lt;/tt&gt; and restart the &lt;tt class="docutils literal"&gt;hostname&lt;/tt&gt; service:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service hostname restart
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Log out and back in and hostname &lt;tt class="docutils literal"&gt;raspberry&lt;/tt&gt; is visible.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="timezone"&gt;
-&lt;h3&gt;7.3 Timezone&lt;/h3&gt;
-&lt;p&gt;Default timezone is &lt;tt class="docutils literal"&gt;UTC&lt;/tt&gt;. Modify to appropriate value:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;cat /etc/timezone
-Etc/UTC
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg-reconfigure tzdata  &lt;span class="c"&gt;# ...and follow the interactive menu to set (example) &amp;#39;America/Toronto&amp;#39;...&lt;/span&gt;
-
-Current default &lt;span class="nb"&gt;time &lt;/span&gt;zone: &lt;span class="s1"&gt;&amp;#39;America/Toronto&amp;#39;&lt;/span&gt;
-Local &lt;span class="nb"&gt;time &lt;/span&gt;is now:      Sun Mar  &lt;span class="m"&gt;1&lt;/span&gt; 18:28:32 EST 2015.
-Universal Time is now:  Sun Mar  &lt;span class="m"&gt;1&lt;/span&gt; 23:28:32 UTC 2015.
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="upgrade"&gt;
-&lt;h3&gt;7.4 Upgrade&lt;/h3&gt;
-&lt;p&gt;With the newly-configured &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; up-and-running now is a good time to update Ubuntu:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get update
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get dist-upgrade
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="swap"&gt;
-&lt;h3&gt;7.5 Swap&lt;/h3&gt;
-&lt;p&gt;Ubuntu on Pi does not include a swap partition/file. Generate a (default) 2GB &lt;tt class="docutils literal"&gt;/var/swap&lt;/tt&gt; file at boot by installing:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install dphys-swapfile
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="static-address"&gt;
-&lt;h3&gt;7.6 Static Address&lt;/h3&gt;
-&lt;p&gt;A Raspberry Pi that is going to stay home and run as a server can be configured to use a &lt;strong&gt;static network address&lt;/strong&gt;. Sample &lt;tt class="docutils literal"&gt;/etc/network/interfaces&lt;/tt&gt; modification that disables &lt;tt class="docutils literal"&gt;dhcp&lt;/tt&gt; and sets ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt; and connects to a router (that handles DNS) at &lt;tt class="docutils literal"&gt;192.168.1.1&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#iface eth0 inet dhcp&lt;/span&gt;
-auto eth0
-iface eth0 inet static
-    address 192.168.1.88
-    netmask 255.255.255.0
-    gateway 192.168.1.1
-    dns-nameservers 192.168.1.1
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="openssh-server"&gt;
-&lt;h3&gt;7.7 OpenSSH Server&lt;/h3&gt;
-&lt;p&gt;Install and configure SSH for remote access to our (soon-to-be) headless Pi home server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install openssh-server
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Check out &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;securing access to remote servers using SSH keys&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h3&gt;Notes&lt;/h3&gt;
-&lt;table class="docutils footnote" frame="void" id="id4" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.raspberrypi.org/forums/viewtopic.php?f=29&amp;amp;t=44177"&gt;Discussion thread (raspberrypi.org/forums)&lt;/a&gt; about moving root to external USB storage.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table class="docutils footnote" frame="void" id="id5" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html"&gt;Version 1&lt;/a&gt; used Raspbian on a Raspberry Pi Model B.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table class="docutils footnote" frame="void" id="id6" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id3"&gt;[3]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Pi requires an SD card to boot so we continue using original &lt;tt class="docutils literal"&gt;/boot&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</summary><category term="raspberry pi"></category><category term="ubuntu"></category><category term="linux"></category><category term="network"></category></entry></feed>
+</summary><category term="ubuntu"></category><category term="linux"></category><category term="network"></category></entry></feed>
