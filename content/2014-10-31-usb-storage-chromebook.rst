@@ -5,7 +5,7 @@ Add encrypted USB storage to Chromebooks
 :date: 2014-10-31 00:11:00
 :slug: 20141031
 :tags: luks, crypto, chromebook, debian, linux
-:modified: 2015-08-12 23:14:00
+:modified: 2015-08-21 16:14:00
 
 I love my `Jessiebook <http://www.circuidipity.com/c720-chromebook-to-jessiebook.html>`_ and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room. One popular option is to open up the device and swap in a bigger SSD.                                                                                    
 
@@ -46,7 +46,7 @@ Install a filesystem (example: ``ext4``) [1]_ and mount the partition to gain ac
 
 .. code-block:: bash
 
-    $ sudo mkfs.ext4 -E lazy_itable_init=0,lazy_journal_init=0 /dev/mapper/sdX1_crypt
+    $ sudo mkfs.ext4 -m 1 -E lazy_itable_init=0,lazy_journal_init=0 /dev/mapper/sdX1_crypt
     $ sudo mount -t ext4 /dev/mapper/sdX1_crypt /mnt
 
 Before disconnecting the drive the partition must be unmounted and the encrypted device must be closed:
@@ -81,4 +81,4 @@ Happy hacking!
 Notes
 -----
 
-.. [1] Writing ``ext4`` with options ``lazy_itable_init=0,lazy_journal_init=0`` initializes the inodes and journal at creation time vs a gradual process during mount times. If you wonder why your newly-formatted drive's activity LED is blinking away... install and run ``iotop`` and take note of ``ext4lazyinit`` and `Lazy Initialization <https://www.thomas-krenn.com/en/wiki/Ext4_Filesystem#Lazy_Initialization>`_.
+.. [1] Writing ``ext4`` with options ``-m 1`` reduces reserved filesystem blocks from default 5% to 1% (grab extra space for non-root partitions) and ``lazy_itable_init=0,lazy_journal_init=0`` initializes the inodes and journal at creation time vs a gradual process during mount times. If you wonder why your newly-formatted drive's activity LED is blinking away... install and run ``iotop`` and take note of ``ext4lazyinit`` and `Lazy Initialization <https://www.thomas-krenn.com/en/wiki/Ext4_Filesystem#Lazy_Initialization>`_.
