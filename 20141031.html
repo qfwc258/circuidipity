@@ -25,7 +25,7 @@
 
 <!-- article -->
 <h1>Add encrypted USB storage to Chromebooks</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Wednesday 12 August 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Friday 21 August 2015</p>
 <div id="article">
     <p>I love my <a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html">Jessiebook</a> and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room. One popular option is to open up the device and swap in a bigger SSD.</p>
 <p>An alternative is to reserve the internal SSD for the OS and use an external USB storage device for data. My plan is to keep the USB stick attached to the Chromebook to provide extra storage that can be disconnected and re-connected at will.</p>
@@ -50,7 +50,7 @@
 <div class="section" id="filesystem">
 <h2>2. Filesystem</h2>
 <p>Install a filesystem (example: <tt class="docutils literal">ext4</tt>) <a class="footnote-reference" href="#id2" id="id1">[1]</a> and mount the partition to gain access to the storage:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mkfs.ext4 -E <span class="nv">lazy_itable_init</span><span class="o">=</span>0,lazy_journal_init<span class="o">=</span><span class="m">0</span> /dev/mapper/sdX1_crypt
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkfs.ext4 -m <span class="m">1</span> -E <span class="nv">lazy_itable_init</span><span class="o">=</span>0,lazy_journal_init<span class="o">=</span><span class="m">0</span> /dev/mapper/sdX1_crypt
 <span class="nv">$ </span>sudo mount -t ext4 /dev/mapper/sdX1_crypt /mnt
 </pre></div>
 <p>Before disconnecting the drive the partition must be unmounted and the encrypted device must be closed:</p>
@@ -76,7 +76,7 @@
 <table class="docutils footnote" frame="void" id="id2" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Writing <tt class="docutils literal">ext4</tt> with options <tt class="docutils literal">lazy_itable_init=0,lazy_journal_init=0</tt> initializes the inodes and journal at creation time vs a gradual process during mount times. If you wonder why your newly-formatted drive's activity LED is blinking away... install and run <tt class="docutils literal">iotop</tt> and take note of <tt class="docutils literal">ext4lazyinit</tt> and <a class="reference external" href="https://www.thomas-krenn.com/en/wiki/Ext4_Filesystem#Lazy_Initialization">Lazy Initialization</a>.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Writing <tt class="docutils literal">ext4</tt> with options <tt class="docutils literal"><span class="pre">-m</span> 1</tt> reduces reserved filesystem blocks from default 5% to 1% (grab extra space for non-root partitions) and <tt class="docutils literal">lazy_itable_init=0,lazy_journal_init=0</tt> initializes the inodes and journal at creation time vs a gradual process during mount times. If you wonder why your newly-formatted drive's activity LED is blinking away... install and run <tt class="docutils literal">iotop</tt> and take note of <tt class="docutils literal">ext4lazyinit</tt> and <a class="reference external" href="https://www.thomas-krenn.com/en/wiki/Ext4_Filesystem#Lazy_Initialization">Lazy Initialization</a>.</td></tr>
 </tbody>
 </table>
 </div>
