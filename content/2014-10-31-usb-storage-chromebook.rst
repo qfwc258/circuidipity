@@ -5,7 +5,7 @@ Add encrypted USB storage to Chromebooks
 :date: 2014-10-31 00:11:00
 :slug: 20141031
 :tags: luks, crypto, chromebook, debian, linux
-:modified: 2015-08-10 14:45:00
+:modified: 2015-08-12 23:14:00
 
 I love my `Jessiebook <http://www.circuidipity.com/c720-chromebook-to-jessiebook.html>`_ and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room. One popular option is to open up the device and swap in a bigger SSD.                                                                                    
 
@@ -14,7 +14,7 @@ An alternative is to reserve the internal SSD for the OS and use an external USB
 Let's go!
 =========
 
-I picked up a **SanDisk Cruzer Fit 64GB USB 2.0**  which are really tiny devices that barely extrude from the USB port. To guard against loss or theft its a good idea to encrypt the USB stick. I prepare the device using **Linux Unified Key Setup** (LUKS) and the ``cryptsetup`` utility.
+I picked up a **SanDisk Ultra Fit 64GB USB 3.0**  which are really tiny devices that barely extrude from the USB port. To guard against loss or theft its a good idea to encrypt the USB stick. I prepare the device using **Linux Unified Key Setup** (LUKS) and the ``cryptsetup`` utility.
 
 .. role:: warning
 
