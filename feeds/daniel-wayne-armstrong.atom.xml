@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-08-21T12:18:00-04:00</updated><entry><title>Install CyanogenMod on Nexus 4</title><link href="http://www.circuidipity.com/install-cyanogenmod-nexus-4.html" rel="alternate"></link><updated>2015-08-21T12:18:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-19:install-cyanogenmod-nexus-4.html</id><summary type="html">&lt;p&gt;Replace stock Android with CyanogenMod on the Nexus 4 using Linux.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-08-21T12:26:00-04:00</updated><entry><title>Install CyanogenMod on Nexus 4</title><link href="http://www.circuidipity.com/install-cyanogenmod-nexus-4.html" rel="alternate"></link><updated>2015-08-21T12:26:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-19:install-cyanogenmod-nexus-4.html</id><summary type="html">&lt;p&gt;Replace stock Android with CyanogenMod on the Nexus 4 using Linux.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Thanks to a &lt;strong&gt;very generous friend&lt;/strong&gt; who upgraded to a new smartphone I now have her old Google Nexus 4. I have dabbled with alternative Android firmwares in the past, and was inspired to give CyaonogenMod a go on this phone after reading &lt;a class="reference external" href="https://lwn.net/Articles/602521/"&gt;Android without the mothership [LWN.net]&lt;/a&gt;.&lt;/p&gt;
@@ -77,16 +77,15 @@ finished. total &lt;span class="nb"&gt;time&lt;/span&gt;: 0.001s
 &lt;h2&gt;6. F-Droid&lt;/h2&gt;
 &lt;p&gt;As a replacement for the non-free Google Play Store app I use the &lt;a class="reference external" href="https://f-droid.org/about/"&gt;F-Droid&lt;/a&gt; free software app repository:&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;On the phone navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Settings-&amp;gt;Security-&amp;gt;Unknown&lt;/span&gt; sources&lt;/tt&gt; and tap to allow&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://f-droid.org/FDroid.apk"&gt;Download the F-Droid app&lt;/a&gt; to host and install the &lt;tt class="docutils literal"&gt;apk&lt;/tt&gt; to phone using &lt;a class="reference external" href="https://developer.android.com/tools/help/adb.html#move"&gt;adb&lt;/a&gt; ...&lt;/li&gt;
+&lt;li&gt;on the phone navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Settings-&amp;gt;Security-&amp;gt;Unknown&lt;/span&gt; sources&lt;/tt&gt; and tap to allow&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://f-droid.org/FDroid.apk"&gt;download the F-Droid app&lt;/a&gt; to host and install the &lt;tt class="docutils literal"&gt;apk&lt;/tt&gt; to phone using &lt;a class="reference external" href="https://developer.android.com/tools/help/adb.html#move"&gt;adb&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;adb install /path/to/FDroid.apk
 &lt;span class="m"&gt;4373&lt;/span&gt; KB/s &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3942326&lt;/span&gt; bytes in 0.880s&lt;span class="o"&gt;)&lt;/span&gt;
         pkg: /data/local/tmp/FDroid.apk
 Success
-&lt;span class="err"&gt;$&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Two apps I like and use daily are &lt;a class="reference external" href="https://f-droid.org/repository/browse/?fdfilter=fbreader&amp;amp;fdid=org.geometerplus.zlibrary.ui.android"&gt;fbreader&lt;/a&gt; for ebooks and &lt;a class="reference external" href="https://f-droid.org/repository/browse/?fdfilter=podcast&amp;amp;fdid=de.danoeh.antennapod"&gt;AntennaPod&lt;/a&gt; for downloading/listening to podcasts.&lt;/p&gt;
+&lt;p&gt;Two apps I like and use daily are &lt;a class="reference external" href="https://f-droid.org/repository/browse/?fdfilter=fbreader&amp;amp;fdid=org.geometerplus.zlibrary.ui.android"&gt;fbreader&lt;/a&gt; for ebooks and &lt;a class="reference external" href="https://f-droid.org/repository/browse/?fdfilter=podcast&amp;amp;fdid=de.danoeh.antennapod"&gt;AntennaPod&lt;/a&gt; for downloading and listening to podcasts.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 </summary><category term="android"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>I would rather be ashes than dust</title><link href="http://www.circuidipity.com/rather-ashes-than-dust.html" rel="alternate"></link><updated>2015-08-13T15:12:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-13:rather-ashes-than-dust.html</id><summary type="html">&lt;img alt="Soyuz night launch" class="align-right" src="images/soyuz-at-night-2.png" /&gt;
