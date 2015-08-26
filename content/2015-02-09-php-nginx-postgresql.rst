@@ -5,14 +5,14 @@ PHP + Nginx + PostgreSQL
 :date: 2015-02-09 18:29:00
 :slug: php-nginx-postgresql
 :tags: network, debian, linux, raspberry pi
-:modified: 2015-07-05 16:41:00
+:modified: 2015-08-26 12:48:00
 
-`Raspberry Pi Home Server Hack #6 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ As a requirement to host web applications like `Tiny Tiny RSS <http://www.circuidipity.com/ttrss.html>`_ on my Raspberry Pi I install **PHP**, the lightweight web server **Nginx**, and the **PostgreSQL** database.
+`Raspberry Pi Home Server Hack #6 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ As a requirement to host web applications like `Tiny Tiny RSS <http://www.circuidipity.com/ttrss.html>`_ on my Raspberry Pi I install **PHP**, the lightweight proxy server **Nginx**, and the **PostgreSQL** database.
 
 Let's go!
 =========
 
-**Server** is a `Raspberry Pi 2 <http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html>`_ (example: ``ip_address:192.168.1.88``) running `Debian <http://www.circuidipity.com/tag-debian.html>`_.
+**Setup:** `Raspberry Pi 2 <http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html>`_ with IP ADDRESS ``192.168.1.88`` running Debian.
 
 0. PHP
 ======
@@ -46,80 +46,81 @@ Install:
     $ sudo apt-get install nginx                                                    
     $ sudo systemctl start nginx                                                  
                                                                                     
-Verify web server is running by opening a browser and navigating to (example) ``http://192.168.1.88``. If you see ``Welcome to nginx!`` the server is installed correctly.
+Verify web server is running by opening a browser and navigating to ``http://192.168.1.88``. If you see ``Welcome to nginx!`` the server is installed correctly.
 
 2. Host multiple domains
 ========================
 
 Nginx is capable of serving up multiple web domains or **server blocks** (virtual hosts) from the same server:
 
-* block content is placed in subfolders located in ``/usr/share/nginx/html``
-* configuration in ``/etc/nginx/sites-available``
-* a server block is made active by setting a symbolic link in ``/etc/nginx/sites-enabled`` to its config file
+* I create ``~/html`` to hold block content in subfolders
+* Create block configs in ``/etc/nginx/sites-available``
+* A block is made active by setting a symbolic link in ``/etc/nginx/sites-enabled`` to its config file
 
-When combined with a `free DDNS service <http://www.circuidipity.com/ddns-openwrt.html>`_ (I like `duckdns.org <http://duckdns.org/>`_) multiple custom domains can be hosted on a home server.
+When combined with a `free DDNS service <http://www.circuidipity.com/ddns-openwrt.html>`_ multiple custom domains can be hosted on a home server.
 
-Example: create a sample ``my2pi`` server block to host ``www.my2pi.com``:
+**Example:** Setup a ``myraspberry`` server block to host ``www.myraspberry.ca`` using `duckdns.org <http://duckdns.org/>`_ DDNS.
 
 2.1 CNAME
 ---------
 
-Create a new **CNAME** record at the domain registrar to redirect ``www.my2pi.com`` to ``my2pi.duckdns.org``.
+Create a new **CNAME** record at the domain registrar to redirect ``www.myraspberry.ca`` to ``myraspberry.duckdns.org``.
 
 2.2 Document Root
 -----------------
 
-Create a new root directory to hold the contents of ``my2pi``:
+Create a new root directory to hold the contents of ``myraspberry``:
 
 .. code-block:: bash
 
-    $ sudo mkdir /usr/share/nginx/html/my2pi
-    $ sudo chown -R $USER.$USER /usr/share/nginx/html/my2pi
+    $ mkdir -p ~/html/myraspberry
 
 2.3 Index.html
 --------------
 
-Create a sample ``/usr/share/nginx/html/my2pi/index.html``:
+Create a sample ``~/html/myraspberry/index.html``:
 
 .. code-block:: bash
 
     <html>
     <head>
-    <title>My Pi 2 Home</title>
+    <title>My Raspberry Pi 2 Home</title>
     </head>
-    <body bgcolor="white" text="black">
-    <center><h1>Welcome to My Pi 2 Home!</h1></center>
+    <body bgcolor="red" text="white">
+    <center><h1>Welcome to My Pi!</h1></center>
     </body>
     </html>
 
 2.4 Server Block
 ----------------
 
-I use ``/etc/nginx/sites-available/default`` as a template for the new ``my2pi`` configuration:
+Create a new server block configuration ``/etc/nginx/sites-available/myraspberry``:
 
 .. code-block:: bash
 
-    $ cd /etc/nginx/sites-available
-    $ sudo cp default my2pi
+    server {
+        listen 80; ## listen for ipv4; this line is default and implied
 
-Modify these lines for the custom domain:
+        root /home/USER/html/myraspberry;  ## Replace USER with your username
+        index index.html;
 
-.. code-block:: bash
+        access_log /var/log/nginx/ttrss_access.log;
+        error_log /var/log/nginx/ttrss_error.log info;
 
-    listen 80;
+        server_name myraspberry.*;
 
-    root /usr/share/nginx/html/my2pi;                                           
-    index index.html index.htm;
-
-    server_name www.my2pi.com; 
+        location / {
+            index           index.html;
+        }
+    }
 
 Activate the new server block:
 
 .. code-block:: bash
 
     $ cd /etc/nginx/sites-enabled
-    $ sudo ln -s ../sites-available/my2pi
-    $ sudo service nginx restart
+    $ sudo ln -s ../sites-available/myraspberry
+    $ sudo systemctl restart nginx
 
 2.5 Port Forwarding
 -------------------
