@@ -5,19 +5,19 @@ Tiny Tiny RSS
 :date: 2015-02-11 18:40:00
 :slug: ttrss
 :tags: network, debian, linux, raspberry pi
-:modified: 2015-07-05 16:51:00
+:modified: 2015-08-26 12:58:00
 
 `Raspberry Pi Home Server Hack #7 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Install and self-host the **Tiny Tiny RSS** news reader and gain access to news feeds over the web.
 
 Let's go!
 =========
 
-**Server** is a `Raspberry Pi 2 <http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html>`_ (example: ``ip_address:192.168.1.88``) running `Debian <http://www.circuidipity.com/tag-debian.html>`_.
+**Setup:** `Raspberry Pi 2 <http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html>`_ with IP ADDRESS ``192.168.1.88`` running Debian.
 
 0. Pre-install
 ==============
 
-`Tiny Tiny RSS <http://tt-rss.org/redmine/projects/tt-rss/wiki>`_ is a PHP application that require a proxy web server and a database back-end to store content. See `PHP + Nginx + PostgreSQL <http://www.circuidipity.com/php-nginx-postgresql.html>`_ for necessary prerequites to host TTRSS. [1]_
+`Tiny Tiny RSS <http://tt-rss.org/redmine/projects/tt-rss/wiki>`_ is a PHP application that requires a proxy web server and a database back-end to store content. See `PHP + Nginx + PostgreSQL <http://www.circuidipity.com/php-nginx-postgresql.html>`_ for necessary prerequites to host TTRSS. [1]_
 
 1. Database
 ===========
@@ -72,22 +72,21 @@ Download latest ``Tiny-Tiny-RSS-X.X.X.tar.gz`` from `Releases <https://github.co
 3. Nginx
 ========
 
-Move ``ttrss`` directory into Nginx's `document root <http://www.circuidipity.com/php-nginx-postgresql.html>`_ directory:
+Move ``ttrss`` directory into Nginx's `document root <http://www.circuidipity.com/php-nginx-postgresql.html>`_ directory (I use ``~/html``):
 
 .. code-block:: bash
 
-    $ sudo mv ../ttrss /usr/share/nginx/html/                                              
-    $ sudo chown -R www-data.www-data /usr/share/nginx/html/ttrss                    
+    $ sudo mv ../ttrss ~/html/                                              
     
-Create `server block <http://www.circuidipity.com/php-nginx-postgresql.html>`_ (virtual host) for TTRSS. Sample ``/etc/nginx/sites-available/ttrss`` [3]_ configuration:
+Create a `server block <http://www.circuidipity.com/php-nginx-postgresql.html>`_ (virtual host) for TTRSS. Sample ``/etc/nginx/sites-available/ttrss`` [3]_ configuration:
     
 .. code-block:: bash
                                                                                     
     server {                                                                        
         listen 80; ## listen for ipv4; this line is default and implied            
                                                                                     
-        root /usr/share/nginx/html/ttrss;
-        index index.html index.htm index.php;                                       
+        root /home/USER/html/ttrss; ## Replace USER with your username
+        index index.php;                                       
                                                                                     
         access_log /var/log/nginx/ttrss_access.log;                                 
         error_log /var/log/nginx/ttrss_error.log info;                              
@@ -119,9 +118,7 @@ Save changes and enable block:
 4. Configure
 ============
 
-Example configuration for LAN access to server (``ip_address:192.168.1.88``).
-
-Modify ``/etc/hosts`` on the **client** making the connection:
+**Example:** Configuration for LAN access to the Raspberry Pi server. Modify ``/etc/hosts`` on the **client** making the connection:
 
 .. code-block:: bash
 
@@ -149,7 +146,7 @@ Configure TTRSS to periodically update RSS feeds with new content. First, test i
 
 .. code-block:: bash
                                                                                 
-    $ /usr/bin/php /usr/share/nginx/html/ttrss/update.php --feeds --quiet            
+    $ /usr/bin/php /home/USER/html/ttrss/update.php --feeds --quiet            
                                                                                 
 If script returns no errors add a new job to ``cron`` to run script periodically:
 
@@ -161,7 +158,7 @@ Sample TTRSS job:
                                                                                
 .. code-block:: bash
 
-    10 * * * * /usr/bin/php /usr/share/nginx/html/ttrss/update.php --feeds --quiet
+    10 * * * * /usr/bin/php /home/USER/html/ttrss/update.php --feeds --quiet
 
 6. Helpful resources
 ====================
@@ -179,4 +176,4 @@ Notes
 
 .. [2] PostgreSQL maintains its own users and passwords, which are separate from the Linux user accounts. It is not required that your PostgreSQL usernames match the Linux usernames. See `Practical PostgreSQL database <http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm>`_.
 
-.. [3] Make TTRSS hosted on a home server accessible from the outside over the web by configuring a **dynamic DNS** service (I like `duckdns.org <http://www.duckdns.org/>`_). Example: Create a ``myhomepi`` domain on the DDNS service and modify ``server_name localhost;`` to ``server_name myhomepi.duckdns.org;``. See `DDNS and OpenWrt <http://www.circuidipity.com/ddns-openwrt.html>`_ for details.
+.. [3] Make TTRSS hosted on a home server accessible from the outside over the web by configuring a **dynamic DNS** service (I like `duckdns.org <http://www.duckdns.org/>`_). Example: Create a ``myraspberry`` domain on the DDNS service and modify ``server_name localhost;`` to ``server_name myraspberry.duckdns.org;``. See `DDNS and OpenWrt <http://www.circuidipity.com/ddns-openwrt.html>`_ for details.
