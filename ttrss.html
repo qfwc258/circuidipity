@@ -25,16 +25,16 @@
 
 <!-- article -->
 <h1>Tiny Tiny RSS</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 05 July 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Wednesday 26 August 2015</p>
 <div id="article">
     <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #7 .:</a> Install and self-host the <strong>Tiny Tiny RSS</strong> news reader and gain access to news feeds over the web.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p><strong>Server</strong> is a <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html">Raspberry Pi 2</a> (example: <tt class="docutils literal">ip_address:192.168.1.88</tt>) running <a class="reference external" href="http://www.circuidipity.com/tag-debian.html">Debian</a>.</p>
+<p><strong>Setup:</strong> <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html">Raspberry Pi 2</a> with IP ADDRESS <tt class="docutils literal">192.168.1.88</tt> running Debian.</p>
 </div>
 <div class="section" id="pre-install">
 <h2>0. Pre-install</h2>
-<p><a class="reference external" href="http://tt-rss.org/redmine/projects/tt-rss/wiki">Tiny Tiny RSS</a> is a PHP application that require a proxy web server and a database back-end to store content. See <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">PHP + Nginx + PostgreSQL</a> for necessary prerequites to host TTRSS. <a class="footnote-reference" href="#id6" id="id2">[1]</a></p>
+<p><a class="reference external" href="http://tt-rss.org/redmine/projects/tt-rss/wiki">Tiny Tiny RSS</a> is a PHP application that requires a proxy web server and a database back-end to store content. See <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">PHP + Nginx + PostgreSQL</a> for necessary prerequites to host TTRSS. <a class="footnote-reference" href="#id6" id="id2">[1]</a></p>
 </div>
 <div class="section" id="database">
 <h2>1. Database</h2>
@@ -72,16 +72,15 @@
 </div>
 <div class="section" id="nginx">
 <h2>3. Nginx</h2>
-<p>Move <tt class="docutils literal">ttrss</tt> directory into Nginx's <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">document root</a> directory:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mv ../ttrss /usr/share/nginx/html/
-<span class="nv">$ </span>sudo chown -R www-data.www-data /usr/share/nginx/html/ttrss
+<p>Move <tt class="docutils literal">ttrss</tt> directory into Nginx's <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">document root</a> directory (I use <tt class="docutils literal">~/html</tt>):</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mv ../ttrss ~/html/
 </pre></div>
-<p>Create <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">server block</a> (virtual host) for TTRSS. Sample <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/ttrss</span></tt> <a class="footnote-reference" href="#id8" id="id4">[3]</a> configuration:</p>
+<p>Create a <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">server block</a> (virtual host) for TTRSS. Sample <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/ttrss</span></tt> <a class="footnote-reference" href="#id8" id="id4">[3]</a> configuration:</p>
 <div class="highlight"><pre>server <span class="o">{</span>
     listen 80<span class="p">;</span> <span class="c">## listen for ipv4; this line is default and implied</span>
 
-    root /usr/share/nginx/html/ttrss<span class="p">;</span>
-    index index.html index.htm index.php<span class="p">;</span>
+    root /home/USER/html/ttrss<span class="p">;</span> <span class="c">## Replace USER with your username</span>
+    index index.php<span class="p">;</span>
 
     access_log /var/log/nginx/ttrss_access.log<span class="p">;</span>
     error_log /var/log/nginx/ttrss_error.log info<span class="p">;</span>
@@ -110,8 +109,7 @@
 </div>
 <div class="section" id="configure">
 <h2>4. Configure</h2>
-<p>Example configuration for LAN access to server (<tt class="docutils literal">ip_address:192.168.1.88</tt>).</p>
-<p>Modify <tt class="docutils literal">/etc/hosts</tt> on the <strong>client</strong> making the connection:</p>
+<p><strong>Example:</strong> Configuration for LAN access to the Raspberry Pi server. Modify <tt class="docutils literal">/etc/hosts</tt> on the <strong>client</strong> making the connection:</p>
 <div class="highlight"><pre>192.168.1.88 rss.local
 </pre></div>
 <p>Navigate to <tt class="docutils literal"><span class="pre">http://rss.local</span></tt> and configure TTRSS:</p>
@@ -128,13 +126,13 @@ Port: 5432
 <div class="section" id="updates">
 <h2>5. Updates</h2>
 <p>Configure TTRSS to periodically update RSS feeds with new content. First, test included <tt class="docutils literal">update.php</tt> script:</p>
-<div class="highlight"><pre><span class="nv">$ </span>/usr/bin/php /usr/share/nginx/html/ttrss/update.php --feeds --quiet
+<div class="highlight"><pre><span class="nv">$ </span>/usr/bin/php /home/USER/html/ttrss/update.php --feeds --quiet
 </pre></div>
 <p>If script returns no errors add a new job to <tt class="docutils literal">cron</tt> to run script periodically:</p>
 <div class="highlight"><pre><span class="nv">$ </span>crontab -e
 </pre></div>
 <p>Sample TTRSS job:</p>
-<div class="highlight"><pre><span class="m">10</span> * * * * /usr/bin/php /usr/share/nginx/html/ttrss/update.php --feeds --quiet
+<div class="highlight"><pre><span class="m">10</span> * * * * /usr/bin/php /home/USER/html/ttrss/update.php --feeds --quiet
 </pre></div>
 </div>
 <div class="section" id="helpful-resources">
@@ -162,7 +160,7 @@ Port: 5432
 <table class="docutils footnote" frame="void" id="id8" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>Make TTRSS hosted on a home server accessible from the outside over the web by configuring a <strong>dynamic DNS</strong> service (I like <a class="reference external" href="http://www.duckdns.org/">duckdns.org</a>). Example: Create a <tt class="docutils literal">myhomepi</tt> domain on the DDNS service and modify <tt class="docutils literal">server_name localhost;</tt> to <tt class="docutils literal">server_name myhomepi.duckdns.org;</tt>. See <a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html">DDNS and OpenWrt</a> for details.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>Make TTRSS hosted on a home server accessible from the outside over the web by configuring a <strong>dynamic DNS</strong> service (I like <a class="reference external" href="http://www.duckdns.org/">duckdns.org</a>). Example: Create a <tt class="docutils literal">myraspberry</tt> domain on the DDNS service and modify <tt class="docutils literal">server_name localhost;</tt> to <tt class="docutils literal">server_name myraspberry.duckdns.org;</tt>. See <a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html">DDNS and OpenWrt</a> for details.</td></tr>
 </tbody>
 </table>
 </div>

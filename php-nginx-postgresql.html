@@ -25,12 +25,12 @@
 
 <!-- article -->
 <h1>PHP + Nginx + PostgreSQL</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 05 July 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Wednesday 26 August 2015</p>
 <div id="article">
-    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #6 .:</a> As a requirement to host web applications like <a class="reference external" href="http://www.circuidipity.com/ttrss.html">Tiny Tiny RSS</a> on my Raspberry Pi I install <strong>PHP</strong>, the lightweight web server <strong>Nginx</strong>, and the <strong>PostgreSQL</strong> database.</p>
+    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #6 .:</a> As a requirement to host web applications like <a class="reference external" href="http://www.circuidipity.com/ttrss.html">Tiny Tiny RSS</a> on my Raspberry Pi I install <strong>PHP</strong>, the lightweight proxy server <strong>Nginx</strong>, and the <strong>PostgreSQL</strong> database.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p><strong>Server</strong> is a <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html">Raspberry Pi 2</a> (example: <tt class="docutils literal">ip_address:192.168.1.88</tt>) running <a class="reference external" href="http://www.circuidipity.com/tag-debian.html">Debian</a>.</p>
+<p><strong>Setup:</strong> <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html">Raspberry Pi 2</a> with IP ADDRESS <tt class="docutils literal">192.168.1.88</tt> running Debian.</p>
 </div>
 <div class="section" id="php">
 <h2>0. PHP</h2>
@@ -51,60 +51,64 @@
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install nginx
 <span class="nv">$ </span>sudo systemctl start nginx
 </pre></div>
-<p>Verify web server is running by opening a browser and navigating to (example) <tt class="docutils literal"><span class="pre">http://192.168.1.88</span></tt>. If you see <tt class="docutils literal">Welcome to nginx!</tt> the server is installed correctly.</p>
+<p>Verify web server is running by opening a browser and navigating to <tt class="docutils literal"><span class="pre">http://192.168.1.88</span></tt>. If you see <tt class="docutils literal">Welcome to nginx!</tt> the server is installed correctly.</p>
 </div>
 <div class="section" id="host-multiple-domains">
 <h2>2. Host multiple domains</h2>
 <p>Nginx is capable of serving up multiple web domains or <strong>server blocks</strong> (virtual hosts) from the same server:</p>
 <ul class="simple">
-<li>block content is placed in subfolders located in <tt class="docutils literal">/usr/share/nginx/html</tt></li>
-<li>configuration in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available</span></tt></li>
-<li>a server block is made active by setting a symbolic link in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-enabled</span></tt> to its config file</li>
+<li>I create <tt class="docutils literal">~/html</tt> to hold block content in subfolders</li>
+<li>Create block configs in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available</span></tt></li>
+<li>A block is made active by setting a symbolic link in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-enabled</span></tt> to its config file</li>
 </ul>
-<p>When combined with a <a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html">free DDNS service</a> (I like <a class="reference external" href="http://duckdns.org/">duckdns.org</a>) multiple custom domains can be hosted on a home server.</p>
-<p>Example: create a sample <tt class="docutils literal">my2pi</tt> server block to host <tt class="docutils literal">www.my2pi.com</tt>:</p>
+<p>When combined with a <a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html">free DDNS service</a> multiple custom domains can be hosted on a home server.</p>
+<p><strong>Example:</strong> Setup a <tt class="docutils literal">myraspberry</tt> server block to host <tt class="docutils literal">www.myraspberry.ca</tt> using <a class="reference external" href="http://duckdns.org/">duckdns.org</a> DDNS.</p>
 <div class="section" id="cname">
 <h3>2.1 CNAME</h3>
-<p>Create a new <strong>CNAME</strong> record at the domain registrar to redirect <tt class="docutils literal">www.my2pi.com</tt> to <tt class="docutils literal">my2pi.duckdns.org</tt>.</p>
+<p>Create a new <strong>CNAME</strong> record at the domain registrar to redirect <tt class="docutils literal">www.myraspberry.ca</tt> to <tt class="docutils literal">myraspberry.duckdns.org</tt>.</p>
 </div>
 <div class="section" id="document-root">
 <h3>2.2 Document Root</h3>
-<p>Create a new root directory to hold the contents of <tt class="docutils literal">my2pi</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /usr/share/nginx/html/my2pi
-<span class="nv">$ </span>sudo chown -R <span class="nv">$USER</span>.<span class="nv">$USER</span> /usr/share/nginx/html/my2pi
+<p>Create a new root directory to hold the contents of <tt class="docutils literal">myraspberry</tt>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>mkdir -p ~/html/myraspberry
 </pre></div>
 </div>
 <div class="section" id="index-html">
 <h3>2.3 Index.html</h3>
-<p>Create a sample <tt class="docutils literal">/usr/share/nginx/html/my2pi/index.html</tt>:</p>
+<p>Create a sample <tt class="docutils literal">~/html/myraspberry/index.html</tt>:</p>
 <div class="highlight"><pre>&lt;html&gt;
 &lt;head&gt;
-&lt;title&gt;My Pi <span class="m">2</span> Home&lt;/title&gt;
+&lt;title&gt;My Raspberry Pi <span class="m">2</span> Home&lt;/title&gt;
 &lt;/head&gt;
-&lt;body <span class="nv">bgcolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span> <span class="nv">text</span><span class="o">=</span><span class="s2">&quot;black&quot;</span>&gt;
-&lt;center&gt;&lt;h1&gt;Welcome to My Pi <span class="m">2</span> Home!&lt;/h1&gt;&lt;/center&gt;
+&lt;body <span class="nv">bgcolor</span><span class="o">=</span><span class="s2">&quot;red&quot;</span> <span class="nv">text</span><span class="o">=</span><span class="s2">&quot;white&quot;</span>&gt;
+&lt;center&gt;&lt;h1&gt;Welcome to My Pi!&lt;/h1&gt;&lt;/center&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </pre></div>
 </div>
 <div class="section" id="server-block">
 <h3>2.4 Server Block</h3>
-<p>I use <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/default</span></tt> as a template for the new <tt class="docutils literal">my2pi</tt> configuration:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /etc/nginx/sites-available
-<span class="nv">$ </span>sudo cp default my2pi
-</pre></div>
-<p>Modify these lines for the custom domain:</p>
-<div class="highlight"><pre>listen 80<span class="p">;</span>
+<p>Create a new server block configuration <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/myraspberry</span></tt>:</p>
+<div class="highlight"><pre>server <span class="o">{</span>
+    listen 80<span class="p">;</span> <span class="c">## listen for ipv4; this line is default and implied</span>
 
-root /usr/share/nginx/html/my2pi<span class="p">;</span>
-index index.html index.htm<span class="p">;</span>
+    root /home/USER/html/myraspberry<span class="p">;</span>  <span class="c">## Replace USER with your username</span>
+    index index.html<span class="p">;</span>
 
-server_name www.my2pi.com<span class="p">;</span>
+    access_log /var/log/nginx/ttrss_access.log<span class="p">;</span>
+    error_log /var/log/nginx/ttrss_error.log info<span class="p">;</span>
+
+    server_name myraspberry.*<span class="p">;</span>
+
+    location / <span class="o">{</span>
+        index           index.html<span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </pre></div>
 <p>Activate the new server block:</p>
 <div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /etc/nginx/sites-enabled
-<span class="nv">$ </span>sudo ln -s ../sites-available/my2pi
-<span class="nv">$ </span>sudo service nginx restart
+<span class="nv">$ </span>sudo ln -s ../sites-available/myraspberry
+<span class="nv">$ </span>sudo systemctl restart nginx
 </pre></div>
 </div>
 <div class="section" id="port-forwarding">
