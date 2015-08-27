@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-08-21T12:26:00-04:00</updated><entry><title>Install CyanogenMod on Nexus 4</title><link href="http://www.circuidipity.com/install-cyanogenmod-nexus-4.html" rel="alternate"></link><updated>2015-08-21T12:26:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-19:install-cyanogenmod-nexus-4.html</id><summary type="html">&lt;p&gt;Replace stock Android with CyanogenMod on the Nexus 4 using Linux.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-08-27T19:25:00-04:00</updated><entry><title>Create a self-signed SSL certificate</title><link href="http://www.circuidipity.com/self-signed-ssl-certificate.html" rel="alternate"></link><updated>2015-08-27T19:25:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-27:self-signed-ssl-certificate.html</id><summary type="html">&lt;p&gt;Secure web access to services hosted on a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi home server&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;What's up:&lt;/strong&gt; I am running &lt;a class="reference external" href="http://www.circuidipity.com/ttrss.html"&gt;Tiny Tiny RSS&lt;/a&gt; (ttrss) and &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;Nginx&lt;/a&gt; on a Debian-powered Pi and want to divert HTTP traffic from port 80 to HTTPS login and access news feeds on port 443. Rather than obtain an SSL certificate from a certificate authority (CA) its a simple matter to create one for personal use.&lt;/p&gt;
+&lt;p&gt;Install &lt;tt class="docutils literal"&gt;openssl&lt;/tt&gt; and generate a certificate for Nginx:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install openssl
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo mkdir /etc/nginx/ssl
+&lt;span class="nv"&gt;$ &lt;/span&gt;sudo openssl req -x509 -nodes -days &lt;span class="m"&gt;365&lt;/span&gt; -newkey rsa:2048 -keyout /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Create a new server block in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;server &lt;span class="o"&gt;{&lt;/span&gt;
+    listen 80&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;## listen for ipv4; this line is default and implied&lt;/span&gt;
+    server_name rss.myraspberrypi.ca&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="m"&gt;301&lt;/span&gt; https://&lt;span class="nv"&gt;$host$request_uri&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="c"&gt;## redirect all non-https traffic to https&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+server &lt;span class="o"&gt;{&lt;/span&gt;
+    listen &lt;span class="m"&gt;443&lt;/span&gt; ssl&lt;span class="p"&gt;;&lt;/span&gt;
+    server_name rss.myraspberrypi.ca&lt;span class="p"&gt;;&lt;/span&gt;
+    ssl_certificate /etc/nginx/ssl/server.crt&lt;span class="p"&gt;;&lt;/span&gt;
+    ssl_certificate_key /etc/nginx/ssl/server.key&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Activate the block by creating a symlink in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-enabled&lt;/span&gt;&lt;/tt&gt; and restart server:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo systemctl restart nginx
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Configure &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;port forwarding on the router&lt;/a&gt; and (optional) &lt;a class="reference external" href="https://wiki.gandi.net/en/dns/zone/subdomain"&gt;setup a subdomain&lt;/a&gt; with a hosting/domain provider.&lt;/p&gt;
+&lt;p&gt;Note the first time navigating to the new HTTPS address the (Firefox) browser warns &amp;quot;This Connection is Untrusted&amp;quot; (which is to be expected since its a self-signed certificate vs CA verification).&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-nginx-for-ubuntu-14-04"&gt;Create an SSL certificate on Nginx for Ubuntu&lt;/a&gt;; &lt;a class="reference external" href="https://serverfault.com/questions/67316/in-nginx-how-can-i-rewrite-all-http-requests-to-https-while-maintaining-sub-dom"&gt;Rewrite HTTP requests to HTTPS&lt;/a&gt;; &lt;a class="reference external" href="http://nginx.org/en/docs/http/server_names.html"&gt;Nginx server_names&lt;/a&gt;&lt;/p&gt;
+</summary><category term="network"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Install CyanogenMod on Nexus 4</title><link href="http://www.circuidipity.com/install-cyanogenmod-nexus-4.html" rel="alternate"></link><updated>2015-08-21T12:26:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-19:install-cyanogenmod-nexus-4.html</id><summary type="html">&lt;p&gt;Replace stock Android with CyanogenMod on the Nexus 4 using Linux.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Thanks to a &lt;strong&gt;very generous friend&lt;/strong&gt; who upgraded to a new smartphone I now have her old Google Nexus 4. I have dabbled with alternative Android firmwares in the past, and was inspired to give CyaonogenMod a go on this phone after reading &lt;a class="reference external" href="https://lwn.net/Articles/602521/"&gt;Android without the mothership [LWN.net]&lt;/a&gt;.&lt;/p&gt;
@@ -2650,163 +2678,5 @@ WebInterface Yes
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Admin functions available at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://192.168.1.88:631/admin&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="ubuntu"></category><category term="linux"></category><category term="network"></category></entry><entry><title>Brother MFC-J450DW All-In-One Printer/Scanner</title><link href="http://www.circuidipity.com/brother-mfc-j450dw-printer-scanner.html" rel="alternate"></link><updated>2015-03-04T20:40:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-04:brother-mfc-j450dw-printer-scanner.html</id><summary type="html">&lt;p&gt;Connect a &lt;strong&gt;Brother MFC-J450DW&lt;/strong&gt; to server running Ubuntu 14.04 LTS and configure as printer+scanner for a home network.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div class="section" id="cups-sane"&gt;
-&lt;h2&gt;0. CUPS + SANE&lt;/h2&gt;
-&lt;p&gt;Attach the Brother device to server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;dmesg -t
-&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
-usb 5-1: new high-speed USB device number &lt;span class="m"&gt;4&lt;/span&gt; using ehci-pci
-usb 5-1: New USB device found, &lt;span class="nv"&gt;idVendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;04f9, &lt;span class="nv"&gt;idProduct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;02fa
-usb 5-1: New USB device strings: &lt;span class="nv"&gt;Mfr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1, &lt;span class="nv"&gt;Product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;SerialNumber&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;3
-usb 5-1: Product: MFC-J450DW
-usb 5-1: Manufacturer: Brother
-usb 5-1: SerialNumber: BROH4F240529
-usblp 5-1:1.0: usblp0: USB Bidirectional printer dev &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; alt &lt;span class="m"&gt;0&lt;/span&gt; proto &lt;span class="m"&gt;2&lt;/span&gt; vid 0x04F9 pid 0x02FA
-usbcore: registered new interface driver usblp
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Install CUPS (printer) and SANE (scanner) packages and grant (example) &lt;tt class="docutils literal"&gt;username&lt;/tt&gt; admin privileges:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install cups cups-bsd sane-utils libsane-extras
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username lp
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username lpadmin
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username scanner
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="brother-drivers"&gt;
-&lt;h2&gt;1. Brother drivers&lt;/h2&gt;
-&lt;p&gt;Download the &lt;strong&gt;Driver Install Tool&lt;/strong&gt; from &lt;a class="reference external" href="http://support.brother.com/g/b/downloadtop.aspx?c=us&amp;amp;lang=en&amp;amp;prod=mfcj450dw_us"&gt;Brother MFC-J450DW Downloads&lt;/a&gt; and install drivers:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gunzip linux-brprinter-installer-*.gz
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo su
-&lt;span class="c"&gt;# bash linux-brprinter-installer-2.0.0-1&lt;/span&gt;
-Input model name -&amp;gt;MFC-J450DW
-
-You are going to install following packages.
-    mfcj450dwlpr-3.0.0-1.i386.deb
-    mfcj450dwcupswrapper-3.0.0-1.i386.deb
-    brscan4-0.4.2-1.i386.deb
-    brscan-skey-0.2.4-1.i386.deb
-OK? &lt;span class="o"&gt;[&lt;/span&gt;y/N&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;y
-&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
-Will you specify the Device URI? &lt;span class="o"&gt;[&lt;/span&gt;Y/n&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;Y
-
-0: ipps
-1: https
-2: http
-3: ipp14
-4: lpd
-5: ipp
-6: socket
-7: usb://Brother/MFC-J450DW?serial&lt;span class="o"&gt;=&lt;/span&gt;BROH4F240529
-8: smb
-&lt;span class="m"&gt;9&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;I&lt;span class="o"&gt;)&lt;/span&gt;: Specify IP address.
-&lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;A&lt;span class="o"&gt;)&lt;/span&gt;: Auto. &lt;span class="o"&gt;(&lt;/span&gt;usb://Brother/MFC-J450DW?serial&lt;span class="o"&gt;=&lt;/span&gt;BROH4F240529&lt;span class="o"&gt;)&lt;/span&gt;
-
-&lt;span class="k"&gt;select&lt;/span&gt; the number of destination Device URI. -&amp;gt;10
-
-lpadmin -p MFCJ450DW -v usb://Brother/MFC-J450DW?serial&lt;span class="o"&gt;=&lt;/span&gt;BROH4F240529 -E
-Test Print? &lt;span class="o"&gt;[&lt;/span&gt;y/N&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;y
-
-
-lpadmin -p MFCJ450DW -v usb://Brother/MFC-J450DW?serial&lt;span class="o"&gt;=&lt;/span&gt;BROH4F240529 -E
-Test Print? &lt;span class="o"&gt;[&lt;/span&gt;y/N&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;y
-
-&lt;span class="nb"&gt;wait &lt;/span&gt;5s.
-lpr -P MFCJ450DW /usr/share/cups/data/testprint
-You are going to install following packages.
-    brscan4-0.4.2-1.i386.deb
-&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
-Do you agree? &lt;span class="o"&gt;[&lt;/span&gt;Y/n&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;Y
-
-You are going to install following packages.
-    brscan-skey-0.2.4-1.i386.deb
-&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
-Do you agree? &lt;span class="o"&gt;[&lt;/span&gt;Y/n&lt;span class="o"&gt;]&lt;/span&gt; -&amp;gt;Y
-&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
-Hit Enter/Return key.
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Problem:&lt;/strong&gt; Scanner stuck in low-res mode using Linux scanner clients. &lt;strong&gt;Simple-scan&lt;/strong&gt; would not scan above 300dpi and would throw constant error messages. &lt;strong&gt;Xsane&lt;/strong&gt; would not scan at all and throw &lt;tt class="docutils literal"&gt;out of memory&lt;/tt&gt; errors. Turns out the Brother installer downloaded and installed an outdated, buggy scanner driver - &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;brscan4-0.4.2-1.i386.deb&lt;/span&gt;&lt;/tt&gt; - when a newer &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;brscan4-0.4.3-*.i386.deb&lt;/span&gt;&lt;/tt&gt; driver exists.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Remove the buggy driver and manually install the updated package:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service saned stop
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -P brscan4
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo dpkg -i brscan4-0.4.3-0.i386.deb
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service saned start
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="http://technik.blogs.nde.ag/2013/12/06/brother-dcp-j925dw-problems-when-scanning-via-sane/"&gt;Problems when scanning via SANE&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="printer-config"&gt;
-&lt;h2&gt;2. Printer config&lt;/h2&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/cups/cupsd.conf&lt;/tt&gt; to listen for connections from any device on the home network. Example for home server at ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Only listen for connections from the local machine.&lt;/span&gt;
-&lt;span class="c"&gt;#Listen localhost:631&lt;/span&gt;
-Listen *:631
-
-&lt;span class="c"&gt;# Show shared printers on the local network.&lt;/span&gt;
-Browsing On
-BrowseLocalProtocols dnssd
-
-&lt;span class="c"&gt;# Web interface setting...&lt;/span&gt;
-WebInterface Yes
-
-&lt;span class="c"&gt;# Restrict access to the server...&lt;/span&gt;
-&amp;lt;Location /&amp;gt;
-  Order allow,deny
-  Allow 192.168.1.*
-&amp;lt;/Location&amp;gt;
-
-&lt;span class="c"&gt;# Restrict access to the admin pages...&lt;/span&gt;
-&amp;lt;Location /admin&amp;gt;
-  Order allow,deny
-  Allow 192.168.1.*
-&amp;lt;/Location&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Restart CUPS:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service cups restart
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Admin functions available at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://192.168.1.88:631/admin&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="scanner-config"&gt;
-&lt;h2&gt;3. Scanner config&lt;/h2&gt;
-&lt;div class="section" id="on-the-server"&gt;
-&lt;h3&gt;On the server&lt;/h3&gt;
-&lt;p&gt;Detect attached device using &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;sane-find-scanner&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;scanimage&lt;/tt&gt; (I find that if one fails discovery the other usually works):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sane-find-scanner
-found USB scanner &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;vendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0x04f9 &lt;span class="o"&gt;[&lt;/span&gt;Brother&lt;span class="o"&gt;]&lt;/span&gt;, &lt;span class="nv"&gt;product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0x02fa &lt;span class="o"&gt;[&lt;/span&gt;MFC-J450DW&lt;span class="o"&gt;])&lt;/span&gt; at libusb:005:00
-&lt;span class="nv"&gt;$ &lt;/span&gt;scanimage -L
-device &lt;span class="sb"&gt;`&lt;/span&gt;brother4:bus1&lt;span class="p"&gt;;&lt;/span&gt;dev1&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; is a Brother MFC-J450DW USB scanner
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/default/saned&lt;/tt&gt; to run SANE as server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;RUN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;yes
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/sane.d/saned.conf&lt;/tt&gt; to share the scanner over the network:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## Access list&lt;/span&gt;
-192.168.1.0/24
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Add entry for Brother scanners to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/lib/udev/rules.d/40-libsane.rules&lt;/span&gt;&lt;/tt&gt; at the point in file just before the bit &lt;tt class="docutils literal"&gt;# The following rule will &lt;span class="pre"&gt;disable...&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Brother scanners&lt;/span&gt;
-ATTRS&lt;span class="o"&gt;{&lt;/span&gt;idVendor&lt;span class="o"&gt;}==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;04f9&amp;quot;&lt;/span&gt;, ENV&lt;span class="o"&gt;{&lt;/span&gt;libsane_matched&lt;span class="o"&gt;}=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;yes&amp;quot;&lt;/span&gt;
-
-&lt;span class="c"&gt;# The following rule will disable...&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reboot server (simply restarting the &lt;tt class="docutils literal"&gt;udev&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;saned&lt;/tt&gt; services fails to work):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo reboot
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Run a test:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;scanimage --format&lt;span class="o"&gt;=&lt;/span&gt;tiff &amp;gt; test.tiff
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="on-the-client"&gt;
-&lt;h3&gt;On the client&lt;/h3&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/sane.d/net.conf&lt;/tt&gt; to point your device towards the server ip address:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;connect_timeout&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 60
-&lt;span class="c"&gt;## saned hosts&lt;/span&gt;
-192.168.1.88
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Run a test using &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;simple-scan&lt;/span&gt;&lt;/tt&gt; included by default in Ubuntu.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 </summary><category term="ubuntu"></category><category term="linux"></category><category term="network"></category></entry></feed>

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Daniel Wayne Armstrong</title>
+        <title>Circuidipity | Create a self-signed SSL certificate</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -16,28 +16,17 @@
 <body>
         <!-- content -->
 
-<!-- greeting -->
-<div id="siteheader">
-        <img class="whoami" src="/theme/images/whoami.png" />
-    <div id="sitegreeting">
-<p><span class="whoa">Howdy!</span><br />
-My name is <span class="noWrap"><span class="whoa">Daniel Wayne Armstrong</span></span>.
-I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    </div>
-<!-- menu -->
-    <div id="sitemenu">
-<p><a href="archives.html">Archives</a>
-&nbsp;<a href="projects.html">Projects</a>
-&nbsp;<a href="/colophon.html">Colophon</a>
-&nbsp;<a href="feed.xml"><i class="fa fa-rss"></i></a>
-&nbsp;<a href="https://twitter.com/circuidipity"><i class="fa fa-twitter"></i></a>
-&nbsp;<a href="https://github.com/vonbrownie"><i class="fa fa-github-alt"></i></a></p>    </div>
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><i class="fa fa-rocket"></i> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    <a href="archives.html">Archives</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Thursday 27 August 2015</p>
 </div>
 
-<!-- latest post -->
-<div id="latestpost">
-        <p class="published"> Thursday 27 August 2015</p>
-        <h1><a href="http://www.circuidipity.com/self-signed-ssl-certificate.html">Create a self-signed SSL certificate</a></h1>
-        <p>Secure web access to services hosted on a <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi home server</a>.</p>
+<!-- article -->
+<h1>Create a self-signed SSL certificate</h1>
+<div id="article">
+    <p>Secure web access to services hosted on a <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi home server</a>.</p>
 <p><strong>What's up:</strong> I am running <a class="reference external" href="http://www.circuidipity.com/ttrss.html">Tiny Tiny RSS</a> (ttrss) and <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">Nginx</a> on a Debian-powered Pi and want to divert HTTP traffic from port 80 to HTTPS login and access news feeds on port 443. Rather than obtain an SSL certificate from a certificate authority (CA) its a simple matter to create one for personal use.</p>
 <p>Install <tt class="docutils literal">openssl</tt> and generate a certificate for Nginx:</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install openssl
@@ -66,13 +55,17 @@ server <span class="o">{</span>
 <p>Happy hacking!</p>
 <p>Sources: <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-nginx-for-ubuntu-14-04">Create an SSL certificate on Nginx for Ubuntu</a>; <a class="reference external" href="https://serverfault.com/questions/67316/in-nginx-how-can-i-rewrite-all-http-requests-to-https-while-maintaining-sub-dom">Rewrite HTTP requests to HTTPS</a>; <a class="reference external" href="http://nginx.org/en/docs/http/server_names.html">Nginx server_names</a></p>
 
-        <!-- Nav links to previous|next article --> 
-        <div id="navmenu">
-            <hr />
-            <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-                <a href="http://www.circuidipity.com/install-cyanogenmod-nexus-4.html">
-                Install CyanogenMod on Nexus 4</a></p>
-        </div>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/install-cyanogenmod-nexus-4.html">Install CyanogenMod on Nexus 4</a></p>
 </div>
 
 
