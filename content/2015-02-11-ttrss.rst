@@ -5,7 +5,7 @@ Tiny Tiny RSS
 :date: 2015-02-11 18:40:00
 :slug: ttrss
 :tags: network, debian, linux, raspberry pi
-:modified: 2015-08-26 12:58:00
+:modified: 2015-08-27 19:36:00
 
 `Raspberry Pi Home Server Hack #7 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Install and self-host the **Tiny Tiny RSS** news reader and gain access to news feeds over the web.
 
@@ -106,7 +106,9 @@ Create a `server block <http://www.circuidipity.com/php-nginx-postgresql.html>`_
         }                                                                           
                                                                                     
     }                                                                               
-                                                                                    
+
+**Alternative:** `Create a self-signed SSL certificate <http://www.circuidipity.com/self-signed-ssl-certificate.html>`_ and configure HTTPS access on port 443.
+
 Save changes and enable block:                                                                         
 
 .. code-block:: bash
