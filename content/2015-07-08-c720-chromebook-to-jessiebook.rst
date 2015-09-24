@@ -6,7 +6,7 @@ Chromebook to Jessiebook
 :slug: c720-chromebook-to-jessiebook
 :template: article-project
 :tags: chromebook, debian, linux
-:modified: 2015-08-10 15:07:00
+:modified: 2015-09-24 13:58:00
 
 Replace **Chrome OS** permanently with **Debian** on the **Acer C720 Chromebook**.
 
@@ -381,13 +381,30 @@ Create ``/etc/modprobe.d/ath9k.conf``:
 
 Source: `ath9k.conf <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/etc/modprobe.d/ath9k.conf>`_
 
-9. Helpful Resources
-====================
+9. Microphone
+=============
+
+Confirm the microphone is un-muted in ``alsamixer``. Create ``/etc/modprobe.d/snd-hda-intel.conf``:
+
+.. code-block:: bash
+
+    options snd_hda_intel model=,alc283-dac-wcaps                                        
+                                                                                       
+... and restart (I couldn't get the module to unload). Give it a try:
+
+.. code-block:: bash
+
+    $ arecord -d 5 chr-mic.wav                                                            
+    $ aplay chr-mic.wav 
+
+10. Helpful Resources
+=====================
 
 * Specs: output of `lshw <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lshw.txt>`_, `lspci <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lspci.txt>`_, and `lsusb <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lsusb.txt>`_
 * Arch Linux C720 installation with useful `post-install details <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook>`_
 * Turn Chromebooks into `Ubuntu-based code learning machines for kids <http://blog.codestarter.org/how-we-turn-199-chromebooks-into-ubuntu-based/>`_
 * My earlier install and configuration of `Lubuntu 14.04 LTS <http://www.circuidipity.com/c720-lubuntubook.html>`_ under ``upstart`` (vs ``systemd`` in Debian) 
+* Lightweight `i3 tiling window manager <http://www.circuidipity.com/i3-tiling-window-manager.html>`_ is snappy on the Chromebook's modest hardware
 * Create shell scripts to configure Chromebook `when it leaves and returns home <http://www.circuidipity.com/chromebook-liftoff-splashdown.html>`_
 
 Happy hacking!
