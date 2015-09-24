@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-08-27T19:25:00-04:00</updated><entry><title>Create a self-signed SSL certificate</title><link href="http://www.circuidipity.com/self-signed-ssl-certificate.html" rel="alternate"></link><updated>2015-08-27T19:25:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-27:self-signed-ssl-certificate.html</id><summary type="html">&lt;p&gt;Secure web access to services hosted on a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi home server&lt;/a&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-09-24T13:58:00-04:00</updated><entry><title>Create a self-signed SSL certificate</title><link href="http://www.circuidipity.com/self-signed-ssl-certificate.html" rel="alternate"></link><updated>2015-08-27T19:25:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-27:self-signed-ssl-certificate.html</id><summary type="html">&lt;p&gt;Secure web access to services hosted on a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi home server&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;What's up:&lt;/strong&gt; I am running &lt;a class="reference external" href="http://www.circuidipity.com/ttrss.html"&gt;Tiny Tiny RSS&lt;/a&gt; (ttrss) and &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;Nginx&lt;/a&gt; on a Debian-powered Pi and want to divert HTTP traffic from port 80 to HTTPS login and access news feeds on port 443. Rather than obtain an SSL certificate from a certificate authority (CA) its a simple matter to create one for personal use.&lt;/p&gt;
 &lt;p&gt;Install &lt;tt class="docutils literal"&gt;openssl&lt;/tt&gt; and generate a certificate for Nginx:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install openssl
@@ -1202,7 +1202,7 @@ XF86AudioRaiseVolume
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="debian"></category><category term="linux"></category><category term="shell"></category><category term="programming"></category></entry><entry><title>Chromebook to Jessiebook</title><link href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html" rel="alternate"></link><updated>2015-08-10T15:07:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-08:c720-chromebook-to-jessiebook.html</id><summary type="html">&lt;p&gt;Replace &lt;strong&gt;Chrome OS&lt;/strong&gt; permanently with &lt;strong&gt;Debian&lt;/strong&gt; on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt;.&lt;/p&gt;
+</summary><category term="debian"></category><category term="linux"></category><category term="shell"></category><category term="programming"></category></entry><entry><title>Chromebook to Jessiebook</title><link href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html" rel="alternate"></link><updated>2015-09-24T13:58:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-08:c720-chromebook-to-jessiebook.html</id><summary type="html">&lt;p&gt;Replace &lt;strong&gt;Chrome OS&lt;/strong&gt; permanently with &lt;strong&gt;Debian&lt;/strong&gt; on the &lt;strong&gt;Acer C720 Chromebook&lt;/strong&gt;.&lt;/p&gt;
 &lt;img alt="jessiebook" class="align-right" src="images/jessiebook.png" style="width: 300px; height: 161px;" /&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
@@ -1474,13 +1474,24 @@ parm:           use_chanctx:Enable channel context &lt;span class="k"&gt;for&lt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/etc/modprobe.d/ath9k.conf"&gt;ath9k.conf&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
+&lt;div class="section" id="microphone"&gt;
+&lt;h2&gt;9. Microphone&lt;/h2&gt;
+&lt;p&gt;Confirm the microphone is un-muted in &lt;tt class="docutils literal"&gt;alsamixer&lt;/tt&gt;. Create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/modprobe.d/snd-hda-intel.conf&lt;/span&gt;&lt;/tt&gt; with options:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;options snd_hda_intel &lt;span class="nv"&gt;model&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;,alc283-dac-wcaps
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and restart (I couldn't get the module to unload). Give it a try:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;arecord -d &lt;span class="m"&gt;5&lt;/span&gt; chr-mic.wav
+&lt;span class="nv"&gt;$ &lt;/span&gt;aplay chr-mic.wav
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;div class="section" id="helpful-resources"&gt;
-&lt;h2&gt;9. Helpful Resources&lt;/h2&gt;
+&lt;h2&gt;10. Helpful Resources&lt;/h2&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Specs: output of &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lshw.txt"&gt;lshw&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lspci.txt"&gt;lspci&lt;/a&gt;, and &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lsusb.txt"&gt;lsusb&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Arch Linux C720 installation with useful &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook"&gt;post-install details&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Turn Chromebooks into &lt;a class="reference external" href="http://blog.codestarter.org/how-we-turn-199-chromebooks-into-ubuntu-based/"&gt;Ubuntu-based code learning machines for kids&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;My earlier install and configuration of &lt;a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html"&gt;Lubuntu 14.04 LTS&lt;/a&gt; under &lt;tt class="docutils literal"&gt;upstart&lt;/tt&gt; (vs &lt;tt class="docutils literal"&gt;systemd&lt;/tt&gt; in Debian)&lt;/li&gt;
+&lt;li&gt;Lightweight &lt;a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html"&gt;i3 tiling window manager&lt;/a&gt; is snappy on the Chromebook's modest hardware&lt;/li&gt;
 &lt;li&gt;Create shell scripts to configure Chromebook &lt;a class="reference external" href="http://www.circuidipity.com/chromebook-liftoff-splashdown.html"&gt;when it leaves and returns home&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;

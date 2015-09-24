@@ -24,7 +24,7 @@
 
 <!-- article -->
 <h1>Chromebook to Jessiebook</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Monday 10 August 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 24 September 2015</p>
 <div id="article">
     <p>Replace <strong>Chrome OS</strong> permanently with <strong>Debian</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
 <img alt="jessiebook" class="align-right" src="images/jessiebook.png" style="width: 300px; height: 161px;" />
@@ -298,13 +298,24 @@ parm:           use_chanctx:Enable channel context <span class="k">for</span> co
 </pre></div>
 <p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/etc/modprobe.d/ath9k.conf">ath9k.conf</a></p>
 </div>
+<div class="section" id="microphone">
+<h2>9. Microphone</h2>
+<p>Confirm the microphone is un-muted in <tt class="docutils literal">alsamixer</tt>. Create <tt class="docutils literal"><span class="pre">/etc/modprobe.d/snd-hda-intel.conf</span></tt> with options:</p>
+<div class="highlight"><pre>options snd_hda_intel <span class="nv">model</span><span class="o">=</span>,alc283-dac-wcaps
+</pre></div>
+<p>... and restart (I couldn't get the module to unload). Give it a try:</p>
+<div class="highlight"><pre><span class="nv">$ </span>arecord -d <span class="m">5</span> chr-mic.wav
+<span class="nv">$ </span>aplay chr-mic.wav
+</pre></div>
+</div>
 <div class="section" id="helpful-resources">
-<h2>9. Helpful Resources</h2>
+<h2>10. Helpful Resources</h2>
 <ul class="simple">
 <li>Specs: output of <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lshw.txt">lshw</a>, <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lspci.txt">lspci</a>, and <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lsusb.txt">lsusb</a></li>
 <li>Arch Linux C720 installation with useful <a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook">post-install details</a></li>
 <li>Turn Chromebooks into <a class="reference external" href="http://blog.codestarter.org/how-we-turn-199-chromebooks-into-ubuntu-based/">Ubuntu-based code learning machines for kids</a></li>
 <li>My earlier install and configuration of <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Lubuntu 14.04 LTS</a> under <tt class="docutils literal">upstart</tt> (vs <tt class="docutils literal">systemd</tt> in Debian)</li>
+<li>Lightweight <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">i3 tiling window manager</a> is snappy on the Chromebook's modest hardware</li>
 <li>Create shell scripts to configure Chromebook <a class="reference external" href="http://www.circuidipity.com/chromebook-liftoff-splashdown.html">when it leaves and returns home</a></li>
 </ul>
 <p>Happy hacking!</p>
