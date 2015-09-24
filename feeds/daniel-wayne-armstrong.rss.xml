@@ -1476,7 +1476,7 @@ parm:           use_chanctx:Enable channel context &lt;span class="k"&gt;for&lt;
 &lt;/div&gt;
 &lt;div class="section" id="microphone"&gt;
 &lt;h2&gt;9. Microphone&lt;/h2&gt;
-&lt;p&gt;Confirm the microphone is un-muted in &lt;tt class="docutils literal"&gt;alsamixer&lt;/tt&gt;. Create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/modprobe.d/snd-hda-intel.conf&lt;/span&gt;&lt;/tt&gt; with options:&lt;/p&gt;
+&lt;p&gt;Confirm the microphone is un-muted in &lt;tt class="docutils literal"&gt;alsamixer&lt;/tt&gt;. Create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/modprobe.d/snd-hda-intel.conf&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;options snd_hda_intel &lt;span class="nv"&gt;model&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;,alc283-dac-wcaps
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... and restart (I couldn't get the module to unload). Give it a try:&lt;/p&gt;
