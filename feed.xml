@@ -1,5 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-09-24T13:58:00-04:00</updated><entry><title>Create a self-signed SSL certificate</title><link href="http://www.circuidipity.com/self-signed-ssl-certificate.html" rel="alternate"></link><updated>2015-08-27T19:25:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-27:self-signed-ssl-certificate.html</id><summary type="html">&lt;p&gt;Secure web access to services hosted on a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi home server&lt;/a&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-09-25T16:30:00-04:00</updated><entry><title>Keystrokes cheatsheet</title><link href="http://www.circuidipity.com/keystrokes.html" rel="alternate"></link><updated>2015-09-25T16:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-09-25:keystrokes.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Work-in-progress:&lt;/strong&gt; Keystroke combos that I find useful (listed here to jog my memory!)...&lt;/p&gt;
+&lt;div class="section" id="chromebook"&gt;
+&lt;h2&gt;Chromebook&lt;/h2&gt;
+&lt;p&gt;Top row on my &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Jessiebook&lt;/a&gt;  keyboard has a series of shortcut icons (&lt;tt class="docutils literal"&gt;Brightness&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;Volume&lt;/tt&gt;...) that identify in Linux as the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;F1-F10&lt;/span&gt;&lt;/tt&gt; keys and the &lt;tt class="docutils literal"&gt;Search&lt;/tt&gt; key (in the &lt;tt class="docutils literal"&gt;CapsLk&lt;/tt&gt; position) acts as &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; (Windows) modifier key.&lt;/p&gt;
+&lt;p&gt;Enable these keyboard shortcuts in Debian by first installing:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; - associate keys to shell commands&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;xbacklight&lt;/tt&gt; - set backlight level using RandR&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pulseaudio-utils&lt;/span&gt;&lt;/tt&gt; - manage sound with pactl&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;xvkbd&lt;/tt&gt; - send characters to another client&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install xbindkeys xbacklight pulseaudio-utils xvkbd
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Chromebook to Jessiebook&lt;/a&gt; for a sample configuration.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="firefox"&gt;
+&lt;h2&gt;Firefox&lt;/h2&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-T&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;open new tab&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-Tab&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;switch tab&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;SHIFT-CTRL-Tab&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;switch tab backwards&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-W&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;close tab&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-[&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;page back&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-]&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;page forward&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-L&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;enter new address/search&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-F&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;find&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;F3&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;find again&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;SHIFT-F3&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;find previous&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;F5&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;reload page&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/div&gt;
+&lt;div class="section" id="shell"&gt;
+&lt;h2&gt;Shell&lt;/h2&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-A&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;move to the start of line&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-E&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;move to the end of line&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-U&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;erase from cursor to start of line&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-K&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;erase from cursor to end of line&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-L&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;clear screen&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-R&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;reverse incremental search of history&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/div&gt;
+&lt;div class="section" id="tmux"&gt;
+&lt;h2&gt;Tmux&lt;/h2&gt;
+&lt;p&gt;My &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux cheatsheet&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="cheatsheet"></category><category term="linux"></category><category term="shell"></category></entry><entry><title>Create a self-signed SSL certificate</title><link href="http://www.circuidipity.com/self-signed-ssl-certificate.html" rel="alternate"></link><updated>2015-08-27T19:25:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-27:self-signed-ssl-certificate.html</id><summary type="html">&lt;p&gt;Secure web access to services hosted on a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi home server&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;What's up:&lt;/strong&gt; I am running &lt;a class="reference external" href="http://www.circuidipity.com/ttrss.html"&gt;Tiny Tiny RSS&lt;/a&gt; (ttrss) and &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;Nginx&lt;/a&gt; on a Debian-powered Pi and want to divert HTTP traffic from port 80 to HTTPS login and access news feeds on port 443. Rather than obtain an SSL certificate from a certificate authority (CA) its a simple matter to create one for personal use.&lt;/p&gt;
 &lt;p&gt;Install &lt;tt class="docutils literal"&gt;openssl&lt;/tt&gt; and generate a certificate for Nginx:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install openssl
@@ -2633,61 +2697,4 @@ en_CA.UTF-8 UTF-8
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Welcome to Arch. Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="arch"></category><category term="linux"></category><category term="luks"></category><category term="crypto"></category><category term="chromebook"></category></entry><entry><title>Samsung CLP-310 Printer</title><link href="http://www.circuidipity.com/samsung-clp-310-printer.html" rel="alternate"></link><updated>2015-03-09T18:17:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-03-09:samsung-clp-310-printer.html</id><summary type="html">&lt;p&gt;Connect a &lt;strong&gt;Samsung CLP-310&lt;/strong&gt; to server running Ubuntu 14.04 LTS and configure as printer for a home network.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div class="section" id="cups"&gt;
-&lt;h2&gt;0. CUPS&lt;/h2&gt;
-&lt;p&gt;Attach the Samsung device to server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;dmesg -t
-&lt;span class="o"&gt;[&lt;/span&gt;...snip...&lt;span class="o"&gt;]&lt;/span&gt;
-usb 1-2: new high-speed USB device number &lt;span class="m"&gt;6&lt;/span&gt; using ehci-pci
-usb 1-2: New USB device found, &lt;span class="nv"&gt;idVendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;04e8, &lt;span class="nv"&gt;idProduct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;328e
-usb 1-2: New USB device strings: &lt;span class="nv"&gt;Mfr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1, &lt;span class="nv"&gt;Product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;2, &lt;span class="nv"&gt;SerialNumber&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;3
-usb 1-2: Product: CLP-310 Series
-usb 1-2: Manufacturer: Samsung Electronics Co., Ltd.
-usb 1-2: SerialNumber: 149CBAGS200219Y
-usblp 1-2:1.0: usblp0: USB Bidirectional printer dev &lt;span class="m"&gt;6&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; alt &lt;span class="m"&gt;0&lt;/span&gt; proto &lt;span class="m"&gt;2&lt;/span&gt; vid 0x04E8 pid 0x328E
-usbcore: registered new interface driver usblp
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Install CUPS (print server) and the &lt;a class="reference external" href="https://www.openprinting.org/printer/Samsung/Samsung-CLP-310"&gt;recommended driver&lt;/a&gt; &lt;tt class="docutils literal"&gt;splix&lt;/tt&gt; and grant (example) &lt;tt class="docutils literal"&gt;username&lt;/tt&gt; admin privileges:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install cups cups-bsd printer-driver-splix
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username lp
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username lpadmin
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo adduser username scanner
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="printer-config"&gt;
-&lt;h2&gt;1. Printer config&lt;/h2&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/cups/cupsd.conf&lt;/tt&gt; to listen for connections from any device on the home network. Example for home server at ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Only listen for connections from the local machine.&lt;/span&gt;
-&lt;span class="c"&gt;#Listen localhost:631&lt;/span&gt;
-Listen *:631
-
-&lt;span class="c"&gt;# Show shared printers on the local network.&lt;/span&gt;
-Browsing On
-BrowseLocalProtocols dnssd
-
-&lt;span class="c"&gt;# Web interface setting...&lt;/span&gt;
-WebInterface Yes
-
-&lt;span class="c"&gt;# Restrict access to the server...&lt;/span&gt;
-&amp;lt;Location /&amp;gt;
-  Order allow,deny
-  Allow 192.168.1.*
-&amp;lt;/Location&amp;gt;
-
-&lt;span class="c"&gt;# Restrict access to the admin pages...&lt;/span&gt;
-&amp;lt;Location /admin&amp;gt;
-  Order allow,deny
-  Allow 192.168.1.*
-&amp;lt;/Location&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Restart CUPS:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo service cups restart
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Admin functions available at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://192.168.1.88:631/admin&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="ubuntu"></category><category term="linux"></category><category term="network"></category></entry></feed>
+</summary><category term="arch"></category><category term="linux"></category><category term="luks"></category><category term="crypto"></category><category term="chromebook"></category></entry></feed>
