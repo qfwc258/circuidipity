@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-11-13T21:52:00-05:00</updated><entry><title>LPTHW Exercise 1: A Good First Program</title><link href="http://www.circuidipity.com/lpthw-e1.html" rel="alternate"></link><updated>2015-11-13T21:49:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-13:lpthw-e1.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; The traditional &lt;em&gt;Hello World&lt;/em&gt; program. &lt;strong&gt;Print&lt;/strong&gt; in Python 2 encloses the statement in quotes while Python 3 adds brackets (and brackets format is backward-compatible to Python 2 but not vice-versa):&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-11-14T17:26:00-05:00</updated><entry><title>LPTHW Exercise 5: More Variables and Printing</title><link href="http://www.circuidipity.com/lpthw-e5.html" rel="alternate"></link><updated>2015-11-14T17:25:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-14:lpthw-e5.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; The old way of printing format strings using &lt;strong&gt;%&lt;/strong&gt; and the new way using &lt;strong&gt;.format()&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;astronaut&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Yuri Gagarin&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;astronaut_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Alan Shepard&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;launch&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Baikonur&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;launch_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Cape Canaveral&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 1961
+
+print &lt;span class="s2"&gt;&amp;quot;%s blasted off from %s and became the first %s to reach space in %d.&amp;quot;&lt;/span&gt; % &lt;span class="o"&gt;(&lt;/span&gt;astronaut, launch, &lt;span class="s1"&gt;&amp;#39;human&amp;#39;&lt;/span&gt;, date&lt;span class="o"&gt;)&lt;/span&gt;
+print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{} blasted off from {} and became the first {} to reach space in {}.&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;astronaut, launch, &lt;span class="s1"&gt;&amp;#39;human&amp;#39;&lt;/span&gt;, date&lt;span class="o"&gt;)&lt;/span&gt;
+print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{1} blasted off from {3} and became the first {5} to reach space in {6}.&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;astronaut, astronaut_1, launch, launch_1, &lt;span class="s1"&gt;&amp;#39;human&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;American&amp;#39;&lt;/span&gt;, date&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;python e05.2.py
+Yuri Gagarin blasted off from Baikonur and became the first human to reach space in 1961.
+Yuri Gagarin blasted off from Baikonur and became the first human to reach space in 1961.
+Alan Shepard blasted off from Cape Canaveral and became the first American to reach space in 1961.
+&lt;span class="err"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 4: Variables and Names</title><link href="http://www.circuidipity.com/lpthw-e4.html" rel="alternate"></link><updated>2015-11-14T16:18:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-14:lpthw-e4.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Equal sign assigns whatever is on the right to the variable on the left. Double equal signs perform a comparison. Same as shell scripting.&lt;/p&gt;
+</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 3: Numbers and Math</title><link href="http://www.circuidipity.com/lpthw-e3.html" rel="alternate"></link><updated>2015-11-14T16:04:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-14:lpthw-e3.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Order of math operations is PEMDAS: Parentheses Exponents Multiplication Division Addition Subtraction. So long as at least one of the numbers in a calculation is a floating point number the answer returned will also be floating point. Otherwise:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="m"&gt;5&lt;/span&gt; / 2
+2
+&amp;gt;&amp;gt;&amp;gt; 5.0 / 2
+2.5
+&amp;gt;&amp;gt;&amp;gt; 5.0 % 2
+1.0
+&amp;gt;&amp;gt;&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 2: Comments and Pound Characters</title><link href="http://www.circuidipity.com/lpthw-e2.html" rel="alternate"></link><updated>2015-11-14T15:43:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-14:lpthw-e2.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Using the pound character (#) to add comments or disable a line of code works the same in Python as in Bash shell scripting.&lt;/p&gt;
+&lt;p&gt;Different languages &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Comment_%28computer_programming%29#Examples"&gt;do things differently&lt;/a&gt; ...&lt;/p&gt;
+</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 1: A Good First Program</title><link href="http://www.circuidipity.com/lpthw-e1.html" rel="alternate"></link><updated>2015-11-13T21:49:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-13:lpthw-e1.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; The traditional &lt;em&gt;Hello World&lt;/em&gt; program. &lt;strong&gt;Print&lt;/strong&gt; in Python 2 encloses the statement in quotes while Python 3 adds brackets (and brackets format is backward-compatible to Python 2 but not vice-versa):&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;Hello World!&amp;quot;&lt;/span&gt;
 Hello World!
 &amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello World!&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
@@ -36,7 +66,7 @@ Type &lt;span class="s2"&gt;&amp;quot;help&amp;quot;&lt;/span&gt;, &lt;span clas
 &lt;span class="err"&gt;$&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category><category term="linux"></category></entry><entry><title>Learn Python the Hard Way with the DUDE</title><link href="http://www.circuidipity.com/lpthw-dude.html" rel="alternate"></link><updated>2015-11-13T21:52:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-11:lpthw-dude.html</id><summary type="html">&lt;img alt="LPTHW" class="align-right" src="images/lpthw-begin-1.png" style="width: 250px; height: 479px;" /&gt;
+</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category><category term="linux"></category></entry><entry><title>Learn Python the Hard Way with the DUDE</title><link href="http://www.circuidipity.com/lpthw-dude.html" rel="alternate"></link><updated>2015-11-14T17:26:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-11:lpthw-dude.html</id><summary type="html">&lt;img alt="LPTHW" class="align-right" src="images/lpthw-begin-1.png" style="width: 250px; height: 479px;" /&gt;
 &lt;p&gt;Using Linux and writing &lt;a class="reference external" href="https://github.com/vonbrownie/homebin"&gt;simple shell scripts&lt;/a&gt; has been an enjoyable peek at programming. But now I want to go farther and learning &lt;a class="reference external" href="http://www.circuidipity.com/tag-python.html"&gt;Python&lt;/a&gt; strikes me as a useful next step. Starting with the free HTML version of the book &lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way&lt;/a&gt; by &lt;strong&gt;Zed Shaw&lt;/strong&gt;, who states right off the bat:&lt;/p&gt;
 &lt;blockquote&gt;
 It's only the &amp;quot;hard&amp;quot; way because it uses a technique called &lt;em&gt;instruction&lt;/em&gt;. Instruction is where I tell you to do a sequence of controlled exercises designed to build a skill through repetition. This technique works very well with beginners who know nothing and need to acquire basic skills before they can understand more complex topics. It's used in everything from martial arts to music to even basic math and reading skills.&lt;/blockquote&gt;
@@ -61,6 +91,18 @@ It's only the &amp;quot;hard&amp;quot; way because it uses a technique called &l
 &lt;/div&gt;
 &lt;div class="section" id="id2"&gt;
 &lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e1.html"&gt;Exercise 1: A Good First Program&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e2.html"&gt;Exercise 2: Comments and Pound Characters&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e3.html"&gt;Exercise 3: Numbers and Math&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e4.html"&gt;Exercise 4: Variables and Names&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id6"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e5.html"&gt;Exercise 5: More Variables and Printing&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1694,514 +1736,4 @@ parm:           use_chanctx:Enable channel context &lt;span class="k"&gt;for&lt;
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="chromebook"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Minimal Debian</title><link href="http://www.circuidipity.com/minimal-debian.html" rel="alternate"></link><updated>2015-07-07T15:43:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-07:minimal-debian.html</id><summary type="html">&lt;div class="figure"&gt;
-&lt;img alt="Debian Vader" src="images/debianVader.png" style="width: 960px; height: 355px;" /&gt;
-&lt;p class="caption"&gt;[Image courtesy &lt;a class="reference external" href="http://jschild.deviantart.com/art/Facebook-cover-debian-Darth-Vader-380351614"&gt;jschild&lt;/a&gt;].&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;I use Debian's &lt;tt class="docutils literal"&gt;mini.iso&lt;/tt&gt; installer to create a &lt;strong&gt;lightweight base configuration&lt;/strong&gt; that can be customized for various tasks and desktops.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://www.debian.org"&gt;Debian GNU/Linux&lt;/a&gt; is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt; build their distributions on solid Debian &lt;strong&gt;awesomesauce&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;There are 3 &lt;strong&gt;release branches&lt;/strong&gt;: &lt;tt class="docutils literal"&gt;jessie/stable&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;stretch/testing&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;sid/unstable&lt;/tt&gt;. Below is a visual walk-through of a sample Debian &lt;tt class="docutils literal"&gt;stable&lt;/tt&gt; setup that makes use of an entire storage device divided into 3 partitions: unencrypted &lt;tt class="docutils literal"&gt;root&lt;/tt&gt;, and &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup"&gt;LUKS&lt;/a&gt; encrypted &lt;tt class="docutils literal"&gt;swap&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;home&lt;/tt&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="prepare-install-media"&gt;
-&lt;h2&gt;0. Prepare install media&lt;/h2&gt;
-&lt;p&gt;Download the &lt;a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/mini.iso"&gt;64-bit mini.iso&lt;/a&gt; (&lt;a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/mini.iso"&gt;32bit&lt;/a&gt; for older machines) and &lt;a class="reference external" href="https://www.debian.org/releases/stable/amd64/ch04s03.html.en"&gt;flash the image&lt;/a&gt; to a USB stick. An alternative (my choice) is adding the image to a &lt;a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html"&gt;USB stick with multiple Linux installers&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The minimal console installer (requires network connection) downloads all the latest packages during setup.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="launch"&gt;
-&lt;h2&gt;1. Launch&lt;/h2&gt;
-&lt;img alt="Install" class="align-center" src="images/screenshot/debianInstall/01.1.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Select Language" class="align-center" src="images/screenshot/debianInstall/02.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Select Location" class="align-center" src="images/screenshot/debianInstall/03.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Configure Keyboard" class="align-center" src="images/screenshot/debianInstall/04.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Hostname" class="align-center" src="images/screenshot/debianInstall/05.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Domain" class="align-center" src="images/screenshot/debianInstall/06.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Mirror Country" class="align-center" src="images/screenshot/debianInstall/07.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Mirror archive" class="align-center" src="images/screenshot/debianInstall/08.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Mirror Directory" class="align-center" src="images/screenshot/debianInstall/09.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Proxy" class="align-center" src="images/screenshot/debianInstall/10.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Root password" class="align-center" src="images/screenshot/debianInstall/11.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Verify password" class="align-center" src="images/screenshot/debianInstall/12.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Full Name" class="align-center" src="images/screenshot/debianInstall/13.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Username" class="align-center" src="images/screenshot/debianInstall/14.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="User password" class="align-center" src="images/screenshot/debianInstall/15.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Verify password" class="align-center" src="images/screenshot/debianInstall/16.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Select time zone" class="align-center" src="images/screenshot/debianInstall/17.png" style="width: 800px; height: 600px;" /&gt;
-&lt;/div&gt;
-&lt;div class="section" id="partitions"&gt;
-&lt;h2&gt;2. Partitions&lt;/h2&gt;
-&lt;p&gt;In the example below I create 3 partitions on the disk:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;sda1&lt;/tt&gt; configured as 20GB &lt;tt class="docutils literal"&gt;root&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;sda5&lt;/tt&gt; configured as 1GB LUKS encrypted &lt;tt class="docutils literal"&gt;swap&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;random key&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;sda6&lt;/tt&gt; uses remaining space as LUKS encrypted &lt;tt class="docutils literal"&gt;home&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;passphrase&lt;/tt&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;img alt="Partitioning method" class="align-center" src="images/screenshot/debianInstall/18.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Partition disks" class="align-center" src="images/screenshot/debianInstall/19.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Partition table" class="align-center" src="images/screenshot/debianInstall/20.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Free space" class="align-center" src="images/screenshot/debianInstall/21.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="New Partition" class="align-center" src="images/screenshot/debianInstall/22.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Partition size" class="align-center" src="images/screenshot/debianInstall/23.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Primary partition" class="align-center" src="images/screenshot/debianInstall/24.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Beginning" class="align-center" src="images/screenshot/debianInstall/25.png" style="width: 800px; height: 600px;" /&gt;
-&lt;p&gt;Setting &lt;strong&gt;Mount options&lt;/strong&gt; to &lt;tt class="docutils literal"&gt;noatime&lt;/tt&gt; decreases write operations and boosts drive speed.&lt;/p&gt;
-&lt;img alt="Mount options" class="align-center" src="images/screenshot/debianInstall/25.1.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="noatime" class="align-center" src="images/screenshot/debianInstall/25.2.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Done setting up partition" class="align-center" src="images/screenshot/debianInstall/26.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Free space" class="align-center" src="images/screenshot/debianInstall/27.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="New partition" class="align-center" src="images/screenshot/debianInstall/28.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Partition size" class="align-center" src="images/screenshot/debianInstall/29.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Logical partition" class="align-center" src="images/screenshot/debianInstall/30.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Beginning" class="align-center" src="images/screenshot/debianInstall/31.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Use as" class="align-center" src="images/screenshot/debianInstall/31.1.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Encrypt volume" class="align-center" src="images/screenshot/debianInstall/32.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Encryption key" class="align-center" src="images/screenshot/debianInstall/32.1.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Random key" class="align-center" src="images/screenshot/debianInstall/33.png" style="width: 800px; height: 600px;" /&gt;
-&lt;p&gt;If the hard disk has not been securely wiped prior to installing Debian (using a utility like &lt;a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html"&gt;DBAN&lt;/a&gt;) you may want to set &lt;tt class="docutils literal"&gt;Erase data&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;yes&lt;/tt&gt;. Depending on the size of the disk this operation can last several hours.&lt;/p&gt;
-&lt;img alt="Erase data" class="align-center" src="images/screenshot/debianInstall/33.1.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Done setting up partition" class="align-center" src="images/screenshot/debianInstall/33.2.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Free space" class="align-center" src="images/screenshot/debianInstall/34.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="New partition" class="align-center" src="images/screenshot/debianInstall/35.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Partition size" class="align-center" src="images/screenshot/debianInstall/36.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Logical partition" class="align-center" src="images/screenshot/debianInstall/30.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Use as" class="align-center" src="images/screenshot/debianInstall/31.1.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Encrypt volume" class="align-center" src="images/screenshot/debianInstall/38.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Erase data" class="align-center" src="images/screenshot/debianInstall/39.1.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Done setting up the partition" class="align-center" src="images/screenshot/debianInstall/39.2.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Configure encrypted volumes" class="align-center" src="images/screenshot/debianInstall/40.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Write changes to disk" class="align-center" src="images/screenshot/debianInstall/41.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Create encrypted volumes" class="align-center" src="images/screenshot/debianInstall/42.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Devices to encrypt" class="align-center" src="images/screenshot/debianInstall/43.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Finish encrypt" class="align-center" src="images/screenshot/debianInstall/44.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Encryption passphrase" class="align-center" src="images/screenshot/debianInstall/45.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Verify passphrase" class="align-center" src="images/screenshot/debianInstall/46.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Configure encrypted volume" class="align-center" src="images/screenshot/debianInstall/47.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Mount point" class="align-center" src="images/screenshot/debianInstall/48.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Mount home" class="align-center" src="images/screenshot/debianInstall/48.1.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Mount options" class="align-center" src="images/screenshot/debianInstall/49.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="noatime" class="align-center" src="images/screenshot/debianInstall/25.2.png" style="width: 800px; height: 600px;" /&gt;
-&lt;p&gt;&lt;strong&gt;Reserved blocks&lt;/strong&gt; can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the default 5% reserve set aside by Debian to 1%.&lt;/p&gt;
-&lt;img alt="Reserved blocks" class="align-center" src="images/screenshot/debianInstall/49.1.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Percent reserved" class="align-center" src="images/screenshot/debianInstall/49.2.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Done setting up the partition" class="align-center" src="images/screenshot/debianInstall/49.3.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Finish partitioning" class="align-center" src="images/screenshot/debianInstall/49.4.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Write changes to disk" class="align-center" src="images/screenshot/debianInstall/50.png" style="width: 800px; height: 600px;" /&gt;
-&lt;/div&gt;
-&lt;div class="section" id="install-packages-and-finish-up"&gt;
-&lt;h2&gt;3. Install packages and finish up&lt;/h2&gt;
-&lt;img alt="Popularity-contest" class="align-center" src="images/screenshot/debianInstall/51.png" style="width: 800px; height: 600px;" /&gt;
-&lt;p&gt;Select only &lt;tt class="docutils literal"&gt;[*] standard system utilities&lt;/tt&gt; if you wish to start with a minimal, console-only base configuration ready for further customization. Task menu can be accessed post-install by running &lt;tt class="docutils literal"&gt;tasksel&lt;/tt&gt;.&lt;/p&gt;
-&lt;img alt="Software selection" class="align-center" src="images/screenshot/debianInstall/52.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="GRUB" class="align-center" src="images/screenshot/debianInstall/53.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="GRUB install" class="align-center" src="images/screenshot/debianInstall/54.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Finish" class="align-center" src="images/screenshot/debianInstall/55.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="GRUB menu" class="align-center" src="images/screenshot/debianInstall/56.png" style="width: 800px; height: 600px;" /&gt;
-&lt;p&gt;If an encrypted home partition was created in Step 2 the system will display a passphrase prompt to unlock the partition.&lt;/p&gt;
-&lt;img alt="Enter encrypt passphrase" class="align-center" src="images/screenshot/debianInstall/57.png" style="width: 800px; height: 600px;" /&gt;
-&lt;img alt="Login" class="align-center" src="images/screenshot/debianInstall/58.png" style="width: 800px; height: 600px;" /&gt;
-&lt;/div&gt;
-&lt;div class="section" id="post-install"&gt;
-&lt;h2&gt;4. Post-install&lt;/h2&gt;
-&lt;p&gt;I created a &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/scripts/debian-post-install.sh"&gt;post-install shell script&lt;/a&gt; to configure or upgrade (to &lt;tt class="docutils literal"&gt;testing&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;sid&lt;/tt&gt;) a fresh setup.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="debian"></category><category term="linux"></category><category term="luks"></category><category term="crypto"></category><category term="shell"></category><category term="programming"></category></entry><entry><title>Run a Raspberry Pi 2 from USB storage v3.0</title><link href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html" rel="alternate"></link><updated>2015-07-24T12:22:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-05:run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; Pi now running &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html"&gt;Debian Jessie&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I am exploring the use of my Pi as &lt;strong&gt;24/7 uptime home server&lt;/strong&gt; and one of the hacks I wish to add is using Pi as a cheap and cheerful &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;network attached storage (NAS)&lt;/a&gt; device. Hmmm... How about using that USB hard drive I connect for NAS and move over the Pi rootfs and run it from there as well?&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;I imagine a 24/7 uptime Pi enjoys more storage and robust performance operating from hard drive storage vs a microSD card. &lt;a class="footnote-reference" href="#id5" id="id1"&gt;[1]&lt;/a&gt; I put my plan in motion using:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Raspberry Pi 2 Model B&lt;/li&gt;
-&lt;li&gt;5V 2A microUSB power adapter&lt;/li&gt;
-&lt;li&gt;8GB microSD card (for initial setup and &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt; partition) &lt;a class="footnote-reference" href="#id6" id="id2"&gt;[2]&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;1TB powered USB hard drive&lt;/li&gt;
-&lt;li&gt;ethernet cable&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst"&gt;raspbian-ua-netinst&lt;/a&gt; &lt;a class="footnote-reference" href="#id7" id="id3"&gt;[3]&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Setup a minimal &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspbian.html"&gt;Raspbian&lt;/a&gt; configuration using the latest packages drawn from &lt;a class="reference external" href="http://www.circuidipity.com/tag-debian.html"&gt;Debian&lt;/a&gt; &lt;tt class="docutils literal"&gt;jessie/stable&lt;/tt&gt;  with &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;raspbian-ua-netinst&lt;/span&gt;&lt;/tt&gt;. The netinstaller runs unattended (no display/keyboard required) with the option of installing rootfs to external USB storage. Upon completion the Pi reboots with DHCP and OpenSSH for remote access.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="prepare-the-microsd"&gt;
-&lt;h2&gt;0. Prepare the microSD&lt;/h2&gt;
-&lt;p&gt;MicroSD card is prepared on a host running Debian. &lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst/releases/"&gt;Download&lt;/a&gt; the latest &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;raspbian-ua-netinst-vX.X.X.img.xz&lt;/span&gt;&lt;/tt&gt; and flash image to the card (example &lt;tt class="docutils literal"&gt;sdX&lt;/tt&gt;):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# apt-get install xz-utils&lt;/span&gt;
-&lt;span class="c"&gt;# xzcat /path/to/raspbian-ua-netinst-&amp;lt;latest-version-number&amp;gt;.img.xz &amp;gt; /dev/sdX &amp;amp;&amp;amp; sync&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="customize-the-install"&gt;
-&lt;h2&gt;1. Customize the install&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst#installer-customization"&gt;Default settings&lt;/a&gt; for the netinstaller are customized by creating &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;installer-config.txt&lt;/span&gt;&lt;/tt&gt; in the root directory of the newly-prepared microSD. Remove card, re-insert, mount &lt;tt class="docutils literal"&gt;sdX1&lt;/tt&gt;, add the config.&lt;/p&gt;
-&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; Netinstaller reformats drive and installs rootfs to &lt;tt class="docutils literal"&gt;sda1&lt;/tt&gt;. Omit if you want a single partition that fills the entire drive (vs separate &lt;tt class="docutils literal"&gt;home&lt;/tt&gt; partition I create later on). Either way... &lt;strong&gt;all data will be wiped from the drive&lt;/strong&gt;. Make any backups you need to make.&lt;/p&gt;
-&lt;p&gt;Add only the settings to be changed from their defaults. Example that creates a 256MB &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt; on the microSD and 24GB &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; on the USB:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;packages&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;vim,tmux
-&lt;span class="nv"&gt;hostname&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;MyHostname
-&lt;span class="nv"&gt;bootsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;+256M
-&lt;span class="nv"&gt;rootsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;+24000M
-&lt;span class="nv"&gt;usbroot&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;A second &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;post-install.txt&lt;/span&gt;&lt;/tt&gt; shell script can also be created alongside &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;installer-config.txt&lt;/span&gt;&lt;/tt&gt; that will run after installation is complete but before the Pi reboots.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="install-and-configure"&gt;
-&lt;h2&gt;2. Install and configure&lt;/h2&gt;
-&lt;p&gt;I connect the 1TB hard drive to Pi, insert microSD, and power up. Netinstaller typically runs under 15 minutes to setup a base configuration before rebooting the Pi.&lt;/p&gt;
-&lt;p&gt;SSH into the newly-configured Pi (default &lt;tt class="docutils literal"&gt;login: root&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;password: raspbian&lt;/tt&gt;). Details of the install are logged in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/var/log/raspbian-ua-netinst.log&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Configure: &lt;a class="footnote-reference" href="#id8" id="id4"&gt;[4]&lt;/a&gt;&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;a new root password: &lt;tt class="docutils literal"&gt;passwd&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;default locale: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dpkg-reconfigure&lt;/span&gt; locales&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;timezone: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dpkg-reconfigure&lt;/span&gt; tzdata&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;create 1GB swap file: &lt;tt class="docutils literal"&gt;dd &lt;span class="pre"&gt;if=/dev/zero&lt;/span&gt; &lt;span class="pre"&gt;of=/swap&lt;/span&gt; bs=1M count=1024 &amp;amp;&amp;amp; mkswap /swap&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;enable swap file at boot: &lt;tt class="docutils literal"&gt;echo &amp;quot;/swap none swap sw 0 0&amp;quot; &amp;gt;&amp;gt; /etc/fstab&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;hardware random number generator: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-get&lt;/span&gt; &lt;span class="pre"&gt;-y&lt;/span&gt; install &lt;span class="pre"&gt;rng-tools&lt;/span&gt; &amp;amp;&amp;amp; echo &lt;span class="pre"&gt;&amp;quot;bcm2708-rng&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/modules&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;add new user: &lt;tt class="docutils literal"&gt;adduser USERNAME&lt;/tt&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="upgrade"&gt;
-&lt;h2&gt;3. Upgrade&lt;/h2&gt;
-&lt;p&gt;Stable release of Raspbian (2015-07-03) is currently built on older Debian &lt;tt class="docutils literal"&gt;wheezy&lt;/tt&gt; packages. Upgrade to the &lt;tt class="docutils literal"&gt;jessie/stable&lt;/tt&gt; branch by first modifying &lt;tt class="docutils literal"&gt;/etc/apt/sources.list&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# cp /etc/apt/sources.list /etc/apt/sources.list.bak&lt;/span&gt;
-&lt;span class="c"&gt;# echo &amp;quot;deb http://mirrordirector.raspbian.org/raspbian jessie main contrib non-free firmware rpi&amp;quot; &amp;gt; /etc/apt/sources.list&lt;/span&gt;
-&lt;span class="c"&gt;# echo &amp;quot;deb http://archive.raspbian.org/raspbian jessie main&amp;quot; &amp;gt;&amp;gt; /etc/apt/sources.list&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Update the package lists and upgrade:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# apt-get update &amp;amp;&amp;amp; apt-get -y dist-upgrade &amp;amp;&amp;amp; apt-get -y autoremove&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reboot.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="partition-external-usb-drive"&gt;
-&lt;h2&gt;4. Partition external USB drive&lt;/h2&gt;
-&lt;p&gt;Device is &lt;tt class="docutils literal"&gt;sda&lt;/tt&gt;. Use &lt;strong&gt;fdisk&lt;/strong&gt; to create a new partition for &lt;tt class="docutils literal"&gt;home&lt;/tt&gt; on the USB:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;sda1 - 24GB - &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; - created by &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;raspbian-ua-netinst&lt;/span&gt;&lt;/tt&gt; using &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;installer-config.txt&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;sda2 - remaining space - &lt;tt class="docutils literal"&gt;home&lt;/tt&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# fdisk /dev/sda&lt;/span&gt;
-
-Welcome to fdisk &lt;span class="o"&gt;(&lt;/span&gt;util-linux 2.25.2&lt;span class="o"&gt;)&lt;/span&gt;.
-Changes will remain in memory only, &lt;span class="k"&gt;until&lt;/span&gt; you decide to write them.
-Be careful before using the write command.
-
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
-Disk /dev/sda: 931.5 GiB, &lt;span class="m"&gt;1000204886016&lt;/span&gt; bytes, &lt;span class="m"&gt;1953525168&lt;/span&gt; sectors
-Units: sectors of &lt;span class="m"&gt;1&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Disklabel &lt;span class="nb"&gt;type&lt;/span&gt;: dos
-Disk identifier: 0x00000000
-
-Device     Boot Start      End  Sectors  Size Id Type
-/dev/sda1          &lt;span class="m"&gt;63&lt;/span&gt; &lt;span class="m"&gt;46893734&lt;/span&gt; &lt;span class="m"&gt;46893672&lt;/span&gt; 22.4G &lt;span class="m"&gt;83&lt;/span&gt; Linux
-
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: n
-Partition &lt;span class="nb"&gt;type&lt;/span&gt;
-&lt;span class="nb"&gt;    &lt;/span&gt;p   primary &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; primary, &lt;span class="m"&gt;0&lt;/span&gt; extended, &lt;span class="m"&gt;3&lt;/span&gt; free&lt;span class="o"&gt;)&lt;/span&gt;
-    e   extended &lt;span class="o"&gt;(&lt;/span&gt;container &lt;span class="k"&gt;for&lt;/span&gt; logical partitions&lt;span class="o"&gt;)&lt;/span&gt;
-Select &lt;span class="o"&gt;(&lt;/span&gt;default p&lt;span class="o"&gt;)&lt;/span&gt;: p
-Partition number &lt;span class="o"&gt;(&lt;/span&gt;2-4, default 2&lt;span class="o"&gt;)&lt;/span&gt;:
-First sector &lt;span class="o"&gt;(&lt;/span&gt;46893735-1953525167, default 46895104&lt;span class="o"&gt;)&lt;/span&gt;:
-Last sector, +sectors or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G,T,P&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;46895104-1953525167, default 1953525167&lt;span class="o"&gt;)&lt;/span&gt;:
-
-Created a new partition &lt;span class="m"&gt;2&lt;/span&gt; of &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Linux&amp;#39;&lt;/span&gt; and of size 909.2 GiB.
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
-Disk /dev/sda: 931.5 GiB, &lt;span class="m"&gt;1000204886016&lt;/span&gt; bytes, &lt;span class="m"&gt;1953525168&lt;/span&gt; sectors
-Units: sectors of &lt;span class="m"&gt;1&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Disklabel &lt;span class="nb"&gt;type&lt;/span&gt;: dos
-Disk identifier: 0x00000000
-
-Device     Boot    Start        End    Sectors   Size Id Type
-/dev/sda1             &lt;span class="m"&gt;63&lt;/span&gt;   &lt;span class="m"&gt;46893734&lt;/span&gt;   &lt;span class="m"&gt;46893672&lt;/span&gt;  22.4G &lt;span class="m"&gt;83&lt;/span&gt; Linux
-/dev/sda2       &lt;span class="m"&gt;46895104&lt;/span&gt; &lt;span class="m"&gt;1953525167&lt;/span&gt; &lt;span class="m"&gt;1906630064&lt;/span&gt; 909.2G &lt;span class="m"&gt;83&lt;/span&gt; Linux
-
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: w
-The partition table has been altered.
-Calling ioctl&lt;span class="o"&gt;()&lt;/span&gt; to re-read partition table.
-Re-reading the partition table failed.: Device or resource busy
-
-The kernel still uses the old table. The new table will be used at the next reboot or after you run partprobe&lt;span class="o"&gt;(&lt;/span&gt;8&lt;span class="o"&gt;)&lt;/span&gt; or kpartx&lt;span class="o"&gt;(&lt;/span&gt;8&lt;span class="o"&gt;)&lt;/span&gt;.
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reboot.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="move-home"&gt;
-&lt;h2&gt;5. Move home&lt;/h2&gt;
-&lt;p&gt;Format new partition using &lt;tt class="docutils literal"&gt;ext4&lt;/tt&gt; filesystem:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# mkfs.ext4 -E lazy_itable_init=0,lazy_journal_init=0 /dev/sda2&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Mount partition and move over any contents in &lt;tt class="docutils literal"&gt;/home&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# mount -t ext4 /dev/sda2 /mnt &amp;amp;&amp;amp; mv /home/* /mnt/ &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; umount /mnt&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Configure &lt;tt class="docutils literal"&gt;fstab&lt;/tt&gt; and mount new location of &lt;tt class="docutils literal"&gt;home&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# echo &amp;quot;/dev/sda2 /home ext4 noatime 0 2&amp;quot; &amp;gt;&amp;gt; /etc/fstab &amp;amp;&amp;amp; mount /home&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="static-address"&gt;
-&lt;h2&gt;6. Static address&lt;/h2&gt;
-&lt;p&gt;A Raspberry Pi that is going to stay home and run as a server can be configured to use a &lt;strong&gt;static network address&lt;/strong&gt;. Sample &lt;tt class="docutils literal"&gt;/etc/network/interfaces&lt;/tt&gt; modification that disables &lt;tt class="docutils literal"&gt;dhcp&lt;/tt&gt; and sets ip address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt; and connects to a router (that handles DNS) at &lt;tt class="docutils literal"&gt;192.168.1.1&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#iface eth0 inet dhcp&lt;/span&gt;
-auto eth0
-iface eth0 inet static
-    address 192.168.1.88
-    netmask 255.255.255.0
-    gateway 192.168.1.1
-    dns-nameservers 192.168.1.1
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="openssh"&gt;
-&lt;h2&gt;7. OpenSSH&lt;/h2&gt;
-&lt;p&gt;Secure access to remote servers &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;using SSH keys&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h3&gt;Notes&lt;/h3&gt;
-&lt;table class="docutils footnote" frame="void" id="id5" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.raspberrypi.org/forums/viewtopic.php?f=29&amp;amp;t=44177"&gt;Discussion thread&lt;/a&gt; about moving root to external USB storage.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table class="docutils footnote" frame="void" id="id6" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Pi 2 requires microSD card at boot so we continue using original &lt;tt class="docutils literal"&gt;/boot&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table class="docutils footnote" frame="void" id="id7" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id3"&gt;[3]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html"&gt;Version 1&lt;/a&gt; of HOWTO used Raspbian on a Raspberry Pi Model B. With the Pi 2 moving to ARMv7 I used a &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html"&gt;minimal Ubuntu 14.04&lt;/a&gt; installer for Version 2.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table class="docutils footnote" frame="void" id="id8" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id4"&gt;[4]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;I created a &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/scripts/raspbian-post-install.sh"&gt;post-install script&lt;/a&gt; for configuring the base install and upgrading to &lt;tt class="docutils literal"&gt;jessie&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</summary><category term="raspberry pi"></category><category term="raspbian"></category><category term="debian"></category><category term="linux"></category><category term="network"></category></entry><entry><title>Minimal Raspbian Jessie</title><link href="http://www.circuidipity.com/minimal-raspbian-jessie.html" rel="alternate"></link><updated>2015-07-03T19:27:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-03:minimal-raspbian-jessie.html</id><summary type="html">&lt;p&gt;Setup a minimal &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspbian.html"&gt;Raspbian&lt;/a&gt; configuration on the &lt;a class="reference external" href="http://www.circuidipity.com/tag-raspberry-pi.html"&gt;Raspberry Pi&lt;/a&gt; using &lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst"&gt;raspbian-ua-netinst&lt;/a&gt; (ideal start for a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;home server&lt;/a&gt;) with the latest packages from &lt;a class="reference external" href="http://www.circuidipity.com/tag-debian.html"&gt;Debian&lt;/a&gt; &lt;tt class="docutils literal"&gt;jessie/stable&lt;/tt&gt;.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;The netinstaller runs unattended (no display/keyboard required) with the option of installing &lt;a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html"&gt;rootfs to external USB storage&lt;/a&gt;. Upon completion the Pi reboots with DHCP and OpenSSH for remote access.&lt;/p&gt;
-&lt;p&gt;I put my plan in motion using:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Raspberry Pi 2 Model B&lt;/li&gt;
-&lt;li&gt;5V 2A microUSB power adapter&lt;/li&gt;
-&lt;li&gt;8GB microSD card&lt;/li&gt;
-&lt;li&gt;ethernet cable&lt;/li&gt;
-&lt;li&gt;raspbian-ua-netinst&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="prepare-the-microsd"&gt;
-&lt;h2&gt;0. Prepare the microSD&lt;/h2&gt;
-&lt;p&gt;MicroSD card is prepared on a host running Debian. &lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst/releases/"&gt;Download&lt;/a&gt; the latest &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;raspbian-ua-netinst-vX.X.X.img.xz&lt;/span&gt;&lt;/tt&gt; and flash the image to the card:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# xzcat /path/to/raspbian-ua-netinst-&amp;lt;latest-version-number&amp;gt;.img.xz &amp;gt; /dev/sdX &amp;amp;&amp;amp; sync&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="customize-the-install-optional"&gt;
-&lt;h2&gt;1. Customize the install (optional)&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst#installer-customization"&gt;Default settings&lt;/a&gt; for the netinstaller can be customized by creating &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;installer-config.txt&lt;/span&gt;&lt;/tt&gt; in the root directory of the newly-prepared microSD. Remove newly-formatted card, re-insert, mount &lt;tt class="docutils literal"&gt;sdX1&lt;/tt&gt;, add the config.&lt;/p&gt;
-&lt;p&gt;Add only the settings to be changed from their defaults (example):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;packages&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;vim,tmux
-&lt;span class="nv"&gt;hostname&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;MyHostname
-&lt;span class="nv"&gt;bootsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;+256M
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;A second &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;post-install.txt&lt;/span&gt;&lt;/tt&gt; shell script can also be created alongside &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;installer-config.txt&lt;/span&gt;&lt;/tt&gt; that will run after installation is complete but before the Pi reboots.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="install-and-configure"&gt;
-&lt;h2&gt;2. Install and configure&lt;/h2&gt;
-&lt;p&gt;Insert microSD in the Pi and power up. Netinstaller typically runs under 15 minutes &lt;a class="footnote-reference" href="#id3" id="id1"&gt;[1]&lt;/a&gt; to setup a base configuration before rebooting the Pi.&lt;/p&gt;
-&lt;p&gt;SSH into the newly-configured Pi (default &lt;tt class="docutils literal"&gt;login: root&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;password: raspbian&lt;/tt&gt;). Details of the install are logged in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/var/log/raspbian-ua-netinst.log&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Configure &lt;a class="footnote-reference" href="#id4" id="id2"&gt;[2]&lt;/a&gt;:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;a new root password: &lt;tt class="docutils literal"&gt;passwd&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;default locale: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dpkg-reconfigure&lt;/span&gt; locales&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;timezone: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dpkg-reconfigure&lt;/span&gt; tzdata&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;create 1GB swap file: &lt;tt class="docutils literal"&gt;dd &lt;span class="pre"&gt;if=/dev/zero&lt;/span&gt; &lt;span class="pre"&gt;of=/swap&lt;/span&gt; bs=1M count=1024 &amp;amp;&amp;amp; mkswap /swap&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;enable swap file at boot: &lt;tt class="docutils literal"&gt;echo &amp;quot;/swap none swap sw 0 0&amp;quot; &amp;gt;&amp;gt; /etc/fstab&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;enable hardware random number generator: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-get&lt;/span&gt; &lt;span class="pre"&gt;-y&lt;/span&gt; install &lt;span class="pre"&gt;rng-tools&lt;/span&gt; &amp;amp;&amp;amp; echo &lt;span class="pre"&gt;&amp;quot;bcm2708-rng&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/modules&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;add new user: &lt;tt class="docutils literal"&gt;adduser USERNAME&lt;/tt&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="upgrade"&gt;
-&lt;h2&gt;3. Upgrade&lt;/h2&gt;
-&lt;p&gt;Stable release of Raspbian (2015-07-03) is currently built on older Debian &lt;tt class="docutils literal"&gt;wheezy&lt;/tt&gt; packages. Upgrade to the &lt;tt class="docutils literal"&gt;jessie/stable&lt;/tt&gt; branch by first modifying &lt;tt class="docutils literal"&gt;/etc/apt/sources.list&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# cp /etc/apt/sources.list /etc/apt/sources.list.bak&lt;/span&gt;
-&lt;span class="c"&gt;# echo &amp;quot;deb http://mirrordirector.raspbian.org/raspbian jessie main contrib non-free firmware rpi&amp;quot; &amp;gt; /etc/apt/sources.list&lt;/span&gt;
-&lt;span class="c"&gt;# echo &amp;quot;deb http://archive.raspbian.org/raspbian jessie main&amp;quot; &amp;gt;&amp;gt; /etc/apt/sources.list&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Update the package lists and upgrade:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# apt-get update &amp;amp;&amp;amp; apt-get -y dist-upgrade &amp;amp;&amp;amp; apt-get -y autoremove&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reboot.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h3&gt;Notes&lt;/h3&gt;
-&lt;table class="docutils footnote" frame="void" id="id3" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;First attempt (unattended upgrade straight to &lt;tt class="docutils literal"&gt;jessie&lt;/tt&gt;) took 236min! Second attempt (no custom config) took 112min.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;I poked around to see if there was something wonky with the microSD... first using &lt;tt class="docutils literal"&gt;badlocks&lt;/tt&gt; (read-only test):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# badblocks -vs /dev/sdb&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
-79434
-79435
-79436
-79437
-&lt;span class="k"&gt;done&lt;/span&gt;
-Pass completed, &lt;span class="m"&gt;6424&lt;/span&gt; bad blocks found. &lt;span class="o"&gt;(&lt;/span&gt;6424/0/0 errors&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Second test was creating/writing an image to the card (see &lt;a class="reference external" href="http://projects.nuschkys.net/2012/05/15/testing-a-new-sd-card-under-linux/"&gt;&amp;quot;Testing a new SD card under Linux&amp;quot;&lt;/a&gt;) but it bombed right away:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# dd if=/dev/urandom of=test_sd.tmp bs=1024 count=8000000&lt;/span&gt;
-8000000+0 records in
-8000000+0 records out
-&lt;span class="m"&gt;8192000000&lt;/span&gt; bytes &lt;span class="o"&gt;(&lt;/span&gt;8.2 GB&lt;span class="o"&gt;)&lt;/span&gt; copied, 597.98 s, 13.7 MB/s
-&lt;span class="c"&gt;# dd if=test_sd.tmp of=/dev/sdb bs=1024 count=8000000&lt;/span&gt;
-dd: error writing ‘/dev/sdb’: Input/output error
-73017+0 records in
-73016+0 records out
-&lt;span class="m"&gt;74768384&lt;/span&gt; bytes &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;75&lt;/span&gt; MB&lt;span class="o"&gt;)&lt;/span&gt; copied, 44.9678 s, 1.7 MB/s
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Conclusion: &lt;em&gt;definitely&lt;/em&gt; wonky. :-) Replace with a good microSD and install took 12min.&lt;/p&gt;
-&lt;table class="docutils footnote" frame="void" id="id4" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;I created a &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/scripts/raspbian-post-install.sh"&gt;post-install script&lt;/a&gt; for configuring the base install and upgrading to &lt;tt class="docutils literal"&gt;jessie&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</summary><category term="raspbian"></category><category term="debian"></category><category term="linux"></category><category term="raspberry pi"></category><category term="network"></category></entry><entry><title>OpenWrt router as bridged repeater using relayd</title><link href="http://www.circuidipity.com/openwrt-bridged-repeater.html" rel="alternate"></link><updated>2015-06-26T00:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-06-26:openwrt-bridged-repeater.html</id><summary type="html">&lt;p&gt;Extend the range of a wireless network using a cheap and cheerful router running &lt;a class="reference external" href="http://www.circuidipity.com/tag-openwrt.html"&gt;OpenWrt&lt;/a&gt; as a &lt;strong&gt;bridged repeater&lt;/strong&gt;. All client devices use the same IP address range and are capable of communicating with each other.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Wireless access points: &lt;strong&gt;PrimaryAP&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html"&gt;TP-Link TL-WDR3600&lt;/a&gt; with IP address &lt;tt class="docutils literal"&gt;192.168.1.1&lt;/tt&gt; + wireless channel &lt;tt class="docutils literal"&gt;11&lt;/tt&gt; and the &lt;strong&gt;RepeaterAP&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/pingparade4.html"&gt;TP-Link TL-WR841N&lt;/a&gt; (~$25CAN). Both devices are running OpenWrt.&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://forum.openwrt.org/viewtopic.php?id=39077"&gt;This thread&lt;/a&gt; was a big help in cutting through the confusion and getting everything hopping! Basically there are 2 types of repeater scenarios to consider:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;em&gt;non-bridged&lt;/em&gt; repeater - works on all radios... devices connected to the &lt;em&gt;RepeaterAP&lt;/em&gt; see the &lt;em&gt;PrimaryAP&lt;/em&gt; devices, &lt;em&gt;PrimaryAP&lt;/em&gt; devices do not see &lt;em&gt;RepeaterAP&lt;/em&gt; devices&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;bridged&lt;/em&gt; repeater - works for most radios... everything sees everything&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;All configuration is done on the secondary router to setup device as a bridged repeater.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="install-relayd"&gt;
-&lt;h2&gt;0. Install relayd&lt;/h2&gt;
-&lt;p&gt;Access the internet by connecting an ethernet cable from the secondary router's WAN port to the primary router. Login and install &lt;tt class="docutils literal"&gt;relayd&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# opkg update&lt;/span&gt;
-&lt;span class="c"&gt;# opkg install relayd&lt;/span&gt;
-&lt;span class="c"&gt;# /etc/init.d/relayd enable&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="configure-wireless"&gt;
-&lt;h2&gt;1. Configure wireless&lt;/h2&gt;
-&lt;p&gt;Sample &lt;tt class="docutils literal"&gt;/etc/config/wireless&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;config wifi-device &lt;span class="s1"&gt;&amp;#39;radio0&amp;#39;&lt;/span&gt;
-    option &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;mac80211&amp;#39;&lt;/span&gt;
-    option channel &lt;span class="s1"&gt;&amp;#39;11&amp;#39;&lt;/span&gt;     &lt;span class="c"&gt;# Important! Match with the channel set on PrimaryAP&lt;/span&gt;
-    option hwmode &lt;span class="s1"&gt;&amp;#39;11g&amp;#39;&lt;/span&gt;
-    option path &lt;span class="s1"&gt;&amp;#39;platform/ar934x_wmac&amp;#39;&lt;/span&gt;
-    option htmode &lt;span class="s1"&gt;&amp;#39;HT20&amp;#39;&lt;/span&gt;
-    option txpower &lt;span class="s1"&gt;&amp;#39;30&amp;#39;&lt;/span&gt;
-    option country &lt;span class="s1"&gt;&amp;#39;US&amp;#39;&lt;/span&gt;
-
-config wifi-iface
-    option device &lt;span class="s1"&gt;&amp;#39;radio0&amp;#39;&lt;/span&gt;
-    option network &lt;span class="s1"&gt;&amp;#39;wwan&amp;#39;&lt;/span&gt;
-    option encryption &lt;span class="s1"&gt;&amp;#39;psk2&amp;#39;&lt;/span&gt;
-    option key &lt;span class="s1"&gt;&amp;#39;*********************&amp;#39;&lt;/span&gt;
-    option mode &lt;span class="s1"&gt;&amp;#39;sta&amp;#39;&lt;/span&gt;
-    option ssid &lt;span class="s1"&gt;&amp;#39;PrimaryAP&amp;#39;&lt;/span&gt;
-
-config wifi-iface
-    option device &lt;span class="s1"&gt;&amp;#39;radio0&amp;#39;&lt;/span&gt;
-    option network &lt;span class="s1"&gt;&amp;#39;lan&amp;#39;&lt;/span&gt;
-    option encryption &lt;span class="s1"&gt;&amp;#39;psk2&amp;#39;&lt;/span&gt;
-    option key &lt;span class="s1"&gt;&amp;#39;*****************&amp;#39;&lt;/span&gt;
-    option mode &lt;span class="s1"&gt;&amp;#39;ap&amp;#39;&lt;/span&gt;
-    option ssid &lt;span class="s1"&gt;&amp;#39;RepeaterAP&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="configure-network"&gt;
-&lt;h2&gt;2. Configure network&lt;/h2&gt;
-&lt;p&gt;Sample &lt;tt class="docutils literal"&gt;/etc/config/network&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;config interface &lt;span class="s1"&gt;&amp;#39;loopback&amp;#39;&lt;/span&gt;
-    option ifname &lt;span class="s1"&gt;&amp;#39;lo&amp;#39;&lt;/span&gt;
-    option proto &lt;span class="s1"&gt;&amp;#39;static&amp;#39;&lt;/span&gt;
-    option ipaddr &lt;span class="s1"&gt;&amp;#39;127.0.0.1&amp;#39;&lt;/span&gt;
-    option netmask &lt;span class="s1"&gt;&amp;#39;255.0.0.0&amp;#39;&lt;/span&gt;
-
-config interface &lt;span class="s1"&gt;&amp;#39;lan&amp;#39;&lt;/span&gt;
-    option ifname &lt;span class="s1"&gt;&amp;#39;eth0&amp;#39;&lt;/span&gt;
-    option force_link &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
-    option &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;bridge&amp;#39;&lt;/span&gt;
-    option proto &lt;span class="s1"&gt;&amp;#39;static&amp;#39;&lt;/span&gt;
-    option ip6assign &lt;span class="s1"&gt;&amp;#39;60&amp;#39;&lt;/span&gt;
-    option ipaddr &lt;span class="s1"&gt;&amp;#39;192.168.10.1&amp;#39;&lt;/span&gt;    &lt;span class="c"&gt;# for relayd... requires 192.168.x.x address but not used by clients&lt;/span&gt;
-    option gateway &lt;span class="s1"&gt;&amp;#39;192.168.1.1&amp;#39;&lt;/span&gt;    &lt;span class="c"&gt;# ip address of PrimaryAP&lt;/span&gt;
-    option netmask &lt;span class="s1"&gt;&amp;#39;255.255.255.0&amp;#39;&lt;/span&gt;
-    option dns &lt;span class="s1"&gt;&amp;#39;192.168.1.1&amp;#39;&lt;/span&gt;
-
-config interface &lt;span class="s1"&gt;&amp;#39;wwan&amp;#39;&lt;/span&gt;
-    option proto &lt;span class="s1"&gt;&amp;#39;static&amp;#39;&lt;/span&gt;
-    option ipaddr &lt;span class="s1"&gt;&amp;#39;192.168.1.254&amp;#39;&lt;/span&gt;
-    option netmask &lt;span class="s1"&gt;&amp;#39;255.255.255.0&amp;#39;&lt;/span&gt;
-    option gateway &lt;span class="s1"&gt;&amp;#39;192.168.1.1&amp;#39;&lt;/span&gt;
-
-config interface &lt;span class="s1"&gt;&amp;#39;stabridge&amp;#39;&lt;/span&gt;
-    option proto &lt;span class="s1"&gt;&amp;#39;relay&amp;#39;&lt;/span&gt;
-    option network &lt;span class="s1"&gt;&amp;#39;lan wwan&amp;#39;&lt;/span&gt;
-    option ipaddr &lt;span class="s1"&gt;&amp;#39;192.168.1.254&amp;#39;&lt;/span&gt;   &lt;span class="c"&gt;# static ip assigned from PrimaryAP address range&lt;/span&gt;
-
-config switch
-    option name &lt;span class="s1"&gt;&amp;#39;switch0&amp;#39;&lt;/span&gt;
-    option reset &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
-    option enable_vlan &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
-
-config switch_vlan
-    option device &lt;span class="s1"&gt;&amp;#39;switch0&amp;#39;&lt;/span&gt;
-    option vlan &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
-    option ports &lt;span class="s1"&gt;&amp;#39;0 1 2 3 4&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="configure-dhcp"&gt;
-&lt;h2&gt;3. Configure DHCP&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;PrimaryAP&lt;/em&gt; will handle DHCP for the combined network. Sample &lt;tt class="docutils literal"&gt;/etc/config/dhcp&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;config dhcp &lt;span class="s1"&gt;&amp;#39;lan&amp;#39;&lt;/span&gt;
-    option interface &lt;span class="s1"&gt;&amp;#39;lan&amp;#39;&lt;/span&gt;
-    option start &lt;span class="s1"&gt;&amp;#39;100&amp;#39;&lt;/span&gt;
-    option limit &lt;span class="s1"&gt;&amp;#39;150&amp;#39;&lt;/span&gt;
-    option leasetime &lt;span class="s1"&gt;&amp;#39;12h&amp;#39;&lt;/span&gt;
-    option ignore &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
-
-config dhcp &lt;span class="s1"&gt;&amp;#39;wan&amp;#39;&lt;/span&gt;
-    option interface &lt;span class="s1"&gt;&amp;#39;wan&amp;#39;&lt;/span&gt;
-    option ignore &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="reboot"&gt;
-&lt;h2&gt;4. Reboot&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;PrimaryAP&lt;/em&gt; will handle firewall and dnsmasq for the combined network. Disable the services on &lt;em&gt;RepeaterAP&lt;/em&gt; to avoid conflicts:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# /etc/init.d/firewall stop&lt;/span&gt;
-&lt;span class="c"&gt;# /etc/init.d/firewall disable&lt;/span&gt;
-&lt;span class="c"&gt;# /etc/init.d/dnsmasq stop&lt;/span&gt;
-&lt;span class="c"&gt;# /etc/init.d/dnsmasq disable&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reboot router:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# reboot&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;OK! Connect to the new &lt;em&gt;RepeaterAP&lt;/em&gt; and the device will be assigned an IP address on the &lt;em&gt;PrimaryAP&lt;/em&gt;'s now-extended network. All rules and services on &lt;em&gt;PrimaryAP&lt;/em&gt; will flow through to devices connected via &lt;em&gt;RepeaterAP&lt;/em&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="helpful-resources"&gt;
-&lt;h2&gt;5. Helpful resources&lt;/h2&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;My &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/openwrt/bridged_repeater/etc/config/wireless"&gt;wireless&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/openwrt/bridged_repeater/etc/config/network"&gt;network&lt;/a&gt;, and &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/openwrt/bridged_repeater/etc/config/dhcp"&gt;dhcp&lt;/a&gt; configs&lt;/li&gt;
-&lt;li&gt;OpenWrt forum thread on &lt;a class="reference external" href="https://forum.openwrt.org/viewtopic.php?id=39077"&gt;bridged and simple repeater configurations&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://wiki.openwrt.org/doc/recipes/relayclient"&gt;Routed Client with relayd (Pseudobridge)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="openwrt"></category><category term="router"></category><category term="linux"></category><category term="network"></category></entry></feed>
+</summary><category term="chromebook"></category><category term="debian"></category><category term="linux"></category></entry></feed>
