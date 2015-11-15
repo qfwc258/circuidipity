@@ -1,5 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 15 Nov 2015 13:23:00 -0500</lastBuildDate><item><title>LPTHW Exercise 6: Strings and Text</title><link>http://www.circuidipity.com/lpthw-e6.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; I am not entirely clear about the difference between &lt;strong&gt;%r&lt;/strong&gt; vs &lt;strong&gt;%s&lt;/strong&gt; in string formatting. I &lt;strong&gt;do&lt;/strong&gt; understand they call different functions (&lt;strong&gt;repr&lt;/strong&gt; and &lt;strong&gt;str&lt;/strong&gt;) and produce different output:&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 15 Nov 2015 16:26:00 -0500</lastBuildDate><item><title>LPTHW Exercise 10: What Was That?</title><link>http://www.circuidipity.com/lpthw-e10.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Playing with escape sequences:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;cars&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;self-driving cars&lt;/span&gt;
+&lt;span class="s1"&gt;... armoured cars&lt;/span&gt;
+&lt;span class="s1"&gt;... \t\t\t\tgetaway cars&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{1} {0}\n\t{2} {0}\t\t{3} {0}\n{4} {4} {3} bumper {0}\n\a&amp;quot;&lt;/span&gt; + &lt;span class="s2"&gt;&amp;quot;.&amp;quot;&lt;/span&gt; * &lt;span class="m"&gt;40&lt;/span&gt; + cars&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;car&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Red&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;blue&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;green&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;really&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+Red car
+        blue car                green car
+really really green bumper car
+........................................self-driving cars
+armoured cars
+                                getaway cars
+&amp;gt;&amp;gt;&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 15 Nov 2015 15:46:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-15:lpthw-e10.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 9: Printing, Printing, Printing</title><link>http://www.circuidipity.com/lpthw-e9.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Escape sequences and block quotes:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;countdown&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;\n10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0\n\n\n&amp;quot;&lt;/span&gt;
+
+print&lt;span class="o"&gt;(&lt;/span&gt;countdown&lt;span class="o"&gt;)&lt;/span&gt;
+print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;Liftoff!&lt;/span&gt;
+&lt;span class="s2"&gt;Tower clear...&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;python e09.1.py
+
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+
+
+
+
+Liftoff!
+Tower clear...
+
+&lt;span class="err"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 15 Nov 2015 15:43:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-15:lpthw-e9.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 8: Printing, Printing</title><link>http://www.circuidipity.com/lpthw-e8.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; More printing using the newer &lt;strong&gt;format()&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;formatter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;{} {} {} {}&amp;quot;&lt;/span&gt;
+
+print&lt;span class="o"&gt;(&lt;/span&gt;formatter&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;1, 2, 3, 4&lt;span class="o"&gt;)&lt;/span&gt;
+print&lt;span class="o"&gt;(&lt;/span&gt;formatter&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;one&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;two&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;three&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;four&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+print&lt;span class="o"&gt;(&lt;/span&gt;formatter&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;True, False, False, True&lt;span class="o"&gt;)&lt;/span&gt;
+print&lt;span class="o"&gt;(&lt;/span&gt;formatter&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;formatter, formatter, formatter, formatter&lt;span class="o"&gt;)&lt;/span&gt;
+print&lt;span class="o"&gt;(&lt;/span&gt;formatter&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;I had this thing.&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;That you could type up right.&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;But it didn&amp;#39;t sing.&amp;quot;&lt;/span&gt;,
+    &lt;span class="s2"&gt;&amp;quot;So I said goodnight.&amp;quot;&lt;/span&gt;
+&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;python e08.1.py
+&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt; 4
+one two three four
+True False False True
+&lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt;
+I had this thing. That you could &lt;span class="nb"&gt;type &lt;/span&gt;up right. But it didn&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;t sing. So I said goodnight.
+&lt;span class="err"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 15 Nov 2015 14:45:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-15:lpthw-e8.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 7: More Printing</title><link>http://www.circuidipity.com/lpthw-e7.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; I am practising printing in Python 2 using the &lt;strong&gt;print()&lt;/strong&gt; and &lt;strong&gt;format()&lt;/strong&gt; functions inherited from Python 3:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;poem&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;The Wreck of the Hesperus&amp;#39;&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;poet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Longfellow&amp;#39;&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;poem + &lt;span class="s2"&gt;&amp;quot; by &amp;quot;&lt;/span&gt; + poet&lt;span class="o"&gt;)&lt;/span&gt;
+The Wreck of the Hesperus by Longfellow
+&amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{}&amp;quot;&lt;/span&gt; + &lt;span class="s2"&gt;&amp;quot; by &amp;quot;&lt;/span&gt; + poet&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;poem&lt;span class="o"&gt;)&lt;/span&gt;
+The Wreck of the Hesperus by Longfellow
+&amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{}&amp;quot;&lt;/span&gt; + &lt;span class="s2"&gt;&amp;quot; by &amp;quot;&lt;/span&gt; + &lt;span class="s2"&gt;&amp;quot;{}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;poem, poet&lt;span class="o"&gt;)&lt;/span&gt;
+The Wreck of the Hesperus by Longfellow
+&amp;gt;&amp;gt;&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 15 Nov 2015 14:38:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-15:lpthw-e7.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 6: Strings and Text</title><link>http://www.circuidipity.com/lpthw-e6.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; I am not entirely clear about the difference between &lt;strong&gt;%r&lt;/strong&gt; vs &lt;strong&gt;%s&lt;/strong&gt; in string formatting. I &lt;strong&gt;do&lt;/strong&gt; understand they call different functions (&lt;strong&gt;repr&lt;/strong&gt; and &lt;strong&gt;str&lt;/strong&gt;) and produce different output:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;vessel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Hesperus&amp;#39;&lt;/span&gt;
 &amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;The Wreck of the %r&amp;quot;&lt;/span&gt; % vessel
 The Wreck of the &lt;span class="s1"&gt;&amp;#39;Hesperus&amp;#39;&lt;/span&gt;
@@ -116,10 +195,22 @@ It's only the &amp;quot;hard&amp;quot; way because it uses a technique called &l
 &lt;/div&gt;
 &lt;div class="section" id="id7"&gt;
 &lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e6.html"&gt;Exercise 6: Strings and Text&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id8"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e7.html"&gt;Exercise 7: More Printing&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id9"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e8.html"&gt;Exercise 8: Printing, Printing&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id10"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e9.html"&gt;Exercise 9: Printing, Printing, Printing&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id11"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e10.html"&gt;Exercise 10: What Was That?&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 15 Nov 2015 13:23:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-11:lpthw-dude.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>Keystrokes cheatsheet</title><link>http://www.circuidipity.com/keystrokes.html</link><description>&lt;p&gt;&lt;strong&gt;Work-in-progress:&lt;/strong&gt; Keystroke combos that I find useful (listed here to jog my memory!)...&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 15 Nov 2015 16:26:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-11:lpthw-dude.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>Keystrokes cheatsheet</title><link>http://www.circuidipity.com/keystrokes.html</link><description>&lt;p&gt;&lt;strong&gt;Work-in-progress:&lt;/strong&gt; Keystroke combos that I find useful (listed here to jog my memory!)...&lt;/p&gt;
 &lt;div class="section" id="chromebook"&gt;
 &lt;h2&gt;Chromebook&lt;/h2&gt;
 &lt;p&gt;Top row on my &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Jessiebook&lt;/a&gt;  keyboard has a series of shortcut icons (&lt;tt class="docutils literal"&gt;Brightness&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;Volume&lt;/tt&gt;...) that identify in Linux as the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;F1-F10&lt;/span&gt;&lt;/tt&gt; keys and the &lt;tt class="docutils literal"&gt;Search&lt;/tt&gt; key (in the &lt;tt class="docutils literal"&gt;CapsLk&lt;/tt&gt; position) acts as &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; (Windows) modifier key.&lt;/p&gt;
@@ -1051,339 +1142,4 @@ iface eth0 inet static
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Mon, 20 Jul 2015 15:18:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-07-20:20150720.html</guid><category>bits</category></item><item><title>Verify a PGP signature with GnuPG</title><link>http://www.circuidipity.com/verify-pgp-signature-gnupg.html</link><description>&lt;p&gt;Using a &lt;strong&gt;PGP private/public keypair&lt;/strong&gt; to create a &lt;strong&gt;digital signature&lt;/strong&gt; for a file certifies its integrity. Adding a signature to software available for download heightens confidence that everything is OK!&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;A developer signs a package with their private key and the receiver verifies the signature with the public key. If the package has been modified or corrupted in transmission the verification will fail.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="download"&gt;
-&lt;h2&gt;0. Download&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;GnuPG&lt;/strong&gt; is used to verify PGP signatures:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install gnupg
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt; I download a &lt;a class="reference external" href="http://sjoerd.luon.net/posts/2015/02/debian-jessie-on-rpi2/"&gt;Debian Jessie for Raspberry Pi 2&lt;/a&gt; image and its signature:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.gz
-&lt;span class="nv"&gt;$ &lt;/span&gt;wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.gz.asc
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="import"&gt;
-&lt;h2&gt;1. Import&lt;/h2&gt;
-&lt;div class="section" id="method-0"&gt;
-&lt;h3&gt;Method 0&lt;/h3&gt;
-&lt;p&gt;If the location of the developer's public key is known, I can directly import the key into my keyring (&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.gnupg/pubring.gpg&lt;/span&gt;&lt;/tt&gt;):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --keyserver x-hkp://pool.sks-keyservers.net --recv-keys 0xC2300F7B
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="method-1"&gt;
-&lt;h3&gt;Method 1&lt;/h3&gt;
-&lt;p&gt;Identify the public key used to generate the signature:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --verify jessie-rpi2-20150705.img.gz.asc
-gpg: Signature made Sun &lt;span class="m"&gt;05&lt;/span&gt; Jul &lt;span class="m"&gt;2015&lt;/span&gt; 09:06:01 AM EDT using RSA key ID C2300F7B
-gpg: Can&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;t check signature: public key not found
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Public key is &lt;tt class="docutils literal"&gt;0xC2300F7B&lt;/tt&gt;. Run a key search &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt; and import:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --search 0xC2300F7B
-gpg: keyring &lt;span class="sb"&gt;`&lt;/span&gt;/home/dwa/.gnupg/secring.gpg&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; created
-gpg: searching &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;0xC2300F7B&amp;quot;&lt;/span&gt; from hkp server keys.gnupg.net
-&lt;span class="o"&gt;(&lt;/span&gt;1&lt;span class="o"&gt;)&lt;/span&gt;     Sjoerd Simons &amp;lt;sjoerd@luon.net&amp;gt;
-        Sjoerd Simons &amp;lt;sjoerd@debian.org&amp;gt;
-        Antonius Gerardus Johannes Simons &amp;lt;sjoerd@luon.net&amp;gt;
-            &lt;span class="m"&gt;4096&lt;/span&gt; bit RSA key C2300F7B, created: 2014-04-25
-Keys 1-1 of &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;0xC2300F7B&amp;quot;&lt;/span&gt;.  Enter number&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt;, N&lt;span class="o"&gt;)&lt;/span&gt;ext, or Q&lt;span class="o"&gt;)&lt;/span&gt;uit &amp;gt; 1
-gpg: requesting key C2300F7B from hkp server keys.gnupg.net
-gpg: key C2300F7B: public key &lt;span class="s2"&gt;&amp;quot;Sjoerd Simons &amp;lt;sjoerd@luon.net&amp;gt;&amp;quot;&lt;/span&gt; imported
-gpg: no ultimately trusted keys found
-gpg: Total number processed: 1
-gpg:               imported: &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="o"&gt;(&lt;/span&gt;RSA: 1&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="verify"&gt;
-&lt;h2&gt;2. Verify&lt;/h2&gt;
-&lt;p&gt;List keys in my keyring:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --list-keys
-/home/dwa/.gnupg/pubring.gpg
-----------------------------
-pub   4096R/C2300F7B 2014-04-25
-uid                  Sjoerd Simons &amp;lt;sjoerd@luon.net&amp;gt;
-uid                  Sjoerd Simons &amp;lt;sjoerd@debian.org&amp;gt;
-uid                  Antonius Gerardus Johannes Simons &amp;lt;sjoerd@luon.net&amp;gt;
-sub   4096R/92545E8E 2014-04-25
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Verify package signature:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gpg --verify jessie-rpi2-20150705.img.gz.asc jessie-rpi2-20150705.img.gz
-gpg: Signature made Sun &lt;span class="m"&gt;05&lt;/span&gt; Jul &lt;span class="m"&gt;2015&lt;/span&gt; 09:06:01 AM EDT using RSA key ID C2300F7B
-gpg: Good signature from &lt;span class="s2"&gt;&amp;quot;Sjoerd Simons &amp;lt;sjoerd@luon.net&amp;gt;&amp;quot;&lt;/span&gt;
-gpg:                 aka &lt;span class="s2"&gt;&amp;quot;Sjoerd Simons &amp;lt;sjoerd@debian.org&amp;gt;&amp;quot;&lt;/span&gt;
-gpg:                 aka &lt;span class="s2"&gt;&amp;quot;Antonius Gerardus Johannes Simons &amp;lt;sjoerd@luon.net&amp;gt;&amp;quot;&lt;/span&gt;
-gpg: WARNING: This key is not certified with a trusted signature!
-gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: &lt;span class="m"&gt;2870&lt;/span&gt; A31B EA9D BCF2 &lt;span class="m"&gt;7472&lt;/span&gt;  &lt;span class="m"&gt;3108&lt;/span&gt; C274 DB64 C230 0F7B
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The warning about &lt;strong&gt;key is not certified with a trusted signature&lt;/strong&gt; means GnuPG verified that key made that signature but can't guarantee that key really belongs to the developer. It's up to me to decide how much confidence to place in the authenticity of the key.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h3&gt;Notes&lt;/h3&gt;
-&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Auto-generated &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.gnupg/gpg.conf&lt;/span&gt;&lt;/tt&gt; defaults to searching &lt;tt class="docutils literal"&gt;keyserver &lt;span class="pre"&gt;hkp://keys.gnupg.net&lt;/span&gt;&lt;/tt&gt; which redirects to the &lt;a class="reference external" href="https://sks-keyservers.net/"&gt;SKS Keyservers pool&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 19 Jul 2015 11:33:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-07-19:verify-pgp-signature-gnupg.html</guid><category>crypto</category><category>debian</category><category>linux</category></item><item><title>Lightweight and a delight: i3 tiling window manager</title><link>http://www.circuidipity.com/i3-tiling-window-manager.html</link><description>&lt;p&gt;As a former &lt;strong&gt;Fluxbox&lt;/strong&gt; and &lt;strong&gt;Openbox&lt;/strong&gt; user I can understand the love for a lightweight, minimal window manager where I can &amp;quot;paint&amp;quot; my applications across the screen.&lt;/p&gt;
-&lt;p&gt;Subsequently I wandered through &lt;strong&gt;Xfce&lt;/strong&gt; and &lt;strong&gt;LXDE&lt;/strong&gt; and all the way to the other end of the scale with Ubuntu's &lt;em&gt;all-in&lt;/em&gt; desktop environment &lt;strong&gt;Unity&lt;/strong&gt;. I was curious about &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Tiling_window_manager"&gt;tiling window managers&lt;/a&gt; but never quite grokked the advantage from screenshots: seeing consoles arranged in a grid made me think &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; a better choice for &lt;em&gt;that&lt;/em&gt; task, and why would I want to watch a video in a reduced square in the corner of a screen?&lt;/p&gt;
-&lt;p&gt;And then I tried &lt;a class="reference external" href="https://i3wm.org/"&gt;i3&lt;/a&gt; and realized I have found my new default desktop:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;startx&lt;/tt&gt; to X almost instantaneous on &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Jessiebook&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;loads sensible defaults and - thanks to the excellent &lt;a class="reference external" href="https://i3wm.org/docs/userguide.html"&gt;User's Guide&lt;/a&gt; - easy to customize via text files&lt;/li&gt;
-&lt;li&gt;toggle between &lt;strong&gt;tiled&lt;/strong&gt;, &lt;strong&gt;tabbed&lt;/strong&gt; (my default), &lt;strong&gt;stacked&lt;/strong&gt;, and &lt;strong&gt;floating&lt;/strong&gt; mode (see User's Guide)&lt;/li&gt;
-&lt;li&gt;even if you rarely use applications in a tiled arrangement, i3 handles maximized windows, desktops, and multiple displays extremely well via keyboard&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Still want to use a mouse here-and-there? Hey, i3 is flexible and OK with that. Provides a statusbar, but you can swap it out for an &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/I3#i3bar_alternatives"&gt;alternative&lt;/a&gt; or run none at all.&lt;/p&gt;
-&lt;p&gt;Starting out I find myself mostly happy with the &lt;a class="reference external" href="https://i3wm.org/docs/userguide.html#_default_keybindings"&gt;default keybindings&lt;/a&gt; and behaviour; making only a few adjustments and additions to my &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.i3/config&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.i3/config"&gt;.i3/config&lt;/a&gt; and statusbar (for Jessiebook) &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.i3status.conf.chromebook"&gt;.i3status.conf&lt;/a&gt;&lt;/p&gt;
-&lt;div class="section" id="auto-start-applications"&gt;
-&lt;h2&gt;Auto-start applications&lt;/h2&gt;
-&lt;p&gt;At launch I have configured i3 to run a script to detect/setup a second display if attached (using &lt;tt class="docutils literal"&gt;xrandr&lt;/tt&gt;), open a terminal, and run any extra commands as determined by &lt;tt class="docutils literal"&gt;$HOSTNAME&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Auto-start&lt;/span&gt;
-exec_always --no-startup-id &lt;span class="nv"&gt;$HOME&lt;/span&gt;/bin/dldsply
-&lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id &lt;span class="nv"&gt;$HOME&lt;/span&gt;/bin/startX
-&lt;span class="c"&gt;# Start a terminal&lt;/span&gt;
-&lt;span class="c"&gt;#bindsym $mod+Return exec i3-sensible-terminal&lt;/span&gt;
-bindsym &lt;span class="nv"&gt;$mod&lt;/span&gt;+Return &lt;span class="nb"&gt;exec &lt;/span&gt;urxvt
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dldsply"&gt;dldsply&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/startX"&gt;startX&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="containers"&gt;
-&lt;h2&gt;Containers&lt;/h2&gt;
-&lt;p&gt;Arrange containers (windows):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Layout mode for new containers&lt;/span&gt;
-workspace_layout tabbed
-&lt;span class="c"&gt;# Enable floating mode&lt;/span&gt;
-for_window &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Remmina&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; floating &lt;span class="nb"&gt;enable&lt;/span&gt;
-for_window &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Remmina&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; border normal
-for_window &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;VirtualBox&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; floating &lt;span class="nb"&gt;enable&lt;/span&gt;
-for_window &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;VirtualBox&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; border normal
-for_window &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Vlc&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; floating &lt;span class="nb"&gt;enable&lt;/span&gt;
-for_window &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Vlc&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; border normal
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="styling"&gt;
-&lt;h2&gt;Styling&lt;/h2&gt;
-&lt;p&gt;Fonts:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;font pango:Terminus 11px
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Colours:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Colours&lt;/span&gt;
-&lt;span class="c"&gt;# class                   border  backgrd text    indicator&lt;/span&gt;
-client.focused            &lt;span class="c"&gt;#1793d0 #1793d0 #ffffff #2e9ef4&lt;/span&gt;
-client.focused_inactive   &lt;span class="c"&gt;#333333 #333333 #ffffff #484e50&lt;/span&gt;
-client.unfocused          &lt;span class="c"&gt;#2d2d2d #2d2d2d #ffffff #292d2e&lt;/span&gt;
-client.urgent             &lt;span class="c"&gt;#2f343a #900000 #ffffff #900000&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Applications:&lt;/p&gt;
-&lt;p&gt;Use &lt;tt class="docutils literal"&gt;lxappearance&lt;/tt&gt; to setup the &lt;strong&gt;Clearlooks&lt;/strong&gt; theme and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;qtconfig-qt4&lt;/span&gt;&lt;/tt&gt; to configure QT apps to use the &lt;tt class="docutils literal"&gt;GTK+&lt;/tt&gt; default theme:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install gnome-themes-standard gtk2-engines lxappearance qt4-qtconfig
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Launcher:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;bindsym &lt;span class="nv"&gt;$mod&lt;/span&gt;+d &lt;span class="nb"&gt;exec &lt;/span&gt;dmenu_run -fn &lt;span class="s1"&gt;&amp;#39;Terminus 11&amp;#39;&lt;/span&gt; -nb &lt;span class="s1"&gt;&amp;#39;#2d2d2d&amp;#39;&lt;/span&gt; -nf &lt;span class="s1"&gt;&amp;#39;#ffffff&amp;#39;&lt;/span&gt; -sb &lt;span class="s1"&gt;&amp;#39;#1793d0&amp;#39;&lt;/span&gt; -sf &lt;span class="s1"&gt;&amp;#39;#ffffff&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="sound"&gt;
-&lt;h2&gt;Sound&lt;/h2&gt;
-&lt;p&gt;I use &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; and a standalone &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;shell script&lt;/a&gt; to control PulseAudio volume levels and notifications.&lt;/p&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="http://www.circuidipity.com/pavolume.html"&gt;paVolume&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="screenshots"&gt;
-&lt;h2&gt;Screenshots&lt;/h2&gt;
-&lt;p&gt;Take screenshots using &lt;tt class="docutils literal"&gt;scrot&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;eog&lt;/tt&gt; displays images:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install scrot eog
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Keybindings:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Screenshot&lt;/span&gt;
-&lt;span class="c"&gt;# * desktop&lt;/span&gt;
-bindsym --release Print &lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id scrot &lt;span class="s1"&gt;&amp;#39;%Y-%m-%dT%H%M%S.png&amp;#39;&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;mv $f ~/Downloads &amp;amp;&amp;amp; eog ~/Downloads/$f&amp;#39;&lt;/span&gt;
-&lt;span class="c"&gt;# * active Window&lt;/span&gt;
-bindsym --release &lt;span class="nv"&gt;$mod&lt;/span&gt;+Print &lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id scrot -d &lt;span class="m"&gt;4&lt;/span&gt; -u -z &lt;span class="s1"&gt;&amp;#39;%Y-%m-%dT%H%M%S.png&amp;#39;&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;mv $f ~/Downloads &amp;amp;&amp;amp; eog ~/Downloads/$f&amp;#39;&lt;/span&gt;
-&lt;span class="c"&gt;# * selected area... (click and move mouse)&lt;/span&gt;
-bindsym --release Shift+Print &lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id scrot -s &lt;span class="s1"&gt;&amp;#39;%Y-%m-%dT%H%M%S.png&amp;#39;&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;mv $f ~/Downloads &amp;amp;&amp;amp; eog ~/Downloads/$f&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="lockscreen-logout-suspend-reboot-shutdown"&gt;
-&lt;h2&gt;LockScreen/Logout/Suspend/Reboot/Shutdown&lt;/h2&gt;
-&lt;p&gt;Debian's i3 metapackage installs &lt;tt class="docutils literal"&gt;i3lock&lt;/tt&gt; to handle locking screens (&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-i&lt;/span&gt; IMAGE.png&lt;/tt&gt; adds a lockscreen wallpaper) and &lt;tt class="docutils literal"&gt;systemctl&lt;/tt&gt; deals with system suspend/reboot/shutdown:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;$Locker&lt;/span&gt; i3lock -i ~/.i3lock.png &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sleep 1
-&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;$mode_system&lt;/span&gt; System &lt;span class="o"&gt;(&lt;/span&gt;l&lt;span class="o"&gt;)&lt;/span&gt; lock, &lt;span class="o"&gt;(&lt;/span&gt;e&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nb"&gt;logout&lt;/span&gt;, &lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nb"&gt;suspend&lt;/span&gt;, &lt;span class="o"&gt;(&lt;/span&gt;r&lt;span class="o"&gt;)&lt;/span&gt; reboot, &lt;span class="o"&gt;(&lt;/span&gt;Shift+s&lt;span class="o"&gt;)&lt;/span&gt; shutdown
-mode &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$mode_system&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-    bindsym l &lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id &lt;span class="nv"&gt;$Locker&lt;/span&gt;, mode &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;
-    bindsym e &lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id i3-msg &lt;span class="nb"&gt;exit&lt;/span&gt;, mode &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;
-    bindsym s &lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id &lt;span class="nv"&gt;$Locker&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sync &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; systemctl &lt;span class="nb"&gt;suspend&lt;/span&gt;, mode &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;
-    bindsym r &lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id systemctl reboot, mode &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;
-    bindsym Shift+s &lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id systemctl poweroff -i, mode &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;
-
-    &lt;span class="c"&gt;# back to normal: Enter or Escape&lt;/span&gt;
-    bindsym Return mode &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;
-    bindsym Escape mode &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
-bindsym &lt;span class="nv"&gt;$mod&lt;/span&gt;+Pause mode &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$mode_system&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/I3#Shutdown.2C_reboot.2C_lock_screen"&gt;i3 shutdown&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 17 Jul 2015 00:20:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-07-17:i3-tiling-window-manager.html</guid><category>i3</category><category>debian</category><category>linux</category></item><item><title>ThinkPad USB Keyboard with TrackPoint</title><link>http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html</link><description>&lt;p&gt;An external ThinkPad keyboard minus the ThinkPad with the classic TrackPoint + Left/Middle/Right mouse buttons. Its attached to my Debian desktop and I want to change the behaviour of a few keys.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Attach the keyboard:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;lsusb &lt;span class="p"&gt;|&lt;/span&gt; grep -i keyboard
-Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 002: ID 17ef:6009 Lenovo ThinkPad Keyboard with TrackPoint
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="caps-lock-and-xmodmap"&gt;
-&lt;h2&gt;0. Caps_Lock and xmodmap&lt;/h2&gt;
-&lt;p&gt;&lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt; occupies a prime location and - seeing as I do not carry on many ALL CAPS conversations - the key can be repurposed for better use. I use &lt;tt class="docutils literal"&gt;xmodmap&lt;/tt&gt; to modify the keymap and transform the key into &lt;tt class="docutils literal"&gt;BackSpace&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Retrieve current keymap (and the &lt;tt class="docutils literal"&gt;keycode&lt;/tt&gt; for &lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt;):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xmodmap -pke
-&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
-keycode  &lt;span class="nv"&gt;66&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Caps_Lock NoSymbol Caps_Lock
-&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Output for &lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt; using &lt;tt class="docutils literal"&gt;xev&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;KeyPress event, serial 32, synthetic NO, window 0x1600001,
-    root 0xb4, subw 0x0, &lt;span class="nb"&gt;time &lt;/span&gt;578277182, &lt;span class="o"&gt;(&lt;/span&gt;137,-6&lt;span class="o"&gt;)&lt;/span&gt;, root:&lt;span class="o"&gt;(&lt;/span&gt;781,12&lt;span class="o"&gt;)&lt;/span&gt;,
-    state 0x0, keycode &lt;span class="m"&gt;66&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;keysym 0xffe5, Caps_Lock&lt;span class="o"&gt;)&lt;/span&gt;, same_screen YES,
-    XLookupString gives &lt;span class="m"&gt;0&lt;/span&gt; bytes:
-    XmbLookupString gives &lt;span class="m"&gt;0&lt;/span&gt; bytes:
-     XFilterEvent returns: False
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Making &lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt; into &lt;tt class="docutils literal"&gt;BackSpace&lt;/tt&gt; is a 3-part process: &lt;strong&gt;remap&lt;/strong&gt; the key, remove the &lt;strong&gt;lock&lt;/strong&gt; on the key, and make it a &lt;strong&gt;repeating&lt;/strong&gt; key.&lt;/p&gt;
-&lt;p&gt;Test a new key modification in the current Xsession:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xmodmap -e &lt;span class="s2"&gt;&amp;quot;keycode 66 = BackSpace&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; xmodmap -e &lt;span class="s2"&gt;&amp;quot;clear Lock&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; xset r 66
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Make the change sticky by adding the keymapping to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xmodmap&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;! Modify Caps_Lock into Backspace
-keycode &lt;span class="nv"&gt;66&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; BackSpace
-clear Lock
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; to load keymap at &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;xmodmap ~/.xmodmap &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; xset r 66
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap"&gt;.xmodmap&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="multimedia-keys-and-xbindkeys"&gt;
-&lt;h2&gt;1. Multimedia keys and xbindkeys&lt;/h2&gt;
-&lt;p&gt;This keyboard includes mediaplayer+volume keys. Create keyboard shortcuts for these multimedia keys by installing:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; - associate keys to shell commands&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pulseaudio-utils&lt;/span&gt;&lt;/tt&gt; - manage sound with &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;rhythmbox-plugins&lt;/span&gt;&lt;/tt&gt; - (optional) player controls&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install xbindkeys pulseaudio-utils rhythmbox-plugins
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;With &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;rhythmbox-plugins&lt;/span&gt;&lt;/tt&gt; the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Fn+{Play,Pause,Previous,Next,Stop}&lt;/span&gt;&lt;/tt&gt; controls &amp;quot;just work&amp;quot; with the audio player. I use &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; to associate new functions to keys.&lt;/p&gt;
-&lt;p&gt;Retrieve the &lt;tt class="docutils literal"&gt;keycodes&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;keysyms&lt;/tt&gt; of the volume keys:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xmodmap -pke &lt;span class="p"&gt;|&lt;/span&gt; egrep -i &lt;span class="s1"&gt;&amp;#39;volume|mute&amp;#39;&lt;/span&gt;
-keycode &lt;span class="nv"&gt;121&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; XF86AudioMute NoSymbol XF86AudioMute
-keycode &lt;span class="nv"&gt;122&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; XF86AudioLowerVolume NoSymbol XF86AudioLowerVolume
-keycode &lt;span class="nv"&gt;123&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; XF86AudioRaiseVolume NoSymbol XF86AudioRaiseVolume
-keycode &lt;span class="nv"&gt;198&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; XF86AudioMicMute NoSymbol XF86AudioMicMute
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I create a &lt;a class="reference external" href="http://www.circuidipity.com/pavolume.html"&gt;standalone script&lt;/a&gt; to control PulseAudio volume and associate the new command &lt;tt class="docutils literal"&gt;paVolume&lt;/tt&gt; and its options to volume keys in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Mute/lower/raise volume&lt;/span&gt;
-&lt;span class="s2"&gt;&amp;quot;paVolume -m&amp;quot;&lt;/span&gt;
-XF86AudioMute
-&lt;span class="s2"&gt;&amp;quot;paVolume -d&amp;quot;&lt;/span&gt;
-XF86AudioLowerVolume
-&lt;span class="s2"&gt;&amp;quot;paVolume -u&amp;quot;&lt;/span&gt;
-XF86AudioRaiseVolume
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Add command &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; to load the new configuration at &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc"&gt;.xbindkeysrc&lt;/a&gt;, &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;paVolume&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="trackpoint"&gt;
-&lt;h2&gt;2. TrackPoint&lt;/h2&gt;
-&lt;p&gt;TrackPoint is auto-detected but slow. Customize pointer settings by installing &lt;tt class="docutils literal"&gt;xinput&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install xinput
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Discover &lt;tt class="docutils literal"&gt;DEVICE &amp;lt;ID&amp;gt;&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;xinput list | grep pointer&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&amp;lt;ID&amp;gt; PROPERTIES&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;xinput &lt;span class="pre"&gt;list-props&lt;/span&gt; &amp;lt;ID&amp;gt;&lt;/tt&gt;. TrackPoint sensitivity is modified using the &lt;tt class="docutils literal"&gt;Device Accel Constant Deceleration&lt;/tt&gt; property:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xinput list &lt;span class="p"&gt;|&lt;/span&gt; grep pointer
-⎡ Virtual core pointer                          &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;    &lt;span class="o"&gt;[&lt;/span&gt;master pointer  &lt;span class="o"&gt;(&lt;/span&gt;3&lt;span class="o"&gt;)]&lt;/span&gt;
-⎜   ↳ Virtual core XTEST pointer                &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;    &lt;span class="o"&gt;[&lt;/span&gt;slave  pointer  &lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)]&lt;/span&gt;
-⎜   ↳ Lite-On Technology Corp. ThinkPad USB Keyboard with TrackPoint    &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;   &lt;span class="o"&gt;[&lt;/span&gt;slave  pointer  &lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)]&lt;/span&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;xinput list-props &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s2"&gt;&amp;quot;Device Accel Constant Deceleration&amp;quot;&lt;/span&gt;
-        Device Accel Constant Deceleration &lt;span class="o"&gt;(&lt;/span&gt;251&lt;span class="o"&gt;)&lt;/span&gt;:       1.000000
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Test a new setting with &lt;tt class="docutils literal"&gt;xinput &lt;span class="pre"&gt;set-prop&lt;/span&gt; ID &amp;quot;Device Accel Constant Deceleration&amp;quot; SETTING&lt;/tt&gt;. Example:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;xinput &lt;span class="nb"&gt;set&lt;/span&gt;-prop &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Device Accel Constant Deceleration&amp;quot;&lt;/span&gt; 0.50
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Make the change sticky by adding the command to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 15 Jul 2015 16:14:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-07-15:thinkpad-usb-keyboard-trackpoint.html</guid><category>debian</category><category>linux</category></item><item><title>Shell script: paVolume</title><link>http://www.circuidipity.com/pavolume.html</link><description>&lt;p&gt;My original intent was to manage sound on &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Jessiebook&lt;/a&gt; by binding the commands to the multimedia keys in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;. Instead &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; calls a standalone script I created to control PulseAudio volume (and thus useful beyond just &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt;): &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;paVolume&lt;/a&gt;&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Script requirements: &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt; (packaged in Debian), &lt;tt class="docutils literal"&gt;pamixer&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt; (GitHub).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="pactl"&gt;
-&lt;h2&gt;0. pactl&lt;/h2&gt;
-&lt;p&gt;&lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt; controls a PulseAudio sound server and is included in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pulseaudio-utils&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install pulseaudio-utils
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="pamixer"&gt;
-&lt;h2&gt;1. pamixer&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/cdemoulins/pamixer"&gt;pamixer&lt;/a&gt; is a PulseAudio console mixer. Compile dependencies:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install build-essential libpulse-dev libboost-program-options1.55.0 libboost-program-options-dev
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Download source and compile:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git clone https://cdemoulins@github.com/cdemoulins/pamixer.git
-&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;pamixer
-&lt;span class="nv"&gt;$ &lt;/span&gt;make
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;No &lt;tt class="docutils literal"&gt;make install&lt;/tt&gt;. Place the resulting &lt;tt class="docutils literal"&gt;pamixer&lt;/tt&gt; in PATH (I use &lt;tt class="docutils literal"&gt;~/bin&lt;/tt&gt;).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="volnoti"&gt;
-&lt;h2&gt;2. volnoti&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/davidbrazdil/volnoti"&gt;volnoti&lt;/a&gt; is a lightweight volume notification. Compile dependencies:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install libdbus-glib-1-dev libgtk2.0-dev libgdk-pixbuf2.0-dev autoconf automake
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Download:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git clone git://github.com/davidbrazdil/volnoti.git
-&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;volnoti
-&lt;span class="nv"&gt;$ &lt;/span&gt;./prepare.sh
-&lt;span class="nv"&gt;$ &lt;/span&gt;./configure --prefix&lt;span class="o"&gt;=&lt;/span&gt;/usr
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Apply this fix &lt;a class="footnote-reference" href="#id5" id="id3"&gt;[1]&lt;/a&gt; to the source:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;src
-&lt;span class="nv"&gt;$ &lt;/span&gt;rm value-client-stub.h &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make value-client-stub.h
-&lt;span class="nv"&gt;$ &lt;/span&gt;rm value-daemon-stub.h &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make value-daemon-stub.h
-&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ..
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Compile source (and I use &lt;a class="reference external" href="https://packages.debian.org/jessie/checkinstall"&gt;checkinstall&lt;/a&gt; to make a &lt;tt class="docutils literal"&gt;deb&lt;/tt&gt; package and install):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;make
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo checkinstall make install
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Start &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt; daemon:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;volnoti
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Configure daemon to auto-start at desktop launch (example: &lt;strong&gt;i3&lt;/strong&gt; - add to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.i3/config&lt;/span&gt;&lt;/tt&gt;):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Auto-start applications&lt;/span&gt;
-&lt;span class="nb"&gt;exec&lt;/span&gt; --no-startup-id volnoti -t 2
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id4"&gt;
-&lt;h2&gt;3. paVolume&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;Script posted to GitHub&lt;/a&gt;. Download and place in PATH. Run &lt;tt class="docutils literal"&gt;paVolume &lt;span class="pre"&gt;-h&lt;/span&gt;&lt;/tt&gt; for options.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h3&gt;Notes&lt;/h3&gt;
-&lt;table class="docutils footnote" frame="void" id="id5" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id3"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Ubuntu forums: &lt;a class="reference external" href="http://ubuntuforums.org/showthread.php?t=2215264&amp;amp;s=7aa2dfa8b89411472598e737c38f1475&amp;amp;p=12978792#post12978792"&gt;Error when using make &amp;quot;client.c:108:5: error: too many arguments to function&amp;quot;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 10 Jul 2015 00:12:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-07-10:pavolume.html</guid><category>debian</category><category>linux</category><category>shell</category><category>programming</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Mon, 20 Jul 2015 15:18:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-07-20:20150720.html</guid><category>bits</category></item></channel></rss>

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | LPTHW Exercise 6: Strings and Text</title>
+        <title>Circuidipity | LPTHW Exercise 8: Printing, Printing</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -24,17 +24,31 @@
 </div>
 
 <!-- article -->
-<h1>LPTHW Exercise 6: Strings and Text</h1>
+<h1>LPTHW Exercise 8: Printing, Printing</h1>
 <div id="article">
-    <p><a class="reference external" href="http://learnpythonthehardway.org/book/">Learn Python the Hard Way by Zed Shaw .:</a> I am not entirely clear about the difference between <strong>%r</strong> vs <strong>%s</strong> in string formatting. I <strong>do</strong> understand they call different functions (<strong>repr</strong> and <strong>str</strong>) and produce different output:</p>
-<div class="highlight"><pre>&gt;&gt;&gt; <span class="nv">vessel</span> <span class="o">=</span> <span class="s1">&#39;Hesperus&#39;</span>
-&gt;&gt;&gt; print <span class="s2">&quot;The Wreck of the %r&quot;</span> % vessel
-The Wreck of the <span class="s1">&#39;Hesperus&#39;</span>
-&gt;&gt;&gt; print <span class="s2">&quot;The Wreck of the %s&quot;</span> % vessel
-The Wreck of the Hesperus
-&gt;&gt;&gt;
+    <p><a class="reference external" href="http://learnpythonthehardway.org/book/">Learn Python the Hard Way by Zed Shaw .:</a> More printing using the newer <strong>format()</strong>:</p>
+<div class="highlight"><pre><span class="nv">formatter</span> <span class="o">=</span> <span class="s2">&quot;{} {} {} {}&quot;</span>
+
+print<span class="o">(</span>formatter<span class="o">)</span>.format<span class="o">(</span>1, 2, 3, 4<span class="o">)</span>
+print<span class="o">(</span>formatter<span class="o">)</span>.format<span class="o">(</span><span class="s2">&quot;one&quot;</span>, <span class="s2">&quot;two&quot;</span>, <span class="s2">&quot;three&quot;</span>, <span class="s2">&quot;four&quot;</span><span class="o">)</span>
+print<span class="o">(</span>formatter<span class="o">)</span>.format<span class="o">(</span>True, False, False, True<span class="o">)</span>
+print<span class="o">(</span>formatter<span class="o">)</span>.format<span class="o">(</span>formatter, formatter, formatter, formatter<span class="o">)</span>
+print<span class="o">(</span>formatter<span class="o">)</span>.format<span class="o">(</span>
+    <span class="s2">&quot;I had this thing.&quot;</span>,
+    <span class="s2">&quot;That you could type up right.&quot;</span>,
+    <span class="s2">&quot;But it didn&#39;t sing.&quot;</span>,
+    <span class="s2">&quot;So I said goodnight.&quot;</span>
+<span class="o">)</span>
 </pre></div>
-<p>As the book states, the first example is &quot;raw output&quot; and the second is the content more cleanly formatted for printing. Why using <strong>repr</strong> would be desirable under certain circumstances will probably become more clear later on.</p>
+<p>Output:</p>
+<div class="highlight"><pre><span class="nv">$ </span>python e08.1.py
+<span class="m">1</span> <span class="m">2</span> <span class="m">3</span> 4
+one two three four
+True False False True
+<span class="o">{}</span> <span class="o">{}</span> <span class="o">{}</span> <span class="o">{}</span> <span class="o">{}</span> <span class="o">{}</span> <span class="o">{}</span> <span class="o">{}</span> <span class="o">{}</span> <span class="o">{}</span> <span class="o">{}</span> <span class="o">{}</span> <span class="o">{}</span> <span class="o">{}</span> <span class="o">{}</span> <span class="o">{}</span>
+I had this thing. That you could <span class="nb">type </span>up right. But it didn<span class="err">&#39;</span>t sing. So I said goodnight.
+<span class="err">$</span>
+</pre></div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-lpthw.html">lpthw</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-python.html">python</a>
@@ -46,9 +60,9 @@ The Wreck of the Hesperus
 <div id="navmenu">
     <hr />
     <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-        <a href="http://www.circuidipity.com/lpthw-e5.html">LPTHW Exercise 5: More Variables and Printing</a></p>
-    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
         <a href="http://www.circuidipity.com/lpthw-e7.html">LPTHW Exercise 7: More Printing</a></p>
+    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
+        <a href="http://www.circuidipity.com/lpthw-e9.html">LPTHW Exercise 9: Printing, Printing, Printing</a></p>
 </div>
 
 
