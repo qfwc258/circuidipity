@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-11-15T16:26:00-05:00</updated><entry><title>LPTHW Exercise 10: What Was That?</title><link href="http://www.circuidipity.com/lpthw-e10.html" rel="alternate"></link><updated>2015-11-15T15:46:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-15:lpthw-e10.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Playing with escape sequences:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-11-16T16:26:00-05:00</updated><entry><title>LPTHW Exercise 11-12: Asking Questions, Prompting People</title><link href="http://www.circuidipity.com/lpthw-e11-12.html" rel="alternate"></link><updated>2015-11-16T13:21:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-16:lpthw-e11-12.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Now we're cooking! Put &lt;strong&gt;raw_input()&lt;/strong&gt; and &lt;strong&gt;format()&lt;/strong&gt; to work:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;What is the temperature today in Clearwater, Florida in Fahrenheit? &amp;gt; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;float&lt;span class="o"&gt;(&lt;/span&gt;f&lt;span class="o"&gt;)&lt;/span&gt; - 32&lt;span class="o"&gt;)&lt;/span&gt; * &lt;span class="o"&gt;(&lt;/span&gt;5.0/9&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;k&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;float&lt;span class="o"&gt;(&lt;/span&gt;f&lt;span class="o"&gt;)&lt;/span&gt; - 32&lt;span class="o"&gt;)&lt;/span&gt; * &lt;span class="o"&gt;(&lt;/span&gt;5.0/9&lt;span class="o"&gt;)&lt;/span&gt; + 273.15
+
+print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;So a temperature of {} Fahrenheit converts to {:.2f} Celsius and {:.2f} Kelvin.&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;f, c, k&lt;span class="o"&gt;)&lt;/span&gt;
+print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Or, to be more precise, a temperature of {} Fahrenheit converts to {} Celsius and {} Kelvin.&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;f, round&lt;span class="o"&gt;(&lt;/span&gt;c,5&lt;span class="o"&gt;)&lt;/span&gt;, round&lt;span class="o"&gt;(&lt;/span&gt;k,5&lt;span class="o"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;python e11.1.py
+What is the temperature today in Clearwater, Florida in Fahrenheit? &amp;gt; 80
+So a temperature of &lt;span class="m"&gt;80&lt;/span&gt; Fahrenheit converts to 26.67 Celsius and 299.82 Kelvin.
+Or, to be more precise, a temperature of &lt;span class="m"&gt;80&lt;/span&gt; Fahrenheit converts to 26.66667 Celsius and 299.81667 Kelvin.
+&lt;span class="err"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 10: What Was That?</title><link href="http://www.circuidipity.com/lpthw-e10.html" rel="alternate"></link><updated>2015-11-15T15:46:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-15:lpthw-e10.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Playing with escape sequences:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;cars&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;self-driving cars&lt;/span&gt;
 &lt;span class="s1"&gt;... armoured cars&lt;/span&gt;
 &lt;span class="s1"&gt;... \t\t\t\tgetaway cars&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
@@ -155,7 +170,7 @@ Type &lt;span class="s2"&gt;&amp;quot;help&amp;quot;&lt;/span&gt;, &lt;span clas
 &lt;span class="err"&gt;$&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category><category term="linux"></category></entry><entry><title>Learn Python the Hard Way with the DUDE</title><link href="http://www.circuidipity.com/lpthw-dude.html" rel="alternate"></link><updated>2015-11-15T16:26:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-11:lpthw-dude.html</id><summary type="html">&lt;img alt="LPTHW" class="align-right" src="images/lpthw-begin-1.png" style="width: 250px; height: 479px;" /&gt;
+</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category><category term="linux"></category></entry><entry><title>Learn Python the Hard Way with the DUDE</title><link href="http://www.circuidipity.com/lpthw-dude.html" rel="alternate"></link><updated>2015-11-16T16:26:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-11:lpthw-dude.html</id><summary type="html">&lt;img alt="LPTHW" class="align-right" src="images/lpthw-begin-1.png" style="width: 250px; height: 479px;" /&gt;
 &lt;p&gt;Using Linux and writing &lt;a class="reference external" href="https://github.com/vonbrownie/homebin"&gt;simple shell scripts&lt;/a&gt; has been an enjoyable peek at programming. But now I want to go farther and learning &lt;a class="reference external" href="http://www.circuidipity.com/tag-python.html"&gt;Python&lt;/a&gt; strikes me as a useful next step. Starting with the free HTML version of the book &lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way&lt;/a&gt; by &lt;strong&gt;Zed Shaw&lt;/strong&gt;, who states right off the bat:&lt;/p&gt;
 &lt;blockquote&gt;
 It's only the &amp;quot;hard&amp;quot; way because it uses a technique called &lt;em&gt;instruction&lt;/em&gt;. Instruction is where I tell you to do a sequence of controlled exercises designed to build a skill through repetition. This technique works very well with beginners who know nothing and need to acquire basic skills before they can understand more complex topics. It's used in everything from martial arts to music to even basic math and reading skills.&lt;/blockquote&gt;
@@ -207,6 +222,12 @@ It's only the &amp;quot;hard&amp;quot; way because it uses a technique called &l
 &lt;/div&gt;
 &lt;div class="section" id="id11"&gt;
 &lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e10.html"&gt;Exercise 10: What Was That?&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id12"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e11-12.html"&gt;Exercise 11: Asking Questions&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id13"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e11-12.html"&gt;Exercise 12: Prompting People&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1060,86 +1081,4 @@ tmpfs           463M     &lt;span class="m"&gt;0&lt;/span&gt;  463M   0% /sys/fs
 &lt;p&gt;Source: &lt;a class="reference external" href="https://raspberrypi.stackexchange.com/questions/499/how-can-i-resize-my-root-partition"&gt;https://raspberrypi.stackexchange.com/questions/499/how-can-i-resize-my-root-partition&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="debian"></category><category term="linux"></category><category term="raspberry pi"></category></entry><entry><title>1000 cool bits</title><link href="http://www.circuidipity.com/20150720.html" rel="alternate"></link><updated>2015-07-20T15:18:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-20:20150720.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
-&lt;h2&gt;0001&lt;/h2&gt;
-&lt;p&gt;&lt;tt class="docutils literal"&gt;Iceweasel&lt;/tt&gt; alerts current flash was out-of-date and insecure -- Debian &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;flashplugin-nonfree&lt;/span&gt;&lt;/tt&gt; package does not auto-update.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Fix&lt;/strong&gt; Run update:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-flashplugin-nonfree --install
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id2"&gt;
-&lt;h2&gt;0010&lt;/h2&gt;
-&lt;p&gt;Simple method to make source compiles into &lt;tt class="docutils literal"&gt;*.deb&lt;/tt&gt; packages -- Use &lt;tt class="docutils literal"&gt;checkinstall&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install checkinstall
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Compile and &lt;tt class="docutils literal"&gt;checkinstall&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;./configure
-&lt;span class="nv"&gt;$ &lt;/span&gt;make
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo checkinstall make install
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id3"&gt;
-&lt;h2&gt;0011&lt;/h2&gt;
-&lt;p&gt;PDF links opening in Chrome vs default browser Firefox -- Option &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;gnome-www-browser&lt;/span&gt;&lt;/tt&gt; checked before &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;x-www-browser&lt;/span&gt;&lt;/tt&gt;. Setting only the second option is not enough.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Fix&lt;/strong&gt; Configure both options:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-alternatives --config gnome-www-browser
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo update-alternatives --config x-www-browser
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id4"&gt;
-&lt;h2&gt;0100&lt;/h2&gt;
-&lt;p&gt;&lt;tt class="docutils literal"&gt;dpkg&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-file&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;list files owned by PACKAGE: &lt;tt class="docutils literal"&gt;dpkg &lt;span class="pre"&gt;-L&lt;/span&gt; PACKAGE&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;find which package owns FILE: &lt;tt class="docutils literal"&gt;dpkg &lt;span class="pre"&gt;-S&lt;/span&gt; /etc/FILE&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;find which package owns FILE (even if not installed):&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install apt-file
-&lt;span class="nv"&gt;$ &lt;/span&gt;apt-file update
-&lt;span class="nv"&gt;$ &lt;/span&gt;apt-file search /etc/FILE
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id5"&gt;
-&lt;h2&gt;0101&lt;/h2&gt;
-&lt;p&gt;Swappiness -- Preference of the kernel to move processes out of physical memory to the swap partition. Range is 0-100, default is set to 60 and lower values cause the kernel to avoid swapping and higher values prompt more frequent swap use:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;check current: &lt;tt class="docutils literal"&gt;cat /proc/sys/vm/swappiness&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;temporary change: &lt;tt class="docutils literal"&gt;sudo sysctl vm.swappiness=1&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;permanent: create &lt;tt class="docutils literal"&gt;/etc/sysctl.d/local.conf&lt;/tt&gt; and set...&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;vm.swappiness&lt;span class="o"&gt;=&lt;/span&gt;1
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id6"&gt;
-&lt;h2&gt;0110&lt;/h2&gt;
-&lt;p&gt;Clear the Bash cache of PATH to executables -- Originally installed &lt;tt class="docutils literal"&gt;glances&lt;/tt&gt; via &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-get&lt;/span&gt;&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;/usr/bin/glances&lt;/tt&gt;. Removed then re-installed via &lt;tt class="docutils literal"&gt;pip&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;/usr/local/bin/glances&lt;/tt&gt;. Command would show in my PATH but - without explicit PATH defined - would try to execute (missing) file in &lt;tt class="docutils literal"&gt;/usr/bin&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Fix&lt;/strong&gt; Clear cache using &lt;tt class="docutils literal"&gt;hash&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;type &lt;/span&gt;glances
-glances is hashed &lt;span class="o"&gt;(&lt;/span&gt;/usr/bin/glances&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt; -d glances
-&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;type &lt;/span&gt;glances
-glances is /usr/local/bin/glances
-&lt;span class="nv"&gt;$ &lt;/span&gt;glances
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id7"&gt;
-&lt;h2&gt;0111&lt;/h2&gt;
-&lt;p&gt;Test if system is 64bit (maybe add to a shell script):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;getconf LONG_BIT&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;64&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;64bit Detected&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;fi&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id8"&gt;
-&lt;h2&gt;1000&lt;/h2&gt;
-&lt;p&gt;Configure a static IP address in Debian's &lt;tt class="docutils literal"&gt;/etc/network/interfaces&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# The primary network interface&lt;/span&gt;
-auto eth0
-&lt;span class="c"&gt;#iface eth0 inet dhcp&lt;/span&gt;
-iface eth0 inet static
-    address 192.168.1.88    &lt;span class="c"&gt;# device ip&lt;/span&gt;
-    netmask 255.255.255.0
-    gateway 192.168.1.1     &lt;span class="c"&gt;# router ip&lt;/span&gt;
-    dns-nameservers 192.168.1.1     &lt;span class="c"&gt;# or &amp;#39;8.8.8.8&amp;#39; for google dns&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="bits"></category></entry></feed>
+</summary><category term="debian"></category><category term="linux"></category><category term="raspberry pi"></category></entry></feed>
