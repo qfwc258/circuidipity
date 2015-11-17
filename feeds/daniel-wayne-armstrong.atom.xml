@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-11-16T16:26:00-05:00</updated><entry><title>LPTHW Exercise 11-12: Asking Questions, Prompting People</title><link href="http://www.circuidipity.com/lpthw-e11-12.html" rel="alternate"></link><updated>2015-11-16T13:21:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-16:lpthw-e11-12.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Now we're cooking! Put &lt;strong&gt;raw_input()&lt;/strong&gt; and &lt;strong&gt;format()&lt;/strong&gt; to work:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-11-17T00:26:00-05:00</updated><entry><title>LPTHW Exercise 13-14: Parameters, Unpacking, Variables, Prompting and Passing</title><link href="http://www.circuidipity.com/lpthw-e13-14.html" rel="alternate"></link><updated>2015-11-17T00:26:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-17:lpthw-e13-14.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Add extra libraries or &lt;em&gt;modules&lt;/em&gt; of code to a program using &lt;strong&gt;import&lt;/strong&gt; and supply arguments to a Python script on the command line using &lt;strong&gt;argv&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;textwrap&lt;/strong&gt; module enables indenting a block quote for cleaner code but moving to left-margin at &lt;strong&gt;print()&lt;/strong&gt; time:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;import sys
+import textwrap
+
+script, firstName, &lt;span class="nv"&gt;lastName&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; sys.argv
+
+&lt;span class="nv"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;    (O&amp;lt; .: Learn Python The Hard Way&lt;/span&gt;
+&lt;span class="s2"&gt;    (/)_&lt;/span&gt;
+&lt;span class="s2"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+print&lt;span class="o"&gt;(&lt;/span&gt;message&lt;span class="o"&gt;)&lt;/span&gt;
+print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;{} {} &amp;#39;&lt;/span&gt; + &lt;span class="s1"&gt;&amp;#39;, author of&amp;#39;&lt;/span&gt; + &lt;span class="s1"&gt;&amp;#39;.&amp;#39;&lt;/span&gt; * 10&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;firstName, lastName&lt;span class="o"&gt;)&lt;/span&gt;
+print&lt;span class="o"&gt;(&lt;/span&gt;textwrap.dedent&lt;span class="o"&gt;(&lt;/span&gt;message&lt;span class="o"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;python e13.2.py Zed Shaw
+
+    &lt;span class="o"&gt;(&lt;/span&gt;O&amp;lt; .: Learn Python The Hard Way
+    &lt;span class="o"&gt;(&lt;/span&gt;/&lt;span class="o"&gt;)&lt;/span&gt;_
+
+Zed Shaw , author of..........
+
+&lt;span class="o"&gt;(&lt;/span&gt;O&amp;lt; .: Learn Python The Hard Way
+&lt;span class="o"&gt;(&lt;/span&gt;/&lt;span class="o"&gt;)&lt;/span&gt;_
+
+&lt;span class="err"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 11-12: Asking Questions, Prompting People</title><link href="http://www.circuidipity.com/lpthw-e11-12.html" rel="alternate"></link><updated>2015-11-16T13:21:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-16:lpthw-e11-12.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Now we're cooking! Put &lt;strong&gt;raw_input()&lt;/strong&gt; and &lt;strong&gt;format()&lt;/strong&gt; to work:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;What is the temperature today in Clearwater, Florida in Fahrenheit? &amp;gt; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;span class="nv"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;float&lt;span class="o"&gt;(&lt;/span&gt;f&lt;span class="o"&gt;)&lt;/span&gt; - 32&lt;span class="o"&gt;)&lt;/span&gt; * &lt;span class="o"&gt;(&lt;/span&gt;5.0/9&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;span class="nv"&gt;k&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;float&lt;span class="o"&gt;(&lt;/span&gt;f&lt;span class="o"&gt;)&lt;/span&gt; - 32&lt;span class="o"&gt;)&lt;/span&gt; * &lt;span class="o"&gt;(&lt;/span&gt;5.0/9&lt;span class="o"&gt;)&lt;/span&gt; + 273.15
@@ -228,6 +256,12 @@ It's only the &amp;quot;hard&amp;quot; way because it uses a technique called &l
 &lt;/div&gt;
 &lt;div class="section" id="id13"&gt;
 &lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e11-12.html"&gt;Exercise 12: Prompting People&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id14"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e13-14.html"&gt;Exercise 13: Parameters, Unpacking, Variables&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id15"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e13-14.html"&gt;Exercise 14: Prompting and Passing&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -972,113 +1006,5 @@ flash-kernel:
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-</summary><category term="debian"></category><category term="linux"></category><category term="raspberry pi"></category></entry><entry><title>Resize rootfs on Raspberry Pi</title><link href="http://www.circuidipity.com/resize-rootfs-raspberry-pi.html" rel="alternate"></link><updated>2015-07-21T17:19:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-21:resize-rootfs-raspberry-pi.html</id><summary type="html">&lt;p&gt;Resize a mounted partition to take full advantage of the storage capacity of a microSD card.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Debian developer Sjoerd Simons has created a &lt;a class="reference external" href="http://sjoerd.luon.net/posts/2015/02/debian-jessie-on-rpi2/"&gt;Jessie minimal image&lt;/a&gt; with an updated 3.18 Linux kernel and firmware suitable for Pi 2. I install the image file to a 32GB microSD card, insert card into my Pi and reboot, log in and inspect the filesystem layout:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Filesystem      Size  Used Avail Use% Mounted on
-/dev/root       2.8G  555M  2.1G  21% /
-devtmpfs        459M     &lt;span class="m"&gt;0&lt;/span&gt;  459M   0% /dev
-tmpfs           463M     &lt;span class="m"&gt;0&lt;/span&gt;  463M   0% /dev/shm
-tmpfs           463M  312K  463M   1% /run
-tmpfs           5.0M     &lt;span class="m"&gt;0&lt;/span&gt;  5.0M   0% /run/lock
-tmpfs           463M     &lt;span class="m"&gt;0&lt;/span&gt;  463M   0% /sys/fs/cgroup
-/dev/mmcblk0p1  121M  9.7M  112M   9% /boot/firmware
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Install image inflates into a 2.8GB partition; using only a fraction of available capacity. I will use &lt;tt class="docutils literal"&gt;fdisk&lt;/tt&gt; to repartition the microSD to use all storage and &lt;tt class="docutils literal"&gt;resize2fs&lt;/tt&gt; to expand &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; into its new accomodations!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="repartition"&gt;
-&lt;h2&gt;0. Repartition&lt;/h2&gt;
-&lt;p&gt;Repartitioning the mounted filesytem using &lt;tt class="docutils literal"&gt;fdisk&lt;/tt&gt; on the Pi involves:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;delete the current &lt;tt class="docutils literal"&gt;mmcblk0p2&lt;/tt&gt; partition containing &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;create a new partition &lt;strong&gt;beginning at the same sector as the old partition&lt;/strong&gt; that uses all remaining space&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;mmcblk0p1&lt;/tt&gt; - containing &lt;tt class="docutils literal"&gt;/boot/firmware&lt;/tt&gt; - remains untouched&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; Ensure the start sector remains identical (example: mine below is &lt;tt class="docutils literal"&gt;249856&lt;/tt&gt; on the old and new versions of &lt;tt class="docutils literal"&gt;mmcblk0p2&lt;/tt&gt; or there is a high probability the operation will fail and all data lost.&lt;/p&gt;
-&lt;p&gt;A sample run-through on my own microSD:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# fdisk /dev/mmcblk0&lt;/span&gt;
-
-Welcome to fdisk &lt;span class="o"&gt;(&lt;/span&gt;util-linux 2.25.2&lt;span class="o"&gt;)&lt;/span&gt;.
-Changes will remain in memory only, &lt;span class="k"&gt;until&lt;/span&gt; you decide to write them.
-Be careful before using the write command.
-
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
-Disk /dev/mmcblk0: 29.7 GiB, &lt;span class="m"&gt;31914983424&lt;/span&gt; bytes, &lt;span class="m"&gt;62333952&lt;/span&gt; sectors
-Units: sectors of &lt;span class="m"&gt;1&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Disklabel &lt;span class="nb"&gt;type&lt;/span&gt;: dos
-Disk identifier: 0xc96ffe28
-
-Device         Boot  Start     End Sectors  Size Id Type
-/dev/mmcblk0p1        &lt;span class="m"&gt;2048&lt;/span&gt;  &lt;span class="m"&gt;249855&lt;/span&gt;  &lt;span class="m"&gt;247808&lt;/span&gt;  121M  e W95 FAT16 &lt;span class="o"&gt;(&lt;/span&gt;LBA&lt;span class="o"&gt;)&lt;/span&gt;
-/dev/mmcblk0p2      &lt;span class="m"&gt;249856&lt;/span&gt; &lt;span class="m"&gt;6291455&lt;/span&gt; &lt;span class="m"&gt;6041600&lt;/span&gt;  2.9G &lt;span class="m"&gt;83&lt;/span&gt; Linux
-
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: d
-Partition number &lt;span class="o"&gt;(&lt;/span&gt;1,2, default 2&lt;span class="o"&gt;)&lt;/span&gt;:
-
-Partition &lt;span class="m"&gt;2&lt;/span&gt; has been deleted.
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: n
-Partition &lt;span class="nb"&gt;type&lt;/span&gt;
-&lt;span class="nb"&gt;   &lt;/span&gt;p   primary &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; primary, &lt;span class="m"&gt;0&lt;/span&gt; extended, &lt;span class="m"&gt;3&lt;/span&gt; free&lt;span class="o"&gt;)&lt;/span&gt;
-   e   extended &lt;span class="o"&gt;(&lt;/span&gt;container &lt;span class="k"&gt;for&lt;/span&gt; logical partitions&lt;span class="o"&gt;)&lt;/span&gt;
-Select &lt;span class="o"&gt;(&lt;/span&gt;default p&lt;span class="o"&gt;)&lt;/span&gt;:
-
-Using default response p.
-Partition number &lt;span class="o"&gt;(&lt;/span&gt;2-4, default 2&lt;span class="o"&gt;)&lt;/span&gt;:
-First sector &lt;span class="o"&gt;(&lt;/span&gt;249856-62333951, default 249856&lt;span class="o"&gt;)&lt;/span&gt;: 249856
-Last sector, +sectors or +size&lt;span class="o"&gt;{&lt;/span&gt;K,M,G,T,P&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;249856-62333951, default 62333951&lt;span class="o"&gt;)&lt;/span&gt;:
-
-Created a new partition &lt;span class="m"&gt;2&lt;/span&gt; of &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Linux&amp;#39;&lt;/span&gt; and of size 29.6 GiB.
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: p
-Disk /dev/mmcblk0: 29.7 GiB, &lt;span class="m"&gt;31914983424&lt;/span&gt; bytes, &lt;span class="m"&gt;62333952&lt;/span&gt; sectors
-Units: sectors of &lt;span class="m"&gt;1&lt;/span&gt; * &lt;span class="nv"&gt;512&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Sector size &lt;span class="o"&gt;(&lt;/span&gt;logical/physical&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-I/O size &lt;span class="o"&gt;(&lt;/span&gt;minimum/optimal&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="m"&gt;512&lt;/span&gt; bytes / &lt;span class="m"&gt;512&lt;/span&gt; bytes
-Disklabel &lt;span class="nb"&gt;type&lt;/span&gt;: dos
-Disk identifier: 0xc96ffe28
-
-Device         Boot  Start      End  Sectors  Size Id Type
-/dev/mmcblk0p1        &lt;span class="m"&gt;2048&lt;/span&gt;   &lt;span class="m"&gt;249855&lt;/span&gt;   &lt;span class="m"&gt;247808&lt;/span&gt;  121M  e W95 FAT16 &lt;span class="o"&gt;(&lt;/span&gt;LBA&lt;span class="o"&gt;)&lt;/span&gt;
-/dev/mmcblk0p2      &lt;span class="m"&gt;249856&lt;/span&gt; &lt;span class="m"&gt;62333951&lt;/span&gt; &lt;span class="m"&gt;62084096&lt;/span&gt; 29.6G &lt;span class="m"&gt;83&lt;/span&gt; Linux
-
-
-Command &lt;span class="o"&gt;(&lt;/span&gt;m &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;help&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;: w
-The partition table has been altered.
-Calling ioctl&lt;span class="o"&gt;()&lt;/span&gt; to re-read partition table.
-Re-reading the partition table failed.: Device or resource busy
-
-The kernel still uses the old table. The new table will be used at the next reboot or after you run partprobe&lt;span class="o"&gt;(&lt;/span&gt;8&lt;span class="o"&gt;)&lt;/span&gt; or kpartx&lt;span class="o"&gt;(&lt;/span&gt;8&lt;span class="o"&gt;)&lt;/span&gt;.
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... aaaand reboot!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="resize"&gt;
-&lt;h2&gt;1. Resize&lt;/h2&gt;
-&lt;p&gt;Expand &lt;tt class="docutils literal"&gt;rootfs&lt;/tt&gt; to use the new capacity:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# resize2fs /dev/mmcblk0p2&lt;/span&gt;
-resize2fs 1.42.12 &lt;span class="o"&gt;(&lt;/span&gt;29-Aug-2014&lt;span class="o"&gt;)&lt;/span&gt;
-Filesystem at /dev/mmcblk0p2 is mounted on /&lt;span class="p"&gt;;&lt;/span&gt; on-line resizing required
-&lt;span class="nv"&gt;old_desc_blocks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 1, &lt;span class="nv"&gt;new_desc_blocks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 2
-The filesystem on /dev/mmcblk0p2 is now &lt;span class="m"&gt;7760512&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;4k&lt;span class="o"&gt;)&lt;/span&gt; blocks long.
-
-&lt;span class="c"&gt;# df -h&lt;/span&gt;
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/root        30G  561M   28G   2% /
-devtmpfs        459M     &lt;span class="m"&gt;0&lt;/span&gt;  459M   0% /dev
-tmpfs           463M     &lt;span class="m"&gt;0&lt;/span&gt;  463M   0% /dev/shm
-tmpfs           463M  312K  463M   1% /run
-tmpfs           5.0M     &lt;span class="m"&gt;0&lt;/span&gt;  5.0M   0% /run/lock
-tmpfs           463M     &lt;span class="m"&gt;0&lt;/span&gt;  463M   0% /sys/fs/cgroup
-/dev/mmcblk0p1  121M  9.7M  112M   9% /boot/firmware
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://raspberrypi.stackexchange.com/questions/499/how-can-i-resize-my-root-partition"&gt;https://raspberrypi.stackexchange.com/questions/499/how-can-i-resize-my-root-partition&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 </summary><category term="debian"></category><category term="linux"></category><category term="raspberry pi"></category></entry></feed>
