@@ -46,6 +46,7 @@ target.write&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot
 print &lt;span class="s2"&gt;&amp;quot;And finally, we close it.&amp;quot;&lt;/span&gt;
 target.close&lt;span class="o"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Bonus: Last night I attended the monthly &lt;a class="reference external" href="http://www.meetup.com/Python-Toronto/"&gt;Python Toronto Meetup&lt;/a&gt;. It was unintelligible but inspiring (to me to learn more)! :-)&lt;/p&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 18 Nov 2015 13:55:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-18:lpthw-e15-17.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 13-14: Parameters, Unpacking, Variables, Prompting and Passing</title><link>http://www.circuidipity.com/lpthw-e13-14.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Add extra libraries or &lt;em&gt;modules&lt;/em&gt; of code to a program using &lt;strong&gt;import&lt;/strong&gt; and supply arguments to a Python script on the command line using &lt;strong&gt;argv&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The &lt;strong&gt;textwrap&lt;/strong&gt; module enables indenting a block quote for cleaner code but moving to left-margin at &lt;strong&gt;print()&lt;/strong&gt; time:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;import sys
