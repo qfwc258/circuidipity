@@ -1,5 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-11-17T00:26:00-05:00</updated><entry><title>LPTHW Exercise 13-14: Parameters, Unpacking, Variables, Prompting and Passing</title><link href="http://www.circuidipity.com/lpthw-e13-14.html" rel="alternate"></link><updated>2015-11-17T00:26:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-17:lpthw-e13-14.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Add extra libraries or &lt;em&gt;modules&lt;/em&gt; of code to a program using &lt;strong&gt;import&lt;/strong&gt; and supply arguments to a Python script on the command line using &lt;strong&gt;argv&lt;/strong&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2015-11-18T13:58:00-05:00</updated><entry><title>LPTHW Exercise 15-17: Reading and Writing Files</title><link href="http://www.circuidipity.com/lpthw-e15-17.html" rel="alternate"></link><updated>2015-11-18T13:55:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-18:lpthw-e15-17.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Reading and Writing Files&lt;/span&gt;
+&lt;span class="c"&gt;# * close - closes the file&lt;/span&gt;
+&lt;span class="c"&gt;# * read - reads the contents of a file... can assign the result to a variable&lt;/span&gt;
+&lt;span class="c"&gt;# * readline - reads just one line of a text file&lt;/span&gt;
+&lt;span class="c"&gt;# * truncate - empties the file&lt;/span&gt;
+&lt;span class="c"&gt;# * write(&amp;#39;stuff&amp;#39;) - writes &amp;#39;stuff&amp;#39; to the file&lt;/span&gt;
+
+from sys import argv
+
+script, &lt;span class="nv"&gt;filename&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; argv
+
+print &lt;span class="s2"&gt;&amp;quot;We&amp;#39;re going to erase %r.&amp;quot;&lt;/span&gt; % filename
+print &lt;span class="s2"&gt;&amp;quot;If you don&amp;#39;t want that, hit CTRL-C (^C).&amp;quot;&lt;/span&gt;
+print &lt;span class="s2"&gt;&amp;quot;If you do want that, hit RETURN.&amp;quot;&lt;/span&gt;
+
+raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;?&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+
+print &lt;span class="s2"&gt;&amp;quot;Opening the file...&amp;quot;&lt;/span&gt;
+&lt;span class="c"&gt;# open &amp;#39;r&amp;#39; (read (default)) &amp;#39;w&amp;#39; writing and &amp;#39;a&amp;#39; append&lt;/span&gt;
+&lt;span class="c"&gt;# &amp;#39;w&amp;#39; will truncate the file if it already exists&lt;/span&gt;
+&lt;span class="nv"&gt;target&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; open&lt;span class="o"&gt;(&lt;/span&gt;filename, &lt;span class="s1"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+
+print &lt;span class="s2"&gt;&amp;quot;Truncating the file. Goodbye!&amp;quot;&lt;/span&gt;
+&lt;span class="c"&gt;# truncate not necessary... &amp;#39;w&amp;#39; already handles it&lt;/span&gt;
+&lt;span class="c"&gt;#target.truncate()&lt;/span&gt;
+
+print &lt;span class="s2"&gt;&amp;quot;Now I&amp;#39;m going to ask you for three lines.&amp;quot;&lt;/span&gt;
+
+&lt;span class="nv"&gt;line1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;line 1: &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;line2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;line 2: &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;line3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;line 3: &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+
+print &lt;span class="s2"&gt;&amp;quot;I&amp;#39;m going to write these to the file.&amp;quot;&lt;/span&gt;
+
+target.write&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{0}\n{1}\n{2}\nWhat was that last bit? I said...\n&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;{2}\n&amp;quot;&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;line1, line2, line3&lt;span class="o"&gt;))&lt;/span&gt;
+&lt;span class="c"&gt;#target.write(line1)&lt;/span&gt;
+&lt;span class="c"&gt;#target.write(&amp;quot;\n&amp;quot;)&lt;/span&gt;
+&lt;span class="c"&gt;#target.write(line2)&lt;/span&gt;
+&lt;span class="c"&gt;#target.write(&amp;quot;\n&amp;quot;)&lt;/span&gt;
+&lt;span class="c"&gt;#target.write(line3)&lt;/span&gt;
+&lt;span class="c"&gt;#target.write(&amp;quot;\n&amp;quot;)&lt;/span&gt;
+
+print &lt;span class="s2"&gt;&amp;quot;And finally, we close it.&amp;quot;&lt;/span&gt;
+target.close&lt;span class="o"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 13-14: Parameters, Unpacking, Variables, Prompting and Passing</title><link href="http://www.circuidipity.com/lpthw-e13-14.html" rel="alternate"></link><updated>2015-11-17T00:26:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-17:lpthw-e13-14.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Add extra libraries or &lt;em&gt;modules&lt;/em&gt; of code to a program using &lt;strong&gt;import&lt;/strong&gt; and supply arguments to a Python script on the command line using &lt;strong&gt;argv&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The &lt;strong&gt;textwrap&lt;/strong&gt; module enables indenting a block quote for cleaner code but moving to left-margin at &lt;strong&gt;print()&lt;/strong&gt; time:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;import sys
 import textwrap
@@ -198,7 +245,7 @@ Type &lt;span class="s2"&gt;&amp;quot;help&amp;quot;&lt;/span&gt;, &lt;span clas
 &lt;span class="err"&gt;$&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category><category term="linux"></category></entry><entry><title>Learn Python the Hard Way with the DUDE</title><link href="http://www.circuidipity.com/lpthw-dude.html" rel="alternate"></link><updated>2015-11-16T16:26:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-11:lpthw-dude.html</id><summary type="html">&lt;img alt="LPTHW" class="align-right" src="images/lpthw-begin-1.png" style="width: 250px; height: 479px;" /&gt;
+</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category><category term="linux"></category></entry><entry><title>Learn Python the Hard Way with the DUDE</title><link href="http://www.circuidipity.com/lpthw-dude.html" rel="alternate"></link><updated>2015-11-18T13:58:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-11:lpthw-dude.html</id><summary type="html">&lt;img alt="LPTHW" class="align-right" src="images/lpthw-begin-1.png" style="width: 250px; height: 479px;" /&gt;
 &lt;p&gt;Using Linux and writing &lt;a class="reference external" href="https://github.com/vonbrownie/homebin"&gt;simple shell scripts&lt;/a&gt; has been an enjoyable peek at programming. But now I want to go farther and learning &lt;a class="reference external" href="http://www.circuidipity.com/tag-python.html"&gt;Python&lt;/a&gt; strikes me as a useful next step. Starting with the free HTML version of the book &lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way&lt;/a&gt; by &lt;strong&gt;Zed Shaw&lt;/strong&gt;, who states right off the bat:&lt;/p&gt;
 &lt;blockquote&gt;
 It's only the &amp;quot;hard&amp;quot; way because it uses a technique called &lt;em&gt;instruction&lt;/em&gt;. Instruction is where I tell you to do a sequence of controlled exercises designed to build a skill through repetition. This technique works very well with beginners who know nothing and need to acquire basic skills before they can understand more complex topics. It's used in everything from martial arts to music to even basic math and reading skills.&lt;/blockquote&gt;
@@ -262,6 +309,15 @@ It's only the &amp;quot;hard&amp;quot; way because it uses a technique called &l
 &lt;/div&gt;
 &lt;div class="section" id="id15"&gt;
 &lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e13-14.html"&gt;Exercise 14: Prompting and Passing&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id16"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e15-17.html"&gt;Exercise 15: Reading Files&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id17"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e15-17.html"&gt;Exercise 16: Reading and Writing Files&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id18"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e15-17.html"&gt;Exercise 17: More Files&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -890,121 +946,4 @@ iface eth0 inet static
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="raspberry pi"></category><category term="debian"></category><category term="linux"></category><category term="luks"></category><category term="crypto"></category><category term="network"></category></entry><entry><title>Debian Jessie on Raspberry Pi 2</title><link href="http://www.circuidipity.com/debian-jessie-raspberry-pi-2.html" rel="alternate"></link><updated>2015-07-25T17:48:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-22:debian-jessie-raspberry-pi-2.html</id><summary type="html">&lt;p&gt;With the move to ARMv7 I am now capable of running the official ARM port of Debian (with Pi-friendly kernel+firmware) on my Raspberry Pi 2!&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Debian developer Sjoerd Simons has created a &lt;a class="reference external" href="http://sjoerd.luon.net/posts/2015/02/debian-jessie-on-rpi2/"&gt;Jessie minimal image&lt;/a&gt; with an updated 3.18 Linux kernel and firmware suitable for Pi 2.&lt;/p&gt;
-&lt;p&gt;My setup:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Raspberry Pi 2 Model B&lt;/li&gt;
-&lt;li&gt;5V 2A microUSB power adapter&lt;/li&gt;
-&lt;li&gt;ethernet cable&lt;/li&gt;
-&lt;li&gt;HDMI display + USB keyboard&lt;/li&gt;
-&lt;li&gt;Debian &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;jessie-rpi2-20150705&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;32GB microSD card&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="download"&gt;
-&lt;h2&gt;0. Download&lt;/h2&gt;
-&lt;p&gt;Download the latest &lt;a class="reference external" href="https://images.collabora.co.uk/rpi2/"&gt;image and GPG signature&lt;/a&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.gz
-&lt;span class="nv"&gt;$ &lt;/span&gt;wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.bmap
-&lt;span class="nv"&gt;$ &lt;/span&gt;wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.gz.asc
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/verify-pgp-signature-gnupg.html"&gt;Verify the GPG signature&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="install-to-microsd"&gt;
-&lt;h2&gt;1. Install to microSD&lt;/h2&gt;
-&lt;p&gt;Unpack the image:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;gzip -d jessie-rpi2-20150202.img.gz
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In lieu of the usual (slower) &lt;tt class="docutils literal"&gt;dd&lt;/tt&gt; I use &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;bmap-tools&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;jessie-rpi2-*.img.bmap&lt;/span&gt;&lt;/tt&gt; to write the image to microSD:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get install bmap-tools
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo bmaptool copy --bmap jessie-rpi2-20150705.img.bmap jessie-rpi2-20150705.img /dev/sdX
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="boot-and-resize"&gt;
-&lt;h2&gt;2. Boot and resize&lt;/h2&gt;
-&lt;p&gt;Login as &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; with password &lt;tt class="docutils literal"&gt;debian&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Filesystem layout &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt; on the microSD card:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Filesystem      Size  Used Avail Use% Mounted on
-/dev/root       2.8G  555M  2.1G  21% /
-devtmpfs        459M     &lt;span class="m"&gt;0&lt;/span&gt;  459M   0% /dev
-tmpfs           463M     &lt;span class="m"&gt;0&lt;/span&gt;  463M   0% /dev/shm
-tmpfs           463M  312K  463M   1% /run
-tmpfs           5.0M     &lt;span class="m"&gt;0&lt;/span&gt;  5.0M   0% /run/lock
-tmpfs           463M     &lt;span class="m"&gt;0&lt;/span&gt;  463M   0% /sys/fs/cgroup
-/dev/mmcblk0p1  121M  9.7M  112M   9% /boot/firmware
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Install image inflates into a 2.8GB partition; using only a fraction of available capacity. I use &lt;tt class="docutils literal"&gt;fdisk&lt;/tt&gt; to repartition the microSD to use all storage and &lt;tt class="docutils literal"&gt;resize2fs&lt;/tt&gt; to &lt;a class="reference external" href="http://www.circuidipity.com/resize-rootfs-raspberry-pi.html"&gt;expand rootfs into its new accomodations&lt;/a&gt;!&lt;/p&gt;
-&lt;p&gt;Alternative: &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html"&gt;Run a Raspberry Pi from USB storage&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="post-install"&gt;
-&lt;h2&gt;3. Post-install&lt;/h2&gt;
-&lt;p&gt;Configure:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;a new root password: &lt;tt class="docutils literal"&gt;passwd&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;default locale: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dpkg-reconfigure&lt;/span&gt; locales&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;timezone: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;dpkg-reconfigure&lt;/span&gt; tzdata&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;create 1GB swap file: &lt;tt class="docutils literal"&gt;dd &lt;span class="pre"&gt;if=/dev/zero&lt;/span&gt; &lt;span class="pre"&gt;of=/swap&lt;/span&gt; bs=1M count=1024 &amp;amp;&amp;amp; mkswap /swap&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;enable swap file at boot: &lt;tt class="docutils literal"&gt;echo &amp;quot;/swap none swap sw 0 0&amp;quot; &amp;gt;&amp;gt; /etc/fstab&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;setup hardware random number generator: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-get&lt;/span&gt; &lt;span class="pre"&gt;-y&lt;/span&gt; install &lt;span class="pre"&gt;rng-tools&lt;/span&gt; &amp;amp;&amp;amp; echo &lt;span class="pre"&gt;&amp;quot;bcm2708-rng&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/modules&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;add new user: &lt;tt class="docutils literal"&gt;adduser USERNAME&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;hostname: modify &lt;tt class="docutils literal"&gt;/etc/hostname&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;/etc/hosts&lt;/tt&gt; and reboot&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="package-management"&gt;
-&lt;h2&gt;4. Package management&lt;/h2&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/apt/sources.list&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;deb http://httpredir.debian.org/debian jessie main contrib non-free
-&lt;span class="c"&gt;#deb-src http://httpredir.debian.org/debian/ jessie main contrib non-free&lt;/span&gt;
-
-deb http://security.debian.org/ jessie/updates main contrib non-free
-&lt;span class="c"&gt;#deb-src http://security.debian.org/ jessie/updates main contrib non-free&lt;/span&gt;
-
-deb http://httpredir.debian.org/debian/ jessie-updates main contrib non-free
-&lt;span class="c"&gt;#deb-src http://httpredir.debian.org/debian/ jessie-updates main contrib non-free&lt;/span&gt;
-
-deb &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;trusted&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;yes&lt;span class="o"&gt;]&lt;/span&gt; https://repositories.collabora.co.uk/debian/ jessie rpi2
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Install image provides a &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;flash-kernel&lt;/span&gt;&lt;/tt&gt; package customized for the Pi. Use &lt;strong&gt;apt-pinning&lt;/strong&gt; to &lt;a class="reference external" href="http://sjoerd.luon.net/posts/2015/02/debian-jessie-on-rpi2/#comment-64b33335e8d852179704fb5dc218aa1e"&gt;continue using this custom package&lt;/a&gt; vs updates from official Debian repositories. Create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/apt/preferences.d/flash-kernel&lt;/span&gt;&lt;/tt&gt; with:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Package: flash-kernel
-Pin: origin repositories.collabora.co.uk
-Pin-Priority: 900
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Confirm &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;flash-kernel&lt;/span&gt;&lt;/tt&gt; is pinned:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# apt-cache policy flash-kernel&lt;/span&gt;
-flash-kernel:
-  Installed: 3.35.co1+b1
-  Candidate: 3.35.co1+b1
-  Package pin: 3.35.co1+b1
-  Version table:
- *** 3.35.co1+b1 900
-        &lt;span class="m"&gt;500&lt;/span&gt; https://repositories.collabora.co.uk/debian/ jessie/rpi2 armhf Packages
-        &lt;span class="m"&gt;100&lt;/span&gt; /var/lib/dpkg/status
-     3.35 900
-        &lt;span class="m"&gt;500&lt;/span&gt; http://httpredir.debian.org/debian/ jessie/main armhf Packages
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now is a good time to upgrade:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get update
-&lt;span class="nv"&gt;$ &lt;/span&gt;sudo apt-get dist-upgrade
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="remote-access"&gt;
-&lt;h2&gt;5. Remote access&lt;/h2&gt;
-&lt;p&gt;Generate new SSH keys on the Pi:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# rm /etc/ssh/ssh_host_*key* &amp;amp;&amp;amp; dpkg-reconfigure openssh-server&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Secure remote access by &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;requiring clients to use SSH keys&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h3&gt;Notes&lt;/h3&gt;
-&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;tt class="docutils literal"&gt;/boot/config.txt&lt;/tt&gt; has been moved to &lt;tt class="docutils literal"&gt;/boot/firmware/config.txt&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</summary><category term="debian"></category><category term="linux"></category><category term="raspberry pi"></category></entry></feed>
+</summary><category term="raspberry pi"></category><category term="debian"></category><category term="linux"></category><category term="luks"></category><category term="crypto"></category><category term="network"></category></entry></feed>
