@@ -1,0 +1,32 @@
+=============================================
+LPTHW Exercise 5: More Variables and Printing
+=============================================
+
+:date: 2015-11-14 17:25:00
+:slug: lpthw-e5
+:tags: lpthw, python, programming
+
+`Learn Python the Hard Way by Zed Shaw .: <http://learnpythonthehardway.org/book/>`_ The old way of printing format strings using **%** and the new way using **.format()**:
+
+.. code-block:: bash
+
+    astronaut = 'Yuri Gagarin'
+    astronaut_1 = 'Alan Shepard'
+    launch = 'Baikonur'
+    launch_1 = 'Cape Canaveral'
+    date = 1961
+
+    print "%s blasted off from %s and became the first %s to reach space in %d." % (astronaut, launch, 'human', date)
+    print("{} blasted off from {} and became the first {} to reach space in {}.").format(astronaut, launch, 'human', date)
+    print("{1} blasted off from {3} and became the first {5} to reach space in {6}.").format(astronaut, astronaut_1, launch, launch_1, 'human', 'American', date)
+    
+Output:
+
+.. code-block:: bash
+
+    $ python e05.2.py 
+    Yuri Gagarin blasted off from Baikonur and became the first human to reach space in 1961.
+    Yuri Gagarin blasted off from Baikonur and became the first human to reach space in 1961.
+    Alan Shepard blasted off from Cape Canaveral and became the first American to reach space in 1961.
+    $
+

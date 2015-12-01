@@ -1,0 +1,42 @@
+=============================================================================
+LPTHW Exercise 13-14: Parameters, Unpacking, Variables, Prompting and Passing
+=============================================================================
+
+:date: 2015-11-17 00:26:00
+:slug: lpthw-e13-14
+:tags: lpthw, python, programming
+
+`Learn Python the Hard Way by Zed Shaw .: <http://learnpythonthehardway.org/book/>`_ Add extra libraries or *modules* of code to a program using **import** and supply arguments to a Python script on the command line using **argv**.
+
+The **textwrap** module enables indenting a block quote for cleaner code but moving to left-margin at **print()** time:
+
+.. code-block:: bash
+
+    import sys
+    import textwrap
+
+    script, firstName, lastName = sys.argv
+
+    message = """
+        (O< .: Learn Python The Hard Way
+        (/)_
+        """
+    print(message)
+    print('{} {} ' + ', author of' + '.' * 10).format(firstName, lastName)
+    print(textwrap.dedent(message))
+
+Output:
+
+.. code-block:: bash
+
+    $ python e13.2.py Zed Shaw
+
+        (O< .: Learn Python The Hard Way
+        (/)_
+    
+    Zed Shaw , author of..........
+
+    (O< .: Learn Python The Hard Way
+    (/)_
+
+    $

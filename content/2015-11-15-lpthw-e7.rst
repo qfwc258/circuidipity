@@ -1,0 +1,22 @@
+===============================
+LPTHW Exercise 7: More Printing
+===============================
+
+:date: 2015-11-15 14:38:00
+:slug: lpthw-e7
+:tags: lpthw, python, programming
+
+`Learn Python the Hard Way by Zed Shaw .: <http://learnpythonthehardway.org/book/>`_ I am practising printing in Python 2 using the **print()** and **format()** functions inherited from Python 3:
+
+.. code-block:: bash
+
+    >>> poem = 'The Wreck of the Hesperus'
+    >>> poet = 'Longfellow'
+    >>> print(poem + " by " + poet)
+    The Wreck of the Hesperus by Longfellow
+    >>> print("{}" + " by " + poet).format(poem)
+    The Wreck of the Hesperus by Longfellow
+    >>> print("{}" + " by " + "{}").format(poem, poet)
+    The Wreck of the Hesperus by Longfellow
+    >>>
+
