@@ -6,6 +6,23 @@ Projects
 
 .. class:: invisiblelink
 
+    .. image:: images/lpthw-begin-1-thumb.png
+        :alt: LPTHW
+        :width: 150px
+        :height: 150px
+        :align: left
+        :target: lpthw-dude.html
+
+.. raw:: html
+
+    <div class="projectx">
+        <h2>Learn Python the Hard Way with the DUDE</h2>
+        <p>Start programming with a bit of <a href="lpthw-dude.html">deliberate effort every day...</a></p>
+        <p style="clear:both;"></p>
+    </div>
+
+.. class:: invisiblelink
+
     .. image:: images/raspberry-pi-home-server-thumb.png
         :alt: Raspberry Pi Home Server
         :width: 150px
