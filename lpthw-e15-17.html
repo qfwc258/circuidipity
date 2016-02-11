@@ -27,12 +27,12 @@
 <h1>LPTHW Exercise 15-17: Reading and Writing Files</h1>
 <div id="article">
     <p><a class="reference external" href="http://learnpythonthehardway.org/book/">Learn Python the Hard Way by Zed Shaw .:</a></p>
-<div class="highlight"><pre><span class="c"># Reading and Writing Files</span>
-<span class="c"># * close - closes the file</span>
-<span class="c"># * read - reads the contents of a file... can assign the result to a variable</span>
-<span class="c"># * readline - reads just one line of a text file</span>
-<span class="c"># * truncate - empties the file</span>
-<span class="c"># * write(&#39;stuff&#39;) - writes &#39;stuff&#39; to the file</span>
+<div class="highlight"><pre><span class="c1"># Reading and Writing Files</span>
+<span class="c1"># * close - closes the file</span>
+<span class="c1"># * read - reads the contents of a file... can assign the result to a variable</span>
+<span class="c1"># * readline - reads just one line of a text file</span>
+<span class="c1"># * truncate - empties the file</span>
+<span class="c1"># * write(&#39;stuff&#39;) - writes &#39;stuff&#39; to the file</span>
 
 from sys import argv
 
@@ -45,13 +45,13 @@ print <span class="s2">&quot;If you do want that, hit RETURN.&quot;</span>
 raw_input<span class="o">(</span><span class="s2">&quot;?&quot;</span><span class="o">)</span>
 
 print <span class="s2">&quot;Opening the file...&quot;</span>
-<span class="c"># open &#39;r&#39; (read (default)) &#39;w&#39; writing and &#39;a&#39; append</span>
-<span class="c"># &#39;w&#39; will truncate the file if it already exists</span>
+<span class="c1"># open &#39;r&#39; (read (default)) &#39;w&#39; writing and &#39;a&#39; append</span>
+<span class="c1"># &#39;w&#39; will truncate the file if it already exists</span>
 <span class="nv">target</span> <span class="o">=</span> open<span class="o">(</span>filename, <span class="s1">&#39;w&#39;</span><span class="o">)</span>
 
 print <span class="s2">&quot;Truncating the file. Goodbye!&quot;</span>
-<span class="c"># truncate not necessary... &#39;w&#39; already handles it</span>
-<span class="c">#target.truncate()</span>
+<span class="c1"># truncate not necessary... &#39;w&#39; already handles it</span>
+<span class="c1">#target.truncate()</span>
 
 print <span class="s2">&quot;Now I&#39;m going to ask you for three lines.&quot;</span>
 
@@ -63,12 +63,12 @@ print <span class="s2">&quot;I&#39;m going to write these to the file.&quot;</sp
 
 target.write<span class="o">(</span><span class="s2">&quot;{0}\n{1}\n{2}\nWhat was that last bit? I said...\n&quot;</span> <span class="se">\</span>
     <span class="s2">&quot;{2}\n&quot;</span>.format<span class="o">(</span>line1, line2, line3<span class="o">))</span>
-<span class="c">#target.write(line1)</span>
-<span class="c">#target.write(&quot;\n&quot;)</span>
-<span class="c">#target.write(line2)</span>
-<span class="c">#target.write(&quot;\n&quot;)</span>
-<span class="c">#target.write(line3)</span>
-<span class="c">#target.write(&quot;\n&quot;)</span>
+<span class="c1">#target.write(line1)</span>
+<span class="c1">#target.write(&quot;\n&quot;)</span>
+<span class="c1">#target.write(line2)</span>
+<span class="c1">#target.write(&quot;\n&quot;)</span>
+<span class="c1">#target.write(line3)</span>
+<span class="c1">#target.write(&quot;\n&quot;)</span>
 
 print <span class="s2">&quot;And finally, we close it.&quot;</span>
 target.close<span class="o">()</span>

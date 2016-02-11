@@ -38,12 +38,12 @@
 </ul>
 <p>One element I found a bit tricky was sorting out the use of <em>regular expressions</em> and <em>globbing</em> in creating positional parameters for matching relevant files ... <tt class="docutils literal">man 7 glob</tt>, this <a class="reference external" href="http://www.linuxjournal.com/content/bash-extended-globbing">tutorial</a>, and my local <a class="reference external" href="http://gtalug.org/wiki/Main_Page">LUG</a> were a big help.</p>
 <p>So this is <strong>tarTime</strong> ... a Bash shell script that matches files recursively from the current directory that were last modified [+-TIME] ago and generates a tar archive ...</p>
-<div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<div class="highlight"><pre><span class="ch">#!/bin/bash</span>
 
-<span class="c">#: VARIABLES</span>
+<span class="c1">#: VARIABLES</span>
 <span class="nv">filename</span><span class="o">=</span><span class="k">$(</span>basename <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>.<span class="k">$(</span>date +%F.%H%M%S<span class="k">)</span>.tar<span class="k">)</span>
 
-<span class="c">#: FUNCTIONS</span>
+<span class="c1">#: FUNCTIONS</span>
 helpInfo <span class="o">()</span> <span class="o">{</span>
             cat <span class="s">&lt;&lt; _EOF_</span>
 <span class="s">Usage: tarTime [OPTION] [+-TIME]</span>
@@ -69,9 +69,9 @@ helpInfo <span class="o">()</span> <span class="o">{</span>
 <span class="o">}</span>
 
 searchMethod <span class="o">()</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">[[</span> <span class="nv">$searchLimit</span> <span class="o">=</span>~ <span class="o">[</span>m<span class="o">]</span><span class="nv">$ </span><span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="k">if</span> <span class="o">[[</span> $<span class="nv">searchLimit</span> <span class="o">=</span>~ <span class="o">[</span>m<span class="o">]</span>$ <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
             <span class="nv">findTime</span><span class="o">=</span><span class="s2">&quot;find . -type f -mmin </span><span class="si">${</span><span class="nv">searchLimit</span><span class="p">%m</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="k">elif</span> <span class="o">[[</span> <span class="nv">$searchLimit</span> <span class="o">=</span>~ <span class="o">[</span>d<span class="o">]</span><span class="nv">$ </span><span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="k">elif</span> <span class="o">[[</span> $<span class="nv">searchLimit</span> <span class="o">=</span>~ <span class="o">[</span>d<span class="o">]</span>$ <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
             <span class="nv">findTime</span><span class="o">=</span><span class="s2">&quot;find . -type f -mtime </span><span class="si">${</span><span class="nv">searchLimit</span><span class="p">%d</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">else</span>
             <span class="nv">findTime</span><span class="o">=</span><span class="s2">&quot;find . -type f&quot;</span>
@@ -86,14 +86,14 @@ penguinista <span class="o">()</span> <span class="o">{</span>
 <span class="s">_EOF_</span>
 <span class="o">}</span>
 
-<span class="c">#: LET&#39;S ROLL ...</span>
-<span class="c"># enable extended globbing for &#39;searchLimit=&#39; match - see &#39;man 7 glob&#39;</span>
+<span class="c1">#: LET&#39;S ROLL ...</span>
+<span class="c1"># enable extended globbing for &#39;searchLimit=&#39; match - see &#39;man 7 glob&#39;</span>
 <span class="nb">shopt</span> -s extglob
 
-<span class="c"># &#39;$#&#39; is a shell variable containing total number of items on command line minus the command($0) itself</span>
-<span class="c"># &#39;shift&#39; is a shell builtin that shifts all the positional parameters down by one</span>
+<span class="c1"># &#39;$#&#39; is a shell variable containing total number of items on command line minus the command($0) itself</span>
+<span class="c1"># &#39;shift&#39; is a shell builtin that shifts all the positional parameters down by one</span>
 <span class="k">if</span> <span class="o">[[</span> <span class="nv">$1</span> !<span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="k">while</span> <span class="o">[[</span> <span class="nv">$# </span>-gt <span class="m">0</span> <span class="o">]]</span><span class="p">;</span> <span class="k">do</span>
+    <span class="k">while</span> <span class="o">[[</span> <span class="nv">$#</span> -gt <span class="m">0</span> <span class="o">]]</span><span class="p">;</span> <span class="k">do</span>
         <span class="k">case</span> <span class="nv">$1</span> in
             <span class="o">[</span>+-<span class="o">]</span>+<span class="o">([</span>0-9<span class="o">])[</span>md<span class="o">]</span> <span class="p">|</span> -a <span class="p">|</span> --all <span class="o">)</span>     <span class="nv">searchLimit</span><span class="o">=</span><span class="nv">$1</span>
                                                 searchMethod
@@ -111,7 +111,7 @@ penguinista <span class="o">()</span> <span class="o">{</span>
             * <span class="o">)</span>                                 <span class="nb">echo</span> <span class="s2">&quot;ERROR: Invalid option(s) specified ...&quot;</span>
                                                 <span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
                                                 helpInfo
-                                                <span class="nb">exit </span>1
+                                                <span class="nb">exit</span> 1
                                                 <span class="p">;;</span>
             <span class="k">esac</span>
         <span class="k">done</span>
@@ -119,18 +119,18 @@ penguinista <span class="o">()</span> <span class="o">{</span>
     <span class="nb">echo</span> <span class="s2">&quot;ERROR: tarTime requires at least 1 parameter ...&quot;</span>
     <span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
     helpInfo
-    <span class="nb">exit </span>1
+    <span class="nb">exit</span> 1
 <span class="k">fi</span>
 
-<span class="k">if</span> <span class="o">[[</span> <span class="nv">$listOnly</span> -eq <span class="m">1</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+<span class="k">if</span> <span class="o">[[</span> $listOnly -eq <span class="m">1</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
     <span class="nb">echo</span> <span class="s2">&quot;These are the files that will be copied to the tar archive ...&quot;</span>
     <span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
-    <span class="nv">$findTime</span>
+    <span class="nv">$f</span>indTime
 <span class="k">else</span>
-    <span class="k">if</span> <span class="o">[[</span> <span class="nv">$compress</span> -eq <span class="m">1</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-        <span class="nv">$findTime</span> -exec tar -czf <span class="si">${</span><span class="nv">filename</span><span class="si">}</span>.gz <span class="s1">&#39;{}&#39;</span> <span class="se">\+</span>
+    <span class="k">if</span> <span class="o">[[</span> <span class="nv">$c</span>ompress -eq <span class="m">1</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nv">$f</span>indTime -exec tar -czf <span class="si">${</span><span class="nv">filename</span><span class="si">}</span>.gz <span class="s1">&#39;{}&#39;</span> <span class="se">\+</span>
     <span class="k">else</span>
-        <span class="nv">$findTime</span> -exec tar -cf <span class="nv">$filename</span> <span class="s1">&#39;{}&#39;</span> <span class="se">\+</span>
+        <span class="nv">$f</span>indTime -exec tar -cf <span class="nv">$f</span>ilename <span class="s1">&#39;{}&#39;</span> <span class="se">\+</span>
     <span class="k">fi</span>
     <span class="nb">echo</span> <span class="s2">&quot;</span><span class="k">$(</span>penguinista<span class="k">)</span><span class="s2">  &#39;</span><span class="k">$(</span>ls -t *.tar* <span class="p">|</span> head -n <span class="m">1</span> <span class="p">|</span> awk <span class="s1">&#39; { print ( $(NF) ) }&#39;</span><span class="k">)</span><span class="s2">&#39; was generated.&quot;</span>
 <span class="k">fi</span>
@@ -139,17 +139,17 @@ penguinista <span class="o">()</span> <span class="o">{</span>
 <h2>Examples</h2>
 <p>If I wanted to share all photos created in the last 2 weeks I would navigate to the images directory and run <tt class="docutils literal">tarTime <span class="pre">-14d</span></tt>. The script would recursively match all photos from the last 14 days and generate a tar archive labelled <tt class="docutils literal">FOLDER.DATE.TIME.tar</tt> or <tt class="docutils literal">.tar.gz</tt> if compressed.</p>
 <p>Some other uses ...</p>
-<div class="highlight"><pre><span class="c"># tar files modified more than 7 days ago</span>
-<span class="nv">$ </span>tarTime +7d
+<div class="highlight"><pre><span class="c1"># tar files modified more than 7 days ago</span>
+$ tarTime +7d
 
-<span class="c"># tar files modified less than 88 minutes ago</span>
-<span class="nv">$ </span>tarTime -88m
+<span class="c1"># tar files modified less than 88 minutes ago</span>
+$ tarTime -88m
 
-<span class="c"># list files modified less than 7 days ago</span>
-<span class="nv">$ </span>tarTime -l -7ds
+<span class="c1"># list files modified less than 7 days ago</span>
+$ tarTime -l -7ds
 
-<span class="c"># tar all files</span>
-<span class="nv">$ </span>tarTime --all
+<span class="c1"># tar all files</span>
+$ tarTime --all
 </pre></div>
 <p>Running <tt class="docutils literal">tarTime <span class="pre">--help</span></tt> displays available options.</p>
 </div>

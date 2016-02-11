@@ -28,7 +28,7 @@
 <div id="article">
     <p><a class="reference external" href="http://learnpythonthehardway.org/book/">Learn Python the Hard Way by Zed Shaw .:</a> I am doing the Python exercises on a computer running Linux (of course!). Debian <tt class="docutils literal">stretch/testing</tt> uses Python 2.7 by default.</p>
 <p>Zed recommends <tt class="docutils literal">gedit</tt> as the text editor to begin writing code. Let's give it a shot:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install gedit
+<div class="highlight"><pre>$ sudo apt-get install gedit
 </pre></div>
 <p>Upon launching the editor I immediately run into a problem of thick transparent borders being drawn around its windows. <strong>Fix...</strong> Create <tt class="docutils literal"><span class="pre">~/.config/gtk-3.0/gtk.css</span></tt> with the following:</p>
 <div class="highlight"><pre>.window-frame, .window-frame:backdrop <span class="o">{</span>
@@ -44,16 +44,16 @@ border-radius: 0<span class="p">;</span>
 </pre></div>
 <p>Source: <a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?pid=1469360#p1469360">Evince (GTK3?) doesn't actually run fullscreen</a></p>
 <p>My terminal is <tt class="docutils literal">urxvt</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install rxvt-unicode
+<div class="highlight"><pre>$ sudo apt-get install rxvt-unicode
 </pre></div>
 <p>Terminal settings (fonts, colours, tabs) are modified in <tt class="docutils literal"><span class="pre">~/.Xresources</span></tt>. <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.Xresources">This is mine.</a></p>
 <p>Launching Python in interactive mode I see:</p>
-<div class="highlight"><pre><span class="nv">$ </span>python
+<div class="highlight"><pre>$ python
 Python 2.7.10+ <span class="o">(</span>default, Oct <span class="m">10</span> 2015, 09:11:24<span class="o">)</span>
 <span class="o">[</span>GCC 5.2.1 20151028<span class="o">]</span> on linux2
 Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&quot;</span>, <span class="s2">&quot;credits&quot;</span> or <span class="s2">&quot;license&quot;</span> <span class="k">for</span> more information.
 &gt;&gt;&gt; quit<span class="o">()</span>
-<span class="err">$</span>
+$
 </pre></div>
 <p>Happy hacking!</p>
 

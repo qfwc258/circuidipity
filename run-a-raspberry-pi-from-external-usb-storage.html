@@ -44,8 +44,8 @@
 <div class="section" id="raspbian-linux">
 <h2>0. Raspbian Linux</h2>
 <p><a class="reference external" href="http://downloads.raspberrypi.org/raspbian_latest">Download</a> and unpack Raspbian and write the image to a spare 4GB+ SD card:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo dd <span class="nv">bs</span><span class="o">=</span>1M <span class="k">if</span><span class="o">=</span>YYYY-MM-DD-wheezy-raspbian.img <span class="nv">of</span><span class="o">=</span>/dev/sdX
-<span class="nv">$ </span>sudo sync
+<div class="highlight"><pre>$ sudo dd <span class="nv">bs</span><span class="o">=</span>1M <span class="k">if</span><span class="o">=</span>YYYY-MM-DD-wheezy-raspbian.img <span class="nv">of</span><span class="o">=</span>/dev/sdX
+$ sudo sync
 </pre></div>
 <p>Sources: <a class="reference external" href="http://www.raspberrypi.org/downloads/">operating system images</a>, installing <a class="reference external" href="http://www.raspberrypi.org/documentation/installation/installing-images/linux.md">images on Linux</a></p>
 </div>
@@ -57,15 +57,15 @@
     * Change Timezone
 <span class="m">8</span> Advanced Options
     * Hostname
-    * Memory Split  <span class="c"># default is GPU=64MB, for a headless server set GPU=16MB and free more memory for the CPU</span>
-    * SSH           <span class="c"># enable SSH server at boot to permit login to Pi over LAN</span>
+    * Memory Split  <span class="c1"># default is GPU=64MB, for a headless server set GPU=16MB and free more memory for the CPU</span>
+    * SSH           <span class="c1"># enable SSH server at boot to permit login to Pi over LAN</span>
 </pre></div>
 <p>Save the new parameters and reboot.</p>
 </div>
 <div class="section" id="partitions">
 <h2>2. Partitions</h2>
 <p>Filesystem layout on the SD card:</p>
-<div class="highlight"><pre><span class="nv">$ </span>df -h
+<div class="highlight"><pre>$ df -h
 Filesystem      Size  Used Avail Use% Mounted on
 rootfs          2.9G  2.4G  401M  86% /
 /dev/root       2.9G  2.4G  401M  86% /
@@ -76,12 +76,12 @@ tmpfs            97M     <span class="m">0</span>   97M   0% /run/shm
 /dev/mmcblk0p1   56M  9.7M   47M  18% /boot
 </pre></div>
 <p>I connect my 1TB USB drive to Pi and confirm device detection:</p>
-<div class="highlight"><pre><span class="nv">$ </span>lsusb
+<div class="highlight"><pre>$ lsusb
 Bus <span class="m">001</span> Device 002: ID 0424:9514 Standard Microsystems Corp.
 Bus <span class="m">001</span> Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 Bus <span class="m">001</span> Device 003: ID 0424:ec00 Standard Microsystems Corp.
 Bus <span class="m">001</span> Device 005: ID 152d:2329 JMicron Technology Corp. / JMicron USA Technology Corp. JM20329 SATA Bridge
-<span class="nv">$ </span>dmesg
+$ dmesg
 <span class="o">[</span> ... <span class="o">]</span>
 usb 1-1.3: new high-speed USB device number <span class="m">5</span> using dwc_otg
 usb 1-1.3: New USB device found, <span class="nv">idVendor</span><span class="o">=</span>152d, <span class="nv">idProduct</span><span class="o">=</span>2329
@@ -100,7 +100,7 @@ sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> No Caching mode 
 sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Assuming drive cache: write through
 sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> No Caching mode page found
 sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Assuming drive cache: write through
-sd 0:0:0:0: Attached scsi generic sg0 <span class="nb">type </span>0
+sd 0:0:0:0: Attached scsi generic sg0 <span class="nb">type</span> 0
 sda: sda1
 sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> No Caching mode page found
 sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Assuming drive cache: write through
@@ -111,7 +111,7 @@ sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Attached SCSI di
 <li>sda1 - 20GB - Pi root filesystem</li>
 <li>sda2 - remaining space - file storage</li>
 </ul>
-<div class="highlight"><pre><span class="nv">$ </span>sudo fdisk /dev/sda
+<div class="highlight"><pre>$ sudo fdisk /dev/sda
 
 Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: p
 
@@ -125,7 +125,7 @@ Disk identifier: 0x00000000
 Device Boot      Start         End      Blocks   Id  System
 
 Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: n
-Partition <span class="nb">type</span>:
+Partition type:
   p   primary <span class="o">(</span><span class="m">0</span> primary, <span class="m">0</span> extended, <span class="m">4</span> free<span class="o">)</span>
   e   extended
 Select <span class="o">(</span>default p<span class="o">)</span>: p
@@ -136,7 +136,7 @@ Using default value 2048
 Last sector, +sectors or +size<span class="o">{</span>K,M,G<span class="o">}</span> <span class="o">(</span>2048-1953525167, default 1953525167<span class="o">)</span>: +20G
 
 Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: n
-Partition <span class="nb">type</span>:
+Partition type:
   p   primary <span class="o">(</span><span class="m">1</span> primary, <span class="m">0</span> extended, <span class="m">3</span> free<span class="o">)</span>
   e   extended
 Select <span class="o">(</span>default p<span class="o">)</span>: p
@@ -170,15 +170,15 @@ Syncing disks.
 <div class="section" id="filesystems">
 <h2>3. Filesystems</h2>
 <p>Format the new partitions as <tt class="docutils literal">ext4</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mke2fs -t ext4 -L rootfs /dev/sda1
-<span class="nv">$ </span>sudo mke2fs -t ext4 -L storage /dev/sda2
+<div class="highlight"><pre>$ sudo mke2fs -t ext4 -L rootfs /dev/sda1
+$ sudo mke2fs -t ext4 -L storage /dev/sda2
 </pre></div>
 </div>
 <div class="section" id="dev-root">
 <h2>4. /dev/root</h2>
 <p>Mount the newly-formatted <tt class="docutils literal">rootfs</tt> partition to <tt class="docutils literal">/mnt</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mount -t ext4 /dev/sda1 /mnt
-<span class="nv">$ </span>df -h
+<div class="highlight"><pre>$ sudo mount -t ext4 /dev/sda1 /mnt
+$ df -h
 Filesystem      Size  Used Avail Use% Mounted on
 rootfs          2.9G  2.4G  401M  86% /
 /dev/root       2.9G  2.4G  401M  86% /
@@ -190,7 +190,7 @@ tmpfs            97M     <span class="m">0</span>   97M   0% /run/shm
 /dev/sda1        20G   44M   19G   1% /mnt
 </pre></div>
 <p>Use <strong>rsync</strong> to copy contents of <tt class="docutils literal">root</tt> on the SD card to the <tt class="docutils literal">rootfs</tt> partition on the USB device:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo rsync -axv / /mnt
+<div class="highlight"><pre>$ sudo rsync -axv / /mnt
 </pre></div>
 </div>
 <div class="section" id="new-rootfs">
@@ -206,23 +206,23 @@ dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span> <span class="
 <div class="section" id="fstab">
 <h2>6. fstab</h2>
 <p>Create new mountpoint for the <tt class="docutils literal">storage</tt> partition:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir /mnt/media/USB0
+<div class="highlight"><pre>$ sudo mkdir /mnt/media/USB0
 </pre></div>
 <p>Modify options in <tt class="docutils literal">/mnt/etc/fstab</tt> - located on the <strong>USB device</strong> - to mount <tt class="docutils literal">rootfs</tt> and <tt class="docutils literal">storage</tt> partitions <a class="footnote-reference" href="#id2" id="id1">[1]</a> at boot. Sample configuration for <tt class="docutils literal">sda1</tt> and <tt class="docutils literal">sda2</tt>:</p>
 <div class="highlight"><pre>proc            /proc           proc    defaults          <span class="m">0</span>       0
 /dev/mmcblk0p1  /boot           vfat    defaults          <span class="m">0</span>       2
-<span class="c"># partitions on USB</span>
+<span class="c1"># partitions on USB</span>
 /dev/sda1   /       ext4    defaults,noatime  <span class="m">0</span>       1
 /dev/sda2   /media/USB0  ext4    defaults,noatime  <span class="m">0</span>       0
-<span class="c"># comment out root filesystem on SD card</span>
-<span class="c">#/dev/mmcblk0p2  /               ext4    defaults,noatime  0       1</span>
-<span class="c"># a swapfile is not a swap partition, so no using swapon|off from here on, use  dphys-swapfile swap[on|off]  for that</span>
+<span class="c1"># comment out root filesystem on SD card</span>
+<span class="c1">#/dev/mmcblk0p2  /               ext4    defaults,noatime  0       1</span>
+<span class="c1"># a swapfile is not a swap partition, so no using swapon|off from here on, use  dphys-swapfile swap[on|off]  for that</span>
 </pre></div>
 </div>
 <div class="section" id="reboot">
 <h2>7. Reboot</h2>
 <p>Save modifications and reboot. Login and check the new filesystem layout:</p>
-<div class="highlight"><pre><span class="nv">$ </span>df -h
+<div class="highlight"><pre>$ df -h
 Filesystem     Type      Size  Used Avail Use% Mounted on
 rootfs         rootfs     20G  2.6G   16G  15% /
 /dev/root      ext4       20G  2.6G   16G  15% /
@@ -239,30 +239,30 @@ tmpfs          tmpfs      97M     <span class="m">0</span>   97M   0% /run/shm
 <div class="section" id="password">
 <h3>8.1 Password</h3>
 <p>A <tt class="docutils literal">raspberry</tt> is a tasty fruit but a lousy password. Change password for username <tt class="docutils literal">pi</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>passwd
+<div class="highlight"><pre>$ passwd
 </pre></div>
 </div>
 <div class="section" id="sudo">
 <h3>8.2 Sudo</h3>
 <p>Default setting in Raspbian is to allow <tt class="docutils literal">pi</tt> to use <tt class="docutils literal">sudo</tt> without prompting for a password. Disable password-less <tt class="docutils literal">sudo</tt> by running:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo visudo -s
+<div class="highlight"><pre>$ sudo visudo -s
 </pre></div>
 <p>... and comment out the <tt class="docutils literal">NOPASSWD</tt> entry:</p>
-<div class="highlight"><pre><span class="c">#includedir /etc/sudoers.d</span>
-<span class="c">#pi ALL=(ALL) NOPASSWD: ALL</span>
+<div class="highlight"><pre><span class="c1">#includedir /etc/sudoers.d</span>
+<span class="c1">#pi ALL=(ALL) NOPASSWD: ALL</span>
 </pre></div>
 </div>
 <div class="section" id="upgrade">
 <h3>8.3 Upgrade</h3>
 <p>With the newly-configured <tt class="docutils literal">rootfs</tt> up-and-running now is a good time to update Raspbian:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get update
-<span class="nv">$ </span>sudo apt-get dist-upgrade
+<div class="highlight"><pre>$ sudo apt-get update
+$ sudo apt-get dist-upgrade
 </pre></div>
 </div>
 <div class="section" id="static-address">
 <h3>8.4 Static Address</h3>
 <p>A Raspberry Pi that is going to stay home and run as a server can be configured to use a <strong>static network address</strong>. Sample <tt class="docutils literal">/etc/network/interfaces</tt> modification that disables <tt class="docutils literal">dhcp</tt> and sets ip address <tt class="docutils literal">192.168.1.88</tt>:</p>
-<div class="highlight"><pre><span class="c">#iface eth0 inet dhcp</span>
+<div class="highlight"><pre><span class="c1">#iface eth0 inet dhcp</span>
 auto eth0
 iface eth0 inet static
     address 192.168.1.88

@@ -35,7 +35,7 @@
 <p>I like to start with a <em>lightweight minimal</em> installation of Debian.</p>
 <p><a class="reference external" href="http://www.debian.org/distrib/">Download</a> one of the many versions of the Debian installation images. In this HOWTO example I select <tt class="docutils literal">i386</tt> as my target architecture and I use the small <tt class="docutils literal">businesscard.iso</tt>: <a class="reference external" href="http://cdimage.debian.org/debian-cd/current/i386/bt-cd/debian-6.0.3-i386-businesscard.iso.torrent">Torrent</a> | <a class="reference external" href="http://cdimage.debian.org/debian-cd/current/i386/iso-cd/debian-6.0.3-i386-businesscard.iso">Direct download</a></p>
 <p>Download the <a class="reference external" href="http://cdimage.debian.org/debian-cd/current/i386/iso-cd/MD5SUMS">MD5SUMS</a> file and confirm the Debian <tt class="docutils literal">businesscard.iso</tt> is a &quot;good&quot; copy by running:</p>
-<div class="highlight"><pre><span class="nv">$ </span>md5sum debian-VERSION-i386-businesscard.iso<span class="p">;</span> cat MD5SUMS <span class="p">|</span> grep businesscard
+<div class="highlight"><pre>$ md5sum debian-VERSION-i386-businesscard.iso<span class="p">;</span> cat MD5SUMS <span class="p">|</span> grep businesscard
 </pre></div>
 <p>Ensure the two strings of numbers match before proceeding.</p>
 </div>
@@ -44,8 +44,8 @@
 <p>USB sticks are my Linux install media of choice because I have configured several devices that do not include an optical drive. Plug the USB stick into your Linux host machine and leave the stick <strong>unmounted</strong>. Run the <tt class="docutils literal">dmesg</tt> command and note the USB device ID (<tt class="docutils literal">sdb</tt>, <tt class="docutils literal">sdc</tt>, ...).</p>
 <p><span class="warning">WARNING!</span> Make sure to record the correct USB device ID. The following procedure <strong>wipes out all data on the USB stick.</strong> On my system the device shows up as <tt class="docutils literal">sdb</tt> but it will possibly be different on <strong>your</strong> system.</p>
 <p>Copy the iso to the USB stick:</p>
-<div class="highlight"><pre><span class="c"># cat debian-VERSION-i386-businesscard.iso &gt; /dev/sdX</span>
-<span class="c"># sync</span>
+<div class="highlight"><pre><span class="c1"># cat debian-VERSION-i386-businesscard.iso &gt; /dev/sdX</span>
+<span class="c1"># sync</span>
 </pre></div>
 </div>
 <div class="section" id="step-2-install">
@@ -104,20 +104,20 @@ targeted: only include drivers needed <span class="k">for</span> this system
 <h2>Step 3 - Configure</h2>
 <div class="section" id="fix-time-if-necessary">
 <h3>Fix time (if necessary)</h3>
-<div class="highlight"><pre>tzconfig    <span class="c"># select timezone</span>
-date MMDDHHmmCCYY    <span class="c"># change the date and time to local settings</span>
-hwclock --utc    <span class="c"># set hardware clock to universal time</span>
-hwclock --systohc    <span class="c"># set system time to hardware clock</span>
+<div class="highlight"><pre>tzconfig    <span class="c1"># select timezone</span>
+date MMDDHHmmCCYY    <span class="c1"># change the date and time to local settings</span>
+hwclock --utc    <span class="c1"># set hardware clock to universal time</span>
+hwclock --systohc    <span class="c1"># set system time to hardware clock</span>
 </pre></div>
 </div>
 <div class="section" id="blacklist-modules">
 <h3>Blacklist modules</h3>
 <p>A system that makes use of encrypted hard drive partitions may notice the following error at boot - <tt class="docutils literal">modprobe: fatal: error inserting padlock_sha ... no such device</tt>.</p>
 <p>It is harmless and the crypto-partitions mount as expected. But if you want to remove the error messages - and the affected system does not contain a VIA CPU - then <em>blacklist</em> the <tt class="docutils literal">padlock_aes</tt> and <tt class="docutils literal">padlock_sha</tt> modules by editing <tt class="docutils literal">/etc/modprobe.d/blacklist.conf</tt> (let's also get rid of that &quot;beep beep&quot; pcspeaker as a bonus):</p>
-<div class="highlight"><pre><span class="c"># no beep, thanks</span>
+<div class="highlight"><pre><span class="c1"># no beep, thanks</span>
 blacklist pcspkr
 
-<span class="c"># no VIA CPU no padlock needed foo</span>
+<span class="c1"># no VIA CPU no padlock needed foo</span>
 blacklist padlock_aes
 blacklist padlock_sha
 </pre></div>
@@ -125,95 +125,95 @@ blacklist padlock_sha
 <div class="section" id="console-tools">
 <h3>Console tools</h3>
 <p>Install:</p>
-<div class="highlight"><pre><span class="c"># apt-get install anacron colordiff cowsay dosfstools firmware-linux gpm htop input-utils rsync sudo sysv-rc-conf vrms</span>
+<div class="highlight"><pre><span class="c1"># apt-get install anacron colordiff cowsay dosfstools firmware-linux gpm htop input-utils rsync sudo sysv-rc-conf vrms</span>
 </pre></div>
 </div>
 <div class="section" id="sudo">
 <h3>Sudo</h3>
 <p>Allow a user to run commands with root-privileges using <tt class="docutils literal">sudo</tt>. Run the command <tt class="docutils literal">visudo <span class="pre">-s</span></tt> and configure:</p>
-<div class="highlight"><pre><span class="c"># Allow members of group sudo to execute any command</span>
+<div class="highlight"><pre><span class="c1"># Allow members of group sudo to execute any command</span>
 %sudo   <span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="o">)</span> ALL
 
-<span class="c"># User privilege specification</span>
+<span class="c1"># User privilege specification</span>
 root    <span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="o">)</span> ALL
-<span class="c"># Allow user to run certain commands without prompting for a password</span>
+<span class="c1"># Allow user to run certain commands without prompting for a password</span>
 yourusername     <span class="nv">ALL</span><span class="o">=</span>NOPASSWD: /sbin/cryptsetup, /sbin/halt, /sbin/ifconfig
 </pre></div>
 <p>Save changes and add your USERNAME to <tt class="docutils literal">sudo</tt> group:</p>
-<div class="highlight"><pre><span class="c"># adduser USERNAME sudo</span>
+<div class="highlight"><pre><span class="c1"># adduser USERNAME sudo</span>
 </pre></div>
 </div>
 <div class="section" id="wireless">
 <h3>Wireless</h3>
 <p>Wifi-equipped machines usually require additional firmware. My Thinkpad X201, for example, requires the <a class="reference external" href="http://packages.debian.org/squeeze/firmware-iwlwifi">firmware-iwlwifi</a> package:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install wireless-tools
-<span class="nv">$ </span>sudo apt-get install firmware-PACKAGENAME
+<div class="highlight"><pre>$ sudo apt-get install wireless-tools
+$ sudo apt-get install firmware-PACKAGENAME
 </pre></div>
 <p>Run <tt class="docutils literal">ifconfig <span class="pre">-a</span></tt> and confirm the wireless_interface is detected (usually identified as <tt class="docutils literal">eth1</tt> or <tt class="docutils literal">wlan0</tt>). For manual setup of a wireless_interface (example: <tt class="docutils literal">wlan0</tt>) connecting to an access point with no encryption:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ifconfig eth0 down
-<span class="nv">$ </span>iwconfig
-<span class="nv">$ </span>ifconfig wlan0 up
-<span class="nv">$ </span>iwlist wlan0 scan <span class="p">|</span> less
-<span class="nv">$ </span>iwconfig wlan0 essid <span class="s2">&quot;ACCESSPOINT&quot;</span>
-<span class="nv">$ </span>iwconfig wlan0
-<span class="nv">$ </span>dhclient wlan0
+<div class="highlight"><pre>$ ifconfig eth0 down
+$ iwconfig
+$ ifconfig wlan0 up
+$ iwlist wlan0 scan <span class="p">|</span> less
+$ iwconfig wlan0 essid <span class="s2">&quot;ACCESSPOINT&quot;</span>
+$ iwconfig wlan0
+$ dhclient wlan0
 </pre></div>
 </div>
 <div class="section" id="id1">
 <h3>Backports</h3>
 <p><a class="reference external" href="http://backports.debian.org/">Backports.debian.org</a> contains packages from Debian's <tt class="docutils literal">testing</tt> and <tt class="docutils literal">unstable</tt> releases that have been recompiled for <tt class="docutils literal">stable</tt>.</p>
 <p>Add the archive to the package manager by generating an entry in <tt class="docutils literal">/etc/apt/sources.list.d</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo <span class="nb">echo</span> <span class="s1">&#39;deb http://backports.debian.org/debian-backports squeeze-backports main&#39;</span> &gt; /etc/apt/sources.list.d/squeeze-backports.list
-<span class="nv">$ </span>sudo apt-get update
+<div class="highlight"><pre>$ sudo <span class="nb">echo</span> <span class="s1">&#39;deb http://backports.debian.org/debian-backports squeeze-backports main&#39;</span> &gt; /etc/apt/sources.list.d/squeeze-backports.list
+$ sudo apt-get update
 </pre></div>
 <p>Files in <tt class="docutils literal">sources.list.d</tt> must end with a <tt class="docutils literal">*.list</tt> extension.</p>
 <p>To verify which versions of a package are available and - for example - to install the version from backports:</p>
-<div class="highlight"><pre><span class="nv">$ </span>apt-cache policy PACKAGE
-<span class="nv">$ </span>sudo apt-get -t squeeze-backports install PACKAGE
+<div class="highlight"><pre>$ apt-cache policy PACKAGE
+$ sudo apt-get -t squeeze-backports install PACKAGE
 </pre></div>
 </div>
 <div class="section" id="multimedia">
 <h3>Multimedia</h3>
 <p>Add <a class="reference external" href="http://debian-multimedia.org/">marillat's debian-multimedia archive</a>. Download and install the archive encryption key:</p>
-<div class="highlight"><pre><span class="nv">$ </span>wget -c http://www.debian-multimedia.org/pool/main/d/debian-multimedia-keyring/debian-multimedia-keyring_2010.12.26_all.deb
-<span class="nv">$ </span>sudo dpkg -i debian-multimedia-keyring_2010.12.26_all.deb
+<div class="highlight"><pre>$ wget -c http://www.debian-multimedia.org/pool/main/d/debian-multimedia-keyring/debian-multimedia-keyring_2010.12.26_all.deb
+$ sudo dpkg -i debian-multimedia-keyring_2010.12.26_all.deb
 </pre></div>
 <p>Generate an entry in <tt class="docutils literal">/etc/apt/sources.list.d</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo <span class="nb">echo</span> <span class="s1">&#39;deb http://www.debian-multimedia.org/ squeeze main non-free&#39;</span> &gt; /etc/apt/sources.list.d/debian-multimedia.list
-<span class="nv">$ </span>sudo apt-get update
+<div class="highlight"><pre>$ sudo <span class="nb">echo</span> <span class="s1">&#39;deb http://www.debian-multimedia.org/ squeeze main non-free&#39;</span> &gt; /etc/apt/sources.list.d/debian-multimedia.list
+$ sudo apt-get update
 </pre></div>
 </div>
 <div class="section" id="apt-file">
 <h3>Apt-file</h3>
 <p><tt class="docutils literal"><span class="pre">Apt-file</span></tt> is a useful Debian package search tool:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install apt-file
-<span class="nv">$ </span>sudo apt-file update
+<div class="highlight"><pre>$ sudo apt-get install apt-file
+$ sudo apt-file update
 </pre></div>
 <p>Re-run <tt class="docutils literal"><span class="pre">apt-file</span> update</tt> whenever a new package archive is added to <tt class="docutils literal">sources.list</tt> or <tt class="docutils literal">sources.list.d</tt>.</p>
 </div>
 <div class="section" id="kernel">
 <h3>Kernel</h3>
 <p>If you are running Debian's <tt class="docutils literal">i386</tt> target architecture on a machine with 4GB+ of memory download the <tt class="docutils literal">pae kernel</tt> to make use of all that installed RAM:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get remove linux-image-2.6-686
-<span class="nv">$ </span>sudo apt-get -t squeeze-backports install linux-image-686-pae
+<div class="highlight"><pre>$ sudo apt-get remove linux-image-2.6-686
+$ sudo apt-get -t squeeze-backports install linux-image-686-pae
 </pre></div>
 <p>... and reboot.</p>
 </div>
 <div class="section" id="sound">
 <h3>Sound</h3>
-<div class="highlight"><pre><span class="nv">$ </span>aptitude show alsa-utils
-<span class="nv">$ </span>alsamixer
-<span class="nv">$ </span>aplay /usr/share/sounds/alsa/Front_Center.wav
-<span class="nv">$ </span>alsactl store
+<div class="highlight"><pre>$ aptitude show alsa-utils
+$ alsamixer
+$ aplay /usr/share/sounds/alsa/Front_Center.wav
+$ alsactl store
 </pre></div>
 </div>
 <div class="section" id="xorg">
 <h3>Xorg</h3>
 <p>Discover your machine's video card:</p>
-<div class="highlight"><pre><span class="nv">$ </span>lspci -v <span class="p">|</span> grep <span class="s2">&quot;VGA compatible controller&quot;</span>
+<div class="highlight"><pre>$ lspci -v <span class="p">|</span> grep <span class="s2">&quot;VGA compatible controller&quot;</span>
 </pre></div>
 <p><em>Using an open-source video driver</em></p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xorg
+<div class="highlight"><pre>$ sudo apt-get install xorg
 </pre></div>
 <p>There are known issues with some Intel video cards - <tt class="docutils literal"><span class="pre">xserver-xorg-video-intel</span></tt> - and <a class="reference external" href="http://wiki.debian.org/KernelModesetting">KMS</a> and the default <tt class="docutils literal">2.6.32 kernel</tt> in Debian <tt class="docutils literal">stable</tt>.</p>
 <p>On my Intel-equipped <a class="reference external" href="http://www.circuidipity.com/debian-linux-on-the-asus-eeepc-1001p.html">netbook</a> netbook booting from GRUB or starting an X session can result in a black screen. A temporary fix is to edit the booting GRUB entry and add <tt class="docutils literal">acpi=off</tt> to the kernel line.</p>
@@ -226,10 +226,10 @@ yourusername     <span class="nv">ALL</span><span class="o">=</span>NOPASSWD: /s
 <h2>Step 4 - Desktop</h2>
 <p>Select a window manager or a full-blown desktop environment such as XFCE, GNOME or KDE. There are a <a class="reference external" href="http://www.gilesorr.com/wm/table.html">few to choose from</a> ...</p>
 <p>I like <a class="reference external" href="http://www.xfce.org/">XFCE</a>. For a desktop environment complete with file manager, themes, graphical package and network managers:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xfce4 gdm gksu libnotify-bin thunar ffmpegthumbnailer catfish synaptic update-notifier xscreensaver
-<span class="nv">$ </span>sudo apt-get install gtk2-engines gtk2-engines-murrine gnome-colors shiki-colors qt4-qtconfig
-<span class="nv">$ </span>sudo apt-get install ttf-mscorefonts-installer ttf-bitstream-vera ttf-liberation xfonts-terminus
-<span class="nv">$ </span>sudo apt-get install network-manager network-manager-gnome
+<div class="highlight"><pre>$ sudo apt-get install xfce4 gdm gksu libnotify-bin thunar ffmpegthumbnailer catfish synaptic update-notifier xscreensaver
+$ sudo apt-get install gtk2-engines gtk2-engines-murrine gnome-colors shiki-colors qt4-qtconfig
+$ sudo apt-get install ttf-mscorefonts-installer ttf-bitstream-vera ttf-liberation xfonts-terminus
+$ sudo apt-get install network-manager network-manager-gnome
 </pre></div>
 <div class="section" id="applications">
 <h3>Applications</h3>

@@ -38,12 +38,12 @@
 <li>... convert to MP3</li>
 </ul>
 <p><em>Update 2013-04-04:</em> Used <tt class="docutils literal">set noglob</tt> to forego wildcard expansion of NAME arguments that broke find command's recursive search, added a counter function to return total number of videos returned by find, and the <tt class="docutils literal">getopts</tt> shell built-in to process positional parameters and their arguments.</p>
-<div class="highlight"><pre><span class="c">#!/bin/bash</span>
-<span class="c">#: VARIABLES</span>
+<div class="highlight"><pre><span class="ch">#!/bin/bash</span>
+<span class="c1">#: VARIABLES</span>
 <span class="nv">Scriptname</span><span class="o">=</span><span class="s2">&quot;Video2Audio&quot;</span>
 <span class="nv">Description</span><span class="o">=</span><span class="s2">&quot;Recursive search of PWD for video and copy/convert to MP3&quot;</span>
-<span class="nv">Synopsis</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$Scriptname</span><span class="s2"> [-v|-h|-a|-n [FILE]|-t [+-][TIME]]&quot;</span>
-<span class="c"># -------- #</span>
+<span class="nv">Synopsis</span><span class="o">=</span><span class="s2">&quot;</span>$<span class="s2">Scriptname [-v|-h|-a|-n [FILE]|-t [+-][TIME]]&quot;</span>
+<span class="c1"># -------- #</span>
 <span class="nv">RequiredPrograms</span><span class="o">=</span><span class="s2">&quot;findutils, ffmpeg, libmp3lame0&quot;</span>
 <span class="nv">InvalidInput</span><span class="o">=</span><span class="s2">&quot;is invalid input. Please select &#39;Y(es)&#39; or &#39;N(o)&#39; ...&quot;</span>
 <span class="nv">Codecs</span><span class="o">=</span><span class="s2">&quot;MP4:FLV:AVI:M4V:MKV:MOV:WMV&quot;</span>
@@ -54,7 +54,7 @@
 <span class="nv">FindName</span><span class="o">=</span>
 <span class="nv">FindTime</span><span class="o">=</span>
 
-<span class="c">#: FUNCTIONS</span>
+<span class="c1">#: FUNCTIONS</span>
 VersionInfo<span class="o">()</span>
 <span class="o">{</span>
 cat <span class="s">&lt;&lt; _EOF_</span>
@@ -98,21 +98,21 @@ cat <span class="s">&lt;&lt; _EOF_</span>
 
 ModField<span class="o">()</span>
 <span class="o">{</span>
-<span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$FindTime</span> <span class="o">]]</span>
+<span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$F</span>indTime <span class="o">]]</span>
 <span class="k">then</span>
     <span class="nv">ModUnits</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
 <span class="k">else</span>
-    <span class="k">if</span> <span class="o">[[</span> <span class="nv">$FindTime</span> <span class="o">=</span>~ ^<span class="o">[</span>+-<span class="o">]</span>*<span class="o">[</span>0-9<span class="o">]</span>+<span class="o">[</span>m<span class="o">]</span><span class="nv">$ </span><span class="o">]]</span>
+    <span class="k">if</span> <span class="o">[[</span> <span class="nv">$F</span>indTime <span class="o">=</span>~ ^<span class="o">[</span>+-<span class="o">]</span>*<span class="o">[</span>0-9<span class="o">]</span>+<span class="o">[</span>m<span class="o">]</span>$ <span class="o">]]</span>
     <span class="k">then</span>
             <span class="nv">ModUnits</span><span class="o">=</span><span class="s2">&quot;-mmin </span><span class="si">${</span><span class="nv">FindTime</span><span class="p">%m</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="k">elif</span> <span class="o">[[</span> <span class="nv">$FindTime</span> <span class="o">=</span>~ ^<span class="o">[</span>+-<span class="o">]</span>*<span class="o">[</span>0-9<span class="o">]</span>+<span class="o">[</span>d<span class="o">]</span><span class="nv">$ </span><span class="o">]]</span>
+    <span class="k">elif</span> <span class="o">[[</span> <span class="nv">$F</span>indTime <span class="o">=</span>~ ^<span class="o">[</span>+-<span class="o">]</span>*<span class="o">[</span>0-9<span class="o">]</span>+<span class="o">[</span>d<span class="o">]</span>$ <span class="o">]]</span>
     <span class="k">then</span>
             <span class="nv">ModUnits</span><span class="o">=</span><span class="s2">&quot;-mtime </span><span class="si">${</span><span class="nv">FindTime</span><span class="p">%d</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">else</span>
             <span class="nb">printf</span> <span class="s2">&quot;Error: &#39;-t&#39; option requires argument in correct format ...\n&quot;</span>
             <span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
             HelpInfo
-            <span class="nb">exit </span>1
+            <span class="nb">exit</span> 1
     <span class="k">fi</span>
 <span class="k">fi</span>
 <span class="o">}</span>
@@ -128,36 +128,36 @@ cat <span class="s">&lt;&lt; _EOF_</span>
 
 FindNameCount<span class="o">()</span>
 <span class="o">{</span>
-<span class="nb">set</span> -o noglob   <span class="c"># no pathname expansion</span>
+<span class="nb">set</span> -o noglob   <span class="c1"># no pathname expansion</span>
 ModField
-<span class="nb">local </span>counter
+<span class="nb">local</span> counter
 <span class="nv">counter</span><span class="o">=</span>/tmp/FindNameCount
-find -L . -iname <span class="nv">$FindName</span> -type f <span class="nv">$ModUnits</span> -print 2&gt;/dev/null <span class="p">|</span> tee -a <span class="nv">$counter</span>
-<span class="nb">printf</span> <span class="s2">&quot;Found </span><span class="k">$(</span> wc -l <span class="nv">$counter</span> <span class="p">|</span> awk <span class="o">{</span><span class="s1">&#39;print $1&#39;</span><span class="o">}</span> <span class="k">)</span><span class="s2"> file(s).\n&quot;</span>
-rm <span class="nv">$counter</span>
+find -L . -iname <span class="nv">$F</span>indName -type f $ModUnits -print 2&gt;/dev/null <span class="p">|</span> tee -a <span class="nv">$c</span>ounter
+<span class="nb">printf</span> <span class="s2">&quot;Found </span><span class="k">$(</span> wc -l <span class="nv">$c</span>ounter <span class="p">|</span> awk <span class="o">{</span><span class="s1">&#39;print $1&#39;</span><span class="o">}</span> <span class="k">)</span><span class="s2"> file(s).\n&quot;</span>
+rm <span class="nv">$c</span>ounter
 <span class="nb">set</span> +o noglob
 <span class="o">}</span>
 
 FindTimeCount<span class="o">()</span>
 <span class="o">{</span>
 ModField
-<span class="nb">local </span>counter
-<span class="nv">counter</span><span class="o">=</span><span class="k">$(</span> find -L . <span class="se">\(</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">InameList</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\)</span> -type f <span class="nv">$ModUnits</span> -print 2&gt;/dev/null <span class="p">|</span> tee /dev/tty <span class="p">|</span> wc -l <span class="k">)</span>
-<span class="nb">printf</span> <span class="s2">&quot;Found </span><span class="nv">$counter</span><span class="s2"> file(s).\n&quot;</span>
+<span class="nb">local</span> counter
+<span class="nv">counter</span><span class="o">=</span><span class="k">$(</span> find -L . <span class="se">\(</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">InameList</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\)</span> -type f $ModUnits -print 2&gt;/dev/null <span class="p">|</span> tee /dev/tty <span class="p">|</span> wc -l <span class="k">)</span>
+<span class="nb">printf</span> <span class="s2">&quot;Found </span><span class="nv">$c</span><span class="s2">ounter file(s).\n&quot;</span>
 <span class="o">}</span>
 
-<span class="c">#: LET&#39;S ROLL ...</span>
+<span class="c1">#: LET&#39;S ROLL ...</span>
 <span class="k">if</span> <span class="o">[[</span> <span class="nv">$1</span> !<span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span>
 <span class="k">then</span>
     <span class="k">while</span> <span class="nb">getopts</span> “n:t:ahv” OPTION
     <span class="k">do</span>
-            <span class="k">case</span> <span class="nv">$OPTION</span> in
-                    a <span class="o">)</span>     <span class="nv">FindName</span><span class="o">=</span><span class="nv">$FindNameAll</span>
+            <span class="k">case</span> $OPTION in
+                    a <span class="o">)</span>     <span class="nv">FindName</span><span class="o">=</span><span class="nv">$F</span>indNameAll
                             <span class="nb">break</span>
                             <span class="p">;;</span>
-                    n <span class="o">)</span>     <span class="nv">FindName</span><span class="o">=</span><span class="nv">$OPTARG</span>
+                    n <span class="o">)</span>     <span class="nv">FindName</span><span class="o">=</span>$OPTARG
                             <span class="p">;;</span>
-                    t <span class="o">)</span>     <span class="nv">FindTime</span><span class="o">=</span><span class="nv">$OPTARG</span>
+                    t <span class="o">)</span>     <span class="nv">FindTime</span><span class="o">=</span>$OPTARG
                             <span class="p">;;</span>
                     h <span class="o">)</span>     HelpInfo
                             <span class="nb">exit</span>
@@ -166,7 +166,7 @@ ModField
                             <span class="nb">exit</span>
                             <span class="p">;;</span>
                     ? <span class="o">)</span>     HelpInfo
-                            <span class="nb">exit </span>1
+                            <span class="nb">exit</span> 1
                             <span class="p">;;</span>
             <span class="k">esac</span>
     <span class="k">done</span>
@@ -174,61 +174,61 @@ ModField
     <span class="nb">printf</span> <span class="s2">&quot;Error: Video2Audio requires at least 1 parameter ...\n&quot;</span>
     <span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
     HelpInfo
-    <span class="nb">exit </span>1
+    <span class="nb">exit</span> 1
 <span class="k">fi</span>
 
-<span class="k">if</span> <span class="o">[[</span> <span class="o">(</span> -n <span class="nv">$FindTime</span> <span class="o">&amp;&amp;</span> -n <span class="nv">$FindName</span> <span class="o">)</span> <span class="o">||</span> -n <span class="nv">$FindName</span> <span class="o">]]</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="o">(</span> -n <span class="nv">$F</span>indTime <span class="o">&amp;&amp;</span> -n <span class="nv">$F</span>indName <span class="o">)</span> <span class="o">||</span> -n <span class="nv">$F</span>indName <span class="o">]]</span>
 <span class="k">then</span>
     FindNameCount
     <span class="k">while</span> <span class="nb">true</span>
-<span class="nb">    </span><span class="k">do</span>
+    <span class="k">do</span>
             <span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
             <span class="nb">read</span> -n <span class="m">1</span> -p <span class="s2">&quot;Copy/convert videos to MP3? [Yn] &gt; &quot;</span>
-            <span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$REPLY</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="o">[</span>Yy<span class="o">]</span> <span class="o">||</span> <span class="s2">&quot;</span><span class="nv">$REPLY</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span>
+            <span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span>$<span class="s2">REPLY&quot;</span> <span class="o">==</span> <span class="o">[</span>Yy<span class="o">]</span> <span class="o">||</span> <span class="s2">&quot;</span>$<span class="s2">REPLY&quot;</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span>
             <span class="k">then</span>
-                    find -L . -iname <span class="s2">&quot;</span><span class="nv">$FindName</span><span class="s2">&quot;</span> -type f <span class="nv">$ModUnits</span> <span class="se">\</span>
-                            -exec <span class="nv">$Converter</span> -i <span class="s1">&#39;{}&#39;</span> <span class="nv">$Mp3Config</span> <span class="s1">&#39;{}&#39;</span>.mp3 <span class="se">\;</span> <span class="se">\</span>
+                    find -L . -iname <span class="s2">&quot;</span><span class="nv">$F</span><span class="s2">indName&quot;</span> -type f $ModUnits <span class="se">\</span>
+                            -exec <span class="nv">$C</span>onverter -i <span class="s1">&#39;{}&#39;</span> $Mp3Config <span class="s1">&#39;{}&#39;</span>.mp3 <span class="se">\;</span> <span class="se">\</span>
                             -exec sh -c <span class="s1">&#39;mv &quot;$0&quot; &quot;${0%.*.mp3}.mp3&quot;&#39;</span> <span class="s1">&#39;{}&#39;</span>.mp3 <span class="se">\;</span>
-                            <span class="c"># file name {} passed to shell as its 0th argument and</span>
-                            <span class="c"># script uses shell variable $0 to refer to the file</span>
+                            <span class="c1"># file name {} passed to shell as its 0th argument and</span>
+                            <span class="c1"># script uses shell variable $0 to refer to the file</span>
                     <span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
                     <span class="nb">printf</span> <span class="s2">&quot;</span><span class="k">$(</span>Penguinista<span class="k">)</span><span class="s2">  All done.\n&quot;</span>
                     <span class="nb">exit</span>
-<span class="nb">            </span><span class="k">elif</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$REPLY</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="o">[</span>nN<span class="o">]</span> <span class="o">]]</span>
+            <span class="k">elif</span> <span class="o">[[</span> <span class="s2">&quot;</span>$<span class="s2">REPLY&quot;</span> <span class="o">==</span> <span class="o">[</span>nN<span class="o">]</span> <span class="o">]]</span>
             <span class="k">then</span>
                     <span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
                     <span class="nb">printf</span> <span class="s2">&quot;</span><span class="k">$(</span>Penguinista<span class="k">)</span><span class="s2">  OK. Nothing done.\n&quot;</span>
                     <span class="nb">exit</span>
-<span class="nb">            </span><span class="k">else</span>
+            <span class="k">else</span>
                     <span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
-                    <span class="nb">printf</span> <span class="s2">&quot;&#39;</span><span class="nv">$REPLY</span><span class="s2">&#39; </span><span class="nv">$InvalidInput</span><span class="s2">\n&quot;</span>
+                    <span class="nb">printf</span> <span class="s2">&quot;&#39;</span>$<span class="s2">REPLY&#39; </span>$<span class="s2">InvalidInput\n&quot;</span>
             <span class="k">fi</span>
     <span class="k">done</span>
 <span class="k">fi</span>
 
-<span class="k">if</span> <span class="o">[[</span> -n <span class="nv">$FindTime</span> <span class="o">]]</span>
+<span class="k">if</span> <span class="o">[[</span> -n <span class="nv">$F</span>indTime <span class="o">]]</span>
 <span class="k">then</span>
     FindTimeCount
     <span class="k">while</span> <span class="nb">true</span>
-<span class="nb">    </span><span class="k">do</span>
+    <span class="k">do</span>
             <span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
             <span class="nb">read</span> -n <span class="m">1</span> -p <span class="s2">&quot;Copy/convert videos to MP3? [Yn] &gt; &quot;</span>
-            <span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$REPLY</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="o">[</span>Yy<span class="o">]</span> <span class="o">||</span> <span class="s2">&quot;</span><span class="nv">$REPLY</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span>
+            <span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span>$<span class="s2">REPLY&quot;</span> <span class="o">==</span> <span class="o">[</span>Yy<span class="o">]</span> <span class="o">||</span> <span class="s2">&quot;</span>$<span class="s2">REPLY&quot;</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span>
             <span class="k">then</span>
-                    find -L . <span class="se">\(</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">InameList</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\)</span> -type f <span class="nv">$ModUnits</span> <span class="se">\</span>
-                            -exec <span class="nv">$Converter</span> -i <span class="s1">&#39;{}&#39;</span> <span class="nv">$Mp3Config</span> <span class="s1">&#39;{}&#39;</span>.mp3 <span class="se">\;</span> <span class="se">\</span>
+                    find -L . <span class="se">\(</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">InameList</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\)</span> -type f $ModUnits <span class="se">\</span>
+                            -exec <span class="nv">$C</span>onverter -i <span class="s1">&#39;{}&#39;</span> $Mp3Config <span class="s1">&#39;{}&#39;</span>.mp3 <span class="se">\;</span> <span class="se">\</span>
                             -exec sh -c <span class="s1">&#39;mv &quot;$0&quot; &quot;${0%.*.mp3}.mp3&quot;&#39;</span> <span class="s1">&#39;{}&#39;</span>.mp3 <span class="se">\;</span>
                     <span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
                     <span class="nb">printf</span> <span class="s2">&quot;</span><span class="k">$(</span>Penguinista<span class="k">)</span><span class="s2">  All done.\n&quot;</span>
                     <span class="nb">exit</span>
-<span class="nb">            </span><span class="k">elif</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$REPLY</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="o">[</span>nN<span class="o">]</span> <span class="o">]]</span>
+            <span class="k">elif</span> <span class="o">[[</span> <span class="s2">&quot;</span>$<span class="s2">REPLY&quot;</span> <span class="o">==</span> <span class="o">[</span>nN<span class="o">]</span> <span class="o">]]</span>
             <span class="k">then</span>
                     <span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
                     <span class="nb">printf</span> <span class="s2">&quot;</span><span class="k">$(</span>Penguinista<span class="k">)</span><span class="s2">  OK. Nothing done.\n&quot;</span>
                     <span class="nb">exit</span>
-<span class="nb">            </span><span class="k">else</span>
+            <span class="k">else</span>
                     <span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
-                    <span class="nb">printf</span> <span class="s2">&quot;&#39;</span><span class="nv">$REPLY</span><span class="s2">&#39; </span><span class="nv">$InvalidInput</span><span class="s2">\n&quot;</span>
+                    <span class="nb">printf</span> <span class="s2">&quot;&#39;</span>$<span class="s2">REPLY&#39; </span>$<span class="s2">InvalidInput\n&quot;</span>
             <span class="k">fi</span>
     <span class="k">done</span>
 <span class="k">fi</span>
@@ -236,20 +236,20 @@ ModField
 <div class="section" id="examples">
 <h2>Examples</h2>
 <p>Video2Audio can copy/convert videos to MP3 either one at a time <tt class="docutils literal">Video2Audio <span class="pre">-n</span> VIDEO1.mp4</tt> or perform a batch-conversion that satisfies a SEARCH paramater ...</p>
-<div class="highlight"><pre><span class="c"># convert videos modified less than 30 minutes ago</span>
-<span class="nv">$ </span>Video2Audio -t -30m
+<div class="highlight"><pre><span class="c1"># convert videos modified less than 30 minutes ago</span>
+$ Video2Audio -t -30m
 
-<span class="c"># convert videos modified more than 5 days ago</span>
-<span class="nv">$ </span>Video2Audio -t +5d
+<span class="c1"># convert videos modified more than 5 days ago</span>
+$ Video2Audio -t +5d
 
-<span class="c"># convert all MP4-encoded videos (quotes are important)</span>
-<span class="nv">$ </span>Video2Audio -n <span class="s2">&quot;*mp4&quot;</span>
+<span class="c1"># convert all MP4-encoded videos (quotes are important)</span>
+$ Video2Audio -n <span class="s2">&quot;*mp4&quot;</span>
 
-<span class="c"># convert all FLV-encoded videos modified less than 90 minutes ago</span>
-<span class="nv">$ </span>Video2Audio -n <span class="s2">&quot;*flv&quot;</span> -t -90m
+<span class="c1"># convert all FLV-encoded videos modified less than 90 minutes ago</span>
+$ Video2Audio -n <span class="s2">&quot;*flv&quot;</span> -t -90m
 
-<span class="c"># convert all videos</span>
-<span class="nv">$ </span>Video2Audio -a
+<span class="c1"># convert all videos</span>
+$ Video2Audio -a
 </pre></div>
 <p>Running <tt class="docutils literal">Video2Audio <span class="pre">-h</span></tt> displays available options.</p>
 <p>This week I learned about <em>bash arrays</em>. They allow you to assign multiple values to a variable. I used them twice in this shell script: 1/ to list video FILETYPES for <em>find</em>; 2/ to construct a list of NAMES of videos to be converted to audio. Also the find <em>exec</em> option is put to good use and trying to get the syntax right for file manipulation is a bit of a puzzle.</p>

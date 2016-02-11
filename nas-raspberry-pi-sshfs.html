@@ -30,15 +30,15 @@
     <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #4 .:</a> Connect a Pi to external USB storage and create a cheap and cheerful NAS device via <strong>SSH Filesystem</strong> (SSHFS).</p>
 <p>With a <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html">Pi-attached 1TB hard drive</a> hosting a properly configured <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">SSH server</a> nothing extra is required server-side.</p>
 <p>On the client... Install SSHFS and create a mountpoint for the remote filesystem:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install sshfs
-<span class="nv">$ </span>mkdir ~/NAS
+<div class="highlight"><pre>$ sudo apt-get install sshfs
+$ mkdir ~/NAS
 </pre></div>
 <p>Mount the Pi-hosted remote filesystem (example: <tt class="docutils literal">ip_address:192.168.1.88</tt>) to the client:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sshfs -o <span class="nv">idmap</span><span class="o">=</span>user 192.168.1.88:/media/external_usb_storage ~/NAS
+<div class="highlight"><pre>$ sshfs -o <span class="nv">idmap</span><span class="o">=</span>user 192.168.1.88:/media/external_usb_storage ~/NAS
 </pre></div>
 <p>Contents of the remote hard drive now appear as local directories and files on the laptop. Data transfer between server and client is SSH-encrypted.</p>
 <p>Use <tt class="docutils literal">fusermount</tt> to detach from the remote storage:</p>
-<div class="highlight"><pre><span class="nv">$ </span>fusermount -u ~/NAS
+<div class="highlight"><pre>$ fusermount -u ~/NAS
 </pre></div>
 <p>Raspberry Pi + SSHFS is no speed demon but its very usable. On my laptop using a wireless LAN connection I am able to run Rhythmbox playing music and videos in VLC remotely hosted on the Pi.</p>
 <p>Happy hacking!</p>

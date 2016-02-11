@@ -41,21 +41,21 @@
 <div class="section" id="auto-start-applications">
 <h2>Auto-start applications</h2>
 <p>At launch I have configured i3 to run a script to detect/setup a second display if attached (using <tt class="docutils literal">xrandr</tt>), open a terminal, and run any extra commands as determined by <tt class="docutils literal">$HOSTNAME</tt>:</p>
-<div class="highlight"><pre><span class="c"># Auto-start</span>
-exec_always --no-startup-id <span class="nv">$HOME</span>/bin/dldsply
-<span class="nb">exec</span> --no-startup-id <span class="nv">$HOME</span>/bin/startX
-<span class="c"># Start a terminal</span>
-<span class="c">#bindsym $mod+Return exec i3-sensible-terminal</span>
-bindsym <span class="nv">$mod</span>+Return <span class="nb">exec </span>urxvt
+<div class="highlight"><pre><span class="c1"># Auto-start</span>
+exec_always --no-startup-id $HOME/bin/dldsply
+<span class="nb">exec</span> --no-startup-id $HOME/bin/startX
+<span class="c1"># Start a terminal</span>
+<span class="c1">#bindsym $mod+Return exec i3-sensible-terminal</span>
+bindsym $mod+Return <span class="nb">exec</span> urxvt
 </pre></div>
 <p>Sources: <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc">.xinitrc</a>, <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dldsply">dldsply</a>, <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/startX">startX</a></p>
 </div>
 <div class="section" id="containers">
 <h2>Containers</h2>
 <p>Arrange containers (windows):</p>
-<div class="highlight"><pre><span class="c"># Layout mode for new containers</span>
+<div class="highlight"><pre><span class="c1"># Layout mode for new containers</span>
 workspace_layout tabbed
-<span class="c"># Enable floating mode</span>
+<span class="c1"># Enable floating mode</span>
 for_window <span class="o">[</span><span class="nv">class</span><span class="o">=</span><span class="s2">&quot;Remmina&quot;</span><span class="o">]</span> floating <span class="nb">enable</span>
 for_window <span class="o">[</span><span class="nv">class</span><span class="o">=</span><span class="s2">&quot;Remmina&quot;</span><span class="o">]</span> border normal
 for_window <span class="o">[</span><span class="nv">class</span><span class="o">=</span><span class="s2">&quot;VirtualBox&quot;</span><span class="o">]</span> floating <span class="nb">enable</span>
@@ -70,19 +70,19 @@ for_window <span class="o">[</span><span class="nv">class</span><span class="o">
 <div class="highlight"><pre>font pango:Terminus 11px
 </pre></div>
 <p>Colours:</p>
-<div class="highlight"><pre><span class="c"># Colours</span>
-<span class="c"># class                   border  backgrd text    indicator</span>
-client.focused            <span class="c">#1793d0 #1793d0 #ffffff #2e9ef4</span>
-client.focused_inactive   <span class="c">#333333 #333333 #ffffff #484e50</span>
-client.unfocused          <span class="c">#2d2d2d #2d2d2d #ffffff #292d2e</span>
-client.urgent             <span class="c">#2f343a #900000 #ffffff #900000</span>
+<div class="highlight"><pre><span class="c1"># Colours</span>
+<span class="c1"># class                   border  backgrd text    indicator</span>
+client.focused            <span class="c1">#1793d0 #1793d0 #ffffff #2e9ef4</span>
+client.focused_inactive   <span class="c1">#333333 #333333 #ffffff #484e50</span>
+client.unfocused          <span class="c1">#2d2d2d #2d2d2d #ffffff #292d2e</span>
+client.urgent             <span class="c1">#2f343a #900000 #ffffff #900000</span>
 </pre></div>
 <p>Applications:</p>
 <p>Use <tt class="docutils literal">lxappearance</tt> to setup the <strong>Clearlooks</strong> theme and <tt class="docutils literal"><span class="pre">qtconfig-qt4</span></tt> to configure QT apps to use the <tt class="docutils literal">GTK+</tt> default theme:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install gnome-themes-standard gtk2-engines lxappearance qt4-qtconfig
+<div class="highlight"><pre>$ sudo apt-get install gnome-themes-standard gtk2-engines lxappearance qt4-qtconfig
 </pre></div>
 <p>Launcher:</p>
-<div class="highlight"><pre>bindsym <span class="nv">$mod</span>+d <span class="nb">exec </span>dmenu_run -fn <span class="s1">&#39;Terminus 11&#39;</span> -nb <span class="s1">&#39;#2d2d2d&#39;</span> -nf <span class="s1">&#39;#ffffff&#39;</span> -sb <span class="s1">&#39;#1793d0&#39;</span> -sf <span class="s1">&#39;#ffffff&#39;</span>
+<div class="highlight"><pre>bindsym $mod+d <span class="nb">exec</span> dmenu_run -fn <span class="s1">&#39;Terminus 11&#39;</span> -nb <span class="s1">&#39;#2d2d2d&#39;</span> -nf <span class="s1">&#39;#ffffff&#39;</span> -sb <span class="s1">&#39;#1793d0&#39;</span> -sf <span class="s1">&#39;#ffffff&#39;</span>
 </pre></div>
 </div>
 <div class="section" id="sound">
@@ -93,35 +93,35 @@ client.urgent             <span class="c">#2f343a #900000 #ffffff #900000</span>
 <div class="section" id="screenshots">
 <h2>Screenshots</h2>
 <p>Take screenshots using <tt class="docutils literal">scrot</tt> and <tt class="docutils literal">eog</tt> displays images:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install scrot eog
+<div class="highlight"><pre>$ sudo apt-get install scrot eog
 </pre></div>
 <p>Keybindings:</p>
-<div class="highlight"><pre><span class="c"># Screenshot</span>
-<span class="c"># * desktop</span>
+<div class="highlight"><pre><span class="c1"># Screenshot</span>
+<span class="c1"># * desktop</span>
 bindsym --release Print <span class="nb">exec</span> --no-startup-id scrot <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
-<span class="c"># * active Window</span>
-bindsym --release <span class="nv">$mod</span>+Print <span class="nb">exec</span> --no-startup-id scrot -d <span class="m">4</span> -u -z <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
-<span class="c"># * selected area... (click and move mouse)</span>
+<span class="c1"># * active Window</span>
+bindsym --release $mod+Print <span class="nb">exec</span> --no-startup-id scrot -d <span class="m">4</span> -u -z <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
+<span class="c1"># * selected area... (click and move mouse)</span>
 bindsym --release Shift+Print <span class="nb">exec</span> --no-startup-id scrot -s <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
 </pre></div>
 </div>
 <div class="section" id="lockscreen-logout-suspend-reboot-shutdown">
 <h2>LockScreen/Logout/Suspend/Reboot/Shutdown</h2>
 <p>Debian's i3 metapackage installs <tt class="docutils literal">i3lock</tt> to handle locking screens (<tt class="docutils literal"><span class="pre">-i</span> IMAGE.png</tt> adds a lockscreen wallpaper) and <tt class="docutils literal">systemctl</tt> deals with system suspend/reboot/shutdown:</p>
-<div class="highlight"><pre><span class="nb">set</span> <span class="nv">$Locker</span> i3lock -i ~/.i3lock.png <span class="o">&amp;&amp;</span> sleep 1
-<span class="nb">set</span> <span class="nv">$mode_system</span> System <span class="o">(</span>l<span class="o">)</span> lock, <span class="o">(</span>e<span class="o">)</span> <span class="nb">logout</span>, <span class="o">(</span>s<span class="o">)</span> <span class="nb">suspend</span>, <span class="o">(</span>r<span class="o">)</span> reboot, <span class="o">(</span>Shift+s<span class="o">)</span> shutdown
-mode <span class="s2">&quot;</span><span class="nv">$mode_system</span><span class="s2">&quot;</span> <span class="o">{</span>
-    bindsym l <span class="nb">exec</span> --no-startup-id <span class="nv">$Locker</span>, mode <span class="s2">&quot;default&quot;</span>
-    bindsym e <span class="nb">exec</span> --no-startup-id i3-msg <span class="nb">exit</span>, mode <span class="s2">&quot;default&quot;</span>
-    bindsym s <span class="nb">exec</span> --no-startup-id <span class="nv">$Locker</span> <span class="o">&amp;&amp;</span> sync <span class="o">&amp;&amp;</span> systemctl <span class="nb">suspend</span>, mode <span class="s2">&quot;default&quot;</span>
+<div class="highlight"><pre><span class="nb">set</span> $Locker i3lock -i ~/.i3lock.png <span class="o">&amp;&amp;</span> sleep 1
+<span class="nb">set</span> $mode_system System <span class="o">(</span>l<span class="o">)</span> lock, <span class="o">(</span>e<span class="o">)</span> logout, <span class="o">(</span>s<span class="o">)</span> suspend, <span class="o">(</span>r<span class="o">)</span> reboot, <span class="o">(</span>Shift+s<span class="o">)</span> shutdown
+mode <span class="s2">&quot;</span>$<span class="s2">mode_system&quot;</span> <span class="o">{</span>
+    bindsym l <span class="nb">exec</span> --no-startup-id $Locker, mode <span class="s2">&quot;default&quot;</span>
+    bindsym e <span class="nb">exec</span> --no-startup-id i3-msg exit, mode <span class="s2">&quot;default&quot;</span>
+    bindsym s <span class="nb">exec</span> --no-startup-id $Locker <span class="o">&amp;&amp;</span> sync <span class="o">&amp;&amp;</span> systemctl suspend, mode <span class="s2">&quot;default&quot;</span>
     bindsym r <span class="nb">exec</span> --no-startup-id systemctl reboot, mode <span class="s2">&quot;default&quot;</span>
     bindsym Shift+s <span class="nb">exec</span> --no-startup-id systemctl poweroff -i, mode <span class="s2">&quot;default&quot;</span>
 
-    <span class="c"># back to normal: Enter or Escape</span>
+    <span class="c1"># back to normal: Enter or Escape</span>
     bindsym Return mode <span class="s2">&quot;default&quot;</span>
     bindsym Escape mode <span class="s2">&quot;default&quot;</span>
 <span class="o">}</span>
-bindsym <span class="nv">$mod</span>+Pause mode <span class="s2">&quot;</span><span class="nv">$mode_system</span><span class="s2">&quot;</span>
+bindsym $mod+Pause mode <span class="s2">&quot;</span>$<span class="s2">mode_system&quot;</span>
 </pre></div>
 <p>Source: <a class="reference external" href="https://wiki.archlinux.org/index.php/I3#Shutdown.2C_reboot.2C_lock_screen">i3 shutdown</a></p>
 <p>Happy hacking!</p>

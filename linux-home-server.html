@@ -41,8 +41,8 @@
 <p>USB sticks are my Linux install media of choice because I have configured several devices like this Asus netbook that do not include an optical drive. Plug the USB stick into your Linux host machine and leave the stick unmounted. Run the <tt class="docutils literal">dmesg</tt> command and note the USB device ID (<tt class="docutils literal">sdb</tt>, <tt class="docutils literal">sdc</tt>, ...).</p>
 <p><span class="warning">WARNING!</span> Make sure to record the correct USB device ID. The following procedure <strong>wipes out</strong> all data on the USB stick. On my system the device shows up as <em>sdb</em> but it will possibly be different on your system.</p>
 <p>Copy the iso to the USB stick ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo cat debian-6.0.3-i386-businesscard.iso &gt; /dev/sdX
-<span class="nv">$ </span>sudo sync
+<div class="highlight"><pre>$ sudo cat debian-6.0.3-i386-businesscard.iso &gt; /dev/sdX
+$ sudo sync
 </pre></div>
 </div>
 <div class="section" id="step-2-debian-installer">
@@ -94,16 +94,16 @@ Choose software to install:
 <h2>Step 3 - Configure</h2>
 <div class="section" id="fix-time-if-necessary">
 <h3>Fix time (if necessary)</h3>
-<div class="highlight"><pre><span class="c"># tzconfig</span>
-<span class="c"># date MMDDHHmmCCYY</span>
-<span class="c"># hwclock --utc</span>
-<span class="c"># hwclock --systohc</span>
+<div class="highlight"><pre><span class="c1"># tzconfig</span>
+<span class="c1"># date MMDDHHmmCCYY</span>
+<span class="c1"># hwclock --utc</span>
+<span class="c1"># hwclock --systohc</span>
 </pre></div>
 </div>
 <div class="section" id="additional-packages">
 <h3>Additional packages</h3>
 <pre class="code bash literal-block">
-<span class="c"># apt-get install htop rsync sudo sysv-rc-conf tmux vrms</span>
+<span class="c1"># apt-get install htop rsync sudo sysv-rc-conf tmux vrms</span>
 </pre>
 <p><a class="reference external" href="http://tmux.sourceforge.net/">Tmux</a> is a ...</p>
 <blockquote>
@@ -119,36 +119,36 @@ terminal multiplexer: it enables a number of terminals (or windows), each runnin
 <p>Install and configure SSH to allow remote login and management of your home server.</p>
 <p><em>On the client</em></p>
 <p>Install an SSH client and configure SSH <em>public key authentication</em> ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install openssh-client ssh-askpass keychain rsync
+<div class="highlight"><pre>$ sudo apt-get install openssh-client ssh-askpass keychain rsync
 </pre></div>
 <p>Generate an RSA user-key pair ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>mkdir ~/.ssh
-<span class="nv">$ </span><span class="nb">cd</span> ~/.ssh
-<span class="nv">$ </span>ssh-keygen -v -t rsa -b <span class="m">2048</span> -C USERNAME@HOSTNAME
+<div class="highlight"><pre>$ mkdir ~/.ssh
+$ <span class="nb">cd</span> ~/.ssh
+$ ssh-keygen -v -t rsa -b <span class="m">2048</span> -C USERNAME@HOSTNAME
 </pre></div>
 <p>Transfer the newly-generated public-key to your new home server. <em>Keychain</em> is a front-end to <tt class="docutils literal"><span class="pre">ssh-add</span></tt> that exists through an entire uptime across all sessions. To source ssh-keychain at startup edit <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt> ...</p>
 <div class="highlight"><pre>keychain ~/.ssh/id_rsa
-. ~/.keychain/<span class="nv">$HOSTNAME</span>-sh
+. ~/.keychain/$HOSTNAME-sh
 </pre></div>
 <p><em>On the server</em></p>
 <p>Install the SSH server package <tt class="docutils literal">sudo <span class="pre">apt-get</span> install <span class="pre">openssh-server</span></tt>.</p>
 <p>Restrict SSH login access to certain users by editing <tt class="docutils literal">/etc/ssh/sshd_config</tt> ...</p>
 <div class="highlight"><pre>PermitRootLogin no
 
-<span class="c"># permit only specified users ssh access</span>
+<span class="c1"># permit only specified users ssh access</span>
 AllowUsers yourUsername
 </pre></div>
 <p>Restart your SSH server after modifying and saving the configuration <tt class="docutils literal">sudo /etc/init.d/ssh restart</tt>.
 {% endhighlight %}</p>
 <p>Copy that newly-generated RSA public-key from your client machine into your user account on the server ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>mkdir ~/.ssh
-<span class="nv">$ </span>touch ~/.ssh/authorized_keys
-<span class="nv">$ </span>cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+<div class="highlight"><pre>$ mkdir ~/.ssh
+$ touch ~/.ssh/authorized_keys
+$ cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
 </pre></div>
 <p>Logout and try logging back in to the server from a remote client machine. Once SSH is properly configured all further management of the server can be performed from the client.</p>
 <p>The netbook's LCD display is no longer needed. Save power by turning off the display backlight using <tt class="docutils literal">vbetool</tt> ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install vbetool
-<span class="nv">$ </span>vbetool dpms off
+<div class="highlight"><pre>$ sudo apt-get install vbetool
+$ vbetool dpms off
 </pre></div>
 </div>
 <div class="section" id="backup">

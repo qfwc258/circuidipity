@@ -40,9 +40,9 @@
 <div class="section" id="install-relayd">
 <h2>0. Install relayd</h2>
 <p>Access the internet by connecting an ethernet cable from the secondary router's WAN port to the primary router. Login and install <tt class="docutils literal">relayd</tt>:</p>
-<div class="highlight"><pre><span class="c"># opkg update</span>
-<span class="c"># opkg install relayd</span>
-<span class="c"># /etc/init.d/relayd enable</span>
+<div class="highlight"><pre><span class="c1"># opkg update</span>
+<span class="c1"># opkg install relayd</span>
+<span class="c1"># /etc/init.d/relayd enable</span>
 </pre></div>
 </div>
 <div class="section" id="configure-wireless">
@@ -50,7 +50,7 @@
 <p>Sample <tt class="docutils literal">/etc/config/wireless</tt>:</p>
 <div class="highlight"><pre>config wifi-device <span class="s1">&#39;radio0&#39;</span>
     option <span class="nb">type</span> <span class="s1">&#39;mac80211&#39;</span>
-    option channel <span class="s1">&#39;11&#39;</span>     <span class="c"># Important! Match with the channel set on PrimaryAP</span>
+    option channel <span class="s1">&#39;11&#39;</span>     <span class="c1"># Important! Match with the channel set on PrimaryAP</span>
     option hwmode <span class="s1">&#39;11g&#39;</span>
     option path <span class="s1">&#39;platform/ar934x_wmac&#39;</span>
     option htmode <span class="s1">&#39;HT20&#39;</span>
@@ -89,8 +89,8 @@ config interface <span class="s1">&#39;lan&#39;</span>
     option <span class="nb">type</span> <span class="s1">&#39;bridge&#39;</span>
     option proto <span class="s1">&#39;static&#39;</span>
     option ip6assign <span class="s1">&#39;60&#39;</span>
-    option ipaddr <span class="s1">&#39;192.168.10.1&#39;</span>    <span class="c"># for relayd... requires 192.168.x.x address but not used by clients</span>
-    option gateway <span class="s1">&#39;192.168.1.1&#39;</span>    <span class="c"># ip address of PrimaryAP</span>
+    option ipaddr <span class="s1">&#39;192.168.10.1&#39;</span>    <span class="c1"># for relayd... requires 192.168.x.x address but not used by clients</span>
+    option gateway <span class="s1">&#39;192.168.1.1&#39;</span>    <span class="c1"># ip address of PrimaryAP</span>
     option netmask <span class="s1">&#39;255.255.255.0&#39;</span>
     option dns <span class="s1">&#39;192.168.1.1&#39;</span>
 
@@ -103,7 +103,7 @@ config interface <span class="s1">&#39;wwan&#39;</span>
 config interface <span class="s1">&#39;stabridge&#39;</span>
     option proto <span class="s1">&#39;relay&#39;</span>
     option network <span class="s1">&#39;lan wwan&#39;</span>
-    option ipaddr <span class="s1">&#39;192.168.1.254&#39;</span>   <span class="c"># static ip assigned from PrimaryAP address range</span>
+    option ipaddr <span class="s1">&#39;192.168.1.254&#39;</span>   <span class="c1"># static ip assigned from PrimaryAP address range</span>
 
 config switch
     option name <span class="s1">&#39;switch0&#39;</span>
@@ -134,13 +134,13 @@ config dhcp <span class="s1">&#39;wan&#39;</span>
 <div class="section" id="reboot">
 <h2>4. Reboot</h2>
 <p><em>PrimaryAP</em> will handle firewall and dnsmasq for the combined network. Disable the services on <em>RepeaterAP</em> to avoid conflicts:</p>
-<div class="highlight"><pre><span class="c"># /etc/init.d/firewall stop</span>
-<span class="c"># /etc/init.d/firewall disable</span>
-<span class="c"># /etc/init.d/dnsmasq stop</span>
-<span class="c"># /etc/init.d/dnsmasq disable</span>
+<div class="highlight"><pre><span class="c1"># /etc/init.d/firewall stop</span>
+<span class="c1"># /etc/init.d/firewall disable</span>
+<span class="c1"># /etc/init.d/dnsmasq stop</span>
+<span class="c1"># /etc/init.d/dnsmasq disable</span>
 </pre></div>
 <p>Reboot router:</p>
-<div class="highlight"><pre><span class="c"># reboot</span>
+<div class="highlight"><pre><span class="c1"># reboot</span>
 </pre></div>
 <p>OK! Connect to the new <em>RepeaterAP</em> and the device will be assigned an IP address on the <em>PrimaryAP</em>'s now-extended network. All rules and services on <em>PrimaryAP</em> will flow through to devices connected via <em>RepeaterAP</em>.</p>
 </div>

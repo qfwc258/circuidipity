@@ -29,15 +29,15 @@
     <p>Secure web access to services hosted on a <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi home server</a>.</p>
 <p><strong>What's up:</strong> I am running <a class="reference external" href="http://www.circuidipity.com/ttrss.html">Tiny Tiny RSS</a> (ttrss) and <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">Nginx</a> on a Debian-powered Pi and want to divert HTTP traffic from port 80 to HTTPS login and access news feeds on port 443. Rather than obtain an SSL certificate from a certificate authority (CA) its a simple matter to create one for personal use.</p>
 <p>Install <tt class="docutils literal">openssl</tt> and generate a certificate for Nginx:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install openssl
-<span class="nv">$ </span>sudo mkdir /etc/nginx/ssl
-<span class="nv">$ </span>sudo openssl req -x509 -nodes -days <span class="m">365</span> -newkey rsa:2048 -keyout /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt
+<div class="highlight"><pre>$ sudo apt-get install openssl
+$ sudo mkdir /etc/nginx/ssl
+$ sudo openssl req -x509 -nodes -days <span class="m">365</span> -newkey rsa:2048 -keyout /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt
 </pre></div>
 <p>Create a new server block in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available</span></tt>:</p>
 <div class="highlight"><pre>server <span class="o">{</span>
-    listen 80<span class="p">;</span> <span class="c">## listen for ipv4; this line is default and implied</span>
+    listen 80<span class="p">;</span> <span class="c1">## listen for ipv4; this line is default and implied</span>
     server_name rss.myraspberrypi.ca<span class="p">;</span>
-    <span class="k">return</span> <span class="m">301</span> https://<span class="nv">$host$request_uri</span><span class="p">;</span>  <span class="c">## redirect all non-https traffic to https</span>
+    <span class="k">return</span> <span class="m">301</span> https://$host$request_uri<span class="p">;</span>  <span class="c1">## redirect all non-https traffic to https</span>
 <span class="o">}</span>
 
 server <span class="o">{</span>
@@ -48,7 +48,7 @@ server <span class="o">{</span>
     <span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 <p>Activate the block by creating a symlink in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-enabled</span></tt> and restart server:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo systemctl restart nginx
+<div class="highlight"><pre>$ sudo systemctl restart nginx
 </pre></div>
 <p>Configure <a class="reference external" href="http://www.circuidipity.com/20141006.html">port forwarding on the router</a> and (optional) <a class="reference external" href="https://wiki.gandi.net/en/dns/zone/subdomain">setup a subdomain</a> with a hosting/domain provider.</p>
 <p>Note the first time navigating to the new HTTPS address the (Firefox) browser warns &quot;This Connection is Untrusted&quot; (which is to be expected since its a self-signed certificate vs CA verification).</p>

@@ -112,16 +112,16 @@
 <div class="section" id="static-network-interface">
 <h3>4. Static network interface</h3>
 <p>For a home server that is going to stay put in one location its a good idea to configure the device with a static network interface. Log in as root and run <tt class="docutils literal">nano /etc/network/interfaces</tt> to configure (in this example) the ethernet port with a static address:</p>
-<div class="highlight"><pre><span class="c"># The loopback network interface</span>
+<div class="highlight"><pre><span class="c1"># The loopback network interface</span>
 auto lo
 iface lo inet loopback
 
-<span class="c"># The primary network interface</span>
+<span class="c1"># The primary network interface</span>
 auto eth0
 iface eth0 inet static
     address 192.168.1.2
     netmask 255.255.255.0
-    gateway 192.168.1.1  <span class="c"># home router address</span>
+    gateway 192.168.1.1  <span class="c1"># home router address</span>
 </pre></div>
 </div>
 <div class="section" id="post-install">

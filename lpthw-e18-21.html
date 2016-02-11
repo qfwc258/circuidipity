@@ -58,10 +58,10 @@ def intro<span class="o">()</span>:
 <span class="s1">        to a destination of your choice! (Thanks {0}!)</span>
 <span class="s1">        &#39;&#39;&#39;</span><span class="o">)</span>.format<span class="o">(</span>name, s, origin<span class="o">)</span>
 
-def itinerary<span class="o">(</span>destination, distance, <span class="nb">time</span>, mode<span class="o">)</span>:
+def itinerary<span class="o">(</span>destination, distance, time, mode<span class="o">)</span>:
     <span class="nv">txt</span> <span class="o">=</span> open<span class="o">(</span><span class="s1">&#39;travelTimes.txt&#39;</span>, <span class="s1">&#39;a+&#39;</span><span class="o">)</span>
     txt.write<span class="o">(</span><span class="s1">&#39;\n{}-&gt;{} ({} km)\n&#39;</span>.format<span class="o">(</span>origin, destination, distance<span class="o">))</span>
-    txt.write<span class="o">(</span><span class="s1">&#39;Travel Time: {} hours by {}\n&#39;</span>.format<span class="o">(</span><span class="nb">time</span>, mode<span class="o">))</span>
+    txt.write<span class="o">(</span><span class="s1">&#39;Travel Time: {} hours by {}\n&#39;</span>.format<span class="o">(</span>time, mode<span class="o">))</span>
     txt.seek<span class="o">(</span>0<span class="o">)</span>
     print<span class="o">(</span>txt.read<span class="o">())</span>
     txt.close<span class="o">()</span>
@@ -85,7 +85,7 @@ intro<span class="o">()</span>
 trip<span class="o">()</span>
 </pre></div>
 <p>Output:</p>
-<div class="highlight"><pre><span class="nv">$ </span>python pedalTime.py Toronto
+<div class="highlight"><pre>$ python pedalTime.py Toronto
 
 ----------- __@
 -------  _<span class="sb">`</span><span class="se">\&lt;</span>,_
@@ -118,7 +118,7 @@ Travel Time: 2.77 hours by bike
 Toronto-&gt;Proxima Centauri <span class="o">(</span>40142174400000.0 km<span class="o">)</span>
 Travel Time: 3.00061103304e+11 hours by bike
 
-<span class="err">$</span>
+$
 </pre></div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-lpthw.html">lpthw</a>

@@ -34,11 +34,11 @@
 <div class="section" id="download">
 <h2>0. Download</h2>
 <p><strong>GnuPG</strong> is used to verify PGP signatures:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install gnupg
+<div class="highlight"><pre>$ sudo apt-get install gnupg
 </pre></div>
 <p><strong>Example:</strong> I download a <a class="reference external" href="http://sjoerd.luon.net/posts/2015/02/debian-jessie-on-rpi2/">Debian Jessie for Raspberry Pi 2</a> image and its signature:</p>
-<div class="highlight"><pre><span class="nv">$ </span>wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.gz
-<span class="nv">$ </span>wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.gz.asc
+<div class="highlight"><pre>$ wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.gz
+$ wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.gz.asc
 </pre></div>
 </div>
 <div class="section" id="import">
@@ -46,18 +46,18 @@
 <div class="section" id="method-0">
 <h3>Method 0</h3>
 <p>If the location of the developer's public key is known, I can directly import the key into my keyring (<tt class="docutils literal"><span class="pre">~/.gnupg/pubring.gpg</span></tt>):</p>
-<div class="highlight"><pre><span class="nv">$ </span>gpg --keyserver x-hkp://pool.sks-keyservers.net --recv-keys 0xC2300F7B
+<div class="highlight"><pre>$ gpg --keyserver x-hkp://pool.sks-keyservers.net --recv-keys 0xC2300F7B
 </pre></div>
 </div>
 <div class="section" id="method-1">
 <h3>Method 1</h3>
 <p>Identify the public key used to generate the signature:</p>
-<div class="highlight"><pre><span class="nv">$ </span>gpg --verify jessie-rpi2-20150705.img.gz.asc
+<div class="highlight"><pre>$ gpg --verify jessie-rpi2-20150705.img.gz.asc
 gpg: Signature made Sun <span class="m">05</span> Jul <span class="m">2015</span> 09:06:01 AM EDT using RSA key ID C2300F7B
 gpg: Can<span class="err">&#39;</span>t check signature: public key not found
 </pre></div>
 <p>Public key is <tt class="docutils literal">0xC2300F7B</tt>. Run a key search <a class="footnote-reference" href="#id2" id="id1">[1]</a> and import:</p>
-<div class="highlight"><pre><span class="nv">$ </span>gpg --search 0xC2300F7B
+<div class="highlight"><pre>$ gpg --search 0xC2300F7B
 gpg: keyring <span class="sb">`</span>/home/dwa/.gnupg/secring.gpg<span class="err">&#39;</span> created
 gpg: searching <span class="k">for</span> <span class="s2">&quot;0xC2300F7B&quot;</span> from hkp server keys.gnupg.net
 <span class="o">(</span>1<span class="o">)</span>     Sjoerd Simons &lt;sjoerd@luon.net&gt;
@@ -76,7 +76,7 @@ gpg:               imported: <span class="m">1</span>  <span class="o">(</span>R
 <div class="section" id="verify">
 <h2>2. Verify</h2>
 <p>List keys in my keyring:</p>
-<div class="highlight"><pre><span class="nv">$ </span>gpg --list-keys
+<div class="highlight"><pre>$ gpg --list-keys
 /home/dwa/.gnupg/pubring.gpg
 ----------------------------
 pub   4096R/C2300F7B 2014-04-25
@@ -86,7 +86,7 @@ uid                  Antonius Gerardus Johannes Simons &lt;sjoerd@luon.net&gt;
 sub   4096R/92545E8E 2014-04-25
 </pre></div>
 <p>Verify package signature:</p>
-<div class="highlight"><pre><span class="nv">$ </span>gpg --verify jessie-rpi2-20150705.img.gz.asc jessie-rpi2-20150705.img.gz
+<div class="highlight"><pre>$ gpg --verify jessie-rpi2-20150705.img.gz.asc jessie-rpi2-20150705.img.gz
 gpg: Signature made Sun <span class="m">05</span> Jul <span class="m">2015</span> 09:06:01 AM EDT using RSA key ID C2300F7B
 gpg: Good signature from <span class="s2">&quot;Sjoerd Simons &lt;sjoerd@luon.net&gt;&quot;</span>
 gpg:                 aka <span class="s2">&quot;Sjoerd Simons &lt;sjoerd@debian.org&gt;&quot;</span>

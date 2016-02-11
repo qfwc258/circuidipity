@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Ubuntu 14.04 Minimal Install</title>
+        <title>Circuidipity | Minimal Ubuntu</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -24,21 +24,21 @@
 </div>
 
 <!-- article -->
-<h1>Ubuntu 14.04 Minimal Install</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Tuesday 11 November 2014</p>
+<h1>Minimal Ubuntu</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 11 February 2016</p>
 <div id="article">
     <img alt="Ubuntu Trusty Tahr" class="align-left" src="images/ubuntuTrusty.png" style="width: 100px; height: 100px;" />
-<p><strong>Ubuntu 14.04 &quot;Trusty Tahr&quot;</strong> is a <a class="reference external" href="https://wiki.ubuntu.com/Releases">Long Term Support (LTS)</a> release of the popular Linux operating system. I use Ubuntu's <a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD">minimal install image</a> to create a <strong>lightweight, console-only base configuration</strong> that can be customized for various tasks and alternate desktops.</p>
-<p>Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire storage device divided into 3 partitions: a <tt class="docutils literal">root</tt> partition, and <a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a> encrypted <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt>.</p>
+<p><strong>Ubuntu 14.04 &quot;Trusty Tahr&quot;</strong> is the latest <a class="reference external" href="https://wiki.ubuntu.com/Releases">Long Term Support (LTS)</a> release of the popular Linux operating system. I use Ubuntu's <a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD">minimal install image</a> to create a <strong>console-only base configuration</strong> that can be customized for various tasks and <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">alternate desktops</a>.</p>
+<p>Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire storage device divided into 3 partitions: a separate <tt class="docutils literal">root</tt> partition, and <a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a> encrypted <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt>.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
 <div class="section" id="prepare-install-media">
 <h3>0. Prepare install media</h3>
-<p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso">64-bit trusty minimal installer</a> (<a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/mini.iso">32-bit</a> for older machines) and burn to CD or <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick. An alternative (my choice) is adding the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>. Using the minimal console installer vs. the graphical installer provides more options during setup <a class="footnote-reference" href="#id3" id="id1">[1]</a>.</p>
+<p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso">64-bit trusty minimal installer</a> (<a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/mini.iso">32-bit</a> for older machines) and burn to CD or <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick. <a class="footnote-reference" href="#id7" id="id1">[1]</a> Using the minimal console installer vs. the graphical installer provides more options during setup. <a class="footnote-reference" href="#id8" id="id2">[2]</a></p>
+<p>Minimal installer (requires network connection) downloads all the latest packages during setup.</p>
 </div>
-<div class="section" id="configure">
-<h3>1. Configure</h3>
-<p>Connect the USB stick and boot the installer:</p>
+<div class="section" id="launch">
+<h3>1. Launch</h3>
 <img alt="Install" class="align-center" src="images/screenshot/trustyInstall/100.png" style="width: 800px; height: 600px;" />
 <img alt="Select Language" class="align-center" src="images/screenshot/trustyInstall/101.png" style="width: 800px; height: 600px;" />
 <img alt="Select Location" class="align-center" src="images/screenshot/trustyInstall/102.png" style="width: 800px; height: 600px;" />
@@ -49,7 +49,7 @@
 <img alt="Mirror Country" class="align-center" src="images/screenshot/trustyInstall/107.png" style="width: 800px; height: 600px;" />
 <img alt="Mirror archive" class="align-center" src="images/screenshot/trustyInstall/108.png" style="width: 800px; height: 600px;" />
 <img alt="Proxy" class="align-center" src="images/screenshot/trustyInstall/109.png" style="width: 800px; height: 600px;" />
-<p>Contents of the Ubuntu minimal installer are now loaded into memory and the USB stick can safely be removed (recommended <a class="footnote-reference" href="#id4" id="id2">[2]</a>).</p>
+<p>Contents of the installer are now loaded into memory and the USB stick can safely be removed. <a class="footnote-reference" href="#id9" id="id3">[3]</a></p>
 <img alt="Full Name" class="align-center" src="images/screenshot/trustyInstall/110.png" style="width: 800px; height: 600px;" />
 <img alt="Username" class="align-center" src="images/screenshot/trustyInstall/111.png" style="width: 800px; height: 600px;" />
 <img alt="User password" class="align-center" src="images/screenshot/trustyInstall/112.png" style="width: 800px; height: 600px;" />
@@ -60,7 +60,7 @@
 </div>
 <div class="section" id="partitions">
 <h3>2. Partitions</h3>
-<p>In the example below I create 3 partitions on the disk:</p>
+<p>In the example below I create 3 partitions <a class="footnote-reference" href="#id10" id="id4">[4]</a> on the disk:</p>
 <ul class="simple">
 <li>sda1 is a 20GB <tt class="docutils literal">root</tt> partition</li>
 <li>sda2 is a 1GB LUKS encrypted <tt class="docutils literal">swap</tt> partition using a <strong>random key</strong></li>
@@ -119,45 +119,113 @@
 <div class="section" id="install-packages-and-finish-up">
 <h3>3. Install packages and finish up</h3>
 <img alt="No automatic updates" class="align-center" src="images/screenshot/trustyInstall/300.png" style="width: 800px; height: 600px;" />
-<p>Leave all tasks unmarked if you wish to start with a minimal, console-only base configuration ready for further customization. This task menu can be accessed post-install by running:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo tasksel
-</pre></div>
+<p>Leave all tasks unmarked if you wish to start with a minimal, console-only base configuration ready for further customization. <a class="footnote-reference" href="#id11" id="id5">[5]</a></p>
 <img alt="Software selection" class="align-center" src="images/screenshot/trustyInstall/301.png" style="width: 800px; height: 600px;" />
-<p>Or get started making a Linux home server:</p>
-<img alt="Software selection" class="align-center" src="images/screenshot/trustyInstall/301-1.png" style="width: 800px; height: 600px;" />
-<p>Perhaps install a lightweight desktop? I like <a class="reference external" href="http://www.circuidipity.com/tag-lubuntu.html">Lubuntu (Ubuntu + LXDE desktop)</a>:</p>
-<img alt="Software selection" class="align-center" src="images/screenshot/trustyInstall/301-2.png" style="width: 800px; height: 600px;" />
-<p>More packages are downloaded and the installer makes its finishing touches:</p>
+<p>Standard system utilties are downloaded and the installer makes its finishing touches:</p>
 <img alt="GRUB" class="align-center" src="images/screenshot/trustyInstall/302.png" style="width: 800px; height: 600px;" />
 <img alt="UTC" class="align-center" src="images/screenshot/trustyInstall/303.png" style="width: 800px; height: 600px;" />
 <img alt="Finish install" class="align-center" src="images/screenshot/trustyInstall/304.png" style="width: 800px; height: 600px;" />
+</div>
+<div class="section" id="first-boot">
+<h3>4. First boot</h3>
 <p>System will display a passphrase prompt to unlock encrypted <tt class="docutils literal">home</tt> partition:</p>
 <img alt="Enter encrypt passphrase" class="align-center" src="images/screenshot/trustyInstall/305.png" style="width: 800px; height: 600px;" />
 <img alt="Login" class="align-center" src="images/screenshot/trustyInstall/306.png" style="width: 800px; height: 600px;" />
+<p>Login ... then run <tt class="docutils literal">timedatectl</tt> to confirm system time+date is properly set.</p>
+</div>
+<div class="section" id="network">
+<h3>5. Network</h3>
+<p>Check which network interfaces are detected and settings ...</p>
+<div class="highlight"><pre>$ ip a
+</pre></div>
+<p><strong>Wired</strong> interfaces are usually auto-configured by default and assigned an IP address courtesy of DHCP.</p>
+<p>To assign a <strong>static</strong> address, deactivate the wired interface and create a new entry in <tt class="docutils literal">/etc/network/interfaces</tt>. Sample entry for <tt class="docutils literal">enp3s0</tt> ...</p>
+<div class="highlight"><pre><span class="c1"># The primary network interface</span>
+auto enp3s0
+<span class="c1">#iface enp3s0 inet dhcp</span>
+iface enp3s0 inet static
+    address 192.168.1.88
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+    dns-nameservers 192.168.1.1
+</pre></div>
+<p>Bring up|down interface with <tt class="docutils literal">sudo if{up,down} enp3s0</tt>.</p>
+<p>Create a temporary <strong>wireless</strong> interface connection to WPA2 encrypted access points manually using <tt class="docutils literal">wpa_supplicant</tt> + <tt class="docutils literal">wpa_passphrase</tt> + <tt class="docutils literal">dhclinet</tt>. Sample setup of <tt class="docutils literal">wlp1s0</tt> ...</p>
+<div class="highlight"><pre>$ sudo ip link <span class="nb">set</span> wlp1s0 up            <span class="c1"># bring up interface</span>
+$ iw dev wlp1s0 link                    <span class="c1"># get link status</span>
+$ sudo iw dev wlp1s0 scan <span class="p">|</span> grep SSID   <span class="c1"># scan for access points</span>
+$ sudo wpa_supplicant -i wlp1s0 -c&lt;<span class="o">(</span>wpa_passphrase <span class="s2">&quot;MY_SSID&quot;</span> <span class="s2">&quot;MY_PASSPHRASE&quot;</span><span class="o">)</span>   <span class="c1"># connect to WPA/WPA2 ... add &#39;-B&#39; to background process</span>
+$ sudo dhclient wlp1s0      <span class="c1"># obtain IP address</span>
+</pre></div>
+<p>More permanent configurations may be set in <tt class="docutils literal">/etc/default/interfaces</tt>. Sample setup <a class="footnote-reference" href="#id12" id="id6">[6]</a> with a static IP address ...</p>
+<div class="highlight"><pre>iface wlp1s0 inet static
+    address 192.168.1.77
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+    wpa-ssid MY_SSID
+    wpa-psk MY_PASSPHRASE
+    dns-nameservers 8.8.8.8 8.8.4.4
+</pre></div>
+<p>Alternative setup using DHCP ...</p>
+<div class="highlight"><pre>allow-hotplug wlp1s0
+iface wlp1s0 inet dhcp
+    wpa-ssid MY_SSID
+    wpa-psk MY_PASSPHRASE
+    dns-nameservers 8.8.8.8 8.8.4.4
+</pre></div>
+<p>Once a link is established an optional network manager utility may be installed. Packages <tt class="docutils literal"><span class="pre">network-manager</span></tt> and <tt class="docutils literal"><span class="pre">network-manager-gnome</span></tt> provide the console <tt class="docutils literal">nmcli</tt> and graphical <tt class="docutils literal"><span class="pre">nm-applet</span></tt> clients respectively ...</p>
+<div class="highlight"><pre>$ sudo apt install network-manager
+</pre></div>
+<p>Comment out (deactivate) any entries in <tt class="docutils literal">/etc/network/interfaces</tt> that will be managed by <tt class="docutils literal"><span class="pre">network-manager</span></tt>.</p>
+</div>
+<div class="section" id="where-to-go-next">
+<h3>6. Where to go next ...</h3>
+<p>... is up to YOU. Yeehaw.</p>
 <p>Happy hacking!</p>
 </div>
 <div class="section" id="notes">
 <h3>Notes</h3>
-<table class="docutils footnote" frame="void" id="id3" rules="none">
+<table class="docutils footnote" frame="void" id="id7" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Specifically in this instance, the Ubuntu console installer provides a random key option for the encrypted swap partition.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>An alternative is adding the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id4" rules="none">
+<table class="docutils footnote" frame="void" id="id8" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Partition editor may designate the USB stick as the primary (sda) storage device, which may lead to partitioning and fstab errors.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Specifically, the console installer provides a <strong>random key</strong> option for the encrypted swap partition.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>Recommended: Otherwise the partitioning tool may designate the USB device as primary (sda) storage and lead to broken partition layouts.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>For storage devices &gt;=128GB I create separate <tt class="docutils literal">root</tt> + <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt> partitions. Smaller devices get <tt class="docutils literal">boot</tt> + <tt class="docutils literal">swap</tt> + <tt class="docutils literal">root</tt> partitions and note encrypted <tt class="docutils literal">root</tt> <strong>requires</strong> an unencrypted <tt class="docutils literal">boot</tt>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[5]</a></td><td>The task selection menu can be run post-install using <tt class="docutils literal">sudo tasksel</tt>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id12" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[6]</a></td><td>Multiple wireless static IP address setups can be created with <tt class="docutils literal">iface wlp1s0_NAME inet static</tt> and [de]activated with <tt class="docutils literal">sudo if{up.down} wlp1s0=wlp1s0_NAME</tt>.</td></tr>
 </tbody>
 </table>
 </div>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-lubuntu.html">lubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-luks.html">luks</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-crypto.html">crypto</a>
 </p>
 </div>
 

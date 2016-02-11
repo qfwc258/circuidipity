@@ -35,10 +35,10 @@
 <p>Stop the running X session ... <tt class="docutils literal">sudo /etc/init.d/gdm stop</tt>.</p>
 <div class="section" id="determine-which-nvidia-graphics-card-is-installed">
 <h3>Determine which Nvidia graphics card is installed</h3>
-<div class="highlight"><pre><span class="nv">$ </span>lspci -v <span class="p">|</span> grep <span class="s2">&quot;VGA compatible controller: nvidia&quot;</span>
+<div class="highlight"><pre>$ lspci -v <span class="p">|</span> grep <span class="s2">&quot;VGA compatible controller: nvidia&quot;</span>
 </pre></div>
 <p>On the motherboard of my primary workstation I have an embedded Nvidia chipset with dual VGA + DVI ports:</p>
-<div class="highlight"><pre><span class="nv">$ </span>lspci -v <span class="p">|</span> grep <span class="s2">&quot;VGA compatible controller: nvidia&quot;</span>
+<div class="highlight"><pre>$ lspci -v <span class="p">|</span> grep <span class="s2">&quot;VGA compatible controller: nvidia&quot;</span>
 00:05.0 VGA compatible controller: nVidia Corporation C51PV <span class="o">[</span>GeForce 6150<span class="o">]</span> <span class="o">(</span>rev a2<span class="o">)</span> <span class="o">(</span>prog-if <span class="m">00</span> <span class="o">[</span>VGA controller<span class="o">])</span>
 </pre></div>
 </div>
@@ -49,7 +49,7 @@
 <h3>Using the open-source nouveau driver</h3>
 <p>For 2-D graphics the <tt class="docutils literal">vesa</tt> or <tt class="docutils literal">nv</tt> or <tt class="docutils literal">nouveau</tt> drivers will suffice (3-D graphics require the proprietary driver).</p>
 <p>To install the &lt;strong&gt;nouveau&lt;/strong&gt; driver ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xorg xserver-xorg-video-vesa xserver-xorg-video-nouveau xbindkeys mesa-utils
+<div class="highlight"><pre>$ sudo apt-get install xorg xserver-xorg-video-vesa xserver-xorg-video-nouveau xbindkeys mesa-utils
 </pre></div>
 <p>That's it. X should pick it up automatically. See below to confirm that the correct driver is loaded or switch to another open-source driver (<tt class="docutils literal">vesa</tt> can be a good fallback if things go awry).</p>
 </div>
@@ -66,21 +66,21 @@
 <div class="section" id="pre-built">
 <h3>Pre-built</h3>
 <p>If running the default kernel in Debian <tt class="docutils literal">squeeze</tt> or <tt class="docutils literal">wheezy</tt> ... there is a Debian package available of a pre-built Nvidia module (<a class="reference external" href="http://us.download.nvidia.com/XFree86/Linux-x86/195.36.24/README/supportedchips.html">supported chipsets</a>) ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xorg xserver-xorg-video-vesa xserver-xorg-video-nouveau xbindkeys mesa-utils
-<span class="nv">$ </span>sudo apt-get install nvidia-kernel-<span class="k">$(</span>uname -r<span class="k">)</span>
-<span class="nv">$ </span>sudo apt-get install nvidia-glx
+<div class="highlight"><pre>$ sudo apt-get install xorg xserver-xorg-video-vesa xserver-xorg-video-nouveau xbindkeys mesa-utils
+$ sudo apt-get install nvidia-kernel-<span class="k">$(</span>uname -r<span class="k">)</span>
+$ sudo apt-get install nvidia-glx
 </pre></div>
 <p>See below for configuring X to use the proprietary Nvidia driver vs an open-source driver.</p>
 </div>
 <div class="section" id="module-assistant">
 <h3>module-assistant</h3>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xorg xbindkeys mesa-utils module-assistant nvidia-kernel-common build-essential
-<span class="nv">$ </span>sudo m-a prepare
-<span class="nv">$ </span>sudo m-a clean nvidia-kernel-source
-<span class="nv">$ </span>m-a get nvidia-kernel-source
-<span class="nv">$ </span>sudo m-a build nvidia-kernel-source
-<span class="nv">$ </span>sudo m-a install nvidia-kernel-source
-<span class="nv">$ </span>sudo apt-get install nvidia-glx
+<div class="highlight"><pre>$ sudo apt-get install xorg xbindkeys mesa-utils module-assistant nvidia-kernel-common build-essential
+$ sudo m-a prepare
+$ sudo m-a clean nvidia-kernel-source
+$ m-a get nvidia-kernel-source
+$ sudo m-a build nvidia-kernel-source
+$ sudo m-a install nvidia-kernel-source
+$ sudo apt-get install nvidia-glx
 </pre></div>
 <p>See below for configuring X to use the proprietary Nvidia driver vs an open-source driver.</p>
 <p>When upgrading to a newer kernel ... the Nvidia kernel module will need to be rebuilt to match the new kernel.</p>
@@ -99,16 +99,16 @@
 <p>Sample configuration from my own system ...</p>
 <div class="highlight"><pre>Section <span class="s2">&quot;Module&quot;</span>
     Load  <span class="s2">&quot;dbe&quot;</span>
-    <span class="c">#Load  &quot;dri&quot;</span>
+    <span class="c1">#Load  &quot;dri&quot;</span>
     Load  <span class="s2">&quot;extmod&quot;</span>
     Load  <span class="s2">&quot;record&quot;</span>
-    <span class="c">#Load  &quot;dri2&quot;</span>
+    <span class="c1">#Load  &quot;dri2&quot;</span>
     Load  <span class="s2">&quot;glx&quot;</span>
 EndSection
 
 Section <span class="s2">&quot;Device&quot;</span>
     Identifier  <span class="s2">&quot;Card0&quot;</span>
-    <span class="c">#Driver      &quot;nouveau&quot;</span>
+    <span class="c1">#Driver      &quot;nouveau&quot;</span>
     Driver      <span class="s2">&quot;nvidia&quot;</span>
     VendorName  <span class="s2">&quot;nVidia Corporation&quot;</span>
     BoardName   <span class="s2">&quot;C51PV [GeForce 6150]&quot;</span>
@@ -116,7 +116,7 @@ Section <span class="s2">&quot;Device&quot;</span>
 EndSection
 </pre></div>
 <p>Move the modified file to its default name and location ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo cp /root/xorg.conf.new /etc/X11/xorg.conf
+<div class="highlight"><pre>$ sudo cp /root/xorg.conf.new /etc/X11/xorg.conf
 </pre></div>
 <p>Any user that wants to run 3-D code must belong to the <tt class="docutils literal">video</tt> group. Should already be pre-configured ... but if not <tt class="docutils literal">sudo adduser USERNAME video</tt>.</p>
 </div>
@@ -124,16 +124,16 @@ EndSection
 <h2>Step 3 - Run</h2>
 <p>Logged in as regular user ... start the X server <tt class="docutils literal">startx</tt> or restart <tt class="docutils literal">sudo /etc/init.d/gdm start</tt> if using a graphical login manager. I needed to restart my system to get the nvidia driver to work properly.</p>
 <p>View what video driver is in use ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>grep -B2 <span class="s1">&#39;Module class: X.Org Video Driver&#39;</span> /var/log/Xorg.0.log
+<div class="highlight"><pre>$ grep -B2 <span class="s1">&#39;Module class: X.Org Video Driver&#39;</span> /var/log/Xorg.0.log
 </pre></div>
 <p>You should see ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>grep -B2 <span class="s1">&#39;Module class: X.Org Video Driver&#39;</span> /var/log/Xorg.0.log
+<div class="highlight"><pre>$ grep -B2 <span class="s1">&#39;Module class: X.Org Video Driver&#39;</span> /var/log/Xorg.0.log
 <span class="o">(</span>II<span class="o">)</span> Module nvidia: <span class="nv">vendor</span><span class="o">=</span><span class="s2">&quot;NVIDIA Corporation&quot;</span>
         compiled <span class="k">for</span> 4.0.2, module <span class="nv">version</span> <span class="o">=</span> 1.0.0
         Module class: X.Org Video Driver
 </pre></div>
 <p>Confirm that video acceleration is actually working ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>glxinfo <span class="p">|</span> grep rendering
+<div class="highlight"><pre>$ glxinfo <span class="p">|</span> grep rendering
 direct rendering: Yes
 </pre></div>
 <p>For a dual-display configuration - use monitors of different resolutions and combine them into one desktop - give <a class="reference external" href="http://www.circuidipity.com/twinview.html">Twinview</a> a chance.</p>

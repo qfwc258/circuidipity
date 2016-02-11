@@ -29,14 +29,14 @@
 <div id="article">
     <p><a class="reference external" href="http://rg3.github.io/youtube-dl/">youtube-dl</a> is a cool command-line program for downloading videos from a whole bunch of online video sites. It can also convert videos into audio files (courtesy of <tt class="docutils literal">ffmpeg</tt>).</p>
 <p>To install on Debian (<tt class="docutils literal">ffmpeg</tt> requires <a class="reference external" href="http://www.deb-multimedia.org/">deb-multimedia</a>) :</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install youtube-dl rtmpdump ffmpeg
+<div class="highlight"><pre>$ sudo apt-get install youtube-dl rtmpdump ffmpeg
 </pre></div>
 <p>Basic usage:</p>
-<div class="highlight"><pre><span class="nv">$ </span>youtube-dl https://www.youtube.com/watch?v<span class="o">=</span>SOMEiD
+<div class="highlight"><pre>$ youtube-dl https://www.youtube.com/watch?v<span class="o">=</span>SOMEiD
 </pre></div>
 <p>... will download the best quality copy (default) of the specified video hosted on YouTube to the current directory.</p>
 <p>To enable audio extraction with a few desirable pre-configured options I create a new <tt class="docutils literal"><span class="pre">youtube-dl-audio</span></tt> alias in <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt>:</p>
-<div class="highlight"><pre><span class="nb">alias </span>youtube-dl-audio<span class="o">=</span><span class="s1">&#39;youtube-dl $1 --output &quot;$HOME/audio/%(title)s-%(upload_date)s.%(ext)s&quot; --restrict-filenames --extract-audio --audio-format &quot;mp3&quot; --audio-quality &quot;0&quot;&#39;</span>
+<div class="highlight"><pre><span class="nb">alias</span> youtube-dl-audio<span class="o">=</span><span class="s1">&#39;youtube-dl $1 --output &quot;$HOME/audio/%(title)s-%(upload_date)s.%(ext)s&quot; --restrict-filenames --extract-audio --audio-format &quot;mp3&quot; --audio-quality &quot;0&quot;&#39;</span>
 </pre></div>
 <p>... using these options:</p>
 <dl class="docutils">
@@ -50,8 +50,8 @@
 <dd>set a value between 0-9 (lower equals better) for VBR or assign a specific bitrate (default is 5|128K)</dd>
 </dl>
 <p>Reload the config and extract audio from an online video:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">source</span> ~/.bashrc
-<span class="nv">$ </span>youtube-dl-audio https://www.youtube.com/watch?v<span class="o">=</span>SOMEiD
+<div class="highlight"><pre>$ <span class="nb">source</span> ~/.bashrc
+$ youtube-dl-audio https://www.youtube.com/watch?v<span class="o">=</span>SOMEiD
 </pre></div>
 <p>See <tt class="docutils literal">man <span class="pre">youtube-dl</span></tt> for more possibilities!</p>
 <p><strong>Update</strong></p>

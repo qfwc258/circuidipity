@@ -42,7 +42,7 @@
 <div class="section" id="prepare-the-microsd">
 <h2>0. Prepare the microSD</h2>
 <p>MicroSD card is prepared on a host running Debian. <a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst/releases/">Download</a> the latest <tt class="docutils literal"><span class="pre">raspbian-ua-netinst-vX.X.X.img.xz</span></tt> and flash the image to the card:</p>
-<div class="highlight"><pre><span class="c"># xzcat /path/to/raspbian-ua-netinst-&lt;latest-version-number&gt;.img.xz &gt; /dev/sdX &amp;&amp; sync</span>
+<div class="highlight"><pre><span class="c1"># xzcat /path/to/raspbian-ua-netinst-&lt;latest-version-number&gt;.img.xz &gt; /dev/sdX &amp;&amp; sync</span>
 </pre></div>
 </div>
 <div class="section" id="customize-the-install-optional">
@@ -73,12 +73,12 @@
 <div class="section" id="upgrade">
 <h2>3. Upgrade</h2>
 <p>Stable release of Raspbian (2015-07-03) is currently built on older Debian <tt class="docutils literal">wheezy</tt> packages. Upgrade to the <tt class="docutils literal">jessie/stable</tt> branch by first modifying <tt class="docutils literal">/etc/apt/sources.list</tt>:</p>
-<div class="highlight"><pre><span class="c"># cp /etc/apt/sources.list /etc/apt/sources.list.bak</span>
-<span class="c"># echo &quot;deb http://mirrordirector.raspbian.org/raspbian jessie main contrib non-free firmware rpi&quot; &gt; /etc/apt/sources.list</span>
-<span class="c"># echo &quot;deb http://archive.raspbian.org/raspbian jessie main&quot; &gt;&gt; /etc/apt/sources.list</span>
+<div class="highlight"><pre><span class="c1"># cp /etc/apt/sources.list /etc/apt/sources.list.bak</span>
+<span class="c1"># echo &quot;deb http://mirrordirector.raspbian.org/raspbian jessie main contrib non-free firmware rpi&quot; &gt; /etc/apt/sources.list</span>
+<span class="c1"># echo &quot;deb http://archive.raspbian.org/raspbian jessie main&quot; &gt;&gt; /etc/apt/sources.list</span>
 </pre></div>
 <p>Update the package lists and upgrade:</p>
-<div class="highlight"><pre><span class="c"># apt-get update &amp;&amp; apt-get -y dist-upgrade &amp;&amp; apt-get -y autoremove</span>
+<div class="highlight"><pre><span class="c1"># apt-get update &amp;&amp; apt-get -y dist-upgrade &amp;&amp; apt-get -y autoremove</span>
 </pre></div>
 <p>Reboot.</p>
 <p>Happy hacking!</p>
@@ -91,7 +91,7 @@
 </tbody>
 </table>
 <p>I poked around to see if there was something wonky with the microSD... first using <tt class="docutils literal">badlocks</tt> (read-only test):</p>
-<div class="highlight"><pre><span class="c"># badblocks -vs /dev/sdb</span>
+<div class="highlight"><pre><span class="c1"># badblocks -vs /dev/sdb</span>
 <span class="o">[</span>...<span class="o">]</span>
 79434
 79435
@@ -101,11 +101,11 @@
 Pass completed, <span class="m">6424</span> bad blocks found. <span class="o">(</span>6424/0/0 errors<span class="o">)</span>
 </pre></div>
 <p>Second test was creating/writing an image to the card (see <a class="reference external" href="http://projects.nuschkys.net/2012/05/15/testing-a-new-sd-card-under-linux/">&quot;Testing a new SD card under Linux&quot;</a>) but it bombed right away:</p>
-<div class="highlight"><pre><span class="c"># dd if=/dev/urandom of=test_sd.tmp bs=1024 count=8000000</span>
+<div class="highlight"><pre><span class="c1"># dd if=/dev/urandom of=test_sd.tmp bs=1024 count=8000000</span>
 8000000+0 records in
 8000000+0 records out
 <span class="m">8192000000</span> bytes <span class="o">(</span>8.2 GB<span class="o">)</span> copied, 597.98 s, 13.7 MB/s
-<span class="c"># dd if=test_sd.tmp of=/dev/sdb bs=1024 count=8000000</span>
+<span class="c1"># dd if=test_sd.tmp of=/dev/sdb bs=1024 count=8000000</span>
 dd: error writing ‘/dev/sdb’: Input/output error
 73017+0 records in
 73016+0 records out

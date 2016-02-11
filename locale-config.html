@@ -30,7 +30,7 @@
 <div class="section" id="default-locale">
 <h2>Default locale</h2>
 <p>Current setting for the default locale is stored in <tt class="docutils literal">/etc/default/locale</tt>.</p>
-<div class="highlight"><pre><span class="nv">$ </span>locale
+<div class="highlight"><pre>$ locale
 <span class="nv">LANG</span><span class="o">=</span>
 <span class="nv">LANGUAGE</span><span class="o">=</span>
 <span class="nv">LC_CTYPE</span><span class="o">=</span><span class="s2">&quot;POSIX&quot;</span>
@@ -50,7 +50,7 @@
 </div>
 <div class="section" id="locales-available">
 <h2>Locales available</h2>
-<div class="highlight"><pre><span class="nv">$ </span>locale -a
+<div class="highlight"><pre>$ locale -a
 C
 C.UTF-8
 POSIX
@@ -59,15 +59,15 @@ POSIX
 <div class="section" id="generate-locales">
 <h2>Generate locales</h2>
 <p>A list of locales to be built is stored in <tt class="docutils literal">/etc/locale.gen</tt>. Edit this file by [un]commenting the entries to [enable]disable locales and run <tt class="docutils literal">sudo <span class="pre">update-gen</span></tt>, or select which locales to build from an interactive menu by running ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo dpkg-reconfigure locales
+<div class="highlight"><pre>$ sudo dpkg-reconfigure locales
 </pre></div>
 </div>
 <div class="section" id="set-default-locale">
 <h2>Set default locale</h2>
-<div class="highlight"><pre><span class="nv">$ </span>sudo update-locale <span class="nv">LANG</span><span class="o">=</span>en_CA.UTF-8 <span class="nv">LANGUAGE</span><span class="o">=</span>en_CA:en
+<div class="highlight"><pre>$ sudo update-locale <span class="nv">LANG</span><span class="o">=</span>en_CA.UTF-8 <span class="nv">LANGUAGE</span><span class="o">=</span>en_CA:en
 </pre></div>
 <p>... and reboot.</p>
-<div class="highlight"><pre><span class="nv">$ </span>locale
+<div class="highlight"><pre>$ locale
 <span class="nv">LANG</span><span class="o">=</span>en_CA.UTF-8
 <span class="nv">LANGUAGE</span><span class="o">=</span>en_CA:en
 <span class="nv">LC_CTYPE</span><span class="o">=</span><span class="s2">&quot;en_CA.UTF-8&quot;</span>

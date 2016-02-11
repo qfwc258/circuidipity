@@ -28,29 +28,29 @@
 <div id="article">
     <p>An <strong>alias</strong> is useful for setting desirable options for a shell command or creating new commands using the structure <tt class="docutils literal">alias <span class="pre">name='string</span></tt>. Multiple commands can be placed on a single line by separating them with a semicolon <tt class="docutils literal">alias <span class="pre">name='command0;</span> command1; command2</tt>.</p>
 <p>Check for aliases already set in the environment:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">alias</span>
+<div class="highlight"><pre>$ <span class="nb">alias</span>
 </pre></div>
 <p>Remove the alias for command <tt class="docutils literal">foo</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">unalias </span>foo
+<div class="highlight"><pre>$ <span class="nb">unalias</span> foo
 </pre></div>
 <p>Create new aliases:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">alias </span><span class="nv">ls</span><span class="o">=</span><span class="s1">&#39;ls -aFlhv --color=auto&#39;</span>
-<span class="nv">$ </span><span class="nb">alias </span><span class="nv">dpkgg</span><span class="o">=</span><span class="s1">&#39;dpkg -l | grep&#39;</span>
-<span class="nv">$ </span><span class="nb">alias </span><span class="nv">aaa</span><span class="o">=</span><span class="s1">&#39;sudo apt-get update; sudo apt-get dist-upgrade; sudo apt-get autoremove&#39;</span>
-<span class="nv">$ </span><span class="nb">type </span>ls   <span class="c"># display information about a command</span>
+<div class="highlight"><pre>$ <span class="nb">alias</span> <span class="nv">ls</span><span class="o">=</span><span class="s1">&#39;ls -aFlhv --color=auto&#39;</span>
+$ <span class="nb">alias</span> <span class="nv">dpkgg</span><span class="o">=</span><span class="s1">&#39;dpkg -l | grep&#39;</span>
+$ <span class="nb">alias</span> <span class="nv">aaa</span><span class="o">=</span><span class="s1">&#39;sudo apt-get update; sudo apt-get dist-upgrade; sudo apt-get autoremove&#39;</span>
+$ <span class="nb">type</span> ls   <span class="c1"># display information about a command</span>
 ls is aliased to <span class="s1">&#39;ls -aFlhv --color=auto&#39;</span>
 </pre></div>
 <p>Aliases created at the prompt persist only for the duration of the current session. Make them permanent by adding them to <tt class="docutils literal"><span class="pre">$HOME/.bashrc</span></tt>. Examples:</p>
-<div class="highlight"><pre><span class="nb">alias </span><span class="nv">df</span><span class="o">=</span><span class="s1">&#39;df -hT&#39;</span>
-<span class="nb">alias </span><span class="nv">diff</span><span class="o">=</span><span class="s1">&#39;colordiff&#39;</span>
-<span class="nb">alias </span><span class="nv">dpkgg</span><span class="o">=</span><span class="s1">&#39;dpkg -l | grep&#39;</span>
-<span class="nb">alias </span><span class="nv">grep</span><span class="o">=</span><span class="s1">&#39;grep --color=auto&#39;</span>
-<span class="nb">alias </span><span class="nv">halt</span><span class="o">=</span><span class="s1">&#39;systemctl poweroff&#39;</span>
-<span class="nb">alias </span><span class="nv">mkdir</span><span class="o">=</span><span class="s1">&#39;mkdir -p -v&#39;</span>
-<span class="nb">alias </span><span class="nv">psg</span><span class="o">=</span><span class="s1">&#39;ps aux | grep&#39;</span>
-<span class="nb">alias pwd</span><span class="o">=</span><span class="s1">&#39;pwd -P&#39;</span>
-<span class="nb">alias </span><span class="nv">reboot</span><span class="o">=</span><span class="s1">&#39;systemctl reboot&#39;</span>
-<span class="nb">alias suspend</span><span class="o">=</span><span class="s1">&#39;systemctl suspend&#39;</span>
+<div class="highlight"><pre><span class="nb">alias</span> <span class="nv">df</span><span class="o">=</span><span class="s1">&#39;df -hT&#39;</span>
+<span class="nb">alias</span> <span class="nv">diff</span><span class="o">=</span><span class="s1">&#39;colordiff&#39;</span>
+<span class="nb">alias</span> <span class="nv">dpkgg</span><span class="o">=</span><span class="s1">&#39;dpkg -l | grep&#39;</span>
+<span class="nb">alias</span> <span class="nv">grep</span><span class="o">=</span><span class="s1">&#39;grep --color=auto&#39;</span>
+<span class="nb">alias</span> <span class="nv">halt</span><span class="o">=</span><span class="s1">&#39;systemctl poweroff&#39;</span>
+<span class="nb">alias</span> <span class="nv">mkdir</span><span class="o">=</span><span class="s1">&#39;mkdir -p -v&#39;</span>
+<span class="nb">alias</span> <span class="nv">psg</span><span class="o">=</span><span class="s1">&#39;ps aux | grep&#39;</span>
+<span class="nb">alias</span> <span class="nv">pwd</span><span class="o">=</span><span class="s1">&#39;pwd -P&#39;</span>
+<span class="nb">alias</span> <span class="nv">reboot</span><span class="o">=</span><span class="s1">&#39;systemctl reboot&#39;</span>
+<span class="nb">alias</span> <span class="nv">suspend</span><span class="o">=</span><span class="s1">&#39;systemctl suspend&#39;</span>
 </pre></div>
 <p>Happy hacking!</p>
 

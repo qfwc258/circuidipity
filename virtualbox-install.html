@@ -34,18 +34,18 @@
 </div>
 <div class="section" id="install-virtualbox-on-host">
 <h2>0. Install VirtualBox on HOST</h2>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install build-essential dkms module-assistant linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span>
-<span class="nv">$ </span>sudo apt-get install virtualbox virtualbox-dkms virtualbox-qt
+<div class="highlight"><pre>$ sudo apt-get install build-essential dkms module-assistant linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span>
+$ sudo apt-get install virtualbox virtualbox-dkms virtualbox-qt
 </pre></div>
 <p>Virtualbox kernel modules are built via <strong>Dynamic Kernel Module Support</strong> (<a class="reference external" href="http://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support">DKMS</a>). After installing the virtualbox packages the <tt class="docutils literal">vbox</tt> modules should be auto-built and -loaded:</p>
-<div class="highlight"><pre><span class="nv">$ </span>lsmod <span class="p">|</span> grep vbox
+<div class="highlight"><pre>$ lsmod <span class="p">|</span> grep vbox
 vboxpci                <span class="m">19066</span>  0
 vboxnetadp             <span class="m">13155</span>  0
 vboxnetflt             <span class="m">23571</span>  0
 vboxdrv               <span class="m">190057</span>  <span class="m">4</span> vboxnetflt,vboxnetadp,vboxpci
 </pre></div>
 <p>I add my USERNAME to the <tt class="docutils literal">vboxusers</tt> group:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo adduser USERNAME vboxusers
+<div class="highlight"><pre>$ sudo adduser USERNAME vboxusers
 </pre></div>
 </div>
 <div class="section" id="create-the-debian-guest">
@@ -59,21 +59,21 @@ vboxdrv               <span class="m">190057</span>  <span class="m">4</span> vb
 <h3>On the GUEST</h3>
 <p><strong>Guest Additions</strong> provide extra features such as the ability to tweak display settings and add a shared folder that can accessed by both HOST and GUEST machines.</p>
 <p>Install on GUEST:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install virtualbox-guest-<span class="o">{</span>dkms,utils,x11<span class="o">}</span>
-<span class="nv">$ </span>sudo adduser USERNAME vboxsf
+<div class="highlight"><pre>$ sudo apt-get install virtualbox-guest-<span class="o">{</span>dkms,utils,x11<span class="o">}</span>
+$ sudo adduser USERNAME vboxsf
 </pre></div>
 <p>I ran into a situation with Debian 32-bit virtual machine where the installer created virtualbox kernel modules for <tt class="docutils literal"><span class="pre">linux-image-686-pae</span></tt> but not the <tt class="docutils literal">486</tt> kernel I ended up using. Confirm that the current kernel has the necessary modules:</p>
-<div class="highlight"><pre><span class="nv">$ </span>modinfo /lib/modules/<span class="k">$(</span>uname -r<span class="k">)</span>/updates/dkms/vbox*
+<div class="highlight"><pre>$ modinfo /lib/modules/<span class="k">$(</span>uname -r<span class="k">)</span>/updates/dkms/vbox*
 </pre></div>
 <p>If they are missing like they were for me ... use DKMS to build them:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install build-essential dkms module-assistant linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span>
-<span class="nv">$ </span>sudo m-a prepare
+<div class="highlight"><pre>$ sudo apt-get install build-essential dkms module-assistant linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span>
+$ sudo m-a prepare
 </pre></div>
 <p>If the virtualbox modules need to be rebuilt for any reason for the running kernel:</p>
-<div class="highlight"><pre><span class="nv">$ </span>uname -r <span class="p">|</span> sudo xargs -n1 /usr/lib/dkms/dkms_autoinstaller start
+<div class="highlight"><pre>$ uname -r <span class="p">|</span> sudo xargs -n1 /usr/lib/dkms/dkms_autoinstaller start
 </pre></div>
 <p>Reboot GUEST and <tt class="docutils literal">vbox</tt> drivers should now be loaded:</p>
-<div class="highlight"><pre><span class="nv">$ </span>lsmod <span class="p">|</span> grep vbox
+<div class="highlight"><pre>$ lsmod <span class="p">|</span> grep vbox
 vboxguest
 vboxsf
 vboxvideo
@@ -87,7 +87,7 @@ vboxvideo
 <p>Tweak display settings by going to the Virtualbox <tt class="docutils literal"><span class="pre">Machine-&gt;Settings...-&gt;Display</span></tt> setting and move the slider to add more video memory and enable 3d acceleration.</p>
 <img alt="Display Settings" src="images/20121207-display.png" style="width: 662px; height: 502px;" />
 <p>With VirtualBox guest additions the display and resolution can be changed when running X:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ps aux <span class="p">|</span> grep VBox
+<div class="highlight"><pre>$ ps aux <span class="p">|</span> grep VBox
 /usr/sbin/VBoxService
 /usr/bin/VBoxClient --clipboard
 /usr/bin/VBoxClient --display

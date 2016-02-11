@@ -40,8 +40,8 @@
 <h2>1. Configure OpenWRT for notification</h2>
 <p>Different routers configure DDNS differently but the goal is the same: the ability to notify the DDNS service whenever the IP address assigned by the ISP is modified. I am using an <a class="reference external" href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html">OpenWRT-powered router</a> and these are the steps to configure OpenWRT to use duckdns DDNS.</p>
 <p>Install DDNS packages:</p>
-<div class="highlight"><pre><span class="c"># opkg update</span>
-<span class="c"># opkg install luci-app-ddns ddns-scripts</span>
+<div class="highlight"><pre><span class="c1"># opkg update</span>
+<span class="c1"># opkg install luci-app-ddns ddns-scripts</span>
 </pre></div>
 <p>Use the customized settings from <a class="reference external" href="http://www.duckdns.org/install.jsp">duckdns.org/install</a> to configure <tt class="docutils literal">/etc/config/ddns</tt>:</p>
 <div class="highlight"><pre>config service          <span class="s2">&quot;duckdns&quot;</span>
@@ -60,13 +60,13 @@ option update_url       <span class="s2">&quot;http://www.duckdns.org/update?dom
 option use_syslog       <span class="s2">&quot;1&quot;</span>
 </pre></div>
 <p>Start daemon:</p>
-<div class="highlight"><pre><span class="c"># sh</span>
-<span class="c"># . /usr/lib/ddns/dynamic_dns_functions.sh</span>
-<span class="c"># start_daemon_for_all_ddns_sections &quot;wan&quot;</span>
-<span class="c"># exit</span>
+<div class="highlight"><pre><span class="c1"># sh</span>
+<span class="c1"># . /usr/lib/ddns/dynamic_dns_functions.sh</span>
+<span class="c1"># start_daemon_for_all_ddns_sections &quot;wan&quot;</span>
+<span class="c1"># exit</span>
 </pre></div>
 <p>Test:</p>
-<div class="highlight"><pre><span class="c"># /usr/lib/ddns/dynamic_dns_updater.sh duckdns</span>
+<div class="highlight"><pre><span class="c1"># /usr/lib/ddns/dynamic_dns_updater.sh duckdns</span>
 </pre></div>
 <p>In OpenWRT's <tt class="docutils literal">LuCI</tt> interface navigate to <tt class="docutils literal"><span class="pre">System-&gt;Startup</span></tt> and enable DDNS to ensure the router continues to send IP address changes after reboot and hotplug events.</p>
 <p>Source: <a class="reference external" href="http://wiki.openwrt.org/doc/howto/ddns.client">OpenWRT DDNS client</a></p>

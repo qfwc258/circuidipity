@@ -30,26 +30,26 @@
 <h2>0001</h2>
 <p><tt class="docutils literal">Iceweasel</tt> alerts current flash was out-of-date and insecure -- Debian <tt class="docutils literal"><span class="pre">flashplugin-nonfree</span></tt> package does not auto-update.</p>
 <p><strong>Fix</strong> Run update:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo update-flashplugin-nonfree --install
+<div class="highlight"><pre>$ sudo update-flashplugin-nonfree --install
 </pre></div>
 </div>
 <div class="section" id="id2">
 <h2>0010</h2>
 <p>Simple method to make source compiles into <tt class="docutils literal">*.deb</tt> packages -- Use <tt class="docutils literal">checkinstall</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install checkinstall
+<div class="highlight"><pre>$ sudo apt-get install checkinstall
 </pre></div>
 <p>Compile and <tt class="docutils literal">checkinstall</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>./configure
-<span class="nv">$ </span>make
-<span class="nv">$ </span>sudo checkinstall make install
+<div class="highlight"><pre>$ ./configure
+$ make
+$ sudo checkinstall make install
 </pre></div>
 </div>
 <div class="section" id="id3">
 <h2>0011</h2>
 <p>PDF links opening in Chrome vs default browser Firefox -- Option <tt class="docutils literal"><span class="pre">gnome-www-browser</span></tt> checked before <tt class="docutils literal"><span class="pre">x-www-browser</span></tt>. Setting only the second option is not enough.</p>
 <p><strong>Fix</strong> Configure both options:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo update-alternatives --config gnome-www-browser
-<span class="nv">$ </span>sudo update-alternatives --config x-www-browser
+<div class="highlight"><pre>$ sudo update-alternatives --config gnome-www-browser
+$ sudo update-alternatives --config x-www-browser
 </pre></div>
 </div>
 <div class="section" id="id4">
@@ -60,9 +60,9 @@
 <li>find which package owns FILE: <tt class="docutils literal">dpkg <span class="pre">-S</span> /etc/FILE</tt></li>
 <li>find which package owns FILE (even if not installed):</li>
 </ul>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install apt-file
-<span class="nv">$ </span>apt-file update
-<span class="nv">$ </span>apt-file search /etc/FILE
+<div class="highlight"><pre>$ sudo apt-get install apt-file
+$ apt-file update
+$ apt-file search /etc/FILE
 </pre></div>
 </div>
 <div class="section" id="id5">
@@ -80,12 +80,12 @@
 <h2>0110</h2>
 <p>Clear the Bash cache of PATH to executables -- Originally installed <tt class="docutils literal">glances</tt> via <tt class="docutils literal"><span class="pre">apt-get</span></tt> to <tt class="docutils literal">/usr/bin/glances</tt>. Removed then re-installed via <tt class="docutils literal">pip</tt> to <tt class="docutils literal">/usr/local/bin/glances</tt>. Command would show in my PATH but - without explicit PATH defined - would try to execute (missing) file in <tt class="docutils literal">/usr/bin</tt>.</p>
 <p><strong>Fix</strong> Clear cache using <tt class="docutils literal">hash</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">type </span>glances
+<div class="highlight"><pre>$ <span class="nb">type</span> glances
 glances is hashed <span class="o">(</span>/usr/bin/glances<span class="o">)</span>
-<span class="nv">$ </span><span class="nb">hash</span> -d glances
-<span class="nv">$ </span><span class="nb">type </span>glances
+$ <span class="nb">hash</span> -d glances
+$ <span class="nb">type</span> glances
 glances is /usr/local/bin/glances
-<span class="nv">$ </span>glances
+$ glances
 </pre></div>
 </div>
 <div class="section" id="id7">
@@ -97,14 +97,14 @@ glances is /usr/local/bin/glances
 <div class="section" id="id8">
 <h2>1000</h2>
 <p>Configure a static IP address in Debian's <tt class="docutils literal">/etc/network/interfaces</tt>:</p>
-<div class="highlight"><pre><span class="c"># The primary network interface</span>
+<div class="highlight"><pre><span class="c1"># The primary network interface</span>
 auto eth0
-<span class="c">#iface eth0 inet dhcp</span>
+<span class="c1">#iface eth0 inet dhcp</span>
 iface eth0 inet static
-    address 192.168.1.88    <span class="c"># device ip</span>
+    address 192.168.1.88    <span class="c1"># device ip</span>
     netmask 255.255.255.0
-    gateway 192.168.1.1     <span class="c"># router ip</span>
-    dns-nameservers 192.168.1.1     <span class="c"># or &#39;8.8.8.8&#39; for google dns</span>
+    gateway 192.168.1.1     <span class="c1"># router ip</span>
+    dns-nameservers 192.168.1.1     <span class="c1"># or &#39;8.8.8.8&#39; for google dns</span>
 </pre></div>
 <p>Happy hacking!</p>
 </div>

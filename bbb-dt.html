@@ -31,7 +31,7 @@
 <h2>Device Tree and ARM</h2>
 <p>Device Tree (DT) support for ARM arrived in the 3.7 kernel (it has existed for years in the PowerPC and SPARC worlds). Basically it is a method for describing the underlying hardware to the Linux kernel so that the required drivers will be loaded.</p>
 <p>On the BeagleBone Black a <em>device tree source</em> (dts) file is written that describes a piece of hardware and a <em>device tree compiler</em> (dtc) transforms the instructions into a <em>device tree blob</em> (dtb) binary that can be used by the kernel. On the BBB there is a bunch of dtb binaries located in <tt class="docutils literal">/boot</tt> that describe the device to the kernel at boot time ...</p>
-<div class="highlight"><pre><span class="c"># ls /boot/*.dtb</span>
+<div class="highlight"><pre><span class="c1"># ls /boot/*.dtb</span>
 /boot/am335x-bone.dtb           /boot/am335x-tester.dtb    /boot/omap3-evm.dtb       /boot/omap4-panda.dtb
 /boot/am335x-boneblack.dtb  /boot/omap2420-h4.dtb      /boot/omap3-tobi.dtb  /boot/omap4-sdp.dtb
 /boot/am335x-evm.dtb            /boot/omap3-beagle-xm.dtb  /boot/omap4-panda-a4.dtb  /boot/omap4-var-som.dtb
@@ -45,7 +45,7 @@ Where this [Device Tree implementation] pays off for us, is in the development o
 <h2>Overlays</h2>
 <p>BBB also introduced the idea of <em>Device Tree Overlays</em>. Overlays allow the device tree that was accessed by the kernel at boot to be modified afterwards in userspace. If a new piece of hardware like a cape is added to BBB or the onboard header pins are initialized/re-configured an overlay can enable the modifications without having to reboot. On the default <em>Angstrom</em> Linux that ships with BBB there is a bunch of DT overlays already created and available for use in <tt class="docutils literal">/lib/firmware</tt>.</p>
 <p>A <em>cape manager</em> has been implemented to load and (in theory) unload overlays and <em>slots</em> is its interface and can show us what is currently loaded ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>cat /sys/devices/bone_capemgr.8/slots
+<div class="highlight"><pre>$ cat /sys/devices/bone_capemgr.8/slots
 0: 54:PF---
 1: 55:PF---
 2: 56:PF---
@@ -58,12 +58,12 @@ Where this [Device Tree implementation] pays off for us, is in the development o
 <div class="section" id="analog-inputs">
 <h2>Analog Inputs</h2>
 <p>An example of overlays in action is loading the BeagleBone Black's analog inputs and making the pins available for use. We use the SLOTS interface a lot so export the location to <tt class="docutils literal"><span class="pre">~/.profile</span></tt> ...</p>
-<div class="highlight"><pre><span class="c"># export SLOTS=/sys/devices/bone_capemgr.*/slots</span>
-<span class="c"># echo &#39;export SLOTS=/sys/devices/bone_capemgr.*/slots&#39; &gt;&gt; ~/.profile</span>
+<div class="highlight"><pre><span class="c1"># export SLOTS=/sys/devices/bone_capemgr.*/slots</span>
+<span class="c1"># echo &#39;export SLOTS=/sys/devices/bone_capemgr.*/slots&#39; &gt;&gt; ~/.profile</span>
 </pre></div>
 <p>BBB has a pre-configured DT overlay <tt class="docutils literal"><span class="pre">BB-ADC-00A0.dtbo</span></tt> for analog pins. Load the overlay (omitting the <tt class="docutils literal"><span class="pre">-00A0.dtbo</span></tt> bit) and see that $SLOTS registers a new cape and the kernel detects new hardware ...</p>
-<div class="highlight"><pre><span class="c"># echo BB-ADC &gt; $SLOTS</span>
-<span class="c"># cat $SLOTS</span>
+<div class="highlight"><pre><span class="c1"># echo BB-ADC &gt; $SLOTS</span>
+<span class="c1"># cat $SLOTS</span>
 0: 54:PF---
 1: 55:PF---
 2: 56:PF---
@@ -71,18 +71,18 @@ Where this [Device Tree implementation] pays off for us, is in the development o
 4: ff:P-O-L Bone-LT-eMMC-2G,00A0,Texas Instrument,BB-BONE-EMMC-2G
 5: ff:P-O-L Bone-Black-HDMI,00A0,Texas Instrument,BB-BONELT-HDMI
 7: ff:P-O-L Override Board Name,00A0,Override Manuf,BB-ADC
-<span class="c"># dmesg</span>
+<span class="c1"># dmesg</span>
 ...
 <span class="o">[</span>37166.391913<span class="o">]</span> bone-capemgr bone_capemgr.8: part_number <span class="s1">&#39;BB-ADC&#39;</span>, version <span class="s1">&#39;N/A&#39;</span>
-<span class="o">[</span>37166.392100<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c">#7: generic override</span>
+<span class="o">[</span>37166.392100<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c1">#7: generic override</span>
 <span class="o">[</span>37166.392151<span class="o">]</span> bone-capemgr bone_capemgr.8: bone: Using override eeprom data at slot 7
-<span class="o">[</span>37166.392204<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c">#7: &#39;Override Board Name,00A0,Override Manuf,BB-ADC&#39;</span>
-<span class="o">[</span>37166.392478<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c">#7: Requesting part number/version based &#39;BB-ADC-00A0.dtbo</span>
-<span class="o">[</span>37166.392536<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c">#7: Requesting firmware &#39;BB-ADC-00A0.dtbo&#39; for board-name &#39;Override Board Name&#39;, version &#39;00A0&#39;</span>
-<span class="o">[</span>37166.392605<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c">#7: dtbo &#39;BB-ADC-00A0.dtbo&#39; loaded; converting to live tree</span>
-<span class="o">[</span>37166.400854<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c">#7: #1 overlays</span>
+<span class="o">[</span>37166.392204<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c1">#7: &#39;Override Board Name,00A0,Override Manuf,BB-ADC&#39;</span>
+<span class="o">[</span>37166.392478<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c1">#7: Requesting part number/version based &#39;BB-ADC-00A0.dtbo</span>
+<span class="o">[</span>37166.392536<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c1">#7: Requesting firmware &#39;BB-ADC-00A0.dtbo&#39; for board-name &#39;Override Board Name&#39;, version &#39;00A0&#39;</span>
+<span class="o">[</span>37166.392605<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c1">#7: dtbo &#39;BB-ADC-00A0.dtbo&#39; loaded; converting to live tree</span>
+<span class="o">[</span>37166.400854<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c1">#7: #1 overlays</span>
 <span class="o">[</span>37166.423565<span class="o">]</span> bone-iio-helper helper.14: ready
-<span class="o">[</span>37166.426252<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c">#7: Applied #1 overlays.</span>
+<span class="o">[</span>37166.426252<span class="o">]</span> bone-capemgr bone_capemgr.8: slot <span class="c1">#7: Applied #1 overlays.</span>
 </pre></div>
 <p>The analog input pins are now available for use.</p>
 <p>Example: If you connect a photoresistor to BBB's <tt class="docutils literal">P9_32(1.8V)</tt> and <tt class="docutils literal">P9_34(AGND)</tt> and <tt class="docutils literal">P9_36(AIN5)</tt> pins you can measure light levels in <tt class="docutils literal">/sys/devices/ocp.2/helper.14/AIN5</tt> and <tt class="docutils literal"><span class="pre">/sys/devices/ocp.2/44e0d000.tscadc/tiadc/iio\:device0/in_voltage5_raw</span></tt>.</p>

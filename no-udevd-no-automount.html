@@ -29,11 +29,11 @@
     <p>Problem: Auto-mounting USB storage devices fails in <tt class="docutils literal">thunar</tt> file manager.</p>
 <p>I ran into a situation today where changing from <tt class="docutils literal">init 2</tt> -&gt; <tt class="docutils literal">init 1</tt> -&gt; <tt class="docutils literal">init 2</tt> failed to restart the udev daemon and rendered USB mounting non-functional.</p>
 <p><strong>FIX:</strong> Confirm <tt class="docutils literal">udevd</tt> is running and - if not - start the daemon:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ps ax <span class="p">|</span> grep udevd
-<span class="nv">$ </span>sudo service udev start
+<div class="highlight"><pre>$ ps ax <span class="p">|</span> grep udevd
+$ sudo service udev start
 </pre></div>
 <p>... and after plugging in a USB stick additional udisk activity is generated:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ps ax <span class="p">|</span> grep udisk <span class="p">|</span> awk <span class="s1">&#39;{print $5}&#39;</span>
+<div class="highlight"><pre>$ ps ax <span class="p">|</span> grep udisk <span class="p">|</span> awk <span class="s1">&#39;{print $5}&#39;</span>
 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
 /usr/lib/udisks2/udisksd
 </pre></div>

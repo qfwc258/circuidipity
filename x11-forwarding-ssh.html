@@ -36,31 +36,31 @@
 <div class="highlight"><pre>X11Forwarding yes
 </pre></div>
 <p>... and restart the server:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo systemctl restart sshd.service
+<div class="highlight"><pre>$ sudo systemctl restart sshd.service
 </pre></div>
 </div>
 <div class="section" id="on-the-client">
 <h3>On the client</h3>
 <p>X11 forwarding options can be configured system-wide in <tt class="docutils literal">/etc/ssh/ssh_config</tt> or per-user in <tt class="docutils literal"><span class="pre">~/.ssh/config</span></tt> or simply forward X on a connection-by-connection basis at login with the <tt class="docutils literal"><span class="pre">-X</span></tt> option:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ssh -X remote.host
+<div class="highlight"><pre>$ ssh -X remote.host
 </pre></div>
 <p>Some apps might require the <tt class="docutils literal">ForwardX11Trusted</tt> option to allow the full set of X functions from a <strong>trusted</strong> remote server:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ssh -Y remote.host
+<div class="highlight"><pre>$ ssh -Y remote.host
 </pre></div>
 <p><span class="warning">WARNING!</span> An intruder on the SSH server will be able to capture everything on the local screen and every keystroke with <tt class="docutils literal">ForwardX11Trusted</tt> enabled.</p>
 <p>If SSH has properly configured X11 forwarding it sets <tt class="docutils literal">$DISPLAY</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$DISPLAY</span>
+<div class="highlight"><pre>$ <span class="nb">echo</span> <span class="nv">$D</span>ISPLAY
 localhost:10.0
 </pre></div>
 <p>Launch an X app on the server and it opens on the local display:</p>
-<div class="highlight"><pre><span class="nv">$ </span>urxvt <span class="p">&amp;</span>
+<div class="highlight"><pre>$ urxvt <span class="p">&amp;</span>
 </pre></div>
 <p>Logging into a remote host just to run a single app can be overkill. Run one-off commands with the <tt class="docutils literal"><span class="pre">-f</span></tt> option which backgrounds the SSH client before running the app:</p>
-<div class="highlight"><pre><span class="nv">$ </span>ssh -fX remote.host urxvt
+<div class="highlight"><pre>$ ssh -fX remote.host urxvt
 </pre></div>
 <p>One interesting use I discovered for X11 forwarding is running the <tt class="docutils literal">rhythmbox</tt> music player. A limitation of X11 forwarding is that sound is not transmitted to the client's audio hardware. Turns out that is a <strong>feature</strong> on my home network setup because my speakers are connected to the server. I launch <tt class="docutils literal">rhythmbox</tt> on the server, display and <a class="reference external" href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html">control the player</a> on the client, and the <a class="reference external" href="https://www.youtube.com/watch?v=mZDYJYqcYK4">good and funky sounds</a> issue forth from the server!</p>
 <p>I create the <tt class="docutils literal">Jukebox</tt> alias in <tt class="docutils literal"><span class="pre">~/.bash_aliases</span></tt> to X11 forward the player as a one-off command:</p>
-<div class="highlight"><pre><span class="nb">alias </span><span class="nv">Jukebox</span><span class="o">=</span><span class="s1">&#39;ssh -fX remote.host rhythmbox&#39;</span>
+<div class="highlight"><pre><span class="nb">alias</span> <span class="nv">Jukebox</span><span class="o">=</span><span class="s1">&#39;ssh -fX remote.host rhythmbox&#39;</span>
 </pre></div>
 <p>Happy Hacking!</p>
 </div>

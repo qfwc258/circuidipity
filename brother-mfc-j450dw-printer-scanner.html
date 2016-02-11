@@ -33,7 +33,7 @@
 <div class="section" id="cups-sane">
 <h2>0. CUPS + SANE</h2>
 <p>Attach the Brother device to server:</p>
-<div class="highlight"><pre><span class="nv">$ </span>dmesg -t
+<div class="highlight"><pre>$ dmesg -t
 <span class="o">[</span>...snip...<span class="o">]</span>
 usb 5-1: new high-speed USB device number <span class="m">4</span> using ehci-pci
 usb 5-1: New USB device found, <span class="nv">idVendor</span><span class="o">=</span>04f9, <span class="nv">idProduct</span><span class="o">=</span>02fa
@@ -45,18 +45,18 @@ usblp 5-1:1.0: usblp0: USB Bidirectional printer dev <span class="m">4</span> <s
 usbcore: registered new interface driver usblp
 </pre></div>
 <p>Install CUPS (printer) and SANE (scanner) packages and grant (example) <tt class="docutils literal">username</tt> admin privileges:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install cups cups-bsd sane-utils libsane-extras
-<span class="nv">$ </span>sudo adduser username lp
-<span class="nv">$ </span>sudo adduser username lpadmin
-<span class="nv">$ </span>sudo adduser username scanner
+<div class="highlight"><pre>$ sudo apt-get install cups cups-bsd sane-utils libsane-extras
+$ sudo adduser username lp
+$ sudo adduser username lpadmin
+$ sudo adduser username scanner
 </pre></div>
 </div>
 <div class="section" id="brother-drivers">
 <h2>1. Brother drivers</h2>
 <p>Download the <strong>Driver Install Tool</strong> from <a class="reference external" href="http://support.brother.com/g/b/downloadtop.aspx?c=us&amp;lang=en&amp;prod=mfcj450dw_us">Brother MFC-J450DW Downloads</a> and install drivers:</p>
-<div class="highlight"><pre><span class="nv">$ </span>gunzip linux-brprinter-installer-*.gz
-<span class="nv">$ </span>sudo su
-<span class="c"># bash linux-brprinter-installer-2.0.0-1</span>
+<div class="highlight"><pre>$ gunzip linux-brprinter-installer-*.gz
+$ sudo su
+<span class="c1"># bash linux-brprinter-installer-2.0.0-1</span>
 Input model name -&gt;MFC-J450DW
 
 You are going to install following packages.
@@ -89,7 +89,7 @@ Test Print? <span class="o">[</span>y/N<span class="o">]</span> -&gt;y
 lpadmin -p MFCJ450DW -v usb://Brother/MFC-J450DW?serial<span class="o">=</span>BROH4F240529 -E
 Test Print? <span class="o">[</span>y/N<span class="o">]</span> -&gt;y
 
-<span class="nb">wait </span>5s.
+<span class="nb">wait</span> 5s.
 lpr -P MFCJ450DW /usr/share/cups/data/testprint
 You are going to install following packages.
     brscan4-0.4.2-1.i386.deb
@@ -105,41 +105,41 @@ Hit Enter/Return key.
 </pre></div>
 <p><strong>Problem:</strong> Scanner stuck in low-res mode using Linux scanner clients. <strong>Simple-scan</strong> would not scan above 300dpi and would throw constant error messages. <strong>Xsane</strong> would not scan at all and throw <tt class="docutils literal">out of memory</tt> errors. Turns out the Brother installer downloaded and installed an outdated, buggy scanner driver - <tt class="docutils literal"><span class="pre">brscan4-0.4.2-1.i386.deb</span></tt> - when a newer <tt class="docutils literal"><span class="pre">brscan4-0.4.3-*.i386.deb</span></tt> driver exists.</p>
 <p><strong>Fix:</strong> Remove the buggy driver and manually install the updated package:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo service saned stop
-<span class="nv">$ </span>sudo dpkg -P brscan4
-<span class="nv">$ </span>sudo dpkg -i brscan4-0.4.3-0.i386.deb
-<span class="nv">$ </span>sudo service saned start
+<div class="highlight"><pre>$ sudo service saned stop
+$ sudo dpkg -P brscan4
+$ sudo dpkg -i brscan4-0.4.3-0.i386.deb
+$ sudo service saned start
 </pre></div>
 <p>Source: <a class="reference external" href="http://technik.blogs.nde.ag/2013/12/06/brother-dcp-j925dw-problems-when-scanning-via-sane/">Problems when scanning via SANE</a></p>
 </div>
 <div class="section" id="printer-config">
 <h2>2. Printer config</h2>
 <p>Modify <tt class="docutils literal">/etc/cups/cupsd.conf</tt> to listen for connections from any device on the home network. Example for home server at ip address <tt class="docutils literal">192.168.1.88</tt>:</p>
-<div class="highlight"><pre><span class="c"># Only listen for connections from the local machine.</span>
-<span class="c">#Listen localhost:631</span>
+<div class="highlight"><pre><span class="c1"># Only listen for connections from the local machine.</span>
+<span class="c1">#Listen localhost:631</span>
 Listen *:631
 
-<span class="c"># Show shared printers on the local network.</span>
+<span class="c1"># Show shared printers on the local network.</span>
 Browsing On
 BrowseLocalProtocols dnssd
 
-<span class="c"># Web interface setting...</span>
+<span class="c1"># Web interface setting...</span>
 WebInterface Yes
 
-<span class="c"># Restrict access to the server...</span>
+<span class="c1"># Restrict access to the server...</span>
 &lt;Location /&gt;
   Order allow,deny
   Allow 192.168.1.*
 &lt;/Location&gt;
 
-<span class="c"># Restrict access to the admin pages...</span>
+<span class="c1"># Restrict access to the admin pages...</span>
 &lt;Location /admin&gt;
   Order allow,deny
   Allow 192.168.1.*
 &lt;/Location&gt;
 </pre></div>
 <p>Restart CUPS:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo service cups restart
+<div class="highlight"><pre>$ sudo service cups restart
 </pre></div>
 <p>Admin functions available at <tt class="docutils literal"><span class="pre">http://192.168.1.88:631/admin</span></tt>.</p>
 </div>
@@ -148,36 +148,36 @@ WebInterface Yes
 <div class="section" id="on-the-server">
 <h3>On the server</h3>
 <p>Detect attached device using <tt class="docutils literal"><span class="pre">sane-find-scanner</span></tt> and <tt class="docutils literal">scanimage</tt> (I find that if one fails discovery the other usually works):</p>
-<div class="highlight"><pre><span class="nv">$ </span>sane-find-scanner
+<div class="highlight"><pre>$ sane-find-scanner
 found USB scanner <span class="o">(</span><span class="nv">vendor</span><span class="o">=</span>0x04f9 <span class="o">[</span>Brother<span class="o">]</span>, <span class="nv">product</span><span class="o">=</span>0x02fa <span class="o">[</span>MFC-J450DW<span class="o">])</span> at libusb:005:00
-<span class="nv">$ </span>scanimage -L
+$ scanimage -L
 device <span class="sb">`</span>brother4:bus1<span class="p">;</span>dev1<span class="err">&#39;</span> is a Brother MFC-J450DW USB scanner
 </pre></div>
 <p>Modify <tt class="docutils literal">/etc/default/saned</tt> to run SANE as server:</p>
 <div class="highlight"><pre><span class="nv">RUN</span><span class="o">=</span>yes
 </pre></div>
 <p>Modify <tt class="docutils literal">/etc/sane.d/saned.conf</tt> to share the scanner over the network:</p>
-<div class="highlight"><pre><span class="c">## Access list</span>
+<div class="highlight"><pre><span class="c1">## Access list</span>
 192.168.1.0/24
 </pre></div>
 <p>Add entry for Brother scanners to <tt class="docutils literal"><span class="pre">/lib/udev/rules.d/40-libsane.rules</span></tt> at the point in file just before the bit <tt class="docutils literal"># The following rule will <span class="pre">disable...</span></tt>:</p>
-<div class="highlight"><pre><span class="c"># Brother scanners</span>
+<div class="highlight"><pre><span class="c1"># Brother scanners</span>
 ATTRS<span class="o">{</span>idVendor<span class="o">}==</span><span class="s2">&quot;04f9&quot;</span>, ENV<span class="o">{</span>libsane_matched<span class="o">}=</span><span class="s2">&quot;yes&quot;</span>
 
-<span class="c"># The following rule will disable...</span>
+<span class="c1"># The following rule will disable...</span>
 </pre></div>
 <p>Reboot server (simply restarting the <tt class="docutils literal">udev</tt> and <tt class="docutils literal">saned</tt> services fails to work):</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo reboot
+<div class="highlight"><pre>$ sudo reboot
 </pre></div>
 <p>Run a test:</p>
-<div class="highlight"><pre><span class="nv">$ </span>scanimage --format<span class="o">=</span>tiff &gt; test.tiff
+<div class="highlight"><pre>$ scanimage --format<span class="o">=</span>tiff &gt; test.tiff
 </pre></div>
 </div>
 <div class="section" id="on-the-client">
 <h3>On the client</h3>
 <p>Modify <tt class="docutils literal">/etc/sane.d/net.conf</tt> to point your device towards the server ip address:</p>
 <div class="highlight"><pre><span class="nv">connect_timeout</span> <span class="o">=</span> 60
-<span class="c">## saned hosts</span>
+<span class="c1">## saned hosts</span>
 192.168.1.88
 </pre></div>
 <p>Run a test using <tt class="docutils literal"><span class="pre">simple-scan</span></tt> included by default in Ubuntu.</p>

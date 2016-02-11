@@ -33,7 +33,7 @@
 <div class="section" id="cups">
 <h2>0. CUPS</h2>
 <p>Attach the Samsung device to server:</p>
-<div class="highlight"><pre><span class="nv">$ </span>dmesg -t
+<div class="highlight"><pre>$ dmesg -t
 <span class="o">[</span>...snip...<span class="o">]</span>
 usb 1-2: new high-speed USB device number <span class="m">6</span> using ehci-pci
 usb 1-2: New USB device found, <span class="nv">idVendor</span><span class="o">=</span>04e8, <span class="nv">idProduct</span><span class="o">=</span>328e
@@ -45,40 +45,40 @@ usblp 1-2:1.0: usblp0: USB Bidirectional printer dev <span class="m">6</span> <s
 usbcore: registered new interface driver usblp
 </pre></div>
 <p>Install CUPS (print server) and the <a class="reference external" href="https://www.openprinting.org/printer/Samsung/Samsung-CLP-310">recommended driver</a> <tt class="docutils literal">splix</tt> and grant (example) <tt class="docutils literal">username</tt> admin privileges:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install cups cups-bsd printer-driver-splix
-<span class="nv">$ </span>sudo adduser username lp
-<span class="nv">$ </span>sudo adduser username lpadmin
-<span class="nv">$ </span>sudo adduser username scanner
+<div class="highlight"><pre>$ sudo apt-get install cups cups-bsd printer-driver-splix
+$ sudo adduser username lp
+$ sudo adduser username lpadmin
+$ sudo adduser username scanner
 </pre></div>
 </div>
 <div class="section" id="printer-config">
 <h2>1. Printer config</h2>
 <p>Modify <tt class="docutils literal">/etc/cups/cupsd.conf</tt> to listen for connections from any device on the home network. Example for home server at ip address <tt class="docutils literal">192.168.1.88</tt>:</p>
-<div class="highlight"><pre><span class="c"># Only listen for connections from the local machine.</span>
-<span class="c">#Listen localhost:631</span>
+<div class="highlight"><pre><span class="c1"># Only listen for connections from the local machine.</span>
+<span class="c1">#Listen localhost:631</span>
 Listen *:631
 
-<span class="c"># Show shared printers on the local network.</span>
+<span class="c1"># Show shared printers on the local network.</span>
 Browsing On
 BrowseLocalProtocols dnssd
 
-<span class="c"># Web interface setting...</span>
+<span class="c1"># Web interface setting...</span>
 WebInterface Yes
 
-<span class="c"># Restrict access to the server...</span>
+<span class="c1"># Restrict access to the server...</span>
 &lt;Location /&gt;
   Order allow,deny
   Allow 192.168.1.*
 &lt;/Location&gt;
 
-<span class="c"># Restrict access to the admin pages...</span>
+<span class="c1"># Restrict access to the admin pages...</span>
 &lt;Location /admin&gt;
   Order allow,deny
   Allow 192.168.1.*
 &lt;/Location&gt;
 </pre></div>
 <p>Restart CUPS:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo service cups restart
+<div class="highlight"><pre>$ sudo service cups restart
 </pre></div>
 <p>Admin functions available at <tt class="docutils literal"><span class="pre">http://192.168.1.88:631/admin</span></tt>.</p>
 <p>Happy hacking!</p>

@@ -112,17 +112,17 @@
 <div class="section" id="eeepc">
 <h3>EEEPC</h3>
 <p>Install the <tt class="docutils literal"><span class="pre">eeepc-acpi-scripts</span></tt> to enable the function keys and the ability to suspend-to-RAM (sleep) ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install eeepc-acpi-scripts
+<div class="highlight"><pre>$ sudo apt-get install eeepc-acpi-scripts
 </pre></div>
 </div>
 <div class="section" id="power-management">
 <h3>Power management</h3>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install acpid acpi cpufrequtils pm-utils
+<div class="highlight"><pre>$ sudo apt-get install acpid acpi cpufrequtils pm-utils
 </pre></div>
 <p>Verify <tt class="docutils literal"><span class="pre">acpi-cpufreq</span></tt> module is loaded... otherwise <tt class="docutils literal">sudo modprobe <span class="pre">acpi-cpufreq</span></tt>.</p>
 <p>Output detailed information about the CPU(s) by running <tt class="docutils literal"><span class="pre">cpufreq-info</span></tt>.</p>
 <p>Settings are in <tt class="docutils literal">/sys/devices/system/cpu/cpu0/cpufreq</tt>. CPU speed can be monitored in real-time by running ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>watch grep <span class="se">\&quot;</span>cpu MHz<span class="se">\&quot;</span> /proc/cpuinfo
+<div class="highlight"><pre>$ watch grep <span class="se">\&quot;</span>cpu MHz<span class="se">\&quot;</span> /proc/cpuinfo
 </pre></div>
 <p>Default scaling governor is <tt class="docutils literal">ondemand</tt>.</p>
 </div>
@@ -132,20 +132,20 @@
 <div class="highlight"><pre><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s2">&quot;quiet acpi_osi=Linux acpi_backlight=vendor&quot;</span>
 </pre></div>
 <p>Save your changes and run <tt class="docutils literal">sudo <span class="pre">update-grub2</span></tt>. Reboot... login... and run ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo <span class="sb">`</span><span class="nb">echo </span><span class="m">15</span> &gt; /sys/class/backlight/eeepc/brightness<span class="sb">`</span>
+<div class="highlight"><pre>$ sudo <span class="sb">`</span><span class="nb">echo</span> <span class="m">15</span> &gt; /sys/class/backlight/eeepc/brightness<span class="sb">`</span>
 </pre></div>
 </div>
 <div class="section" id="touchpad">
 <h3>Touchpad</h3>
 <p>By default the touchpad is limited to finger-tap=left-mouse-click. <em>HAL</em> and <em>fdi</em> files were previously used to enable more mouse-click and scrolling functions but their use is now deprecated... <em>udev</em> is the way to go now.</p>
 <p>Determine type of touchpad used in the 1001P ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>egrep -i <span class="s1">&#39;synap|alps|etps&#39;</span> /proc/bus/input/devices
+<div class="highlight"><pre>$ egrep -i <span class="s1">&#39;synap|alps|etps&#39;</span> /proc/bus/input/devices
 N: <span class="nv">Name</span><span class="o">=</span><span class="s2">&quot;SynPS/2 Synaptics TouchPad&quot;</span>
 </pre></div>
 <p>Use <tt class="docutils literal">xinput</tt> to determine the properties of the touchpad and add new functions ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xinput
-<span class="nv">$ </span>xinput --list <span class="p">|</span> grep Synaptic     <span class="c"># determine ``DEVICE_ID`` of the touchpad ... on the 1001P its ``id=13``)</span>
-<span class="nv">$ </span>xinput --list-props 13
+<div class="highlight"><pre>$ sudo apt-get install xinput
+$ xinput --list <span class="p">|</span> grep Synaptic     <span class="c1"># determine ``DEVICE_ID`` of the touchpad ... on the 1001P its ``id=13``)</span>
+$ xinput --list-props 13
 </pre></div>
 <p>Create a shell script using xinput to configure the touchpad for left-middle-right mouse clicks with finger taps and two-finger scrolling, save it in <tt class="docutils literal">~/bin</tt> and source it to run at login. On my 1001P running Fluxbox window manager I add the line <tt class="docutils literal">touchpad_config &amp;</tt> to <tt class="docutils literal"><span class="pre">~/.fluxbox/startup</span></tt>.</p>
 </div>
@@ -161,8 +161,8 @@ N: <span class="nv">Name</span><span class="o">=</span><span class="s2">&quot;Sy
 <h3>Hard drive management</h3>
 <p>I noticed a frequent clicking noise from the drive heads on my netbook. Digging online reveals discussion about over-aggressive power management settings on hard drives that rapidly mount/unmount/remount and gradually wear out the drive. Feedback suggests that laptop drives are good for roughly ~600000 <em>load_cycles</em>.</p>
 <p>To check the drive and alter management settings ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install smartmontools hdparm
-<span class="nv">$ </span>sudo smartctl -a /dev/sda <span class="p">|</span> egrep -i <span class="s1">&#39;Power_On_Hours|Load_Cycle_Count&#39;</span>
+<div class="highlight"><pre>$ sudo apt-get install smartmontools hdparm
+$ sudo smartctl -a /dev/sda <span class="p">|</span> egrep -i <span class="s1">&#39;Power_On_Hours|Load_Cycle_Count&#39;</span>
 </pre></div>
 <p>In my situation I felt <tt class="docutils literal">Load_Cycle_Count</tt> was increasing too rapidly and I found the <em>click-click-click</em> of the drive every few seconds a nuisance. I use <tt class="docutils literal">hdparm</tt> to set powersaving mode to less aggressive tactics... which eliminated the clicking <tt class="docutils literal">hdparm <span class="pre">-B</span> 254 /dev/sda</tt>.</p>
 <p>To make the change permanent edit <tt class="docutils literal">/etc/hdparm.conf</tt> by adding to the end of the file ...</p>

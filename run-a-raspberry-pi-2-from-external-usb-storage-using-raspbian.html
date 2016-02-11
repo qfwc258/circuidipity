@@ -45,8 +45,8 @@
 <div class="section" id="prepare-the-microsd">
 <h2>0. Prepare the microSD</h2>
 <p>MicroSD card is prepared on a host running Debian. <a class="reference external" href="https://github.com/debian-pi/raspbian-ua-netinst/releases/">Download</a> the latest <tt class="docutils literal"><span class="pre">raspbian-ua-netinst-vX.X.X.img.xz</span></tt> and flash image to the card (example <tt class="docutils literal">sdX</tt>):</p>
-<div class="highlight"><pre><span class="c"># apt-get install xz-utils</span>
-<span class="c"># xzcat /path/to/raspbian-ua-netinst-&lt;latest-version-number&gt;.img.xz &gt; /dev/sdX &amp;&amp; sync</span>
+<div class="highlight"><pre><span class="c1"># apt-get install xz-utils</span>
+<span class="c1"># xzcat /path/to/raspbian-ua-netinst-&lt;latest-version-number&gt;.img.xz &gt; /dev/sdX &amp;&amp; sync</span>
 </pre></div>
 </div>
 <div class="section" id="customize-the-install">
@@ -80,12 +80,12 @@
 <div class="section" id="upgrade">
 <h2>3. Upgrade</h2>
 <p>Stable release of Raspbian (2015-07-03) is currently built on older Debian <tt class="docutils literal">wheezy</tt> packages. Upgrade to the <tt class="docutils literal">jessie/stable</tt> branch by first modifying <tt class="docutils literal">/etc/apt/sources.list</tt>:</p>
-<div class="highlight"><pre><span class="c"># cp /etc/apt/sources.list /etc/apt/sources.list.bak</span>
-<span class="c"># echo &quot;deb http://mirrordirector.raspbian.org/raspbian jessie main contrib non-free firmware rpi&quot; &gt; /etc/apt/sources.list</span>
-<span class="c"># echo &quot;deb http://archive.raspbian.org/raspbian jessie main&quot; &gt;&gt; /etc/apt/sources.list</span>
+<div class="highlight"><pre><span class="c1"># cp /etc/apt/sources.list /etc/apt/sources.list.bak</span>
+<span class="c1"># echo &quot;deb http://mirrordirector.raspbian.org/raspbian jessie main contrib non-free firmware rpi&quot; &gt; /etc/apt/sources.list</span>
+<span class="c1"># echo &quot;deb http://archive.raspbian.org/raspbian jessie main&quot; &gt;&gt; /etc/apt/sources.list</span>
 </pre></div>
 <p>Update the package lists and upgrade:</p>
-<div class="highlight"><pre><span class="c"># apt-get update &amp;&amp; apt-get -y dist-upgrade &amp;&amp; apt-get -y autoremove</span>
+<div class="highlight"><pre><span class="c1"># apt-get update &amp;&amp; apt-get -y dist-upgrade &amp;&amp; apt-get -y autoremove</span>
 </pre></div>
 <p>Reboot.</p>
 </div>
@@ -96,7 +96,7 @@
 <li>sda1 - 24GB - <tt class="docutils literal">root</tt> - created by <tt class="docutils literal"><span class="pre">raspbian-ua-netinst</span></tt> using <tt class="docutils literal"><span class="pre">installer-config.txt</span></tt></li>
 <li>sda2 - remaining space - <tt class="docutils literal">home</tt></li>
 </ul>
-<div class="highlight"><pre><span class="c"># fdisk /dev/sda</span>
+<div class="highlight"><pre><span class="c1"># fdisk /dev/sda</span>
 
 Welcome to fdisk <span class="o">(</span>util-linux 2.25.2<span class="o">)</span>.
 Changes will remain in memory only, <span class="k">until</span> you decide to write them.
@@ -108,7 +108,7 @@ Disk /dev/sda: 931.5 GiB, <span class="m">1000204886016</span> bytes, <span clas
 Units: sectors of <span class="m">1</span> * <span class="nv">512</span> <span class="o">=</span> <span class="m">512</span> bytes
 Sector size <span class="o">(</span>logical/physical<span class="o">)</span>: <span class="m">512</span> bytes / <span class="m">512</span> bytes
 I/O size <span class="o">(</span>minimum/optimal<span class="o">)</span>: <span class="m">512</span> bytes / <span class="m">512</span> bytes
-Disklabel <span class="nb">type</span>: dos
+Disklabel type: dos
 Disk identifier: 0x00000000
 
 Device     Boot Start      End  Sectors  Size Id Type
@@ -117,7 +117,7 @@ Device     Boot Start      End  Sectors  Size Id Type
 
 Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: n
 Partition <span class="nb">type</span>
-<span class="nb">    </span>p   primary <span class="o">(</span><span class="m">1</span> primary, <span class="m">0</span> extended, <span class="m">3</span> free<span class="o">)</span>
+    p   primary <span class="o">(</span><span class="m">1</span> primary, <span class="m">0</span> extended, <span class="m">3</span> free<span class="o">)</span>
     e   extended <span class="o">(</span>container <span class="k">for</span> logical partitions<span class="o">)</span>
 Select <span class="o">(</span>default p<span class="o">)</span>: p
 Partition number <span class="o">(</span>2-4, default 2<span class="o">)</span>:
@@ -131,7 +131,7 @@ Disk /dev/sda: 931.5 GiB, <span class="m">1000204886016</span> bytes, <span clas
 Units: sectors of <span class="m">1</span> * <span class="nv">512</span> <span class="o">=</span> <span class="m">512</span> bytes
 Sector size <span class="o">(</span>logical/physical<span class="o">)</span>: <span class="m">512</span> bytes / <span class="m">512</span> bytes
 I/O size <span class="o">(</span>minimum/optimal<span class="o">)</span>: <span class="m">512</span> bytes / <span class="m">512</span> bytes
-Disklabel <span class="nb">type</span>: dos
+Disklabel type: dos
 Disk identifier: 0x00000000
 
 Device     Boot    Start        End    Sectors   Size Id Type
@@ -151,19 +151,19 @@ The kernel still uses the old table. The new table will be used at the next rebo
 <div class="section" id="move-home">
 <h2>5. Move home</h2>
 <p>Format new partition using <tt class="docutils literal">ext4</tt> filesystem:</p>
-<div class="highlight"><pre><span class="c"># mkfs.ext4 -E lazy_itable_init=0,lazy_journal_init=0 /dev/sda2</span>
+<div class="highlight"><pre><span class="c1"># mkfs.ext4 -E lazy_itable_init=0,lazy_journal_init=0 /dev/sda2</span>
 </pre></div>
 <p>Mount partition and move over any contents in <tt class="docutils literal">/home</tt>:</p>
-<div class="highlight"><pre><span class="c"># mount -t ext4 /dev/sda2 /mnt &amp;&amp; mv /home/* /mnt/ &amp;&amp; sync &amp;&amp; umount /mnt</span>
+<div class="highlight"><pre><span class="c1"># mount -t ext4 /dev/sda2 /mnt &amp;&amp; mv /home/* /mnt/ &amp;&amp; sync &amp;&amp; umount /mnt</span>
 </pre></div>
 <p>Configure <tt class="docutils literal">fstab</tt> and mount new location of <tt class="docutils literal">home</tt>:</p>
-<div class="highlight"><pre><span class="c"># echo &quot;/dev/sda2 /home ext4 noatime 0 2&quot; &gt;&gt; /etc/fstab &amp;&amp; mount /home</span>
+<div class="highlight"><pre><span class="c1"># echo &quot;/dev/sda2 /home ext4 noatime 0 2&quot; &gt;&gt; /etc/fstab &amp;&amp; mount /home</span>
 </pre></div>
 </div>
 <div class="section" id="static-address">
 <h2>6. Static address</h2>
 <p>A Raspberry Pi that is going to stay home and run as a server can be configured to use a <strong>static network address</strong>. Sample <tt class="docutils literal">/etc/network/interfaces</tt> modification that disables <tt class="docutils literal">dhcp</tt> and sets ip address <tt class="docutils literal">192.168.1.88</tt> and connects to a router (that handles DNS) at <tt class="docutils literal">192.168.1.1</tt>:</p>
-<div class="highlight"><pre><span class="c">#iface eth0 inet dhcp</span>
+<div class="highlight"><pre><span class="c1">#iface eth0 inet dhcp</span>
 auto eth0
 iface eth0 inet static
     address 192.168.1.88

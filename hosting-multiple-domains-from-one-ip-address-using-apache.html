@@ -31,8 +31,8 @@
 <p>This is my setup ...</p>
 <div class="section" id="step-0-install-apache">
 <h2>Step 0 - Install Apache</h2>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install apache2
-<span class="nv">$ </span>/etc/init.d/apache2 start
+<div class="highlight"><pre>$ sudo apt-get install apache2
+$ /etc/init.d/apache2 start
 </pre></div>
 <p>Confirm the web server is up-and-running by navigating to <a class="reference external" href="http://localhost/">localhost</a> ... You should now see:</p>
 <div class="highlight"><pre>It works!
@@ -51,15 +51,15 @@ The web server software is running but no content has been added, yet.
 <h2>Step 1 - Website directory</h2>
 <p>Create a directory for the website and grant ownership to USERNAME ...</p>
 <pre class="code bash literal-block">
-<span class="nv">$ </span>sudo mkdir /var/www/SITENAME
-<span class="nv">$ </span>sudo chown USERNAME:USERNAME /var/www/SITENAME
+$ sudo mkdir /var/www/SITENAME
+$ sudo chown USERNAME:USERNAME /var/www/SITENAME
 </pre>
 </div>
 <div class="section" id="step-2-virtual-host">
 <h2>Step 2 - Virtual host</h2>
 <p>Create a new virtual host configuration for the website by copying Apache's <tt class="docutils literal">default</tt> configuration to the new sitename ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo <span class="nb">cd</span> /etc/apache2/sites-available/
-<span class="nv">$ </span>sudo cp default SITENAME
+<div class="highlight"><pre>$ sudo <span class="nb">cd</span> /etc/apache2/sites-available/
+$ sudo cp default SITENAME
 </pre></div>
 <p>Edit the newly-created configuration to match the new website settings ...</p>
 <div class="highlight"><pre>&lt;VirtualHost *:80&gt;
@@ -75,8 +75,8 @@ ServerName SITENAME
     &lt;Directory /var/www/SITENAME/&gt;
 </pre></div>
 <p>Enable the new site in Apache ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo a2ensite SITENAME
-<span class="nv">$ </span>sudo /etc/init.d/apache2 restart
+<div class="highlight"><pre>$ sudo a2ensite SITENAME
+$ sudo /etc/init.d/apache2 restart
 </pre></div>
 <p>If you want to be able to view the website on the same localhost it is being served from ... modify <tt class="docutils literal">/etc/hosts</tt> by adding a <em>testing</em> domain to the localhost address ...</p>
 <div class="highlight"><pre>127.0.1.1       test.*sitename*
@@ -87,7 +87,7 @@ ServerName SITENAME
 <div class="section" id="step-3-extra-web-enabled-user-directory">
 <h2>Step 3 - Extra: Web-enabled user directory</h2>
 <p>Create a folder in a user's home directory with contents made available over the web ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>mkdir /home/USERNAME/public_html
+<div class="highlight"><pre>$ mkdir /home/USERNAME/public_html
 </pre></div>
 <p>Configure Apache to allow outside access to the folder by editing <tt class="docutils literal"><span class="pre">/etc/apache2/mods-available/userdir.conf</span></tt> ...</p>
 <div class="highlight"><pre>&lt;IfModule mod_userdir.c&gt;
@@ -96,8 +96,8 @@ UserDir disabled root
 UserDir enabled USERNAME
 </pre></div>
 <p>Enable the <tt class="docutils literal">userdir</tt> module and reload Apache ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo a2enmod userdir
-<span class="nv">$ </span>sudo /etc/init.d/apache2 restart
+<div class="highlight"><pre>$ sudo a2enmod userdir
+$ sudo /etc/init.d/apache2 restart
 </pre></div>
 <p>Navigate to <a class="reference external" href="http://localhost/~USERNAME_">http://localhost/~USERNAME_</a> to view the contents of <tt class="docutils literal">/home/USERNAME/public_html</tt> ... Outside your LAN a user would travel to <a class="reference external" href="http://YOUR_IP_ADDRESS/~USERNAME">http://YOUR_IP_ADDRESS/~USERNAME</a>.</p>
 </div>

@@ -33,8 +33,8 @@
 
 <span class="o">[</span>Service<span class="o">]</span>
 <span class="nv">Type</span><span class="o">=</span>forking
-<span class="c"># man systemd.service: &quot;If set to forking... it is recommended to also use the</span>
-<span class="c"># PIDFile= option, so that systemd can identify the main process of the daemon.&quot;</span>
+<span class="c1"># man systemd.service: &quot;If set to forking... it is recommended to also use the</span>
+<span class="c1"># PIDFile= option, so that systemd can identify the main process of the daemon.&quot;</span>
 <span class="nv">PIDFile</span><span class="o">=</span>/var/run/irqbalance.pid
 <span class="nv">ExecStart</span><span class="o">=</span>/usr/local/sbin/irqbalance --pid<span class="o">=</span>/var/run/irqbalance.pid
 
@@ -42,11 +42,11 @@
 <span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
 </pre></div>
 <p>Set the new service to be auto-started at boot:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo systemctl daemon-reload <span class="o">&amp;&amp;</span> sudo systemctl <span class="nb">enable </span>irqbalance.service
+<div class="highlight"><pre>$ sudo systemctl daemon-reload <span class="o">&amp;&amp;</span> sudo systemctl <span class="nb">enable</span> irqbalance.service
 Created symlink from /etc/systemd/system/multi-user.target.wants/irqbalance.service to /etc/systemd/system/irqbalance.service.
 </pre></div>
 <p>Launch daemon and inspect running service:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo systemctl start irqbalance.service <span class="o">&amp;&amp;</span> sudo systemctl status irqbalance
+<div class="highlight"><pre>$ sudo systemctl start irqbalance.service <span class="o">&amp;&amp;</span> sudo systemctl status irqbalance
 </pre></div>
 <p>Happy hacking!</p>
 <p>Source: <a class="reference external" href="https://wiki.archlinux.org/index.php/Systemd#Writing_unit_files">Writing systemd unit files</a></p>

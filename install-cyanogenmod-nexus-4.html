@@ -35,7 +35,7 @@
 <div class="section" id="download">
 <h2>0. Download</h2>
 <p>I install CyanogenMod from a host running Debian. Download <tt class="docutils literal">adb</tt> and <tt class="docutils literal">fastboot</tt> install tools:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install android-tools-adb android-tools-fastboot
+<div class="highlight"><pre>$ sudo apt-get install android-tools-adb android-tools-fastboot
 </pre></div>
 <p>Nexus 4 device is code-named <tt class="docutils literal">mako</tt>. Download:</p>
 <ul class="simple">
@@ -50,16 +50,16 @@
 <div class="section" id="connect-device">
 <h2>2. Connect device</h2>
 <p>Connect phone to host via USB:</p>
-<div class="highlight"><pre><span class="nv">$ </span>lsusb <span class="p">|</span> grep -i nexus
+<div class="highlight"><pre>$ lsusb <span class="p">|</span> grep -i nexus
 Bus <span class="m">001</span> Device 003: ID 18d1:4ee2 Google Inc. Nexus <span class="m">4</span> <span class="o">(</span>debug<span class="o">)</span>
-<span class="nv">$ </span>adb devices -l
+$ adb devices -l
 * daemon not running. starting it now on port <span class="m">5037</span> *
 * daemon started successfully *
 List of devices attached
 <span class="o">[</span>...<span class="o">]</span>       offline usb:1-12
 </pre></div>
 <p>Confirm <tt class="docutils literal">Allow usb debugging</tt> in pop-up on the phone. Re-run:</p>
-<div class="highlight"><pre><span class="nv">$ </span>adb devices -l
+<div class="highlight"><pre>$ adb devices -l
 List of devices attached
 <span class="o">[</span>...<span class="o">]</span>       device usb:1-12 product:occam model:Nexus_4 device:mako
 </pre></div>
@@ -67,36 +67,36 @@ List of devices attached
 <div class="section" id="unlock-bootloader">
 <h2>3. Unlock bootloader</h2>
 <p>Boot the device into <strong>fastboot</strong> mode:</p>
-<div class="highlight"><pre><span class="nv">$ </span>adb reboot bootloader
+<div class="highlight"><pre>$ adb reboot bootloader
 </pre></div>
 <p>Once device is in fastboot mode, verify host sees device and unlock:</p>
-<div class="highlight"><pre><span class="nv">$ </span>fastboot devices -l
+<div class="highlight"><pre>$ fastboot devices -l
 <span class="o">[</span>...<span class="o">]</span>       fastboot usb:1-12
-<span class="nv">$ </span>fastboot oem unlock
+$ fastboot oem unlock
 </pre></div>
 </div>
 <div class="section" id="install-twrp">
 <h2>4. Install TWRP</h2>
 <p>While in fastboot mode flash the TWRP recovery image:</p>
-<div class="highlight"><pre><span class="nv">$ </span>fastboot flash recovery twrp-VERSION-mako.img
+<div class="highlight"><pre>$ fastboot flash recovery twrp-VERSION-mako.img
 sending <span class="s1">&#39;recovery&#39;</span> <span class="o">(</span><span class="m">9028</span> KB<span class="o">)</span>...
 OKAY <span class="o">[</span>  0.287s<span class="o">]</span>
 writing <span class="s1">&#39;recovery&#39;</span>...
 OKAY <span class="o">[</span>  0.501s<span class="o">]</span>
-finished. total <span class="nb">time</span>: 0.787s
+finished. total time: 0.787s
 </pre></div>
 <p>Reboot the bootloader:</p>
-<div class="highlight"><pre><span class="nv">$ </span>fastboot reboot-bootloader
+<div class="highlight"><pre>$ fastboot reboot-bootloader
 rebooting into bootloader...
 OKAY <span class="o">[</span>  0.001s<span class="o">]</span>
-finished. total <span class="nb">time</span>: 0.001s
+finished. total time: 0.001s
 </pre></div>
 <p>Use the device volume keys to navigate to <strong>Recovery</strong> mode and power key to select. TWRP recovery starts. Tap <strong>Wipe</strong> and swipe to start <strong>Factory Reset</strong>.</p>
 </div>
 <div class="section" id="install-cyanogenmod">
 <h2>5. Install CyanogenMod</h2>
 <p>Copy the CyanogenMod distribution zip file into device:</p>
-<div class="highlight"><pre><span class="nv">$ </span>adb push cm-12.1-VERSION-NIGHTLY-mako.zip /sdcard
+<div class="highlight"><pre>$ adb push cm-12.1-VERSION-NIGHTLY-mako.zip /sdcard
 <span class="m">3753</span> KB/s <span class="o">(</span><span class="m">263171832</span> bytes in 68.465s<span class="o">)</span>
 </pre></div>
 <p>Return to TWRP main menu and tap <strong>Install</strong>. Search in file system for the freshly-installed zip and tap to select. Tap checkbox Zip file signature verification and swipe to confirm flash. The message <tt class="docutils literal">Successfull</tt> should appear. Tap <tt class="docutils literal">Reboot System</tt> and device boots into CyanogenMod. Yes!</p>
@@ -108,7 +108,7 @@ finished. total <span class="nb">time</span>: 0.001s
 <li>on the phone navigate to <tt class="docutils literal"><span class="pre">Settings-&gt;Security-&gt;Unknown</span> sources</tt> and tap to allow</li>
 <li><a class="reference external" href="https://f-droid.org/FDroid.apk">download the F-Droid app</a> to host and install the <tt class="docutils literal">apk</tt> to phone using <a class="reference external" href="https://developer.android.com/tools/help/adb.html#move">adb</a></li>
 </ul>
-<div class="highlight"><pre><span class="nv">$ </span>adb install /path/to/FDroid.apk
+<div class="highlight"><pre>$ adb install /path/to/FDroid.apk
 <span class="m">4373</span> KB/s <span class="o">(</span><span class="m">3942326</span> bytes in 0.880s<span class="o">)</span>
         pkg: /data/local/tmp/FDroid.apk
 Success

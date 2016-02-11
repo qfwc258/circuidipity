@@ -38,8 +38,8 @@ grub&gt; boot
 </pre></div>
 <p>Boot process begins, pauses for the LUKS passphrase prompt to unlock root, and makes it to the login screen. Good stuff.</p>
 <p>Examine <tt class="docutils literal">/etc/default/grub</tt> and everything looks OK. Update and <strong>reinstall grub</strong> to the MBR:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo update-grub
-<span class="nv">$ </span>sudo grub-install /dev/sda
+<div class="highlight"><pre>$ sudo update-grub
+$ sudo grub-install /dev/sda
 </pre></div>
 <p>Reboot and back in business!</p>
 <p>Source: <a class="reference external" href="https://help.ubuntu.com/community/Grub2/Troubleshooting#Post_Boot_Follow_Up">Grub 2 Troubleshooting - Post Boot Follow Up</a></p>

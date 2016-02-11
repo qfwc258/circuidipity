@@ -28,7 +28,7 @@
 <div id="article">
     <p>Create a hotkey-activated custom menu for favourite functions and applications.</p>
 <p>Copy Openbox's default <tt class="docutils literal">menu.xml</tt> and customize:</p>
-<div class="highlight"><pre><span class="nv">$ </span>cp /usr/share/lubuntu/openbox/menu.xml ~/.config/openbox/lubuntu-menu.xml
+<div class="highlight"><pre>$ cp /usr/share/lubuntu/openbox/menu.xml ~/.config/openbox/lubuntu-menu.xml
 </pre></div>
 <p>My <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-menu.xml">own menu</a> includes <tt class="docutils literal">lxpanelctl menu</tt>, search (using <strong>catfish</strong>), <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/ob-recent-files-pipemenu">Recent Files</a> sub-menu, screenshot utility (<strong>scrot</strong>), and logout.</p>
 <p>Create a key-combo in <tt class="docutils literal"><span class="pre">~/.config/openbox/lubuntu-rc.xml</span></tt> to activate the menu:</p>
@@ -40,7 +40,7 @@
 &lt;/keybind&gt;
 </pre></div>
 <p>Reload the new configuration:</p>
-<div class="highlight"><pre><span class="nv">$ </span>openbox --reconfigure
+<div class="highlight"><pre>$ openbox --reconfigure
 </pre></div>
 <p>Happy hacking!</p>
 <p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-menu.xml">lubuntu-menu.xml</a> + <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/home/username/.config/openbox/lubuntu-rc.xml">lubuntu-rc.xml</a> + <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/ob-recent-files-pipemenu">ob-recent-files-pipemenu</a> (github.com/vonbrownie), <a class="reference external" href="http://crunchbanglinux.org/wiki/configuring_the_openbox_menu">Configuring the Openbox Menu</a> (crunchbanglinux.org)</p>

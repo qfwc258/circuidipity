@@ -46,27 +46,27 @@
 <div class="section" id="remove-troublesome-packages">
 <h2>1. Remove troublesome packages</h2>
 <p>Take note of the dependencies also removed for later restoration:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get remove libpolkit-gobject-1-0:amd64 libpolkit-agent-1-0:amd64 libpolkit-backend-1-0:amd64 policykit-1
+<div class="highlight"><pre>$ sudo apt-get remove libpolkit-gobject-1-0:amd64 libpolkit-agent-1-0:amd64 libpolkit-backend-1-0:amd64 policykit-1
 </pre></div>
 </div>
 <div class="section" id="install-downgrade-packages">
 <h2>2. Install downgrade packages</h2>
 <p>Place the downgraded packages on hold to block <tt class="docutils literal"><span class="pre">apt-get</span></tt> from trying to upgrade again to newer (broken) versions:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo dpkg -i libpolkit-gobject-1-0_0.105-4_amd64.deb
-<span class="nv">$ </span>sudo dpkg -i libpolkit-agent-1-0_0.105-4_amd64.deb
-<span class="nv">$ </span>sudo dpkg -i libpolkit-backend-1-0_0.105-4_amd64.deb
-<span class="nv">$ </span>sudo dpkg -i policykit-1_0.105-4_amd64.deb
-<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;libpolkit-gobject-1-0:amd64 hold&quot;</span> <span class="p">|</span> sudo dpkg --set-selections
-<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;libpolkit-agent-1-0:amd64 hold&quot;</span> <span class="p">|</span> sudo dpkg --set-selections
-<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;libpolkit-backend-1-0:amd64 hold&quot;</span> <span class="p">|</span> sudo dpkg --set-selections
-<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;policykit-1 hold&quot;</span> <span class="p">|</span> sudo dpkg --set-selections
-<span class="nv">$ </span>dpkg get-selections <span class="p">|</span> grep <span class="s2">&quot;pol&quot;</span>  <span class="c"># confirm pkgs are now on hold</span>
+<div class="highlight"><pre>$ sudo dpkg -i libpolkit-gobject-1-0_0.105-4_amd64.deb
+$ sudo dpkg -i libpolkit-agent-1-0_0.105-4_amd64.deb
+$ sudo dpkg -i libpolkit-backend-1-0_0.105-4_amd64.deb
+$ sudo dpkg -i policykit-1_0.105-4_amd64.deb
+$ <span class="nb">echo</span> <span class="s2">&quot;libpolkit-gobject-1-0:amd64 hold&quot;</span> <span class="p">|</span> sudo dpkg --set-selections
+$ <span class="nb">echo</span> <span class="s2">&quot;libpolkit-agent-1-0:amd64 hold&quot;</span> <span class="p">|</span> sudo dpkg --set-selections
+$ <span class="nb">echo</span> <span class="s2">&quot;libpolkit-backend-1-0:amd64 hold&quot;</span> <span class="p">|</span> sudo dpkg --set-selections
+$ <span class="nb">echo</span> <span class="s2">&quot;policykit-1 hold&quot;</span> <span class="p">|</span> sudo dpkg --set-selections
+$ dpkg get-selections <span class="p">|</span> grep <span class="s2">&quot;pol&quot;</span>  <span class="c1"># confirm pkgs are now on hold</span>
 </pre></div>
 </div>
 <div class="section" id="restore-dependencies">
 <h2>3. Restore dependencies</h2>
 <p>My own system as example:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install accountsservice colord consolekit cups-pk-helper gnome-control-center network-manager-gnome <span class="se">\</span>
+<div class="highlight"><pre>$ sudo apt-get install accountsservice colord consolekit cups-pk-helper gnome-control-center network-manager-gnome <span class="se">\</span>
 packagekit packagekit-tools policykit-1-gnome upower xfce4-power-manager
 </pre></div>
 <p>Source: <a class="reference external" href="http://forums.debian.net/viewtopic.php?f=5&amp;t=114412">UPower Suspend/Hibernate: not authorized</a></p>

@@ -34,33 +34,33 @@
 <div class="section" id="install-media">
 <h2>0. Install media</h2>
 <p><a class="reference external" href="https://www.archlinux.org/download/">Download</a> the combined 32+64bit installer and flash the image to a USB stick:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo dd <span class="nv">bs</span><span class="o">=</span>4M <span class="k">if</span><span class="o">=</span>archlinux*-dual.iso <span class="nv">of</span><span class="o">=</span>/dev/sdX
+<div class="highlight"><pre>$ sudo dd <span class="nv">bs</span><span class="o">=</span>4M <span class="k">if</span><span class="o">=</span>archlinux*-dual.iso <span class="nv">of</span><span class="o">=</span>/dev/sdX
 </pre></div>
 </div>
 <div class="section" id="net-connection">
 <h2>1. Net connection</h2>
 <p>Connect the USB stick and boot the installer. Identify the name of the device net interfaces:</p>
-<div class="highlight"><pre><span class="c"># ip link</span>
+<div class="highlight"><pre><span class="c1"># ip link</span>
 </pre></div>
 <p>Chromebook wireless interface is <tt class="docutils literal">wlp1s0</tt>. Connect to an access point using <tt class="docutils literal">netctl</tt> and its interactive <tt class="docutils literal"><span class="pre">wifi-menu</span></tt> utility:</p>
-<div class="highlight"><pre><span class="c"># wifi-menu</span>
+<div class="highlight"><pre><span class="c1"># wifi-menu</span>
 </pre></div>
 </div>
 <div class="section" id="wipe-storage">
 <h2>2. Wipe storage</h2>
 <p>Secure wipe storage before installation (16GB SSD took 22-23 minutes):</p>
-<div class="highlight"><pre><span class="c"># cryptsetup open --type plain /dev/sdX container</span>
-<span class="c"># dd if=/dev/zero of=/dev/mapper/container</span>
+<div class="highlight"><pre><span class="c1"># cryptsetup open --type plain /dev/sdX container</span>
+<span class="c1"># dd if=/dev/zero of=/dev/mapper/container</span>
 </pre></div>
 <p>Upon completion close the container:</p>
-<div class="highlight"><pre><span class="c"># cryptsetup close /dev/mapper/container</span>
+<div class="highlight"><pre><span class="c1"># cryptsetup close /dev/mapper/container</span>
 </pre></div>
 <p>Source: <a class="reference external" href="https://wiki.archlinux.org/index.php/Dm-crypt/Drive_preparation">Dm-crypt drive preparation</a></p>
 </div>
 <div class="section" id="partition">
 <h2>3. Partition</h2>
 <p>Detect storage devices:</p>
-<div class="highlight"><pre><span class="c"># lsblk</span>
+<div class="highlight"><pre><span class="c1"># lsblk</span>
 </pre></div>
 <p>SSD identified as <tt class="docutils literal">sda</tt>. Use <tt class="docutils literal">gpt</tt> to create a 4 partition layout:</p>
 <ul class="simple">
@@ -70,7 +70,7 @@
 <li>sda4 - remaining space - root (encrypted)</li>
 </ul>
 <p>Normally I create a separate partition for <tt class="docutils literal">$HOME</tt> but on smaller storage devices I make a single encrypted <tt class="docutils literal">root</tt> and a (required) unencrypted <tt class="docutils literal">boot</tt>:</p>
-<div class="highlight"><pre><span class="c"># gdisk /dev/sda</span>
+<div class="highlight"><pre><span class="c1"># gdisk /dev/sda</span>
 o <span class="o">(</span>new partition table<span class="o">)</span>
 ...
 w
@@ -79,70 +79,70 @@ w
 <div class="section" id="encrypted-root">
 <h2>4. Encrypted root</h2>
 <p>Using above partition layout:</p>
-<div class="highlight"><pre><span class="c"># cryptsetup -y -v luksFormat /dev/sda4</span>
-<span class="c"># cryptsetup open /dev/sda4 cryptroot</span>
-<span class="c"># mkfs.ext4 /dev/mapper/cryptroot</span>
-<span class="c"># mount -t ext4 /dev/mapper/cryptroot /mnt</span>
+<div class="highlight"><pre><span class="c1"># cryptsetup -y -v luksFormat /dev/sda4</span>
+<span class="c1"># cryptsetup open /dev/sda4 cryptroot</span>
+<span class="c1"># mkfs.ext4 /dev/mapper/cryptroot</span>
+<span class="c1"># mount -t ext4 /dev/mapper/cryptroot /mnt</span>
 </pre></div>
 </div>
 <div class="section" id="boot">
 <h2>5. Boot</h2>
 <p>Setup:</p>
-<div class="highlight"><pre><span class="c"># mkfs.ext4 /dev/sda2</span>
-<span class="c"># mkdir /mnt/boot</span>
-<span class="c"># mount -t ext4 /dev/sda2 /mnt/boot</span>
+<div class="highlight"><pre><span class="c1"># mkfs.ext4 /dev/sda2</span>
+<span class="c1"># mkdir /mnt/boot</span>
+<span class="c1"># mount -t ext4 /dev/sda2 /mnt/boot</span>
 </pre></div>
 </div>
 <div class="section" id="install">
 <h2>6. Install</h2>
 <p>Install the Arch base system:</p>
-<div class="highlight"><pre><span class="c"># pacstrap -i /mnt base base-devel</span>
+<div class="highlight"><pre><span class="c1"># pacstrap -i /mnt base base-devel</span>
 </pre></div>
 </div>
 <div class="section" id="fstab">
 <h2>7. Fstab</h2>
 <p>Generate a base <tt class="docutils literal">/etc/fstab</tt> and modify:</p>
-<div class="highlight"><pre><span class="c"># genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab</span>
-<span class="c"># nano /mnt/etc/fstab</span>
+<div class="highlight"><pre><span class="c1"># genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab</span>
+<span class="c1"># nano /mnt/etc/fstab</span>
 </pre></div>
 </div>
 <div class="section" id="chroot">
 <h2>8. Chroot</h2>
 <p>Chroot into the freshly-installed Arch base system to configure:</p>
-<div class="highlight"><pre><span class="c"># arch-chroot /mnt /bin/bash</span>
+<div class="highlight"><pre><span class="c1"># arch-chroot /mnt /bin/bash</span>
 </pre></div>
 </div>
 <div class="section" id="locale">
 <h2>9. Locale</h2>
 <p>Configure a locale suitable for the region:</p>
-<div class="highlight"><pre><span class="c"># nano /etc/locale.gen</span>
+<div class="highlight"><pre><span class="c1"># nano /etc/locale.gen</span>
 ...
 en_CA.UTF-8 UTF-8
 ...
-<span class="c"># locale-gen</span>
-<span class="c"># echo LANG=en_CA.UTF-8 &gt; /etc/locale.conf</span>
-<span class="c"># export LANG=en_CA.UTF-8</span>
+<span class="c1"># locale-gen</span>
+<span class="c1"># echo LANG=en_CA.UTF-8 &gt; /etc/locale.conf</span>
+<span class="c1"># export LANG=en_CA.UTF-8</span>
 </pre></div>
 </div>
 <div class="section" id="time-zone">
 <h2>10. Time zone</h2>
 <p>Configure local time:</p>
-<div class="highlight"><pre><span class="c"># ln -s /usr/share/zoneinfo/Canada/Eastern /etc/localtime</span>
+<div class="highlight"><pre><span class="c1"># ln -s /usr/share/zoneinfo/Canada/Eastern /etc/localtime</span>
 </pre></div>
 </div>
 <div class="section" id="hardware-clock">
 <h2>11. Hardware clock</h2>
 <p>Set the hardware clock to UTC:</p>
-<div class="highlight"><pre><span class="c"># hwclock --systohc --utc</span>
+<div class="highlight"><pre><span class="c1"># hwclock --systohc --utc</span>
 </pre></div>
 </div>
 <div class="section" id="hostname">
 <h2>12. Hostname</h2>
 <p>Make a name for the new Arch installation:</p>
-<div class="highlight"><pre><span class="c"># echo myhostname &gt; /etc/hostname</span>
+<div class="highlight"><pre><span class="c1"># echo myhostname &gt; /etc/hostname</span>
 </pre></div>
 <p>... and modify <tt class="docutils literal">/etc/hosts</tt>:</p>
-<div class="highlight"><pre><span class="c">#&lt;ip-address&gt; &lt;hostname.domain.org&gt; &lt;hostname&gt;</span>
+<div class="highlight"><pre><span class="c1">#&lt;ip-address&gt; &lt;hostname.domain.org&gt; &lt;hostname&gt;</span>
 127.0.0.1 localhost.localdomain localhost myhostname
 ::1   localhost.localdomain localhost myhostname
 </pre></div>
@@ -151,7 +151,7 @@ en_CA.UTF-8 UTF-8
 <h2>13. Network</h2>
 <p>Chromebook wireless interface is an Atheros <tt class="docutils literal">AR9462</tt> using the <tt class="docutils literal">ath9k</tt> kernel module. It does not require separate firmware.</p>
 <p>Install wireless tools:</p>
-<div class="highlight"><pre><span class="c"># pacman -S iw wpa_supplicant dialog</span>
+<div class="highlight"><pre><span class="c1"># pacman -S iw wpa_supplicant dialog</span>
 </pre></div>
 <p><strong>Wait until after reboot</strong> to configure interface with <tt class="docutils literal"><span class="pre">wifi-menu</span></tt>.</p>
 </div>
@@ -161,26 +161,26 @@ en_CA.UTF-8 UTF-8
 <div class="highlight"><pre><span class="nv">HOOKS</span><span class="o">=</span><span class="s2">&quot;... encrypt ... filesystems ...&quot;</span>
 </pre></div>
 <p>Re-generate the initramfs image:</p>
-<div class="highlight"><pre><span class="c"># mkinitcpio -p linux</span>
+<div class="highlight"><pre><span class="c1"># mkinitcpio -p linux</span>
 </pre></div>
 </div>
 <div class="section" id="password">
 <h2>15. Password</h2>
 <p>Set root password:</p>
-<div class="highlight"><pre><span class="c"># passwd</span>
+<div class="highlight"><pre><span class="c1"># passwd</span>
 </pre></div>
 </div>
 <div class="section" id="bootloader">
 <h2>16. Bootloader</h2>
 <p>Download GRUB:</p>
-<div class="highlight"><pre><span class="c"># pacman -S grub os-prober</span>
+<div class="highlight"><pre><span class="c1"># pacman -S grub os-prober</span>
 </pre></div>
 <p>Configure <tt class="docutils literal">/etc/default/grub</tt> to handle encrypted root:</p>
 <div class="highlight"><pre><span class="nv">GRUB_CMDLINE_LINUX</span><span class="o">=</span><span class="s2">&quot;cryptdevice=/dev/sda4:cryptroot&quot;</span>
 </pre></div>
 <p>Install GRUB to storage device and auto-generate <tt class="docutils literal">grub.cfg</tt>:</p>
-<div class="highlight"><pre><span class="c"># grub-install --target=i386-pc --recheck /dev/sda</span>
-<span class="c"># grub-mkconfig -o /boot/grub/grub.cfg</span>
+<div class="highlight"><pre><span class="c1"># grub-install --target=i386-pc --recheck /dev/sda</span>
+<span class="c1"># grub-mkconfig -o /boot/grub/grub.cfg</span>
 </pre></div>
 </div>
 <div class="section" id="prepare-non-root-encrypted-partitions">
@@ -194,11 +194,11 @@ en_CA.UTF-8 UTF-8
 </div>
 <div class="section" id="unmount-and-reboot">
 <h2>18. Unmount and reboot</h2>
-<div class="highlight"><pre><span class="c"># exit</span>
-<span class="c"># umount /mnt/boot</span>
-<span class="c"># umount /mnt</span>
-<span class="c"># cryptsetup close /dev/mapper/cryptroot</span>
-<span class="c"># reboot</span>
+<div class="highlight"><pre><span class="c1"># exit</span>
+<span class="c1"># umount /mnt/boot</span>
+<span class="c1"># umount /mnt</span>
+<span class="c1"># cryptsetup close /dev/mapper/cryptroot</span>
+<span class="c1"># reboot</span>
 </pre></div>
 <p>Welcome to Arch. Happy hacking!</p>
 </div>

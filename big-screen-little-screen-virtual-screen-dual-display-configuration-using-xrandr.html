@@ -39,7 +39,7 @@
 </ul>
 <p>Running xrandr without any options will dump the state of the outputs, show existing modes for each of them, with a '+' after the preferred mode and a '*' after the current mode.</p>
 <p>Using my setup as an example... connecting my 22&quot; LCD to my netbook's VGA-port but leaving the external display powered off outputs:</p>
-<div class="highlight"><pre><span class="nv">$ </span>xrandr
+<div class="highlight"><pre>$ xrandr
 Screen 0: minimum <span class="m">320</span> x 200, current <span class="m">1024</span> x 600, maximum <span class="m">4096</span> x 4096
 VGA1 connected <span class="o">(</span>normal left inverted right x axis y axis<span class="o">)</span>
     1680x1050      60.0 +
@@ -62,17 +62,17 @@ LVDS1 connected 1024x600+0+0 <span class="o">(</span>normal left inverted right 
 <p><tt class="docutils literal">Xrandr</tt> correctly detects my attached external display <tt class="docutils literal">VGA1</tt> and my netbook's LCD <tt class="docutils literal">LVDS1</tt> running at its optimum setting. For the purposes of using the dual-displays to create a virtual desktop... recent work on <em>Kernel Mode Setting</em> <tt class="docutils literal">KMS</tt> and the latest Intel chips/drivers like the GMA 3150 allow a larger virtual display size (4096x4096) <em>but</em> the chip has hardware limitations when the display area exceeds 2048 pixels (horizontally or vertically).</p>
 <p><a class="reference external" href="https://bugzilla.redhat.com/show_bug.cgi?id=497069">Known issues and possible workarounds</a> when running a dual-display virtual desktop include limited and crash-prone 3D acceleration and Xvideo fails (black or empty video window). In the case of Xvideo... I experimented with the various <tt class="docutils literal"><span class="pre">-vo</span></tt> settings of <tt class="docutils literal">mplayer</tt> and found that running <tt class="docutils literal">mplayer <span class="pre">-vo</span> gl</tt> bypassed the problem.</p>
 <p>Now to create my dual-display virtual desktop with my external display on the left and my netbook on the right I run ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>xrandr --output LVDS1 --auto --output VGA1 --auto --left-of LVDS1
+<div class="highlight"><pre>$ xrandr --output LVDS1 --auto --output VGA1 --auto --left-of LVDS1
 </pre></div>
 <p>Using <tt class="docutils literal"><span class="pre">--auto</span></tt> prompts xrandr to select the optimum resolution for each display. Any supported resolution may also be set by using the <tt class="docutils literal"><span class="pre">--mode</span> resolution</tt> option. If the external display is to the right of the netbook I would change <tt class="docutils literal"><span class="pre">--left-of</span></tt> to <tt class="docutils literal"><span class="pre">--right-of</span></tt> ... in addition you arrange the displays in a top or bottom layout.</p>
 <p>If you would rather <em>mirror</em> (clone) the netbook's display on the external device (perhaps for using a projector connected to the VGA-port) ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>xrandr --output LVDS1 --mode 800x600 --output VGA1 --mode 800x600 --same-as LVDS1
+<div class="highlight"><pre>$ xrandr --output LVDS1 --mode 800x600 --output VGA1 --mode 800x600 --same-as LVDS1
 </pre></div>
 <p>There are many other options and details described in <tt class="docutils literal">man xrandr</tt> ... I also found <a class="reference external" href="http://www.thinkwiki.org/wiki/Xorg_RandR_1.2">http://www.thinkwiki.org/wiki/Xorg_RandR_1.2</a> and <a class="reference external" href="http://wiki.debian.org/XStrikeForce/HowToRandR12">http://wiki.debian.org/XStrikeForce/HowToRandR12</a> helpful.</p>
 <p>To preserve my xrandr configuration strings for future use... I added aliases to <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt> ...</p>
-<div class="highlight"><pre><span class="nb">alias </span><span class="nv">dsply2clone</span><span class="o">=</span><span class="s1">&#39;xrandr --output LVDS1 --mode 800x600 --output VGA1 --mode 800x600 --same-as LVDS1&#39;</span>
-<span class="nb">alias </span><span class="nv">dsply2left</span><span class="o">=</span><span class="s1">&#39;xrandr --output LVDS1 --auto --output VGA1 --auto --left-of LVDS1&#39;</span>
-<span class="nb">alias </span><span class="nv">dsply2right</span><span class="o">=</span><span class="s1">&#39;xrandr --output LVDS1 --auto --output VGA1 --auto --right-of LVDS1&#39;</span>
+<div class="highlight"><pre><span class="nb">alias</span> <span class="nv">dsply2clone</span><span class="o">=</span><span class="s1">&#39;xrandr --output LVDS1 --mode 800x600 --output VGA1 --mode 800x600 --same-as LVDS1&#39;</span>
+<span class="nb">alias</span> <span class="nv">dsply2left</span><span class="o">=</span><span class="s1">&#39;xrandr --output LVDS1 --auto --output VGA1 --auto --left-of LVDS1&#39;</span>
+<span class="nb">alias</span> <span class="nv">dsply2right</span><span class="o">=</span><span class="s1">&#39;xrandr --output LVDS1 --auto --output VGA1 --auto --right-of LVDS1&#39;</span>
 </pre></div>
 <p>I was really impressed how setting up a dual-display configuration in xrandr &quot;just worked&quot; running on recent hardware and Debian. Can't believe I never tried it sooner. I like it!</p>
 

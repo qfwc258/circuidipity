@@ -33,7 +33,7 @@
 <h2>Step 0 - Download</h2>
 <p>Unpack the Epson, load it up with ink and paper, then switch the printer back off. Do not connect the device via USB cable just yet. On the host computer running Debian:</p>
 <pre class="code bash literal-block">
-<span class="nv">$ </span>sudo apt-get install cups lsb libltdl7 sane-utils xsane
+$ sudo apt-get install cups lsb libltdl7 sane-utils xsane
 </pre>
 <p>Download printer and scanner packages from <a class="reference external" href="http://avasys.jp/eng/linux_driver/">Avasys</a> . On their Linux driver page... select your printer type and model. For the NX215 all-in-one I download:</p>
 <ul class="simple">
@@ -46,35 +46,35 @@
 <div class="section" id="step-1-install-print-drivers">
 <h2>Step 1 - Install print drivers</h2>
 <p>Attempting to install the print driver at this point will generate a complaint about a missing <tt class="docutils literal">libltdl3</tt> dependency and will result in a broken package. In Debian <tt class="docutils literal">stable</tt> the <tt class="docutils literal">libltdl3</tt> library has been superseded by <tt class="docutils literal">libltdl7</tt> and the Avasys package is hardcoded to look for the former. A way around this is to create a symlink before installing the drivers:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo ln -s /usr/lib/libltdl.so.7 /usr/lib/libltdl.so.3
+<div class="highlight"><pre>$ sudo ln -s /usr/lib/libltdl.so.7 /usr/lib/libltdl.so.3
 </pre></div>
 <p>Now install the <em>Photo Image Print System Lite</em> package:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo dpkg --ignore-depends<span class="o">=</span>libltdl3 -i pipslite_VERSION.deb
+<div class="highlight"><pre>$ sudo dpkg --ignore-depends<span class="o">=</span>libltdl3 -i pipslite_VERSION.deb
 </pre></div>
 <p>Copy the downloaded <em>PostScript Printer Description (PPD)</em> file to <tt class="docutils literal">/etc/cups/ppd</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo cp Epson-Stylus_NX215-pipslite-en.ppd /etc/cups/ppd/
-<span class="nv">$ </span>sudo chmod <span class="m">644</span> /etc/cups/ppd/Epson-Stylus_NX215-pipslite-en.ppd
-<span class="nv">$ </span>sudo /etc/init.d/cups restart
+<div class="highlight"><pre>$ sudo cp Epson-Stylus_NX215-pipslite-en.ppd /etc/cups/ppd/
+$ sudo chmod <span class="m">644</span> /etc/cups/ppd/Epson-Stylus_NX215-pipslite-en.ppd
+$ sudo /etc/init.d/cups restart
 </pre></div>
 </div>
 <div class="section" id="step-2-configure-cups">
 <h2>Step 2 - Configure CUPS</h2>
 <p>Now connect the NX215 via USB cable to the computer and switch on the printer. Running <tt class="docutils literal">dmesg</tt> on my desktop outputs:</p>
-<div class="highlight"><pre><span class="nv">$ </span>dmesg
+<div class="highlight"><pre>$ dmesg
 <span class="o">[</span>418676.456021<span class="o">]</span> usb 1-1: new high speed USB device using ehci_hcd and address 8
 <span class="o">[</span>418676.596366<span class="o">]</span> usb 1-1: New USB device found, <span class="nv">idVendor</span><span class="o">=</span>04b8, <span class="nv">idProduct</span><span class="o">=</span>084f
 <span class="o">[</span>418676.596370<span class="o">]</span> usb 1-1: New USB device strings: <span class="nv">Mfr</span><span class="o">=</span>1, <span class="nv">Product</span><span class="o">=</span>2, <span class="nv">SerialNumber</span><span class="o">=</span>3
 <span class="o">[</span>418676.596373<span class="o">]</span> usb 1-1: Product: USB2.0 MFP<span class="o">(</span>Hi-Speed<span class="o">)</span>
 <span class="o">[</span>418676.596376<span class="o">]</span> usb 1-1: Manufacturer: EPSON
 <span class="o">[</span>418676.596378<span class="o">]</span> usb 1-1: SerialNumber: 4C39544B3033343183
-<span class="o">[</span>418676.596487<span class="o">]</span> usb 1-1: configuration <span class="c">#1 chosen from 1 choice</span>
+<span class="o">[</span>418676.596487<span class="o">]</span> usb 1-1: configuration <span class="c1">#1 chosen from 1 choice</span>
 <span class="o">[</span>418676.604068<span class="o">]</span> usblp0: USB Bidirectional printer dev <span class="m">8</span> <span class="k">if</span> <span class="m">1</span> alt <span class="m">0</span> proto <span class="m">2</span> vid 0x04B8 pid 0x084F
 <span class="o">[</span>418676.605087<span class="o">]</span> scsi11 : SCSI emulation <span class="k">for</span> USB Mass Storage devices
 <span class="o">[</span>418676.605194<span class="o">]</span> usb-storage: device found at 8
 <span class="o">[</span>418676.605196<span class="o">]</span> usb-storage: waiting <span class="k">for</span> device to settle before scanning
 <span class="o">[</span>418681.604309<span class="o">]</span> usb-storage: device scan <span class="nb">complete</span>
 <span class="o">[</span>418681.606512<span class="o">]</span> scsi 11:0:0:0: Direct-Access     EPSON    Stylus Storage   1.00 PQ: <span class="m">0</span> ANSI: 2
-<span class="o">[</span>418681.607084<span class="o">]</span> sd 11:0:0:0: Attached scsi generic sg6 <span class="nb">type </span>0
+<span class="o">[</span>418681.607084<span class="o">]</span> sd 11:0:0:0: Attached scsi generic sg6 <span class="nb">type</span> 0
 <span class="o">[</span>418681.613113<span class="o">]</span> sd 11:0:0:0: <span class="o">[</span>sdf<span class="o">]</span> Attached SCSI removable disk
 </pre></div>
 <p>Kernel driver <em>usb-storage</em> is detecting the printer SD slot. It can be used to print photos directly from a memory card without using a computer. I have not yet tried this feature (and with the price of ink I doubt I will make use of it).</p>
@@ -87,12 +87,12 @@
 <div class="section" id="step-4-scanner">
 <h2>Step 4 - Scanner</h2>
 <p><tt class="docutils literal">Xsane</tt> is a popular Linux scanner tool with many options. For a simple front-end to xsane that is useful for basic scanning needs I installed the Avasys-sponsored <tt class="docutils literal">iscan</tt> package:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo dpkg -i iscan-data_VERSION.deb
-<span class="nv">$ </span>sudo dpkg --ignore-depends<span class="o">=</span>libltdl3 -i iscan_VERSION.deb
+<div class="highlight"><pre>$ sudo dpkg -i iscan-data_VERSION.deb
+$ sudo dpkg --ignore-depends<span class="o">=</span>libltdl3 -i iscan_VERSION.deb
 </pre></div>
 <p>Before you can scan as a non-privileged user... that user account needs to be added to the <tt class="docutils literal">lp</tt> and <tt class="docutils literal">scanner</tt> groups:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo adduser USERNAME lp
-<span class="nv">$ </span>sudo adduser USERNAME scanner
+<div class="highlight"><pre>$ sudo adduser USERNAME lp
+$ sudo adduser USERNAME scanner
 </pre></div>
 <p>Log out and back in again to update the user group list. Test the configuration by first running <tt class="docutils literal">xsane</tt>. If <tt class="docutils literal">xsane</tt> outputs an error message:</p>
 <div class="highlight"><pre>Failed to open device <span class="s1">&#39;epkowa:usb:001:008&#39;</span>:
@@ -103,7 +103,7 @@ Access to resource has been denied.
 <div class="section" id="step-5-modify-dpkg">
 <h2>Step 5 - Modify dpkg</h2>
 <p>Since I earlier installed <tt class="docutils literal">pipslite</tt> and <tt class="docutils literal">iscan</tt> by ignoring the <tt class="docutils literal">libltdl3</tt> dependency... the Debian package management tools will complain about broken packages every time I try to install something new. To fix this (thanks <a class="reference external" href="http://danson.grafidog.com/2010/02/epson-nx510-scanner-and-ubuntu-904.html">Dale</a>)... start by making a backup of <tt class="docutils literal">/var/lib/dpkg/status</tt> ...</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo cp /var/lib/dpkg/status /var/lib/dpkg/status.bak
+<div class="highlight"><pre>$ sudo cp /var/lib/dpkg/status /var/lib/dpkg/status.bak
 </pre></div>
 <p>Open a text editor and modify the entries for the <tt class="docutils literal">pipslite</tt> and <tt class="docutils literal">iscan</tt> packages by removing the reference to <tt class="docutils literal">libltdl3</tt>. After making this change Debian will no longer treat these packages as broken or try to remove them.</p>
 <p>Done! Good printer/scanner at a good price. I like it!</p>

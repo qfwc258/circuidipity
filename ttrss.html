@@ -39,24 +39,24 @@
 <div class="section" id="database">
 <h2>1. Database</h2>
 <p>Create a new PostgreSQL database to hold the content of RSS feeds. Launch the interactive console front-end <tt class="docutils literal">psql</tt> and create <tt class="docutils literal"><span class="pre">user:www-data</span></tt> <a class="footnote-reference" href="#id7" id="id3">[2]</a> and <tt class="docutils literal">database:ttrss</tt>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo -u postgres psql
-<span class="nv">postgres</span><span class="o">=</span><span class="c"># CREATE USER &quot;www-data&quot; WITH PASSWORD &#39;newpasswd&#39;;</span>
-<span class="nv">postgres</span><span class="o">=</span><span class="c"># CREATE DATABASE ttrss WITH OWNER &quot;www-data&quot;;</span>
-<span class="nv">postgres</span><span class="o">=</span><span class="c"># GRANT ALL PRIVILEGES ON DATABASE ttrss to &quot;www-data&quot;;</span>
-<span class="nv">postgres</span><span class="o">=</span><span class="c"># \quit</span>
+<div class="highlight"><pre>$ sudo -u postgres psql
+<span class="nv">postgres</span><span class="o">=</span><span class="c1"># CREATE USER &quot;www-data&quot; WITH PASSWORD &#39;newpasswd&#39;;</span>
+<span class="nv">postgres</span><span class="o">=</span><span class="c1"># CREATE DATABASE ttrss WITH OWNER &quot;www-data&quot;;</span>
+<span class="nv">postgres</span><span class="o">=</span><span class="c1"># GRANT ALL PRIVILEGES ON DATABASE ttrss to &quot;www-data&quot;;</span>
+<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \quit</span>
 </pre></div>
 <div class="section" id="peer-authentication">
 <h3>1.1 Peer authentication</h3>
 <p>Later when running the TTRSS <tt class="docutils literal">update.php</tt> script you may run into the error <tt class="docutils literal">Peer authentication failed for user</tt> . <strong>Fix:</strong> edit <tt class="docutils literal">/etc/postgresql/9.4/main/pg_hba.conf</tt> and change <tt class="docutils literal">peer</tt>:</p>
-<div class="highlight"><pre><span class="c"># &quot;local&quot; is for Unix domain socket connections only</span>
-<span class="nb">local   </span>all             all                                     peer
+<div class="highlight"><pre><span class="c1"># &quot;local&quot; is for Unix domain socket connections only</span>
+<span class="nb">local</span>   all             all                                     peer
 </pre></div>
 <p>... to <tt class="docutils literal">trust</tt>:</p>
-<div class="highlight"><pre><span class="c"># &quot;local&quot; is for Unix domain socket connections only</span>
-<span class="nb">local   </span>all             all                                     trust
+<div class="highlight"><pre><span class="c1"># &quot;local&quot; is for Unix domain socket connections only</span>
+<span class="nb">local</span>   all             all                                     trust
 </pre></div>
 <p>Reload server:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo systemctl restart postgresql
+<div class="highlight"><pre>$ sudo systemctl restart postgresql
 </pre></div>
 <p>Source: <a class="reference external" href="http://askubuntu.com/questions/274441/pg-connect-unable-to-connect-to-postgresql-server">Unable to connect to postgresql server</a></p>
 </div>
@@ -64,22 +64,22 @@
 <div class="section" id="ttrss">
 <h2>2. TTRSS</h2>
 <p>Download latest <tt class="docutils literal"><span class="pre">Tiny-Tiny-RSS-X.X.X.tar.gz</span></tt> from <a class="reference external" href="https://github.com/gothfox/Tiny-Tiny-RSS/releases">Releases</a>, unpack, and change permissions:</p>
-<div class="highlight"><pre><span class="nv">$ </span>tar xvzf Tiny-Tiny-RSS-X.X.X.tar.gz
-<span class="nv">$ </span>mv Tiny-Tiny-RSS-X.X.X ttrss
-<span class="nv">$ </span><span class="nb">cd </span>ttrss
-<span class="nv">$ </span>chmod -R <span class="m">777</span> cache/images/ cache/js/ cache/export/ cache/upload/ feed-icons/ lock/
+<div class="highlight"><pre>$ tar xvzf Tiny-Tiny-RSS-X.X.X.tar.gz
+$ mv Tiny-Tiny-RSS-X.X.X ttrss
+$ <span class="nb">cd</span> ttrss
+$ chmod -R <span class="m">777</span> cache/images/ cache/js/ cache/export/ cache/upload/ feed-icons/ lock/
 </pre></div>
 </div>
 <div class="section" id="nginx">
 <h2>3. Nginx</h2>
 <p>Move <tt class="docutils literal">ttrss</tt> directory into Nginx's <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">document root</a> directory (I use <tt class="docutils literal">~/html</tt>):</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mv ../ttrss ~/html/
+<div class="highlight"><pre>$ sudo mv ../ttrss ~/html/
 </pre></div>
 <p>Create a <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">server block</a> (virtual host) for TTRSS. Sample <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/ttrss</span></tt> <a class="footnote-reference" href="#id8" id="id4">[3]</a> configuration:</p>
 <div class="highlight"><pre>server <span class="o">{</span>
-    listen 80<span class="p">;</span> <span class="c">## listen for ipv4; this line is default and implied</span>
+    listen 80<span class="p">;</span> <span class="c1">## listen for ipv4; this line is default and implied</span>
 
-    root /home/USER/html/ttrss<span class="p">;</span> <span class="c">## Replace USER with your username</span>
+    root /home/USER/html/ttrss<span class="p">;</span> <span class="c1">## Replace USER with your username</span>
     index index.php<span class="p">;</span>
 
     access_log /var/log/nginx/ttrss_access.log<span class="p">;</span>
@@ -91,11 +91,11 @@
         index           index.php<span class="p">;</span>
     <span class="o">}</span>
 
-    location ~ <span class="se">\.</span>php<span class="nv">$ </span><span class="o">{</span>
-        try_files <span class="nv">$uri</span> <span class="o">=</span> 404<span class="p">;</span> <span class="c">#Prevents autofixing of path which could be used for exploit</span>
+    location ~ <span class="se">\.</span>php$ <span class="o">{</span>
+        try_files $<span class="nv">uri</span> <span class="o">=</span> 404<span class="p">;</span> <span class="c1">#Prevents autofixing of path which could be used for exploit</span>
         fastcgi_pass unix:/var/run/php5-fpm.sock<span class="p">;</span>
         fastcgi_index index.php<span class="p">;</span>
-        <span class="c">#include /etc/nginx/fastcgi_params;</span>
+        <span class="c1">#include /etc/nginx/fastcgi_params;</span>
         include /etc/nginx/fastcgi.conf<span class="p">;</span>
     <span class="o">}</span>
 
@@ -103,9 +103,9 @@
 </pre></div>
 <p><strong>Alternative:</strong> <a class="reference external" href="http://www.circuidipity.com/self-signed-ssl-certificate.html">Create a self-signed SSL certificate</a> and configure HTTPS access on port 443.</p>
 <p>Save changes and enable block:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /etc/nginx/sites-enabled
-<span class="nv">$ </span>sudo ln -s /etc/nginx/sites-available/ttrss
-<span class="nv">$ </span>sudo systemctl restart nginx
+<div class="highlight"><pre>$ <span class="nb">cd</span> /etc/nginx/sites-enabled
+$ sudo ln -s /etc/nginx/sites-available/ttrss
+$ sudo systemctl restart nginx
 </pre></div>
 </div>
 <div class="section" id="configure">
@@ -114,7 +114,7 @@
 <div class="highlight"><pre>192.168.1.88 rss.local
 </pre></div>
 <p>Navigate to <tt class="docutils literal"><span class="pre">http://rss.local</span></tt> and configure TTRSS:</p>
-<div class="highlight"><pre>Database <span class="nb">type</span>: <span class="o">[</span><span class="k">select</span> PostgreSQL<span class="o">]</span>
+<div class="highlight"><pre>Database type: <span class="o">[</span><span class="k">select</span> PostgreSQL<span class="o">]</span>
 Username: www-data
 Password: <span class="o">[</span>database password created earlier<span class="o">]</span>
 Database Name: ttrss
@@ -127,10 +127,10 @@ Port: 5432
 <div class="section" id="updates">
 <h2>5. Updates</h2>
 <p>Configure TTRSS to periodically update RSS feeds with new content. First, test included <tt class="docutils literal">update.php</tt> script:</p>
-<div class="highlight"><pre><span class="nv">$ </span>/usr/bin/php /home/USER/html/ttrss/update.php --feeds --quiet
+<div class="highlight"><pre>$ /usr/bin/php /home/USER/html/ttrss/update.php --feeds --quiet
 </pre></div>
 <p>If script returns no errors add a new job to <tt class="docutils literal">cron</tt> to run script periodically:</p>
-<div class="highlight"><pre><span class="nv">$ </span>crontab -e
+<div class="highlight"><pre>$ crontab -e
 </pre></div>
 <p>Sample TTRSS job:</p>
 <div class="highlight"><pre><span class="m">10</span> * * * * /usr/bin/php /home/USER/html/ttrss/update.php --feeds --quiet
