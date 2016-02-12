@@ -1,11 +1,11 @@
-============================
-Ubuntu 14.04 Minimal Install
-============================
+==============
+Minimal Ubuntu
+==============
 
 :date: 2014-07-07 01:23:00
-:tags: ubuntu, lubuntu, linux, luks, crypto
+:tags: ubuntu, linux
 :slug: ubuntu-trusty-install
-:modified: 2014-11-11 20:15:00
+:modified: 2016-02-11 18:48:00
 
 .. image:: images/ubuntuTrusty.png
     :alt: Ubuntu Trusty Tahr
@@ -13,9 +13,9 @@ Ubuntu 14.04 Minimal Install
     :width: 100px
     :height: 100px
 
-**Ubuntu 14.04 "Trusty Tahr"** is a `Long Term Support (LTS) <https://wiki.ubuntu.com/Releases>`_ release of the popular Linux operating system. I use Ubuntu's `minimal install image <https://help.ubuntu.com/community/Installation/MinimalCD>`_ to create a **lightweight, console-only base configuration** that can be customized for various tasks and alternate desktops.
+**Ubuntu 14.04 "Trusty Tahr"** is the latest `Long Term Support (LTS) <https://wiki.ubuntu.com/Releases>`_ release of the popular Linux operating system. I use Ubuntu's `minimal install image <https://help.ubuntu.com/community/Installation/MinimalCD>`_ to create a **console-only base configuration** that can be customized for various tasks and `alternate desktops <http://www.circuidipity.com/i3-tiling-window-manager.html>`_.
 
-Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire storage device divided into 3 partitions: a ``root`` partition, and `LUKS <https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup>`_ encrypted ``swap`` + ``home``. 
+Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire storage device divided into 3 partitions: a separate ``root`` partition, and `LUKS <https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup>`_ encrypted ``swap`` + ``home``. 
 
 Let's go!
 =========
@@ -23,12 +23,12 @@ Let's go!
 0. Prepare install media
 ------------------------
 
-Download the `64-bit trusty minimal installer <http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso>`_ (`32-bit <http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/mini.iso>`_ for older machines) and burn to CD or `flash the image <https://help.ubuntu.com/community/Installation/FromUSBStick>`_ to a USB stick. An alternative (my choice) is adding the image to a `USB stick with multiple Linux installers <http://www.circuidipity.com/multi-boot-usb.html>`_. Using the minimal console installer vs. the graphical installer provides more options during setup [1]_.
+Download the `64-bit trusty minimal installer <http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso>`_ (`32-bit <http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/mini.iso>`_ for older machines) and burn to CD or `flash the image <https://help.ubuntu.com/community/Installation/FromUSBStick>`_ to a USB stick. [1]_ Using the minimal console installer vs. the graphical installer provides more options during setup. [2]_
 
-1. Configure
-------------
+Minimal installer (requires network connection) downloads all the latest packages during setup.
 
-Connect the USB stick and boot the installer:
+1. Launch
+---------
 
 .. image:: images/screenshot/trustyInstall/100.png
     :align: center
@@ -90,7 +90,7 @@ Connect the USB stick and boot the installer:
     :width: 800px
     :height: 600px
 
-Contents of the Ubuntu minimal installer are now loaded into memory and the USB stick can safely be removed (recommended [2]_). 
+Contents of the installer are now loaded into memory and the USB stick can safely be removed. [3]_ 
 
 .. image:: images/screenshot/trustyInstall/110.png
     :alt: Full Name
@@ -137,7 +137,7 @@ Contents of the Ubuntu minimal installer are now loaded into memory and the USB 
 2. Partitions
 -------------
 
-In the example below I create 3 partitions on the disk:
+In the example below I create 3 partitions [4]_ on the disk:
 
 * sda1 is a 20GB ``root`` partition 
 * sda2 is a 1GB LUKS encrypted ``swap`` partition using a **random key**
@@ -434,11 +434,7 @@ If the hard disk has not been securely wiped prior to installing Ubuntu (using a
     :width: 800px
     :height: 600px
 
-Leave all tasks unmarked if you wish to start with a minimal, console-only base configuration ready for further customization. This task menu can be accessed post-install by running:
-
-.. code-block:: bash
-
-    $ sudo tasksel
+Leave all tasks unmarked if you wish to start with a minimal, console-only base configuration ready for further customization. [5]_
 
 .. image:: images/screenshot/trustyInstall/301.png
     :alt: Software selection
@@ -446,23 +442,7 @@ Leave all tasks unmarked if you wish to start with a minimal, console-only base 
     :width: 800px
     :height: 600px
 
-Or get started making a Linux home server:
-
-.. image:: images/screenshot/trustyInstall/301-1.png
-    :alt: Software selection
-    :align: center
-    :width: 800px
-    :height: 600px
-
-Perhaps install a lightweight desktop? I like `Lubuntu (Ubuntu + LXDE desktop) <http://www.circuidipity.com/tag-lubuntu.html>`_:
-
-.. image:: images/screenshot/trustyInstall/301-2.png
-    :alt: Software selection
-    :align: center
-    :width: 800px
-    :height: 600px
-
-More packages are downloaded and the installer makes its finishing touches:
+Standard system utilties are downloaded and the installer makes its finishing touches:
 
 .. image:: images/screenshot/trustyInstall/302.png
     :alt: GRUB
@@ -482,6 +462,9 @@ More packages are downloaded and the installer makes its finishing touches:
     :width: 800px
     :height: 600px
 
+4. First boot
+-------------
+
 System will display a passphrase prompt to unlock encrypted ``home`` partition:
 
 .. image:: images/screenshot/trustyInstall/305.png
@@ -496,11 +479,92 @@ System will display a passphrase prompt to unlock encrypted ``home`` partition:
     :width: 800px
     :height: 600px
 
+Login ... then run ``timedatectl`` to confirm system time+date is properly set.
+
+5. Network
+----------
+
+Check which network interfaces are detected and settings ...
+
+.. code-block:: bash
+
+    $ ip a
+    
+**Wired** interfaces are usually auto-configured by default and assigned an IP address courtesy of DHCP.
+
+To assign a **static** address, deactivate the wired interface and create a new entry in ``/etc/network/interfaces``. Sample entry for ``enp3s0`` ...
+
+.. code-block:: bash
+
+    # The primary network interface
+    auto enp3s0
+    #iface enp3s0 inet dhcp
+    iface enp3s0 inet static
+        address 192.168.1.88
+        netmask 255.255.255.0
+        gateway 192.168.1.1
+        dns-nameservers 192.168.1.1
+
+Bring up|down interface with ``sudo if{up,down} enp3s0``.
+
+Create a temporary **wireless** interface connection to WPA2 encrypted access points manually using ``wpa_supplicant`` + ``wpa_passphrase`` + ``dhclinet``. Sample setup of ``wlp1s0`` ...
+
+.. code-block:: bash
+
+    $ sudo ip link set wlp1s0 up            # bring up interface
+    $ iw dev wlp1s0 link                    # get link status
+    $ sudo iw dev wlp1s0 scan | grep SSID   # scan for access points
+    $ sudo wpa_supplicant -i wlp1s0 -c<(wpa_passphrase "MY_SSID" "MY_PASSPHRASE")   # connect to WPA/WPA2 ... add '-B' to background process
+    $ sudo dhclient wlp1s0      # obtain IP address
+
+More permanent configurations may be set in ``/etc/default/interfaces``. Sample setup [6]_ with a static IP address ...
+
+.. code-block:: bash
+
+    iface wlp1s0 inet static
+        address 192.168.1.77
+        netmask 255.255.255.0
+        gateway 192.168.1.1                                                              
+        wpa-ssid MY_SSID
+        wpa-psk MY_PASSPHRASE
+        dns-nameservers 8.8.8.8 8.8.4.4                                                  
+                                                                                     
+Alternative setup using DHCP ...
+
+.. code-block:: bash               
+                                                                                     
+    allow-hotplug wlp1s0
+    iface wlp1s0 inet dhcp
+        wpa-ssid MY_SSID
+        wpa-psk MY_PASSPHRASE                                       
+        dns-nameservers 8.8.8.8 8.8.4.4
+
+Once a link is established an optional network manager utility may be installed. Packages ``network-manager`` and ``network-manager-gnome`` provide the console ``nmcli`` and graphical ``nm-applet`` clients respectively ...
+
+.. code-block:: bash
+
+    $ sudo apt install network-manager 
+
+Comment out (deactivate) any entries in ``/etc/network/interfaces`` that will be managed by ``network-manager``.
+
+6. Where to go next ...
+-----------------------
+
+... is up to YOU. Yeehaw.
+
 Happy hacking!
 
 Notes
 -----
 
-.. [1] Specifically in this instance, the Ubuntu console installer provides a random key option for the encrypted swap partition.
+.. [1] An alternative is adding the image to a `USB stick with multiple Linux installers <http://www.circuidipity.com/multi-boot-usb.html>`_.
 
-.. [2] Partition editor may designate the USB stick as the primary (sda) storage device, which may lead to partitioning and fstab errors.
+.. [2] Specifically, the console installer provides a **random key** option for the encrypted swap partition.
+
+.. [3] Recommended: Otherwise the partitioning tool may designate the USB device as primary (sda) storage and lead to broken partition layouts.
+
+.. [4] For storage devices >=128GB I create separate ``root`` + ``swap`` + ``home`` partitions. Smaller devices get ``boot`` + ``swap`` + ``root`` partitions and note encrypted ``root`` **requires** an unencrypted ``boot``.
+
+.. [5] The task selection menu can be run post-install using ``sudo tasksel``.
+
+.. [6] Multiple wireless static IP address setups can be created with ``iface wlp1s0_NAME inet static`` and [de]activated with ``sudo if{up.down} wlp1s0=wlp1s0_NAME``.
