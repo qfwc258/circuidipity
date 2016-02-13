@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 19 Nov 2015 18:01:00 -0500</lastBuildDate><item><title>LPTHW Exercise 18-21: Functions, Variables, Return</title><link>http://www.circuidipity.com/lpthw-e18-21.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; How long will it take for Sebastiaan to pedal his bike to &lt;em&gt;Proxima Centauri&lt;/em&gt;?&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Circuidipity</title><link>http://www.circuidipity.com/</link><description></description><atom:link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 12 Feb 2016 23:13:00 -0500</lastBuildDate><item><title>LPTHW Exercise 18-21: Functions, Variables, Return</title><link>http://www.circuidipity.com/lpthw-e18-21.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; How long will it take for Sebastiaan to pedal his bike to &lt;em&gt;Proxima Centauri&lt;/em&gt;?&lt;/p&gt;
 &lt;p&gt;Code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;import sys
 import textwrap
@@ -682,11 +682,11 @@ $ sudo rsnapshot -t sync
 &lt;p&gt;If everything checks out OK go ahead and run:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;$ sudo rsnapshot sync &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo rsnapshot daily &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; rsnapshot du
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Automate backups by running (as root user) &lt;tt class="docutils literal"&gt;crontab &lt;span class="pre"&gt;-e&lt;/span&gt;&lt;/tt&gt; and create a job for &lt;tt class="docutils literal"&gt;rsnapshot&lt;/tt&gt;. Sample job:&lt;/p&gt;
+&lt;p&gt;Automate backups by modifying the sample cron file provided in &lt;tt class="docutils literal"&gt;/etc/cron.d/rsnapshot&lt;/tt&gt; and running jobs as root. Example config:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# m h  dom mon dow   command&lt;/span&gt;
-&lt;span class="m"&gt;50&lt;/span&gt; &lt;span class="m"&gt;23&lt;/span&gt; * * *     /usr/bin/rsnapshot sync &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; /usr/bin/rsnapshot daily
-&lt;span class="m"&gt;40&lt;/span&gt; &lt;span class="m"&gt;22&lt;/span&gt; * * &lt;span class="m"&gt;6&lt;/span&gt;     /usr/bin/rsnapshot weekly
-&lt;span class="m"&gt;30&lt;/span&gt; &lt;span class="m"&gt;21&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; * *     /usr/bin/rsnapshot monthly
+&lt;span class="m"&gt;50&lt;/span&gt; &lt;span class="m"&gt;23&lt;/span&gt; * * *     root    /usr/bin/rsnapshot sync &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; /usr/bin/rsnapshot daily
+&lt;span class="m"&gt;40&lt;/span&gt; &lt;span class="m"&gt;22&lt;/span&gt; * * &lt;span class="m"&gt;6&lt;/span&gt;     root    /usr/bin/rsnapshot weekly
+&lt;span class="m"&gt;30&lt;/span&gt; &lt;span class="m"&gt;21&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; * *     root    /usr/bin/rsnapshot monthly
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="backup-the-backup"&gt;
@@ -726,7 +726,7 @@ rsync --archive --hard-links --numeric-ids --delete --exclude&lt;span class="o"&
 &lt;p&gt;... and take my hard drive for &lt;a class="reference external" href="http://ttc.ca/Routes/General_Information/Maps/index.jsp"&gt;a ride on the subway&lt;/a&gt; to say hello to my offsite storage!&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 12 Aug 2015 01:27:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-08-12:incremental-backups-rsnapshot.html</guid><category>network</category><category>ssh</category><category>crypto</category><category>debian</category><category>linux</category><category>raspberry pi</category></item><item><title>Run remote X applications on a local display</title><link>http://www.circuidipity.com/x11-forwarding-ssh.html</link><description>&lt;p&gt;Run remote X applications on a local display with X11 forwarding over SSH.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 12 Feb 2016 23:13:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-08-12:incremental-backups-rsnapshot.html</guid><category>network</category><category>debian</category><category>linux</category><category>raspberry pi</category></item><item><title>Run remote X applications on a local display</title><link>http://www.circuidipity.com/x11-forwarding-ssh.html</link><description>&lt;p&gt;Run remote X applications on a local display with X11 forwarding over SSH.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;I give my &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Jessiebook's smallish amount of RAM&lt;/a&gt; a bit of a break by enlisting other machines on my home network to run X apps. Once &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH is properly configured&lt;/a&gt; it is easy to use X11 forwarding to have apps running on the server show up on the client's local display.&lt;/p&gt;

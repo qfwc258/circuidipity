@@ -25,6 +25,7 @@
 
 <!-- article -->
 <h1>Incremental backups</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Friday 12 February 2016</p>
 <div id="article">
     <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi Home Server Hack #3 .:</a> Make incremental and automatic backups of a home folder using <strong>rsnapshot + cron</strong> (and manual backups via <strong>public transit</strong>).</p>
 <div class="section" id="let-s-go">
@@ -82,11 +83,11 @@ $ sudo rsnapshot -t sync
 <p>If everything checks out OK go ahead and run:</p>
 <div class="highlight"><pre>$ sudo rsnapshot sync <span class="o">&amp;&amp;</span> sudo rsnapshot daily <span class="o">&amp;&amp;</span> rsnapshot du
 </pre></div>
-<p>Automate backups by running (as root user) <tt class="docutils literal">crontab <span class="pre">-e</span></tt> and create a job for <tt class="docutils literal">rsnapshot</tt>. Sample job:</p>
+<p>Automate backups by modifying the sample cron file provided in <tt class="docutils literal">/etc/cron.d/rsnapshot</tt> and running jobs as root. Example config:</p>
 <div class="highlight"><pre><span class="c1"># m h  dom mon dow   command</span>
-<span class="m">50</span> <span class="m">23</span> * * *     /usr/bin/rsnapshot sync <span class="o">&amp;&amp;</span> /usr/bin/rsnapshot daily
-<span class="m">40</span> <span class="m">22</span> * * <span class="m">6</span>     /usr/bin/rsnapshot weekly
-<span class="m">30</span> <span class="m">21</span> <span class="m">1</span> * *     /usr/bin/rsnapshot monthly
+<span class="m">50</span> <span class="m">23</span> * * *     root    /usr/bin/rsnapshot sync <span class="o">&amp;&amp;</span> /usr/bin/rsnapshot daily
+<span class="m">40</span> <span class="m">22</span> * * <span class="m">6</span>     root    /usr/bin/rsnapshot weekly
+<span class="m">30</span> <span class="m">21</span> <span class="m">1</span> * *     root    /usr/bin/rsnapshot monthly
 </pre></div>
 </div>
 <div class="section" id="backup-the-backup">
@@ -128,8 +129,6 @@ rsync --archive --hard-links --numeric-ids --delete --exclude<span class="o">=</
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ssh.html">ssh</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-crypto.html">crypto</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-raspberry-pi.html">raspberry pi</a>
