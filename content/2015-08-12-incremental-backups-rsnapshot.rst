@@ -4,7 +4,8 @@ Incremental backups
 
 :date: 2015-08-12 01:27:00
 :slug: incremental-backups-rsnapshot
-:tags: network, ssh, crypto, debian, linux, raspberry pi
+:tags: network, debian, linux, raspberry pi
+:modified: 2016-02-12 23:13:00
 
 `Raspberry Pi Home Server Hack #3 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Make incremental and automatic backups of a home folder using **rsnapshot + cron** (and manual backups via **public transit**).
 
@@ -79,14 +80,14 @@ If everything checks out OK go ahead and run:
 
     $ sudo rsnapshot sync && sudo rsnapshot daily && rsnapshot du                                          
                                                                                      
-Automate backups by running (as root user) ``crontab -e`` and create a job for ``rsnapshot``. Sample job:
+Automate backups by modifying the sample cron file provided in ``/etc/cron.d/rsnapshot`` and running jobs as root. Example config:
 
 .. code-block:: bash
 
     # m h  dom mon dow   command                                                         
-    50 23 * * *     /usr/bin/rsnapshot sync && /usr/bin/rsnapshot daily                  
-    40 22 * * 6     /usr/bin/rsnapshot weekly                                            
-    30 21 1 * *     /usr/bin/rsnapshot monthly 
+    50 23 * * *     root    /usr/bin/rsnapshot sync && /usr/bin/rsnapshot daily                  
+    40 22 * * 6     root    /usr/bin/rsnapshot weekly                                            
+    30 21 1 * *     root    /usr/bin/rsnapshot monthly 
 
 1. Backup the backup
 ====================
