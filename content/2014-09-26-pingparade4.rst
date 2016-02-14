@@ -4,7 +4,6 @@ Supercharge a home router using OpenWrt
 
 :date: 2014-09-26 21:10:00
 :slug: pingparade4
-:template: article-project
 :tags: router, openwrt, linux, network
 :modified: 2015-07-22 09:49:00
 
