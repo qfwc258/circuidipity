@@ -4,14 +4,15 @@ ThinkPad USB Keyboard with TrackPoint
 
 :date: 2015-07-15 16:14:00
 :slug: thinkpad-usb-keyboard-trackpoint
-:tags: debian, linux
+:tags: ubuntu, linux
+:modified: 2016-02-14 14:02:00
 
-An external ThinkPad keyboard minus the ThinkPad with the classic TrackPoint + Left/Middle/Right mouse buttons. Its attached to my Debian desktop and I want to change the behaviour of a few keys.
+An external ThinkPad keyboard minus the ThinkPad with the classic TrackPoint + Left/Middle/Right mouse buttons. Its attached to my Ubuntu desktop and I want to change the behaviour of a few keys.
 
 Let's go!
 =========
 
-Attach the keyboard:
+Attach the keyboard ...
 
 .. code-block:: bash
 
@@ -23,7 +24,7 @@ Attach the keyboard:
 
 ``Caps_Lock`` occupies a prime location and - seeing as I do not carry on many ALL CAPS conversations - the key can be repurposed for better use. I use ``xmodmap`` to modify the keymap and transform the key into ``BackSpace``.
 
-Retrieve current keymap (and the ``keycode`` for ``Caps_Lock``):
+Retrieve current keymap (and the ``keycode`` for ``Caps_Lock``) ...
 
 .. code-block:: bash
 
@@ -32,7 +33,7 @@ Retrieve current keymap (and the ``keycode`` for ``Caps_Lock``):
     keycode  66 = Caps_Lock NoSymbol Caps_Lock
     [...]
     
-Output for ``Caps_Lock`` using ``xev``:
+Output for ``Caps_Lock`` using ``xev`` ...
 
 .. code-block:: bash
 
@@ -45,13 +46,13 @@ Output for ``Caps_Lock`` using ``xev``:
 
 Making ``Caps_Lock`` into ``BackSpace`` is a 3-part process: **remap** the key, remove the **lock** on the key, and make it a **repeating** key.
 
-Test a new key modification in the current Xsession:
+Test a new key modification in the current Xsession ...
 
 .. code-block:: bash
  
     $ xmodmap -e "keycode 66 = BackSpace" && xmodmap -e "clear Lock" && xset r 66                                                                        
 
-Make the change sticky by adding the keymapping to ``~/.xmodmap``:
+Make the change sticky by adding the keymapping to ``~/.xmodmap`` ... [1]_
 
 .. code-block:: bash
 
@@ -59,13 +60,11 @@ Make the change sticky by adding the keymapping to ``~/.xmodmap``:
     keycode 66 = BackSpace                              
     clear Lock
 
-Modify ``~/.xinitrc`` to load keymap at ``startx``:
+Modify ``~/.xinitrc`` to load keymap at ``startx`` ...
 
 .. code-block:: bash
 
     xmodmap ~/.xmodmap && xset r 66                                   
-
-Sources: `.xmodmap <https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap>`_, `.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_
 
 1. Multimedia keys and xbindkeys
 ================================
@@ -106,8 +105,6 @@ I create a `standalone script <http://www.circuidipity.com/pavolume.html>`_ to c
 
 Add command ``xbindkeys`` to ``~/.xinitrc`` to load the new configuration at ``startx``.
 
-Sources: `.xbindkeysrc <https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc>`_, `paVolume <https://github.com/vonbrownie/homebin/blob/master/paVolume>`_
-
 2. TrackPoint
 =============
 
@@ -137,3 +134,8 @@ Test a new setting with ``xinput set-prop ID "Device Accel Constant Deceleration
 Make the change sticky by adding the command to ``~/.xinitrc``.
 
 Happy hacking!
+
+Notes
+-----
+
+.. [1] My `.xmodmap <https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.thinkpad_usb>`_, `.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_, and `.xbindkeysrc <https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.thinkpad_usb>`_
