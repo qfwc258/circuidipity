@@ -25,9 +25,9 @@
 
 <!-- article -->
 <h1>Chromebook to Lubuntubook</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Wednesday 08 July 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 14 February 2016</p>
 <div id="article">
-    <p><strong>Update:</strong> Now running <a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html">Debian 'Jessie'</a> on my Chromebook.</p>
+    <p><strong>Update:</strong> Currently using <a class="reference external" href="http://www.circuidipity.com/c720-ubuntubook.html">Ubuntu + i3 window manager</a> ... I like it!</p>
 <p>Replace <strong>Chrome OS</strong> permanently with <strong>Lubuntu 14.04 LTS Linux</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
 <img alt="Acer C720 Lubuntubook" class="align-right" src="images/c720-lubuntubook.png" style="width: 300px; height: 157px;" />
 <p>Running a <strong>full-featured Linux</strong> on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance using the LXDE desktop.</p>
@@ -157,7 +157,7 @@ $ sudo cp /usr/share/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-c
     Option          <span class="s2">&quot;TapButton3&quot;</span> <span class="s2">&quot;2&quot;</span>
 EndSection
 </pre></div>
-<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/X11/xorg.conf.d/50-c720-touchpad.conf">50-c720-touchpad.conf</a>, and pages for <a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics">Touchpad Synaptics</a> and the <a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration">C720</a> on <a class="reference external" href="https://wiki.archlinux.org/">ArchWiki</a></p>
+<p>See: <a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics">Touchpad Synaptics</a> and the <a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration">C720</a> on <a class="reference external" href="https://wiki.archlinux.org/">ArchWiki</a></p>
 </div>
 <div class="section" id="ssd">
 <h2>5. SSD</h2>
@@ -177,7 +177,7 @@ EndSection
 <p>After modifying <tt class="docutils literal">fstab</tt> update <tt class="docutils literal"><span class="pre">/boot/initrd.img-*</span></tt> by running:</p>
 <div class="highlight"><pre>$ sudo update-initramfs -u -k all
 </pre></div>
-<p>Source: <a class="reference external" href="http://www.linuxjournal.com/content/solid-state-drives-get-one-already">TRIM configuration on solid-state drives</a></p>
+<p>See: <a class="reference external" href="http://www.linuxjournal.com/content/solid-state-drives-get-one-already">TRIM configuration on solid-state drives</a></p>
 </div>
 <div class="section" id="suspend">
 <h2>6. Suspend</h2>
@@ -224,7 +224,7 @@ log_success_msg <span class="s2">&quot;Unbind ehci for preventing error&quot;</s
 <div class="highlight"><pre>$ sudo restart systemd-logind
 </pre></div>
 <p>Suspend now works reliably when triggered from Lubuntu's shutdown menu. Chromebook will go to sleep and pushing the power button/opening the lid will resume the system with the desktop locked and a password prompt <a class="footnote-reference" href="#id16" id="id8">[7]</a>.</p>
-<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/initramfs-tools/scripts/init-top/unbind_ehci">unbind_ehci</a> and <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/udev/rules.d/10_disable-ehci.rules">10_disable-ehci.rules</a>, <a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/ch8eq2o">C720 suspend tips</a>, and <a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/2evv1c/updating_ubuntu_kernel_headers_image_etc/ckaf6hx">configuring grub</a></p>
+<p>See: <a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/ch8eq2o">C720 suspend tips</a>, and <a class="reference external" href="https://www.reddit.com/r/chrubuntu/comments/2evv1c/updating_ubuntu_kernel_headers_image_etc/ckaf6hx">configuring grub</a></p>
 </div>
 <div class="section" id="keyboard-shortcuts">
 <h2>7. Keyboard Shortcuts</h2>
@@ -281,7 +281,7 @@ Alt + Right
 <div class="highlight"><pre>$ xbindkeys
 </pre></div>
 <p>Lubuntu auto-detects <tt class="docutils literal"><span class="pre">$HOME/.xbindkeysrc</span></tt>  and will run <tt class="docutils literal">xbindkeys</tt> on the next login.</p>
-<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/home/username/xbindkeysrc-chromebook">xbindkeysrc-chromebook</a>, <a class="reference external" href="https://wiki.archlinux.org/index.php/Xbindkeys">Xbindkeys</a>, and another sample <a class="reference external" href="https://github.com/alexpatel/dotfiles/blob/master/xbindkeysrc">Chromebook-friendly xbindkeysrc</a></p>
+<p>See: <a class="reference external" href="https://wiki.archlinux.org/index.php/Xbindkeys">Xbindkeys</a>, and another sample <a class="reference external" href="https://github.com/alexpatel/dotfiles/blob/master/xbindkeysrc">Chromebook-friendly xbindkeysrc</a></p>
 </div>
 <div class="section" id="power-key">
 <h3>7.2 Power Key</h3>
@@ -306,12 +306,11 @@ parm:           use_chanctx:Enable channel context <span class="k">for</span> co
 <p>Create <tt class="docutils literal">/etc/modprobe.d/ath9k.conf</tt> with the following options:</p>
 <div class="highlight"><pre>options ath9k <span class="nv">bt_ant_diversity</span><span class="o">=</span><span class="m">1</span> <span class="nv">ps_enable</span><span class="o">=</span>0
 </pre></div>
-<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_lubuntubook/etc/modprobe.d/ath9k.conf">ath9k.conf</a>, <a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k">ath9k wireless driver</a> and <a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex">bluetooth coexistence</a></p>
+<p>See: <a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k">ath9k wireless driver</a> and <a class="reference external" href="http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex">bluetooth coexistence</a></p>
 </div>
 <div class="section" id="helpful-resources">
 <h2>9. Helpful Resources</h2>
 <ul class="simple">
-<li>My personal <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_lubuntubook">Lubuntubook configurations</a></li>
 <li><a class="reference external" href="https://github.com/liangcj/AcerC720CrunchBang">CrunchBang Linux</a> on the Acer C720</li>
 <li>Arch Linux <a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook">C720 installation with useful post-install details</a></li>
 <li>Ongoing <a class="reference external" href="http://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/">discussion thread about configuring Chromebooks</a></li>
@@ -323,7 +322,7 @@ parm:           use_chanctx:Enable channel context <span class="k">for</span> co
 <table class="docutils footnote" frame="void" id="id10" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Device information <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_lubuntubook/doc">output of lshw, lspci, and lsusb</a>.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Device information <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_ubuntubook/doc">output of lshw, lspci, and lsusb</a>.</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id11" rules="none">

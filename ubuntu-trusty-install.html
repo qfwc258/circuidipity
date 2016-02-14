@@ -25,7 +25,7 @@
 
 <!-- article -->
 <h1>Minimal Ubuntu</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 11 February 2016</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 14 February 2016</p>
 <div id="article">
     <img alt="Ubuntu Trusty Tahr" class="align-left" src="images/ubuntuTrusty.png" style="width: 100px; height: 100px;" />
 <p><strong>Ubuntu 14.04 &quot;Trusty Tahr&quot;</strong> is the latest <a class="reference external" href="https://wiki.ubuntu.com/Releases">Long Term Support (LTS)</a> release of the popular Linux operating system. I use Ubuntu's <a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD">minimal install image</a> to create a <strong>console-only base configuration</strong> that can be customized for various tasks and <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">alternate desktops</a>.</p>
@@ -133,8 +133,22 @@
 <img alt="Login" class="align-center" src="images/screenshot/trustyInstall/306.png" style="width: 800px; height: 600px;" />
 <p>Login ... then run <tt class="docutils literal">timedatectl</tt> to confirm system time+date is properly set.</p>
 </div>
+<div class="section" id="grub">
+<h3>5. GRUB</h3>
+<p>After running a minimal install on my <a class="reference external" href="http://www.circuidipity.com/c720-ubuntubook.html">C720 Ubuntubook</a> (with LUKS- encrypted <tt class="docutils literal">home</tt>) I ran into this issue: <a class="reference external" href="https://bugs.launchpad.net/ubuntu/+source/cryptsetup/+bug/1375435">&quot;Black screen instead of password prompt for boot encryption&quot;</a>.</p>
+<p>I had to enter my LUKS passphrase blind and ALT+F1 to tty ... or when I tried removing the GRUB options <tt class="docutils literal">splash</tt> and/or <tt class="docutils literal">quiet</tt> I lost the ability to enter the passphrase at all and a <strong>hard reset</strong> was required.</p>
+<p><strong>Fix:</strong> Modify <tt class="docutils literal">/etc/default/grub</tt> ...</p>
+<div class="highlight"><pre><span class="c1"># Force the kernel to boot in normal text mode with &#39;=text&#39;</span>
+<span class="nv">GRUB_GFXPAYLOAD_LINUX</span><span class="o">=</span>text
+</pre></div>
+<p>... and update ...</p>
+<div class="highlight"><pre>$ sudo update-grub
+</pre></div>
+<p>Now it works! Chromebook currently is the only device I have run into this issue.</p>
+<p>See: <a class="reference external" href="https://www.gnu.org/software/grub/manual/html_node/gfxpayload.html">GNU gfxpayload</a></p>
+</div>
 <div class="section" id="network">
-<h3>5. Network</h3>
+<h3>6. Network</h3>
 <p>Check which network interfaces are detected and settings ...</p>
 <div class="highlight"><pre>$ ip a
 </pre></div>
@@ -179,7 +193,7 @@ iface wlp1s0 inet dhcp
 <p>Comment out (deactivate) any entries in <tt class="docutils literal">/etc/network/interfaces</tt> that will be managed by <tt class="docutils literal"><span class="pre">network-manager</span></tt>.</p>
 </div>
 <div class="section" id="where-to-go-next">
-<h3>6. Where to go next ...</h3>
+<h3>7. Where to go next ...</h3>
 <p>... is up to YOU. Yeehaw.</p>
 <p>Happy hacking!</p>
 </div>
