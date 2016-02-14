@@ -5,7 +5,7 @@ Minimal Ubuntu
 :date: 2014-07-07 01:23:00
 :tags: ubuntu, linux
 :slug: ubuntu-trusty-install
-:modified: 2016-02-11 18:48:00
+:modified: 2016-02-14 00:08:00
 
 .. image:: images/ubuntuTrusty.png
     :alt: Ubuntu Trusty Tahr
@@ -481,7 +481,31 @@ System will display a passphrase prompt to unlock encrypted ``home`` partition:
 
 Login ... then run ``timedatectl`` to confirm system time+date is properly set.
 
-5. Network
+5. GRUB
+-------
+
+After running a minimal install on my `C720 Ubuntubook <http://www.circuidipity.com/c720-ubuntubook.html>`_ (with LUKS- encrypted ``home``) I ran into this issue: `"Black screen instead of password prompt for boot encryption" <https://bugs.launchpad.net/ubuntu/+source/cryptsetup/+bug/1375435>`_.
+
+I had to enter my LUKS passphrase blind and ALT+F1 to tty ... or when I tried removing the GRUB options ``splash`` and/or ``quiet`` I lost the ability to enter the passphrase at all and a **hard reset** was required.
+
+**Fix:** Modify ``/etc/default/grub`` ...                                                    
+
+.. code-block:: bash
+
+    # Force the kernel to boot in normal text mode with '=text'                     
+    GRUB_GFXPAYLOAD_LINUX=text
+    
+... and update ...
+
+.. code-block:: bash
+
+    $ sudo update-grub
+
+Now it works! Chromebook currently is the only device I have run into this issue.
+
+See: `GNU gfxpayload <https://www.gnu.org/software/grub/manual/html_node/gfxpayload.html>`_
+
+6. Network
 ----------
 
 Check which network interfaces are detected and settings ...
@@ -547,7 +571,7 @@ Once a link is established an optional network manager utility may be installed.
 
 Comment out (deactivate) any entries in ``/etc/network/interfaces`` that will be managed by ``network-manager``.
 
-6. Where to go next ...
+7. Where to go next ...
 -----------------------
 
 ... is up to YOU. Yeehaw.
