@@ -7,8 +7,6 @@ Chromebook to Ubuntubook
 :tags: chromebook, ubuntu, linux
 :modified: 2015-07-08 10:18:00
 
-**Update:** Now running `Debian 'Jessie' <http://www.circuidipity.com/c720-chromebook-to-jessiebook.html>`_ on my Chromebook.
-
 Replace **Chrome OS** permanently with **Ubuntu 15.04 Linux** on the **Acer C720 Chromebook**.
 
 .. image:: images/vivid-icon.png
