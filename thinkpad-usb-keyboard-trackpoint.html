@@ -25,11 +25,12 @@
 
 <!-- article -->
 <h1>ThinkPad USB Keyboard with TrackPoint</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 14 February 2016</p>
 <div id="article">
-    <p>An external ThinkPad keyboard minus the ThinkPad with the classic TrackPoint + Left/Middle/Right mouse buttons. Its attached to my Debian desktop and I want to change the behaviour of a few keys.</p>
+    <p>An external ThinkPad keyboard minus the ThinkPad with the classic TrackPoint + Left/Middle/Right mouse buttons. Its attached to my Ubuntu desktop and I want to change the behaviour of a few keys.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p>Attach the keyboard:</p>
+<p>Attach the keyboard ...</p>
 <div class="highlight"><pre>$ lsusb <span class="p">|</span> grep -i keyboard
 Bus <span class="m">001</span> Device 002: ID 17ef:6009 Lenovo ThinkPad Keyboard with TrackPoint
 </pre></div>
@@ -37,13 +38,13 @@ Bus <span class="m">001</span> Device 002: ID 17ef:6009 Lenovo ThinkPad Keyboard
 <div class="section" id="caps-lock-and-xmodmap">
 <h2>0. Caps_Lock and xmodmap</h2>
 <p><tt class="docutils literal">Caps_Lock</tt> occupies a prime location and - seeing as I do not carry on many ALL CAPS conversations - the key can be repurposed for better use. I use <tt class="docutils literal">xmodmap</tt> to modify the keymap and transform the key into <tt class="docutils literal">BackSpace</tt>.</p>
-<p>Retrieve current keymap (and the <tt class="docutils literal">keycode</tt> for <tt class="docutils literal">Caps_Lock</tt>):</p>
+<p>Retrieve current keymap (and the <tt class="docutils literal">keycode</tt> for <tt class="docutils literal">Caps_Lock</tt>) ...</p>
 <div class="highlight"><pre>$ xmodmap -pke
 <span class="o">[</span>...<span class="o">]</span>
 keycode  <span class="nv">66</span> <span class="o">=</span> Caps_Lock NoSymbol Caps_Lock
 <span class="o">[</span>...<span class="o">]</span>
 </pre></div>
-<p>Output for <tt class="docutils literal">Caps_Lock</tt> using <tt class="docutils literal">xev</tt>:</p>
+<p>Output for <tt class="docutils literal">Caps_Lock</tt> using <tt class="docutils literal">xev</tt> ...</p>
 <div class="highlight"><pre>KeyPress event, serial 32, synthetic NO, window 0x1600001,
     root 0xb4, subw 0x0, <span class="nb">time</span> 578277182, <span class="o">(</span>137,-6<span class="o">)</span>, root:<span class="o">(</span>781,12<span class="o">)</span>,
     state 0x0, keycode <span class="m">66</span> <span class="o">(</span>keysym 0xffe5, Caps_Lock<span class="o">)</span>, same_screen YES,
@@ -52,18 +53,17 @@ keycode  <span class="nv">66</span> <span class="o">=</span> Caps_Lock NoSymbol 
      XFilterEvent returns: False
 </pre></div>
 <p>Making <tt class="docutils literal">Caps_Lock</tt> into <tt class="docutils literal">BackSpace</tt> is a 3-part process: <strong>remap</strong> the key, remove the <strong>lock</strong> on the key, and make it a <strong>repeating</strong> key.</p>
-<p>Test a new key modification in the current Xsession:</p>
+<p>Test a new key modification in the current Xsession ...</p>
 <div class="highlight"><pre>$ xmodmap -e <span class="s2">&quot;keycode 66 = BackSpace&quot;</span> <span class="o">&amp;&amp;</span> xmodmap -e <span class="s2">&quot;clear Lock&quot;</span> <span class="o">&amp;&amp;</span> xset r 66
 </pre></div>
-<p>Make the change sticky by adding the keymapping to <tt class="docutils literal"><span class="pre">~/.xmodmap</span></tt>:</p>
+<p>Make the change sticky by adding the keymapping to <tt class="docutils literal"><span class="pre">~/.xmodmap</span></tt> ... <a class="footnote-reference" href="#id2" id="id1">[1]</a></p>
 <div class="highlight"><pre>! Modify Caps_Lock into Backspace
 keycode <span class="nv">66</span> <span class="o">=</span> BackSpace
 clear Lock
 </pre></div>
-<p>Modify <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt> to load keymap at <tt class="docutils literal">startx</tt>:</p>
+<p>Modify <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt> to load keymap at <tt class="docutils literal">startx</tt> ...</p>
 <div class="highlight"><pre>xmodmap ~/.xmodmap <span class="o">&amp;&amp;</span> xset r 66
 </pre></div>
-<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap">.xmodmap</a>, <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc">.xinitrc</a></p>
 </div>
 <div class="section" id="multimedia-keys-and-xbindkeys">
 <h2>1. Multimedia keys and xbindkeys</h2>
@@ -93,7 +93,6 @@ XF86AudioLowerVolume
 XF86AudioRaiseVolume
 </pre></div>
 <p>Add command <tt class="docutils literal">xbindkeys</tt> to <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt> to load the new configuration at <tt class="docutils literal">startx</tt>.</p>
-<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc">.xbindkeysrc</a>, <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume">paVolume</a></p>
 </div>
 <div class="section" id="trackpoint">
 <h2>2. TrackPoint</h2>
@@ -113,9 +112,18 @@ $ xinput list-props <span class="m">10</span> <span class="p">|</span> grep <spa
 </pre></div>
 <p>Make the change sticky by adding the command to <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt>.</p>
 <p>Happy hacking!</p>
+<div class="section" id="notes">
+<h3>Notes</h3>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>My <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.thinkpad_usb">.xmodmap</a>, <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc">.xinitrc</a>, and <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.thinkpad_usb">.xbindkeysrc</a></td></tr>
+</tbody>
+</table>
+</div>
 </div>
 
-    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
 </div>
