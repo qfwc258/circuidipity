@@ -4,9 +4,10 @@ Chromebook to Jessiebook
 
 :date: 2015-07-08 10:45:00
 :slug: c720-chromebook-to-jessiebook
-:template: article-project
 :tags: chromebook, debian, linux
-:modified: 2015-09-24 13:58:00
+:modified: 2016-02-14 00:10:00
+
+**Update:** Currently using `Ubuntu + i3 window manager <http://www.circuidipity.com/c720-ubuntubook.html>`_ ... I like it!
 
 Replace **Chrome OS** permanently with **Debian** on the **Acer C720 Chromebook**.
 
