@@ -4,21 +4,22 @@ Chromebook to Ubuntubook
 
 :date: 2015-05-02 17:30:00
 :slug: c720-ubuntubook
+:template: article-project
 :tags: chromebook, ubuntu, linux
-:modified: 2015-07-08 10:18:00
+:modified: 2016-02-14 00:29:00
 
-Replace **Chrome OS** permanently with **Ubuntu 15.04 Linux** on the **Acer C720 Chromebook**.
+Replace **Chrome OS** permanently with **Ubuntu 15.10 "Wily Werewolf** on the **Acer C720 Chromebook**.
 
-.. image:: images/vivid-icon.png
+.. image:: images/wily_werewolf.png
     :align: right
-    :alt: Ubuntu 15.04 Vivid Vervet
+    :alt: Ubuntu 15.10
     :width: 250px
     :height: 250px
 
 Let's go!
 =========
 
-Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with Debian, followed by `Lubuntu 14.04 <http://www.circuidipity.com/c720-lubuntubook.html>`_ and `Arch <http://www.circuidipity.com/arch-install-encrypt.html>`_, and now experimenting with Ubuntu's latest and greatest and the **Unity** desktop.
+Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with `Debian <http://www.circuidipity.com/c720-chromebook-to-jessiebook.html>`_, followed by `Lubuntu 14.04 <http://www.circuidipity.com/c720-lubuntubook.html>`_ and `Arch <http://www.circuidipity.com/arch-install-encrypt.html>`_, and now experimenting with Ubuntu + `i3 tiling window manager <http://www.circuidipity.com/i3-tiling-window-manager.html>`_.
 
 This device is available in a few different configurations. Mine is the non-touchscreen model ``C720-2848`` with (non-expandable) **2GB RAM** and a (user-replaceable) **16GB SSD** [1]_.
 
@@ -30,12 +31,16 @@ Create a recovery image of Chrome OS (my C720 is model ``PEPPY C6A-N3C-A7O``) to
 * Log into the Chromebook and let it auto update, as there sometimes are firmware updates... check the updating status in the browser at ``chrome://help``
 * Insert the USB stick, enter ``chrome://imageburner`` and follow the directions to generate a recovery image
 
-Source: `Create a Chromebook recovery image <https://support.google.com/chromebook/answer/1080595?hl=en>`_ 
+See: `Create a Chromebook recovery image <https://support.google.com/chromebook/answer/1080595?hl=en>`_ 
 
 1. Prepare install media
 ========================
 
-Download the `64-bit 'Vivid Vervet' minimal installer <http://archive.ubuntu.com/ubuntu/dists/vivid/main/installer-amd64/current/images/netboot/mini.iso>`_ and `flash the image <https://help.ubuntu.com/community/Installation/FromUSBStick>`_ to a USB stick. An alternative (my choice) is adding the image to a `USB stick with multiple Linux installers <http://www.circuidipity.com/multi-boot-usb.html>`_. Using the minimal console installer (requires network connection) vs. the graphical `Ubuntu installer <https://help.ubuntu.com/community/Ubuntu/GetUbuntu>`_ provides more options during setup [2]_ and downloads all the latest packages.
+Download the `64-bit mini.iso installer <http://archive.ubuntu.com/ubuntu/dists/wily/main/installer-amd64/current/images/netboot/>`_ and `flash the image <https://help.ubuntu.com/community/Installation/FromUSBStick>`_ to a USB stick.
+
+**Alternative:** Add the image to a `USB stick with multiple Linux installers <http://www.circuidipity.com/multi-boot-usb.html>`_.
+
+Using the minimal console installer (requires network connection) vs. the graphical `Ubuntu installer <https://help.ubuntu.com/community/Ubuntu/GetUbuntu>`_ provides more options during setup [2]_ and downloads all the latest packages.
 
 2. SeaBIOS
 ==========
@@ -48,14 +53,14 @@ The second method involves setting new flags for the write-protected **Google Bi
 
 Experimenting with alternate OS installs on the Chromebook I first employed the developer mode method followed by the write-protect screw removal. I prefer configuring the device to default to legacy-mode BIOS but I have employed both methods successfully and describe their respective steps below.
 
-**No guarantees** though... Hopefully you enjoy equal success!
+Happy hacking!
 
 2.1 Write-Protect Screw Method
 ------------------------------
 
 Disconnect power. Turn the Chromebook over facing bottom up and remove the 13 screws (not missing the one hidden under the warranty sticker). Gently pry the case off starting with the seam where the display connects to device. It comes away pretty easy.
 
-This is what you see:
+This is what you see ...
 
 .. figure:: images/c720-chromebook-annotated-innards.png
     :alt: C720 annotated innards
@@ -66,11 +71,11 @@ This is what you see:
 
 .. role:: warning
 
-:warning:`WARNING!` This will **wipe out** whatever is installed on the SSD:
+:warning:`WARNING!` This will **wipe out** whatever is installed on the SSD ...
 
 * Remove the write-protect screw
 * Close back cover using only the battery lock screw to hold in place
-* Re-connect power, boot Chromebook and wait until it displays:                           
+* Re-connect power, boot Chromebook and wait until it displays ...                           
                                                                                 
 .. code-block:: bash
     
@@ -81,7 +86,7 @@ This is what you see:
 * At default Chrome OS "Welcome!" screen open a terminal ``CTRL+ALT+F2`` (Right-arrow)
 * Login as ``chronos`` (no password), then enter ``sudo su`` for superuser access
 
-Set new GBB flags using the ``set_gbb_flags.sh`` script in Chrome OS. To enable short **developer mode** screen (1 second timeout) followed by **default legacy mode** boot use these flags:
+Set new GBB flags using the ``set_gbb_flags.sh`` script in Chrome OS. To enable short **developer mode** screen (1 second timeout) followed by **default legacy mode** boot use these flags ...
 
 .. code-block:: bash
 
@@ -90,38 +95,38 @@ Set new GBB flags using the ``set_gbb_flags.sh`` script in Chrome OS. To enable 
     GBB_FLAG_FORCE_DEV_BOOT_LEGACY 0×00000080
     GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 
-... which adds up to running in the shell:
+... which adds up to running in the shell ...
 
 .. code-block:: bash
 
     /usr/share/vboot/bin/set_gbb_flags.sh 0x489
 
-Shutdown with:
+Shutdown with ...
 
 .. code-block:: bash
 
     # shutdown -h now
 
-... and disconnect the power:
+... and disconnect the power ...
 
 * Remove the bottom cover again and reinstall the write-lock screw to protect the BIOS
 * Close cover and reinstall all the case screws
 
 Re-connect the power, insert the USB stick prepared in Step 1, and power up the Chromebook [4]_.
 
-Sources: `Useful GBB flags <http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html>`_ for `another new free software machine <https://blogs.fsfe.org/the_unconventional/2014/04/20/c720-debian/>`_
+See: `Useful GBB flags <http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html>`_ for `another new free software machine <https://blogs.fsfe.org/the_unconventional/2014/04/20/c720-debian/>`_
 
 2.2 Developer Mode Method
 -------------------------
 
-The alternative to removing the write-protect screw above is to place the Chromebook into developer mode using the Chrome OS shell before booting the USB install media:
+The alternative to removing the write-protect screw above is to place the Chromebook into developer mode using the Chrome OS shell before booting the USB install media ...
 
 * With the Chromebook off... Hold down ``ESC+F3`` (Refresh) keys and power on the device
 * Invoke Recovery, and at the Recovery screen press ``Ctrl+D``
 * Device will prompt for confirmation, press ``ENTER`` and the system reboots into developer mode
 * Scary white boot screen appears and you need to press ``Ctrl+D`` to continue boot [5]_
 
-Enable the **USB Boot** and **Legacy BIOS** modes by opening the shell with ``Ctrl+Alt+T`` and enter ``shell``. Set ``dev_boot_usb`` and ``dev_boot_legacy`` to active:
+Enable the **USB Boot** and **Legacy BIOS** modes by opening the shell with ``Ctrl+Alt+T`` and enter ``shell``. Set ``dev_boot_usb`` and ``dev_boot_legacy`` to active ...
 
 .. code-block:: bash
 
@@ -130,32 +135,38 @@ Enable the **USB Boot** and **Legacy BIOS** modes by opening the shell with ``Ct
 
 Insert the USB stick prepared in Step 1, reboot the Chromebook and press ``CTRL+L`` at the boot screen to enter legacy boot mode.
 
-Source: `Chromium OS <http://www.chromium.org/chromium-os>`_ developer information for the `Acer C720 Chromebook <http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook>`_
+See: `Chromium OS <http://www.chromium.org/chromium-os>`_ developer information for the `Acer C720 Chromebook <http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook>`_
 
 3. Install Ubuntu
 ==================
 
-My `visual screenshot tour <http://www.circuidipity.com/c720-lubuntubook-install.html>`_ of installing Ubuntu 14.04 - a `Long Term Support (LTS) <https://wiki.ubuntu.com/Releases>`_ release. Install steps remain the same for 15.04.
+My `visual screenshot tour <http://www.circuidipity.com/ubuntu-trusty-install.html>`_ of installing Ubuntu 14.04 - a `Long Term Support (LTS) <https://wiki.ubuntu.com/Releases>`_ release. Ubuntu's minimal install image makes it easy to create a console-only base configuration that can be later customized for various tasks and alternate desktops.
 
 **Alternative:** At the ``tasksel`` stage select a different desktop: `Lubuntu (LXDE) <http://www.circuidipity.com/c720-lubuntubook.html>`_, Xubuntu (XFCE), etc.
 
-Chromebook's SSD will be divided into 3 partitions:
+Chromebook's SSD will be divided into 3 partitions ...
 
 * sda1 is a 300MB ``boot`` partition 
 * sda2 is a 1GB LUKS encrypted ``swap`` partition using a **random key**
 * sda3 uses the remaining space as a LUKS encrypted ``root`` partition using a **passphrase**
 
+**Update:** I replaced the factory-installed SSD with a 256GB device and a revised partition scheme ...
+
+* sda1 is a 24GB ``root`` partition
+* sda2 is a 2GB LUKS encrypted ``swap`` partition using a **random key**
+* sda3 uses the remaining space as a LUKS encrypted ``home`` partition using a **passphrase**
+
 4. Touchpad
 ===========
 
-Ubuntu 15.04 installs Linux kernel ``3.19`` with built-in support for the Chromebook's touchpad. Per-session modifications of touchpad settings can be made using ``synclient``:
+Ubuntu 15.10 installs a 4.2.0 Linux kernel with built-in support for the Chromebook's touchpad. Per-session modifications of touchpad settings can be made using ``synclient`` ...
 
 .. code-block:: bash
 
     $ synclient                 # display current settings
     $ synclient TapButton3=2    # 3-finger tap = middle-click
 
-To make any desired touchpad settings permanent create a configuration file in ``/etc/X11/xorg.conf.d``: 
+To make any desired touchpad settings permanent create a configuration file in ``/etc/X11/xorg.conf.d`` ...
 
 .. code-block:: bash
 
@@ -164,7 +175,7 @@ To make any desired touchpad settings permanent create a configuration file in `
 
 Modify this file to adjust timeouts, add tap-mouse actions (2-finger tap = right-click, 3-finger tap = middle-click), and 2-finger scrolling.
 
-Sample config:
+Sample config ...
 
 .. code-block:: bash
 
@@ -185,24 +196,22 @@ Sample config:
         Option          "TapButton3" "2"
     EndSection
 
-**Problem:** My 3-finger middle-click option required a manual reset each session.
+**Note:** If using Ubuntu's default Unity desktop ... you may find the 3-finger middle-click option requires a manual reset each session.
 
-**Fix:** Stop the Gnome Settings daemon from overiding ``50-c720-touchpad.conf``:
+**Fix:** Stop the Gnome Settings daemon from overiding ``50-c720-touchpad.conf`` ...
 
 .. code-block:: bash
 
     $ gsettings set org.gnome.settings-daemon.plugins.mouse active false 
 
-Logout and back in. It works!
-
-Sources: `50-c720-touchpad.conf <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_ubuntubook/etc/X11/xorg.conf.d/50-c720-touchpad.conf>`_, and pages for `Touchpad Synaptics <https://wiki.archlinux.org/index.php/Touchpad_Synaptics>`_ and the `C720 Chromebook <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration>`_ on `ArchWiki <https://wiki.archlinux.org/>`_
+See: `50-c720-touchpad.conf <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_ubuntubook/etc/X11/xorg.conf.d/50-c720-touchpad.conf>`_, and pages for `Touchpad Synaptics <https://wiki.archlinux.org/index.php/Touchpad_Synaptics>`_ and the `C720 Chromebook <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration>`_ on `ArchWiki <https://wiki.archlinux.org/>`_
 
 5. SSD
 ======
 
 The `swappiness <https://en.wikipedia.org/wiki/Swappiness>`_ parameter controls the preference of the kernel to move processes out of physical memory to the swap partition. Range is ``0-100``, default is set to ``60`` and lower values cause the kernel to avoid swapping and higher values prompt more frequent swap use.
 
-Check the current swappiness value:
+Check the current swappiness value ...
 
 .. code-block:: bash
 
@@ -212,7 +221,7 @@ To reduce writes on the SSD set a low value of ``1`` by setting ``vm.swappiness=
 
 **TRIM** optimizes SSD performance and is enabled by adding the ``discard`` option to ``/etc/crypttab`` and ``/etc/fstab``. Ubuntu auto-magically configures ``crypttab`` but ``fstab`` needs to be set manually.
 
-Sample ``fstab``:
+Sample ``fstab`` ...
 
 .. code-block:: bash
 
@@ -222,18 +231,18 @@ Sample ``fstab``:
     UUID=[some_long_random_string] /boot    ext4    noatime,discard         0       2
     /dev/mapper/sda2_crypt none            swap    sw,discard              0       0
 
-After modifying ``fstab`` update ``/boot/initrd.img-*`` by running:
+After modifying ``fstab`` update ``/boot/initrd.img-*`` by running ...
 
 .. code-block:: bash
  
     $ sudo update-initramfs -u -k all                                                      
 
-Source: `TRIM configuration on solid-state drives <http://www.linuxjournal.com/content/solid-state-drives-get-one-already>`_
+See: `TRIM configuration on solid-state drives <http://www.linuxjournal.com/content/solid-state-drives-get-one-already>`_
 
 6. Suspend
 ==========
 
-**Problem:** Suspend-and-resume generates a stream of errors:
+**Problem:** Suspend-and-resume generates a stream of errors ...
 
 .. code-block:: bash
 
@@ -246,7 +255,7 @@ Source: `TRIM configuration on solid-state drives <http://www.linuxjournal.com/c
 
 ... and blocks the Chromebook from executing a proper restart/shutdown.
 
-**FIX:** Create ``/lib/systemd/system-sleep/ehci-pci.sh`` [6]_:
+**FIX:** Create ``/lib/systemd/system-sleep/ehci-pci.sh`` ...  [6]_
 
 .. code-block:: bash
 
@@ -263,20 +272,20 @@ Source: `TRIM configuration on solid-state drives <http://www.linuxjournal.com/c
         ;;
     esac
 
-... and make it executable:
+... and make it executable ...
                                                                                     
 .. code-block:: bash                                                                
                                                                                     
     $ sudo chmod 755 /lib/systemd/system-sleep/ehci-pci.sh           
                                                                                     
-Configure boot options in ``/etc/default/grub``:                                         
-                                                                                
+Configure boot options in ``/etc/default/grub`` ...
+
 .. code-block:: bash                                                            
                                                                                 
     GRUB_CMDLINE_LINUX_DEFAULT="quiet splash tpm_tis.force=1" 
                                                                                 
-... save the changes and run:                                                                    
-                                                                                
+... save the changes and run ...
+
 .. code-block:: bash                                                            
                                                                                 
     $ sudo update-grub                                                          
@@ -290,7 +299,7 @@ Source: `ehci-pci.sh <https://github.com/vonbrownie/linux-post-install/blob/mast
 
 Top row on the keyboard with the shortcut icons (brightness, volume, etc.) identify in Linux as the ``F1-F10`` keys and the Search key (in the ``CapsLk`` position) acts as the ``Super`` (Windows) modifier key.
 
-Create keyboard shortcuts by first installing:
+Create keyboard shortcuts by first installing ...
 
 * ``xbindkeys`` - associate keys to shell commands
 * ``xbacklight`` - set backlight level using RandR
@@ -299,7 +308,7 @@ Create keyboard shortcuts by first installing:
 
 .. code-block:: bash
 
-    $ sudo apt-get install xbindkeys xbacklight pulseaudio-utils xvkbd
+    $ sudo apt install xbindkeys xbacklight pulseaudio-utils xvkbd
 
 7.1 Direction, Brightness, Volume, Page Keys
 --------------------------------------------
@@ -308,7 +317,7 @@ Create keyboard shortcuts by first installing:
 
     $ xbindkeys -k
 
-Enable the function keys to modify the sound and brightness settings by creating ``$HOME/.xbindkeysrc``:
+Enable the function keys to modify the sound and brightness settings by creating ``~/.xbindkeysrc`` ...
 
 .. code-block:: bash
 
@@ -352,15 +361,15 @@ Enable the function keys to modify the sound and brightness settings by creating
     "xvkbd -xsendevent -text '\[End]'"
     Alt + Right
 
-Enable the new key shortcuts by running:
+Enable the new key shortcuts by running ...
 
 .. code-block:: bash
 
     $ xbindkeys
 
-Ubuntu auto-detects ``$HOME/.xbindkeysrc``  and will run ``xbindkeys`` on the next login.
+Ubuntu auto-detects ``~/.xbindkeysrc``  and will run ``xbindkeys`` on the next login.
 
-Sources: `xbindkeysrc <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_ubuntubook/home/username/.xbindkeysrc>`_, `Xbindkeys <https://wiki.archlinux.org/index.php/Xbindkeys>`_, and another sample `Chromebook-friendly xbindkeysrc <https://github.com/alexpatel/dotfiles/blob/master/xbindkeysrc>`_
+See: `xbindkeysrc <https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook>`_, `Xbindkeys <https://wiki.archlinux.org/index.php/Xbindkeys>`_, and another sample `Chromebook-friendly xbindkeysrc <https://github.com/alexpatel/dotfiles/blob/master/xbindkeysrc>`_
 
 7.2 Power Key
 -------------
@@ -372,7 +381,9 @@ If you want to disable the power key edit ``/etc/systemd/logind.conf`` and set `
 8. Wireless
 ===========
 
-There are a few settings to modify to improve performance of Chromebook's wireless chipset. Identify the card and parameters:
+**Update:** With the >= 4.2 kernels I have not been required to make any modifications. Works OK.
+
+There are a few settings to modify to improve performance of Chromebook's wireless chipset. Identify the card and parameters ...
 
 .. code-block:: bash
 
@@ -387,20 +398,37 @@ There are a few settings to modify to improve performance of Chromebook's wirele
     parm:           ps_enable:Enable WLAN PowerSave (int)
     parm:           use_chanctx:Enable channel context for concurrency (int)
 
-Create ``/etc/modprobe.d/ath9k.conf`` with the following options:
+Create ``/etc/modprobe.d/ath9k.conf`` with the following options ...
 
 .. code-block:: bash
   
     options ath9k bt_ant_diversity=1 ps_enable=0
 
-Sources: `ath9k.conf <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_ubuntubook/etc/modprobe.d/ath9k.conf>`_, `ath9k wireless driver <http://wireless.kernel.org/en/users/Drivers/ath9k>`_ and `bluetooth coexistence <http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex>`_                                                       
+See: `ath9k.conf <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_ubuntubook/etc/modprobe.d/ath9k.conf>`_, `ath9k wireless driver <http://wireless.kernel.org/en/users/Drivers/ath9k>`_ and `bluetooth coexistence <http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex>`_                                                       
 
-9. Helpful Resources
-====================
+9. Microphone
+=============
 
-* My former `Lubuntu 14.04 LTS install on the Chromebook <http://www.circuidipity.com/c720-lubuntubook.html>`_ and configuration (under ``upstart`` init vs ``systemd`` in the current 15.04)
+Confirm the microphone is un-muted in ``alsamixer``. Create ``/etc/modprobe.d/snd-hda-intel.conf`` ...
+
+.. code-block:: bash
+
+    options snd_hda_intel model=,alc283-dac-wcaps                                        
+                                                                                       
+... and restart. Give it a try ...
+
+.. code-block:: bash
+
+    $ arecord -d 5 chr-mic.wav                                                            
+    $ aplay chr-mic.wav
+
+10. Good stuff
+==============
+
+* My former `Lubuntu 14.04 LTS install on the Chromebook <http://www.circuidipity.com/c720-lubuntubook.html>`_ and configuration (under ``upstart`` init vs ``systemd`` in the current 15.10)
 * Arch Linux C720 installation with `useful post-install details <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook>`_
 * Turn Chromebooks into `Ubuntu-based code learning machines for kids <http://blog.codestarter.org/post/93985346780/how-we-turn-199-chromebooks-into-ubuntu-based-code>`_
+* Lightweight `i3 tiling window manager <http://www.circuidipity.com/i3-tiling-window-manager.html>`_ is snappy on the Chromebook's modest hardware
 
 Happy hacking!
 
