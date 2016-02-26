@@ -25,6 +25,7 @@
 
 <!-- article -->
 <h1>Minimal Debian</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Friday 26 February 2016</p>
 <div id="article">
     <div class="figure">
 <img alt="Debian Vader" src="images/debianVader.png" style="width: 960px; height: 355px;" />
@@ -77,10 +78,10 @@
 <img alt="Partition size" class="align-center" src="images/screenshot/debianInstall/23.png" style="width: 800px; height: 600px;" />
 <img alt="Primary partition" class="align-center" src="images/screenshot/debianInstall/24.png" style="width: 800px; height: 600px;" />
 <img alt="Beginning" class="align-center" src="images/screenshot/debianInstall/25.png" style="width: 800px; height: 600px;" />
-<p>Setting <strong>Mount options</strong> to <tt class="docutils literal">noatime</tt> decreases write operations and boosts drive speed.</p>
+<p>Setting <strong>Mount options</strong> to <tt class="docutils literal">relatime</tt> decreases write operations and boosts drive speed.</p>
 <img alt="Mount options" class="align-center" src="images/screenshot/debianInstall/25.1.png" style="width: 800px; height: 600px;" />
-<img alt="noatime" class="align-center" src="images/screenshot/debianInstall/25.2.png" style="width: 800px; height: 600px;" />
-<img alt="Done setting up partition" class="align-center" src="images/screenshot/debianInstall/26.png" style="width: 800px; height: 600px;" />
+<img alt="relatime" class="align-center" src="images/screenshot/debianInstall/25.3.png" style="width: 800px; height: 600px;" />
+<img alt="Done setting up partition" class="align-center" src="images/screenshot/debianInstall/26.1.png" style="width: 800px; height: 600px;" />
 <img alt="Free space" class="align-center" src="images/screenshot/debianInstall/27.png" style="width: 800px; height: 600px;" />
 <img alt="New partition" class="align-center" src="images/screenshot/debianInstall/28.png" style="width: 800px; height: 600px;" />
 <img alt="Partition size" class="align-center" src="images/screenshot/debianInstall/29.png" style="width: 800px; height: 600px;" />
@@ -112,7 +113,7 @@
 <img alt="Mount point" class="align-center" src="images/screenshot/debianInstall/48.png" style="width: 800px; height: 600px;" />
 <img alt="Mount home" class="align-center" src="images/screenshot/debianInstall/48.1.png" style="width: 800px; height: 600px;" />
 <img alt="Mount options" class="align-center" src="images/screenshot/debianInstall/49.png" style="width: 800px; height: 600px;" />
-<img alt="noatime" class="align-center" src="images/screenshot/debianInstall/25.2.png" style="width: 800px; height: 600px;" />
+<img alt="relatime" class="align-center" src="images/screenshot/debianInstall/25.3.png" style="width: 800px; height: 600px;" />
 <p><strong>Reserved blocks</strong> can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the default 5% reserve set aside by Debian to 1%.</p>
 <img alt="Reserved blocks" class="align-center" src="images/screenshot/debianInstall/49.1.png" style="width: 800px; height: 600px;" />
 <img alt="Percent reserved" class="align-center" src="images/screenshot/debianInstall/49.2.png" style="width: 800px; height: 600px;" />
@@ -141,10 +142,6 @@
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-luks.html">luks</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-crypto.html">crypto</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
 </p>
 </div>
 
