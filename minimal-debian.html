@@ -31,19 +31,18 @@
 <img alt="Debian Vader" src="images/debianVader.png" style="width: 960px; height: 355px;" />
 <p class="caption">[Image courtesy <a class="reference external" href="http://jschild.deviantart.com/art/Facebook-cover-debian-Darth-Vader-380351614">jschild</a>].</p>
 </div>
-<p>I use Debian's <tt class="docutils literal">mini.iso</tt> installer to create a <strong>lightweight base configuration</strong> that can be customized for various tasks and desktops.</p>
+<p>I like using Debian's minimal <strong>mini.iso</strong> installer to create <strong>console-only base configurations</strong> that can be customized for various tasks and <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">alternate desktops</a>.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p><a class="reference external" href="http://www.debian.org">Debian GNU/Linux</a> is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like <a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html">Ubuntu</a> build their distributions on solid Debian <strong>awesomesauce</strong>.</p>
-<p>There are 3 <strong>release branches</strong>: <tt class="docutils literal">jessie/stable</tt>, <tt class="docutils literal">stretch/testing</tt>, and <tt class="docutils literal">sid/unstable</tt>. Below is a visual walk-through of a sample Debian <tt class="docutils literal">stable</tt> setup that makes use of an entire storage device divided into 3 partitions: unencrypted <tt class="docutils literal">root</tt>, and <a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a> encrypted <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt>.</p>
-</div>
+<p><a class="reference external" href="http://www.debian.org">Debian GNU/Linux</a> is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like <a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html">Ubuntu</a> build their distributions on a solid Debian foundation.</p>
+<p>There are 3 <strong>release branches</strong>: <tt class="docutils literal">jessie/stable</tt>, <tt class="docutils literal">stretch/testing</tt>, and <tt class="docutils literal">sid/unstable</tt>. Below is a visual walk-through of a sample Debian <tt class="docutils literal">stable</tt> setup that makes use of an entire storage device divided into 3 partitions: a <tt class="docutils literal">root</tt> partition, and <a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a> encrypted <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt> partitions.</p>
 <div class="section" id="prepare-install-media">
-<h2>0. Prepare install media</h2>
-<p>Download the <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/mini.iso">64-bit mini.iso</a> (<a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/mini.iso">32bit</a> for older machines) and <a class="reference external" href="https://www.debian.org/releases/stable/amd64/ch04s03.html.en">flash the image</a> to a USB stick. An alternative (my choice) is adding the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>.</p>
-<p>The minimal console installer (requires network connection) downloads all the latest packages during setup.</p>
+<h3>0. Prepare install media</h3>
+<p>Download the <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/mini.iso">64-bit mini.iso</a> (<a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/mini.iso">32bit</a> for older machines) and <a class="reference external" href="https://www.debian.org/releases/stable/amd64/ch04s03.html.en">flash the image</a> to a USB stick. <a class="footnote-reference" href="#id6" id="id1">[1]</a></p>
+<p>Minimal installer (requires network connection) downloads all the latest packages during setup.</p>
 </div>
 <div class="section" id="launch">
-<h2>1. Launch</h2>
+<h3>1. Launch</h3>
 <img alt="Install" class="align-center" src="images/screenshot/debianInstall/01.1.png" style="width: 800px; height: 600px;" />
 <img alt="Select Language" class="align-center" src="images/screenshot/debianInstall/02.png" style="width: 800px; height: 600px;" />
 <img alt="Select Location" class="align-center" src="images/screenshot/debianInstall/03.png" style="width: 800px; height: 600px;" />
@@ -54,6 +53,7 @@
 <img alt="Mirror archive" class="align-center" src="images/screenshot/debianInstall/08.png" style="width: 800px; height: 600px;" />
 <img alt="Mirror Directory" class="align-center" src="images/screenshot/debianInstall/09.png" style="width: 800px; height: 600px;" />
 <img alt="Proxy" class="align-center" src="images/screenshot/debianInstall/10.png" style="width: 800px; height: 600px;" />
+<p>Contents of the installer are now loaded into memory and the USB stick can safely be removed. <a class="footnote-reference" href="#id7" id="id2">[2]</a></p>
 <img alt="Root password" class="align-center" src="images/screenshot/debianInstall/11.png" style="width: 800px; height: 600px;" />
 <img alt="Verify password" class="align-center" src="images/screenshot/debianInstall/12.png" style="width: 800px; height: 600px;" />
 <img alt="Full Name" class="align-center" src="images/screenshot/debianInstall/13.png" style="width: 800px; height: 600px;" />
@@ -63,12 +63,12 @@
 <img alt="Select time zone" class="align-center" src="images/screenshot/debianInstall/17.png" style="width: 800px; height: 600px;" />
 </div>
 <div class="section" id="partitions">
-<h2>2. Partitions</h2>
-<p>In the example below I create 3 partitions on the disk:</p>
+<h3>2. Partitions</h3>
+<p>In the example below I create 3 partitions <a class="footnote-reference" href="#id8" id="id3">[3]</a> on the disk:</p>
 <ul class="simple">
-<li><tt class="docutils literal">sda1</tt> configured as 20GB <tt class="docutils literal">root</tt></li>
-<li><tt class="docutils literal">sda5</tt> configured as 1GB LUKS encrypted <tt class="docutils literal">swap</tt> with <tt class="docutils literal">random key</tt></li>
-<li><tt class="docutils literal">sda6</tt> uses remaining space as LUKS encrypted <tt class="docutils literal">home</tt> with <tt class="docutils literal">passphrase</tt></li>
+<li>sda1 is a 20GB <tt class="docutils literal">root</tt> partition</li>
+<li>sda5 is a 1GB LUKS encrypted <tt class="docutils literal">swap</tt> partition using a <strong>random key</strong></li>
+<li>sda6 uses the remaining storage as a LUKS encrypted <tt class="docutils literal">home</tt> partition using a <strong>passphrase</strong></li>
 </ul>
 <img alt="Partitioning method" class="align-center" src="images/screenshot/debianInstall/18.png" style="width: 800px; height: 600px;" />
 <img alt="Partition disks" class="align-center" src="images/screenshot/debianInstall/19.png" style="width: 800px; height: 600px;" />
@@ -78,7 +78,7 @@
 <img alt="Partition size" class="align-center" src="images/screenshot/debianInstall/23.png" style="width: 800px; height: 600px;" />
 <img alt="Primary partition" class="align-center" src="images/screenshot/debianInstall/24.png" style="width: 800px; height: 600px;" />
 <img alt="Beginning" class="align-center" src="images/screenshot/debianInstall/25.png" style="width: 800px; height: 600px;" />
-<p>Setting <strong>Mount options</strong> to <tt class="docutils literal">relatime</tt> decreases write operations and boosts drive speed.</p>
+<p>Setting <tt class="docutils literal">Mount options: relatime</tt> decreases write operations and boosts drive speed ...</p>
 <img alt="Mount options" class="align-center" src="images/screenshot/debianInstall/25.1.png" style="width: 800px; height: 600px;" />
 <img alt="relatime" class="align-center" src="images/screenshot/debianInstall/25.3.png" style="width: 800px; height: 600px;" />
 <img alt="Done setting up partition" class="align-center" src="images/screenshot/debianInstall/26.1.png" style="width: 800px; height: 600px;" />
@@ -91,7 +91,7 @@
 <img alt="Encrypt volume" class="align-center" src="images/screenshot/debianInstall/32.png" style="width: 800px; height: 600px;" />
 <img alt="Encryption key" class="align-center" src="images/screenshot/debianInstall/32.1.png" style="width: 800px; height: 600px;" />
 <img alt="Random key" class="align-center" src="images/screenshot/debianInstall/33.png" style="width: 800px; height: 600px;" />
-<p>If the hard disk has not been securely wiped prior to installing Debian (using a utility like <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">DBAN</a>) you may want to set <tt class="docutils literal">Erase data</tt> to <tt class="docutils literal">yes</tt>. Depending on the size of the disk this operation can last several hours.</p>
+<p>If the hard disk has not been securely wiped prior to installing Debian (using a utility like <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">DBAN</a>) you may want to configure <tt class="docutils literal">Erase data: yes</tt>. Note, however, depending on the size of the disk this operation can last several hours.</p>
 <img alt="Erase data" class="align-center" src="images/screenshot/debianInstall/33.1.png" style="width: 800px; height: 600px;" />
 <img alt="Done setting up partition" class="align-center" src="images/screenshot/debianInstall/33.2.png" style="width: 800px; height: 600px;" />
 <img alt="Free space" class="align-center" src="images/screenshot/debianInstall/34.png" style="width: 800px; height: 600px;" />
@@ -114,7 +114,7 @@
 <img alt="Mount home" class="align-center" src="images/screenshot/debianInstall/48.1.png" style="width: 800px; height: 600px;" />
 <img alt="Mount options" class="align-center" src="images/screenshot/debianInstall/49.png" style="width: 800px; height: 600px;" />
 <img alt="relatime" class="align-center" src="images/screenshot/debianInstall/25.3.png" style="width: 800px; height: 600px;" />
-<p><strong>Reserved blocks</strong> can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the default 5% reserve set aside by Debian to 1%.</p>
+<p><strong>Reserved blocks</strong> can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, <strong>non-root partitions</strong> extra space can be gained by reducing the default 5% reserve set aside by Debian to 1% ...</p>
 <img alt="Reserved blocks" class="align-center" src="images/screenshot/debianInstall/49.1.png" style="width: 800px; height: 600px;" />
 <img alt="Percent reserved" class="align-center" src="images/screenshot/debianInstall/49.2.png" style="width: 800px; height: 600px;" />
 <img alt="Done setting up the partition" class="align-center" src="images/screenshot/debianInstall/49.3.png" style="width: 800px; height: 600px;" />
@@ -122,22 +122,106 @@
 <img alt="Write changes to disk" class="align-center" src="images/screenshot/debianInstall/50.png" style="width: 800px; height: 600px;" />
 </div>
 <div class="section" id="install-packages-and-finish-up">
-<h2>3. Install packages and finish up</h2>
+<h3>3. Install packages and finish up</h3>
 <img alt="Popularity-contest" class="align-center" src="images/screenshot/debianInstall/51.png" style="width: 800px; height: 600px;" />
-<p>Select only <tt class="docutils literal">[*] standard system utilities</tt> if you wish to start with a minimal, console-only base configuration ready for further customization. Task menu can be accessed post-install by running <tt class="docutils literal">tasksel</tt>.</p>
+<p>Select only <tt class="docutils literal">[*] standard system utilities</tt> if you wish to start with a minimal, console-only base configuration ready for further customization. <a class="footnote-reference" href="#id9" id="id4">[4]</a></p>
 <img alt="Software selection" class="align-center" src="images/screenshot/debianInstall/52.png" style="width: 800px; height: 600px;" />
+<p>Packages are downloaded and the installer makes its finishing touches ...</p>
 <img alt="GRUB" class="align-center" src="images/screenshot/debianInstall/53.png" style="width: 800px; height: 600px;" />
 <img alt="GRUB install" class="align-center" src="images/screenshot/debianInstall/54.png" style="width: 800px; height: 600px;" />
 <img alt="Finish" class="align-center" src="images/screenshot/debianInstall/55.png" style="width: 800px; height: 600px;" />
+</div>
+<div class="section" id="first-boot">
+<h3>4. First boot</h3>
 <img alt="GRUB menu" class="align-center" src="images/screenshot/debianInstall/56.png" style="width: 800px; height: 600px;" />
-<p>If an encrypted home partition was created in Step 2 the system will display a passphrase prompt to unlock the partition.</p>
+<p>System will display a passphrase prompt to unlock encrypted <tt class="docutils literal">home</tt> partition ...</p>
 <img alt="Enter encrypt passphrase" class="align-center" src="images/screenshot/debianInstall/57.png" style="width: 800px; height: 600px;" />
 <img alt="Login" class="align-center" src="images/screenshot/debianInstall/58.png" style="width: 800px; height: 600px;" />
+<p>Login as root ... then run <tt class="docutils literal">timedatectl</tt> to confirm system time+date is properly set.</p>
 </div>
-<div class="section" id="post-install">
-<h2>4. Post-install</h2>
-<p>I created a <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/scripts/debian-post-install.sh">post-install shell script</a> to configure or upgrade (to <tt class="docutils literal">testing</tt> or <tt class="docutils literal">sid</tt>) a fresh setup.</p>
+<div class="section" id="network">
+<h3>5. Network</h3>
+<p>Check which network interfaces are detected and settings ...</p>
+<div class="highlight"><pre><span class="c1"># ip a</span>
+</pre></div>
+<p><strong>Wired</strong> interfaces are usually auto-configured by default and assigned an IP address courtesy of DHCP.</p>
+<p>To assign a <strong>static</strong> address, deactivate the wired interface and create a new entry in <tt class="docutils literal">/etc/network/interfaces</tt>. Sample entry for <tt class="docutils literal">enp3s0</tt> ...</p>
+<div class="highlight"><pre><span class="c1"># The primary network interface</span>
+auto enp3s0
+<span class="c1">#iface enp3s0 inet dhcp</span>
+iface enp3s0 inet static
+    address 192.168.1.88
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+    dns-nameservers 192.168.1.1
+</pre></div>
+<p>Bring up|down interface with <tt class="docutils literal">if{up,down} enp3s0</tt>.</p>
+<p>Create a temporary <strong>wireless</strong> interface connection to WPA2 encrypted access points manually using <tt class="docutils literal">wpa_supplicant</tt> + <tt class="docutils literal">wpa_passphrase</tt> + <tt class="docutils literal">dhclinet</tt>. Sample setup of <tt class="docutils literal">wlp1s0</tt> ...</p>
+<div class="highlight"><pre><span class="c1"># ip link set wlp1s0 up             # bring up interface</span>
+<span class="c1"># iw dev wlp1s0 link                # get link status</span>
+<span class="c1"># iw dev wlp1s0 scan | grep SSID    # scan for access points</span>
+<span class="c1"># wpa_supplicant -i wlp1s0 -c&lt;(wpa_passphrase &quot;MY_SSID&quot; &quot;MY_PASSPHRASE&quot;)   # connect to WPA/WPA2 ... add &#39;-B&#39; to background process</span>
+<span class="c1"># dhclient wlp1s0                   # obtain IP address</span>
+</pre></div>
+<p>More permanent configurations may be set in <tt class="docutils literal">interfaces</tt>. Sample setup <a class="footnote-reference" href="#id10" id="id5">[5]</a> with a static IP address ...</p>
+<div class="highlight"><pre>iface wlp1s0 inet static
+    address 192.168.1.77
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+    wpa-ssid MY_SSID
+    wpa-psk MY_PASSPHRASE
+    dns-nameservers 8.8.8.8 8.8.4.4
+</pre></div>
+<p>Alternative setup using DHCP ...</p>
+<div class="highlight"><pre>allow-hotplug wlp1s0
+iface wlp1s0 inet dhcp
+    wpa-ssid MY_SSID
+    wpa-psk MY_PASSPHRASE
+    dns-nameservers 8.8.8.8 8.8.4.4
+</pre></div>
+<p>Once a link is established an optional network manager utility may be installed. Packages <tt class="docutils literal"><span class="pre">network-manager</span></tt> and <tt class="docutils literal"><span class="pre">network-manager-gnome</span></tt> provide the console <tt class="docutils literal">nmcli</tt> and graphical <tt class="docutils literal"><span class="pre">nm-applet</span></tt> clients respectively ...</p>
+<div class="highlight"><pre><span class="c1"># apt install network-manager</span>
+</pre></div>
+<p>Comment out (deactivate) any entries in <tt class="docutils literal">interfaces</tt> that will be managed by <tt class="docutils literal"><span class="pre">network-manager</span></tt>.</p>
+</div>
+<div class="section" id="where-to-go-next">
+<h3>6. Where to go next ...</h3>
+<p>... is up to YOU. Yeehaw.</p>
 <p>Happy hacking!</p>
+</div>
+<div class="section" id="notes">
+<h3>Notes</h3>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>An alternative is adding the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Recommended: Otherwise the partitioning tool may designate the USB device as primary (sda) storage.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>For storage devices &gt;=128GB I create separate <tt class="docutils literal">root</tt> + <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt> partitions. Smaller devices get <tt class="docutils literal">boot</tt> + <tt class="docutils literal">swap</tt> + <tt class="docutils literal">root</tt>  partitions and remember that encrypted <tt class="docutils literal">root</tt> <strong>requires</strong> an unencrypted <tt class="docutils literal">boot</tt>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>The task selection menu can be used post-install by running (as root) <tt class="docutils literal">tasksel</tt>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[5]</a></td><td>Multiple wireless static IP address setups can be created with <tt class="docutils literal">iface wlp1s0_NAME inet static</tt> and [de]activated with <tt class="docutils literal">if{up.down} wlp1s0=wlp1s0_NAME</tt>.</td></tr>
+</tbody>
+</table>
+</div>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
