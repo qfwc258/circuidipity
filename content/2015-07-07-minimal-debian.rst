@@ -4,7 +4,8 @@ Minimal Debian
 
 :date: 2015-07-07 15:43
 :slug: minimal-debian
-:tags: debian, linux, luks, crypto, shell, programming
+:tags: debian, linux
+:modified: 2016-02-26 13:35:00
 
 .. figure:: images/debianVader.png
     :alt: Debian Vader
@@ -191,7 +192,7 @@ In the example below I create 3 partitions on the disk:
     :width: 800px
     :height: 600px
 
-Setting **Mount options** to ``noatime`` decreases write operations and boosts drive speed.
+Setting **Mount options** to ``relatime`` decreases write operations and boosts drive speed.
 
 .. image:: images/screenshot/debianInstall/25.1.png
     :alt: Mount options
@@ -199,13 +200,13 @@ Setting **Mount options** to ``noatime`` decreases write operations and boosts d
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/25.2.png
-    :alt: noatime
+.. image:: images/screenshot/debianInstall/25.3.png
+    :alt: relatime
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/26.png
+.. image:: images/screenshot/debianInstall/26.1.png
     :alt: Done setting up partition
     :align: center
     :width: 800px
@@ -393,8 +394,8 @@ If the hard disk has not been securely wiped prior to installing Debian (using a
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/25.2.png
-    :alt: noatime
+.. image:: images/screenshot/debianInstall/25.3.png
+    :alt: relatime
     :align: center
     :width: 800px
     :height: 600px
