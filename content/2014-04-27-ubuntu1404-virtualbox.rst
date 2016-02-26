@@ -3,7 +3,7 @@ Ubuntu 14.04 and Virtualbox
 ===========================
 
 :date: 2014-04-27 01:23:00
-:tags: vm, debian, ubuntu, linux
+:tags: virtualbox, debian, ubuntu, linux
 :slug: ubuntu1404-virtualbox
 
 `Virtualbox <https://www.virtualbox.org/>`_ is virtualization software that allows a Linux user to HOST multiple GUEST operating systems as *virtual machines* (VMs). Its a cool tool for playing with different Linux distros and experimenting with configurations.

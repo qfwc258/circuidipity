@@ -2,7 +2,7 @@
 Python2 and Python3 co-existing in harmony using Virtualenv
 ===========================================================
 
-:tags: python, programming, vm, debian, linux
+:tags: python, programming, linux
 :slug: python2-and-python3
 :modified: 2014-02-03 01:23:00
 
