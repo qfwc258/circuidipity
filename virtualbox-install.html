@@ -25,15 +25,14 @@
 
 <!-- article -->
 <h1>Virtualbox</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 05 July 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Friday 26 February 2016</p>
 <div id="article">
     <p><a class="reference external" href="https://www.virtualbox.org/">Virtualbox</a> is virtualization software that allows a Linux user to HOST multiple GUEST operating systems as <a class="reference external" href="http://www.circuidipity.com/tag-vm.html">virtual machines (VMs)</a>. Its a cool tool for playing with different Linux distros and experimenting with configurations.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
 <p>In this HOWTO I install Virtualbox on a 64-bit <a class="reference external" href="http://www.circuidipity.com/tag-debian.html">Debian</a> HOST and create a Debian GUEST virtual machine.</p>
-</div>
 <div class="section" id="install-virtualbox-on-host">
-<h2>0. Install VirtualBox on HOST</h2>
+<h3>0. Install VirtualBox on HOST</h3>
 <div class="highlight"><pre>$ sudo apt-get install build-essential dkms module-assistant linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span>
 $ sudo apt-get install virtualbox virtualbox-dkms virtualbox-qt
 </pre></div>
@@ -48,15 +47,13 @@ vboxdrv               <span class="m">190057</span>  <span class="m">4</span> vb
 <div class="highlight"><pre>$ sudo adduser USERNAME vboxusers
 </pre></div>
 </div>
-<div class="section" id="create-the-debian-guest">
-<h2>1. Create the Debian GUEST</h2>
+<div class="section" id="create-the-guest">
+<h3>1. Create the GUEST</h3>
 <p><strong>Default Machine Folder</strong> where VM images are stored is <tt class="docutils literal">~/Virtualbox VMs</tt> (this can be modified in <tt class="docutils literal"><span class="pre">File-&gt;Preferences-&gt;General</span></tt>).</p>
-<p>See the <a class="reference external" href="http://www.virtualbox.org/manual/UserManual.html">User Manual</a> for creating a GUEST virtual machine. I use the <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/mini.iso">mini.iso installer</a> to create a new virtual machine with a minimal system configuration.</p>
+<p>See the <a class="reference external" href="http://www.virtualbox.org/manual/UserManual.html">User Manual</a> for creating a GUEST virtual machine. I use the <a class="reference external" href="http://www.circuidipity.com/minimal-debian.html">mini.iso installer</a> to create a new virtual machine with a minimal system configuration.</p>
 </div>
 <div class="section" id="guest-additions">
-<h2>2. GUEST Additions</h2>
-<div class="section" id="on-the-guest">
-<h3>On the GUEST</h3>
+<h3>2. GUEST additions</h3>
 <p><strong>Guest Additions</strong> provide extra features such as the ability to tweak display settings and add a shared folder that can accessed by both HOST and GUEST machines.</p>
 <p>Install on GUEST:</p>
 <div class="highlight"><pre>$ sudo apt-get install virtualbox-guest-<span class="o">{</span>dkms,utils,x11<span class="o">}</span>
@@ -79,11 +76,10 @@ vboxsf
 vboxvideo
 </pre></div>
 </div>
-</div>
-<div class="section" id="guest-configuration">
-<h2>3. GUEST Configuration</h2>
+<div class="section" id="extra-configuration">
+<h3>3. Extra configuration</h3>
 <div class="section" id="display">
-<h3>3.1 Display</h3>
+<h4>3.1 Display</h4>
 <p>Tweak display settings by going to the Virtualbox <tt class="docutils literal"><span class="pre">Machine-&gt;Settings...-&gt;Display</span></tt> setting and move the slider to add more video memory and enable 3d acceleration.</p>
 <img alt="Display Settings" src="images/20121207-display.png" style="width: 662px; height: 502px;" />
 <p>With VirtualBox guest additions the display and resolution can be changed when running X:</p>
@@ -100,7 +96,7 @@ VBoxClient --seamless <span class="p">&amp;</span>
 </pre></div>
 </div>
 <div class="section" id="console">
-<h3>3.2 Console</h3>
+<h4>3.2 Console</h4>
 <p>Debian GUEST in console mode defaults to a small 80x40 window. Resize by rebooting GUEST and:</p>
 <ul class="simple">
 <li>GRUB screen: hit <tt class="docutils literal">c</tt> to enter command mode</li>
@@ -110,14 +106,46 @@ VBoxClient --seamless <span class="p">&amp;</span>
 </ul>
 </div>
 <div class="section" id="shared-folder">
-<h3>3.3 Shared folder</h3>
+<h4>3.3 Shared folder</h4>
 <p>Create a shared folder on HOST. Make it accessible to GUEST by going to <tt class="docutils literal"><span class="pre">Machine-&gt;Settings...-&gt;Shared</span> Folders</tt> and click <tt class="docutils literal">Add Shared Folder</tt> and <tt class="docutils literal"><span class="pre">Auto-Mount</span></tt>.</p>
 <img alt="Shared Folder Settings" src="images/20121207-shared-folders.png" style="width: 662px; height: 502px;" />
+</div>
+<div class="section" id="ssh-from-host-to-guest">
+<h4>3.4 SSH from HOST to GUEST</h4>
+<p><a class="reference external" href="http://christophermaier.name/blog/2010/09/01/host-only-networking-with-virtualbox">Host-only networking with Virtualbox</a> was a big help getting this properly configured.</p>
+<p>Scenario: I want to SSH from my HOST to GUEST. Default configuration supplies GUEST with a NAT interface for internet access but no HOST&lt;-&gt;GUEST connectivity. A solution for local access is creating a <strong>host-only adapter</strong>.</p>
+</div>
+<div class="section" id="host">
+<h4>Host</h4>
+<p>Navigate to Virtualbox's <tt class="docutils literal"><span class="pre">File-&gt;Preferences-&gt;Network</span></tt>, select <tt class="docutils literal"><span class="pre">Host-only</span> Networks</tt>, click <tt class="docutils literal">Adds new <span class="pre">host-only</span> network</tt> to create <tt class="docutils literal">vboxnet0</tt>. Default setup is interface address <tt class="docutils literal">192.168.56.1</tt> with DHCP enabled.</p>
+<p>Select the GUEST VM and in <tt class="docutils literal"><span class="pre">Machine-&gt;Settings-&gt;Network</span></tt> click on <tt class="docutils literal">Adapter 2</tt>, enable network adapter attached to <tt class="docutils literal"><span class="pre">Host-only</span> Adapter</tt>, and select <tt class="docutils literal">vboxnet0</tt>.</p>
+</div>
+<div class="section" id="guest">
+<h4>Guest</h4>
+<p>Boot the VM and confirm the new interface has been created. Add the interface to <tt class="docutils literal">/etc/network/interfaces</tt> (example: <tt class="docutils literal">enp0s8</tt>) ...</p>
+<div class="highlight"><pre>auto enp0s8
+iface enp0s8 inet dhcp
+</pre></div>
+<p>Install the SSH server ...</p>
+<div class="highlight"><pre>$ sudo apt install openssh-server
+</pre></div>
+<p>Reboot GUEST. The second interface has been assigned address <tt class="docutils literal">192.168.56.101</tt> by DHCP and can now be accessed from HOST via SSH.</p>
+<p><strong>Optional:</strong> Assign GUEST a static address outside the range of the Virtualbox DHCP server (101-254 by default) ...</p>
+<div class="highlight"><pre>allow-hotplug enp0s8
+<span class="c1">#iface enp3s0 inet dhcp</span>
+iface enp0s8 inet static
+address 192.168.56.50
+netmask 255.255.255.0
+network 192.168.56.0
+broadcast 192.168.56.255
+</pre></div>
+<p>... and modify <tt class="docutils literal">/etc/hosts</tt> on HOST by adding the VM static address.</p>
 <p>Happy hacking!</p>
 </div>
 </div>
+</div>
 
-    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-vm.html">vm</a>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-virtualbox.html">virtualbox</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
