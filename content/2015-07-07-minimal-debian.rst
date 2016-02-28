@@ -5,7 +5,7 @@ Minimal Debian
 :date: 2015-07-07 15:43
 :slug: minimal-debian
 :tags: debian, linux
-:modified: 2016-02-26 14:55:00
+:modified: 2016-02-28 14:16:00
 
 .. figure:: images/debianVader.png
     :alt: Debian Vader
