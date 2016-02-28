@@ -5,7 +5,7 @@ Minimal Ubuntu
 :date: 2014-07-07 01:23:00
 :tags: ubuntu, linux
 :slug: ubuntu-trusty-install
-:modified: 2016-02-14 00:08:00
+:modified: 2016-02-28 14:17:00
 
 .. image:: images/ubuntuTrusty.png
     :alt: Ubuntu Trusty Tahr
@@ -15,10 +15,10 @@ Minimal Ubuntu
 
 **Ubuntu 14.04 "Trusty Tahr"** is the latest `Long Term Support (LTS) <https://wiki.ubuntu.com/Releases>`_ release of the popular Linux operating system. I use Ubuntu's `minimal install image <https://help.ubuntu.com/community/Installation/MinimalCD>`_ to create a **console-only base configuration** that can be customized for various tasks and `alternate desktops <http://www.circuidipity.com/i3-tiling-window-manager.html>`_.
 
-Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire storage device divided into 3 partitions: a separate ``root`` partition, and `LUKS <https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup>`_ encrypted ``swap`` + ``home``. 
-
 Let's go!
 =========
+
+Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire storage device divided into 3 partitions: a separate ``root`` partition, and `LUKS <https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup>`_ encrypted ``swap`` + ``home``. 
 
 0. Prepare install media
 ------------------------
@@ -191,7 +191,7 @@ In the example below I create 3 partitions [4]_ on the disk:
     :width: 800px
     :height: 600px
 
-Setting ``Mount options: noatime`` decreases write operations and boosts drive speed:
+Setting ``Mount options: noatime`` decreases write operations and boosts drive speed ...
 
 .. image:: images/screenshot/trustyInstall/208.png
     :alt: Mount options
@@ -265,7 +265,7 @@ Setting ``Mount options: noatime`` decreases write operations and boosts drive s
     :width: 800px
     :height: 600px
 
-If the hard disk has not been securely wiped prior to installing Ubuntu (using a utility like `DBAN <http://www.circuidipity.com/multi-boot-usb.html>`_) you may want to configure ``Erase data: yes``. Note, however, that depending on the size of the disk this operation can last several hours:
+If the hard disk has not been securely wiped prior to installing Ubuntu (using a utility like `DBAN <http://www.circuidipity.com/multi-boot-usb.html>`_) you may want to configure ``Erase data: yes``. Note, however, that depending on the size of the disk this operation can last several hours ...
 
 .. image:: images/screenshot/trustyInstall/219.png
     :alt: Done with partition
@@ -393,7 +393,7 @@ If the hard disk has not been securely wiped prior to installing Ubuntu (using a
     :width: 800px
     :height: 600px
 
-**Reserved blocks** can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the ``5%`` default reserve set by Ubuntu to ``1%``:
+**Reserved blocks** can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, **non-root partitions** extra space can be gained by reducing the ``5%`` default reserve set by Ubuntu to ``1%`` ...
 
 .. image:: images/screenshot/trustyInstall/239.png
     :alt: Reserved blocks
@@ -434,7 +434,7 @@ If the hard disk has not been securely wiped prior to installing Ubuntu (using a
     :width: 800px
     :height: 600px
 
-Leave all tasks unmarked if you wish to start with a minimal, console-only base configuration ready for further customization. [5]_
+Leave all tasks unmarked if you wish to start with a minimal, console-only base configuration ready for further customization ... [5]_
 
 .. image:: images/screenshot/trustyInstall/301.png
     :alt: Software selection
@@ -442,7 +442,7 @@ Leave all tasks unmarked if you wish to start with a minimal, console-only base 
     :width: 800px
     :height: 600px
 
-Standard system utilties are downloaded and the installer makes its finishing touches:
+Standard system utilties are downloaded and the installer makes its finishing touches ...
 
 .. image:: images/screenshot/trustyInstall/302.png
     :alt: GRUB
@@ -465,7 +465,7 @@ Standard system utilties are downloaded and the installer makes its finishing to
 4. First boot
 -------------
 
-System will display a passphrase prompt to unlock encrypted ``home`` partition:
+System will display a passphrase prompt to unlock encrypted ``home`` partition ...
 
 .. image:: images/screenshot/trustyInstall/305.png
     :alt: Enter encrypt passphrase
@@ -486,7 +486,7 @@ Login ... then run ``timedatectl`` to confirm system time+date is properly set.
 
 After running a minimal install on my `C720 Ubuntubook <http://www.circuidipity.com/c720-ubuntubook.html>`_ (with LUKS- encrypted ``home``) I ran into this issue: `"Black screen instead of password prompt for boot encryption" <https://bugs.launchpad.net/ubuntu/+source/cryptsetup/+bug/1375435>`_.
 
-I had to enter my LUKS passphrase blind and ALT+F1 to tty ... or when I tried removing the GRUB options ``splash`` and/or ``quiet`` I lost the ability to enter the passphrase at all and a **hard reset** was required.
+I had to enter my LUKS passphrase blind and ALT+F1 to tty. When I tried removing the GRUB options ``splash`` and/or ``quiet`` I lost the ability to enter the passphrase at all and a **hard reset** was required.
 
 **Fix:** Modify ``/etc/default/grub`` ...                                                    
 
@@ -538,8 +538,10 @@ Create a temporary **wireless** interface connection to WPA2 encrypted access po
     $ sudo ip link set wlp1s0 up            # bring up interface
     $ iw dev wlp1s0 link                    # get link status
     $ sudo iw dev wlp1s0 scan | grep SSID   # scan for access points
-    $ sudo wpa_supplicant -i wlp1s0 -c<(wpa_passphrase "MY_SSID" "MY_PASSPHRASE")   # connect to WPA/WPA2 ... add '-B' to background process
-    $ sudo dhclient wlp1s0      # obtain IP address
+    $ sudo -i                               # simulate a root login shell (for wpa_supplicant)
+    # wpa_supplicant -B -i wlp1s0 -c<(wpa_passphrase "MY_SSID" "MY_PASSPHRASE")   # connect to WPA/WPA2 ... '-B' sends the process to the background
+    # exit
+    $ sudo dhclient wlp1s0                  # obtain IP address
 
 More permanent configurations may be set in ``/etc/default/interfaces``. Sample setup [6]_ with a static IP address ...
 
