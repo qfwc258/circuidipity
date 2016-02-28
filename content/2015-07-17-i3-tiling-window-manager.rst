@@ -4,7 +4,7 @@ Lightweight and a delight: i3 tiling window manager
 
 :date: 2015-07-17 00:20:00
 :slug: i3-tiling-window-manager
-:tags: i3, debian, linux
+:tags: i3, ubuntu, linux
 :modified: 2016-02-13 17:38:00
 
 As a former **Fluxbox** and **Openbox** user I can understand the love for a lightweight, minimal window manager where I can "paint" my applications across the screen.
