@@ -25,13 +25,13 @@
 
 <!-- article -->
 <h1>Minimal Ubuntu</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 14 February 2016</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 28 February 2016</p>
 <div id="article">
     <img alt="Ubuntu Trusty Tahr" class="align-left" src="images/ubuntuTrusty.png" style="width: 100px; height: 100px;" />
 <p><strong>Ubuntu 14.04 &quot;Trusty Tahr&quot;</strong> is the latest <a class="reference external" href="https://wiki.ubuntu.com/Releases">Long Term Support (LTS)</a> release of the popular Linux operating system. I use Ubuntu's <a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD">minimal install image</a> to create a <strong>console-only base configuration</strong> that can be customized for various tasks and <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">alternate desktops</a>.</p>
-<p>Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire storage device divided into 3 partitions: a separate <tt class="docutils literal">root</tt> partition, and <a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a> encrypted <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt>.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
+<p>Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire storage device divided into 3 partitions: a separate <tt class="docutils literal">root</tt> partition, and <a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a> encrypted <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt>.</p>
 <div class="section" id="prepare-install-media">
 <h3>0. Prepare install media</h3>
 <p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso">64-bit trusty minimal installer</a> (<a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/mini.iso">32-bit</a> for older machines) and burn to CD or <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick. <a class="footnote-reference" href="#id7" id="id1">[1]</a> Using the minimal console installer vs. the graphical installer provides more options during setup. <a class="footnote-reference" href="#id8" id="id2">[2]</a></p>
@@ -74,7 +74,7 @@
 <img alt="Partition size" class="align-center" src="images/screenshot/trustyInstall/205.png" style="width: 800px; height: 600px;" />
 <img alt="Primary partition" class="align-center" src="images/screenshot/trustyInstall/206.png" style="width: 800px; height: 600px;" />
 <img alt="Beginning" class="align-center" src="images/screenshot/trustyInstall/207.png" style="width: 800px; height: 600px;" />
-<p>Setting <tt class="docutils literal">Mount options: noatime</tt> decreases write operations and boosts drive speed:</p>
+<p>Setting <tt class="docutils literal">Mount options: noatime</tt> decreases write operations and boosts drive speed ...</p>
 <img alt="Mount options" class="align-center" src="images/screenshot/trustyInstall/208.png" style="width: 800px; height: 600px;" />
 <img alt="Mount options" class="align-center" src="images/screenshot/trustyInstall/209.png" style="width: 800px; height: 600px;" />
 <img alt="Done with partition" class="align-center" src="images/screenshot/trustyInstall/210.png" style="width: 800px; height: 600px;" />
@@ -87,7 +87,7 @@
 <img alt="Encrypt volume" class="align-center" src="images/screenshot/trustyInstall/216.png" style="width: 800px; height: 600px;" />
 <img alt="Encrypt key" class="align-center" src="images/screenshot/trustyInstall/217.png" style="width: 800px; height: 600px;" />
 <img alt="Random key" class="align-center" src="images/screenshot/trustyInstall/218.png" style="width: 800px; height: 600px;" />
-<p>If the hard disk has not been securely wiped prior to installing Ubuntu (using a utility like <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">DBAN</a>) you may want to configure <tt class="docutils literal">Erase data: yes</tt>. Note, however, that depending on the size of the disk this operation can last several hours:</p>
+<p>If the hard disk has not been securely wiped prior to installing Ubuntu (using a utility like <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">DBAN</a>) you may want to configure <tt class="docutils literal">Erase data: yes</tt>. Note, however, that depending on the size of the disk this operation can last several hours ...</p>
 <img alt="Done with partition" class="align-center" src="images/screenshot/trustyInstall/219.png" style="width: 800px; height: 600px;" />
 <img alt="Free space" class="align-center" src="images/screenshot/trustyInstall/220.png" style="width: 800px; height: 600px;" />
 <img alt="New partition" class="align-center" src="images/screenshot/trustyInstall/221.png" style="width: 800px; height: 600px;" />
@@ -109,7 +109,7 @@
 <img alt="Mount home" class="align-center" src="images/screenshot/trustyInstall/236.png" style="width: 800px; height: 600px;" />
 <img alt="Mount options" class="align-center" src="images/screenshot/trustyInstall/237.png" style="width: 800px; height: 600px;" />
 <img alt="Mount options" class="align-center" src="images/screenshot/trustyInstall/238.png" style="width: 800px; height: 600px;" />
-<p><strong>Reserved blocks</strong> can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, non-root partitions extra space can be gained by reducing the <tt class="docutils literal">5%</tt> default reserve set by Ubuntu to <tt class="docutils literal">1%</tt>:</p>
+<p><strong>Reserved blocks</strong> can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, <strong>non-root partitions</strong> extra space can be gained by reducing the <tt class="docutils literal">5%</tt> default reserve set by Ubuntu to <tt class="docutils literal">1%</tt> ...</p>
 <img alt="Reserved blocks" class="align-center" src="images/screenshot/trustyInstall/239.png" style="width: 800px; height: 600px;" />
 <img alt="Percent reserved" class="align-center" src="images/screenshot/trustyInstall/240.png" style="width: 800px; height: 600px;" />
 <img alt="Done with partition" class="align-center" src="images/screenshot/trustyInstall/241.png" style="width: 800px; height: 600px;" />
@@ -119,16 +119,16 @@
 <div class="section" id="install-packages-and-finish-up">
 <h3>3. Install packages and finish up</h3>
 <img alt="No automatic updates" class="align-center" src="images/screenshot/trustyInstall/300.png" style="width: 800px; height: 600px;" />
-<p>Leave all tasks unmarked if you wish to start with a minimal, console-only base configuration ready for further customization. <a class="footnote-reference" href="#id11" id="id5">[5]</a></p>
+<p>Leave all tasks unmarked if you wish to start with a minimal, console-only base configuration ready for further customization ... <a class="footnote-reference" href="#id11" id="id5">[5]</a></p>
 <img alt="Software selection" class="align-center" src="images/screenshot/trustyInstall/301.png" style="width: 800px; height: 600px;" />
-<p>Standard system utilties are downloaded and the installer makes its finishing touches:</p>
+<p>Standard system utilties are downloaded and the installer makes its finishing touches ...</p>
 <img alt="GRUB" class="align-center" src="images/screenshot/trustyInstall/302.png" style="width: 800px; height: 600px;" />
 <img alt="UTC" class="align-center" src="images/screenshot/trustyInstall/303.png" style="width: 800px; height: 600px;" />
 <img alt="Finish install" class="align-center" src="images/screenshot/trustyInstall/304.png" style="width: 800px; height: 600px;" />
 </div>
 <div class="section" id="first-boot">
 <h3>4. First boot</h3>
-<p>System will display a passphrase prompt to unlock encrypted <tt class="docutils literal">home</tt> partition:</p>
+<p>System will display a passphrase prompt to unlock encrypted <tt class="docutils literal">home</tt> partition ...</p>
 <img alt="Enter encrypt passphrase" class="align-center" src="images/screenshot/trustyInstall/305.png" style="width: 800px; height: 600px;" />
 <img alt="Login" class="align-center" src="images/screenshot/trustyInstall/306.png" style="width: 800px; height: 600px;" />
 <p>Login ... then run <tt class="docutils literal">timedatectl</tt> to confirm system time+date is properly set.</p>
@@ -136,7 +136,7 @@
 <div class="section" id="grub">
 <h3>5. GRUB</h3>
 <p>After running a minimal install on my <a class="reference external" href="http://www.circuidipity.com/c720-ubuntubook.html">C720 Ubuntubook</a> (with LUKS- encrypted <tt class="docutils literal">home</tt>) I ran into this issue: <a class="reference external" href="https://bugs.launchpad.net/ubuntu/+source/cryptsetup/+bug/1375435">&quot;Black screen instead of password prompt for boot encryption&quot;</a>.</p>
-<p>I had to enter my LUKS passphrase blind and ALT+F1 to tty ... or when I tried removing the GRUB options <tt class="docutils literal">splash</tt> and/or <tt class="docutils literal">quiet</tt> I lost the ability to enter the passphrase at all and a <strong>hard reset</strong> was required.</p>
+<p>I had to enter my LUKS passphrase blind and ALT+F1 to tty. When I tried removing the GRUB options <tt class="docutils literal">splash</tt> and/or <tt class="docutils literal">quiet</tt> I lost the ability to enter the passphrase at all and a <strong>hard reset</strong> was required.</p>
 <p><strong>Fix:</strong> Modify <tt class="docutils literal">/etc/default/grub</tt> ...</p>
 <div class="highlight"><pre><span class="c1"># Force the kernel to boot in normal text mode with &#39;=text&#39;</span>
 <span class="nv">GRUB_GFXPAYLOAD_LINUX</span><span class="o">=</span>text
@@ -168,8 +168,10 @@ iface enp3s0 inet static
 <div class="highlight"><pre>$ sudo ip link <span class="nb">set</span> wlp1s0 up            <span class="c1"># bring up interface</span>
 $ iw dev wlp1s0 link                    <span class="c1"># get link status</span>
 $ sudo iw dev wlp1s0 scan <span class="p">|</span> grep SSID   <span class="c1"># scan for access points</span>
-$ sudo wpa_supplicant -i wlp1s0 -c&lt;<span class="o">(</span>wpa_passphrase <span class="s2">&quot;MY_SSID&quot;</span> <span class="s2">&quot;MY_PASSPHRASE&quot;</span><span class="o">)</span>   <span class="c1"># connect to WPA/WPA2 ... add &#39;-B&#39; to background process</span>
-$ sudo dhclient wlp1s0      <span class="c1"># obtain IP address</span>
+$ sudo -i                               <span class="c1"># simulate a root login shell (for wpa_supplicant)</span>
+<span class="c1"># wpa_supplicant -B -i wlp1s0 -c&lt;(wpa_passphrase &quot;MY_SSID&quot; &quot;MY_PASSPHRASE&quot;)   # connect to WPA/WPA2 ... &#39;-B&#39; sends the process to the background</span>
+<span class="c1"># exit</span>
+$ sudo dhclient wlp1s0                  <span class="c1"># obtain IP address</span>
 </pre></div>
 <p>More permanent configurations may be set in <tt class="docutils literal">/etc/default/interfaces</tt>. Sample setup <a class="footnote-reference" href="#id12" id="id6">[6]</a> with a static IP address ...</p>
 <div class="highlight"><pre>iface wlp1s0 inet static
