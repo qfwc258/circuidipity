@@ -25,118 +25,119 @@
 
 <!-- article -->
 <h1>Minimal Ubuntu</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 28 February 2016</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Monday 25 April 2016</p>
 <div id="article">
-    <img alt="Ubuntu Trusty Tahr" class="align-left" src="images/ubuntuTrusty.png" style="width: 100px; height: 100px;" />
-<p><strong>Ubuntu 14.04 &quot;Trusty Tahr&quot;</strong> is the latest <a class="reference external" href="https://wiki.ubuntu.com/Releases">Long Term Support (LTS)</a> release of the popular Linux operating system. I use Ubuntu's <a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD">minimal install image</a> to create a <strong>console-only base configuration</strong> that can be customized for various tasks and <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">alternate desktops</a>.</p>
+    <img alt="Xerus" class="align-right" src="images/screenshot/ubuntuInstall/xerus.png" style="width: 200px; height: 200px;" />
+<p><strong>Ubuntu 16.04 &quot;Xenial Xerus&quot;</strong> is the latest <a class="reference external" href="https://wiki.ubuntu.com/Releases">Long Term Support (LTS)</a> release of the popular Linux operating system. I use Ubuntu's <a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD">minimal install image</a> to create a <strong>console-only base configuration</strong> that can be customized for various tasks and <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">alternate desktops</a>.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p>Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire storage device divided into 3 partitions: a separate <tt class="docutils literal">root</tt> partition, and <a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a> encrypted <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt>.</p>
+<p>Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire storage device divided into 3 partitions: an unencrypted <tt class="docutils literal">root</tt> partition, and encrypted <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt>.</p>
 <div class="section" id="prepare-install-media">
 <h3>0. Prepare install media</h3>
-<p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso">64-bit trusty minimal installer</a> (<a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/mini.iso">32-bit</a> for older machines) and burn to CD or <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick. <a class="footnote-reference" href="#id7" id="id1">[1]</a> Using the minimal console installer vs. the graphical installer provides more options during setup. <a class="footnote-reference" href="#id8" id="id2">[2]</a></p>
+<p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/mini.iso">64-bit xenial minimal installer</a> (<a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-i386/current/images/netboot/mini.iso">32-bit</a> for older machines) and burn to CD or <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick. <a class="footnote-reference" href="#id7" id="id1">[1]</a> Using the minimal console installer vs. the graphical installer provides more options during setup. <a class="footnote-reference" href="#id8" id="id2">[2]</a></p>
 <p>Minimal installer (requires network connection) downloads all the latest packages during setup.</p>
 </div>
 <div class="section" id="launch">
 <h3>1. Launch</h3>
-<img alt="Install" class="align-center" src="images/screenshot/trustyInstall/100.png" style="width: 800px; height: 600px;" />
-<img alt="Select Language" class="align-center" src="images/screenshot/trustyInstall/101.png" style="width: 800px; height: 600px;" />
-<img alt="Select Location" class="align-center" src="images/screenshot/trustyInstall/102.png" style="width: 800px; height: 600px;" />
-<img alt="Configure Keyboard" class="align-center" src="images/screenshot/trustyInstall/103.png" style="width: 800px; height: 600px;" />
-<img alt="Configure Keyboard" class="align-center" src="images/screenshot/trustyInstall/104.png" style="width: 800px; height: 600px;" />
-<img alt="Configure Keyboard" class="align-center" src="images/screenshot/trustyInstall/105.png" style="width: 800px; height: 600px;" />
-<img alt="Hostname" class="align-center" src="images/screenshot/trustyInstall/106.png" style="width: 800px; height: 600px;" />
-<img alt="Mirror Country" class="align-center" src="images/screenshot/trustyInstall/107.png" style="width: 800px; height: 600px;" />
-<img alt="Mirror archive" class="align-center" src="images/screenshot/trustyInstall/108.png" style="width: 800px; height: 600px;" />
-<img alt="Proxy" class="align-center" src="images/screenshot/trustyInstall/109.png" style="width: 800px; height: 600px;" />
+<img alt="Install" class="align-center" src="images/screenshot/ubuntuInstall/100.png" style="width: 800px; height: 600px;" />
+<img alt="Select Language" class="align-center" src="images/screenshot/ubuntuInstall/101.png" style="width: 800px; height: 600px;" />
+<img alt="Select Location" class="align-center" src="images/screenshot/ubuntuInstall/102.png" style="width: 800px; height: 600px;" />
+<img alt="Configure Keyboard" class="align-center" src="images/screenshot/ubuntuInstall/103.png" style="width: 800px; height: 600px;" />
+<img alt="Configure Keyboard" class="align-center" src="images/screenshot/ubuntuInstall/104.png" style="width: 800px; height: 600px;" />
+<img alt="Configure Keyboard" class="align-center" src="images/screenshot/ubuntuInstall/105.png" style="width: 800px; height: 600px;" />
+<img alt="Hostname" class="align-center" src="images/screenshot/ubuntuInstall/106.png" style="width: 800px; height: 600px;" />
+<img alt="Mirror Country" class="align-center" src="images/screenshot/ubuntuInstall/107.png" style="width: 800px; height: 600px;" />
+<img alt="Mirror archive" class="align-center" src="images/screenshot/ubuntuInstall/108.png" style="width: 800px; height: 600px;" />
+<img alt="Proxy" class="align-center" src="images/screenshot/ubuntuInstall/109.png" style="width: 800px; height: 600px;" />
 <p>Contents of the installer are now loaded into memory and the USB stick can safely be removed. <a class="footnote-reference" href="#id9" id="id3">[3]</a></p>
-<img alt="Full Name" class="align-center" src="images/screenshot/trustyInstall/110.png" style="width: 800px; height: 600px;" />
-<img alt="Username" class="align-center" src="images/screenshot/trustyInstall/111.png" style="width: 800px; height: 600px;" />
-<img alt="User password" class="align-center" src="images/screenshot/trustyInstall/112.png" style="width: 800px; height: 600px;" />
-<img alt="Verify password" class="align-center" src="images/screenshot/trustyInstall/113.png" style="width: 800px; height: 600px;" />
-<img alt="Encrypt home" class="align-center" src="images/screenshot/trustyInstall/114.png" style="width: 800px; height: 600px;" />
-<img alt="Configure clock" class="align-center" src="images/screenshot/trustyInstall/115.png" style="width: 800px; height: 600px;" />
-<img alt="Select time zone" class="align-center" src="images/screenshot/trustyInstall/116.png" style="width: 800px; height: 600px;" />
+<img alt="Full Name" class="align-center" src="images/screenshot/ubuntuInstall/110.png" style="width: 800px; height: 600px;" />
+<img alt="Username" class="align-center" src="images/screenshot/ubuntuInstall/111.png" style="width: 800px; height: 600px;" />
+<img alt="User password" class="align-center" src="images/screenshot/ubuntuInstall/112.png" style="width: 800px; height: 600px;" />
+<img alt="Verify password" class="align-center" src="images/screenshot/ubuntuInstall/113.png" style="width: 800px; height: 600px;" />
+<img alt="Encrypt home" class="align-center" src="images/screenshot/ubuntuInstall/114.png" style="width: 800px; height: 600px;" />
+<img alt="Configure clock" class="align-center" src="images/screenshot/ubuntuInstall/115.png" style="width: 800px; height: 600px;" />
+<img alt="Select time zone" class="align-center" src="images/screenshot/ubuntuInstall/116.png" style="width: 800px; height: 600px;" />
 </div>
 <div class="section" id="partitions">
 <h3>2. Partitions</h3>
 <p>In the example below I create 3 partitions <a class="footnote-reference" href="#id10" id="id4">[4]</a> on the disk:</p>
 <ul class="simple">
-<li>sda1 is a 20GB <tt class="docutils literal">root</tt> partition</li>
-<li>sda2 is a 1GB LUKS encrypted <tt class="docutils literal">swap</tt> partition using a <strong>random key</strong></li>
+<li>sda1 is a 24GB <tt class="docutils literal">root</tt> partition</li>
+<li>sda2 is a 2GB LUKS encrypted <tt class="docutils literal">swap</tt> partition using a <strong>random key</strong></li>
 <li>sda3 uses the remaining space as a LUKS encrypted <tt class="docutils literal">home</tt> partition using a <strong>passphrase</strong></li>
 </ul>
-<img alt="Partitioning method" class="align-center" src="images/screenshot/trustyInstall/200.png" style="width: 800px; height: 600px;" />
-<img alt="Partition disks" class="align-center" src="images/screenshot/trustyInstall/201.png" style="width: 800px; height: 600px;" />
-<img alt="Partition table" class="align-center" src="images/screenshot/trustyInstall/202.png" style="width: 800px; height: 600px;" />
-<img alt="Free space" class="align-center" src="images/screenshot/trustyInstall/203.png" style="width: 800px; height: 600px;" />
-<img alt="New Partition" class="align-center" src="images/screenshot/trustyInstall/204.png" style="width: 800px; height: 600px;" />
-<img alt="Partition size" class="align-center" src="images/screenshot/trustyInstall/205.png" style="width: 800px; height: 600px;" />
-<img alt="Primary partition" class="align-center" src="images/screenshot/trustyInstall/206.png" style="width: 800px; height: 600px;" />
-<img alt="Beginning" class="align-center" src="images/screenshot/trustyInstall/207.png" style="width: 800px; height: 600px;" />
-<p>Setting <tt class="docutils literal">Mount options: noatime</tt> decreases write operations and boosts drive speed ...</p>
-<img alt="Mount options" class="align-center" src="images/screenshot/trustyInstall/208.png" style="width: 800px; height: 600px;" />
-<img alt="Mount options" class="align-center" src="images/screenshot/trustyInstall/209.png" style="width: 800px; height: 600px;" />
-<img alt="Done with partition" class="align-center" src="images/screenshot/trustyInstall/210.png" style="width: 800px; height: 600px;" />
-<img alt="Free space" class="align-center" src="images/screenshot/trustyInstall/211.png" style="width: 800px; height: 600px;" />
-<img alt="New partition" class="align-center" src="images/screenshot/trustyInstall/212.png" style="width: 800px; height: 600px;" />
-<img alt="Partition size" class="align-center" src="images/screenshot/trustyInstall/213.png" style="width: 800px; height: 600px;" />
-<img alt="Primary partition" class="align-center" src="images/screenshot/trustyInstall/214-1.png" style="width: 800px; height: 600px;" />
-<img alt="Beginning" class="align-center" src="images/screenshot/trustyInstall/214.png" style="width: 800px; height: 600px;" />
-<img alt="Use as" class="align-center" src="images/screenshot/trustyInstall/215.png" style="width: 800px; height: 600px;" />
-<img alt="Encrypt volume" class="align-center" src="images/screenshot/trustyInstall/216.png" style="width: 800px; height: 600px;" />
-<img alt="Encrypt key" class="align-center" src="images/screenshot/trustyInstall/217.png" style="width: 800px; height: 600px;" />
-<img alt="Random key" class="align-center" src="images/screenshot/trustyInstall/218.png" style="width: 800px; height: 600px;" />
+<img alt="Partitioning method" class="align-center" src="images/screenshot/ubuntuInstall/200.png" style="width: 800px; height: 600px;" />
+<img alt="Partition disks" class="align-center" src="images/screenshot/ubuntuInstall/201.png" style="width: 800px; height: 600px;" />
+<img alt="Partition table" class="align-center" src="images/screenshot/ubuntuInstall/202.png" style="width: 800px; height: 600px;" />
+<img alt="Free space" class="align-center" src="images/screenshot/ubuntuInstall/203.png" style="width: 800px; height: 600px;" />
+<img alt="New Partition" class="align-center" src="images/screenshot/ubuntuInstall/204.png" style="width: 800px; height: 600px;" />
+<img alt="Partition size" class="align-center" src="images/screenshot/ubuntuInstall/205.png" style="width: 800px; height: 600px;" />
+<img alt="Primary partition" class="align-center" src="images/screenshot/ubuntuInstall/206.png" style="width: 800px; height: 600px;" />
+<img alt="Beginning" class="align-center" src="images/screenshot/ubuntuInstall/207.png" style="width: 800px; height: 600px;" />
+<p>Setting <tt class="docutils literal">Mount options: relatime</tt> decreases write operations and boosts drive speed ...</p>
+<img alt="Mount options" class="align-center" src="images/screenshot/ubuntuInstall/208.png" style="width: 800px; height: 600px;" />
+<img alt="Mount relatime" class="align-center" src="images/screenshot/ubuntuInstall/209.png" style="width: 800px; height: 600px;" />
+<img alt="Done with partition" class="align-center" src="images/screenshot/ubuntuInstall/210.png" style="width: 800px; height: 600px;" />
+<img alt="Free space" class="align-center" src="images/screenshot/ubuntuInstall/211.png" style="width: 800px; height: 600px;" />
+<img alt="New partition" class="align-center" src="images/screenshot/ubuntuInstall/204.png" style="width: 800px; height: 600px;" />
+<img alt="Partition size" class="align-center" src="images/screenshot/ubuntuInstall/213.png" style="width: 800px; height: 600px;" />
+<img alt="Primary partition" class="align-center" src="images/screenshot/ubuntuInstall/206.png" style="width: 800px; height: 600px;" />
+<img alt="Beginning" class="align-center" src="images/screenshot/ubuntuInstall/207.png" style="width: 800px; height: 600px;" />
+<img alt="Use as" class="align-center" src="images/screenshot/ubuntuInstall/215.png" style="width: 800px; height: 600px;" />
+<img alt="Encrypt volume" class="align-center" src="images/screenshot/ubuntuInstall/216.png" style="width: 800px; height: 600px;" />
+<img alt="Encrypt key" class="align-center" src="images/screenshot/ubuntuInstall/217.png" style="width: 800px; height: 600px;" />
+<img alt="Random key" class="align-center" src="images/screenshot/ubuntuInstall/218.png" style="width: 800px; height: 600px;" />
 <p>If the hard disk has not been securely wiped prior to installing Ubuntu (using a utility like <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">DBAN</a>) you may want to configure <tt class="docutils literal">Erase data: yes</tt>. Note, however, that depending on the size of the disk this operation can last several hours ...</p>
-<img alt="Done with partition" class="align-center" src="images/screenshot/trustyInstall/219.png" style="width: 800px; height: 600px;" />
-<img alt="Free space" class="align-center" src="images/screenshot/trustyInstall/220.png" style="width: 800px; height: 600px;" />
-<img alt="New partition" class="align-center" src="images/screenshot/trustyInstall/221.png" style="width: 800px; height: 600px;" />
-<img alt="Partition size" class="align-center" src="images/screenshot/trustyInstall/222.png" style="width: 800px; height: 600px;" />
-<img alt="Primary partition" class="align-center" src="images/screenshot/trustyInstall/223.png" style="width: 800px; height: 600px;" />
-<img alt="Beginning" class="align-center" src="images/screenshot/trustyInstall/224-1.png" style="width: 800px; height: 600px;" />
-<img alt="Use as" class="align-center" src="images/screenshot/trustyInstall/224.png" style="width: 800px; height: 600px;" />
-<img alt="Encrypt volume" class="align-center" src="images/screenshot/trustyInstall/225.png" style="width: 800px; height: 600px;" />
-<img alt="Done with partition" class="align-center" src="images/screenshot/trustyInstall/226.png" style="width: 800px; height: 600px;" />
-<img alt="Configure encrypted volumes" class="align-center" src="images/screenshot/trustyInstall/227.png" style="width: 800px; height: 600px;" />
-<img alt="Write changes" class="align-center" src="images/screenshot/trustyInstall/228.png" style="width: 800px; height: 600px;" />
-<img alt="Create encrypted volumes" class="align-center" src="images/screenshot/trustyInstall/229.png" style="width: 800px; height: 600px;" />
-<img alt="Devices to encrypt" class="align-center" src="images/screenshot/trustyInstall/230.png" style="width: 800px; height: 600px;" />
-<img alt="Finish" class="align-center" src="images/screenshot/trustyInstall/231.png" style="width: 800px; height: 600px;" />
-<img alt="Encrypt passphrase" class="align-center" src="images/screenshot/trustyInstall/232.png" style="width: 800px; height: 600px;" />
-<img alt="Verify passphrase" class="align-center" src="images/screenshot/trustyInstall/233.png" style="width: 800px; height: 600px;" />
-<img alt="Configure encrypt volume" class="align-center" src="images/screenshot/trustyInstall/234.png" style="width: 800px; height: 600px;" />
-<img alt="Mount point" class="align-center" src="images/screenshot/trustyInstall/235.png" style="width: 800px; height: 600px;" />
-<img alt="Mount home" class="align-center" src="images/screenshot/trustyInstall/236.png" style="width: 800px; height: 600px;" />
-<img alt="Mount options" class="align-center" src="images/screenshot/trustyInstall/237.png" style="width: 800px; height: 600px;" />
-<img alt="Mount options" class="align-center" src="images/screenshot/trustyInstall/238.png" style="width: 800px; height: 600px;" />
+<img alt="Done with partition" class="align-center" src="images/screenshot/ubuntuInstall/219.png" style="width: 800px; height: 600px;" />
+<img alt="Free space" class="align-center" src="images/screenshot/ubuntuInstall/220.png" style="width: 800px; height: 600px;" />
+<img alt="New partition" class="align-center" src="images/screenshot/ubuntuInstall/204.png" style="width: 800px; height: 600px;" />
+<img alt="Partition size" class="align-center" src="images/screenshot/ubuntuInstall/222.png" style="width: 800px; height: 600px;" />
+<img alt="Primary partition" class="align-center" src="images/screenshot/ubuntuInstall/206.png" style="width: 800px; height: 600px;" />
+<img alt="Use as" class="align-center" src="images/screenshot/ubuntuInstall/224.png" style="width: 800px; height: 600px;" />
+<img alt="Encrypt volume" class="align-center" src="images/screenshot/ubuntuInstall/216.png" style="width: 800px; height: 600px;" />
+<img alt="Encrypt key" class="align-center" src="images/screenshot/ubuntuInstall/216-1.png" style="width: 800px; height: 600px;" />
+<img alt="Passphrase" class="align-center" src="images/screenshot/ubuntuInstall/216-2.png" style="width: 800px; height: 600px;" />
+<img alt="Done with partition" class="align-center" src="images/screenshot/ubuntuInstall/226.png" style="width: 800px; height: 600px;" />
+<img alt="Configure encrypted volumes" class="align-center" src="images/screenshot/ubuntuInstall/227.png" style="width: 800px; height: 600px;" />
+<img alt="Write changes" class="align-center" src="images/screenshot/ubuntuInstall/228.png" style="width: 800px; height: 600px;" />
+<img alt="Create encrypted volumes" class="align-center" src="images/screenshot/ubuntuInstall/229.png" style="width: 800px; height: 600px;" />
+<img alt="Devices to encrypt" class="align-center" src="images/screenshot/ubuntuInstall/230.png" style="width: 800px; height: 600px;" />
+<img alt="Finish" class="align-center" src="images/screenshot/ubuntuInstall/231.png" style="width: 800px; height: 600px;" />
+<img alt="Encrypt passphrase" class="align-center" src="images/screenshot/ubuntuInstall/232.png" style="width: 800px; height: 600px;" />
+<img alt="Verify passphrase" class="align-center" src="images/screenshot/ubuntuInstall/233.png" style="width: 800px; height: 600px;" />
+<img alt="Configure encrypt volume" class="align-center" src="images/screenshot/ubuntuInstall/234.png" style="width: 800px; height: 600px;" />
+<img alt="Mount point" class="align-center" src="images/screenshot/ubuntuInstall/235.png" style="width: 800px; height: 600px;" />
+<img alt="Mount home" class="align-center" src="images/screenshot/ubuntuInstall/236.png" style="width: 800px; height: 600px;" />
+<img alt="Mount options" class="align-center" src="images/screenshot/ubuntuInstall/237.png" style="width: 800px; height: 600px;" />
+<img alt="Mount relatime" class="align-center" src="images/screenshot/ubuntuInstall/209.png" style="width: 800px; height: 600px;" />
 <p><strong>Reserved blocks</strong> can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, <strong>non-root partitions</strong> extra space can be gained by reducing the <tt class="docutils literal">5%</tt> default reserve set by Ubuntu to <tt class="docutils literal">1%</tt> ...</p>
-<img alt="Reserved blocks" class="align-center" src="images/screenshot/trustyInstall/239.png" style="width: 800px; height: 600px;" />
-<img alt="Percent reserved" class="align-center" src="images/screenshot/trustyInstall/240.png" style="width: 800px; height: 600px;" />
-<img alt="Done with partition" class="align-center" src="images/screenshot/trustyInstall/241.png" style="width: 800px; height: 600px;" />
-<img alt="Finish" class="align-center" src="images/screenshot/trustyInstall/242.png" style="width: 800px; height: 600px;" />
-<img alt="Write changes" class="align-center" src="images/screenshot/trustyInstall/243.png" style="width: 800px; height: 600px;" />
+<img alt="Reserved blocks" class="align-center" src="images/screenshot/ubuntuInstall/239.png" style="width: 800px; height: 600px;" />
+<img alt="Percent reserved" class="align-center" src="images/screenshot/ubuntuInstall/240.png" style="width: 800px; height: 600px;" />
+<img alt="Done with partition" class="align-center" src="images/screenshot/ubuntuInstall/241.png" style="width: 800px; height: 600px;" />
+<img alt="Finish" class="align-center" src="images/screenshot/ubuntuInstall/242.png" style="width: 800px; height: 600px;" />
+<img alt="Write changes" class="align-center" src="images/screenshot/ubuntuInstall/243.png" style="width: 800px; height: 600px;" />
 </div>
 <div class="section" id="install-packages-and-finish-up">
 <h3>3. Install packages and finish up</h3>
-<img alt="No automatic updates" class="align-center" src="images/screenshot/trustyInstall/300.png" style="width: 800px; height: 600px;" />
-<p>Leave all tasks unmarked if you wish to start with a minimal, console-only base configuration ready for further customization ... <a class="footnote-reference" href="#id11" id="id5">[5]</a></p>
-<img alt="Software selection" class="align-center" src="images/screenshot/trustyInstall/301.png" style="width: 800px; height: 600px;" />
-<p>Standard system utilties are downloaded and the installer makes its finishing touches ...</p>
-<img alt="GRUB" class="align-center" src="images/screenshot/trustyInstall/302.png" style="width: 800px; height: 600px;" />
-<img alt="UTC" class="align-center" src="images/screenshot/trustyInstall/303.png" style="width: 800px; height: 600px;" />
-<img alt="Finish install" class="align-center" src="images/screenshot/trustyInstall/304.png" style="width: 800px; height: 600px;" />
+<img alt="No automatic updates" class="align-center" src="images/screenshot/ubuntuInstall/300.png" style="width: 800px; height: 600px;" />
+<p>Select <tt class="docutils literal">[*] standard system utilities</tt>  and leave the remaining tasks unmarked if you wish to start with a minimal, console-only base configuration ready for further customization ... <a class="footnote-reference" href="#id11" id="id5">[5]</a></p>
+<img alt="Software selection" class="align-center" src="images/screenshot/ubuntuInstall/301.png" style="width: 800px; height: 600px;" />
+<p>Packages are downloaded and the installer makes its finishing touches ...</p>
+<img alt="GRUB" class="align-center" src="images/screenshot/ubuntuInstall/302.png" style="width: 800px; height: 600px;" />
+<img alt="UTC" class="align-center" src="images/screenshot/ubuntuInstall/303.png" style="width: 800px; height: 600px;" />
+<img alt="Finish install" class="align-center" src="images/screenshot/ubuntuInstall/304.png" style="width: 800px; height: 600px;" />
 </div>
 <div class="section" id="first-boot">
 <h3>4. First boot</h3>
 <p>System will display a passphrase prompt to unlock encrypted <tt class="docutils literal">home</tt> partition ...</p>
-<img alt="Enter encrypt passphrase" class="align-center" src="images/screenshot/trustyInstall/305.png" style="width: 800px; height: 600px;" />
-<img alt="Login" class="align-center" src="images/screenshot/trustyInstall/306.png" style="width: 800px; height: 600px;" />
+<img alt="Enter encrypt passphrase" class="align-center" src="images/screenshot/ubuntuInstall/305.png" style="width: 800px; height: 600px;" />
+<img alt="Login" class="align-center" src="images/screenshot/ubuntuInstall/306.png" style="width: 800px; height: 600px;" />
 <p>Login ... then run <tt class="docutils literal">timedatectl</tt> to confirm system time+date is properly set.</p>
 </div>
 <div class="section" id="grub">
 <h3>5. GRUB</h3>
-<p>After running a minimal install on my <a class="reference external" href="http://www.circuidipity.com/c720-ubuntubook.html">C720 Ubuntubook</a> (with LUKS- encrypted <tt class="docutils literal">home</tt>) I ran into this issue: <a class="reference external" href="https://bugs.launchpad.net/ubuntu/+source/cryptsetup/+bug/1375435">&quot;Black screen instead of password prompt for boot encryption&quot;</a>.</p>
-<p>I had to enter my LUKS passphrase blind and ALT+F1 to tty. When I tried removing the GRUB options <tt class="docutils literal">splash</tt> and/or <tt class="docutils literal">quiet</tt> I lost the ability to enter the passphrase at all and a <strong>hard reset</strong> was required.</p>
+<p>After running a minimal install on my <a class="reference external" href="http://www.circuidipity.com/c720-ubuntubook.html">C720 Ubuntubook</a> with encrypted <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt> partitions I ran into this issue: <a class="reference external" href="https://bugs.launchpad.net/ubuntu/+source/cryptsetup/+bug/1375435">&quot;Black screen instead of password prompt for boot encryption&quot;</a>.</p>
+<p>I had to enter my passphrase blind and <tt class="docutils literal">ALT+F1</tt> to console. When I tried removing the GRUB options <tt class="docutils literal">splash</tt> and/or <tt class="docutils literal">quiet</tt> I lost the ability to enter the passphrase at all and a hard reset was required.</p>
 <p><strong>Fix:</strong> Modify <tt class="docutils literal">/etc/default/grub</tt> ...</p>
 <div class="highlight"><pre><span class="c1"># Force the kernel to boot in normal text mode with &#39;=text&#39;</span>
 <span class="nv">GRUB_GFXPAYLOAD_LINUX</span><span class="o">=</span>text
@@ -144,7 +145,7 @@
 <p>... and update ...</p>
 <div class="highlight"><pre>$ sudo update-grub
 </pre></div>
-<p>Now it works! Chromebook currently is the only device I have run into this issue.</p>
+<p>Now it works! My chromebook is the only device I have run into this issue.</p>
 <p>See: <a class="reference external" href="https://www.gnu.org/software/grub/manual/html_node/gfxpayload.html">GNU gfxpayload</a></p>
 </div>
 <div class="section" id="network">
@@ -189,8 +190,8 @@ iface wlp1s0 inet dhcp
     wpa-psk MY_PASSPHRASE
     dns-nameservers 8.8.8.8 8.8.4.4
 </pre></div>
-<p>Once a link is established an optional network manager utility may be installed. Packages <tt class="docutils literal"><span class="pre">network-manager</span></tt> and <tt class="docutils literal"><span class="pre">network-manager-gnome</span></tt> provide the console <tt class="docutils literal">nmcli</tt> and graphical <tt class="docutils literal"><span class="pre">nm-applet</span></tt> clients respectively ...</p>
-<div class="highlight"><pre>$ sudo apt install network-manager
+<p>Once a link is established an optional network manager utility may be installed. Package <tt class="docutils literal"><span class="pre">network-manager-gnome</span></tt> provides the console <tt class="docutils literal">nmcli</tt> and graphical <tt class="docutils literal"><span class="pre">nm-applet</span></tt> clients ...</p>
+<div class="highlight"><pre>$ sudo apt install network-manager-gnome
 </pre></div>
 <p>Comment out (deactivate) any entries in <tt class="docutils literal">/etc/network/interfaces</tt> that will be managed by <tt class="docutils literal"><span class="pre">network-manager</span></tt>.</p>
 </div>
@@ -222,7 +223,7 @@ iface wlp1s0 inet dhcp
 <table class="docutils footnote" frame="void" id="id10" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>For storage devices &gt;=128GB I create separate <tt class="docutils literal">root</tt> + <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt> partitions. Smaller devices get <tt class="docutils literal">boot</tt> + <tt class="docutils literal">swap</tt> + <tt class="docutils literal">root</tt> partitions and note encrypted <tt class="docutils literal">root</tt> <strong>requires</strong> an unencrypted <tt class="docutils literal">boot</tt>.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>For storage devices &gt;=128GB I create separate <tt class="docutils literal">root</tt> + <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt> partitions. Smaller devices get <tt class="docutils literal">boot</tt> + <tt class="docutils literal">swap</tt> + <tt class="docutils literal">root</tt> partitions. Note encrypted <tt class="docutils literal">root</tt> <strong>requires</strong> an unencrypted <tt class="docutils literal">boot</tt>.</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id11" rules="none">
