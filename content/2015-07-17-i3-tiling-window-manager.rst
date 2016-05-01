@@ -5,13 +5,11 @@ Lightweight and a delight: i3 tiling window manager
 :date: 2015-07-17 00:20:00
 :slug: i3-tiling-window-manager
 :tags: i3, ubuntu, linux
-:modified: 2016-02-13 17:38:00
+:modified: 2016-04-30 16:38:00
 
-As a former **Fluxbox** and **Openbox** user I can understand the love for a lightweight, minimal window manager where I can "paint" my applications across the screen.
+As a former **Fluxbox** and **Openbox** user I can understand the love for a lightweight, minimal window manager where I can "paint" my applications across the screen. I was curious about `tiling window managers <https://en.wikipedia.org/wiki/Tiling_window_manager>`_ but never quite grokked the advantage from screenshots: seeing consoles arranged in a grid made me think `tmux <http://www.circuidipity.com/tmux.html>`_ a better choice for that task, and why would I want to watch a video in a reduced square in the corner of a screen?
 
-Subsequently I wandered through **Xfce** and **LXDE** and all the way to the other end of the scale with Ubuntu's full-bore desktop environment **Unity**. I was curious about `tiling window managers <https://en.wikipedia.org/wiki/Tiling_window_manager>`_ but never quite grokked the advantage from screenshots: seeing consoles arranged in a grid made me think `tmux <http://www.circuidipity.com/tmux.html>`_ a better choice for **that** task, and why would I want to watch a video in a reduced square in the corner of a screen?
-
-And then I tried `i3 <https://i3wm.org/>`_ and realized I have found my new default desktop:
+And then I tried `i3 <https://i3wm.org/>`_ and found my new default desktop:
 
 * ``startx`` to X almost instantaneous on `Ubuntubook <http://www.circuidipity.com/c720-ubuntubook.html>`_
 
@@ -28,16 +26,16 @@ Starting out I find myself mostly happy with the `default keybindings <https://i
 Install
 =======
 
-To obtain the latest window manager packages I use the third-party `i3 Ubuntu repository <https://i3wm.org/docs/repositories.html>`_ ...
+I use the third-party `i3 Ubuntu repository <https://i3wm.org/docs/repositories.html>`_. Download and install the keyring, configure apt, and install the latest window manager packages ...
 
 .. code-block:: bash
 
+    $ wget http://debian.sur5r.net/i3/pool/universe/s/sur5r-keyring/sur5r-keyring_2015.12.29_all.deb
+    $ sudo dpkg -i sur5r-keyring*.deb
     $ sudo cp /etc/apt/sources.list /etc/apt/sources.list.$(date +%FT%H%M%S).bak
     $ sudo echo "## i3 window manager" >> /etc/apt/sources.list
     $ sudo echo "deb http://debian.sur5r.net/i3/ $(lsb_release -c -s) universe" >> /etc/apt/sources.list
-    $ sudo apt update       # Expect an error here ... because keyring not yet installed
-    $ sudo apt-get --allow-unauthenticated install sur5r-keyring && sudo apt update
-    $ sudo apt install i3 i3status i3lock
+    $ sudo apt update && sudo apt install i3 i3status i3lock
 
 Auto-start applications
 =======================
