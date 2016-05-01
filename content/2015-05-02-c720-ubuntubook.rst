@@ -6,20 +6,20 @@ Chromebook to Ubuntubook
 :slug: c720-ubuntubook
 :template: article-project
 :tags: chromebook, ubuntu, linux
-:modified: 2016-02-14 00:29:00
+:modified: 2016-04-30 19:38:00
 
-Replace **Chrome OS** permanently with **Ubuntu 15.10 "Wily Werewolf** on the **Acer C720 Chromebook**.
+Replace **Chrome OS** permanently with **Ubuntu 16.04 "Xenial Xerus"** on the **Acer C720 Chromebook**.
 
-.. image:: images/wily_werewolf.png
+.. image:: images/jessiebook.png
     :align: right
-    :alt: Ubuntu 15.10
-    :width: 250px
-    :height: 250px
+    :alt: Ubuntu 16.04
+    :width: 300px
+    :height: 161px
 
 Let's go!
 =========
 
-Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with `Debian <http://www.circuidipity.com/c720-chromebook-to-jessiebook.html>`_, followed by `Lubuntu 14.04 <http://www.circuidipity.com/c720-lubuntubook.html>`_ and `Arch <http://www.circuidipity.com/arch-install-encrypt.html>`_, and now experimenting with Ubuntu + `i3 tiling window manager <http://www.circuidipity.com/i3-tiling-window-manager.html>`_.
+Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with `Debian <http://www.circuidipity.com/c720-chromebook-to-jessiebook.html>`_, followed by `Lubuntu 14.04 <http://www.circuidipity.com/c720-lubuntubook.html>`_ and `Arch <http://www.circuidipity.com/arch-install-encrypt.html>`_, and now running happy with `Ubuntu + i3 tiling window manager <http://www.circuidipity.com/20160501.html>`_.
 
 This device is available in a few different configurations. Mine is the non-touchscreen model ``C720-2848`` with (non-expandable) **2GB RAM** and a (user-replaceable) **16GB SSD** [1]_.
 
@@ -36,7 +36,7 @@ See: `Create a Chromebook recovery image <https://support.google.com/chromebook/
 1. Prepare install media
 ========================
 
-Download the `64-bit mini.iso installer <http://archive.ubuntu.com/ubuntu/dists/wily/main/installer-amd64/current/images/netboot/>`_ and `flash the image <https://help.ubuntu.com/community/Installation/FromUSBStick>`_ to a USB stick.
+Download the `64-bit mini.iso installer <http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/>`_ and `flash the image <https://help.ubuntu.com/community/Installation/FromUSBStick>`_ to a USB stick.
 
 **Alternative:** Add the image to a `USB stick with multiple Linux installers <http://www.circuidipity.com/multi-boot-usb.html>`_.
 
@@ -140,9 +140,7 @@ See: `Chromium OS <http://www.chromium.org/chromium-os>`_ developer information 
 3. Install Ubuntu
 ==================
 
-My `visual screenshot tour <http://www.circuidipity.com/ubuntu-trusty-install.html>`_ of installing Ubuntu 14.04 - a `Long Term Support (LTS) <https://wiki.ubuntu.com/Releases>`_ release. Ubuntu's minimal install image makes it easy to create a console-only base configuration that can be later customized for various tasks and alternate desktops.
-
-**Alternative:** At the ``tasksel`` stage select a different desktop: `Lubuntu (LXDE) <http://www.circuidipity.com/c720-lubuntubook.html>`_, Xubuntu (XFCE), etc.
+My `visual screenshot tour <http://www.circuidipity.com/ubuntu-trusty-install.html>`_ of installing Ubuntu 16.04 - a `Long Term Support (LTS) <https://wiki.ubuntu.com/Releases>`_ release. Ubuntu's minimal install image makes it easy to create a console-only base configuration that can be later customized for various tasks and alternate desktops. I like the `lightweight and delightful i3 window manager <http://www.circuidipity.com/20160501.html>`_. 
 
 Chromebook's SSD will be divided into 3 partitions ...
 
