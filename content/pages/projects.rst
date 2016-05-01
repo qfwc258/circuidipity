@@ -6,6 +6,23 @@ Projects
 
 .. class:: invisiblelink
 
+    .. image:: images/ubuntu-crane-thumb.png
+        :alt: Minimal to Morebuntu
+        :width: 150px
+        :height: 150px
+        :align: left
+        :target: 20160501.html
+
+.. raw:: html
+
+    <div class="projectx">
+        <h2>Minimal to Morebuntu</h2>
+        <p>Start with a <a href="20160501.html">base configuration of Ubuntu and go from there ...</a></p>
+        <p style="clear:both;"></p>
+    </div>
+
+.. class:: invisiblelink
+
     .. image:: images/raspberry-pi-home-server-thumb.png
         :alt: Raspberry Pi Home Server
         :width: 150px
