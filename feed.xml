@@ -1,5 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-02-12T23:13:00-05:00</updated><entry><title>LPTHW Exercise 18-21: Functions, Variables, Return</title><link href="http://www.circuidipity.com/lpthw-e18-21.html" rel="alternate"></link><updated>2015-11-19T17:10:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-19:lpthw-e18-21.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; How long will it take for Sebastiaan to pedal his bike to &lt;em&gt;Proxima Centauri&lt;/em&gt;?&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-05-01T11:59:00-04:00</updated><entry><title>Minimal to Morebuntu</title><link href="http://www.circuidipity.com/20160501.html" rel="alternate"></link><updated>2016-05-01T11:59:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-05-01:20160501.html</id><summary type="html">&lt;img alt="Ubuntu under-construction" class="align-right" src="images/ubuntu-crane-300.png" style="width: 300px; height: 300px;" /&gt;
+&lt;p&gt;Start with a &lt;strong&gt;minimal install of Ubuntu 16.04 &amp;quot;Xenial Xerus&amp;quot;&lt;/strong&gt; and roll a &lt;strong&gt;Morebuntu&lt;/strong&gt; customized with the &lt;strong&gt;i3 tiling window manager&lt;/strong&gt; plus a collection of desktop applications.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;I use Ubuntu's &lt;a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD"&gt;minimal install image&lt;/a&gt; to create a console-only base configuration.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="minimal-ubuntu"&gt;
+&lt;h2&gt;0. Minimal Ubuntu&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Start here:&lt;/strong&gt; A &lt;a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html"&gt;visual walk-through of a sample Ubuntu setup&lt;/a&gt; that makes use of an entire storage device divided into 3 partitions: an unencrypted &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; partition, and encrypted &lt;tt class="docutils literal"&gt;swap + home&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="install-x"&gt;
+&lt;h2&gt;1. Install X&lt;/h2&gt;
+&lt;p&gt;After a successful first boot and network active ... setup the X environment ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install xorg xinput xbindkeys xbacklight xvkbd fonts-liberation ttf-ubuntu-font-family
+$ sudo apt install rxvt-unicode-256color xfonts-terminus
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="window-manager"&gt;
+&lt;h2&gt;2. Window Manager&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Lots&lt;/strong&gt; of choices! I like the &lt;a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html"&gt;lightweight and delightful i3 window manager&lt;/a&gt;, with the latest packages provided by the i3 project's &lt;a class="reference external" href="https://i3wm.org/docs/repositories.html"&gt;Ubuntu repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Styling:&lt;/strong&gt; I use &lt;a class="reference external" href="http://www.ravefinity.com/p/download-ambiance-radiance-colors.html"&gt;Ambiance Colors&lt;/a&gt; + &lt;a class="reference external" href="http://www.ravefinity.com/p/vibrancy-colors-gtk-icon-theme.html"&gt;Vibrancy Color Icon&lt;/a&gt; themes. Download the &lt;tt class="docutils literal"&gt;deb&lt;/tt&gt; packages and install with &lt;tt class="docutils literal"&gt;sudo dpkg &lt;span class="pre"&gt;-i&lt;/span&gt; *.deb&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Depends: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;gtk2-engines-{murrine,pixbuf}&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install gnome-themes-standard gtk2-engines-murrine gtk2-engines-pixbuf lxappearance qt4-qtconfig
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Theming for QT5 apps can be configured using the &lt;tt class="docutils literal"&gt;qt5ct&lt;/tt&gt; utility. Download the package &lt;a class="reference external" href="http://ppa.launchpad.net/nilarimogard/webupd8/ubuntu/pool/main/q/qt5ct/"&gt;available on the WebUpd8 PPA&lt;/a&gt; and install.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="applications"&gt;
+&lt;h2&gt;3. Applications&lt;/h2&gt;
+&lt;p&gt;Install some favourite desktop packages ...&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;editor&lt;/strong&gt; - &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;terminal&lt;/strong&gt; - &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;rxvt-unicode&lt;/span&gt;&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;tmux&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;net&lt;/strong&gt; - &lt;tt class="docutils literal"&gt;firefox&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;transmission-gtk&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;multimedia&lt;/strong&gt; - &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ubuntu-restricted-extras&lt;/span&gt;&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;vlc&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;rhythmbox&lt;/tt&gt; (with &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--no-install-recommends&lt;/span&gt;&lt;/tt&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;images&lt;/strong&gt; - &lt;tt class="docutils literal"&gt;eog&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;scrot&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;geeqie&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;gimp&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;docs&lt;/strong&gt; - &lt;tt class="docutils literal"&gt;libreoffice&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;qpdfview&lt;/tt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install vim rxvt-unicode tmux most
+$ sudo apt --no-install-recommends install rhythmbox
+$ sudo apt install pulseaudio pulseaudio-utils pavucontrol gstreamer1.0-pulseaudio alsa-utils sox
+$ sudo apt install firefox default-jre icedtea-plugin transmission-gtk
+$ sudo apt install ubuntu-restricted-extras ffmpeg rhythmbox-plugins vlc
+$ sudo apt install eog scrot geeqie gimp gimp-help-en gimp-data-extras
+$ sudo apt install libreoffice libreoffice-help-en-us libreoffice-gnome qpdfview
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="update-alternatives"&gt;
+&lt;h2&gt;4. Update-alternatives&lt;/h2&gt;
+&lt;p&gt;Configure symbolic links that determine default commands ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo update-alternatives --config editor
+$ sudo update-alternatives --config pager
+$ sudo update-alternatives --config x-terminal-emulator
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="morebuntu"&gt;
+&lt;h2&gt;5. Morebuntu&lt;/h2&gt;
+&lt;p&gt;My &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/scripts/morebuntu.sh"&gt;morebuntu shell script&lt;/a&gt; that covers most of steps 1-4.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="ubuntu"></category><category term="linux"></category><category term="i3"></category></entry><entry><title>LPTHW Exercise 18-21: Functions, Variables, Return</title><link href="http://www.circuidipity.com/lpthw-e18-21.html" rel="alternate"></link><updated>2015-11-19T17:10:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-19:lpthw-e18-21.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; How long will it take for Sebastiaan to pedal his bike to &lt;em&gt;Proxima Centauri&lt;/em&gt;?&lt;/p&gt;
 &lt;p&gt;Code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;import sys
 import textwrap
@@ -814,29 +873,4 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/irqbalance.serv
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;p&gt;Source: &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Systemd#Writing_unit_files"&gt;Writing systemd unit files&lt;/a&gt;&lt;/p&gt;
-</summary><category term="linux"></category></entry><entry><title>Raspberry Pi RAM gobbled up by irqbalance</title><link href="http://www.circuidipity.com/raspberry-pi-ram-irqbalance.html" rel="alternate"></link><updated>2015-08-04T16:34:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-07-30:raspberry-pi-ram-irqbalance.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Problem:&lt;/strong&gt; After a few days uptime my Pi sees hundreds of MB gobbled up by the &lt;tt class="docutils literal"&gt;irqbalance&lt;/tt&gt; daemon (which balances interrupts across multiple CPUs). Package version is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;1.0.6-3&lt;/span&gt;&lt;/tt&gt; on Debian &lt;tt class="docutils literal"&gt;jessie/armhf&lt;/tt&gt; and its a &lt;a class="reference external" href="https://bugs.launchpad.net/ubuntu/+source/irqbalance/+bug/1247107"&gt;known bug&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; &lt;strong&gt;0)&lt;/strong&gt; Restart &lt;tt class="docutils literal"&gt;irqbalance&lt;/tt&gt; in nightly cron job, or &lt;strong&gt;1)&lt;/strong&gt; Compile and install a newer, patched version (my choice).&lt;/p&gt;
-&lt;p&gt;Remove buggy &lt;tt class="docutils literal"&gt;irqbalance&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo systemctl stop irqbalance
-$ sudo apt-get --purge remove irqbalance
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Install development tools on the Pi:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt-get install build-essential autogen automake libtool pkg-config checkinstall
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/Irqbalance/irqbalance"&gt;Download source&lt;/a&gt; and unpack:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ wget https://github.com/Irqbalance/irqbalance/archive/v1.0.9.tar.gz &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; tar xvzf v1.0.9.tar.gz
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Checkinstall&lt;/strong&gt; is an easy way to make Debian packages for personal use. Compile and (check)install:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; irqbalance-1.0.9
-$ /autogen.sh
-$ ./configure
-$ make
-$ sudo checkinstall make install
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Start new &lt;tt class="docutils literal"&gt;irqbalance&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo /usr/local/sbin/irqbalance &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Optional: Configure the daemon for &lt;a class="reference external" href="http://www.circuidipity.com/writing-systemd-service-files.html"&gt;systemd control and auto-start at boot&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I have been running the daemon for a few days now and it stays around 0.6% memory usage vs &lt;strong&gt;20%&lt;/strong&gt; (and growing) of the previous packaged version.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-</summary><category term="raspberry pi"></category><category term="debian"></category><category term="linux"></category></entry></feed>
+</summary><category term="linux"></category></entry></feed>

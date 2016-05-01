@@ -24,14 +24,14 @@
 
 <!-- article -->
 <h1>Chromebook to Ubuntubook</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 14 February 2016</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Saturday 30 April 2016</p>
 <div id="article">
-    <p>Replace <strong>Chrome OS</strong> permanently with <strong>Ubuntu 15.10 &quot;Wily Werewolf</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
-<img alt="Ubuntu 15.10" class="align-right" src="images/wily_werewolf.png" style="width: 250px; height: 250px;" />
+    <p>Replace <strong>Chrome OS</strong> permanently with <strong>Ubuntu 16.04 &quot;Xenial Xerus&quot;</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
+<img alt="Ubuntu 16.04" class="align-right" src="images/jessiebook.png" style="width: 300px; height: 161px;" />
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p>Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with <a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html">Debian</a>, followed by <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Lubuntu 14.04</a> and <a class="reference external" href="http://www.circuidipity.com/arch-install-encrypt.html">Arch</a>, and now experimenting with Ubuntu + <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">i3 tiling window manager</a>.</p>
-<p>This device is available in a few different configurations. Mine is the non-touchscreen model <tt class="docutils literal"><span class="pre">C720-2848</span></tt> with (non-expandable) <strong>2GB RAM</strong> and a (user-replaceable) <strong>16GB SSD</strong> <a class="footnote-reference" href="#id9" id="id1">[1]</a>.</p>
+<p>Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with <a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html">Debian</a>, followed by <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Lubuntu 14.04</a> and <a class="reference external" href="http://www.circuidipity.com/arch-install-encrypt.html">Arch</a>, and now running happy with <a class="reference external" href="http://www.circuidipity.com/20160501.html">Ubuntu + i3 tiling window manager</a>.</p>
+<p>This device is available in a few different configurations. Mine is the non-touchscreen model <tt class="docutils literal"><span class="pre">C720-2848</span></tt> with (non-expandable) <strong>2GB RAM</strong> and a (user-replaceable) <strong>16GB SSD</strong> <a class="footnote-reference" href="#id8" id="id1">[1]</a>.</p>
 </div>
 <div class="section" id="recovery-image">
 <h2>0. Recovery Image</h2>
@@ -44,9 +44,9 @@
 </div>
 <div class="section" id="prepare-install-media">
 <h2>1. Prepare install media</h2>
-<p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/wily/main/installer-amd64/current/images/netboot/">64-bit mini.iso installer</a> and <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick.</p>
+<p>Download the <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/">64-bit mini.iso installer</a> and <a class="reference external" href="https://help.ubuntu.com/community/Installation/FromUSBStick">flash the image</a> to a USB stick.</p>
 <p><strong>Alternative:</strong> Add the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>.</p>
-<p>Using the minimal console installer (requires network connection) vs. the graphical <a class="reference external" href="https://help.ubuntu.com/community/Ubuntu/GetUbuntu">Ubuntu installer</a> provides more options during setup <a class="footnote-reference" href="#id10" id="id2">[2]</a> and downloads all the latest packages.</p>
+<p>Using the minimal console installer (requires network connection) vs. the graphical <a class="reference external" href="https://help.ubuntu.com/community/Ubuntu/GetUbuntu">Ubuntu installer</a> provides more options during setup <a class="footnote-reference" href="#id9" id="id2">[2]</a> and downloads all the latest packages.</p>
 </div>
 <div class="section" id="seabios">
 <h2>2. SeaBIOS</h2>
@@ -61,7 +61,7 @@
 <p>This is what you see ...</p>
 <div class="figure">
 <img alt="C720 annotated innards" src="images/c720-chromebook-annotated-innards.png" style="width: 800px; height: 558px;" />
-<p class="caption">[ Image: <a class="footnote-reference" href="#id11" id="id4">[3]</a> The battery lock screw is #6 and the write-protect screw is #7 ].</p>
+<p class="caption">[ Image: <a class="footnote-reference" href="#id10" id="id4">[3]</a> The battery lock screw is #6 and the write-protect screw is #7 ].</p>
 </div>
 <p><span class="warning">WARNING!</span> This will <strong>wipe out</strong> whatever is installed on the SSD ...</p>
 <ul class="simple">
@@ -94,7 +94,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <li>Remove the bottom cover again and reinstall the write-lock screw to protect the BIOS</li>
 <li>Close cover and reinstall all the case screws</li>
 </ul>
-<p>Re-connect the power, insert the USB stick prepared in Step 1, and power up the Chromebook <a class="footnote-reference" href="#id12" id="id5">[4]</a>.</p>
+<p>Re-connect the power, insert the USB stick prepared in Step 1, and power up the Chromebook <a class="footnote-reference" href="#id11" id="id5">[4]</a>.</p>
 <p>See: <a class="reference external" href="http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html">Useful GBB flags</a> for <a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/c720-debian/">another new free software machine</a></p>
 </div>
 <div class="section" id="developer-mode-method">
@@ -104,7 +104,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <li>With the Chromebook off... Hold down <tt class="docutils literal">ESC+F3</tt> (Refresh) keys and power on the device</li>
 <li>Invoke Recovery, and at the Recovery screen press <tt class="docutils literal">Ctrl+D</tt></li>
 <li>Device will prompt for confirmation, press <tt class="docutils literal">ENTER</tt> and the system reboots into developer mode</li>
-<li>Scary white boot screen appears and you need to press <tt class="docutils literal">Ctrl+D</tt> to continue boot <a class="footnote-reference" href="#id13" id="id6">[5]</a></li>
+<li>Scary white boot screen appears and you need to press <tt class="docutils literal">Ctrl+D</tt> to continue boot <a class="footnote-reference" href="#id12" id="id6">[5]</a></li>
 </ul>
 <p>Enable the <strong>USB Boot</strong> and <strong>Legacy BIOS</strong> modes by opening the shell with <tt class="docutils literal">Ctrl+Alt+T</tt> and enter <tt class="docutils literal">shell</tt>. Set <tt class="docutils literal">dev_boot_usb</tt> and <tt class="docutils literal">dev_boot_legacy</tt> to active ...</p>
 <div class="highlight"><pre>$ sudo crossystem <span class="nv">dev_boot_usb</span><span class="o">=</span>1
@@ -116,8 +116,7 @@ $ sudo crossystem <span class="nv">dev_boot_legacy</span><span class="o">=</span
 </div>
 <div class="section" id="install-ubuntu">
 <h2>3. Install Ubuntu</h2>
-<p>My <a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html">visual screenshot tour</a> of installing Ubuntu 14.04 - a <a class="reference external" href="https://wiki.ubuntu.com/Releases">Long Term Support (LTS)</a> release. Ubuntu's minimal install image makes it easy to create a console-only base configuration that can be later customized for various tasks and alternate desktops.</p>
-<p><strong>Alternative:</strong> At the <tt class="docutils literal">tasksel</tt> stage select a different desktop: <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Lubuntu (LXDE)</a>, Xubuntu (XFCE), etc.</p>
+<p>My <a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html">visual screenshot tour</a> of installing Ubuntu 16.04 - a <a class="reference external" href="https://wiki.ubuntu.com/Releases">Long Term Support (LTS)</a> release. Ubuntu's minimal install image makes it easy to create a console-only base configuration that can be later customized for various tasks and alternate desktops. I like the <a class="reference external" href="http://www.circuidipity.com/20160501.html">lightweight and delightful i3 window manager</a>.</p>
 <p>Chromebook's SSD will be divided into 3 partitions ...</p>
 <ul class="simple">
 <li>sda1 is a 300MB <tt class="docutils literal">boot</tt> partition</li>
@@ -197,7 +196,7 @@ usb usb3-port2: over-current condition
 usb usb3-port2: connect-debounce failed
 </pre></div>
 <p>... and blocks the Chromebook from executing a proper restart/shutdown.</p>
-<p><strong>FIX:</strong> Create <tt class="docutils literal"><span class="pre">/lib/systemd/system-sleep/ehci-pci.sh</span></tt> ...  <a class="footnote-reference" href="#id14" id="id7">[6]</a></p>
+<p><strong>FIX:</strong> Create <tt class="docutils literal"><span class="pre">/lib/systemd/system-sleep/ehci-pci.sh</span></tt> ...  <a class="footnote-reference" href="#id13" id="id7">[6]</a></p>
 <div class="highlight"><pre><span class="ch">#!/bin/bash</span>
 
 <span class="k">case</span> <span class="nv">$1</span>/<span class="nv">$2</span> in
@@ -333,37 +332,37 @@ $ aplay chr-mic.wav
 <p>Happy hacking!</p>
 <div class="section" id="notes">
 <h3>Notes</h3>
-<table class="docutils footnote" frame="void" id="id9" rules="none">
+<table class="docutils footnote" frame="void" id="id8" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Device information <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_ubuntubook/doc">output of lshw, lspci, and lsusb</a>.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id10" rules="none">
+<table class="docutils footnote" frame="void" id="id9" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Specifically in this instance, the Ubuntu console installer provides a random key option for the encrypted swap partition.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id11" rules="none">
+<table class="docutils footnote" frame="void" id="id10" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>Image courtesy of <a class="reference external" href="http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook#TOC-Firmware">Chromium</a>.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id12" rules="none">
+<table class="docutils footnote" frame="void" id="id11" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td>Whenever you remove battery power to the Chromebook (like opening up the case) the hardware clock on the motherboard resets to a future year (mine travelled to 2040). Providing a network connection is up during the Ubuntu installation the system should fetch a correct time from a NTP server. Otherwise fix the <a class="reference external" href="https://blogs.fsfe.org/the_unconventional/2014/04/20/c720-debian/">fallout from an incorrect clock</a> by re-mounting partitions read-only and correct filesystem timestamps using <tt class="docutils literal">fsck</tt>.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id13" rules="none">
+<table class="docutils footnote" frame="void" id="id12" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id6">[5]</a></td><td>Switching between developer and normal (non-developer) modes will remove user accounts and their associated information from the Chromebook.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id14" rules="none">
+<table class="docutils footnote" frame="void" id="id13" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id7">[6]</a></td><td>Some HOWTOs talk about adding <tt class="docutils literal">modprobe.blacklist=ehci_hcd,ehci_pci</tt> but in Ubuntu they are compiled into the kernel.</td></tr>

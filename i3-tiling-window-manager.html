@@ -25,11 +25,10 @@
 
 <!-- article -->
 <h1>Lightweight and a delight: i3 tiling window manager</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Saturday 13 February 2016</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Saturday 30 April 2016</p>
 <div id="article">
-    <p>As a former <strong>Fluxbox</strong> and <strong>Openbox</strong> user I can understand the love for a lightweight, minimal window manager where I can &quot;paint&quot; my applications across the screen.</p>
-<p>Subsequently I wandered through <strong>Xfce</strong> and <strong>LXDE</strong> and all the way to the other end of the scale with Ubuntu's full-bore desktop environment <strong>Unity</strong>. I was curious about <a class="reference external" href="https://en.wikipedia.org/wiki/Tiling_window_manager">tiling window managers</a> but never quite grokked the advantage from screenshots: seeing consoles arranged in a grid made me think <a class="reference external" href="http://www.circuidipity.com/tmux.html">tmux</a> a better choice for <strong>that</strong> task, and why would I want to watch a video in a reduced square in the corner of a screen?</p>
-<p>And then I tried <a class="reference external" href="https://i3wm.org/">i3</a> and realized I have found my new default desktop:</p>
+    <p>As a former <strong>Fluxbox</strong> and <strong>Openbox</strong> user I can understand the love for a lightweight, minimal window manager where I can &quot;paint&quot; my applications across the screen. I was curious about <a class="reference external" href="https://en.wikipedia.org/wiki/Tiling_window_manager">tiling window managers</a> but never quite grokked the advantage from screenshots: seeing consoles arranged in a grid made me think <a class="reference external" href="http://www.circuidipity.com/tmux.html">tmux</a> a better choice for that task, and why would I want to watch a video in a reduced square in the corner of a screen?</p>
+<p>And then I tried <a class="reference external" href="https://i3wm.org/">i3</a> and found my new default desktop:</p>
 <ul class="simple">
 <li><tt class="docutils literal">startx</tt> to X almost instantaneous on <a class="reference external" href="http://www.circuidipity.com/c720-ubuntubook.html">Ubuntubook</a></li>
 <li>loads sensible defaults and - thanks to the excellent <a class="reference external" href="https://i3wm.org/docs/userguide.html">User's Guide</a> - easy to customize via text files</li>
@@ -40,13 +39,13 @@
 <p>Starting out I find myself mostly happy with the <a class="reference external" href="https://i3wm.org/docs/userguide.html#_default_keybindings">default keybindings</a> and behaviour; making only a few adjustments and additions to my <tt class="docutils literal"><span class="pre">~/.i3/config</span></tt> and <tt class="docutils literal">/.i3status.conf</tt>. <a class="footnote-reference" href="#id2" id="id1">[1]</a></p>
 <div class="section" id="install">
 <h2>Install</h2>
-<p>To obtain the latest window manager packages I use the third-party <a class="reference external" href="https://i3wm.org/docs/repositories.html">i3 Ubuntu repository</a> ...</p>
-<div class="highlight"><pre>$ sudo cp /etc/apt/sources.list /etc/apt/sources.list.<span class="k">$(</span>date +%FT%H%M%S<span class="k">)</span>.bak
+<p>I use the third-party <a class="reference external" href="https://i3wm.org/docs/repositories.html">i3 Ubuntu repository</a>. Download and install the keyring, configure apt, and install the latest window manager packages ...</p>
+<div class="highlight"><pre>$ wget http://debian.sur5r.net/i3/pool/universe/s/sur5r-keyring/sur5r-keyring_2015.12.29_all.deb
+$ sudo dpkg -i sur5r-keyring*.deb
+$ sudo cp /etc/apt/sources.list /etc/apt/sources.list.<span class="k">$(</span>date +%FT%H%M%S<span class="k">)</span>.bak
 $ sudo <span class="nb">echo</span> <span class="s2">&quot;## i3 window manager&quot;</span> &gt;&gt; /etc/apt/sources.list
 $ sudo <span class="nb">echo</span> <span class="s2">&quot;deb http://debian.sur5r.net/i3/ </span><span class="k">$(</span>lsb_release -c -s<span class="k">)</span><span class="s2"> universe&quot;</span> &gt;&gt; /etc/apt/sources.list
-$ sudo apt update       <span class="c1"># Expect an error here ... because keyring not yet installed</span>
-$ sudo apt-get --allow-unauthenticated install sur5r-keyring <span class="o">&amp;&amp;</span> sudo apt update
-$ sudo apt install i3 i3status i3lock
+$ sudo apt update <span class="o">&amp;&amp;</span> sudo apt install i3 i3status i3lock
 </pre></div>
 </div>
 <div class="section" id="auto-start-applications">
