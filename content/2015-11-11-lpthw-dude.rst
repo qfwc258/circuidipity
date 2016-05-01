@@ -2,7 +2,7 @@
 Learn Python the Hard Way with the DUDE
 =======================================
 
-:date: 2015-11-19 17:00:00
+:date: 2015-11-11 17:00:00
 :slug: lpthw-dude
 :tags: lpthw, python, programming
 :modified: 2015-11-19 18:01:00
