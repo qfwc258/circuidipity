@@ -5,14 +5,15 @@ LPTHW Exercise 0: The Setup
 :date: 2015-11-12 00:05:00
 :slug: lpthw-e0
 :tags: lpthw, python, programming, linux
+:modified: 2016-05-28 14:13:00
 
-`Learn Python the Hard Way by Zed Shaw .: <http://learnpythonthehardway.org/book/>`_ I am doing the Python exercises on a computer running Linux (of course!). Debian ``stretch/testing`` uses Python 2.7 by default.
+`Learn Python the Hard Way by Zed Shaw .: <http://learnpythonthehardway.org/book/>`_ I am doing the Python exercises on a computer running `Ubuntu <http://www.circuidipity.com/tag-ubuntu.html>`_ bundled with Python 2.7.
 
 Zed recommends ``gedit`` as the text editor to begin writing code. Let's give it a shot:
 
 .. code-block:: bash
 
-    $ sudo apt-get install gedit
+    $ sudo apt install gedit
     
 Upon launching the editor I immediately run into a problem of thick transparent borders being drawn around its windows. **Fix...** Create ``~/.config/gtk-3.0/gtk.css`` with the following:
 
@@ -35,7 +36,7 @@ My terminal is ``urxvt``:
 
 .. code-block:: bash
 
-    $ sudo apt-get install rxvt-unicode
+    $ sudo apt install rxvt-unicode
 
 Terminal settings (fonts, colours, tabs) are modified in ``~/.Xresources``. `This is mine. <https://github.com/vonbrownie/dotfiles/blob/master/.Xresources>`_
 
@@ -44,12 +45,9 @@ Launching Python in interactive mode I see:
 .. code-block:: bash
 
     $ python
-    Python 2.7.10+ (default, Oct 10 2015, 09:11:24) 
-    [GCC 5.2.1 20151028] on linux2
+    Python 2.7.10 (default, Oct 14 2015, 16:09:02) 
+    [GCC 5.2.1 20151010] on linux2
     Type "help", "copyright", "credits" or "license" for more information.
-    >>> quit()
-    $
+    >>>
 
 Happy hacking!
-
-
