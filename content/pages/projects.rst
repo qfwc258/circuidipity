@@ -6,6 +6,23 @@ Projects
 
 .. class:: invisiblelink
 
+    .. image:: images/lpthw-begin-1-thumb.png
+        :alt: Learn Python the Hard Way
+        :width: 150px
+        :height: 150px
+        :align: left
+        :target: lpthw-dude.html
+
+.. raw:: html
+
+    <div class="projectx">
+        <h2>Learn Python the Hard Way with the DUDE</h2>
+        <p>Learn programming with <a href="lpthw-dude.html">a Daily Undertaking of Deliberate Effort ...</a></p>
+        <p style="clear:both;"></p>
+    </div>
+
+.. class:: invisiblelink
+
     .. image:: images/ubuntu-crane-thumb.png
         :alt: Minimal to Morebuntu
         :width: 150px
