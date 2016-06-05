@@ -1,0 +1,277 @@
+===========================================
+LPTHW Exercise 22: What Do You Know So Far?
+===========================================
+
+:date: 2016-06-05 14:40:00
+:slug: lpthw-e22
+:tags: lpthw, python, programming
+
+`Learn Python the Hard Way by Zed Shaw .: <http://learnpythonthehardway.org/book/>`_ A review of my recent Python journey ...
+
+**print** Output result of expression.
+
+**python script.py** Run *script.py*
+
+**#** Comment out a line of script. Anything after the pound symbol is ignored.
+
+**"""** Block quotes ...
+
+.. code-block:: bash
+
+    print("""
+    (O< .: Hello world!
+    (/)_
+    .....
+    .....
+    """)
+
+**variable** A memory location that holds data and given an identifying name.
+
+**integer** Whole numbers
+
+**float** Decimals
+
+**round()** Round a floating number ...
+
+.. code-block:: bash
+
+    >>> round(5.67888)
+    6.0
+    >>> round(5.67888, 2)
+    5.68
+
+**string** Sequence of characters (text).
+
+**len** Length of a string.
+
+**data type** Type of data stored in memory. Example: ``int`` (integers), ``float`` (decimals), ``str`` (strings) ...
+
+.. code-block:: bash
+
+    >>> a = '8'
+    >>> type(a)
+    <type 'str'>
+    >>> a = int(a)
+    >>> type(a)
+    <type 'int'>
+    >>> a = float(a)
+    >>> type(a)
+    <type 'float'>
+    >>>
+
+Math Operators
+--------------
+
+**+** Addition (or concatenate strings).
+
+**-** Subtraction
+
+**/** Division. Rounds down to integer. Returns a floating number if one of the numbers is a float.
+
+***** Multiplication
+
+**%** Modulus. Caculate remainder after division.
+
+**+=** Shorthand for "plus itself". Also ``-=``, ``*=`` ... Ex: ``x = x + y`` or ``x+= y``
+
+**PEMMDAS** Order of priority of math operations ...
+
+* Parantheses
+* Exponents
+* Multiplication and Modulus
+* Division
+* Addition and Substraction
+
+... and operations of equal priority are evaluated from left-to-right ...
+
+.. code-block:: bash
+
+    >>> 5 % 3
+    2
+    >>> 2 * 5 % 3
+    1
+
+Comparison Operators
+--------------------
+
+**<** Less than 
+
+**>** Greater than
+
+**<=** Less than or equal to
+
+**>=** Greater than or equal to
+
+**==** Equal to
+
+**=** Assign value on the right to variable on the left (**not** a comparator).
+
+**boolean** A test for truth values: ``True`` or ``False``.
+
+Boolean operators have an order of operations. After any math or comparison operations evaluate, Python evaluates the ``not`` operators first, then the ``and`` operators, then the ``or`` operators ...
+
+.. code-block:: bash
+
+    >>> not 2 > 4
+    True
+    >>> not 2 > 4 and 2 > 4
+    False
+    >>> not 2 > 4 and 2 > 4 or 2 <= 4
+    True
+    >>>
+
+Format and Escape Characters
+----------------------------
+
+**%d** Digit
+
+**%s** String
+
+**%r** Raw
+
+**\n** New line
+
+**\t** Tab
+
+.. code-block:: bash
+
+    >>> print "I \"may\" have %d %s tickets\nfor the \t%r\tnext weekend." % (3, 'free', 'LPTHW Bootcamp')
+    I "may" have 3 free tickets
+    for the         'LPTHW Bootcamp'        next weekend.
+    >>>
+
+Input and Extras
+----------------
+
+**raw_input()** Get user input (changed to ``input()`` in Python 3).
+
+**int(raw_input())**
+
+**float(raw_input())** Convert user input into an integer|float ...
+
+.. code-block:: bash
+
+    >>> age = int(raw_input('Age? > '))
+    Age? > 104
+    >>> print "You must be doing something right to make it to %d years old!" % age
+    You must be doing something right to make it to 104 years old!
+    >>>
+
+**import** Add modules (libraries) of Python code to my script.
+
+**modules** Features
+
+**pydoc** Show documentation from Python modules. Can read in the console or start a webserver and read documentation in the browser ...
+
+.. code-block:: bash
+
+    $ pydoc -p 1234
+    pydoc server ready at http://localhost:1234/
+
+**argv** Module that enables a script to accept command line arguments ...
+
+.. code-block:: bash
+
+    from sys import argv
+    script, first, second, third = argv
+
+Reading and Writing
+-------------------
+
+**open()** Open an external file in my script. Default file mode is ``read-only`` or ``r`` if none is specified.
+
+Commonly-used modes include ...
+
+* ``r`` Open text file for reading. Stream is positioned at the beginning of the file.
+
+* ``r+`` Open for reading and writing. Stream is positioned at the beginning of the file.
+
+* ``w`` Truncate file to zero length or create text file for writing. Stream is positioned at the beginning of the file.
+
+* ``w+`` Open for reading and writing. File is created if it does not exist, otherwise it is truncated. Stream is positioned at the beginning of the file.
+
+* ``a`` Open for writing. File is created if it does not exist. Stream is positioned at the end of the file.
+
+* ``a+`` Open for reading and writing. File is created if it does not exist. Stream is positioned at the end of the file.
+
+**read()** Read the contents of the opened file.
+
+**readline()** Read just one line of the file.
+
+**write()** Write a string to the file.
+
+**seek()** Set the current position in the file. Beginning of file is ``seek(0)``.
+
+**close()** Close the file ...
+
+.. code-block:: bash
+
+    >>> txt = open(filename)
+    >>> print(txt.read())
+    (O< .: Hello world!
+    (/)_
+
+    >>> txt.seek(0)     # Important: return to the top of the file before reading, otherwise I just read an empty string
+    >>> txt.read()
+    '(O< .: Hello world!\n(/)_\n'
+    >>> txt.close()
+    >>> txt = open(filename, 'a+')
+    >>> txt.write('.' * 10)
+    >>> txt.seek(0)
+    >>> print(txt.read())
+    (O< .: Hello world!
+    (/)_
+    ..........
+    >>> txt.close()
+    >>>
+
+Functions
+---------
+
+**function** A named section of my script that executes a task when called.
+
+**def** "Defines" a new function. Ex: ``def some_function_name():``
+
+**method** Same thing as a function, except it is called on a value. Ex: the ``seek()`` method ... ``txt.seek(0)``. Each data type has its own set of methods.
+
+**argument** Input parameters.
+
+**parameter** A variable an argument is stored in when a function is called.
+
+**return** Value that a function call evaluates to
+
+**exists** Checks if a file exists. Returns True or False. Part of the ``os.path`` module.
+
+Notes
+-----
+
+**01.** Run a script from within python interactive mode ...
+
+>>> execfile('some_script.py')
+
+**02.** ``format()`` Positional formatting ...
+
+.. code-block:: bash
+
+    >>> print "{0} {1} {0} zero ...".format(1, 'two')
+    1 two 1 zero ...
+
+**03.** ``from __future__ import`` Allows me to bring Python 3 features into Python 2. Example ...
+
+.. code-block:: bash
+
+    from __future__ import print_function
+    print('There are', cars, 'cars available.')
+
+... prints a concatenated statement (otherwise the above ``print()`` in Python 2 makes the commas treat things as a tuple).
+
+.. code-block:: bash
+
+    from __future__ import division
+    print 8/7  # prints 1.1428571428571428
+    print 8//7 # prints 1
+
+... makes division into a float. Python 2 would otherwise return ``1`` for both calculations.
+
+**04.** ``textwrap.dedent`` A useful module+method for indenting quotes in code while the output is aligned to margin.
+
