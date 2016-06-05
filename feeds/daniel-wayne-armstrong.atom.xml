@@ -1,5 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-05-01T11:59:00-04:00</updated><entry><title>Minimal to Morebuntu</title><link href="http://www.circuidipity.com/20160501.html" rel="alternate"></link><updated>2016-05-01T11:59:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-05-01:20160501.html</id><summary type="html">&lt;img alt="Ubuntu under-construction" class="align-right" src="images/ubuntu-crane-300.png" style="width: 300px; height: 300px;" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-06-05T14:40:00-04:00</updated><entry><title>LPTHW Exercise 22: What Do You Know So Far?</title><link href="http://www.circuidipity.com/lpthw-e22.html" rel="alternate"></link><updated>2016-06-05T14:40:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-06-05:lpthw-e22.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; A review of my recent Python journey ...&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;print&lt;/strong&gt; Output result of expression.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;python script.py&lt;/strong&gt; Run &lt;em&gt;script.py&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;#&lt;/strong&gt; Comment out a line of script. Anything after the pound symbol is ignored.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/strong&gt; Block quotes ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;(O&amp;lt; .: Hello world!&lt;/span&gt;
+&lt;span class="s2"&gt;(/)_&lt;/span&gt;
+&lt;span class="s2"&gt;.....&lt;/span&gt;
+&lt;span class="s2"&gt;.....&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;variable&lt;/strong&gt; A memory location that holds data and given an identifying name.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;integer&lt;/strong&gt; Whole numbers&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;float&lt;/strong&gt; Decimals&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;round()&lt;/strong&gt; Round a floating number ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; round&lt;span class="o"&gt;(&lt;/span&gt;5.67888&lt;span class="o"&gt;)&lt;/span&gt;
+6.0
+&amp;gt;&amp;gt;&amp;gt; round&lt;span class="o"&gt;(&lt;/span&gt;5.67888, 2&lt;span class="o"&gt;)&lt;/span&gt;
+5.68
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;string&lt;/strong&gt; Sequence of characters (text).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;len&lt;/strong&gt; Length of a string.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;data type&lt;/strong&gt; Type of data stored in memory. Example: &lt;tt class="docutils literal"&gt;int&lt;/tt&gt; (integers), &lt;tt class="docutils literal"&gt;float&lt;/tt&gt; (decimals), &lt;tt class="docutils literal"&gt;str&lt;/tt&gt; (strings) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;8&amp;#39;&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; type&lt;span class="o"&gt;(&lt;/span&gt;a&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;lt;&lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;str&amp;#39;&lt;/span&gt;&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; int&lt;span class="o"&gt;(&lt;/span&gt;a&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; type&lt;span class="o"&gt;(&lt;/span&gt;a&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;lt;&lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;int&amp;#39;&lt;/span&gt;&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; float&lt;span class="o"&gt;(&lt;/span&gt;a&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; type&lt;span class="o"&gt;(&lt;/span&gt;a&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;lt;&lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;float&amp;#39;&lt;/span&gt;&amp;gt;
+&amp;gt;&amp;gt;&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="math-operators"&gt;
+&lt;h2&gt;Math Operators&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;+&lt;/strong&gt; Addition (or concatenate strings).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;-&lt;/strong&gt; Subtraction&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;/&lt;/strong&gt; Division. Rounds down to integer. Returns a floating number if one of the numbers is a float.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;*&lt;/strong&gt; Multiplication&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;%&lt;/strong&gt; Modulus. Caculate remainder after division.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;+=&lt;/strong&gt; Shorthand for &amp;quot;plus itself&amp;quot;. Also &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-=&lt;/span&gt;&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;*=&lt;/tt&gt; ... Ex: &lt;tt class="docutils literal"&gt;x = x + y&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;x+= y&lt;/tt&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;PEMMDAS&lt;/strong&gt; Order of priority of math operations ...&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Parantheses&lt;/li&gt;
+&lt;li&gt;Exponents&lt;/li&gt;
+&lt;li&gt;Multiplication and Modulus&lt;/li&gt;
+&lt;li&gt;Division&lt;/li&gt;
+&lt;li&gt;Addition and Substraction&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;... and operations of equal priority are evaluated from left-to-right ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="m"&gt;5&lt;/span&gt; % 3
+2
+&amp;gt;&amp;gt;&amp;gt; &lt;span class="m"&gt;2&lt;/span&gt; * &lt;span class="m"&gt;5&lt;/span&gt; % 3
+1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="comparison-operators"&gt;
+&lt;h2&gt;Comparison Operators&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&amp;lt;&lt;/strong&gt; Less than&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&amp;gt;&lt;/strong&gt; Greater than&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&amp;lt;=&lt;/strong&gt; Less than or equal to&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&amp;gt;=&lt;/strong&gt; Greater than or equal to&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;==&lt;/strong&gt; Equal to&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;=&lt;/strong&gt; Assign value on the right to variable on the left (&lt;strong&gt;not&lt;/strong&gt; a comparator).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;boolean&lt;/strong&gt; A test for truth values: &lt;tt class="docutils literal"&gt;True&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;False&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Boolean operators have an order of operations. After any math or comparison operations evaluate, Python evaluates the &lt;tt class="docutils literal"&gt;not&lt;/tt&gt; operators first, then the &lt;tt class="docutils literal"&gt;and&lt;/tt&gt; operators, then the &lt;tt class="docutils literal"&gt;or&lt;/tt&gt; operators ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; not &lt;span class="m"&gt;2&lt;/span&gt; &amp;gt; 4
+True
+&amp;gt;&amp;gt;&amp;gt; not &lt;span class="m"&gt;2&lt;/span&gt; &amp;gt; &lt;span class="m"&gt;4&lt;/span&gt; and &lt;span class="m"&gt;2&lt;/span&gt; &amp;gt; 4
+False
+&amp;gt;&amp;gt;&amp;gt; not &lt;span class="m"&gt;2&lt;/span&gt; &amp;gt; &lt;span class="m"&gt;4&lt;/span&gt; and &lt;span class="m"&gt;2&lt;/span&gt; &amp;gt; &lt;span class="m"&gt;4&lt;/span&gt; or &lt;span class="m"&gt;2&lt;/span&gt; &amp;lt;&lt;span class="o"&gt;=&lt;/span&gt; 4
+True
+&amp;gt;&amp;gt;&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="format-and-escape-characters"&gt;
+&lt;h2&gt;Format and Escape Characters&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;%d&lt;/strong&gt; Digit&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;%s&lt;/strong&gt; String&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;%r&lt;/strong&gt; Raw&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;n&lt;/strong&gt; New line&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;t&lt;/strong&gt; Tab&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;I \&amp;quot;may\&amp;quot; have %d %s tickets\nfor the \t%r\tnext weekend.&amp;quot;&lt;/span&gt; % &lt;span class="o"&gt;(&lt;/span&gt;3, &lt;span class="s1"&gt;&amp;#39;free&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;LPTHW Bootcamp&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+I &lt;span class="s2"&gt;&amp;quot;may&amp;quot;&lt;/span&gt; have &lt;span class="m"&gt;3&lt;/span&gt; free tickets
+&lt;span class="k"&gt;for&lt;/span&gt; the         &lt;span class="s1"&gt;&amp;#39;LPTHW Bootcamp&amp;#39;&lt;/span&gt;        next weekend.
+&amp;gt;&amp;gt;&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="input-and-extras"&gt;
+&lt;h2&gt;Input and Extras&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;raw_input()&lt;/strong&gt; Get user input (changed to &lt;tt class="docutils literal"&gt;input()&lt;/tt&gt; in Python 3).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;int(raw_input())&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;float(raw_input())&lt;/strong&gt; Convert user input into an integer|float ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;age&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; int&lt;span class="o"&gt;(&lt;/span&gt;raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Age? &amp;gt; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
+Age? &amp;gt; 104
+&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;You must be doing something right to make it to %d years old!&amp;quot;&lt;/span&gt; % age
+You must be doing something right to make it to &lt;span class="m"&gt;104&lt;/span&gt; years old!
+&amp;gt;&amp;gt;&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;import&lt;/strong&gt; Add modules (libraries) of Python code to my script.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;modules&lt;/strong&gt; Features&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;pydoc&lt;/strong&gt; Show documentation from Python modules. Can read in the console or start a webserver and read documentation in the browser ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ pydoc -p 1234
+pydoc server ready at http://localhost:1234/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;argv&lt;/strong&gt; Module that enables a script to accept command line arguments ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;from sys import argv
+script, first, second, &lt;span class="nv"&gt;third&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; argv
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reading-and-writing"&gt;
+&lt;h2&gt;Reading and Writing&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;open()&lt;/strong&gt; Open an external file in my script. Default file mode is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;read-only&lt;/span&gt;&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;r&lt;/tt&gt; if none is specified.&lt;/p&gt;
+&lt;p&gt;Commonly-used modes include ...&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;r&lt;/tt&gt; Open text file for reading. Stream is positioned at the beginning of the file.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;r+&lt;/tt&gt; Open for reading and writing. Stream is positioned at the beginning of the file.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;w&lt;/tt&gt; Truncate file to zero length or create text file for writing. Stream is positioned at the beginning of the file.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;w+&lt;/tt&gt; Open for reading and writing. File is created if it does not exist, otherwise it is truncated. Stream is positioned at the beginning of the file.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;a&lt;/tt&gt; Open for writing. File is created if it does not exist. Stream is positioned at the end of the file.&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;a+&lt;/tt&gt; Open for reading and writing. File is created if it does not exist. Stream is positioned at the end of the file.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;read()&lt;/strong&gt; Read the contents of the opened file.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;readline()&lt;/strong&gt; Read just one line of the file.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;write()&lt;/strong&gt; Write a string to the file.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;seek()&lt;/strong&gt; Set the current position in the file. Beginning of file is &lt;tt class="docutils literal"&gt;seek(0)&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;close()&lt;/strong&gt; Close the file ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;txt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; open&lt;span class="o"&gt;(&lt;/span&gt;filename&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;txt.read&lt;span class="o"&gt;())&lt;/span&gt;
+&lt;span class="o"&gt;(&lt;/span&gt;O&amp;lt; .: Hello world!
+&lt;span class="o"&gt;(&lt;/span&gt;/&lt;span class="o"&gt;)&lt;/span&gt;_
+
+&amp;gt;&amp;gt;&amp;gt; txt.seek&lt;span class="o"&gt;(&lt;/span&gt;0&lt;span class="o"&gt;)&lt;/span&gt;     &lt;span class="c1"&gt;# Important: return to the top of the file before reading, otherwise I just read an empty string&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; txt.read&lt;span class="o"&gt;()&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;(O&amp;lt; .: Hello world!\n(/)_\n&amp;#39;&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; txt.close&lt;span class="o"&gt;()&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;txt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; open&lt;span class="o"&gt;(&lt;/span&gt;filename, &lt;span class="s1"&gt;&amp;#39;a+&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; txt.write&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.&amp;#39;&lt;/span&gt; * 10&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; txt.seek&lt;span class="o"&gt;(&lt;/span&gt;0&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;txt.read&lt;span class="o"&gt;())&lt;/span&gt;
+&lt;span class="o"&gt;(&lt;/span&gt;O&amp;lt; .: Hello world!
+&lt;span class="o"&gt;(&lt;/span&gt;/&lt;span class="o"&gt;)&lt;/span&gt;_
+..........
+&amp;gt;&amp;gt;&amp;gt; txt.close&lt;span class="o"&gt;()&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="functions"&gt;
+&lt;h2&gt;Functions&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;function&lt;/strong&gt; A named section of my script that executes a task when called.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;def&lt;/strong&gt; &amp;quot;Defines&amp;quot; a new function. Ex: &lt;tt class="docutils literal"&gt;def &lt;span class="pre"&gt;some_function_name():&lt;/span&gt;&lt;/tt&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;method&lt;/strong&gt; Same thing as a function, except it is called on a value. Ex: the &lt;tt class="docutils literal"&gt;seek()&lt;/tt&gt; method ... &lt;tt class="docutils literal"&gt;txt.seek(0)&lt;/tt&gt;. Each data type has its own set of methods.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;argument&lt;/strong&gt; Input parameters.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;parameter&lt;/strong&gt; A variable an argument is stored in when a function is called.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;return&lt;/strong&gt; Value that a function call evaluates to&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;exists&lt;/strong&gt; Checks if a file exists. Returns True or False. Part of the &lt;tt class="docutils literal"&gt;os.path&lt;/tt&gt; module.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h2&gt;Notes&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;01.&lt;/strong&gt; Run a script from within python interactive mode ...&lt;/p&gt;
+&lt;pre class="doctest-block"&gt;
+&amp;gt;&amp;gt;&amp;gt; execfile('some_script.py')
+&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;02.&lt;/strong&gt; &lt;tt class="docutils literal"&gt;format()&lt;/tt&gt; Positional formatting ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;{0} {1} {0} zero ...&amp;quot;&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;1, &lt;span class="s1"&gt;&amp;#39;two&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="m"&gt;1&lt;/span&gt; two &lt;span class="m"&gt;1&lt;/span&gt; zero ...
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;03.&lt;/strong&gt; &lt;tt class="docutils literal"&gt;from __future__ import&lt;/tt&gt; Allows me to bring Python 3 features into Python 2. Example ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;from __future__ import print_function
+print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;There are&amp;#39;&lt;/span&gt;, cars, &lt;span class="s1"&gt;&amp;#39;cars available.&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... prints a concatenated statement (otherwise the above &lt;tt class="docutils literal"&gt;print()&lt;/tt&gt; in Python 2 makes the commas treat things as a tuple).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;from __future__ import division
+print 8/7  &lt;span class="c1"&gt;# prints 1.1428571428571428&lt;/span&gt;
+print 8//7 &lt;span class="c1"&gt;# prints 1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... makes division into a float. Python 2 would otherwise return &lt;tt class="docutils literal"&gt;1&lt;/tt&gt; for both calculations.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;04.&lt;/strong&gt; &lt;tt class="docutils literal"&gt;textwrap.dedent&lt;/tt&gt; A useful module+method for indenting quotes in code while the output is aligned to margin.&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category></entry><entry><title>Minimal to Morebuntu</title><link href="http://www.circuidipity.com/20160501.html" rel="alternate"></link><updated>2016-05-01T11:59:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-05-01:20160501.html</id><summary type="html">&lt;img alt="Ubuntu under-construction" class="align-right" src="images/ubuntu-crane-300.png" style="width: 300px; height: 300px;" /&gt;
 &lt;p&gt;Start with a &lt;strong&gt;minimal install of Ubuntu 16.04 &amp;quot;Xenial Xerus&amp;quot;&lt;/strong&gt; and roll a &lt;strong&gt;Morebuntu&lt;/strong&gt; customized with the &lt;strong&gt;i3 tiling window manager&lt;/strong&gt; plus a collection of desktop applications.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
@@ -369,9 +550,9 @@ Hello World!
 Hello World!
 &amp;gt;&amp;gt;&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
-</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 0: The Setup</title><link href="http://www.circuidipity.com/lpthw-e0.html" rel="alternate"></link><updated>2015-11-12T00:05:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-12:lpthw-e0.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; I am doing the Python exercises on a computer running Linux (of course!). Debian &lt;tt class="docutils literal"&gt;stretch/testing&lt;/tt&gt; uses Python 2.7 by default.&lt;/p&gt;
+</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 0: The Setup</title><link href="http://www.circuidipity.com/lpthw-e0.html" rel="alternate"></link><updated>2016-05-28T14:13:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-12:lpthw-e0.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; I am doing the Python exercises on a computer running &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt; bundled with Python 2.7.&lt;/p&gt;
 &lt;p&gt;Zed recommends &lt;tt class="docutils literal"&gt;gedit&lt;/tt&gt; as the text editor to begin writing code. Let's give it a shot:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt-get install gedit
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install gedit
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Upon launching the editor I immediately run into a problem of thick transparent borders being drawn around its windows. &lt;strong&gt;Fix...&lt;/strong&gt; Create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/gtk-3.0/gtk.css&lt;/span&gt;&lt;/tt&gt; with the following:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;.window-frame, .window-frame:backdrop &lt;span class="o"&gt;{&lt;/span&gt;
@@ -387,35 +568,34 @@ border-radius: 0&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Source: &lt;a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?pid=1469360#p1469360"&gt;Evince (GTK3?) doesn't actually run fullscreen&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;My terminal is &lt;tt class="docutils literal"&gt;urxvt&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt-get install rxvt-unicode
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install rxvt-unicode
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Terminal settings (fonts, colours, tabs) are modified in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.Xresources&lt;/span&gt;&lt;/tt&gt;. &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.Xresources"&gt;This is mine.&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Launching Python in interactive mode I see:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;$ python
-Python 2.7.10+ &lt;span class="o"&gt;(&lt;/span&gt;default, Oct &lt;span class="m"&gt;10&lt;/span&gt; 2015, 09:11:24&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;GCC 5.2.1 20151028&lt;span class="o"&gt;]&lt;/span&gt; on linux2
+Python 2.7.10 &lt;span class="o"&gt;(&lt;/span&gt;default, Oct &lt;span class="m"&gt;14&lt;/span&gt; 2015, 16:09:02&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;GCC 5.2.1 20151010&lt;span class="o"&gt;]&lt;/span&gt; on linux2
 Type &lt;span class="s2"&gt;&amp;quot;help&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;copyright&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;credits&amp;quot;&lt;/span&gt; or &lt;span class="s2"&gt;&amp;quot;license&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; more information.
-&amp;gt;&amp;gt;&amp;gt; quit&lt;span class="o"&gt;()&lt;/span&gt;
-$
+&amp;gt;&amp;gt;&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category><category term="linux"></category></entry><entry><title>Learn Python the Hard Way with the DUDE</title><link href="http://www.circuidipity.com/lpthw-dude.html" rel="alternate"></link><updated>2015-11-19T18:01:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-11:lpthw-dude.html</id><summary type="html">&lt;img alt="LPTHW" class="align-right" src="images/lpthw-begin-1.png" style="width: 250px; height: 479px;" /&gt;
+</summary><category term="lpthw"></category><category term="python"></category><category term="programming"></category><category term="linux"></category></entry><entry><title>Learn Python the Hard Way with the DUDE</title><link href="http://www.circuidipity.com/lpthw-dude.html" rel="alternate"></link><updated>2016-06-05T14:28:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-11:lpthw-dude.html</id><summary type="html">&lt;img alt="LPTHW" class="align-right" src="images/lpthw-begin-1.png" style="width: 250px; height: 479px;" /&gt;
 &lt;p&gt;Using Linux and writing &lt;a class="reference external" href="https://github.com/vonbrownie/homebin"&gt;simple shell scripts&lt;/a&gt; has been an enjoyable peek at programming. But now I want to go farther and learning &lt;a class="reference external" href="http://www.circuidipity.com/tag-python.html"&gt;Python&lt;/a&gt; strikes me as a useful next step. Starting with the free HTML version of the book &lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way&lt;/a&gt; by &lt;strong&gt;Zed Shaw&lt;/strong&gt;, who states right off the bat:&lt;/p&gt;
 &lt;blockquote&gt;
 It's only the &amp;quot;hard&amp;quot; way because it uses a technique called &lt;em&gt;instruction&lt;/em&gt;. Instruction is where I tell you to do a sequence of controlled exercises designed to build a skill through repetition. This technique works very well with beginners who know nothing and need to acquire basic skills before they can understand more complex topics. It's used in everything from martial arts to music to even basic math and reading skills.&lt;/blockquote&gt;
 &lt;p&gt;Zed is a (probably very cool) dude but the DUDE is a &lt;strong&gt;Daily Undertaking of Deliberate Effort&lt;/strong&gt;. Which translates as:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;set aside a block of time free of distractions to focus on improving a skill&lt;/li&gt;
-&lt;li&gt;push ahead with tasks of increasing complexity towards goals slightly out-of-reach&lt;/li&gt;
+&lt;li&gt;push ahead with tasks of increasing complexity&lt;/li&gt;
+&lt;li&gt;do a bit every day&lt;/li&gt;
 &lt;li&gt;cultivate feedback&lt;/li&gt;
-&lt;li&gt;do a bit (or a lot) every day&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;For LPTHW I will:&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;set a timer for a &lt;strong&gt;50 minute session&lt;/strong&gt; to focus on the coding exercises (and place the timer out-of-reach to ensure I get up and stretch...)&lt;/li&gt;
+&lt;li&gt;set a timer for a &lt;strong&gt;50 minute session&lt;/strong&gt; to focus on the coding exercises (a double &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Pomodoro_Technique"&gt;pomodoro&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;work methodically through each exercise&lt;/li&gt;
-&lt;li&gt;send a one-word email (&lt;em&gt;Done!&lt;/em&gt;) to a friend to inform that &lt;em&gt;Python was performed this day&lt;/em&gt;; who will send a one-word (&lt;em&gt;OK&lt;/em&gt;) reply&lt;/li&gt;
 &lt;li&gt;do the work (minimum 1 session) every day&lt;/li&gt;
+&lt;li&gt;send a &lt;tt class="docutils literal"&gt;Done!&lt;/tt&gt; email to a friend marking the daily effort&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
@@ -484,6 +664,9 @@ It's only the &amp;quot;hard&amp;quot; way because it uses a technique called &l
 &lt;/div&gt;
 &lt;div class="section" id="id22"&gt;
 &lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e18-21.html"&gt;Exercise 21: Functions Can Return Something&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id23"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e22.html"&gt;Exercise 22: What Do You Know So Far?&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -849,28 +1032,4 @@ localhost:10.0
 &lt;p&gt;After 18 months of light-now-daily use I am very happy with my Chromebook. Free software makes modest hardware go a long way.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="chromebook"></category><category term="shell"></category><category term="programming"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Writing systemd service files</title><link href="http://www.circuidipity.com/writing-systemd-service-files.html" rel="alternate"></link><updated>2015-08-04T16:28:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-04:writing-systemd-service-files.html</id><summary type="html">&lt;p&gt;Allow &lt;strong&gt;systemd&lt;/strong&gt; and its &lt;tt class="docutils literal"&gt;systemctl&lt;/tt&gt; command to start, stop, and report the status of a daemon by creating a &lt;strong&gt;service file&lt;/strong&gt; in &lt;tt class="docutils literal"&gt;/etc/systemd/system&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt; Setup the &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-ram-irqbalance.html"&gt;irqbalance daemon I installed on my Raspberry Pi&lt;/a&gt; for systemd control by creating &lt;tt class="docutils literal"&gt;/etc/systemd/system/irqbalance.service&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;Unit&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Daemon to distribute hardware interrupts across multi-CPUs
-
-&lt;span class="o"&gt;[&lt;/span&gt;Service&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;forking
-&lt;span class="c1"&gt;# man systemd.service: &amp;quot;If set to forking... it is recommended to also use the&lt;/span&gt;
-&lt;span class="c1"&gt;# PIDFile= option, so that systemd can identify the main process of the daemon.&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;PIDFile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/var/run/irqbalance.pid
-&lt;span class="nv"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/local/sbin/irqbalance --pid&lt;span class="o"&gt;=&lt;/span&gt;/var/run/irqbalance.pid
-
-&lt;span class="o"&gt;[&lt;/span&gt;Install&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;multi-user.target
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Set the new service to be auto-started at boot:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo systemctl daemon-reload &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; irqbalance.service
-Created symlink from /etc/systemd/system/multi-user.target.wants/irqbalance.service to /etc/systemd/system/irqbalance.service.
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Launch daemon and inspect running service:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo systemctl start irqbalance.service &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo systemctl status irqbalance
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/Systemd#Writing_unit_files"&gt;Writing systemd unit files&lt;/a&gt;&lt;/p&gt;
-</summary><category term="linux"></category></entry></feed>
+</summary><category term="chromebook"></category><category term="shell"></category><category term="programming"></category><category term="debian"></category><category term="linux"></category></entry></feed>
