@@ -4,8 +4,9 @@ Learn Python the Hard Way with the DUDE
 
 :date: 2015-11-11 17:00:00
 :slug: lpthw-dude
+:template: article-project
 :tags: lpthw, python, programming
-:modified: 2015-11-19 18:01:00
+:modified: 2016-06-05 14:28:00
 
 .. image:: images/lpthw-begin-1.png
     :align: right
@@ -20,16 +21,22 @@ Using Linux and writing `simple shell scripts <https://github.com/vonbrownie/hom
 Zed is a (probably very cool) dude but the DUDE is a **Daily Undertaking of Deliberate Effort**. Which translates as:
 
 * set aside a block of time free of distractions to focus on improving a skill
-* push ahead with tasks of increasing complexity towards goals slightly out-of-reach
+
+* push ahead with tasks of increasing complexity
+
+* do a bit every day
+
 * cultivate feedback
-* do a bit (or a lot) every day
 
 For LPTHW I will:
 
-* set a timer for a **50 minute session** to focus on the coding exercises (and place the timer out-of-reach to ensure I get up and stretch...)
+* set a timer for a **50 minute session** to focus on the coding exercises (a double `pomodoro <https://en.wikipedia.org/wiki/Pomodoro_Technique>`_)
+
 * work methodically through each exercise
-* send a one-word email (*Done!*) to a friend to inform that *Python was performed this day*; who will send a one-word (*OK*) reply
+
 * do the work (minimum 1 session) every day
+
+* send a ``Done!`` email to a friend marking the daily effort
 
 Let's go!
 =========
@@ -99,5 +106,8 @@ Let's go!
 
 `Exercise 21: Functions Can Return Something <http://www.circuidipity.com/lpthw-e18-21.html>`_
 ----------------------------------------------------------------------------------------------
+
+`Exercise 22: What Do You Know So Far? <http://www.circuidipity.com/lpthw-e22.html>`_
+-------------------------------------------------------------------------------------
 
 Happy hacking!
