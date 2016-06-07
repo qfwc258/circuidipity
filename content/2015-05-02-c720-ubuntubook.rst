@@ -157,7 +157,7 @@ Chromebook's SSD will be divided into 3 partitions ...
 4. Touchpad
 ===========
 
-Ubuntu 15.10 installs a 4.2.0 Linux kernel with built-in support for the Chromebook's touchpad. Per-session modifications of touchpad settings can be made using ``synclient`` ...
+Ubuntu installs a kernel with built-in support for the Chromebook's touchpad. Per-session modifications of touchpad settings can be made using ``synclient`` ...
 
 .. code-block:: bash
 
@@ -224,9 +224,9 @@ Sample ``fstab`` ...
 .. code-block:: bash
 
     # <file system> <mount point>   <type>  <options>       <dump>  <pass>
-    /dev/mapper/sda3_crypt /               ext4    noatime,discard,errors=remount-ro 0       1
-    # /boot was on /dev/sda1 during installation
-    UUID=[some_long_random_string] /boot    ext4    noatime,discard         0       2
+    # / was on /dev/sda1 during installation
+    UUID=<______string___>  /              ext4    relatime,discard,errors=remount-ro 0       1
+    /dev/mapper/sda3_crypt /home           ext4    relatime,discard        0       2
     /dev/mapper/sda2_crypt none            swap    sw,discard              0       0
 
 After modifying ``fstab`` update ``/boot/initrd.img-*`` by running ...
