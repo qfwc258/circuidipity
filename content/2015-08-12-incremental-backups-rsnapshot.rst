@@ -78,7 +78,7 @@ If everything checks out OK go ahead and run:
 
 .. code-block:: bash
 
-    $ sudo rsnapshot sync && sudo rsnapshot daily && rsnapshot du                                          
+    $ sudo rsnapshot sync && sudo rsnapshot daily && sudo rsnapshot du                                          
                                                                                      
 Automate backups by modifying the sample cron file provided in ``/etc/cron.d/rsnapshot`` and running jobs as root. Example config:
 
