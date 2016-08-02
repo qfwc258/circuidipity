@@ -87,8 +87,6 @@ ul.tagcloud a, #siteheader a, #navmenu a, #footer a, #breadcrumb a,
 
 #sitemenu a {color: #ff0000;}
 
-#archives a {font-size: 1.4em;}
-
 /*
 Paragraphs
 */
@@ -132,8 +130,7 @@ Lists
 
 #archives ul {
     clear: both;
-    line-height: 1.6em;
-    list-style: none; 
+    line-height: 1.8em;
     padding-left: 0;
 }
 
