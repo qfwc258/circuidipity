@@ -25,207 +25,293 @@ My name is <span class="noWrap"><span class="whoa">Daniel Wayne Armstrong</span>
 I am learning to make <span class="noWrap">freedom-loving</span> things.</p>    </div>
 <!-- menu -->
     <div id="sitemenu">
-<p><a href="archives.html">Archives</a>
-&nbsp;<a href="projects.html">Projects</a>
+<p><a href="projects.html">Projects</a>
 &nbsp;<a href="/colophon.html">Colophon</a>
 &nbsp;<a href="feed.xml"><i class="fa fa-rss"></i></a>
 &nbsp;<a href="https://twitter.com/circuidipity"><i class="fa fa-twitter"></i></a>
 &nbsp;<a href="https://github.com/vonbrownie"><i class="fa fa-github-alt"></i></a></p>    </div>
 </div>
 
-<!-- latest post -->
-<div id="latestpost">
-        <p class="published"> Sunday 05 June 2016</p>
-        <h1><a href="http://www.circuidipity.com/lpthw-e22.html">LPTHW Exercise 22: What Do You Know So Far?</a></h1>
-        <p><a class="reference external" href="http://learnpythonthehardway.org/book/">Learn Python the Hard Way by Zed Shaw .:</a> A review of my recent Python journey ...</p>
-<p><strong>print</strong> Output result of expression.</p>
-<p><strong>python script.py</strong> Run <em>script.py</em></p>
-<p><strong>#</strong> Comment out a line of script. Anything after the pound symbol is ignored.</p>
-<p><strong>&quot;&quot;&quot;</strong> Block quotes ...</p>
-<div class="highlight"><pre>print<span class="o">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">(O&lt; .: Hello world!</span>
-<span class="s2">(/)_</span>
-<span class="s2">.....</span>
-<span class="s2">.....</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="o">)</span>
-</pre></div>
-<p><strong>variable</strong> A memory location that holds data and given an identifying name.</p>
-<p><strong>integer</strong> Whole numbers</p>
-<p><strong>float</strong> Decimals</p>
-<p><strong>round()</strong> Round a floating number ...</p>
-<div class="highlight"><pre>&gt;&gt;&gt; round<span class="o">(</span>5.67888<span class="o">)</span>
-6.0
-&gt;&gt;&gt; round<span class="o">(</span>5.67888, 2<span class="o">)</span>
-5.68
-</pre></div>
-<p><strong>string</strong> Sequence of characters (text).</p>
-<p><strong>len</strong> Length of a string.</p>
-<p><strong>data type</strong> Type of data stored in memory. Example: <tt class="docutils literal">int</tt> (integers), <tt class="docutils literal">float</tt> (decimals), <tt class="docutils literal">str</tt> (strings) ...</p>
-<div class="highlight"><pre>&gt;&gt;&gt; <span class="nv">a</span> <span class="o">=</span> <span class="s1">&#39;8&#39;</span>
-&gt;&gt;&gt; type<span class="o">(</span>a<span class="o">)</span>
-&lt;<span class="nb">type</span> <span class="s1">&#39;str&#39;</span>&gt;
-&gt;&gt;&gt; <span class="nv">a</span> <span class="o">=</span> int<span class="o">(</span>a<span class="o">)</span>
-&gt;&gt;&gt; type<span class="o">(</span>a<span class="o">)</span>
-&lt;<span class="nb">type</span> <span class="s1">&#39;int&#39;</span>&gt;
-&gt;&gt;&gt; <span class="nv">a</span> <span class="o">=</span> float<span class="o">(</span>a<span class="o">)</span>
-&gt;&gt;&gt; type<span class="o">(</span>a<span class="o">)</span>
-&lt;<span class="nb">type</span> <span class="s1">&#39;float&#39;</span>&gt;
-&gt;&gt;&gt;
-</pre></div>
-<div class="section" id="math-operators">
-<h2>Math Operators</h2>
-<p><strong>+</strong> Addition (or concatenate strings).</p>
-<p><strong>-</strong> Subtraction</p>
-<p><strong>/</strong> Division. Rounds down to integer. Returns a floating number if one of the numbers is a float.</p>
-<p><strong>*</strong> Multiplication</p>
-<p><strong>%</strong> Modulus. Caculate remainder after division.</p>
-<p><strong>+=</strong> Shorthand for &quot;plus itself&quot;. Also <tt class="docutils literal"><span class="pre">-=</span></tt>, <tt class="docutils literal">*=</tt> ... Ex: <tt class="docutils literal">x = x + y</tt> or <tt class="docutils literal">x+= y</tt></p>
-<p><strong>PEMMDAS</strong> Order of priority of math operations ...</p>
-<ul class="simple">
-<li>Parantheses</li>
-<li>Exponents</li>
-<li>Multiplication and Modulus</li>
-<li>Division</li>
-<li>Addition and Substraction</li>
-</ul>
-<p>... and operations of equal priority are evaluated from left-to-right ...</p>
-<div class="highlight"><pre>&gt;&gt;&gt; <span class="m">5</span> % 3
-2
-&gt;&gt;&gt; <span class="m">2</span> * <span class="m">5</span> % 3
-1
-</pre></div>
-</div>
-<div class="section" id="comparison-operators">
-<h2>Comparison Operators</h2>
-<p><strong>&lt;</strong> Less than</p>
-<p><strong>&gt;</strong> Greater than</p>
-<p><strong>&lt;=</strong> Less than or equal to</p>
-<p><strong>&gt;=</strong> Greater than or equal to</p>
-<p><strong>==</strong> Equal to</p>
-<p><strong>=</strong> Assign value on the right to variable on the left (<strong>not</strong> a comparator).</p>
-<p><strong>boolean</strong> A test for truth values: <tt class="docutils literal">True</tt> or <tt class="docutils literal">False</tt>.</p>
-<p>Boolean operators have an order of operations. After any math or comparison operations evaluate, Python evaluates the <tt class="docutils literal">not</tt> operators first, then the <tt class="docutils literal">and</tt> operators, then the <tt class="docutils literal">or</tt> operators ...</p>
-<div class="highlight"><pre>&gt;&gt;&gt; not <span class="m">2</span> &gt; 4
-True
-&gt;&gt;&gt; not <span class="m">2</span> &gt; <span class="m">4</span> and <span class="m">2</span> &gt; 4
-False
-&gt;&gt;&gt; not <span class="m">2</span> &gt; <span class="m">4</span> and <span class="m">2</span> &gt; <span class="m">4</span> or <span class="m">2</span> &lt;<span class="o">=</span> 4
-True
-&gt;&gt;&gt;
-</pre></div>
-</div>
-<div class="section" id="format-and-escape-characters">
-<h2>Format and Escape Characters</h2>
-<p><strong>%d</strong> Digit</p>
-<p><strong>%s</strong> String</p>
-<p><strong>%r</strong> Raw</p>
-<p><strong>n</strong> New line</p>
-<p><strong>t</strong> Tab</p>
-<div class="highlight"><pre>&gt;&gt;&gt; print <span class="s2">&quot;I \&quot;may\&quot; have %d %s tickets\nfor the \t%r\tnext weekend.&quot;</span> % <span class="o">(</span>3, <span class="s1">&#39;free&#39;</span>, <span class="s1">&#39;LPTHW Bootcamp&#39;</span><span class="o">)</span>
-I <span class="s2">&quot;may&quot;</span> have <span class="m">3</span> free tickets
-<span class="k">for</span> the         <span class="s1">&#39;LPTHW Bootcamp&#39;</span>        next weekend.
-&gt;&gt;&gt;
-</pre></div>
-</div>
-<div class="section" id="input-and-extras">
-<h2>Input and Extras</h2>
-<p><strong>raw_input()</strong> Get user input (changed to <tt class="docutils literal">input()</tt> in Python 3).</p>
-<p><strong>int(raw_input())</strong></p>
-<p><strong>float(raw_input())</strong> Convert user input into an integer|float ...</p>
-<div class="highlight"><pre>&gt;&gt;&gt; <span class="nv">age</span> <span class="o">=</span> int<span class="o">(</span>raw_input<span class="o">(</span><span class="s1">&#39;Age? &gt; &#39;</span><span class="o">))</span>
-Age? &gt; 104
-&gt;&gt;&gt; print <span class="s2">&quot;You must be doing something right to make it to %d years old!&quot;</span> % age
-You must be doing something right to make it to <span class="m">104</span> years old!
-&gt;&gt;&gt;
-</pre></div>
-<p><strong>import</strong> Add modules (libraries) of Python code to my script.</p>
-<p><strong>modules</strong> Features</p>
-<p><strong>pydoc</strong> Show documentation from Python modules. Can read in the console or start a webserver and read documentation in the browser ...</p>
-<div class="highlight"><pre>$ pydoc -p 1234
-pydoc server ready at http://localhost:1234/
-</pre></div>
-<p><strong>argv</strong> Module that enables a script to accept command line arguments ...</p>
-<div class="highlight"><pre>from sys import argv
-script, first, second, <span class="nv">third</span> <span class="o">=</span> argv
-</pre></div>
-</div>
-<div class="section" id="reading-and-writing">
-<h2>Reading and Writing</h2>
-<p><strong>open()</strong> Open an external file in my script. Default file mode is <tt class="docutils literal"><span class="pre">read-only</span></tt> or <tt class="docutils literal">r</tt> if none is specified.</p>
-<p>Commonly-used modes include ...</p>
-<ul class="simple">
-<li><tt class="docutils literal">r</tt> Open text file for reading. Stream is positioned at the beginning of the file.</li>
-<li><tt class="docutils literal">r+</tt> Open for reading and writing. Stream is positioned at the beginning of the file.</li>
-<li><tt class="docutils literal">w</tt> Truncate file to zero length or create text file for writing. Stream is positioned at the beginning of the file.</li>
-<li><tt class="docutils literal">w+</tt> Open for reading and writing. File is created if it does not exist, otherwise it is truncated. Stream is positioned at the beginning of the file.</li>
-<li><tt class="docutils literal">a</tt> Open for writing. File is created if it does not exist. Stream is positioned at the end of the file.</li>
-<li><tt class="docutils literal">a+</tt> Open for reading and writing. File is created if it does not exist. Stream is positioned at the end of the file.</li>
-</ul>
-<p><strong>read()</strong> Read the contents of the opened file.</p>
-<p><strong>readline()</strong> Read just one line of the file.</p>
-<p><strong>write()</strong> Write a string to the file.</p>
-<p><strong>seek()</strong> Set the current position in the file. Beginning of file is <tt class="docutils literal">seek(0)</tt>.</p>
-<p><strong>close()</strong> Close the file ...</p>
-<div class="highlight"><pre>&gt;&gt;&gt; <span class="nv">txt</span> <span class="o">=</span> open<span class="o">(</span>filename<span class="o">)</span>
-&gt;&gt;&gt; print<span class="o">(</span>txt.read<span class="o">())</span>
-<span class="o">(</span>O&lt; .: Hello world!
-<span class="o">(</span>/<span class="o">)</span>_
-
-&gt;&gt;&gt; txt.seek<span class="o">(</span>0<span class="o">)</span>     <span class="c1"># Important: return to the top of the file before reading, otherwise I just read an empty string</span>
-&gt;&gt;&gt; txt.read<span class="o">()</span>
-<span class="s1">&#39;(O&lt; .: Hello world!\n(/)_\n&#39;</span>
-&gt;&gt;&gt; txt.close<span class="o">()</span>
-&gt;&gt;&gt; <span class="nv">txt</span> <span class="o">=</span> open<span class="o">(</span>filename, <span class="s1">&#39;a+&#39;</span><span class="o">)</span>
-&gt;&gt;&gt; txt.write<span class="o">(</span><span class="s1">&#39;.&#39;</span> * 10<span class="o">)</span>
-&gt;&gt;&gt; txt.seek<span class="o">(</span>0<span class="o">)</span>
-&gt;&gt;&gt; print<span class="o">(</span>txt.read<span class="o">())</span>
-<span class="o">(</span>O&lt; .: Hello world!
-<span class="o">(</span>/<span class="o">)</span>_
-..........
-&gt;&gt;&gt; txt.close<span class="o">()</span>
-&gt;&gt;&gt;
-</pre></div>
-</div>
-<div class="section" id="functions">
-<h2>Functions</h2>
-<p><strong>function</strong> A named section of my script that executes a task when called.</p>
-<p><strong>def</strong> &quot;Defines&quot; a new function. Ex: <tt class="docutils literal">def <span class="pre">some_function_name():</span></tt></p>
-<p><strong>method</strong> Same thing as a function, except it is called on a value. Ex: the <tt class="docutils literal">seek()</tt> method ... <tt class="docutils literal">txt.seek(0)</tt>. Each data type has its own set of methods.</p>
-<p><strong>argument</strong> Input parameters.</p>
-<p><strong>parameter</strong> A variable an argument is stored in when a function is called.</p>
-<p><strong>return</strong> Value that a function call evaluates to</p>
-<p><strong>exists</strong> Checks if a file exists. Returns True or False. Part of the <tt class="docutils literal">os.path</tt> module.</p>
-</div>
-<div class="section" id="notes">
-<h2>Notes</h2>
-<p><strong>01.</strong> Run a script from within python interactive mode ...</p>
-<pre class="doctest-block">
-&gt;&gt;&gt; execfile('some_script.py')
-</pre>
-<p><strong>02.</strong> <tt class="docutils literal">format()</tt> Positional formatting ...</p>
-<div class="highlight"><pre>&gt;&gt;&gt; print <span class="s2">&quot;{0} {1} {0} zero ...&quot;</span>.format<span class="o">(</span>1, <span class="s1">&#39;two&#39;</span><span class="o">)</span>
-<span class="m">1</span> two <span class="m">1</span> zero ...
-</pre></div>
-<p><strong>03.</strong> <tt class="docutils literal">from __future__ import</tt> Allows me to bring Python 3 features into Python 2. Example ...</p>
-<div class="highlight"><pre>from __future__ import print_function
-print<span class="o">(</span><span class="s1">&#39;There are&#39;</span>, cars, <span class="s1">&#39;cars available.&#39;</span><span class="o">)</span>
-</pre></div>
-<p>... prints a concatenated statement (otherwise the above <tt class="docutils literal">print()</tt> in Python 2 makes the commas treat things as a tuple).</p>
-<div class="highlight"><pre>from __future__ import division
-print 8/7  <span class="c1"># prints 1.1428571428571428</span>
-print 8//7 <span class="c1"># prints 1</span>
-</pre></div>
-<p>... makes division into a float. Python 2 would otherwise return <tt class="docutils literal">1</tt> for both calculations.</p>
-<p><strong>04.</strong> <tt class="docutils literal">textwrap.dedent</tt> A useful module+method for indenting quotes in code while the output is aligned to margin.</p>
-</div>
-
-        <!-- Nav links to previous|next article --> 
-        <div id="navmenu">
-            <hr />
-            <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-                <a href="http://www.circuidipity.com/20160501.html">
-                Minimal to Morebuntu</a></p>
-        </div>
+<!-- archive list -->
+<div id="archives">
+    <ul reversed="reversed">
+        <li>Sunday 05 June 2016<br />
+            <a href="http://www.circuidipity.com/lpthw-e22.html">LPTHW Exercise 22: What Do You Know So Far?</a></li>
+        <li>Sunday 01 May 2016<br />
+            <a href="http://www.circuidipity.com/20160501.html">Minimal to Morebuntu</a></li>
+        <li>Thursday 19 November 2015<br />
+            <a href="http://www.circuidipity.com/lpthw-e18-21.html">LPTHW Exercise 18-21: Functions, Variables, Return</a></li>
+        <li>Wednesday 18 November 2015<br />
+            <a href="http://www.circuidipity.com/lpthw-e15-17.html">LPTHW Exercise 15-17: Reading and Writing Files</a></li>
+        <li>Tuesday 17 November 2015<br />
+            <a href="http://www.circuidipity.com/lpthw-e13-14.html">LPTHW Exercise 13-14: Parameters, Unpacking, Variables, Prompting and Passing</a></li>
+        <li>Monday 16 November 2015<br />
+            <a href="http://www.circuidipity.com/lpthw-e11-12.html">LPTHW Exercise 11-12: Asking Questions, Prompting People</a></li>
+        <li>Sunday 15 November 2015<br />
+            <a href="http://www.circuidipity.com/lpthw-e10.html">LPTHW Exercise 10: What Was That?</a></li>
+        <li>Sunday 15 November 2015<br />
+            <a href="http://www.circuidipity.com/lpthw-e9.html">LPTHW Exercise 9: Printing, Printing, Printing</a></li>
+        <li>Sunday 15 November 2015<br />
+            <a href="http://www.circuidipity.com/lpthw-e8.html">LPTHW Exercise 8: Printing, Printing</a></li>
+        <li>Sunday 15 November 2015<br />
+            <a href="http://www.circuidipity.com/lpthw-e7.html">LPTHW Exercise 7: More Printing</a></li>
+        <li>Sunday 15 November 2015<br />
+            <a href="http://www.circuidipity.com/lpthw-e6.html">LPTHW Exercise 6: Strings and Text</a></li>
+        <li>Saturday 14 November 2015<br />
+            <a href="http://www.circuidipity.com/lpthw-e5.html">LPTHW Exercise 5: More Variables and Printing</a></li>
+        <li>Saturday 14 November 2015<br />
+            <a href="http://www.circuidipity.com/lpthw-e4.html">LPTHW Exercise 4: Variables and Names</a></li>
+        <li>Saturday 14 November 2015<br />
+            <a href="http://www.circuidipity.com/lpthw-e3.html">LPTHW Exercise 3: Numbers and Math</a></li>
+        <li>Saturday 14 November 2015<br />
+            <a href="http://www.circuidipity.com/lpthw-e2.html">LPTHW Exercise 2: Comments and Pound Characters</a></li>
+        <li>Friday 13 November 2015<br />
+            <a href="http://www.circuidipity.com/lpthw-e1.html">LPTHW Exercise 1: A Good First Program</a></li>
+        <li>Thursday 12 November 2015<br />
+            <a href="http://www.circuidipity.com/lpthw-e0.html">LPTHW Exercise 0: The Setup</a></li>
+        <li>Wednesday 11 November 2015<br />
+            <a href="http://www.circuidipity.com/lpthw-dude.html">Learn Python the Hard Way with the DUDE</a></li>
+        <li>Friday 25 September 2015<br />
+            <a href="http://www.circuidipity.com/keystrokes.html">Keystrokes cheatsheet</a></li>
+        <li>Thursday 27 August 2015<br />
+            <a href="http://www.circuidipity.com/self-signed-ssl-certificate.html">Create a self-signed SSL certificate</a></li>
+        <li>Wednesday 19 August 2015<br />
+            <a href="http://www.circuidipity.com/install-cyanogenmod-nexus-4.html">Install CyanogenMod on Nexus 4</a></li>
+        <li>Thursday 13 August 2015<br />
+            <a href="http://www.circuidipity.com/rather-ashes-than-dust.html">I would rather be ashes than dust</a></li>
+        <li>Wednesday 12 August 2015<br />
+            <a href="http://www.circuidipity.com/incremental-backups-rsnapshot.html">Incremental backups</a></li>
+        <li>Tuesday 11 August 2015<br />
+            <a href="http://www.circuidipity.com/x11-forwarding-ssh.html">Run remote X applications on a local display</a></li>
+        <li>Monday 10 August 2015<br />
+            <a href="http://www.circuidipity.com/chromebook-liftoff-splashdown.html">Chromebook liftoff and splashdown</a></li>
+        <li>Tuesday 04 August 2015<br />
+            <a href="http://www.circuidipity.com/writing-systemd-service-files.html">Writing systemd service files</a></li>
+        <li>Thursday 30 July 2015<br />
+            <a href="http://www.circuidipity.com/raspberry-pi-ram-irqbalance.html">Raspberry Pi RAM gobbled up by irqbalance</a></li>
+        <li>Saturday 25 July 2015<br />
+            <a href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html">Run a Raspberry Pi from USB storage v4.0</a></li>
+        <li>Wednesday 22 July 2015<br />
+            <a href="http://www.circuidipity.com/debian-jessie-raspberry-pi-2.html">Debian Jessie on Raspberry Pi 2</a></li>
+        <li>Tuesday 21 July 2015<br />
+            <a href="http://www.circuidipity.com/resize-rootfs-raspberry-pi.html">Resize rootfs on Raspberry Pi</a></li>
+        <li>Monday 20 July 2015<br />
+            <a href="http://www.circuidipity.com/20150720.html">1000 cool bits</a></li>
+        <li>Sunday 19 July 2015<br />
+            <a href="http://www.circuidipity.com/verify-pgp-signature-gnupg.html">Verify a PGP signature with GnuPG</a></li>
+        <li>Friday 17 July 2015<br />
+            <a href="http://www.circuidipity.com/i3-tiling-window-manager.html">Lightweight and a delight: i3 tiling window manager</a></li>
+        <li>Wednesday 15 July 2015<br />
+            <a href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html">ThinkPad USB Keyboard with TrackPoint</a></li>
+        <li>Friday 10 July 2015<br />
+            <a href="http://www.circuidipity.com/pavolume.html">Shell script: paVolume</a></li>
+        <li>Wednesday 08 July 2015<br />
+            <a href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html">Chromebook to Jessiebook</a></li>
+        <li>Tuesday 07 July 2015<br />
+            <a href="http://www.circuidipity.com/minimal-debian.html">Minimal Debian</a></li>
+        <li>Sunday 05 July 2015<br />
+            <a href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage-using-raspbian.html">Run a Raspberry Pi 2 from USB storage v3.0</a></li>
+        <li>Friday 03 July 2015<br />
+            <a href="http://www.circuidipity.com/minimal-raspbian-jessie.html">Minimal Raspbian Jessie</a></li>
+        <li>Friday 26 June 2015<br />
+            <a href="http://www.circuidipity.com/openwrt-bridged-repeater.html">OpenWrt router as bridged repeater using relayd</a></li>
+        <li>Saturday 02 May 2015<br />
+            <a href="http://www.circuidipity.com/c720-ubuntubook.html">Chromebook to Ubuntubook</a></li>
+        <li>Friday 01 May 2015<br />
+            <a href="http://www.circuidipity.com/encrypt-external-drive.html">Configure an encrypted external USB hard drive in Linux</a></li>
+        <li>Thursday 26 March 2015<br />
+            <a href="http://www.circuidipity.com/arch-install-encrypt.html">Arch Linux installation with encrypted root + swap</a></li>
+        <li>Monday 09 March 2015<br />
+            <a href="http://www.circuidipity.com/samsung-clp-310-printer.html">Samsung CLP-310 Printer</a></li>
+        <li>Wednesday 04 March 2015<br />
+            <a href="http://www.circuidipity.com/brother-mfc-j450dw-printer-scanner.html">Brother MFC-J450DW All-In-One Printer/Scanner</a></li>
+        <li>Monday 02 March 2015<br />
+            <a href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html">Run a Raspberry Pi 2 from USB storage v2.0</a></li>
+        <li>Friday 27 February 2015<br />
+            <a href="http://www.circuidipity.com/20150227.html">A bit of unplanned Grub2 surgery</a></li>
+        <li>Wednesday 25 February 2015<br />
+            <a href="http://www.circuidipity.com/ubuntu-keyboard-shortcuts.html">Ubuntu Keyboard Shortcuts</a></li>
+        <li>Wednesday 11 February 2015<br />
+            <a href="http://www.circuidipity.com/ttrss.html">Tiny Tiny RSS</a></li>
+        <li>Monday 09 February 2015<br />
+            <a href="http://www.circuidipity.com/php-nginx-postgresql.html">PHP + Nginx + PostgreSQL</a></li>
+        <li>Sunday 08 February 2015<br />
+            <a href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html">OpenWrt surgery on more home routers</a></li>
+        <li>Friday 06 February 2015<br />
+            <a href="http://www.circuidipity.com/ddns-openwrt.html">Dynamic DNS and OpenWRT</a></li>
+        <li>Thursday 05 February 2015<br />
+            <a href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html">Network Attached Storage using a Raspberry Pi and SSHFS</a></li>
+        <li>Tuesday 03 February 2015<br />
+            <a href="http://www.circuidipity.com/backup-home.html">Backup home</a></li>
+        <li>Monday 02 February 2015<br />
+            <a href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">Secure remote access using SSH keys</a></li>
+        <li>Sunday 01 February 2015<br />
+            <a href="http://www.circuidipity.com/raspberry-pi-home-server.html">There's no place like [a Raspberry Pi] Home [Server]</a></li>
+        <li>Thursday 29 January 2015<br />
+            <a href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html">Run a Raspberry Pi from USB storage v1.0</a></li>
+        <li>Saturday 15 November 2014<br />
+            <a href="http://www.circuidipity.com/20141115.html">Pop-up custom menu in LXDE</a></li>
+        <li>Monday 10 November 2014<br />
+            <a href="http://www.circuidipity.com/dual-display-lubuntu.html">Dual display configuration in Lubuntu</a></li>
+        <li>Sunday 02 November 2014<br />
+            <a href="http://www.circuidipity.com/lubuntu-trusty-hacks.html">20 small hacks after installing Lubuntu 14.04</a></li>
+        <li>Friday 31 October 2014<br />
+            <a href="http://www.circuidipity.com/20141031.html">Add encrypted USB storage to Chromebooks</a></li>
+        <li>Sunday 26 October 2014<br />
+            <a href="http://www.circuidipity.com/c720-lubuntubook.html">Chromebook to Lubuntubook</a></li>
+        <li>Saturday 25 October 2014<br />
+            <a href="http://www.circuidipity.com/c720-lubuntubook-install.html">Install Lubuntu 14.04 on the Acer C720 Chromebook</a></li>
+        <li>Friday 17 October 2014<br />
+            <a href="http://www.circuidipity.com/20141017.html">Pentium M and PAE</a></li>
+        <li>Wednesday 08 October 2014<br />
+            <a href="http://www.circuidipity.com/restore-stock-android-on-nexus-7.html">Restore stock Android on Nexus 7</a></li>
+        <li>Monday 06 October 2014<br />
+            <a href="http://www.circuidipity.com/20141006.html">Port forwarding</a></li>
+        <li>Friday 03 October 2014<br />
+            <a href="http://www.circuidipity.com/pingparade5.html">Remote control a Linux desktop using VNC</a></li>
+        <li>Wednesday 01 October 2014<br />
+            <a href="http://www.circuidipity.com/20141001.html">Static leases</a></li>
+        <li>Tuesday 30 September 2014<br />
+            <a href="http://www.circuidipity.com/20140930.html">A place for humanity in the stars</a></li>
+        <li>Sunday 28 September 2014<br />
+            <a href="http://www.circuidipity.com/20140928.html">&quot;Hieroglyph&quot;, or ideas about getting Big Stuff Done in an incremental world</a></li>
+        <li>Saturday 27 September 2014<br />
+            <a href="http://www.circuidipity.com/20140927.html">Upton on Shenzhen</a></li>
+        <li>Friday 26 September 2014<br />
+            <a href="http://www.circuidipity.com/pingparade4.html">Supercharge a home router using OpenWrt</a></li>
+        <li>Sunday 21 September 2014<br />
+            <a href="http://www.circuidipity.com/20140921.html">He did not have a long voyage, just a long tossing about</a></li>
+        <li>Thursday 18 September 2014<br />
+            <a href="http://www.circuidipity.com/20140918.html">Stay relaxed and success will follow</a></li>
+        <li>Thursday 11 September 2014<br />
+            <a href="http://www.circuidipity.com/20140911.html">A growing something else</a></li>
+        <li>Friday 05 September 2014<br />
+            <a href="http://www.circuidipity.com/pingparade1.html">Give new life to old laptops as Linux home servers</a></li>
+        <li>Sunday 31 August 2014<br />
+            <a href="http://www.circuidipity.com/20140831.html">Modify the default boot order in GRUB</a></li>
+        <li>Wednesday 27 August 2014<br />
+            <a href="http://www.circuidipity.com/linux-post-install.html">Linux post-install configuration</a></li>
+        <li>Thursday 10 July 2014<br />
+            <a href="http://www.circuidipity.com/heavenly-breezes.html">Ship or sails adapted to the heavenly breezes</a></li>
+        <li>Wednesday 09 July 2014<br />
+            <a href="http://www.circuidipity.com/pi-memory-split.html">Increase RAM available to Raspberry Pi CPU</a></li>
+        <li>Monday 07 July 2014<br />
+            <a href="http://www.circuidipity.com/ubuntu-trusty-install.html">Minimal Ubuntu</a></li>
+        <li>Thursday 03 July 2014<br />
+            <a href="http://www.circuidipity.com/pi-plate.html">Raspberry Pi Plate</a></li>
+        <li>Wednesday 28 May 2014<br />
+            <a href="http://www.circuidipity.com/dpkg-duplicate.html">Duplicate package selection in Debian</a></li>
+        <li>Thursday 15 May 2014<br />
+            <a href="http://www.circuidipity.com/policykit-upgrade-user-permission.html">Policykit upgrade generates user permission problems</a></li>
+        <li>Tuesday 13 May 2014<br />
+            <a href="http://www.circuidipity.com/alias-commands.html">Creating new commands with alias</a></li>
+        <li>Saturday 10 May 2014<br />
+            <a href="http://www.circuidipity.com/forward-search-bash.html">Enable forward search in Bash history</a></li>
+        <li>Sunday 27 April 2014<br />
+            <a href="http://www.circuidipity.com/ubuntu1404-virtualbox.html">Ubuntu 14.04 and Virtualbox</a></li>
+        <li>Monday 14 April 2014<br />
+            <a href="http://www.circuidipity.com/no-udevd-no-automount.html">No udevd no auto-mount</a></li>
+        <li>Tuesday 08 April 2014<br />
+            <a href="http://www.circuidipity.com/grml-debootstrap.html">Install Debian using grml-debootstrap</a></li>
+        <li>Tuesday 01 April 2014<br />
+            <a href="http://www.circuidipity.com/youtube-dl.html">Download videos using youtube-dl</a></li>
+        <li>Monday 31 March 2014<br />
+            <a href="http://www.circuidipity.com/super-key.html">Stop SHOUTING and convert Caps_Lock into a Super key</a></li>
+        <li>Monday 17 March 2014<br />
+            <a href="http://www.circuidipity.com/locale-config.html">Locale configuration</a></li>
+        <li>Thursday 13 March 2014<br />
+            <a href="http://www.circuidipity.com/grubs.html">GRUBS Reanimated USB Boot Stick</a></li>
+        <li>Thursday 20 February 2014<br />
+            <a href="http://www.circuidipity.com/the-man-in-the-arena.html">The Man In The Arena</a></li>
+        <li>Saturday 15 February 2014<br />
+            <a href="http://www.circuidipity.com/snapshot-debian.html">Snapshot Debian</a></li>
+        <li>Tuesday 11 February 2014<br />
+            <a href="http://www.circuidipity.com/tmux.html">My tmux cheatsheet</a></li>
+        <li>Monday 10 February 2014<br />
+            <a href="http://www.circuidipity.com/easy-8-bit-pixel-images.html">Easy 8-bit pixel images</a></li>
+        <li>Saturday 08 February 2014<br />
+            <a href="http://www.circuidipity.com/github-pages.html">Host a blog on GitHub Pages</a></li>
+        <li>Thursday 06 February 2014<br />
+            <a href="http://www.circuidipity.com/pelican.html">Build a blog using the Pelican static site generator</a></li>
+        <li>Tuesday 07 January 2014<br />
+            <a href="http://www.circuidipity.com/flashblock.html">Vimeo and FlashBlock not playing nice on Iceweasel</a></li>
+        <li>Monday 06 January 2014<br />
+            <a href="http://www.circuidipity.com/ascii-logo.html">Add ascii logo to login prompt</a></li>
+        <li>Wednesday 01 January 2014<br />
+            <a href="http://www.circuidipity.com/convert-video-to-audio.html">Convert video file(s) to MP3 audio</a></li>
+        <li>Monday 23 December 2013<br />
+            <a href="http://www.circuidipity.com/nm-applet-openbox.html">Multiple instances of nm-applet in Openbox</a></li>
+        <li>Friday 22 November 2013<br />
+            <a href="http://www.circuidipity.com/python2-and-python3.html">Python2 and Python3 co-existing in harmony using Virtualenv</a></li>
+        <li>Friday 11 October 2013<br />
+            <a href="http://www.circuidipity.com/install-debian-wheezy-screenshot-tour.html">Minimal Debian</a></li>
+        <li>Friday 04 October 2013<br />
+            <a href="http://www.circuidipity.com/install-arduino-debian.html">Install Arduino on Debian</a></li>
+        <li>Sunday 08 September 2013<br />
+            <a href="http://www.circuidipity.com/bbb-dt.html">Device Tree and BeagleBone Black</a></li>
+        <li>Friday 06 September 2013<br />
+            <a href="http://www.circuidipity.com/bbb-led.html">BeagleBone Black: 'Say Hello to My Little LEDs'</a></li>
+        <li>Monday 02 September 2013<br />
+            <a href="http://www.circuidipity.com/getting-started-with-beaglebone-black.html">Getting Started with BeagleBone Black</a></li>
+        <li>Wednesday 31 July 2013<br />
+            <a href="http://www.circuidipity.com/sputnik.html">It is for those in the future to envy us our Joy</a></li>
+        <li>Saturday 22 June 2013<br />
+            <a href="http://www.circuidipity.com/firefox-rss-reader.html">Firefox as RSS reader</a></li>
+        <li>Thursday 18 April 2013<br />
+            <a href="http://www.circuidipity.com/shell-script-library.html">A library for shell scripts</a></li>
+        <li>Thursday 11 April 2013<br />
+            <a href="http://www.circuidipity.com/funkygoodtimer.html">FunkyGoodTimer - A simple (but funky) graphical countdown timer</a></li>
+        <li>Thursday 04 April 2013<br />
+            <a href="http://www.circuidipity.com/fidel.html">Fidel - Find and delete files</a></li>
+        <li>Thursday 28 March 2013<br />
+            <a href="http://www.circuidipity.com/video2audio.html">Video2Audio - Search for video and copy/convert to MP3</a></li>
+        <li>Thursday 21 March 2013<br />
+            <a href="http://www.circuidipity.com/tartime-find-time-tar.html">TarTime - Match files and generate a tar archive</a></li>
+        <li>Thursday 14 March 2013<br />
+            <a href="http://www.circuidipity.com/dual-display-xrandr-extended-desktop-configuration.html">DualDisplay - Extended desktop configuration</a></li>
+        <li>Thursday 07 March 2013<br />
+            <a href="http://www.circuidipity.com/adb-fastboot-android.html">Install ADB and Fastboot Android Tools</a></li>
+        <li>Thursday 28 February 2013<br />
+            <a href="http://www.circuidipity.com/mtp.html">Configure MTP in Linux</a></li>
+        <li>Friday 07 December 2012<br />
+            <a href="http://www.circuidipity.com/virtualbox-install.html">Virtualbox</a></li>
+        <li>Thursday 06 December 2012<br />
+            <a href="http://www.circuidipity.com/multi-boot-usb.html">Transform a USB stick into a boot device packing multiple Linux distros</a></li>
+        <li>Thursday 07 June 2012<br />
+            <a href="http://www.circuidipity.com/great-fun-getting-started-with-jekyll.html">Great fun getting started with Jekyll</a></li>
+        <li>Thursday 31 May 2012<br />
+            <a href="http://www.circuidipity.com/install-ruby-on-debian-wheezy-using-rvm.html">Install Ruby on Debian using RVM</a></li>
+        <li>Sunday 01 January 2012<br />
+            <a href="http://www.circuidipity.com/going-going-gandi-done.html">Going ... going ... Gandi ... done!</a></li>
+        <li>Thursday 08 December 2011<br />
+            <a href="http://www.circuidipity.com/linux-home-server.html">Make an old netbook or laptop into a Linux home server</a></li>
+        <li>Saturday 26 November 2011<br />
+            <a href="http://www.circuidipity.com/host-website-on-amazon-s3.html">Tie a balloon on your website and head for the clouds of Amazon</a></li>
+        <li>Tuesday 05 April 2011<br />
+            <a href="http://www.circuidipity.com/intel-backlight.html">Fix the backlight on laptops using Intel video chipsets</a></li>
+        <li>Wednesday 23 March 2011<br />
+            <a href="http://www.circuidipity.com/use-gtk-themes-with-fluxbox.html">Use GTK+ themes with Fluxbox</a></li>
+        <li>Tuesday 22 March 2011<br />
+            <a href="http://www.circuidipity.com/add-a-dynamic-menu-to-your-desktop-using-dmenu.html">Add a dynamic menu to your desktop using dmenu</a></li>
+        <li>Thursday 03 March 2011<br />
+            <a href="http://www.circuidipity.com/twinview.html">Dual-display configuration using Nvidia + Twinview</a></li>
+        <li>Monday 28 February 2011<br />
+            <a href="http://www.circuidipity.com/getting-nvidia-and-xorg-to-play-nice.html">Getting Nvidia and xorg to play nice</a></li>
+        <li>Sunday 20 February 2011<br />
+            <a href="http://www.circuidipity.com/hosting-multiple-domains-from-one-ip-address-using-apache.html">Hosting multiple domains from one IP address using Apache</a></li>
+        <li>Thursday 12 August 2010<br />
+            <a href="http://www.circuidipity.com/print-copy-scan-using-the-epson-nx215-all-in-one-with-debian.html">Print copy scan using the Epson NX215 all-in-one with Linux</a></li>
+        <li>Thursday 17 June 2010<br />
+            <a href="http://www.circuidipity.com/big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr.html">Big screen little screen virtual screen and xrandr</a></li>
+        <li>Thursday 10 June 2010<br />
+            <a href="http://www.circuidipity.com/debian-linux-on-the-asus-eeepc-1001p.html">Debian Linux on the Asus EEEPC 1001P</a></li>
+        <li>Sunday 06 June 2010<br />
+            <a href="http://www.circuidipity.com/applications-checklist-for-my-debian-linux-installs.html">Applications checklist for my Debian Squeeze installs</a></li>
+        <li>Thursday 03 June 2010<br />
+            <a href="http://www.circuidipity.com/install-debian-linux-squeeze.html">Install Debian Squeeze GNU/Linux</a></li>
+        <li>Saturday 29 May 2010<br />
+            <a href="http://www.circuidipity.com/hello-world.html">Hello World</a></li>
+    </ul>
 </div>
 
 

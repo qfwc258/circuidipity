@@ -1,8 +1,8 @@
 /*
-    Name: Orangespresso
-    Date: October 2014
+    Name: Clearwater
+    Date: August 2016
     Description: Theme for the Pelican static site generator
-    Version: 0.4
+    Version: 0.1
     Licence: GPL2
     Author: Daniel Wayne Armstrong <http://www.circuidipity.com>
 */
@@ -87,6 +87,8 @@ ul.tagcloud a, #siteheader a, #navmenu a, #footer a, #breadcrumb a,
 
 #sitemenu a {color: #ff0000;}
 
+#archives a {font-size: 1.4em;}
+
 /*
 Paragraphs
 */
@@ -114,22 +116,6 @@ p.firstparagraph {
 
 p.caption {font-size: 1.0em; font-weight: bold; margin-top: 0px;}
 
-/*
-.note p.first.admonition-title, .warning p.first.admonition-title {
-    font-size: 1.2em; 
-    font-weight: bold;
-    color: #ffffff;
-    margin-bottom: 0px;
-    padding: 4px;
-}
-
-.note p.first.admonition-title {background-color: #009900;}
-
-.warning p.first.admonition-title {background-color: #ff0000;}
-
-.note p.last, .warning p.last {margin-top: 0px;}
-*/
-
 .projectx p {font-size: 1.2em;}
 
 /*
@@ -142,7 +128,14 @@ blockquote {padding-left: 12px; border-left: 6px solid #009900;}
 Lists
 */
 
-#archives ol, #tagposts ol {line-height: 1.4em;}
+#tagposts ol {line-height: 1.4em;}
+
+#archives ul {
+    clear: both;
+    line-height: 1.6em;
+    list-style: none; 
+    padding-left: 0;
+}
 
 ul.tagcloud {list-style: none; line-height: 1.8em;}
 
@@ -256,6 +249,13 @@ img.whoami {
     margin: 0px 20px 20px 0px !important;
 }
 
+img.minime {
+    width: 38px;
+    height: 38px;
+    float: left;
+    margin: 0px 5px 5px 0px !important;
+}
+
 img.align-center {
     display: block;
     margin-left: auto;
@@ -288,32 +288,10 @@ Siteheader
 #siteheader {font-size: 2.0em; line-height: 1.0em;}
 
 /*
-Latest Post
-*/
-
-#latestpost {clear: both;}
-
-/*
-Nav Links to Old/New Posts
-*/
-
-/*
 Footer
 */
 
 #footer {margin-top: 20px; line-height: 1.2em; text-align: right;}
-
-/*
-Breadcrumb Trail
-*/
-
-/*
-Archives
-*/
-
-/*
-Tagged Posts
-*/
 
 /*
 All Tags
