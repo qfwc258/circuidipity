@@ -1,0 +1,94 @@
+===============
+$HOME slash bin
+===============
+
+:date: 2016-08-08 16:20:00
+:slug: homebin
+:template: article-project
+:tags: programming, shell, python, linux
+:modified: 2016-08-08 16:20:00
+
+.. image:: images/infinite-loop-not-300.png
+    :align: right
+    :alt: Infinite loop
+    :width: 300px
+    :height: 400px
+
+Bit by bit I build my collection of working scripts and experiments in my `home directory <https://github.com/vonbrownie/homebin>`_. Programming right now in `Python <http://www.circuidipity.com/tag-python.html>`_.
+
+Let's go!
+=========
+
+`Library.sh <https://github.com/vonbrownie/homebin/blob/master/Library.sh>`_
+    library of functions for bash shell scripts (more: `"A library for shell scripts" <http://www.circuidipity.com/shell-script-library.html>`_)
+
+`bBook.py <https://github.com/vonbrownie/homebin/blob/master/bBook.py>`_
+    get book information from command line arguments or clipboard and open web browser and search Amazon and the Toronto Public Library
+
+`bMap.py <https://github.com/vonbrownie/homebin/blob/master/bMap.py>`_
+    get a street address from command line arguments or clipboard and open web browser to the Google Maps page for the address
+
+`collatz.py <https://github.com/vonbrownie/homebin/blob/master/collatz.py>`_
+    explore the *Collatz sequence*, sometimes called "the simplest impossible math problem"
+
+`dateAndBook.py <https://github.com/vonbrownie/homebin/blob/master/dateAndBook.py>`_
+    collect books I have read and the dates I finished reading them from my daily logfile and write to a new logfile
+
+`dateAndStep.py <https://github.com/vonbrownie/homebin/blob/master/dateAndStep.py>`_
+    collect dates (x_axis) and corresponding pedometer measurements (y_axis) from my daily logfile and write to a new logfile + generate a graph
+
+`dateAndWeight.py <https://github.com/vonbrownie/homebin/blob/master/dateAndWeight.py>`_
+    collect dates (x_axis) and corresponding weight measurements (y_axis) from my daily logfile and write to a new logfile + generate a graph
+
+`dateAndY.py <https://github.com/vonbrownie/homebin/blob/master/dateAndY.py>`_
+    collect dates (x_axis) and corresponding y measurements (y_axis) from a logfile and write to a new logfile + generate a graph using matplotlib
+
+`daysUntil.py <https://github.com/vonbrownie/homebin/blob/master/daysUntil.py>`_
+    how many days until: yyyy mm dd
+
+`debtBuster.py <https://github.com/vonbrownie/homebin/blob/master/debtBuster.py>`_
+    find the smallest monthly payment to the cent such that we can pay off a debt within *n* months
+
+`dldsply <https://github.com/vonbrownie/homebin/blob/master/dldsply>`_
+    enable|disable extended desktop using XRandR
+
+`dlg <https://github.com/vonbrownie/homebin/blob/master/dlg>`_
+    daily activity log + git commits
+
+`dmenu-run.sh <https://github.com/vonbrownie/homebin/blob/master/dmenu-run.sh>`_
+    ``dmenu`` configuration
+
+`magic8ball.py <https://github.com/vonbrownie/homebin/blob/master/magic8ball.py>`_
+    Magic 8 Ball peers into the future and retrieves the answer to your questions
+
+`paVolume <https://github.com/vonbrownie/homebin/blob/master/paVolume>`_
+    pulseaudio volume control (more: `"Shell script: paVolume" <http://www.circuidipity.com/pavolume.html>`_)
+
+`rePhoneAndEmail.py <https://github.com/vonbrownie/homebin/blob/master/rePhoneAndEmail.py>`_
+    find and extract phone numbers and email addresses on the clipboard
+
+`reSearch.py <https://github.com/vonbrownie/homebin/blob/master/reSearch.py>`_
+    find matches for regex patterns in file(s)
+
+`teleportHomeTo <https://github.com/vonbrownie/homebin/blob/master/teleportHomeTo>`_
+    sync $HOME to DESTINATION
+
+`timeToCount.py <https://github.com/vonbrownie/homebin/blob/master/timeToCount.py>`_
+    measure clock time for a device to count from 0 to *x* in increments of 1
+
+`tplWatch.py <https://github.com/vonbrownie/homebin/blob/master/tplWatch.py>`_
+    check to see if Toronto Public Library has added an item to catalogue
+
+`vboxshot <https://github.com/vonbrownie/homebin/blob/master/vboxshot>`_
+    capture screenshot of a virtualbox session
+
+`webWatch.py <https://github.com/vonbrownie/homebin/blob/master/webWatch.py>`_
+    functions to support web scraping
+
+`yt-audio <https://github.com/vonbrownie/homebin/blob/master/yt-audio>`_
+    download online video and convert to audio (more: `"Download videos using youtube-dl" <http://www.circuidipity.com/youtube-dl.html>`_)
+
+`xtra <https://github.com/vonbrownie/homebin/blob/master/xtra>`_
+    ``xinit`` extra config
+
+Happy hacking!
