@@ -44,8 +44,6 @@ TAG_URL = 'tag-{slug}.html'
 TAG_SAVE_AS = 'tag-{slug}.html'
 TAGS_URL = 'tags.html'
 TAGS_SAVE_AS = 'tags.html'
-ARCHIVES_URL = 'archives.html'
-ARCHIVES_SAVE_AS = 'archives.html'
 PROJECTS_URL = 'projects.html'
 PROJECTS_SAVE_AS = 'projects.html'
 
@@ -57,8 +55,9 @@ PLUGIN_PATHS = ['/home/dwa/code/pelican-plugins']
 PLUGINS = ['neighbors', 'tag_cloud']
 
 # Theme
-THEME = '/home/dwa/code/pelican-themes/orangespresso'
+THEME = '/home/dwa/code/pelican-themes/clearwater'
 WHOAMI_URL = '/theme/images/whoami.png'
+MINIME_URL = '/theme/images/minime.png'
 GREETING = 'Howdy!'
 LICENCE_NAME = 'CC BY-NC-SA'
 LICENCE_URL = 'http://creativecommons.org/licenses/by-nc-sa/4.0/'
