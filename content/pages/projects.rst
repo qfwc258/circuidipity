@@ -6,6 +6,23 @@ Projects
 
 .. class:: invisiblelink
 
+    .. image:: images/infinite-loop-not-300-thumb.png
+        :alt: Infinite loop
+        :width: 150px
+        :height: 150px
+        :align: left
+        :target: homebin.html
+
+.. raw:: html
+
+    <div class="projectx">
+        <h2>$HOME slash bin</h2>
+        <p>Bit by bit I build <a href="homebin.html">my collection of working scripts and experiments ...</a></p>
+        <p style="clear:both;"></p>
+    </div>
+
+.. class:: invisiblelink
+
     .. image:: images/lpthw-begin-1-thumb.png
         :alt: Learn Python the Hard Way
         :width: 150px
