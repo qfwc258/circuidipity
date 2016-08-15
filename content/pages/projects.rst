@@ -17,7 +17,7 @@ Projects
 
     <div class="projectx">
         <h2>$HOME slash bin</h2>
-        <p>Bit by bit I build <a href="homebin.html">my collection of working scripts and experiments ...</a></p>
+        <p>Bit by bit I build my <a href="homebin.html">collection of working scripts and experiments ...</a></p>
         <p style="clear:both;"></p>
     </div>
 
@@ -34,7 +34,7 @@ Projects
 
     <div class="projectx">
         <h2>Learn Python the Hard Way with the DUDE</h2>
-        <p>Learn programming with <a href="lpthw-dude.html">a Daily Undertaking of Deliberate Effort ...</a></p>
+        <p>Learn programming with a <a href="lpthw-dude.html">Daily Undertaking of Deliberate Effort ...</a></p>
         <p style="clear:both;"></p>
     </div>
 
