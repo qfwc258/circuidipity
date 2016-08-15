@@ -5,7 +5,7 @@ Minimal Ubuntu
 :date: 2014-07-07 01:23:00
 :tags: ubuntu, linux
 :slug: ubuntu-trusty-install
-:modified: 2016-04-25 19:57:00
+:modified: 2016-08-14 19:57:00
 
 .. image:: images/screenshot/ubuntuInstall/xerus.png
     :alt: Xerus
@@ -440,9 +440,25 @@ If the hard disk has not been securely wiped prior to installing Ubuntu (using a
     :width: 800px
     :height: 600px
 
+**Alternative:** For a `home server setup <http://www.circuidipity.com/laptop-home-server.html>`_ I like to select ``Install security updates automatically`` for a device often running unattended ...
+
+.. image:: images/screenshot/ubuntuInstall/300-1.png
+    :alt: Install security updates
+    :align: center
+    :width: 800px
+    :height: 600px
+
 Select ``[*] standard system utilities``  and leave the remaining tasks unmarked if you wish to start with a minimal, console-only base configuration ready for further customization ... [5]_
 
 .. image:: images/screenshot/ubuntuInstall/301.png
+    :alt: Software selection
+    :align: center
+    :width: 800px
+    :height: 600px
+
+**Alternative:** Or - again, for a home server - select the few extras included in ``[*] Basic Ubuntu server`` ...
+
+.. image:: images/screenshot/ubuntuInstall/301-1.png
     :alt: Software selection
     :align: center
     :width: 800px
