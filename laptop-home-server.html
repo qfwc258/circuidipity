@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | New life for an old laptop as a Linux home server</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Tuesday 16 August 2016</p>
+</div>
+
+<!-- article -->
+<h1>New life for an old laptop as a Linux home server</h1>
+<div id="article">
+    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Home Server Project #0.1 .:</a> <strong>Netbooks</strong> ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old <strong>Asus 900HA</strong> netbook and put it to work as a <a class="reference external" href="http://www.circuidipity.com/tag-server.html">home server</a>. Good times!</p>
+<p>Running your own home server is a fun learning experience and offers several advantages.</p>
+<p>Second-hand laptops -  retired in favour of more current and powerful machines - can still deliver plenty of oomph for running a personal server. Frugal with power and come equipped with their own built-in UPS (battery)!</p>
+<p>Install a stable, well-tested Linux distribution and provide services such as network printing and <a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html">storage (NAS)</a>, perform <a class="reference external" href="http://www.circuidipity.com/incremental-backups-rsnapshot.html">backups</a>, host <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">web services</a> and much more. Start with a minimal base configuration of <a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html">Ubuntu</a> and gain access to tens of thousands of packages ready to install.</p>
+<p>Privacy may be important to you. Hosting your own server running your own services gives more control over your data.</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<p><strong>Hardware:</strong> Asus 900HA netbook with 10&quot; display, 1GB RAM, a 500GB hard drive (very easy replacement of original drive - just unscrew the netbook's bottom panel), built-in ethernet/wifi, webcam, and a host of ports (3xUSB2, VGA, sound, SD card slot). Neat and compact device!</p>
+<div class="section" id="install-ubuntu">
+<h3>0. Install Ubuntu</h3>
+<p>My <a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html">visual screenshot tour</a> of installing Ubuntu 16.04 - a <a class="reference external" href="https://wiki.ubuntu.com/Releases">Long Term Support (LTS)</a> release. Ubuntu's <strong>minimal install image</strong> (32bit for the netbook) makes it easy to create a console-only base configuration that can be later customized for various tasks.</p>
+<p>I make a few modifications to my usual desktop install routine that are more appropriate for configuring a home server ...</p>
+<p><strong>Storage:</strong> I divide the netbook's internal storage into 3 partitions ...</p>
+<ul class="simple">
+<li>sda1 is a 24GB <tt class="docutils literal">root</tt> partition</li>
+<li>sda2 is a 2GB LUKS encrypted <tt class="docutils literal">swap</tt> partition using a <strong>random key</strong></li>
+<li>sda3 uses the remaining space as a <strong>unmounted</strong> encrypted partition (setup post-install)</li>
+</ul>
+<img alt="Mount point none" class="align-center" src="images/screenshot/ubuntuInstall/mount_point_none.png" style="width: 800px; height: 600px;" />
+<p>I don't want an unattended server halting in the boot process waiting for a passphrase for <tt class="docutils literal">sda3_crypt</tt> or any necessary mountpoints to reside on that partition. After a successful first boot I configure the encrypted partition to be mounted manually to <tt class="docutils literal">/media</tt>.</p>
+<p><strong>Updates:</strong> I like to select <tt class="docutils literal">Install security updates automatically</tt> for a device running unattended with long uptimes ...</p>
+<img alt="Install security updates" class="align-center" src="images/screenshot/ubuntuInstall/300-1.png" style="width: 800px; height: 600px;" />
+<p><strong>Tasks:</strong> Select <tt class="docutils literal">[*] standard system utilities</tt>  and the few extras included in <tt class="docutils literal">[*] Basic Ubuntu server</tt> ...</p>
+<img alt="Software selection" class="align-center" src="images/screenshot/ubuntuInstall/301-1.png" style="width: 800px; height: 600px;" />
+<p>Finish up and reboot!</p>
+</div>
+<div class="section" id="static-network-address">
+<h3>1. Static network address</h3>
+<p>Login to the new home server and check which network interfaces are detected and settings ...</p>
+<div class="highlight"><pre>$ ip a
+</pre></div>
+<p><strong>Wired</strong> interfaces are usually auto-configured by default and assigned an IP address courtesy of DHCP.</p>
+<p>To assign the server a <strong>static</strong> address (recommended), deactivate the wired interface and create a new entry in <tt class="docutils literal">/etc/network/interfaces</tt>. Sample entry for <tt class="docutils literal">enp3s0</tt> ...</p>
+<div class="highlight"><pre><span class="c1"># The primary network interface</span>
+auto enp3s0
+<span class="c1">#iface enp3s0 inet dhcp</span>
+iface enp3s0 inet static
+    address 192.168.1.88
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+    dns-nameservers 192.168.1.1
+</pre></div>
+<p>Bring up|down interface with <tt class="docutils literal">sudo if{up,down} enp3s0</tt>.</p>
+</div>
+<div class="section" id="ssh">
+<h3>2. SSH</h3>
+<p><a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">Install OpenSSH, create crypto keys, and disable password logins</a> to boost server security.</p>
+</div>
+<div class="section" id="encrypted-storage">
+<h3>3. Encrypted storage</h3>
+<p>Configure the encrypted partition created by Ubuntu during the install to be mounted by a user, starting with the creation of a mountpoint in <tt class="docutils literal">/media</tt> for the storage ...</p>
+<div class="highlight"><pre>$ sudo mkdir /media/sda3_crypt
+</pre></div>
+<p>Unlock the partition with the passphrase created during the install ...</p>
+<div class="highlight"><pre>$ sudo cryptsetup open /dev/sda3 sda3_crypt
+</pre></div>
+<p>Modify <tt class="docutils literal">/etc/fstab</tt> by creating a consistent mountpoint for the partition ...</p>
+<div class="highlight"><pre>/dev/mapper/sda3_crypt /media/sda3_crypt        ext4    relatime,noauto,user       <span class="m">0</span>       0
+</pre></div>
+<p>Mount the partition ...</p>
+<div class="highlight"><pre>$ mount /media/sda3_crypt
+</pre></div>
+</div>
+<div class="section" id="services">
+<h3>4. Services</h3>
+<p>What to do next? <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Some of the services I use ...</a></p>
+<p>Happy hacking!</p>
+</div>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-server.html">server</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/homebin.html">$HOME slash bin</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2016 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>

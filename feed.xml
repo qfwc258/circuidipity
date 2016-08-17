@@ -1,5 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-08-08T16:20:00-04:00</updated><entry><title>$HOME slash bin</title><link href="http://www.circuidipity.com/homebin.html" rel="alternate"></link><updated>2016-08-08T16:20:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-08:homebin.html</id><summary type="html">&lt;img alt="Infinite loop" class="align-right" src="images/infinite-loop-not-300.png" style="width: 300px; height: 400px;" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-08-16T21:47:00-04:00</updated><entry><title>New life for an old laptop as a Linux home server</title><link href="http://www.circuidipity.com/laptop-home-server.html" rel="alternate"></link><updated>2016-08-16T21:47:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-16:laptop-home-server.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #0.1 .:&lt;/a&gt; &lt;strong&gt;Netbooks&lt;/strong&gt; ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old &lt;strong&gt;Asus 900HA&lt;/strong&gt; netbook and put it to work as a &lt;a class="reference external" href="http://www.circuidipity.com/tag-server.html"&gt;home server&lt;/a&gt;. Good times!&lt;/p&gt;
+&lt;p&gt;Running your own home server is a fun learning experience and offers several advantages.&lt;/p&gt;
+&lt;p&gt;Second-hand laptops -  retired in favour of more current and powerful machines - can still deliver plenty of oomph for running a personal server. Frugal with power and come equipped with their own built-in UPS (battery)!&lt;/p&gt;
+&lt;p&gt;Install a stable, well-tested Linux distribution and provide services such as network printing and &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;storage (NAS)&lt;/a&gt;, perform &lt;a class="reference external" href="http://www.circuidipity.com/incremental-backups-rsnapshot.html"&gt;backups&lt;/a&gt;, host &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;web services&lt;/a&gt; and much more. Start with a minimal base configuration of &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt; and gain access to tens of thousands of packages ready to install.&lt;/p&gt;
+&lt;p&gt;Privacy may be important to you. Hosting your own server running your own services gives more control over your data.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Hardware:&lt;/strong&gt; Asus 900HA netbook with 10&amp;quot; display, 1GB RAM, a 500GB hard drive (very easy replacement of original drive - just unscrew the netbook's bottom panel), built-in ethernet/wifi, webcam, and a host of ports (3xUSB2, VGA, sound, SD card slot). Neat and compact device!&lt;/p&gt;
+&lt;div class="section" id="install-ubuntu"&gt;
+&lt;h3&gt;0. Install Ubuntu&lt;/h3&gt;
+&lt;p&gt;My &lt;a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html"&gt;visual screenshot tour&lt;/a&gt; of installing Ubuntu 16.04 - a &lt;a class="reference external" href="https://wiki.ubuntu.com/Releases"&gt;Long Term Support (LTS)&lt;/a&gt; release. Ubuntu's &lt;strong&gt;minimal install image&lt;/strong&gt; (32bit for the netbook) makes it easy to create a console-only base configuration that can be later customized for various tasks.&lt;/p&gt;
+&lt;p&gt;I make a few modifications to my usual desktop install routine that are more appropriate for configuring a home server ...&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Storage:&lt;/strong&gt; I divide the netbook's internal storage into 3 partitions ...&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;sda1 is a 24GB &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; partition&lt;/li&gt;
+&lt;li&gt;sda2 is a 2GB LUKS encrypted &lt;tt class="docutils literal"&gt;swap&lt;/tt&gt; partition using a &lt;strong&gt;random key&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;sda3 uses the remaining space as a &lt;strong&gt;unmounted&lt;/strong&gt; encrypted partition (setup post-install)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img alt="Mount point none" class="align-center" src="images/screenshot/ubuntuInstall/mount_point_none.png" style="width: 800px; height: 600px;" /&gt;
+&lt;p&gt;I don't want an unattended server halting in the boot process waiting for a passphrase for &lt;tt class="docutils literal"&gt;sda3_crypt&lt;/tt&gt; or any necessary mountpoints to reside on that partition. After a successful first boot I configure the encrypted partition to be mounted manually to &lt;tt class="docutils literal"&gt;/media&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Updates:&lt;/strong&gt; I like to select &lt;tt class="docutils literal"&gt;Install security updates automatically&lt;/tt&gt; for a device running unattended with long uptimes ...&lt;/p&gt;
+&lt;img alt="Install security updates" class="align-center" src="images/screenshot/ubuntuInstall/300-1.png" style="width: 800px; height: 600px;" /&gt;
+&lt;p&gt;&lt;strong&gt;Tasks:&lt;/strong&gt; Select &lt;tt class="docutils literal"&gt;[*] standard system utilities&lt;/tt&gt;  and the few extras included in &lt;tt class="docutils literal"&gt;[*] Basic Ubuntu server&lt;/tt&gt; ...&lt;/p&gt;
+&lt;img alt="Software selection" class="align-center" src="images/screenshot/ubuntuInstall/301-1.png" style="width: 800px; height: 600px;" /&gt;
+&lt;p&gt;Finish up and reboot!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="static-network-address"&gt;
+&lt;h3&gt;1. Static network address&lt;/h3&gt;
+&lt;p&gt;Login to the new home server and check which network interfaces are detected and settings ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ ip a
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Wired&lt;/strong&gt; interfaces are usually auto-configured by default and assigned an IP address courtesy of DHCP.&lt;/p&gt;
+&lt;p&gt;To assign the server a &lt;strong&gt;static&lt;/strong&gt; address (recommended), deactivate the wired interface and create a new entry in &lt;tt class="docutils literal"&gt;/etc/network/interfaces&lt;/tt&gt;. Sample entry for &lt;tt class="docutils literal"&gt;enp3s0&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# The primary network interface&lt;/span&gt;
+auto enp3s0
+&lt;span class="c1"&gt;#iface enp3s0 inet dhcp&lt;/span&gt;
+iface enp3s0 inet static
+    address 192.168.1.88
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+    dns-nameservers 192.168.1.1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Bring up|down interface with &lt;tt class="docutils literal"&gt;sudo if{up,down} enp3s0&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ssh"&gt;
+&lt;h3&gt;2. SSH&lt;/h3&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;Install OpenSSH, create crypto keys, and disable password logins&lt;/a&gt; to boost server security.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="encrypted-storage"&gt;
+&lt;h3&gt;3. Encrypted storage&lt;/h3&gt;
+&lt;p&gt;Configure the encrypted partition created by Ubuntu during the install to be mounted by a user, starting with the creation of a mountpoint in &lt;tt class="docutils literal"&gt;/media&lt;/tt&gt; for the storage ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo mkdir /media/sda3_crypt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Unlock the partition with the passphrase created during the install ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo cryptsetup open /dev/sda3 sda3_crypt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/fstab&lt;/tt&gt; by creating a consistent mountpoint for the partition ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;/dev/mapper/sda3_crypt /media/sda3_crypt        ext4    relatime,noauto,user       &lt;span class="m"&gt;0&lt;/span&gt;       0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Mount the partition ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ mount /media/sda3_crypt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="services"&gt;
+&lt;h3&gt;4. Services&lt;/h3&gt;
+&lt;p&gt;What to do next? &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Some of the services I use ...&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="server"></category><category term="network"></category><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>$HOME slash bin</title><link href="http://www.circuidipity.com/homebin.html" rel="alternate"></link><updated>2016-08-08T16:20:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-08:homebin.html</id><summary type="html">&lt;img alt="Infinite loop" class="align-right" src="images/infinite-loop-not-300.png" style="width: 300px; height: 400px;" /&gt;
 &lt;p&gt;Bit by bit I build my collection of working scripts and experiments in my &lt;a class="reference external" href="https://github.com/vonbrownie/homebin"&gt;home directory&lt;/a&gt;. Programming right now in &lt;a class="reference external" href="http://www.circuidipity.com/tag-python.html"&gt;Python&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
@@ -924,7 +993,7 @@ Success
 &lt;div class="line"&gt;I shall USE my time.&lt;/div&gt;
 &lt;/div&gt;
 &lt;/blockquote&gt;
-</summary><category term="quotes"></category></entry><entry><title>Incremental backups</title><link href="http://www.circuidipity.com/incremental-backups-rsnapshot.html" rel="alternate"></link><updated>2016-02-12T23:13:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-12:incremental-backups-rsnapshot.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi Home Server Hack #3 .:&lt;/a&gt; Make incremental and automatic backups of a home folder using &lt;strong&gt;rsnapshot + cron&lt;/strong&gt; (and manual backups via &lt;strong&gt;public transit&lt;/strong&gt;).&lt;/p&gt;
+</summary><category term="quotes"></category></entry><entry><title>Incremental backups</title><link href="http://www.circuidipity.com/incremental-backups-rsnapshot.html" rel="alternate"></link><updated>2016-02-12T23:13:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-12:incremental-backups-rsnapshot.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #3 .:&lt;/a&gt; Make incremental and automatic backups of a home folder using &lt;strong&gt;rsnapshot + cron&lt;/strong&gt; (and manual backups via &lt;strong&gt;public transit&lt;/strong&gt;).&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Backup strategy &lt;strong&gt;Version 0&lt;/strong&gt; for my home folder was &lt;strong&gt;rsync&lt;/strong&gt; + &lt;strong&gt;portable&lt;/strong&gt; + &lt;strong&gt;subway&lt;/strong&gt;. That is, I would simply make a periodic, manual sync of files using &lt;strong&gt;rsync&lt;/strong&gt; from my primary computer to a &lt;strong&gt;portable&lt;/strong&gt; encrypted &lt;a class="reference external" href="http://www.circuidipity.com/encrypt-external-drive.html"&gt;USB hard drive&lt;/a&gt;. Then ride the &lt;strong&gt;subway&lt;/strong&gt; to a family/friend's place and swap drives (offsite backup).&lt;/p&gt;
@@ -1024,43 +1093,4 @@ rsync --archive --hard-links --numeric-ids --delete --exclude&lt;span class="o"&
 &lt;p&gt;... and take my hard drive for &lt;a class="reference external" href="http://ttc.ca/Routes/General_Information/Maps/index.jsp"&gt;a ride on the subway&lt;/a&gt; to say hello to my offsite storage!&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="network"></category><category term="debian"></category><category term="linux"></category><category term="raspberry pi"></category></entry><entry><title>Run remote X applications on a local display</title><link href="http://www.circuidipity.com/x11-forwarding-ssh.html" rel="alternate"></link><updated>2015-08-11T15:43:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-11:x11-forwarding-ssh.html</id><summary type="html">&lt;p&gt;Run remote X applications on a local display with X11 forwarding over SSH.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;I give my &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Jessiebook's smallish amount of RAM&lt;/a&gt; a bit of a break by enlisting other machines on my home network to run X apps. Once &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH is properly configured&lt;/a&gt; it is easy to use X11 forwarding to have apps running on the server show up on the client's local display.&lt;/p&gt;
-&lt;div class="section" id="on-the-server"&gt;
-&lt;h3&gt;On the server&lt;/h3&gt;
-&lt;p&gt;Activate X11 forwarding on the OpenSSH server by modifying &lt;tt class="docutils literal"&gt;/etc/ssh/sshd_config&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;X11Forwarding yes
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and restart the server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo systemctl restart sshd.service
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="on-the-client"&gt;
-&lt;h3&gt;On the client&lt;/h3&gt;
-&lt;p&gt;X11 forwarding options can be configured system-wide in &lt;tt class="docutils literal"&gt;/etc/ssh/ssh_config&lt;/tt&gt; or per-user in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/config&lt;/span&gt;&lt;/tt&gt; or simply forward X on a connection-by-connection basis at login with the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-X&lt;/span&gt;&lt;/tt&gt; option:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ ssh -X remote.host
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Some apps might require the &lt;tt class="docutils literal"&gt;ForwardX11Trusted&lt;/tt&gt; option to allow the full set of X functions from a &lt;strong&gt;trusted&lt;/strong&gt; remote server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ ssh -Y remote.host
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; An intruder on the SSH server will be able to capture everything on the local screen and every keystroke with &lt;tt class="docutils literal"&gt;ForwardX11Trusted&lt;/tt&gt; enabled.&lt;/p&gt;
-&lt;p&gt;If SSH has properly configured X11 forwarding it sets &lt;tt class="docutils literal"&gt;$DISPLAY&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$D&lt;/span&gt;ISPLAY
-localhost:10.0
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Launch an X app on the server and it opens on the local display:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ urxvt &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Logging into a remote host just to run a single app can be overkill. Run one-off commands with the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-f&lt;/span&gt;&lt;/tt&gt; option which backgrounds the SSH client before running the app:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ ssh -fX remote.host urxvt
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;One interesting use I discovered for X11 forwarding is running the &lt;tt class="docutils literal"&gt;rhythmbox&lt;/tt&gt; music player. A limitation of X11 forwarding is that sound is not transmitted to the client's audio hardware. Turns out that is a &lt;strong&gt;feature&lt;/strong&gt; on my home network setup because my speakers are connected to the server. I launch &lt;tt class="docutils literal"&gt;rhythmbox&lt;/tt&gt; on the server, display and &lt;a class="reference external" href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html"&gt;control the player&lt;/a&gt; on the client, and the &lt;a class="reference external" href="https://www.youtube.com/watch?v=mZDYJYqcYK4"&gt;good and funky sounds&lt;/a&gt; issue forth from the server!&lt;/p&gt;
-&lt;p&gt;I create the &lt;tt class="docutils literal"&gt;Jukebox&lt;/tt&gt; alias in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bash_aliases&lt;/span&gt;&lt;/tt&gt; to X11 forward the player as a one-off command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;Jukebox&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ssh -fX remote.host rhythmbox&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy Hacking!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</summary><category term="ssh"></category><category term="crypto"></category><category term="network"></category><category term="graphics"></category><category term="linux"></category></entry></feed>
+</summary><category term="server"></category><category term="network"></category><category term="linux"></category></entry></feed>
