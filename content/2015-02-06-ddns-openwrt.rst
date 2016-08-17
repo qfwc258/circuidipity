@@ -4,10 +4,10 @@ Dynamic DNS and OpenWRT
 
 :date: 2015-02-06 00:02:00
 :slug: ddns-openwrt
-:tags: openwrt, router, network, linux
+:tags: openwrt, router, server, network, linux
 :modifed: 2015-02-08 18:08:00 
 
-`Raspberry Pi Home Server Hack #5 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Access a home server from anywhere using **Dynamic DNS** (DDNS).
+`Home Server Project #5 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Access a home server from anywhere using **Dynamic DNS** (DDNS).
 
 Let's go!
 =========

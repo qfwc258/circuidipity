@@ -4,10 +4,10 @@ Incremental backups
 
 :date: 2015-08-12 01:27:00
 :slug: incremental-backups-rsnapshot
-:tags: network, debian, linux, raspberry pi
+:tags: server, network, linux
 :modified: 2016-02-12 23:13:00
 
-`Raspberry Pi Home Server Hack #3 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Make incremental and automatic backups of a home folder using **rsnapshot + cron** (and manual backups via **public transit**).
+`Home Server Project #3 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Make incremental and automatic backups of a home folder using **rsnapshot + cron** (and manual backups via **public transit**).
 
 Let's go!
 =========
