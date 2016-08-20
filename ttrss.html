@@ -24,20 +24,19 @@
 
 <!-- article -->
 <h1>Tiny Tiny RSS</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 27 August 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Friday 19 August 2016</p>
 <div id="article">
     <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Home Server Project #7 .:</a> Install and self-host the <strong>Tiny Tiny RSS</strong> news reader and gain access to news feeds over the web.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p><strong>Setup:</strong> <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html">Raspberry Pi 2</a> with IP ADDRESS <tt class="docutils literal">192.168.1.88</tt> running Debian.</p>
-</div>
+<p><strong>Setup:</strong> <a class="reference external" href="http://www.circuidipity.com/laptop-home-server.html">Netbook</a> with IP ADDRESS <tt class="docutils literal">192.168.1.88</tt> running <a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html">Ubuntu 16.04 LTS</a>.</p>
 <div class="section" id="pre-install">
-<h2>0. Pre-install</h2>
+<h3>0. Pre-install</h3>
 <p><a class="reference external" href="http://tt-rss.org/redmine/projects/tt-rss/wiki">Tiny Tiny RSS</a> is a PHP application that requires a proxy web server and a database back-end to store content. See <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">PHP + Nginx + PostgreSQL</a> for necessary prerequites to host TTRSS. <a class="footnote-reference" href="#id6" id="id2">[1]</a></p>
 </div>
 <div class="section" id="database">
-<h2>1. Database</h2>
-<p>Create a new PostgreSQL database to hold the content of RSS feeds. Launch the interactive console front-end <tt class="docutils literal">psql</tt> and create <tt class="docutils literal"><span class="pre">user:www-data</span></tt> <a class="footnote-reference" href="#id7" id="id3">[2]</a> and <tt class="docutils literal">database:ttrss</tt>:</p>
+<h3>1. Database</h3>
+<p>Create a new PostgreSQL database to hold the content of RSS feeds. Launch the interactive console front-end <tt class="docutils literal">psql</tt> and create <tt class="docutils literal"><span class="pre">user:www-data</span></tt> <a class="footnote-reference" href="#id7" id="id3">[2]</a> and <tt class="docutils literal">database:ttrss</tt> ...</p>
 <div class="highlight"><pre>$ sudo -u postgres psql
 <span class="nv">postgres</span><span class="o">=</span><span class="c1"># CREATE USER &quot;www-data&quot; WITH PASSWORD &#39;newpasswd&#39;;</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c1"># CREATE DATABASE ttrss WITH OWNER &quot;www-data&quot;;</span>
@@ -45,40 +44,37 @@
 <span class="nv">postgres</span><span class="o">=</span><span class="c1"># \quit</span>
 </pre></div>
 <div class="section" id="peer-authentication">
-<h3>1.1 Peer authentication</h3>
-<p>Later when running the TTRSS <tt class="docutils literal">update.php</tt> script you may run into the error <tt class="docutils literal">Peer authentication failed for user</tt> . <strong>Fix:</strong> edit <tt class="docutils literal">/etc/postgresql/9.4/main/pg_hba.conf</tt> and change <tt class="docutils literal">peer</tt>:</p>
+<h4>1.1 Peer authentication</h4>
+<p>Later when running the TTRSS <tt class="docutils literal">update.php</tt> script you may run into the error <tt class="docutils literal">Peer authentication failed for user</tt> . <strong>Fix:</strong> <a class="footnote-reference" href="#id8" id="id4">[3]</a> Edit <tt class="docutils literal">/etc/postgresql/9.5/main/pg_hba.conf</tt> and change <tt class="docutils literal">peer</tt> ...</p>
 <div class="highlight"><pre><span class="c1"># &quot;local&quot; is for Unix domain socket connections only</span>
 <span class="nb">local</span>   all             all                                     peer
 </pre></div>
-<p>... to <tt class="docutils literal">trust</tt>:</p>
+<p>... to <tt class="docutils literal">trust</tt> ...</p>
 <div class="highlight"><pre><span class="c1"># &quot;local&quot; is for Unix domain socket connections only</span>
 <span class="nb">local</span>   all             all                                     trust
 </pre></div>
-<p>Reload server:</p>
+<p>Reload server ...</p>
 <div class="highlight"><pre>$ sudo systemctl restart postgresql
 </pre></div>
-<p>Source: <a class="reference external" href="http://askubuntu.com/questions/274441/pg-connect-unable-to-connect-to-postgresql-server">Unable to connect to postgresql server</a></p>
 </div>
 </div>
 <div class="section" id="ttrss">
-<h2>2. TTRSS</h2>
-<p>Download latest <tt class="docutils literal"><span class="pre">Tiny-Tiny-RSS-X.X.X.tar.gz</span></tt> from <a class="reference external" href="https://github.com/gothfox/Tiny-Tiny-RSS/releases">Releases</a>, unpack, and change permissions:</p>
-<div class="highlight"><pre>$ tar xvzf Tiny-Tiny-RSS-X.X.X.tar.gz
-$ mv Tiny-Tiny-RSS-X.X.X ttrss
+<h3>2. TTRSS</h3>
+<p>Clone tt-rss repository using Git, and change permissions ...</p>
+<div class="highlight"><pre>$ git clone https://tt-rss.org/git/tt-rss.git ttrss
 $ <span class="nb">cd</span> ttrss
-$ chmod -R <span class="m">777</span> cache/images/ cache/js/ cache/export/ cache/upload/ feed-icons/ lock/
+$ chmod -R <span class="m">777</span> cache/images cache/js cache/export cache/upload feed-icons lock
 </pre></div>
 </div>
 <div class="section" id="nginx">
-<h2>3. Nginx</h2>
-<p>Move <tt class="docutils literal">ttrss</tt> directory into Nginx's <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">document root</a> directory (I use <tt class="docutils literal">~/html</tt>):</p>
-<div class="highlight"><pre>$ sudo mv ../ttrss ~/html/
-</pre></div>
-<p>Create a <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">server block</a> (virtual host) for TTRSS. Sample <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/ttrss</span></tt> <a class="footnote-reference" href="#id8" id="id4">[3]</a> configuration:</p>
+<h3>3. Nginx</h3>
+<p>Move <tt class="docutils literal">ttrss</tt> directory into Nginx's <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">document root</a> directory (I use <tt class="docutils literal">/home/USERNAME/www</tt>).</p>
+<p>Create a <a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">server block</a> (virtual host) for TTRSS. Sample <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/ttrss</span></tt> <a class="footnote-reference" href="#id9" id="id5">[4]</a> configuration ...</p>
 <div class="highlight"><pre>server <span class="o">{</span>
-    listen 80<span class="p">;</span> <span class="c1">## listen for ipv4; this line is default and implied</span>
+    listen 80<span class="p">;</span>
+    listen <span class="o">[</span>::<span class="o">]</span>:80<span class="p">;</span>
 
-    root /home/USER/html/ttrss<span class="p">;</span> <span class="c1">## Replace USER with your username</span>
+    root /home/USERNAME/www/ttrss<span class="p">;</span>
     index index.php<span class="p">;</span>
 
     access_log /var/log/nginx/ttrss_access.log<span class="p">;</span>
@@ -92,27 +88,26 @@ $ chmod -R <span class="m">777</span> cache/images/ cache/js/ cache/export/ cach
 
     location ~ <span class="se">\.</span>php$ <span class="o">{</span>
         try_files $<span class="nv">uri</span> <span class="o">=</span> 404<span class="p">;</span> <span class="c1">#Prevents autofixing of path which could be used for exploit</span>
-        fastcgi_pass unix:/var/run/php5-fpm.sock<span class="p">;</span>
+        fastcgi_pass unix:/var/run/php/php7.0-fpm.sock<span class="p">;</span>
         fastcgi_index index.php<span class="p">;</span>
-        <span class="c1">#include /etc/nginx/fastcgi_params;</span>
         include /etc/nginx/fastcgi.conf<span class="p">;</span>
     <span class="o">}</span>
 
 <span class="o">}</span>
 </pre></div>
 <p><strong>Alternative:</strong> <a class="reference external" href="http://www.circuidipity.com/self-signed-ssl-certificate.html">Create a self-signed SSL certificate</a> and configure HTTPS access on port 443.</p>
-<p>Save changes and enable block:</p>
+<p>Save changes and enable block ...</p>
 <div class="highlight"><pre>$ <span class="nb">cd</span> /etc/nginx/sites-enabled
 $ sudo ln -s /etc/nginx/sites-available/ttrss
 $ sudo systemctl restart nginx
 </pre></div>
 </div>
 <div class="section" id="configure">
-<h2>4. Configure</h2>
-<p><strong>Example:</strong> Configuration for LAN access to the Raspberry Pi server. Modify <tt class="docutils literal">/etc/hosts</tt> on the <strong>client</strong> making the connection:</p>
-<div class="highlight"><pre>192.168.1.88 rss.local
+<h3>4. Configure</h3>
+<p><strong>Example:</strong> Configuration for LAN access to the TTRSS hosting server. Modify <tt class="docutils literal">/etc/hosts</tt> on the <strong>client</strong> ...</p>
+<div class="highlight"><pre>192.168.1.88 rss.lan
 </pre></div>
-<p>Navigate to <tt class="docutils literal"><span class="pre">http://rss.local</span></tt> and configure TTRSS:</p>
+<p>Navigate to <tt class="docutils literal"><span class="pre">http://rss.lan</span></tt> and configure TTRSS ...</p>
 <div class="highlight"><pre>Database type: <span class="o">[</span><span class="k">select</span> PostgreSQL<span class="o">]</span>
 Username: www-data
 Password: <span class="o">[</span>database password created earlier<span class="o">]</span>
@@ -121,28 +116,21 @@ Hostname: <span class="o">[</span>leave blank<span class="o">]</span>
 Port: 5432
 </pre></div>
 <p>Press <tt class="docutils literal">Test configuration</tt>, then <tt class="docutils literal">Initialize database</tt>, and finally <tt class="docutils literal">Save configuration</tt>.</p>
-<p>Navigate back to <tt class="docutils literal">rss.local</tt> and log back in with <tt class="docutils literal">username:admin</tt> and <tt class="docutils literal">password:password</tt>. In the top-right go to <tt class="docutils literal"><span class="pre">Actions-&gt;Preferences</span></tt> to make further changes to default settings. Create new account for RSS reading (vs logging in all the time as <tt class="docutils literal">admin</tt>) and change the default password.</p>
+<p>Navigate back to <tt class="docutils literal">rss.lan</tt> and log back in with username <tt class="docutils literal">admin</tt> and password <tt class="docutils literal">password</tt>. In the top-right go to <tt class="docutils literal"><span class="pre">Actions-&gt;Preferences</span></tt> to make further changes to default settings. Create new user account (vs logging in all the time as <tt class="docutils literal">admin</tt>) and change the default admin password.</p>
 </div>
 <div class="section" id="updates">
-<h2>5. Updates</h2>
-<p>Configure TTRSS to periodically update RSS feeds with new content. First, test included <tt class="docutils literal">update.php</tt> script:</p>
-<div class="highlight"><pre>$ /usr/bin/php /home/USER/html/ttrss/update.php --feeds --quiet
+<h3>5. Updates</h3>
+<p>Configure TTRSS to periodically update RSS feeds with new content. First, test the included <tt class="docutils literal">update.php</tt> script ...</p>
+<div class="highlight"><pre>$ /usr/bin/php /home/USERNAME/www/ttrss/update.php --feeds --quiet
 </pre></div>
-<p>If script returns no errors add a new job to <tt class="docutils literal">cron</tt> to run script periodically:</p>
+<p>If script returns no errors add a new job to <tt class="docutils literal">cron</tt> to run script periodically ...</p>
 <div class="highlight"><pre>$ crontab -e
 </pre></div>
-<p>Sample TTRSS job:</p>
-<div class="highlight"><pre><span class="m">10</span> * * * * /usr/bin/php /home/USER/html/ttrss/update.php --feeds --quiet
+<p><strong>Example</strong> ...</p>
+<div class="highlight"><pre><span class="m">10</span> * * * * /usr/bin/php /home/USERNAME/www/ttrss/update.php --feeds --quiet
 </pre></div>
-</div>
-<div class="section" id="helpful-resources">
-<h2>6. Helpful resources</h2>
-<ul class="simple">
-<li><a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-ttrss-with-nginx-for-debian-7-on-a-vps">How to install TTRSS with Nginx for Debian</a></li>
-<li><a class="reference external" href="https://davidbeath.com/posts/installing-tiny-tiny-rss-from-scratch.html">Installing TTRSS from scratch</a></li>
-<li><a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html">PHP + Nginx + PostgreSQL</a></li>
-</ul>
 <p>Happy hacking!</p>
+</div>
 <div class="section" id="notes">
 <h3>Notes</h3>
 <table class="docutils footnote" frame="void" id="id6" rules="none">
@@ -160,7 +148,13 @@ Port: 5432
 <table class="docutils footnote" frame="void" id="id8" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>Make TTRSS hosted on a home server accessible from the outside over the web by configuring a <strong>dynamic DNS</strong> service (I like <a class="reference external" href="http://www.duckdns.org/">duckdns.org</a>). Example: Create a <tt class="docutils literal">myraspberry</tt> domain on the DDNS service and modify <tt class="docutils literal">server_name localhost;</tt> to <tt class="docutils literal">server_name myraspberry.duckdns.org;</tt>. See <a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html">DDNS and OpenWrt</a> for details.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td><a class="reference external" href="http://askubuntu.com/questions/274441/pg-connect-unable-to-connect-to-postgresql-server">Unable to connect to postgresql server</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td>Make TTRSS hosted on a home server accessible from the outside over the web by configuring a <strong>dynamic DNS</strong> service (I like <a class="reference external" href="http://www.duckdns.org/">duckdns.org</a>). See <a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html">DDNS and OpenWrt</a> for details.</td></tr>
 </tbody>
 </table>
 </div>

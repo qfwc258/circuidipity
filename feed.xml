@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-08-16T21:47:00-04:00</updated><entry><title>New life for an old laptop as a Linux home server</title><link href="http://www.circuidipity.com/laptop-home-server.html" rel="alternate"></link><updated>2016-08-16T21:47:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-16:laptop-home-server.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #0.1 .:&lt;/a&gt; &lt;strong&gt;Netbooks&lt;/strong&gt; ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old &lt;strong&gt;Asus 900HA&lt;/strong&gt; netbook and put it to work as a &lt;a class="reference external" href="http://www.circuidipity.com/tag-server.html"&gt;home server&lt;/a&gt;. Good times!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-08-18T22:10:00-04:00</updated><entry><title>New life for an old laptop as a Linux home server</title><link href="http://www.circuidipity.com/laptop-home-server.html" rel="alternate"></link><updated>2016-08-16T21:47:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-16:laptop-home-server.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #0.1 .:&lt;/a&gt; &lt;strong&gt;Netbooks&lt;/strong&gt; ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old &lt;strong&gt;Asus 900HA&lt;/strong&gt; netbook and put it to work as a &lt;a class="reference external" href="http://www.circuidipity.com/tag-server.html"&gt;home server&lt;/a&gt;. Good times!&lt;/p&gt;
 &lt;p&gt;Running your own home server is a fun learning experience and offers several advantages.&lt;/p&gt;
 &lt;p&gt;Second-hand laptops -  retired in favour of more current and powerful machines - can still deliver plenty of oomph for running a personal server. Frugal with power and come equipped with their own built-in UPS (battery)!&lt;/p&gt;
 &lt;p&gt;Install a stable, well-tested Linux distribution and provide services such as network printing and &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;storage (NAS)&lt;/a&gt;, perform &lt;a class="reference external" href="http://www.circuidipity.com/incremental-backups-rsnapshot.html"&gt;backups&lt;/a&gt;, host &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;web services&lt;/a&gt; and much more. Start with a minimal base configuration of &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt; and gain access to tens of thousands of packages ready to install.&lt;/p&gt;
@@ -68,17 +68,17 @@ iface enp3s0 inet static
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="server"></category><category term="network"></category><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>$HOME slash bin</title><link href="http://www.circuidipity.com/homebin.html" rel="alternate"></link><updated>2016-08-08T16:20:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-08:homebin.html</id><summary type="html">&lt;img alt="Infinite loop" class="align-right" src="images/infinite-loop-not-300.png" style="width: 300px; height: 400px;" /&gt;
+</summary><category term="server"></category><category term="network"></category><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>$HOME slash bin</title><link href="http://www.circuidipity.com/homebin.html" rel="alternate"></link><updated>2016-08-18T22:10:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-08:homebin.html</id><summary type="html">&lt;img alt="Infinite loop" class="align-right" src="images/infinite-loop-not-300.png" style="width: 300px; height: 400px;" /&gt;
 &lt;p&gt;Bit by bit I build my collection of working scripts and experiments in my &lt;a class="reference external" href="https://github.com/vonbrownie/homebin"&gt;home directory&lt;/a&gt;. Programming right now in &lt;a class="reference external" href="http://www.circuidipity.com/tag-python.html"&gt;Python&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;dl class="docutils"&gt;
 &lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/Library.sh"&gt;Library.sh&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;library of functions for bash shell scripts (more: &lt;a class="reference external" href="http://www.circuidipity.com/shell-script-library.html"&gt;&amp;quot;A library for shell scripts&amp;quot;&lt;/a&gt;)&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bBook.py"&gt;bBook.py&lt;/a&gt;&lt;/dt&gt;
+&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bernersLee.py"&gt;bernersLee.py&lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;a set of classes to support my web hacks&lt;/dd&gt;
+&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bookTab.py"&gt;bookTab.py&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;get book information from command line arguments or clipboard and open web browser and search Amazon and the Toronto Public Library&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bMap.py"&gt;bMap.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;get a street address from command line arguments or clipboard and open web browser to the Google Maps page for the address&lt;/dd&gt;
 &lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/collatz.py"&gt;collatz.py&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;explore the &lt;em&gt;Collatz sequence&lt;/em&gt;, sometimes called &amp;quot;the simplest impossible math problem&amp;quot;&lt;/dd&gt;
 &lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dateAndBook.py"&gt;dateAndBook.py&lt;/a&gt;&lt;/dt&gt;
@@ -101,26 +101,30 @@ iface enp3s0 inet static
 &lt;dd&gt;&lt;tt class="docutils literal"&gt;dmenu&lt;/tt&gt; configuration&lt;/dd&gt;
 &lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/magic8ball.py"&gt;magic8ball.py&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;Magic 8 Ball peers into the future and retrieves the answer to your questions&lt;/dd&gt;
+&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/mapTab.py"&gt;mapTab.py&lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;get a street address from command line arguments or clipboard and open web browser to the Google Maps page for the address&lt;/dd&gt;
 &lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;paVolume&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;pulseaudio volume control (more: &lt;a class="reference external" href="http://www.circuidipity.com/pavolume.html"&gt;&amp;quot;Shell script: paVolume&amp;quot;&lt;/a&gt;)&lt;/dd&gt;
+&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/raiseRedLantern.py"&gt;raiseRedLantern.py&lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;a set of classes to add notification capabilities to scripts&lt;/dd&gt;
 &lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/rePhoneAndEmail.py"&gt;rePhoneAndEmail.py&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;find and extract phone numbers and email addresses on the clipboard&lt;/dd&gt;
 &lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/reSearch.py"&gt;reSearch.py&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;find matches for regex patterns in file(s)&lt;/dd&gt;
 &lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/teleportHomeTo"&gt;teleportHomeTo&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;sync $HOME to DESTINATION&lt;/dd&gt;
+&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/teleportHomeToSSH"&gt;teleportHomeToSSH&lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;sync $HOME to remote DESTINATION using SSH keys&lt;/dd&gt;
 &lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/timeToCount.py"&gt;timeToCount.py&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;measure clock time for a device to count from 0 to &lt;em&gt;x&lt;/em&gt; in increments of 1&lt;/dd&gt;
 &lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/tplWatch.py"&gt;tplWatch.py&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;check to see if Toronto Public Library has added an item to catalogue&lt;/dd&gt;
 &lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/vboxshot"&gt;vboxshot&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;capture screenshot of a virtualbox session&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/webWatch.py"&gt;webWatch.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;functions to support web scraping&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/yt-audio"&gt;yt-audio&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;download online video and convert to audio (more: &lt;a class="reference external" href="http://www.circuidipity.com/youtube-dl.html"&gt;&amp;quot;Download videos using youtube-dl&amp;quot;&lt;/a&gt;)&lt;/dd&gt;
 &lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/xtra"&gt;xtra&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;&lt;tt class="docutils literal"&gt;xinit&lt;/tt&gt; extra config&lt;/dd&gt;
+&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/yt-audio"&gt;yt-audio&lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;download online video and convert to audio (more: &lt;a class="reference external" href="http://www.circuidipity.com/youtube-dl.html"&gt;&amp;quot;Download videos using youtube-dl&amp;quot;&lt;/a&gt;)&lt;/dd&gt;
 &lt;/dl&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
@@ -1011,9 +1015,8 @@ Success
 &lt;li&gt;every week or so I sync &lt;tt class="docutils literal"&gt;/my/backup/location/&lt;/tt&gt; to the USB drive;&lt;/li&gt;
 &lt;li&gt;every month or so I ride the subway to offsite storage and swap drives&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/div&gt;
 &lt;div class="section" id="id1"&gt;
-&lt;h2&gt;0. Rsnapshot&lt;/h2&gt;
+&lt;h3&gt;0. Rsnapshot&lt;/h3&gt;
 &lt;p&gt;Install &lt;tt class="docutils literal"&gt;rsnapshot&lt;/tt&gt;, make a directory to store backups, and make a copy of the default config file:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt-get install rsnapshot
 $ mkdir /my/backup/location
@@ -1057,16 +1060,16 @@ $ sudo rsnapshot -t sync
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="backup-the-backup"&gt;
-&lt;h2&gt;1. Backup the backup&lt;/h2&gt;
+&lt;h3&gt;1. Backup the backup&lt;/h3&gt;
 &lt;p&gt;Rsnapshot operates as a &lt;strong&gt;pull&lt;/strong&gt; program: it pulls in backups from local and remote devices. Instead of juggling access permissions to allow the rsnapshot server to talk with other devices I decided to limit &lt;tt class="docutils literal"&gt;rsnapshot&lt;/tt&gt; to making backups on &lt;tt class="docutils literal"&gt;localhost&lt;/tt&gt; and use &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;my already-configured SSH key setup&lt;/a&gt; to &lt;strong&gt;push&lt;/strong&gt; a snapshot of the backup to my Raspberry Pi for remote storage.&lt;/p&gt;
 &lt;div class="section" id="on-the-pi"&gt;
-&lt;h3&gt;1.1 On the Pi&lt;/h3&gt;
+&lt;h4&gt;1.1 On the Pi&lt;/h4&gt;
 &lt;p&gt;Create a directory to store the backup:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;$ mkdir /path/to/backup
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="on-localhost"&gt;
-&lt;h3&gt;1.2 On localhost&lt;/h3&gt;
+&lt;h4&gt;1.2 On localhost&lt;/h4&gt;
 &lt;p&gt;Set the ip address and hostname of the Pi server in &lt;tt class="docutils literal"&gt;/etc/hosts&lt;/tt&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;192.168.1.88    raspberry.server
 &lt;/pre&gt;&lt;/div&gt;
@@ -1086,11 +1089,12 @@ rsync --archive --hard-links --numeric-ids --delete --exclude&lt;span class="o"&
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="external-drive-and-offsite-storage"&gt;
-&lt;h2&gt;2. External drive and offsite storage&lt;/h2&gt;
+&lt;h3&gt;2. External drive and offsite storage&lt;/h3&gt;
 &lt;p&gt;I connect my USB drive and sync the backup to the device:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;$ /home/USERNAME/bin/backupSnap.sh /media/USB/path/to/backup/
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... and take my hard drive for &lt;a class="reference external" href="http://ttc.ca/Routes/General_Information/Maps/index.jsp"&gt;a ride on the subway&lt;/a&gt; to say hello to my offsite storage!&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 </summary><category term="server"></category><category term="network"></category><category term="linux"></category></entry></feed>

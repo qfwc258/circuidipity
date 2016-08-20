@@ -24,122 +24,120 @@
 
 <!-- article -->
 <h1>PHP + Nginx + PostgreSQL</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Wednesday 26 August 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Friday 19 August 2016</p>
 <div id="article">
-    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Home Server Project #6 .:</a> As a requirement to host web applications like <a class="reference external" href="http://www.circuidipity.com/ttrss.html">Tiny Tiny RSS</a> on my Raspberry Pi I install <strong>PHP</strong>, the lightweight proxy server <strong>Nginx</strong>, and the <strong>PostgreSQL</strong> database.</p>
+    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Home Server Project #6 .:</a> As a requirement to host web applications like <a class="reference external" href="http://www.circuidipity.com/ttrss.html">Tiny Tiny RSS</a> on my home server I install <strong>PHP</strong>, the lightweight proxy server <strong>Nginx</strong>, and the <strong>PostgreSQL</strong> database.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p><strong>Setup:</strong> <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html">Raspberry Pi 2</a> with IP ADDRESS <tt class="docutils literal">192.168.1.88</tt> running Debian.</p>
-</div>
+<p><strong>Setup:</strong> <a class="reference external" href="http://www.circuidipity.com/laptop-home-server.html">Netbook</a> with IP ADDRESS <tt class="docutils literal">192.168.1.88</tt> running <a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html">Ubuntu 16.04 LTS</a>.</p>
 <div class="section" id="php">
-<h2>0. PHP</h2>
-<p>Install:</p>
-<div class="highlight"><pre>$ sudo apt-get update
-$ sudo apt-get install php5 php5-fpm php-apc php5-curl php5-cli php5-pgsql php5-gd php5-mcrypt
+<h3>0. PHP</h3>
+<p>Install ...</p>
+<div class="highlight"><pre>$ sudo apt install php php-fpm php-apcu php-curl php-cli php-pgsql php-gd php-mcrypt php-mbstring php-fdomdocument
 </pre></div>
-<p>Improve security by editing <tt class="docutils literal">/etc/php5/fpm/php.ini</tt> and modifying <strong>pathinfo</strong> to <tt class="docutils literal">0</tt>:</p>
+<p>Improve security by editing <tt class="docutils literal">/etc/php/7.0/fpm/php.ini</tt> and modifying <tt class="docutils literal">pathinfo</tt> to <tt class="docutils literal">0</tt> ...</p>
 <div class="highlight"><pre>cgi.fix_pathinfo<span class="o">=</span>0
 </pre></div>
-<p>Restart PHP:</p>
-<div class="highlight"><pre>$ sudo systemctl restart php5-fpm
+<p>Restart PHP ...</p>
+<div class="highlight"><pre>$ sudo systemctl restart php7.0-fpm
 </pre></div>
 </div>
 <div class="section" id="nginx">
-<h2>1. Nginx</h2>
-<p>Install:</p>
-<div class="highlight"><pre>$ sudo apt-get install nginx
+<h3>1. Nginx</h3>
+<p>Install ...</p>
+<div class="highlight"><pre>$ sudo apt install nginx
 $ sudo systemctl start nginx
 </pre></div>
 <p>Verify web server is running by opening a browser and navigating to <tt class="docutils literal"><span class="pre">http://192.168.1.88</span></tt>. If you see <tt class="docutils literal">Welcome to nginx!</tt> the server is installed correctly.</p>
 </div>
 <div class="section" id="host-multiple-domains">
-<h2>2. Host multiple domains</h2>
-<p>Nginx is capable of serving up multiple web domains or <strong>server blocks</strong> (virtual hosts) from the same server:</p>
+<h3>2. Host multiple domains</h3>
+<p>Nginx is capable of serving up multiple web domains or <strong>server blocks</strong> (virtual hosts):</p>
 <ul class="simple">
-<li>I create <tt class="docutils literal">~/html</tt> to hold block content in subfolders</li>
+<li>I create <tt class="docutils literal">/home/USERNAME/www</tt> to hold block content in subfolders</li>
 <li>Create block configs in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available</span></tt></li>
-<li>A block is made active by setting a symbolic link in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-enabled</span></tt> to its config file</li>
+<li>A block is made active by setting a symbolic link in <tt class="docutils literal"><span class="pre">/etc/nginx/sites-enabled</span></tt> to its block config</li>
 </ul>
 <p>When combined with a <a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html">free DDNS service</a> multiple custom domains can be hosted on a home server.</p>
-<p><strong>Example:</strong> Setup a <tt class="docutils literal">myraspberry</tt> server block to host <tt class="docutils literal">www.myraspberry.ca</tt> using <a class="reference external" href="http://duckdns.org/">duckdns.org</a> DDNS.</p>
-<div class="section" id="cname">
-<h3>2.1 CNAME</h3>
-<p>Create a new <strong>CNAME</strong> record at the domain registrar to redirect <tt class="docutils literal">www.myraspberry.ca</tt> to <tt class="docutils literal">myraspberry.duckdns.org</tt>.</p>
-</div>
+<p><strong>Example:</strong> Setup a <tt class="docutils literal">myfoo</tt> server block to host <tt class="docutils literal">www.myfoo.ca</tt> using <a class="reference external" href="http://duckdns.org/">duckdns.org</a> DDNS.</p>
 <div class="section" id="document-root">
-<h3>2.2 Document Root</h3>
-<p>Create a new root directory to hold the contents of <tt class="docutils literal">myraspberry</tt>:</p>
-<div class="highlight"><pre>$ mkdir -p ~/html/myraspberry
+<h4>2.1 Document Root</h4>
+<p>Create a new root directory to hold the contents of <tt class="docutils literal">myfoo</tt> ...</p>
+<div class="highlight"><pre>$ mkdir -p /home/USERNAME/html/myfoo
 </pre></div>
 </div>
 <div class="section" id="index-html">
-<h3>2.3 Index.html</h3>
-<p>Create a sample <tt class="docutils literal">~/html/myraspberry/index.html</tt>:</p>
+<h4>2.2 Index.html</h4>
+<p>Create a sample <tt class="docutils literal">myfoo/index.html</tt> ...</p>
 <div class="highlight"><pre>&lt;html&gt;
 &lt;head&gt;
-&lt;title&gt;My Raspberry Pi <span class="m">2</span> Home&lt;/title&gt;
+&lt;title&gt;My Foo Home&lt;/title&gt;
 &lt;/head&gt;
 &lt;body <span class="nv">bgcolor</span><span class="o">=</span><span class="s2">&quot;red&quot;</span> <span class="nv">text</span><span class="o">=</span><span class="s2">&quot;white&quot;</span>&gt;
-&lt;center&gt;&lt;h1&gt;Welcome to My Pi!&lt;/h1&gt;&lt;/center&gt;
+&lt;center&gt;&lt;h1&gt;Welcome to More Foo!&lt;/h1&gt;&lt;/center&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </pre></div>
 </div>
 <div class="section" id="server-block">
-<h3>2.4 Server Block</h3>
-<p>Create a new server block configuration <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/myraspberry</span></tt>:</p>
+<h4>2.3 Server Block</h4>
+<p>Create a new server block configuration <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/myfoo</span></tt> ...</p>
 <div class="highlight"><pre>server <span class="o">{</span>
     listen 80<span class="p">;</span> <span class="c1">## listen for ipv4; this line is default and implied</span>
 
-    root /home/USER/html/myraspberry<span class="p">;</span>  <span class="c1">## Replace USER with your username</span>
+    root /home/USERNAME/html/myfoo<span class="p">;</span>
     index index.html<span class="p">;</span>
 
-    access_log /var/log/nginx/ttrss_access.log<span class="p">;</span>
-    error_log /var/log/nginx/ttrss_error.log info<span class="p">;</span>
+    access_log /var/log/nginx/myfoo_access.log<span class="p">;</span>
+    error_log /var/log/nginx/myfoo_error.log info<span class="p">;</span>
 
-    server_name myraspberry.*<span class="p">;</span>
+    server_name myfoo.*<span class="p">;</span>
 
     location / <span class="o">{</span>
         index           index.html<span class="p">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-<p>Activate the new server block:</p>
+<p>Activate the new server block ...</p>
 <div class="highlight"><pre>$ <span class="nb">cd</span> /etc/nginx/sites-enabled
-$ sudo ln -s ../sites-available/myraspberry
+$ sudo ln -s ../sites-available/myfoo
 $ sudo systemctl restart nginx
 </pre></div>
 </div>
+<div class="section" id="cname">
+<h4>2.4 CNAME</h4>
+<p>Create a new <strong>CNAME</strong> record at the domain registrar to redirect <tt class="docutils literal">www.myfoo.ca</tt> to <tt class="docutils literal">myfoo.duckdns.org</tt>.</p>
+</div>
 <div class="section" id="port-forwarding">
-<h3>2.5 Port Forwarding</h3>
-<p>Configure <a class="reference external" href="http://www.circuidipity.com/20141006.html">port forwarding on the home router</a> to redirect traffic on port 80 to the internal IP address of the nginx server. Repeat the above steps to add more domains. The limiting factor is the <strong>upload bandwidth</strong> provided by the home ISP (typically a fraction of the download speed).</p>
+<h4>2.5 Port Forwarding</h4>
+<p>Configure <a class="reference external" href="http://www.circuidipity.com/20141006.html">port forwarding on the home router</a> to redirect traffic on port 80 to the internal IP address of the nginx server. Repeat the above steps to add more domains. The real limiting factor is the <strong>upload bandwidth</strong> provided by the home ISP (typically a fraction of the download speed).</p>
 </div>
 </div>
 <div class="section" id="postgresql">
-<h2>3. PostgreSQL</h2>
-<p>Install:</p>
-<div class="highlight"><pre>$ sudo apt-get install postgresql
+<h3>3. PostgreSQL</h3>
+<p>Install ...</p>
+<div class="highlight"><pre>$ sudo apt install postgresql
 </pre></div>
-<p>Launch the PostgreSQL interactive console front-end <tt class="docutils literal">psql</tt> as <tt class="docutils literal">postgres</tt> user and set a new password:</p>
+<p>Launch the PostgreSQL interactive console front-end <tt class="docutils literal">psql</tt> as <tt class="docutils literal">postgres</tt> user and set a new password ...</p>
 <div class="highlight"><pre>$ sudo -u postgres psql
 <span class="nv">postgres</span><span class="o">=</span><span class="c1"># \password postgres</span>
 Enter new password: <span class="o">[</span>newpasswd<span class="o">]</span>
 Enter it again: <span class="o">[</span>newpasswd<span class="o">]</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c1"># \quit</span>
 </pre></div>
-<p>Example: Create new <tt class="docutils literal"><span class="pre">user:www-data</span></tt> and <tt class="docutils literal">database:mydb</tt>: <a class="footnote-reference" href="#id2" id="id1">[1]</a></p>
+<p><strong>Example:</strong> Create new <tt class="docutils literal"><span class="pre">user:www-data</span></tt> and <tt class="docutils literal">database:mydb</tt> ... <a class="footnote-reference" href="#id2" id="id1">[1]</a></p>
 <div class="highlight"><pre>$ sudo -u postgres psql
 <span class="nv">postgres</span><span class="o">=</span><span class="c1"># CREATE USER &quot;www-data&quot; WITH PASSWORD &#39;newpasswd&#39;;</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c1"># CREATE DATABASE mydb WITH OWNER &quot;www-data&quot;;</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c1"># GRANT ALL PRIVILEGES ON DATABASE mydb to &quot;www-data&quot;;</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c1"># \quit</span>
 </pre></div>
-<p>Save any changes and reload server:</p>
+<p>Reload server ...</p>
 <div class="highlight"><pre>$ sudo systemctl restart postgresql.service
 </pre></div>
 </div>
 <div class="section" id="helpful-resources">
-<h2>4. Helpful resources</h2>
+<h3>4. Helpful resources</h3>
 <ul class="simple">
 <li><a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-14-04">How to install the LEMP stack on Ubuntu</a></li>
 <li><a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-14-04-lts">Set up Nginx Server Blocks</a></li>
@@ -148,6 +146,7 @@ Enter it again: <span class="o">[</span>newpasswd<span class="o">]</span>
 <li><a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html">DDNS and OpenWrt</a></li>
 </ul>
 <p>Happy hacking!</p>
+</div>
 <div class="section" id="notes">
 <h3>Notes</h3>
 <table class="docutils footnote" frame="void" id="id2" rules="none">

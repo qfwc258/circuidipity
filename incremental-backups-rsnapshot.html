@@ -44,9 +44,8 @@
 <li>every week or so I sync <tt class="docutils literal">/my/backup/location/</tt> to the USB drive;</li>
 <li>every month or so I ride the subway to offsite storage and swap drives</li>
 </ul>
-</div>
 <div class="section" id="id1">
-<h2>0. Rsnapshot</h2>
+<h3>0. Rsnapshot</h3>
 <p>Install <tt class="docutils literal">rsnapshot</tt>, make a directory to store backups, and make a copy of the default config file:</p>
 <div class="highlight"><pre>$ sudo apt-get install rsnapshot
 $ mkdir /my/backup/location
@@ -90,16 +89,16 @@ $ sudo rsnapshot -t sync
 </pre></div>
 </div>
 <div class="section" id="backup-the-backup">
-<h2>1. Backup the backup</h2>
+<h3>1. Backup the backup</h3>
 <p>Rsnapshot operates as a <strong>pull</strong> program: it pulls in backups from local and remote devices. Instead of juggling access permissions to allow the rsnapshot server to talk with other devices I decided to limit <tt class="docutils literal">rsnapshot</tt> to making backups on <tt class="docutils literal">localhost</tt> and use <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">my already-configured SSH key setup</a> to <strong>push</strong> a snapshot of the backup to my Raspberry Pi for remote storage.</p>
 <div class="section" id="on-the-pi">
-<h3>1.1 On the Pi</h3>
+<h4>1.1 On the Pi</h4>
 <p>Create a directory to store the backup:</p>
 <div class="highlight"><pre>$ mkdir /path/to/backup
 </pre></div>
 </div>
 <div class="section" id="on-localhost">
-<h3>1.2 On localhost</h3>
+<h4>1.2 On localhost</h4>
 <p>Set the ip address and hostname of the Pi server in <tt class="docutils literal">/etc/hosts</tt>:</p>
 <div class="highlight"><pre>192.168.1.88    raspberry.server
 </pre></div>
@@ -119,12 +118,13 @@ rsync --archive --hard-links --numeric-ids --delete --exclude<span class="o">=</
 </div>
 </div>
 <div class="section" id="external-drive-and-offsite-storage">
-<h2>2. External drive and offsite storage</h2>
+<h3>2. External drive and offsite storage</h3>
 <p>I connect my USB drive and sync the backup to the device:</p>
 <div class="highlight"><pre>$ /home/USERNAME/bin/backupSnap.sh /media/USB/path/to/backup/
 </pre></div>
 <p>... and take my hard drive for <a class="reference external" href="http://ttc.ca/Routes/General_Information/Maps/index.jsp">a ride on the subway</a> to say hello to my offsite storage!</p>
 <p>Happy hacking!</p>
+</div>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-server.html">server</a>
