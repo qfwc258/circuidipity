@@ -4,7 +4,7 @@ My tmux cheatsheet
 
 :date: 2014-02-11 01:23:00
 :slug: tmux
-:tags: cheatsheet, linux, shell
+:tags: shell, linux
 :modified: 2015-06-25 23:38:00
 
 .. image:: /images/screenshot/tmux_window_pane.png
@@ -22,7 +22,7 @@ Using ``tmux`` I can create terminal sessions with a custom layout of windows / 
 
 .. code-block:: bash
 
-    $ sudo apt-get install tmux
+    $ sudo apt install tmux
 
 Commands entered inside a ``tmux`` session are preceded by the key combination ``CTRL-b`` as the default ``PREFIX`` (this can be modified in ``.tmux.conf``).
 

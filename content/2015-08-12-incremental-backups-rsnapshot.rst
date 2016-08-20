@@ -31,7 +31,7 @@ A much better solution is to use `rsnapshot <http://rsnapshot.org/>`_  to make *
 * every month or so I ride the subway to offsite storage and swap drives
 
 0. Rsnapshot
-============
+------------
 
 Install ``rsnapshot``, make a directory to store backups, and make a copy of the default config file:
 
@@ -90,12 +90,12 @@ Automate backups by modifying the sample cron file provided in ``/etc/cron.d/rsn
     30 21 1 * *     root    /usr/bin/rsnapshot monthly 
 
 1. Backup the backup
-====================
+--------------------
 
 Rsnapshot operates as a **pull** program: it pulls in backups from local and remote devices. Instead of juggling access permissions to allow the rsnapshot server to talk with other devices I decided to limit ``rsnapshot`` to making backups on ``localhost`` and use `my already-configured SSH key setup <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_ to **push** a snapshot of the backup to my Raspberry Pi for remote storage.
 
 1.1 On the Pi
--------------
++++++++++++++
 
 Create a directory to store the backup:
 
@@ -104,7 +104,7 @@ Create a directory to store the backup:
     $ mkdir /path/to/backup                                             
 
 1.2 On localhost
-----------------
+++++++++++++++++
 
 Set the ip address and hostname of the Pi server in ``/etc/hosts``:
 
@@ -136,7 +136,7 @@ Automate the backups by creating a cron job (example that runs daily at 04:50):
     50 4 * * *  /home/USERNAME/bin/backupSnap.sh raspberry.server:/path/to/backup/      
 
 2. External drive and offsite storage
-=====================================
+-------------------------------------
 
 I connect my USB drive and sync the backup to the device:
 

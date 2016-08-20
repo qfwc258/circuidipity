@@ -6,7 +6,7 @@ $HOME slash bin
 :slug: homebin
 :template: article-project
 :tags: programming, shell, python, linux
-:modified: 2016-08-08 16:20:00
+:modified: 2016-08-18 22:10:00
 
 .. image:: images/infinite-loop-not-300.png
     :align: right
@@ -22,11 +22,11 @@ Let's go!
 `Library.sh <https://github.com/vonbrownie/homebin/blob/master/Library.sh>`_
     library of functions for bash shell scripts (more: `"A library for shell scripts" <http://www.circuidipity.com/shell-script-library.html>`_)
 
-`bBook.py <https://github.com/vonbrownie/homebin/blob/master/bBook.py>`_
-    get book information from command line arguments or clipboard and open web browser and search Amazon and the Toronto Public Library
+`bernersLee.py <https://github.com/vonbrownie/homebin/blob/master/bernersLee.py>`_
+    a set of classes to support my web hacks
 
-`bMap.py <https://github.com/vonbrownie/homebin/blob/master/bMap.py>`_
-    get a street address from command line arguments or clipboard and open web browser to the Google Maps page for the address
+`bookTab.py <https://github.com/vonbrownie/homebin/blob/master/bookTab.py>`_
+    get book information from command line arguments or clipboard and open web browser and search Amazon and the Toronto Public Library
 
 `collatz.py <https://github.com/vonbrownie/homebin/blob/master/collatz.py>`_
     explore the *Collatz sequence*, sometimes called "the simplest impossible math problem"
@@ -61,8 +61,14 @@ Let's go!
 `magic8ball.py <https://github.com/vonbrownie/homebin/blob/master/magic8ball.py>`_
     Magic 8 Ball peers into the future and retrieves the answer to your questions
 
+`mapTab.py <https://github.com/vonbrownie/homebin/blob/master/mapTab.py>`_
+    get a street address from command line arguments or clipboard and open web browser to the Google Maps page for the address
+
 `paVolume <https://github.com/vonbrownie/homebin/blob/master/paVolume>`_
     pulseaudio volume control (more: `"Shell script: paVolume" <http://www.circuidipity.com/pavolume.html>`_)
+
+`raiseRedLantern.py <https://github.com/vonbrownie/homebin/blob/master/raiseRedLantern.py>`_
+    a set of classes to add notification capabilities to scripts
 
 `rePhoneAndEmail.py <https://github.com/vonbrownie/homebin/blob/master/rePhoneAndEmail.py>`_
     find and extract phone numbers and email addresses on the clipboard
@@ -73,6 +79,9 @@ Let's go!
 `teleportHomeTo <https://github.com/vonbrownie/homebin/blob/master/teleportHomeTo>`_
     sync $HOME to DESTINATION
 
+`teleportHomeToSSH <https://github.com/vonbrownie/homebin/blob/master/teleportHomeToSSH>`_
+    sync $HOME to remote DESTINATION using SSH keys
+
 `timeToCount.py <https://github.com/vonbrownie/homebin/blob/master/timeToCount.py>`_
     measure clock time for a device to count from 0 to *x* in increments of 1
 
@@ -82,13 +91,10 @@ Let's go!
 `vboxshot <https://github.com/vonbrownie/homebin/blob/master/vboxshot>`_
     capture screenshot of a virtualbox session
 
-`webWatch.py <https://github.com/vonbrownie/homebin/blob/master/webWatch.py>`_
-    functions to support web scraping
+`xtra <https://github.com/vonbrownie/homebin/blob/master/xtra>`_
+    ``xinit`` extra config
 
 `yt-audio <https://github.com/vonbrownie/homebin/blob/master/yt-audio>`_
     download online video and convert to audio (more: `"Download videos using youtube-dl" <http://www.circuidipity.com/youtube-dl.html>`_)
-
-`xtra <https://github.com/vonbrownie/homebin/blob/master/xtra>`_
-    ``xinit`` extra config
 
 Happy hacking!

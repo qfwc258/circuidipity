@@ -5,138 +5,137 @@ PHP + Nginx + PostgreSQL
 :date: 2015-02-09 18:29:00
 :slug: php-nginx-postgresql
 :tags: server, network, linux
-:modified: 2015-08-26 12:48:00
+:modified: 2016-08-19 20:48:00
 
-`Home Server Project #6 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ As a requirement to host web applications like `Tiny Tiny RSS <http://www.circuidipity.com/ttrss.html>`_ on my Raspberry Pi I install **PHP**, the lightweight proxy server **Nginx**, and the **PostgreSQL** database.
+`Home Server Project #6 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ As a requirement to host web applications like `Tiny Tiny RSS <http://www.circuidipity.com/ttrss.html>`_ on my home server I install **PHP**, the lightweight proxy server **Nginx**, and the **PostgreSQL** database.
 
 Let's go!
 =========
 
-**Setup:** `Raspberry Pi 2 <http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html>`_ with IP ADDRESS ``192.168.1.88`` running Debian.
+**Setup:** `Netbook <http://www.circuidipity.com/laptop-home-server.html>`_ with IP ADDRESS ``192.168.1.88`` running `Ubuntu 16.04 LTS <http://www.circuidipity.com/tag-ubuntu.html>`_.
 
 0. PHP
-======
+------
 
-Install:
+Install ...
 
 .. code-block:: bash
 
-    $ sudo apt-get update
-    $ sudo apt-get install php5 php5-fpm php-apc php5-curl php5-cli php5-pgsql php5-gd php5-mcrypt
+    $ sudo apt install php php-fpm php-apcu php-curl php-cli php-pgsql php-gd php-mcrypt php-mbstring php-fdomdocument
 
-Improve security by editing ``/etc/php5/fpm/php.ini`` and modifying **pathinfo** to ``0``:                          
-                                                                                
+Improve security by editing ``/etc/php/7.0/fpm/php.ini`` and modifying ``pathinfo`` to ``0`` ...
+
 .. code-block:: bash
 
     cgi.fix_pathinfo=0                                                              
 
-Restart PHP:
+Restart PHP ...
                                                                                     
 .. code-block:: bash
 
-    $ sudo systemctl restart php5-fpm                                           
-                                                                                    
+    $ sudo systemctl restart php7.0-fpm
+    
 1. Nginx
-========
+--------
 
-Install:
+Install ...
 
 .. code-block:: bash
 
-    $ sudo apt-get install nginx                                                    
+    $ sudo apt install nginx                                                    
     $ sudo systemctl start nginx                                                  
                                                                                     
 Verify web server is running by opening a browser and navigating to ``http://192.168.1.88``. If you see ``Welcome to nginx!`` the server is installed correctly.
 
 2. Host multiple domains
-========================
+------------------------
 
-Nginx is capable of serving up multiple web domains or **server blocks** (virtual hosts) from the same server:
+Nginx is capable of serving up multiple web domains or **server blocks** (virtual hosts):
 
-* I create ``~/html`` to hold block content in subfolders
+* I create ``/home/USERNAME/www`` to hold block content in subfolders
 * Create block configs in ``/etc/nginx/sites-available``
-* A block is made active by setting a symbolic link in ``/etc/nginx/sites-enabled`` to its config file
+* A block is made active by setting a symbolic link in ``/etc/nginx/sites-enabled`` to its block config
 
 When combined with a `free DDNS service <http://www.circuidipity.com/ddns-openwrt.html>`_ multiple custom domains can be hosted on a home server.
 
-**Example:** Setup a ``myraspberry`` server block to host ``www.myraspberry.ca`` using `duckdns.org <http://duckdns.org/>`_ DDNS.
+**Example:** Setup a ``myfoo`` server block to host ``www.myfoo.ca`` using `duckdns.org <http://duckdns.org/>`_ DDNS.
 
-2.1 CNAME
----------
+2.1 Document Root
++++++++++++++++++
 
-Create a new **CNAME** record at the domain registrar to redirect ``www.myraspberry.ca`` to ``myraspberry.duckdns.org``.
-
-2.2 Document Root
------------------
-
-Create a new root directory to hold the contents of ``myraspberry``:
+Create a new root directory to hold the contents of ``myfoo`` ...
 
 .. code-block:: bash
 
-    $ mkdir -p ~/html/myraspberry
+    $ mkdir -p /home/USERNAME/html/myfoo
 
-2.3 Index.html
---------------
+2.2 Index.html
+++++++++++++++
 
-Create a sample ``~/html/myraspberry/index.html``:
+Create a sample ``myfoo/index.html`` ...
 
 .. code-block:: bash
 
     <html>
     <head>
-    <title>My Raspberry Pi 2 Home</title>
+    <title>My Foo Home</title>
     </head>
     <body bgcolor="red" text="white">
-    <center><h1>Welcome to My Pi!</h1></center>
+    <center><h1>Welcome to More Foo!</h1></center>
     </body>
     </html>
 
-2.4 Server Block
-----------------
+2.3 Server Block
+++++++++++++++++
 
-Create a new server block configuration ``/etc/nginx/sites-available/myraspberry``:
+Create a new server block configuration ``/etc/nginx/sites-available/myfoo`` ...
 
 .. code-block:: bash
 
     server {
         listen 80; ## listen for ipv4; this line is default and implied
 
-        root /home/USER/html/myraspberry;  ## Replace USER with your username
+        root /home/USERNAME/html/myfoo;
         index index.html;
 
-        access_log /var/log/nginx/ttrss_access.log;
-        error_log /var/log/nginx/ttrss_error.log info;
+        access_log /var/log/nginx/myfoo_access.log;
+        error_log /var/log/nginx/myfoo_error.log info;
 
-        server_name myraspberry.*;
+        server_name myfoo.*;
 
         location / {
             index           index.html;
         }
     }
 
-Activate the new server block:
+Activate the new server block ...
 
 .. code-block:: bash
 
     $ cd /etc/nginx/sites-enabled
-    $ sudo ln -s ../sites-available/myraspberry
+    $ sudo ln -s ../sites-available/myfoo
     $ sudo systemctl restart nginx
 
-2.5 Port Forwarding
--------------------
+2.4 CNAME
++++++++++
 
-Configure `port forwarding on the home router <http://www.circuidipity.com/20141006.html>`_ to redirect traffic on port 80 to the internal IP address of the nginx server. Repeat the above steps to add more domains. The limiting factor is the **upload bandwidth** provided by the home ISP (typically a fraction of the download speed).
+Create a new **CNAME** record at the domain registrar to redirect ``www.myfoo.ca`` to ``myfoo.duckdns.org``.
+
+2.5 Port Forwarding
++++++++++++++++++++
+
+Configure `port forwarding on the home router <http://www.circuidipity.com/20141006.html>`_ to redirect traffic on port 80 to the internal IP address of the nginx server. Repeat the above steps to add more domains. The real limiting factor is the **upload bandwidth** provided by the home ISP (typically a fraction of the download speed).
 
 3. PostgreSQL
-=============
+-------------
 
-Install:
+Install ...
                                                                                     
 .. code-block:: bash
 
-    $ sudo apt-get install postgresql                                                       
+    $ sudo apt install postgresql                                                       
                                                                                     
-Launch the PostgreSQL interactive console front-end ``psql`` as ``postgres`` user and set a new password:                                 
+Launch the PostgreSQL interactive console front-end ``psql`` as ``postgres`` user and set a new password ...                            
 
 .. code-block:: bash
 
@@ -146,7 +145,7 @@ Launch the PostgreSQL interactive console front-end ``psql`` as ``postgres`` use
     Enter it again: [newpasswd]
     postgres=# \quit
                                                                                     
-Example: Create new ``user:www-data`` and ``database:mydb``: [1]_
+**Example:** Create new ``user:www-data`` and ``database:mydb`` ... [1]_
 
 .. code-block:: bash                                                               
     
@@ -156,14 +155,14 @@ Example: Create new ``user:www-data`` and ``database:mydb``: [1]_
     postgres=# GRANT ALL PRIVILEGES ON DATABASE mydb to "www-data";                
     postgres=# \quit
                       
-Save any changes and reload server:                                                             
+Reload server ...                                                             
                                                                                     
 .. code-block:: bash
 
     $ sudo systemctl restart postgresql.service
 
 4. Helpful resources
-====================
+--------------------
 
 * `How to install the LEMP stack on Ubuntu <https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-14-04>`_
 * `Set up Nginx Server Blocks <https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-14-04-lts>`_
