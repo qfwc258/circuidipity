@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | My tmux cheatsheet</title>
+        <title>Circuidipity | Command line tools: tmux</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -23,14 +23,14 @@
 </div>
 
 <!-- article -->
-<h1>My tmux cheatsheet</h1>
+<h1>Command line tools: tmux</h1>
     <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 25 June 2015</p>
 <div id="article">
     <img alt="tmux" src="/images/screenshot/tmux_window_pane.png" style="width: 940px; height: 529px;" />
 <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Home Server Project #2 .:</a> <strong>Tmux</strong> is a <strong>terminal multiplexer</strong>. What this means is I can take a single terminal window and create multiple <strong>windows</strong> (tabs) and further partition a window into horizontal and vertical <strong>panes</strong>.</p>
 <p>Using <tt class="docutils literal">tmux</tt> I can create terminal sessions with a custom layout of windows / panes / names / running programs, switch between different sessions, and - best of all - <strong>detach</strong> from a session, log out, return later, <strong>re-attach</strong> and find the session layout preserved and programs continuing to run in the interim.</p>
 <p><strong>Example:</strong> I can <tt class="docutils literal">ssh</tt> into my <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">home server</a>, start a <tt class="docutils literal">tmux</tt> session and create multiple windows, run <a class="reference external" href="http://libtorrent.rakshasa.no/">rtorrent</a> in a window to start seeding a Linux <tt class="docutils literal">iso</tt>, detach from session and server, and return later to find everything in place and the <tt class="docutils literal">iso</tt> uploading.</p>
-<p><strong>To install:</strong> On Ubuntu/Debian:</p>
+<p><strong>Install:</strong> On Ubuntu/Debian ...</p>
 <div class="highlight"><pre>$ sudo apt install tmux
 </pre></div>
 <p>Commands entered inside a <tt class="docutils literal">tmux</tt> session are preceded by the key combination <tt class="docutils literal"><span class="pre">CTRL-b</span></tt> as the default <tt class="docutils literal">PREFIX</tt> (this can be modified in <tt class="docutils literal">.tmux.conf</tt>).</p>
@@ -181,6 +181,7 @@ tmux -f <span class="nv">$C</span>ONFIG attach
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-tools.html">tools</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
 </div>

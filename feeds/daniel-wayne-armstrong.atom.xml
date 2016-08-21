@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-08-18T22:10:00-04:00</updated><entry><title>New life for an old laptop as a Linux home server</title><link href="http://www.circuidipity.com/laptop-home-server.html" rel="alternate"></link><updated>2016-08-16T21:47:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-16:laptop-home-server.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #0.1 .:&lt;/a&gt; &lt;strong&gt;Netbooks&lt;/strong&gt; ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old &lt;strong&gt;Asus 900HA&lt;/strong&gt; netbook and put it to work as a &lt;a class="reference external" href="http://www.circuidipity.com/tag-server.html"&gt;home server&lt;/a&gt;. Good times!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-08-21T18:33:00-04:00</updated><entry><title>New life for an old laptop as a Linux home server</title><link href="http://www.circuidipity.com/laptop-home-server.html" rel="alternate"></link><updated>2016-08-16T21:47:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-16:laptop-home-server.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #0.1 .:&lt;/a&gt; &lt;strong&gt;Netbooks&lt;/strong&gt; ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old &lt;strong&gt;Asus 900HA&lt;/strong&gt; netbook and put it to work as a &lt;a class="reference external" href="http://www.circuidipity.com/tag-server.html"&gt;home server&lt;/a&gt;. Good times!&lt;/p&gt;
 &lt;p&gt;Running your own home server is a fun learning experience and offers several advantages.&lt;/p&gt;
 &lt;p&gt;Second-hand laptops -  retired in favour of more current and powerful machines - can still deliver plenty of oomph for running a personal server. Frugal with power and come equipped with their own built-in UPS (battery)!&lt;/p&gt;
 &lt;p&gt;Install a stable, well-tested Linux distribution and provide services such as network printing and &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;storage (NAS)&lt;/a&gt;, perform &lt;a class="reference external" href="http://www.circuidipity.com/incremental-backups-rsnapshot.html"&gt;backups&lt;/a&gt;, host &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;web services&lt;/a&gt; and much more. Start with a minimal base configuration of &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt; and gain access to tens of thousands of packages ready to install.&lt;/p&gt;
@@ -863,35 +863,46 @@ It's only the &amp;quot;hard&amp;quot; way because it uses a technique called &l
 &lt;p&gt;My &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux cheatsheet&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="cheatsheet"></category><category term="linux"></category><category term="shell"></category></entry><entry><title>Create a self-signed SSL certificate</title><link href="http://www.circuidipity.com/self-signed-ssl-certificate.html" rel="alternate"></link><updated>2015-08-27T19:25:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-27:self-signed-ssl-certificate.html</id><summary type="html">&lt;p&gt;Secure web access to services hosted on a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi home server&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;What's up:&lt;/strong&gt; I am running &lt;a class="reference external" href="http://www.circuidipity.com/ttrss.html"&gt;Tiny Tiny RSS&lt;/a&gt; (ttrss) and &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;Nginx&lt;/a&gt; on a Debian-powered Pi and want to divert HTTP traffic from port 80 to HTTPS login and access news feeds on port 443. Rather than obtain an SSL certificate from a certificate authority (CA) its a simple matter to create one for personal use.&lt;/p&gt;
-&lt;p&gt;Install &lt;tt class="docutils literal"&gt;openssl&lt;/tt&gt; and generate a certificate for Nginx:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt-get install openssl
+</summary><category term="cheatsheet"></category><category term="linux"></category><category term="shell"></category></entry><entry><title>Create a self-signed SSL certificate</title><link href="http://www.circuidipity.com/self-signed-ssl-certificate.html" rel="alternate"></link><updated>2016-08-21T18:33:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-27:self-signed-ssl-certificate.html</id><summary type="html">&lt;p&gt;Secure web access to services hosted on a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;home server&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I am running &lt;a class="reference external" href="http://www.circuidipity.com/ttrss.html"&gt;Tiny Tiny RSS&lt;/a&gt; (ttrss) and &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;Nginx&lt;/a&gt; on my server and want to divert HTTP traffic from port 80 to HTTPS login and access news feeds on port 443. Rather than obtain an SSL certificate from a certificate authority (CA) its a simple matter to create one for personal use.&lt;/p&gt;
+&lt;p&gt;Install &lt;tt class="docutils literal"&gt;openssl&lt;/tt&gt; and generate a certificate for Nginx ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install openssl
 $ sudo mkdir /etc/nginx/ssl
 $ sudo openssl req -x509 -nodes -days &lt;span class="m"&gt;365&lt;/span&gt; -newkey rsa:2048 -keyout /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Create a new server block in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;p&gt;Create a new server block in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;server &lt;span class="o"&gt;{&lt;/span&gt;
-    listen 80&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;## listen for ipv4; this line is default and implied&lt;/span&gt;
-    server_name rss.myraspberrypi.ca&lt;span class="p"&gt;;&lt;/span&gt;
+    listen 80&lt;span class="p"&gt;;&lt;/span&gt;
+    listen &lt;span class="o"&gt;[&lt;/span&gt;::&lt;span class="o"&gt;]&lt;/span&gt;:80&lt;span class="p"&gt;;&lt;/span&gt;
+    server_name www.foo.ca&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="m"&gt;301&lt;/span&gt; https://$host$request_uri&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="c1"&gt;## redirect all non-https traffic to https&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
 
 server &lt;span class="o"&gt;{&lt;/span&gt;
     listen &lt;span class="m"&gt;443&lt;/span&gt; ssl&lt;span class="p"&gt;;&lt;/span&gt;
-    server_name rss.myraspberrypi.ca&lt;span class="p"&gt;;&lt;/span&gt;
+    root /var/www/foo&lt;span class="p"&gt;;&lt;/span&gt;
+    index index.html index.php&lt;span class="p"&gt;;&lt;/span&gt;
+
+    access_log /var/log/nginx/foo_access.log&lt;span class="p"&gt;;&lt;/span&gt;
+    error_log /var/log/nginx/foo_error.log info&lt;span class="p"&gt;;&lt;/span&gt;
+
+    server_name www.foo.ca&lt;span class="p"&gt;;&lt;/span&gt;
     ssl_certificate /etc/nginx/ssl/server.crt&lt;span class="p"&gt;;&lt;/span&gt;
     ssl_certificate_key /etc/nginx/ssl/server.key&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+
+    location / &lt;span class="o"&gt;{&lt;/span&gt;
+            index           index.php&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Activate the block by creating a symlink in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-enabled&lt;/span&gt;&lt;/tt&gt; and restart server:&lt;/p&gt;
+&lt;p&gt;Activate the block by creating a symlink in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-enabled&lt;/span&gt;&lt;/tt&gt; and restart nginx ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;$ sudo systemctl restart nginx
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Configure &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;port forwarding on the router&lt;/a&gt; and (optional) &lt;a class="reference external" href="https://wiki.gandi.net/en/dns/zone/subdomain"&gt;setup a subdomain&lt;/a&gt; with a hosting/domain provider.&lt;/p&gt;
-&lt;p&gt;Note the first time navigating to the new HTTPS address the (Firefox) browser warns &amp;quot;This Connection is Untrusted&amp;quot; (which is to be expected since its a self-signed certificate vs CA verification).&lt;/p&gt;
+&lt;p&gt;Note the first time navigating to the new HTTPS address the web browser warns &lt;em&gt;This Connection is Untrusted&lt;/em&gt; (which is to be expected since its a self-signed certificate vs CA verification).&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;p&gt;Sources: &lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-nginx-for-ubuntu-14-04"&gt;Create an SSL certificate on Nginx for Ubuntu&lt;/a&gt;; &lt;a class="reference external" href="https://serverfault.com/questions/67316/in-nginx-how-can-i-rewrite-all-http-requests-to-https-while-maintaining-sub-dom"&gt;Rewrite HTTP requests to HTTPS&lt;/a&gt;; &lt;a class="reference external" href="http://nginx.org/en/docs/http/server_names.html"&gt;Nginx server_names&lt;/a&gt;&lt;/p&gt;
-</summary><category term="network"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Install CyanogenMod on Nexus 4</title><link href="http://www.circuidipity.com/install-cyanogenmod-nexus-4.html" rel="alternate"></link><updated>2015-08-21T12:26:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-19:install-cyanogenmod-nexus-4.html</id><summary type="html">&lt;p&gt;Replace stock Android with CyanogenMod on the Nexus 4 using Linux.&lt;/p&gt;
+</summary><category term="server"></category><category term="network"></category><category term="linux"></category></entry><entry><title>Install CyanogenMod on Nexus 4</title><link href="http://www.circuidipity.com/install-cyanogenmod-nexus-4.html" rel="alternate"></link><updated>2015-08-21T12:26:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-19:install-cyanogenmod-nexus-4.html</id><summary type="html">&lt;p&gt;Replace stock Android with CyanogenMod on the Nexus 4 using Linux.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Thanks to a &lt;strong&gt;very generous friend&lt;/strong&gt; who upgraded to a new smartphone I now have her old Google Nexus 4. I have dabbled with alternative Android firmwares in the past, and was inspired to give CyaonogenMod a go on this phone after reading &lt;a class="reference external" href="https://lwn.net/Articles/602521/"&gt;Android without the mothership [LWN.net]&lt;/a&gt;.&lt;/p&gt;

@@ -83,7 +83,8 @@ $ sudo systemctl start nginx
 <h4>2.3 Server Block</h4>
 <p>Create a new server block configuration <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/myfoo</span></tt> ...</p>
 <div class="highlight"><pre>server <span class="o">{</span>
-    listen 80<span class="p">;</span> <span class="c1">## listen for ipv4; this line is default and implied</span>
+    listen 80<span class="p">;</span>
+    listen <span class="o">[</span>::<span class="o">]</span>:80<span class="p">;</span>
 
     root /home/USERNAME/html/myfoo<span class="p">;</span>
     index index.html<span class="p">;</span>
