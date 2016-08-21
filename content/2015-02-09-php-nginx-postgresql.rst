@@ -93,7 +93,8 @@ Create a new server block configuration ``/etc/nginx/sites-available/myfoo`` ...
 .. code-block:: bash
 
     server {
-        listen 80; ## listen for ipv4; this line is default and implied
+        listen 80;
+        listen [::]:80;
 
         root /home/USERNAME/html/myfoo;
         index index.html;
