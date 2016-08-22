@@ -4,7 +4,7 @@ Verify a PGP signature with GnuPG
 
 :date: 2015-07-19 11:33:00
 :slug: verify-pgp-signature-gnupg
-:tags: crypto, debian, linux
+:tags: linux
 
 Using a **PGP private/public keypair** to create a **digital signature** for a file certifies its integrity. Adding a signature to software available for download heightens confidence that everything is OK!
 

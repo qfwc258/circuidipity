@@ -4,7 +4,7 @@ Install Lubuntu 14.04 on the Acer C720 Chromebook
 
 :date: 2014-10-25 23:55:00
 :slug: c720-lubuntubook-install
-:tags: lubuntu, linux, chromebook, luks, crypto
+:tags: lubuntu, ubuntu, linux, chromebook
 :modified: 2015-05-02 17:16:00
 
 .. image:: images/ubuntuTrusty.png

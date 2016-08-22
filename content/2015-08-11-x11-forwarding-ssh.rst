@@ -4,7 +4,7 @@ Run remote X applications on a local display
 
 :date: 2015-08-11 15:43:00
 :slug: x11-forwarding-ssh
-:tags: ssh, crypto, network, graphics, linux
+:tags: ssh, network, linux
 
 Run remote X applications on a local display with X11 forwarding over SSH.
 

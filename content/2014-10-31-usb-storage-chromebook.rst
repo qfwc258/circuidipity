@@ -4,7 +4,7 @@ Add encrypted USB storage to Chromebooks
 
 :date: 2014-10-31 00:11:00
 :slug: 20141031
-:tags: luks, crypto, chromebook, debian, linux
+:tags: chromebook, linux
 :modified: 2015-08-21 16:14:00
 
 I love my `Jessiebook <http://www.circuidipity.com/c720-chromebook-to-jessiebook.html>`_ and the speedy performance of a solid-state drive (SSD). However 16GB of storage does not offer much room. One popular option is to open up the device and swap in a bigger SSD.                                                                                    

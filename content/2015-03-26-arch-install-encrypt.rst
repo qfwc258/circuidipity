@@ -4,7 +4,7 @@ Arch Linux installation with encrypted root + swap
 
 :date: 2015-03-26 21:00:00
 :slug: arch-install-encrypt
-:tags: arch, linux, luks, crypto, chromebook
+:tags: arch, linux, chromebook
 
 My notes for installing **Arch Linux** that follow a condensed path through the `Beginner's Guide <https://wiki.archlinux.org/index.php/Beginners%27_guide>`_ plus extra steps to configure LUKS-encrypted root + swap.
 

@@ -4,7 +4,7 @@ Backup home
 
 :date: 2015-02-03 00:10:00
 :slug: backup-home
-:tags: ssh, crypto, network, debian, linux, shell, programming, raspberry pi
+:tags: ssh, network, linux, shell, programming
 :modified: 2015-08-12 01:34:00
 
 **Update:** I am now using `rsnapshot to make incremental backups. <http://www.circuidipity.com/incremental-backups-rsnapshot.html>`_
