@@ -4,7 +4,7 @@ Install CyanogenMod on Nexus 4
 
 :date: 2015-08-19 00:28:00
 :slug: install-cyanogenmod-nexus-4
-:tags: android, debian, linux
+:tags: android, linux
 :modified: 2015-08-21 12:26:00
 
 Replace stock Android with CyanogenMod on the Nexus 4 using Linux.

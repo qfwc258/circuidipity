@@ -4,7 +4,7 @@ Resize rootfs on Raspberry Pi
 
 :date: 2015-07-21 17:19:00
 :slug: resize-rootfs-raspberry-pi
-:tags: debian, linux, raspberry pi
+:tags: raspberry pi, linux
 
 Resize a mounted partition to take full advantage of the storage capacity of a microSD card.
 

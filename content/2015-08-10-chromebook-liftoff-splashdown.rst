@@ -4,7 +4,7 @@ Chromebook liftoff and splashdown
 
 :date: 2015-08-10 15:12:00
 :slug: chromebook-liftoff-splashdown
-:tags: chromebook, shell, programming, debian, linux
+:tags: chromebook, shell, programming, linux
 
 Create shell scripts to configure a Debian-powered Chromebook when it leaves and returns home.
 
