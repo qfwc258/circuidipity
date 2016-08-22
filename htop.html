@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Command line tools: htop</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Monday 22 August 2016</p>
+</div>
+
+<!-- article -->
+<h1>Command line tools: htop</h1>
+<div id="article">
+    <img alt="htop" src="/images/screenshot/htop.png" style="width: 940px; height: 354px;" />
+<p>The <tt class="docutils literal">top</tt> command displays Linux processes, and one of the first packages I install on a new Linux setup is the enhanced, interactive <a class="reference external" href="http://hisham.hm/htop/">htop</a> viewer. Good-looking and easy to use: see CPU and MEMORY usage at a glance, system load and uptime, kill wonky processes, and more!</p>
+<p><strong>Install:</strong> On Ubuntu/Debian ...</p>
+<div class="highlight"><pre>$ sudo apt install htop lsof
+</pre></div>
+<div class="section" id="helpful-commands">
+<h2>Helpful Commands</h2>
+<p>To search for a specific <em>process ID</em> (PID) just input the number in the htop window and ENTER to select.</p>
+<p>Menu function keys <tt class="docutils literal"><span class="pre">F1-&gt;F10</span></tt> may conflict with desktop environment settings. Fortunately there are many keycode shortcuts, and these are the ones I find most useful ...</p>
+<dl class="docutils">
+<dt><tt class="docutils literal">h</tt></dt>
+<dd>help menu</dd>
+<dt><tt class="docutils literal">t</tt></dt>
+<dd>toggles the tree view which displays all related processes</dd>
+<dt><tt class="docutils literal">l</tt></dt>
+<dd>show all files opened by a process (uses <tt class="docutils literal">lsof</tt>)</dd>
+<dt><tt class="docutils literal">u</tt></dt>
+<dd>select a user and display only processes belonging to that ID</dd>
+<dt><tt class="docutils literal">/</tt></dt>
+<dd>search for process by keyword</dd>
+<dt><tt class="docutils literal">\</tt></dt>
+<dd>filter processes by keyword</dd>
+<dt><tt class="docutils literal">f</tt></dt>
+<dd>something or other</dd>
+<dt><tt class="docutils literal">Shift</tt> + <tt class="docutils literal">f</tt></dt>
+<dd>follow a process</dd>
+<dt><tt class="docutils literal">Shift</tt> + <tt class="docutils literal">.</tt></dt>
+<dd>sort menu, <tt class="docutils literal">Shift + i</tt> will invert the sort</dd>
+<dt><tt class="docutils literal">Shift</tt> + <tt class="docutils literal">p</tt></dt>
+<dd>shortcut to sort processes by CPU ...</dd>
+<dt><tt class="docutils literal">Shift</tt> + <tt class="docutils literal">m</tt></dt>
+<dd>... by MEMORY ...</dd>
+<dt><tt class="docutils literal">Shift</tt> + <tt class="docutils literal">t</tt></dt>
+<dd>... or TIME</dd>
+<dt><tt class="docutils literal">Space</tt></dt>
+<dd>toggle a tag (useful for selecting multiple processes to <tt class="docutils literal">kill</tt>)</dd>
+<dt><tt class="docutils literal">Shift + u</tt></dt>
+<dd>remove all tags</dd>
+<dt><tt class="docutils literal">k</tt></dt>
+<dd>kill process menu</dd>
+<dt><tt class="docutils literal">q</tt></dt>
+<dd>quit</dd>
+</dl>
+<p>Happy hacking!</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-tools.html">tools</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/laptop-home-server.html">New life for an old laptop as a Linux home server</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2016 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>

@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-08-22T13:30:00-04:00</updated><entry><title>New life for an old laptop as a Linux home server</title><link href="http://www.circuidipity.com/laptop-home-server.html" rel="alternate"></link><updated>2016-08-16T21:47:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-16:laptop-home-server.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #0.1 .:&lt;/a&gt; &lt;strong&gt;Netbooks&lt;/strong&gt; ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old &lt;strong&gt;Asus 900HA&lt;/strong&gt; netbook and put it to work as a &lt;a class="reference external" href="http://www.circuidipity.com/tag-server.html"&gt;home server&lt;/a&gt;. Good times!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-08-22T17:09:00-04:00</updated><entry><title>Command line tools: htop</title><link href="http://www.circuidipity.com/htop.html" rel="alternate"></link><updated>2016-08-22T17:09:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-22:htop.html</id><summary type="html">&lt;img alt="htop" src="/images/screenshot/htop.png" style="width: 940px; height: 354px;" /&gt;
+&lt;p&gt;The &lt;tt class="docutils literal"&gt;top&lt;/tt&gt; command displays Linux processes, and one of the first packages I install on a new Linux setup is the enhanced, interactive &lt;a class="reference external" href="http://hisham.hm/htop/"&gt;htop&lt;/a&gt; viewer. Good-looking and easy to use: see CPU and MEMORY usage at a glance, system load and uptime, kill wonky processes, and more!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Install:&lt;/strong&gt; On Ubuntu/Debian ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install htop lsof
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="helpful-commands"&gt;
+&lt;h2&gt;Helpful Commands&lt;/h2&gt;
+&lt;p&gt;To search for a specific &lt;em&gt;process ID&lt;/em&gt; (PID) just input the number in the htop window and ENTER to select.&lt;/p&gt;
+&lt;p&gt;Menu function keys &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;F1-&amp;gt;F10&lt;/span&gt;&lt;/tt&gt; may conflict with desktop environment settings. Fortunately there are many keycode shortcuts, and these are the ones I find most useful ...&lt;/p&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;h&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;help menu&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;t&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;toggles the tree view which displays all related processes&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;l&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;show all files opened by a process (uses &lt;tt class="docutils literal"&gt;lsof&lt;/tt&gt;)&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;u&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;select a user and display only processes belonging to that ID&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;/&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;search for process by keyword&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;\&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;filter processes by keyword&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;f&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;something or other&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;Shift&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;f&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;follow a process&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;Shift&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;.&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;sort menu, &lt;tt class="docutils literal"&gt;Shift + i&lt;/tt&gt; will invert the sort&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;Shift&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;p&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;shortcut to sort processes by CPU ...&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;Shift&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;m&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;... by MEMORY ...&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;Shift&lt;/tt&gt; + &lt;tt class="docutils literal"&gt;t&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;... or TIME&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;Space&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;toggle a tag (useful for selecting multiple processes to &lt;tt class="docutils literal"&gt;kill&lt;/tt&gt;)&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;Shift + u&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;remove all tags&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;k&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;kill process menu&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;q&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;quit&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="shell"></category><category term="tools"></category><category term="linux"></category></entry><entry><title>New life for an old laptop as a Linux home server</title><link href="http://www.circuidipity.com/laptop-home-server.html" rel="alternate"></link><updated>2016-08-16T21:47:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-16:laptop-home-server.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #0.1 .:&lt;/a&gt; &lt;strong&gt;Netbooks&lt;/strong&gt; ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old &lt;strong&gt;Asus 900HA&lt;/strong&gt; netbook and put it to work as a &lt;a class="reference external" href="http://www.circuidipity.com/tag-server.html"&gt;home server&lt;/a&gt;. Good times!&lt;/p&gt;
 &lt;p&gt;Running your own home server is a fun learning experience and offers several advantages.&lt;/p&gt;
 &lt;p&gt;Second-hand laptops -  retired in favour of more current and powerful machines - can still deliver plenty of oomph for running a personal server. Frugal with power and come equipped with their own built-in UPS (battery)!&lt;/p&gt;
 &lt;p&gt;Install a stable, well-tested Linux distribution and provide services such as network printing and &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;storage (NAS)&lt;/a&gt;, perform &lt;a class="reference external" href="http://www.circuidipity.com/incremental-backups-rsnapshot.html"&gt;backups&lt;/a&gt;, host &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;web services&lt;/a&gt; and much more. Start with a minimal base configuration of &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt; and gain access to tens of thousands of packages ready to install.&lt;/p&gt;
@@ -1044,43 +1089,4 @@ rsync --archive --hard-links --numeric-ids --delete --exclude&lt;span class="o"&
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="server"></category><category term="network"></category><category term="linux"></category></entry><entry><title>Run remote X applications on a local display</title><link href="http://www.circuidipity.com/x11-forwarding-ssh.html" rel="alternate"></link><updated>2015-08-11T15:43:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-11:x11-forwarding-ssh.html</id><summary type="html">&lt;p&gt;Run remote X applications on a local display with X11 forwarding over SSH.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;I give my &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Jessiebook's smallish amount of RAM&lt;/a&gt; a bit of a break by enlisting other machines on my home network to run X apps. Once &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH is properly configured&lt;/a&gt; it is easy to use X11 forwarding to have apps running on the server show up on the client's local display.&lt;/p&gt;
-&lt;div class="section" id="on-the-server"&gt;
-&lt;h3&gt;On the server&lt;/h3&gt;
-&lt;p&gt;Activate X11 forwarding on the OpenSSH server by modifying &lt;tt class="docutils literal"&gt;/etc/ssh/sshd_config&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;X11Forwarding yes
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and restart the server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo systemctl restart sshd.service
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="on-the-client"&gt;
-&lt;h3&gt;On the client&lt;/h3&gt;
-&lt;p&gt;X11 forwarding options can be configured system-wide in &lt;tt class="docutils literal"&gt;/etc/ssh/ssh_config&lt;/tt&gt; or per-user in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/config&lt;/span&gt;&lt;/tt&gt; or simply forward X on a connection-by-connection basis at login with the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-X&lt;/span&gt;&lt;/tt&gt; option:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ ssh -X remote.host
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Some apps might require the &lt;tt class="docutils literal"&gt;ForwardX11Trusted&lt;/tt&gt; option to allow the full set of X functions from a &lt;strong&gt;trusted&lt;/strong&gt; remote server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ ssh -Y remote.host
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; An intruder on the SSH server will be able to capture everything on the local screen and every keystroke with &lt;tt class="docutils literal"&gt;ForwardX11Trusted&lt;/tt&gt; enabled.&lt;/p&gt;
-&lt;p&gt;If SSH has properly configured X11 forwarding it sets &lt;tt class="docutils literal"&gt;$DISPLAY&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$D&lt;/span&gt;ISPLAY
-localhost:10.0
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Launch an X app on the server and it opens on the local display:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ urxvt &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Logging into a remote host just to run a single app can be overkill. Run one-off commands with the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-f&lt;/span&gt;&lt;/tt&gt; option which backgrounds the SSH client before running the app:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ ssh -fX remote.host urxvt
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;One interesting use I discovered for X11 forwarding is running the &lt;tt class="docutils literal"&gt;rhythmbox&lt;/tt&gt; music player. A limitation of X11 forwarding is that sound is not transmitted to the client's audio hardware. Turns out that is a &lt;strong&gt;feature&lt;/strong&gt; on my home network setup because my speakers are connected to the server. I launch &lt;tt class="docutils literal"&gt;rhythmbox&lt;/tt&gt; on the server, display and &lt;a class="reference external" href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html"&gt;control the player&lt;/a&gt; on the client, and the &lt;a class="reference external" href="https://www.youtube.com/watch?v=mZDYJYqcYK4"&gt;good and funky sounds&lt;/a&gt; issue forth from the server!&lt;/p&gt;
-&lt;p&gt;I create the &lt;tt class="docutils literal"&gt;Jukebox&lt;/tt&gt; alias in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bash_aliases&lt;/span&gt;&lt;/tt&gt; to X11 forward the player as a one-off command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;Jukebox&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ssh -fX remote.host rhythmbox&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy Hacking!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</summary><category term="ssh"></category><category term="network"></category><category term="linux"></category></entry></feed>
+</summary><category term="server"></category><category term="network"></category><category term="linux"></category></entry></feed>
