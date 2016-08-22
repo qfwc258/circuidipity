@@ -309,7 +309,7 @@ print 8//7 &lt;span class="c1"&gt;# prints 1&lt;/span&gt;
 &lt;p&gt;... makes division into a float. Python 2 would otherwise return &lt;tt class="docutils literal"&gt;1&lt;/tt&gt; for both calculations.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;04.&lt;/strong&gt; &lt;tt class="docutils literal"&gt;textwrap.dedent&lt;/tt&gt; A useful module+method for indenting quotes in code while the output is aligned to margin.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 05 Jun 2016 14:40:00 -0400</pubDate><guid>tag:www.circuidipity.com,2016-06-05:lpthw-e22.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>Minimal to Morebuntu</title><link>http://www.circuidipity.com/20160501.html</link><description>&lt;img alt="Ubuntu under-construction" class="align-right" src="images/ubuntu-crane-300.png" style="width: 300px; height: 300px;" /&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 05 Jun 2016 14:40:00 -0400</pubDate><guid>tag:www.circuidipity.com,2016-06-05:lpthw-e22.html</guid><category>python</category><category>programming</category></item><item><title>Minimal to Morebuntu</title><link>http://www.circuidipity.com/20160501.html</link><description>&lt;img alt="Ubuntu under-construction" class="align-right" src="images/ubuntu-crane-300.png" style="width: 300px; height: 300px;" /&gt;
 &lt;p&gt;Start with a &lt;strong&gt;minimal install of Ubuntu 16.04 &amp;quot;Xenial Xerus&amp;quot;&lt;/strong&gt; and roll a &lt;strong&gt;Morebuntu&lt;/strong&gt; customized with the &lt;strong&gt;i3 tiling window manager&lt;/strong&gt; plus a collection of desktop applications.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
@@ -368,7 +368,7 @@ $ sudo update-alternatives --config x-terminal-emulator
 &lt;p&gt;My &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/scripts/morebuntu.sh"&gt;morebuntu shell script&lt;/a&gt; that covers most of steps 1-4.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 01 May 2016 11:59:00 -0400</pubDate><guid>tag:www.circuidipity.com,2016-05-01:20160501.html</guid><category>ubuntu</category><category>linux</category><category>i3</category></item><item><title>LPTHW Exercise 18-21: Functions, Variables, Return</title><link>http://www.circuidipity.com/lpthw-e18-21.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; How long will it take for Sebastiaan to pedal his bike to &lt;em&gt;Proxima Centauri&lt;/em&gt;?&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 01 May 2016 11:59:00 -0400</pubDate><guid>tag:www.circuidipity.com,2016-05-01:20160501.html</guid><category>ubuntu</category><category>linux</category><category>i3</category><category>shell</category><category>programming</category></item><item><title>LPTHW Exercise 18-21: Functions, Variables, Return</title><link>http://www.circuidipity.com/lpthw-e18-21.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; How long will it take for Sebastiaan to pedal his bike to &lt;em&gt;Proxima Centauri&lt;/em&gt;?&lt;/p&gt;
 &lt;p&gt;Code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;import sys
 import textwrap
@@ -462,7 +462,7 @@ Travel Time: 3.00061103304e+11 hours by bike
 
 $
 &lt;/pre&gt;&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Thu, 19 Nov 2015 17:10:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-19:lpthw-e18-21.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 15-17: Reading and Writing Files</title><link>http://www.circuidipity.com/lpthw-e15-17.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt;&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Thu, 19 Nov 2015 17:10:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-19:lpthw-e18-21.html</guid><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 15-17: Reading and Writing Files</title><link>http://www.circuidipity.com/lpthw-e15-17.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# Reading and Writing Files&lt;/span&gt;
 &lt;span class="c1"&gt;# * close - closes the file&lt;/span&gt;
 &lt;span class="c1"&gt;# * read - reads the contents of a file... can assign the result to a variable&lt;/span&gt;
@@ -510,7 +510,7 @@ print &lt;span class="s2"&gt;&amp;quot;And finally, we close it.&amp;quot;&lt;/s
 target.close&lt;span class="o"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Bonus:&lt;/strong&gt; Last night I attended the monthly &lt;a class="reference external" href="http://www.meetup.com/Python-Toronto/"&gt;Python Toronto Meetup&lt;/a&gt;. It was unintelligible (for a beginner) but inspiring (to me to learn more)! :-)&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 18 Nov 2015 13:55:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-18:lpthw-e15-17.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 13-14: Parameters, Unpacking, Variables, Prompting and Passing</title><link>http://www.circuidipity.com/lpthw-e13-14.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Add extra libraries or &lt;em&gt;modules&lt;/em&gt; of code to a program using &lt;strong&gt;import&lt;/strong&gt; and supply arguments to a Python script on the command line using &lt;strong&gt;argv&lt;/strong&gt;.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 18 Nov 2015 13:55:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-18:lpthw-e15-17.html</guid><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 13-14: Parameters, Unpacking, Variables, Prompting and Passing</title><link>http://www.circuidipity.com/lpthw-e13-14.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Add extra libraries or &lt;em&gt;modules&lt;/em&gt; of code to a program using &lt;strong&gt;import&lt;/strong&gt; and supply arguments to a Python script on the command line using &lt;strong&gt;argv&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The &lt;strong&gt;textwrap&lt;/strong&gt; module enables indenting a block quote for cleaner code but moving to left-margin at &lt;strong&gt;print()&lt;/strong&gt; time:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;import sys
 import textwrap
@@ -538,7 +538,7 @@ Zed Shaw , author of..........
 
 $
 &lt;/pre&gt;&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Tue, 17 Nov 2015 00:26:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-17:lpthw-e13-14.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 11-12: Asking Questions, Prompting People</title><link>http://www.circuidipity.com/lpthw-e11-12.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Now we're cooking! Put &lt;strong&gt;raw_input()&lt;/strong&gt; and &lt;strong&gt;format()&lt;/strong&gt; to work:&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Tue, 17 Nov 2015 00:26:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-17:lpthw-e13-14.html</guid><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 11-12: Asking Questions, Prompting People</title><link>http://www.circuidipity.com/lpthw-e11-12.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Now we're cooking! Put &lt;strong&gt;raw_input()&lt;/strong&gt; and &lt;strong&gt;format()&lt;/strong&gt; to work:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;What is the temperature today in Clearwater, Florida in Fahrenheit? &amp;gt; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;span class="nv"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;float&lt;span class="o"&gt;(&lt;/span&gt;f&lt;span class="o"&gt;)&lt;/span&gt; - 32&lt;span class="o"&gt;)&lt;/span&gt; * &lt;span class="o"&gt;(&lt;/span&gt;5.0/9&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;span class="nv"&gt;k&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;float&lt;span class="o"&gt;(&lt;/span&gt;f&lt;span class="o"&gt;)&lt;/span&gt; - 32&lt;span class="o"&gt;)&lt;/span&gt; * &lt;span class="o"&gt;(&lt;/span&gt;5.0/9&lt;span class="o"&gt;)&lt;/span&gt; + 273.15
@@ -553,7 +553,7 @@ So a temperature of &lt;span class="m"&gt;80&lt;/span&gt; Fahrenheit converts to
 Or, to be more precise, a temperature of &lt;span class="m"&gt;80&lt;/span&gt; Fahrenheit converts to 26.66667 Celsius and 299.81667 Kelvin.
 $
 &lt;/pre&gt;&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Mon, 16 Nov 2015 13:21:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-16:lpthw-e11-12.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 10: What Was That?</title><link>http://www.circuidipity.com/lpthw-e10.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Playing with escape sequences:&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Mon, 16 Nov 2015 13:21:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-16:lpthw-e11-12.html</guid><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 10: What Was That?</title><link>http://www.circuidipity.com/lpthw-e10.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Playing with escape sequences:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;cars&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;self-driving cars&lt;/span&gt;
 &lt;span class="s1"&gt;... armoured cars&lt;/span&gt;
 &lt;span class="s1"&gt;... \t\t\t\tgetaway cars&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
@@ -566,7 +566,7 @@ armoured cars
                                 getaway cars
 &amp;gt;&amp;gt;&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 15 Nov 2015 15:46:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-15:lpthw-e10.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 9: Printing, Printing, Printing</title><link>http://www.circuidipity.com/lpthw-e9.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Escape sequences and block quotes:&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 15 Nov 2015 15:46:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-15:lpthw-e10.html</guid><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 9: Printing, Printing, Printing</title><link>http://www.circuidipity.com/lpthw-e9.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Escape sequences and block quotes:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;countdown&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;\n10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0\n\n\n&amp;quot;&lt;/span&gt;
 
 print&lt;span class="o"&gt;(&lt;/span&gt;countdown&lt;span class="o"&gt;)&lt;/span&gt;
@@ -598,7 +598,7 @@ Tower clear...
 
 $
 &lt;/pre&gt;&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 15 Nov 2015 15:43:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-15:lpthw-e9.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 8: Printing, Printing</title><link>http://www.circuidipity.com/lpthw-e8.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; More printing using the newer &lt;strong&gt;format()&lt;/strong&gt;:&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 15 Nov 2015 15:43:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-15:lpthw-e9.html</guid><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 8: Printing, Printing</title><link>http://www.circuidipity.com/lpthw-e8.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; More printing using the newer &lt;strong&gt;format()&lt;/strong&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;formatter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;{} {} {} {}&amp;quot;&lt;/span&gt;
 
 print&lt;span class="o"&gt;(&lt;/span&gt;formatter&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;1, 2, 3, 4&lt;span class="o"&gt;)&lt;/span&gt;
@@ -621,7 +621,7 @@ True False False True
 I had this thing. That you could &lt;span class="nb"&gt;type&lt;/span&gt; up right. But it didn&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;t sing. So I said goodnight.
 $
 &lt;/pre&gt;&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 15 Nov 2015 14:45:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-15:lpthw-e8.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 7: More Printing</title><link>http://www.circuidipity.com/lpthw-e7.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; I am practising printing in Python 2 using the &lt;strong&gt;print()&lt;/strong&gt; and &lt;strong&gt;format()&lt;/strong&gt; functions inherited from Python 3:&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 15 Nov 2015 14:45:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-15:lpthw-e8.html</guid><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 7: More Printing</title><link>http://www.circuidipity.com/lpthw-e7.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; I am practising printing in Python 2 using the &lt;strong&gt;print()&lt;/strong&gt; and &lt;strong&gt;format()&lt;/strong&gt; functions inherited from Python 3:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;poem&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;The Wreck of the Hesperus&amp;#39;&lt;/span&gt;
 &amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;poet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Longfellow&amp;#39;&lt;/span&gt;
 &amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;poem + &lt;span class="s2"&gt;&amp;quot; by &amp;quot;&lt;/span&gt; + poet&lt;span class="o"&gt;)&lt;/span&gt;
@@ -632,7 +632,7 @@ The Wreck of the Hesperus by Longfellow
 The Wreck of the Hesperus by Longfellow
 &amp;gt;&amp;gt;&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 15 Nov 2015 14:38:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-15:lpthw-e7.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 6: Strings and Text</title><link>http://www.circuidipity.com/lpthw-e6.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; I am not entirely clear about the difference between &lt;strong&gt;%r&lt;/strong&gt; vs &lt;strong&gt;%s&lt;/strong&gt; in string formatting. I &lt;strong&gt;do&lt;/strong&gt; understand they call different functions (&lt;strong&gt;repr&lt;/strong&gt; and &lt;strong&gt;str&lt;/strong&gt;) and produce different output:&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 15 Nov 2015 14:38:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-15:lpthw-e7.html</guid><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 6: Strings and Text</title><link>http://www.circuidipity.com/lpthw-e6.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; I am not entirely clear about the difference between &lt;strong&gt;%r&lt;/strong&gt; vs &lt;strong&gt;%s&lt;/strong&gt; in string formatting. I &lt;strong&gt;do&lt;/strong&gt; understand they call different functions (&lt;strong&gt;repr&lt;/strong&gt; and &lt;strong&gt;str&lt;/strong&gt;) and produce different output:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;vessel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Hesperus&amp;#39;&lt;/span&gt;
 &amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;The Wreck of the %r&amp;quot;&lt;/span&gt; % vessel
 The Wreck of the &lt;span class="s1"&gt;&amp;#39;Hesperus&amp;#39;&lt;/span&gt;
@@ -641,7 +641,7 @@ The Wreck of the Hesperus
 &amp;gt;&amp;gt;&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;As the book states, the first example is &amp;quot;raw output&amp;quot; and the second is the content more cleanly formatted for printing. Why using &lt;strong&gt;repr&lt;/strong&gt; would be desirable under certain circumstances will probably become more clear later on.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 15 Nov 2015 12:59:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-15:lpthw-e6.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 5: More Variables and Printing</title><link>http://www.circuidipity.com/lpthw-e5.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; The old way of printing format strings using &lt;strong&gt;%&lt;/strong&gt; and the new way using &lt;strong&gt;.format()&lt;/strong&gt;:&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 15 Nov 2015 12:59:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-15:lpthw-e6.html</guid><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 5: More Variables and Printing</title><link>http://www.circuidipity.com/lpthw-e5.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; The old way of printing format strings using &lt;strong&gt;%&lt;/strong&gt; and the new way using &lt;strong&gt;.format()&lt;/strong&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;astronaut&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Yuri Gagarin&amp;#39;&lt;/span&gt;
 &lt;span class="nv"&gt;astronaut_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Alan Shepard&amp;#39;&lt;/span&gt;
 &lt;span class="nv"&gt;launch&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Baikonur&amp;#39;&lt;/span&gt;
@@ -659,8 +659,8 @@ Yuri Gagarin blasted off from Baikonur and became the first human to reach space
 Alan Shepard blasted off from Cape Canaveral and became the first American to reach space in 1961.
 $
 &lt;/pre&gt;&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sat, 14 Nov 2015 17:25:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-14:lpthw-e5.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 4: Variables and Names</title><link>http://www.circuidipity.com/lpthw-e4.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Equal sign assigns whatever is on the right to the variable on the left. Double equal signs perform a comparison. Same as shell scripting.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sat, 14 Nov 2015 16:18:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-14:lpthw-e4.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 3: Numbers and Math</title><link>http://www.circuidipity.com/lpthw-e3.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Order of math operations is PEMDAS: &lt;em&gt;Parentheses Exponents Multiplication Division Addition Subtraction&lt;/em&gt;.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sat, 14 Nov 2015 17:25:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-14:lpthw-e5.html</guid><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 4: Variables and Names</title><link>http://www.circuidipity.com/lpthw-e4.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Equal sign assigns whatever is on the right to the variable on the left. Double equal signs perform a comparison. Same as shell scripting.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sat, 14 Nov 2015 16:18:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-14:lpthw-e4.html</guid><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 3: Numbers and Math</title><link>http://www.circuidipity.com/lpthw-e3.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Order of math operations is PEMDAS: &lt;em&gt;Parentheses Exponents Multiplication Division Addition Subtraction&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;So long as at least one of the numbers in a calculation is a floating point number the answer returned will also be floating point. Otherwise:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="m"&gt;5&lt;/span&gt; / 2
 2
@@ -670,16 +670,16 @@ $
 1.0
 &amp;gt;&amp;gt;&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sat, 14 Nov 2015 16:04:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-14:lpthw-e3.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 2: Comments and Pound Characters</title><link>http://www.circuidipity.com/lpthw-e2.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Using the pound character (#) to add comments or disable a line of code works the same in Python as in Bash shell scripting.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sat, 14 Nov 2015 16:04:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-14:lpthw-e3.html</guid><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 2: Comments and Pound Characters</title><link>http://www.circuidipity.com/lpthw-e2.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Using the pound character (#) to add comments or disable a line of code works the same in Python as in Bash shell scripting.&lt;/p&gt;
 &lt;p&gt;Different languages &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Comment_%28computer_programming%29#Examples"&gt;do things differently ...&lt;/a&gt;&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sat, 14 Nov 2015 15:43:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-14:lpthw-e2.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 1: A Good First Program</title><link>http://www.circuidipity.com/lpthw-e1.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; The traditional &lt;em&gt;Hello World&lt;/em&gt; program. &lt;strong&gt;Print&lt;/strong&gt; in Python 2 encloses the statement in quotes while Python 3 adds brackets (and brackets format is backward-compatible to Python 2 but not vice-versa):&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sat, 14 Nov 2015 15:43:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-14:lpthw-e2.html</guid><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 1: A Good First Program</title><link>http://www.circuidipity.com/lpthw-e1.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; The traditional &lt;em&gt;Hello World&lt;/em&gt; program. &lt;strong&gt;Print&lt;/strong&gt; in Python 2 encloses the statement in quotes while Python 3 adds brackets (and brackets format is backward-compatible to Python 2 but not vice-versa):&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;Hello World!&amp;quot;&lt;/span&gt;
 Hello World!
 &amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello World!&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 Hello World!
 &amp;gt;&amp;gt;&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 13 Nov 2015 21:49:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-13:lpthw-e1.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 0: The Setup</title><link>http://www.circuidipity.com/lpthw-e0.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; I am doing the Python exercises on a computer running &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt; bundled with Python 2.7.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 13 Nov 2015 21:49:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-11-13:lpthw-e1.html</guid><category>python</category><category>programming</category></item><item><title>LPTHW Exercise 0: The Setup</title><link>http://www.circuidipity.com/lpthw-e0.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; I am doing the Python exercises on a computer running &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt; bundled with Python 2.7.&lt;/p&gt;
 &lt;p&gt;Zed recommends &lt;tt class="docutils literal"&gt;gedit&lt;/tt&gt; as the text editor to begin writing code. Let's give it a shot:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install gedit
 &lt;/pre&gt;&lt;/div&gt;
@@ -708,7 +708,7 @@ Type &lt;span class="s2"&gt;&amp;quot;help&amp;quot;&lt;/span&gt;, &lt;span clas
 &amp;gt;&amp;gt;&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sat, 28 May 2016 14:13:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-11-12:lpthw-e0.html</guid><category>lpthw</category><category>python</category><category>programming</category><category>linux</category></item><item><title>Learn Python the Hard Way with the DUDE</title><link>http://www.circuidipity.com/lpthw-dude.html</link><description>&lt;img alt="LPTHW" class="align-right" src="images/lpthw-begin-1.png" style="width: 250px; height: 479px;" /&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sat, 28 May 2016 14:13:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-11-12:lpthw-e0.html</guid><category>python</category><category>programming</category><category>linux</category></item><item><title>Learn Python the Hard Way with the DUDE</title><link>http://www.circuidipity.com/lpthw-dude.html</link><description>&lt;img alt="LPTHW" class="align-right" src="images/lpthw-begin-1.png" style="width: 250px; height: 479px;" /&gt;
 &lt;p&gt;Using Linux and writing &lt;a class="reference external" href="https://github.com/vonbrownie/homebin"&gt;simple shell scripts&lt;/a&gt; has been an enjoyable peek at programming. But now I want to go farther and learning &lt;a class="reference external" href="http://www.circuidipity.com/tag-python.html"&gt;Python&lt;/a&gt; strikes me as a useful next step. Starting with the free HTML version of the book &lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way&lt;/a&gt; by &lt;strong&gt;Zed Shaw&lt;/strong&gt;, who states right off the bat:&lt;/p&gt;
 &lt;blockquote&gt;
 It's only the &amp;quot;hard&amp;quot; way because it uses a technique called &lt;em&gt;instruction&lt;/em&gt;. Instruction is where I tell you to do a sequence of controlled exercises designed to build a skill through repetition. This technique works very well with beginners who know nothing and need to acquire basic skills before they can understand more complex topics. It's used in everything from martial arts to music to even basic math and reading skills.&lt;/blockquote&gt;
@@ -799,71 +799,7 @@ It's only the &amp;quot;hard&amp;quot; way because it uses a technique called &l
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 05 Jun 2016 14:28:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-11-11:lpthw-dude.html</guid><category>lpthw</category><category>python</category><category>programming</category></item><item><title>Keystrokes cheatsheet</title><link>http://www.circuidipity.com/keystrokes.html</link><description>&lt;p&gt;&lt;strong&gt;Work-in-progress:&lt;/strong&gt; Keystroke combos that I find useful (listed here to jog my memory!)...&lt;/p&gt;
-&lt;div class="section" id="chromebook"&gt;
-&lt;h2&gt;Chromebook&lt;/h2&gt;
-&lt;p&gt;Top row on my &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Jessiebook&lt;/a&gt;  keyboard has a series of shortcut icons (&lt;tt class="docutils literal"&gt;Brightness&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;Volume&lt;/tt&gt;...) that identify in Linux as the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;F1-F10&lt;/span&gt;&lt;/tt&gt; keys and the &lt;tt class="docutils literal"&gt;Search&lt;/tt&gt; key (in the &lt;tt class="docutils literal"&gt;CapsLk&lt;/tt&gt; position) acts as &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; (Windows) modifier key.&lt;/p&gt;
-&lt;p&gt;Enable these keyboard shortcuts in Debian by first installing:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; - associate keys to shell commands&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;xbacklight&lt;/tt&gt; - set backlight level using RandR&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pulseaudio-utils&lt;/span&gt;&lt;/tt&gt; - manage sound with pactl&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;xvkbd&lt;/tt&gt; - send characters to another client&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt-get install xbindkeys xbacklight pulseaudio-utils xvkbd
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;See &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Chromebook to Jessiebook&lt;/a&gt; for a sample configuration.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="firefox"&gt;
-&lt;h2&gt;Firefox&lt;/h2&gt;
-&lt;dl class="docutils"&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-T&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;open new tab&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-Tab&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;switch tab&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;SHIFT-CTRL-Tab&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;switch tab backwards&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-W&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;close tab&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-[&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;page back&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-]&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;page forward&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-L&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;enter new address/search&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-F&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;find&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;F3&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;find again&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;SHIFT-F3&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;find previous&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;F5&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;reload page&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;/div&gt;
-&lt;div class="section" id="shell"&gt;
-&lt;h2&gt;Shell&lt;/h2&gt;
-&lt;dl class="docutils"&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-A&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;move to the start of line&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-E&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;move to the end of line&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-U&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;erase from cursor to start of line&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-K&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;erase from cursor to end of line&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-L&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;clear screen&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CTRL-R&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;reverse incremental search of history&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;/div&gt;
-&lt;div class="section" id="tmux"&gt;
-&lt;h2&gt;Tmux&lt;/h2&gt;
-&lt;p&gt;My &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux cheatsheet&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 25 Sep 2015 16:30:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-09-25:keystrokes.html</guid><category>cheatsheet</category><category>linux</category><category>shell</category></item><item><title>Create a self-signed SSL certificate</title><link>http://www.circuidipity.com/self-signed-ssl-certificate.html</link><description>&lt;p&gt;Secure web access to services hosted on a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;home server&lt;/a&gt;.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 05 Jun 2016 14:28:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-11-11:lpthw-dude.html</guid><category>python</category><category>programming</category></item><item><title>Create a self-signed SSL certificate</title><link>http://www.circuidipity.com/self-signed-ssl-certificate.html</link><description>&lt;p&gt;Secure web access to services hosted on a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;home server&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;I am running &lt;a class="reference external" href="http://www.circuidipity.com/ttrss.html"&gt;Tiny Tiny RSS&lt;/a&gt; (ttrss) and &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;Nginx&lt;/a&gt; on my server and want to divert HTTP traffic from port 80 to HTTPS login and access news feeds on port 443. Rather than obtain an SSL certificate from a certificate authority (CA) its a simple matter to create one for personal use.&lt;/p&gt;
 &lt;p&gt;Install &lt;tt class="docutils literal"&gt;openssl&lt;/tt&gt; and generate a certificate for Nginx ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install openssl
@@ -1108,4 +1044,43 @@ rsync --archive --hard-links --numeric-ids --delete --exclude&lt;span class="o"&
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 12 Feb 2016 23:13:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-08-12:incremental-backups-rsnapshot.html</guid><category>server</category><category>network</category><category>linux</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Fri, 12 Feb 2016 23:13:00 -0500</pubDate><guid>tag:www.circuidipity.com,2015-08-12:incremental-backups-rsnapshot.html</guid><category>server</category><category>network</category><category>linux</category></item><item><title>Run remote X applications on a local display</title><link>http://www.circuidipity.com/x11-forwarding-ssh.html</link><description>&lt;p&gt;Run remote X applications on a local display with X11 forwarding over SSH.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;I give my &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Jessiebook's smallish amount of RAM&lt;/a&gt; a bit of a break by enlisting other machines on my home network to run X apps. Once &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH is properly configured&lt;/a&gt; it is easy to use X11 forwarding to have apps running on the server show up on the client's local display.&lt;/p&gt;
+&lt;div class="section" id="on-the-server"&gt;
+&lt;h3&gt;On the server&lt;/h3&gt;
+&lt;p&gt;Activate X11 forwarding on the OpenSSH server by modifying &lt;tt class="docutils literal"&gt;/etc/ssh/sshd_config&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;X11Forwarding yes
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and restart the server:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo systemctl restart sshd.service
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="on-the-client"&gt;
+&lt;h3&gt;On the client&lt;/h3&gt;
+&lt;p&gt;X11 forwarding options can be configured system-wide in &lt;tt class="docutils literal"&gt;/etc/ssh/ssh_config&lt;/tt&gt; or per-user in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.ssh/config&lt;/span&gt;&lt;/tt&gt; or simply forward X on a connection-by-connection basis at login with the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-X&lt;/span&gt;&lt;/tt&gt; option:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ ssh -X remote.host
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Some apps might require the &lt;tt class="docutils literal"&gt;ForwardX11Trusted&lt;/tt&gt; option to allow the full set of X functions from a &lt;strong&gt;trusted&lt;/strong&gt; remote server:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ ssh -Y remote.host
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span class="warning"&gt;WARNING!&lt;/span&gt; An intruder on the SSH server will be able to capture everything on the local screen and every keystroke with &lt;tt class="docutils literal"&gt;ForwardX11Trusted&lt;/tt&gt; enabled.&lt;/p&gt;
+&lt;p&gt;If SSH has properly configured X11 forwarding it sets &lt;tt class="docutils literal"&gt;$DISPLAY&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$D&lt;/span&gt;ISPLAY
+localhost:10.0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Launch an X app on the server and it opens on the local display:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ urxvt &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Logging into a remote host just to run a single app can be overkill. Run one-off commands with the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-f&lt;/span&gt;&lt;/tt&gt; option which backgrounds the SSH client before running the app:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ ssh -fX remote.host urxvt
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;One interesting use I discovered for X11 forwarding is running the &lt;tt class="docutils literal"&gt;rhythmbox&lt;/tt&gt; music player. A limitation of X11 forwarding is that sound is not transmitted to the client's audio hardware. Turns out that is a &lt;strong&gt;feature&lt;/strong&gt; on my home network setup because my speakers are connected to the server. I launch &lt;tt class="docutils literal"&gt;rhythmbox&lt;/tt&gt; on the server, display and &lt;a class="reference external" href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html"&gt;control the player&lt;/a&gt; on the client, and the &lt;a class="reference external" href="https://www.youtube.com/watch?v=mZDYJYqcYK4"&gt;good and funky sounds&lt;/a&gt; issue forth from the server!&lt;/p&gt;
+&lt;p&gt;I create the &lt;tt class="docutils literal"&gt;Jukebox&lt;/tt&gt; alias in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bash_aliases&lt;/span&gt;&lt;/tt&gt; to X11 forward the player as a one-off command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;Jukebox&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ssh -fX remote.host rhythmbox&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Happy Hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Tue, 11 Aug 2015 15:43:00 -0400</pubDate><guid>tag:www.circuidipity.com,2015-08-11:x11-forwarding-ssh.html</guid><category>ssh</category><category>crypto</category><category>network</category><category>graphics</category><category>linux</category></item></channel></rss>

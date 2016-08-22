@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | Download videos using youtube-dl</title>
+        <title>Circuidipity | Command line tools: youtube-dl</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -23,14 +23,14 @@
 </div>
 
 <!-- article -->
-<h1>Download videos using youtube-dl</h1>
+<h1>Command line tools: youtube-dl</h1>
     <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 12 July 2015</p>
 <div id="article">
     <p><a class="reference external" href="http://rg3.github.io/youtube-dl/">youtube-dl</a> is a cool command-line program for downloading videos from a whole bunch of online video sites. It can also convert videos into audio files (courtesy of <tt class="docutils literal">ffmpeg</tt>).</p>
-<p>To install on Debian (<tt class="docutils literal">ffmpeg</tt> requires <a class="reference external" href="http://www.deb-multimedia.org/">deb-multimedia</a>) :</p>
+<p><strong>Install:</strong> On Debian (<tt class="docutils literal">ffmpeg</tt> requires <a class="reference external" href="http://www.deb-multimedia.org/">deb-multimedia</a>) ...</p>
 <div class="highlight"><pre>$ sudo apt-get install youtube-dl rtmpdump ffmpeg
 </pre></div>
-<p>Basic usage:</p>
+<p>Basic usage ...</p>
 <div class="highlight"><pre>$ youtube-dl https://www.youtube.com/watch?v<span class="o">=</span>SOMEiD
 </pre></div>
 <p>... will download the best quality copy (default) of the specified video hosted on YouTube to the current directory.</p>
@@ -48,7 +48,7 @@
 <dt><tt class="docutils literal"><span class="pre">--audio-quality</span> &quot;0&quot;</tt></dt>
 <dd>set a value between 0-9 (lower equals better) for VBR or assign a specific bitrate (default is 5|128K)</dd>
 </dl>
-<p>Reload the config and extract audio from an online video:</p>
+<p>Reload the config and extract audio from an online video ...</p>
 <div class="highlight"><pre>$ <span class="nb">source</span> ~/.bashrc
 $ youtube-dl-audio https://www.youtube.com/watch?v<span class="o">=</span>SOMEiD
 </pre></div>
@@ -58,9 +58,9 @@ $ youtube-dl-audio https://www.youtube.com/watch?v<span class="o">=</span>SOMEiD
 <p>Happy hacking!</p>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-tools.html">tools</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
 </p>
 </div>
 
