@@ -4,7 +4,7 @@ LPTHW Exercise 5: More Variables and Printing
 
 :date: 2015-11-14 17:25:00
 :slug: lpthw-e5
-:tags: lpthw, python, programming
+:tags: python, programming
 
 `Learn Python the Hard Way by Zed Shaw .: <http://learnpythonthehardway.org/book/>`_ The old way of printing format strings using **%** and the new way using **.format()**:
 

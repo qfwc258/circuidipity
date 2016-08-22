@@ -1,20 +1,21 @@
-================================
-Download videos using youtube-dl
-================================
+==============================
+Command line tools: youtube-dl
+==============================
 
+:date: 2014-04-01 01:10:00
 :slug: youtube-dl
-:tags: shell, programming, debian, linux
+:tags: shell, tools, linux, programming
 :modified: 2015-07-12 19:10:00
 
 `youtube-dl <http://rg3.github.io/youtube-dl/>`_ is a cool command-line program for downloading videos from a whole bunch of online video sites. It can also convert videos into audio files (courtesy of ``ffmpeg``).                                  
 
-To install on Debian (``ffmpeg`` requires `deb-multimedia <http://www.deb-multimedia.org/>`_) : 
+**Install:** On Debian (``ffmpeg`` requires `deb-multimedia <http://www.deb-multimedia.org/>`_) ...
                                                                                     
 .. code-block:: bash                                                                
                                                                                     
     $ sudo apt-get install youtube-dl rtmpdump ffmpeg
 
-Basic usage:
+Basic usage ...
 
 .. code-block:: bash
 
@@ -39,7 +40,7 @@ To enable audio extraction with a few desirable pre-configured options I create 
 ``--audio-quality "0"``
     set a value between 0-9 (lower equals better) for VBR or assign a specific bitrate (default is 5|128K)
 
-Reload the config and extract audio from an online video:
+Reload the config and extract audio from an online video ...
 
 .. code-block:: bash
 

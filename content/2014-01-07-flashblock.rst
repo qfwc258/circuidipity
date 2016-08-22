@@ -3,7 +3,7 @@ Vimeo and FlashBlock not playing nice on Iceweasel
 ==================================================
 
 :date: 2014-01-07 01:23:00
-:tags: mozilla, linux
+:tags: firefox, linux
 :slug: flashblock
 
 Vimeo videos actually are not playing *at all* ... neither embedded or on the site itself.

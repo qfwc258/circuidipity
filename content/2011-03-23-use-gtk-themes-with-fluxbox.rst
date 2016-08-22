@@ -3,7 +3,7 @@ Use GTK+ themes with Fluxbox
 ============================
 
 :date: 2011-03-23 01:23:00
-:tags: fluxbox, debian, linux
+:tags: fluxbox, linux
 :slug: use-gtk-themes-with-fluxbox
 
 Pick a theme for *Fluxbox* that has a compatible GTK+ counterpart and apply a clean consistent look across applications.

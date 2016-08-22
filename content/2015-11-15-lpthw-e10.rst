@@ -4,7 +4,7 @@ LPTHW Exercise 10: What Was That?
 
 :date: 2015-11-15 15:46:00
 :slug: lpthw-e10
-:tags: lpthw, python, programming
+:tags: python, programming
 
 `Learn Python the Hard Way by Zed Shaw .: <http://learnpythonthehardway.org/book/>`_ Playing with escape sequences:
 

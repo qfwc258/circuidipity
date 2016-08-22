@@ -4,7 +4,7 @@ LPTHW Exercise 8: Printing, Printing
 
 :date: 2015-11-15 14:45:00
 :slug: lpthw-e8
-:tags: lpthw, python, programming
+:tags: python, programming
 
 `Learn Python the Hard Way by Zed Shaw .: <http://learnpythonthehardway.org/book/>`_ More printing using the newer **format()**:
 

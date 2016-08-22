@@ -5,7 +5,7 @@ Learn Python the Hard Way with the DUDE
 :date: 2015-11-11 17:00:00
 :slug: lpthw-dude
 :template: article-project
-:tags: lpthw, python, programming
+:tags: python, programming
 :modified: 2016-06-05 14:28:00
 
 .. image:: images/lpthw-begin-1.png

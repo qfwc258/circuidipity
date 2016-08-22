@@ -5,7 +5,7 @@ Minimal to Morebuntu
 :date: 2016-05-01 11:58:00
 :slug: 20160501
 :template: article-project
-:tags: ubuntu, linux, i3
+:tags: ubuntu, linux, i3, shell, programming
 :modified: 2016-05-01 11:59:00
 
 .. image:: images/ubuntu-crane-300.png

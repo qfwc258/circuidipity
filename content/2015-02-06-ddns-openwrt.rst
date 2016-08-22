@@ -12,35 +12,33 @@ Dynamic DNS and OpenWRT
 Let's go!
 =========
 
-My Raspberry Pi server sits behind a router assigned a **dynamic IP address** by the ISP. If I want to connect to my Pi over the Internet from anywhere in the world I can use a **DDNS service** to create a domain name that automatically updates the IP address in the background whenever it changes and redirect traffic to the new location.
+My server sits behind a router assigned a **dynamic IP address** by the ISP. If I want to remotely connect to my server I can use a **DDNS service** to create a domain name that automatically updates the IP address whenever it changes and redirect traffic to the new location.
 
 0. Select a DDNS service
-========================
+------------------------
 
-I chose the free DDNS service `duckdns.org <http://www.duckdns.org/>`_ which permits the creation of up to 4 domains in the format ``your_subdomain_choice.duckdns.org``. Example: Create the subdomain ``mypihomeserver`` and later - after configuring the router - when entering ``mypihomeserver.duckdns.org`` I will be redirected to the current IP address assigned to my home network.
-
-Make note of `duckdns.org/install <http://www.duckdns.org/install.jsp>`_ (while logged in) for customized settings useful for configuring the router for DDNS.
+I use the free DDNS service `duckdns.org <http://www.duckdns.org/>`_ which permits the creation of up to 4 domains in the format ``subdomain_foo.duckdns.org``. Make note of `duckdns.org/install <http://www.duckdns.org/install.jsp>`_ (while logged in) for customized settings useful for configuring the router for DDNS.
 
 1. Configure OpenWRT for notification
-=====================================
+-------------------------------------
 
 Different routers configure DDNS differently but the goal is the same: the ability to notify the DDNS service whenever the IP address assigned by the ISP is modified. I am using an `OpenWRT-powered router <http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html>`_ and these are the steps to configure OpenWRT to use duckdns DDNS.
 
-Install DDNS packages:
+Login to the router and install DDNS packages ...
 
 .. code-block:: bash
 
     # opkg update                                                                         
     # opkg install luci-app-ddns ddns-scripts                                             
                                                                                     
-Use the customized settings from `duckdns.org/install <http://www.duckdns.org/install.jsp>`_ to configure ``/etc/config/ddns``:
+Use the customized settings from `duckdns.org/install <http://www.duckdns.org/install.jsp>`_ to configure ``/etc/config/ddns`` ...
       
 .. code-block:: bash
 
     config service          "duckdns"
     option enabled          "1"
     option service_name     "duckdns.org"
-    option domain           "mypihomeserver"
+    option domain           "subdomain_foo"
     option username         "NA"
     option password         "string_of_letters_and_digits"
     option ip_source        "network"
@@ -52,7 +50,7 @@ Use the customized settings from `duckdns.org/install <http://www.duckdns.org/in
     option update_url       "http://www.duckdns.org/update?domains=[DOMAIN]&token=[PASSWORD]&ip=[IP]"
     option use_syslog       "1"
 
-Start daemon:
+Start daemon ...
 
 .. code-block:: bash
 
@@ -61,7 +59,7 @@ Start daemon:
     # start_daemon_for_all_ddns_sections "wan"
     # exit
 
-Test:
+Test ...
 
 .. code-block:: bash
 
@@ -72,8 +70,8 @@ In OpenWRT's ``LuCI`` interface navigate to ``System->Startup`` and enable DDNS 
 Source: `OpenWRT DDNS client <http://wiki.openwrt.org/doc/howto/ddns.client>`_
 
 2. Port forwarding
-==================
+------------------
 
-`Port forwarding <http://www.circuidipity.com/20141006.html>`_ configures OpenWRT to forward traffic directed at one of the router's ports to the listening port on the Pi home server. Example: configure ``port:55555`` on router to connect to the `SSH server <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_ listening on ``port:22`` on Pi.
+`Port forwarding <http://www.circuidipity.com/20141006.html>`_ configures OpenWRT to forward traffic directed at one of the router's ports to the listening port on the server. **Example:** configure port ``56789`` on the router to connect `over SSH <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_ to port ``22`` on the home server.
 
 Happy hacking!

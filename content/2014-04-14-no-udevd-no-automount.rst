@@ -4,7 +4,7 @@ No udevd no auto-mount
 
 :date: 2014-04-14 01:23:00
 :slug: no-udevd-no-automount
-:tags: debian, linux
+:tags: linux
 
 Problem: Auto-mounting USB storage devices fails in ``thunar`` file manager.
 

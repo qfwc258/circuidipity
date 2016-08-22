@@ -4,7 +4,7 @@ LPTHW Exercise 3: Numbers and Math
 
 :date: 2015-11-14 16:04:00
 :slug: lpthw-e3
-:tags: lpthw, python, programming
+:tags: python, programming
 
 `Learn Python the Hard Way by Zed Shaw .: <http://learnpythonthehardway.org/book/>`_ Order of math operations is PEMDAS: *Parentheses Exponents Multiplication Division Addition Subtraction*.
 

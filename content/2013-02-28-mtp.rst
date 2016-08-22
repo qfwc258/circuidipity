@@ -3,7 +3,7 @@ Configure MTP in Linux
 ======================
 
 :date: 2013-02-28 01:23:00
-:tags: android, debian, linux
+:tags: android, linux
 :slug: mtp
 :modified: 2014-10-08 17:16:00
 

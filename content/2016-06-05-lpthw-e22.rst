@@ -4,7 +4,7 @@ LPTHW Exercise 22: What Do You Know So Far?
 
 :date: 2016-06-05 14:40:00
 :slug: lpthw-e22
-:tags: lpthw, python, programming
+:tags: python, programming
 
 `Learn Python the Hard Way by Zed Shaw .: <http://learnpythonthehardway.org/book/>`_ A review of my recent Python journey ...
 

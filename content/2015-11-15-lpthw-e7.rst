@@ -4,7 +4,7 @@ LPTHW Exercise 7: More Printing
 
 :date: 2015-11-15 14:38:00
 :slug: lpthw-e7
-:tags: lpthw, python, programming
+:tags: python, programming
 
 `Learn Python the Hard Way by Zed Shaw .: <http://learnpythonthehardway.org/book/>`_ I am practising printing in Python 2 using the **print()** and **format()** functions inherited from Python 3:
 

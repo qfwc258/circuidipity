@@ -4,7 +4,7 @@ LPTHW Exercise 2: Comments and Pound Characters
 
 :date: 2015-11-14 15:43:00
 :slug: lpthw-e2
-:tags: lpthw, python, programming
+:tags: python, programming
 
 `Learn Python the Hard Way by Zed Shaw .: <http://learnpythonthehardway.org/book/>`_ Using the pound character (#) to add comments or disable a line of code works the same in Python as in Bash shell scripting.
 

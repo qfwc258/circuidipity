@@ -4,7 +4,7 @@ Enable forward search in Bash history
 
 :date: 2014-05-10 01:23:00
 :slug: forward-search-bash
-:tags: shell, debian, linux
+:tags: shell, linux
 
 ``CTRL-R`` enables reverse incremental searches through the Bash shell history and ``CTRL-S`` runs forward searches. However ``CTRL-S`` collides with XON/XOFF flow control in my terminal and disables that feature in history.
 

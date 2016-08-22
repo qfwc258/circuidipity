@@ -3,7 +3,7 @@ BeagleBone Black: 'Say Hello to My Little LEDs'
 ===============================================
 
 :date: 2013-09-06 01:23:00
-:tags: beaglebone, electronics, angstrom, linux
+:tags: beaglebone, electronics, linux
 :slug: bbb-led
 
 Blinking an LED is the 'Hello World' of hardware. `BeagleBone Black's <http://www.circuidipity.com/getting-started-with-beaglebone-black.html>`_ LEDs can be controlled by the user and the device can be connected with external LEDs.

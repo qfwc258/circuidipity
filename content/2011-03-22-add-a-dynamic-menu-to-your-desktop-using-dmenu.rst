@@ -3,7 +3,7 @@ Add a dynamic menu to your desktop using dmenu
 ==============================================
 
 :date: 2011-03-22 01:23:00
-:tags: shell, programming, openbox, debian, linux
+:tags: shell, programming, openbox, linux
 :slug: add-a-dynamic-menu-to-your-desktop-using-dmenu
 :modified: 15 April 2014
 

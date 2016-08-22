@@ -4,7 +4,7 @@ Increase RAM available to Raspberry Pi CPU
 
 :date: 2014-07-09
 :slug: pi-memory-split
-:tags: raspberry pi, raspbian, linux, shell
+:tags: raspberry pi, linux
 
 **Raspberry Pi Model B Rev 2** has 512MB RAM that is partitioned between the CPU and the GPU. If the Pi is working as a headless server or the Pi desktop is being accessed via `VNC <http://www.circuidipity.com/pingparade5.html>`_ (which doesn't utilize the GPU) the **memory split** between the two processors can be altered to assign more memory to the CPU for running applications. 
 

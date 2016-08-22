@@ -4,7 +4,7 @@ LPTHW Exercise 4: Variables and Names
 
 :date: 2015-11-14 16:18:00
 :slug: lpthw-e4
-:tags: lpthw, python, programming
+:tags: python, programming
 
 `Learn Python the Hard Way by Zed Shaw .: <http://learnpythonthehardway.org/book/>`_ Equal sign assigns whatever is on the right to the variable on the left. Double equal signs perform a comparison. Same as shell scripting.
 

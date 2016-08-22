@@ -2,7 +2,7 @@
 Minimal Debian
 ==============
 
-:tags: debian, linux, luks, crypto, shell, programming
+:tags: debian, linux
 :slug: install-debian-wheezy-screenshot-tour
 :modified: 2014-08-06 01:23:00
 

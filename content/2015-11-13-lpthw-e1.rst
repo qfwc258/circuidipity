@@ -4,7 +4,7 @@ LPTHW Exercise 1: A Good First Program
 
 :date: 2015-11-13 21:49:00
 :slug: lpthw-e1
-:tags: lpthw, python, programming
+:tags: python, programming
 
 `Learn Python the Hard Way by Zed Shaw .: <http://learnpythonthehardway.org/book/>`_ The traditional *Hello World* program. **Print** in Python 2 encloses the statement in quotes while Python 3 adds brackets (and brackets format is backward-compatible to Python 2 but not vice-versa):
 

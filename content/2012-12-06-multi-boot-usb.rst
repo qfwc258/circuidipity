@@ -3,7 +3,7 @@ Transform a USB stick into a boot device packing multiple Linux distros
 =======================================================================
 
 :date: 2012-12-06 01:23:00
-:tags: grub, bootloader, linux, shell, programming
+:tags: shell, programming, linux
 :slug: multi-boot-usb
 :modified: 2015-02-26 20:53:00
 

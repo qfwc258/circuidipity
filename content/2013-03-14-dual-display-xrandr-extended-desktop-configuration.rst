@@ -3,7 +3,7 @@ DualDisplay - Extended desktop configuration
 ============================================
 
 :date: 2013-03-14 01:23:00
-:tags: graphics, shell, programming, linux
+:tags: shell, programming, linux
 :slug: dual-display-xrandr-extended-desktop-configuration
 
 Bash shell scripting strikes me as a good place for a Linux user to start to learn programming. Diving into the command line unlocks the power of Linux, makes it malleable to the user, and you pick up some history of how Unix came to be what it is today. Design ideas like *everything is a file* and *pipes* are incredibly useful for taking simple discrete components and stringing them together to build something new and awesome!
