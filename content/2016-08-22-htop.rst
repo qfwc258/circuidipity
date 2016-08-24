@@ -44,9 +44,6 @@ Menu function keys ``F1->F10`` may conflict with desktop environment settings. F
 ``\``
     filter processes by keyword
 
-``f``
-    something or other
-
 ``Shift`` + ``f``
     follow a process
 
