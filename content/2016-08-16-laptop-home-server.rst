@@ -5,6 +5,7 @@ New life for an old laptop as a Linux home server
 :date: 2016-08-16 21:47:00
 :tags: server, network, ubuntu, linux
 :slug: laptop-home-server
+:modified: 2016-08-29 15:15:00
 
 `Home Server Project #0.1 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ **Netbooks** ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old **Asus 900HA** netbook and put it to work as a `home server <http://www.circuidipity.com/tag-server.html>`_. Good times!
 
@@ -118,7 +119,50 @@ Mount the partition ...
 
 	$ mount /media/sda3_crypt
 
-4. Services
+4. Set power management on hard drive
+-------------------------------------
+
+Default settings on the netbook frequently park and spindown the drive, generating an audible "click" sound. Too aggressive power management can reduce lifespan of drive. I want "kinder, gentler" settings.
+                                                                                   
+Get information on drive ...                                                     
+                                                                                   
+.. code-block:: bash                                                               
+                                                                                   
+    $ sudo hdparm -I /dev/sda                                                      
+
+From ``man hdparm`` ...
+
+``-B``                                                                             
+    Get/set Advanced Power Management feature ... low value means aggressive power management and a high value means better performance. Possible settings range from values 1 through 127 (which permit spin-down), and values 128 through 254 (which do not permit spin-down) ... A value of 255 tells hdparm to disable APM altogether ...
+                                                                                   
+``-S``                                                                             
+    Put the drive into idle (low-power) mode, and also set the standby (spindown) timeout for the drive ... A value of zero means "timeouts are disabled" ...
+                                                                                   
+On the netbook I run ...                                                         
+                                                                                   
+.. code-block:: bash                                                               
+                                                                                   
+    $ sudo hdparm -B 254 -S 0 /dev/sda                                             
+                                                                                   
+    /dev/sda:                                                                        
+    setting Advanced Power Management level to 0xfe (254)                            
+    setting standby to 0 (off)                                                       
+    APM_level      = 254                                                           
+                                                                                   
+Create **udev rules** to setup at boot. Existing rule ...                         
+                                                                                   
+.. code-block:: bash                                                               
+                                                                                   
+    $ cat /lib/udev/rules.d/85-hdparm.rules                                          
+    ACTION=="add", SUBSYSTEM=="block", KERNEL=="[sh]d[a-z]", RUN+="/lib/udev/hdparm"
+                                                                                     
+... and make my own ``/etc/udev/rules.d/85-hdparm.rules`` (rules in ``/etc/udev/rules.d`` have the `highest priority <http://manpages.ubuntu.com/manpages/wily/man7/udev.7.html>`_) ...
+                                                                                   
+.. code-block:: bash                                                               
+                                                                                   
+    ACTION=="add", SUBSYSTEM=="block", KERNEL=="sda", RUN+="/sbin/hdparm -B 254 -S 0 /dev/sda"
+
+5. Services
 -----------
 
 What to do next? `Some of the services I use ... <http://www.circuidipity.com/raspberry-pi-home-server.html>`_
