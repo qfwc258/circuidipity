@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-08-22T17:09:00-04:00</updated><entry><title>Command line tools: htop</title><link href="http://www.circuidipity.com/htop.html" rel="alternate"></link><updated>2016-08-22T17:09:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-22:htop.html</id><summary type="html">&lt;img alt="htop" src="/images/screenshot/htop.png" style="width: 940px; height: 354px;" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-08-29T15:15:00-04:00</updated><entry><title>Command line tools: htop</title><link href="http://www.circuidipity.com/htop.html" rel="alternate"></link><updated>2016-08-22T17:09:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-22:htop.html</id><summary type="html">&lt;img alt="htop" src="/images/screenshot/htop.png" style="width: 940px; height: 354px;" /&gt;
 &lt;p&gt;The &lt;tt class="docutils literal"&gt;top&lt;/tt&gt; command displays Linux processes, and one of the first packages I install on a new Linux setup is the enhanced, interactive &lt;a class="reference external" href="http://hisham.hm/htop/"&gt;htop&lt;/a&gt; viewer. Good-looking and easy to use: see CPU and MEMORY usage at a glance, system load and uptime, kill wonky processes, and more!&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Install:&lt;/strong&gt; On Ubuntu/Debian ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install htop lsof
@@ -42,7 +42,7 @@
 &lt;/dl&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="shell"></category><category term="tools"></category><category term="linux"></category></entry><entry><title>New life for an old laptop as a Linux home server</title><link href="http://www.circuidipity.com/laptop-home-server.html" rel="alternate"></link><updated>2016-08-16T21:47:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-16:laptop-home-server.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #0.1 .:&lt;/a&gt; &lt;strong&gt;Netbooks&lt;/strong&gt; ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old &lt;strong&gt;Asus 900HA&lt;/strong&gt; netbook and put it to work as a &lt;a class="reference external" href="http://www.circuidipity.com/tag-server.html"&gt;home server&lt;/a&gt;. Good times!&lt;/p&gt;
+</summary><category term="shell"></category><category term="tools"></category><category term="linux"></category></entry><entry><title>New life for an old laptop as a Linux home server</title><link href="http://www.circuidipity.com/laptop-home-server.html" rel="alternate"></link><updated>2016-08-29T15:15:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-16:laptop-home-server.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #0.1 .:&lt;/a&gt; &lt;strong&gt;Netbooks&lt;/strong&gt; ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old &lt;strong&gt;Asus 900HA&lt;/strong&gt; netbook and put it to work as a &lt;a class="reference external" href="http://www.circuidipity.com/tag-server.html"&gt;home server&lt;/a&gt;. Good times!&lt;/p&gt;
 &lt;p&gt;Running your own home server is a fun learning experience and offers several advantages.&lt;/p&gt;
 &lt;p&gt;Second-hand laptops -  retired in favour of more current and powerful machines - can still deliver plenty of oomph for running a personal server. Frugal with power and come equipped with their own built-in UPS (battery)!&lt;/p&gt;
 &lt;p&gt;Install a stable, well-tested Linux distribution and provide services such as network printing and &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;storage (NAS)&lt;/a&gt;, perform &lt;a class="reference external" href="http://www.circuidipity.com/incremental-backups-rsnapshot.html"&gt;backups&lt;/a&gt;, host &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;web services&lt;/a&gt; and much more. Start with a minimal base configuration of &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt; and gain access to tens of thousands of packages ready to install.&lt;/p&gt;
@@ -105,8 +105,37 @@ iface enp3s0 inet static
 &lt;div class="highlight"&gt;&lt;pre&gt;$ mount /media/sda3_crypt
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;div class="section" id="set-power-management-on-hard-drive"&gt;
+&lt;h3&gt;4. Set power management on hard drive&lt;/h3&gt;
+&lt;p&gt;Default settings on the netbook frequently park and spindown the drive, generating an audible &amp;quot;click&amp;quot; sound. Too aggressive power management can reduce lifespan of drive. I want &amp;quot;kinder, gentler&amp;quot; settings.&lt;/p&gt;
+&lt;p&gt;Get information on drive ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo hdparm -I /dev/sda
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;From &lt;tt class="docutils literal"&gt;man hdparm&lt;/tt&gt; ...&lt;/p&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-B&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;Get/set Advanced Power Management feature ... low value means aggressive power management and a high value means better performance. Possible settings range from values 1 through 127 (which permit spin-down), and values 128 through 254 (which do not permit spin-down) ... A value of 255 tells hdparm to disable APM altogether ...&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-S&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;Put the drive into idle (low-power) mode, and also set the standby (spindown) timeout for the drive ... A value of zero means &amp;quot;timeouts are disabled&amp;quot; ...&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;On the netbook I run ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo hdparm -B &lt;span class="m"&gt;254&lt;/span&gt; -S &lt;span class="m"&gt;0&lt;/span&gt; /dev/sda
+
+/dev/sda:
+setting Advanced Power Management level to 0xfe &lt;span class="o"&gt;(&lt;/span&gt;254&lt;span class="o"&gt;)&lt;/span&gt;
+setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;off&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;APM_level&lt;/span&gt;      &lt;span class="o"&gt;=&lt;/span&gt; 254
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Create &lt;strong&gt;udev rules&lt;/strong&gt; to setup at boot. Existing rule ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ cat /lib/udev/rules.d/85-hdparm.rules
+&lt;span class="nv"&gt;ACTION&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;SUBSYSTEM&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;block&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;KERNEL&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;[sh]d[a-z]&amp;quot;&lt;/span&gt;, RUN+&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/lib/udev/hdparm&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and make my own &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/udev/rules.d/85-hdparm.rules&lt;/span&gt;&lt;/tt&gt; (rules in &lt;tt class="docutils literal"&gt;/etc/udev/rules.d&lt;/tt&gt; have the &lt;a class="reference external" href="http://manpages.ubuntu.com/manpages/wily/man7/udev.7.html"&gt;highest priority&lt;/a&gt;) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;ACTION&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;SUBSYSTEM&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;block&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;KERNEL&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sda&amp;quot;&lt;/span&gt;, RUN+&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/sbin/hdparm -B 254 -S 0 /dev/sda&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;div class="section" id="services"&gt;
-&lt;h3&gt;4. Services&lt;/h3&gt;
+&lt;h3&gt;5. Services&lt;/h3&gt;
 &lt;p&gt;What to do next? &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Some of the services I use ...&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;

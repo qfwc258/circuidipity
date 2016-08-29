@@ -24,6 +24,7 @@
 
 <!-- article -->
 <h1>New life for an old laptop as a Linux home server</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Monday 29 August 2016</p>
 <div id="article">
     <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Home Server Project #0.1 .:</a> <strong>Netbooks</strong> ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old <strong>Asus 900HA</strong> netbook and put it to work as a <a class="reference external" href="http://www.circuidipity.com/tag-server.html">home server</a>. Good times!</p>
 <p>Running your own home server is a fun learning experience and offers several advantages.</p>
@@ -88,8 +89,37 @@ iface enp3s0 inet static
 <div class="highlight"><pre>$ mount /media/sda3_crypt
 </pre></div>
 </div>
+<div class="section" id="set-power-management-on-hard-drive">
+<h3>4. Set power management on hard drive</h3>
+<p>Default settings on the netbook frequently park and spindown the drive, generating an audible &quot;click&quot; sound. Too aggressive power management can reduce lifespan of drive. I want &quot;kinder, gentler&quot; settings.</p>
+<p>Get information on drive ...</p>
+<div class="highlight"><pre>$ sudo hdparm -I /dev/sda
+</pre></div>
+<p>From <tt class="docutils literal">man hdparm</tt> ...</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">-B</span></tt></dt>
+<dd>Get/set Advanced Power Management feature ... low value means aggressive power management and a high value means better performance. Possible settings range from values 1 through 127 (which permit spin-down), and values 128 through 254 (which do not permit spin-down) ... A value of 255 tells hdparm to disable APM altogether ...</dd>
+<dt><tt class="docutils literal"><span class="pre">-S</span></tt></dt>
+<dd>Put the drive into idle (low-power) mode, and also set the standby (spindown) timeout for the drive ... A value of zero means &quot;timeouts are disabled&quot; ...</dd>
+</dl>
+<p>On the netbook I run ...</p>
+<div class="highlight"><pre>$ sudo hdparm -B <span class="m">254</span> -S <span class="m">0</span> /dev/sda
+
+/dev/sda:
+setting Advanced Power Management level to 0xfe <span class="o">(</span>254<span class="o">)</span>
+setting standby to <span class="m">0</span> <span class="o">(</span>off<span class="o">)</span>
+<span class="nv">APM_level</span>      <span class="o">=</span> 254
+</pre></div>
+<p>Create <strong>udev rules</strong> to setup at boot. Existing rule ...</p>
+<div class="highlight"><pre>$ cat /lib/udev/rules.d/85-hdparm.rules
+<span class="nv">ACTION</span><span class="o">==</span><span class="s2">&quot;add&quot;</span>, <span class="nv">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;block&quot;</span>, <span class="nv">KERNEL</span><span class="o">==</span><span class="s2">&quot;[sh]d[a-z]&quot;</span>, RUN+<span class="o">=</span><span class="s2">&quot;/lib/udev/hdparm&quot;</span>
+</pre></div>
+<p>... and make my own <tt class="docutils literal"><span class="pre">/etc/udev/rules.d/85-hdparm.rules</span></tt> (rules in <tt class="docutils literal">/etc/udev/rules.d</tt> have the <a class="reference external" href="http://manpages.ubuntu.com/manpages/wily/man7/udev.7.html">highest priority</a>) ...</p>
+<div class="highlight"><pre><span class="nv">ACTION</span><span class="o">==</span><span class="s2">&quot;add&quot;</span>, <span class="nv">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;block&quot;</span>, <span class="nv">KERNEL</span><span class="o">==</span><span class="s2">&quot;sda&quot;</span>, RUN+<span class="o">=</span><span class="s2">&quot;/sbin/hdparm -B 254 -S 0 /dev/sda&quot;</span>
+</pre></div>
+</div>
 <div class="section" id="services">
-<h3>4. Services</h3>
+<h3>5. Services</h3>
 <p>What to do next? <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Some of the services I use ...</a></p>
 <p>Happy hacking!</p>
 </div>
