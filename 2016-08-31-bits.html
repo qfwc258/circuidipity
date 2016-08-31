@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Bits of August</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Wednesday 31 August 2016</p>
+</div>
+
+<!-- article -->
+<h1>Bits of August</h1>
+<div id="article">
+    <p>Just the <strong>good stuff</strong> ...</p>
+<div class="section" id="restart-network-service-on-ubuntu">
+<h2>0. Restart network service on Ubuntu</h2>
+<p>Sometimes after wake-from-suspend the network connection is down and network-manager's wifi ap list fails to refresh.</p>
+<p><strong>FIX:</strong> Simple systemd way ...</p>
+<div class="highlight"><pre>$ sudo systemctl restart NetworkManager.service
+</pre></div>
+<p>If that doesn't work ... Try using <tt class="docutils literal">nmcli</tt> to stop and start network-manager directly ...</p>
+<!-- code-block::bash
+
+$ sudo nmcli networking off
+$ sudo nmcli networking on -->
+<p>Old-fashioned SysV init script method still works on 16.04 ...</p>
+<div class="highlight"><pre>$ sudo /etc/init.d/networking restart
+    ... or ...
+$ sudo /etc/init.d/network-manager restart
+</pre></div>
+<p>Last resort ...</p>
+<div class="highlight"><pre>$ sudo ifdown -a  <span class="c1"># -a brings down all interfaces</span>
+$ sudo ifup -a
+</pre></div>
+</div>
+<div class="section" id="microphone-problem-on-thinkpad-x230-running-ubuntu-16-04">
+<h2>1. Microphone problem on Thinkpad x230 running Ubuntu 16.04</h2>
+<p>No sound input and <strong>mic</strong> not detected.</p>
+<p><strong>FIX:</strong> Get capture device ...</p>
+<div class="highlight"><pre>$ arecord -l
+card 0: ... device 0: ...
+</pre></div>
+<p>... and edit <tt class="docutils literal">/etc/pulse/default.pa</tt> with <tt class="docutils literal"><span class="pre">load-module</span> <span class="pre">module-alsa-source</span> device=hw:0,0</tt>.</p>
+<p>Kill and respawn pulseaudio ...</p>
+<div class="highlight"><pre>$ pulseaudio -k
+</pre></div>
+</div>
+<div class="section" id="frozen-ssh-session">
+<h2>2. Frozen SSH session</h2>
+<p><strong>Fix:</strong> Use the key-combo <tt class="docutils literal">Shift + ` + .</tt> to drop the connection.</p>
+</div>
+<div class="section" id="local-install-of-python-modules-as-non-root-user">
+<h2>3. Local install of Python modules as non-root user</h2>
+<p>Example ...</p>
+<div class="highlight"><pre>$ pip3 install exifread
+</pre></div>
+<p>... libraries are installed to <tt class="docutils literal"><span class="pre">~/.local/lib/python-ver/</span></tt> and the bins are placed in <tt class="docutils literal"><span class="pre">~/.local/bin/</span></tt>.</p>
+<p>Add <tt class="docutils literal"><span class="pre">~/.local/bin</span></tt> to user's $PATH.</p>
+</div>
+<div class="section" id="set-power-management-on-hard-drive">
+<h2>4. Set power management on hard drive</h2>
+<p>Get information on drive ...</p>
+<div class="highlight"><pre>$ sudo hdparm -I /dev/sda
+</pre></div>
+<p>Too aggressive power management can reduce lifespan of drive due to frequent parking and spindown. For my <a class="reference external" href="http://www.circuidipity.com/laptop-home-server.html">netbook server</a> I want &quot;kinder, gentler&quot; settings.</p>
+<p>From <tt class="docutils literal">man hdparm</tt> ...</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">-B</span></tt></dt>
+<dd>Get/set Advanced Power Management feature ... low value means aggressive power management and a high value means better performance. Possible settings range from values 1 through 127 (which permit spin-down), and values 128 through 254 (which do not permit spin-down) ... A value of 255 tells hdparm to disable APM altogether ...</dd>
+<dt><tt class="docutils literal"><span class="pre">-S</span></tt></dt>
+<dd>Put the drive into idle (low-power) mode, and also set the standby (spindown) timeout for the drive ... A value of zero means &quot;timeouts are disabled&quot; ...</dd>
+</dl>
+<p>On the netbook I run ...</p>
+<div class="highlight"><pre>    $ sudo hdparm -B <span class="m">254</span> -S <span class="m">0</span> /dev/sda
+
+    /dev/sda:
+setting Advanced Power Management level to 0xfe <span class="o">(</span>254<span class="o">)</span>
+setting standby to <span class="m">0</span> <span class="o">(</span>off<span class="o">)</span>
+<span class="nv">APM_level</span>      <span class="o">=</span> 254
+</pre></div>
+<p>Create <strong>udev rules</strong> to setup at boot. Existing rule ...</p>
+<div class="highlight"><pre>$ cat /lib/udev/rules.d/85-hdparm.rules
+<span class="nv">ACTION</span><span class="o">==</span><span class="s2">&quot;add&quot;</span>, <span class="nv">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;block&quot;</span>, <span class="nv">KERNEL</span><span class="o">==</span><span class="s2">&quot;[sh]d[a-z]&quot;</span>, RUN+<span class="o">=</span><span class="s2">&quot;/lib/udev/hdparm&quot;</span>
+</pre></div>
+<p>... and make my own <tt class="docutils literal"><span class="pre">/etc/udev/rules.d/85-hdparm.rules</span></tt> (rules in <tt class="docutils literal">/etc/udev/rules.d</tt> have the <a class="reference external" href="http://manpages.ubuntu.com/manpages/wily/man7/udev.7.html">highest priority</a>) ...</p>
+<div class="highlight"><pre><span class="nv">ACTION</span><span class="o">==</span><span class="s2">&quot;add&quot;</span>, <span class="nv">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;block&quot;</span>, <span class="nv">KERNEL</span><span class="o">==</span><span class="s2">&quot;sda&quot;</span>, RUN+<span class="o">=</span><span class="s2">&quot;/sbin/hdparm -B 254 -S 0 /dev/sda&quot;</span>
+</pre></div>
+<p>Happy hacking!</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-bits.html">bits</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/htop.html">Command line tools: htop</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2016 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>

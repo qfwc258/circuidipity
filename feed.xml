@@ -1,5 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-08-29T15:15:00-04:00</updated><entry><title>Command line tools: htop</title><link href="http://www.circuidipity.com/htop.html" rel="alternate"></link><updated>2016-08-22T17:09:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-22:htop.html</id><summary type="html">&lt;img alt="htop" src="/images/screenshot/htop.png" style="width: 940px; height: 354px;" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-08-31T09:09:00-04:00</updated><entry><title>Bits of August</title><link href="http://www.circuidipity.com/2016-08-31-bits.html" rel="alternate"></link><updated>2016-08-31T09:09:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-31:2016-08-31-bits.html</id><summary type="html">&lt;p&gt;Just the &lt;strong&gt;good stuff&lt;/strong&gt; ...&lt;/p&gt;
+&lt;div class="section" id="restart-network-service-on-ubuntu"&gt;
+&lt;h2&gt;0. Restart network service on Ubuntu&lt;/h2&gt;
+&lt;p&gt;Sometimes after wake-from-suspend the network connection is down and network-manager's wifi ap list fails to refresh.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;FIX:&lt;/strong&gt; Simple systemd way ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo systemctl restart NetworkManager.service
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If that doesn't work ... Try using &lt;tt class="docutils literal"&gt;nmcli&lt;/tt&gt; to stop and start network-manager directly ...&lt;/p&gt;
+&lt;!-- code-block::bash
+
+$ sudo nmcli networking off
+$ sudo nmcli networking on --&gt;
+&lt;p&gt;Old-fashioned SysV init script method still works on 16.04 ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo /etc/init.d/networking restart
+    ... or ...
+$ sudo /etc/init.d/network-manager restart
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Last resort ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo ifdown -a  &lt;span class="c1"&gt;# -a brings down all interfaces&lt;/span&gt;
+$ sudo ifup -a
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="microphone-problem-on-thinkpad-x230-running-ubuntu-16-04"&gt;
+&lt;h2&gt;1. Microphone problem on Thinkpad x230 running Ubuntu 16.04&lt;/h2&gt;
+&lt;p&gt;No sound input and &lt;strong&gt;mic&lt;/strong&gt; not detected.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;FIX:&lt;/strong&gt; Get capture device ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ arecord -l
+card 0: ... device 0: ...
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and edit &lt;tt class="docutils literal"&gt;/etc/pulse/default.pa&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;load-module&lt;/span&gt; &lt;span class="pre"&gt;module-alsa-source&lt;/span&gt; device=hw:0,0&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Kill and respawn pulseaudio ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ pulseaudio -k
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="frozen-ssh-session"&gt;
+&lt;h2&gt;2. Frozen SSH session&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Use the key-combo &lt;tt class="docutils literal"&gt;Shift + ` + .&lt;/tt&gt; to drop the connection.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="local-install-of-python-modules-as-non-root-user"&gt;
+&lt;h2&gt;3. Local install of Python modules as non-root user&lt;/h2&gt;
+&lt;p&gt;Example ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ pip3 install exifread
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... libraries are installed to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/lib/python-ver/&lt;/span&gt;&lt;/tt&gt; and the bins are placed in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/bin/&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Add &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/bin&lt;/span&gt;&lt;/tt&gt; to user's $PATH.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="set-power-management-on-hard-drive"&gt;
+&lt;h2&gt;4. Set power management on hard drive&lt;/h2&gt;
+&lt;p&gt;Get information on drive ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo hdparm -I /dev/sda
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Too aggressive power management can reduce lifespan of drive due to frequent parking and spindown. For my &lt;a class="reference external" href="http://www.circuidipity.com/laptop-home-server.html"&gt;netbook server&lt;/a&gt; I want &amp;quot;kinder, gentler&amp;quot; settings.&lt;/p&gt;
+&lt;p&gt;From &lt;tt class="docutils literal"&gt;man hdparm&lt;/tt&gt; ...&lt;/p&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-B&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;Get/set Advanced Power Management feature ... low value means aggressive power management and a high value means better performance. Possible settings range from values 1 through 127 (which permit spin-down), and values 128 through 254 (which do not permit spin-down) ... A value of 255 tells hdparm to disable APM altogether ...&lt;/dd&gt;
+&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-S&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
+&lt;dd&gt;Put the drive into idle (low-power) mode, and also set the standby (spindown) timeout for the drive ... A value of zero means &amp;quot;timeouts are disabled&amp;quot; ...&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;On the netbook I run ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    $ sudo hdparm -B &lt;span class="m"&gt;254&lt;/span&gt; -S &lt;span class="m"&gt;0&lt;/span&gt; /dev/sda
+
+    /dev/sda:
+setting Advanced Power Management level to 0xfe &lt;span class="o"&gt;(&lt;/span&gt;254&lt;span class="o"&gt;)&lt;/span&gt;
+setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;off&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;APM_level&lt;/span&gt;      &lt;span class="o"&gt;=&lt;/span&gt; 254
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Create &lt;strong&gt;udev rules&lt;/strong&gt; to setup at boot. Existing rule ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ cat /lib/udev/rules.d/85-hdparm.rules
+&lt;span class="nv"&gt;ACTION&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;SUBSYSTEM&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;block&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;KERNEL&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;[sh]d[a-z]&amp;quot;&lt;/span&gt;, RUN+&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/lib/udev/hdparm&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and make my own &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/udev/rules.d/85-hdparm.rules&lt;/span&gt;&lt;/tt&gt; (rules in &lt;tt class="docutils literal"&gt;/etc/udev/rules.d&lt;/tt&gt; have the &lt;a class="reference external" href="http://manpages.ubuntu.com/manpages/wily/man7/udev.7.html"&gt;highest priority&lt;/a&gt;) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;ACTION&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;SUBSYSTEM&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;block&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;KERNEL&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sda&amp;quot;&lt;/span&gt;, RUN+&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/sbin/hdparm -B 254 -S 0 /dev/sda&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="bits"></category><category term="network"></category><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>Command line tools: htop</title><link href="http://www.circuidipity.com/htop.html" rel="alternate"></link><updated>2016-08-22T17:09:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-22:htop.html</id><summary type="html">&lt;img alt="htop" src="/images/screenshot/htop.png" style="width: 940px; height: 354px;" /&gt;
 &lt;p&gt;The &lt;tt class="docutils literal"&gt;top&lt;/tt&gt; command displays Linux processes, and one of the first packages I install on a new Linux setup is the enhanced, interactive &lt;a class="reference external" href="http://hisham.hm/htop/"&gt;htop&lt;/a&gt; viewer. Good-looking and easy to use: see CPU and MEMORY usage at a glance, system load and uptime, kill wonky processes, and more!&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Install:&lt;/strong&gt; On Ubuntu/Debian ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install htop lsof
@@ -1016,104 +1092,4 @@ Success
 &lt;div class="line"&gt;I shall USE my time.&lt;/div&gt;
 &lt;/div&gt;
 &lt;/blockquote&gt;
-</summary><category term="quotes"></category></entry><entry><title>Incremental backups</title><link href="http://www.circuidipity.com/incremental-backups-rsnapshot.html" rel="alternate"></link><updated>2016-02-12T23:13:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-12:incremental-backups-rsnapshot.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #3 .:&lt;/a&gt; Make incremental and automatic backups of a home folder using &lt;strong&gt;rsnapshot + cron&lt;/strong&gt; (and manual backups via &lt;strong&gt;public transit&lt;/strong&gt;).&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Backup strategy &lt;strong&gt;Version 0&lt;/strong&gt; for my home folder was &lt;strong&gt;rsync&lt;/strong&gt; + &lt;strong&gt;portable&lt;/strong&gt; + &lt;strong&gt;subway&lt;/strong&gt;. That is, I would simply make a periodic, manual sync of files using &lt;strong&gt;rsync&lt;/strong&gt; from my primary computer to a &lt;strong&gt;portable&lt;/strong&gt; encrypted &lt;a class="reference external" href="http://www.circuidipity.com/encrypt-external-drive.html"&gt;USB hard drive&lt;/a&gt;. Then ride the &lt;strong&gt;subway&lt;/strong&gt; to a family/friend's place and swap drives (offsite backup).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Version 1&lt;/strong&gt; expanded to &lt;strong&gt;cron&lt;/strong&gt; + &lt;strong&gt;rsync&lt;/strong&gt; + &lt;strong&gt;Raspberry Pi&lt;/strong&gt; + &lt;strong&gt;portable&lt;/strong&gt; + &lt;strong&gt;subway&lt;/strong&gt;. One of the advantages of setting up a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Raspberry Pi home server&lt;/a&gt; is providing a 24/7 uptime location to automatically (using &lt;strong&gt;cron&lt;/strong&gt;) mirror my laptop's home folder over the local area network (LAN).&lt;/p&gt;
-&lt;p&gt;These backups are &lt;strong&gt;snapshots&lt;/strong&gt; of home at a particular date. Pi server has a backup of 24 hours or less, the USB drive has another snapshot a few weeks old, the offsite another snapshot from a month ago. But there is no ordered progression of backups from Day 2 to Day 3, Week 4, Month 5, etc. One alternative is to every day stash an entire backup of my home folder but its a sub-optimal use of resources and would quickly fill a hard drive.&lt;/p&gt;
-&lt;p&gt;A much better solution is to use &lt;a class="reference external" href="http://rsnapshot.org/"&gt;rsnapshot&lt;/a&gt;  to make &lt;strong&gt;incremental backups&lt;/strong&gt; and my backup strategy &lt;strong&gt;Version 2&lt;/strong&gt; now incorporates:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;strong&gt;cron&lt;/strong&gt; + &lt;strong&gt;rsnapshot&lt;/strong&gt; + &lt;strong&gt;cron&lt;/strong&gt; + &lt;strong&gt;rsync&lt;/strong&gt; + &lt;strong&gt;Raspberry Pi&lt;/strong&gt; + &lt;strong&gt;portable&lt;/strong&gt; + &lt;strong&gt;subway&lt;/strong&gt;;&lt;/li&gt;
-&lt;li&gt;nightly a cron job runs &lt;tt class="docutils literal"&gt;rsnapshot&lt;/tt&gt; to sync &lt;tt class="docutils literal"&gt;/home/&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;/etc/&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;/my/backup/location/daily.0/&lt;/tt&gt;;&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;daily.0&lt;/tt&gt; increments to &lt;tt class="docutils literal"&gt;daily.1&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;daily.1&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;daily.2&lt;/tt&gt;, etc. (retention set to 7 days)&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--hard-links&lt;/span&gt;&lt;/tt&gt; is how &lt;tt class="docutils literal"&gt;rsnapshot&lt;/tt&gt; performs its minimal-storage-magic... if a file remains unchanged in the next backup a hard link is created so subsequent backups only contain modified files and links;&lt;/li&gt;
-&lt;li&gt;in the wee morning hours another cron job syncs &lt;tt class="docutils literal"&gt;/my/backup/location/&lt;/tt&gt; to Pi server;&lt;/li&gt;
-&lt;li&gt;every Saturday &lt;tt class="docutils literal"&gt;daily.6&lt;/tt&gt; rotates to &lt;tt class="docutils literal"&gt;weekly.0&lt;/tt&gt; (and &lt;tt class="docutils literal"&gt;weekly.0&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;weekly.1&lt;/tt&gt; ... with 4 week retention);&lt;/li&gt;
-&lt;li&gt;on the 1st of the month &lt;tt class="docutils literal"&gt;weekly.3&lt;/tt&gt; rotates to &lt;tt class="docutils literal"&gt;month.0&lt;/tt&gt; (12 month retention);&lt;/li&gt;
-&lt;li&gt;every week or so I sync &lt;tt class="docutils literal"&gt;/my/backup/location/&lt;/tt&gt; to the USB drive;&lt;/li&gt;
-&lt;li&gt;every month or so I ride the subway to offsite storage and swap drives&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="section" id="id1"&gt;
-&lt;h3&gt;0. Rsnapshot&lt;/h3&gt;
-&lt;p&gt;Install &lt;tt class="docutils literal"&gt;rsnapshot&lt;/tt&gt;, make a directory to store backups, and make a copy of the default config file:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt-get install rsnapshot
-$ mkdir /my/backup/location
-$ sudo cp /etc/rsnapshot.conf /etc/rsnapshot.conf.default
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/rsnapshot.conf&lt;/tt&gt; (important to separate fields with &lt;strong&gt;TABS&lt;/strong&gt; not spaces). Example of a few tweaks:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;snapshot_root   /my/backup/location
-
-cmd_cp          /bin/cp
-cmd_rm          /bin/rm
-cmd_rsync       /usr/bin/rsync
-cmd_du          /usr/bin/du
-cmd_rsnapshot_diff      /usr/bin/rsnapshot-diff
-
-retain  daily   7
-retain  weekly  4
-retain  monthly 12
-
-exclude_file    /home/USER/.rsyncExclude  &lt;span class="c1"&gt;# ...and create this file with list of things to exclude from backup&lt;/span&gt;
-
-link_dest       1
-
-sync_first      &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="c1"&gt;# allows better recovery in the event that rsnapshot is interrupted (see: ``man rsnapshot``)&lt;/span&gt;
-
-&lt;span class="c1"&gt;# LOCALHOST&lt;/span&gt;
-backup  /home/          localhost/
-backup  /etc/           localhost/
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Check config syntax and run backup test:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo rsnapshot configtest
-$ sudo rsnapshot -t sync
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If everything checks out OK go ahead and run:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo rsnapshot sync &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo rsnapshot daily &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo rsnapshot du
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Automate backups by modifying the sample cron file provided in &lt;tt class="docutils literal"&gt;/etc/cron.d/rsnapshot&lt;/tt&gt; and running jobs as root. Example config:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# m h  dom mon dow   command&lt;/span&gt;
-&lt;span class="m"&gt;50&lt;/span&gt; &lt;span class="m"&gt;23&lt;/span&gt; * * *     root    /usr/bin/rsnapshot sync &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; /usr/bin/rsnapshot daily
-&lt;span class="m"&gt;40&lt;/span&gt; &lt;span class="m"&gt;22&lt;/span&gt; * * &lt;span class="m"&gt;6&lt;/span&gt;     root    /usr/bin/rsnapshot weekly
-&lt;span class="m"&gt;30&lt;/span&gt; &lt;span class="m"&gt;21&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; * *     root    /usr/bin/rsnapshot monthly
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="backup-the-backup"&gt;
-&lt;h3&gt;1. Backup the backup&lt;/h3&gt;
-&lt;p&gt;Rsnapshot operates as a &lt;strong&gt;pull&lt;/strong&gt; program: it pulls in backups from local and remote devices. Instead of juggling access permissions to allow the rsnapshot server to talk with other devices I decided to limit &lt;tt class="docutils literal"&gt;rsnapshot&lt;/tt&gt; to making backups on &lt;tt class="docutils literal"&gt;localhost&lt;/tt&gt; and use &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;my already-configured SSH key setup&lt;/a&gt; to &lt;strong&gt;push&lt;/strong&gt; a snapshot of the backup to my Raspberry Pi for remote storage.&lt;/p&gt;
-&lt;div class="section" id="on-the-pi"&gt;
-&lt;h4&gt;1.1 On the Pi&lt;/h4&gt;
-&lt;p&gt;Create a directory to store the backup:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ mkdir /path/to/backup
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="on-localhost"&gt;
-&lt;h4&gt;1.2 On localhost&lt;/h4&gt;
-&lt;p&gt;Set the ip address and hostname of the Pi server in &lt;tt class="docutils literal"&gt;/etc/hosts&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;192.168.1.88    raspberry.server
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Test synching &lt;tt class="docutils literal"&gt;/my/backup/location/&lt;/tt&gt; on &lt;tt class="docutils literal"&gt;localhost&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;raspberry.server:/path/to/backup/&lt;/span&gt;&lt;/tt&gt; with the &lt;tt class="docutils literal"&gt;rsync &lt;span class="pre"&gt;--dry-run&lt;/span&gt;&lt;/tt&gt; option (I exclude &lt;tt class="docutils literal"&gt;/etc/&lt;/tt&gt; from the backup):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;rsync --dry-run --archive --hard-links --numeric-ids --delete --exclude&lt;span class="o"&gt;=&lt;/span&gt;etc/ --verbose /my/backup/location/ raspberry.server:/path/to/backup/
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If everything checks out OK drop &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--dry-run&lt;/span&gt;&lt;/tt&gt; and re-run the command to make a proper backup.&lt;/p&gt;
-&lt;p&gt;I use &lt;tt class="docutils literal"&gt;keychain&lt;/tt&gt; to manage &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;SSH keys for password-less logins to the Pi&lt;/a&gt;. Create a &lt;tt class="docutils literal"&gt;backupSnap.sh&lt;/tt&gt; shell script and place in &lt;tt class="docutils literal"&gt;~/bin&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
-. &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;HOME&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/.keychain/&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;HOSTNAME&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;-sh
-rsync --archive --hard-links --numeric-ids --delete --exclude&lt;span class="o"&gt;=&lt;/span&gt;etc/ /my/backup/location/ &lt;span class="nv"&gt;$1&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Automate the backups by creating a cron job (example that runs daily at 04:50):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# m h  dom mon dow   command&lt;/span&gt;
-&lt;span class="m"&gt;50&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; * * *  /home/USERNAME/bin/backupSnap.sh raspberry.server:/path/to/backup/
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="external-drive-and-offsite-storage"&gt;
-&lt;h3&gt;2. External drive and offsite storage&lt;/h3&gt;
-&lt;p&gt;I connect my USB drive and sync the backup to the device:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ /home/USERNAME/bin/backupSnap.sh /media/USB/path/to/backup/
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and take my hard drive for &lt;a class="reference external" href="http://ttc.ca/Routes/General_Information/Maps/index.jsp"&gt;a ride on the subway&lt;/a&gt; to say hello to my offsite storage!&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</summary><category term="server"></category><category term="network"></category><category term="linux"></category></entry></feed>
+</summary><category term="quotes"></category></entry></feed>
