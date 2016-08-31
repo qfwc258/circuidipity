@@ -1,0 +1,125 @@
+==============
+Bits of August
+==============
+
+:date: 2016-08-31 09:09:00
+:slug: 2016-08-31-bits
+:tags: bits, network, ubuntu, linux
+
+Just the **good stuff** ...
+
+0. Restart network service on Ubuntu                                       
+====================================
+
+Sometimes after wake-from-suspend the network connection is down and network-manager's wifi ap list fails to refresh.
+                                                                                
+**FIX:** Simple systemd way ...                                                   
+                                                                                
+.. code-block:: bash                                                            
+                                                                                
+    $ sudo systemctl restart NetworkManager.service                             
+                                                                                
+If that doesn't work ... Try using ``nmcli`` to stop and start network-manager directly ...
+                                                                                
+.. code-block::bash                                                             
+                                                                                
+    $ sudo nmcli networking off                                                 
+    $ sudo nmcli networking on                                                  
+                                                                                
+Old-fashioned SysV init script method still works on 16.04 ...                
+                                                                                
+.. code-block:: bash                                                            
+                                                                                
+    $ sudo /etc/init.d/networking restart                                       
+        ... or ...                                                              
+    $ sudo /etc/init.d/network-manager restart                                  
+                                                                                
+Last resort ...                                             
+                                                                                
+.. code-block:: bash                                                            
+                                                                                
+    $ sudo ifdown -a  # -a brings down all interfaces                           
+    $ sudo ifup -a
+
+1. Microphone problem on Thinkpad x230 running Ubuntu 16.04
+===========================================================
+
+No sound input and **mic** not detected.
+
+**FIX:** Get capture device ...                                                          
+
+.. code-block:: bash
+
+	$ arecord -l                                                                         
+	card 0: ... device 0: ...                                                            
+                                                                                     
+... and edit ``/etc/pulse/default.pa`` with ``load-module module-alsa-source device=hw:0,0``.
+
+Kill and respawn pulseaudio ...
+
+.. code-block:: bash
+                                                        
+	$ pulseaudio -k
+
+2. Frozen SSH session
+=====================
+
+**Fix:** Use the key-combo ``Shift + ` + .`` to drop the connection.
+
+3. Local install of Python modules as non-root user
+===================================================
+                                                                                
+Example ...                                                                
+                                                                                
+.. code-block:: bash                                                            
+                                                                                
+    $ pip3 install exifread                                                     
+                                                                                
+... libraries are installed to ``~/.local/lib/python-ver/`` and the bins are placed in ``~/.local/bin/``.
+                                                                                
+Add ``~/.local/bin`` to user's $PATH.
+
+4. Set power management on hard drive
+=====================================
+
+Get information on drive ...
+
+.. code-block:: bash
+
+    $ sudo hdparm -I /dev/sda
+
+Too aggressive power management can reduce lifespan of drive due to frequent parking and spindown. For my `netbook server <http://www.circuidipity.com/laptop-home-server.html>`_ I want "kinder, gentler" settings.
+
+From ``man hdparm`` ... 
+
+``-B``
+	Get/set Advanced Power Management feature ... low value means aggressive power management and a high value means better performance. Possible settings range from values 1 through 127 (which permit spin-down), and values 128 through 254 (which do not permit spin-down) ... A value of 255 tells hdparm to disable APM altogether ...
+
+``-S``
+	Put the drive into idle (low-power) mode, and also set the standby (spindown) timeout for the drive ... A value of zero means "timeouts are disabled" ...
+
+On the netbook I run ...
+
+.. code-block:: bash
+
+	$ sudo hdparm -B 254 -S 0 /dev/sda
+
+	/dev/sda:                                                                        
+    setting Advanced Power Management level to 0xfe (254)                            
+    setting standby to 0 (off)                                                       
+    APM_level      = 254
+
+Create **udev rules** to setup at boot. Existing rule ...
+
+.. code-block:: bash
+                           
+    $ cat /lib/udev/rules.d/85-hdparm.rules                                          
+    ACTION=="add", SUBSYSTEM=="block", KERNEL=="[sh]d[a-z]", RUN+="/lib/udev/hdparm"
+                                                                                     
+... and make my own ``/etc/udev/rules.d/85-hdparm.rules`` (rules in ``/etc/udev/rules.d`` have the `highest priority <http://manpages.ubuntu.com/manpages/wily/man7/udev.7.html>`_) ...
+
+.. code-block:: bash
+
+	ACTION=="add", SUBSYSTEM=="block", KERNEL=="sda", RUN+="/sbin/hdparm -B 254 -S 0 /dev/sda"
+
+Happy hacking!
