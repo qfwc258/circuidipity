@@ -20,7 +20,7 @@ Privacy may be important to you. Hosting your own server running your own servic
 Let's go!
 =========
 
-**Hardware:** Asus 900HA netbook with 10" display, 1GB RAM, a 500GB hard drive (very easy replacement of original drive - just unscrew the netbook's bottom panel), built-in ethernet/wifi, webcam, and a host of ports (3xUSB2, VGA, sound, SD card slot). Neat and compact device!
+**Hardware:** Asus 900HA netbook with 9" display, 1GB RAM, a 500GB hard drive (very easy replacement of original drive - just unscrew the netbook's bottom panel), built-in ethernet/wifi, webcam, and a host of ports (3xUSB2, VGA, sound, SD card slot). Neat and compact device!
 
 0. Install Ubuntu
 -----------------
