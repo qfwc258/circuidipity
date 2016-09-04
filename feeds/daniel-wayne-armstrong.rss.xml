@@ -125,7 +125,7 @@ setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&
 &lt;p&gt;Privacy may be important to you. Hosting your own server running your own services gives more control over your data.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Hardware:&lt;/strong&gt; Asus 900HA netbook with 10&amp;quot; display, 1GB RAM, a 500GB hard drive (very easy replacement of original drive - just unscrew the netbook's bottom panel), built-in ethernet/wifi, webcam, and a host of ports (3xUSB2, VGA, sound, SD card slot). Neat and compact device!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hardware:&lt;/strong&gt; Asus 900HA netbook with 9&amp;quot; display, 1GB RAM, a 500GB hard drive (very easy replacement of original drive - just unscrew the netbook's bottom panel), built-in ethernet/wifi, webcam, and a host of ports (3xUSB2, VGA, sound, SD card slot). Neat and compact device!&lt;/p&gt;
 &lt;div class="section" id="install-ubuntu"&gt;
 &lt;h3&gt;0. Install Ubuntu&lt;/h3&gt;
 &lt;p&gt;My &lt;a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html"&gt;visual screenshot tour&lt;/a&gt; of installing Ubuntu 16.04 - a &lt;a class="reference external" href="https://wiki.ubuntu.com/Releases"&gt;Long Term Support (LTS)&lt;/a&gt; release. Ubuntu's &lt;strong&gt;minimal install image&lt;/strong&gt; (32bit for the netbook) makes it easy to create a console-only base configuration that can be later customized for various tasks.&lt;/p&gt;
