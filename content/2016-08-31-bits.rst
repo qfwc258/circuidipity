@@ -64,7 +64,7 @@ Kill and respawn pulseaudio ...
 2. Frozen SSH session
 =====================
 
-**Fix:** Use the key-combo ``Shift + ` + .`` to drop the connection.
+**Fix:** Use the key-combo **Enter, Shift + `, .** [Enter, Tilde, Period]  to drop the connection.
 
 3. Local install of Python modules as non-root user
 ===================================================
