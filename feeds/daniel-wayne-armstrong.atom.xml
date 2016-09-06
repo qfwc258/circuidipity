@@ -1,5 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-08-31T09:09:00-04:00</updated><entry><title>Bits of August</title><link href="http://www.circuidipity.com/2016-08-31-bits.html" rel="alternate"></link><updated>2016-08-31T09:09:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-31:2016-08-31-bits.html</id><summary type="html">&lt;p&gt;Just the &lt;strong&gt;good stuff&lt;/strong&gt; ...&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-09-05T19:24:00-04:00</updated><entry><title>Search for a book using Python and Firefox</title><link href="http://www.circuidipity.com/booktab.html" rel="alternate"></link><updated>2016-09-05T19:24:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-09-05:booktab.html</id><summary type="html">&lt;p&gt;Get book information from command line arguments or clipboard, open a web browser, and search on Amazon and the &lt;a class="reference external" href="http://torontopubliclibrary.ca/"&gt;Toronto Public Library (TPL)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;When I read something interesting online about a book or author I start to dig deeper by checking out details on Amazon and availability at my local library. Is it possible that Python can improve on this search flow? Why yes it can!&lt;/p&gt;
+&lt;p&gt;I discovered two new Python modules and one new concept:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://docs.python.org/2/library/webbrowser.html"&gt;webbrowser&lt;/a&gt; for opening tabs and URLs in a webbrowser;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://pypi.python.org/pypi/pyperclip"&gt;pyperclip&lt;/a&gt; to retrieve text from a Linux clipboard;&lt;/li&gt;
+&lt;li&gt;a gentle introduction to object-oriented programming by refactoring code and creating &lt;strong&gt;class objects&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Step 0:&lt;/strong&gt; On Ubuntu/Debian for Python3, install ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install python3-pyperclip xclip
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Step 1:&lt;/strong&gt; Create a Python module [&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bernersLee.py"&gt;source&lt;/a&gt;] that opens new tabs and URLs in Firefox ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;import webbrowser, pyperclip
+
+class Browser&lt;span class="o"&gt;()&lt;/span&gt;:
+    &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;Super browser powers&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    def __init__&lt;span class="o"&gt;(&lt;/span&gt;self&lt;span class="o"&gt;)&lt;/span&gt;:
+        &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;Set a default browser.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        self.browser &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;firefox&amp;#39;&lt;/span&gt;
+
+    def open_search_tab&lt;span class="o"&gt;(&lt;/span&gt;self, web_address&lt;span class="o"&gt;)&lt;/span&gt;:
+        &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;        Open browser tab for address retrieved from command line arguments&lt;/span&gt;
+&lt;span class="s2"&gt;        or clipboard&lt;/span&gt;
+&lt;span class="s2"&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; len&lt;span class="o"&gt;(&lt;/span&gt;sys.argv&lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; 1:
+            &lt;span class="c1"&gt;# Get search item from command line&lt;/span&gt;
+            &lt;span class="nv"&gt;search_item&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;.join&lt;span class="o"&gt;(&lt;/span&gt;sys.argv&lt;span class="o"&gt;[&lt;/span&gt;1:&lt;span class="o"&gt;])&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;:
+            &lt;span class="c1"&gt;# Get search item from clipboard&lt;/span&gt;
+            &lt;span class="nv"&gt;search_item&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; pyperclip.paste&lt;span class="o"&gt;()&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; self.browser in webbrowser._browsers:
+            &lt;span class="nv"&gt;www&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; webbrowser.get&lt;span class="o"&gt;(&lt;/span&gt;self.browser&lt;span class="o"&gt;)&lt;/span&gt;.open
+        &lt;span class="k"&gt;else&lt;/span&gt;:
+            &lt;span class="nv"&gt;www&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; webbrowser.open
+
+        www&lt;span class="o"&gt;(&lt;/span&gt;web_address + search_item&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Step 2:&lt;/strong&gt; Setup a script [&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bookTab.py"&gt;source&lt;/a&gt;] to call the module, open tabs in the browser, and run searches on Amazon.(com,ca) and the TPL ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="ch"&gt;#!/usr/bin/env python3&lt;/span&gt;
+from bernersLee import Browser
+
+def main&lt;span class="o"&gt;()&lt;/span&gt;:
+    &lt;span class="nv"&gt;library&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;https://www.torontopubliclibrary.ca/search.jsp?Ntt=&amp;quot;&lt;/span&gt;
+    &lt;span class="nv"&gt;amazonCa&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;https://www.amazon.ca/s/ref=nb_sb_noss_1?&amp;quot;&lt;/span&gt;
+    &lt;span class="nv"&gt;amazonCom&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;https://www.amazon.com/s/ref=nb_sb_noss_1?&amp;quot;&lt;/span&gt;
+    &lt;span class="nv"&gt;amzSearch&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;url=search-alias%3Dstripbooks&amp;amp;field-keywords=&amp;quot;&lt;/span&gt;
+
+    &lt;span class="nv"&gt;browser&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Browser&lt;span class="o"&gt;()&lt;/span&gt;
+    browser.open_search_tab&lt;span class="o"&gt;(&lt;/span&gt;library&lt;span class="o"&gt;)&lt;/span&gt;
+    browser.open_search_tab&lt;span class="o"&gt;(&lt;/span&gt;amazonCa + amzSearch&lt;span class="o"&gt;)&lt;/span&gt;
+    browser.open_search_tab&lt;span class="o"&gt;(&lt;/span&gt;amazonCom + amzSearch&lt;span class="o"&gt;)&lt;/span&gt;
+
+main&lt;span class="o"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Cut-and-paste text in the browser, launch &lt;em&gt;bookTab.py&lt;/em&gt; from the &lt;a class="reference external" href="https://davedavenport.github.io/rofi/"&gt;run menu&lt;/a&gt;, and all the tabs+searches open and go to work!&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+</summary><category term="firefox"></category><category term="python"></category><category term="programming"></category></entry><entry><title>Bits of August</title><link href="http://www.circuidipity.com/2016-08-31-bits.html" rel="alternate"></link><updated>2016-08-31T09:09:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-31:2016-08-31-bits.html</id><summary type="html">&lt;p&gt;Just the &lt;strong&gt;good stuff&lt;/strong&gt; ...&lt;/p&gt;
 &lt;div class="section" id="restart-network-service-on-ubuntu"&gt;
 &lt;h2&gt;0. Restart network service on Ubuntu&lt;/h2&gt;
 &lt;p&gt;Sometimes after wake-from-suspend the network connection is down and network-manager's wifi ap list fails to refresh.&lt;/p&gt;
@@ -1075,21 +1134,4 @@ Success
 &lt;p&gt;Two apps I like and use daily are &lt;a class="reference external" href="https://f-droid.org/repository/browse/?fdfilter=fbreader&amp;amp;fdid=org.geometerplus.zlibrary.ui.android"&gt;fbreader&lt;/a&gt; for ebooks and &lt;a class="reference external" href="https://f-droid.org/repository/browse/?fdfilter=podcast&amp;amp;fdid=de.danoeh.antennapod"&gt;AntennaPod&lt;/a&gt; for downloading and listening to podcasts.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="android"></category><category term="linux"></category></entry><entry><title>I would rather be ashes than dust</title><link href="http://www.circuidipity.com/rather-ashes-than-dust.html" rel="alternate"></link><updated>2015-08-13T15:12:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-13:rather-ashes-than-dust.html</id><summary type="html">&lt;img alt="Soyuz night launch" class="align-right" src="images/soyuz-at-night-2.png" /&gt;
-&lt;p&gt;&lt;strong&gt;Jack London (1876-1916):&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;div class="line-block"&gt;
-&lt;div class="line"&gt;I would rather be ashes than dust;&lt;/div&gt;
-&lt;div class="line"&gt;I would rather that my spark should&lt;/div&gt;
-&lt;div class="line"&gt;burn out in a brilliant blaze than it&lt;/div&gt;
-&lt;div class="line"&gt;should be stifled by dry-rot; I would&lt;/div&gt;
-&lt;div class="line"&gt;rather be in a superb meteor; every&lt;/div&gt;
-&lt;div class="line"&gt;atom of me in a magnificent glow&lt;/div&gt;
-&lt;div class="line"&gt;than in a sleepy and permanent&lt;/div&gt;
-&lt;div class="line"&gt;planet; the proper function of man is&lt;/div&gt;
-&lt;div class="line"&gt;to live, not to exist; I shall not waste&lt;/div&gt;
-&lt;div class="line"&gt;my days in trying to prolong them;&lt;/div&gt;
-&lt;div class="line"&gt;I shall USE my time.&lt;/div&gt;
-&lt;/div&gt;
-&lt;/blockquote&gt;
-</summary><category term="quotes"></category></entry></feed>
+</summary><category term="android"></category><category term="linux"></category></entry></feed>

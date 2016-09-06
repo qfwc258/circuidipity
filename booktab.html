@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Search for a book using Python and Firefox</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Monday 05 September 2016</p>
+</div>
+
+<!-- article -->
+<h1>Search for a book using Python and Firefox</h1>
+<div id="article">
+    <p>Get book information from command line arguments or clipboard, open a web browser, and search on Amazon and the <a class="reference external" href="http://torontopubliclibrary.ca/">Toronto Public Library (TPL)</a>.</p>
+<p>When I read something interesting online about a book or author I start to dig deeper by checking out details on Amazon and availability at my local library. Is it possible that Python can improve on this search flow? Why yes it can!</p>
+<p>I discovered two new Python modules and one new concept:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.python.org/2/library/webbrowser.html">webbrowser</a> for opening tabs and URLs in a webbrowser;</li>
+<li><a class="reference external" href="https://pypi.python.org/pypi/pyperclip">pyperclip</a> to retrieve text from a Linux clipboard;</li>
+<li>a gentle introduction to object-oriented programming by refactoring code and creating <strong>class objects</strong></li>
+</ul>
+<p><strong>Step 0:</strong> On Ubuntu/Debian for Python3, install ...</p>
+<div class="highlight"><pre>$ sudo apt install python3-pyperclip xclip
+</pre></div>
+<p><strong>Step 1:</strong> Create a Python module [<a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bernersLee.py">source</a>] that opens new tabs and URLs in Firefox ...</p>
+<div class="highlight"><pre>import webbrowser, pyperclip
+
+class Browser<span class="o">()</span>:
+    <span class="s2">&quot;&quot;&quot;Super browser powers&quot;&quot;&quot;</span>
+
+    def __init__<span class="o">(</span>self<span class="o">)</span>:
+        <span class="s2">&quot;&quot;&quot;Set a default browser.&quot;&quot;&quot;</span>
+        self.browser <span class="o">=</span> <span class="s1">&#39;firefox&#39;</span>
+
+    def open_search_tab<span class="o">(</span>self, web_address<span class="o">)</span>:
+        <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        Open browser tab for address retrieved from command line arguments</span>
+<span class="s2">        or clipboard</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> len<span class="o">(</span>sys.argv<span class="o">)</span> &gt; 1:
+            <span class="c1"># Get search item from command line</span>
+            <span class="nv">search_item</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span>.join<span class="o">(</span>sys.argv<span class="o">[</span>1:<span class="o">])</span>
+        <span class="k">else</span>:
+            <span class="c1"># Get search item from clipboard</span>
+            <span class="nv">search_item</span> <span class="o">=</span> pyperclip.paste<span class="o">()</span>
+
+        <span class="k">if</span> self.browser in webbrowser._browsers:
+            <span class="nv">www</span> <span class="o">=</span> webbrowser.get<span class="o">(</span>self.browser<span class="o">)</span>.open
+        <span class="k">else</span>:
+            <span class="nv">www</span> <span class="o">=</span> webbrowser.open
+
+        www<span class="o">(</span>web_address + search_item<span class="o">)</span>
+</pre></div>
+<p><strong>Step 2:</strong> Setup a script [<a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bookTab.py">source</a>] to call the module, open tabs in the browser, and run searches on Amazon.(com,ca) and the TPL ...</p>
+<div class="highlight"><pre><span class="ch">#!/usr/bin/env python3</span>
+from bernersLee import Browser
+
+def main<span class="o">()</span>:
+    <span class="nv">library</span> <span class="o">=</span> <span class="s2">&quot;https://www.torontopubliclibrary.ca/search.jsp?Ntt=&quot;</span>
+    <span class="nv">amazonCa</span> <span class="o">=</span> <span class="s2">&quot;https://www.amazon.ca/s/ref=nb_sb_noss_1?&quot;</span>
+    <span class="nv">amazonCom</span> <span class="o">=</span> <span class="s2">&quot;https://www.amazon.com/s/ref=nb_sb_noss_1?&quot;</span>
+    <span class="nv">amzSearch</span> <span class="o">=</span> <span class="s2">&quot;url=search-alias%3Dstripbooks&amp;field-keywords=&quot;</span>
+
+    <span class="nv">browser</span> <span class="o">=</span> Browser<span class="o">()</span>
+    browser.open_search_tab<span class="o">(</span>library<span class="o">)</span>
+    browser.open_search_tab<span class="o">(</span>amazonCa + amzSearch<span class="o">)</span>
+    browser.open_search_tab<span class="o">(</span>amazonCom + amzSearch<span class="o">)</span>
+
+main<span class="o">()</span>
+</pre></div>
+<p>Cut-and-paste text in the browser, launch <em>bookTab.py</em> from the <a class="reference external" href="https://davedavenport.github.io/rofi/">run menu</a>, and all the tabs+searches open and go to work!</p>
+<p>Happy hacking!</p>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-firefox.html">firefox</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-python.html">python</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/2016-08-31-bits.html">Bits of August</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2016 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>
