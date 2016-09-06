@@ -285,7 +285,7 @@ setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&
 &lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bernersLee.py"&gt;bernersLee.py&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;a set of classes to support my web hacks&lt;/dd&gt;
 &lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bookTab.py"&gt;bookTab.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;get book information from command line arguments or clipboard and open web browser and search Amazon and the Toronto Public Library (more: &lt;a class="reference external" href="http://www.circuidipity.com/booktab.html"&gt;&amp;quot;Search for a book using Python and Firefox&amp;quot;&lt;/a&gt;)&lt;/dd&gt;
+&lt;dd&gt;get book information from command line arguments or clipboard, open web browser, and search Amazon and the Toronto Public Library (more: &lt;a class="reference external" href="http://www.circuidipity.com/booktab.html"&gt;&amp;quot;Search for a book using Python and Firefox&amp;quot;&lt;/a&gt;)&lt;/dd&gt;
 &lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/collatz.py"&gt;collatz.py&lt;/a&gt;&lt;/dt&gt;
 &lt;dd&gt;explore the &lt;em&gt;Collatz sequence&lt;/em&gt;, sometimes called &amp;quot;the simplest impossible math problem&amp;quot;&lt;/dd&gt;
 &lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dateAndBook.py"&gt;dateAndBook.py&lt;/a&gt;&lt;/dt&gt;
