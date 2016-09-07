@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-09-05T21:45:00-04:00</updated><entry><title>Search for a book using Python and Firefox</title><link href="http://www.circuidipity.com/booktab.html" rel="alternate"></link><updated>2016-09-05T19:24:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-09-05:booktab.html</id><summary type="html">&lt;p&gt;Get book information from command line arguments or clipboard, open a web browser, and search on Amazon and the &lt;a class="reference external" href="http://torontopubliclibrary.ca/"&gt;Toronto Public Library (TPL)&lt;/a&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-09-07T15:17:00-04:00</updated><entry><title>Centauri Oak</title><link href="http://www.circuidipity.com/centauri-oak.html" rel="alternate"></link><updated>2016-09-07T15:17:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-09-07:centauri-oak.html</id><summary type="html">&lt;p&gt;One of my favourite blog's is &lt;strong&gt;Paul Gilster's&lt;/strong&gt; &lt;a class="reference external" href="http://www.centauri-dreams.org/"&gt;Centauri Dreams&lt;/a&gt;. The frequency and quality of posts is fantastic!&lt;/p&gt;
+&lt;p&gt;All the recent news about &lt;strong&gt;Proxima b&lt;/strong&gt; and the &lt;a class="reference external" href="https://breakthroughinitiatives.org/Initiative/3"&gt;Breakthrough Starshot&lt;/a&gt; project spurred me to start reading his earlier book by the same name that inspired the blog. I like this bit ...&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Even as a starship embodies our dreams, it also casts light on our history. Lord Collingwood (1748-1810) was Nelson's second in command at the battle of Trafalgar, taking command of the fleet when Nelson was mortally wounded. Collingwood knew that the British oak used in ships built during the Napoleonic wars had been planted during the reign of the Stuarts, some two hundred years earlier, and that it had been designed for future use in the Royal Navy. He would go on to encourage plantings of oak that would be ready for the Navy a hundred and fifty years after his death.&lt;/p&gt;
+&lt;p&gt;In an era of quickly fabricated materials, we forget our once deep reliance on the slow processes of nature, and the need to adapt to their rhythms. Interstellar flight demands perspectives as profoundly attuned to its goals as those of Collingwood's foresters, and a commitment to what Tennyson once called &amp;quot;the long result of time.&amp;quot; Alpha Centauri, or other dazzling, distant targets like Epsilon Eridani or Tau Ceti, may one day help us recalibrate our vision, while reminding us that &lt;em&gt;no worthwhile goal has ever been easy&lt;/em&gt; [emphasis added]. (p29-30)&lt;/p&gt;
+&lt;/blockquote&gt;
+</summary><category term="quotes"></category></entry><entry><title>Search for a book using Python and Firefox</title><link href="http://www.circuidipity.com/booktab.html" rel="alternate"></link><updated>2016-09-05T19:24:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-09-05:booktab.html</id><summary type="html">&lt;p&gt;Get book information from command line arguments or clipboard, open a web browser, and search on Amazon and the &lt;a class="reference external" href="http://torontopubliclibrary.ca/"&gt;Toronto Public Library (TPL)&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;When I read something interesting online about a book or author I start to dig deeper by checking out details on Amazon and availability at my local library. Is it possible that Python can improve on this search flow? Why yes it can!&lt;/p&gt;
 &lt;p&gt;I discovered two new Python modules and one new concept:&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -1045,93 +1051,4 @@ server &lt;span class="o"&gt;{&lt;/span&gt;
 &lt;p&gt;Note the first time navigating to the new HTTPS address the web browser warns &lt;em&gt;This Connection is Untrusted&lt;/em&gt; (which is to be expected since its a self-signed certificate vs CA verification).&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;p&gt;Sources: &lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-nginx-for-ubuntu-14-04"&gt;Create an SSL certificate on Nginx for Ubuntu&lt;/a&gt;; &lt;a class="reference external" href="https://serverfault.com/questions/67316/in-nginx-how-can-i-rewrite-all-http-requests-to-https-while-maintaining-sub-dom"&gt;Rewrite HTTP requests to HTTPS&lt;/a&gt;; &lt;a class="reference external" href="http://nginx.org/en/docs/http/server_names.html"&gt;Nginx server_names&lt;/a&gt;&lt;/p&gt;
-</summary><category term="server"></category><category term="network"></category><category term="linux"></category></entry><entry><title>Install CyanogenMod on Nexus 4</title><link href="http://www.circuidipity.com/install-cyanogenmod-nexus-4.html" rel="alternate"></link><updated>2015-08-21T12:26:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-19:install-cyanogenmod-nexus-4.html</id><summary type="html">&lt;p&gt;Replace stock Android with CyanogenMod on the Nexus 4 using Linux.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Thanks to a &lt;strong&gt;very generous friend&lt;/strong&gt; who upgraded to a new smartphone I now have her old Google Nexus 4. I have dabbled with alternative Android firmwares in the past, and was inspired to give CyaonogenMod a go on this phone after reading &lt;a class="reference external" href="https://lwn.net/Articles/602521/"&gt;Android without the mothership [LWN.net]&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="download"&gt;
-&lt;h2&gt;0. Download&lt;/h2&gt;
-&lt;p&gt;I install CyanogenMod from a host running Debian. Download &lt;tt class="docutils literal"&gt;adb&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;fastboot&lt;/tt&gt; install tools:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt-get install android-tools-adb android-tools-fastboot
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Nexus 4 device is code-named &lt;tt class="docutils literal"&gt;mako&lt;/tt&gt;. Download:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;a recovery image (TWRP) - &lt;a class="reference external" href="https://twrp.me/devices/lgnexus4.html"&gt;https://twrp.me/devices/lgnexus4.html&lt;/a&gt; (&lt;a class="reference external" href="https://dl.twrp.me/mako/"&gt;latest is 2.8.7.0&lt;/a&gt; as of 7/29)&lt;/li&gt;
-&lt;li&gt;the Cyanogenmod ROM nightly build &lt;a class="reference external" href="https://download.cyanogenmod.org/?device=mako&amp;amp;type="&gt;specific to this device&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="developer-options"&gt;
-&lt;h2&gt;1. Developer Options&lt;/h2&gt;
-&lt;p&gt;On the Nexus I enable developer options by navigating to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Settings-&amp;gt;About&lt;/span&gt; phone&lt;/tt&gt;, click to open and make +7 taps on &lt;strong&gt;Build&lt;/strong&gt; number. Displays &lt;tt class="docutils literal"&gt;You are now a developer&lt;/tt&gt;. Return to settings and &lt;tt class="docutils literal"&gt;Developer Options&lt;/tt&gt; is now visible. Click to open and activate &lt;tt class="docutils literal"&gt;USB debugging&lt;/tt&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="connect-device"&gt;
-&lt;h2&gt;2. Connect device&lt;/h2&gt;
-&lt;p&gt;Connect phone to host via USB:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ lsusb &lt;span class="p"&gt;|&lt;/span&gt; grep -i nexus
-Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 003: ID 18d1:4ee2 Google Inc. Nexus &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;debug&lt;span class="o"&gt;)&lt;/span&gt;
-$ adb devices -l
-* daemon not running. starting it now on port &lt;span class="m"&gt;5037&lt;/span&gt; *
-* daemon started successfully *
-List of devices attached
-&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;       offline usb:1-12
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Confirm &lt;tt class="docutils literal"&gt;Allow usb debugging&lt;/tt&gt; in pop-up on the phone. Re-run:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ adb devices -l
-List of devices attached
-&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;       device usb:1-12 product:occam model:Nexus_4 device:mako
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="unlock-bootloader"&gt;
-&lt;h2&gt;3. Unlock bootloader&lt;/h2&gt;
-&lt;p&gt;Boot the device into &lt;strong&gt;fastboot&lt;/strong&gt; mode:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ adb reboot bootloader
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Once device is in fastboot mode, verify host sees device and unlock:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ fastboot devices -l
-&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;       fastboot usb:1-12
-$ fastboot oem unlock
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="install-twrp"&gt;
-&lt;h2&gt;4. Install TWRP&lt;/h2&gt;
-&lt;p&gt;While in fastboot mode flash the TWRP recovery image:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ fastboot flash recovery twrp-VERSION-mako.img
-sending &lt;span class="s1"&gt;&amp;#39;recovery&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;9028&lt;/span&gt; KB&lt;span class="o"&gt;)&lt;/span&gt;...
-OKAY &lt;span class="o"&gt;[&lt;/span&gt;  0.287s&lt;span class="o"&gt;]&lt;/span&gt;
-writing &lt;span class="s1"&gt;&amp;#39;recovery&amp;#39;&lt;/span&gt;...
-OKAY &lt;span class="o"&gt;[&lt;/span&gt;  0.501s&lt;span class="o"&gt;]&lt;/span&gt;
-finished. total time: 0.787s
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reboot the bootloader:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ fastboot reboot-bootloader
-rebooting into bootloader...
-OKAY &lt;span class="o"&gt;[&lt;/span&gt;  0.001s&lt;span class="o"&gt;]&lt;/span&gt;
-finished. total time: 0.001s
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Use the device volume keys to navigate to &lt;strong&gt;Recovery&lt;/strong&gt; mode and power key to select. TWRP recovery starts. Tap &lt;strong&gt;Wipe&lt;/strong&gt; and swipe to start &lt;strong&gt;Factory Reset&lt;/strong&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="install-cyanogenmod"&gt;
-&lt;h2&gt;5. Install CyanogenMod&lt;/h2&gt;
-&lt;p&gt;Copy the CyanogenMod distribution zip file into device:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ adb push cm-12.1-VERSION-NIGHTLY-mako.zip /sdcard
-&lt;span class="m"&gt;3753&lt;/span&gt; KB/s &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;263171832&lt;/span&gt; bytes in 68.465s&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Return to TWRP main menu and tap &lt;strong&gt;Install&lt;/strong&gt;. Search in file system for the freshly-installed zip and tap to select. Tap checkbox Zip file signature verification and swipe to confirm flash. The message &lt;tt class="docutils literal"&gt;Successfull&lt;/tt&gt; should appear. Tap &lt;tt class="docutils literal"&gt;Reboot System&lt;/tt&gt; and device boots into CyanogenMod. Yes!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="f-droid"&gt;
-&lt;h2&gt;6. F-Droid&lt;/h2&gt;
-&lt;p&gt;As a replacement for the non-free Google Play Store app I use the &lt;a class="reference external" href="https://f-droid.org/about/"&gt;F-Droid&lt;/a&gt; free software app repository:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;on the phone navigate to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Settings-&amp;gt;Security-&amp;gt;Unknown&lt;/span&gt; sources&lt;/tt&gt; and tap to allow&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://f-droid.org/FDroid.apk"&gt;download the F-Droid app&lt;/a&gt; to host and install the &lt;tt class="docutils literal"&gt;apk&lt;/tt&gt; to phone using &lt;a class="reference external" href="https://developer.android.com/tools/help/adb.html#move"&gt;adb&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ adb install /path/to/FDroid.apk
-&lt;span class="m"&gt;4373&lt;/span&gt; KB/s &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3942326&lt;/span&gt; bytes in 0.880s&lt;span class="o"&gt;)&lt;/span&gt;
-        pkg: /data/local/tmp/FDroid.apk
-Success
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Two apps I like and use daily are &lt;a class="reference external" href="https://f-droid.org/repository/browse/?fdfilter=fbreader&amp;amp;fdid=org.geometerplus.zlibrary.ui.android"&gt;fbreader&lt;/a&gt; for ebooks and &lt;a class="reference external" href="https://f-droid.org/repository/browse/?fdfilter=podcast&amp;amp;fdid=de.danoeh.antennapod"&gt;AntennaPod&lt;/a&gt; for downloading and listening to podcasts.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="android"></category><category term="linux"></category></entry></feed>
+</summary><category term="server"></category><category term="network"></category><category term="linux"></category></entry></feed>
