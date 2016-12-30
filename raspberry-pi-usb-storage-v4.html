@@ -53,7 +53,7 @@
 <div class="section" id="partition">
 <h2>1. Partition</h2>
 <p>I connect the USB drive to Pi and confirm detection:</p>
-<div class="highlight"><pre><span class="c1"># lsblk</span>
+<div class="highlight"><pre><span></span><span class="c1"># lsblk</span>
 NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
 sda           8:0    <span class="m">0</span> 931.5G  <span class="m">0</span> disk
 └─sda1        8:1    <span class="m">0</span> 931.5G  <span class="m">0</span> part
@@ -68,7 +68,7 @@ mmcblk0     179:0    <span class="m">0</span>   7.6G  <span class="m">0</span> d
 <li>sda3 - remaining space - future encrypted <tt class="docutils literal">storage</tt></li>
 </ul>
 <p>Sample walk-through:</p>
-<div class="highlight"><pre><span class="c1"># fdisk /dev/sda</span>
+<div class="highlight"><pre><span></span><span class="c1"># fdisk /dev/sda</span>
 
 Welcome to fdisk <span class="o">(</span>util-linux 2.25.2<span class="o">)</span>.
 Changes will remain in memory only, <span class="k">until</span> you decide to write them.
@@ -149,23 +149,23 @@ Syncing disks.
 <div class="section" id="root">
 <h2>2. Root</h2>
 <p>Format the future <tt class="docutils literal">rootfs</tt> partition using filesystem <tt class="docutils literal">ext4</tt> and mount:</p>
-<div class="highlight"><pre><span class="c1"># mke2fs -t ext4 -L rootfs /dev/sda1</span>
+<div class="highlight"><pre><span></span><span class="c1"># mke2fs -t ext4 -L rootfs /dev/sda1</span>
 <span class="c1"># mount -t ext4 /dev/sda1 /mnt</span>
 </pre></div>
 <p>Modify options in <tt class="docutils literal">/boot/firmware/cmdline.txt</tt> to point the bootloader to <tt class="docutils literal">root</tt> filesystem on the USB device:</p>
-<div class="highlight"><pre>Original:
+<div class="highlight"><pre><span></span>Original:
 dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span> <span class="nv">console</span><span class="o">=</span>ttyAMA0,115200 <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">root</span><span class="o">=</span>/dev/mmcblk0p2 rootwait net.ifnames<span class="o">=</span>1
 
 Modified:
 dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span> <span class="nv">console</span><span class="o">=</span>ttyAMA0,115200 <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">root</span><span class="o">=</span>/dev/sda1 rootwait <span class="nv">rootdelay</span><span class="o">=</span>5
 </pre></div>
 <p>Comment out <tt class="docutils literal">mmcblk0p2</tt> and point to the new <tt class="docutils literal">root</tt> partition in <tt class="docutils literal">/etc/fstab</tt>:</p>
-<div class="highlight"><pre><span class="c1">#/dev/mmcblk0p2  / ext4 relatime,errors=remount-ro,discard 0 1</span>
+<div class="highlight"><pre><span></span><span class="c1">#/dev/mmcblk0p2  / ext4 relatime,errors=remount-ro,discard 0 1</span>
 /dev/sda1 / ext4 relatime,errors<span class="o">=</span>remount-ro <span class="m">0</span> 1
 /dev/mmcblk0p1 /boot/firmware vfat defaults <span class="m">0</span> 2
 </pre></div>
 <p>Use <tt class="docutils literal">rsync</tt> to duplicate contents of <tt class="docutils literal">root</tt> on the microSD <a class="footnote-reference" href="#id4" id="id2">[2]</a> to the <tt class="docutils literal">rootfs</tt> partition on the USB hard drive:</p>
-<div class="highlight"><pre><span class="c1"># apt-get -y install rsync</span>
+<div class="highlight"><pre><span></span><span class="c1"># apt-get -y install rsync</span>
 <span class="c1"># rsync --exclude=firmware/* -axv / /mnt</span>
 </pre></div>
 </div>
@@ -175,22 +175,22 @@ dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span> <span class="
 <div class="section" id="storage">
 <h3>3.1 Storage</h3>
 <p>Encrypt the partition, assign a passphrase, and format using filesystem <tt class="docutils literal">ext4</tt>:</p>
-<div class="highlight"><pre><span class="c1"># apt-get -y install cryptsetup</span>
+<div class="highlight"><pre><span></span><span class="c1"># apt-get -y install cryptsetup</span>
 <span class="c1"># cryptsetup luksFormat /dev/sda3</span>
 <span class="c1"># cryptsetup luksOpen /dev/sda3 sda3_crypt</span>
 <span class="c1"># mkfs.ext4 -L storage /dev/mapper/sda3_crypt</span>
 </pre></div>
 <p>Create a mountpoint and mount the partition:</p>
-<div class="highlight"><pre><span class="c1"># mkdir /media/sda3_crypt &amp;&amp; mount -t ext4 /dev/mapper/sda3_crypt /media/sda3_crypt/</span>
+<div class="highlight"><pre><span></span><span class="c1"># mkdir /media/sda3_crypt &amp;&amp; mount -t ext4 /dev/mapper/sda3_crypt /media/sda3_crypt/</span>
 </pre></div>
 <p>Unmounting:</p>
-<div class="highlight"><pre><span class="c1"># umount /media/sda3_crypt &amp;&amp; cryptsetup luksClose /dev/mapper/sda3_crypt</span>
+<div class="highlight"><pre><span></span><span class="c1"># umount /media/sda3_crypt &amp;&amp; cryptsetup luksClose /dev/mapper/sda3_crypt</span>
 </pre></div>
 </div>
 <div class="section" id="swap">
 <h3>3.2 Swap</h3>
 <p>Configure the secure wiping of the swap partition, auto-generation of a new random key, and swap activation at boot:</p>
-<div class="highlight"><pre><span class="c1"># echo &quot;sda2_crypt /dev/sda2 /dev/urandom cipher=aes-xts-plain64,size=256,swap&quot; &gt;&gt; /etc/crypttab</span>
+<div class="highlight"><pre><span></span><span class="c1"># echo &quot;sda2_crypt /dev/sda2 /dev/urandom cipher=aes-xts-plain64,size=256,swap&quot; &gt;&gt; /etc/crypttab</span>
 <span class="c1"># echo &quot;/dev/mapper/sda2_crypt none swap sw 0 0&quot; &gt;&gt; /etc/fstab</span>
 </pre></div>
 </div>
@@ -198,10 +198,10 @@ dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span> <span class="
 <div class="section" id="reboot">
 <h2>4. Reboot</h2>
 <p>Aaaand reboot!</p>
-<div class="highlight"><pre><span class="c1"># reboot</span>
+<div class="highlight"><pre><span></span><span class="c1"># reboot</span>
 </pre></div>
 <p>Log in and check the new filesystem layout:</p>
-<div class="highlight"><pre>$ df -h
+<div class="highlight"><pre><span></span>$ df -h
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/root        20G  646M   18G   4% /
 devtmpfs        459M     <span class="m">0</span>  459M   0% /dev
@@ -215,7 +215,7 @@ tmpfs           463M     <span class="m">0</span>  463M   0% /sys/fs/cgroup
 <div class="section" id="static-address">
 <h2>5. Static Address</h2>
 <p>Assign a Pi home server a <strong>static network address</strong>. Sample <tt class="docutils literal">/etc/network/interfaces</tt> that disables <tt class="docutils literal">dhcp</tt>, sets ip address <tt class="docutils literal">192.168.1.88</tt>, and connects to a router (managing DNS) at <tt class="docutils literal">192.168.1.1</tt>:</p>
-<div class="highlight"><pre>auto eth0
+<div class="highlight"><pre><span></span>auto eth0
 iface eth0 inet static
     address 192.168.1.88
     netmask 255.255.255.0

@@ -27,17 +27,17 @@
     <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Monday 03 February 2014</p>
 <div id="article">
     <p>On my laptop Python is pre-installed:</p>
-<div class="highlight"><pre>$ python -V
+<div class="highlight"><pre><span></span>$ python -V
 Python 2.7.5+
 </pre></div>
 <p><a class="reference external" href="http://inventwithpython.com/hacking/index.html">Hacking Secret Ciphers with Python</a> looks to be a good resource for beginners to get started with Python programming. This free book uses Python3 but Debian defaults to Python2. No problem. Multiple versions of Python can co-exist on the same computer thanks to <em>virtual isolated python environments</em> created using <a class="reference external" href="https://pypi.python.org/pypi/virtualenv">Virtualenv</a>. That allows me to use Python3 for certain projects - like the exercises in <em>Ciphers</em> - but continue using Python2 as the system default.</p>
 <p>Install the Debian package for <tt class="docutils literal">virtualenv</tt> and create a directory to hold multiple virtual environments:</p>
-<div class="highlight"><pre>$ sudo apt-get install python-virtualenv
-$ mkdir $HOME/virtualenvs
-$ <span class="nb">cd</span> $HOME/virtualenvs
+<div class="highlight"><pre><span></span>$ sudo apt-get install python-virtualenv
+$ mkdir <span class="nv">$HOME</span>/virtualenvs
+$ <span class="nb">cd</span> <span class="nv">$HOME</span>/virtualenvs
 </pre></div>
 <p>Now we can create and activate a new sandboxed Python3 environment:</p>
-<div class="highlight"><pre>$ virtualenv --python<span class="o">=</span>/usr/bin/python3 --no-site-packages secret_ciphers
+<div class="highlight"><pre><span></span>$ virtualenv --python<span class="o">=</span>/usr/bin/python3 --no-site-packages secret_ciphers
 Running virtualenv with interpreter /usr/bin/python3
 Using base prefix <span class="s1">&#39;/usr&#39;</span>
 New python executable in secret_ciphers/bin/python3
@@ -46,7 +46,7 @@ Installing Setuptools........done.
 Installing Pip...............done.
 </pre></div>
 <p>Enter the newly-created sandbox with <tt class="docutils literal">activate</tt> and install additional Python package using <tt class="docutils literal">pip</tt>:</p>
-<div class="highlight"><pre><span class="o">[</span>~<span class="o">]</span>$ <span class="nb">source</span> secret_ciphers/bin/activate
+<div class="highlight"><pre><span></span><span class="o">[</span>~<span class="o">]</span>$ <span class="nb">source</span> secret_ciphers/bin/activate
 <span class="o">(</span>secret_ciphers<span class="o">)[</span>~<span class="o">]</span>$ python -V
 Python 3.3.3
 <span class="o">(</span>secret_ciphers<span class="o">)[</span>~<span class="o">]</span>$ pip install PACKAGENAME

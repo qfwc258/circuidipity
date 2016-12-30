@@ -42,7 +42,7 @@
 <h2>Step 2 - Set public permissions on S3 bucket</h2>
 <p>At this stage your website-enabled bucket and contents are only viewable over the web by their owner ... you.</p>
 <p>Add a <em>bucket policy</em> to make your files <a class="reference external" href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?HostingWebsiteOnS3Setup.html">publicly available</a>. In the AWS Management Console, right-click on your website bucket and select <tt class="docutils literal"><span class="pre">Properties-&gt;Permissions-&gt;Edit</span> bucket policy</tt> and create a new policy ...</p>
-<div class="highlight"><pre><span class="o">{</span>
+<div class="highlight"><pre><span></span><span class="o">{</span>
         <span class="s2">&quot;Version&quot;</span>: <span class="s2">&quot;2008-10-17&quot;</span>,
         <span class="s2">&quot;Statement&quot;</span>: <span class="o">[</span>
                 <span class="o">{</span>
@@ -65,11 +65,11 @@
 <p>For uploading multiple files in one great swoop I ran across <a class="reference external" href="http://s3tools.org/s3cmd">s3cmd</a> ... a cool Linux command line utility for managing S3 storage. A package is available for Debian <tt class="docutils literal">sudo <span class="pre">apt-get</span> install s3cmd</tt>.</p>
 <p>Before configuring <tt class="docutils literal">s3cmd</tt> to grant access to your website's S3 bucket you require your <tt class="docutils literal">Access Key ID</tt> and <tt class="docutils literal">Secret Access Key</tt>. Navigate to <a class="reference external" href="https://aws-portal.amazon.com">https://aws-portal.amazon.com</a> and the <tt class="docutils literal"><span class="pre">-&gt;</span> Security Credentials <span class="pre">-&gt;</span> Access Keys</tt> tab and make note of your Amazon S3 keys.</p>
 <p>Now run ...</p>
-<div class="highlight"><pre>$ s3cmd --configure    <span class="c1"># configuration saved to &#39;/home/&lt;em&gt;user&lt;/em&gt;/.s3cfg&#39;</span>
+<div class="highlight"><pre><span></span>$ s3cmd --configure    <span class="c1"># configuration saved to &#39;/home/&lt;em&gt;user&lt;/em&gt;/.s3cfg&#39;</span>
 </pre></div>
 <p><tt class="docutils literal">s3cmd</tt> has lots of options ... but especially cool is the <a class="reference external" href="http://s3tools.org/s3cmd-sync">sync</a> command. Its similar to <tt class="docutils literal">rsync</tt> and uses <tt class="docutils literal">md5</tt> checksum and filesize to compare files between localhost and your remote S3 bucket and only transfer files that have changed.</p>
 <p>For my own website I run ...</p>
-<div class="highlight"><pre>$ s3cmd sync --dry-run output/ s3://www.circuidipity.com/   <span class="c1"># first I test it out ... nothing is transferred</span>
+<div class="highlight"><pre><span></span>$ s3cmd sync --dry-run output/ s3://www.circuidipity.com/   <span class="c1"># first I test it out ... nothing is transferred</span>
 $ s3cmd sync output/ s3://www.circuidipity.com/
 </pre></div>
 </div>
@@ -78,7 +78,7 @@ $ s3cmd sync output/ s3://www.circuidipity.com/
 <p>To transform <em>s3-website-location.amazonaws.com</em> into <em>www.YOURWEBSITE.com</em> you need to <a class="reference external" href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?VirtualHosting.html">create a CNAME at your DNS provider</a> that maps <tt class="docutils literal">www</tt> to your S3 bucket ... in my case DNS is provided by GoDaddy and I map <tt class="docutils literal">www</tt> to www.circuidipity.com.s3-website-us-east-1.amazonaws.com.</p>
 <p><em>s3-website-us-east-1.amazonaws.com</em> is for accessing the website feature. If you just want S3 you can use <em>s3.amazonaws.com</em>.</p>
 <p>Allow a bit of time for your changes to propagate through the global network of DNS servers ... check your modifications by running <tt class="docutils literal">host</tt> (cool little DNS hookup utility) ...</p>
-<div class="highlight"><pre>$ host www.circuidipity.com
+<div class="highlight"><pre><span></span>$ host www.circuidipity.com
 www.circuidipity.com is an <span class="nb">alias</span> <span class="k">for</span> www.circuidipity.com.s3-website-us-east-1.amazonaws.com.
 www.circuidipity.com.s3-website-us-east-1.amazonaws.com is an <span class="nb">alias</span> <span class="k">for</span> s3-website-us-east-1.amazonaws.com.
 s3-website-us-east-1.amazonaws.com has address 207.171.163.149

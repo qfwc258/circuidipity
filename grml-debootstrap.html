@@ -44,7 +44,7 @@
 <h2>1. Boot, network and partitions</h2>
 <p>Boot Grml with the <tt class="docutils literal">toram</tt> option <tt class="docutils literal"><span class="pre">grml64-full</span> - advanced options <span class="pre">-&gt;</span> copy Grml to RAM</tt>. This way we can make use of the USB boot device as storage for any extra packages or scripts we might want to use on the new Debian system.</p>
 <p>Use the <tt class="docutils literal"><span class="pre">grml-network</span></tt> command to launch an interactive configuration of network interfaces. A sample entry generated for wifi in <tt class="docutils literal">/etc/network/interfaces</tt>:</p>
-<div class="highlight"><pre>iface wlan0 inet dhcp
+<div class="highlight"><pre><span></span>iface wlan0 inet dhcp
     wireless-mode auto
     wireless-essid YOUR_SSID
     wpa-ssid YOUR_SSID
@@ -58,7 +58,7 @@
 <li>sda4 - root - remaining space</li>
 </ul>
 <p>Create the above using <tt class="docutils literal">parted</tt> (note: any changes are <strong>executed instantly</strong>):</p>
-<div class="highlight"><pre>parted -a optimal /dev/sda
+<div class="highlight"><pre><span></span>parted -a optimal /dev/sda
 print
 mklabel gpt
 unit mib
@@ -75,7 +75,7 @@ print
 quit
 </pre></div>
 <p>To verify that a partition is properly aligned query it using <tt class="docutils literal">blockdev</tt> ('0' return = aligned):</p>
-<div class="highlight"><pre>blockdev --getalignoff /dev/sdaX
+<div class="highlight"><pre><span></span>blockdev --getalignoff /dev/sdaX
 0
 </pre></div>
 <p>Sources: <a class="reference external" href="http://git.grml.org/?p=grml-live.git;a=blob_plain;f=templates/GRML/grml-cheatcodes.txt;hb=HEAD">Grml boot cheatcodes</a> (git.grml.org), the <a class="reference external" href="https://www.gnu.org/software/grub/manual/html_node/BIOS-installation.html">BIOS Boot Partition</a> (gnu.org), and <a class="reference external" href="http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?part=1&amp;chap=4">partitioning disks using parted</a> (gentoo.org)</p>
@@ -83,7 +83,7 @@ quit
 <div class="section" id="cryptsetup">
 <h2>2. Cryptsetup</h2>
 <p>Configure the newly-created root partition for encrypted storage and create filesystems for <tt class="docutils literal">boot</tt> and <tt class="docutils literal"><span class="pre">crypt-root</span></tt>:</p>
-<div class="highlight"><pre>cryptsetup luksFormat -c aes-xts-plain64 -s <span class="m">256</span> /dev/sda4
+<div class="highlight"><pre><span></span>cryptsetup luksFormat -c aes-xts-plain64 -s <span class="m">256</span> /dev/sda4
 cryptsetup luksOpen /dev/sda4 crypt_root
 mkfs.ext4 /dev/sda2
 mkfs.ext4 /dev/mapper/crypt_root
@@ -94,7 +94,7 @@ mkfs.ext4 /dev/mapper/crypt_root
 <p>Any extra packages to be installed can be added to the list in <tt class="docutils literal">/etc/debootstrap/packages</tt> and scripts to customize the setup can be placed in <tt class="docutils literal"><span class="pre">/etc/debootstrap/chroot-scripts/</span></tt>.</p>
 <p><strong>Tip:</strong> If configuring a device that only has a wireless interface (Chromebook) add the <tt class="docutils literal"><span class="pre">wireless-tools</span></tt> and <tt class="docutils literal">wpasupplicant</tt> packages to the install list.</p>
 <p>GRML auto-detects the <tt class="docutils literal">crypt_root</tt>, updating <tt class="docutils literal">fstab</tt> and creating a mountpoint for the device in <tt class="docutils literal">/media</tt>. Mount the newly-created partitions and install a minimal Debian setup:</p>
-<div class="highlight"><pre>mount /media/crypt_root
+<div class="highlight"><pre><span></span>mount /media/crypt_root
 mkdir /media/crypt_root/boot
 mount -t ext4 /dev/sda2 /media/crypt_root/boot
 <span class="c1"># optional: with &#39;toram&#39; usb stick can be mounted to /media... check /etc/fstab for auto-generated entries</span>
@@ -106,7 +106,7 @@ grml-debootstrap --target /media/crypt_root --password <span class="s2">&quot;PA
 <div class="section" id="adjust-crypttab-fstab-initramfs">
 <h2>4. Adjust crypttab, fstab, initramfs</h2>
 <p>Next step is to enter <tt class="docutils literal">chroot</tt> and perform post-install configuration:</p>
-<div class="highlight"><pre>grml-chroot /media/crypt_root /bin/bash
+<div class="highlight"><pre><span></span>grml-chroot /media/crypt_root /bin/bash
 grub-install /dev/sda
 update-grub
 <span class="c1"># For SSD add the &#39;discard&#39; option</span>
@@ -123,14 +123,14 @@ update-initramfs -u -k all
 <h2>5. Sid, swappiness, locales, and timezone</h2>
 <p>It is possible to use grml-debootstrap to directly install a Debian <tt class="docutils literal">sid/unstable</tt> setup. But I have experienced greater success by first installing a minimal stable system before doing a dist-upgrade to track the unstable rolling release.</p>
 <p><strong>Optional:</strong> Continue inside <tt class="docutils literal">chroot</tt> and upgrade to <tt class="docutils literal">unstable</tt> by modifying <tt class="docutils literal">/etc/apt/sources.list</tt>:</p>
-<div class="highlight"><pre><span class="c1">### unstable ###</span>
+<div class="highlight"><pre><span></span><span class="c1">### unstable ###</span>
 deb http://http.debian.net/debian unstable main contrib non-free
 deb-src http://http.debian.net/debian unstable main contrib non-free
 </pre></div>
 <p>Run <tt class="docutils literal"><span class="pre">apt-get</span> update &amp;&amp; <span class="pre">apt-get</span> <span class="pre">dist-upgrade</span></tt></p>
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Swappiness">swappiness</a> parameter controls the preference of the kernel to move processes out of physical memory to the swap partition. Range is 0-100, default is set to 60 and lower values cause the kernel to avoid swapping and higher values prompt more frequent swap use.</p>
 <p>To reduce writes on the SSD set a low value of '1':</p>
-<div class="highlight"><pre><span class="c1"># check current swappiness value</span>
+<div class="highlight"><pre><span></span><span class="c1"># check current swappiness value</span>
 cat /proc/sys/vm/swappiness
 <span class="c1"># temporarily change value</span>
 /sbin/sysctl vm.swappiness<span class="o">=</span>1
@@ -142,7 +142,7 @@ vm.swappiness<span class="o">=</span>1
 <div class="section" id="reboot">
 <h2>6. Reboot</h2>
 <p>Exit the chroot, unmount partitions, and reboot into Debian:</p>
-<div class="highlight"><pre><span class="nb">exit</span>
+<div class="highlight"><pre><span></span><span class="nb">exit</span>
 umount /media/crypt_root/boot
 umount /media/crypt_root
 cryptsetup luksClose /dev/mapper/crypt_root

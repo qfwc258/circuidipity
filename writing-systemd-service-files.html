@@ -27,7 +27,7 @@
 <div id="article">
     <p>Allow <strong>systemd</strong> and its <tt class="docutils literal">systemctl</tt> command to start, stop, and report the status of a daemon by creating a <strong>service file</strong> in <tt class="docutils literal">/etc/systemd/system</tt>.</p>
 <p><strong>Example:</strong> Setup the <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-ram-irqbalance.html">irqbalance daemon I installed on my Raspberry Pi</a> for systemd control by creating <tt class="docutils literal">/etc/systemd/system/irqbalance.service</tt>:</p>
-<div class="highlight"><pre><span class="o">[</span>Unit<span class="o">]</span>
+<div class="highlight"><pre><span></span><span class="o">[</span>Unit<span class="o">]</span>
 <span class="nv">Description</span><span class="o">=</span>Daemon to distribute hardware interrupts across multi-CPUs
 
 <span class="o">[</span>Service<span class="o">]</span>
@@ -41,11 +41,11 @@
 <span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
 </pre></div>
 <p>Set the new service to be auto-started at boot:</p>
-<div class="highlight"><pre>$ sudo systemctl daemon-reload <span class="o">&amp;&amp;</span> sudo systemctl <span class="nb">enable</span> irqbalance.service
+<div class="highlight"><pre><span></span>$ sudo systemctl daemon-reload <span class="o">&amp;&amp;</span> sudo systemctl <span class="nb">enable</span> irqbalance.service
 Created symlink from /etc/systemd/system/multi-user.target.wants/irqbalance.service to /etc/systemd/system/irqbalance.service.
 </pre></div>
 <p>Launch daemon and inspect running service:</p>
-<div class="highlight"><pre>$ sudo systemctl start irqbalance.service <span class="o">&amp;&amp;</span> sudo systemctl status irqbalance
+<div class="highlight"><pre><span></span>$ sudo systemctl start irqbalance.service <span class="o">&amp;&amp;</span> sudo systemctl status irqbalance
 </pre></div>
 <p>Happy hacking!</p>
 <p>Source: <a class="reference external" href="https://wiki.archlinux.org/index.php/Systemd#Writing_unit_files">Writing systemd unit files</a></p>

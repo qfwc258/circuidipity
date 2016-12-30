@@ -31,7 +31,7 @@
 <p>Using <tt class="docutils literal">tmux</tt> I can create terminal sessions with a custom layout of windows / panes / names / running programs, switch between different sessions, and - best of all - <strong>detach</strong> from a session, log out, return later, <strong>re-attach</strong> and find the session layout preserved and programs continuing to run in the interim.</p>
 <p><strong>Example:</strong> I can <tt class="docutils literal">ssh</tt> into my <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">home server</a>, start a <tt class="docutils literal">tmux</tt> session and create multiple windows, run <a class="reference external" href="http://libtorrent.rakshasa.no/">rtorrent</a> in a window to start seeding a Linux <tt class="docutils literal">iso</tt>, detach from session and server, and return later to find everything in place and the <tt class="docutils literal">iso</tt> uploading.</p>
 <p><strong>Install:</strong> On Ubuntu/Debian ...</p>
-<div class="highlight"><pre>$ sudo apt install tmux
+<div class="highlight"><pre><span></span>$ sudo apt install tmux
 </pre></div>
 <p>Commands entered inside a <tt class="docutils literal">tmux</tt> session are preceded by the key combination <tt class="docutils literal"><span class="pre">CTRL-b</span></tt> as the default <tt class="docutils literal">PREFIX</tt> (this can be modified in <tt class="docutils literal">.tmux.conf</tt>).</p>
 <div class="section" id="helpful-commands">
@@ -171,11 +171,11 @@
 <dd>in <em>development</em> run <tt class="docutils literal">vim</tt> in window_1 pane_0 and <tt class="docutils literal"><span class="pre">C-m</span></tt> sends the Carriage Return sequence</dd>
 </dl>
 <p><strong>Example:</strong> I created a <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.tmux.default.conf">tmux.default.conf</a> to outline my standard <tt class="docutils literal">tmux</tt> session layout and a simple launcher to create / attach sessions that source the file:</p>
-<div class="highlight"><pre><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="c1"># Launch/attach tmux session with $CONFIG</span>
-<span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;</span>$<span class="s2">HOME/doc/code/tmux_scripts/default.conf&quot;</span>
+<span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/doc/code/tmux_scripts/default.conf&quot;</span>
 
-tmux -f <span class="nv">$C</span>ONFIG attach
+tmux -f <span class="nv">$CONFIG</span> attach
 </pre></div>
 <p>Happy hacking!</p>
 </div>

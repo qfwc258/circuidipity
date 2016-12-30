@@ -24,56 +24,35 @@
 
 <!-- article -->
 <h1>Build a blog using the Pelican static site generator</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Friday 30 December 2016</p>
 <div id="article">
     <p><a class="reference external" href="http://docs.getpelican.com/en/3.3.0/">Pelican</a> is a Python-powered <strong>static site generator</strong>. I design the look and layout of this site using CSS and <a class="reference external" href="http://jinja.pocoo.org/docs/">Jinja2</a> templates and write my posts as plaintext files using <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reStructuredText</a> and Pelican compiles the contents into HTML output suitable for a blog.</p>
 <p>I like the idea of creating a static website. Some of the advantages:</p>
 <ul class="simple">
 <li>no database required ... plaintext is easy to edit, backup and move around</li>
-<li>plaintext allows your choice of editor ... I am learning <tt class="docutils literal">vim</tt></li>
+<li>plaintext allows your choice of editor</li>
 <li>cheap and easy to host practically anywhere ... one option: <a class="reference external" href="http://pages.github.com/">GitHub Pages</a> is a free service for hosting static HTML content</li>
 <li>no database or excutable code makes a website easy to secure, maintain and scale</li>
 </ul>
 <p>The traditional disadvantage to using static pages for a blog has been the lack of dynamic elements - hosting feeds, user comments - but JavaScript for things like a Twitter widget to provide real-time updates and out-sourced services like Disqus for commenting are possible alternatives to work around static limitations.</p>
-<p>This is how I built Circuidipity using Pelican.</p>
+<p>This is how I built <strong>Circuidipity</strong> on Ubuntu 16.04 using Pelican.</p>
 <div class="section" id="install">
 <h2>0. Install</h2>
-<p>I install Pelican and extra tools by creating a <em>virtual environment</em> using <a class="reference external" href="http://www.circuidipity.com/python2-and-python3.html">virtualenv</a> and <a class="reference external" href="https://pypi.python.org/pypi/pip">pip</a>. This allows me to create a sandboxed work area specific to my blog and user separate from my default Python installation (an alternative method in Debian would be to install the <tt class="docutils literal"><span class="pre">python-pelican</span></tt> package).</p>
-<p>With <tt class="docutils literal">virtualenv</tt> installed and using my blog as an example:</p>
-<div class="highlight"><pre>$ virtualenv ~/virtualenvs/circuidipity
-$ <span class="nb">source</span> ~/virtualenvs/circuidipity/bin/activate
-<span class="o">(</span>circuidipity<span class="o">)</span>$ pip install pelican
+<p>I install Pelican and extra tools by creating a <em>virtual environment</em> using <a class="reference external" href="http://www.circuidipity.com/python2-and-python3.html">virtualenv</a> and <a class="reference external" href="https://pypi.python.org/pypi/pip">pip</a>. This allows me to create a sandboxed work area specific to my blog and user separate from my default Python installation (an alternative method in Debian would be to install the <tt class="docutils literal"><span class="pre">python-pelican</span></tt> package) ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install virtualenv
+$ mkdir ~/code/virtualenvs
+$ virtualenv ~/code/virtualenvs/pelican
+$ <span class="nb">source</span> ~/code/virtualenvs/pelican/bin/activate
+<span class="o">(</span>pelican<span class="o">)</span>$ pip install pelican
 </pre></div>
-<p>To later upgrade to newer versions simply run <tt class="docutils literal">pip install <span class="pre">--upgrade</span> pelican</tt>.</p>
-<p>Next I create a directory to hold my blog contents and run <tt class="docutils literal"><span class="pre">pelican-quickstart</span></tt> to create a default site layout and configuration. I add my blog details and mostly accept the default choices provided (except for <a class="reference external" href="http://docs.getpelican.com/en/3.3.0/settings.html#pagination">pagination</a>):</p>
-<div class="highlight"><pre><span class="o">(</span>circuidipity<span class="o">)</span>$ mkdir ~/circuidipity
-<span class="o">(</span>circuidipity<span class="o">)</span>$ <span class="nb">cd</span> ~/circuidipity
-<span class="o">(</span>circuidipity<span class="o">)</span>$ pelican-quickstart
-Welcome to pelican-quickstart v3.3.0.
-
-This script will <span class="nb">help</span> you create a new Pelican-based website.
-
-Please answer the following questions so this script can generate the files
-needed by Pelican.
-
-
-&gt; Where <span class="k">do</span> you want to create your new web site? <span class="o">[</span>.<span class="o">]</span>
-&gt; What will be the title of this web site? Circuidipity
-&gt; Who will be the author of this web site? Daniel Wayne Armstrong
-&gt; What will be the default language of this web site? <span class="o">[</span>en<span class="o">]</span>
-&gt; Do you want to specify a URL prefix? e.g., http://example.com   <span class="o">(</span>Y/n<span class="o">)</span>
-&gt; What is your URL prefix? <span class="o">(</span>see above example<span class="p">;</span> no trailing slash<span class="o">)</span> http://www.circuidipity.com
-&gt; Do you want to <span class="nb">enable</span> article pagination? <span class="o">(</span>Y/n<span class="o">)</span> n
-&gt; Do you want to generate a Fabfile/Makefile to automate generation and publishing? <span class="o">(</span>Y/n<span class="o">)</span>
-&gt; Do you want an auto-reload <span class="p">&amp;</span> simpleHTTP script to assist with theme and site development? <span class="o">(</span>Y/n<span class="o">)</span>
-&gt; Do you want to upload your website using FTP? <span class="o">(</span>y/N<span class="o">)</span>
-&gt; Do you want to upload your website using SSH? <span class="o">(</span>y/N<span class="o">)</span>
-&gt; Do you want to upload your website using Dropbox? <span class="o">(</span>y/N<span class="o">)</span>
-&gt; Do you want to upload your website using S3? <span class="o">(</span>y/N<span class="o">)</span>
-&gt; Do you want to upload your website using Rackspace Cloud Files? <span class="o">(</span>y/N<span class="o">)</span>
-Done. Your new project is available at /home/dwa/circuidipity
+<p>Upgrading: simply run <tt class="docutils literal">pip install <span class="pre">--upgrade</span> pelican</tt>.</p>
+<p>Next I create a directory to hold my blog contents and run <tt class="docutils literal"><span class="pre">pelican-quickstart</span></tt> to create a default site layout and configuration. I add my blog details and mostly accept the default choices provided (except for <a class="reference external" href="http://docs.getpelican.com/en/3.3.0/settings.html#pagination">pagination</a>) ...</p>
+<div class="highlight"><pre><span></span><span class="o">(</span>pelican<span class="o">)</span>$ mkdir -p ~/code/circuidipity/www
+<span class="o">(</span>pelican<span class="o">)</span>$ <span class="nb">cd</span> ~/code/circuidipity/www
+<span class="o">(</span>pelican<span class="o">)</span>$ pelican-quickstart
 </pre></div>
-<p>This is the layout generated by <tt class="docutils literal"><span class="pre">pelican-quickstart</span></tt>:</p>
-<div class="highlight"><pre>$ tree
+<p>... and this is the layout generated ...</p>
+<div class="highlight"><pre><span></span>$ tree
 .
 ├── content
 ├── develop_server.sh
@@ -88,136 +67,37 @@ Done. Your new project is available at /home/dwa/circuidipity
 </div>
 <div class="section" id="first-post">
 <h2>1. First post</h2>
-<p>Posts go into <tt class="docutils literal">content</tt> and I create a <tt class="docutils literal">images</tt> subdirectory for screenshots and artwork and a <tt class="docutils literal">pages</tt> subdirectory to hold things like an <tt class="docutils literal">about</tt> or <tt class="docutils literal">contact</tt> page:</p>
-<div class="highlight"><pre>$ mkdir content/<span class="o">{</span>images,pages<span class="o">}</span>
+<p>Posts go into <tt class="docutils literal">content</tt> and I create an <tt class="docutils literal">images</tt> subdirectory for screenshots and artwork and a <tt class="docutils literal">pages</tt> subdirectory to hold things like an <tt class="docutils literal">about</tt> or <tt class="docutils literal">contact</tt> page ...</p>
+<div class="highlight"><pre><span></span>$ mkdir content/<span class="o">{</span>images,pages<span class="o">}</span>
 </pre></div>
-<p>Inside <tt class="docutils literal">content</tt> create your first post <tt class="docutils literal">hello_world.rst</tt> using reStructuredText:</p>
-<div class="highlight"><pre><span class="gh">===========</span>
+<p>Inside <tt class="docutils literal">content</tt> create your first post <tt class="docutils literal">hello_world.rst</tt> using reStructuredText ...</p>
+<div class="highlight"><pre><span></span><span class="gh">===========</span>
 <span class="gh">Hello World</span>
 <span class="gh">===========</span>
 
 <span class="nc">:date:</span> <span class="nf">2014-02-06 23:24</span>
-<span class="nc">:tags:</span> <span class="nf">pelican, web</span>
-<span class="nc">:slug:</span> <span class="nf">hello</span>
+<span class="nc">:slug:</span> <span class="nf">hello-world</span>
+<span class="nc">:tags:</span> <span class="nf">pelican, web, python</span>
 
 My <span class="ge">*first*</span> post using <span class="s">`Pelican </span><span class="si">&lt;http://docs.getpelican.com/en/3.3.0/getting_started.html&gt;</span><span class="s">`_</span>!
 </pre></div>
 <p>Items like <tt class="docutils literal">:date</tt> <tt class="docutils literal">:tags:</tt> <tt class="docutils literal">:slug:</tt> are <strong>metadata</strong> that can be used in the generated HTML output. These and a few others are included in Pelican and users can create their own to use in <a class="reference external" href="http://docs.getpelican.com/en/3.1.1/themes.html#theming-pelican">templates</a>.</p>
-<p>Save the file and test the new blog by running the Pelican built-in development server. This will take all the <tt class="docutils literal">*.rst</tt> files and generate HTML formatted files in <tt class="docutils literal">output</tt> and serve up the results for inspection in a browser at <tt class="docutils literal"><span class="pre">http://localhost:8000</span></tt>:</p>
-<div class="highlight"><pre><span class="o">(</span>circuidipity<span class="o">)</span>$ make devserver
+<p>Save the file and test the new blog by running the Pelican built-in development server. This will take all the <tt class="docutils literal">*.rst</tt> files and generate HTML formatted files in <tt class="docutils literal">output</tt> and serve up the results for inspection in a browser at <tt class="docutils literal"><span class="pre">http://localhost:8000</span></tt> ...</p>
+<div class="highlight"><pre><span></span><span class="o">(</span>pelican<span class="o">)</span>$ make devserver
 </pre></div>
-<p>The server will continue to run in the background and re-generate any updated content for viewing. Stop the server by running <tt class="docutils literal">./develop_server.sh stop</tt>.</p>
+<p>Server will continue to run in the background and re-generate any updated content for viewing. Stop server by running <tt class="docutils literal">./develop_server.sh stop</tt>.</p>
 </div>
 <div class="section" id="settings">
 <h2>2. Settings</h2>
 <p>Running <tt class="docutils literal"><span class="pre">pelican-quickstart</span></tt> creates 2 configuration files: <tt class="docutils literal">pelicanconf.py</tt> and <tt class="docutils literal">publishconf.py</tt>.</p>
-<p>Primary settings are configured in <tt class="docutils literal">pelicanconf.py</tt>. Settings can be used as variables in posts, pages, and templates. This is how mine looks ... some of the settings such as <tt class="docutils literal">AUTHOR</tt> and <tt class="docutils literal">SITENAME</tt> were generated by Pelican and some like <tt class="docutils literal">WHOAMI_URL</tt> were created by myself:</p>
-<div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
-<span class="c1"># -*- coding: utf-8 -*- #</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
-
-<span class="n">AUTHOR</span> <span class="o">=</span> <span class="s1">&#39;Daniel Wayne Armstrong&#39;</span>
-<span class="n">SITENAME</span> <span class="o">=</span> <span class="s1">&#39;Circuidipity&#39;</span>
-<span class="n">SITEURL</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-
-<span class="n">TIMEZONE</span> <span class="o">=</span> <span class="s1">&#39;America/Toronto&#39;</span>
-
-<span class="n">DEFAULT_LANG</span> <span class="o">=</span> <span class="s1">&#39;en&#39;</span>
-
-<span class="n">DEFAULT_DATE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;%A </span><span class="si">%d</span><span class="s1"> %B %Y&#39;</span>
-
-<span class="c1"># Static paths will be copied without parsing their contents</span>
-<span class="n">STATIC_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="p">]</span>
-
-<span class="c1"># Shift the installed location of a file</span>
-<span class="n">EXTRA_PATH_METADATA</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;extra/CNAME&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="s1">&#39;CNAME&#39;</span><span class="p">},</span>
-                <span class="p">}</span>
-
-<span class="c1"># Extract post date from filename</span>
-<span class="n">FILENAME_METADATA</span> <span class="o">=</span> <span class="s1">&#39;(?P&lt;date&gt;\d{4}-\d{2}-\d{2})&#39;</span>
-
-<span class="c1"># Sole author and don&#39;t use categories ... disable these features</span>
-<span class="n">AUTHOR_SAVE_AS</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">AUTHORS_SAVE_AS</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">CATEGORY_SAVE_AS</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">CATEGORIES_SAVE_AS</span> <span class="o">=</span> <span class="bp">False</span>
-
-<span class="c1"># Feed generation is usually not desired when developing</span>
-<span class="n">FEED_ALL_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
-<span class="n">CATEGORY_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
-<span class="n">TRANSLATION_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
-
-<span class="c1"># URL settings</span>
-<span class="c1"># Uncomment following line if you want document-relative URLs when developing</span>
-<span class="n">RELATIVE_URLS</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="n">ARTICLE_URL</span> <span class="o">=</span> <span class="s1">&#39;{slug}.html&#39;</span>
-<span class="n">PAGE_URL</span> <span class="o">=</span> <span class="s1">&#39;{slug}.html&#39;</span>
-<span class="n">PAGE_SAVE_AS</span> <span class="o">=</span> <span class="s1">&#39;{slug}.html&#39;</span>
-<span class="n">TAG_URL</span> <span class="o">=</span> <span class="s1">&#39;tag-{slug}.html&#39;</span>
-<span class="n">TAG_SAVE_AS</span> <span class="o">=</span> <span class="s1">&#39;tag-{slug}.html&#39;</span>
-<span class="n">TAGS_URL</span> <span class="o">=</span> <span class="s1">&#39;tags.html&#39;</span>
-<span class="n">TAGS_SAVE_AS</span> <span class="o">=</span> <span class="s1">&#39;tags.html&#39;</span>
-<span class="n">ARCHIVES_URL</span> <span class="o">=</span> <span class="s1">&#39;archives.html&#39;</span>
-<span class="n">ARCHIVES_SAVE_AS</span> <span class="o">=</span> <span class="s1">&#39;archives.html&#39;</span>
-
-<span class="c1"># Contact</span>
-<span class="n">EMAIL_ADDR</span> <span class="o">=</span> <span class="s1">&#39;daniel at circuidipity dot com&#39;</span>
-
-<span class="c1"># Plugins</span>
-<span class="n">PLUGIN_PATH</span> <span class="o">=</span> <span class="s1">&#39;/home/dwa/doc/code/pelican-plugins&#39;</span>
-<span class="n">PLUGINS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;neighbors&#39;</span><span class="p">]</span>
-
-<span class="c1"># Theme</span>
-<span class="n">THEME</span> <span class="o">=</span> <span class="s1">&#39;/home/dwa/doc/code/pelican-themes/chungking-condo&#39;</span>
-<span class="n">WHOAMI_URL</span> <span class="o">=</span> <span class="s1">&#39;/theme/images/whoami.jpg&#39;</span>
-<span class="n">GREETING</span> <span class="o">=</span> <span class="s1">&#39;Howdy!&#39;</span>
-<span class="n">LICENCE_NAME</span> <span class="o">=</span> <span class="s1">&#39;BY-NC-SA&#39;</span>
-<span class="n">LICENCE_URL</span> <span class="o">=</span> <span class="s1">&#39;http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US&#39;</span>
-<span class="n">LICENCE_URL_IMG</span> <span class="o">=</span> <span class="s1">&#39;http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png&#39;</span>
-<span class="n">JINJA_EXTENSIONS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;jinja2.ext.loopcontrols&#39;</span><span class="p">]</span>
-
-<span class="c1"># Social</span>
-<span class="n">TWITTER_URL</span> <span class="o">=</span> <span class="s1">&#39;https://twitter.com/circuidipity&#39;</span>
-<span class="n">GITHUB_URL</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/vonbrownie&#39;</span>
-
-<span class="c1"># Tag cloud</span>
-<span class="n">TAG_CLOUD_STEPS</span> <span class="o">=</span> <span class="mi">4</span>
-</pre></div>
-<p>A few of the settings like <tt class="docutils literal">RELATIVE_URLS = True</tt> and turning off <tt class="docutils literal">ATOM</tt> feeds are appropriate for a <em>test</em> environment but are probably things that need to be modified when its time for deployment. The second <tt class="docutils literal">publishconf.py</tt> configuration file contains priority settings for <strong>publishing</strong> content:</p>
-<div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
-<span class="c1"># -*- coding: utf-8 -*- #</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
-
-<span class="c1"># This file is only used if you use `make publish` or</span>
-<span class="c1"># explicitly specify it as your config file.</span>
-
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">curdir</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">pelicanconf</span> <span class="kn">import</span> <span class="o">*</span>
-
-<span class="n">SITEURL</span> <span class="o">=</span> <span class="s1">&#39;http://www.circuidipity.com&#39;</span>
-<span class="n">RELATIVE_URLS</span> <span class="o">=</span> <span class="bp">False</span>
-
-<span class="n">FEED_ALL_ATOM</span> <span class="o">=</span> <span class="s1">&#39;feed.xml&#39;</span>
-<span class="n">CATEGORY_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
-<span class="n">TRANSLATION_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
-
-<span class="n">FEED_MAX_ITEMS</span> <span class="o">=</span> <span class="mi">10</span>
-
-<span class="n">DELETE_OUTPUT_DIRECTORY</span> <span class="o">=</span> <span class="bp">True</span>
-</pre></div>
+<p>Primary settings are configured in <tt class="docutils literal">pelicanconf.py</tt>. Settings can be used as variables in posts, pages, and templates. This is how <a class="reference external" href="https://github.com/vonbrownie/circuidipity/blob/master/pelicanconf.py">mine looks</a> ... some of the settings such as <tt class="docutils literal">AUTHOR</tt> and <tt class="docutils literal">SITENAME</tt> were generated by Pelican and some like <tt class="docutils literal">WHOAMI_URL</tt> were created by myself.</p>
+<p>A few of the settings like <tt class="docutils literal">RELATIVE_URLS = True</tt> and turning off <tt class="docutils literal">ATOM</tt> feeds are appropriate for a <em>test</em> environment but are probably things that need to be modified when its time for deployment.</p>
+<p>The second configuration - <a class="reference external" href="https://github.com/vonbrownie/circuidipity/blob/master/publishconf.py">publishconf.py</a> - contains priority settings for publishing content.</p>
 </div>
 <div class="section" id="plugins">
 <h2>3. Plugins</h2>
-<p><a class="reference external" href="http://docs.getpelican.com/en/3.3.0/plugins.html">Plugins</a> are available to extend the functionality of Pelican. I use a plugin called <a class="reference external" href="https://github.com/getpelican/pelican-plugins/tree/master/neighbors">neighbors</a> that makes it easy for me to add links near the bottom to <tt class="docutils literal">Newer</tt> and <tt class="docutils literal">Older</tt> articles in relation to the current page.</p>
-<p>Enable plugins in <tt class="docutils literal">pelicanconf.py</tt>:</p>
-<div class="highlight"><pre><span class="n">PLUGIN_PATH</span> <span class="o">=</span> <span class="s1">&#39;/home/dwa/doc/code/pelican-plugins&#39;</span>
-<span class="n">PLUGINS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;neighbors&#39;</span><span class="p">]</span>
-</pre></div>
-<p>I can then make use of the plugin's <tt class="docutils literal">next_article</tt> and <tt class="docutils literal">prev_article</tt> variables in a Jinja2-formatted template to add those navigation links:</p>
-<div class="highlight"><pre><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">article</span><span class="o">.</span><span class="n">prev_article</span> <span class="o">%</span><span class="p">}</span>
+<p><a class="reference external" href="http://docs.getpelican.com/en/3.3.0/plugins.html">Plugins</a> are available to extend the functionality of Pelican. I use a plugin called <a class="reference external" href="https://github.com/getpelican/pelican-plugins/tree/master/neighbors">neighbors</a> that makes it easy for me to add links near the bottom to <tt class="docutils literal">Newer</tt> and <tt class="docutils literal">Older</tt> articles in relation to the current page. After enabling the plugin in <tt class="docutils literal">pelicanconf.py</tt> I make use of the plugin's <tt class="docutils literal">next_article</tt> and <tt class="docutils literal">prev_article</tt> variables in a Jinja2-formatted template to add those navigation links ...</p>
+<div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">article</span><span class="o">.</span><span class="n">prev_article</span> <span class="o">%</span><span class="p">}</span>
     <span class="o">&lt;</span><span class="n">p</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;prevpost&quot;</span><span class="o">&gt;&lt;</span><span class="n">i</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;fa fa-arrow-left&quot;</span><span class="o">&gt;&lt;/</span><span class="n">i</span><span class="o">&gt;</span> <span class="n">Older</span><span class="o">&lt;</span><span class="n">br</span> <span class="o">/&gt;</span>
     <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;{{ SITEURL }}/{{ article.prev_article.url}}&quot;</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">article</span><span class="o">.</span><span class="n">prev_article</span><span class="o">.</span><span class="n">title</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
@@ -229,25 +109,20 @@ My <span class="ge">*first*</span> post using <span class="s">`Pelican </span><s
 </div>
 <div class="section" id="themes">
 <h2>4. Themes</h2>
-<p>Pelican includes a default theme to get you started and there is a collection of <a class="reference external" href="https://github.com/getpelican/pelican-themes">user-created themes</a> to choose from or <a class="reference external" href="http://docs.getpelican.com/en/3.3.0/themes.html">create your own</a>. I chose to start from scratch and explore CSS, Jinja2 templating, <a class="reference external" href="http://pygments.org/faq/">pygments</a> and <a class="reference external" href="http://fortawesome.github.io/Font-Awesome/">Font Awesome icons</a> to create my own <a class="reference external" href="https://github.com/vonbrownie/circuidipity/tree/gh-pages/theme">Chungking Condo</a> theme.</p>
-<p>To use a theme set the location of its contents in <tt class="docutils literal">pelicanconf.py</tt>:</p>
-<div class="highlight"><pre><span class="n">THEME</span> <span class="o">=</span> <span class="s1">&#39;/home/dwa/doc/code/pelican-themes/chungking-condo&#39;</span>
-</pre></div>
+<p>Pelican includes a default theme to get you started and there is a collection of <a class="reference external" href="https://github.com/getpelican/pelican-themes">user-created themes</a> to choose from or <a class="reference external" href="http://docs.getpelican.com/en/3.3.0/themes.html">create your own</a>. I chose to start from scratch and explore CSS, Jinja2 templating, <a class="reference external" href="http://pygments.org/faq/">pygments</a> and <a class="reference external" href="http://fortawesome.github.io/Font-Awesome/">Font Awesome icons</a> to create my own custom theme.</p>
 </div>
 <div class="section" id="publish">
 <h2>5. Publish</h2>
-<p>When ready to generate for deployment run:</p>
-<div class="highlight"><pre><span class="o">(</span>circuidipity<span class="o">)</span>$ make publish
+<p>When ready to generate for deployment run ...</p>
+<div class="highlight"><pre><span></span><span class="o">(</span>pelican<span class="o">)</span>$ make publish
 </pre></div>
-<p>All blog contents are placed in <tt class="docutils literal">output</tt> ready to be uploaded to a hosting service. Since everything is static content there are many options available. Previously I used <a class="reference external" href="http://www.circuidipity.com/host-website-on-amazon-s3.html">Amazon S3</a> and have now switched to a free <a class="reference external" href="http://www.circuidipity.com/github-pages.html">project repository hosted on GitHub Pages</a>.</p>
+<p>All blog contents are placed in <tt class="docutils literal">output</tt> ready to be uploaded to a hosting service. Since everything is static content there are many options available. I use a free <a class="reference external" href="http://www.circuidipity.com/github-pages.html">project repository hosted on GitHub Pages</a>.</p>
 <p>Happy hacking!</p>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-pelican.html">pelican</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-blog.html">blog</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-web.html">web</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-python.html">python</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
 </div>
 

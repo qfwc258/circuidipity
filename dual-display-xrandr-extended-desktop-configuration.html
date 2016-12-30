@@ -35,17 +35,17 @@
 <li>use a <em>positional parameter</em> to provide option to <em>disable</em> extended desktop</li>
 <li>create a <em>test</em> to give the user feedback if an incorrect option is used</li>
 </ul>
-<div class="highlight"><pre><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="c1"># Enable|disable extended desktop using XRandR</span>
 
 <span class="nv">PRIMARY</span><span class="o">=</span><span class="k">$(</span>xrandr <span class="p">|</span> grep <span class="s2">&quot; connected&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;FNR == 1 {print $1}&#39;</span><span class="k">)</span>
 <span class="nv">SECOND</span><span class="o">=</span><span class="k">$(</span>xrandr <span class="p">|</span> grep <span class="s2">&quot; connected&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;FNR == 2 {print $1}&#39;</span><span class="k">)</span>
-<span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;xrandr --output </span>$<span class="s2">PRIMARY --auto --primary --output </span>$<span class="s2">SECOND&quot;</span>
+<span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;xrandr --output </span><span class="nv">$PRIMARY</span><span class="s2"> --auto --primary --output </span><span class="nv">$SECOND</span><span class="s2">&quot;</span>
 
-<span class="k">if</span> <span class="o">[[</span> -n $SECOND <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+<span class="k">if</span> <span class="o">[[</span> -n <span class="nv">$SECOND</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
     <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> !<span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
         <span class="k">case</span> <span class="nv">$1</span> in
-            -q <span class="o">)</span>    <span class="nv">$C</span>ONFIG --off
+            -q <span class="o">)</span>    <span class="nv">$CONFIG</span> --off
                     <span class="nb">exit</span>
                     <span class="p">;;</span>
             * <span class="o">)</span>     <span class="nb">printf</span> <span class="s2">&quot;ERROR: &#39;</span><span class="nv">$1</span><span class="s2">&#39; is an invalid option\n&quot;</span>
@@ -54,7 +54,7 @@
                     <span class="p">;;</span>
         <span class="k">esac</span>
     <span class="k">else</span>
-        <span class="nv">$C</span>ONFIG --auto --right-of $PRIMARY
+        <span class="nv">$CONFIG</span> --auto --right-of <span class="nv">$PRIMARY</span>
     <span class="k">fi</span>
 <span class="k">fi</span>
 </pre></div>

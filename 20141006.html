@@ -28,7 +28,7 @@
 <div id="article">
     <p><strong>Port forwarding</strong> enables <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">SSH access</a> to my <a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Raspberry Pi home server</a> from outside the home by forwarding traffic directed at a port on the router (reachable over the Internet by <a class="reference external" href="http://www.circuidipity.com/ddns-openwrt.html">dynamic DDNS</a>) to the SSH port on the internal server behind a <a class="reference external" href="http://wiki.openwrt.org/doc/uci/firewall">NAT firewall</a>.</p>
 <p><a class="reference external" href="http://www.circuidipity.com/supercharge-a-home-router-using-openwrt-pt2.html">OpenWrt</a> port forward configuration is done in <tt class="docutils literal">/etc/config/firewall</tt>. A sample entry that redirects port <tt class="docutils literal">55555</tt> on the router to the SSH server listening on port <tt class="docutils literal">22</tt> at <tt class="docutils literal">192.168.1.88</tt>:</p>
-<div class="highlight"><pre>config <span class="s1">&#39;redirect&#39;</span>
+<div class="highlight"><pre><span></span>config <span class="s1">&#39;redirect&#39;</span>
     option <span class="s1">&#39;name&#39;</span> <span class="s1">&#39;ssh&#39;</span>
     option <span class="s1">&#39;src&#39;</span> <span class="s1">&#39;wan&#39;</span>
     option <span class="s1">&#39;proto&#39;</span> <span class="s1">&#39;tcpudp&#39;</span>
@@ -39,7 +39,7 @@
     option <span class="s1">&#39;dest&#39;</span> <span class="s1">&#39;lan&#39;</span>
 </pre></div>
 <p>Save and make the changes active by running:</p>
-<div class="highlight"><pre><span class="c1"># /etc/init.d/firewall restart</span>
+<div class="highlight"><pre><span></span><span class="c1"># /etc/init.d/firewall restart</span>
 </pre></div>
 <p><strong>Alternative:</strong> setup port forwarding in LuCI under <tt class="docutils literal"><span class="pre">Network-&gt;Firewall-&gt;Port</span> Forwards</tt>.</p>
 <p>Example: SSH login outside the home enter <tt class="docutils literal">ssh <span class="pre">-p</span> 55555 my.external.ip.address</tt> and the connection will be forwarded to the Pi server.</p>

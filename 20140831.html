@@ -31,7 +31,7 @@
 <div class="section" id="install-a-less-than-current-debian-packaged-kernel">
 <h3>0. Install a (less-than-current) Debian-packaged kernel</h3>
 <p>I am running Debian's <strong>sid</strong> (unstable) branch and the 3.13.X kernel is no longer available in the package manager. I download the kernel headers and image and install the packages using <tt class="docutils literal">dpkg</tt> ...</p>
-<div class="highlight"><pre>$ wget http://snapshot.debian.org/archive/debian/20140320T042639Z/pool/main/l/linux-tools/linux-kbuild-3.13_3.13.6-1_amd64.deb
+<div class="highlight"><pre><span></span>$ wget http://snapshot.debian.org/archive/debian/20140320T042639Z/pool/main/l/linux-tools/linux-kbuild-3.13_3.13.6-1_amd64.deb
 $ sudo dpkg -i linux-kbuild-3.13_3.13.6-1_amd64.deb
 $ wget http://snapshot.debian.org/archive/debian/20140416T101543Z/pool/main/l/linux/linux-headers-3.13-1-common_3.13.10-1_amd64.deb
 $ sudo dpkg -i linux-headers-3.13-1-common_3.13.10-1_amd64.deb
@@ -45,14 +45,14 @@ $ sudo dpkg -i linux-image-3.13-1-amd64_3.13.10-1_amd64.deb
 <div class="section" id="retrieve-the-kernel-menuentry">
 <h3>1. Retrieve the kernel menuentry</h3>
 <p>Inside <tt class="docutils literal">grub.cfg</tt> there is an option for <tt class="docutils literal">submenu 'Advanced options for Debian GNU/Linux'</tt> and beneath it multiple menuentries for installed kernels and boot options. Using my Chromebook's 3.13.10 kernel as an example the relevant entry is ...</p>
-<div class="highlight"><pre>menuentry <span class="s1">&#39;Debian GNU/Linux, with Linux 3.13-1-amd64&#39;</span>
+<div class="highlight"><pre><span></span>menuentry <span class="s1">&#39;Debian GNU/Linux, with Linux 3.13-1-amd64&#39;</span>
 </pre></div>
 <p>This will be designated as the new default kernel to boot.</p>
 </div>
 <div class="section" id="set-default-kernel">
 <h3>2. Set default kernel</h3>
 <p>Open <tt class="docutils literal">/etc/default/grub</tt> in an editor and modify <tt class="docutils literal">GRUB_DEFAULT=</tt> (set to '0' or most recent by default) to the new desired boot kernel. In the case of my Chromebook I include the submenu + menuentry in the modified setting ...</p>
-<div class="highlight"><pre><span class="nv">GRUB_DEFAULT</span><span class="o">=</span><span class="s2">&quot;Advanced options for Debian GNU/Linux&gt;Debian GNU/Linux, with Linux 3.13-1-amd64&quot;</span>
+<div class="highlight"><pre><span></span><span class="nv">GRUB_DEFAULT</span><span class="o">=</span><span class="s2">&quot;Advanced options for Debian GNU/Linux&gt;Debian GNU/Linux, with Linux 3.13-1-amd64&quot;</span>
 </pre></div>
 <p>Run <tt class="docutils literal">sudo <span class="pre">update-grub</span></tt> to generate a new config and reboot. At the GRUB splash screen the <tt class="docutils literal">Advanced options for Debian GNU</tt> menu will be the new default and the designated kernel will load.</p>
 <p>Happy hacking!</p>

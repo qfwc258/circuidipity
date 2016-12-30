@@ -38,7 +38,7 @@
 <div class="section" id="mtp">
 <h3>1. MTP</h3>
 <p>Install MTP packages and assign USER to the <tt class="docutils literal">plugdev</tt> group:</p>
-<div class="highlight"><pre>$ sudo apt-get install mtp-tools mtpfs
+<div class="highlight"><pre><span></span>$ sudo apt-get install mtp-tools mtpfs
 $ sudo adduser USER plugdev
 </pre></div>
 <p>Logout and re-login to activate new group permissions.</p>
@@ -46,14 +46,14 @@ $ sudo adduser USER plugdev
 <div class="section" id="udev">
 <h3>2. Udev</h3>
 <p>Connect the MTP-enabled device to Linux and make note of the <strong>idVendor</strong> and <strong>idProduct</strong> codes. Sample output from my Nexus 7:</p>
-<div class="highlight"><pre>$ lsusb <span class="p">|</span> grep Google
+<div class="highlight"><pre><span></span>$ lsusb <span class="p">|</span> grep Google
 Bus <span class="m">001</span> Device 009: ID 18d1:4e41 Google Inc. ASUS Nexus <span class="m">7</span> <span class="o">(</span>MTP modus<span class="o">)</span>
 </pre></div>
 <p>Google's <strong>idVendor=18d1</strong> and the Nexus 7 is <strong>idProduct=4e41</strong>. Disconnect the device. Create a new <strong>udev rule</strong> for Nexus devices in <tt class="docutils literal"><span class="pre">/etc/udev/rules.d/99-android.rules</span></tt>:</p>
-<div class="highlight"><pre><span class="c1"># Google</span>
+<div class="highlight"><pre><span></span><span class="c1"># Google</span>
 <span class="nv">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;usb&quot;</span>, ATTR<span class="o">{</span>idVendor<span class="o">}==</span><span class="s2">&quot;18d1&quot;</span>, <span class="nv">MODE</span><span class="o">=</span><span class="s2">&quot;0666&quot;</span>
 </pre></div>
-<div class="note">
+<div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">For a generic entry to handle all Google devices use <strong>idVendor</strong>. Otherwise add <strong>idVendor</strong> and <strong>idProduct</strong> codes to make a device-specific udev rule.</p>
 </div>
@@ -61,14 +61,14 @@ Bus <span class="m">001</span> Device 009: ID 18d1:4e41 Google Inc. ASUS Nexus <
 <div class="section" id="mtpfs">
 <h3>3. MTPFS</h3>
 <p><strong>MTPFS</strong> is a FUSE filesystem that enables reading and writing data to the MTP-enabled Nexus. Create a mount point for the tablet and restart the udev daemon:</p>
-<div class="highlight"><pre>$ sudo mkdir /media/nexus
+<div class="highlight"><pre><span></span>$ sudo mkdir /media/nexus
 $ sudo service udev restart
 </pre></div>
 <p>Connect the (not in sleep mode) tablet and access onboard storage by running:</p>
-<div class="highlight"><pre>$ sudo mtpfs /media/nexus -o allow_other
+<div class="highlight"><pre><span></span>$ sudo mtpfs /media/nexus -o allow_other
 </pre></div>
 <p>Unmount the device when finished:</p>
-<div class="highlight"><pre>$ sudo umount mtpfs
+<div class="highlight"><pre><span></span>$ sudo umount mtpfs
 </pre></div>
 <p>Alternate options such as <a class="reference external" href="https://play.google.com/store/apps/details?id=com.sand.airdroid">Airdroid</a> exist for device storage management over wireless connections that are OS-independent. MTP is useful to setup if you plan to install <a class="reference external" href="http://www.circuidipity.com/adb-fastboot-android.html">development tools</a> and <strong>root</strong> your device.</p>
 <p>Happy hacking!</p>

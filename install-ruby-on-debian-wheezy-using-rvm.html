@@ -31,11 +31,11 @@
 <p>Load RVM <tt class="docutils literal">source <span class="pre">~/.rvm/scripts/rvm</span></tt>.</p>
 <p>Check for additional requirements <tt class="docutils literal">rvm requirements</tt>.</p>
 <p>I needed to install these extras ...</p>
-<div class="highlight"><pre>$ sudo apt-get install build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion
+<div class="highlight"><pre><span></span>$ sudo apt-get install build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion
 </pre></div>
 <p>Now I can use RVM to install the latest stable version of Ruby <tt class="docutils literal">rvm install 1.9.3</tt>.</p>
 <p>The current system-wide install of Ruby is <tt class="docutils literal"><span class="pre">1.8.7.352-2</span></tt> ... To test my new RVM configuration and confirm that I am using my later, freshly-installed version I run:</p>
-<div class="highlight"><pre>$ <span class="nb">type</span> rvm <span class="p">|</span> head -n 1
+<div class="highlight"><pre><span></span>$ <span class="nb">type</span> rvm <span class="p">|</span> head -n 1
 rvm is a <span class="k">function</span>
 $ ruby -v
 ruby 1.9.3p194 <span class="o">(</span>2012-04-20 revision 35410<span class="o">)</span> <span class="o">[</span>x86_64-linux<span class="o">]</span>
@@ -51,7 +51,7 @@ $ which ruby
 </ul>
 <p><strong>To Fix:</strong></p>
 <p>1/ Copy the RVM function in <tt class="docutils literal"><span class="pre">~/.bash_login</span></tt> ...</p>
-<div class="highlight"><pre><span class="o">[[</span> -s <span class="s2">&quot;</span>$<span class="s2">HOME/.rvm/scripts/rvm&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> . <span class="s2">&quot;</span>$<span class="s2">HOME/.rvm/scripts/rvm&quot;</span>
+<div class="highlight"><pre><span></span><span class="o">[[</span> -s <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.rvm/scripts/rvm&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> . <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.rvm/scripts/rvm&quot;</span>
 </pre></div>
 <p>... and place it at the end of <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt></p>
 <p>2/ Remove <tt class="docutils literal"><span class="pre">~/.bash_login</span></tt></p>

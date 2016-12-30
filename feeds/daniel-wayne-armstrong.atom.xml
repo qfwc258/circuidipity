@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-09-07T15:17:00-04:00</updated><entry><title>Centauri Oak</title><link href="http://www.circuidipity.com/centauri-oak.html" rel="alternate"></link><updated>2016-09-07T15:17:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-09-07:centauri-oak.html</id><summary type="html">&lt;p&gt;One of my favourite blog's is &lt;strong&gt;Paul Gilster's&lt;/strong&gt; &lt;a class="reference external" href="http://www.centauri-dreams.org/"&gt;Centauri Dreams&lt;/a&gt;. The frequency and quality of posts is fantastic!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-09-07T15:17:00-04:00</updated><entry><title>Centauri Oak</title><link href="http://www.circuidipity.com/centauri-oak.html" rel="alternate"></link><published>2016-09-07T15:17:00-04:00</published><updated>2016-09-07T15:17:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-09-07:/centauri-oak.html</id><summary type="html">&lt;p&gt;One of my favourite blog's is &lt;strong&gt;Paul Gilster's&lt;/strong&gt; &lt;a class="reference external" href="http://www.centauri-dreams.org/"&gt;Centauri Dreams&lt;/a&gt;. The frequency and quality of posts is fantastic!&lt;/p&gt;
+&lt;p&gt;All the recent news about &lt;strong&gt;Proxima b&lt;/strong&gt; and the &lt;a class="reference external" href="https://breakthroughinitiatives.org/Initiative/3"&gt;Breakthrough Starshot&lt;/a&gt; project spurred me to start reading his earlier book by the same name that inspired the blog. I like this bit …&lt;/p&gt;</summary><content type="html">&lt;p&gt;One of my favourite blog's is &lt;strong&gt;Paul Gilster's&lt;/strong&gt; &lt;a class="reference external" href="http://www.centauri-dreams.org/"&gt;Centauri Dreams&lt;/a&gt;. The frequency and quality of posts is fantastic!&lt;/p&gt;
 &lt;p&gt;All the recent news about &lt;strong&gt;Proxima b&lt;/strong&gt; and the &lt;a class="reference external" href="https://breakthroughinitiatives.org/Initiative/3"&gt;Breakthrough Starshot&lt;/a&gt; project spurred me to start reading his earlier book by the same name that inspired the blog. I like this bit ...&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Even as a starship embodies our dreams, it also casts light on our history. Lord Collingwood (1748-1810) was Nelson's second in command at the battle of Trafalgar, taking command of the fleet when Nelson was mortally wounded. Collingwood knew that the British oak used in ships built during the Napoleonic wars had been planted during the reign of the Stuarts, some two hundred years earlier, and that it had been designed for future use in the Royal Navy. He would go on to encourage plantings of oak that would be ready for the Navy a hundred and fifty years after his death.&lt;/p&gt;
 &lt;p&gt;In an era of quickly fabricated materials, we forget our once deep reliance on the slow processes of nature, and the need to adapt to their rhythms. Interstellar flight demands perspectives as profoundly attuned to its goals as those of Collingwood's foresters, and a commitment to what Tennyson once called &amp;quot;the long result of time.&amp;quot; Alpha Centauri, or other dazzling, distant targets like Epsilon Eridani or Tau Ceti, may one day help us recalibrate our vision, while reminding us that &lt;em&gt;no worthwhile goal has ever been easy&lt;/em&gt; [emphasis added]. (p29-30)&lt;/p&gt;
 &lt;/blockquote&gt;
-</summary><category term="quotes"></category></entry><entry><title>Search for a book using Python and Firefox</title><link href="http://www.circuidipity.com/booktab.html" rel="alternate"></link><updated>2016-09-05T19:24:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-09-05:booktab.html</id><summary type="html">&lt;p&gt;Get book information from command line arguments or clipboard, open a web browser, and search on Amazon and the &lt;a class="reference external" href="http://torontopubliclibrary.ca/"&gt;Toronto Public Library (TPL)&lt;/a&gt;.&lt;/p&gt;
+</content><category term="quotes"></category></entry><entry><title>Search for a book using Python and Firefox</title><link href="http://www.circuidipity.com/booktab.html" rel="alternate"></link><published>2016-09-05T19:24:00-04:00</published><updated>2016-09-05T19:24:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-09-05:/booktab.html</id><summary type="html">&lt;p&gt;Get book information from command line arguments or clipboard, open a web browser, and search on Amazon and the &lt;a class="reference external" href="http://torontopubliclibrary.ca/"&gt;Toronto Public Library (TPL)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;When I read something interesting online about a book or author I start to dig deeper by checking out details on Amazon and availability at my local …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Get book information from command line arguments or clipboard, open a web browser, and search on Amazon and the &lt;a class="reference external" href="http://torontopubliclibrary.ca/"&gt;Toronto Public Library (TPL)&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;When I read something interesting online about a book or author I start to dig deeper by checking out details on Amazon and availability at my local library. Is it possible that Python can improve on this search flow? Why yes it can!&lt;/p&gt;
 &lt;p&gt;I discovered two new Python modules and one new concept:&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -14,10 +16,10 @@
 &lt;li&gt;a gentle introduction to object-oriented programming by refactoring code and creating &lt;strong&gt;class objects&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;Step 0:&lt;/strong&gt; On Ubuntu/Debian for Python3, install ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install python3-pyperclip xclip
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install python3-pyperclip xclip
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Step 1:&lt;/strong&gt; Create a Python module [&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bernersLee.py"&gt;source&lt;/a&gt;] that opens new tabs and URLs in Firefox ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;import webbrowser, pyperclip
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;import webbrowser, pyperclip
 
 class Browser&lt;span class="o"&gt;()&lt;/span&gt;:
     &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;Super browser powers&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
@@ -46,7 +48,7 @@ class Browser&lt;span class="o"&gt;()&lt;/span&gt;:
         www&lt;span class="o"&gt;(&lt;/span&gt;web_address + search_item&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Step 2:&lt;/strong&gt; Setup a script [&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bookTab.py"&gt;source&lt;/a&gt;] to call the module, open tabs in the browser, and run searches on Amazon.(com,ca) and the TPL ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="ch"&gt;#!/usr/bin/env python3&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/env python3&lt;/span&gt;
 from bernersLee import Browser
 
 def main&lt;span class="o"&gt;()&lt;/span&gt;:
@@ -64,12 +66,24 @@ main&lt;span class="o"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Cut-and-paste text in the browser, launch &lt;em&gt;bookTab.py&lt;/em&gt; from the &lt;a class="reference external" href="https://davedavenport.github.io/rofi/"&gt;run menu&lt;/a&gt;, and all the tabs+searches open and go to work!&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-</summary><category term="firefox"></category><category term="python"></category><category term="programming"></category></entry><entry><title>Bits of August</title><link href="http://www.circuidipity.com/2016-08-31-bits.html" rel="alternate"></link><updated>2016-08-31T09:09:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-31:2016-08-31-bits.html</id><summary type="html">&lt;p&gt;Just the &lt;strong&gt;good stuff&lt;/strong&gt; ...&lt;/p&gt;
+</content><category term="firefox"></category><category term="python"></category><category term="programming"></category></entry><entry><title>Bits of August</title><link href="http://www.circuidipity.com/2016-08-31-bits.html" rel="alternate"></link><published>2016-08-31T09:09:00-04:00</published><updated>2016-08-31T09:09:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-31:/2016-08-31-bits.html</id><summary type="html">&lt;p&gt;Just the &lt;strong&gt;good stuff&lt;/strong&gt; ...&lt;/p&gt;
 &lt;div class="section" id="restart-network-service-on-ubuntu"&gt;
 &lt;h2&gt;0. Restart network service on Ubuntu&lt;/h2&gt;
 &lt;p&gt;Sometimes after wake-from-suspend the network connection is down and network-manager's wifi ap list fails to refresh.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;FIX:&lt;/strong&gt; Simple systemd way ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo systemctl restart NetworkManager.service
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo systemctl restart NetworkManager.service
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If that doesn't work ... Try using &lt;tt class="docutils literal"&gt;nmcli&lt;/tt&gt; to stop and start network-manager directly ...&lt;/p&gt;
+&lt;!-- code-block::bash
+
+$ sudo nmcli networking off
+$ sudo nmcli networking on --&gt;
+&lt;p&gt;Old-fashioned SysV …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Just the &lt;strong&gt;good stuff&lt;/strong&gt; ...&lt;/p&gt;
+&lt;div class="section" id="restart-network-service-on-ubuntu"&gt;
+&lt;h2&gt;0. Restart network service on Ubuntu&lt;/h2&gt;
+&lt;p&gt;Sometimes after wake-from-suspend the network connection is down and network-manager's wifi ap list fails to refresh.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;FIX:&lt;/strong&gt; Simple systemd way ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo systemctl restart NetworkManager.service
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If that doesn't work ... Try using &lt;tt class="docutils literal"&gt;nmcli&lt;/tt&gt; to stop and start network-manager directly ...&lt;/p&gt;
 &lt;!-- code-block::bash
@@ -77,12 +91,12 @@ main&lt;span class="o"&gt;()&lt;/span&gt;
 $ sudo nmcli networking off
 $ sudo nmcli networking on --&gt;
 &lt;p&gt;Old-fashioned SysV init script method still works on 16.04 ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo /etc/init.d/networking restart
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo /etc/init.d/networking restart
     ... or ...
 $ sudo /etc/init.d/network-manager restart
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Last resort ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo ifdown -a  &lt;span class="c1"&gt;# -a brings down all interfaces&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo ifdown -a  &lt;span class="c1"&gt;# -a brings down all interfaces&lt;/span&gt;
 $ sudo ifup -a
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -90,12 +104,12 @@ $ sudo ifup -a
 &lt;h2&gt;1. Microphone problem on Thinkpad x230 running Ubuntu 16.04&lt;/h2&gt;
 &lt;p&gt;No sound input and &lt;strong&gt;mic&lt;/strong&gt; not detected.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;FIX:&lt;/strong&gt; Get capture device ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ arecord -l
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ arecord -l
 card 0: ... device 0: ...
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... and edit &lt;tt class="docutils literal"&gt;/etc/pulse/default.pa&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;load-module&lt;/span&gt; &lt;span class="pre"&gt;module-alsa-source&lt;/span&gt; device=hw:0,0&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;Kill and respawn pulseaudio ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ pulseaudio -k
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pulseaudio -k
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="frozen-ssh-session"&gt;
@@ -105,7 +119,7 @@ card 0: ... device 0: ...
 &lt;div class="section" id="local-install-of-python-modules-as-non-root-user"&gt;
 &lt;h2&gt;3. Local install of Python modules as non-root user&lt;/h2&gt;
 &lt;p&gt;Example ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ pip3 install exifread
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pip3 install exifread
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... libraries are installed to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/lib/python-ver/&lt;/span&gt;&lt;/tt&gt; and the bins are placed in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/bin/&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;Add &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/bin&lt;/span&gt;&lt;/tt&gt; to user's $PATH.&lt;/p&gt;
@@ -113,7 +127,7 @@ card 0: ... device 0: ...
 &lt;div class="section" id="set-power-management-on-hard-drive"&gt;
 &lt;h2&gt;4. Set power management on hard drive&lt;/h2&gt;
 &lt;p&gt;Get information on drive ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo hdparm -I /dev/sda
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo hdparm -I /dev/sda
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Too aggressive power management can reduce lifespan of drive due to frequent parking and spindown. For my &lt;a class="reference external" href="http://www.circuidipity.com/laptop-home-server.html"&gt;netbook server&lt;/a&gt; I want &amp;quot;kinder, gentler&amp;quot; settings.&lt;/p&gt;
 &lt;p&gt;From &lt;tt class="docutils literal"&gt;man hdparm&lt;/tt&gt; ...&lt;/p&gt;
@@ -124,7 +138,7 @@ card 0: ... device 0: ...
 &lt;dd&gt;Put the drive into idle (low-power) mode, and also set the standby (spindown) timeout for the drive ... A value of zero means &amp;quot;timeouts are disabled&amp;quot; ...&lt;/dd&gt;
 &lt;/dl&gt;
 &lt;p&gt;On the netbook I run ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    $ sudo hdparm -B &lt;span class="m"&gt;254&lt;/span&gt; -S &lt;span class="m"&gt;0&lt;/span&gt; /dev/sda
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    $ sudo hdparm -B &lt;span class="m"&gt;254&lt;/span&gt; -S &lt;span class="m"&gt;0&lt;/span&gt; /dev/sda
 
     /dev/sda:
 setting Advanced Power Management level to 0xfe &lt;span class="o"&gt;(&lt;/span&gt;254&lt;span class="o"&gt;)&lt;/span&gt;
@@ -132,18 +146,20 @@ setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&
 &lt;span class="nv"&gt;APM_level&lt;/span&gt;      &lt;span class="o"&gt;=&lt;/span&gt; 254
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Create &lt;strong&gt;udev rules&lt;/strong&gt; to setup at boot. Existing rule ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ cat /lib/udev/rules.d/85-hdparm.rules
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ cat /lib/udev/rules.d/85-hdparm.rules
 &lt;span class="nv"&gt;ACTION&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;SUBSYSTEM&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;block&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;KERNEL&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;[sh]d[a-z]&amp;quot;&lt;/span&gt;, RUN+&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/lib/udev/hdparm&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... and make my own &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/udev/rules.d/85-hdparm.rules&lt;/span&gt;&lt;/tt&gt; (rules in &lt;tt class="docutils literal"&gt;/etc/udev/rules.d&lt;/tt&gt; have the &lt;a class="reference external" href="http://manpages.ubuntu.com/manpages/wily/man7/udev.7.html"&gt;highest priority&lt;/a&gt;) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;ACTION&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;SUBSYSTEM&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;block&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;KERNEL&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sda&amp;quot;&lt;/span&gt;, RUN+&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/sbin/hdparm -B 254 -S 0 /dev/sda&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;ACTION&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;SUBSYSTEM&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;block&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;KERNEL&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sda&amp;quot;&lt;/span&gt;, RUN+&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/sbin/hdparm -B 254 -S 0 /dev/sda&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="bits"></category><category term="network"></category><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>Command line tools: htop</title><link href="http://www.circuidipity.com/htop.html" rel="alternate"></link><updated>2016-08-22T17:09:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-22:htop.html</id><summary type="html">&lt;img alt="htop" src="/images/screenshot/htop.png" style="width: 940px; height: 354px;" /&gt;
+</content><category term="bits"></category><category term="network"></category><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>Command line tools: htop</title><link href="http://www.circuidipity.com/htop.html" rel="alternate"></link><published>2016-08-22T17:09:00-04:00</published><updated>2016-08-22T17:09:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-22:/htop.html</id><summary type="html">&lt;img alt="htop" src="/images/screenshot/htop.png" style="width: 940px; height: 354px;" /&gt;
+&lt;p&gt;The &lt;tt class="docutils literal"&gt;top&lt;/tt&gt; command displays Linux processes, and one of the first packages I install on a new Linux setup is the enhanced, interactive &lt;a class="reference external" href="http://hisham.hm/htop/"&gt;htop&lt;/a&gt; viewer. Good-looking and easy to use: see CPU and MEMORY usage at a glance, system load and uptime, kill wonky processes, and more!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Install:&lt;/strong&gt; On Ubuntu …&lt;/p&gt;</summary><content type="html">&lt;img alt="htop" src="/images/screenshot/htop.png" style="width: 940px; height: 354px;" /&gt;
 &lt;p&gt;The &lt;tt class="docutils literal"&gt;top&lt;/tt&gt; command displays Linux processes, and one of the first packages I install on a new Linux setup is the enhanced, interactive &lt;a class="reference external" href="http://hisham.hm/htop/"&gt;htop&lt;/a&gt; viewer. Good-looking and easy to use: see CPU and MEMORY usage at a glance, system load and uptime, kill wonky processes, and more!&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Install:&lt;/strong&gt; On Ubuntu/Debian ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install htop lsof
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install htop lsof
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="section" id="helpful-commands"&gt;
 &lt;h2&gt;Helpful Commands&lt;/h2&gt;
@@ -183,7 +199,8 @@ setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&
 &lt;/dl&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="shell"></category><category term="tools"></category><category term="linux"></category></entry><entry><title>New life for an old laptop as a Linux home server</title><link href="http://www.circuidipity.com/laptop-home-server.html" rel="alternate"></link><updated>2016-08-29T15:15:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-16:laptop-home-server.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #0.1 .:&lt;/a&gt; &lt;strong&gt;Netbooks&lt;/strong&gt; ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old &lt;strong&gt;Asus 900HA&lt;/strong&gt; netbook and put it to work as a &lt;a class="reference external" href="http://www.circuidipity.com/tag-server.html"&gt;home server&lt;/a&gt;. Good times!&lt;/p&gt;
+</content><category term="shell"></category><category term="tools"></category><category term="linux"></category></entry><entry><title>New life for an old laptop as a Linux home server</title><link href="http://www.circuidipity.com/laptop-home-server.html" rel="alternate"></link><published>2016-08-16T21:47:00-04:00</published><updated>2016-08-29T15:15:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-16:/laptop-home-server.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #0.1 .:&lt;/a&gt; &lt;strong&gt;Netbooks&lt;/strong&gt; ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old &lt;strong&gt;Asus 900HA&lt;/strong&gt; netbook and put it to work as a &lt;a class="reference external" href="http://www.circuidipity.com/tag-server.html"&gt;home server&lt;/a&gt;. Good times!&lt;/p&gt;
+&lt;p&gt;Running your own home server is a fun learning experience and offers several advantages …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #0.1 .:&lt;/a&gt; &lt;strong&gt;Netbooks&lt;/strong&gt; ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old &lt;strong&gt;Asus 900HA&lt;/strong&gt; netbook and put it to work as a &lt;a class="reference external" href="http://www.circuidipity.com/tag-server.html"&gt;home server&lt;/a&gt;. Good times!&lt;/p&gt;
 &lt;p&gt;Running your own home server is a fun learning experience and offers several advantages.&lt;/p&gt;
 &lt;p&gt;Second-hand laptops -  retired in favour of more current and powerful machines - can still deliver plenty of oomph for running a personal server. Frugal with power and come equipped with their own built-in UPS (battery)!&lt;/p&gt;
 &lt;p&gt;Install a stable, well-tested Linux distribution and provide services such as network printing and &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;storage (NAS)&lt;/a&gt;, perform &lt;a class="reference external" href="http://www.circuidipity.com/incremental-backups-rsnapshot.html"&gt;backups&lt;/a&gt;, host &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;web services&lt;/a&gt; and much more. Start with a minimal base configuration of &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt; and gain access to tens of thousands of packages ready to install.&lt;/p&gt;
@@ -212,11 +229,11 @@ setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&
 &lt;div class="section" id="static-network-address"&gt;
 &lt;h3&gt;1. Static network address&lt;/h3&gt;
 &lt;p&gt;Login to the new home server and check which network interfaces are detected and settings ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ ip a
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ip a
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Wired&lt;/strong&gt; interfaces are usually auto-configured by default and assigned an IP address courtesy of DHCP.&lt;/p&gt;
 &lt;p&gt;To assign the server a &lt;strong&gt;static&lt;/strong&gt; address (recommended), deactivate the wired interface and create a new entry in &lt;tt class="docutils literal"&gt;/etc/network/interfaces&lt;/tt&gt;. Sample entry for &lt;tt class="docutils literal"&gt;enp3s0&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# The primary network interface&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# The primary network interface&lt;/span&gt;
 auto enp3s0
 &lt;span class="c1"&gt;#iface enp3s0 inet dhcp&lt;/span&gt;
 iface enp3s0 inet static
@@ -234,23 +251,23 @@ iface enp3s0 inet static
 &lt;div class="section" id="encrypted-storage"&gt;
 &lt;h3&gt;3. Encrypted storage&lt;/h3&gt;
 &lt;p&gt;Configure the encrypted partition created by Ubuntu during the install to be mounted by a user, starting with the creation of a mountpoint in &lt;tt class="docutils literal"&gt;/media&lt;/tt&gt; for the storage ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo mkdir /media/sda3_crypt
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo mkdir /media/sda3_crypt
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Unlock the partition with the passphrase created during the install ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo cryptsetup open /dev/sda3 sda3_crypt
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo cryptsetup open /dev/sda3 sda3_crypt
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/fstab&lt;/tt&gt; by creating a consistent mountpoint for the partition ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;/dev/mapper/sda3_crypt /media/sda3_crypt        ext4    relatime,noauto,user       &lt;span class="m"&gt;0&lt;/span&gt;       0
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/dev/mapper/sda3_crypt /media/sda3_crypt        ext4    relatime,noauto,user       &lt;span class="m"&gt;0&lt;/span&gt;       0
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Mount the partition ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ mount /media/sda3_crypt
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ mount /media/sda3_crypt
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="set-power-management-on-hard-drive"&gt;
 &lt;h3&gt;4. Set power management on hard drive&lt;/h3&gt;
 &lt;p&gt;Default settings on the netbook frequently park and spindown the drive, generating an audible &amp;quot;click&amp;quot; sound. Too aggressive power management can reduce lifespan of drive. I want &amp;quot;kinder, gentler&amp;quot; settings.&lt;/p&gt;
 &lt;p&gt;Get information on drive ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo hdparm -I /dev/sda
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo hdparm -I /dev/sda
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;From &lt;tt class="docutils literal"&gt;man hdparm&lt;/tt&gt; ...&lt;/p&gt;
 &lt;dl class="docutils"&gt;
@@ -260,7 +277,7 @@ iface enp3s0 inet static
 &lt;dd&gt;Put the drive into idle (low-power) mode, and also set the standby (spindown) timeout for the drive ... A value of zero means &amp;quot;timeouts are disabled&amp;quot; ...&lt;/dd&gt;
 &lt;/dl&gt;
 &lt;p&gt;On the netbook I run ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo hdparm -B &lt;span class="m"&gt;254&lt;/span&gt; -S &lt;span class="m"&gt;0&lt;/span&gt; /dev/sda
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo hdparm -B &lt;span class="m"&gt;254&lt;/span&gt; -S &lt;span class="m"&gt;0&lt;/span&gt; /dev/sda
 
 /dev/sda:
 setting Advanced Power Management level to 0xfe &lt;span class="o"&gt;(&lt;/span&gt;254&lt;span class="o"&gt;)&lt;/span&gt;
@@ -268,11 +285,11 @@ setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&
 &lt;span class="nv"&gt;APM_level&lt;/span&gt;      &lt;span class="o"&gt;=&lt;/span&gt; 254
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Create &lt;strong&gt;udev rules&lt;/strong&gt; to setup at boot. Existing rule ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ cat /lib/udev/rules.d/85-hdparm.rules
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ cat /lib/udev/rules.d/85-hdparm.rules
 &lt;span class="nv"&gt;ACTION&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;SUBSYSTEM&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;block&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;KERNEL&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;[sh]d[a-z]&amp;quot;&lt;/span&gt;, RUN+&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/lib/udev/hdparm&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... and make my own &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/udev/rules.d/85-hdparm.rules&lt;/span&gt;&lt;/tt&gt; (rules in &lt;tt class="docutils literal"&gt;/etc/udev/rules.d&lt;/tt&gt; have the &lt;a class="reference external" href="http://manpages.ubuntu.com/manpages/wily/man7/udev.7.html"&gt;highest priority&lt;/a&gt;) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;ACTION&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;SUBSYSTEM&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;block&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;KERNEL&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sda&amp;quot;&lt;/span&gt;, RUN+&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/sbin/hdparm -B 254 -S 0 /dev/sda&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;ACTION&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;SUBSYSTEM&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;block&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;KERNEL&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sda&amp;quot;&lt;/span&gt;, RUN+&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/sbin/hdparm -B 254 -S 0 /dev/sda&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="services"&gt;
@@ -281,7 +298,16 @@ setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="server"></category><category term="network"></category><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>$HOME slash bin</title><link href="http://www.circuidipity.com/homebin.html" rel="alternate"></link><updated>2016-09-05T21:45:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-08:homebin.html</id><summary type="html">&lt;img alt="Infinite loop" class="align-right" src="images/infinite-loop-not-300.png" style="width: 300px; height: 400px;" /&gt;
+</content><category term="server"></category><category term="network"></category><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>$HOME slash bin</title><link href="http://www.circuidipity.com/homebin.html" rel="alternate"></link><published>2016-08-08T16:20:00-04:00</published><updated>2016-09-05T21:45:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-08:/homebin.html</id><summary type="html">&lt;img alt="Infinite loop" class="align-right" src="images/infinite-loop-not-300.png" style="width: 300px; height: 400px;" /&gt;
+&lt;p&gt;Bit by bit I build my collection of working scripts and experiments in my &lt;a class="reference external" href="https://github.com/vonbrownie/homebin"&gt;home directory&lt;/a&gt;. Programming right now in &lt;a class="reference external" href="http://www.circuidipity.com/tag-python.html"&gt;Python&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/Library.sh"&gt;Library.sh&lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;library of functions for bash shell scripts (more: &lt;a class="reference external" href="http://www.circuidipity.com/shell-script-library.html"&gt;&amp;quot;A library for shell scripts&amp;quot;&lt;/a&gt;)&lt;/dd&gt;
+&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bernersLee.py"&gt;bernersLee.py&lt;/a&gt;&lt;/dt&gt;
+&lt;dd&gt;a set of classes to support my web hacks&lt;/dd&gt;
+&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bookTab.py"&gt;bookTab …&lt;/a&gt;&lt;/dt&gt;&lt;/dl&gt;&lt;/div&gt;</summary><content type="html">&lt;img alt="Infinite loop" class="align-right" src="images/infinite-loop-not-300.png" style="width: 300px; height: 400px;" /&gt;
 &lt;p&gt;Bit by bit I build my collection of working scripts and experiments in my &lt;a class="reference external" href="https://github.com/vonbrownie/homebin"&gt;home directory&lt;/a&gt;. Programming right now in &lt;a class="reference external" href="http://www.circuidipity.com/tag-python.html"&gt;Python&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
@@ -341,12 +367,24 @@ setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&
 &lt;/dl&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="programming"></category><category term="shell"></category><category term="python"></category><category term="linux"></category></entry><entry><title>LPTHW Exercise 22: What Do You Know So Far?</title><link href="http://www.circuidipity.com/lpthw-e22.html" rel="alternate"></link><updated>2016-06-05T14:40:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-06-05:lpthw-e22.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; A review of my recent Python journey ...&lt;/p&gt;
+</content><category term="programming"></category><category term="shell"></category><category term="python"></category><category term="linux"></category></entry><entry><title>LPTHW Exercise 22: What Do You Know So Far?</title><link href="http://www.circuidipity.com/lpthw-e22.html" rel="alternate"></link><published>2016-06-05T14:40:00-04:00</published><updated>2016-06-05T14:40:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-06-05:/lpthw-e22.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; A review of my recent Python journey ...&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;print&lt;/strong&gt; Output result of expression.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;python script.py&lt;/strong&gt; Run &lt;em&gt;script.py&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;#&lt;/strong&gt; Comment out a line of script. Anything after the pound symbol is ignored.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/strong&gt; Block quotes ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;(O&amp;lt; .: Hello world!&lt;/span&gt;
+&lt;span class="s2"&gt;(/)_&lt;/span&gt;
+&lt;span class="s2"&gt;.....&lt;/span&gt;
+&lt;span class="s2"&gt;.....&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;variable&lt;/strong&gt; A memory location …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; A review of my recent Python journey ...&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;print&lt;/strong&gt; Output result of expression.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;python script.py&lt;/strong&gt; Run &lt;em&gt;script.py&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;#&lt;/strong&gt; Comment out a line of script. Anything after the pound symbol is ignored.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/strong&gt; Block quotes ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
 &lt;span class="s2"&gt;(O&amp;lt; .: Hello world!&lt;/span&gt;
 &lt;span class="s2"&gt;(/)_&lt;/span&gt;
 &lt;span class="s2"&gt;.....&lt;/span&gt;
@@ -357,7 +395,7 @@ setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&
 &lt;p&gt;&lt;strong&gt;integer&lt;/strong&gt; Whole numbers&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;float&lt;/strong&gt; Decimals&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;round()&lt;/strong&gt; Round a floating number ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; round&lt;span class="o"&gt;(&lt;/span&gt;5.67888&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; round&lt;span class="o"&gt;(&lt;/span&gt;5.67888&lt;span class="o"&gt;)&lt;/span&gt;
 6.0
 &amp;gt;&amp;gt;&amp;gt; round&lt;span class="o"&gt;(&lt;/span&gt;5.67888, 2&lt;span class="o"&gt;)&lt;/span&gt;
 5.68
@@ -365,7 +403,7 @@ setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&
 &lt;p&gt;&lt;strong&gt;string&lt;/strong&gt; Sequence of characters (text).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;len&lt;/strong&gt; Length of a string.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;data type&lt;/strong&gt; Type of data stored in memory. Example: &lt;tt class="docutils literal"&gt;int&lt;/tt&gt; (integers), &lt;tt class="docutils literal"&gt;float&lt;/tt&gt; (decimals), &lt;tt class="docutils literal"&gt;str&lt;/tt&gt; (strings) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;8&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;8&amp;#39;&lt;/span&gt;
 &amp;gt;&amp;gt;&amp;gt; type&lt;span class="o"&gt;(&lt;/span&gt;a&lt;span class="o"&gt;)&lt;/span&gt;
 &amp;lt;&lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;str&amp;#39;&lt;/span&gt;&amp;gt;
 &amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; int&lt;span class="o"&gt;(&lt;/span&gt;a&lt;span class="o"&gt;)&lt;/span&gt;
@@ -393,7 +431,7 @@ setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&
 &lt;li&gt;Addition and Substraction&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;... and operations of equal priority are evaluated from left-to-right ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="m"&gt;5&lt;/span&gt; % 3
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="m"&gt;5&lt;/span&gt; % 3
 2
 &amp;gt;&amp;gt;&amp;gt; &lt;span class="m"&gt;2&lt;/span&gt; * &lt;span class="m"&gt;5&lt;/span&gt; % 3
 1
@@ -409,7 +447,7 @@ setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&
 &lt;p&gt;&lt;strong&gt;=&lt;/strong&gt; Assign value on the right to variable on the left (&lt;strong&gt;not&lt;/strong&gt; a comparator).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;boolean&lt;/strong&gt; A test for truth values: &lt;tt class="docutils literal"&gt;True&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;False&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;Boolean operators have an order of operations. After any math or comparison operations evaluate, Python evaluates the &lt;tt class="docutils literal"&gt;not&lt;/tt&gt; operators first, then the &lt;tt class="docutils literal"&gt;and&lt;/tt&gt; operators, then the &lt;tt class="docutils literal"&gt;or&lt;/tt&gt; operators ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; not &lt;span class="m"&gt;2&lt;/span&gt; &amp;gt; 4
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; not &lt;span class="m"&gt;2&lt;/span&gt; &amp;gt; 4
 True
 &amp;gt;&amp;gt;&amp;gt; not &lt;span class="m"&gt;2&lt;/span&gt; &amp;gt; &lt;span class="m"&gt;4&lt;/span&gt; and &lt;span class="m"&gt;2&lt;/span&gt; &amp;gt; 4
 False
@@ -425,7 +463,7 @@ True
 &lt;p&gt;&lt;strong&gt;%r&lt;/strong&gt; Raw&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;n&lt;/strong&gt; New line&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;t&lt;/strong&gt; Tab&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;I \&amp;quot;may\&amp;quot; have %d %s tickets\nfor the \t%r\tnext weekend.&amp;quot;&lt;/span&gt; % &lt;span class="o"&gt;(&lt;/span&gt;3, &lt;span class="s1"&gt;&amp;#39;free&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;LPTHW Bootcamp&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;I \&amp;quot;may\&amp;quot; have %d %s tickets\nfor the \t%r\tnext weekend.&amp;quot;&lt;/span&gt; % &lt;span class="o"&gt;(&lt;/span&gt;3, &lt;span class="s1"&gt;&amp;#39;free&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;LPTHW Bootcamp&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 I &lt;span class="s2"&gt;&amp;quot;may&amp;quot;&lt;/span&gt; have &lt;span class="m"&gt;3&lt;/span&gt; free tickets
 &lt;span class="k"&gt;for&lt;/span&gt; the         &lt;span class="s1"&gt;&amp;#39;LPTHW Bootcamp&amp;#39;&lt;/span&gt;        next weekend.
 &amp;gt;&amp;gt;&amp;gt;
@@ -436,7 +474,7 @@ I &lt;span class="s2"&gt;&amp;quot;may&amp;quot;&lt;/span&gt; have &lt;span clas
 &lt;p&gt;&lt;strong&gt;raw_input()&lt;/strong&gt; Get user input (changed to &lt;tt class="docutils literal"&gt;input()&lt;/tt&gt; in Python 3).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;int(raw_input())&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;float(raw_input())&lt;/strong&gt; Convert user input into an integer|float ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;age&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; int&lt;span class="o"&gt;(&lt;/span&gt;raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Age? &amp;gt; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;age&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; int&lt;span class="o"&gt;(&lt;/span&gt;raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Age? &amp;gt; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
 Age? &amp;gt; 104
 &amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;You must be doing something right to make it to %d years old!&amp;quot;&lt;/span&gt; % age
 You must be doing something right to make it to &lt;span class="m"&gt;104&lt;/span&gt; years old!
@@ -445,11 +483,11 @@ You must be doing something right to make it to &lt;span class="m"&gt;104&lt;/sp
 &lt;p&gt;&lt;strong&gt;import&lt;/strong&gt; Add modules (libraries) of Python code to my script.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;modules&lt;/strong&gt; Features&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;pydoc&lt;/strong&gt; Show documentation from Python modules. Can read in the console or start a webserver and read documentation in the browser ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ pydoc -p 1234
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pydoc -p 1234
 pydoc server ready at http://localhost:1234/
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;argv&lt;/strong&gt; Module that enables a script to accept command line arguments ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;from sys import argv
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;from sys import argv
 script, first, second, &lt;span class="nv"&gt;third&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; argv
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -470,7 +508,7 @@ script, first, second, &lt;span class="nv"&gt;third&lt;/span&gt; &lt;span class=
 &lt;p&gt;&lt;strong&gt;write()&lt;/strong&gt; Write a string to the file.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;seek()&lt;/strong&gt; Set the current position in the file. Beginning of file is &lt;tt class="docutils literal"&gt;seek(0)&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;close()&lt;/strong&gt; Close the file ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;txt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; open&lt;span class="o"&gt;(&lt;/span&gt;filename&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;txt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; open&lt;span class="o"&gt;(&lt;/span&gt;filename&lt;span class="o"&gt;)&lt;/span&gt;
 &amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;txt.read&lt;span class="o"&gt;())&lt;/span&gt;
 &lt;span class="o"&gt;(&lt;/span&gt;O&amp;lt; .: Hello world!
 &lt;span class="o"&gt;(&lt;/span&gt;/&lt;span class="o"&gt;)&lt;/span&gt;_
@@ -507,22 +545,30 @@ script, first, second, &lt;span class="nv"&gt;third&lt;/span&gt; &lt;span class=
 &amp;gt;&amp;gt;&amp;gt; execfile('some_script.py')
 &lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;02.&lt;/strong&gt; &lt;tt class="docutils literal"&gt;format()&lt;/tt&gt; Positional formatting ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;{0} {1} {0} zero ...&amp;quot;&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;1, &lt;span class="s1"&gt;&amp;#39;two&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;{0} {1} {0} zero ...&amp;quot;&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;1, &lt;span class="s1"&gt;&amp;#39;two&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;span class="m"&gt;1&lt;/span&gt; two &lt;span class="m"&gt;1&lt;/span&gt; zero ...
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;03.&lt;/strong&gt; &lt;tt class="docutils literal"&gt;from __future__ import&lt;/tt&gt; Allows me to bring Python 3 features into Python 2. Example ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;from __future__ import print_function
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;from __future__ import print_function
 print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;There are&amp;#39;&lt;/span&gt;, cars, &lt;span class="s1"&gt;&amp;#39;cars available.&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... prints a concatenated statement (otherwise the above &lt;tt class="docutils literal"&gt;print()&lt;/tt&gt; in Python 2 makes the commas treat things as a tuple).&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;from __future__ import division
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;from __future__ import division
 print 8/7  &lt;span class="c1"&gt;# prints 1.1428571428571428&lt;/span&gt;
 print 8//7 &lt;span class="c1"&gt;# prints 1&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;... makes division into a float. Python 2 would otherwise return &lt;tt class="docutils literal"&gt;1&lt;/tt&gt; for both calculations.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;04.&lt;/strong&gt; &lt;tt class="docutils literal"&gt;textwrap.dedent&lt;/tt&gt; A useful module+method for indenting quotes in code while the output is aligned to margin.&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="python"></category><category term="programming"></category></entry><entry><title>Minimal to Morebuntu</title><link href="http://www.circuidipity.com/20160501.html" rel="alternate"></link><updated>2016-05-01T11:59:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-05-01:20160501.html</id><summary type="html">&lt;img alt="Ubuntu under-construction" class="align-right" src="images/ubuntu-crane-300.png" style="width: 300px; height: 300px;" /&gt;
+</content><category term="python"></category><category term="programming"></category></entry><entry><title>Minimal to Morebuntu</title><link href="http://www.circuidipity.com/20160501.html" rel="alternate"></link><published>2016-05-01T11:58:00-04:00</published><updated>2016-05-01T11:59:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-05-01:/20160501.html</id><summary type="html">&lt;img alt="Ubuntu under-construction" class="align-right" src="images/ubuntu-crane-300.png" style="width: 300px; height: 300px;" /&gt;
+&lt;p&gt;Start with a &lt;strong&gt;minimal install of Ubuntu 16.04 &amp;quot;Xenial Xerus&amp;quot;&lt;/strong&gt; and roll a &lt;strong&gt;Morebuntu&lt;/strong&gt; customized with the &lt;strong&gt;i3 tiling window manager&lt;/strong&gt; plus a collection of desktop applications.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;I use Ubuntu's &lt;a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD"&gt;minimal install image&lt;/a&gt; to create a console-only base configuration.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="minimal-ubuntu"&gt;
+&lt;h2&gt;0. Minimal Ubuntu&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Start here:&lt;/strong&gt; A &lt;a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html"&gt;visual walk-through …&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;img alt="Ubuntu under-construction" class="align-right" src="images/ubuntu-crane-300.png" style="width: 300px; height: 300px;" /&gt;
 &lt;p&gt;Start with a &lt;strong&gt;minimal install of Ubuntu 16.04 &amp;quot;Xenial Xerus&amp;quot;&lt;/strong&gt; and roll a &lt;strong&gt;Morebuntu&lt;/strong&gt; customized with the &lt;strong&gt;i3 tiling window manager&lt;/strong&gt; plus a collection of desktop applications.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
@@ -535,7 +581,7 @@ print 8//7 &lt;span class="c1"&gt;# prints 1&lt;/span&gt;
 &lt;div class="section" id="install-x"&gt;
 &lt;h2&gt;1. Install X&lt;/h2&gt;
 &lt;p&gt;After a successful first boot and network active ... setup the X environment ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install xorg xinput xbindkeys xbacklight xvkbd fonts-liberation ttf-ubuntu-font-family
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install xorg xinput xbindkeys xbacklight xvkbd fonts-liberation ttf-ubuntu-font-family
 $ sudo apt install rxvt-unicode-256color xfonts-terminus
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -544,7 +590,7 @@ $ sudo apt install rxvt-unicode-256color xfonts-terminus
 &lt;p&gt;&lt;strong&gt;Lots&lt;/strong&gt; of choices! I like the &lt;a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html"&gt;lightweight and delightful i3 window manager&lt;/a&gt;, with the latest packages provided by the i3 project's &lt;a class="reference external" href="https://i3wm.org/docs/repositories.html"&gt;Ubuntu repository&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Styling:&lt;/strong&gt; I use &lt;a class="reference external" href="http://www.ravefinity.com/p/download-ambiance-radiance-colors.html"&gt;Ambiance Colors&lt;/a&gt; + &lt;a class="reference external" href="http://www.ravefinity.com/p/vibrancy-colors-gtk-icon-theme.html"&gt;Vibrancy Color Icon&lt;/a&gt; themes. Download the &lt;tt class="docutils literal"&gt;deb&lt;/tt&gt; packages and install with &lt;tt class="docutils literal"&gt;sudo dpkg &lt;span class="pre"&gt;-i&lt;/span&gt; *.deb&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;Depends: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;gtk2-engines-{murrine,pixbuf}&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install gnome-themes-standard gtk2-engines-murrine gtk2-engines-pixbuf lxappearance qt4-qtconfig
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install gnome-themes-standard gtk2-engines-murrine gtk2-engines-pixbuf lxappearance qt4-qtconfig
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Theming for QT5 apps can be configured using the &lt;tt class="docutils literal"&gt;qt5ct&lt;/tt&gt; utility. Download the package &lt;a class="reference external" href="http://ppa.launchpad.net/nilarimogard/webupd8/ubuntu/pool/main/q/qt5ct/"&gt;available on the WebUpd8 PPA&lt;/a&gt; and install.&lt;/p&gt;
 &lt;/div&gt;
@@ -559,7 +605,7 @@ $ sudo apt install rxvt-unicode-256color xfonts-terminus
 &lt;li&gt;&lt;strong&gt;images&lt;/strong&gt; - &lt;tt class="docutils literal"&gt;eog&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;scrot&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;geeqie&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;gimp&lt;/tt&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;docs&lt;/strong&gt; - &lt;tt class="docutils literal"&gt;libreoffice&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;qpdfview&lt;/tt&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install vim rxvt-unicode tmux most
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install vim rxvt-unicode tmux most
 $ sudo apt --no-install-recommends install rhythmbox
 $ sudo apt install pulseaudio pulseaudio-utils pavucontrol gstreamer1.0-pulseaudio alsa-utils sox
 $ sudo apt install firefox default-jre icedtea-plugin transmission-gtk
@@ -571,7 +617,7 @@ $ sudo apt install libreoffice libreoffice-help-en-us libreoffice-gnome qpdfview
 &lt;div class="section" id="update-alternatives"&gt;
 &lt;h2&gt;4. Update-alternatives&lt;/h2&gt;
 &lt;p&gt;Configure symbolic links that determine default commands ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo update-alternatives --config editor
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo update-alternatives --config editor
 $ sudo update-alternatives --config pager
 $ sudo update-alternatives --config x-terminal-emulator
 &lt;/pre&gt;&lt;/div&gt;
@@ -581,9 +627,22 @@ $ sudo update-alternatives --config x-terminal-emulator
 &lt;p&gt;My &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/scripts/morebuntu.sh"&gt;morebuntu shell script&lt;/a&gt; that covers most of steps 1-4.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="ubuntu"></category><category term="linux"></category><category term="i3"></category><category term="shell"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 18-21: Functions, Variables, Return</title><link href="http://www.circuidipity.com/lpthw-e18-21.html" rel="alternate"></link><updated>2015-11-19T17:10:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-19:lpthw-e18-21.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; How long will it take for Sebastiaan to pedal his bike to &lt;em&gt;Proxima Centauri&lt;/em&gt;?&lt;/p&gt;
+</content><category term="ubuntu"></category><category term="linux"></category><category term="i3"></category><category term="shell"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 18-21: Functions, Variables, Return</title><link href="http://www.circuidipity.com/lpthw-e18-21.html" rel="alternate"></link><published>2015-11-19T17:10:00-05:00</published><updated>2015-11-19T17:10:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-19:/lpthw-e18-21.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; How long will it take for Sebastiaan to pedal his bike to &lt;em&gt;Proxima Centauri&lt;/em&gt;?&lt;/p&gt;
 &lt;p&gt;Code:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;import sys
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;import sys
+import textwrap
+
+script, &lt;span class="nv"&gt;origin&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; sys.argv
+
+&lt;span class="nv"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Sebastiaan&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 133.78
+
+def cyclist&lt;span class="o"&gt;(&lt;/span&gt;boost&lt;span class="o"&gt;)&lt;/span&gt;:
+    &lt;span class="nv"&gt;v&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;-&amp;#39;&lt;/span&gt;
+    &lt;span class="nv"&gt;h&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; v * &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt; + int&lt;span class="o"&gt;(&lt;/span&gt;boost&lt;span class="o"&gt;))&lt;/span&gt;
+    &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; v * &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;6&lt;/span&gt; + int&lt;span class="o"&gt;(&lt;/span&gt;boost …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; How long will it take for Sebastiaan to pedal his bike to &lt;em&gt;Proxima Centauri&lt;/em&gt;?&lt;/p&gt;
+&lt;p&gt;Code:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;import sys
 import textwrap
 
 script, &lt;span class="nv"&gt;origin&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; sys.argv
@@ -640,7 +699,7 @@ intro&lt;span class="o"&gt;()&lt;/span&gt;
 trip&lt;span class="o"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Output:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ python pedalTime.py Toronto
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ python pedalTime.py Toronto
 
 ----------- __@
 -------  _&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="se"&gt;\&amp;lt;&lt;/span&gt;,_
@@ -675,8 +734,14 @@ Travel Time: 3.00061103304e+11 hours by bike
 
 $
 &lt;/pre&gt;&lt;/div&gt;
-</summary><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 15-17: Reading and Writing Files</title><link href="http://www.circuidipity.com/lpthw-e15-17.html" rel="alternate"></link><updated>2015-11-18T13:55:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-18:lpthw-e15-17.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# Reading and Writing Files&lt;/span&gt;
+</content><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 15-17: Reading and Writing Files</title><link href="http://www.circuidipity.com/lpthw-e15-17.html" rel="alternate"></link><published>2015-11-18T13:55:00-05:00</published><updated>2015-11-18T13:55:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-18:/lpthw-e15-17.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Reading and Writing Files&lt;/span&gt;
+&lt;span class="c1"&gt;# * close - closes the file&lt;/span&gt;
+&lt;span class="c1"&gt;# * read - reads the contents of a file... can assign the result to a variable&lt;/span&gt;
+&lt;span class="c1"&gt;# * readline - reads just one line of a text file&lt;/span&gt;
+&lt;span class="c1"&gt;# * truncate - empties the file&lt;/span&gt;
+&lt;span class="c1"&gt;# * write(&amp;#39;stuff&amp;#39;) - writes &amp;#39;stuff&amp;#39; to the file …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Reading and Writing Files&lt;/span&gt;
 &lt;span class="c1"&gt;# * close - closes the file&lt;/span&gt;
 &lt;span class="c1"&gt;# * read - reads the contents of a file... can assign the result to a variable&lt;/span&gt;
 &lt;span class="c1"&gt;# * readline - reads just one line of a text file&lt;/span&gt;
@@ -723,332 +788,4 @@ print &lt;span class="s2"&gt;&amp;quot;And finally, we close it.&amp;quot;&lt;/s
 target.close&lt;span class="o"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Bonus:&lt;/strong&gt; Last night I attended the monthly &lt;a class="reference external" href="http://www.meetup.com/Python-Toronto/"&gt;Python Toronto Meetup&lt;/a&gt;. It was unintelligible (for a beginner) but inspiring (to me to learn more)! :-)&lt;/p&gt;
-</summary><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 13-14: Parameters, Unpacking, Variables, Prompting and Passing</title><link href="http://www.circuidipity.com/lpthw-e13-14.html" rel="alternate"></link><updated>2015-11-17T00:26:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-17:lpthw-e13-14.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Add extra libraries or &lt;em&gt;modules&lt;/em&gt; of code to a program using &lt;strong&gt;import&lt;/strong&gt; and supply arguments to a Python script on the command line using &lt;strong&gt;argv&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;The &lt;strong&gt;textwrap&lt;/strong&gt; module enables indenting a block quote for cleaner code but moving to left-margin at &lt;strong&gt;print()&lt;/strong&gt; time:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;import sys
-import textwrap
-
-script, firstName, &lt;span class="nv"&gt;lastName&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; sys.argv
-
-&lt;span class="nv"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span class="s2"&gt;    (O&amp;lt; .: Learn Python The Hard Way&lt;/span&gt;
-&lt;span class="s2"&gt;    (/)_&lt;/span&gt;
-&lt;span class="s2"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-print&lt;span class="o"&gt;(&lt;/span&gt;message&lt;span class="o"&gt;)&lt;/span&gt;
-print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;{} {} &amp;#39;&lt;/span&gt; + &lt;span class="s1"&gt;&amp;#39;, author of&amp;#39;&lt;/span&gt; + &lt;span class="s1"&gt;&amp;#39;.&amp;#39;&lt;/span&gt; * 10&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;firstName, lastName&lt;span class="o"&gt;)&lt;/span&gt;
-print&lt;span class="o"&gt;(&lt;/span&gt;textwrap.dedent&lt;span class="o"&gt;(&lt;/span&gt;message&lt;span class="o"&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Output:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ python e13.2.py Zed Shaw
-
-    &lt;span class="o"&gt;(&lt;/span&gt;O&amp;lt; .: Learn Python The Hard Way
-    &lt;span class="o"&gt;(&lt;/span&gt;/&lt;span class="o"&gt;)&lt;/span&gt;_
-
-Zed Shaw , author of..........
-
-&lt;span class="o"&gt;(&lt;/span&gt;O&amp;lt; .: Learn Python The Hard Way
-&lt;span class="o"&gt;(&lt;/span&gt;/&lt;span class="o"&gt;)&lt;/span&gt;_
-
-$
-&lt;/pre&gt;&lt;/div&gt;
-</summary><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 11-12: Asking Questions, Prompting People</title><link href="http://www.circuidipity.com/lpthw-e11-12.html" rel="alternate"></link><updated>2015-11-16T13:21:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-16:lpthw-e11-12.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Now we're cooking! Put &lt;strong&gt;raw_input()&lt;/strong&gt; and &lt;strong&gt;format()&lt;/strong&gt; to work:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;What is the temperature today in Clearwater, Florida in Fahrenheit? &amp;gt; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="nv"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;float&lt;span class="o"&gt;(&lt;/span&gt;f&lt;span class="o"&gt;)&lt;/span&gt; - 32&lt;span class="o"&gt;)&lt;/span&gt; * &lt;span class="o"&gt;(&lt;/span&gt;5.0/9&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="nv"&gt;k&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;float&lt;span class="o"&gt;(&lt;/span&gt;f&lt;span class="o"&gt;)&lt;/span&gt; - 32&lt;span class="o"&gt;)&lt;/span&gt; * &lt;span class="o"&gt;(&lt;/span&gt;5.0/9&lt;span class="o"&gt;)&lt;/span&gt; + 273.15
-
-print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;So a temperature of {} Fahrenheit converts to {:.2f} Celsius and {:.2f} Kelvin.&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;f, c, k&lt;span class="o"&gt;)&lt;/span&gt;
-print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Or, to be more precise, a temperature of {} Fahrenheit converts to {} Celsius and {} Kelvin.&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;f, round&lt;span class="o"&gt;(&lt;/span&gt;c,5&lt;span class="o"&gt;)&lt;/span&gt;, round&lt;span class="o"&gt;(&lt;/span&gt;k,5&lt;span class="o"&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Output:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ python e11.1.py
-What is the temperature today in Clearwater, Florida in Fahrenheit? &amp;gt; 80
-So a temperature of &lt;span class="m"&gt;80&lt;/span&gt; Fahrenheit converts to 26.67 Celsius and 299.82 Kelvin.
-Or, to be more precise, a temperature of &lt;span class="m"&gt;80&lt;/span&gt; Fahrenheit converts to 26.66667 Celsius and 299.81667 Kelvin.
-$
-&lt;/pre&gt;&lt;/div&gt;
-</summary><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 10: What Was That?</title><link href="http://www.circuidipity.com/lpthw-e10.html" rel="alternate"></link><updated>2015-11-15T15:46:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-15:lpthw-e10.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Playing with escape sequences:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;cars&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;self-driving cars&lt;/span&gt;
-&lt;span class="s1"&gt;... armoured cars&lt;/span&gt;
-&lt;span class="s1"&gt;... \t\t\t\tgetaway cars&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
-&amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{1} {0}\n\t{2} {0}\t\t{3} {0}\n{4} {4} {3} bumper {0}\n\a&amp;quot;&lt;/span&gt; + &lt;span class="s2"&gt;&amp;quot;.&amp;quot;&lt;/span&gt; * &lt;span class="m"&gt;40&lt;/span&gt; + cars&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;car&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Red&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;blue&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;green&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;really&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-Red car
-        blue car                green car
-really really green bumper car
-........................................self-driving cars
-armoured cars
-                                getaway cars
-&amp;gt;&amp;gt;&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-</summary><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 9: Printing, Printing, Printing</title><link href="http://www.circuidipity.com/lpthw-e9.html" rel="alternate"></link><updated>2015-11-15T15:43:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-15:lpthw-e9.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Escape sequences and block quotes:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;countdown&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;\n10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0\n\n\n&amp;quot;&lt;/span&gt;
-
-print&lt;span class="o"&gt;(&lt;/span&gt;countdown&lt;span class="o"&gt;)&lt;/span&gt;
-print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span class="s2"&gt;Liftoff!&lt;/span&gt;
-&lt;span class="s2"&gt;Tower clear...&lt;/span&gt;
-&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Output:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ python e09.1.py
-
-10
-9
-8
-7
-6
-5
-4
-3
-2
-1
-0
-
-
-
-
-Liftoff!
-Tower clear...
-
-$
-&lt;/pre&gt;&lt;/div&gt;
-</summary><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 8: Printing, Printing</title><link href="http://www.circuidipity.com/lpthw-e8.html" rel="alternate"></link><updated>2015-11-15T14:45:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-15:lpthw-e8.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; More printing using the newer &lt;strong&gt;format()&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;formatter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;{} {} {} {}&amp;quot;&lt;/span&gt;
-
-print&lt;span class="o"&gt;(&lt;/span&gt;formatter&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;1, 2, 3, 4&lt;span class="o"&gt;)&lt;/span&gt;
-print&lt;span class="o"&gt;(&lt;/span&gt;formatter&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;one&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;two&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;three&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;four&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-print&lt;span class="o"&gt;(&lt;/span&gt;formatter&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;True, False, False, True&lt;span class="o"&gt;)&lt;/span&gt;
-print&lt;span class="o"&gt;(&lt;/span&gt;formatter&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;formatter, formatter, formatter, formatter&lt;span class="o"&gt;)&lt;/span&gt;
-print&lt;span class="o"&gt;(&lt;/span&gt;formatter&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;I had this thing.&amp;quot;&lt;/span&gt;,
-    &lt;span class="s2"&gt;&amp;quot;That you could type up right.&amp;quot;&lt;/span&gt;,
-    &lt;span class="s2"&gt;&amp;quot;But it didn&amp;#39;t sing.&amp;quot;&lt;/span&gt;,
-    &lt;span class="s2"&gt;&amp;quot;So I said goodnight.&amp;quot;&lt;/span&gt;
-&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Output:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ python e08.1.py
-&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt; 4
-one two three four
-True False False True
-&lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt;
-I had this thing. That you could &lt;span class="nb"&gt;type&lt;/span&gt; up right. But it didn&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;t sing. So I said goodnight.
-$
-&lt;/pre&gt;&lt;/div&gt;
-</summary><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 7: More Printing</title><link href="http://www.circuidipity.com/lpthw-e7.html" rel="alternate"></link><updated>2015-11-15T14:38:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-15:lpthw-e7.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; I am practising printing in Python 2 using the &lt;strong&gt;print()&lt;/strong&gt; and &lt;strong&gt;format()&lt;/strong&gt; functions inherited from Python 3:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;poem&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;The Wreck of the Hesperus&amp;#39;&lt;/span&gt;
-&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;poet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Longfellow&amp;#39;&lt;/span&gt;
-&amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;poem + &lt;span class="s2"&gt;&amp;quot; by &amp;quot;&lt;/span&gt; + poet&lt;span class="o"&gt;)&lt;/span&gt;
-The Wreck of the Hesperus by Longfellow
-&amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{}&amp;quot;&lt;/span&gt; + &lt;span class="s2"&gt;&amp;quot; by &amp;quot;&lt;/span&gt; + poet&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;poem&lt;span class="o"&gt;)&lt;/span&gt;
-The Wreck of the Hesperus by Longfellow
-&amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{}&amp;quot;&lt;/span&gt; + &lt;span class="s2"&gt;&amp;quot; by &amp;quot;&lt;/span&gt; + &lt;span class="s2"&gt;&amp;quot;{}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;poem, poet&lt;span class="o"&gt;)&lt;/span&gt;
-The Wreck of the Hesperus by Longfellow
-&amp;gt;&amp;gt;&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-</summary><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 6: Strings and Text</title><link href="http://www.circuidipity.com/lpthw-e6.html" rel="alternate"></link><updated>2015-11-15T12:59:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-15:lpthw-e6.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; I am not entirely clear about the difference between &lt;strong&gt;%r&lt;/strong&gt; vs &lt;strong&gt;%s&lt;/strong&gt; in string formatting. I &lt;strong&gt;do&lt;/strong&gt; understand they call different functions (&lt;strong&gt;repr&lt;/strong&gt; and &lt;strong&gt;str&lt;/strong&gt;) and produce different output:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;vessel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Hesperus&amp;#39;&lt;/span&gt;
-&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;The Wreck of the %r&amp;quot;&lt;/span&gt; % vessel
-The Wreck of the &lt;span class="s1"&gt;&amp;#39;Hesperus&amp;#39;&lt;/span&gt;
-&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;The Wreck of the %s&amp;quot;&lt;/span&gt; % vessel
-The Wreck of the Hesperus
-&amp;gt;&amp;gt;&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;As the book states, the first example is &amp;quot;raw output&amp;quot; and the second is the content more cleanly formatted for printing. Why using &lt;strong&gt;repr&lt;/strong&gt; would be desirable under certain circumstances will probably become more clear later on.&lt;/p&gt;
-</summary><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 5: More Variables and Printing</title><link href="http://www.circuidipity.com/lpthw-e5.html" rel="alternate"></link><updated>2015-11-14T17:25:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-14:lpthw-e5.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; The old way of printing format strings using &lt;strong&gt;%&lt;/strong&gt; and the new way using &lt;strong&gt;.format()&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;astronaut&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Yuri Gagarin&amp;#39;&lt;/span&gt;
-&lt;span class="nv"&gt;astronaut_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Alan Shepard&amp;#39;&lt;/span&gt;
-&lt;span class="nv"&gt;launch&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Baikonur&amp;#39;&lt;/span&gt;
-&lt;span class="nv"&gt;launch_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Cape Canaveral&amp;#39;&lt;/span&gt;
-&lt;span class="nv"&gt;date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 1961
-
-print &lt;span class="s2"&gt;&amp;quot;%s blasted off from %s and became the first %s to reach space in %d.&amp;quot;&lt;/span&gt; % &lt;span class="o"&gt;(&lt;/span&gt;astronaut, launch, &lt;span class="s1"&gt;&amp;#39;human&amp;#39;&lt;/span&gt;, date&lt;span class="o"&gt;)&lt;/span&gt;
-print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{} blasted off from {} and became the first {} to reach space in {}.&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;astronaut, launch, &lt;span class="s1"&gt;&amp;#39;human&amp;#39;&lt;/span&gt;, date&lt;span class="o"&gt;)&lt;/span&gt;
-print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{1} blasted off from {3} and became the first {5} to reach space in {6}.&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;astronaut, astronaut_1, launch, launch_1, &lt;span class="s1"&gt;&amp;#39;human&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;American&amp;#39;&lt;/span&gt;, date&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Output:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ python e05.2.py
-Yuri Gagarin blasted off from Baikonur and became the first human to reach space in 1961.
-Yuri Gagarin blasted off from Baikonur and became the first human to reach space in 1961.
-Alan Shepard blasted off from Cape Canaveral and became the first American to reach space in 1961.
-$
-&lt;/pre&gt;&lt;/div&gt;
-</summary><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 4: Variables and Names</title><link href="http://www.circuidipity.com/lpthw-e4.html" rel="alternate"></link><updated>2015-11-14T16:18:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-14:lpthw-e4.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Equal sign assigns whatever is on the right to the variable on the left. Double equal signs perform a comparison. Same as shell scripting.&lt;/p&gt;
-</summary><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 3: Numbers and Math</title><link href="http://www.circuidipity.com/lpthw-e3.html" rel="alternate"></link><updated>2015-11-14T16:04:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-14:lpthw-e3.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Order of math operations is PEMDAS: &lt;em&gt;Parentheses Exponents Multiplication Division Addition Subtraction&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;So long as at least one of the numbers in a calculation is a floating point number the answer returned will also be floating point. Otherwise:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="m"&gt;5&lt;/span&gt; / 2
-2
-&amp;gt;&amp;gt;&amp;gt; 5.0 / 2
-2.5
-&amp;gt;&amp;gt;&amp;gt; 5.0 % 2
-1.0
-&amp;gt;&amp;gt;&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-</summary><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 2: Comments and Pound Characters</title><link href="http://www.circuidipity.com/lpthw-e2.html" rel="alternate"></link><updated>2015-11-14T15:43:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-14:lpthw-e2.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; Using the pound character (#) to add comments or disable a line of code works the same in Python as in Bash shell scripting.&lt;/p&gt;
-&lt;p&gt;Different languages &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Comment_%28computer_programming%29#Examples"&gt;do things differently ...&lt;/a&gt;&lt;/p&gt;
-</summary><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 1: A Good First Program</title><link href="http://www.circuidipity.com/lpthw-e1.html" rel="alternate"></link><updated>2015-11-13T21:49:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-13:lpthw-e1.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; The traditional &lt;em&gt;Hello World&lt;/em&gt; program. &lt;strong&gt;Print&lt;/strong&gt; in Python 2 encloses the statement in quotes while Python 3 adds brackets (and brackets format is backward-compatible to Python 2 but not vice-versa):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;Hello World!&amp;quot;&lt;/span&gt;
-Hello World!
-&amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello World!&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-Hello World!
-&amp;gt;&amp;gt;&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-</summary><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 0: The Setup</title><link href="http://www.circuidipity.com/lpthw-e0.html" rel="alternate"></link><updated>2016-05-28T14:13:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-12:lpthw-e0.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; I am doing the Python exercises on a computer running &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt; bundled with Python 2.7.&lt;/p&gt;
-&lt;p&gt;Zed recommends &lt;tt class="docutils literal"&gt;gedit&lt;/tt&gt; as the text editor to begin writing code. Let's give it a shot:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install gedit
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Upon launching the editor I immediately run into a problem of thick transparent borders being drawn around its windows. &lt;strong&gt;Fix...&lt;/strong&gt; Create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/gtk-3.0/gtk.css&lt;/span&gt;&lt;/tt&gt; with the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;.window-frame, .window-frame:backdrop &lt;span class="o"&gt;{&lt;/span&gt;
-box-shadow: &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; black&lt;span class="p"&gt;;&lt;/span&gt;
-border-style: none&lt;span class="p"&gt;;&lt;/span&gt;
-margin: 0&lt;span class="p"&gt;;&lt;/span&gt;
-border-radius: 0&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
-
-.titlebar &lt;span class="o"&gt;{&lt;/span&gt;
-border-radius: 0&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?pid=1469360#p1469360"&gt;Evince (GTK3?) doesn't actually run fullscreen&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;My terminal is &lt;tt class="docutils literal"&gt;urxvt&lt;/tt&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install rxvt-unicode
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Terminal settings (fonts, colours, tabs) are modified in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.Xresources&lt;/span&gt;&lt;/tt&gt;. &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.Xresources"&gt;This is mine.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Launching Python in interactive mode I see:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ python
-Python 2.7.10 &lt;span class="o"&gt;(&lt;/span&gt;default, Oct &lt;span class="m"&gt;14&lt;/span&gt; 2015, 16:09:02&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;GCC 5.2.1 20151010&lt;span class="o"&gt;]&lt;/span&gt; on linux2
-Type &lt;span class="s2"&gt;&amp;quot;help&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;copyright&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;credits&amp;quot;&lt;/span&gt; or &lt;span class="s2"&gt;&amp;quot;license&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; more information.
-&amp;gt;&amp;gt;&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-</summary><category term="python"></category><category term="programming"></category><category term="linux"></category></entry><entry><title>Learn Python the Hard Way with the DUDE</title><link href="http://www.circuidipity.com/lpthw-dude.html" rel="alternate"></link><updated>2016-06-05T14:28:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-11:lpthw-dude.html</id><summary type="html">&lt;img alt="LPTHW" class="align-right" src="images/lpthw-begin-1.png" style="width: 250px; height: 479px;" /&gt;
-&lt;p&gt;Using Linux and writing &lt;a class="reference external" href="https://github.com/vonbrownie/homebin"&gt;simple shell scripts&lt;/a&gt; has been an enjoyable peek at programming. But now I want to go farther and learning &lt;a class="reference external" href="http://www.circuidipity.com/tag-python.html"&gt;Python&lt;/a&gt; strikes me as a useful next step. Starting with the free HTML version of the book &lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way&lt;/a&gt; by &lt;strong&gt;Zed Shaw&lt;/strong&gt;, who states right off the bat:&lt;/p&gt;
-&lt;blockquote&gt;
-It's only the &amp;quot;hard&amp;quot; way because it uses a technique called &lt;em&gt;instruction&lt;/em&gt;. Instruction is where I tell you to do a sequence of controlled exercises designed to build a skill through repetition. This technique works very well with beginners who know nothing and need to acquire basic skills before they can understand more complex topics. It's used in everything from martial arts to music to even basic math and reading skills.&lt;/blockquote&gt;
-&lt;p&gt;Zed is a (probably very cool) dude but the DUDE is a &lt;strong&gt;Daily Undertaking of Deliberate Effort&lt;/strong&gt;. Which translates as:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;set aside a block of time free of distractions to focus on improving a skill&lt;/li&gt;
-&lt;li&gt;push ahead with tasks of increasing complexity&lt;/li&gt;
-&lt;li&gt;do a bit every day&lt;/li&gt;
-&lt;li&gt;cultivate feedback&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;For LPTHW I will:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;set a timer for a &lt;strong&gt;50 minute session&lt;/strong&gt; to focus on the coding exercises (a double &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Pomodoro_Technique"&gt;pomodoro&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;work methodically through each exercise&lt;/li&gt;
-&lt;li&gt;do the work (minimum 1 session) every day&lt;/li&gt;
-&lt;li&gt;send a &lt;tt class="docutils literal"&gt;Done!&lt;/tt&gt; email to a friend marking the daily effort&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;div class="section" id="id1"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e0.html"&gt;Exercise 0: The Setup&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id2"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e1.html"&gt;Exercise 1: A Good First Program&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id3"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e2.html"&gt;Exercise 2: Comments and Pound Characters&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id4"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e3.html"&gt;Exercise 3: Numbers and Math&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id5"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e4.html"&gt;Exercise 4: Variables and Names&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id6"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e5.html"&gt;Exercise 5: More Variables and Printing&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id7"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e6.html"&gt;Exercise 6: Strings and Text&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id8"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e7.html"&gt;Exercise 7: More Printing&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id9"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e8.html"&gt;Exercise 8: Printing, Printing&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id10"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e9.html"&gt;Exercise 9: Printing, Printing, Printing&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id11"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e10.html"&gt;Exercise 10: What Was That?&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id12"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e11-12.html"&gt;Exercise 11: Asking Questions&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id13"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e11-12.html"&gt;Exercise 12: Prompting People&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id14"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e13-14.html"&gt;Exercise 13: Parameters, Unpacking, Variables&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id15"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e13-14.html"&gt;Exercise 14: Prompting and Passing&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id16"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e15-17.html"&gt;Exercise 15: Reading Files&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id17"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e15-17.html"&gt;Exercise 16: Reading and Writing Files&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id18"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e15-17.html"&gt;Exercise 17: More Files&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id19"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e18-21.html"&gt;Exercise 18: Names, Variables, Code, Functions&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id20"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e18-21.html"&gt;Exercise 19: Functions and Variables&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id21"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e18-21.html"&gt;Exercise 20: Functions and Files&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id22"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e18-21.html"&gt;Exercise 21: Functions Can Return Something&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id23"&gt;
-&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/lpthw-e22.html"&gt;Exercise 22: What Do You Know So Far?&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</summary><category term="python"></category><category term="programming"></category></entry><entry><title>Create a self-signed SSL certificate</title><link href="http://www.circuidipity.com/self-signed-ssl-certificate.html" rel="alternate"></link><updated>2016-08-21T18:33:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-08-27:self-signed-ssl-certificate.html</id><summary type="html">&lt;p&gt;Secure web access to services hosted on a &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;home server&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I am running &lt;a class="reference external" href="http://www.circuidipity.com/ttrss.html"&gt;Tiny Tiny RSS&lt;/a&gt; (ttrss) and &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;Nginx&lt;/a&gt; on my server and want to divert HTTP traffic from port 80 to HTTPS login and access news feeds on port 443. Rather than obtain an SSL certificate from a certificate authority (CA) its a simple matter to create one for personal use.&lt;/p&gt;
-&lt;p&gt;Install &lt;tt class="docutils literal"&gt;openssl&lt;/tt&gt; and generate a certificate for Nginx ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo apt install openssl
-$ sudo mkdir /etc/nginx/ssl
-$ sudo openssl req -x509 -nodes -days &lt;span class="m"&gt;365&lt;/span&gt; -newkey rsa:2048 -keyout /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Create a new server block in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-available&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;server &lt;span class="o"&gt;{&lt;/span&gt;
-    listen 80&lt;span class="p"&gt;;&lt;/span&gt;
-    listen &lt;span class="o"&gt;[&lt;/span&gt;::&lt;span class="o"&gt;]&lt;/span&gt;:80&lt;span class="p"&gt;;&lt;/span&gt;
-    server_name www.foo.ca&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="m"&gt;301&lt;/span&gt; https://$host$request_uri&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="c1"&gt;## redirect all non-https traffic to https&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
-
-server &lt;span class="o"&gt;{&lt;/span&gt;
-    listen &lt;span class="m"&gt;443&lt;/span&gt; ssl&lt;span class="p"&gt;;&lt;/span&gt;
-    root /var/www/foo&lt;span class="p"&gt;;&lt;/span&gt;
-    index index.html index.php&lt;span class="p"&gt;;&lt;/span&gt;
-
-    access_log /var/log/nginx/foo_access.log&lt;span class="p"&gt;;&lt;/span&gt;
-    error_log /var/log/nginx/foo_error.log info&lt;span class="p"&gt;;&lt;/span&gt;
-
-    server_name www.foo.ca&lt;span class="p"&gt;;&lt;/span&gt;
-    ssl_certificate /etc/nginx/ssl/server.crt&lt;span class="p"&gt;;&lt;/span&gt;
-    ssl_certificate_key /etc/nginx/ssl/server.key&lt;span class="p"&gt;;&lt;/span&gt;
-
-    location / &lt;span class="o"&gt;{&lt;/span&gt;
-            index           index.php&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="o"&gt;}&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Activate the block by creating a symlink in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/nginx/sites-enabled&lt;/span&gt;&lt;/tt&gt; and restart nginx ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ sudo systemctl restart nginx
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Configure &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;port forwarding on the router&lt;/a&gt; and (optional) &lt;a class="reference external" href="https://wiki.gandi.net/en/dns/zone/subdomain"&gt;setup a subdomain&lt;/a&gt; with a hosting/domain provider.&lt;/p&gt;
-&lt;p&gt;Note the first time navigating to the new HTTPS address the web browser warns &lt;em&gt;This Connection is Untrusted&lt;/em&gt; (which is to be expected since its a self-signed certificate vs CA verification).&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-nginx-for-ubuntu-14-04"&gt;Create an SSL certificate on Nginx for Ubuntu&lt;/a&gt;; &lt;a class="reference external" href="https://serverfault.com/questions/67316/in-nginx-how-can-i-rewrite-all-http-requests-to-https-while-maintaining-sub-dom"&gt;Rewrite HTTP requests to HTTPS&lt;/a&gt;; &lt;a class="reference external" href="http://nginx.org/en/docs/http/server_names.html"&gt;Nginx server_names&lt;/a&gt;&lt;/p&gt;
-</summary><category term="server"></category><category term="network"></category><category term="linux"></category></entry></feed>
+</content><category term="python"></category><category term="programming"></category></entry></feed>

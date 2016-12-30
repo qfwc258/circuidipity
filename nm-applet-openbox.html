@@ -27,14 +27,14 @@
 <div id="article">
     <p>I had commented out my entry for <tt class="docutils literal"><span class="pre">nm-applet</span></tt> in <tt class="docutils literal"><span class="pre">$HOME/.config/openbox/autostart</span></tt> and system was loading <tt class="docutils literal"><span class="pre">nm-applet</span></tt> from <tt class="docutils literal"><span class="pre">/etc/xdg/autostart/nm-applet.desktop</span></tt>. Problem: After updating Openbox there were <em>two</em> instances of <tt class="docutils literal"><span class="pre">nm-applet</span></tt> being loaded.</p>
 <p>In <tt class="docutils literal"><span class="pre">/usr/lib/x86_64-linux-gnu/openbox-autostart</span></tt> ...</p>
-<div class="highlight"><pre><span class="nv">GLOBALAUTOSTART</span><span class="o">=</span><span class="s2">&quot;/etc/xdg/openbox/autostart&quot;</span>
-<span class="nv">AUTOSTART</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">XDG_CONFIG_HOME</span><span class="k">:-</span><span class="s2">&quot;</span>$<span class="s2">HOME/.config&quot;</span><span class="si">}</span><span class="s2">/openbox/autostart&quot;</span>
+<div class="highlight"><pre><span></span><span class="nv">GLOBALAUTOSTART</span><span class="o">=</span><span class="s2">&quot;/etc/xdg/openbox/autostart&quot;</span>
+<span class="nv">AUTOSTART</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">XDG_CONFIG_HOME</span><span class="k">:-</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.config&quot;</span><span class="si">}</span><span class="s2">/openbox/autostart&quot;</span>
 </pre></div>
 <p><strong>Fix:</strong> Edited <tt class="docutils literal"><span class="pre">/etc/xdg/autostart/nm-applet.desktop</span></tt> to read ...</p>
-<div class="highlight"><pre><span class="nv">NotShowIn</span><span class="o">=</span>KDE<span class="p">;</span>GNOME<span class="p">;</span>OPENBOX<span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="nv">NotShowIn</span><span class="o">=</span>KDE<span class="p">;</span>GNOME<span class="p">;</span>OPENBOX<span class="p">;</span>
 </pre></div>
 <p>... and <em>no</em> <tt class="docutils literal"><span class="pre">nm-applet</span></tt> appears when Openbox is loaded. Re-enabled <tt class="docutils literal"><span class="pre">nm-applet</span></tt> in <tt class="docutils literal">autostart</tt> ...</p>
-<div class="highlight"><pre><span class="o">(</span>sleep <span class="m">3</span> <span class="o">&amp;&amp;</span> /usr/bin/nm-applet --sm-disable<span class="o">)</span> <span class="p">&amp;</span>
+<div class="highlight"><pre><span></span><span class="o">(</span>sleep <span class="m">3</span> <span class="o">&amp;&amp;</span> /usr/bin/nm-applet --sm-disable<span class="o">)</span> <span class="p">&amp;</span>
 </pre></div>
 <p>... re-started Openbox and now only the desired <em>single</em> instance of <tt class="docutils literal"><span class="pre">nm-applet</span></tt> is loaded.</p>
 

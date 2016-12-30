@@ -26,18 +26,18 @@
 <h1>A bit of unplanned Grub2 surgery</h1>
 <div id="article">
     <p><strong>PROBLEM:</strong> Late night experiments <a class="reference external" href="http://www.circuidipity.com/grubs.html">loading GRUB on USB sticks</a> resulted in mucking up Grub on my host machine. After a reboot instead of a boot menu I was greeted with:</p>
-<div class="highlight"><pre>grub &gt;
+<div class="highlight"><pre><span></span>grub &gt;
 </pre></div>
 <p>Whoops.</p>
 <p>Host boot partition is <tt class="docutils literal">sda1</tt>, LUKS-encrypted root is <tt class="docutils literal">sda3</tt>, and runs Linux kernel <tt class="docutils literal">3.19.0</tt>. Since the boot loader hadn't fallen into rescue mode there was hope that the essential stuff was in place but for some reason the config was not being read. A quick <tt class="docutils literal">ls</tt> in the Grub shell confirmed that <tt class="docutils literal">/boot/grub/grub.cfg</tt>, kernels, initrd files were present.</p>
 <p><strong>FIX:</strong> After a few tries I found the right parameters for a manual boot... specifically <tt class="docutils literal"><span class="pre">root=/dev/mapper/sda3_crypt</span></tt> NOT <tt class="docutils literal"><span class="pre">root=/dev/sda3</span></tt>:</p>
-<div class="highlight"><pre>grub&gt; linux <span class="o">(</span>hd0,1<span class="o">)</span>/vmlinuz-3.19.0-031900-generic <span class="nv">root</span><span class="o">=</span>/dev/mapper/sda3_crypt ro
+<div class="highlight"><pre><span></span>grub&gt; linux <span class="o">(</span>hd0,1<span class="o">)</span>/vmlinuz-3.19.0-031900-generic <span class="nv">root</span><span class="o">=</span>/dev/mapper/sda3_crypt ro
 grub&gt; initrd <span class="o">(</span>hd0,1<span class="o">)</span>/initrd.img-3.19.0-031900-generic
 grub&gt; boot
 </pre></div>
 <p>Boot process begins, pauses for the LUKS passphrase prompt to unlock root, and makes it to the login screen. Good stuff.</p>
 <p>Examine <tt class="docutils literal">/etc/default/grub</tt> and everything looks OK. Update and <strong>reinstall grub</strong> to the MBR:</p>
-<div class="highlight"><pre>$ sudo update-grub
+<div class="highlight"><pre><span></span>$ sudo update-grub
 $ sudo grub-install /dev/sda
 </pre></div>
 <p>Reboot and back in business!</p>

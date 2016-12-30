@@ -66,7 +66,7 @@
 <li>Close back cover using only the battery lock screw to hold in place</li>
 <li>Re-connect power, boot Chromebook and wait until it displays:</li>
 </ul>
-<div class="highlight"><pre>Chrome OS is missing or damaged.
+<div class="highlight"><pre><span></span>Chrome OS is missing or damaged.
 Please insert a recovery USB stick or SD card.
 </pre></div>
 <ul class="simple">
@@ -75,16 +75,16 @@ Please insert a recovery USB stick or SD card.
 <li>Login as <tt class="docutils literal">chronos</tt> (no password), then enter <tt class="docutils literal">sudo su</tt> for superuser access</li>
 </ul>
 <p>Set new GBB flags <a class="footnote-reference" href="#id16" id="id4">[3]</a> using the <tt class="docutils literal">set_gbb_flags.sh</tt> script in Chrome OS. Enable short <strong>developer mode</strong> screen (1 second timeout) followed by <strong>default legacy mode</strong> boot by using these flags:</p>
-<div class="highlight"><pre>GBB_FLAG_DEV_SCREEN_SHORT_DELAY 0×00000001
+<div class="highlight"><pre><span></span>GBB_FLAG_DEV_SCREEN_SHORT_DELAY 0×00000001
 GBB_FLAG_FORCE_DEV_SWITCH_ON 0×00000008
 GBB_FLAG_FORCE_DEV_BOOT_LEGACY 0×00000080
 GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 </pre></div>
 <p>... which adds up to running in the shell:</p>
-<div class="highlight"><pre>/usr/share/vboot/bin/set_gbb_flags.sh 0x489
+<div class="highlight"><pre><span></span>/usr/share/vboot/bin/set_gbb_flags.sh 0x489
 </pre></div>
 <p>Shutdown:</p>
-<div class="highlight"><pre><span class="c1"># shutdown -h now</span>
+<div class="highlight"><pre><span></span><span class="c1"># shutdown -h now</span>
 </pre></div>
 <p>... and disconnect the power:</p>
 <ul class="simple">
@@ -103,7 +103,7 @@ GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 <li>Scary white boot screen appears and you need to press <tt class="docutils literal">Ctrl+D</tt> to continue boot</li>
 </ul>
 <p>Enable the <strong>USB Boot</strong> and <strong>Legacy BIOS</strong> modes by opening the shell with <tt class="docutils literal">Ctrl+Alt+T</tt> and enter <tt class="docutils literal">shell</tt>. Set <tt class="docutils literal">dev_boot_usb</tt> and <tt class="docutils literal">dev_boot_legacy</tt> to active:</p>
-<div class="highlight"><pre>$ sudo crossystem <span class="nv">dev_boot_usb</span><span class="o">=</span>1
+<div class="highlight"><pre><span></span>$ sudo crossystem <span class="nv">dev_boot_usb</span><span class="o">=</span>1
 $ sudo crossystem <span class="nv">dev_boot_legacy</span><span class="o">=</span>1
 </pre></div>
 <p>Insert USB stick prepared in Step 1, reboot the Chromebook and press <tt class="docutils literal">CTRL+L</tt> at the boot screen to enter legacy boot mode. <a class="footnote-reference" href="#id19" id="id7">[6]</a></p>
@@ -121,16 +121,16 @@ $ sudo crossystem <span class="nv">dev_boot_legacy</span><span class="o">=</span
 <div class="section" id="touchpad">
 <h2>4. Touchpad</h2>
 <p>Debian <tt class="docutils literal">jessie/stable</tt> installs Linux kernel 3.16 with backported support for Chromebook touchpad. Per-session modifications of touchpad settings can be made using <tt class="docutils literal">synclient</tt>:</p>
-<div class="highlight"><pre>$ synclient                 <span class="c1"># display current settings</span>
+<div class="highlight"><pre><span></span>$ synclient                 <span class="c1"># display current settings</span>
 $ synclient <span class="nv">TapButton3</span><span class="o">=</span><span class="m">2</span>    <span class="c1"># 3-finger tap = middle-click</span>
 </pre></div>
 <p>Make any desired touchpad settings permanent by creating <tt class="docutils literal"><span class="pre">/etc/X11/xorg.conf.d/50-c720-touchpad.conf</span></tt>:</p>
-<div class="highlight"><pre>$ sudo mkdir /etc/X11/xorg.conf.d
+<div class="highlight"><pre><span></span>$ sudo mkdir /etc/X11/xorg.conf.d
 $ sudo cp /usr/share/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-c720-touchpad.conf
 </pre></div>
 <p>Modify to adjust timeouts, add tap-mouse actions (2-finger tap = right-click, 3-finger tap = middle-click), and 2-finger scrolling. <a class="footnote-reference" href="#id20" id="id8">[7]</a></p>
 <p>Example:</p>
-<div class="highlight"><pre>Section <span class="s2">&quot;InputClass&quot;</span>
+<div class="highlight"><pre><span></span>Section <span class="s2">&quot;InputClass&quot;</span>
     Identifier      <span class="s2">&quot;touchpad peppy cyapa&quot;</span>
     MatchIsTouchpad <span class="s2">&quot;on&quot;</span>
     MatchDevicePath <span class="s2">&quot;/dev/input/event*&quot;</span>
@@ -153,28 +153,28 @@ EndSection
 <h2>5. SSD</h2>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Swappiness">Swappiness</a> parameter controls the preference of the kernel to move processes out of physical memory to the swap partition. Range is <tt class="docutils literal"><span class="pre">0-100</span></tt>, default is set to <tt class="docutils literal">60</tt> and lower values cause the kernel to avoid swapping and higher values prompt more frequent swap use.</p>
 <p>Check current swappiness value:</p>
-<div class="highlight"><pre>$ cat /proc/sys/vm/swappiness
+<div class="highlight"><pre><span></span>$ cat /proc/sys/vm/swappiness
 </pre></div>
 <p>Reduce SSD writes by setting a low value of <tt class="docutils literal">vm.swappiness=1</tt> in <tt class="docutils literal">/etc/sysctl.conf</tt>.</p>
 <p><strong>TRIM</strong> optimizes SSD performance <a class="footnote-reference" href="#id21" id="id9">[8]</a> and is enabled by adding the <tt class="docutils literal">discard</tt> option to <tt class="docutils literal">/etc/crypttab</tt> and <tt class="docutils literal">/etc/fstab</tt>.</p>
 <p>Example <tt class="docutils literal">crypttab</tt>:</p>
-<div class="highlight"><pre>sda2_crypt /dev/sda2 /dev/urandom <span class="nv">cipher</span><span class="o">=</span>aes-xts-plain64,size<span class="o">=</span>256,discard,swap
+<div class="highlight"><pre><span></span>sda2_crypt /dev/sda2 /dev/urandom <span class="nv">cipher</span><span class="o">=</span>aes-xts-plain64,size<span class="o">=</span>256,discard,swap
 sda3_crypt <span class="nv">UUID</span><span class="o">=</span>&lt;STRING&gt; none luks,discard
 </pre></div>
 <p>Example <tt class="docutils literal">fstab</tt>:</p>
-<div class="highlight"><pre><span class="c1"># &lt;file system&gt; &lt;mount point&gt;   &lt;type&gt;  &lt;options&gt;       &lt;dump&gt;  &lt;pass&gt;</span>
+<div class="highlight"><pre><span></span><span class="c1"># &lt;file system&gt; &lt;mount point&gt;   &lt;type&gt;  &lt;options&gt;       &lt;dump&gt;  &lt;pass&gt;</span>
 /dev/mapper/sda3_crypt /               ext4    noatime,discard,errors<span class="o">=</span>remount-ro <span class="m">0</span>       1
 <span class="nv">UUID</span><span class="o">=</span>&lt;STRING&gt; /boot                    ext4    noatime,discard         <span class="m">0</span>       2
 /dev/mapper/sda2_crypt none            swap    sw,discard              <span class="m">0</span>       0
 </pre></div>
 <p>Update <tt class="docutils literal"><span class="pre">/boot/initrd.img-*</span></tt>:</p>
-<div class="highlight"><pre>$ sudo update-initramfs -u -k all
+<div class="highlight"><pre><span></span>$ sudo update-initramfs -u -k all
 </pre></div>
 </div>
 <div class="section" id="suspend">
 <h2>6. Suspend</h2>
 <p><strong>Problem:</strong> Suspend-and-resume generates a stream of errors:</p>
-<div class="highlight"><pre>ehci-pci 0000:00:1d.0: port <span class="m">1</span> resume error -19
+<div class="highlight"><pre><span></span>ehci-pci 0000:00:1d.0: port <span class="m">1</span> resume error -19
 ehci-pci 0000:00:1d.0: port <span class="m">2</span> resume error -19
 usb usb3-port1: over-current condition
 usb usb3-port1: connect-debounce failed
@@ -183,7 +183,7 @@ usb usb3-port2: connect-debounce failed
 </pre></div>
 <p>... and blocks Jessiebook from executing a proper restart/shutdown.</p>
 <p><strong>FIX:</strong> <a class="footnote-reference" href="#id22" id="id10">[9]</a> Create <tt class="docutils literal"><span class="pre">/lib/systemd/system-sleep/ehci-pci.sh</span></tt>:</p>
-<div class="highlight"><pre><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
 <span class="k">case</span> <span class="nv">$1</span>/<span class="nv">$2</span> in
     pre/*<span class="o">)</span>
@@ -197,13 +197,13 @@ usb usb3-port2: connect-debounce failed
 <span class="k">esac</span>
 </pre></div>
 <p>Make the script executable:</p>
-<div class="highlight"><pre>$ sudo chmod <span class="m">755</span> /lib/systemd/system-sleep/ehci-pci.sh
+<div class="highlight"><pre><span></span>$ sudo chmod <span class="m">755</span> /lib/systemd/system-sleep/ehci-pci.sh
 </pre></div>
 <p>Configure boot options in <tt class="docutils literal">/etc/default/grub</tt>:</p>
-<div class="highlight"><pre><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s2">&quot;tpm_tis.force=1&quot;</span>
+<div class="highlight"><pre><span></span><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s2">&quot;tpm_tis.force=1&quot;</span>
 </pre></div>
 <p>Update GRUB:</p>
-<div class="highlight"><pre>$ sudo update-grub
+<div class="highlight"><pre><span></span>$ sudo update-grub
 </pre></div>
 <p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/lib/systemd/system-sleep/ehci-pci.sh">ehci-pci.sh</a></p>
 </div>
@@ -217,15 +217,15 @@ usb usb3-port2: connect-debounce failed
 <li><tt class="docutils literal"><span class="pre">pulseaudio-utils</span></tt> - manage sound with <tt class="docutils literal">pactl</tt></li>
 <li><tt class="docutils literal">xvkbd</tt> - send characters to another client</li>
 </ul>
-<div class="highlight"><pre>$ sudo apt-get install xbindkeys xbacklight pulseaudio-utils xvkbd
+<div class="highlight"><pre><span></span>$ sudo apt-get install xbindkeys xbacklight pulseaudio-utils xvkbd
 </pre></div>
 <div class="section" id="direction-brightness-volume-page-keys">
 <h3>7.1 Direction, Brightness, Volume, Page Keys</h3>
-<div class="highlight"><pre>$ xbindkeys -k
+<div class="highlight"><pre><span></span>$ xbindkeys -k
 </pre></div>
 <p>Enable function keys to modify sound and brightness settings by creating <tt class="docutils literal"><span class="pre">~/.xbindkeysrc</span></tt>.</p>
 <p>Example:</p>
-<div class="highlight"><pre><span class="c1"># backward/forward</span>
+<div class="highlight"><pre><span></span><span class="c1"># backward/forward</span>
 <span class="s2">&quot;xvkbd -xsendevent -text &quot;</span><span class="se">\A\[</span>Left<span class="o">]</span><span class="s2">&quot;&quot;</span>
 F1
 
@@ -269,7 +269,7 @@ Alt + Left
 Alt + Right
 </pre></div>
 <p>Enable new key shortcuts:</p>
-<div class="highlight"><pre>$ xbindkeys
+<div class="highlight"><pre><span></span>$ xbindkeys
 </pre></div>
 <p>Place <tt class="docutils literal">xbindkeys</tt> in <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt> to load configuration at <tt class="docutils literal">startx</tt>. <a class="footnote-reference" href="#id23" id="id11">[10]</a></p>
 <p>Sources: <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc">.xbindkeysrc</a> and <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc">.xinitrc</a></p>
@@ -283,7 +283,7 @@ Alt + Right
 <div class="section" id="wireless">
 <h2>8. Wireless</h2>
 <p>There are a few settings to modify to improve performance of Chromebook's wireless chipset. <a class="footnote-reference" href="#id24" id="id12">[11]</a> Identify the card and parameters:</p>
-<div class="highlight"><pre>$ lspci <span class="p">|</span> grep -i net
+<div class="highlight"><pre><span></span>$ lspci <span class="p">|</span> grep -i net
 01:00.0 Network controller: Qualcomm Atheros AR9462 Wireless Network Adapter <span class="o">(</span>rev 01<span class="o">)</span>
 $ modinfo ath9k <span class="p">|</span> grep parm
 parm:           debug:Debugging mask <span class="o">(</span>uint<span class="o">)</span>
@@ -295,17 +295,17 @@ parm:           ps_enable:Enable WLAN PowerSave <span class="o">(</span>int<span
 parm:           use_chanctx:Enable channel context <span class="k">for</span> concurrency <span class="o">(</span>int<span class="o">)</span>
 </pre></div>
 <p>Create <tt class="docutils literal">/etc/modprobe.d/ath9k.conf</tt>:</p>
-<div class="highlight"><pre>options ath9k <span class="nv">bt_ant_diversity</span><span class="o">=</span><span class="m">1</span> <span class="nv">ps_enable</span><span class="o">=</span>0
+<div class="highlight"><pre><span></span>options ath9k <span class="nv">bt_ant_diversity</span><span class="o">=</span><span class="m">1</span> <span class="nv">ps_enable</span><span class="o">=</span>0
 </pre></div>
 <p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/etc/modprobe.d/ath9k.conf">ath9k.conf</a></p>
 </div>
 <div class="section" id="microphone">
 <h2>9. Microphone</h2>
 <p>Confirm the microphone is un-muted in <tt class="docutils literal">alsamixer</tt>. Create <tt class="docutils literal"><span class="pre">/etc/modprobe.d/snd-hda-intel.conf</span></tt>:</p>
-<div class="highlight"><pre>options snd_hda_intel <span class="nv">model</span><span class="o">=</span>,alc283-dac-wcaps
+<div class="highlight"><pre><span></span>options snd_hda_intel <span class="nv">model</span><span class="o">=</span>,alc283-dac-wcaps
 </pre></div>
 <p>... and restart (I couldn't get the module to unload). Give it a try:</p>
-<div class="highlight"><pre>$ arecord -d <span class="m">5</span> chr-mic.wav
+<div class="highlight"><pre><span></span>$ arecord -d <span class="m">5</span> chr-mic.wav
 $ aplay chr-mic.wav
 </pre></div>
 </div>

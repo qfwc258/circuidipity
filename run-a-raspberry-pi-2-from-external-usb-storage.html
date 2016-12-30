@@ -45,7 +45,7 @@
 <div class="section" id="download">
 <h2>0. Download</h2>
 <p><strong>Using Linux:</strong> Import the <a class="reference external" href="http://www.finnie.org/2015/02/16/raspberry-pi-2-update-ubuntu-14-04-image-available/">lead developer's</a> GPG key:</p>
-<div class="highlight"><pre>$ gpg --keyserver pgp.mit.edu --recv-key 86AE8D98
+<div class="highlight"><pre><span></span>$ gpg --keyserver pgp.mit.edu --recv-key 86AE8D98
 gpg: keyring <span class="sb">`</span>/home/username/.gnupg/secring.gpg<span class="err">&#39;</span> created
 gpg: requesting key 86AE8D98 from hkp server pgp.mit.edu
 gpg: /home/username/.gnupg/trustdb.gpg: trustdb created
@@ -62,11 +62,11 @@ uid                  <span class="o">[</span>jpeg image of size 1669<span class=
 sub   4096R/C50F6695 2012-04-11
 </pre></div>
 <p>Download the <a class="reference external" href="http://www.finnie.org/software/raspberrypi/">latest ubuntu-trusty image and GPG signature</a> for Pi 2:</p>
-<div class="highlight"><pre>$ wget -c http://www.finnie.org/software/raspberrypi/2015-02-19-ubuntu-trusty.zip
+<div class="highlight"><pre><span></span>$ wget -c http://www.finnie.org/software/raspberrypi/2015-02-19-ubuntu-trusty.zip
 $ wget -c http://www.finnie.org/software/raspberrypi/2015-02-19-ubuntu-trusty.zip.asc
 </pre></div>
 <p>Verify and unpack the image:</p>
-<div class="highlight"><pre>$ gpg --verify 2015-02-19-ubuntu-trusty.zip.asc 2015-02-19-ubuntu-trusty.zip
+<div class="highlight"><pre><span></span>$ gpg --verify 2015-02-19-ubuntu-trusty.zip.asc 2015-02-19-ubuntu-trusty.zip
 gpg: Signature made Thu <span class="m">19</span> Feb <span class="m">2015</span> 12:46:09 PM EST using RSA key ID 86AE8D98
 gpg: Good signature from <span class="s2">&quot;Ryan Finnie &lt;ryan@finnie.org&gt;&quot;</span>
 gpg:                 aka <span class="s2">&quot;Ryan Finnie &lt;ryan.finnie@canonical.com&gt;&quot;</span>
@@ -80,7 +80,7 @@ $ unzip 2015-02-19-ubuntu-trusty.zip
 <div class="section" id="install-to-sd-card">
 <h2>1. Install to SD card</h2>
 <p>In lieu of the usual <tt class="docutils literal">dd</tt> I use <a class="reference external" href="https://source.tizen.org/documentation/reference/bmaptool/bmap-tools-project">bmap-tools</a> and <tt class="docutils literal"><span class="pre">2015-02-19-ubuntu-trusty.bmap</span></tt> to write <tt class="docutils literal"><span class="pre">2015-02-19-ubuntu-trusty.img</span></tt> to the SD card. <strong>Advantages:</strong> speed boost, and bmaptool's inability to write to mounted devices (in case you pick a wrong device/partition like, say, your <em>home</em> drive... <tt class="docutils literal">dd</tt>'s nickname <em>disk destroyer</em> is no idle boast):</p>
-<div class="highlight"><pre>$ sudo apt-get install bmap-tools
+<div class="highlight"><pre><span></span>$ sudo apt-get install bmap-tools
 $ sudo bmaptool copy --bmap 2015-02-19-ubuntu-trusty.bmap 2015-02-19-ubuntu-trusty.img /dev/sdX
 </pre></div>
 </div>
@@ -88,7 +88,7 @@ $ sudo bmaptool copy --bmap 2015-02-19-ubuntu-trusty.bmap 2015-02-19-ubuntu-trus
 <h2>2. Pi Boot</h2>
 <p>Login username and password are both <tt class="docutils literal">ubuntu</tt>.</p>
 <p>Filesystem layout on the SD card:</p>
-<div class="highlight"><pre>$ df -h
+<div class="highlight"><pre><span></span>$ df -h
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/mmcblk0p2  1.7G  456M  1.1G  30% /
 devtmpfs        458M  4.0K  458M   1% /dev
@@ -103,7 +103,7 @@ none            100M     <span class="m">0</span>  100M   0% /run/user
 <div class="section" id="partition-external-hard-drive">
 <h2>3. Partition external hard drive</h2>
 <p>I connect the 1TB USB hard drive to Pi and confirm device detection:</p>
-<div class="highlight"><pre>$ lsusb
+<div class="highlight"><pre><span></span>$ lsusb
 Bus <span class="m">001</span> Device 002: ID 0424:9514 Standard Microsystems Corp.
 Bus <span class="m">001</span> Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 Bus <span class="m">001</span> Device 003: ID 0424:ec00 Standard Microsystems Corp.
@@ -138,7 +138,7 @@ sd 0:0:0:0: <span class="o">[</span>sda<span class="o">]</span> Attached SCSI di
 <li>sda1 - 20GB - root filesystem</li>
 <li>sda2 - remaining space - storage</li>
 </ul>
-<div class="highlight"><pre>$ sudo fdisk /dev/sda
+<div class="highlight"><pre><span></span>$ sudo fdisk /dev/sda
 
 Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: p
 
@@ -194,17 +194,17 @@ Calling ioctl<span class="o">()</span> to re-read partition table.
 Syncing disks.
 </pre></div>
 <p>Format the new partitions using filesystem <tt class="docutils literal">ext4</tt>:</p>
-<div class="highlight"><pre>$ sudo mke2fs -t ext4 -L rootfs /dev/sda1
+<div class="highlight"><pre><span></span>$ sudo mke2fs -t ext4 -L rootfs /dev/sda1
 $ sudo mke2fs -t ext4 -L storage /dev/sda2
 </pre></div>
 </div>
 <div class="section" id="rsync">
 <h2>4. Rsync</h2>
 <p>Mount the newly-formatted <tt class="docutils literal">rootfs</tt> partition to <tt class="docutils literal">/mnt</tt>:</p>
-<div class="highlight"><pre>$ sudo mount -t ext4 /dev/sda1 /mnt
+<div class="highlight"><pre><span></span>$ sudo mount -t ext4 /dev/sda1 /mnt
 </pre></div>
 <p>Use <strong>rsync</strong> to copy contents of <tt class="docutils literal">root</tt> on the SD card to the <tt class="docutils literal">rootfs</tt> partition on the USB device:</p>
-<div class="highlight"><pre>$ sudo rsync -axv / /mnt
+<div class="highlight"><pre><span></span>$ sudo rsync -axv / /mnt
 </pre></div>
 </div>
 <div class="section" id="new-rootfs">
@@ -212,7 +212,7 @@ $ sudo mke2fs -t ext4 -L storage /dev/sda2
 <div class="section" id="on-the-sd-card">
 <h3>5.1 On the SD card</h3>
 <p>Modify options in <tt class="docutils literal">/boot/cmdline.txt</tt> to point the bootloader to <tt class="docutils literal">root</tt> filesystem on the USB device:</p>
-<div class="highlight"><pre>Original:
+<div class="highlight"><pre><span></span>Original:
 dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span> <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">root</span><span class="o">=</span>/dev/mmcblk0p2 rootwait
 
 Modified:
@@ -222,10 +222,10 @@ dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span> <span class="
 <div class="section" id="on-the-usb-hard-drive">
 <h3>5.2 On the USB hard drive</h3>
 <p>Create new mountpoint for the <tt class="docutils literal">storage</tt> partition:</p>
-<div class="highlight"><pre>$ sudo mkdir /mnt/media/USB0
+<div class="highlight"><pre><span></span>$ sudo mkdir /mnt/media/USB0
 </pre></div>
 <p>Modify options in <tt class="docutils literal">/mnt/etc/fstab</tt> to mount <tt class="docutils literal">rootfs</tt> and <tt class="docutils literal">storage</tt> partitions at boot. <a class="footnote-reference" href="#id6" id="id3">[3]</a> Example for <tt class="docutils literal">sda1</tt> and <tt class="docutils literal">sda2</tt>:</p>
-<div class="highlight"><pre>proc            /proc           proc    defaults          <span class="m">0</span>       0
+<div class="highlight"><pre><span></span>proc            /proc           proc    defaults          <span class="m">0</span>       0
 <span class="c1"># comment out root filesystem on SD card</span>
 <span class="c1">#/dev/mmcblk0p2  /               ext4    defaults,noatime  0       1</span>
 <span class="c1"># partitions on USB hard drive</span>
@@ -238,10 +238,10 @@ dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span> <span class="
 <div class="section" id="reboot">
 <h2>6. Reboot</h2>
 <p>Save modifications and reboot:</p>
-<div class="highlight"><pre>$ sudo reboot
+<div class="highlight"><pre><span></span>$ sudo reboot
 </pre></div>
 <p>Log in and check out the new filesystem layout:</p>
-<div class="highlight"><pre>$ df -h
+<div class="highlight"><pre><span></span>$ df -h
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/sda1        20G  590M   18G   4% /
 devtmpfs        458M  4.0K  458M   1% /dev
@@ -260,28 +260,28 @@ none            100M     <span class="m">0</span>  100M   0% /run/user
 <h3>7.1 Administrator</h3>
 <p>Ubuntu is a great operating system but a not-so-great username and a lousy password. Example: change default username/group <tt class="docutils literal">ubuntu</tt> to <tt class="docutils literal">pi</tt> and set a new password.</p>
 <p>Unlock <tt class="docutils literal">root</tt> account by setting a new password:</p>
-<div class="highlight"><pre>$ sudo passwd root
+<div class="highlight"><pre><span></span>$ sudo passwd root
 </pre></div>
 <p>Log out and back in as <tt class="docutils literal">root</tt> and configure <tt class="docutils literal">pi</tt>:</p>
-<div class="highlight"><pre><span class="c1"># usermod -l pi -m -d /home/pi ubuntu</span>
+<div class="highlight"><pre><span></span><span class="c1"># usermod -l pi -m -d /home/pi ubuntu</span>
 <span class="c1"># groupmod -n pi ubuntu</span>
 <span class="c1"># passwd pi</span>
 </pre></div>
 <p><strong>Optional:</strong> Re-lock <tt class="docutils literal">root</tt> by disabling the password:</p>
-<div class="highlight"><pre>$ sudo passwd -dl root
+<div class="highlight"><pre><span></span>$ sudo passwd -dl root
 </pre></div>
 </div>
 <div class="section" id="hostname">
 <h3>7.2 Hostname</h3>
 <p>Example: Modify hostname <tt class="docutils literal">ubuntu</tt> to <tt class="docutils literal">raspberry</tt> in <tt class="docutils literal">/etc/hostname</tt> and <tt class="docutils literal">/etc/hosts</tt> and restart the <tt class="docutils literal">hostname</tt> service:</p>
-<div class="highlight"><pre>$ sudo service hostname restart
+<div class="highlight"><pre><span></span>$ sudo service hostname restart
 </pre></div>
 <p>Log out and back in and hostname <tt class="docutils literal">raspberry</tt> is visible.</p>
 </div>
 <div class="section" id="timezone">
 <h3>7.3 Timezone</h3>
 <p>Default timezone is <tt class="docutils literal">UTC</tt>. Modify to appropriate value:</p>
-<div class="highlight"><pre>$ cat /etc/timezone
+<div class="highlight"><pre><span></span>$ cat /etc/timezone
 Etc/UTC
 $ sudo dpkg-reconfigure tzdata  <span class="c1"># ...and follow the interactive menu to set (example) &#39;America/Toronto&#39;...</span>
 
@@ -293,20 +293,20 @@ Universal Time is now:  Sun Mar  <span class="m">1</span> 23:28:32 UTC 2015.
 <div class="section" id="upgrade">
 <h3>7.4 Upgrade</h3>
 <p>With the newly-configured <tt class="docutils literal">rootfs</tt> up-and-running now is a good time to update Ubuntu:</p>
-<div class="highlight"><pre>$ sudo apt-get update
+<div class="highlight"><pre><span></span>$ sudo apt-get update
 $ sudo apt-get dist-upgrade
 </pre></div>
 </div>
 <div class="section" id="swap">
 <h3>7.5 Swap</h3>
 <p>Ubuntu on Pi does not include a swap partition/file. Generate a (default) 2GB <tt class="docutils literal">/var/swap</tt> file at boot by installing:</p>
-<div class="highlight"><pre>$ sudo apt-get install dphys-swapfile
+<div class="highlight"><pre><span></span>$ sudo apt-get install dphys-swapfile
 </pre></div>
 </div>
 <div class="section" id="static-address">
 <h3>7.6 Static Address</h3>
 <p>A Raspberry Pi that is going to stay home and run as a server can be configured to use a <strong>static network address</strong>. Sample <tt class="docutils literal">/etc/network/interfaces</tt> modification that disables <tt class="docutils literal">dhcp</tt> and sets ip address <tt class="docutils literal">192.168.1.88</tt> and connects to a router (that handles DNS) at <tt class="docutils literal">192.168.1.1</tt>:</p>
-<div class="highlight"><pre><span class="c1">#iface eth0 inet dhcp</span>
+<div class="highlight"><pre><span></span><span class="c1">#iface eth0 inet dhcp</span>
 auto eth0
 iface eth0 inet static
     address 192.168.1.88
@@ -318,7 +318,7 @@ iface eth0 inet static
 <div class="section" id="openssh-server">
 <h3>7.7 OpenSSH Server</h3>
 <p>Install and configure SSH for remote access to our (soon-to-be) headless Pi home server:</p>
-<div class="highlight"><pre>$ sudo apt-get install openssh-server
+<div class="highlight"><pre><span></span>$ sudo apt-get install openssh-server
 </pre></div>
 <p>Check out <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">securing access to remote servers using SSH keys</a>.</p>
 <p>Happy hacking!</p>

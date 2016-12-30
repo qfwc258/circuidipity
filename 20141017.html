@@ -31,24 +31,24 @@
 A number of older <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_Intel_Pentium_M_microprocessors">Pentium M</a> processors produced around 2003-4 (the Banias family) do not display the PAE flag, and hence a normal installation fails. However, these processors are in fact able to run the latest (and PAE-demanding) kernels if only the installation process is modified a little. The problem is not missing PAE, it's about the processor not displaying its full capabilities.</blockquote>
 <p><a class="reference external" href="http://lubuntu.net/">Lubuntu</a> is a Ubuntu-based distro using the lightweight LXDE desktop (good match for older machines like the X31) and <a class="reference external" href="https://wiki.ubuntu.com/Lubuntu/AdvancedMethods#Pentium_M_and_Celeron_M">provides instructions</a> for adding the <tt class="docutils literal">forcepae</tt> kernel option to the Lubuntu installer. This allows the installer to correctly detect a PAE-capable processor and the system to install as desired.</p>
 <p>My own alternative is to <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">prepare a GRUB-capable USB stick</a> capable of booting the Lubuntu installer + <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">other Linux images from the same device</a>. In this scenario I create an entry in <tt class="docutils literal">grub.cfg</tt> for Lubuntu to boot with <tt class="docutils literal">forcepae</tt> pre-configured:</p>
-<div class="highlight"><pre>menuentry <span class="s2">&quot;Lubuntu 14.04 LTS - 32bit Installer (&#39;forcepae&#39; for Pentium M)&quot;</span> <span class="o">{</span>
+<div class="highlight"><pre><span></span>menuentry <span class="s2">&quot;Lubuntu 14.04 LTS - 32bit Installer (&#39;forcepae&#39; for Pentium M)&quot;</span> <span class="o">{</span>
 <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/lubuntu-14.04.1-desktop-i386.iso&quot;</span>
-loopback loop $iso
-linux <span class="o">(</span>loop<span class="o">)</span>/casper/vmlinuz linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span>$iso noprompt noeject forcepae
+loopback loop <span class="nv">$iso</span>
+linux <span class="o">(</span>loop<span class="o">)</span>/casper/vmlinuz linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject forcepae
 initrd <span class="o">(</span>loop<span class="o">)</span>/casper/initrd.lz
 <span class="o">}</span>
 </pre></div>
 <p>See <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">'Transform a USB stick into a boot device packing multiple Linux distros'</a> for details.</p>
 <p>Post-install - and <strong>before</strong> running any upgrades - the PAE flag needs to be set for the CPU, otherwise any attempt at upgrading the kernel will bail (package manager thinks its dealing with a non-PAE processor).</p>
 <p>Add <tt class="docutils literal">forcepae</tt> option to <tt class="docutils literal">GRUB_CMDLINE_LINUX</tt> in <tt class="docutils literal">/etc/default/grub</tt>:</p>
-<div class="highlight"><pre><span class="nv">GRUB_CMDLINE_LINUX</span><span class="o">=</span><span class="s2">&quot;forcepae&quot;</span>
+<div class="highlight"><pre><span></span><span class="nv">GRUB_CMDLINE_LINUX</span><span class="o">=</span><span class="s2">&quot;forcepae&quot;</span>
 </pre></div>
 <p>Run:</p>
-<div class="highlight"><pre>$ sudo update-grub
+<div class="highlight"><pre><span></span>$ sudo update-grub
 </pre></div>
 <p>... and reboot.</p>
 <p>Confirm that <tt class="docutils literal">/proc/cpuinfo</tt> displays the <tt class="docutils literal">pae</tt> flag (0=false, 1=true):</p>
-<div class="highlight"><pre>$ cat /proc/cpuinfo <span class="p">|</span> grep -cim1 pae
+<div class="highlight"><pre><span></span>$ cat /proc/cpuinfo <span class="p">|</span> grep -cim1 pae
 $ 1
 </pre></div>
 <p>Happy hacking!</p>

@@ -34,10 +34,10 @@
 <li>a gentle introduction to object-oriented programming by refactoring code and creating <strong>class objects</strong></li>
 </ul>
 <p><strong>Step 0:</strong> On Ubuntu/Debian for Python3, install ...</p>
-<div class="highlight"><pre>$ sudo apt install python3-pyperclip xclip
+<div class="highlight"><pre><span></span>$ sudo apt install python3-pyperclip xclip
 </pre></div>
 <p><strong>Step 1:</strong> Create a Python module [<a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bernersLee.py">source</a>] that opens new tabs and URLs in Firefox ...</p>
-<div class="highlight"><pre>import webbrowser, pyperclip
+<div class="highlight"><pre><span></span>import webbrowser, pyperclip
 
 class Browser<span class="o">()</span>:
     <span class="s2">&quot;&quot;&quot;Super browser powers&quot;&quot;&quot;</span>
@@ -66,7 +66,7 @@ class Browser<span class="o">()</span>:
         www<span class="o">(</span>web_address + search_item<span class="o">)</span>
 </pre></div>
 <p><strong>Step 2:</strong> Setup a script [<a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bookTab.py">source</a>] to call the module, open tabs in the browser, and run searches on Amazon.(com,ca) and the TPL ...</p>
-<div class="highlight"><pre><span class="ch">#!/usr/bin/env python3</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
 from bernersLee import Browser
 
 def main<span class="o">()</span>:

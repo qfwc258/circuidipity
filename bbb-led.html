@@ -29,11 +29,11 @@
 <div class="section" id="built-in-leds">
 <h2>Built-in LEDs</h2>
 <p>BBB has 4 onboard LEDs that serve as indicators for various bits of the hardware and their interfaces can be accessed under <tt class="docutils literal">/sys/class/leds</tt> ...</p>
-<div class="highlight"><pre>$ ls /sys/class/leds/
+<div class="highlight"><pre><span></span>$ ls /sys/class/leds/
 beaglebone:green:usr0  beaglebone:green:usr1  beaglebone:green:usr2  beaglebone:green:usr3
 </pre></div>
 <p>The blinking 'heartbeat' LED that indicates BBB is alive and well is <tt class="docutils literal">beaglebone:green:usr0</tt> ...</p>
-<div class="highlight"><pre><span class="c1">## &#39;trigger&#39; determines what event is monitored</span>
+<div class="highlight"><pre><span></span><span class="c1">## &#39;trigger&#39; determines what event is monitored</span>
 $ ls /sys/class/leds/beaglebone<span class="se">\:</span>green<span class="se">\:</span>usr0/
 brightness  device  max_brightness  power  subsystem  trigger  uevent
 $ cat /sys/class/leds/beaglebone<span class="se">\:</span>green<span class="se">\:</span>usr0/trigger
@@ -58,12 +58,12 @@ none nand-disk mmc0 mmc1 timer oneshot <span class="o">[</span>heartbeat<span cl
 <div class="section" id="how-to-use-the-gpio-pins">
 <h2>How to Use the GPIO Pins</h2>
 <p>BeagleBone Black has 65 <em>General Purpose Input/Output (GPIO)</em> pins distributed on the board's P8 and P9 headers. These software-controlled pins can be configured to work with external hardware and are accessed through the Linux kernel's GPIO interfaces under <tt class="docutils literal">/sys/class/gpio</tt> ...</p>
-<div class="highlight"><pre>$ ls /sys/class/gpio/
+<div class="highlight"><pre><span></span>$ ls /sys/class/gpio/
 <span class="nb">export</span>      gpiochip0  gpiochip32  gpiochip64  gpiochip96  unexport
 </pre></div>
 <p>What can be confusing at first glance is that a pin's number on the BeagleBone header and its GPIO number are different. Each <tt class="docutils literal">gpiochipX</tt> controls 32 pins and is used to calculate the GPIO address of a pin (some of the GPIO pins are dedicated to BBB's onboard hardware and unavailable by default).</p>
 <p>Example: Pin <tt class="docutils literal">P8_12</tt> is controlled by <tt class="docutils literal">gpio1[12]</tt> which translates as pin 12 on the second controller (starting from zero) ... (32 * 1) + 12 = 44. To <em>add</em> a pin for use I map GPIO_44 into the filesystem by echoing its pin number to the GPIO <tt class="docutils literal">export</tt> file ...</p>
-<div class="highlight"><pre><span class="c1"># echo 44 &gt; /sys/class/gpio/export</span>
+<div class="highlight"><pre><span></span><span class="c1"># echo 44 &gt; /sys/class/gpio/export</span>
 <span class="c1"># ls /sys/class/gpio/</span>
 <span class="nb">export</span>      gpio44  gpiochip0  gpiochip32  gpiochip64  gpiochip96  unexport
 <span class="c1"># ls /sys/class/gpio/gpio44/</span>
@@ -84,36 +84,36 @@ active_low  direction  edge  power  subsystem  uevent  value
 </ul>
 <p>Header pins <tt class="docutils literal">P8_1</tt> and <tt class="docutils literal">P8_2</tt> are both <tt class="docutils literal">GND</tt>. Connect <tt class="docutils literal">P8_2</tt> to the LED cathode and our newly-enabled <tt class="docutils literal">GPIO_44</tt> pin (<tt class="docutils literal">P8_12</tt>) to the LED anode.</p>
 <p>To turn the LED on and off I input settings HIGH and LOW ...</p>
-<div class="highlight"><pre><span class="c1">## ON</span>
+<div class="highlight"><pre><span></span><span class="c1">## ON</span>
 <span class="c1"># echo high &gt; /sys/class/gpio/gpio44/direction</span>
 <span class="c1">## OFF</span>
 <span class="c1"># echo low &gt; /sys/class/gpio/gpio44/direction</span>
 </pre></div>
 <p>I created a tiny shell script to blink the LED ...</p>
-<div class="highlight"><pre><span class="ch">#!/bin/sh</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
 <span class="c1"># Blink an LED on breadboard</span>
 
 <span class="nv">PIN</span><span class="o">=</span><span class="s2">&quot;44&quot;</span> <span class="c1"># P8_12 is gpio1[12] = (32 * 1) + 12 = 44</span>
-<span class="nv">GPIOPIN</span><span class="o">=</span><span class="s2">&quot;/sys/class/gpio/gpio</span>$<span class="s2">PIN&quot;</span>
+<span class="nv">GPIOPIN</span><span class="o">=</span><span class="s2">&quot;/sys/class/gpio/gpio</span><span class="nv">$PIN</span><span class="s2">&quot;</span>
 
-<span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span>$<span class="s2">GPIOPIN&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">&quot;Blinking LED connected to Pin </span>$<span class="s2">PIN ...&quot;</span>
+<span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="nv">$GPIOPIN</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Blinking LED connected to Pin </span><span class="nv">$PIN</span><span class="s2"> ...&quot;</span>
 <span class="k">else</span>
-    <span class="nb">echo</span> $PIN &gt; /sys/class/gpio/export
-    <span class="nb">echo</span> <span class="s2">&quot;Blinking LED connected to Pin </span>$<span class="s2">PIN ...&quot;</span>
+    <span class="nb">echo</span> <span class="nv">$PIN</span> &gt; /sys/class/gpio/export
+    <span class="nb">echo</span> <span class="s2">&quot;Blinking LED connected to Pin </span><span class="nv">$PIN</span><span class="s2"> ...&quot;</span>
     sleep 1
 <span class="k">fi</span>
 
 <span class="k">while</span> true<span class="p">;</span> <span class="k">do</span>
-    <span class="nb">echo</span> high &gt; $GPIOPIN/direction
+    <span class="nb">echo</span> high &gt; <span class="nv">$GPIOPIN</span>/direction
     sleep 2
-    <span class="nb">echo</span> low &gt; $GPIOPIN/direction
+    <span class="nb">echo</span> low &gt; <span class="nv">$GPIOPIN</span>/direction
     sleep 2
 <span class="k">done</span>
 </pre></div>
 <p>... and <tt class="docutils literal"><span class="pre">CTRL-C</span></tt> to kill the script.</p>
 <p>To <em>remove</em> a GPIO pin from use simply <tt class="docutils literal">unexport</tt> the pin ...</p>
-<div class="highlight"><pre><span class="c1"># echo 44 &gt; /sys/class/gpio/unexport</span>
+<div class="highlight"><pre><span></span><span class="c1"># echo 44 &gt; /sys/class/gpio/unexport</span>
 </pre></div>
 </div>
 <div class="section" id="helpful-resources">

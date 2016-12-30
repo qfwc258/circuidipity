@@ -39,7 +39,7 @@
 <div class="section" id="install">
 <h2>Install</h2>
 <p>I use the third-party <a class="reference external" href="https://i3wm.org/docs/repositories.html">i3 Ubuntu repository</a>. Download and install the keyring, configure apt, and install the latest window manager packages ...</p>
-<div class="highlight"><pre>$ wget http://debian.sur5r.net/i3/pool/universe/s/sur5r-keyring/sur5r-keyring_2015.12.29_all.deb
+<div class="highlight"><pre><span></span>$ wget http://debian.sur5r.net/i3/pool/universe/s/sur5r-keyring/sur5r-keyring_2015.12.29_all.deb
 $ sudo dpkg -i sur5r-keyring*.deb
 $ sudo cp /etc/apt/sources.list /etc/apt/sources.list.<span class="k">$(</span>date +%FT%H%M%S<span class="k">)</span>.bak
 $ sudo <span class="nb">echo</span> <span class="s2">&quot;## i3 window manager&quot;</span> &gt;&gt; /etc/apt/sources.list
@@ -51,20 +51,20 @@ $ sudo apt update <span class="o">&amp;&amp;</span> sudo apt install i3 i3status
 <h2>Auto-start applications</h2>
 <p>In my <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt> I have added a few applications to start at launch: a script to detect and setup a second display if attached (using <tt class="docutils literal">xrandr</tt>), another script to configure things like my Thinkpad USB keyboard and empty Trash, and finally open a terminal.</p>
 <p>In the i3 configuration file I replace the default dynamic application launcher <tt class="docutils literal">dmenu</tt> with <a class="reference external" href="https://davedavenport.github.io/rofi/">rofi</a> (<tt class="docutils literal">sudo apt install rofi</tt>) ...</p>
-<div class="highlight"><pre><span class="c1"># rofi - window switcher, run dialog and dmenu replacement</span>
+<div class="highlight"><pre><span></span><span class="c1"># rofi - window switcher, run dialog and dmenu replacement</span>
 bindsym F3 <span class="nb">exec</span> --no-startup-id rofi -show run
-bindsym $mod+Tab <span class="nb">exec</span> --no-startup-id rofi -show window
+bindsym <span class="nv">$mod</span>+Tab <span class="nb">exec</span> --no-startup-id rofi -show window
 </pre></div>
 </div>
 <div class="section" id="window-tabs">
 <h2>Window tabs</h2>
 <p>I remove tabs from windows and replace them with thin coloured bars by reducing window title font size to zero ...</p>
-<div class="highlight"><pre><span class="c1"># Font for window titles. Will also be used by the bar unless a different font</span>
+<div class="highlight"><pre><span></span><span class="c1"># Font for window titles. Will also be used by the bar unless a different font</span>
 <span class="c1"># is used in the bar {} block below.</span>
 font pango:DejaVu Sans Mono 0
 </pre></div>
 <p>... and setting the colour for active/inactive windows ...</p>
-<div class="highlight"><pre><span class="c1"># Colours</span>
+<div class="highlight"><pre><span></span><span class="c1"># Colours</span>
 <span class="c1"># * class                 border  backgrd text    indicator</span>
 client.focused            <span class="c1">#ff0000 #ff0000 #ffffff #2e9ef4</span>
 client.focused_inactive   <span class="c1">#333333 #333333 #ffffff #484e50</span>
@@ -75,7 +75,7 @@ client.urgent             <span class="c1">#2f343a #900000 #ffffff #900000</span
 <div class="section" id="containers">
 <h2>Containers</h2>
 <p>Arrange containers (windows) to default to a <strong>tabbed</strong> layout ... and allow a few applications to start in alternate <strong>floating</strong> (unmaximized) mode ...</p>
-<div class="highlight"><pre><span class="c1"># Layout mode for new containers</span>
+<div class="highlight"><pre><span></span><span class="c1"># Layout mode for new containers</span>
 workspace_layout tabbed
 <span class="c1"># Enable floating mode</span>
 for_window <span class="o">[</span><span class="nv">class</span><span class="o">=</span><span class="s2">&quot;Remmina&quot;</span><span class="o">]</span> floating <span class="nb">enable</span>
@@ -89,16 +89,16 @@ for_window <span class="o">[</span><span class="nv">class</span><span class="o">
 <div class="section" id="screenshots">
 <h2>Screenshots</h2>
 <p>I install <strong>scrot</strong> for screenshots and <strong>eog</strong> as image viewer ...</p>
-<div class="highlight"><pre>$ sudo apt install scrot eog
+<div class="highlight"><pre><span></span>$ sudo apt install scrot eog
 </pre></div>
 <p>... and configure key combos to trigger desktop/active window/selected area snapshots ...</p>
-<div class="highlight"><pre><span class="c1"># Screenshot</span>
+<div class="highlight"><pre><span></span><span class="c1"># Screenshot</span>
 <span class="c1"># * desktop</span>
 bindsym --release Print <span class="nb">exec</span> --no-startup-id scrot <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
 bindsym --release F4 <span class="nb">exec</span> --no-startup-id scrot <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
 <span class="c1"># * active Window</span>
-bindsym --release $mod+Print <span class="nb">exec</span> --no-startup-id scrot -d <span class="m">4</span> -u -z <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
-bindsym --release $mod+F4 <span class="nb">exec</span> --no-startup-id scrot -d <span class="m">4</span> -u -z <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
+bindsym --release <span class="nv">$mod</span>+Print <span class="nb">exec</span> --no-startup-id scrot -d <span class="m">4</span> -u -z <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
+bindsym --release <span class="nv">$mod</span>+F4 <span class="nb">exec</span> --no-startup-id scrot -d <span class="m">4</span> -u -z <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
 <span class="c1"># * selected area... (click and move mouse)</span>
 bindsym --release Shift+Print <span class="nb">exec</span> --no-startup-id scrot -s <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
 bindsym --release Shift+F4 <span class="nb">exec</span> --no-startup-id scrot -s <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
@@ -111,13 +111,13 @@ bindsym --release Shift+F4 <span class="nb">exec</span> --no-startup-id scrot -s
 <div class="section" id="styling">
 <h2>Styling</h2>
 <p>Theme dependencies, fonts, and config utilities ...</p>
-<div class="highlight"><pre>$ sudo apt install gnome-themes-standard gtk2-engines-murrine gtk2-engines-pixbuf fonts-liberation ttf-ubuntu-font-family xfonts-terminus lxappearance qt4-qtconfig
+<div class="highlight"><pre><span></span>$ sudo apt install gnome-themes-standard gtk2-engines-murrine gtk2-engines-pixbuf fonts-liberation ttf-ubuntu-font-family xfonts-terminus lxappearance qt4-qtconfig
 </pre></div>
 <p>I use the <a class="reference external" href="http://www.ravefinity.com/p/download-ambiance-radiance-colors.html">Ambiance Colors GTK</a> and <a class="reference external" href="http://www.ravefinity.com/p/vibrancy-colors-gtk-icon-theme.html">Vibrancy Color Icon</a> themes. Download the <tt class="docutils literal">*.deb</tt> packages separately and install using <tt class="docutils literal">sudo dpkg <span class="pre">-i</span> *.deb</tt>.</p>
 <p>Run <tt class="docutils literal">lxappearance</tt> to setup the GTK theme (outputs to <tt class="docutils literal"><span class="pre">~/.gtkrc-2.0</span></tt> and <tt class="docutils literal"><span class="pre">~/.config/gtk-{2,3}.0</span></tt>) and <tt class="docutils literal"><span class="pre">qtconfig-qt4</span></tt> to configure QT4 (outputs to <tt class="docutils literal"><span class="pre">~/.config/Trolltech.conf</span></tt>) to use the <tt class="docutils literal">GTK+</tt> default theme.</p>
 <p>Theming for QT5 applications can be configured using the <tt class="docutils literal">qt5ct</tt> utility. <a class="reference external" href="http://ppa.launchpad.net/nilarimogard/webupd8/ubuntu/pool/main/q/qt5ct/">Download the qt5ct package</a> available on the <a class="reference external" href="https://launchpad.net/~nilarimogard/+archive/ubuntu/webupd8">WebUpd8 PPA</a> and <tt class="docutils literal">sudo dpkg <span class="pre">-i</span> <span class="pre">qt5ct*.deb</span></tt>.</p>
 <p>Add to <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt> ...</p>
-<div class="highlight"><pre><span class="nb">export</span> <span class="nv">QT_QPA_PLATFORMTHEME</span><span class="o">=</span><span class="s2">&quot;qt5ct&quot;</span>
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">QT_QPA_PLATFORMTHEME</span><span class="o">=</span><span class="s2">&quot;qt5ct&quot;</span>
 </pre></div>
 <p>Exit from X and log back in. Run <tt class="docutils literal">qt5ct</tt> (outputs to <tt class="docutils literal"><span class="pre">~/.config/qt5ct/qt5ct.conf</span></tt>) and configure QT5 to use GTK settings.</p>
 <p>See: <a class="reference external" href="https://wiki.archlinux.org/index.php/Uniform_look_for_Qt_and_GTK_applications">Uniform look for QT and GTK applications</a> and <a class="reference external" href="http://www.webupd8.org/2015/11/configure-qt5-application-style-icons.html">Configure QT5 with QT5CT</a></p>
@@ -125,14 +125,14 @@ bindsym --release Shift+F4 <span class="nb">exec</span> --no-startup-id scrot -s
 <div class="section" id="lockscreen-logout-suspend-reboot-shutdown">
 <h2>LockScreen/Logout/Suspend/Reboot/Shutdown</h2>
 <p>Screen locks are handled by <tt class="docutils literal">i3lock</tt> and <tt class="docutils literal">systemctl</tt> deals with system suspend/reboot/shutdown ...</p>
-<div class="highlight"><pre><span class="c1"># Lock/Logout/Suspend/Reboot/Shutdown</span>
+<div class="highlight"><pre><span></span><span class="c1"># Lock/Logout/Suspend/Reboot/Shutdown</span>
 <span class="c1"># * https://wiki.archlinux.org/index.php/I3#Shutdown.2C_reboot.2C_lock_screen</span>
-<span class="nb">set</span> $Locker i3lock -i ~/.i3lock.png <span class="o">&amp;&amp;</span> sleep 1
-<span class="nb">set</span> $mode_system System <span class="o">(</span>l<span class="o">)</span> lock, <span class="o">(</span>e<span class="o">)</span> logout, <span class="o">(</span>s<span class="o">)</span> suspend, <span class="o">(</span>r<span class="o">)</span> reboot, <span class="o">(</span>Shift+s<span class="o">)</span> shutdown
-mode <span class="s2">&quot;</span>$<span class="s2">mode_system&quot;</span> <span class="o">{</span>
-    bindsym l <span class="nb">exec</span> --no-startup-id $Locker, mode <span class="s2">&quot;default&quot;</span>
+<span class="nb">set</span> <span class="nv">$Locker</span> i3lock -i ~/.i3lock.png <span class="o">&amp;&amp;</span> sleep 1
+<span class="nb">set</span> <span class="nv">$mode_system</span> System <span class="o">(</span>l<span class="o">)</span> lock, <span class="o">(</span>e<span class="o">)</span> logout, <span class="o">(</span>s<span class="o">)</span> suspend, <span class="o">(</span>r<span class="o">)</span> reboot, <span class="o">(</span>Shift+s<span class="o">)</span> shutdown
+mode <span class="s2">&quot;</span><span class="nv">$mode_system</span><span class="s2">&quot;</span> <span class="o">{</span>
+    bindsym l <span class="nb">exec</span> --no-startup-id <span class="nv">$Locker</span>, mode <span class="s2">&quot;default&quot;</span>
     bindsym e <span class="nb">exec</span> --no-startup-id i3-msg exit, mode <span class="s2">&quot;default&quot;</span>
-    bindsym s <span class="nb">exec</span> --no-startup-id $Locker <span class="o">&amp;&amp;</span> sync <span class="o">&amp;&amp;</span> systemctl suspend, mode <span class="s2">&quot;default&quot;</span>
+    bindsym s <span class="nb">exec</span> --no-startup-id <span class="nv">$Locker</span> <span class="o">&amp;&amp;</span> sync <span class="o">&amp;&amp;</span> systemctl suspend, mode <span class="s2">&quot;default&quot;</span>
     bindsym r <span class="nb">exec</span> --no-startup-id systemctl reboot, mode <span class="s2">&quot;default&quot;</span>
     bindsym Shift+s <span class="nb">exec</span> --no-startup-id systemctl poweroff -i, mode <span class="s2">&quot;default&quot;</span>
 
@@ -140,7 +140,7 @@ mode <span class="s2">&quot;</span>$<span class="s2">mode_system&quot;</span> <s
     bindsym Return mode <span class="s2">&quot;default&quot;</span>
     bindsym Escape mode <span class="s2">&quot;default&quot;</span>
 <span class="o">}</span>
-bindsym $mod+Pause mode <span class="s2">&quot;</span>$<span class="s2">mode_system&quot;</span>
+bindsym <span class="nv">$mod</span>+Pause mode <span class="s2">&quot;</span><span class="nv">$mode_system</span><span class="s2">&quot;</span>
 </pre></div>
 <p>Happy hacking!</p>
 <div class="section" id="notes">

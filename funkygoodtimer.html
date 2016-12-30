@@ -35,11 +35,11 @@
 <li>then <a class="reference external" href="https://www.youtube.com/watch?v=7OrOahkRgvA">play something funky</a></li>
 <li>offer the choice of timer reset or quit program</li>
 </ul>
-<div class="highlight"><pre><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="c1">#: VARIABLES</span>
 <span class="nv">Scriptname</span><span class="o">=</span><span class="s2">&quot;FunkyGoodTimer&quot;</span>
 <span class="nv">Description</span><span class="o">=</span><span class="s2">&quot;A simple (but funky) graphical countdown timer&quot;</span>
-<span class="nv">Synopsis</span><span class="o">=</span><span class="s2">&quot;</span>$<span class="s2">Scriptname [-v|-h]&quot;</span>
+<span class="nv">Synopsis</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$Scriptname</span><span class="s2"> [-v|-h]&quot;</span>
 <span class="nv">Version</span><span class="o">=</span><span class="s2">&quot;0.X&quot;</span>
 <span class="c1"># -------- #</span>
 <span class="nv">RequiredPrograms</span><span class="o">=</span><span class="s2">&quot;zenity, {vorbis-tools,alsa-utils,mpg123}&quot;</span>
@@ -50,7 +50,7 @@
 <span class="c1">#Player=&quot;/usr/bin/mpg123&quot;   # MP3</span>
 <span class="c1">#</span>
 <span class="c1"># CHANGE THIS: pick something FUNKY to play ...</span>
-<span class="nv">Funky</span><span class="o">=</span><span class="s2">&quot;</span>$<span class="s2">HOME/.FunkyGoodTimer/you_been_sitting_much_too_long.ogg&quot;</span>
+<span class="nv">Funky</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.FunkyGoodTimer/you_been_sitting_much_too_long.ogg&quot;</span>
 
 <span class="c1">#: FUNCTIONS</span>
 VersionInfo<span class="o">()</span>
@@ -88,50 +88,50 @@ cat <span class="s">&lt;&lt; _EOF_</span>
 
 PlayerTest<span class="o">()</span>
 <span class="o">{</span>
-<span class="k">if</span> <span class="o">[[</span> -x <span class="s2">&quot;</span>$<span class="s2">Player&quot;</span> <span class="o">]]</span>
+<span class="k">if</span> <span class="o">[[</span> -x <span class="s2">&quot;</span><span class="nv">$Player</span><span class="s2">&quot;</span> <span class="o">]]</span>
 <span class="k">then</span>
             :
 <span class="k">else</span>
             zenity --error --title<span class="o">=</span><span class="s2">&quot;ERROR: Music Player Not Installed&quot;</span> <span class="se">\</span>
-                            --text<span class="o">=</span><span class="s2">&quot;&#39;</span>$<span class="s2">Player&#39; is missing on this box.\n\n Use your package manager to install this funky player.&quot;</span>
+                            --text<span class="o">=</span><span class="s2">&quot;&#39;</span><span class="nv">$Player</span><span class="s2">&#39; is missing on this box.\n\n Use your package manager to install this funky player.&quot;</span>
             <span class="nb">exit</span>
 <span class="k">fi</span>
 <span class="o">}</span>
 
 FunkTest<span class="o">()</span>
 <span class="o">{</span>
-<span class="k">if</span> <span class="o">[[</span> -e <span class="s2">&quot;</span><span class="nv">$F</span><span class="s2">unky&quot;</span> <span class="o">]]</span>
+<span class="k">if</span> <span class="o">[[</span> -e <span class="s2">&quot;</span><span class="nv">$Funky</span><span class="s2">&quot;</span> <span class="o">]]</span>
 <span class="k">then</span>
             :
 <span class="k">else</span>
             zenity --error --title<span class="o">=</span><span class="s2">&quot;ERROR: No Funk&quot;</span> <span class="se">\</span>
-                            --text<span class="o">=</span><span class="s2">&quot;Track &#39;</span><span class="nv">$F</span><span class="s2">unky&#39; is missing on this box.\n\n Open this script in a text editor and select another piece of funkiness.&quot;</span>
+                            --text<span class="o">=</span><span class="s2">&quot;Track &#39;</span><span class="nv">$Funky</span><span class="s2">&#39; is missing on this box.\n\n Open this script in a text editor and select another piece of funkiness.&quot;</span>
             <span class="nb">exit</span>
 <span class="k">fi</span>
 <span class="o">}</span>
 
 SetTime<span class="o">()</span>
 <span class="o">{</span>
-sleep $Time
+sleep <span class="nv">$Time</span>
 <span class="o">}</span>
 
 NoTime<span class="o">()</span>
 <span class="o">{</span>
 zenity --question --title<span class="o">=</span><span class="s2">&quot;TIME is UP&quot;</span> --ok-label<span class="o">=</span><span class="s2">&quot;Quit&quot;</span> --cancel-label<span class="o">=</span><span class="s2">&quot;Reset&quot;</span> <span class="se">\</span>
-    --text<span class="o">=</span><span class="s2">&quot;It has been </span>$<span class="s2">Time.\n\n Get UP and SHAKE your RUMP to the FUNK!&quot;</span>
+    --text<span class="o">=</span><span class="s2">&quot;It has been </span><span class="nv">$Time</span><span class="s2">.\n\n Get UP and SHAKE your RUMP to the FUNK!&quot;</span>
 <span class="o">}</span>
 
 HitIt<span class="o">()</span>
 <span class="o">{</span>
 <span class="k">while</span> :
 <span class="k">do</span>
-            $Player <span class="nv">$F</span>unky <span class="p">&amp;</span> NoTime
+            <span class="nv">$Player</span> <span class="nv">$Funky</span> <span class="p">&amp;</span> NoTime
             <span class="k">if</span> <span class="o">[[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]]</span>
             <span class="k">then</span>
-                            killall $Player
+                            killall <span class="nv">$Player</span>
                             <span class="nb">exit</span>
             <span class="k">else</span>
-                            killall $Player
+                            killall <span class="nv">$Player</span>
                             SetTime
             <span class="k">fi</span>
 <span class="k">done</span>
@@ -143,7 +143,7 @@ HitIt<span class="o">()</span>
 <span class="k">then</span>
     <span class="k">while</span> <span class="nb">getopts</span> “hv” OPTION
     <span class="k">do</span>
-            <span class="k">case</span> $OPTION in
+            <span class="k">case</span> <span class="nv">$OPTION</span> in
                     v <span class="o">)</span>     VersionInfo
                             <span class="nb">exit</span>
                             <span class="p">;;</span>
@@ -170,7 +170,7 @@ SetTime
 HitIt
 </pre></div>
 <p>The script requires zenity plus a console audio player to be installed ... I suggest <tt class="docutils literal">ogg123</tt> for OGG tracks, <tt class="docutils literal">mpg123</tt> for MP3, and <tt class="docutils literal">aplay</tt> for WAV. On Debian install ...</p>
-<div class="highlight"><pre>$ sudo apt-get install zenity vorbis-tools mpg123 alsa-utils
+<div class="highlight"><pre><span></span>$ sudo apt-get install zenity vorbis-tools mpg123 alsa-utils
 </pre></div>
 <p>All set to set time! Run program and enter a time to countdown:</p>
 <img alt="Enter time" class="align-center" src="images/fgt1.png" />

@@ -47,12 +47,12 @@
 <div class="section" id="id1">
 <h3>0. Rsnapshot</h3>
 <p>Install <tt class="docutils literal">rsnapshot</tt>, make a directory to store backups, and make a copy of the default config file:</p>
-<div class="highlight"><pre>$ sudo apt-get install rsnapshot
+<div class="highlight"><pre><span></span>$ sudo apt-get install rsnapshot
 $ mkdir /my/backup/location
 $ sudo cp /etc/rsnapshot.conf /etc/rsnapshot.conf.default
 </pre></div>
 <p>Modify <tt class="docutils literal">/etc/rsnapshot.conf</tt> (important to separate fields with <strong>TABS</strong> not spaces). Example of a few tweaks:</p>
-<div class="highlight"><pre>snapshot_root   /my/backup/location
+<div class="highlight"><pre><span></span>snapshot_root   /my/backup/location
 
 cmd_cp          /bin/cp
 cmd_rm          /bin/rm
@@ -75,14 +75,14 @@ backup  /home/          localhost/
 backup  /etc/           localhost/
 </pre></div>
 <p>Check config syntax and run backup test:</p>
-<div class="highlight"><pre>$ sudo rsnapshot configtest
+<div class="highlight"><pre><span></span>$ sudo rsnapshot configtest
 $ sudo rsnapshot -t sync
 </pre></div>
 <p>If everything checks out OK go ahead and run:</p>
-<div class="highlight"><pre>$ sudo rsnapshot sync <span class="o">&amp;&amp;</span> sudo rsnapshot daily <span class="o">&amp;&amp;</span> sudo rsnapshot du
+<div class="highlight"><pre><span></span>$ sudo rsnapshot sync <span class="o">&amp;&amp;</span> sudo rsnapshot daily <span class="o">&amp;&amp;</span> sudo rsnapshot du
 </pre></div>
 <p>Automate backups by modifying the sample cron file provided in <tt class="docutils literal">/etc/cron.d/rsnapshot</tt> and running jobs as root. Example config:</p>
-<div class="highlight"><pre><span class="c1"># m h  dom mon dow   command</span>
+<div class="highlight"><pre><span></span><span class="c1"># m h  dom mon dow   command</span>
 <span class="m">50</span> <span class="m">23</span> * * *     root    /usr/bin/rsnapshot sync <span class="o">&amp;&amp;</span> /usr/bin/rsnapshot daily
 <span class="m">40</span> <span class="m">22</span> * * <span class="m">6</span>     root    /usr/bin/rsnapshot weekly
 <span class="m">30</span> <span class="m">21</span> <span class="m">1</span> * *     root    /usr/bin/rsnapshot monthly
@@ -94,25 +94,25 @@ $ sudo rsnapshot -t sync
 <div class="section" id="on-the-pi">
 <h4>1.1 On the Pi</h4>
 <p>Create a directory to store the backup:</p>
-<div class="highlight"><pre>$ mkdir /path/to/backup
+<div class="highlight"><pre><span></span>$ mkdir /path/to/backup
 </pre></div>
 </div>
 <div class="section" id="on-localhost">
 <h4>1.2 On localhost</h4>
 <p>Set the ip address and hostname of the Pi server in <tt class="docutils literal">/etc/hosts</tt>:</p>
-<div class="highlight"><pre>192.168.1.88    raspberry.server
+<div class="highlight"><pre><span></span>192.168.1.88    raspberry.server
 </pre></div>
 <p>Test synching <tt class="docutils literal">/my/backup/location/</tt> on <tt class="docutils literal">localhost</tt> to <tt class="docutils literal"><span class="pre">raspberry.server:/path/to/backup/</span></tt> with the <tt class="docutils literal">rsync <span class="pre">--dry-run</span></tt> option (I exclude <tt class="docutils literal">/etc/</tt> from the backup):</p>
-<div class="highlight"><pre>rsync --dry-run --archive --hard-links --numeric-ids --delete --exclude<span class="o">=</span>etc/ --verbose /my/backup/location/ raspberry.server:/path/to/backup/
+<div class="highlight"><pre><span></span>rsync --dry-run --archive --hard-links --numeric-ids --delete --exclude<span class="o">=</span>etc/ --verbose /my/backup/location/ raspberry.server:/path/to/backup/
 </pre></div>
 <p>If everything checks out OK drop <tt class="docutils literal"><span class="pre">--dry-run</span></tt> and re-run the command to make a proper backup.</p>
 <p>I use <tt class="docutils literal">keychain</tt> to manage <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">SSH keys for password-less logins to the Pi</a>. Create a <tt class="docutils literal">backupSnap.sh</tt> shell script and place in <tt class="docutils literal">~/bin</tt>:</p>
-<div class="highlight"><pre><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 . <span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/.keychain/<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>-sh
 rsync --archive --hard-links --numeric-ids --delete --exclude<span class="o">=</span>etc/ /my/backup/location/ <span class="nv">$1</span>
 </pre></div>
 <p>Automate the backups by creating a cron job (example that runs daily at 04:50):</p>
-<div class="highlight"><pre><span class="c1"># m h  dom mon dow   command</span>
+<div class="highlight"><pre><span></span><span class="c1"># m h  dom mon dow   command</span>
 <span class="m">50</span> <span class="m">4</span> * * *  /home/USERNAME/bin/backupSnap.sh raspberry.server:/path/to/backup/
 </pre></div>
 </div>
@@ -120,7 +120,7 @@ rsync --archive --hard-links --numeric-ids --delete --exclude<span class="o">=</
 <div class="section" id="external-drive-and-offsite-storage">
 <h3>2. External drive and offsite storage</h3>
 <p>I connect my USB drive and sync the backup to the device:</p>
-<div class="highlight"><pre>$ /home/USERNAME/bin/backupSnap.sh /media/USB/path/to/backup/
+<div class="highlight"><pre><span></span>$ /home/USERNAME/bin/backupSnap.sh /media/USB/path/to/backup/
 </pre></div>
 <p>... and take my hard drive for <a class="reference external" href="http://ttc.ca/Routes/General_Information/Maps/index.jsp">a ride on the subway</a> to say hello to my offsite storage!</p>
 <p>Happy hacking!</p>

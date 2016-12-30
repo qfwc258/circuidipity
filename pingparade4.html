@@ -60,10 +60,10 @@
 <div class="section" id="first-login">
 <h2>2. First login</h2>
 <p>Use <tt class="docutils literal">telnet</tt> (no password) to <a class="reference external" href="http://wiki.openwrt.org/doc/howto/firstlogin">login for the first time</a> to OpenWrt. Use <tt class="docutils literal">passwd</tt> to create a new root password. Once password is modified telnet is disabled. Exit and re-login using SSH:</p>
-<div class="highlight"><pre>$ ssh root@192.168.1.1
+<div class="highlight"><pre><span></span>$ ssh root@192.168.1.1
 </pre></div>
 <p><a class="reference external" href="http://wiki.openwrt.org/doc/howto/internet.connection">Setup your internet connection</a> either by editing <tt class="docutils literal">/etc/config/network</tt> or using OpenWrt's <strong>Unified Configuration Interface</strong> (UCI). Example (<tt class="docutils literal">pppoe</tt>) setup:</p>
-<div class="highlight"><pre><span class="c1"># uci set network.wan.proto=pppoe</span>
+<div class="highlight"><pre><span></span><span class="c1"># uci set network.wan.proto=pppoe</span>
 <span class="c1"># uci set network.wan.username=&#39;USERNAME@myisp.su&#39;</span>
 <span class="c1"># uci set network.wan.password=&#39;PASSWORD&#39;</span>
 <span class="c1"># uci commit network</span>
@@ -73,11 +73,11 @@
 <div class="section" id="web-interface">
 <h2>3. Web interface</h2>
 <p>OpenWrt can be configured in the console or install the optional <a class="reference external" href="http://wiki.openwrt.org/doc/howto/luci.essentials">LuCI web interface</a> using the <tt class="docutils literal">opkg</tt> package manager: <a class="footnote-reference" href="#id4" id="id2">[2]</a></p>
-<div class="highlight"><pre><span class="c1"># opkg update</span>
+<div class="highlight"><pre><span></span><span class="c1"># opkg update</span>
 <span class="c1"># opkg install luci</span>
 </pre></div>
 <p>After install LuCI is not running by default:</p>
-<div class="highlight"><pre><span class="c1"># /etc/init.d/uhttpd start      # start the web server</span>
+<div class="highlight"><pre><span></span><span class="c1"># /etc/init.d/uhttpd start      # start the web server</span>
 <span class="c1"># /etc/init.d/uhttpd enable     # auto-start at boot</span>
 </pre></div>
 <p>LuCI's web server <tt class="docutils literal">uhttpd</tt> is configured in <tt class="docutils literal">/etc/config/uhttpd</tt> and LuCI itself is configured in <tt class="docutils literal">/etc/config/luci</tt>.</p>

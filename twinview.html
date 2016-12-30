@@ -36,7 +36,7 @@
 </ul>
 <p>For a dual-display configuration using non-Nvidia graphics try <a class="reference external" href="big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr.html">xrandr</a> .</p>
 <p>Make a small edit to <tt class="docutils literal">/etc/X11/xorg.conf</tt> by adding <tt class="docutils literal">Option &quot;TwinView&quot;</tt> and <tt class="docutils literal">Option &quot;TwinViewOrientation&quot;</tt>. Using my own configuration as an example ... my primary display is the Acer and the I-INC is positioned left-relative to it. So I add to my <tt class="docutils literal">xorg.conf</tt> ...</p>
-<div class="highlight"><pre>Section <span class="s2">&quot;Device&quot;</span>
+<div class="highlight"><pre><span></span>Section <span class="s2">&quot;Device&quot;</span>
     Identifier  <span class="s2">&quot;Card0&quot;</span>
     <span class="c1">#Driver      &quot;nouveau&quot;</span>
     Driver      <span class="s2">&quot;nvidia&quot;</span>

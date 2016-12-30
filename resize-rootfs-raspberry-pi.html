@@ -29,7 +29,7 @@
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
 <p>Debian developer Sjoerd Simons has created a <a class="reference external" href="http://sjoerd.luon.net/posts/2015/02/debian-jessie-on-rpi2/">Jessie minimal image</a> with an updated 3.18 Linux kernel and firmware suitable for Pi 2. I install the image file to a 32GB microSD card, insert card into my Pi and reboot, log in and inspect the filesystem layout:</p>
-<div class="highlight"><pre>Filesystem      Size  Used Avail Use% Mounted on
+<div class="highlight"><pre><span></span>Filesystem      Size  Used Avail Use% Mounted on
 /dev/root       2.8G  555M  2.1G  21% /
 devtmpfs        459M     <span class="m">0</span>  459M   0% /dev
 tmpfs           463M     <span class="m">0</span>  463M   0% /dev/shm
@@ -50,7 +50,7 @@ tmpfs           463M     <span class="m">0</span>  463M   0% /sys/fs/cgroup
 </ul>
 <p><span class="warning">WARNING!</span> Ensure the start sector remains identical (example: mine below is <tt class="docutils literal">249856</tt> on the old and new versions of <tt class="docutils literal">mmcblk0p2</tt> or there is a high probability the operation will fail and all data lost.</p>
 <p>A sample run-through on my own microSD:</p>
-<div class="highlight"><pre><span class="c1"># fdisk /dev/mmcblk0</span>
+<div class="highlight"><pre><span></span><span class="c1"># fdisk /dev/mmcblk0</span>
 
 Welcome to fdisk <span class="o">(</span>util-linux 2.25.2<span class="o">)</span>.
 Changes will remain in memory only, <span class="k">until</span> you decide to write them.
@@ -113,7 +113,7 @@ The kernel still uses the old table. The new table will be used at the next rebo
 <div class="section" id="resize">
 <h2>1. Resize</h2>
 <p>Expand <tt class="docutils literal">rootfs</tt> to use the new capacity:</p>
-<div class="highlight"><pre><span class="c1"># resize2fs /dev/mmcblk0p2</span>
+<div class="highlight"><pre><span></span><span class="c1"># resize2fs /dev/mmcblk0p2</span>
 resize2fs 1.42.12 <span class="o">(</span>29-Aug-2014<span class="o">)</span>
 Filesystem at /dev/mmcblk0p2 is mounted on /<span class="p">;</span> on-line resizing required
 <span class="nv">old_desc_blocks</span> <span class="o">=</span> 1, <span class="nv">new_desc_blocks</span> <span class="o">=</span> 2

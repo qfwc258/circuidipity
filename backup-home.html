@@ -42,7 +42,7 @@
 <div class="section" id="on-the-server">
 <h3>On the server</h3>
 <p>Create a backup directory to hold the contents of <tt class="docutils literal">home</tt>:</p>
-<div class="highlight"><pre>$ mkdir ~/backup-home
+<div class="highlight"><pre><span></span>$ mkdir ~/backup-home
 </pre></div>
 </div>
 <div class="section" id="on-the-client">
@@ -54,23 +54,23 @@
 <li>exclude certain items from the backup like <tt class="docutils literal">cache</tt> and <tt class="docutils literal">trash</tt></li>
 </ul>
 <p><span class="warning">WARNING!</span> Take care nothing important is wiped out using <tt class="docutils literal"><span class="pre">--delete</span></tt>. First run <tt class="docutils literal">rsync</tt> in a console with option <tt class="docutils literal"><span class="pre">--dry-run</span></tt> to test settings:</p>
-<div class="highlight"><pre>$ rsync --verbose --archive --delete --dry-run ~/ pi@192.168.1.88:~/backup-home/
+<div class="highlight"><pre><span></span>$ rsync --verbose --archive --delete --dry-run ~/ pi@192.168.1.88:~/backup-home/
 </pre></div>
 <p>Sample script:</p>
-<div class="highlight"><pre><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="c1"># ~/bin/myRsync</span>
-<span class="nv">ssh_agent</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span><span class="s2">/.keychain/</span>$<span class="s2">HOSTNAME-sh&quot;</span>
+<span class="nv">ssh_agent</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span><span class="s2">/.keychain/</span><span class="nv">$HOSTNAME</span><span class="s2">-sh&quot;</span>
 <span class="nv">rsync_options</span><span class="o">=</span><span class="s2">&quot;--verbose --archive --delete&quot;</span>
 <span class="nv">rsync_exclude</span><span class="o">=</span><span class="s2">&quot;--exclude=*[Cc]ache* --exclude=*[Tt]rash*&quot;</span>
 <span class="nv">rsync_src</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span><span class="s2">/&quot;</span>
 <span class="nv">rsync_dest</span><span class="o">=</span><span class="s2">&quot;pi@192.168.1.88:~/backup_home/&quot;</span>
 
-. $ssh_agent
+. <span class="nv">$ssh_agent</span>
 <span class="nb">echo</span> <span class="k">$(</span>date<span class="k">)</span>
-rsync $rsync_options $rsync_exclude $rsync_src $rsync_dest
+rsync <span class="nv">$rsync_options</span> <span class="nv">$rsync_exclude</span> <span class="nv">$rsync_src</span> <span class="nv">$rsync_dest</span>
 </pre></div>
 <p>Place the script in <tt class="docutils literal">~/bin</tt> and make it executable. Run manually at least once to test:</p>
-<div class="highlight"><pre>$ chmod <span class="m">744</span> ~/bin/myRsync
+<div class="highlight"><pre><span></span>$ chmod <span class="m">744</span> ~/bin/myRsync
 $ ~/bin/myRsync
 </pre></div>
 </div>
@@ -82,7 +82,7 @@ $ ~/bin/myRsync
 <li>perform a daily backup at <tt class="docutils literal">23:55</tt></li>
 <li>log program activity by redirecting output to <tt class="docutils literal">/home/USERNAME/cron.log</tt></li>
 </ul>
-<div class="highlight"><pre><span class="c1"># To define the time you can provide concrete values for</span>
+<div class="highlight"><pre><span></span><span class="c1"># To define the time you can provide concrete values for</span>
 <span class="c1"># minute (m), hour (h), day of month (dom), month (mon),</span>
 <span class="c1"># and day of week (dow) or use &#39;*&#39; in these fields (for &#39;any&#39;).#</span>
 <span class="c1">#</span>

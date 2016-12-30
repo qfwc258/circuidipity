@@ -39,7 +39,7 @@
 <div class="section" id="install-relayd">
 <h2>0. Install relayd</h2>
 <p>Access the internet by connecting an ethernet cable from the secondary router's WAN port to the primary router. Login and install <tt class="docutils literal">relayd</tt>:</p>
-<div class="highlight"><pre><span class="c1"># opkg update</span>
+<div class="highlight"><pre><span></span><span class="c1"># opkg update</span>
 <span class="c1"># opkg install relayd</span>
 <span class="c1"># /etc/init.d/relayd enable</span>
 </pre></div>
@@ -47,7 +47,7 @@
 <div class="section" id="configure-wireless">
 <h2>1. Configure wireless</h2>
 <p>Sample <tt class="docutils literal">/etc/config/wireless</tt>:</p>
-<div class="highlight"><pre>config wifi-device <span class="s1">&#39;radio0&#39;</span>
+<div class="highlight"><pre><span></span>config wifi-device <span class="s1">&#39;radio0&#39;</span>
     option <span class="nb">type</span> <span class="s1">&#39;mac80211&#39;</span>
     option channel <span class="s1">&#39;11&#39;</span>     <span class="c1"># Important! Match with the channel set on PrimaryAP</span>
     option hwmode <span class="s1">&#39;11g&#39;</span>
@@ -76,7 +76,7 @@ config wifi-iface
 <div class="section" id="configure-network">
 <h2>2. Configure network</h2>
 <p>Sample <tt class="docutils literal">/etc/config/network</tt>:</p>
-<div class="highlight"><pre>config interface <span class="s1">&#39;loopback&#39;</span>
+<div class="highlight"><pre><span></span>config interface <span class="s1">&#39;loopback&#39;</span>
     option ifname <span class="s1">&#39;lo&#39;</span>
     option proto <span class="s1">&#39;static&#39;</span>
     option ipaddr <span class="s1">&#39;127.0.0.1&#39;</span>
@@ -118,7 +118,7 @@ config switch_vlan
 <div class="section" id="configure-dhcp">
 <h2>3. Configure DHCP</h2>
 <p><em>PrimaryAP</em> will handle DHCP for the combined network. Sample <tt class="docutils literal">/etc/config/dhcp</tt>:</p>
-<div class="highlight"><pre>config dhcp <span class="s1">&#39;lan&#39;</span>
+<div class="highlight"><pre><span></span>config dhcp <span class="s1">&#39;lan&#39;</span>
     option interface <span class="s1">&#39;lan&#39;</span>
     option start <span class="s1">&#39;100&#39;</span>
     option limit <span class="s1">&#39;150&#39;</span>
@@ -133,13 +133,13 @@ config dhcp <span class="s1">&#39;wan&#39;</span>
 <div class="section" id="reboot">
 <h2>4. Reboot</h2>
 <p><em>PrimaryAP</em> will handle firewall and dnsmasq for the combined network. Disable the services on <em>RepeaterAP</em> to avoid conflicts:</p>
-<div class="highlight"><pre><span class="c1"># /etc/init.d/firewall stop</span>
+<div class="highlight"><pre><span></span><span class="c1"># /etc/init.d/firewall stop</span>
 <span class="c1"># /etc/init.d/firewall disable</span>
 <span class="c1"># /etc/init.d/dnsmasq stop</span>
 <span class="c1"># /etc/init.d/dnsmasq disable</span>
 </pre></div>
 <p>Reboot router:</p>
-<div class="highlight"><pre><span class="c1"># reboot</span>
+<div class="highlight"><pre><span></span><span class="c1"># reboot</span>
 </pre></div>
 <p>OK! Connect to the new <em>RepeaterAP</em> and the device will be assigned an IP address on the <em>PrimaryAP</em>'s now-extended network. All rules and services on <em>PrimaryAP</em> will flow through to devices connected via <em>RepeaterAP</em>.</p>
 </div>

@@ -24,6 +24,7 @@
 
 <!-- article -->
 <h1>Host a blog on GitHub Pages</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Friday 30 December 2016</p>
 <div id="article">
     <p><a class="reference external" href="http://pages.github.com/">GitHub Pages</a> is a free web hosting service for projects composed of static files (i.e no database). Combine a <strong>Pages repository</strong> with <strong>git</strong> version control and a <strong>static site generator</strong> like <a class="reference external" href="http://www.circuidipity.com/pelican.html">Pelican</a> and you have one awesome toolset to build a website.</p>
 <p>This is how I configured GitHub Pages to host <a class="reference external" href="http://www.circuidipity.com">Circuidipity</a>.</p>
@@ -31,8 +32,8 @@
 <h2>Let's go!</h2>
 <div class="section" id="install-git">
 <h3>0. Install git</h3>
-<p>Install (on Debian Linux) the <tt class="docutils literal">git</tt> package and write global configuration variables for <tt class="docutils literal">USERNAME</tt> in <tt class="docutils literal"><span class="pre">~/.gitconfig</span></tt>:</p>
-<div class="highlight"><pre>$ sudo apt-get install git git-doc
+<p><strong>Ubuntu Linux:</strong> Install <tt class="docutils literal">git</tt> package and write global configuration variables for <tt class="docutils literal">USERNAME</tt> in <tt class="docutils literal"><span class="pre">~/.gitconfig</span></tt> ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install git git-doc
 $ git config --global user.name <span class="s2">&quot;USERNAME&quot;</span>
 $ git config --global user.email USERNAME.EMAIL@example.com
 $ git config --global core.editor EDITOR  <span class="c1"># I use &#39;vim&#39;</span>
@@ -42,21 +43,14 @@ $ git config --global merge.tool vimdiff
 <div class="section" id="create-git-repository">
 <h3>1. Create git repository</h3>
 <p>Inside my <tt class="docutils literal">pelican</tt>-powered blog project I create 2 new files: <tt class="docutils literal">.gitignore</tt> and <tt class="docutils literal">README.rst</tt>.</p>
-<p>The <tt class="docutils literal">.gitignore</tt> file does exactly what the name implies ... it instructs <tt class="docutils literal">git</tt> which files and directories not to bother tracking in version control. For example I do not want to track:</p>
-<div class="highlight"><pre>*.pid
+<p>The <tt class="docutils literal">.gitignore</tt> file does exactly what the name implies ... it instructs <tt class="docutils literal">git</tt> which files and directories not to bother tracking in version control. For example I do not want to track ...</p>
+<div class="highlight"><pre><span></span>*.pid
 *.pyc
 output/
 </pre></div>
-<p>Creating a <tt class="docutils literal">README.rst</tt> will allow GitHub to auto-detect and configure it as the project homepage when we upload our blog contents to the remote repository. Mine looks like:</p>
-<div class="highlight"><pre><span class="gh">www dot circuidipity dot com</span>
-<span class="gh">============================</span>
-
-This repository holds my blog which you can visit at www.circuidipity.com.
-
-It is compiled by <span class="s">`Pelican </span><span class="si">&lt;http://docs.getpelican.com/&gt;</span><span class="s">`_</span> and hosted on <span class="s">`GitHub Pages </span><span class="si">&lt;http://pages.github.com/&gt;</span><span class="s">`_</span>.
-</pre></div>
-<p>Now I create my local repository, add the items I want to track, and execute my first commit:</p>
-<div class="highlight"><pre>$ git init
+<p><strong>For GitHub:</strong> Create a <tt class="docutils literal">README.rst</tt> and GitHub will auto-detect and configure it as the project homepage when blog contents are uploaded to the remote repository.</p>
+<p>Now I create my local repository, add the items I want to track, and execute my first commit ...</p>
+<div class="highlight"><pre><span></span>$ git init
 $ git add README.rst
 $ git add .gitignore
 $ git add Makefile
@@ -71,8 +65,8 @@ $ git log  <span class="c1"># to view commit history</span>
 <div class="section" id="create-github-repository">
 <h3>2. Create GitHub repository</h3>
 <p><a class="reference external" href="https://help.github.com/articles/signing-up-for-a-new-github-account">Sign up</a> for a free account on GitHub and <a class="reference external" href="https://help.github.com/articles/creating-a-new-repository">create a new empty repository</a> to hold the blog contents.</p>
-<p>Next I connect my local <tt class="docutils literal">.git</tt> repository to my GitHub remote repository:</p>
-<div class="highlight"><pre>$ git remote add origin https://github.com/vonbrownie/circuidipity.git
+<p>Next I connect my local <tt class="docutils literal">.git</tt> repository to my GitHub remote repository ...</p>
+<div class="highlight"><pre><span></span>$ git remote add origin https://github.com/vonbrownie/circuidipity.git
 $ git remote -v  <span class="c1"># confirm local knows about remote</span>
 $ git push -u origin master
 </pre></div>
@@ -80,11 +74,11 @@ $ git push -u origin master
 <div class="section" id="configure-pelican-to-use-github-pages">
 <h3>3. Configure Pelican to use GitHub Pages</h3>
 <p>GitHub offers 2 types of <a class="reference external" href="https://help.github.com/articles/user-organization-and-project-pages">Pages</a> ... <strong>User Pages</strong> and <strong>Project Pages</strong>. Each GitHub account can host a single User Page and an unlimited amount of Project Pages. Basically they are identical to the end-user and differ only in their configuration.</p>
-<p>I chose to make my blog a Project Page and the contents are hosted in the <tt class="docutils literal"><span class="pre">gh-pages</span></tt> branch of my GitHub project repository. Pelican makes it easy to create and configure <tt class="docutils literal"><span class="pre">gh-pages</span></tt> using the <a class="reference external" href="https://github.com/davisp/ghp-import">ghp-import</a> Python script ... which I install via <tt class="docutils literal">pip</tt>:</p>
-<div class="highlight"><pre>$ pip install ghp-import
+<p>I chose to make my blog a Project Page and the contents are hosted in the <tt class="docutils literal"><span class="pre">gh-pages</span></tt> branch of my GitHub project repository. Pelican makes it easy to create and configure <tt class="docutils literal"><span class="pre">gh-pages</span></tt> using the <a class="reference external" href="https://github.com/davisp/ghp-import">ghp-import</a> Python script ... which I install via <tt class="docutils literal">pip</tt> ...</p>
+<div class="highlight"><pre><span></span>$ pip install ghp-import
 </pre></div>
-<p>Finally I publish my blog by pushing the files up to GitHub:</p>
-<div class="highlight"><pre>$ make github
+<p>Finally I publish my blog by pushing the files up to GitHub ...</p>
+<div class="highlight"><pre><span></span>$ make github
 </pre></div>
 <p>GitHub Pages is now hosting the site at <tt class="docutils literal"><span class="pre">http://USERNAME.github.io/REPOSITORY</span></tt>.</p>
 </div>
@@ -92,8 +86,8 @@ $ git push -u origin master
 <h3>4. Custom domain name</h3>
 <p>Awesome! But I want to use my own custom domain name ... not <tt class="docutils literal">REPOSITORY</tt>.</p>
 <p>GitHub enables <a class="reference external" href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">custom domains</a> by allowing users to create a <tt class="docutils literal">CNAME</tt> file with their domain address that resides in the root directory of <tt class="docutils literal"><span class="pre">gh-pages</span></tt>. Inside my Pelican project folder I create a new <tt class="docutils literal">extra</tt> directory containing a single-line <tt class="docutils literal">CNAME</tt> file with my domain address <tt class="docutils literal">www.circuidipity.com</tt>.</p>
-<p>Next I edit <tt class="docutils literal">pelicanconf.py</tt> to recognize <tt class="docutils literal">CNAME</tt> and place the file in <tt class="docutils literal"><span class="pre">gh-pages</span></tt> when I upload my files:</p>
-<div class="highlight"><pre><span class="c1"># Static paths will be copied without parsing their contents</span>
+<p>Next I edit <tt class="docutils literal">pelicanconf.py</tt> to recognize <tt class="docutils literal">CNAME</tt> and place the file in <tt class="docutils literal"><span class="pre">gh-pages</span></tt> when I upload my files ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Static paths will be copied without parsing their contents</span>
 <span class="n">STATIC_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="p">]</span>
 
 <span class="c1"># Shift the installed location of a file</span>
@@ -101,8 +95,8 @@ $ git push -u origin master
     <span class="s1">&#39;extra/CNAME&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="s1">&#39;CNAME&#39;</span><span class="p">},</span>
 <span class="p">}</span>
 </pre></div>
-<p>Upload my changes to GitHub:</p>
-<div class="highlight"><pre>$ make github
+<p>Upload my changes to GitHub ...</p>
+<div class="highlight"><pre><span></span>$ make github
 </pre></div>
 </div>
 <div class="section" id="domain-registrar">
@@ -127,10 +121,9 @@ $ git push -u origin master
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-pelican.html">pelican</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-blog.html">blog</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-web.html">web</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-python.html">python</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-git.html">git</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
 </div>
 

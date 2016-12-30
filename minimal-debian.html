@@ -141,11 +141,11 @@
 <div class="section" id="network">
 <h3>5. Network</h3>
 <p>Check which network interfaces are detected and settings ...</p>
-<div class="highlight"><pre><span class="c1"># ip a</span>
+<div class="highlight"><pre><span></span><span class="c1"># ip a</span>
 </pre></div>
 <p><strong>Wired</strong> interfaces are usually auto-configured by default and assigned an IP address courtesy of DHCP.</p>
 <p>To assign a <strong>static</strong> address, deactivate the wired interface and create a new entry in <tt class="docutils literal">/etc/network/interfaces</tt>. Sample entry for <tt class="docutils literal">enp3s0</tt> ...</p>
-<div class="highlight"><pre><span class="c1"># The primary network interface</span>
+<div class="highlight"><pre><span></span><span class="c1"># The primary network interface</span>
 auto enp3s0
 <span class="c1">#iface enp3s0 inet dhcp</span>
 iface enp3s0 inet static
@@ -156,14 +156,14 @@ iface enp3s0 inet static
 </pre></div>
 <p>Bring up|down interface with <tt class="docutils literal">if{up,down} enp3s0</tt>.</p>
 <p>Create a temporary <strong>wireless</strong> interface connection to WPA2 encrypted access points manually using <tt class="docutils literal">wpa_supplicant</tt> + <tt class="docutils literal">wpa_passphrase</tt> + <tt class="docutils literal">dhclinet</tt>. Sample setup of <tt class="docutils literal">wlp1s0</tt> ...</p>
-<div class="highlight"><pre><span class="c1"># ip link set wlp1s0 up             # bring up interface</span>
+<div class="highlight"><pre><span></span><span class="c1"># ip link set wlp1s0 up             # bring up interface</span>
 <span class="c1"># iw dev wlp1s0 link                # get link status</span>
 <span class="c1"># iw dev wlp1s0 scan | grep SSID    # scan for access points</span>
 <span class="c1"># wpa_supplicant -i wlp1s0 -c&lt;(wpa_passphrase &quot;MY_SSID&quot; &quot;MY_PASSPHRASE&quot;)   # connect to WPA/WPA2 ... add &#39;-B&#39; to background process</span>
 <span class="c1"># dhclient wlp1s0                   # obtain IP address</span>
 </pre></div>
 <p>More permanent configurations may be set in <tt class="docutils literal">interfaces</tt>. Sample setup <a class="footnote-reference" href="#id10" id="id5">[5]</a> with a static IP address ...</p>
-<div class="highlight"><pre>iface wlp1s0 inet static
+<div class="highlight"><pre><span></span>iface wlp1s0 inet static
     address 192.168.1.77
     netmask 255.255.255.0
     gateway 192.168.1.1
@@ -172,14 +172,14 @@ iface enp3s0 inet static
     dns-nameservers 8.8.8.8 8.8.4.4
 </pre></div>
 <p>Alternative setup using DHCP ...</p>
-<div class="highlight"><pre>allow-hotplug wlp1s0
+<div class="highlight"><pre><span></span>allow-hotplug wlp1s0
 iface wlp1s0 inet dhcp
     wpa-ssid MY_SSID
     wpa-psk MY_PASSPHRASE
     dns-nameservers 8.8.8.8 8.8.4.4
 </pre></div>
 <p>Once a link is established an optional network manager utility may be installed. Packages <tt class="docutils literal"><span class="pre">network-manager</span></tt> and <tt class="docutils literal"><span class="pre">network-manager-gnome</span></tt> provide the console <tt class="docutils literal">nmcli</tt> and graphical <tt class="docutils literal"><span class="pre">nm-applet</span></tt> clients respectively ...</p>
-<div class="highlight"><pre><span class="c1"># apt install network-manager</span>
+<div class="highlight"><pre><span></span><span class="c1"># apt install network-manager</span>
 </pre></div>
 <p>Comment out (deactivate) any entries in <tt class="docutils literal">interfaces</tt> that will be managed by <tt class="docutils literal"><span class="pre">network-manager</span></tt>.</p>
 </div>

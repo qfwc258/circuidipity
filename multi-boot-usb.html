@@ -34,19 +34,19 @@
 <div class="section" id="select-device-and-create-filesystem">
 <h2>0. Select device and create filesystem</h2>
 <p>Create a <tt class="docutils literal">FAT32</tt> partition on the unmounted USB stick:</p>
-<div class="highlight"><pre>$ sudo mkfs.vfat -n MULTIBOOT /dev/sdX1
+<div class="highlight"><pre><span></span>$ sudo mkfs.vfat -n MULTIBOOT /dev/sdX1
 </pre></div>
 </div>
 <div class="section" id="create-boot-and-iso-folders">
 <h2>1. Create boot and iso folders</h2>
 <p>New <tt class="docutils literal">FAT32</tt> partition is mounted and I create a <tt class="docutils literal">boot</tt> folder for GRUB and a <tt class="docutils literal">iso</tt> folder to hold Linux distro images. Example using <tt class="docutils literal">/media/USB0</tt> as mountpoint:</p>
-<div class="highlight"><pre>$ mkdir /media/USB0/<span class="o">{</span>boot,iso<span class="o">}</span>
+<div class="highlight"><pre><span></span>$ mkdir /media/USB0/<span class="o">{</span>boot,iso<span class="o">}</span>
 </pre></div>
 </div>
 <div class="section" id="install-grub">
 <h2>2. Install GRUB</h2>
 <p>Install GRUB to the <strong>Master Boot Record (MBR)</strong> of the USB stick:</p>
-<div class="highlight"><pre>$ sudo grub-install --force --no-floppy --root-directory<span class="o">=</span>/media/USB0 /dev/sdX
+<div class="highlight"><pre><span></span>$ sudo grub-install --force --no-floppy --root-directory<span class="o">=</span>/media/USB0 /dev/sdX
 </pre></div>
 </div>
 <div class="section" id="copy-linux-images">
@@ -63,7 +63,7 @@
 <div class="section" id="create-grub-cfg">
 <h2>4. Create grub.cfg</h2>
 <p>Create a <tt class="docutils literal">grub.cfg</tt> with entries for the Linux images copied to the USB stick. Each distro is a little bit different in the manner its booted by GRUB. Using my own example above I have created:</p>
-<div class="highlight"><pre><span class="c1"># Config for GNU GRand Unified Bootloader (GRUB)</span>
+<div class="highlight"><pre><span></span><span class="c1"># Config for GNU GRand Unified Bootloader (GRUB)</span>
 <span class="c1"># /boot/grub/grub.cfg</span>
 
 <span class="c1"># Timeout for menu</span>
@@ -86,49 +86,49 @@
 <span class="c1"># Boot ISOs</span>
 menuentry <span class="s2">&quot;GParted Live - Partition Editor&quot;</span> <span class="o">{</span>
     <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/gparted-live-0.20.0-2-i486.iso&quot;</span>
-    loopback loop $iso
-    linux <span class="o">(</span>loop<span class="o">)</span>/live/vmlinuz <span class="nv">boot</span><span class="o">=</span>live config <span class="nv">union</span><span class="o">=</span>aufs noswap noprompt <span class="nv">ip</span><span class="o">=</span>frommedia <span class="nv">toram</span><span class="o">=</span>filesystem.squashfs <span class="nv">findiso</span><span class="o">=</span>$iso
+    loopback loop <span class="nv">$iso</span>
+    linux <span class="o">(</span>loop<span class="o">)</span>/live/vmlinuz <span class="nv">boot</span><span class="o">=</span>live config <span class="nv">union</span><span class="o">=</span>aufs noswap noprompt <span class="nv">ip</span><span class="o">=</span>frommedia <span class="nv">toram</span><span class="o">=</span>filesystem.squashfs <span class="nv">findiso</span><span class="o">=</span><span class="nv">$iso</span>
     initrd <span class="o">(</span>loop<span class="o">)</span>/live/initrd.img
 <span class="o">}</span>
 
 menuentry <span class="s2">&quot;Darik&#39;s Boot and Nuke - Hard Disk Wipe&quot;</span> <span class="o">{</span>
     <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/dban-2.2.8_i586.iso&quot;</span>
-    loopback loop $iso
+    loopback loop <span class="nv">$iso</span>
     linux <span class="o">(</span>loop<span class="o">)</span>/DBAN.BZI <span class="nv">nuke</span><span class="o">=</span><span class="s2">&quot;dwipe&quot;</span>
 <span class="o">}</span>
 
 menuentry <span class="s2">&quot;Debian Wheezy - 64bit Mini-Installer&quot;</span> <span class="o">{</span>
     <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/debian-wheezy-amd64-mini.iso&quot;</span>
-    loopback loop $iso
+    loopback loop <span class="nv">$iso</span>
     linux <span class="o">(</span>loop<span class="o">)</span>/linux
     initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
 <span class="o">}</span>
 
 menuentry <span class="s2">&quot;Debian Wheezy - 32bit Mini-Installer&quot;</span> <span class="o">{</span>
     <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/debian-wheezy-i386-mini.iso&quot;</span>
-    loopback loop $iso
+    loopback loop <span class="nv">$iso</span>
     linux <span class="o">(</span>loop<span class="o">)</span>/linux
     initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
 <span class="o">}</span>
 
 menuentry <span class="s2">&quot;Ubuntu 14.04 LTS - 64bit Mini-Installer&quot;</span> <span class="o">{</span>
     <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/ubuntu-14.04-amd64-mini.iso&quot;</span>
-    loopback loop $iso
-    linux <span class="o">(</span>loop<span class="o">)</span>/linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span>$iso noprompt noeject
+    loopback loop <span class="nv">$iso</span>
+    linux <span class="o">(</span>loop<span class="o">)</span>/linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject
     initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
 <span class="o">}</span>
 
 menuentry <span class="s2">&quot;Ubuntu 14.04 LTS - 32bit Mini-Installer&quot;</span> <span class="o">{</span>
     <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/ubuntu-14.04-i386-mini.iso&quot;</span>
-    loopback loop $iso
-    linux <span class="o">(</span>loop<span class="o">)</span>/linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span>$iso noprompt noeject
+    loopback loop <span class="nv">$iso</span>
+    linux <span class="o">(</span>loop<span class="o">)</span>/linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject
     initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
 <span class="o">}</span>
 
 menuentry <span class="s2">&quot;Ubuntu 14.04 LTS - 32bit Installer (&#39;forcepae&#39; for Pentium M)&quot;</span> <span class="o">{</span>
     <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/ubuntu-14.04-i386-mini.iso&quot;</span>
-    loopback loop $iso
-    linux <span class="o">(</span>loop<span class="o">)</span>/linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span>$iso noprompt noeject forcepae
+    loopback loop <span class="nv">$iso</span>
+    linux <span class="o">(</span>loop<span class="o">)</span>/linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject forcepae
     initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
 <span class="o">}</span>
 

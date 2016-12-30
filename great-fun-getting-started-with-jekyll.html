@@ -34,7 +34,7 @@ Jekyll is a simple, blog aware, static site generator. It takes a template direc
 <li>cheap and easy to host ... I make use of Amazon S3 and its ability to <a class="reference external" href="http://www.circuidipity.com/host-website-on-amazon-s3.html">host static webpages</a></li>
 <li>easy to maintain and scale ... at the end of the day its straight HTML</li>
 </ul>
-<div class="note">
+<div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Another possible (free for non-commercial use) hosting option is <a class="reference external" href="https://github.com/">GitHub</a>. Jekyll is the default page generator for the site (and was created by GitHub co-founder Tom Preston-Werner).</p>
 </div>
@@ -48,7 +48,7 @@ Jekyll is a simple, blog aware, static site generator. It takes a template direc
 <div class="section" id="yaml-liquid-and-markdown">
 <h2>YAML, Liquid, and Markdown</h2>
 <p><em>YAML</em> and <em>Liquid</em> templating are new to me. <a class="reference external" href="http://yaml.org/">YAML</a> &quot;is a human friendly data serialization standard for all programming languages&quot;. Its presence in a document header signals Jekyll to go to work on the contents and it holds variables that can be used in templates and Jekyll functions. This post - for example - has the following YAML header ...</p>
-<div class="highlight"><pre>---
+<div class="highlight"><pre><span></span>---
 layout: post
 title: Great fun getting started with Jekyll
 location: Toronto
@@ -57,12 +57,12 @@ modified: 2012-06-07
 </pre></div>
 <p>Variables <em>layout</em> and <em>title</em> are included by default in Jekyll and can be used to set a template for the document and generate a page title (and more).</p>
 <p>I also can create my own variables. The entry <em>location: Toronto</em> sets a variable that is used in <a class="reference external" href="http://liquidmarkup.org/">Liquid</a> to add my location to the posting date ...</p>
-<div class="highlight"><pre><span class="o">{</span>% raw %<span class="o">}</span>
+<div class="highlight"><pre><span></span><span class="o">{</span>% raw %<span class="o">}</span>
 <span class="o">{{</span> page.date <span class="p">|</span> date_to_long_string <span class="o">}}</span> in <span class="o">{{</span> page.location <span class="o">}}</span>
 <span class="o">{</span>% endraw %<span class="o">}</span>
 </pre></div>
 <p>I then create a layout template named <em>post.html</em> and insert this piece of code ...</p>
-<div class="highlight"><pre><span class="o">{</span>% raw %<span class="o">}</span>
+<div class="highlight"><pre><span></span><span class="o">{</span>% raw %<span class="o">}</span>
 ---
 layout: default
 ---
@@ -82,13 +82,13 @@ layout: default
 </pre></div>
 <p>Any modifications I make to this document will ripple across all documents that call on <em>layout: post</em>. Cool!</p>
 <p><a class="reference external" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> &quot;allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML)&quot;. So - for example - web links ...</p>
-<div class="highlight"><pre><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;http://daringfireball.net/projects/markdown/syntax&quot;</span><span class="p">&gt;</span>Markdown<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;http://daringfireball.net/projects/markdown/syntax&quot;</span><span class="p">&gt;</span>Markdown<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
 </pre></div>
 <p>... can be written as ...</p>
-<div class="highlight"><pre>[Markdown](http://daringfireball.net/projects/markdown/syntax)
+<div class="highlight"><pre><span></span>[Markdown](http://daringfireball.net/projects/markdown/syntax)
 </pre></div>
 <p>Other examples ...</p>
-<div class="highlight"><pre><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Header 1<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Header 1<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Header 2<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
 
 # Header 1

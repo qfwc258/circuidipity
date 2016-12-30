@@ -28,128 +28,128 @@
     <p>These are some Linux applications I like to include with a <a class="reference external" href="http://www.circuidipity.com/install-debian-linux-squeeze.html">desktop installation</a> of Debian Squeeze.</p>
 <div class="section" id="terminal-rxvt-unicode-tmux">
 <h2>Terminal: rxvt-unicode, tmux</h2>
-<div class="highlight"><pre>$ sudo apt-get install rxvt-unicode xfonts-terminus tmux
+<div class="highlight"><pre><span></span>$ sudo apt-get install rxvt-unicode xfonts-terminus tmux
 </pre></div>
 <p><a class="reference external" href="http://tmux.sourceforge.net/">Tmux</a>  &quot;is a terminal multiplexer: it enables a number of terminals (or windows), each running a separate program, to be created, accessed, and controlled from a single screen ... [then] detached from a screen and continue running in the background, then later reattached.&quot;</p>
 </div>
 <div class="section" id="editor-vim-gedit">
 <h2>Editor: vim, gedit</h2>
-<div class="highlight"><pre>$ sudo apt-get install vim gedit
+<div class="highlight"><pre><span></span>$ sudo apt-get install vim gedit
 </pre></div>
 </div>
 <div class="section" id="desktop-menu-dmenu">
 <h2>Desktop menu: dmenu</h2>
-<div class="highlight"><pre>$ sudo apt-get install suckless-tools
+<div class="highlight"><pre><span></span>$ sudo apt-get install suckless-tools
 </pre></div>
 </div>
 <div class="section" id="remote-login-ssh">
 <h2>Remote login: ssh</h2>
 <p><em>SSH client</em></p>
 <p>Install an SSH client and configure SSH public key authentication:</p>
-<div class="highlight"><pre>$ sudo apt-get install openssh-client ssh-askpass keychain rsync
+<div class="highlight"><pre><span></span>$ sudo apt-get install openssh-client ssh-askpass keychain rsync
 </pre></div>
 <p>Generate an RSA user-key pair:</p>
-<div class="highlight"><pre>$ mkdir ~/.ssh
+<div class="highlight"><pre><span></span>$ mkdir ~/.ssh
 $ <span class="nb">cd</span> ~/.ssh
 $ ssh-keygen -v -t rsa -b <span class="m">2048</span> -C username@hostname
 </pre></div>
 <p>Transfer the newly-generated public-key to any remote machine running SSH server. <tt class="docutils literal">Keychain</tt> is a front-end to <tt class="docutils literal"><span class="pre">ssh-add</span></tt> that exists through an entire uptime across all sessions. To source ssh-keychain at startup edit <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt>:</p>
-<div class="highlight"><pre>keychain ~/.ssh/id_rsa
-. ~/.keychain/$HOSTNAME-sh
+<div class="highlight"><pre><span></span>keychain ~/.ssh/id_rsa
+. ~/.keychain/<span class="nv">$HOSTNAME</span>-sh
 </pre></div>
 <p><em>SSH server</em></p>
 <p>Install the SSH server package:</p>
-<div class="highlight"><pre>$ sudo apt-get install openssh-server
+<div class="highlight"><pre><span></span>$ sudo apt-get install openssh-server
 </pre></div>
 <p>Restrict SSH login access to certain users by editing <tt class="docutils literal">/etc/ssh/sshd_config</tt>:</p>
-<div class="highlight"><pre>PermitRootLogin no
+<div class="highlight"><pre><span></span>PermitRootLogin no
 
 <span class="c1"># permit only specified users ssh access</span>
 AllowUsers yourUsername
 </pre></div>
 <p>Restart your SSH server after modifying and saving the configuration ... <tt class="docutils literal">/etc/init.d/ssh restart</tt>.</p>
 <p>Copy that newly-generated RSA public-key from your client machine into your user account on the server:</p>
-<div class="highlight"><pre>$ mkdir ~/.ssh
+<div class="highlight"><pre><span></span>$ mkdir ~/.ssh
 $ touch ~/.ssh/authorized_keys
 $ cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
 </pre></div>
 </div>
 <div class="section" id="network-manager-network-manager-gnome">
 <h2>Network Manager: network-manager-gnome</h2>
-<div class="highlight"><pre>$ sudo apt-get install network-manager network-manager-gnome
+<div class="highlight"><pre><span></span>$ sudo apt-get install network-manager network-manager-gnome
 </pre></div>
 </div>
 <div class="section" id="web-browser-iceweasel">
 <h2>Web Browser: iceweasel</h2>
 <p>The default <tt class="docutils literal">Firefox/Iceweasel (3.5)</tt> included in <tt class="docutils literal">Squeeze</tt> is rather dated. More recent versions of the browser have been backported by the <a class="reference external" href="http://mozilla.debian.net">Debian Mozilla Team</a> .</p>
 <p>First configure the package manager to track the backported Iceweasel release packages .. then grab the latest version:</p>
-<div class="highlight"><pre>$ sudo apt-get -t squeeze-backports install iceweasel
+<div class="highlight"><pre><span></span>$ sudo apt-get -t squeeze-backports install iceweasel
 </pre></div>
 </div>
 <div class="section" id="flash-plug-in">
 <h2>Flash plug-in</h2>
-<div class="highlight"><pre>$ sudo apt-get install flashplugin-nonfree
+<div class="highlight"><pre><span></span>$ sudo apt-get install flashplugin-nonfree
 </pre></div>
 </div>
 <div class="section" id="java">
 <h2>Java</h2>
 <p>I use Google Video Chat (below) and experienced a slew of problems with <tt class="docutils literal">openjdk</tt> that were finally resolved when I switched to the <tt class="docutils literal"><span class="pre">sun-java</span></tt> packages.</p>
-<div class="highlight"><pre>$ sudo apt-get install sun-java6-jre sun-java6-plugin
+<div class="highlight"><pre><span></span>$ sudo apt-get install sun-java6-jre sun-java6-plugin
 </pre></div>
 </div>
 <div class="section" id="voip-google-talk">
 <h2>VOIP: google-talk</h2>
 <p>To add video chat to Gmail...  install dependencies:</p>
-<div class="highlight"><pre>$ sudo apt-get install libglew1.5
+<div class="highlight"><pre><span></span>$ sudo apt-get install libglew1.5
 </pre></div>
 <p>Download the Debian package for the google-talk plugin from &lt;<a class="reference external" href="http://www.google.com/chat/video">http://www.google.com/chat/video</a>&gt; and install:</p>
-<div class="highlight"><pre>$ sudo dpkg -i google-talkplugin_current_VERSION.deb
+<div class="highlight"><pre><span></span>$ sudo dpkg -i google-talkplugin_current_VERSION.deb
 </pre></div>
 </div>
 <div class="section" id="bittorrent-rtorrent">
 <h2>Bittorrent: rtorrent</h2>
-<div class="highlight"><pre>$ sudo apt-get install rtorrent
+<div class="highlight"><pre><span></span>$ sudo apt-get install rtorrent
 </pre></div>
 </div>
 <div class="section" id="images-gimp-eog-geeqie-imagemagick-scrot">
 <h2>Images: gimp, eog, geeqie, imagemagick, scrot</h2>
-<div class="highlight"><pre>$ sudo apt-get install gimp gimp-data-extras gimp-help-en eog geeqie imagemagick scrot
+<div class="highlight"><pre><span></span>$ sudo apt-get install gimp gimp-data-extras gimp-help-en eog geeqie imagemagick scrot
 </pre></div>
 </div>
 <div class="section" id="scanner-xsane-simple-scan">
 <h2>Scanner: xsane, simple-scan</h2>
-<div class="highlight"><pre>$ sudo apt-get install xsane simple-scan
+<div class="highlight"><pre><span></span>$ sudo apt-get install xsane simple-scan
 </pre></div>
 </div>
 <div class="section" id="document-reader-xchm-evince">
 <h2>Document reader: xchm, evince</h2>
-<div class="highlight"><pre>$ sudo apt-get install xchm evince
+<div class="highlight"><pre><span></span>$ sudo apt-get install xchm evince
 </pre></div>
 </div>
 <div class="section" id="office-suite-libreoffice">
 <h2>Office Suite: libreoffice</h2>
 <p>With <a class="reference external" href="http://backports-master.debian.org/">backports</a> enabled ...</p>
-<div class="highlight"><pre>$ sudo apt-get -t squeeze-backports install libreoffice libreoffice-gtk libreoffice-help-en-us
+<div class="highlight"><pre><span></span>$ sudo apt-get -t squeeze-backports install libreoffice libreoffice-gtk libreoffice-help-en-us
 </pre></div>
 </div>
 <div class="section" id="multimedia-codecs-and-plugins-assorted">
 <h2>Multimedia Codecs and Plugins: <em>assorted</em></h2>
-<div class="highlight"><pre>$ sudo apt-get install gstreamer0.10-plugins-<span class="o">{</span>base,good,bad,ugly<span class="o">}</span> gstreamer0.10-alsa gstreamer0.10-ffmpeg gstreamer0.10-tools
+<div class="highlight"><pre><span></span>$ sudo apt-get install gstreamer0.10-plugins-<span class="o">{</span>base,good,bad,ugly<span class="o">}</span> gstreamer0.10-alsa gstreamer0.10-ffmpeg gstreamer0.10-tools
 $ sudo apt-get install lame vorbis-tools flac id3 id3v2 normalize-audio w32codecs
 $ sudo apt-get install libdvdcss2 libdvdnav4 libdvdread4
 </pre></div>
 </div>
 <div class="section" id="audio-player-rhythmbox">
 <h2>Audio Player: rhythmbox</h2>
-<div class="highlight"><pre>$ sudo apt-get install rhythmbox
+<div class="highlight"><pre><span></span>$ sudo apt-get install rhythmbox
 </pre></div>
 </div>
 <div class="section" id="video-player-vlc">
 <h2>Video Player: vlc</h2>
-<div class="highlight"><pre>$ sudo apt-get install vlc
+<div class="highlight"><pre><span></span>$ sudo apt-get install vlc
 </pre></div>
 <p>File-Handling and Compression Tools: <em>assorted</em></p>
-<div class="highlight"><pre>$ sudo apt-get install antiword cabextract fastjar file-roller html2text lzip lxsplit par2 p7zip-full unrar unrtf unzip
+<div class="highlight"><pre><span></span>$ sudo apt-get install antiword cabextract fastjar file-roller html2text lzip lxsplit par2 p7zip-full unrar unrtf unzip
 </pre></div>
 <img alt="Get Debian" src="images/debian-banner.png" style="width: 800px; height: 75px;" />
 </div>

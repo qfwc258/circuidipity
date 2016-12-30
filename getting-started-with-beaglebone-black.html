@@ -36,7 +36,7 @@
 <h2>Step 1 - Connect to Host</h2>
 <p>BeagleBone Black is designed to get the Linux user up-and-running quickly. Within a few minutes of unboxing the device I was using the provided USB cable to connect the device to my host computer (running Debian <tt class="docutils literal">sid</tt>). BBB mounts as a usb-storage device and provides a usbnet virtual-ethernet interface running a DHCP server.</p>
 <p>Some post-connection HOST output of interest ...</p>
-<div class="highlight"><pre>$ cat /var/log/kern.log
+<div class="highlight"><pre><span></span>$ cat /var/log/kern.log
 Sep  <span class="m">1</span> 16:58:17 kambei kernel: <span class="o">[</span>455195.036280<span class="o">]</span> usb 1-1.2: new high-speed USB device number <span class="m">20</span> using ehci-pci
 Sep  <span class="m">1</span> 16:58:18 kambei kernel: <span class="o">[</span>455195.129344<span class="o">]</span> usb 1-1.2: New USB device found, <span class="nv">idVendor</span><span class="o">=</span>1d6b, <span class="nv">idProduct</span><span class="o">=</span>0104
 Sep  <span class="m">1</span> 16:58:18 kambei kernel: <span class="o">[</span>455195.129350<span class="o">]</span> usb 1-1.2: New USB device strings: <span class="nv">Mfr</span><span class="o">=</span>2, <span class="nv">Product</span><span class="o">=</span>3, <span class="nv">SerialNumber</span><span class="o">=</span>4
@@ -96,7 +96,7 @@ eth1      Link encap:Ethernet  HWaddr c8:a0:30:ac:1d:6f
 <h3>Download and unpack image</h3>
 <p>Angstrom image files for the BBB are labelled <a class="reference external" href="http://dominion.thruhere.net/koen/angstrom/beaglebone/">BBB-eMMC-flasher-xxxx.xx.xx.img.xz</a> ... Latest version as of 2 September is <tt class="docutils literal"><span class="pre">BBB-eMMC-flasher-2013.08.21.img.xz</span></tt>.</p>
 <p>Using the above image as an example ... download the <tt class="docutils literal"><span class="pre">xz-utils</span></tt> Debian package and download and unpack the Angstrom image ...</p>
-<div class="highlight"><pre>$ sudo apt-get install xz-utils
+<div class="highlight"><pre><span></span>$ sudo apt-get install xz-utils
 $ wget -c http://dominion.thruhere.net/koen/angstrom/beaglebone/BBB-eMMC-flasher-2013.08.21.img.xz
 $ xz -d BBB-eMMC-flasher-2013.08.21.img.xz
 </pre></div>
@@ -105,7 +105,7 @@ $ xz -d BBB-eMMC-flasher-2013.08.21.img.xz
 <h3>Copy image to microSD</h3>
 <p><span class="warning">WARNING!</span> Be careful to note the proper <em>DeviceID</em> of your microSD card ... in my example I use <em>sdb</em> but your device will probably have a <em>different address</em>. Command <em>dd</em> will completely <strong>wipe out the contents of the card</strong>. Its not nicknamed <em>disk destroyer</em> for nothing!</p>
 <p>Copy image to card using <tt class="docutils literal">dd</tt> ...</p>
-<div class="highlight"><pre>$ sudo dd <span class="k">if</span><span class="o">=</span>BBB-eMMC-flasher-2013.08.21.img <span class="nv">of</span><span class="o">=</span>/dev/sdb <span class="nv">bs</span><span class="o">=</span>1M
+<div class="highlight"><pre><span></span>$ sudo dd <span class="k">if</span><span class="o">=</span>BBB-eMMC-flasher-2013.08.21.img <span class="nv">of</span><span class="o">=</span>/dev/sdb <span class="nv">bs</span><span class="o">=</span>1M
 </pre></div>
 </div>
 <div class="section" id="flash-the-bbb">
@@ -125,7 +125,7 @@ $ xz -d BBB-eMMC-flasher-2013.08.21.img.xz
 <h3>Configure HOST as router</h3>
 <p>Tip from <a class="reference external" href="http://shallowsky.com/blog/hardware/talking-to-beaglebone.html">http://shallowsky.com/blog/hardware/talking-to-beaglebone.html</a></p>
 <p>When BBB is connected to my HOST via USB ... Network-Manager sets up a second wired interface <tt class="docutils literal">eth1</tt> to connect with BBB ... and BBB connects to HOST through <tt class="docutils literal">usb0</tt> ...</p>
-<div class="highlight"><pre>$ ifconfig
+<div class="highlight"><pre><span></span>$ ifconfig
 ...
 usb0      Link encap:Ethernet  HWaddr BA:E1:A2:37:43:15
           inet addr:192.168.7.2  Bcast:192.168.7.3  Mask:255.255.255.252
@@ -136,7 +136,7 @@ usb0      Link encap:Ethernet  HWaddr BA:E1:A2:37:43:15
           RX bytes:888859 <span class="o">(</span>868.0 KiB<span class="o">)</span>  TX bytes:13309157 <span class="o">(</span>12.6 MiB<span class="o">)</span>
 </pre></div>
 <p>This arrangment is OK for getting HOST and BBB talking to each other but BBB - in lieu of an additional ethernet cable - cannot reach the net. I created a tiny script that can be run as desired to configure my Linux HOST to route internet traffic for the BBB ...</p>
-<div class="highlight"><pre><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
 <span class="c1"># bbbIPforward.sh -- Enable internet access for my BeagleBone Black (BBB)</span>
 <span class="c1"># using my Linux HOST as a router</span>
@@ -149,14 +149,14 @@ sudo iptables -A POSTROUTING -t nat -j MASQUERADE
 <span class="nb">echo</span> <span class="m">1</span> <span class="p">|</span> sudo tee /proc/sys/net/ipv4/ip_forward &gt; /dev/null
 
 <span class="c1"># Copy ssh key to BBB for passwordless logins</span>
-ssh-copy-id root@<span class="nv">$bbbAdd</span>r
+ssh-copy-id root@<span class="nv">$bbbAddr</span>
 
 <span class="c1"># Configure BBB to use HOST as gateway</span>
-ssh root@<span class="nv">$bbbAdd</span>r <span class="s2">&quot;/sbin/route add default gw </span>$<span class="s2">hostAddr&quot;</span>
+ssh root@<span class="nv">$bbbAddr</span> <span class="s2">&quot;/sbin/route add default gw </span><span class="nv">$hostAddr</span><span class="s2">&quot;</span>
 
 <span class="c1"># Backup and substitute BBB resolv.conf with HOST resolv.conf</span>
-ssh root@<span class="nv">$bbbAdd</span>r <span class="s2">&quot;mv -n /etc/resolv.conf /etc/resolv.conf.bak&quot;</span>
-scp /etc/resolv.conf root@<span class="nv">$bbbAdd</span>r:/etc/
+ssh root@<span class="nv">$bbbAddr</span> <span class="s2">&quot;mv -n /etc/resolv.conf /etc/resolv.conf.bak&quot;</span>
+scp /etc/resolv.conf root@<span class="nv">$bbbAddr</span>:/etc/
 </pre></div>
 </div>
 <div class="section" id="date-and-time">
@@ -164,16 +164,16 @@ scp /etc/resolv.conf root@<span class="nv">$bbbAdd</span>r:/etc/
 <p>Tip from <a class="reference external" href="http://derekmolloy.ie/automatically-setting-the-beaglebone-black-time-using-ntp/">http://derekmolloy.ie/automatically-setting-the-beaglebone-black-time-using-ntp/</a></p>
 <p>The BeagleBone Black does not include an onboard <em>Real Time Clock</em> (RTC) and thus loses its time and date setting after every power off.</p>
 <p>Set the time over the internet using an ntp server by first configuring the timezone linking <tt class="docutils literal">localtime</tt> to your proper location in <tt class="docutils literal">zoneinfo</tt> (in my case <tt class="docutils literal">Toronto/New York</tt>) and then running a quick one-off command to set the proper date ...</p>
-<div class="highlight"><pre><span class="c1"># ln -s /usr/share/zoneinfo/America/New_York /etc/localtime</span>
+<div class="highlight"><pre><span></span><span class="c1"># ln -s /usr/share/zoneinfo/America/New_York /etc/localtime</span>
 <span class="c1"># ntpdate -u pool.ntp.org</span>
 </pre></div>
 <p>... but the date/time will still be lost after every shutdown.</p>
 <p>For a more permanent solution install <em>NTP</em> ...</p>
-<div class="highlight"><pre><span class="c1"># opkg update</span>
+<div class="highlight"><pre><span></span><span class="c1"># opkg update</span>
 <span class="c1"># opkg install ntp</span>
 </pre></div>
 <p>Find local NTP servers (Canada) and edit <tt class="docutils literal">/etc/ntp.conf</tt> ...</p>
-<div class="highlight"><pre>driftfile /etc/ntp.drift
+<div class="highlight"><pre><span></span>driftfile /etc/ntp.drift
 logfile /var/log/ntpd.log
 
 <span class="c1"># NTP Servers for Canada from www.pool.ntp.org</span>
@@ -190,12 +190,12 @@ server 3.ca.pool.ntp.org
 <span class="c1"># Defining a default security setting</span>
 restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap
 </pre></div>
-<div class="note">
+<div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Angstrom uses <em>systemd</em> and init.d is replaced by <em>systemctl COMMAND</em> and files are located in <em>/lib/systemd/system/NAME.service</em>.</p>
 </div>
 <p>Enable NTP services ...</p>
-<div class="highlight"><pre><span class="c1"># systemctl enable ntpdate.service</span>
+<div class="highlight"><pre><span></span><span class="c1"># systemctl enable ntpdate.service</span>
 <span class="c1"># systemctl enable ntpd.service</span>
 <span class="c1"># cat /lib/systemd/system/ntpd.service</span>
 <span class="o">[</span>Unit<span class="o">]</span>
@@ -212,7 +212,7 @@ restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap
 <span class="o">{</span>% endhighlight %<span class="o">}</span>
 </pre></div>
 <p>Modify <tt class="docutils literal">ExecStart</tt> of <tt class="docutils literal">/lib/systemd/system/ntpdate.service</tt> ....</p>
-<div class="highlight"><pre><span class="o">[</span>Unit<span class="o">]</span>
+<div class="highlight"><pre><span></span><span class="o">[</span>Unit<span class="o">]</span>
 <span class="nv">Description</span><span class="o">=</span>Network Time Service <span class="o">(</span>one-shot ntpdate mode<span class="o">)</span>
 <span class="nv">Before</span><span class="o">=</span>ntpd.service
 
@@ -226,7 +226,7 @@ restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap
 <span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
 </pre></div>
 <p>Save all changes, reboot the BBB while connected to the Internet, and verify the proper date and time are set with <tt class="docutils literal">timedatectl</tt> ...</p>
-<div class="highlight"><pre>   <span class="c1"># timedatectl</span>
+<div class="highlight"><pre><span></span>   <span class="c1"># timedatectl</span>
      Local time: Wed 2013-07-10 23:14:45 EDT
  Universal time: Thu 2013-07-11 03:14:45 UTC
        RTC time: Wed 2013-07-10 23:14:45
@@ -249,7 +249,7 @@ Next DST change: DST ends <span class="o">(</span>the clock jumps one hour backw
 <p>Tip from <a class="reference external" href="http://digitaldiner.blogspot.ca/2013/05/quick-hint-for-beaglebone-black-user.html">http://digitaldiner.blogspot.ca/2013/05/quick-hint-for-beaglebone-black-user.html</a></p>
 <p>In lieu of a microHDMI cable for connecting an HDMI display to the BBB the device may be configured to transmit a remote desktop to HOST.</p>
 <p>On BBB install the <tt class="docutils literal">x11vnc</tt> package and launch ...</p>
-<div class="highlight"><pre><span class="c1"># opkg update</span>
+<div class="highlight"><pre><span></span><span class="c1"># opkg update</span>
 <span class="c1"># opkg install x11vnc</span>
 <span class="c1"># x11vnc -bg -o %HOME/.x11vnc.log.%VNCDISPLAY -auth /var/run/gdm/auth-for-gdm*/database -display :0  -forever</span>
 </pre></div>
@@ -274,7 +274,7 @@ Next DST change: DST ends <span class="o">(</span>the clock jumps one hour backw
 <p>If I connect the keyboard (with built-in trackpoint) directly to the BBB USB port and reboot and hit SHIFT key the display springs to life and the login window appears.</p>
 <p><em>Issue:</em> BeagleBone logo appears at boot but no login screen (and this time its not the keyboard).</p>
 <p><em>Fix:</em> Creating a password for root causes the <em>autologin</em> task running at login screen to constantly fail (because it doesn't know the password) and buggers up the display. To disable autologin edit <tt class="docutils literal">/etc/gdm/custom.conf</tt> and modify the line <tt class="docutils literal">TimedLoginEnable</tt> from <tt class="docutils literal">true</tt> to <tt class="docutils literal">false</tt> ...</p>
-<div class="highlight"><pre><span class="o">[</span>daemon<span class="o">]</span>
+<div class="highlight"><pre><span></span><span class="o">[</span>daemon<span class="o">]</span>
 <span class="nv">TimedLoginEnable</span><span class="o">=</span><span class="nb">false</span>
 </pre></div>
 <p>... and restart GDM with the command <tt class="docutils literal">systemctl restart gdm.service</tt>.</p>
@@ -293,12 +293,12 @@ Next DST change: DST ends <span class="o">(</span>the clock jumps one hour backw
 <div class="section" id="drm-debug">
 <h2>drm.debug</h2>
 <p><em>Issue:</em> A whole pile of these messages were filling dmesg ...</p>
-<div class="highlight"><pre><span class="o">[</span>Mon Aug <span class="m">26</span> 03:34:00 2013<span class="o">]</span> <span class="o">[</span>drm:output_poll_execute<span class="o">]</span>, <span class="o">[</span>CONNECTOR:5:HDMI-A-1<span class="o">]</span> status updated from <span class="m">2</span> to 2
+<div class="highlight"><pre><span></span><span class="o">[</span>Mon Aug <span class="m">26</span> 03:34:00 2013<span class="o">]</span> <span class="o">[</span>drm:output_poll_execute<span class="o">]</span>, <span class="o">[</span>CONNECTOR:5:HDMI-A-1<span class="o">]</span> status updated from <span class="m">2</span> to 2
 </pre></div>
 <p>... repeating every few seconds.</p>
 <p><em>Fix:</em> These debugging messages can safely be turned off by editing <tt class="docutils literal">uEnv.txt</tt> located on the <tt class="docutils literal">mmcblk0p1</tt> partition (<strong>not</strong> the <tt class="docutils literal">uEnv.txt</tt> found in <tt class="docutils literal">boot</tt>).</p>
 <p>If that partition is not auto-mounted (mine was not) then go ahead and mount it now ...</p>
-<div class="highlight"><pre><span class="c1"># mount /dev/mmcblk0p1 /media/BEAGLEBONE/</span>
+<div class="highlight"><pre><span></span><span class="c1"># mount /dev/mmcblk0p1 /media/BEAGLEBONE/</span>
 </pre></div>
 <p>... and edit <tt class="docutils literal">/media/BEAGLEBONE/uEnv.txt</tt> by changing the line <tt class="docutils literal">optargs=quiet drm.debug=7</tt> to simply <tt class="docutils literal">optargs=quiet</tt> ... Reboot and issue resolved.</p>
 <div class="section" id="resolv-conf">

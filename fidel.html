@@ -28,11 +28,11 @@
     <p>After writing shell scripts that find files matching NAME and/or TIME parameters and <a class="reference external" href="http://www.circuidipity.com/tartime-find-time-tar.html">create tar archives</a> or <a class="reference external" href="http://www.circuidipity.com/video2audio.html">convert video to audio</a> I wanted a script that could find and delete files. Example: <em>Find all MP4 files modified in the last 7 days, provide a total count, and prompt to confirm file deletion before erasure.</em></p>
 <p>In the course of creating a deletion script I ran into a problem that I had overlooked in my earlier scripts. Supplying a <em>positional parameter</em> with a NAME and a <em>wildcard</em> would have the shell <em>expand</em> the parameter before it was passed to the <tt class="docutils literal">find</tt> command. So for example <em>shellscript *.mp4</em> would expand the <em>*.mp4</em> to all the files in the current directory that ended with that argument and pass those filenames to find. If there were no sub-folders in the directory that needed to be searched this is not a problem ... otherwise the result is that filename expansion prevents recursive search.</p>
 <p>What I <em>wanted</em> to occur is have the script forego expansion and pass the literal argument <em>&amp;lowast;mp4</em> to search. The solution was to use the <tt class="docutils literal">noglob</tt> variable which turns off and on shell pathname expansion. Writing a function that includes <tt class="docutils literal">set <span class="pre">-o</span> noglob</tt> to turn off and <tt class="docutils literal">set +o noglob</tt> to restore expansion allows wildcard characters to be treated literally in a variable. Recursive search is now a <em>go</em> ...</p>
-<div class="highlight"><pre><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="c1">#: VARIABLES</span>
 <span class="nv">Scriptname</span><span class="o">=</span><span class="s2">&quot;Fidel&quot;</span>
 <span class="nv">Description</span><span class="o">=</span><span class="s2">&quot;[Fi]nd and [del]ete - Recursive search of PWD for matching FILE(s) and delete&quot;</span>
-<span class="nv">Synopsis</span><span class="o">=</span><span class="s2">&quot;</span>$<span class="s2">Scriptname [-v|-h|-n [FILE]|-t [+-][TIME]]&quot;</span>
+<span class="nv">Synopsis</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$Scriptname</span><span class="s2"> [-v|-h|-n [FILE]|-t [+-][TIME]]&quot;</span>
 <span class="nv">Version</span><span class="o">=</span><span class="s2">&quot;0.2&quot;</span>
 <span class="c1"># -------- #</span>
 <span class="nv">RequiredPrograms</span><span class="o">=</span><span class="s2">&quot;findutils&quot;</span>
@@ -99,19 +99,19 @@ PenguinistaNoDelete<span class="o">()</span>
 ReplyInvalid<span class="o">()</span>
 <span class="o">{</span>
 <span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
-<span class="nb">printf</span> <span class="s2">&quot;&#39;</span>$<span class="s2">REPLY&#39; </span>$<span class="s2">InvalidInput\n&quot;</span>
+<span class="nb">printf</span> <span class="s2">&quot;&#39;</span><span class="nv">$REPLY</span><span class="s2">&#39; </span><span class="nv">$InvalidInput</span><span class="s2">\n&quot;</span>
 <span class="o">}</span>
 
 ModField<span class="o">()</span>
 <span class="o">{</span>
-<span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$F</span>indTime <span class="o">]]</span>
+<span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$FindTime</span> <span class="o">]]</span>
 <span class="k">then</span>
             <span class="nv">ModUnits</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
 <span class="k">else</span>
-            <span class="k">if</span> <span class="o">[[</span> <span class="nv">$F</span>indTime <span class="o">=</span>~ ^<span class="o">[</span>+-<span class="o">]</span>*<span class="o">[</span>0-9<span class="o">]</span>+<span class="o">[</span>m<span class="o">]</span>$ <span class="o">]]</span>
+            <span class="k">if</span> <span class="o">[[</span> <span class="nv">$FindTime</span> <span class="o">=</span>~ ^<span class="o">[</span>+-<span class="o">]</span>*<span class="o">[</span>0-9<span class="o">]</span>+<span class="o">[</span>m<span class="o">]</span>$ <span class="o">]]</span>
             <span class="k">then</span>
                             <span class="nv">ModUnits</span><span class="o">=</span><span class="s2">&quot;-mmin </span><span class="si">${</span><span class="nv">FindTime</span><span class="p">%m</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="k">elif</span> <span class="o">[[</span> <span class="nv">$F</span>indTime <span class="o">=</span>~ ^<span class="o">[</span>+-<span class="o">]</span>*<span class="o">[</span>0-9<span class="o">]</span>+<span class="o">[</span>d<span class="o">]</span>$ <span class="o">]]</span>
+            <span class="k">elif</span> <span class="o">[[</span> <span class="nv">$FindTime</span> <span class="o">=</span>~ ^<span class="o">[</span>+-<span class="o">]</span>*<span class="o">[</span>0-9<span class="o">]</span>+<span class="o">[</span>d<span class="o">]</span>$ <span class="o">]]</span>
             <span class="k">then</span>
                             <span class="nv">ModUnits</span><span class="o">=</span><span class="s2">&quot;-mtime </span><span class="si">${</span><span class="nv">FindTime</span><span class="p">%d</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="k">else</span>
@@ -129,9 +129,9 @@ FindNameCount<span class="o">()</span>
 ModField
 <span class="nb">local</span> counter
 <span class="nv">counter</span><span class="o">=</span>/tmp/FindNameCount
-find -L . -iname <span class="nv">$F</span>indName -type f $ModUnits -print 2&gt;/dev/null <span class="p">|</span> tee -a <span class="nv">$c</span>ounter
-<span class="nb">printf</span> <span class="s2">&quot;Found </span><span class="k">$(</span> wc -l <span class="nv">$c</span>ounter <span class="p">|</span> awk <span class="o">{</span><span class="s1">&#39;print $1&#39;</span><span class="o">}</span> <span class="k">)</span><span class="s2"> file(s).\n&quot;</span>
-rm <span class="nv">$c</span>ounter
+find -L . -iname <span class="nv">$FindName</span> -type f <span class="nv">$ModUnits</span> -print 2&gt;/dev/null <span class="p">|</span> tee -a <span class="nv">$counter</span>
+<span class="nb">printf</span> <span class="s2">&quot;Found </span><span class="k">$(</span> wc -l <span class="nv">$counter</span> <span class="p">|</span> awk <span class="o">{</span><span class="s1">&#39;print $1&#39;</span><span class="o">}</span> <span class="k">)</span><span class="s2"> file(s).\n&quot;</span>
+rm <span class="nv">$counter</span>
 <span class="nb">set</span> +o noglob
 <span class="o">}</span>
 
@@ -139,8 +139,8 @@ FindTimeCount<span class="o">()</span>
 <span class="o">{</span>
 ModField
 <span class="nb">local</span> counter
-<span class="nv">counter</span><span class="o">=</span><span class="k">$(</span> find . -type f $ModUnits -print 2&gt;/dev/null <span class="p">|</span> tee /dev/tty <span class="p">|</span> wc -l <span class="k">)</span>
-<span class="nb">printf</span> <span class="s2">&quot;Found </span><span class="nv">$c</span><span class="s2">ounter file(s).\n&quot;</span>
+<span class="nv">counter</span><span class="o">=</span><span class="k">$(</span> find . -type f <span class="nv">$ModUnits</span> -print 2&gt;/dev/null <span class="p">|</span> tee /dev/tty <span class="p">|</span> wc -l <span class="k">)</span>
+<span class="nb">printf</span> <span class="s2">&quot;Found </span><span class="nv">$counter</span><span class="s2"> file(s).\n&quot;</span>
 <span class="o">}</span>
 
 <span class="c1">#: LET&#39;S ROLL ...</span>
@@ -148,10 +148,10 @@ ModField
 <span class="k">then</span>
     <span class="k">while</span> <span class="nb">getopts</span> “n:t:hv” OPTION
             <span class="k">do</span>
-            <span class="k">case</span> $OPTION in
-                                            n <span class="o">)</span>             <span class="nv">FindName</span><span class="o">=</span>$OPTARG
+            <span class="k">case</span> <span class="nv">$OPTION</span> in
+                                            n <span class="o">)</span>             <span class="nv">FindName</span><span class="o">=</span><span class="nv">$OPTARG</span>
                                                             <span class="p">;;</span>
-                                            t <span class="o">)</span>             <span class="nv">FindTime</span><span class="o">=</span>$OPTARG
+                                            t <span class="o">)</span>             <span class="nv">FindTime</span><span class="o">=</span><span class="nv">$OPTARG</span>
                                                             <span class="p">;;</span>
                                             h <span class="o">)</span>             HelpInfo
                                                             <span class="nb">exit</span>
@@ -171,19 +171,19 @@ ModField
     <span class="nb">exit</span> 1
 <span class="k">fi</span>
 
-<span class="k">if</span> <span class="o">[[</span> <span class="o">(</span> -n <span class="nv">$F</span>indTime <span class="o">&amp;&amp;</span> -n <span class="nv">$F</span>indName <span class="o">)</span> <span class="o">||</span> -n <span class="nv">$F</span>indName <span class="o">]]</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="o">(</span> -n <span class="nv">$FindTime</span> <span class="o">&amp;&amp;</span> -n <span class="nv">$FindName</span> <span class="o">)</span> <span class="o">||</span> -n <span class="nv">$FindName</span> <span class="o">]]</span>
 <span class="k">then</span>
             FindNameCount
             <span class="k">while</span> <span class="nb">true</span>
             <span class="k">do</span>
                             <span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
                             <span class="nb">read</span> -n <span class="m">1</span> -p <span class="s2">&quot;Delete? [yN] &gt; &quot;</span>
-                            <span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span>$<span class="s2">REPLY&quot;</span> <span class="o">==</span> <span class="o">[</span>yY<span class="o">]</span> <span class="o">]]</span>
+                            <span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$REPLY</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="o">[</span>yY<span class="o">]</span> <span class="o">]]</span>
                             <span class="k">then</span>
-                                            find -L . -iname <span class="s2">&quot;</span><span class="nv">$F</span><span class="s2">indName&quot;</span> -type f $ModUnits -delete
+                                            find -L . -iname <span class="s2">&quot;</span><span class="nv">$FindName</span><span class="s2">&quot;</span> -type f <span class="nv">$ModUnits</span> -delete
                                             PenguinistaDone
                                             <span class="nb">exit</span>
-                            <span class="k">elif</span> <span class="o">[[</span> <span class="s2">&quot;</span>$<span class="s2">REPLY&quot;</span> <span class="o">==</span> <span class="o">[</span>nN<span class="o">]</span> <span class="o">||</span> <span class="s2">&quot;</span>$<span class="s2">REPLY&quot;</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span>
+                            <span class="k">elif</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$REPLY</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="o">[</span>nN<span class="o">]</span> <span class="o">||</span> <span class="s2">&quot;</span><span class="nv">$REPLY</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span>
                             <span class="k">then</span>
                                             PenguinistaNoDelete
                                             <span class="nb">exit</span>
@@ -193,19 +193,19 @@ ModField
             <span class="k">done</span>
 <span class="k">fi</span>
 
-<span class="k">if</span> <span class="o">[[</span> -n <span class="nv">$F</span>indTime <span class="o">]]</span>
+<span class="k">if</span> <span class="o">[[</span> -n <span class="nv">$FindTime</span> <span class="o">]]</span>
 <span class="k">then</span>
             FindTimeCount
             <span class="k">while</span> <span class="nb">true</span>
             <span class="k">do</span>
                             <span class="nb">printf</span> <span class="s2">&quot;\n&quot;</span>
                             <span class="nb">read</span> -n <span class="m">1</span> -p <span class="s2">&quot;Delete? [yN] &gt; &quot;</span>
-                            <span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span>$<span class="s2">REPLY&quot;</span> <span class="o">==</span> <span class="o">[</span>yY<span class="o">]</span> <span class="o">]]</span>
+                            <span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$REPLY</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="o">[</span>yY<span class="o">]</span> <span class="o">]]</span>
                             <span class="k">then</span>
-                                            find . -type f $ModUnits -delete
+                                            find . -type f <span class="nv">$ModUnits</span> -delete
                                             PenguinistaDone
                                             <span class="nb">exit</span>
-                            <span class="k">elif</span> <span class="o">[[</span> <span class="s2">&quot;</span>$<span class="s2">REPLY&quot;</span> <span class="o">==</span> <span class="o">[</span>nN<span class="o">]</span> <span class="o">||</span> <span class="s2">&quot;</span>$<span class="s2">REPLY&quot;</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span>
+                            <span class="k">elif</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$REPLY</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="o">[</span>nN<span class="o">]</span> <span class="o">||</span> <span class="s2">&quot;</span><span class="nv">$REPLY</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="o">]]</span>
                             <span class="k">then</span>
                                             PenguinistaNoDelete
                                             <span class="nb">exit</span>
@@ -218,7 +218,7 @@ ModField
 <div class="section" id="examples">
 <h2>Examples</h2>
 <p>Fidel can find and delete files by NAME and/or TIME ...</p>
-<div class="highlight"><pre><span class="c1"># delete files modified less than 7 days ago</span>
+<div class="highlight"><pre><span></span><span class="c1"># delete files modified less than 7 days ago</span>
 $ Fidel -t -7d
 
 <span class="c1"># delete files modified more than 88 minutes ago</span>

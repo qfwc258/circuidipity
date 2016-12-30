@@ -43,7 +43,7 @@
 <div class="section" id="download">
 <h2>0. Download</h2>
 <p>Download the latest <a class="reference external" href="https://images.collabora.co.uk/rpi2/">image and GPG signature</a>:</p>
-<div class="highlight"><pre>$ wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.gz
+<div class="highlight"><pre><span></span>$ wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.gz
 $ wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.bmap
 $ wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.gz.asc
 </pre></div>
@@ -52,10 +52,10 @@ $ wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.gz.asc
 <div class="section" id="install-to-microsd">
 <h2>1. Install to microSD</h2>
 <p>Unpack the image:</p>
-<div class="highlight"><pre>$ gzip -d jessie-rpi2-20150202.img.gz
+<div class="highlight"><pre><span></span>$ gzip -d jessie-rpi2-20150202.img.gz
 </pre></div>
 <p>In lieu of the usual (slower) <tt class="docutils literal">dd</tt> I use <tt class="docutils literal"><span class="pre">bmap-tools</span></tt> and <tt class="docutils literal"><span class="pre">jessie-rpi2-*.img.bmap</span></tt> to write the image to microSD:</p>
-<div class="highlight"><pre>$ sudo apt-get install bmap-tools
+<div class="highlight"><pre><span></span>$ sudo apt-get install bmap-tools
 $ sudo bmaptool copy --bmap jessie-rpi2-20150705.img.bmap jessie-rpi2-20150705.img /dev/sdX
 </pre></div>
 </div>
@@ -63,7 +63,7 @@ $ sudo bmaptool copy --bmap jessie-rpi2-20150705.img.bmap jessie-rpi2-20150705.i
 <h2>2. Boot and resize</h2>
 <p>Login as <tt class="docutils literal">root</tt> with password <tt class="docutils literal">debian</tt>.</p>
 <p>Filesystem layout <a class="footnote-reference" href="#id2" id="id1">[1]</a> on the microSD card:</p>
-<div class="highlight"><pre>Filesystem      Size  Used Avail Use% Mounted on
+<div class="highlight"><pre><span></span>Filesystem      Size  Used Avail Use% Mounted on
 /dev/root       2.8G  555M  2.1G  21% /
 devtmpfs        459M     <span class="m">0</span>  459M   0% /dev
 tmpfs           463M     <span class="m">0</span>  463M   0% /dev/shm
@@ -92,7 +92,7 @@ tmpfs           463M     <span class="m">0</span>  463M   0% /sys/fs/cgroup
 <div class="section" id="package-management">
 <h2>4. Package management</h2>
 <p>Modify <tt class="docutils literal">/etc/apt/sources.list</tt>:</p>
-<div class="highlight"><pre>deb http://httpredir.debian.org/debian jessie main contrib non-free
+<div class="highlight"><pre><span></span>deb http://httpredir.debian.org/debian jessie main contrib non-free
 <span class="c1">#deb-src http://httpredir.debian.org/debian/ jessie main contrib non-free</span>
 
 deb http://security.debian.org/ jessie/updates main contrib non-free
@@ -104,12 +104,12 @@ deb http://httpredir.debian.org/debian/ jessie-updates main contrib non-free
 deb <span class="o">[</span><span class="nv">trusted</span><span class="o">=</span>yes<span class="o">]</span> https://repositories.collabora.co.uk/debian/ jessie rpi2
 </pre></div>
 <p>Install image provides a <tt class="docutils literal"><span class="pre">flash-kernel</span></tt> package customized for the Pi. Use <strong>apt-pinning</strong> to <a class="reference external" href="http://sjoerd.luon.net/posts/2015/02/debian-jessie-on-rpi2/#comment-64b33335e8d852179704fb5dc218aa1e">continue using this custom package</a> vs updates from official Debian repositories. Create <tt class="docutils literal"><span class="pre">/etc/apt/preferences.d/flash-kernel</span></tt> with:</p>
-<div class="highlight"><pre>Package: flash-kernel
+<div class="highlight"><pre><span></span>Package: flash-kernel
 Pin: origin repositories.collabora.co.uk
 Pin-Priority: 900
 </pre></div>
 <p>Confirm <tt class="docutils literal"><span class="pre">flash-kernel</span></tt> is pinned:</p>
-<div class="highlight"><pre><span class="c1"># apt-cache policy flash-kernel</span>
+<div class="highlight"><pre><span></span><span class="c1"># apt-cache policy flash-kernel</span>
 flash-kernel:
   Installed: 3.35.co1+b1
   Candidate: 3.35.co1+b1
@@ -122,14 +122,14 @@ flash-kernel:
         <span class="m">500</span> http://httpredir.debian.org/debian/ jessie/main armhf Packages
 </pre></div>
 <p>Now is a good time to upgrade:</p>
-<div class="highlight"><pre>$ sudo apt-get update
+<div class="highlight"><pre><span></span>$ sudo apt-get update
 $ sudo apt-get dist-upgrade
 </pre></div>
 </div>
 <div class="section" id="remote-access">
 <h2>5. Remote access</h2>
 <p>Generate new SSH keys on the Pi:</p>
-<div class="highlight"><pre><span class="c1"># rm /etc/ssh/ssh_host_*key* &amp;&amp; dpkg-reconfigure openssh-server</span>
+<div class="highlight"><pre><span></span><span class="c1"># rm /etc/ssh/ssh_host_*key* &amp;&amp; dpkg-reconfigure openssh-server</span>
 </pre></div>
 <p>Secure remote access by <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">requiring clients to use SSH keys</a>.</p>
 <p>Happy hacking!</p>

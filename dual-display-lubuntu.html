@@ -31,7 +31,7 @@
 <div class="section" id="xrandr">
 <h3>0. Xrandr</h3>
 <p>Output information about connected display devices and supported resolutions using <strong>Xrandr</strong>:</p>
-<div class="highlight"><pre>$ xrandr
+<div class="highlight"><pre><span></span>$ xrandr
 Screen 0: minimum <span class="m">320</span> x 200, current <span class="m">3200</span> x 1200, maximum <span class="m">32767</span> x 32767
 LVDS1 connected 1280x800+0+0 <span class="o">(</span>normal left inverted right x axis y axis<span class="o">)</span> 261mm x 163mm
     1280x800       60.0*+   50.1
@@ -59,14 +59,14 @@ VIRTUAL1 disconnected <span class="o">(</span>normal left inverted right x axis 
 <div class="section" id="dualdisplay">
 <h3>1. dualDisplay</h3>
 <p>Create a <a class="reference external" href="https://github.com/vonbrownie/linux-home-bin/blob/master/dualDisplay">dualDisplay</a> shell script to generate a combined desktop (with external monitor set as primary display and positioned to the right of laptop display):</p>
-<div class="highlight"><pre><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="nv">first_dsply</span><span class="o">=</span><span class="k">$(</span>xrandr <span class="p">|</span> grep <span class="s2">&quot; connected&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;FNR == 1 {print $1}&#39;</span><span class="k">)</span>
 <span class="nv">second_dsply</span><span class="o">=</span><span class="k">$(</span>xrandr <span class="p">|</span> grep <span class="s2">&quot; connected&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;FNR == 2 {print $1}&#39;</span><span class="k">)</span>
-<span class="nv">conf_dsply</span><span class="o">=</span><span class="s2">&quot;xrandr --output </span><span class="nv">$f</span><span class="s2">irst_dsply --auto --output </span>$<span class="s2">second_dsply --primary&quot;</span>
+<span class="nv">conf_dsply</span><span class="o">=</span><span class="s2">&quot;xrandr --output </span><span class="nv">$first_dsply</span><span class="s2"> --auto --output </span><span class="nv">$second_dsply</span><span class="s2"> --primary&quot;</span>
 
-<span class="k">if</span> <span class="o">[[</span> -n $second_dsply <span class="o">]]</span>
+<span class="k">if</span> <span class="o">[[</span> -n <span class="nv">$second_dsply</span> <span class="o">]]</span>
 <span class="k">then</span>
-    <span class="nv">$c</span>onf_dsply --auto --right-of <span class="nv">$f</span>irst_dsply
+    <span class="nv">$conf_dsply</span> --auto --right-of <span class="nv">$first_dsply</span>
 <span class="k">fi</span>
 </pre></div>
 <p>Save the script to <tt class="docutils literal">~/bin</tt> or <tt class="docutils literal">/usr/local/bin</tt> and <tt class="docutils literal">chmod 755 dualDisplay</tt> to make it executable.</p>
@@ -82,12 +82,12 @@ VIRTUAL1 disconnected <span class="o">(</span>normal left inverted right x axis 
 <ul class="simple">
 <li>laptop display is <tt class="docutils literal"><span class="pre">desktop-items-0.conf</span></tt>:</li>
 </ul>
-<div class="highlight"><pre><span class="nv">wallpaper</span><span class="o">=</span>/path/to/laptop-wallpaper.jpg
+<div class="highlight"><pre><span></span><span class="nv">wallpaper</span><span class="o">=</span>/path/to/laptop-wallpaper.jpg
 </pre></div>
 <ul class="simple">
 <li>external display is <tt class="docutils literal"><span class="pre">desktop-items-1.conf</span></tt>:</li>
 </ul>
-<div class="highlight"><pre><span class="nv">wallpaper0</span><span class="o">=</span>/path/to/external-wallpaper.jpg
+<div class="highlight"><pre><span></span><span class="nv">wallpaper0</span><span class="o">=</span>/path/to/external-wallpaper.jpg
 </pre></div>
 <p>Save all changes and logout. LXDE will now auto-detect at login if a second display is attached and make the necessary adjustments.</p>
 <p>Happy hacking!</p>

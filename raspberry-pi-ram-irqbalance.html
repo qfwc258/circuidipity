@@ -29,24 +29,24 @@
     <p><strong>Problem:</strong> After a few days uptime my Pi sees hundreds of MB gobbled up by the <tt class="docutils literal">irqbalance</tt> daemon (which balances interrupts across multiple CPUs). Package version is <tt class="docutils literal"><span class="pre">1.0.6-3</span></tt> on Debian <tt class="docutils literal">jessie/armhf</tt> and its a <a class="reference external" href="https://bugs.launchpad.net/ubuntu/+source/irqbalance/+bug/1247107">known bug</a>.</p>
 <p><strong>Fix:</strong> <strong>0)</strong> Restart <tt class="docutils literal">irqbalance</tt> in nightly cron job, or <strong>1)</strong> Compile and install a newer, patched version (my choice).</p>
 <p>Remove buggy <tt class="docutils literal">irqbalance</tt>:</p>
-<div class="highlight"><pre>$ sudo systemctl stop irqbalance
+<div class="highlight"><pre><span></span>$ sudo systemctl stop irqbalance
 $ sudo apt-get --purge remove irqbalance
 </pre></div>
 <p>Install development tools on the Pi:</p>
-<div class="highlight"><pre>$ sudo apt-get install build-essential autogen automake libtool pkg-config checkinstall
+<div class="highlight"><pre><span></span>$ sudo apt-get install build-essential autogen automake libtool pkg-config checkinstall
 </pre></div>
 <p><a class="reference external" href="https://github.com/Irqbalance/irqbalance">Download source</a> and unpack:</p>
-<div class="highlight"><pre>$ wget https://github.com/Irqbalance/irqbalance/archive/v1.0.9.tar.gz <span class="o">&amp;&amp;</span> tar xvzf v1.0.9.tar.gz
+<div class="highlight"><pre><span></span>$ wget https://github.com/Irqbalance/irqbalance/archive/v1.0.9.tar.gz <span class="o">&amp;&amp;</span> tar xvzf v1.0.9.tar.gz
 </pre></div>
 <p><strong>Checkinstall</strong> is an easy way to make Debian packages for personal use. Compile and (check)install:</p>
-<div class="highlight"><pre>$ <span class="nb">cd</span> irqbalance-1.0.9
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> irqbalance-1.0.9
 $ /autogen.sh
 $ ./configure
 $ make
 $ sudo checkinstall make install
 </pre></div>
 <p>Start new <tt class="docutils literal">irqbalance</tt>:</p>
-<div class="highlight"><pre>$ sudo /usr/local/sbin/irqbalance <span class="p">&amp;</span>
+<div class="highlight"><pre><span></span>$ sudo /usr/local/sbin/irqbalance <span class="p">&amp;</span>
 </pre></div>
 <p>Optional: Configure the daemon for <a class="reference external" href="http://www.circuidipity.com/writing-systemd-service-files.html">systemd control and auto-start at boot</a>.</p>
 <p>I have been running the daemon for a few days now and it stays around 0.6% memory usage vs <strong>20%</strong> (and growing) of the previous packaged version.</p>

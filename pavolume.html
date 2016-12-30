@@ -34,16 +34,16 @@
 <div class="section" id="pactl">
 <h2>0. pactl</h2>
 <p><tt class="docutils literal">pactl</tt> controls a PulseAudio sound server and is included in <tt class="docutils literal"><span class="pre">pulseaudio-utils</span></tt>:</p>
-<div class="highlight"><pre>$ sudo apt-get install pulseaudio-utils
+<div class="highlight"><pre><span></span>$ sudo apt-get install pulseaudio-utils
 </pre></div>
 </div>
 <div class="section" id="pamixer">
 <h2>1. pamixer</h2>
 <p><a class="reference external" href="https://github.com/cdemoulins/pamixer">pamixer</a> is a PulseAudio console mixer. Compile dependencies:</p>
-<div class="highlight"><pre>$ sudo apt-get install build-essential libpulse-dev libboost-program-options1.58.0 libboost-program-options-dev
+<div class="highlight"><pre><span></span>$ sudo apt-get install build-essential libpulse-dev libboost-program-options1.58.0 libboost-program-options-dev
 </pre></div>
 <p>Download source and compile:</p>
-<div class="highlight"><pre>$ git clone https://cdemoulins@github.com/cdemoulins/pamixer.git
+<div class="highlight"><pre><span></span>$ git clone https://cdemoulins@github.com/cdemoulins/pamixer.git
 $ <span class="nb">cd</span> pamixer
 $ make
 </pre></div>
@@ -52,29 +52,29 @@ $ make
 <div class="section" id="volnoti">
 <h2>2. volnoti</h2>
 <p><a class="reference external" href="https://github.com/davidbrazdil/volnoti">volnoti</a> is a lightweight volume notification. Compile dependencies:</p>
-<div class="highlight"><pre>$ sudo apt-get install libdbus-glib-1-dev libgtk2.0-dev libgdk-pixbuf2.0-dev autoconf automake
+<div class="highlight"><pre><span></span>$ sudo apt-get install libdbus-glib-1-dev libgtk2.0-dev libgdk-pixbuf2.0-dev autoconf automake
 </pre></div>
 <p>Download:</p>
-<div class="highlight"><pre>$ git clone git://github.com/davidbrazdil/volnoti.git
+<div class="highlight"><pre><span></span>$ git clone git://github.com/davidbrazdil/volnoti.git
 $ <span class="nb">cd</span> volnoti
 $ ./prepare.sh
 $ ./configure --prefix<span class="o">=</span>/usr
 </pre></div>
 <p>Apply this fix <a class="footnote-reference" href="#id5" id="id3">[1]</a> to the source:</p>
-<div class="highlight"><pre>$ <span class="nb">cd</span> src
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> src
 $ rm value-client-stub.h <span class="o">&amp;&amp;</span> make value-client-stub.h
 $ rm value-daemon-stub.h <span class="o">&amp;&amp;</span> make value-daemon-stub.h
 $ <span class="nb">cd</span> ..
 </pre></div>
 <p>Compile source (and I use <a class="reference external" href="https://packages.debian.org/jessie/checkinstall">checkinstall</a> to make a <tt class="docutils literal">deb</tt> package and install):</p>
-<div class="highlight"><pre>$ make
+<div class="highlight"><pre><span></span>$ make
 $ sudo checkinstall make install
 </pre></div>
 <p>Start <tt class="docutils literal">volnoti</tt> daemon:</p>
-<div class="highlight"><pre>$ volnoti
+<div class="highlight"><pre><span></span>$ volnoti
 </pre></div>
 <p>Configure daemon to auto-start at desktop launch (example: <strong>i3</strong> - add to <tt class="docutils literal"><span class="pre">~/.i3/config</span></tt>):</p>
-<div class="highlight"><pre><span class="c1"># Auto-start applications</span>
+<div class="highlight"><pre><span></span><span class="c1"># Auto-start applications</span>
 <span class="nb">exec</span> --no-startup-id volnoti -t 2
 </pre></div>
 </div>

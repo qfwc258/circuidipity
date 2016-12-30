@@ -28,11 +28,11 @@
 <div id="article">
     <p>I am happy with the selection of packages installed on my primary Debian box and discovered an easy method <a class="footnote-reference" href="#id3" id="id1">[1]</a> to duplicate the setup on a secondary machine.</p>
 <p>Generate a list of installed packages on the original:</p>
-<div class="highlight"><pre>$ dpkg --get-selections <span class="p">|</span> grep -v deinstall &gt; pkg-list.txt
+<div class="highlight"><pre><span></span>$ dpkg --get-selections <span class="p">|</span> grep -v deinstall &gt; pkg-list.txt
 </pre></div>
 <p>Move the generated list to the target machine. Configure the package manager <a class="footnote-reference" href="#id4" id="id2">[2]</a> to duplicate the selection:</p>
-<div class="highlight"><pre>$ <span class="nv">PKGS</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
-$ sudo apt-cache dumpavail &gt; <span class="s2">&quot;</span>$<span class="s2">PKGS&quot;</span> <span class="o">&amp;&amp;</span> sudo dpkg --merge-avail <span class="s2">&quot;</span>$<span class="s2">PKGS&quot;</span> <span class="o">&amp;&amp;</span> sudo rm <span class="s2">&quot;</span>$<span class="s2">PKGS&quot;</span>
+<div class="highlight"><pre><span></span>$ <span class="nv">PKGS</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
+$ sudo apt-cache dumpavail &gt; <span class="s2">&quot;</span><span class="nv">$PKGS</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> sudo dpkg --merge-avail <span class="s2">&quot;</span><span class="nv">$PKGS</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> sudo rm <span class="s2">&quot;</span><span class="nv">$PKGS</span><span class="s2">&quot;</span>
 $ sudo dpkg --clear-selections <span class="o">&amp;&amp;</span> sudo dpkg --set-selections &lt; pkg-list.txt
 $ sudo apt-get dselect-upgrade
 </pre></div>
