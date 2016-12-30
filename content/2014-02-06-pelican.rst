@@ -4,68 +4,46 @@ Build a blog using the Pelican static site generator
 
 :date: 2014-02-06 01:23:00
 :slug: pelican
-:tags: pelican, blog, python, network, linux
+:tags: pelican, web, python
+:modified: 2016-12-30 13:58:00
 
 `Pelican <http://docs.getpelican.com/en/3.3.0/>`_ is a Python-powered **static site generator**. I design the look and layout of this site using CSS and `Jinja2 <http://jinja.pocoo.org/docs/>`_ templates and write my posts as plaintext files using `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ and Pelican compiles the contents into HTML output suitable for a blog.
 
 I like the idea of creating a static website. Some of the advantages:
 
 * no database required ... plaintext is easy to edit, backup and move around
-* plaintext allows your choice of editor ... I am learning ``vim``
+* plaintext allows your choice of editor
 * cheap and easy to host practically anywhere ... one option: `GitHub Pages <http://pages.github.com/>`_ is a free service for hosting static HTML content 
 * no database or excutable code makes a website easy to secure, maintain and scale
 
 The traditional disadvantage to using static pages for a blog has been the lack of dynamic elements - hosting feeds, user comments - but JavaScript for things like a Twitter widget to provide real-time updates and out-sourced services like Disqus for commenting are possible alternatives to work around static limitations.
  
-This is how I built Circuidipity using Pelican.
+This is how I built **Circuidipity** on Ubuntu 16.04 using Pelican.
 
 0. Install
 ----------
 
-I install Pelican and extra tools by creating a *virtual environment* using `virtualenv <http://www.circuidipity.com/python2-and-python3.html>`_ and `pip <https://pypi.python.org/pypi/pip>`_. This allows me to create a sandboxed work area specific to my blog and user separate from my default Python installation (an alternative method in Debian would be to install the ``python-pelican`` package).
-
-With ``virtualenv`` installed and using my blog as an example:
+I install Pelican and extra tools by creating a *virtual environment* using `virtualenv <http://www.circuidipity.com/python2-and-python3.html>`_ and `pip <https://pypi.python.org/pypi/pip>`_. This allows me to create a sandboxed work area specific to my blog and user separate from my default Python installation (an alternative method in Debian would be to install the ``python-pelican`` package) ...
 
 .. code-block:: bash
 
-    $ virtualenv ~/virtualenvs/circuidipity
-    $ source ~/virtualenvs/circuidipity/bin/activate
-    (circuidipity)$ pip install pelican
+    $ sudo apt install virtualenv
+    $ mkdir ~/code/virtualenvs
+    $ virtualenv ~/code/virtualenvs/pelican
+    $ source ~/code/virtualenvs/pelican/bin/activate
+    (pelican)$ pip install pelican
 
-To later upgrade to newer versions simply run ``pip install --upgrade pelican``.  
+Upgrading: simply run ``pip install --upgrade pelican``.  
 
-Next I create a directory to hold my blog contents and run ``pelican-quickstart`` to create a default site layout and configuration. I add my blog details and mostly accept the default choices provided (except for `pagination <http://docs.getpelican.com/en/3.3.0/settings.html#pagination>`_): 
+Next I create a directory to hold my blog contents and run ``pelican-quickstart`` to create a default site layout and configuration. I add my blog details and mostly accept the default choices provided (except for `pagination <http://docs.getpelican.com/en/3.3.0/settings.html#pagination>`_) ...
 
 .. code-block:: bash
 
-    (circuidipity)$ mkdir ~/circuidipity
-    (circuidipity)$ cd ~/circuidipity
-    (circuidipity)$ pelican-quickstart 
-    Welcome to pelican-quickstart v3.3.0.
+    (pelican)$ mkdir -p ~/code/circuidipity/www
+    (pelican)$ cd ~/code/circuidipity/www
+    (pelican)$ pelican-quickstart 
 
-    This script will help you create a new Pelican-based website.
-
-    Please answer the following questions so this script can generate the files
-    needed by Pelican.
-
-    
-    > Where do you want to create your new web site? [.] 
-    > What will be the title of this web site? Circuidipity
-    > Who will be the author of this web site? Daniel Wayne Armstrong
-    > What will be the default language of this web site? [en] 
-    > Do you want to specify a URL prefix? e.g., http://example.com   (Y/n) 
-    > What is your URL prefix? (see above example; no trailing slash) http://www.circuidipity.com
-    > Do you want to enable article pagination? (Y/n) n
-    > Do you want to generate a Fabfile/Makefile to automate generation and publishing? (Y/n) 
-    > Do you want an auto-reload & simpleHTTP script to assist with theme and site development? (Y/n) 
-    > Do you want to upload your website using FTP? (y/N) 
-    > Do you want to upload your website using SSH? (y/N) 
-    > Do you want to upload your website using Dropbox? (y/N) 
-    > Do you want to upload your website using S3? (y/N) 
-    > Do you want to upload your website using Rackspace Cloud Files? (y/N) 
-    Done. Your new project is available at /home/dwa/circuidipity
-
-This is the layout generated by ``pelican-quickstart``:
+... and this is the layout generated ...
 
 .. code-block:: bash
 
@@ -84,13 +62,13 @@ This is the layout generated by ``pelican-quickstart``:
 1. First post
 -------------
 
-Posts go into ``content`` and I create a ``images`` subdirectory for screenshots and artwork and a ``pages`` subdirectory to hold things like an ``about`` or ``contact`` page:
+Posts go into ``content`` and I create an ``images`` subdirectory for screenshots and artwork and a ``pages`` subdirectory to hold things like an ``about`` or ``contact`` page ...
 
 .. code-block:: bash
 
     $ mkdir content/{images,pages}
 
-Inside ``content`` create your first post ``hello_world.rst`` using reStructuredText:
+Inside ``content`` create your first post ``hello_world.rst`` using reStructuredText ...
 
 .. code-block:: rst
 
@@ -99,143 +77,36 @@ Inside ``content`` create your first post ``hello_world.rst`` using reStructured
     ===========
 
     :date: 2014-02-06 23:24
-    :tags: pelican, web
-    :slug: hello
+    :slug: hello-world
+    :tags: pelican, web, python
 
     My *first* post using `Pelican <http://docs.getpelican.com/en/3.3.0/getting_started.html>`_!
 
 Items like ``:date`` ``:tags:`` ``:slug:`` are **metadata** that can be used in the generated HTML output. These and a few others are included in Pelican and users can create their own to use in `templates <http://docs.getpelican.com/en/3.1.1/themes.html#theming-pelican>`_.
 
-Save the file and test the new blog by running the Pelican built-in development server. This will take all the ``*.rst`` files and generate HTML formatted files in ``output`` and serve up the results for inspection in a browser at ``http://localhost:8000``:
+Save the file and test the new blog by running the Pelican built-in development server. This will take all the ``*.rst`` files and generate HTML formatted files in ``output`` and serve up the results for inspection in a browser at ``http://localhost:8000`` ...
 
 .. code-block:: bash
 
-    (circuidipity)$ make devserver
+    (pelican)$ make devserver
 
-The server will continue to run in the background and re-generate any updated content for viewing. Stop the server by running ``./develop_server.sh stop``.
+Server will continue to run in the background and re-generate any updated content for viewing. Stop server by running ``./develop_server.sh stop``.
 
 2. Settings
 -----------
 
 Running ``pelican-quickstart`` creates 2 configuration files: ``pelicanconf.py`` and ``publishconf.py``.
 
-Primary settings are configured in ``pelicanconf.py``. Settings can be used as variables in posts, pages, and templates. This is how mine looks ... some of the settings such as ``AUTHOR`` and ``SITENAME`` were generated by Pelican and some like ``WHOAMI_URL`` were created by myself:
+Primary settings are configured in ``pelicanconf.py``. Settings can be used as variables in posts, pages, and templates. This is how `mine looks <https://github.com/vonbrownie/circuidipity/blob/master/pelicanconf.py>`_ ... some of the settings such as ``AUTHOR`` and ``SITENAME`` were generated by Pelican and some like ``WHOAMI_URL`` were created by myself.
 
-.. code-block:: python
+A few of the settings like ``RELATIVE_URLS = True`` and turning off ``ATOM`` feeds are appropriate for a *test* environment but are probably things that need to be modified when its time for deployment.
 
-    #!/usr/bin/env python
-    # -*- coding: utf-8 -*- #
-    from __future__ import unicode_literals
-    
-    AUTHOR = 'Daniel Wayne Armstrong'
-    SITENAME = 'Circuidipity'
-    SITEURL = ''
-
-    TIMEZONE = 'America/Toronto'
-
-    DEFAULT_LANG = 'en'
-
-    DEFAULT_DATE_FORMAT = '%A %d %B %Y'
-
-    # Static paths will be copied without parsing their contents
-    STATIC_PATHS = ['images', 'extra']
-
-    # Shift the installed location of a file
-    EXTRA_PATH_METADATA = {
-            'extra/CNAME': {'path': 'CNAME'},
-                    }
-
-    # Extract post date from filename
-    FILENAME_METADATA = '(?P<date>\d{4}-\d{2}-\d{2})'
-
-    # Sole author and don't use categories ... disable these features
-    AUTHOR_SAVE_AS = False                                                             
-    AUTHORS_SAVE_AS = False                                                            
-    CATEGORY_SAVE_AS = False                                                           
-    CATEGORIES_SAVE_AS = False   
-
-    # Feed generation is usually not desired when developing
-    FEED_ALL_ATOM = None
-    CATEGORY_FEED_ATOM = None
-    TRANSLATION_FEED_ATOM = None
-
-    # URL settings
-    # Uncomment following line if you want document-relative URLs when developing
-    RELATIVE_URLS = True
-    ARTICLE_URL = '{slug}.html'
-    PAGE_URL = '{slug}.html'
-    PAGE_SAVE_AS = '{slug}.html'
-    TAG_URL = 'tag-{slug}.html'
-    TAG_SAVE_AS = 'tag-{slug}.html'
-    TAGS_URL = 'tags.html'
-    TAGS_SAVE_AS = 'tags.html'
-    ARCHIVES_URL = 'archives.html'
-    ARCHIVES_SAVE_AS = 'archives.html'
-
-    # Contact
-    EMAIL_ADDR = 'daniel at circuidipity dot com'
-
-    # Plugins
-    PLUGIN_PATH = '/home/dwa/doc/code/pelican-plugins'
-    PLUGINS = ['neighbors']
-
-    # Theme
-    THEME = '/home/dwa/doc/code/pelican-themes/chungking-condo'
-    WHOAMI_URL = '/theme/images/whoami.jpg'
-    GREETING = 'Howdy!'
-    LICENCE_NAME = 'BY-NC-SA'
-    LICENCE_URL = 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US'
-    LICENCE_URL_IMG = 'http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png'
-    JINJA_EXTENSIONS = ['jinja2.ext.loopcontrols']
-
-    # Social
-    TWITTER_URL = 'https://twitter.com/circuidipity'
-    GITHUB_URL = 'https://github.com/vonbrownie'
-
-    # Tag cloud
-    TAG_CLOUD_STEPS = 4
-
-A few of the settings like ``RELATIVE_URLS = True`` and turning off ``ATOM`` feeds are appropriate for a *test* environment but are probably things that need to be modified when its time for deployment. The second ``publishconf.py`` configuration file contains priority settings for **publishing** content:
-
-.. code-block:: python
-
-    #!/usr/bin/env python
-    # -*- coding: utf-8 -*- #
-    from __future__ import unicode_literals
-
-    # This file is only used if you use `make publish` or
-    # explicitly specify it as your config file.
-
-    import os
-    import sys
-    sys.path.append(os.curdir)
-    from pelicanconf import *
-
-    SITEURL = 'http://www.circuidipity.com'
-    RELATIVE_URLS = False
-
-    FEED_ALL_ATOM = 'feed.xml'
-    CATEGORY_FEED_ATOM = None
-    TRANSLATION_FEED_ATOM = None
-
-    FEED_MAX_ITEMS = 10
-
-    DELETE_OUTPUT_DIRECTORY = True
-
+The second configuration - `publishconf.py <https://github.com/vonbrownie/circuidipity/blob/master/publishconf.py>`_ - contains priority settings for publishing content.
 
 3. Plugins
 ----------
 
-`Plugins <http://docs.getpelican.com/en/3.3.0/plugins.html>`_ are available to extend the functionality of Pelican. I use a plugin called `neighbors <https://github.com/getpelican/pelican-plugins/tree/master/neighbors>`_ that makes it easy for me to add links near the bottom to ``Newer`` and ``Older`` articles in relation to the current page.
-
-Enable plugins in ``pelicanconf.py``:
-
-.. code-block:: python
-
-    PLUGIN_PATH = '/home/dwa/doc/code/pelican-plugins'
-    PLUGINS = ['neighbors']
-
-I can then make use of the plugin's ``next_article`` and ``prev_article`` variables in a Jinja2-formatted template to add those navigation links:
+`Plugins <http://docs.getpelican.com/en/3.3.0/plugins.html>`_ are available to extend the functionality of Pelican. I use a plugin called `neighbors <https://github.com/getpelican/pelican-plugins/tree/master/neighbors>`_ that makes it easy for me to add links near the bottom to ``Newer`` and ``Older`` articles in relation to the current page. After enabling the plugin in ``pelicanconf.py`` I make use of the plugin's ``next_article`` and ``prev_article`` variables in a Jinja2-formatted template to add those navigation links ...
 
 .. code-block:: python
 
@@ -251,23 +122,17 @@ I can then make use of the plugin's ``next_article`` and ``prev_article`` variab
 4. Themes
 ---------
 
-Pelican includes a default theme to get you started and there is a collection of `user-created themes <https://github.com/getpelican/pelican-themes>`_ to choose from or `create your own <http://docs.getpelican.com/en/3.3.0/themes.html>`_. I chose to start from scratch and explore CSS, Jinja2 templating, `pygments <http://pygments.org/faq/>`_ and `Font Awesome icons <http://fortawesome.github.io/Font-Awesome/>`_ to create my own `Chungking Condo <https://github.com/vonbrownie/circuidipity/tree/gh-pages/theme>`_ theme.
-
-To use a theme set the location of its contents in ``pelicanconf.py``:
-
-.. code-block:: python
-
-        THEME = '/home/dwa/doc/code/pelican-themes/chungking-condo'
+Pelican includes a default theme to get you started and there is a collection of `user-created themes <https://github.com/getpelican/pelican-themes>`_ to choose from or `create your own <http://docs.getpelican.com/en/3.3.0/themes.html>`_. I chose to start from scratch and explore CSS, Jinja2 templating, `pygments <http://pygments.org/faq/>`_ and `Font Awesome icons <http://fortawesome.github.io/Font-Awesome/>`_ to create my own custom theme.
 
 5. Publish
 ----------
 
-When ready to generate for deployment run:
+When ready to generate for deployment run ...
 
 .. code-block:: bash
 
-    (circuidipity)$ make publish
+    (pelican)$ make publish
 
-All blog contents are placed in ``output`` ready to be uploaded to a hosting service. Since everything is static content there are many options available. Previously I used `Amazon S3 <http://www.circuidipity.com/host-website-on-amazon-s3.html>`_ and have now switched to a free `project repository hosted on GitHub Pages <http://www.circuidipity.com/github-pages.html>`_.
+All blog contents are placed in ``output`` ready to be uploaded to a hosting service. Since everything is static content there are many options available. I use a free `project repository hosted on GitHub Pages <http://www.circuidipity.com/github-pages.html>`_.
 
 Happy hacking!

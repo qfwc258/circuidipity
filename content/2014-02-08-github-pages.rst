@@ -4,7 +4,8 @@ Host a blog on GitHub Pages
 
 :date: 2014-02-08 01:23:00
 :slug: github-pages
-:tags: pelican, blog, git, network, linux
+:tags: pelican, web, python, git
+:modified: 2016-12-30 14:11:00
 
 `GitHub Pages <http://pages.github.com/>`_ is a free web hosting service for projects composed of static files (i.e no database). Combine a **Pages repository** with **git** version control and a **static site generator** like `Pelican <http://www.circuidipity.com/pelican.html>`_ and you have one awesome toolset to build a website.
 
@@ -16,11 +17,11 @@ Let's go!
 0. Install git
 --------------
 
-Install (on Debian Linux) the ``git`` package and write global configuration variables for ``USERNAME`` in ``~/.gitconfig``: 
+**Ubuntu Linux:** Install ``git`` package and write global configuration variables for ``USERNAME`` in ``~/.gitconfig`` ...
 
 .. code-block:: bash
 
-    $ sudo apt-get install git git-doc                                          
+    $ sudo apt install git git-doc                                          
     $ git config --global user.name "USERNAME"                                  
     $ git config --global user.email USERNAME.EMAIL@example.com                        
     $ git config --global core.editor EDITOR  # I use 'vim'                                     
@@ -31,7 +32,7 @@ Install (on Debian Linux) the ``git`` package and write global configuration var
 
 Inside my ``pelican``-powered blog project I create 2 new files: ``.gitignore`` and ``README.rst``.
 
-The ``.gitignore`` file does exactly what the name implies ... it instructs ``git`` which files and directories not to bother tracking in version control. For example I do not want to track:
+The ``.gitignore`` file does exactly what the name implies ... it instructs ``git`` which files and directories not to bother tracking in version control. For example I do not want to track ...
 
 .. code-block:: bash
 
@@ -39,18 +40,9 @@ The ``.gitignore`` file does exactly what the name implies ... it instructs ``gi
     *.pyc
     output/
 
-Creating a ``README.rst`` will allow GitHub to auto-detect and configure it as the project homepage when we upload our blog contents to the remote repository. Mine looks like:
+**For GitHub:** Create a ``README.rst`` and GitHub will auto-detect and configure it as the project homepage when blog contents are uploaded to the remote repository. 
 
-.. code-block:: rst
-
-    www dot circuidipity dot com
-    ============================
-
-    This repository holds my blog which you can visit at www.circuidipity.com.
-
-    It is compiled by `Pelican <http://docs.getpelican.com/>`_ and hosted on `GitHub Pages <http://pages.github.com/>`_. 
-
-Now I create my local repository, add the items I want to track, and execute my first commit:
+Now I create my local repository, add the items I want to track, and execute my first commit ...
 
 .. code-block:: bash
 
@@ -70,7 +62,7 @@ Now I create my local repository, add the items I want to track, and execute my 
 
 `Sign up <https://help.github.com/articles/signing-up-for-a-new-github-account>`_ for a free account on GitHub and `create a new empty repository <https://help.github.com/articles/creating-a-new-repository>`_ to hold the blog contents.
 
-Next I connect my local ``.git`` repository to my GitHub remote repository:
+Next I connect my local ``.git`` repository to my GitHub remote repository ...
                                             
 .. code-block:: bash
 
@@ -83,13 +75,13 @@ Next I connect my local ``.git`` repository to my GitHub remote repository:
 
 GitHub offers 2 types of `Pages <https://help.github.com/articles/user-organization-and-project-pages>`_ ... **User Pages** and **Project Pages**. Each GitHub account can host a single User Page and an unlimited amount of Project Pages. Basically they are identical to the end-user and differ only in their configuration.
 
-I chose to make my blog a Project Page and the contents are hosted in the ``gh-pages`` branch of my GitHub project repository. Pelican makes it easy to create and configure ``gh-pages`` using the `ghp-import <https://github.com/davisp/ghp-import>`_ Python script ... which I install via ``pip``: 
+I chose to make my blog a Project Page and the contents are hosted in the ``gh-pages`` branch of my GitHub project repository. Pelican makes it easy to create and configure ``gh-pages`` using the `ghp-import <https://github.com/davisp/ghp-import>`_ Python script ... which I install via ``pip`` ...
 
 .. code-block:: bash
 
     $ pip install ghp-import
 
-Finally I publish my blog by pushing the files up to GitHub:
+Finally I publish my blog by pushing the files up to GitHub ...
 
 .. code-block:: bash
 
@@ -104,7 +96,7 @@ Awesome! But I want to use my own custom domain name ... not ``REPOSITORY``.
 
 GitHub enables `custom domains <https://help.github.com/articles/setting-up-a-custom-domain-with-pages>`_ by allowing users to create a ``CNAME`` file with their domain address that resides in the root directory of ``gh-pages``. Inside my Pelican project folder I create a new ``extra`` directory containing a single-line ``CNAME`` file with my domain address ``www.circuidipity.com``.
 
-Next I edit ``pelicanconf.py`` to recognize ``CNAME`` and place the file in ``gh-pages`` when I upload my files:
+Next I edit ``pelicanconf.py`` to recognize ``CNAME`` and place the file in ``gh-pages`` when I upload my files ...
 
 .. code-block:: py
 
@@ -116,7 +108,7 @@ Next I edit ``pelicanconf.py`` to recognize ``CNAME`` and place the file in ``gh
         'extra/CNAME': {'path': 'CNAME'},                                       
     }
 
-Upload my changes to GitHub:
+Upload my changes to GitHub ...
 
 .. code-block:: bash
 

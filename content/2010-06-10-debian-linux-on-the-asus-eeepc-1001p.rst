@@ -8,13 +8,16 @@ Debian Linux on the Asus EEEPC 1001P
 
 I recently acquired an *Asus EEEPC 1001P-MU17* netbook and replaced the marginal crippled operating system it included with `Debian GNU/Linux <http://www.circuidipity.com/install-debian-linux-squeeze.html>`_.
 
+Let's go!
+=========
+
 There were a few hiccups during the install... but with the replacement of Debian's default 2.6.32 kernel with a more recent release (currently running kernel 2.6.37) most of the 1001P's hardware is supported by default. Adding a few configuration tweaks makes this one nifty little device!
 
-Step 0 - Start
-==============
+0. Start
+--------
 
 Asus 1001P-MU17 Hardware specifications
----------------------------------------
+```````````````````````````````````````
 
 * Processor: Intel Atom N450
 * Chipset: Intel NM10<
@@ -30,7 +33,7 @@ Asus 1001P-MU17 Hardware specifications
 * Ports: 3 x USB 2.0, VGA, SD Reader, 100Mb Ethernet, Microphone/Headphone Jacks
 
 Device status
--------------
+`````````````
 
 * Graphics: Works
 * Ethernet: Works
@@ -41,7 +44,7 @@ Device status
 * Touchpad: Works
 
 Function keys
--------------
+`````````````
 
 * Fn+F1 (Suspend-to-RAM): Works
 * Fn+F2 (Toggle wireless): Not used
@@ -56,13 +59,13 @@ Function keys
 * Fn+F11 (Volume down): Works
 * Fn+F12 (Volume up): Works
 
-Step 1 - Install
-----------------
+1. Install
+----------
 
 My `Debian install notes <http://www.circuidipity.com/install-debian-linux-squeeze.html>`_. Specific details concerning the Asus 1001P are noted below.
 
-Configure BIOS and boot Debian installer
-----------------------------------------
+1.1 Configure BIOS and boot Debian installer
+````````````````````````````````````````````
 
 Power up and enter the Asus BIOS by pressing the ``F2`` key. Configure for a USB install:
 
@@ -72,11 +75,11 @@ Power up and enter the Asus BIOS by pressing the ``F2`` key. Configure for a USB
 
 `Prepare the Debian installer <http://www.circuidipity.com/install-debian-linux-squeeze.html>`_ on a USB stick, attach, and reboot. At the BIOS screen hit ``Esc`` and select USB as boot device.
 
-Step 2 - Configuration
-======================
+2. Configuration
+----------------
 
-Ethernet
---------
+2.1 Ethernet
+````````````
 
 Auto-detection probing of the ethernet interface during the install can result in device disappearing from the system and network configuration to fail (*Update:* Appears problem has been resolved with the stable release of Debian ``squeeze``). If the ethernet device was knocked out during installation:
 
@@ -87,13 +90,13 @@ Auto-detection probing of the ethernet interface during the install can result i
 * ``lspci -v | grep net`` reveals the ethernet device (Atheros Communications AR8132 Fast Ethernet)
 * bring up the interface... ``ifconfig eth0 up`` and ``dhclient eth0``
 
-Wireless
---------
+2.2 Wireless
+````````````
 
 Works "out-of-box". Interface is identified as ``wlan0``.
 
-EEEPC
------
+2.3 EEEPC
+`````````
 
 Install the ``eeepc-acpi-scripts`` to enable the function keys and the ability to suspend-to-RAM (sleep) ...
 
@@ -101,8 +104,8 @@ Install the ``eeepc-acpi-scripts`` to enable the function keys and the ability t
 
     $ sudo apt-get install eeepc-acpi-scripts
 
-Power management
-----------------
+2.4 Power management
+````````````````````
 
 .. code-block:: bash
 
@@ -120,8 +123,8 @@ Settings are in ``/sys/devices/system/cpu/cpu0/cpufreq``. CPU speed can be monit
 
 Default scaling governor is ``ondemand``.
 
-Screen brightness
------------------
+2.5 Screen brightness
+`````````````````````
 
 Post-install the display brightness is extremely low and the assigned funtion keys for adjusting the brightness level cause the setting to jump all over the place. This can be fixed by editing ``/etc/default/grub`` and modifying ``GRUB_CMDLINE_LINUX_DEFAULT`` ...
 
@@ -135,8 +138,8 @@ Save your changes and run ``sudo update-grub2``. Reboot... login... and run ...
 
     $ sudo `echo 15 > /sys/class/backlight/eeepc/brightness`
 
-Touchpad
---------
+2.6 Touchpad
+````````````
 
 By default the touchpad is limited to finger-tap=left-mouse-click. *HAL* and *fdi* files were previously used to enable more mouse-click and scrolling functions but their use is now deprecated... *udev* is the way to go now.
 
@@ -157,18 +160,18 @@ Use ``xinput`` to determine the properties of the touchpad and add new functions
 
 Create a shell script using xinput to configure the touchpad for left-middle-right mouse clicks with finger taps and two-finger scrolling, save it in ``~/bin`` and source it to run at login. On my 1001P running Fluxbox window manager I add the line ``touchpad_config &`` to ``~/.fluxbox/startup``.
 
-Suspend-to-RAM
---------------
+2.7 Suspend-to-RAM
+``````````````````
 
 Using the ``eeepc-acpi-scripts`` and key combo ``Fn + F1`` to put the netbook to sleep "just works".
 
-Microphone
-----------
+2.8 Microphone
+``````````````
 
 Muted by default. Need to enable capture in ``alsamixer``.
 
-Hard drive management
----------------------
+2.9 Hard drive management
+`````````````````````````
 
 I noticed a frequent clicking noise from the drive heads on my netbook. Digging online reveals discussion about over-aggressive power management settings on hard drives that rapidly mount/unmount/remount and gradually wear out the drive. Feedback suggests that laptop drives are good for roughly ~600000 *load_cycles*.
 

@@ -51,11 +51,11 @@ PROJECTS_SAVE_AS = 'projects.html'
 EMAIL_ADDR = 'daniel at circuidipity dot com'
 
 # Plugins
-PLUGIN_PATHS = ['/home/dwa/code/pelican-plugins']
+PLUGIN_PATHS = ['/home/dwa/code/pelican/plugins']
 PLUGINS = ['neighbors', 'tag_cloud']
 
 # Theme
-THEME = '/home/dwa/code/pelican-themes/clearwater'
+THEME = '/home/dwa/code/pelican/themes/clearwater'
 WHOAMI_URL = '/theme/images/whoami.png'
 MINIME_URL = '/theme/images/minime.png'
 GREETING = 'Howdy!'
