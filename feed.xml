@@ -1,5 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2016-09-07T15:17:00-04:00</updated><entry><title>Centauri Oak</title><link href="http://www.circuidipity.com/centauri-oak.html" rel="alternate"></link><published>2016-09-07T15:17:00-04:00</published><updated>2016-09-07T15:17:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-09-07:/centauri-oak.html</id><summary type="html">&lt;p&gt;One of my favourite blog's is &lt;strong&gt;Paul Gilster's&lt;/strong&gt; &lt;a class="reference external" href="http://www.centauri-dreams.org/"&gt;Centauri Dreams&lt;/a&gt;. The frequency and quality of posts is fantastic!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-01-01T14:34:00-05:00</updated><entry><title>GNU GRUB</title><link href="http://www.circuidipity.com/grub.html" rel="alternate"></link><published>2017-01-01T14:34:00-05:00</published><updated>2017-01-01T14:34:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-01:/grub.html</id><summary type="html">&lt;p&gt;A few generic tweaks I add to Ubuntu's configuration (location: &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;) of the &lt;strong&gt;GNU GRand Unified Bootloader&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="section" id="display-menu"&gt;
+&lt;h2&gt;Display menu&lt;/h2&gt;
+&lt;p&gt;Default is to hide the boot menu and - after a slight delay - start loading the system. To make the menu visible, comment out the HIDDEN settings and set a …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;A few generic tweaks I add to Ubuntu's configuration (location: &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;) of the &lt;strong&gt;GNU GRand Unified Bootloader&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="section" id="display-menu"&gt;
+&lt;h2&gt;Display menu&lt;/h2&gt;
+&lt;p&gt;Default is to hide the boot menu and - after a slight delay - start loading the system. To make the menu visible, comment out the HIDDEN settings and set a TIMEOUT in seconds ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#GRUB_HIDDEN_TIMEOUT=0&lt;/span&gt;
+&lt;span class="c1"&gt;#GRUB_HIDDEN_TIMEOUT_QUIET=true&lt;/span&gt;
+&lt;span class="nv"&gt;GRUB_TIMEOUT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;10
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="make-some-noise"&gt;
+&lt;h2&gt;Make some noise&lt;/h2&gt;
+&lt;p&gt;It is a good thing to start Linux with a bit of song ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Uncomment to get a beep at grub start ... how about &amp;#39;Close Encounters&amp;#39;?&lt;/span&gt;
+&lt;span class="nv"&gt;GRUB_INIT_TUNE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;480 900 2 1000 2 800 2 400 2 600 3&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="black-screen"&gt;
+&lt;h2&gt;Black screen&lt;/h2&gt;
+&lt;p&gt;On some devices I run into this issue: &lt;a class="reference external" href="https://bugs.launchpad.net/ubuntu/+source/cryptsetup/+bug/1375435"&gt;&amp;quot;Black screen instead of password prompt for boot encryption&amp;quot;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I have to blindly enter the passphrase for my LUKS-encrypted partitions and &lt;tt class="docutils literal"&gt;ALT+F1&lt;/tt&gt; to console. Trying to remove GRUB options &lt;tt class="docutils literal"&gt;splash&lt;/tt&gt; and/or &lt;tt class="docutils literal"&gt;quiet&lt;/tt&gt; results in the inability to enter the passphrase at all and a hard reset is required.&lt;/p&gt;
+&lt;p&gt;To fix, add ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Force the kernel to boot in normal text mode with &amp;#39;=text&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;GRUB_GFXPAYLOAD_LINUX&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;text
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;See: &lt;a class="reference external" href="https://www.gnu.org/software/grub/manual/html_node/gfxpayload.html"&gt;GNU gfxpayload&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="wallpaper"&gt;
+&lt;h2&gt;Wallpaper&lt;/h2&gt;
+&lt;p&gt;Add a &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/boot/grub/grub_moon_jupiter_moons.tga"&gt;background image&lt;/a&gt; saved in &lt;tt class="docutils literal"&gt;.tga&lt;/tt&gt; format to GRUB menu ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Wallpaper&lt;/span&gt;
+&lt;span class="nv"&gt;GRUB_BACKGROUND&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/boot/grub/grub_moon_jupiter_moons.tga&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Run &lt;tt class="docutils literal"&gt;sudo &lt;span class="pre"&gt;update-grub&lt;/span&gt;&lt;/tt&gt; after any file modifications. Source: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/etc/default/grub"&gt;grub&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Happy (hacking) New Year!&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>Centauri Oak</title><link href="http://www.circuidipity.com/centauri-oak.html" rel="alternate"></link><published>2016-09-07T15:17:00-04:00</published><updated>2016-09-07T15:17:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-09-07:/centauri-oak.html</id><summary type="html">&lt;p&gt;One of my favourite blog's is &lt;strong&gt;Paul Gilster's&lt;/strong&gt; &lt;a class="reference external" href="http://www.centauri-dreams.org/"&gt;Centauri Dreams&lt;/a&gt;. The frequency and quality of posts is fantastic!&lt;/p&gt;
 &lt;p&gt;All the recent news about &lt;strong&gt;Proxima b&lt;/strong&gt; and the &lt;a class="reference external" href="https://breakthroughinitiatives.org/Initiative/3"&gt;Breakthrough Starshot&lt;/a&gt; project spurred me to start reading his earlier book by the same name that inspired the blog. I like this bit …&lt;/p&gt;</summary><content type="html">&lt;p&gt;One of my favourite blog's is &lt;strong&gt;Paul Gilster's&lt;/strong&gt; &lt;a class="reference external" href="http://www.centauri-dreams.org/"&gt;Centauri Dreams&lt;/a&gt;. The frequency and quality of posts is fantastic!&lt;/p&gt;
 &lt;p&gt;All the recent news about &lt;strong&gt;Proxima b&lt;/strong&gt; and the &lt;a class="reference external" href="https://breakthroughinitiatives.org/Initiative/3"&gt;Breakthrough Starshot&lt;/a&gt; project spurred me to start reading his earlier book by the same name that inspired the blog. I like this bit ...&lt;/p&gt;
 &lt;blockquote&gt;
@@ -734,58 +772,4 @@ Travel Time: 3.00061103304e+11 hours by bike
 
 $
 &lt;/pre&gt;&lt;/div&gt;
-</content><category term="python"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 15-17: Reading and Writing Files</title><link href="http://www.circuidipity.com/lpthw-e15-17.html" rel="alternate"></link><published>2015-11-18T13:55:00-05:00</published><updated>2015-11-18T13:55:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-18:/lpthw-e15-17.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Reading and Writing Files&lt;/span&gt;
-&lt;span class="c1"&gt;# * close - closes the file&lt;/span&gt;
-&lt;span class="c1"&gt;# * read - reads the contents of a file... can assign the result to a variable&lt;/span&gt;
-&lt;span class="c1"&gt;# * readline - reads just one line of a text file&lt;/span&gt;
-&lt;span class="c1"&gt;# * truncate - empties the file&lt;/span&gt;
-&lt;span class="c1"&gt;# * write(&amp;#39;stuff&amp;#39;) - writes &amp;#39;stuff&amp;#39; to the file …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Reading and Writing Files&lt;/span&gt;
-&lt;span class="c1"&gt;# * close - closes the file&lt;/span&gt;
-&lt;span class="c1"&gt;# * read - reads the contents of a file... can assign the result to a variable&lt;/span&gt;
-&lt;span class="c1"&gt;# * readline - reads just one line of a text file&lt;/span&gt;
-&lt;span class="c1"&gt;# * truncate - empties the file&lt;/span&gt;
-&lt;span class="c1"&gt;# * write(&amp;#39;stuff&amp;#39;) - writes &amp;#39;stuff&amp;#39; to the file&lt;/span&gt;
-
-from sys import argv
-
-script, &lt;span class="nv"&gt;filename&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; argv
-
-print &lt;span class="s2"&gt;&amp;quot;We&amp;#39;re going to erase %r.&amp;quot;&lt;/span&gt; % filename
-print &lt;span class="s2"&gt;&amp;quot;If you don&amp;#39;t want that, hit CTRL-C (^C).&amp;quot;&lt;/span&gt;
-print &lt;span class="s2"&gt;&amp;quot;If you do want that, hit RETURN.&amp;quot;&lt;/span&gt;
-
-raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;?&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-
-print &lt;span class="s2"&gt;&amp;quot;Opening the file...&amp;quot;&lt;/span&gt;
-&lt;span class="c1"&gt;# open &amp;#39;r&amp;#39; (read (default)) &amp;#39;w&amp;#39; writing and &amp;#39;a&amp;#39; append&lt;/span&gt;
-&lt;span class="c1"&gt;# &amp;#39;w&amp;#39; will truncate the file if it already exists&lt;/span&gt;
-&lt;span class="nv"&gt;target&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; open&lt;span class="o"&gt;(&lt;/span&gt;filename, &lt;span class="s1"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-
-print &lt;span class="s2"&gt;&amp;quot;Truncating the file. Goodbye!&amp;quot;&lt;/span&gt;
-&lt;span class="c1"&gt;# truncate not necessary... &amp;#39;w&amp;#39; already handles it&lt;/span&gt;
-&lt;span class="c1"&gt;#target.truncate()&lt;/span&gt;
-
-print &lt;span class="s2"&gt;&amp;quot;Now I&amp;#39;m going to ask you for three lines.&amp;quot;&lt;/span&gt;
-
-&lt;span class="nv"&gt;line1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;line 1: &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="nv"&gt;line2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;line 2: &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="nv"&gt;line3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;line 3: &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-
-print &lt;span class="s2"&gt;&amp;quot;I&amp;#39;m going to write these to the file.&amp;quot;&lt;/span&gt;
-
-target.write&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{0}\n{1}\n{2}\nWhat was that last bit? I said...\n&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;{2}\n&amp;quot;&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;line1, line2, line3&lt;span class="o"&gt;))&lt;/span&gt;
-&lt;span class="c1"&gt;#target.write(line1)&lt;/span&gt;
-&lt;span class="c1"&gt;#target.write(&amp;quot;\n&amp;quot;)&lt;/span&gt;
-&lt;span class="c1"&gt;#target.write(line2)&lt;/span&gt;
-&lt;span class="c1"&gt;#target.write(&amp;quot;\n&amp;quot;)&lt;/span&gt;
-&lt;span class="c1"&gt;#target.write(line3)&lt;/span&gt;
-&lt;span class="c1"&gt;#target.write(&amp;quot;\n&amp;quot;)&lt;/span&gt;
-
-print &lt;span class="s2"&gt;&amp;quot;And finally, we close it.&amp;quot;&lt;/span&gt;
-target.close&lt;span class="o"&gt;()&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Bonus:&lt;/strong&gt; Last night I attended the monthly &lt;a class="reference external" href="http://www.meetup.com/Python-Toronto/"&gt;Python Toronto Meetup&lt;/a&gt;. It was unintelligible (for a beginner) but inspiring (to me to learn more)! :-)&lt;/p&gt;
 </content><category term="python"></category><category term="programming"></category></entry></feed>

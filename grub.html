@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | GNU GRUB</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+        <!-- analytics -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89591498-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Sunday 01 January 2017</p>
+</div>
+
+<!-- article -->
+<h1>GNU GRUB</h1>
+<div id="article">
+    <p>A few generic tweaks I add to Ubuntu's configuration (location: <tt class="docutils literal">/etc/default/grub</tt>) of the <strong>GNU GRand Unified Bootloader</strong>.</p>
+<div class="section" id="display-menu">
+<h2>Display menu</h2>
+<p>Default is to hide the boot menu and - after a slight delay - start loading the system. To make the menu visible, comment out the HIDDEN settings and set a TIMEOUT in seconds ...</p>
+<div class="highlight"><pre><span></span><span class="c1">#GRUB_HIDDEN_TIMEOUT=0</span>
+<span class="c1">#GRUB_HIDDEN_TIMEOUT_QUIET=true</span>
+<span class="nv">GRUB_TIMEOUT</span><span class="o">=</span>10
+</pre></div>
+</div>
+<div class="section" id="make-some-noise">
+<h2>Make some noise</h2>
+<p>It is a good thing to start Linux with a bit of song ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Uncomment to get a beep at grub start ... how about &#39;Close Encounters&#39;?</span>
+<span class="nv">GRUB_INIT_TUNE</span><span class="o">=</span><span class="s2">&quot;480 900 2 1000 2 800 2 400 2 600 3&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="black-screen">
+<h2>Black screen</h2>
+<p>On some devices I run into this issue: <a class="reference external" href="https://bugs.launchpad.net/ubuntu/+source/cryptsetup/+bug/1375435">&quot;Black screen instead of password prompt for boot encryption&quot;</a>.</p>
+<p>I have to blindly enter the passphrase for my LUKS-encrypted partitions and <tt class="docutils literal">ALT+F1</tt> to console. Trying to remove GRUB options <tt class="docutils literal">splash</tt> and/or <tt class="docutils literal">quiet</tt> results in the inability to enter the passphrase at all and a hard reset is required.</p>
+<p>To fix, add ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Force the kernel to boot in normal text mode with &#39;=text&#39;</span>
+<span class="nv">GRUB_GFXPAYLOAD_LINUX</span><span class="o">=</span>text
+</pre></div>
+<p>See: <a class="reference external" href="https://www.gnu.org/software/grub/manual/html_node/gfxpayload.html">GNU gfxpayload</a></p>
+</div>
+<div class="section" id="wallpaper">
+<h2>Wallpaper</h2>
+<p>Add a <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/boot/grub/grub_moon_jupiter_moons.tga">background image</a> saved in <tt class="docutils literal">.tga</tt> format to GRUB menu ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Wallpaper</span>
+<span class="nv">GRUB_BACKGROUND</span><span class="o">=</span><span class="s2">&quot;/boot/grub/grub_moon_jupiter_moons.tga&quot;</span>
+</pre></div>
+<p>Run <tt class="docutils literal">sudo <span class="pre">update-grub</span></tt> after any file modifications. Source: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/etc/default/grub">grub</a></p>
+<p>Happy (hacking) New Year!</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/centauri-oak.html">Centauri Oak</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>
