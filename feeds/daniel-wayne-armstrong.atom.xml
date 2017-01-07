@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-01-01T14:34:00-05:00</updated><entry><title>GNU GRUB</title><link href="http://www.circuidipity.com/grub.html" rel="alternate"></link><published>2017-01-01T14:34:00-05:00</published><updated>2017-01-01T14:34:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-01:/grub.html</id><summary type="html">&lt;p&gt;A few generic tweaks I add to Ubuntu's configuration (location: &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;) of the &lt;strong&gt;GNU GRand Unified Bootloader&lt;/strong&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-01-07T07:56:00-05:00</updated><entry><title>The Unseen World</title><link href="http://www.circuidipity.com/unseen-world.html" rel="alternate"></link><published>2017-01-07T07:56:00-05:00</published><updated>2017-01-07T07:56:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-07:/unseen-world.html</id><summary type="html">&lt;img alt="The Unseen World" class="align-right" src="images/unseen_world_cover2.jpg" style="width: 150px; height: 228px;" /&gt;
+&lt;p&gt;&lt;strong&gt;The Unseen World&lt;/strong&gt; &lt;em&gt;by Liz Moore&lt;/em&gt; (ISBN: 0393241688) .: The first book I read in 2017 has been doing a slow burn in my head these past few days. Ada Sibelius is the only child of David, a computer scientist and artificial intelligence pioneer at a thinly-disguised 1980s-era MIT. Homeschooled by …&lt;/p&gt;</summary><content type="html">&lt;img alt="The Unseen World" class="align-right" src="images/unseen_world_cover2.jpg" style="width: 150px; height: 228px;" /&gt;
+&lt;p&gt;&lt;strong&gt;The Unseen World&lt;/strong&gt; &lt;em&gt;by Liz Moore&lt;/em&gt; (ISBN: 0393241688) .: The first book I read in 2017 has been doing a slow burn in my head these past few days. Ada Sibelius is the only child of David, a computer scientist and artificial intelligence pioneer at a thinly-disguised 1980s-era MIT. Homeschooled by her father and with his fellow researchers as her only childhood friends, Ada is forced to grow up in a hurry when David's health begins a downward spiral. She is placed in the care of one of her father's colleagues and finds herself not only in new surroundings but embroiled in a growing mystery about her father's true identity.&lt;/p&gt;
+&lt;p&gt;What does it mean to possess a &lt;em&gt;self&lt;/em&gt;, either biological or digital? One moment to the next I feel attached to a particular identity though I understand that everything is in flux. Years from now (hopefully!) there will be a person that makes the claim to being me. Will that be true? &lt;em&gt;Unseen&lt;/em&gt; is a story about the accretion of memory, its fabrication, transmission, dissolution, and as a means to immortality.&lt;/p&gt;
+</content><category term="books"></category></entry><entry><title>GNU GRUB</title><link href="http://www.circuidipity.com/grub.html" rel="alternate"></link><published>2017-01-01T14:34:00-05:00</published><updated>2017-01-01T14:34:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-01:/grub.html</id><summary type="html">&lt;p&gt;A few generic tweaks I add to Ubuntu's configuration (location: &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;) of the &lt;strong&gt;GNU GRand Unified Bootloader&lt;/strong&gt;.&lt;/p&gt;
 &lt;div class="section" id="display-menu"&gt;
 &lt;h2&gt;Display menu&lt;/h2&gt;
 &lt;p&gt;Default is to hide the boot menu and - after a slight delay - start loading the system. To make the menu visible, comment out the HIDDEN settings and set a …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;A few generic tweaks I add to Ubuntu's configuration (location: &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;) of the &lt;strong&gt;GNU GRand Unified Bootloader&lt;/strong&gt;.&lt;/p&gt;
@@ -37,8 +41,8 @@
 &lt;p&gt;Run &lt;tt class="docutils literal"&gt;sudo &lt;span class="pre"&gt;update-grub&lt;/span&gt;&lt;/tt&gt; after any file modifications. Source: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/generic/etc/default/grub"&gt;grub&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Happy (hacking) New Year!&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>Centauri Oak</title><link href="http://www.circuidipity.com/centauri-oak.html" rel="alternate"></link><published>2016-09-07T15:17:00-04:00</published><updated>2016-09-07T15:17:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-09-07:/centauri-oak.html</id><summary type="html">&lt;p&gt;One of my favourite blog's is &lt;strong&gt;Paul Gilster's&lt;/strong&gt; &lt;a class="reference external" href="http://www.centauri-dreams.org/"&gt;Centauri Dreams&lt;/a&gt;. The frequency and quality of posts is fantastic!&lt;/p&gt;
-&lt;p&gt;All the recent news about &lt;strong&gt;Proxima b&lt;/strong&gt; and the &lt;a class="reference external" href="https://breakthroughinitiatives.org/Initiative/3"&gt;Breakthrough Starshot&lt;/a&gt; project spurred me to start reading his earlier book by the same name that inspired the blog. I like this bit …&lt;/p&gt;</summary><content type="html">&lt;p&gt;One of my favourite blog's is &lt;strong&gt;Paul Gilster's&lt;/strong&gt; &lt;a class="reference external" href="http://www.centauri-dreams.org/"&gt;Centauri Dreams&lt;/a&gt;. The frequency and quality of posts is fantastic!&lt;/p&gt;
+</content><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>Centauri Oak</title><link href="http://www.circuidipity.com/centauri-oak.html" rel="alternate"></link><published>2016-09-07T15:17:00-04:00</published><updated>2016-09-07T15:17:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-09-07:/centauri-oak.html</id><summary type="html">&lt;p&gt;One of my favourite blogs is &lt;strong&gt;Paul Gilster's&lt;/strong&gt; &lt;a class="reference external" href="http://www.centauri-dreams.org/"&gt;Centauri Dreams&lt;/a&gt;. The frequency and quality of posts is fantastic!&lt;/p&gt;
+&lt;p&gt;All the recent news about &lt;strong&gt;Proxima b&lt;/strong&gt; and the &lt;a class="reference external" href="https://breakthroughinitiatives.org/Initiative/3"&gt;Breakthrough Starshot&lt;/a&gt; project spurred me to start reading his earlier book by the same name that inspired the blog. I like this bit …&lt;/p&gt;</summary><content type="html">&lt;p&gt;One of my favourite blogs is &lt;strong&gt;Paul Gilster's&lt;/strong&gt; &lt;a class="reference external" href="http://www.centauri-dreams.org/"&gt;Centauri Dreams&lt;/a&gt;. The frequency and quality of posts is fantastic!&lt;/p&gt;
 &lt;p&gt;All the recent news about &lt;strong&gt;Proxima b&lt;/strong&gt; and the &lt;a class="reference external" href="https://breakthroughinitiatives.org/Initiative/3"&gt;Breakthrough Starshot&lt;/a&gt; project spurred me to start reading his earlier book by the same name that inspired the blog. I like this bit ...&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Even as a starship embodies our dreams, it also casts light on our history. Lord Collingwood (1748-1810) was Nelson's second in command at the battle of Trafalgar, taking command of the fleet when Nelson was mortally wounded. Collingwood knew that the British oak used in ships built during the Napoleonic wars had been planted during the reign of the Stuarts, some two hundred years earlier, and that it had been designed for future use in the Royal Navy. He would go on to encourage plantings of oak that would be ready for the Navy a hundred and fifty years after his death.&lt;/p&gt;
@@ -665,111 +669,4 @@ $ sudo update-alternatives --config x-terminal-emulator
 &lt;p&gt;My &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/scripts/morebuntu.sh"&gt;morebuntu shell script&lt;/a&gt; that covers most of steps 1-4.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="ubuntu"></category><category term="linux"></category><category term="i3"></category><category term="shell"></category><category term="programming"></category></entry><entry><title>LPTHW Exercise 18-21: Functions, Variables, Return</title><link href="http://www.circuidipity.com/lpthw-e18-21.html" rel="alternate"></link><published>2015-11-19T17:10:00-05:00</published><updated>2015-11-19T17:10:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2015-11-19:/lpthw-e18-21.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; How long will it take for Sebastiaan to pedal his bike to &lt;em&gt;Proxima Centauri&lt;/em&gt;?&lt;/p&gt;
-&lt;p&gt;Code:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;import sys
-import textwrap
-
-script, &lt;span class="nv"&gt;origin&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; sys.argv
-
-&lt;span class="nv"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Sebastiaan&amp;#39;&lt;/span&gt;
-&lt;span class="nv"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 133.78
-
-def cyclist&lt;span class="o"&gt;(&lt;/span&gt;boost&lt;span class="o"&gt;)&lt;/span&gt;:
-    &lt;span class="nv"&gt;v&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;-&amp;#39;&lt;/span&gt;
-    &lt;span class="nv"&gt;h&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; v * &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt; + int&lt;span class="o"&gt;(&lt;/span&gt;boost&lt;span class="o"&gt;))&lt;/span&gt;
-    &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; v * &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;6&lt;/span&gt; + int&lt;span class="o"&gt;(&lt;/span&gt;boost …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; How long will it take for Sebastiaan to pedal his bike to &lt;em&gt;Proxima Centauri&lt;/em&gt;?&lt;/p&gt;
-&lt;p&gt;Code:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;import sys
-import textwrap
-
-script, &lt;span class="nv"&gt;origin&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; sys.argv
-
-&lt;span class="nv"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Sebastiaan&amp;#39;&lt;/span&gt;
-&lt;span class="nv"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 133.78
-
-def cyclist&lt;span class="o"&gt;(&lt;/span&gt;boost&lt;span class="o"&gt;)&lt;/span&gt;:
-    &lt;span class="nv"&gt;v&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;-&amp;#39;&lt;/span&gt;
-    &lt;span class="nv"&gt;h&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; v * &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt; + int&lt;span class="o"&gt;(&lt;/span&gt;boost&lt;span class="o"&gt;))&lt;/span&gt;
-    &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; v * &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;6&lt;/span&gt; + int&lt;span class="o"&gt;(&lt;/span&gt;boost&lt;span class="o"&gt;))&lt;/span&gt;
-    &lt;span class="nv"&gt;w&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; v * &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt; + int&lt;span class="o"&gt;(&lt;/span&gt;boost&lt;span class="o"&gt;))&lt;/span&gt;
-    print textwrap.dedent&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="s1"&gt;        {} __@&lt;/span&gt;
-&lt;span class="s1"&gt;        {}  _`\&amp;lt;,_&lt;/span&gt;
-&lt;span class="s1"&gt;        {}  (*)/ (*)&lt;/span&gt;
-&lt;span class="s1"&gt;        &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;h, b, w&lt;span class="o"&gt;)&lt;/span&gt;
-
-def intro&lt;span class="o"&gt;()&lt;/span&gt;:
-    cyclist&lt;span class="o"&gt;(&lt;/span&gt;1&lt;span class="o"&gt;)&lt;/span&gt;
-    print textwrap.dedent&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="s1"&gt;        Dutch cyclist {0} Bowier in September 2013 achieved a speed&lt;/span&gt;
-&lt;span class="s1"&gt;        of {1} km/h with his VeloX3 bicycle, a new world record for a&lt;/span&gt;
-&lt;span class="s1"&gt;        human powered vehicle.&lt;/span&gt;
-
-&lt;span class="s1"&gt;        {0} has now offered you a ride on his bike from {2}&lt;/span&gt;
-&lt;span class="s1"&gt;        to a destination of your choice! (Thanks {0}!)&lt;/span&gt;
-&lt;span class="s1"&gt;        &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;name, s, origin&lt;span class="o"&gt;)&lt;/span&gt;
-
-def itinerary&lt;span class="o"&gt;(&lt;/span&gt;destination, distance, time, mode&lt;span class="o"&gt;)&lt;/span&gt;:
-    &lt;span class="nv"&gt;txt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; open&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;travelTimes.txt&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;a+&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-    txt.write&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;\n{}-&amp;gt;{} ({} km)\n&amp;#39;&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;origin, destination, distance&lt;span class="o"&gt;))&lt;/span&gt;
-    txt.write&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Travel Time: {} hours by {}\n&amp;#39;&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;time, mode&lt;span class="o"&gt;))&lt;/span&gt;
-    txt.seek&lt;span class="o"&gt;(&lt;/span&gt;0&lt;span class="o"&gt;)&lt;/span&gt;
-    print&lt;span class="o"&gt;(&lt;/span&gt;txt.read&lt;span class="o"&gt;())&lt;/span&gt;
-    txt.close&lt;span class="o"&gt;()&lt;/span&gt;
-
-def tripTime&lt;span class="o"&gt;(&lt;/span&gt;distance, speed&lt;span class="o"&gt;)&lt;/span&gt;:
-    &lt;span class="k"&gt;return&lt;/span&gt; float&lt;span class="o"&gt;(&lt;/span&gt;distance&lt;span class="o"&gt;)&lt;/span&gt; / speed
-
-def trip&lt;span class="o"&gt;()&lt;/span&gt;:
-    &lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Where would you like to go? &amp;gt; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-    &lt;span class="nv"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Distance to {} in kilometers? Enter a digit &amp;gt; &amp;#39;&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;g&lt;span class="o"&gt;))&lt;/span&gt;
-    &lt;span class="nv"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; tripTime&lt;span class="o"&gt;(&lt;/span&gt;d, s&lt;span class="o"&gt;)&lt;/span&gt;
-    cyclist&lt;span class="o"&gt;(&lt;/span&gt;49&lt;span class="o"&gt;)&lt;/span&gt;
-    print textwrap.dedent&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="s1"&gt;        Working the pedals at top speed with no breaks, {} would&lt;/span&gt;
-&lt;span class="s1"&gt;        get you to {} in {} hours.&lt;/span&gt;
-&lt;span class="s1"&gt;        &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;name, g, round&lt;span class="o"&gt;(&lt;/span&gt;t, 2&lt;span class="o"&gt;))&lt;/span&gt;
-    print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Details have been added to your itinerary:&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-    itinerary&lt;span class="o"&gt;(&lt;/span&gt;g, d, round&lt;span class="o"&gt;(&lt;/span&gt;t, 2&lt;span class="o"&gt;)&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;bike&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-
-intro&lt;span class="o"&gt;()&lt;/span&gt;
-trip&lt;span class="o"&gt;()&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Output:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ python pedalTime.py Toronto
-
------------ __@
--------  _&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="se"&gt;\&amp;lt;&lt;/span&gt;,_
-------  &lt;span class="o"&gt;(&lt;/span&gt;*&lt;span class="o"&gt;)&lt;/span&gt;/ &lt;span class="o"&gt;(&lt;/span&gt;*&lt;span class="o"&gt;)&lt;/span&gt;
-
-
-Dutch cyclist Sebastiaan Bowier in September &lt;span class="m"&gt;2013&lt;/span&gt; achieved a speed
-of 133.78 km/h with his VeloX3 bicycle, a new world record &lt;span class="k"&gt;for&lt;/span&gt; a
-human powered vehicle.
-
-Sebastiaan has now offered you a ride on his bike from Toronto
-to a destination of your choice! &lt;span class="o"&gt;(&lt;/span&gt;Thanks Sebastiaan!&lt;span class="o"&gt;)&lt;/span&gt;
-
-Where would you like to go? &amp;gt; Proxima Centauri
-Distance to Proxima Centauri in kilometers? Enter a digit &amp;gt; 40142174400000.0
-
------------------------------------------------------------ __@
--------------------------------------------------------  _&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="se"&gt;\&amp;lt;&lt;/span&gt;,_
-------------------------------------------------------  &lt;span class="o"&gt;(&lt;/span&gt;*&lt;span class="o"&gt;)&lt;/span&gt;/ &lt;span class="o"&gt;(&lt;/span&gt;*&lt;span class="o"&gt;)&lt;/span&gt;
-
-
-Working the pedals at top speed with no breaks, Sebastiaan would
-get you to Proxima Centauri in 3.00061103304e+11 hours.
-
-Details have been added to your itinerary:
-
-Toronto-&amp;gt;Detroit &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;371&lt;/span&gt; km&lt;span class="o"&gt;)&lt;/span&gt;
-Travel Time: 2.77 hours by bike
-
-Toronto-&amp;gt;Proxima Centauri &lt;span class="o"&gt;(&lt;/span&gt;40142174400000.0 km&lt;span class="o"&gt;)&lt;/span&gt;
-Travel Time: 3.00061103304e+11 hours by bike
-
-$
-&lt;/pre&gt;&lt;/div&gt;
-</content><category term="python"></category><category term="programming"></category></entry></feed>
+</content><category term="ubuntu"></category><category term="linux"></category><category term="i3"></category><category term="shell"></category><category term="programming"></category></entry></feed>
