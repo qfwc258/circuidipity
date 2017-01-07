@@ -6,7 +6,7 @@ Centauri Oak
 :slug: centauri-oak
 :tags: quotes
 
-One of my favourite blog's is **Paul Gilster's** `Centauri Dreams <http://www.centauri-dreams.org/>`_. The frequency and quality of posts is fantastic!
+One of my favourite blogs is **Paul Gilster's** `Centauri Dreams <http://www.centauri-dreams.org/>`_. The frequency and quality of posts is fantastic!
 
 All the recent news about **Proxima b** and the `Breakthrough Starshot <https://breakthroughinitiatives.org/Initiative/3>`_ project spurred me to start reading his earlier book by the same name that inspired the blog. I like this bit ...
 
