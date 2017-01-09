@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Getting started with Neovim</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+        <!-- analytics -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89591498-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Sunday 08 January 2017</p>
+</div>
+
+<!-- article -->
+<h1>Getting started with Neovim</h1>
+<div id="article">
+    <p>Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!</p>
+<p>I have used <strong>Vim</strong> in the past but barely scratched the surface of its features motherlode. A friend who is a <a class="reference external" href="http://gilesorr.com/blog/tag/vim.html">passionate vim user</a> recommended I try <strong>Neovim</strong>, which &quot;<em>strives to be a superset of Vim except for some intentionally-removed misfeatures... [and] is built for users who want the good parts of Vim, and more</em>&quot;. Sounds good!</p>
+<div class="section" id="install-neovim">
+<h2>0. Install Neovim</h2>
+<p>Neovim packages are available for <strong>Ubuntu Linux</strong> courtesy of a <em>Personal Package Archive (PPA)</em> ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install software-properties-common
+$ sudo add-apt-repository ppa:neovim-ppa/unstable
+$ sudo apt update
+$ sudo apt install neovim
+$ sudo apt install python-dev python-pip python3-dev python3-pip
+</pre></div>
+</div>
+<div class="section" id="launch">
+<h2>1. Launch</h2>
+<p>Start the newly-installed editor ...</p>
+<div class="highlight"><pre><span></span>$ nvim
+</pre></div>
+<p>Upon first launch on Ubuntu the <tt class="docutils literal"><span class="pre">~/.local/share/nvim/{shada,swap}</span></tt> directories are auto-generated. Manually create a new <tt class="docutils literal"><span class="pre">~/.config/nvim</span></tt> configuration directory and place inside an <tt class="docutils literal">init.vim</tt> config file (or link to an existing <tt class="docutils literal"><span class="pre">~/.vimrc</span></tt>) ...</p>
+<div class="highlight"><pre><span></span>$ mkdir ~/.config/nvim
+$ <span class="nb">cd</span> ~/.config/nvim
+$ ln -s ~/.vimrc init.vim
+</pre></div>
+<p>Check out Neovim's built-in <tt class="docutils literal">:help</tt> command and the <a class="reference external" href="https://neovim.io/doc/">online documentation</a> .</p>
+<p>Source: <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.config/nvim/init.vim">https://github.com/vonbrownie/dotfiles/blob/master/.config/nvim/init.vim</a></p>
+</div>
+<div class="section" id="plugins">
+<h2>2. Plugins</h2>
+<p>Extend the core features of the text editor using <strong>plugins</strong>. With a fresh install of Neovim, now is a good time to setup a plugin manager. I install <a class="reference external" href="https://github.com/VundleVim/Vundle.vim">Vundle</a> ...</p>
+<div class="highlight"><pre><span></span>$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
+</pre></div>
+<p>Configure neovim to use vundle by modifying <tt class="docutils literal"><span class="pre">~/.config/nvim/init.vim</span></tt> ...</p>
+<div class="highlight"><pre><span></span>    <span class="nb">set</span> nocompatible
+    filetype off
+    <span class="s2">&quot; set the runtime path to include Vundle and initialize</span>
+<span class="s2">    set rtp+=~/.config/nvim/bundle/Vundle.vim</span>
+<span class="s2">    call vundle#begin()</span>
+<span class="s2">    &quot;</span> <span class="nb">let</span> Vundle manage Vundle, required
+    Plugin <span class="s1">&#39;VundleVim/Vundle.vim&#39;</span>
+<span class="s2">&quot; All of your Plugins must be added before the following line</span>
+<span class="s2">    call vundle#end()</span>
+<span class="s2">    filetype plugin indent on  &quot;</span> allows auto-indenting depending on file <span class="nb">type</span>
+</pre></div>
+<p>Install plugins ...</p>
+<div class="highlight"><pre><span></span>$ nvim +PluginInstall +qall
+</pre></div>
+<p>Happy hacking!</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-neovim.html">neovim</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-vim.html">vim</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/unseen-world.html">The Unseen World</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>

@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-01-07T07:56:00-05:00</updated><entry><title>The Unseen World</title><link href="http://www.circuidipity.com/unseen-world.html" rel="alternate"></link><published>2017-01-07T07:56:00-05:00</published><updated>2017-01-07T07:56:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-07:/unseen-world.html</id><summary type="html">&lt;img alt="The Unseen World" class="align-right" src="images/unseen_world_cover2.jpg" style="width: 150px; height: 228px;" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-01-08T19:18:00-05:00</updated><entry><title>Getting started with Neovim</title><link href="http://www.circuidipity.com/neovim.html" rel="alternate"></link><published>2017-01-08T19:18:00-05:00</published><updated>2017-01-08T19:18:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-08:/neovim.html</id><summary type="html">&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
+&lt;p&gt;I have used &lt;strong&gt;Vim&lt;/strong&gt; in the past but barely scratched the surface of its features motherlode. A friend who is a &lt;a class="reference external" href="http://gilesorr.com/blog/tag/vim.html"&gt;passionate vim user&lt;/a&gt; recommended …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
+&lt;p&gt;I have used &lt;strong&gt;Vim&lt;/strong&gt; in the past but barely scratched the surface of its features motherlode. A friend who is a &lt;a class="reference external" href="http://gilesorr.com/blog/tag/vim.html"&gt;passionate vim user&lt;/a&gt; recommended I try &lt;strong&gt;Neovim&lt;/strong&gt;, which &amp;quot;&lt;em&gt;strives to be a superset of Vim except for some intentionally-removed misfeatures... [and] is built for users who want the good parts of Vim, and more&lt;/em&gt;&amp;quot;. Sounds good!&lt;/p&gt;
+&lt;div class="section" id="install-neovim"&gt;
+&lt;h2&gt;0. Install Neovim&lt;/h2&gt;
+&lt;p&gt;Neovim packages are available for &lt;strong&gt;Ubuntu Linux&lt;/strong&gt; courtesy of a &lt;em&gt;Personal Package Archive (PPA)&lt;/em&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install software-properties-common
+$ sudo add-apt-repository ppa:neovim-ppa/unstable
+$ sudo apt update
+$ sudo apt install neovim
+$ sudo apt install python-dev python-pip python3-dev python3-pip
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="launch"&gt;
+&lt;h2&gt;1. Launch&lt;/h2&gt;
+&lt;p&gt;Start the newly-installed editor ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nvim
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Upon first launch on Ubuntu the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/share/nvim/{shada,swap}&lt;/span&gt;&lt;/tt&gt; directories are auto-generated. Manually create a new &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/nvim&lt;/span&gt;&lt;/tt&gt; configuration directory and place inside an &lt;tt class="docutils literal"&gt;init.vim&lt;/tt&gt; config file (or link to an existing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vimrc&lt;/span&gt;&lt;/tt&gt;) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ mkdir ~/.config/nvim
+$ &lt;span class="nb"&gt;cd&lt;/span&gt; ~/.config/nvim
+$ ln -s ~/.vimrc init.vim
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check out Neovim's built-in &lt;tt class="docutils literal"&gt;:help&lt;/tt&gt; command and the &lt;a class="reference external" href="https://neovim.io/doc/"&gt;online documentation&lt;/a&gt; .&lt;/p&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.config/nvim/init.vim"&gt;https://github.com/vonbrownie/dotfiles/blob/master/.config/nvim/init.vim&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="plugins"&gt;
+&lt;h2&gt;2. Plugins&lt;/h2&gt;
+&lt;p&gt;Extend the core features of the text editor using &lt;strong&gt;plugins&lt;/strong&gt;. With a fresh install of Neovim, now is a good time to setup a plugin manager. I install &lt;a class="reference external" href="https://github.com/VundleVim/Vundle.vim"&gt;Vundle&lt;/a&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Configure neovim to use vundle by modifying &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/nvim/init.vim&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="nb"&gt;set&lt;/span&gt; nocompatible
+    filetype off
+    &lt;span class="s2"&gt;&amp;quot; set the runtime path to include Vundle and initialize&lt;/span&gt;
+&lt;span class="s2"&gt;    set rtp+=~/.config/nvim/bundle/Vundle.vim&lt;/span&gt;
+&lt;span class="s2"&gt;    call vundle#begin()&lt;/span&gt;
+&lt;span class="s2"&gt;    &amp;quot;&lt;/span&gt; &lt;span class="nb"&gt;let&lt;/span&gt; Vundle manage Vundle, required
+    Plugin &lt;span class="s1"&gt;&amp;#39;VundleVim/Vundle.vim&amp;#39;&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot; All of your Plugins must be added before the following line&lt;/span&gt;
+&lt;span class="s2"&gt;    call vundle#end()&lt;/span&gt;
+&lt;span class="s2"&gt;    filetype plugin indent on  &amp;quot;&lt;/span&gt; allows auto-indenting depending on file &lt;span class="nb"&gt;type&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Install plugins ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nvim +PluginInstall +qall
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="neovim"></category><category term="vim"></category></entry><entry><title>The Unseen World</title><link href="http://www.circuidipity.com/unseen-world.html" rel="alternate"></link><published>2017-01-07T07:56:00-05:00</published><updated>2017-01-07T07:56:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-07:/unseen-world.html</id><summary type="html">&lt;img alt="The Unseen World" class="align-right" src="images/unseen_world_cover2.jpg" style="width: 150px; height: 228px;" /&gt;
 &lt;p&gt;&lt;strong&gt;The Unseen World&lt;/strong&gt; &lt;em&gt;by Liz Moore&lt;/em&gt; (ISBN: 0393241688) .: The first book I read in 2017 has been doing a slow burn in my head these past few days. Ada Sibelius is the only child of David, a computer scientist and artificial intelligence pioneer at a thinly-disguised 1980s-era MIT. Homeschooled by …&lt;/p&gt;</summary><content type="html">&lt;img alt="The Unseen World" class="align-right" src="images/unseen_world_cover2.jpg" style="width: 150px; height: 228px;" /&gt;
 &lt;p&gt;&lt;strong&gt;The Unseen World&lt;/strong&gt; &lt;em&gt;by Liz Moore&lt;/em&gt; (ISBN: 0393241688) .: The first book I read in 2017 has been doing a slow burn in my head these past few days. Ada Sibelius is the only child of David, a computer scientist and artificial intelligence pioneer at a thinly-disguised 1980s-era MIT. Homeschooled by her father and with his fellow researchers as her only childhood friends, Ada is forced to grow up in a hurry when David's health begins a downward spiral. She is placed in the care of one of her father's colleagues and finds herself not only in new surroundings but embroiled in a growing mystery about her father's true identity.&lt;/p&gt;
 &lt;p&gt;What does it mean to possess a &lt;em&gt;self&lt;/em&gt;, either biological or digital? One moment to the next I feel attached to a particular identity though I understand that everything is in flux. Years from now (hopefully!) there will be a person that makes the claim to being me. Will that be true? &lt;em&gt;Unseen&lt;/em&gt; is a story about the accretion of memory, its fabrication, transmission, dissolution, and as a means to immortality.&lt;/p&gt;
@@ -602,71 +650,4 @@ print 8//7 &lt;span class="c1"&gt;# prints 1&lt;/span&gt;
 &lt;p&gt;... makes division into a float. Python 2 would otherwise return &lt;tt class="docutils literal"&gt;1&lt;/tt&gt; for both calculations.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;04.&lt;/strong&gt; &lt;tt class="docutils literal"&gt;textwrap.dedent&lt;/tt&gt; A useful module+method for indenting quotes in code while the output is aligned to margin.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="python"></category><category term="programming"></category></entry><entry><title>Minimal to Morebuntu</title><link href="http://www.circuidipity.com/20160501.html" rel="alternate"></link><published>2016-05-01T11:58:00-04:00</published><updated>2016-05-01T11:59:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-05-01:/20160501.html</id><summary type="html">&lt;img alt="Ubuntu under-construction" class="align-right" src="images/ubuntu-crane-300.png" style="width: 300px; height: 300px;" /&gt;
-&lt;p&gt;Start with a &lt;strong&gt;minimal install of Ubuntu 16.04 &amp;quot;Xenial Xerus&amp;quot;&lt;/strong&gt; and roll a &lt;strong&gt;Morebuntu&lt;/strong&gt; customized with the &lt;strong&gt;i3 tiling window manager&lt;/strong&gt; plus a collection of desktop applications.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;I use Ubuntu's &lt;a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD"&gt;minimal install image&lt;/a&gt; to create a console-only base configuration.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="minimal-ubuntu"&gt;
-&lt;h2&gt;0. Minimal Ubuntu&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Start here:&lt;/strong&gt; A &lt;a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html"&gt;visual walk-through …&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;img alt="Ubuntu under-construction" class="align-right" src="images/ubuntu-crane-300.png" style="width: 300px; height: 300px;" /&gt;
-&lt;p&gt;Start with a &lt;strong&gt;minimal install of Ubuntu 16.04 &amp;quot;Xenial Xerus&amp;quot;&lt;/strong&gt; and roll a &lt;strong&gt;Morebuntu&lt;/strong&gt; customized with the &lt;strong&gt;i3 tiling window manager&lt;/strong&gt; plus a collection of desktop applications.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;I use Ubuntu's &lt;a class="reference external" href="https://help.ubuntu.com/community/Installation/MinimalCD"&gt;minimal install image&lt;/a&gt; to create a console-only base configuration.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="minimal-ubuntu"&gt;
-&lt;h2&gt;0. Minimal Ubuntu&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Start here:&lt;/strong&gt; A &lt;a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html"&gt;visual walk-through of a sample Ubuntu setup&lt;/a&gt; that makes use of an entire storage device divided into 3 partitions: an unencrypted &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; partition, and encrypted &lt;tt class="docutils literal"&gt;swap + home&lt;/tt&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="install-x"&gt;
-&lt;h2&gt;1. Install X&lt;/h2&gt;
-&lt;p&gt;After a successful first boot and network active ... setup the X environment ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install xorg xinput xbindkeys xbacklight xvkbd fonts-liberation ttf-ubuntu-font-family
-$ sudo apt install rxvt-unicode-256color xfonts-terminus
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="window-manager"&gt;
-&lt;h2&gt;2. Window Manager&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Lots&lt;/strong&gt; of choices! I like the &lt;a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html"&gt;lightweight and delightful i3 window manager&lt;/a&gt;, with the latest packages provided by the i3 project's &lt;a class="reference external" href="https://i3wm.org/docs/repositories.html"&gt;Ubuntu repository&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Styling:&lt;/strong&gt; I use &lt;a class="reference external" href="http://www.ravefinity.com/p/download-ambiance-radiance-colors.html"&gt;Ambiance Colors&lt;/a&gt; + &lt;a class="reference external" href="http://www.ravefinity.com/p/vibrancy-colors-gtk-icon-theme.html"&gt;Vibrancy Color Icon&lt;/a&gt; themes. Download the &lt;tt class="docutils literal"&gt;deb&lt;/tt&gt; packages and install with &lt;tt class="docutils literal"&gt;sudo dpkg &lt;span class="pre"&gt;-i&lt;/span&gt; *.deb&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Depends: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;gtk2-engines-{murrine,pixbuf}&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install gnome-themes-standard gtk2-engines-murrine gtk2-engines-pixbuf lxappearance qt4-qtconfig
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Theming for QT5 apps can be configured using the &lt;tt class="docutils literal"&gt;qt5ct&lt;/tt&gt; utility. Download the package &lt;a class="reference external" href="http://ppa.launchpad.net/nilarimogard/webupd8/ubuntu/pool/main/q/qt5ct/"&gt;available on the WebUpd8 PPA&lt;/a&gt; and install.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="applications"&gt;
-&lt;h2&gt;3. Applications&lt;/h2&gt;
-&lt;p&gt;Install some favourite desktop packages ...&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;strong&gt;editor&lt;/strong&gt; - &lt;tt class="docutils literal"&gt;vim&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;terminal&lt;/strong&gt; - &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;rxvt-unicode&lt;/span&gt;&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;tmux&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;net&lt;/strong&gt; - &lt;tt class="docutils literal"&gt;firefox&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;transmission-gtk&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;multimedia&lt;/strong&gt; - &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ubuntu-restricted-extras&lt;/span&gt;&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;vlc&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;rhythmbox&lt;/tt&gt; (with &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--no-install-recommends&lt;/span&gt;&lt;/tt&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;images&lt;/strong&gt; - &lt;tt class="docutils literal"&gt;eog&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;scrot&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;geeqie&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;gimp&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;docs&lt;/strong&gt; - &lt;tt class="docutils literal"&gt;libreoffice&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;qpdfview&lt;/tt&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install vim rxvt-unicode tmux most
-$ sudo apt --no-install-recommends install rhythmbox
-$ sudo apt install pulseaudio pulseaudio-utils pavucontrol gstreamer1.0-pulseaudio alsa-utils sox
-$ sudo apt install firefox default-jre icedtea-plugin transmission-gtk
-$ sudo apt install ubuntu-restricted-extras ffmpeg rhythmbox-plugins vlc
-$ sudo apt install eog scrot geeqie gimp gimp-help-en gimp-data-extras
-$ sudo apt install libreoffice libreoffice-help-en-us libreoffice-gnome qpdfview
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="update-alternatives"&gt;
-&lt;h2&gt;4. Update-alternatives&lt;/h2&gt;
-&lt;p&gt;Configure symbolic links that determine default commands ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo update-alternatives --config editor
-$ sudo update-alternatives --config pager
-$ sudo update-alternatives --config x-terminal-emulator
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="morebuntu"&gt;
-&lt;h2&gt;5. Morebuntu&lt;/h2&gt;
-&lt;p&gt;My &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/scripts/morebuntu.sh"&gt;morebuntu shell script&lt;/a&gt; that covers most of steps 1-4.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</content><category term="ubuntu"></category><category term="linux"></category><category term="i3"></category><category term="shell"></category><category term="programming"></category></entry></feed>
+</content><category term="python"></category><category term="programming"></category></entry></feed>
