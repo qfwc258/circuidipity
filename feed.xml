@@ -31,16 +31,16 @@ $ ln -s ~/.vimrc init.vim
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Configure neovim to use vundle by modifying &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/nvim/init.vim&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="nb"&gt;set&lt;/span&gt; nocompatible
-    filetype off
-    &lt;span class="s2"&gt;&amp;quot; set the runtime path to include Vundle and initialize&lt;/span&gt;
-&lt;span class="s2"&gt;    set rtp+=~/.config/nvim/bundle/Vundle.vim&lt;/span&gt;
-&lt;span class="s2"&gt;    call vundle#begin()&lt;/span&gt;
-&lt;span class="s2"&gt;    &amp;quot;&lt;/span&gt; &lt;span class="nb"&gt;let&lt;/span&gt; Vundle manage Vundle, required
-    Plugin &lt;span class="s1"&gt;&amp;#39;VundleVim/Vundle.vim&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt; nocompatible
+filetype off
+&lt;span class="s2"&gt;&amp;quot; set the runtime path to include Vundle and initialize&lt;/span&gt;
+&lt;span class="s2"&gt;set rtp+=~/.config/nvim/bundle/Vundle.vim&lt;/span&gt;
+&lt;span class="s2"&gt;call vundle#begin()&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="nb"&gt;let&lt;/span&gt; Vundle manage Vundle, required
+Plugin &lt;span class="s1"&gt;&amp;#39;VundleVim/Vundle.vim&amp;#39;&lt;/span&gt;
 &lt;span class="s2"&gt;&amp;quot; All of your Plugins must be added before the following line&lt;/span&gt;
-&lt;span class="s2"&gt;    call vundle#end()&lt;/span&gt;
-&lt;span class="s2"&gt;    filetype plugin indent on  &amp;quot;&lt;/span&gt; allows auto-indenting depending on file &lt;span class="nb"&gt;type&lt;/span&gt;
+&lt;span class="s2"&gt;call vundle#end()&lt;/span&gt;
+&lt;span class="s2"&gt;filetype plugin indent on  &amp;quot;&lt;/span&gt; allows auto-indenting depending on file &lt;span class="nb"&gt;type&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Install plugins ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nvim +PluginInstall +qall

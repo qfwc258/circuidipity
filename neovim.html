@@ -68,16 +68,16 @@ $ ln -s ~/.vimrc init.vim
 <div class="highlight"><pre><span></span>$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
 </pre></div>
 <p>Configure neovim to use vundle by modifying <tt class="docutils literal"><span class="pre">~/.config/nvim/init.vim</span></tt> ...</p>
-<div class="highlight"><pre><span></span>    <span class="nb">set</span> nocompatible
-    filetype off
-    <span class="s2">&quot; set the runtime path to include Vundle and initialize</span>
-<span class="s2">    set rtp+=~/.config/nvim/bundle/Vundle.vim</span>
-<span class="s2">    call vundle#begin()</span>
-<span class="s2">    &quot;</span> <span class="nb">let</span> Vundle manage Vundle, required
-    Plugin <span class="s1">&#39;VundleVim/Vundle.vim&#39;</span>
+<div class="highlight"><pre><span></span><span class="nb">set</span> nocompatible
+filetype off
+<span class="s2">&quot; set the runtime path to include Vundle and initialize</span>
+<span class="s2">set rtp+=~/.config/nvim/bundle/Vundle.vim</span>
+<span class="s2">call vundle#begin()</span>
+<span class="s2">&quot;</span> <span class="nb">let</span> Vundle manage Vundle, required
+Plugin <span class="s1">&#39;VundleVim/Vundle.vim&#39;</span>
 <span class="s2">&quot; All of your Plugins must be added before the following line</span>
-<span class="s2">    call vundle#end()</span>
-<span class="s2">    filetype plugin indent on  &quot;</span> allows auto-indenting depending on file <span class="nb">type</span>
+<span class="s2">call vundle#end()</span>
+<span class="s2">filetype plugin indent on  &quot;</span> allows auto-indenting depending on file <span class="nb">type</span>
 </pre></div>
 <p>Install plugins ...</p>
 <div class="highlight"><pre><span></span>$ nvim +PluginInstall +qall
