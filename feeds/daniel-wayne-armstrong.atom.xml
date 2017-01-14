@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-01-08T19:18:00-05:00</updated><entry><title>Getting started with Neovim</title><link href="http://www.circuidipity.com/neovim.html" rel="alternate"></link><published>2017-01-08T19:18:00-05:00</published><updated>2017-01-08T19:18:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-08:/neovim.html</id><summary type="html">&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-01-14T08:50:00-05:00</updated><entry><title>Virtually Human</title><link href="http://www.circuidipity.com/virtually-human.html" rel="alternate"></link><published>2017-01-14T08:50:00-05:00</published><updated>2017-01-14T08:50:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-14:/virtually-human.html</id><summary type="html">&lt;img alt="Virtually Human" class="align-left" src="images/virtually_human.jpg" style="width: 150px; height: 224px;" /&gt;
+&lt;p&gt;&lt;strong&gt;Virtually Human: The Promise - And the Peril - of Digital Immortality&lt;/strong&gt; &lt;em&gt;by Martine Rothblatt&lt;/em&gt; (ISBN: 978-1-250-04663-5)&lt;/p&gt;
+&lt;p&gt;Cybernetic consciousness has been imagined as a deliberate creation of AI researchers or perhaps an unintended 'waking up' moment for globs of increasing complexity such as the Internet. &lt;strong&gt;Mind-uploading&lt;/strong&gt; envisions a future with the capability …&lt;/p&gt;</summary><content type="html">&lt;img alt="Virtually Human" class="align-left" src="images/virtually_human.jpg" style="width: 150px; height: 224px;" /&gt;
+&lt;p&gt;&lt;strong&gt;Virtually Human: The Promise - And the Peril - of Digital Immortality&lt;/strong&gt; &lt;em&gt;by Martine Rothblatt&lt;/em&gt; (ISBN: 978-1-250-04663-5)&lt;/p&gt;
+&lt;p&gt;Cybernetic consciousness has been imagined as a deliberate creation of AI researchers or perhaps an unintended 'waking up' moment for globs of increasing complexity such as the Internet. &lt;strong&gt;Mind-uploading&lt;/strong&gt; envisions a future with the capability of performing a one-to-one duplication of an individual's biological neuron to digital form, achieving a &lt;strong&gt;substrate-independent existence&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Martine Rothblatt writes about another path to intellectual continuity via digital clones. A record of thoughts, recollections, feelings, beliefs, preferences are collected in a &lt;strong&gt;mindfile&lt;/strong&gt;, processed by &lt;strong&gt;mindware&lt;/strong&gt; that generates a &lt;strong&gt;mindclone&lt;/strong&gt;. Maybe put more thought in some of those emails and social media posts? :-)&lt;/p&gt;
+&lt;p&gt;But is it, you know, &lt;em&gt;you&lt;/em&gt;? &lt;strong&gt;Continuum of consciousness&lt;/strong&gt; is the idea that consciousness is not a binary state, 0 or 1, on and off sort of thing but is present in greater or lesser degrees in things that demonstrate self-awareness, sentience, morality, autonomy, and transcendence. A related idea is &lt;strong&gt;panpsychism&lt;/strong&gt; which explores the possibility that mind is present in &lt;em&gt;all things&lt;/em&gt; in greater and lesser degrees.&lt;/p&gt;
+&lt;p&gt;Alan Turing's famous insight that lives on as the &lt;strong&gt;Turing Test&lt;/strong&gt; was that software was humanly conscious if - in a blind test - it successfully passed itself off as conscious to humans. Turing's biographer Andrew Hodges states ...&lt;/p&gt;
+&lt;blockquote&gt;
+To avoid philosophical discussions of what 'mind' or 'thought' or 'free will' were supposed to be, he favoured the idea of judging a machine's mental capacity simply by comparing its performance with that of a human being. It was an &lt;em&gt;operational&lt;/em&gt; definition of 'thinking', rather as Einstein had insisted on operational definitions of time and space in order to liberate his theory from &lt;em&gt;a priori&lt;/em&gt; assumptions ... If a machine appeared to be doing as well as a human being, then it &lt;em&gt;was&lt;/em&gt; doing as well as a human being.&lt;/blockquote&gt;
+&lt;p&gt;Hard-line &lt;strong&gt;essentialists&lt;/strong&gt; believe that consciousness is a unique biological property of humans. &lt;strong&gt;Materialists&lt;/strong&gt; believe in an empirical source, that consciousness is a pattern that emerges from the myriad connections of information stored either in wetware (brains) or any other substrate that passes a certain threshold of complexity. A blending of the two positions would be the idea of consciousness as an emergent property that relies on the unique biology, chemistry, and architecture of human (and possibly certain animal) brains (an idea that Rothblatt rejects).&lt;/p&gt;
+&lt;p&gt;Then there are the mystics but ... let's not go there!&lt;/p&gt;
+&lt;p&gt;The philosopher David Chalmers has described there being a 'hard problem' and 'easy problem' about the nature of consciousness. The hard problem is how a substrate of neurons give rise to subjective feelings (&amp;quot;the redness of red&amp;quot;), and the easy problem is how electrons and neurochemistry result in simulations of physical reality. A &lt;em&gt;philosophical zombie&lt;/em&gt; is a thought experiment about an entity that solves the easy part but not the hard part of consciousness. Check out Peter Watts' novel &lt;a class="reference external" href="http://www.rifters.com/real/Blindsight.htm"&gt;Blindsight&lt;/a&gt; (one of my favourites!) for a thorough exploration of alien intelligence without consciousness and the idea of consciousness (all the so-called &amp;quot;good parts&amp;quot; of being human) as a rare and perhaps not very useful evolutionary &lt;em&gt;aberration&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Hmm. Well, zombies are not the focus of attention for Rothblatt. Its about getting mindclones up-and-running ...&lt;/p&gt;
+&lt;blockquote&gt;
+If human consciousness is to arise in software we must do three things: first, explain how the easy problem is solved in neurons; second, explain how the hard problem is solved in neurons; and third, explain how the solution in neurons is replicable in information technology. The key to all three explanations is the relational-database concept. With the relational database an inquiry (or a sensory input for the brain) triggers a number of related responses. Each of these responses is, in turn, a stimulus for a further number of related responses. An output response is triggered when the strength of a stimulus, such as the number of times it was triggered, is greater than a set threshold.&lt;/blockquote&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+[ ... ]&lt;/blockquote&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+Is a second, independent consciousness with similar memories and preferences to the first a separate being or an extended manifestation of a single being? This depends upon one's definition of &amp;quot;being&amp;quot;. If a &amp;quot;being&amp;quot; is a body, or a platform, then we are talking about separate beings. But if a &amp;quot;being&amp;quot; is a consciousness with an idiosyncratic set of memories and preferences, then we are talking about a single being. I am certain we really mean consciousness, memories, and preferences by &amp;quot;being&amp;quot;. Therefore, I'm confident that those who create mindclones will experience the profound, life-altering event of of having redefined themselves as a dual-platform consciousness ... [Its] not about being accurate in every [detail] as to a biological original. It is, instead, about feeling that there is oneness that comes from a preponderance of common memories, emotions, and patterns of thinking, selecting and forgetting.&lt;/blockquote&gt;
+&lt;p&gt;What weaves through the book is a (biological) mind-expanding consideration of what non-human, but &lt;em&gt;strangely familiar&lt;/em&gt;, conscious entities will mean for the future of our species. If mindclones are brought to life Rothblatt outlines possible civil, religious, and personal responses that run the gamut from love at first sight to cybernetic slavery and extermination. Picking fights with superintelligent immortals is not recommended!&lt;/p&gt;
+</content><category term="books"></category><category term="mind"></category></entry><entry><title>Getting started with Neovim</title><link href="http://www.circuidipity.com/neovim.html" rel="alternate"></link><published>2017-01-08T19:18:00-05:00</published><updated>2017-01-08T19:18:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-08:/neovim.html</id><summary type="html">&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
 &lt;p&gt;I have used &lt;strong&gt;Vim&lt;/strong&gt; in the past but barely scratched the surface of its features motherlode. A friend who is a &lt;a class="reference external" href="http://gilesorr.com/blog/tag/vim.html"&gt;passionate vim user&lt;/a&gt; recommended …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
 &lt;p&gt;I have used &lt;strong&gt;Vim&lt;/strong&gt; in the past but barely scratched the surface of its features motherlode. A friend who is a &lt;a class="reference external" href="http://gilesorr.com/blog/tag/vim.html"&gt;passionate vim user&lt;/a&gt; recommended I try &lt;strong&gt;Neovim&lt;/strong&gt;, which &amp;quot;&lt;em&gt;strives to be a superset of Vim except for some intentionally-removed misfeatures... [and] is built for users who want the good parts of Vim, and more&lt;/em&gt;&amp;quot;. Sounds good!&lt;/p&gt;
 &lt;div class="section" id="install-neovim"&gt;
@@ -47,8 +70,8 @@ Plugin &lt;span class="s1"&gt;&amp;#39;VundleVim/Vundle.vim&amp;#39;&lt;/span&gt
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="neovim"></category><category term="vim"></category></entry><entry><title>The Unseen World</title><link href="http://www.circuidipity.com/unseen-world.html" rel="alternate"></link><published>2017-01-07T07:56:00-05:00</published><updated>2017-01-07T07:56:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-07:/unseen-world.html</id><summary type="html">&lt;img alt="The Unseen World" class="align-right" src="images/unseen_world_cover2.jpg" style="width: 150px; height: 228px;" /&gt;
-&lt;p&gt;&lt;strong&gt;The Unseen World&lt;/strong&gt; &lt;em&gt;by Liz Moore&lt;/em&gt; (ISBN: 0393241688) .: The first book I read in 2017 has been doing a slow burn in my head these past few days. Ada Sibelius is the only child of David, a computer scientist and artificial intelligence pioneer at a thinly-disguised 1980s-era MIT. Homeschooled by …&lt;/p&gt;</summary><content type="html">&lt;img alt="The Unseen World" class="align-right" src="images/unseen_world_cover2.jpg" style="width: 150px; height: 228px;" /&gt;
+</content><category term="neovim"></category><category term="vim"></category></entry><entry><title>The Unseen World</title><link href="http://www.circuidipity.com/unseen-world.html" rel="alternate"></link><published>2017-01-07T07:56:00-05:00</published><updated>2017-01-07T07:56:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-07:/unseen-world.html</id><summary type="html">&lt;img alt="The Unseen World" class="align-left" src="images/unseen_world_cover2.jpg" style="width: 150px; height: 228px;" /&gt;
+&lt;p&gt;&lt;strong&gt;The Unseen World&lt;/strong&gt; &lt;em&gt;by Liz Moore&lt;/em&gt; (ISBN: 0393241688) .: The first book I read in 2017 has been doing a slow burn in my head these past few days. Ada Sibelius is the only child of David, a computer scientist and artificial intelligence pioneer at a thinly-disguised 1980s-era MIT. Homeschooled by …&lt;/p&gt;</summary><content type="html">&lt;img alt="The Unseen World" class="align-left" src="images/unseen_world_cover2.jpg" style="width: 150px; height: 228px;" /&gt;
 &lt;p&gt;&lt;strong&gt;The Unseen World&lt;/strong&gt; &lt;em&gt;by Liz Moore&lt;/em&gt; (ISBN: 0393241688) .: The first book I read in 2017 has been doing a slow burn in my head these past few days. Ada Sibelius is the only child of David, a computer scientist and artificial intelligence pioneer at a thinly-disguised 1980s-era MIT. Homeschooled by her father and with his fellow researchers as her only childhood friends, Ada is forced to grow up in a hurry when David's health begins a downward spiral. She is placed in the care of one of her father's colleagues and finds herself not only in new surroundings but embroiled in a growing mystery about her father's true identity.&lt;/p&gt;
 &lt;p&gt;What does it mean to possess a &lt;em&gt;self&lt;/em&gt;, either biological or digital? One moment to the next I feel attached to a particular identity though I understand that everything is in flux. Years from now (hopefully!) there will be a person that makes the claim to being me. Will that be true? &lt;em&gt;Unseen&lt;/em&gt; is a story about the accretion of memory, its fabrication, transmission, dissolution, and as a means to immortality.&lt;/p&gt;
 </content><category term="books"></category></entry><entry><title>GNU GRUB</title><link href="http://www.circuidipity.com/grub.html" rel="alternate"></link><published>2017-01-01T14:34:00-05:00</published><updated>2017-01-01T14:34:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-01:/grub.html</id><summary type="html">&lt;p&gt;A few generic tweaks I add to Ubuntu's configuration (location: &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;) of the &lt;strong&gt;GNU GRand Unified Bootloader&lt;/strong&gt;.&lt;/p&gt;
@@ -457,197 +480,4 @@ setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&
 &lt;/dl&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="programming"></category><category term="shell"></category><category term="python"></category><category term="linux"></category></entry><entry><title>LPTHW Exercise 22: What Do You Know So Far?</title><link href="http://www.circuidipity.com/lpthw-e22.html" rel="alternate"></link><published>2016-06-05T14:40:00-04:00</published><updated>2016-06-05T14:40:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-06-05:/lpthw-e22.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; A review of my recent Python journey ...&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;print&lt;/strong&gt; Output result of expression.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;python script.py&lt;/strong&gt; Run &lt;em&gt;script.py&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;#&lt;/strong&gt; Comment out a line of script. Anything after the pound symbol is ignored.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/strong&gt; Block quotes ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span class="s2"&gt;(O&amp;lt; .: Hello world!&lt;/span&gt;
-&lt;span class="s2"&gt;(/)_&lt;/span&gt;
-&lt;span class="s2"&gt;.....&lt;/span&gt;
-&lt;span class="s2"&gt;.....&lt;/span&gt;
-&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;variable&lt;/strong&gt; A memory location …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://learnpythonthehardway.org/book/"&gt;Learn Python the Hard Way by Zed Shaw .:&lt;/a&gt; A review of my recent Python journey ...&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;print&lt;/strong&gt; Output result of expression.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;python script.py&lt;/strong&gt; Run &lt;em&gt;script.py&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;#&lt;/strong&gt; Comment out a line of script. Anything after the pound symbol is ignored.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/strong&gt; Block quotes ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span class="s2"&gt;(O&amp;lt; .: Hello world!&lt;/span&gt;
-&lt;span class="s2"&gt;(/)_&lt;/span&gt;
-&lt;span class="s2"&gt;.....&lt;/span&gt;
-&lt;span class="s2"&gt;.....&lt;/span&gt;
-&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;variable&lt;/strong&gt; A memory location that holds data and given an identifying name.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;integer&lt;/strong&gt; Whole numbers&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;float&lt;/strong&gt; Decimals&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;round()&lt;/strong&gt; Round a floating number ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; round&lt;span class="o"&gt;(&lt;/span&gt;5.67888&lt;span class="o"&gt;)&lt;/span&gt;
-6.0
-&amp;gt;&amp;gt;&amp;gt; round&lt;span class="o"&gt;(&lt;/span&gt;5.67888, 2&lt;span class="o"&gt;)&lt;/span&gt;
-5.68
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;string&lt;/strong&gt; Sequence of characters (text).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;len&lt;/strong&gt; Length of a string.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;data type&lt;/strong&gt; Type of data stored in memory. Example: &lt;tt class="docutils literal"&gt;int&lt;/tt&gt; (integers), &lt;tt class="docutils literal"&gt;float&lt;/tt&gt; (decimals), &lt;tt class="docutils literal"&gt;str&lt;/tt&gt; (strings) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;8&amp;#39;&lt;/span&gt;
-&amp;gt;&amp;gt;&amp;gt; type&lt;span class="o"&gt;(&lt;/span&gt;a&lt;span class="o"&gt;)&lt;/span&gt;
-&amp;lt;&lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;str&amp;#39;&lt;/span&gt;&amp;gt;
-&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; int&lt;span class="o"&gt;(&lt;/span&gt;a&lt;span class="o"&gt;)&lt;/span&gt;
-&amp;gt;&amp;gt;&amp;gt; type&lt;span class="o"&gt;(&lt;/span&gt;a&lt;span class="o"&gt;)&lt;/span&gt;
-&amp;lt;&lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;int&amp;#39;&lt;/span&gt;&amp;gt;
-&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; float&lt;span class="o"&gt;(&lt;/span&gt;a&lt;span class="o"&gt;)&lt;/span&gt;
-&amp;gt;&amp;gt;&amp;gt; type&lt;span class="o"&gt;(&lt;/span&gt;a&lt;span class="o"&gt;)&lt;/span&gt;
-&amp;lt;&lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;float&amp;#39;&lt;/span&gt;&amp;gt;
-&amp;gt;&amp;gt;&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="section" id="math-operators"&gt;
-&lt;h2&gt;Math Operators&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;+&lt;/strong&gt; Addition (or concatenate strings).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;-&lt;/strong&gt; Subtraction&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;/&lt;/strong&gt; Division. Rounds down to integer. Returns a floating number if one of the numbers is a float.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;*&lt;/strong&gt; Multiplication&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;%&lt;/strong&gt; Modulus. Caculate remainder after division.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;+=&lt;/strong&gt; Shorthand for &amp;quot;plus itself&amp;quot;. Also &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-=&lt;/span&gt;&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;*=&lt;/tt&gt; ... Ex: &lt;tt class="docutils literal"&gt;x = x + y&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;x+= y&lt;/tt&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;PEMMDAS&lt;/strong&gt; Order of priority of math operations ...&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Parantheses&lt;/li&gt;
-&lt;li&gt;Exponents&lt;/li&gt;
-&lt;li&gt;Multiplication and Modulus&lt;/li&gt;
-&lt;li&gt;Division&lt;/li&gt;
-&lt;li&gt;Addition and Substraction&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;... and operations of equal priority are evaluated from left-to-right ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="m"&gt;5&lt;/span&gt; % 3
-2
-&amp;gt;&amp;gt;&amp;gt; &lt;span class="m"&gt;2&lt;/span&gt; * &lt;span class="m"&gt;5&lt;/span&gt; % 3
-1
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="comparison-operators"&gt;
-&lt;h2&gt;Comparison Operators&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;&amp;lt;&lt;/strong&gt; Less than&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&amp;gt;&lt;/strong&gt; Greater than&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&amp;lt;=&lt;/strong&gt; Less than or equal to&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&amp;gt;=&lt;/strong&gt; Greater than or equal to&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;==&lt;/strong&gt; Equal to&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;=&lt;/strong&gt; Assign value on the right to variable on the left (&lt;strong&gt;not&lt;/strong&gt; a comparator).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;boolean&lt;/strong&gt; A test for truth values: &lt;tt class="docutils literal"&gt;True&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;False&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Boolean operators have an order of operations. After any math or comparison operations evaluate, Python evaluates the &lt;tt class="docutils literal"&gt;not&lt;/tt&gt; operators first, then the &lt;tt class="docutils literal"&gt;and&lt;/tt&gt; operators, then the &lt;tt class="docutils literal"&gt;or&lt;/tt&gt; operators ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; not &lt;span class="m"&gt;2&lt;/span&gt; &amp;gt; 4
-True
-&amp;gt;&amp;gt;&amp;gt; not &lt;span class="m"&gt;2&lt;/span&gt; &amp;gt; &lt;span class="m"&gt;4&lt;/span&gt; and &lt;span class="m"&gt;2&lt;/span&gt; &amp;gt; 4
-False
-&amp;gt;&amp;gt;&amp;gt; not &lt;span class="m"&gt;2&lt;/span&gt; &amp;gt; &lt;span class="m"&gt;4&lt;/span&gt; and &lt;span class="m"&gt;2&lt;/span&gt; &amp;gt; &lt;span class="m"&gt;4&lt;/span&gt; or &lt;span class="m"&gt;2&lt;/span&gt; &amp;lt;&lt;span class="o"&gt;=&lt;/span&gt; 4
-True
-&amp;gt;&amp;gt;&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="format-and-escape-characters"&gt;
-&lt;h2&gt;Format and Escape Characters&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;%d&lt;/strong&gt; Digit&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;%s&lt;/strong&gt; String&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;%r&lt;/strong&gt; Raw&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;n&lt;/strong&gt; New line&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;t&lt;/strong&gt; Tab&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;I \&amp;quot;may\&amp;quot; have %d %s tickets\nfor the \t%r\tnext weekend.&amp;quot;&lt;/span&gt; % &lt;span class="o"&gt;(&lt;/span&gt;3, &lt;span class="s1"&gt;&amp;#39;free&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;LPTHW Bootcamp&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-I &lt;span class="s2"&gt;&amp;quot;may&amp;quot;&lt;/span&gt; have &lt;span class="m"&gt;3&lt;/span&gt; free tickets
-&lt;span class="k"&gt;for&lt;/span&gt; the         &lt;span class="s1"&gt;&amp;#39;LPTHW Bootcamp&amp;#39;&lt;/span&gt;        next weekend.
-&amp;gt;&amp;gt;&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="input-and-extras"&gt;
-&lt;h2&gt;Input and Extras&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;raw_input()&lt;/strong&gt; Get user input (changed to &lt;tt class="docutils literal"&gt;input()&lt;/tt&gt; in Python 3).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;int(raw_input())&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;float(raw_input())&lt;/strong&gt; Convert user input into an integer|float ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;age&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; int&lt;span class="o"&gt;(&lt;/span&gt;raw_input&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Age? &amp;gt; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
-Age? &amp;gt; 104
-&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;You must be doing something right to make it to %d years old!&amp;quot;&lt;/span&gt; % age
-You must be doing something right to make it to &lt;span class="m"&gt;104&lt;/span&gt; years old!
-&amp;gt;&amp;gt;&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;import&lt;/strong&gt; Add modules (libraries) of Python code to my script.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;modules&lt;/strong&gt; Features&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;pydoc&lt;/strong&gt; Show documentation from Python modules. Can read in the console or start a webserver and read documentation in the browser ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pydoc -p 1234
-pydoc server ready at http://localhost:1234/
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;argv&lt;/strong&gt; Module that enables a script to accept command line arguments ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;from sys import argv
-script, first, second, &lt;span class="nv"&gt;third&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; argv
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="reading-and-writing"&gt;
-&lt;h2&gt;Reading and Writing&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;open()&lt;/strong&gt; Open an external file in my script. Default file mode is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;read-only&lt;/span&gt;&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;r&lt;/tt&gt; if none is specified.&lt;/p&gt;
-&lt;p&gt;Commonly-used modes include ...&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;r&lt;/tt&gt; Open text file for reading. Stream is positioned at the beginning of the file.&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;r+&lt;/tt&gt; Open for reading and writing. Stream is positioned at the beginning of the file.&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;w&lt;/tt&gt; Truncate file to zero length or create text file for writing. Stream is positioned at the beginning of the file.&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;w+&lt;/tt&gt; Open for reading and writing. File is created if it does not exist, otherwise it is truncated. Stream is positioned at the beginning of the file.&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;a&lt;/tt&gt; Open for writing. File is created if it does not exist. Stream is positioned at the end of the file.&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;a+&lt;/tt&gt; Open for reading and writing. File is created if it does not exist. Stream is positioned at the end of the file.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;read()&lt;/strong&gt; Read the contents of the opened file.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;readline()&lt;/strong&gt; Read just one line of the file.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;write()&lt;/strong&gt; Write a string to the file.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;seek()&lt;/strong&gt; Set the current position in the file. Beginning of file is &lt;tt class="docutils literal"&gt;seek(0)&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;close()&lt;/strong&gt; Close the file ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;txt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; open&lt;span class="o"&gt;(&lt;/span&gt;filename&lt;span class="o"&gt;)&lt;/span&gt;
-&amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;txt.read&lt;span class="o"&gt;())&lt;/span&gt;
-&lt;span class="o"&gt;(&lt;/span&gt;O&amp;lt; .: Hello world!
-&lt;span class="o"&gt;(&lt;/span&gt;/&lt;span class="o"&gt;)&lt;/span&gt;_
-
-&amp;gt;&amp;gt;&amp;gt; txt.seek&lt;span class="o"&gt;(&lt;/span&gt;0&lt;span class="o"&gt;)&lt;/span&gt;     &lt;span class="c1"&gt;# Important: return to the top of the file before reading, otherwise I just read an empty string&lt;/span&gt;
-&amp;gt;&amp;gt;&amp;gt; txt.read&lt;span class="o"&gt;()&lt;/span&gt;
-&lt;span class="s1"&gt;&amp;#39;(O&amp;lt; .: Hello world!\n(/)_\n&amp;#39;&lt;/span&gt;
-&amp;gt;&amp;gt;&amp;gt; txt.close&lt;span class="o"&gt;()&lt;/span&gt;
-&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;txt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; open&lt;span class="o"&gt;(&lt;/span&gt;filename, &lt;span class="s1"&gt;&amp;#39;a+&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-&amp;gt;&amp;gt;&amp;gt; txt.write&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.&amp;#39;&lt;/span&gt; * 10&lt;span class="o"&gt;)&lt;/span&gt;
-&amp;gt;&amp;gt;&amp;gt; txt.seek&lt;span class="o"&gt;(&lt;/span&gt;0&lt;span class="o"&gt;)&lt;/span&gt;
-&amp;gt;&amp;gt;&amp;gt; print&lt;span class="o"&gt;(&lt;/span&gt;txt.read&lt;span class="o"&gt;())&lt;/span&gt;
-&lt;span class="o"&gt;(&lt;/span&gt;O&amp;lt; .: Hello world!
-&lt;span class="o"&gt;(&lt;/span&gt;/&lt;span class="o"&gt;)&lt;/span&gt;_
-..........
-&amp;gt;&amp;gt;&amp;gt; txt.close&lt;span class="o"&gt;()&lt;/span&gt;
-&amp;gt;&amp;gt;&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="functions"&gt;
-&lt;h2&gt;Functions&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;function&lt;/strong&gt; A named section of my script that executes a task when called.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;def&lt;/strong&gt; &amp;quot;Defines&amp;quot; a new function. Ex: &lt;tt class="docutils literal"&gt;def &lt;span class="pre"&gt;some_function_name():&lt;/span&gt;&lt;/tt&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;method&lt;/strong&gt; Same thing as a function, except it is called on a value. Ex: the &lt;tt class="docutils literal"&gt;seek()&lt;/tt&gt; method ... &lt;tt class="docutils literal"&gt;txt.seek(0)&lt;/tt&gt;. Each data type has its own set of methods.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;argument&lt;/strong&gt; Input parameters.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;parameter&lt;/strong&gt; A variable an argument is stored in when a function is called.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;return&lt;/strong&gt; Value that a function call evaluates to&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;exists&lt;/strong&gt; Checks if a file exists. Returns True or False. Part of the &lt;tt class="docutils literal"&gt;os.path&lt;/tt&gt; module.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h2&gt;Notes&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;01.&lt;/strong&gt; Run a script from within python interactive mode ...&lt;/p&gt;
-&lt;pre class="doctest-block"&gt;
-&amp;gt;&amp;gt;&amp;gt; execfile('some_script.py')
-&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;02.&lt;/strong&gt; &lt;tt class="docutils literal"&gt;format()&lt;/tt&gt; Positional formatting ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s2"&gt;&amp;quot;{0} {1} {0} zero ...&amp;quot;&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;1, &lt;span class="s1"&gt;&amp;#39;two&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="m"&gt;1&lt;/span&gt; two &lt;span class="m"&gt;1&lt;/span&gt; zero ...
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;03.&lt;/strong&gt; &lt;tt class="docutils literal"&gt;from __future__ import&lt;/tt&gt; Allows me to bring Python 3 features into Python 2. Example ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;from __future__ import print_function
-print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;There are&amp;#39;&lt;/span&gt;, cars, &lt;span class="s1"&gt;&amp;#39;cars available.&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... prints a concatenated statement (otherwise the above &lt;tt class="docutils literal"&gt;print()&lt;/tt&gt; in Python 2 makes the commas treat things as a tuple).&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;from __future__ import division
-print 8/7  &lt;span class="c1"&gt;# prints 1.1428571428571428&lt;/span&gt;
-print 8//7 &lt;span class="c1"&gt;# prints 1&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... makes division into a float. Python 2 would otherwise return &lt;tt class="docutils literal"&gt;1&lt;/tt&gt; for both calculations.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;04.&lt;/strong&gt; &lt;tt class="docutils literal"&gt;textwrap.dedent&lt;/tt&gt; A useful module+method for indenting quotes in code while the output is aligned to margin.&lt;/p&gt;
-&lt;/div&gt;
-</content><category term="python"></category><category term="programming"></category></entry></feed>
+</content><category term="programming"></category><category term="shell"></category><category term="python"></category><category term="linux"></category></entry></feed>
