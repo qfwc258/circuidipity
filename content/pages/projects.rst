@@ -23,18 +23,18 @@ Projects
 
 .. class:: invisiblelink
 
-    .. image:: images/lpthw-begin-1-thumb.png
-        :alt: Learn Python the Hard Way
+    .. image:: images/mitx-6001x-thumb.png
+        :alt: MITx and the Python DUDE
         :width: 150px
         :height: 150px
         :align: left
-        :target: lpthw-dude.html
+        :target: mitx-6001x.html
 
 .. raw:: html
 
     <div class="projectx">
-        <h2>Learn Python the Hard Way with the DUDE</h2>
-        <p>Learn programming with a <a href="lpthw-dude.html">Daily Undertaking of Deliberate Effort ...</a></p>
+        <h2>MITx and the Python DUDE</h2>
+        <p>Learn computer science with a <a href="mitx-6001x.html">Daily Undertaking of Deliberate Effort ...</a></p>
         <p style="clear:both;"></p>
     </div>
 
