@@ -10,7 +10,7 @@ The Unseen World
     :alt: The Unseen World
     :width: 150px
     :height: 228px
-    :align: right
+    :align: left
 
 **The Unseen World** *by Liz Moore* (ISBN: 0393241688) .: The first book I read in 2017 has been doing a slow burn in my head these past few days. Ada Sibelius is the only child of David, a computer scientist and artificial intelligence pioneer at a thinly-disguised 1980s-era MIT. Homeschooled by her father and with his fellow researchers as her only childhood friends, Ada is forced to grow up in a hurry when David's health begins a downward spiral. She is placed in the care of one of her father's colleagues and finds herself not only in new surroundings but embroiled in a growing mystery about her father's true identity.
 

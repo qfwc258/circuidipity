@@ -1,42 +1,15 @@
-=======================================
-Learn Python the Hard Way with the DUDE
-=======================================
+=========================
+Learn Python the Hard Way
+=========================
 
 :date: 2015-11-11 17:00:00
 :slug: lpthw-dude
-:template: article-project
 :tags: python, programming
-:modified: 2016-06-05 14:28:00
+:modified: 2017-01-14 14:28:00
 
-.. image:: images/lpthw-begin-1.png
-    :align: right
-    :alt: LPTHW
-    :width: 250px
-    :height: 479px
-    
 Using Linux and writing `simple shell scripts <https://github.com/vonbrownie/homebin>`_ has been an enjoyable peek at programming. But now I want to go farther and learning `Python <http://www.circuidipity.com/tag-python.html>`_ strikes me as a useful next step. Starting with the free HTML version of the book `Learn Python the Hard Way <http://learnpythonthehardway.org/book/>`_ by **Zed Shaw**, who states right off the bat:
 
     It's only the "hard" way because it uses a technique called *instruction*. Instruction is where I tell you to do a sequence of controlled exercises designed to build a skill through repetition. This technique works very well with beginners who know nothing and need to acquire basic skills before they can understand more complex topics. It's used in everything from martial arts to music to even basic math and reading skills.
-
-Zed is a (probably very cool) dude but the DUDE is a **Daily Undertaking of Deliberate Effort**. Which translates as:
-
-* set aside a block of time free of distractions to focus on improving a skill
-
-* push ahead with tasks of increasing complexity
-
-* do a bit every day
-
-* cultivate feedback
-
-For LPTHW I will:
-
-* set a timer for a **50 minute session** to focus on the coding exercises (a double `pomodoro <https://en.wikipedia.org/wiki/Pomodoro_Technique>`_)
-
-* work methodically through each exercise
-
-* do the work (minimum 1 session) every day
-
-* send a ``Done!`` email to a friend marking the daily effort
 
 Let's go!
 =========
@@ -110,4 +83,4 @@ Let's go!
 `Exercise 22: What Do You Know So Far? <http://www.circuidipity.com/lpthw-e22.html>`_
 -------------------------------------------------------------------------------------
 
-Happy hacking!
+Note: I did not complete the book. My focus shifted to MIT's `Introduction to Computer Science and Programming Using Python <http://www.circuidipity.com/mitx-6001x.html>`_.
