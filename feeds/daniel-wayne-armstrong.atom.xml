@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-01-14T08:50:00-05:00</updated><entry><title>Virtually Human</title><link href="http://www.circuidipity.com/virtually-human.html" rel="alternate"></link><published>2017-01-14T08:50:00-05:00</published><updated>2017-01-14T08:50:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-14:/virtually-human.html</id><summary type="html">&lt;img alt="Virtually Human" class="align-left" src="images/virtually_human.jpg" style="width: 150px; height: 224px;" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-01-15T09:13:00-05:00</updated><entry><title>MITx Week 1: Setup and Python Basics</title><link href="http://www.circuidipity.com/mitx-6001x-w1.html" rel="alternate"></link><published>2017-01-15T09:13:00-05:00</published><updated>2017-01-15T09:13:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-15:/mitx-6001x-w1.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; Time to get programming! &lt;a class="reference external" href="https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-9"&gt;6.00.1x Introduction to Computer Science and Programming Using Python&lt;/a&gt; went live on Tuesday and runs for the next 9 weeks. Very interesting to see students from all over the world posting in the discussion forums. Courseware is a series …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; Time to get programming! &lt;a class="reference external" href="https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-9"&gt;6.00.1x Introduction to Computer Science and Programming Using Python&lt;/a&gt; went live on Tuesday and runs for the next 9 weeks. Very interesting to see students from all over the world posting in the discussion forums. Courseware is a series of video lectures each roughly 10 minutes in duration interspersed with test exercises to help the knowledge sink in. Each week concludes with a more in-depth problem set to be submitted online for evaluation. There will be a mid-term and final exam.&lt;/p&gt;
+&lt;p&gt;This week focused on &lt;strong&gt;conditionals, branching, loops&lt;/strong&gt;, and getting acquainted with just enough Python basics to get started on assignments. I completed all the material for the week. The last part of the problem set I found a bit tricky, which required writing a program that prints the longest substring of any random string in which the letters occur in alphabetical order. For example, if string = 'azcbobobegghakl', then my program needs to find the substring &lt;em&gt;beggh&lt;/em&gt; or, in the case of multiple substrings of equal length, output the first match found. When stuck I find the best solution is ... go off and do something else! Subconscious mind gets cracking and when I return it all falls into place.&lt;/p&gt;
+&lt;p&gt;New material is released every Monday. Its a rapid pace but the video instruction is very well done by course mentor &lt;a class="reference external" href="https://www.csail.mit.edu/user/807"&gt;Dr. Eric Grimson&lt;/a&gt; and I usually view at 1.25+ playback speed which I find encourages closer attention to what is being said.&lt;/p&gt;
+</content><category term="python"></category><category term="programming"></category><category term="mooc"></category></entry><entry><title>MITx and the Python DUDE</title><link href="http://www.circuidipity.com/mitx-6001x.html" rel="alternate"></link><published>2017-01-15T01:23:00-05:00</published><updated>2017-01-15T01:24:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-15:/mitx-6001x.html</id><summary type="html">&lt;img alt="PYTHON" class="align-right" src="images/mitx-6001x.png" style="width: 250px; height: 479px;" /&gt;
+&lt;p&gt;MIT offers a &lt;em&gt;Massive Open Online Course&lt;/em&gt; (MOOC) that aims to teach computer science using Python. This introduction is free and open to all in a two-course sequence: &lt;a class="reference external" href="https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-9"&gt;Introduction to Computer Science and Programming Using Python&lt;/a&gt;, and &lt;a class="reference external" href="https://www.edx.org/course/introduction-computational-thinking-data-mitx-6-00-2x-5"&gt;Introduction to Computational Thinking and Data Science&lt;/a&gt;. Sounds good to me!&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go …&lt;/h2&gt;&lt;/div&gt;</summary><content type="html">&lt;img alt="PYTHON" class="align-right" src="images/mitx-6001x.png" style="width: 250px; height: 479px;" /&gt;
+&lt;p&gt;MIT offers a &lt;em&gt;Massive Open Online Course&lt;/em&gt; (MOOC) that aims to teach computer science using Python. This introduction is free and open to all in a two-course sequence: &lt;a class="reference external" href="https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-9"&gt;Introduction to Computer Science and Programming Using Python&lt;/a&gt;, and &lt;a class="reference external" href="https://www.edx.org/course/introduction-computational-thinking-data-mitx-6-00-2x-5"&gt;Introduction to Computational Thinking and Data Science&lt;/a&gt;. Sounds good to me!&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;I enjoy programming and creating shell scripts and bits of Python &lt;a class="reference external" href="https://github.com/vonbrownie/homebin"&gt;to scratch my own itches&lt;/a&gt;. But what I have discovered is that after intense bouts of figuring out how to solve something in code I make little follow-up effort that builds on lessons learned or gain understanding of more fundamental programming principles. Sometimes I come back to a program months later and it reads as if generated by a stranger. Its like creating the second floor of a building, suspended in air, with no foundation dug and materials left exposed to the elements!&lt;/p&gt;
+&lt;p&gt;I want to go faster and farther in programming with the &lt;strong&gt;DUDE&lt;/strong&gt; as my trusty companion ... a &lt;em&gt;Daily Undertaking of Deliberate Effort&lt;/em&gt;. Which translates as:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;set aside blocks of time free of distractions to focus on improving a skill&lt;/li&gt;
+&lt;li&gt;push ahead with tasks of increasing complexity&lt;/li&gt;
+&lt;li&gt;do a bit every day&lt;/li&gt;
+&lt;li&gt;cultivate feedback&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For this MOOC I will:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;set a timer for &lt;strong&gt;50 minute sessions&lt;/strong&gt; to focus on the courseware (a double &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Pomodoro_Technique"&gt;pomodoro&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;work methodically through each exercise&lt;/li&gt;
+&lt;li&gt;do the work (minimum 1 session) every day&lt;/li&gt;
+&lt;li&gt;post weekly updates for the duration of study and check in with an &lt;strong&gt;accountability partner&lt;/strong&gt; (who will give me a boot in the butt otherwise!)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I am extremely grateful for the opportunity to access world-class education where neither cost, nor location, nor schedule is a serious barrier to learning. We live in the &lt;strong&gt;Age of the Possible&lt;/strong&gt;. Onward!&lt;/p&gt;
+&lt;div class="section" id="x-computer-science-and-programming-using-python"&gt;
+&lt;h3&gt;6.00.1x: Computer Science and Programming Using Python&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x-w1.html"&gt;Week 1: Setup and Python Basics&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Week 2: Coming soon!&lt;/p&gt;
+&lt;p&gt;Week 3: Coming soon!&lt;/p&gt;
+&lt;p&gt;Week 4: Coming soon!&lt;/p&gt;
+&lt;p&gt;Week 5: Coming soon!&lt;/p&gt;
+&lt;p&gt;Week 6: Coming soon!&lt;/p&gt;
+&lt;p&gt;Week 7: Coming soon!&lt;/p&gt;
+&lt;p&gt;Week 8: Coming soon!&lt;/p&gt;
+&lt;p&gt;Week 9: Coming soon!&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="python"></category><category term="programming"></category><category term="mooc"></category></entry><entry><title>Virtually Human</title><link href="http://www.circuidipity.com/virtually-human.html" rel="alternate"></link><published>2017-01-14T08:50:00-05:00</published><updated>2017-01-14T08:50:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-14:/virtually-human.html</id><summary type="html">&lt;img alt="Virtually Human" class="align-left" src="images/virtually_human.jpg" style="width: 150px; height: 224px;" /&gt;
 &lt;p&gt;&lt;strong&gt;Virtually Human: The Promise - And the Peril - of Digital Immortality&lt;/strong&gt; &lt;em&gt;by Martine Rothblatt&lt;/em&gt; (ISBN: 978-1-250-04663-5)&lt;/p&gt;
 &lt;p&gt;Cybernetic consciousness has been imagined as a deliberate creation of AI researchers or perhaps an unintended 'waking up' moment for globs of increasing complexity such as the Internet. &lt;strong&gt;Mind-uploading&lt;/strong&gt; envisions a future with the capability …&lt;/p&gt;</summary><content type="html">&lt;img alt="Virtually Human" class="align-left" src="images/virtually_human.jpg" style="width: 150px; height: 224px;" /&gt;
 &lt;p&gt;&lt;strong&gt;Virtually Human: The Promise - And the Peril - of Digital Immortality&lt;/strong&gt; &lt;em&gt;by Martine Rothblatt&lt;/em&gt; (ISBN: 978-1-250-04663-5)&lt;/p&gt;
@@ -312,172 +354,4 @@ setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&
 &lt;/dl&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="shell"></category><category term="tools"></category><category term="linux"></category></entry><entry><title>New life for an old laptop as a Linux home server</title><link href="http://www.circuidipity.com/laptop-home-server.html" rel="alternate"></link><published>2016-08-16T21:47:00-04:00</published><updated>2016-08-29T15:15:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-16:/laptop-home-server.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #0.1 .:&lt;/a&gt; &lt;strong&gt;Netbooks&lt;/strong&gt; ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old &lt;strong&gt;Asus 900HA&lt;/strong&gt; netbook and put it to work as a &lt;a class="reference external" href="http://www.circuidipity.com/tag-server.html"&gt;home server&lt;/a&gt;. Good times!&lt;/p&gt;
-&lt;p&gt;Running your own home server is a fun learning experience and offers several advantages …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #0.1 .:&lt;/a&gt; &lt;strong&gt;Netbooks&lt;/strong&gt; ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old &lt;strong&gt;Asus 900HA&lt;/strong&gt; netbook and put it to work as a &lt;a class="reference external" href="http://www.circuidipity.com/tag-server.html"&gt;home server&lt;/a&gt;. Good times!&lt;/p&gt;
-&lt;p&gt;Running your own home server is a fun learning experience and offers several advantages.&lt;/p&gt;
-&lt;p&gt;Second-hand laptops -  retired in favour of more current and powerful machines - can still deliver plenty of oomph for running a personal server. Frugal with power and come equipped with their own built-in UPS (battery)!&lt;/p&gt;
-&lt;p&gt;Install a stable, well-tested Linux distribution and provide services such as network printing and &lt;a class="reference external" href="http://www.circuidipity.com/nas-raspberry-pi-sshfs.html"&gt;storage (NAS)&lt;/a&gt;, perform &lt;a class="reference external" href="http://www.circuidipity.com/incremental-backups-rsnapshot.html"&gt;backups&lt;/a&gt;, host &lt;a class="reference external" href="http://www.circuidipity.com/php-nginx-postgresql.html"&gt;web services&lt;/a&gt; and much more. Start with a minimal base configuration of &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt; and gain access to tens of thousands of packages ready to install.&lt;/p&gt;
-&lt;p&gt;Privacy may be important to you. Hosting your own server running your own services gives more control over your data.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Hardware:&lt;/strong&gt; Asus 900HA netbook with 9&amp;quot; display, 1GB RAM, a 500GB hard drive (very easy replacement of original drive - just unscrew the netbook's bottom panel), built-in ethernet/wifi, webcam, and a host of ports (3xUSB2, VGA, sound, SD card slot). Neat and compact device!&lt;/p&gt;
-&lt;div class="section" id="install-ubuntu"&gt;
-&lt;h3&gt;0. Install Ubuntu&lt;/h3&gt;
-&lt;p&gt;My &lt;a class="reference external" href="http://www.circuidipity.com/ubuntu-trusty-install.html"&gt;visual screenshot tour&lt;/a&gt; of installing Ubuntu 16.04 - a &lt;a class="reference external" href="https://wiki.ubuntu.com/Releases"&gt;Long Term Support (LTS)&lt;/a&gt; release. Ubuntu's &lt;strong&gt;minimal install image&lt;/strong&gt; (32bit for the netbook) makes it easy to create a console-only base configuration that can be later customized for various tasks.&lt;/p&gt;
-&lt;p&gt;I make a few modifications to my usual desktop install routine that are more appropriate for configuring a home server ...&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Storage:&lt;/strong&gt; I divide the netbook's internal storage into 3 partitions ...&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;sda1 is a 24GB &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; partition&lt;/li&gt;
-&lt;li&gt;sda2 is a 2GB LUKS encrypted &lt;tt class="docutils literal"&gt;swap&lt;/tt&gt; partition using a &lt;strong&gt;random key&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;sda3 uses the remaining space as a &lt;strong&gt;unmounted&lt;/strong&gt; encrypted partition (setup post-install)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;img alt="Mount point none" class="align-center" src="images/screenshot/ubuntuInstall/mount_point_none.png" style="width: 800px; height: 600px;" /&gt;
-&lt;p&gt;I don't want an unattended server halting in the boot process waiting for a passphrase for &lt;tt class="docutils literal"&gt;sda3_crypt&lt;/tt&gt; or any necessary mountpoints to reside on that partition. After a successful first boot I configure the encrypted partition to be mounted manually to &lt;tt class="docutils literal"&gt;/media&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Updates:&lt;/strong&gt; I like to select &lt;tt class="docutils literal"&gt;Install security updates automatically&lt;/tt&gt; for a device running unattended with long uptimes ...&lt;/p&gt;
-&lt;img alt="Install security updates" class="align-center" src="images/screenshot/ubuntuInstall/300-1.png" style="width: 800px; height: 600px;" /&gt;
-&lt;p&gt;&lt;strong&gt;Tasks:&lt;/strong&gt; Select &lt;tt class="docutils literal"&gt;[*] standard system utilities&lt;/tt&gt;  and the few extras included in &lt;tt class="docutils literal"&gt;[*] Basic Ubuntu server&lt;/tt&gt; ...&lt;/p&gt;
-&lt;img alt="Software selection" class="align-center" src="images/screenshot/ubuntuInstall/301-1.png" style="width: 800px; height: 600px;" /&gt;
-&lt;p&gt;Finish up and reboot!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="static-network-address"&gt;
-&lt;h3&gt;1. Static network address&lt;/h3&gt;
-&lt;p&gt;Login to the new home server and check which network interfaces are detected and settings ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ip a
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Wired&lt;/strong&gt; interfaces are usually auto-configured by default and assigned an IP address courtesy of DHCP.&lt;/p&gt;
-&lt;p&gt;To assign the server a &lt;strong&gt;static&lt;/strong&gt; address (recommended), deactivate the wired interface and create a new entry in &lt;tt class="docutils literal"&gt;/etc/network/interfaces&lt;/tt&gt;. Sample entry for &lt;tt class="docutils literal"&gt;enp3s0&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# The primary network interface&lt;/span&gt;
-auto enp3s0
-&lt;span class="c1"&gt;#iface enp3s0 inet dhcp&lt;/span&gt;
-iface enp3s0 inet static
-    address 192.168.1.88
-    netmask 255.255.255.0
-    gateway 192.168.1.1
-    dns-nameservers 192.168.1.1
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Bring up|down interface with &lt;tt class="docutils literal"&gt;sudo if{up,down} enp3s0&lt;/tt&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="ssh"&gt;
-&lt;h3&gt;2. SSH&lt;/h3&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;Install OpenSSH, create crypto keys, and disable password logins&lt;/a&gt; to boost server security.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="encrypted-storage"&gt;
-&lt;h3&gt;3. Encrypted storage&lt;/h3&gt;
-&lt;p&gt;Configure the encrypted partition created by Ubuntu during the install to be mounted by a user, starting with the creation of a mountpoint in &lt;tt class="docutils literal"&gt;/media&lt;/tt&gt; for the storage ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo mkdir /media/sda3_crypt
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Unlock the partition with the passphrase created during the install ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo cryptsetup open /dev/sda3 sda3_crypt
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/fstab&lt;/tt&gt; by creating a consistent mountpoint for the partition ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/dev/mapper/sda3_crypt /media/sda3_crypt        ext4    relatime,noauto,user       &lt;span class="m"&gt;0&lt;/span&gt;       0
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Mount the partition ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ mount /media/sda3_crypt
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="set-power-management-on-hard-drive"&gt;
-&lt;h3&gt;4. Set power management on hard drive&lt;/h3&gt;
-&lt;p&gt;Default settings on the netbook frequently park and spindown the drive, generating an audible &amp;quot;click&amp;quot; sound. Too aggressive power management can reduce lifespan of drive. I want &amp;quot;kinder, gentler&amp;quot; settings.&lt;/p&gt;
-&lt;p&gt;Get information on drive ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo hdparm -I /dev/sda
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;From &lt;tt class="docutils literal"&gt;man hdparm&lt;/tt&gt; ...&lt;/p&gt;
-&lt;dl class="docutils"&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-B&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;Get/set Advanced Power Management feature ... low value means aggressive power management and a high value means better performance. Possible settings range from values 1 through 127 (which permit spin-down), and values 128 through 254 (which do not permit spin-down) ... A value of 255 tells hdparm to disable APM altogether ...&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-S&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;Put the drive into idle (low-power) mode, and also set the standby (spindown) timeout for the drive ... A value of zero means &amp;quot;timeouts are disabled&amp;quot; ...&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;p&gt;On the netbook I run ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo hdparm -B &lt;span class="m"&gt;254&lt;/span&gt; -S &lt;span class="m"&gt;0&lt;/span&gt; /dev/sda
-
-/dev/sda:
-setting Advanced Power Management level to 0xfe &lt;span class="o"&gt;(&lt;/span&gt;254&lt;span class="o"&gt;)&lt;/span&gt;
-setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;off&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="nv"&gt;APM_level&lt;/span&gt;      &lt;span class="o"&gt;=&lt;/span&gt; 254
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Create &lt;strong&gt;udev rules&lt;/strong&gt; to setup at boot. Existing rule ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ cat /lib/udev/rules.d/85-hdparm.rules
-&lt;span class="nv"&gt;ACTION&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;SUBSYSTEM&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;block&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;KERNEL&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;[sh]d[a-z]&amp;quot;&lt;/span&gt;, RUN+&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/lib/udev/hdparm&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and make my own &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/udev/rules.d/85-hdparm.rules&lt;/span&gt;&lt;/tt&gt; (rules in &lt;tt class="docutils literal"&gt;/etc/udev/rules.d&lt;/tt&gt; have the &lt;a class="reference external" href="http://manpages.ubuntu.com/manpages/wily/man7/udev.7.html"&gt;highest priority&lt;/a&gt;) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;ACTION&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;SUBSYSTEM&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;block&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;KERNEL&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sda&amp;quot;&lt;/span&gt;, RUN+&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/sbin/hdparm -B 254 -S 0 /dev/sda&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="services"&gt;
-&lt;h3&gt;5. Services&lt;/h3&gt;
-&lt;p&gt;What to do next? &lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Some of the services I use ...&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</content><category term="server"></category><category term="network"></category><category term="ubuntu"></category><category term="linux"></category></entry><entry><title>$HOME slash bin</title><link href="http://www.circuidipity.com/homebin.html" rel="alternate"></link><published>2016-08-08T16:20:00-04:00</published><updated>2016-09-05T21:45:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-08:/homebin.html</id><summary type="html">&lt;img alt="Infinite loop" class="align-right" src="images/infinite-loop-not-300.png" style="width: 300px; height: 400px;" /&gt;
-&lt;p&gt;Bit by bit I build my collection of working scripts and experiments in my &lt;a class="reference external" href="https://github.com/vonbrownie/homebin"&gt;home directory&lt;/a&gt;. Programming right now in &lt;a class="reference external" href="http://www.circuidipity.com/tag-python.html"&gt;Python&lt;/a&gt;.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;dl class="docutils"&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/Library.sh"&gt;Library.sh&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;library of functions for bash shell scripts (more: &lt;a class="reference external" href="http://www.circuidipity.com/shell-script-library.html"&gt;&amp;quot;A library for shell scripts&amp;quot;&lt;/a&gt;)&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bernersLee.py"&gt;bernersLee.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;a set of classes to support my web hacks&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bookTab.py"&gt;bookTab …&lt;/a&gt;&lt;/dt&gt;&lt;/dl&gt;&lt;/div&gt;</summary><content type="html">&lt;img alt="Infinite loop" class="align-right" src="images/infinite-loop-not-300.png" style="width: 300px; height: 400px;" /&gt;
-&lt;p&gt;Bit by bit I build my collection of working scripts and experiments in my &lt;a class="reference external" href="https://github.com/vonbrownie/homebin"&gt;home directory&lt;/a&gt;. Programming right now in &lt;a class="reference external" href="http://www.circuidipity.com/tag-python.html"&gt;Python&lt;/a&gt;.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;dl class="docutils"&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/Library.sh"&gt;Library.sh&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;library of functions for bash shell scripts (more: &lt;a class="reference external" href="http://www.circuidipity.com/shell-script-library.html"&gt;&amp;quot;A library for shell scripts&amp;quot;&lt;/a&gt;)&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bernersLee.py"&gt;bernersLee.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;a set of classes to support my web hacks&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/bookTab.py"&gt;bookTab.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;get book information from command line arguments or clipboard, open web browser, and search Amazon and the Toronto Public Library (more: &lt;a class="reference external" href="http://www.circuidipity.com/booktab.html"&gt;&amp;quot;Search for a book using Python and Firefox&amp;quot;&lt;/a&gt;)&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/collatz.py"&gt;collatz.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;explore the &lt;em&gt;Collatz sequence&lt;/em&gt;, sometimes called &amp;quot;the simplest impossible math problem&amp;quot;&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dateAndBook.py"&gt;dateAndBook.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;collect books I have read and the dates I finished reading them from my daily logfile and write to a new logfile&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dateAndStep.py"&gt;dateAndStep.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;collect dates (x_axis) and pedometer measurements (y_axis) from my daily logfile and write to a new logfile + generate a graph&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dateAndWeight.py"&gt;dateAndWeight.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;collect dates (x_axis) and weight measurements (y_axis) from my daily logfile and write to a new logfile + generate a graph&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dateAndY.py"&gt;dateAndY.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;a set of classes to support collecting dates (x_axis) and measurements (y_axis) from a logfile and write to a new logfile and generate a graph&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/daysUntil.py"&gt;daysUntil.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;how many days until: yyyy mm dd&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/debtBuster.py"&gt;debtBuster.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;find the smallest monthly payment to the cent such that we can pay off a debt within &lt;em&gt;n&lt;/em&gt; months&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dldsply"&gt;dldsply&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;enable|disable extended desktop using XRandR&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dlg"&gt;dlg&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;daily activity log + git commits&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dmenu-run.sh"&gt;dmenu-run.sh&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;&lt;tt class="docutils literal"&gt;dmenu&lt;/tt&gt; configuration&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/magic8ball.py"&gt;magic8ball.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;Magic 8 Ball peers into the future and retrieves the answer to your questions&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/mapTab.py"&gt;mapTab.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;get a street address from command line arguments or clipboard and open web browser to the Google Maps page for the address&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;paVolume&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;pulseaudio volume control (more: &lt;a class="reference external" href="http://www.circuidipity.com/pavolume.html"&gt;&amp;quot;Shell script: paVolume&amp;quot;&lt;/a&gt;)&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/raiseRedLantern.py"&gt;raiseRedLantern.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;a set of classes to add notification capabilities to scripts&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/rePhoneAndEmail.py"&gt;rePhoneAndEmail.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;find and extract phone numbers and email addresses on the clipboard&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/reSearch.py"&gt;reSearch.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;find matches for regex patterns in file(s)&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/teleportHomeTo"&gt;teleportHomeTo&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;sync $HOME to DESTINATION&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/teleportHomeToSSH"&gt;teleportHomeToSSH&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;sync $HOME to remote DESTINATION using SSH keys&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/timeToCount.py"&gt;timeToCount.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;measure clock time for a device to count from 0 to &lt;em&gt;x&lt;/em&gt; in increments of 1&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/tplWatch.py"&gt;tplWatch.py&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;check to see if Toronto Public Library has added an item to catalogue&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/vboxshot"&gt;vboxshot&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;capture screenshot of a virtualbox session&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/xtra"&gt;xtra&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;&lt;tt class="docutils literal"&gt;xinit&lt;/tt&gt; extra config&lt;/dd&gt;
-&lt;dt&gt;&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/yt-audio"&gt;yt-audio&lt;/a&gt;&lt;/dt&gt;
-&lt;dd&gt;download online video and convert to audio (more: &lt;a class="reference external" href="http://www.circuidipity.com/youtube-dl.html"&gt;&amp;quot;Download videos using youtube-dl&amp;quot;&lt;/a&gt;)&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</content><category term="programming"></category><category term="shell"></category><category term="python"></category><category term="linux"></category></entry></feed>
+</content><category term="shell"></category><category term="tools"></category><category term="linux"></category></entry></feed>
