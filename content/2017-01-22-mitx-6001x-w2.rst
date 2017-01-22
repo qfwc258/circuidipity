@@ -1,0 +1,55 @@
+============================================
+MITx Week 2: Algorithms and Python Functions
+============================================
+
+:date: 2017-01-22 16:35:00
+:slug: mitx-6001x-w2
+:tags: python, programming, mooc
+
+`MITx and the Python DUDE .: <http://www.circuidipity.com/mitx-6001x.html>`_ I completed all the video tutorials and practice exercises assigned this week. Left unfinished is the *Week 2 Problem Set* (due Feb 2nd).
+
+The big idea this week is **recursion** and creating functions in Python that call themselves to solve problems. One of the exercises involved finding the greatest common divisor of two positive integers (that is, the largest integer that divides each of them without remainder). Here is a cool `animated example of recursion using Euclid's algorithm to find the GCD of two numbers. <https://en.wikipedia.org/wiki/Euclidean_algorithm#Worked_example>`_
+
+Translated into Python code ...
+
+.. code-block:: python
+
+    def gcdRecur(a, b):
+        '''
+        a, b: positive integers
+        returns: a positive integer, the greatest common divisor of a & b
+    
+        A clever mathematical trick (due to Euclid) makes it easy to find 
+        greatest common divisors. Suppose that a and b are two positive 
+        integers:
+
+        If b = 0, then the answer is a
+
+        Otherwise, gcd(a, b) is the same as gcd(b, a % b)
+        '''
+        if b == 0:
+            return a
+        else:
+            return gcdRecur(b, a % b)
+
+A **big** help trying to figure out how to code solutions this week was the `online Python Tutor <http://pythontutor.com/>`_ resource. It allows you to insert your code and then visualize what the computer is doing step-by-step as it executes the instructions. Here is an exercise which required writing a recursive function that executes a bisection search to determine if a character is in a string (the MITx grader uses example strings that are sorted in alphabetical order) ...
+
+.. raw:: html
+
+    <iframe width="800" height="750" frameborder="0" 
+        src="http://pythontutor.com/iframe-embed.html#code=def%20isIn(char,%20aStr%29%3A%0A%20%20%20%20'''%0A%20%20%20%20char%3A%20a%20single%20character%0A%20%20%20%20aStr%3A%20an%20alphabetized%20string%0A%0A%20%20%20%20returns%3A%20True%20if%20char%20is%20in%20aStr%3B%20False%20otherwise%0A%20%20%20%20'''%0A%20%20%20%20if%20len(aStr%29%20%3E%3D%201%3A%0A%20%20%20%20%20%20%20%20midChar%20%3D%20len(aStr%29%20//%202%0A%20%20%20%20%20%20%20%20if%20char%20%3D%3D%20aStr%5BmidChar%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20True%0A%20%20%20%20%20%20%20%20elif%20char%20%3E%20aStr%5BmidChar%5D%20and%20len(aStr%29%20%3E%201%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20isIn(char,%20aStr%5BmidChar%3A%5D%29%0A%20%20%20%20%20%20%20%20elif%20char%20%3C%20aStr%5BmidChar%5D%20and%20len(aStr%29%20%3E%201%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20isIn(char,%20aStr%5B%3AmidChar%5D%29%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20False%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20False%0A%0A%23%20test%0Aprint(isIn('x',%20'acfghij'%29%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=27&heapPrimitives=false&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false">
+    </iframe>
+
+I am doing the coursework on a system running `Ubuntu <http://www.circuidipity.com/tag-ubuntu.html>`_ **16.04 LTS** and writing code using `Neovim <http://www.circuidipity.com/neovim.html>`_. A few modifications in `~/.config/nvim/init.vim <https://github.com/vonbrownie/dotfiles/blob/master/.config/nvim/init.vim>`_ to give the text editor super Python powers ...
+
+.. code-block:: bash
+
+    set tabstop=4		" number of columns occupied by a tab character
+    set softtabstop=4   " see multiple spaces as tabstops so <BS> does the right thing
+    set expandtab		" converts tabs to white space
+    set shiftwidth=4	" width for autoindents
+    set autoindent      " indent a new line the same amount as the line just typed
+    set number          " add line numbers
+    set cc=80           " set an 80 column border for good coding style
+
+Onward!
