@@ -6,7 +6,7 @@ MITx and the Python DUDE
 :slug: mitx-6001x
 :template: article-project
 :tags: python, programming, mooc
-:modified: 2017-01-15 01:24:00
+:modified: 2017-01-22 16:24:00
 
 .. image:: images/mitx-6001x.png
     :align: right
@@ -49,7 +49,8 @@ I am extremely grateful for the opportunity to access world-class education wher
 `Week 1: Setup and Python Basics <http://www.circuidipity.com/mitx-6001x-w1.html>`_
 -----------------------------------------------------------------------------------
 
-Week 2: Coming soon!
+`Week 2: Algorithms and Python Functions <http://www.circuidipity.com/mitx-6001x-w2.html>`_
+-------------------------------------------------------------------------------------------
 
 Week 3: Coming soon!
 
