@@ -12,7 +12,8 @@ Virtually Human
     :height: 224px
     :align: left
 
-**Virtually Human: The Promise - And the Peril - of Digital Immortality** *by Martine Rothblatt* (ISBN: 978-1-250-04663-5)
+| **Virtually Human: The Promise - And the Peril - of Digital Immortality**
+| *by Martine Rothblatt* (ISBN: 978-1-250-04663-5)
 
 Cybernetic consciousness has been imagined as a deliberate creation of AI researchers or perhaps an unintended 'waking up' moment for globs of increasing complexity such as the Internet. **Mind-uploading** envisions a future with the capability of performing a one-to-one duplication of an individual's biological neuron to digital form, achieving a **substrate-independent existence**.
 
