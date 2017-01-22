@@ -4,7 +4,7 @@ Virtually Human
 
 :date: 2017-01-14 08:50:00
 :slug: virtually-human
-:tags: books, mind
+:tags: books
 
 .. image:: images/virtually_human.jpg
     :alt: Virtually Human
