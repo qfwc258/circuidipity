@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-01-21T19:29:00-05:00</updated><entry><title>The Plan that Broke the World</title><link href="http://www.circuidipity.com/plan-that-broke-the-world.html" rel="alternate"></link><published>2017-01-21T19:29:00-05:00</published><updated>2017-01-21T19:29:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-21:/plan-that-broke-the-world.html</id><summary type="html">&lt;img alt="book cover" class="align-left" src="images/plan_that_broke_the_world.jpg" style="width: 150px; height: 225px;" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-01-22T09:13:00-05:00</updated><entry><title>MITx Week 2: Algorithms and Python Functions</title><link href="http://www.circuidipity.com/mitx-6001x-w2.html" rel="alternate"></link><published>2017-01-22T09:13:00-05:00</published><updated>2017-01-22T09:13:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-22:/mitx-6001x-w2.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; I completed all the video tutorials and practice exercises assigned this week. Left unfinished is the &lt;em&gt;Week 2 Problem Set&lt;/em&gt; (due Feb 2nd).&lt;/p&gt;
+&lt;p&gt;The big idea this week is &lt;strong&gt;recursion&lt;/strong&gt; and creating functions in Python that call themselves to solve problems. One of the exercises …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; I completed all the video tutorials and practice exercises assigned this week. Left unfinished is the &lt;em&gt;Week 2 Problem Set&lt;/em&gt; (due Feb 2nd).&lt;/p&gt;
+&lt;p&gt;The big idea this week is &lt;strong&gt;recursion&lt;/strong&gt; and creating functions in Python that call themselves to solve problems. One of the exercises involved finding the greatest common divisor of two positive integers (that is, the largest integer that divides each of them without remainder). Here is a cool &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Euclidean_algorithm#Worked_example"&gt;animated example of recursion using Euclid's algorithm to find the GCD of two numbers.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Translated into Python code ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;gcdRecur&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;    a, b: positive integers&lt;/span&gt;
+&lt;span class="sd"&gt;    returns: a positive integer, the greatest common divisor of a &amp;amp; b&lt;/span&gt;
+
+&lt;span class="sd"&gt;    A clever mathematical trick (due to Euclid) makes it easy to find&lt;/span&gt;
+&lt;span class="sd"&gt;    greatest common divisors. Suppose that a and b are two positive&lt;/span&gt;
+&lt;span class="sd"&gt;    integers:&lt;/span&gt;
+
+&lt;span class="sd"&gt;    If b = 0, then the answer is a&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Otherwise, gcd(a, b) is the same as gcd(b, a % b)&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;gcdRecur&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A &lt;strong&gt;big&lt;/strong&gt; help trying to figure out how to code solutions this week was the &lt;a class="reference external" href="http://pythontutor.com/"&gt;online Python Tutor&lt;/a&gt; resource. It allows you to insert your code and then visualize what the computer is doing step-by-step as it executes the instructions. Here is an exercise which required writing a recursive function that executed a bisection search to determine if a character is in a string (the MITx grader uses example strings that are sorted in alphabetical order) ...&lt;/p&gt;
+&lt;iframe width="800" height="750" frameborder="0"
+    src="http://pythontutor.com/iframe-embed.html#code=def%20isIn(char,%20aStr%29%3A%0A%20%20%20%20'''%0A%20%20%20%20char%3A%20a%20single%20character%0A%20%20%20%20aStr%3A%20an%20alphabetized%20string%0A%0A%20%20%20%20returns%3A%20True%20if%20char%20is%20in%20aStr%3B%20False%20otherwise%0A%20%20%20%20'''%0A%20%20%20%20if%20len(aStr%29%20%3E%3D%201%3A%0A%20%20%20%20%20%20%20%20midChar%20%3D%20len(aStr%29%20//%202%0A%20%20%20%20%20%20%20%20if%20char%20%3D%3D%20aStr%5BmidChar%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20True%0A%20%20%20%20%20%20%20%20elif%20char%20%3E%20aStr%5BmidChar%5D%20and%20len(aStr%29%20%3E%201%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20isIn(char,%20aStr%5BmidChar%3A%5D%29%0A%20%20%20%20%20%20%20%20elif%20char%20%3C%20aStr%5BmidChar%5D%20and%20len(aStr%29%20%3E%201%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20isIn(char,%20aStr%5B%3AmidChar%5D%29%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20False%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20False%0A%0A%23%20test%0Aprint(isIn('x',%20'acfghij'%29%29&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cumulative=false&amp;curInstr=27&amp;heapPrimitives=false&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"&gt;
+&lt;/iframe&gt;&lt;p&gt;I am doing the coursework on a system running &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt; &lt;strong&gt;16.04 LTS&lt;/strong&gt; and writing code using &lt;a class="reference external" href="http://www.circuidipity.com/neovim.html"&gt;Neovim&lt;/a&gt;. A few modifications in &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.config/nvim/init.vim"&gt;~/.config/nvim/init.vim&lt;/a&gt; to give the text editor super Python powers ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;tabstop&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;               &lt;span class="s2"&gt;&amp;quot; number of columns occupied by a tab character&lt;/span&gt;
+&lt;span class="s2"&gt;set softtabstop=4   &amp;quot;&lt;/span&gt; see multiple spaces as tabstops so &amp;lt;BS&amp;gt; does the right thing
+&lt;span class="nb"&gt;set&lt;/span&gt; expandtab               &lt;span class="s2"&gt;&amp;quot; converts tabs to white space&lt;/span&gt;
+&lt;span class="s2"&gt;set shiftwidth=4    &amp;quot;&lt;/span&gt; width &lt;span class="k"&gt;for&lt;/span&gt; autoindents
+&lt;span class="nb"&gt;set&lt;/span&gt; autoindent      &lt;span class="s2"&gt;&amp;quot; indent a new line the same amount as the line just typed&lt;/span&gt;
+&lt;span class="s2"&gt;set number          &amp;quot;&lt;/span&gt; add line numbers
+&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;cc&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;80&lt;/span&gt;           &lt;span class="s2"&gt;&amp;quot; set an 80 column border for good coding style&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Onward!&lt;/p&gt;
+</content><category term="python"></category><category term="programming"></category><category term="mooc"></category></entry><entry><title>The Plan that Broke the World</title><link href="http://www.circuidipity.com/plan-that-broke-the-world.html" rel="alternate"></link><published>2017-01-21T19:29:00-05:00</published><updated>2017-01-21T19:29:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-21:/plan-that-broke-the-world.html</id><summary type="html">&lt;img alt="book cover" class="align-left" src="images/plan_that_broke_the_world.jpg" style="width: 150px; height: 225px;" /&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;&lt;strong&gt;The Plan that Broke the World: The &amp;quot;Schlieffen Plan&amp;quot; and World War I&lt;/strong&gt;&lt;/div&gt;
 &lt;div class="line"&gt;&lt;em&gt;by William D. O'Neill&lt;/em&gt; (ISBN: 978-1-4819-5585-0)&lt;/div&gt;
@@ -44,7 +79,9 @@
 &lt;/div&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x-w1.html"&gt;Week 1: Setup and Python Basics&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Week 2: Coming soon!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x-w2.html"&gt;Week 2: Algorithms and Python Functions&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Week 3: Coming soon!&lt;/p&gt;
 &lt;p&gt;Week 4: Coming soon!&lt;/p&gt;
 &lt;p&gt;Week 5: Coming soon!&lt;/p&gt;
@@ -241,92 +278,4 @@ main&lt;span class="o"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Cut-and-paste text in the browser, launch &lt;em&gt;bookTab.py&lt;/em&gt; from the &lt;a class="reference external" href="https://davedavenport.github.io/rofi/"&gt;run menu&lt;/a&gt;, and all the tabs+searches open and go to work!&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-</content><category term="firefox"></category><category term="python"></category><category term="programming"></category></entry><entry><title>Bits of August</title><link href="http://www.circuidipity.com/2016-08-31-bits.html" rel="alternate"></link><published>2016-08-31T09:09:00-04:00</published><updated>2016-08-31T09:09:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2016-08-31:/2016-08-31-bits.html</id><summary type="html">&lt;p&gt;Just the &lt;strong&gt;good stuff&lt;/strong&gt; ...&lt;/p&gt;
-&lt;div class="section" id="restart-network-service-on-ubuntu"&gt;
-&lt;h2&gt;0. Restart network service on Ubuntu&lt;/h2&gt;
-&lt;p&gt;Sometimes after wake-from-suspend the network connection is down and network-manager's wifi ap list fails to refresh.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;FIX:&lt;/strong&gt; Simple systemd way ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo systemctl restart NetworkManager.service
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If that doesn't work ... Try using &lt;tt class="docutils literal"&gt;nmcli&lt;/tt&gt; to stop and start network-manager directly ...&lt;/p&gt;
-&lt;!-- code-block::bash
-
-$ sudo nmcli networking off
-$ sudo nmcli networking on --&gt;
-&lt;p&gt;Old-fashioned SysV …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Just the &lt;strong&gt;good stuff&lt;/strong&gt; ...&lt;/p&gt;
-&lt;div class="section" id="restart-network-service-on-ubuntu"&gt;
-&lt;h2&gt;0. Restart network service on Ubuntu&lt;/h2&gt;
-&lt;p&gt;Sometimes after wake-from-suspend the network connection is down and network-manager's wifi ap list fails to refresh.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;FIX:&lt;/strong&gt; Simple systemd way ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo systemctl restart NetworkManager.service
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If that doesn't work ... Try using &lt;tt class="docutils literal"&gt;nmcli&lt;/tt&gt; to stop and start network-manager directly ...&lt;/p&gt;
-&lt;!-- code-block::bash
-
-$ sudo nmcli networking off
-$ sudo nmcli networking on --&gt;
-&lt;p&gt;Old-fashioned SysV init script method still works on 16.04 ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo /etc/init.d/networking restart
-    ... or ...
-$ sudo /etc/init.d/network-manager restart
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Last resort ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo ifdown -a  &lt;span class="c1"&gt;# -a brings down all interfaces&lt;/span&gt;
-$ sudo ifup -a
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="microphone-problem-on-thinkpad-x230-running-ubuntu-16-04"&gt;
-&lt;h2&gt;1. Microphone problem on Thinkpad x230 running Ubuntu 16.04&lt;/h2&gt;
-&lt;p&gt;No sound input and &lt;strong&gt;mic&lt;/strong&gt; not detected.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;FIX:&lt;/strong&gt; Get capture device ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ arecord -l
-card 0: ... device 0: ...
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and edit &lt;tt class="docutils literal"&gt;/etc/pulse/default.pa&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;load-module&lt;/span&gt; &lt;span class="pre"&gt;module-alsa-source&lt;/span&gt; device=hw:0,0&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Kill and respawn pulseaudio ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pulseaudio -k
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="frozen-ssh-session"&gt;
-&lt;h2&gt;2. Frozen SSH session&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Use the key-combo &lt;strong&gt;Enter, Shift + `, .&lt;/strong&gt; [Enter, Tilde, Period]  to drop the connection.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="local-install-of-python-modules-as-non-root-user"&gt;
-&lt;h2&gt;3. Local install of Python modules as non-root user&lt;/h2&gt;
-&lt;p&gt;Example ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pip3 install exifread
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... libraries are installed to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/lib/python-ver/&lt;/span&gt;&lt;/tt&gt; and the bins are placed in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/bin/&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;Add &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/bin&lt;/span&gt;&lt;/tt&gt; to user's $PATH.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="set-power-management-on-hard-drive"&gt;
-&lt;h2&gt;4. Set power management on hard drive&lt;/h2&gt;
-&lt;p&gt;Get information on drive ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo hdparm -I /dev/sda
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Too aggressive power management can reduce lifespan of drive due to frequent parking and spindown. For my &lt;a class="reference external" href="http://www.circuidipity.com/laptop-home-server.html"&gt;netbook server&lt;/a&gt; I want &amp;quot;kinder, gentler&amp;quot; settings.&lt;/p&gt;
-&lt;p&gt;From &lt;tt class="docutils literal"&gt;man hdparm&lt;/tt&gt; ...&lt;/p&gt;
-&lt;dl class="docutils"&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-B&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;Get/set Advanced Power Management feature ... low value means aggressive power management and a high value means better performance. Possible settings range from values 1 through 127 (which permit spin-down), and values 128 through 254 (which do not permit spin-down) ... A value of 255 tells hdparm to disable APM altogether ...&lt;/dd&gt;
-&lt;dt&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-S&lt;/span&gt;&lt;/tt&gt;&lt;/dt&gt;
-&lt;dd&gt;Put the drive into idle (low-power) mode, and also set the standby (spindown) timeout for the drive ... A value of zero means &amp;quot;timeouts are disabled&amp;quot; ...&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;p&gt;On the netbook I run ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    $ sudo hdparm -B &lt;span class="m"&gt;254&lt;/span&gt; -S &lt;span class="m"&gt;0&lt;/span&gt; /dev/sda
-
-    /dev/sda:
-setting Advanced Power Management level to 0xfe &lt;span class="o"&gt;(&lt;/span&gt;254&lt;span class="o"&gt;)&lt;/span&gt;
-setting standby to &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;off&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="nv"&gt;APM_level&lt;/span&gt;      &lt;span class="o"&gt;=&lt;/span&gt; 254
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Create &lt;strong&gt;udev rules&lt;/strong&gt; to setup at boot. Existing rule ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ cat /lib/udev/rules.d/85-hdparm.rules
-&lt;span class="nv"&gt;ACTION&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;SUBSYSTEM&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;block&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;KERNEL&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;[sh]d[a-z]&amp;quot;&lt;/span&gt;, RUN+&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/lib/udev/hdparm&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and make my own &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/udev/rules.d/85-hdparm.rules&lt;/span&gt;&lt;/tt&gt; (rules in &lt;tt class="docutils literal"&gt;/etc/udev/rules.d&lt;/tt&gt; have the &lt;a class="reference external" href="http://manpages.ubuntu.com/manpages/wily/man7/udev.7.html"&gt;highest priority&lt;/a&gt;) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;ACTION&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;SUBSYSTEM&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;block&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;KERNEL&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sda&amp;quot;&lt;/span&gt;, RUN+&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/sbin/hdparm -B 254 -S 0 /dev/sda&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</content><category term="bits"></category><category term="network"></category><category term="ubuntu"></category><category term="linux"></category></entry></feed>
+</content><category term="firefox"></category><category term="python"></category><category term="programming"></category></entry></feed>
