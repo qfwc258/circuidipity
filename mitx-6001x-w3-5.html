@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | MITx Week 3.5: Textbook and Syntax</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+        <!-- analytics -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89591498-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Sunday 05 February 2017</p>
+</div>
+
+<!-- article -->
+<h1>MITx Week 3.5: Textbook and Syntax</h1>
+<div id="article">
+    <p><a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html">MITx and the Python DUDE .:</a> I have worked my way through all lectures and exercises and problem sets released to date. MITx will release coursework for <em>Week 4</em> on February 7th.</p>
+<p>I picked up a copy of the (optional) course textbook: <a class="reference external" href="https://mitpress.mit.edu/books/introduction-computation-and-programming-using-python-0">Introduction to Computation and Programming Using Python</a>.</p>
+<p>I am writing my Python code using the <strong>Neovim</strong> text editor and I added the <a class="reference external" href="https://github.com/vim-syntastic/syntastic">Syntastic</a> syntax checking plugin. It provides a framework for managing syntax files installed separately by the user for various programming languages.</p>
+<div class="section" id="install-and-configure">
+<h2>Install and configure</h2>
+<p><strong>1.</strong> Install syntastic plugin using <a class="reference external" href="https://github.com/VundleVim/Vundle.vim">Vundle</a>. Edit Neovim's <tt class="docutils literal">init.vim</tt> ...</p>
+<div class="highlight"><pre><span></span>Plugin <span class="s1">&#39;vim-syntastic/syntastic&#39;</span>
+</pre></div>
+<p>... and add some recommended defaults for beginners ...</p>
+<div class="highlight"><pre><span></span><span class="nb">set</span> statusline+<span class="o">=</span>%#warningmsg#
+<span class="nb">set</span> statusline+<span class="o">=</span>%<span class="o">{</span>SyntasticStatuslineFlag<span class="o">()}</span>
+<span class="nb">set</span> statusline+<span class="o">=</span>%*
+
+<span class="nb">let</span> g:syntastic_always_populate_loc_list <span class="o">=</span> 1
+<span class="nb">let</span> g:syntastic_auto_loc_list <span class="o">=</span> 1
+<span class="nb">let</span> g:syntastic_check_on_open <span class="o">=</span> 1
+<span class="nb">let</span> g:syntastic_check_on_wq <span class="o">=</span> 0
+</pre></div>
+<p><strong>2.</strong> Install the <strong>pylint</strong> package (available in Ubuntu) for checking Python syntax ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install pylint pylint3
+</pre></div>
+<p><strong>3.</strong> Syntastic defaults to using pylint for Python 2 syntax. I am using Python 3 for MITx coursework so I once again modify <tt class="docutils literal">init.vim</tt> ...</p>
+<div class="highlight"><pre><span></span><span class="nb">let</span> g:syntastic_python_pylint_exe <span class="o">=</span> <span class="s1">&#39;python3 -m pylint3&#39;</span>
+</pre></div>
+<p>Onward!</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-python.html">python</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-mooc.html">mooc</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/deaths-end.html">The Dark Forest and Death's End</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>
