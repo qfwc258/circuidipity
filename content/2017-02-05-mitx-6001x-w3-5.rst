@@ -1,0 +1,49 @@
+==================================
+MITx Week 3.5: Textbook and Syntax
+==================================
+
+:date: 2017-02-05 22:59:00
+:slug: mitx-6001x-w3-5
+:tags: python, programming, mooc
+
+`MITx and the Python DUDE .: <http://www.circuidipity.com/mitx-6001x.html>`_ I have worked my way through all lectures and exercises and problem sets released to date. MITx will release coursework for *Week 4* on February 7th.
+
+I picked up a copy of the (optional) course textbook: `Introduction to Computation and Programming Using Python <https://mitpress.mit.edu/books/introduction-computation-and-programming-using-python-0>`_.
+
+I am writing my Python code using the **Neovim** text editor and I added the `Syntastic <https://github.com/vim-syntastic/syntastic>`_ syntax checking plugin. It provides a framework for managing syntax files installed separately by the user for various programming languages.
+
+Install and configure
+---------------------
+
+**1.** Install syntastic plugin using `Vundle <https://github.com/VundleVim/Vundle.vim>`_. Edit Neovim's ``init.vim`` ...
+
+.. code-block:: bash
+
+    Plugin 'vim-syntastic/syntastic' 
+
+... and add some recommended defaults for beginners ...
+
+.. code-block:: bash
+
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+    
+**2.** Install the **pylint** package (available in Ubuntu) for checking Python syntax ...
+
+.. code-block:: bash
+
+    $ sudo apt install pylint pylint3
+
+**3.** Syntastic defaults to using pylint for Python 2 syntax. I am using Python 3 for MITx coursework so I once again modify ``init.vim`` ...
+
+.. code-block:: bash
+
+    let g:syntastic_python_pylint_exe = 'python3 -m pylint3'
+
+Onward!
