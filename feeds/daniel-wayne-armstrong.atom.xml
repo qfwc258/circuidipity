@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-02-05T22:59:00-05:00</updated><entry><title>MITx Week 3.5: Textbook and Syntax</title><link href="http://www.circuidipity.com/mitx-6001x-w3-5.html" rel="alternate"></link><published>2017-02-05T22:59:00-05:00</published><updated>2017-02-05T22:59:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-02-05:/mitx-6001x-w3-5.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; I have worked my way through all lectures and exercises and problem sets released to date. MITx will release coursework for &lt;em&gt;Week 4&lt;/em&gt; on February 7th.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-02-12T22:19:00-05:00</updated><entry><title>MITx Week 4: Testing, Debugging, Exceptions, and Assertions</title><link href="http://www.circuidipity.com/mitx-6001x-w4.html" rel="alternate"></link><published>2017-02-12T22:19:00-05:00</published><updated>2017-02-12T22:19:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-02-12:/mitx-6001x-w4.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; I have worked my way through all lectures and exercises and problem sets released to date. This week was all about &lt;strong&gt;defensive programming&lt;/strong&gt;. I will have more to say about this later ... but right now I am deep into the online &lt;strong&gt;Midterm Exam&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Onward!&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; I have worked my way through all lectures and exercises and problem sets released to date. This week was all about &lt;strong&gt;defensive programming&lt;/strong&gt;. I will have more to say about this later ... but right now I am deep into the online &lt;strong&gt;Midterm Exam&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Onward!&lt;/p&gt;
+</content><category term="python"></category><category term="programming"></category><category term="mooc"></category></entry><entry><title>MITx Week 3.5: Textbook and Syntax</title><link href="http://www.circuidipity.com/mitx-6001x-w3-5.html" rel="alternate"></link><published>2017-02-05T22:59:00-05:00</published><updated>2017-02-05T22:59:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-02-05:/mitx-6001x-w3-5.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; I have worked my way through all lectures and exercises and problem sets released to date. MITx will release coursework for &lt;em&gt;Week 4&lt;/em&gt; on February 7th.&lt;/p&gt;
 &lt;p&gt;I picked up a copy of the (optional) course textbook: &lt;a class="reference external" href="https://mitpress.mit.edu/books/introduction-computation-and-programming-using-python-0"&gt;Introduction to Computation and Programming Using Python&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;I am …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; I have worked my way through all lectures and exercises and problem sets released to date. MITx will release coursework for &lt;em&gt;Week 4&lt;/em&gt; on February 7th.&lt;/p&gt;
 &lt;p&gt;I picked up a copy of the (optional) course textbook: &lt;a class="reference external" href="https://mitpress.mit.edu/books/introduction-computation-and-programming-using-python-0"&gt;Introduction to Computation and Programming Using Python&lt;/a&gt;.&lt;/p&gt;
@@ -146,7 +150,9 @@ The best translations into English do not, in fact, read as if they were origina
 &lt;/div&gt;
 &lt;div class="section" id="id4"&gt;
 &lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x-w3-5.html"&gt;Week 3.5: Textbook and Syntax&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Week 4: Coming soon!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h3&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x-w4.html"&gt;Week 4: Testing, Debugging, Exceptions, and Assertions&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Week 5: Coming soon!&lt;/p&gt;
 &lt;p&gt;Week 6: Coming soon!&lt;/p&gt;
 &lt;p&gt;Week 7: Coming soon!&lt;/p&gt;
@@ -184,52 +190,4 @@ If human consciousness is to arise in software we must do three things: first, e
 &lt;blockquote&gt;
 Is a second, independent consciousness with similar memories and preferences to the first a separate being or an extended manifestation of a single being? This depends upon one's definition of &amp;quot;being&amp;quot;. If a &amp;quot;being&amp;quot; is a body, or a platform, then we are talking about separate beings. But if a &amp;quot;being&amp;quot; is a consciousness with an idiosyncratic set of memories and preferences, then we are talking about a single being. I am certain we really mean consciousness, memories, and preferences by &amp;quot;being&amp;quot;. Therefore, I'm confident that those who create mindclones will experience the profound, life-altering event of having redefined themselves as a dual-platform consciousness ... [Its] not about being accurate in every [detail] as to a biological original. It is, instead, about feeling that there is oneness that comes from a preponderance of common memories, emotions, and patterns of thinking, selecting and forgetting.&lt;/blockquote&gt;
 &lt;p&gt;What weaves through the book is a (biological) mind-expanding consideration of what non-human, but &lt;em&gt;strangely familiar&lt;/em&gt;, conscious entities will mean for the future of our species. If mindclones are brought to life Rothblatt outlines possible civil, religious, and personal responses that run the gamut from love at first sight to cybernetic slavery and extermination. Picking fights with immortals is not recommended!&lt;/p&gt;
-</content><category term="books"></category></entry><entry><title>Getting started with Neovim</title><link href="http://www.circuidipity.com/neovim.html" rel="alternate"></link><published>2017-01-08T19:18:00-05:00</published><updated>2017-01-08T19:18:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-08:/neovim.html</id><summary type="html">&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
-&lt;p&gt;I have used &lt;strong&gt;Vim&lt;/strong&gt; in the past but barely scratched the surface of its features motherlode. A friend who is a &lt;a class="reference external" href="http://gilesorr.com/blog/tag/vim.html"&gt;passionate vim user&lt;/a&gt; recommended …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
-&lt;p&gt;I have used &lt;strong&gt;Vim&lt;/strong&gt; in the past but barely scratched the surface of its features motherlode. A friend who is a &lt;a class="reference external" href="http://gilesorr.com/blog/tag/vim.html"&gt;passionate vim user&lt;/a&gt; recommended I try &lt;strong&gt;Neovim&lt;/strong&gt;, which &amp;quot;&lt;em&gt;strives to be a superset of Vim except for some intentionally-removed misfeatures... [and] is built for users who want the good parts of Vim, and more&lt;/em&gt;&amp;quot;. Sounds good!&lt;/p&gt;
-&lt;div class="section" id="install-neovim"&gt;
-&lt;h2&gt;0. Install Neovim&lt;/h2&gt;
-&lt;p&gt;Neovim packages are available for &lt;strong&gt;Ubuntu Linux&lt;/strong&gt; courtesy of a &lt;em&gt;Personal Package Archive (PPA)&lt;/em&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install software-properties-common
-$ sudo add-apt-repository ppa:neovim-ppa/unstable
-$ sudo apt update
-$ sudo apt install neovim
-$ sudo apt install python-dev python-pip python3-dev python3-pip
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="launch"&gt;
-&lt;h2&gt;1. Launch&lt;/h2&gt;
-&lt;p&gt;Start the newly-installed editor ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nvim
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Upon first launch on Ubuntu the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/share/nvim/{shada,swap}&lt;/span&gt;&lt;/tt&gt; directories are auto-generated. Manually create a new &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/nvim&lt;/span&gt;&lt;/tt&gt; configuration directory and place inside an &lt;tt class="docutils literal"&gt;init.vim&lt;/tt&gt; config file (or link to an existing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vimrc&lt;/span&gt;&lt;/tt&gt;) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ mkdir ~/.config/nvim
-$ &lt;span class="nb"&gt;cd&lt;/span&gt; ~/.config/nvim
-$ ln -s ~/.vimrc init.vim
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Check out Neovim's built-in &lt;tt class="docutils literal"&gt;:help&lt;/tt&gt; command and the &lt;a class="reference external" href="https://neovim.io/doc/"&gt;online documentation&lt;/a&gt; .&lt;/p&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.config/nvim/init.vim"&gt;https://github.com/vonbrownie/dotfiles/blob/master/.config/nvim/init.vim&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="plugins"&gt;
-&lt;h2&gt;2. Plugins&lt;/h2&gt;
-&lt;p&gt;Extend the core features of the text editor using &lt;strong&gt;plugins&lt;/strong&gt;. With a fresh install of Neovim, now is a good time to setup a plugin manager. I install &lt;a class="reference external" href="https://github.com/VundleVim/Vundle.vim"&gt;Vundle&lt;/a&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Configure neovim to use vundle by modifying &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/nvim/init.vim&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt; nocompatible
-filetype off
-&lt;span class="s2"&gt;&amp;quot; set the runtime path to include Vundle and initialize&lt;/span&gt;
-&lt;span class="s2"&gt;set rtp+=~/.config/nvim/bundle/Vundle.vim&lt;/span&gt;
-&lt;span class="s2"&gt;call vundle#begin()&lt;/span&gt;
-&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="nb"&gt;let&lt;/span&gt; Vundle manage Vundle, required
-Plugin &lt;span class="s1"&gt;&amp;#39;VundleVim/Vundle.vim&amp;#39;&lt;/span&gt;
-&lt;span class="s2"&gt;&amp;quot; All of your Plugins must be added before the following line&lt;/span&gt;
-&lt;span class="s2"&gt;call vundle#end()&lt;/span&gt;
-&lt;span class="s2"&gt;filetype plugin indent on  &amp;quot;&lt;/span&gt; allows auto-indenting depending on file &lt;span class="nb"&gt;type&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Install plugins ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nvim +PluginInstall +qall
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</content><category term="neovim"></category><category term="vim"></category></entry></feed>
+</content><category term="books"></category></entry></feed>
