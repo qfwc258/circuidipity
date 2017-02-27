@@ -6,7 +6,7 @@ MITx and the Python DUDE
 :slug: mitx-6001x
 :template: article-project
 :tags: python, programming, mooc
-:modified: 2017-02-05 19:54:00
+:modified: 2017-02-26 21:34:00
 
 .. image:: images/mitx-6001x.png
     :align: right
@@ -58,16 +58,12 @@ I am extremely grateful for the opportunity to access world-class education wher
 `Week 3.5: Textbook and Syntax <http://www.circuidipity.com/mitx-6001x-w3-5.html>`_
 -----------------------------------------------------------------------------------
 
-Week 4: Coming soon!
+`Week 4: Testing, Debugging, Exceptions, and Assertions <http://www.circuidipity.com/mitx-6001x-w4.html>`_
+----------------------------------------------------------------------------------------------------------
 
-Week 5: Coming soon!
+`Week 5: Object Oriented Programming <http://www.circuidipity.com/mitx-6001x-w5.html>`_
+---------------------------------------------------------------------------------------
 
 Week 6: Coming soon!
-
-Week 7: Coming soon!
-
-Week 8: Coming soon!
-
-Week 9: Coming soon!
 
 Happy hacking!
