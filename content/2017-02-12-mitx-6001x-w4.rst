@@ -1,0 +1,11 @@
+===========================================================
+MITx Week 4: Testing, Debugging, Exceptions, and Assertions
+===========================================================
+
+:date: 2017-02-12 22:19:00
+:slug: mitx-6001x-w4
+:tags: python, programming, mooc
+
+`MITx and the Python DUDE .: <http://www.circuidipity.com/mitx-6001x.html>`_ I have worked my way through all lectures and exercises and problem sets released to date. This week was all about **defensive programming**. I will have more to say about this later ... but right now I am deep into the online **Midterm Exam**.
+
+Onward!
