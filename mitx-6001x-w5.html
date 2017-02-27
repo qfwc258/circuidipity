@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | MITx Week 4: Testing, Debugging, Exceptions, and Assertions</title>
+        <title>Circuidipity | MITx Week 5: Object Oriented Programming</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -31,13 +31,21 @@
 <!-- breadcrumb trail -->
 <div id="breadcrumb">
     <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
-    Sunday 12 February 2017</p>
+    Sunday 26 February 2017</p>
 </div>
 
 <!-- article -->
-<h1>MITx Week 4: Testing, Debugging, Exceptions, and Assertions</h1>
+<h1>MITx Week 5: Object Oriented Programming</h1>
 <div id="article">
-    <p><a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html">MITx and the Python DUDE .:</a> I have worked my way through all lectures and exercises and problem sets released to date. This week was all about <strong>defensive programming</strong>. I will have more to say about this later ... but right now I am deep into the online <strong>Midterm Exam</strong>.</p>
+    <p><a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html">MITx and the Python DUDE .:</a> This week the focus was on Python <strong>classes</strong> and <strong>inheritance</strong> in the context of <strong>object-oriented programming</strong>. Objects are a combination of data collections and the methods that operate on that data. It allows the programmer to move beyond the built-in types provided by Python (integers, floating point numbers, strings, lists, dictionaries) and roll their own purpose-built types with methods (which is very cool)!</p>
+<p>I am still wrapping my head around the idea but I watched all the lecture videos and completed all the exercises for the week. The problem set involved creating a Python class + methods for encryption and decryption using the <em>Caesar Cipher</em> ...</p>
+<blockquote>
+<p>The idea of the Caesar Cipher is to pick an integer and shift every letter of your message by that integer. In other words, suppose the shift is k . Then, all instances of the i-th letter of the alphabet that appear in the plaintext should become the (i+k)-th letter of the alphabet in the ciphertext. You will need to be careful with the case in which i + k &gt; 26 (the length of the alphabet). Here is what the whole alphabet looks like shifted three spots to the right:</p>
+<p>Original:  a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
+<p>3-shift:  d e f g h i j k l m n o p q r s t u v w x y z a b c</p>
+<p>Using the above key, we can quickly translate the message &quot;happy&quot; to &quot;kdssb&quot; (note how the 3-shifted alphabet wraps around at the end, so x -&gt; a, y -&gt; b, and z -&gt; c).</p>
+</blockquote>
+<p>The problem template provided a <tt class="docutils literal">Message</tt> class and a few helper methods and I had to create new objects and methods to generate dictionaries to encrypt and decrypt plaintext messages. It (eventually) works!</p>
 <p>Onward!</p>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-python.html">python</a>
@@ -50,9 +58,7 @@
 <div id="navmenu">
     <hr />
     <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-        <a href="http://www.circuidipity.com/mitx-6001x-w3-5.html">MITx Week 3.5: Textbook and Syntax</a></p>
-    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
-        <a href="http://www.circuidipity.com/mitx-6001x-w5.html">MITx Week 5: Object Oriented Programming</a></p>
+        <a href="http://www.circuidipity.com/mitx-6001x-w4.html">MITx Week 4: Testing, Debugging, Exceptions, and Assertions</a></p>
 </div>
 
 
