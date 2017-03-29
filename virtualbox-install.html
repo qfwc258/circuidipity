@@ -107,7 +107,16 @@ VBoxClient --seamless <span class="p">&amp;</span>
 <ul class="simple">
 <li>GRUB screen: hit <tt class="docutils literal">c</tt> to enter command mode</li>
 <li><tt class="docutils literal">grub&gt;</tt>: run <tt class="docutils literal">vbeinfo</tt> to display supported resolutions (example: <tt class="docutils literal">1152x864</tt>)</li>
-<li><tt class="docutils literal">/etc/default/grub</tt>: add <tt class="docutils literal"><span class="pre">GRUB_CMDLINE_LINUX_DEFAULT=&quot;nomodeset&quot;</span></tt>, <tt class="docutils literal">GRUB_GFXMODE=1152x864</tt>, and <tt class="docutils literal">GRUB_GFXPAYLOAD_LINUX=keep</tt> (<a class="reference external" href="https://askubuntu.com/a/887785">Helpful!</a>)</li>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal">/etc/default/grub</tt>: add ...</dt>
+<dd><ul class="first last">
+<li><tt class="docutils literal"><span class="pre">GRUB_CMDLINE_LINUX_DEFAULT=&quot;nomodeset&quot;</span></tt></li>
+<li><tt class="docutils literal">GRUB_GFXMODE=1152x864</tt></li>
+<li><tt class="docutils literal">GRUB_GFXPAYLOAD_LINUX=keep</tt> (<a class="reference external" href="https://askubuntu.com/a/887785">Helpful!</a>)</li>
+</ul>
+</dd>
+</dl>
+</li>
 <li>save changes: run <tt class="docutils literal"><span class="pre">update-grub</span></tt> and reboot</li>
 </ul>
 </div>
