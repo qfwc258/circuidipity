@@ -1,0 +1,13 @@
+========================================
+MITx Week 7: Plotting and Final Thoughts
+========================================
+
+:date: 2017-03-19 19:10:00
+:slug: mitx-6001x-w7
+:tags: python, programming, mooc
+
+`MITx and the Python DUDE .: <http://www.circuidipity.com/mitx-6001x.html>`_ Last week of the course! An introduction to plotting graphs in Python. I have experimented a bit `writing a script <https://github.com/vonbrownie/homebin/blob/master/dateAndStep.py>`_ that collects dates (x_axis) and pedometer measurements (y_axis) from my personal logfile and generates a graph.
+
+So concludes **MITx 6.00.1x**. It proved to be a well-designed course and true to its synopsis of being a **computer science course** that teaches some fundamental concepts, **not** a programming course per se. Taken in that spirit (and plan on spending more than the proposed 15 hours a week) its a very worthwhile endeavour. Personally I want to learn more about Python itself and scratch some of my own itches. 
+
+Onward!
