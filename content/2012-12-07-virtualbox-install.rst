@@ -5,22 +5,22 @@ Virtualbox
 :date: 2012-12-07 00:11:00
 :tags: virtualbox, linux
 :slug: virtualbox-install
-:modified: 2016-02-26 16:57:00
+:modified: 2017-03-28 19:57:00
 
 `Virtualbox <https://www.virtualbox.org/>`_ is virtualization software that allows a Linux user to HOST multiple GUEST operating systems as `virtual machines (VMs) <http://www.circuidipity.com/tag-vm.html>`_. Its a cool tool for playing with different Linux distros and experimenting with configurations.
 
 Let's go!
 =========
 
-In this HOWTO I install Virtualbox on a 64-bit `Debian <http://www.circuidipity.com/tag-debian.html>`_ HOST and create a Debian GUEST virtual machine.
+In this HOWTO I install Virtualbox on a 64-bit `Ubuntu <http://www.circuidipity.com/tag-ubuntu.html>`_ HOST and create an Ubuntu GUEST virtual machine.
 
 0. Install VirtualBox on HOST
 -----------------------------
 
 .. code-block:: bash
 
-    $ sudo apt-get install build-essential dkms module-assistant linux-headers-$(uname -r)
-    $ sudo apt-get install virtualbox virtualbox-dkms virtualbox-qt
+    $ sudo apt install build-essential dkms module-assistant linux-headers-$(uname -r)
+    $ sudo apt install virtualbox virtualbox-dkms virtualbox-qt
 
 Virtualbox kernel modules are built via **Dynamic Kernel Module Support** (`DKMS <http://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support>`_). After installing the virtualbox packages the ``vbox`` modules should be auto-built and -loaded:
 
@@ -38,37 +38,26 @@ I add my USERNAME to the ``vboxusers`` group:
 
     $ sudo adduser USERNAME vboxusers
 
-1. Create the GUEST
--------------------
+1. Create the Ubuntu GUEST
+--------------------------
 
 **Default Machine Folder** where VM images are stored is ``~/Virtualbox VMs`` (this can be modified in ``File->Preferences->General``).
 
-See the `User Manual <http://www.virtualbox.org/manual/UserManual.html>`_ for creating a GUEST virtual machine. I use the `mini.iso installer <http://www.circuidipity.com/minimal-debian.html>`_ to create a new virtual machine with a minimal system configuration.
+See the `User Manual <http://www.virtualbox.org/manual/UserManual.html>`_ for creating a GUEST virtual machine. I use the `mini.iso installer <http://www.circuidipity.com/ubuntu-trusty-install.html>`_ to create a new virtual machine with a minimal system configuration.
 
 2. GUEST additions
 ------------------
 
 **Guest Additions** provide extra features such as the ability to tweak display settings and add a shared folder that can accessed by both HOST and GUEST machines.
 
-Install on GUEST:
+Install on the new Ubuntu GUEST:
 
 .. code-block:: bash
 
-    $ sudo apt-get install virtualbox-guest-{dkms,utils,x11}
-    $ sudo adduser USERNAME vboxsf
-
-I ran into a situation with Debian 32-bit virtual machine where the installer created virtualbox kernel modules for ``linux-image-686-pae`` but not the ``486`` kernel I ended up using. Confirm that the current kernel has the necessary modules:
-
-.. code-block:: bash
-
-    $ modinfo /lib/modules/$(uname -r)/updates/dkms/vbox*
-
-If they are missing like they were for me ... use DKMS to build them:
-
-.. code-block:: bash
-
-    $ sudo apt-get install build-essential dkms module-assistant linux-headers-$(uname -r)
+    $ sudo apt install build-essential module-assistant linux-headers-$(uname -r) dkms
+    $ sudo apt install virtualbox-guest-{dkms,utils,x11}
     $ sudo m-a prepare
+    $ sudo adduser USERNAME vboxsf
 
 If the virtualbox modules need to be rebuilt for any reason for the running kernel:
 
@@ -95,6 +84,7 @@ Tweak display settings by going to the Virtualbox ``Machine->Settings...->Displa
 
 .. image:: images/20121207-display.png
     :alt: Display Settings
+    :align: center
     :width: 662px
     :height: 502px
 
@@ -119,11 +109,14 @@ If GUEST does not use a graphical login manager to launch its desktop then modif
 3.2 Console
 +++++++++++
 
-Debian GUEST in console mode defaults to a small 80x40 window. Resize by rebooting GUEST and:
+Ubuntu GUEST in console mode defaults to a small 80x40 window. Resize by rebooting GUEST and:
 
 * GRUB screen: hit ``c`` to enter command mode
-* ``grub>``: run ``vbeinfo`` to display supported resolutions (example: ``1152x864x32``)
-* ``/etc/default/grub``: add ``GRUB_GFXMODE=1152x864x32`` and ``GRUB_GFXPAYLOAD_LINUX=keep``
+* ``grub>``: run ``vbeinfo`` to display supported resolutions (example: ``1152x864``)
+* ``/etc/default/grub``: add ...
+    * ``GRUB_CMDLINE_LINUX_DEFAULT="nomodeset"``
+    * ``GRUB_GFXMODE=1152x864``
+    * ``GRUB_GFXPAYLOAD_LINUX=keep`` (`Helpful! <https://askubuntu.com/a/887785>`_)
 * save changes: run ``update-grub`` and reboot
 
 3.3 Shared folder
@@ -133,6 +126,7 @@ Create a shared folder on HOST. Make it accessible to GUEST by going to ``Machin
 
 .. image:: images/20121207-shared-folders.png
     :alt: Shared Folder Settings
+    :align: center
     :width: 662px
     :height: 502px
 

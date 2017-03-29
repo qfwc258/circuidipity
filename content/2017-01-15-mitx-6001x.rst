@@ -6,7 +6,7 @@ MITx and the Python DUDE
 :slug: mitx-6001x
 :template: article-project
 :tags: python, programming, mooc
-:modified: 2017-03-05 18:09:00
+:modified: 2017-03-19 19:09:00
 
 .. image:: images/mitx-6001x.png
     :align: right
@@ -67,6 +67,7 @@ I am extremely grateful for the opportunity to access world-class education wher
 `Week 6: Algorithmic Complexity <http://www.circuidipity.com/mitx-6001x-w6.html>`_
 ----------------------------------------------------------------------------------
 
-Week 7: Coming soon!
+`Week 7: Plotting and Final Thoughts <http://www.circuidipity.com/mitx-6001x-w7.html>`_
+---------------------------------------------------------------------------------------
 
 Happy hacking!
