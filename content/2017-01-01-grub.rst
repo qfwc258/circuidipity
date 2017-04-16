@@ -4,7 +4,7 @@ GNU GRUB
 
 :date: 2017-01-01 14:34:00
 :slug: grub
-:tags: ubuntu, linux
+:tags: grub, linux
 
 A few generic tweaks I add to Ubuntu's configuration (location: ``/etc/default/grub``) of the **GNU GRand Unified Bootloader**.
 

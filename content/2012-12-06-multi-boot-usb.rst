@@ -3,61 +3,61 @@ Transform a USB stick into a boot device packing multiple Linux distros
 =======================================================================
 
 :date: 2012-12-06 01:23:00
-:tags: shell, programming, linux
+:tags: grub, shell, linux
 :slug: multi-boot-usb
-:modified: 2015-02-26 20:53:00
+:modified: 2017-04-16 17:53:00
 
-In 5 easy steps I transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.
-
-.. role:: warning
-
-:warning:`WARNING!` In this HOWTO the USB stick is identified as **sdX** and contains a single partition **sdX1**. Make careful note of the drive and partition labels on your system. The following steps will **destroy all data** currently stored on the device.
+Transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.
 
 Let's go!
 =========
 
-0. Select device and create filesystem
-======================================
+.. role:: warning
 
-Create a ``FAT32`` partition on the unmounted USB stick:
+:warning:`WARNING!` In this HOWTO the USB device is identified as **sdX** and contains a single partition **sdX1**. Make careful note of the drive and partition labels on your system. The following steps will **destroy all data** currently stored on the device.
+
+0. Format
+---------
+
+Create a ``FAT32`` partition on the **unmounted** USB device ...
 
 .. code-block:: bash
 
     $ sudo mkfs.vfat -n MULTIBOOT /dev/sdX1
 
-1. Create boot and iso folders
-==============================
+1. Boot and iso
+---------------
 
-New ``FAT32`` partition is mounted and I create a ``boot`` folder for GRUB and a ``iso`` folder to hold Linux distro images. Example using ``/media/USB0`` as mountpoint:
-
-.. code-block:: bash
-
-    $ mkdir /media/USB0/{boot,iso}
-
-2. Install GRUB
-===============
-
-Install GRUB to the **Master Boot Record (MBR)** of the USB stick:
+Mount the USB device to MOUNTPOINT and create a ``boot`` folder for GRUB files and a ``iso`` folder to hold Linux distro images ...
 
 .. code-block:: bash
 
-    $ sudo grub-install --force --no-floppy --root-directory=/media/USB0 /dev/sdX
+    $ mkdir /media/MOUNTPOINT/{boot,iso}
 
-3. Copy Linux images
-====================
+2. GRUB
+-------
 
-Download and copy Linux ISO images to the newly-created ``iso`` folder on the USB stick. For example I have installed on my own USB stick:
+Install GRUB to the **Master Boot Record (MBR)** of the USB device at MOUNTPOINT ...
 
-* **GParted Live CD** - `Graphical partition editor <http://gparted.sourceforge.net/livecd.php>`_ for hard drives
+.. code-block:: bash
+
+    $ sudo grub-install --force --no-floppy --root-directory=/media/MOUNTPOINT /dev/sdX
+
+3. Linux images
+---------------
+
+Download and copy Linux ISO images to the newly-created ``iso`` folder on the USB device. I have installed ...
+
+* **SystemRescueCd** - `Collection of Linux repair tools <http://www.system-rescue-cd.org/>`_
 * **Darik's Boot and Nuke (DBAN)** - `Secure deletion tool <http://www.dban.org/>`_ to wipe hard disks clean [1]_
-* **Debian Wheezy Mini-Installers** - Minimal (~25MB) `64bit <http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/>`_ and `32bit <http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/>`_ ``mini.iso`` installers
-* **Ubuntu 14.04 LTS Mini-Installers** - `64bit mini.iso <http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/>`_ and `32bit mini.iso <http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/>`_
+* **Debian Jessie Mini-Installers** - Minimal (~25MB) `64bit <http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/>`_ and `32bit <http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/>`_ ``mini.iso`` installers
+* **Ubuntu 16.04 LTS Mini-Installers** - `64bit mini.iso <http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/>`_ and `32bit mini.iso <http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-i386/current/images/netboot/>`_
 * **Memtest86+** - Diagnostic tool for `testing RAM <http://www.memtest.org/>`_
 
-4. Create grub.cfg
-==================
+4. GRUB configuration
+---------------------
 
-Create a ``grub.cfg`` with entries for the Linux images copied to the USB stick. Each distro is a little bit different in the manner its booted by GRUB. Using my own example above I have created:
+Create ``grub.cfg`` with entries for the Linux images copied to the USB device. Each distro is a little bit different in the manner its booted by GRUB. Example ... 
 
 .. code-block:: bash
 
@@ -82,49 +82,49 @@ Create a ``grub.cfg`` with entries for the Linux images copied to the USB stick.
     set imgdevpath="/dev/disk/by-label/MULTIBOOT"
 
     # Boot ISOs
-    menuentry "GParted Live - Partition Editor" {
-        set iso="/iso/gparted-live-0.20.0-2-i486.iso"
+    menuentry "SystemRescueCd std-64bit" {
+        set iso="/iso/systemrescuecd-x86.iso"
         loopback loop $iso
-        linux (loop)/live/vmlinuz boot=live config union=aufs noswap noprompt ip=frommedia toram=filesystem.squashfs findiso=$iso
-        initrd (loop)/live/initrd.img
+        linux (loop)/isolinux/rescue64 isoloop=$iso
+        initrd (loop)/isolinux/initram.igz
     }
 
     menuentry "Darik's Boot and Nuke - Hard Disk Wipe" {
-        set iso="/iso/dban-2.2.8_i586.iso"
+        set iso="/iso/dban-i586.iso"
         loopback loop $iso
         linux (loop)/DBAN.BZI nuke="dwipe"
     }
 
-    menuentry "Debian Wheezy - 64bit Mini-Installer" {
-        set iso="/iso/debian-wheezy-amd64-mini.iso"
+    menuentry "Debian Jessie - 64bit Mini-Installer" {
+        set iso="/iso/debian-jessie-amd64-mini.iso"
         loopback loop $iso
         linux (loop)/linux
         initrd (loop)/initrd.gz
     }
 
-    menuentry "Debian Wheezy - 32bit Mini-Installer" {
-        set iso="/iso/debian-wheezy-i386-mini.iso"
+    menuentry "Debian Jessie - 32bit Mini-Installer" {
+        set iso="/iso/debian-jessie-i386-mini.iso"
         loopback loop $iso
         linux (loop)/linux
         initrd (loop)/initrd.gz
     }
 
-    menuentry "Ubuntu 14.04 LTS - 64bit Mini-Installer" {
-        set iso="/iso/ubuntu-14.04-amd64-mini.iso"
+    menuentry "Ubuntu 16.04 LTS - 64bit Mini-Installer" {
+        set iso="/iso/ubuntu-lts-amd64-mini.iso"
         loopback loop $iso
         linux (loop)/linux boot=casper iso-scan/filename=$iso noprompt noeject
         initrd (loop)/initrd.gz
     }
 
-    menuentry "Ubuntu 14.04 LTS - 32bit Mini-Installer" {
-        set iso="/iso/ubuntu-14.04-i386-mini.iso"
+    menuentry "Ubuntu 16.04 LTS - 32bit Mini-Installer" {
+        set iso="/iso/ubuntu-lts-i386-mini.iso"
         loopback loop $iso
         linux (loop)/linux boot=casper iso-scan/filename=$iso noprompt noeject
         initrd (loop)/initrd.gz
     }
 
-    menuentry "Ubuntu 14.04 LTS - 32bit Installer ('forcepae' for Pentium M)" {
-        set iso="/iso/ubuntu-14.04-i386-mini.iso"
+    menuentry "Ubuntu 16.04 LTS - 32bit Installer ('forcepae' for Pentium M)" {
+        set iso="/iso/ubuntu-lts-i386-mini.iso"
         loopback loop $iso
         linux (loop)/linux boot=casper iso-scan/filename=$iso noprompt noeject forcepae
         initrd (loop)/initrd.gz
@@ -134,12 +134,12 @@ Create a ``grub.cfg`` with entries for the Linux images copied to the USB stick.
         linux16 /boot/memtest86+-4.20.bin
     }
 
-Save ``grub.cfg`` to the USB stick at ``/media/my_username/boot/grub``.
+Save ``grub.cfg`` to the USB stick at ``/media/MOUNTPOINT/boot/grub``.
 
-All done! Reboot, select the USB stick (depends on BIOS) as boot device and GRUB will display a menu of the installed Linux distro images. Reboot again and return to using your USB stick as a regular storage device.
+All done! Reboot, configure USB (set in BIOS) as boot device, save changes, reboot again, and GRUB will display the menu of Linux distro images. Remove the USB multi-boot device, reboot, and return to using your USB device as removable storage.
 
 5. GRUBS Reanimated USB Boot Stick
-==================================
+----------------------------------
 
 I created the `GRUBS shell script <https://github.com/vonbrownie/grubs>`_ that creates multi-boot Linux USB sticks using the above steps and placed it on GitHub.
 
