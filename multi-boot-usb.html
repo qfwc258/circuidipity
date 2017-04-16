@@ -36,45 +36,44 @@
 
 <!-- article -->
 <h1>Transform a USB stick into a boot device packing multiple Linux distros</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 26 February 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 16 April 2017</p>
 <div id="article">
-    <p>In 5 easy steps I transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.</p>
-<p><span class="warning">WARNING!</span> In this HOWTO the USB stick is identified as <strong>sdX</strong> and contains a single partition <strong>sdX1</strong>. Make careful note of the drive and partition labels on your system. The following steps will <strong>destroy all data</strong> currently stored on the device.</p>
+    <p>Transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-</div>
-<div class="section" id="select-device-and-create-filesystem">
-<h2>0. Select device and create filesystem</h2>
-<p>Create a <tt class="docutils literal">FAT32</tt> partition on the unmounted USB stick:</p>
+<p><span class="warning">WARNING!</span> In this HOWTO the USB device is identified as <strong>sdX</strong> and contains a single partition <strong>sdX1</strong>. Make careful note of the drive and partition labels on your system. The following steps will <strong>destroy all data</strong> currently stored on the device.</p>
+<div class="section" id="format">
+<h3>0. Format</h3>
+<p>Create a <tt class="docutils literal">FAT32</tt> partition on the <strong>unmounted</strong> USB device ...</p>
 <div class="highlight"><pre><span></span>$ sudo mkfs.vfat -n MULTIBOOT /dev/sdX1
 </pre></div>
 </div>
-<div class="section" id="create-boot-and-iso-folders">
-<h2>1. Create boot and iso folders</h2>
-<p>New <tt class="docutils literal">FAT32</tt> partition is mounted and I create a <tt class="docutils literal">boot</tt> folder for GRUB and a <tt class="docutils literal">iso</tt> folder to hold Linux distro images. Example using <tt class="docutils literal">/media/USB0</tt> as mountpoint:</p>
-<div class="highlight"><pre><span></span>$ mkdir /media/USB0/<span class="o">{</span>boot,iso<span class="o">}</span>
+<div class="section" id="boot-and-iso">
+<h3>1. Boot and iso</h3>
+<p>Mount the USB device to MOUNTPOINT and create a <tt class="docutils literal">boot</tt> folder for GRUB files and a <tt class="docutils literal">iso</tt> folder to hold Linux distro images ...</p>
+<div class="highlight"><pre><span></span>$ mkdir /media/MOUNTPOINT/<span class="o">{</span>boot,iso<span class="o">}</span>
 </pre></div>
 </div>
-<div class="section" id="install-grub">
-<h2>2. Install GRUB</h2>
-<p>Install GRUB to the <strong>Master Boot Record (MBR)</strong> of the USB stick:</p>
-<div class="highlight"><pre><span></span>$ sudo grub-install --force --no-floppy --root-directory<span class="o">=</span>/media/USB0 /dev/sdX
+<div class="section" id="grub">
+<h3>2. GRUB</h3>
+<p>Install GRUB to the <strong>Master Boot Record (MBR)</strong> of the USB device at MOUNTPOINT ...</p>
+<div class="highlight"><pre><span></span>$ sudo grub-install --force --no-floppy --root-directory<span class="o">=</span>/media/MOUNTPOINT /dev/sdX
 </pre></div>
 </div>
-<div class="section" id="copy-linux-images">
-<h2>3. Copy Linux images</h2>
-<p>Download and copy Linux ISO images to the newly-created <tt class="docutils literal">iso</tt> folder on the USB stick. For example I have installed on my own USB stick:</p>
+<div class="section" id="linux-images">
+<h3>3. Linux images</h3>
+<p>Download and copy Linux ISO images to the newly-created <tt class="docutils literal">iso</tt> folder on the USB device. I have installed ...</p>
 <ul class="simple">
-<li><strong>GParted Live CD</strong> - <a class="reference external" href="http://gparted.sourceforge.net/livecd.php">Graphical partition editor</a> for hard drives</li>
+<li><strong>SystemRescueCd</strong> - <a class="reference external" href="http://www.system-rescue-cd.org/">Collection of Linux repair tools</a></li>
 <li><strong>Darik's Boot and Nuke (DBAN)</strong> - <a class="reference external" href="http://www.dban.org/">Secure deletion tool</a> to wipe hard disks clean <a class="footnote-reference" href="#id4" id="id1">[1]</a></li>
-<li><strong>Debian Wheezy Mini-Installers</strong> - Minimal (~25MB) <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/">64bit</a> and <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/">32bit</a> <tt class="docutils literal">mini.iso</tt> installers</li>
-<li><strong>Ubuntu 14.04 LTS Mini-Installers</strong> - <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/">64bit mini.iso</a> and <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-i386/current/images/netboot/">32bit mini.iso</a></li>
+<li><strong>Debian Jessie Mini-Installers</strong> - Minimal (~25MB) <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/">64bit</a> and <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/">32bit</a> <tt class="docutils literal">mini.iso</tt> installers</li>
+<li><strong>Ubuntu 16.04 LTS Mini-Installers</strong> - <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/">64bit mini.iso</a> and <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-i386/current/images/netboot/">32bit mini.iso</a></li>
 <li><strong>Memtest86+</strong> - Diagnostic tool for <a class="reference external" href="http://www.memtest.org/">testing RAM</a></li>
 </ul>
 </div>
-<div class="section" id="create-grub-cfg">
-<h2>4. Create grub.cfg</h2>
-<p>Create a <tt class="docutils literal">grub.cfg</tt> with entries for the Linux images copied to the USB stick. Each distro is a little bit different in the manner its booted by GRUB. Using my own example above I have created:</p>
+<div class="section" id="grub-configuration">
+<h3>4. GRUB configuration</h3>
+<p>Create <tt class="docutils literal">grub.cfg</tt> with entries for the Linux images copied to the USB device. Each distro is a little bit different in the manner its booted by GRUB. Example ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># Config for GNU GRand Unified Bootloader (GRUB)</span>
 <span class="c1"># /boot/grub/grub.cfg</span>
 
@@ -96,49 +95,49 @@
 <span class="nb">set</span> <span class="nv">imgdevpath</span><span class="o">=</span><span class="s2">&quot;/dev/disk/by-label/MULTIBOOT&quot;</span>
 
 <span class="c1"># Boot ISOs</span>
-menuentry <span class="s2">&quot;GParted Live - Partition Editor&quot;</span> <span class="o">{</span>
-    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/gparted-live-0.20.0-2-i486.iso&quot;</span>
+menuentry <span class="s2">&quot;SystemRescueCd std-64bit&quot;</span> <span class="o">{</span>
+    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/systemrescuecd-x86.iso&quot;</span>
     loopback loop <span class="nv">$iso</span>
-    linux <span class="o">(</span>loop<span class="o">)</span>/live/vmlinuz <span class="nv">boot</span><span class="o">=</span>live config <span class="nv">union</span><span class="o">=</span>aufs noswap noprompt <span class="nv">ip</span><span class="o">=</span>frommedia <span class="nv">toram</span><span class="o">=</span>filesystem.squashfs <span class="nv">findiso</span><span class="o">=</span><span class="nv">$iso</span>
-    initrd <span class="o">(</span>loop<span class="o">)</span>/live/initrd.img
+    linux <span class="o">(</span>loop<span class="o">)</span>/isolinux/rescue64 <span class="nv">isoloop</span><span class="o">=</span><span class="nv">$iso</span>
+    initrd <span class="o">(</span>loop<span class="o">)</span>/isolinux/initram.igz
 <span class="o">}</span>
 
 menuentry <span class="s2">&quot;Darik&#39;s Boot and Nuke - Hard Disk Wipe&quot;</span> <span class="o">{</span>
-    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/dban-2.2.8_i586.iso&quot;</span>
+    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/dban-i586.iso&quot;</span>
     loopback loop <span class="nv">$iso</span>
     linux <span class="o">(</span>loop<span class="o">)</span>/DBAN.BZI <span class="nv">nuke</span><span class="o">=</span><span class="s2">&quot;dwipe&quot;</span>
 <span class="o">}</span>
 
-menuentry <span class="s2">&quot;Debian Wheezy - 64bit Mini-Installer&quot;</span> <span class="o">{</span>
-    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/debian-wheezy-amd64-mini.iso&quot;</span>
+menuentry <span class="s2">&quot;Debian Jessie - 64bit Mini-Installer&quot;</span> <span class="o">{</span>
+    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/debian-jessie-amd64-mini.iso&quot;</span>
     loopback loop <span class="nv">$iso</span>
     linux <span class="o">(</span>loop<span class="o">)</span>/linux
     initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
 <span class="o">}</span>
 
-menuentry <span class="s2">&quot;Debian Wheezy - 32bit Mini-Installer&quot;</span> <span class="o">{</span>
-    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/debian-wheezy-i386-mini.iso&quot;</span>
+menuentry <span class="s2">&quot;Debian Jessie - 32bit Mini-Installer&quot;</span> <span class="o">{</span>
+    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/debian-jessie-i386-mini.iso&quot;</span>
     loopback loop <span class="nv">$iso</span>
     linux <span class="o">(</span>loop<span class="o">)</span>/linux
     initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
 <span class="o">}</span>
 
-menuentry <span class="s2">&quot;Ubuntu 14.04 LTS - 64bit Mini-Installer&quot;</span> <span class="o">{</span>
-    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/ubuntu-14.04-amd64-mini.iso&quot;</span>
+menuentry <span class="s2">&quot;Ubuntu 16.04 LTS - 64bit Mini-Installer&quot;</span> <span class="o">{</span>
+    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/ubuntu-lts-amd64-mini.iso&quot;</span>
     loopback loop <span class="nv">$iso</span>
     linux <span class="o">(</span>loop<span class="o">)</span>/linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject
     initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
 <span class="o">}</span>
 
-menuentry <span class="s2">&quot;Ubuntu 14.04 LTS - 32bit Mini-Installer&quot;</span> <span class="o">{</span>
-    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/ubuntu-14.04-i386-mini.iso&quot;</span>
+menuentry <span class="s2">&quot;Ubuntu 16.04 LTS - 32bit Mini-Installer&quot;</span> <span class="o">{</span>
+    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/ubuntu-lts-i386-mini.iso&quot;</span>
     loopback loop <span class="nv">$iso</span>
     linux <span class="o">(</span>loop<span class="o">)</span>/linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject
     initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
 <span class="o">}</span>
 
-menuentry <span class="s2">&quot;Ubuntu 14.04 LTS - 32bit Installer (&#39;forcepae&#39; for Pentium M)&quot;</span> <span class="o">{</span>
-    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/ubuntu-14.04-i386-mini.iso&quot;</span>
+menuentry <span class="s2">&quot;Ubuntu 16.04 LTS - 32bit Installer (&#39;forcepae&#39; for Pentium M)&quot;</span> <span class="o">{</span>
+    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/ubuntu-lts-i386-mini.iso&quot;</span>
     loopback loop <span class="nv">$iso</span>
     linux <span class="o">(</span>loop<span class="o">)</span>/linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject forcepae
     initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
@@ -148,13 +147,14 @@ menuentry <span class="s2">&quot;Memtest86+ - RAM Tester&quot;</span> <span clas
     linux16 /boot/memtest86+-4.20.bin
 <span class="o">}</span>
 </pre></div>
-<p>Save <tt class="docutils literal">grub.cfg</tt> to the USB stick at <tt class="docutils literal">/media/my_username/boot/grub</tt>.</p>
-<p>All done! Reboot, select the USB stick (depends on BIOS) as boot device and GRUB will display a menu of the installed Linux distro images. Reboot again and return to using your USB stick as a regular storage device.</p>
+<p>Save <tt class="docutils literal">grub.cfg</tt> to the USB stick at <tt class="docutils literal">/media/MOUNTPOINT/boot/grub</tt>.</p>
+<p>All done! Reboot, configure USB (set in BIOS) as boot device, save changes, reboot again, and GRUB will display the menu of Linux distro images. Remove the USB multi-boot device, reboot, and return to using your USB device as removable storage.</p>
 </div>
 <div class="section" id="grubs-reanimated-usb-boot-stick">
-<h2>5. GRUBS Reanimated USB Boot Stick</h2>
+<h3>5. GRUBS Reanimated USB Boot Stick</h3>
 <p>I created the <a class="reference external" href="https://github.com/vonbrownie/grubs">GRUBS shell script</a> that creates multi-boot Linux USB sticks using the above steps and placed it on GitHub.</p>
 <p>Happy hacking!</p>
+</div>
 <div class="section" id="notes">
 <h3>Notes</h3>
 <table class="docutils footnote" frame="void" id="id4" rules="none">
@@ -166,8 +166,8 @@ menuentry <span class="s2">&quot;Memtest86+ - RAM Tester&quot;</span> <span clas
 </div>
 </div>
 
-    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-grub.html">grub</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
 </div>
