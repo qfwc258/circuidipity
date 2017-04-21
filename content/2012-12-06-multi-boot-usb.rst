@@ -3,9 +3,9 @@ Transform a USB stick into a boot device packing multiple Linux distros
 =======================================================================
 
 :date: 2012-12-06 01:23:00
-:tags: grub, shell, linux
+:tags: grub, shell, systemrescuecd, debian, ubuntu, linux
 :slug: multi-boot-usb
-:modified: 2017-04-16 17:53:00
+:modified: 2017-04-21 12:43:00
 
 Transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.
 
@@ -32,7 +32,7 @@ Mount the USB device to MOUNTPOINT and create a ``boot`` folder for GRUB files a
 
 .. code-block:: bash
 
-    $ mkdir /media/MOUNTPOINT/{boot,iso}
+    $ mkdir -p /media/MOUNTPOINT/boot/{grub,iso,debian}
 
 2. GRUB
 -------
@@ -46,13 +46,28 @@ Install GRUB to the **Master Boot Record (MBR)** of the USB device at MOUNTPOINT
 3. Linux images
 ---------------
 
-Download and copy Linux ISO images to the newly-created ``iso`` folder on the USB device. I have installed ...
+Download and copy Linux ISO images to the newly-created ``boot/iso`` folder on the USB device. I have installed ...
 
 * **SystemRescueCd** - `Collection of Linux repair tools <http://www.system-rescue-cd.org/>`_
-* **Darik's Boot and Nuke (DBAN)** - `Secure deletion tool <http://www.dban.org/>`_ to wipe hard disks clean [1]_
-* **Debian Jessie Mini-Installers** - Minimal (~25MB) `64bit <http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/>`_ and `32bit <http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/>`_ ``mini.iso`` installers
+* **Debian Jessie Netinst+firmware** - `64bit <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/8.7.1+nonfree/amd64/iso-cd/>`_ and `32bit <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/8.7.1+nonfree/i386/iso-cd/>`_ installers
 * **Ubuntu 16.04 LTS Mini-Installers** - `64bit mini.iso <http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/>`_ and `32bit mini.iso <http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-i386/current/images/netboot/>`_
-* **Memtest86+** - Diagnostic tool for `testing RAM <http://www.memtest.org/>`_
+
+3.1 Debian Netinst
+++++++++++++++++++
+
+Problem: This was a bit tricky to get working. Selecting ``firmware-8.7.1-ARCH-netinst.iso`` from the GRUB menu would get things started but the install would fail at the stage where the ISO needs to be located and mounted. Debian's netinst images do not include the **iso-scan** package , which is required for searching and loading ISO images.
+
+Fix: Bypass the ``initrd.gz`` that is on the ISO images and use ones that *do* contain the iso-scan package, which I retrieved from the **hd-media** installers ...
+
+.. code-block:: bash
+
+    $ mkdir /media/MOUNTPOINT/boot/debian/install.{amd,386}
+    $ cd /media/MOUNTPOINT/boot/debian/install.amd
+    $ wget http://ftp.debian.org/debian/dists/jessie/main/installer-amd64/current/images/hd-media/initrd.gz
+    $ cd .. /install.386
+    $ wget http://ftp.debian.org/debian/dists/jessie/main/installer-i386/current/images/hd-media/initrd.gz
+
+Helpful resource in figuring this out! `Multi-boot stick update <http://126kr.com/article/6xzqwchvlv6>`_
 
 4. GRUB configuration
 ---------------------
@@ -89,24 +104,25 @@ Create ``grub.cfg`` with entries for the Linux images copied to the USB device. 
         initrd (loop)/isolinux/initram.igz
     }
 
-    menuentry "Darik's Boot and Nuke - Hard Disk Wipe" {
-        set iso="/iso/dban-i586.iso"
+    menuentry "SystemRescueCd std-32bit" {
+        set iso="/iso/systemrescuecd-x86.iso"
         loopback loop $iso
-        linux (loop)/DBAN.BZI nuke="dwipe"
+        linux (loop)/isolinux/rescue32 isoloop=$iso
+        initrd (loop)/isolinux/initram.igz
     }
 
-    menuentry "Debian Jessie - 64bit Mini-Installer" {
-        set iso="/iso/debian-jessie-amd64-mini.iso"
+    menuentry "Debian Jessie - 64bit Netinst+firmware" {
+        set iso="/boot/iso/firmware-8.7.1-amd64-netinst.iso"
         loopback loop $iso
-        linux (loop)/linux
-        initrd (loop)/initrd.gz
+        linux (loop)/install.amd/vmlinuz iso-scan/ask_second_pass=true iso-scan/filename=$iso priority=low vga=788 --- quiet 
+        initrd /boot/debian/install.amd/initrd.gz
     }
 
-    menuentry "Debian Jessie - 32bit Mini-Installer" {
-        set iso="/iso/debian-jessie-i386-mini.iso"
+    menuentry "Debian Jessie - 32bit Netinst+firmware" {
+        set iso="/boot/iso/firmware-8.7.1-i386-netinst.iso"
         loopback loop $iso
-        linux (loop)/linux
-        initrd (loop)/initrd.gz
+        linux (loop)/install.386/vmlinuz iso-scan/ask_second_pass=true iso-scan/filename=$iso priority=low vga=788 --- quiet 
+        initrd /boot/debian/install.386/initrd.gz
     }
 
     menuentry "Ubuntu 16.04 LTS - 64bit Mini-Installer" {
@@ -130,11 +146,7 @@ Create ``grub.cfg`` with entries for the Linux images copied to the USB device. 
         initrd (loop)/initrd.gz
     }
 
-    menuentry "Memtest86+ - RAM Tester" {
-        linux16 /boot/memtest86+-4.20.bin
-    }
-
-Save ``grub.cfg`` to the USB stick at ``/media/MOUNTPOINT/boot/grub``.
+Save ``grub.cfg`` to the USB stick at ``boot/grub``.
 
 All done! Reboot, configure USB (set in BIOS) as boot device, save changes, reboot again, and GRUB will display the menu of Linux distro images. Remove the USB multi-boot device, reboot, and return to using your USB device as removable storage.
 
@@ -144,8 +156,3 @@ All done! Reboot, configure USB (set in BIOS) as boot device, save changes, rebo
 I created the `GRUBS shell script <https://github.com/vonbrownie/grubs>`_ that creates multi-boot Linux USB sticks using the above steps and placed it on GitHub.
 
 Happy hacking!
-
-Notes
------
-
-.. [1] When using DBAN remove the USB stick immediately when the boot messages begin to scroll past... otherwise it will scan for USB drives and later fail when selecting a hard drive to wipe.
