@@ -5,7 +5,7 @@ Transform a USB stick into a boot device packing multiple Linux distros
 :date: 2012-12-06 01:23:00
 :tags: grub, shell, systemrescuecd, debian, ubuntu, linux
 :slug: multi-boot-usb
-:modified: 2017-04-21 12:43:00
+:modified: 2017-04-23 21:43:00
 
 Transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.
 
@@ -41,7 +41,7 @@ Install GRUB to the **Master Boot Record (MBR)** of the USB device at MOUNTPOINT
 
 .. code-block:: bash
 
-    $ sudo grub-install --force --no-floppy --root-directory=/media/MOUNTPOINT /dev/sdX
+    $ sudo grub-install --target=i386-pc --force --recheck --boot-directory=/media/MOUNTPOINT/boot /dev/sdX
 
 3. Linux images
 ---------------
