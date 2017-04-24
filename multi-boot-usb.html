@@ -36,7 +36,7 @@
 
 <!-- article -->
 <h1>Transform a USB stick into a boot device packing multiple Linux distros</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Friday 21 April 2017</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 23 April 2017</p>
 <div id="article">
     <p>Transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.</p>
 <div class="section" id="let-s-go">
@@ -57,7 +57,7 @@
 <div class="section" id="grub">
 <h3>2. GRUB</h3>
 <p>Install GRUB to the <strong>Master Boot Record (MBR)</strong> of the USB device at MOUNTPOINT ...</p>
-<div class="highlight"><pre><span></span>$ sudo grub-install --force --no-floppy --root-directory<span class="o">=</span>/media/MOUNTPOINT /dev/sdX
+<div class="highlight"><pre><span></span>$ sudo grub-install --target<span class="o">=</span>i386-pc --force --recheck --boot-directory<span class="o">=</span>/media/MOUNTPOINT/boot /dev/sdX
 </pre></div>
 </div>
 <div class="section" id="linux-images">
