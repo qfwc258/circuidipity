@@ -36,7 +36,7 @@
 
 <!-- article -->
 <h1>Transform a USB stick into a boot device packing multiple Linux distros</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 23 April 2017</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Wednesday 26 April 2017</p>
 <div id="article">
     <p>Transform a standard USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.</p>
 <div class="section" id="let-s-go">
@@ -66,6 +66,7 @@
 <ul class="simple">
 <li><strong>SystemRescueCd</strong> - <a class="reference external" href="http://www.system-rescue-cd.org/">Collection of Linux repair tools</a></li>
 <li><strong>Debian Jessie Netinst+firmware</strong> - <a class="reference external" href="https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/8.7.1+nonfree/amd64/iso-cd/">64bit</a> and <a class="reference external" href="https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/8.7.1+nonfree/i386/iso-cd/">32bit</a> installers</li>
+<li><strong>Lubuntu 16.04 Live Mode + Desktop Installer</strong> - <a class="reference external" href="http://cdimage.ubuntu.com/lubuntu/releases/16.04.2/release/">64bit and 32bit</a> desktop images allow trying Lubuntu before installig</li>
 <li><strong>Ubuntu 16.04 LTS Mini-Installers</strong> - <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/">64bit mini.iso</a> and <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-i386/current/images/netboot/">32bit mini.iso</a></li>
 </ul>
 <div class="section" id="debian-netinst">
@@ -133,6 +134,13 @@ menuentry <span class="s2">&quot;Debian Jessie - 32bit Netinst+firmware&quot;</s
     initrd /boot/debian/install.386/initrd.gz
 <span class="o">}</span>
 
+menuentry <span class="s2">&quot;Lubuntu 16.04 - 64bit Live Mode + Desktop Installer&quot;</span> <span class="o">{</span>
+    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/boot/iso/lubuntu-16.04.2-desktop-amd64.iso&quot;</span>
+    loopback loop <span class="nv">$iso</span>
+    linux <span class="o">(</span>loop<span class="o">)</span>/casper/vmlinuz.efi <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject
+    initrd <span class="o">(</span>loop<span class="o">)</span>/casper/initrd.lz
+<span class="o">}</span>
+
 menuentry <span class="s2">&quot;Ubuntu 16.04 LTS - 64bit Mini-Installer&quot;</span> <span class="o">{</span>
     <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/ubuntu-lts-amd64-mini.iso&quot;</span>
     loopback loop <span class="nv">$iso</span>
@@ -168,6 +176,7 @@ menuentry <span class="s2">&quot;Ubuntu 16.04 LTS - 32bit Installer (&#39;forcep
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-systemrescuecd.html">systemrescuecd</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-lubuntu.html">lubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
