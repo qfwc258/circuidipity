@@ -39,7 +39,7 @@
     <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Friday 26 May 2017</p>
 <div id="article">
     <img alt="GRUBS" class="align-right" src="images/grubs-300.png" style="width: 300px; height: 363px;" />
-<p>Transform removable USB storage into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device capable of loopback mounting Linux distro ISO files. <a class="footnote-reference" href="#id4" id="id1">[1]</a></p>
+<p>Transform removable USB storage into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device capable of loopback mounting Linux distro ISO files. <a class="footnote-reference" href="#id5" id="id1">[1]</a></p>
 <p>Depends: <tt class="docutils literal">grub2</tt>, <tt class="docutils literal">bash</tt>, <tt class="docutils literal">sudo</tt>, <tt class="docutils literal">rsync</tt></p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
@@ -74,14 +74,13 @@
 <div class="section" id="debian-netinst">
 <h4>3.1 Debian Netinst</h4>
 <p>Problem: This was a bit tricky to get working. Selecting <tt class="docutils literal"><span class="pre">firmware-8.7.1-ARCH-netinst.iso</span></tt> from the GRUB menu would get things started but the install would fail at the stage where the ISO needs to be located and mounted. Debian's netinst images do not include the <strong>iso-scan</strong> package , which is required for searching and loading ISO images.</p>
-<p>Fix: Bypass the <tt class="docutils literal">initrd.gz</tt> that is on the ISO images and use ones that <em>do</em> contain the iso-scan package, which I retrieved from the <strong>hd-media</strong> installers ...</p>
+<p>Fix: Bypass the <tt class="docutils literal">initrd.gz</tt> that is on the ISO images and use ones that <em>do</em> contain the iso-scan package, <a class="footnote-reference" href="#id6" id="id4">[2]</a> which I retrieved from the <strong>hd-media</strong> installers ...</p>
 <div class="highlight"><pre><span></span>$ mkdir /media/MOUNTPOINT/boot/debian/install.<span class="o">{</span>amd,386<span class="o">}</span>
 $ <span class="nb">cd</span> /media/MOUNTPOINT/boot/debian/install.amd
 $ wget http://ftp.debian.org/debian/dists/jessie/main/installer-amd64/current/images/hd-media/initrd.gz
 $ <span class="nb">cd</span> .. /install.386
 $ wget http://ftp.debian.org/debian/dists/jessie/main/installer-i386/current/images/hd-media/initrd.gz
 </pre></div>
-<p>Helpful resource in figuring this out! <a class="reference external" href="http://126kr.com/article/6xzqwchvlv6">Multi-boot stick update</a></p>
 </div>
 </div>
 <div class="section" id="grub-configuration">
@@ -173,10 +172,16 @@ menuentry <span class="s2">&quot;Ubuntu 16.04 LTS - 32bit Installer (&#39;forcep
 <p>Happy hacking!</p>
 <div class="section" id="notes">
 <h4>Notes</h4>
-<table class="docutils footnote" frame="void" id="id4" rules="none">
+<table class="docutils footnote" frame="void" id="id5" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Image credit: Flickr user Peter via Creative Commons, retrieved from <a class="reference external" href="https://insideclimatenews.org/species/birds/ad%C3%A9lie-penguin">InsideClimate News</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[2]</a></td><td>Helpful in figuring out the iso-scan package wrinkle: <a class="reference external" href="http://126kr.com/article/6xzqwchvlv6">Multi-boot stick update</a></td></tr>
 </tbody>
 </table>
 </div>
