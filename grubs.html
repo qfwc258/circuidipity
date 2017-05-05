@@ -36,29 +36,12 @@
 
 <!-- article -->
 <h1>GRUBS Reanimated USB Boot Stick</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 26 February 2015</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Friday 05 May 2017</p>
 <div id="article">
-    <p><a class="reference external" href="https://github.com/vonbrownie/grubs">GRUBS</a> is a Bash script I created for transforming a USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.</p>
-<p>See for more details: <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">Transform a USB stick into a boot device packing multiple Linux distros</a></p>
-<p>Requires: <tt class="docutils literal">GRUB2</tt>, <tt class="docutils literal">rsync</tt></p>
-<div class="section" id="usage">
-<h2>Usage</h2>
-<p><strong>0.</strong> <a class="reference external" href="https://github.com/vonbrownie/grubs/archive/master.zip">Download GRUBS</a>, unpack, and copy <tt class="docutils literal"><span class="pre">grubs-master/grubs</span></tt> script to a location in PATH. Example:</p>
-<div class="highlight"><pre><span></span>$ sudo cp grubs-master/grubs /usr/local/bin
-</pre></div>
-<p><strong>1.</strong> Create a folder to hold Linux distro images and <tt class="docutils literal">grub.cfg</tt>. Example:</p>
-<div class="highlight"><pre><span></span>$ mkdir -p ~/GRUBS/iso
-$ cp grubs-master/grub.cfg ~/GRUBS
-</pre></div>
-<p><strong>2.</strong> Download Linux distro images and place in <tt class="docutils literal">~/GRUBS/iso</tt>.</p>
-<p><strong>3.</strong> Edit sample <tt class="docutils literal">grub.cfg</tt> with entries for the Linux images to be copied to the device. Each distro is a little bit different in the manner its booted by GRUB.</p>
-<p><strong>4.</strong> Run <tt class="docutils literal">sudo /path/to/grubs [OPTION] DEVICE</tt>. Example: install GRUB and Linux distros to a partition on a USB stick identified as <tt class="docutils literal">/dev/sde1</tt>:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> sudo /usr/local/bin/grubs -i ~/GRUBS/iso -c ~/GRUBS/grub.cfg sde1
-</pre></div>
-<p>See <tt class="docutils literal">grubs <span class="pre">-h</span></tt> for options.</p>
-<p>Reboot, select the USB stick (depends on BIOS) as boot device and GRUB will display a menu of the installed Linux distro images. Reboot again and return to using your USB stick as a regular storage device.</p>
+    <p><strong>GRUBS</strong> is a shell script I made for transforming removable USB storage into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device capable of loopback mounting Linux distro ISO files.</p>
+<p>Depends: <tt class="docutils literal">grub2</tt>, <tt class="docutils literal">bash</tt>, <tt class="docutils literal">sudo</tt>, <tt class="docutils literal">rsync</tt></p>
+<p>Links: <a class="reference external" href="https://github.com/vonbrownie/grubs">https://github.com/vonbrownie/grubs</a> and for more details see <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">Transform a USB stick into a boot device packing multiple Linux distros</a></p>
 <p>Happy hacking!</p>
-</div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-grub.html">grub</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
