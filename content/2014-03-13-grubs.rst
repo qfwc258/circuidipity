@@ -5,42 +5,12 @@ GRUBS Reanimated USB Boot Stick
 :date: 2014-03-13 01:23:00
 :slug: grubs
 :tags: grub, shell, programming, linux
-:modified: 2015-02-26 20:59:00
+:modified: 2017-05-05 09:59:00
 
-`GRUBS <https://github.com/vonbrownie/grubs>`_ is a Bash script I created for transforming a USB stick into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device packing multiple Linux distros.
+**GRUBS** is a shell script I made for transforming removable USB storage into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device capable of loopback mounting Linux distro ISO files.
 
-See for more details: `Transform a USB stick into a boot device packing multiple Linux distros <http://www.circuidipity.com/multi-boot-usb.html>`_
+Depends: ``grub2``, ``bash``, ``sudo``, ``rsync``
 
-Requires: ``GRUB2``, ``rsync``
-
-Usage
-=====
-
-**0.** `Download GRUBS <https://github.com/vonbrownie/grubs/archive/master.zip>`_, unpack, and copy ``grubs-master/grubs`` script to a location in PATH. Example:
-
-.. code-block:: bash
-
-    $ sudo cp grubs-master/grubs /usr/local/bin
-
-**1.** Create a folder to hold Linux distro images and ``grub.cfg``. Example:
-
-.. code-block:: bash
-
-    $ mkdir -p ~/GRUBS/iso
-    $ cp grubs-master/grub.cfg ~/GRUBS
-
-**2.** Download Linux distro images and place in ``~/GRUBS/iso``.
-
-**3.** Edit sample ``grub.cfg`` with entries for the Linux images to be copied to the device. Each distro is a little bit different in the manner its booted by GRUB.
-
-**4.** Run ``sudo /path/to/grubs [OPTION] DEVICE``. Example: install GRUB and Linux distros to a partition on a USB stick identified as ``/dev/sde1``: 
-
-.. code-block:: console
-
-    $ sudo /usr/local/bin/grubs -i ~/GRUBS/iso -c ~/GRUBS/grub.cfg sde1
-
-See ``grubs -h`` for options.
-
-Reboot, select the USB stick (depends on BIOS) as boot device and GRUB will display a menu of the installed Linux distro images. Reboot again and return to using your USB stick as a regular storage device.
+Links: https://github.com/vonbrownie/grubs and for more details see `Transform a USB stick into a boot device packing multiple Linux distros <http://www.circuidipity.com/multi-boot-usb.html>`_
 
 Happy hacking!

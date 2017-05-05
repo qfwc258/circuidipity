@@ -23,6 +23,23 @@ Projects
 
 .. class:: invisiblelink
 
+    .. image:: images/grubs-300-thumb.png
+        :alt: GRUBS
+        :width: 150px
+        :height: 150px
+        :align: left
+        :target: multi-boot-usb.html
+
+.. raw:: html
+
+    <div class="projectx">
+        <h2>GRUBS Reanimated USB Boot Stick</h2>
+        <p>Transform a USB stick into <a href="multi-boot-usb.html"> a boot device packing multiple Linux distros ...</a></p>
+        <p style="clear:both;"></p>
+    </div>
+
+.. class:: invisiblelink
+
     .. image:: images/mitx-6001x-thumb.png
         :alt: MITx and the Python DUDE
         :width: 150px
