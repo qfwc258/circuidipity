@@ -4,15 +4,15 @@ Secure remote access using SSH keys
 
 :date: 2015-02-02 00:05:00
 :slug: secure-remote-access-using-ssh-keys
-:tags: ssh, server, network, linux
-:modified: 2016-02-02 18:44:00
+:tags: ssh, linux
+:modified: 2017-05-06 18:44:00
 
 `Home Server Project #1 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Create cryptographic keys and **disable password logins** to make remote machines more secure.
 
 Let's go!
 =========
 
-**Server** is a `netbook <http://www.circuidipity.com/laptop-home-server.html>`_ running `Ubuntu <http://www.circuidipity.com/tag-ubuntu.html>`_ configured for SSH logins from a Linux **client**.
+**Server** is a `netbook <http://www.circuidipity.com/laptop-home-server.html>`_ running `Debian <http://www.circuidipity.com/tag-debian.html>`_ configured for SSH logins from a Linux **client**.
 
 0. Install
 ----------

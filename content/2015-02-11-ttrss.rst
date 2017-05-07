@@ -4,10 +4,10 @@ Tiny Tiny RSS
 
 :date: 2015-02-11 18:40:00
 :slug: ttrss
-:tags: server, network, linux
+:tags: ttrss, network, linux
 :modified: 2016-08-19 21:00:00
 
-`Home Server Project #7 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Install and self-host the **Tiny Tiny RSS** news reader and gain access to news feeds over the web.
+`Home Server Project #8 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Install and self-host the **Tiny Tiny RSS** news reader and gain access to news feeds over the web.
 
 Let's go!
 =========

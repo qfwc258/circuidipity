@@ -4,10 +4,10 @@ PHP + Nginx + PostgreSQL
 
 :date: 2015-02-09 18:29:00
 :slug: php-nginx-postgresql
-:tags: server, network, linux
+:tags: php, nginx, postgres, network, linux
 :modified: 2016-08-19 20:48:00
 
-`Home Server Project #6 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ As a requirement to host web applications like `Tiny Tiny RSS <http://www.circuidipity.com/ttrss.html>`_ on my home server I install **PHP**, the lightweight proxy server **Nginx**, and the **PostgreSQL** database.
+`Home Server Project #7 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ As a requirement to host web applications like `Tiny Tiny RSS <http://www.circuidipity.com/ttrss.html>`_ on my home server I install **PHP**, the lightweight proxy server **Nginx**, and the **PostgreSQL** database.
 
 Let's go!
 =========

@@ -5,7 +5,7 @@ There's no place like [a Raspberry Pi] Home [Server]
 :slug: raspberry-pi-home-server
 :tags: raspberry pi, server, network, linux
 :template: article-project
-:modified: 2016-08-16 19:37:00
+:modified: 2017-05-07 11:22:00
 
 .. image:: images/raspberry-pi-home-server.png
     :align: right
@@ -42,32 +42,37 @@ Services
 
 Use cryptographic keys to secure access to your new home server.
 
-2. `Multiple terminal windows using tmux <http://www.circuidipity.com/tmux.html>`_
+2. `Automatic security updates <http://www.circuidipity.com/unattended-upgrades.html>`_
+---------------------------------------------------------------------------------------
+
+Fetch the latest fixes, install, and reboot (if necessary).
+
+3. `Multiple terminal windows using tmux <http://www.circuidipity.com/tmux.html>`_
 ----------------------------------------------------------------------------------
 
 A *terminal multiplexor* for creating, detaching, re-attaching work areas.
 
-3. `Backup home <http://www.circuidipity.com/incremental-backups-rsnapshot.html>`_
+4. `Backup home <http://www.circuidipity.com/incremental-backups-rsnapshot.html>`_
 ----------------------------------------------------------------------------------
 
 Make incremental and automatic backups of a home folder using rsnapshot + cron.
 
-4. `Network attached storage <http://www.circuidipity.com/nas-raspberry-pi-sshfs.html>`_
+5. `Network attached storage <http://www.circuidipity.com/nas-raspberry-pi-sshfs.html>`_
 ----------------------------------------------------------------------------------------
 
 External USB storage + Pi turns any hard drive into a NAS.
 
-5. `Access from anywhere in the world using dynamic DNS <http://www.circuidipity.com/ddns-openwrt.html>`_
+6. `Access from anywhere in the world using dynamic DNS <http://www.circuidipity.com/ddns-openwrt.html>`_
 ---------------------------------------------------------------------------------------------------------
 
 Use a DDNS service to automatically update an IP address.
 
-6. `Web + database <http://www.circuidipity.com/php-nginx-postgresql.html>`_
+7. `Web + database <http://www.circuidipity.com/php-nginx-postgresql.html>`_
 ----------------------------------------------------------------------------
 
 Host web applications using PHP + Nginx + PostgreSQL.
 
-7. `RSS reader <http://www.circuidipity.com/ttrss.html>`_
+8. `RSS reader <http://www.circuidipity.com/ttrss.html>`_
 ---------------------------------------------------------
 
 Access news feeds over the web with Tiny Tiny RSS news reader.

@@ -1,17 +1,10 @@
-==============
-Minimal Debian
-==============
+=====================
+Debian Wheezy Install
+=====================
 
 :tags: debian, linux
 :slug: install-debian-wheezy-screenshot-tour
 :modified: 2014-08-06 01:23:00
-
-.. figure:: images/debianVader.png
-    :alt: Debian Vader
-    :width: 960px
-    :height: 355px
-
-    [Image: Debian Vader, courtesy `jschild <http://jschild.deviantart.com/art/Facebook-cover-debian-Darth-Vader-380351614>`_].
 
 `Debian GNU/Linux <http://www.debian.org>`_ is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like `Ubuntu <http://www.circuidipity.com/tag-ubuntu.html>`_ build their distributions on solid Debian **awesomesauce**.
 
@@ -480,7 +473,5 @@ If an **encrypted home** partition was created in Step 2 the system will display
     :align: center
     :width: 800px
     :height: 600px
-
-I have created a `post-install shell script <https://github.com/vonbrownie/linux-post-install/blob/master/scripts/debian-post-install.sh>`_ that can be used to configure tracking of Debian's ``stable``, ``testing``, or ``unstable`` branch.
 
 Happy hacking!

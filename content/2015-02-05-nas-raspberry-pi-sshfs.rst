@@ -4,10 +4,10 @@ Network Attached Storage using a Raspberry Pi and SSHFS
 
 :date: 2015-02-05 18:28:00
 :slug: nas-raspberry-pi-sshfs
-:tags: server, network, linux
+:tags: raspberry pi, network, linux
 :modified: 2015-07-05 16:21:00
 
-`Home Server Project #4 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Connect a Pi to external USB storage and create a cheap and cheerful NAS device via **SSH Filesystem** (SSHFS).
+`Home Server Project #5 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Connect a Pi to external USB storage and create a cheap and cheerful NAS device via **SSH Filesystem** (SSHFS).
 
 With a `Pi-attached 1TB hard drive <http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html>`_ hosting a properly configured `SSH server <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_ nothing extra is required server-side. 
 
