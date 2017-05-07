@@ -1,5 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-03-19T19:10:00-04:00</updated><entry><title>MITx Week 7: Plotting and Final Thoughts</title><link href="http://www.circuidipity.com/mitx-6001x-w7.html" rel="alternate"></link><published>2017-03-19T19:10:00-04:00</published><updated>2017-03-19T19:10:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-03-19:/mitx-6001x-w7.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; Last week of the course! An introduction to plotting graphs in Python. I have experimented a bit &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dateAndStep.py"&gt;writing a script&lt;/a&gt; that collects dates (x_axis) and pedometer measurements (y_axis) from my personal logfile and generates a graph.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-05-07T10:56:00-04:00</updated><entry><title>Automatic security updates on Debian</title><link href="http://www.circuidipity.com/unattended-upgrades.html" rel="alternate"></link><published>2017-05-07T10:56:00-04:00</published><updated>2017-05-07T10:56:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-05-07:/unattended-upgrades.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #2 .:&lt;/a&gt; Fetch the latest fixes, install, and reboot (if necessary).&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Install ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install unattended-upgrades apt-listchanges
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Configuration file for the unattended-upgrades package is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/apt/apt.conf.d/50unattended-upgrades&lt;/span&gt;&lt;/tt&gt;. This section controls which packages are upgraded and security updates are uncommented and enabled by default …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #2 .:&lt;/a&gt; Fetch the latest fixes, install, and reboot (if necessary).&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Install ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install unattended-upgrades apt-listchanges
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Configuration file for the unattended-upgrades package is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/apt/apt.conf.d/50unattended-upgrades&lt;/span&gt;&lt;/tt&gt;. This section controls which packages are upgraded and security updates are uncommented and enabled by default ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Unattended-Upgrade::Origins-Pattern &lt;span class="o"&gt;{&lt;/span&gt;
+    //
+    &lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;origin=Debian,codename=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;distro_codename&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;,label=Debian-Security&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Uncomment the following line to have mail sent to root when Debian auto-installs packages ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Unattended-Upgrade::Mail &lt;span class="s2"&gt;&amp;quot;root&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Confirm a working mail setup is in place. A package that provides &lt;tt class="docutils literal"&gt;mailx&lt;/tt&gt; must be installed ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ dpkg -l &lt;span class="p"&gt;|&lt;/span&gt; grep mailx
+ii  bsd-mailx                     8.1.2-0.20141216cvs-2      i386         simple mail user agent
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;On a laptop consider enabling the &lt;tt class="docutils literal"&gt;MinimalSteps&lt;/tt&gt; option. This allows an upgrade to be interrupted upon shutdown (with a slight delay) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Unattended-Upgrade::MinimalSteps &lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Some security updates can require the system to be rebooted. On a server I enable automatic reboot and set the reboot to occur at a specified time (instead of immediately) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Unattended-Upgrade::Automatic-Reboot &lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+Unattended-Upgrade::Automatic-Reboot-Time &lt;span class="s2"&gt;&amp;quot;04:00&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Activate unattended-upgrades by creating &lt;tt class="docutils literal"&gt;/etc/apt/apt.conf.d/02periodic&lt;/tt&gt;. Sample file ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;// Control parameters &lt;span class="k"&gt;for&lt;/span&gt; cron &lt;span class="nb"&gt;jobs&lt;/span&gt; by /etc/cron.daily/apt //
+
+// Enable the update/upgrade script &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;0&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;disable&lt;span class="o"&gt;)&lt;/span&gt;
+APT::Periodic::Enable &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+// Do &lt;span class="s2"&gt;&amp;quot;apt-get update&amp;quot;&lt;/span&gt; automatically every n-days &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;0&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;disable&lt;span class="o"&gt;)&lt;/span&gt;
+APT::Periodic::Update-Package-Lists &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+// Run the &lt;span class="s2"&gt;&amp;quot;unattended-upgrade&amp;quot;&lt;/span&gt; security upgrade script every n-days &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;0&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;disabled&lt;span class="o"&gt;)&lt;/span&gt;
+// Requires the package &lt;span class="s2"&gt;&amp;quot;unattended-upgrades&amp;quot;&lt;/span&gt; and will write a log in /var/log/unattended-upgrades
+APT::Periodic::Unattended-Upgrade &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+// Do &lt;span class="s2"&gt;&amp;quot;apt-get autoclean&amp;quot;&lt;/span&gt; every n-days &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;0&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;disable&lt;span class="o"&gt;)&lt;/span&gt;
+APT::Periodic::AutocleanInterval &lt;span class="s2"&gt;&amp;quot;14&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+// Send report mail to root ...
+//  0:  no report             &lt;span class="o"&gt;(&lt;/span&gt;or null string&lt;span class="o"&gt;)&lt;/span&gt;
+//  1:  progress report       &lt;span class="o"&gt;(&lt;/span&gt;actually any string&lt;span class="o"&gt;)&lt;/span&gt;
+//  2:  + &lt;span class="nb"&gt;command&lt;/span&gt; outputs     &lt;span class="o"&gt;(&lt;/span&gt;remove -qq, remove 2&amp;gt;/dev/null, add -d&lt;span class="o"&gt;)&lt;/span&gt;
+//  3:  + trace on
+APT::Periodic::Verbose &lt;span class="s2"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Confirm notifications will be sent to root ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ cat /etc/apt/listchanges.conf
+&lt;span class="o"&gt;[&lt;/span&gt;apt&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;frontend&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;pager
+&lt;span class="nv"&gt;email_address&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;root
+&lt;span class="nv"&gt;confirm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
+&lt;span class="nv"&gt;save_seen&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/var/lib/apt/listchanges.db
+&lt;span class="nv"&gt;which&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;news
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Upgrade information is also logged within the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/var/log/unattended-upgrades&lt;/span&gt;&lt;/tt&gt; directory.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="debian"></category><category term="linux"></category></entry><entry><title>MITx Week 7: Plotting and Final Thoughts</title><link href="http://www.circuidipity.com/mitx-6001x-w7.html" rel="alternate"></link><published>2017-03-19T19:10:00-04:00</published><updated>2017-03-19T19:10:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-03-19:/mitx-6001x-w7.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; Last week of the course! An introduction to plotting graphs in Python. I have experimented a bit &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dateAndStep.py"&gt;writing a script&lt;/a&gt; that collects dates (x_axis) and pedometer measurements (y_axis) from my personal logfile and generates a graph.&lt;/p&gt;
 &lt;p&gt;So concludes &lt;strong&gt;MITx 6.00.1x&lt;/strong&gt;. It proved to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; Last week of the course! An introduction to plotting graphs in Python. I have experimented a bit &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dateAndStep.py"&gt;writing a script&lt;/a&gt; that collects dates (x_axis) and pedometer measurements (y_axis) from my personal logfile and generates a graph.&lt;/p&gt;
 &lt;p&gt;So concludes &lt;strong&gt;MITx 6.00.1x&lt;/strong&gt;. It proved to be a well-designed course and true to its synopsis of being a &lt;strong&gt;computer science course&lt;/strong&gt; that teaches some fundamental concepts, &lt;strong&gt;not&lt;/strong&gt; a programming course per se. Taken in that spirit (and plan on spending more than the proposed 15 hours a week) its a very worthwhile endeavour. Personally I want to learn more about Python itself and scratch some of my own itches.&lt;/p&gt;
 &lt;p&gt;Onward!&lt;/p&gt;
@@ -114,18 +182,4 @@ The best translations into English do not, in fact, read as if they were origina
 &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;cc&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;80&lt;/span&gt;           &lt;span class="s2"&gt;&amp;quot; set an 80 column border for good coding style&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Onward!&lt;/p&gt;
-</content><category term="python"></category><category term="programming"></category><category term="mooc"></category></entry><entry><title>The Plan that Broke the World</title><link href="http://www.circuidipity.com/plan-that-broke-the-world.html" rel="alternate"></link><published>2017-01-21T19:29:00-05:00</published><updated>2017-01-21T19:29:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-21:/plan-that-broke-the-world.html</id><summary type="html">&lt;img alt="book cover" class="align-left" src="images/plan_that_broke_the_world.jpg" style="width: 150px; height: 225px;" /&gt;
-&lt;div class="line-block"&gt;
-&lt;div class="line"&gt;&lt;strong&gt;The Plan that Broke the World: The &amp;quot;Schlieffen Plan&amp;quot; and World War I&lt;/strong&gt;&lt;/div&gt;
-&lt;div class="line"&gt;&lt;em&gt;by William D. O'Neill&lt;/em&gt; (ISBN: 978-1-4819-5585-0)&lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Germany went to war with a master plan in 1914 to secure the future peace and prosperity of its Empire for generations. The result was the most destructive war in history …&lt;/p&gt;</summary><content type="html">&lt;img alt="book cover" class="align-left" src="images/plan_that_broke_the_world.jpg" style="width: 150px; height: 225px;" /&gt;
-&lt;div class="line-block"&gt;
-&lt;div class="line"&gt;&lt;strong&gt;The Plan that Broke the World: The &amp;quot;Schlieffen Plan&amp;quot; and World War I&lt;/strong&gt;&lt;/div&gt;
-&lt;div class="line"&gt;&lt;em&gt;by William D. O'Neill&lt;/em&gt; (ISBN: 978-1-4819-5585-0)&lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Germany went to war with a master plan in 1914 to secure the future peace and prosperity of its Empire for generations. The result was the most destructive war in history, defeat, followed by a second and even more destructive world war, and the end of the European empires. How could (in the author's estimation) the foremost planning organization of the day, the Prussian &lt;em&gt;Great General Staff&lt;/em&gt;, have been so wrong?&lt;/p&gt;
-&lt;p&gt;William O'Neill shows, in fact, the idea of a plan created by a military genius that &lt;em&gt;would&lt;/em&gt; have worked except for its flawed execution by less capable hands was a mythology that arose only after Germany's defeat. Count von Schlieffen of the &amp;quot;Plan&amp;quot; was a pre-war chief of the GGS who as a &lt;em&gt;thought experiment&lt;/em&gt; in a memo (and, perhaps, as a thinly veiled bid for greater military expenditures) explored how a &lt;em&gt;much larger&lt;/em&gt; German Army might go on the offensive and defeat France early in a conflict. It was never fully developed into a plan for battle and the actual strategy that unfolded at the start of the war bears little resemblance. Where Schlieffen's ideas proved most useful was not in the waging of war but in explaining away defeat. A plan crafted by a (dead) genius but fumbled by a select few successors (all of whom were dead at war's end) absolved the incumbent generalship. The story gained currency in the postwar years as a political counterweight to the despicable explanation promoted by extreme right-wing elements of supremely capable German armies that had been &amp;quot;stabbed in the back&amp;quot; by a toxic cabal of decadent liberals, war profiteers, and Jewish conspirators.&lt;/p&gt;
-&lt;p&gt;What I found most interesting is the exploration of how through neither malice nor incompetence such a smart and capable leadership - Imperial Germany's &amp;quot;best and brightest&amp;quot; - could make such a catastrophic miscalculation. German political leadership under the misdirection of Kaiser Wilhelm II pushed the Empire to the brink of war but - in a moment of doubt when Wilhelm moved to pull back from the brink - his military chief forcefully declared that the war machine was in motion and &lt;em&gt;could not be stopped&lt;/em&gt;. The nominal head of state offered no further pushback and events swiftly moved past the point of no return. It is true that hindsight has a powerful lure but it was clear to well-placed observers in the summer of 1914 that Germany was taking an incredible gamble for a dubious prize. The swift recovery of France following its defeat in the Franco-Prussian War demonstrated that even German victory in its stated war aims would not deliver a lasting and secure peace. The danger of waging a two-front war with France and Russia and the necessity of avoiding such a scenario was recognized early and at the highest levels. The violation of Belgian neutrality practically guaranteed British intervention and a naval blockade imposed by the world's largest navy would ruin Germany.&lt;/p&gt;
-&lt;p&gt;As the author states, &lt;em&gt;what were they thinking&lt;/em&gt;? He draws on a lifetime of experience as a program manager for both the American military and private defense contractors to explore how technologies are developed, forces outfitted, and war plans drafted and executed. Germany suffered from a weak political leadership that proved unwilling to push back and challenge an insular military culture, a culture that settled on an offensive strategy and failed to consider a range of lower-risk alternatives. The German experience underlines the importance of powerful outsiders who exist to challenge convention. There is a thin line that separates institutional wisdom from institutional myopia.&lt;/p&gt;
-</content><category term="books"></category></entry></feed>
+</content><category term="python"></category><category term="programming"></category><category term="mooc"></category></entry></feed>

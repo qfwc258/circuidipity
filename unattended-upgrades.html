@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Automatic security updates on Debian</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+        <!-- analytics -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89591498-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Sunday 07 May 2017</p>
+</div>
+
+<!-- article -->
+<h1>Automatic security updates on Debian</h1>
+<div id="article">
+    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Home Server Project #2 .:</a> Fetch the latest fixes, install, and reboot (if necessary).</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<p>Install ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install unattended-upgrades apt-listchanges
+</pre></div>
+<p>Configuration file for the unattended-upgrades package is <tt class="docutils literal"><span class="pre">/etc/apt/apt.conf.d/50unattended-upgrades</span></tt>. This section controls which packages are upgraded and security updates are uncommented and enabled by default ...</p>
+<div class="highlight"><pre><span></span>Unattended-Upgrade::Origins-Pattern <span class="o">{</span>
+    //
+    <span class="o">[</span>...<span class="o">]</span>
+    <span class="s2">&quot;origin=Debian,codename=</span><span class="si">${</span><span class="nv">distro_codename</span><span class="si">}</span><span class="s2">,label=Debian-Security&quot;</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+</pre></div>
+<p>Uncomment the following line to have mail sent to root when Debian auto-installs packages ...</p>
+<div class="highlight"><pre><span></span>Unattended-Upgrade::Mail <span class="s2">&quot;root&quot;</span><span class="p">;</span>
+</pre></div>
+<p>Confirm a working mail setup is in place. A package that provides <tt class="docutils literal">mailx</tt> must be installed ...</p>
+<div class="highlight"><pre><span></span>$ dpkg -l <span class="p">|</span> grep mailx
+ii  bsd-mailx                     8.1.2-0.20141216cvs-2      i386         simple mail user agent
+</pre></div>
+<p>On a laptop consider enabling the <tt class="docutils literal">MinimalSteps</tt> option. This allows an upgrade to be interrupted upon shutdown (with a slight delay) ...</p>
+<div class="highlight"><pre><span></span>Unattended-Upgrade::MinimalSteps <span class="s2">&quot;true&quot;</span><span class="p">;</span>
+</pre></div>
+<p>Some security updates can require the system to be rebooted. On a server I enable automatic reboot and set the reboot to occur at a specified time (instead of immediately) ...</p>
+<div class="highlight"><pre><span></span>Unattended-Upgrade::Automatic-Reboot <span class="s2">&quot;true&quot;</span><span class="p">;</span>
+Unattended-Upgrade::Automatic-Reboot-Time <span class="s2">&quot;04:00&quot;</span><span class="p">;</span>
+</pre></div>
+<p>Activate unattended-upgrades by creating <tt class="docutils literal">/etc/apt/apt.conf.d/02periodic</tt>. Sample file ...</p>
+<div class="highlight"><pre><span></span>// Control parameters <span class="k">for</span> cron <span class="nb">jobs</span> by /etc/cron.daily/apt //
+
+// Enable the update/upgrade script <span class="o">(</span><span class="nv">0</span><span class="o">=</span>disable<span class="o">)</span>
+APT::Periodic::Enable <span class="s2">&quot;1&quot;</span><span class="p">;</span>
+
+// Do <span class="s2">&quot;apt-get update&quot;</span> automatically every n-days <span class="o">(</span><span class="nv">0</span><span class="o">=</span>disable<span class="o">)</span>
+APT::Periodic::Update-Package-Lists <span class="s2">&quot;1&quot;</span><span class="p">;</span>
+
+// Run the <span class="s2">&quot;unattended-upgrade&quot;</span> security upgrade script every n-days <span class="o">(</span><span class="nv">0</span><span class="o">=</span>disabled<span class="o">)</span>
+// Requires the package <span class="s2">&quot;unattended-upgrades&quot;</span> and will write a log in /var/log/unattended-upgrades
+APT::Periodic::Unattended-Upgrade <span class="s2">&quot;1&quot;</span><span class="p">;</span>
+
+// Do <span class="s2">&quot;apt-get autoclean&quot;</span> every n-days <span class="o">(</span><span class="nv">0</span><span class="o">=</span>disable<span class="o">)</span>
+APT::Periodic::AutocleanInterval <span class="s2">&quot;14&quot;</span><span class="p">;</span>
+
+// Send report mail to root ...
+//  0:  no report             <span class="o">(</span>or null string<span class="o">)</span>
+//  1:  progress report       <span class="o">(</span>actually any string<span class="o">)</span>
+//  2:  + <span class="nb">command</span> outputs     <span class="o">(</span>remove -qq, remove 2&gt;/dev/null, add -d<span class="o">)</span>
+//  3:  + trace on
+APT::Periodic::Verbose <span class="s2">&quot;2&quot;</span><span class="p">;</span>
+</pre></div>
+<p>Confirm notifications will be sent to root ...</p>
+<div class="highlight"><pre><span></span>$ cat /etc/apt/listchanges.conf
+<span class="o">[</span>apt<span class="o">]</span>
+<span class="nv">frontend</span><span class="o">=</span>pager
+<span class="nv">email_address</span><span class="o">=</span>root
+<span class="nv">confirm</span><span class="o">=</span>0
+<span class="nv">save_seen</span><span class="o">=</span>/var/lib/apt/listchanges.db
+<span class="nv">which</span><span class="o">=</span>news
+</pre></div>
+<p>Upgrade information is also logged within the <tt class="docutils literal"><span class="pre">/var/log/unattended-upgrades</span></tt> directory.</p>
+<p>Happy hacking!</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/mitx-6001x-w7.html">MITx Week 7: Plotting and Final Thoughts</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>
