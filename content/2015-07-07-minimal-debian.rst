@@ -4,134 +4,110 @@ Minimal Debian
 
 :date: 2015-07-07 15:43
 :slug: minimal-debian
-:tags: debian, linux
-:modified: 2016-02-28 14:16:00
+:tags: debian, linux, crypto, lvm
+:modified: 2017-05-11 18:21:00
 
 .. figure:: images/debianVader.png
     :alt: Debian Vader
     :width: 960px
     :height: 355px
 
-    [Image courtesy `jschild <http://jschild.deviantart.com/art/Facebook-cover-debian-Darth-Vader-380351614>`_].
-
-I like using Debian's minimal **mini.iso** installer to create **console-only base configurations** that can be customized for various tasks and `alternate desktops <http://www.circuidipity.com/i3-tiling-window-manager.html>`_.
+**Debian "Jessie"** is the latest stable release of the popular Linux operating system. I use Debian's `minimal network install image <https://www.debian.org/CD/netinst/>`_ to create a **console-only base configuration** that can be customized for various tasks and `alternate desktops <http://www.circuidipity.com/i3-tiling-window-manager.html>`_. [1]_
 
 Let's go!
 =========
 
-`Debian GNU/Linux <http://www.debian.org>`_ is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like `Ubuntu <http://www.circuidipity.com/tag-ubuntu.html>`_ build their distributions on a solid Debian foundation.
+`Debian GNU/Linux <http://www.debian.org>`_ is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. There are 3 **release branches**: ``jessie/stable``, ``stretch/testing``, and ``sid/unstable``.
 
-There are 3 **release branches**: ``jessie/stable``, ``stretch/testing``, and ``sid/unstable``. Below is a visual walk-through of a sample Debian ``stable`` setup that makes use of an entire storage device divided into 3 partitions: a ``root`` partition, and `LUKS <https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup>`_ encrypted ``swap`` + ``home`` partitions.
+Below is a visual walk-through of a sample workstation setup that makes use of the entire disk divided into 2 partitions: a ``boot`` partition, [2]_ and an **encrypted partition** used by the **Logical Volume Manager** (LVM) to create "virtual partitions" (Logical Volumes). Installing LVM on top of the encrypted partition allows:
+
+* creation of multiple LVs protected by a single passphrase entered at boot time
+* dynamic resizing of filesystems (set aside unallocated space and make use of it as needed)
+* snapshots of filesystems that can be used as backups or to restore a previous state [3]_
 
 0. Prepare install media
 ------------------------
 
-Download the `64-bit mini.iso <http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/mini.iso>`_ (`32bit <http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/mini.iso>`_ for older machines) and `flash the image <https://www.debian.org/releases/stable/amd64/ch04s03.html.en>`_ to a USB stick. [1]_
+Download the (unofficial image that includes non-free firmware) `64bit firmware-VERSION-amd64-netinst.iso <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/>`_ (`32bit image <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/i386/iso-cd/>`_ for older machines) and `flash the image <https://www.debian.org/releases/stable/amd64/ch04s03.html.en>`_ to a USB stick. [4]_
 
 Minimal installer (requires network connection) downloads all the latest packages during setup.
 
 1. Launch
 ---------
 
-.. image:: images/screenshot/debianInstall/01.1.png
+.. image:: images/screenshot/debianInstallLvm/001-1.png
     :align: center
     :alt: Install
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/02.png
+.. image:: images/screenshot/debianInstallLvm/002.png
     :align: center
     :alt: Select Language
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/03.png
+.. image:: images/screenshot/debianInstallLvm/003.png
     :alt: Select Location
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/04.png
+.. image:: images/screenshot/debianInstallLvm/004.png
     :alt: Configure Keyboard
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/05.png
+.. image:: images/screenshot/debianInstallLvm/005.png
     :alt: Hostname
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/06.png
+.. image:: images/screenshot/debianInstallLvm/006.png
     :alt: Domain
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/07.png
-    :alt: Mirror Country
-    :align: center
-    :width: 800px
-    :height: 600px
-
-.. image:: images/screenshot/debianInstall/08.png
-    :alt: Mirror archive
-    :align: center
-    :width: 800px
-    :height: 600px
-
-.. image:: images/screenshot/debianInstall/09.png
-    :alt: Mirror Directory
-    :align: center
-    :width: 800px
-    :height: 600px
-
-.. image:: images/screenshot/debianInstall/10.png
-    :alt: Proxy
-    :align: center
-    :width: 800px
-    :height: 600px
-
-Contents of the installer are now loaded into memory and the USB stick can safely be removed. [2]_
-
-.. image:: images/screenshot/debianInstall/11.png
+.. image:: images/screenshot/debianInstallLvm/007.png
     :alt: Root password
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/12.png
+.. image:: images/screenshot/debianInstallLvm/008.png
     :alt: Verify password
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/13.png
+.. image:: images/screenshot/debianInstallLvm/009.png
     :alt: Full Name
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/14.png
+.. image:: images/screenshot/debianInstallLvm/010.png
     :alt: Username
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/15.png
+.. image:: images/screenshot/debianInstallLvm/011.png
     :alt: User password
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/16.png
+.. image:: images/screenshot/debianInstallLvm/012.png
     :alt: Verify password
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/17.png
+.. image:: images/screenshot/debianInstallLvm/013.png
     :alt: Select time zone
     :align: center
     :width: 800px
@@ -140,296 +116,353 @@ Contents of the installer are now loaded into memory and the USB stick can safel
 2. Partitions
 -------------
 
-In the example below I create 3 partitions [3]_ on the disk:
+Sample layout:
 
-* sda1 is a 20GB ``root`` partition
-* sda5 is a 1GB LUKS encrypted ``swap`` partition using a **random key**
-* sda6 uses the remaining storage as a LUKS encrypted ``home`` partition using a **passphrase**
+* sda1 is a 512MB ``boot`` partition
+* sda2 uses the remaining storage as a LUKS encrypted partition
+* LVM is installed on the encrypted partition, and contains a volume group with the 3 logical volumes ``root`` + ``swap`` + ``home``
 
-.. image:: images/screenshot/debianInstall/18.png
+.. image:: images/screenshot/debianInstallLvm/100.png
     :alt: Partitioning method
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/19.png
+.. image:: images/screenshot/debianInstallLvm/101.png
     :alt: Partition disks
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/20.png
+
+.. image:: images/screenshot/debianInstallLvm/102.png
     :alt: Partition table
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/21.png
+.. image:: images/screenshot/debianInstallLvm/103.png
     :alt: Free space
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/22.png
-    :alt: New Partition
+.. image:: images/screenshot/debianInstallLvm/104.png
+    :alt: New partition
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/23.png
+.. image:: images/screenshot/debianInstallLvm/105.png
     :alt: Partition size
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/24.png
+.. image:: images/screenshot/debianInstallLvm/106.png
     :alt: Primary partition
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/25.png
+.. image:: images/screenshot/debianInstallLvm/107.png
     :alt: Beginning
     :align: center
     :width: 800px
     :height: 600px
 
-Setting ``Mount options: relatime`` decreases write operations and boosts drive speed ...
+Modify the default mount options ... [5]_
 
-.. image:: images/screenshot/debianInstall/25.1.png
-    :alt: Mount options
+.. code-block:: bash
+
+    Mount point: /boot
+    Mount options: relatime
+    Bootable flag: on
+
+.. image:: images/screenshot/debianInstallLvm/108.png
+    :alt: Boot
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/25.3.png
-    :alt: relatime
-    :align: center
-    :width: 800px
-    :height: 600px
-
-.. image:: images/screenshot/debianInstall/26.1.png
-    :alt: Done setting up partition
-    :align: center
-    :width: 800px
-    :height: 600px
-
-.. image:: images/screenshot/debianInstall/27.png
+.. image:: images/screenshot/debianInstallLvm/109.png
     :alt: Free space
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/28.png
+.. image:: images/screenshot/debianInstallLvm/104.png
     :alt: New partition
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/29.png
+Assign the remaining storage to the encrypted partition ...
+
+.. image:: images/screenshot/debianInstallLvm/110.png
     :alt: Partition size
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/30.png
-    :alt: Logical partition
+.. image:: images/screenshot/debianInstallLvm/106.png
+    :alt: Primary partition
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/31.png
-    :alt: Beginning
-    :align: center
-    :width: 800
-    :height: 600px
+Modify the default mount options ...
 
-.. image:: images/screenshot/debianInstall/31.1.png
-    :alt: Use as
-    :align: center
-    :width: 800px
-    :height: 600px
+.. code-block:: bash
 
-.. image:: images/screenshot/debianInstall/32.png
-    :alt: Encrypt volume
+    Use as: physical volume for encryption
+    Erase data: no
+
+If the hard disk has not been securely wiped prior to installing Debian you may want to configure ``Erase data: yes``. Note, however, depending on the size of the disk this operation can last several hours.
+
+.. image:: images/screenshot/debianInstallLvm/111.png
+    :alt: Physical volume for encryption
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/32.1.png
-    :alt: Encryption key
-    :align: center
-    :width: 800px
-    :height: 600px
-
-.. image:: images/screenshot/debianInstall/33.png
-    :alt: Random key
-    :align: center
-    :width: 800px
-    :height: 600px
-
-If the hard disk has not been securely wiped prior to installing Debian (using a utility like `DBAN <http://www.circuidipity.com/multi-boot-usb.html>`_) you may want to configure ``Erase data: yes``. Note, however, depending on the size of the disk this operation can last several hours.
-
-.. image:: images/screenshot/debianInstall/33.1.png
-    :alt: Erase data
-    :align: center
-    :width: 800px
-    :height: 600px
-
-.. image:: images/screenshot/debianInstall/33.2.png
-    :alt: Done setting up partition
-    :align: center
-    :width: 800px
-    :height: 600px
-
-.. image:: images/screenshot/debianInstall/34.png
-    :alt: Free space
-    :align: center
-    :width: 800px
-    :height: 600px
-
-.. image:: images/screenshot/debianInstall/35.png
-    :alt: New partition
-    :align: center
-    :width: 800px
-    :height: 600px
-
-.. image:: images/screenshot/debianInstall/36.png
-    :alt: Partition size
-    :align: center
-    :width: 800px
-    :height: 600px
-
-.. image:: images/screenshot/debianInstall/30.png
-    :alt: Logical partition
-    :align: center
-    :width: 800px
-    :height: 600px
-
-.. image:: images/screenshot/debianInstall/31.1.png
-    :alt: Use as
-    :align: center
-    :width: 800px
-    :height: 600px
-
-.. image:: images/screenshot/debianInstall/38.png
-    :alt: Encrypt volume
-    :align: center
-    :width: 800px
-    :height: 600px
-
-.. image:: images/screenshot/debianInstall/39.1.png
-    :alt: Erase data
-    :align: center
-    :width: 800px
-    :height: 600px
-
-.. image:: images/screenshot/debianInstall/39.2.png
-    :alt: Done setting up the partition
-    :align: center
-    :width: 800px
-    :height: 600px
-
-.. image:: images/screenshot/debianInstall/40.png
+.. image:: images/screenshot/debianInstallLvm/112.png
     :alt: Configure encrypted volumes
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/41.png
-    :alt: Write changes to disk
+.. image:: images/screenshot/debianInstallLvm/113.png
+    :alt: Write changes
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/42.png
-    :alt: Create encrypted volumes
+.. image:: images/screenshot/debianInstallLvm/114.png
+    :alt: Create encrypted
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/43.png
+.. image:: images/screenshot/debianInstallLvm/115.png
     :alt: Devices to encrypt
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/44.png
-    :alt: Finish encrypt
+.. image:: images/screenshot/debianInstallLvm/116.png
+    :alt: Finish
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/45.png
-    :alt: Encryption passphrase
+.. image:: images/screenshot/debianInstallLvm/117.png
+    :alt: Passphrase
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/46.png
+.. image:: images/screenshot/debianInstallLvm/118.png
     :alt: Verify passphrase
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/47.png
-    :alt: Configure encrypted volume
+.. image:: images/screenshot/debianInstallLvm/119.png
+    :alt: Partition disks
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/48.png
-    :alt: Mount point
+Modify the default mount options ...
+
+.. code-block:: bash
+
+    Use as: physical volume for LVM
+
+.. image:: images/screenshot/debianInstallLvm/120.png
+    :alt: Physical volume for LVM
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/48.1.png
-    :alt: Mount home
+.. image:: images/screenshot/debianInstallLvm/121.png
+    :alt: Configure LVM
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/49.png
-    :alt: Mount options
+.. image:: images/screenshot/debianInstallLvm/122.png
+    :alt: Write changes
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/25.3.png
-    :alt: relatime
+.. image:: images/screenshot/debianInstallLvm/123.png
+    :alt: Create volume group
     :align: center
     :width: 800px
     :height: 600px
 
-**Reserved blocks** can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, **non-root partitions** extra space can be gained by reducing the default 5% reserve set aside by Debian to 1% ...
-
-.. image:: images/screenshot/debianInstall/49.1.png
-    :alt: Reserved blocks
+.. image:: images/screenshot/debianInstallLvm/124.png
+    :alt: Vg name
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/49.2.png
-    :alt: Percent reserved
+.. image:: images/screenshot/debianInstallLvm/125.png
+    :alt: Device for vg
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/49.3.png
-    :alt: Done setting up the partition
+.. image:: images/screenshot/debianInstallLvm/126.png
+    :alt: Create lv
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/49.4.png
+.. image:: images/screenshot/debianInstallLvm/127.png
+    :alt: Vg
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/debianInstallLvm/128.png
+    :alt: Lv root
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/debianInstallLvm/129.png
+    :alt: Lv root size
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/debianInstallLvm/130.png
+    :alt: Create lv
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/debianInstallLvm/131.png
+    :alt: Vg
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/debianInstallLvm/132.png
+    :alt: Lv swap
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/debianInstallLvm/133.png
+    :alt: Lv swap size
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/debianInstallLvm/134.png
+    :alt: Create lv
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/debianInstallLvm/135.png
+    :alt: Vg
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/debianInstallLvm/136.png
+    :alt: Lv home
+    :align: center
+    :width: 800px
+    :height: 600px
+
+Set aside some unused space for future requirements. LVM makes it easy to expand or create new filesystems as needed ...
+
+.. image:: images/screenshot/debianInstallLvm/137.png
+    :alt: Lv home size
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/debianInstallLvm/138.png
+    :alt: Finish lvm
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/debianInstallLvm/139.png
+    :alt: Select lv root
+    :align: center
+    :width: 800px
+    :height: 600px
+
+Modify the default mount options ...
+
+.. code-block:: bash
+
+    Use as: Ext4
+    Mount point: /
+    Mount options: relatime
+
+.. image:: images/screenshot/debianInstallLvm/140.png
+    :alt: Lv root config
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/debianInstallLvm/141.png
+    :alt: Select lv swap
+    :align: center
+    :width: 800px
+    :height: 600px
+
+Modify the default mount options ...
+
+.. code-block:: bash
+
+    Use as: swap area
+
+.. image:: images/screenshot/debianInstallLvm/142.png
+    :alt: Lv swap config
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/debianInstallLvm/143.png
+    :alt: Select lv home
+    :align: center
+    :width: 800px
+    :height: 600px
+
+Modify the default mount options ... [6]_
+
+.. code-block:: bash
+
+    Use as: Ext4
+    Mount point: /home
+    Mount options: relatime
+    Reserved blocks: 1%
+
+.. image:: images/screenshot/debianInstallLvm/144.png
+    :alt: Lv home config
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/debianInstallLvm/145.png
     :alt: Finish partitioning
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/50.png
-    :alt: Write changes to disk
+.. image:: images/screenshot/debianInstallLvm/146.png
+    :alt: Write changes
     :align: center
     :width: 800px
     :height: 600px
@@ -437,15 +470,44 @@ If the hard disk has not been securely wiped prior to installing Debian (using a
 3. Install packages and finish up
 ---------------------------------
 
-.. image:: images/screenshot/debianInstall/51.png
-    :alt: Popularity-contest
+.. image:: images/screenshot/debianInstallLvm/200.png
+    :alt: Configure package manager
     :align: center
     :width: 800px
     :height: 600px
 
-Select only ``[*] standard system utilities`` if you wish to start with a minimal, console-only base configuration ready for further customization. [4]_
+Use the Debian global mirrors service `deb.debian.org <https://wiki.debian.org/DebianGeoMirror>`_ ...
+
+.. image:: images/screenshot/debianInstallLvm/201-1.png
+    :alt: Mirror hostname
+    :align: center
+    :width: 800px
+    :height: 600px
+
+
+.. image:: images/screenshot/debianInstallLvm/202.png
+    :alt: Mirror directory
+    :align: center
+    :width: 800px
+    :height: 600px
+
+
+.. image:: images/screenshot/debianInstallLvm/203.png
+    :alt: Proxy
+    :align: center
+    :width: 800px
+    :height: 600px
+
+
+.. image:: images/screenshot/debianInstallLvm/204.png
+    :alt: Popularity contest
+    :align: center
+    :width: 800px
+    :height: 600px
+
+Select only ``[*] standard system utilities`` and leave the remaining tasks [7]_ unmarked ...
     
-.. image:: images/screenshot/debianInstall/52.png
+.. image:: images/screenshot/debianInstallLvm/205.png
     :alt: Software selection
     :align: center
     :width: 800px
@@ -453,19 +515,25 @@ Select only ``[*] standard system utilities`` if you wish to start with a minima
 
 Packages are downloaded and the installer makes its finishing touches ...
 
-.. image:: images/screenshot/debianInstall/53.png
-    :alt: GRUB
+.. image:: images/screenshot/debianInstallLvm/206.png
+    :alt: Downloading
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/54.png
-    :alt: GRUB install
+.. image:: images/screenshot/debianInstallLvm/207.png
+    :alt: Install GRUB to MBR
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/55.png
+.. image:: images/screenshot/debianInstallLvm/208.png
+    :alt: GRUB device
+    :align: center
+    :width: 800px
+    :height: 600px
+
+.. image:: images/screenshot/debianInstallLvm/209.png
     :alt: Finish
     :align: center
     :width: 800px
@@ -474,51 +542,74 @@ Packages are downloaded and the installer makes its finishing touches ...
 4. First boot
 -------------
 
-.. image:: images/screenshot/debianInstall/56.png
+.. image:: images/screenshot/debianInstallLvm/300.png
     :alt: GRUB menu
     :align: center
     :width: 800px
     :height: 600px
 
-System will display a passphrase prompt to unlock encrypted ``home`` partition ...
+User is prompted for the passphrase to unlock the encrypted partition ...
 
-.. image:: images/screenshot/debianInstall/57.png
-    :alt: Enter encrypt passphrase
+.. image:: images/screenshot/debianInstallLvm/301-1.png
+    :alt: Unlock passphrase
     :align: center
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstall/58.png
+.. image:: images/screenshot/debianInstallLvm/302-1.png
     :alt: Login
     :align: center
     :width: 800px
     :height: 600px
 
-Login as root ... then run ``timedatectl`` to confirm system time+date is properly set.
+Login and run ``timedatectl`` to confirm system date+time is properly configured.
 
-5. Network
+5. GRUB
+-------
+
+After running a minimal install on my Acer C720 Chromebook with encrypted swap + home partitions I ran into this issue: `"Black screen instead of password prompt for boot encryption" <https://bugs.launchpad.net/ubuntu/+source/cryptsetup/+bug/1375435>`_.
+
+I had to enter my passphrase blind and ``ALT+F1`` to console. When I tried removing the GRUB options ``splash`` and/or ``quiet`` I lost the ability to enter the passphrase at all and a hard reset was required.
+
+**Fix:** Modify ``/etc/default/grub`` ...
+
+.. code-block:: bash
+
+    ## Force the kernel to boot in normal text mode with '=text'
+    GRUB_GFXPAYLOAD_LINUX=text
+
+... and update ...
+
+.. code-block:: bash
+
+    # update-grub
+
+Now it works! My chromebook is currently the only device I have run into this issue.
+
+See: `GNU gfxpayload <https://www.gnu.org/software/grub/manual/html_node/gfxpayload.html>`_
+
+6. Network
 ----------
 
 Check which network interfaces are detected and settings ...
 
 .. code-block:: bash
 
-    # ip a
+    $ ip a
     
 **Wired** interfaces are usually auto-configured by default and assigned an IP address courtesy of DHCP.
 
-To assign a **static** address, deactivate the wired interface and create a new entry in ``/etc/network/interfaces``. Sample entry for ``enp3s0`` ...
+To assign a **static** address, deactivate the wired interface and create a new entry in ``/etc/network/interfaces``. [8]_ Sample entry for ``enp3s0`` ...
 
 .. code-block:: bash
 
     # The primary network interface
     auto enp3s0
-    #iface enp3s0 inet dhcp
     iface enp3s0 inet static
         address 192.168.1.88
         netmask 255.255.255.0
         gateway 192.168.1.1
-        dns-nameservers 192.168.1.1
+        dns-nameservers 8.8.8.8 8.8.4.4
 
 Bring up|down interface with ``if{up,down} enp3s0``.
 
@@ -526,13 +617,13 @@ Create a temporary **wireless** interface connection to WPA2 encrypted access po
 
 .. code-block:: bash
 
-    # ip link set wlp1s0 up             # bring up interface
-    # iw dev wlp1s0 link                # get link status
-    # iw dev wlp1s0 scan | grep SSID    # scan for access points
-    # wpa_supplicant -i wlp1s0 -c<(wpa_passphrase "MY_SSID" "MY_PASSPHRASE")   # connect to WPA/WPA2 ... add '-B' to background process
-    # dhclient wlp1s0                   # obtain IP address
+    # ip link set wlp1s0 up             ## bring up interface
+    # iw dev wlp1s0 link                ## get link status
+    # iw dev wlp1s0 scan | grep SSID    ## scan for access points
+    # wpa_supplicant -i wlp1s0 -c<(wpa_passphrase "MY_SSID" "MY_PASSPHRASE")   ## connect to WPA/WPA2 ... add '-B' to background process
+    # dhclient wlp1s0                   ## obtain IP address
 
-More permanent configurations may be set in ``interfaces``. Sample setup [5]_ with a static IP address ...
+More permanent configurations may be set in ``interfaces``. Sample setup [9]_ with a static IP address ...
 
 .. code-block:: bash
 
@@ -554,15 +645,9 @@ Alternative setup using DHCP ...
         wpa-psk MY_PASSPHRASE                                       
         dns-nameservers 8.8.8.8 8.8.4.4
 
-Once a link is established an optional network manager utility may be installed. Packages ``network-manager`` and ``network-manager-gnome`` provide the console ``nmcli`` and graphical ``nm-applet`` clients respectively ...
+Once a link is established install an (optional) network manager utility. Packages ``network-manager`` and ``network-manager-gnome`` provide the console ``nmcli`` and graphical ``nm-applet`` clients respectively . Comment out (deactivate) any entries in ``interfaces`` that will be managed by ``network-manager``.
 
-.. code-block:: bash
-
-    # apt install network-manager 
-
-Comment out (deactivate) any entries in ``interfaces`` that will be managed by ``network-manager``.
-
-6. Where to go next ...
+7. Where to go next ...
 -----------------------
 
 ... is up to YOU. Yeehaw.
@@ -570,14 +655,22 @@ Comment out (deactivate) any entries in ``interfaces`` that will be managed by `
 Happy hacking!
 
 Notes
------
++++++
 
-.. [1] An alternative is adding the image to a `USB stick with multiple Linux installers <http://www.circuidipity.com/multi-boot-usb.html>`_.
+.. [1] Image courtesy of `jschild <http://jschild.deviantart.com/art/Facebook-cover-debian-Darth-Vader-380351614>`_.
 
-.. [2] Recommended: Otherwise the partitioning tool may designate the USB device as primary (sda) storage.
+.. [2] Note that encrypted ``root`` **requires** an unencrypted ``boot``.
 
-.. [3] For storage devices >=128GB I create separate ``root`` + ``swap`` + ``home`` partitions. Smaller devices get ``boot`` + ``swap`` + ``root``  partitions and remember that encrypted ``root`` **requires** an unencrypted ``boot``.
+.. [3] Very helpful! `LVM post on the Arch Wiki <https://wiki.archlinux.org/index.php/LVM>`_.
 
-.. [4] The task selection menu can be used post-install by running (as root) ``tasksel``.
+.. [4] An alternative is adding the image to a `USB stick with multiple Linux installers <http://www.circuidipity.com/multi-boot-usb.html>`_.
 
-.. [5] Multiple wireless static IP address setups can be created with ``iface wlp1s0_NAME inet static`` and [de]activated with ``if{up.down} wlp1s0=wlp1s0_NAME``.
+.. [5] ``Mount options: relatime`` decreases write operations and boosts drive speed.
+
+.. [6] Reserved blocks can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large **non-root partitions** extra space can be gained by reducing the default 5% reserve set aside by Debian to 1%.
+
+.. [7] Task selection menu can be used post-install by running (as root) ``tasksel``.
+
+.. [8] Problem: setting the network interface to static address can result in ``/etc/resolv.conf`` being overwritten every few minutes with an IPv6 address that breaks DNS. The "fix" is to maually set ``nameserver 8.8.8.8`` in resolv.conf and install the ``resolvconf`` package. Note that ``dns-nameservers`` entries are ignored if resolvconf is not installed.
+
+.. [9] Multiple wireless static IP address setups can be created with ``iface wlp1s0_NAME inet static`` and [de]activated with ``if{up.down} wlp1s0=wlp1s0_NAME``.
