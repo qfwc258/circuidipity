@@ -36,145 +36,191 @@
 
 <!-- article -->
 <h1>Minimal Debian</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 28 February 2016</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 11 May 2017</p>
 <div id="article">
     <div class="figure">
 <img alt="Debian Vader" src="images/debianVader.png" style="width: 960px; height: 355px;" />
-<p class="caption">[Image courtesy <a class="reference external" href="http://jschild.deviantart.com/art/Facebook-cover-debian-Darth-Vader-380351614">jschild</a>].</p>
 </div>
-<p>I like using Debian's minimal <strong>mini.iso</strong> installer to create <strong>console-only base configurations</strong> that can be customized for various tasks and <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">alternate desktops</a>.</p>
+<p><strong>Debian &quot;Jessie&quot;</strong> is the latest stable release of the popular Linux operating system. I use Debian's <a class="reference external" href="https://www.debian.org/CD/netinst/">minimal network install image</a> to create a <strong>console-only base configuration</strong> that can be customized for various tasks and <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">alternate desktops</a>. <a class="footnote-reference" href="#id10" id="id1">[1]</a></p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p><a class="reference external" href="http://www.debian.org">Debian GNU/Linux</a> is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. More than a hundred other Linux distributions like <a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html">Ubuntu</a> build their distributions on a solid Debian foundation.</p>
-<p>There are 3 <strong>release branches</strong>: <tt class="docutils literal">jessie/stable</tt>, <tt class="docutils literal">stretch/testing</tt>, and <tt class="docutils literal">sid/unstable</tt>. Below is a visual walk-through of a sample Debian <tt class="docutils literal">stable</tt> setup that makes use of an entire storage device divided into 3 partitions: a <tt class="docutils literal">root</tt> partition, and <a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a> encrypted <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt> partitions.</p>
+<p><a class="reference external" href="http://www.debian.org">Debian GNU/Linux</a> is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. There are 3 <strong>release branches</strong>: <tt class="docutils literal">jessie/stable</tt>, <tt class="docutils literal">stretch/testing</tt>, and <tt class="docutils literal">sid/unstable</tt>.</p>
+<p>Below is a visual walk-through of a sample workstation setup that makes use of the entire disk divided into 2 partitions: a <tt class="docutils literal">boot</tt> partition, <a class="footnote-reference" href="#id11" id="id2">[2]</a> and an <strong>encrypted partition</strong> used by the <strong>Logical Volume Manager</strong> (LVM) to create &quot;virtual partitions&quot; (Logical Volumes). Installing LVM on top of the encrypted partition allows:</p>
+<ul class="simple">
+<li>creation of multiple LVs protected by a single passphrase entered at boot time</li>
+<li>dynamic resizing of filesystems (set aside unallocated space and make use of it as needed)</li>
+<li>snapshots of filesystems that can be used as backups or to restore a previous state <a class="footnote-reference" href="#id12" id="id3">[3]</a></li>
+</ul>
 <div class="section" id="prepare-install-media">
 <h3>0. Prepare install media</h3>
-<p>Download the <a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/mini.iso">64-bit mini.iso</a> (<a class="reference external" href="http://ftp.us.debian.org/debian/dists/stable/main/installer-i386/current/images/netboot/mini.iso">32bit</a> for older machines) and <a class="reference external" href="https://www.debian.org/releases/stable/amd64/ch04s03.html.en">flash the image</a> to a USB stick. <a class="footnote-reference" href="#id6" id="id1">[1]</a></p>
+<p>Download the (unofficial image that includes non-free firmware) <a class="reference external" href="https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/">64bit firmware-VERSION-amd64-netinst.iso</a> (<a class="reference external" href="https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/i386/iso-cd/">32bit image</a> for older machines) and <a class="reference external" href="https://www.debian.org/releases/stable/amd64/ch04s03.html.en">flash the image</a> to a USB stick. <a class="footnote-reference" href="#id13" id="id4">[4]</a></p>
 <p>Minimal installer (requires network connection) downloads all the latest packages during setup.</p>
 </div>
 <div class="section" id="launch">
 <h3>1. Launch</h3>
-<img alt="Install" class="align-center" src="images/screenshot/debianInstall/01.1.png" style="width: 800px; height: 600px;" />
-<img alt="Select Language" class="align-center" src="images/screenshot/debianInstall/02.png" style="width: 800px; height: 600px;" />
-<img alt="Select Location" class="align-center" src="images/screenshot/debianInstall/03.png" style="width: 800px; height: 600px;" />
-<img alt="Configure Keyboard" class="align-center" src="images/screenshot/debianInstall/04.png" style="width: 800px; height: 600px;" />
-<img alt="Hostname" class="align-center" src="images/screenshot/debianInstall/05.png" style="width: 800px; height: 600px;" />
-<img alt="Domain" class="align-center" src="images/screenshot/debianInstall/06.png" style="width: 800px; height: 600px;" />
-<img alt="Mirror Country" class="align-center" src="images/screenshot/debianInstall/07.png" style="width: 800px; height: 600px;" />
-<img alt="Mirror archive" class="align-center" src="images/screenshot/debianInstall/08.png" style="width: 800px; height: 600px;" />
-<img alt="Mirror Directory" class="align-center" src="images/screenshot/debianInstall/09.png" style="width: 800px; height: 600px;" />
-<img alt="Proxy" class="align-center" src="images/screenshot/debianInstall/10.png" style="width: 800px; height: 600px;" />
-<p>Contents of the installer are now loaded into memory and the USB stick can safely be removed. <a class="footnote-reference" href="#id7" id="id2">[2]</a></p>
-<img alt="Root password" class="align-center" src="images/screenshot/debianInstall/11.png" style="width: 800px; height: 600px;" />
-<img alt="Verify password" class="align-center" src="images/screenshot/debianInstall/12.png" style="width: 800px; height: 600px;" />
-<img alt="Full Name" class="align-center" src="images/screenshot/debianInstall/13.png" style="width: 800px; height: 600px;" />
-<img alt="Username" class="align-center" src="images/screenshot/debianInstall/14.png" style="width: 800px; height: 600px;" />
-<img alt="User password" class="align-center" src="images/screenshot/debianInstall/15.png" style="width: 800px; height: 600px;" />
-<img alt="Verify password" class="align-center" src="images/screenshot/debianInstall/16.png" style="width: 800px; height: 600px;" />
-<img alt="Select time zone" class="align-center" src="images/screenshot/debianInstall/17.png" style="width: 800px; height: 600px;" />
+<img alt="Install" class="align-center" src="images/screenshot/debianInstallLvm/001-1.png" style="width: 800px; height: 600px;" />
+<img alt="Select Language" class="align-center" src="images/screenshot/debianInstallLvm/002.png" style="width: 800px; height: 600px;" />
+<img alt="Select Location" class="align-center" src="images/screenshot/debianInstallLvm/003.png" style="width: 800px; height: 600px;" />
+<img alt="Configure Keyboard" class="align-center" src="images/screenshot/debianInstallLvm/004.png" style="width: 800px; height: 600px;" />
+<img alt="Hostname" class="align-center" src="images/screenshot/debianInstallLvm/005.png" style="width: 800px; height: 600px;" />
+<img alt="Domain" class="align-center" src="images/screenshot/debianInstallLvm/006.png" style="width: 800px; height: 600px;" />
+<img alt="Root password" class="align-center" src="images/screenshot/debianInstallLvm/007.png" style="width: 800px; height: 600px;" />
+<img alt="Verify password" class="align-center" src="images/screenshot/debianInstallLvm/008.png" style="width: 800px; height: 600px;" />
+<img alt="Full Name" class="align-center" src="images/screenshot/debianInstallLvm/009.png" style="width: 800px; height: 600px;" />
+<img alt="Username" class="align-center" src="images/screenshot/debianInstallLvm/010.png" style="width: 800px; height: 600px;" />
+<img alt="User password" class="align-center" src="images/screenshot/debianInstallLvm/011.png" style="width: 800px; height: 600px;" />
+<img alt="Verify password" class="align-center" src="images/screenshot/debianInstallLvm/012.png" style="width: 800px; height: 600px;" />
+<img alt="Select time zone" class="align-center" src="images/screenshot/debianInstallLvm/013.png" style="width: 800px; height: 600px;" />
 </div>
 <div class="section" id="partitions">
 <h3>2. Partitions</h3>
-<p>In the example below I create 3 partitions <a class="footnote-reference" href="#id8" id="id3">[3]</a> on the disk:</p>
+<p>Sample layout:</p>
 <ul class="simple">
-<li>sda1 is a 20GB <tt class="docutils literal">root</tt> partition</li>
-<li>sda5 is a 1GB LUKS encrypted <tt class="docutils literal">swap</tt> partition using a <strong>random key</strong></li>
-<li>sda6 uses the remaining storage as a LUKS encrypted <tt class="docutils literal">home</tt> partition using a <strong>passphrase</strong></li>
+<li>sda1 is a 512MB <tt class="docutils literal">boot</tt> partition</li>
+<li>sda2 uses the remaining storage as a LUKS encrypted partition</li>
+<li>LVM is installed on the encrypted partition, and contains a volume group with the 3 logical volumes <tt class="docutils literal">root</tt> + <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt></li>
 </ul>
-<img alt="Partitioning method" class="align-center" src="images/screenshot/debianInstall/18.png" style="width: 800px; height: 600px;" />
-<img alt="Partition disks" class="align-center" src="images/screenshot/debianInstall/19.png" style="width: 800px; height: 600px;" />
-<img alt="Partition table" class="align-center" src="images/screenshot/debianInstall/20.png" style="width: 800px; height: 600px;" />
-<img alt="Free space" class="align-center" src="images/screenshot/debianInstall/21.png" style="width: 800px; height: 600px;" />
-<img alt="New Partition" class="align-center" src="images/screenshot/debianInstall/22.png" style="width: 800px; height: 600px;" />
-<img alt="Partition size" class="align-center" src="images/screenshot/debianInstall/23.png" style="width: 800px; height: 600px;" />
-<img alt="Primary partition" class="align-center" src="images/screenshot/debianInstall/24.png" style="width: 800px; height: 600px;" />
-<img alt="Beginning" class="align-center" src="images/screenshot/debianInstall/25.png" style="width: 800px; height: 600px;" />
-<p>Setting <tt class="docutils literal">Mount options: relatime</tt> decreases write operations and boosts drive speed ...</p>
-<img alt="Mount options" class="align-center" src="images/screenshot/debianInstall/25.1.png" style="width: 800px; height: 600px;" />
-<img alt="relatime" class="align-center" src="images/screenshot/debianInstall/25.3.png" style="width: 800px; height: 600px;" />
-<img alt="Done setting up partition" class="align-center" src="images/screenshot/debianInstall/26.1.png" style="width: 800px; height: 600px;" />
-<img alt="Free space" class="align-center" src="images/screenshot/debianInstall/27.png" style="width: 800px; height: 600px;" />
-<img alt="New partition" class="align-center" src="images/screenshot/debianInstall/28.png" style="width: 800px; height: 600px;" />
-<img alt="Partition size" class="align-center" src="images/screenshot/debianInstall/29.png" style="width: 800px; height: 600px;" />
-<img alt="Logical partition" class="align-center" src="images/screenshot/debianInstall/30.png" style="width: 800px; height: 600px;" />
-<img alt="Beginning" class="align-center" src="images/screenshot/debianInstall/31.png" style="width: 800px; height: 600px;" />
-<img alt="Use as" class="align-center" src="images/screenshot/debianInstall/31.1.png" style="width: 800px; height: 600px;" />
-<img alt="Encrypt volume" class="align-center" src="images/screenshot/debianInstall/32.png" style="width: 800px; height: 600px;" />
-<img alt="Encryption key" class="align-center" src="images/screenshot/debianInstall/32.1.png" style="width: 800px; height: 600px;" />
-<img alt="Random key" class="align-center" src="images/screenshot/debianInstall/33.png" style="width: 800px; height: 600px;" />
-<p>If the hard disk has not been securely wiped prior to installing Debian (using a utility like <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">DBAN</a>) you may want to configure <tt class="docutils literal">Erase data: yes</tt>. Note, however, depending on the size of the disk this operation can last several hours.</p>
-<img alt="Erase data" class="align-center" src="images/screenshot/debianInstall/33.1.png" style="width: 800px; height: 600px;" />
-<img alt="Done setting up partition" class="align-center" src="images/screenshot/debianInstall/33.2.png" style="width: 800px; height: 600px;" />
-<img alt="Free space" class="align-center" src="images/screenshot/debianInstall/34.png" style="width: 800px; height: 600px;" />
-<img alt="New partition" class="align-center" src="images/screenshot/debianInstall/35.png" style="width: 800px; height: 600px;" />
-<img alt="Partition size" class="align-center" src="images/screenshot/debianInstall/36.png" style="width: 800px; height: 600px;" />
-<img alt="Logical partition" class="align-center" src="images/screenshot/debianInstall/30.png" style="width: 800px; height: 600px;" />
-<img alt="Use as" class="align-center" src="images/screenshot/debianInstall/31.1.png" style="width: 800px; height: 600px;" />
-<img alt="Encrypt volume" class="align-center" src="images/screenshot/debianInstall/38.png" style="width: 800px; height: 600px;" />
-<img alt="Erase data" class="align-center" src="images/screenshot/debianInstall/39.1.png" style="width: 800px; height: 600px;" />
-<img alt="Done setting up the partition" class="align-center" src="images/screenshot/debianInstall/39.2.png" style="width: 800px; height: 600px;" />
-<img alt="Configure encrypted volumes" class="align-center" src="images/screenshot/debianInstall/40.png" style="width: 800px; height: 600px;" />
-<img alt="Write changes to disk" class="align-center" src="images/screenshot/debianInstall/41.png" style="width: 800px; height: 600px;" />
-<img alt="Create encrypted volumes" class="align-center" src="images/screenshot/debianInstall/42.png" style="width: 800px; height: 600px;" />
-<img alt="Devices to encrypt" class="align-center" src="images/screenshot/debianInstall/43.png" style="width: 800px; height: 600px;" />
-<img alt="Finish encrypt" class="align-center" src="images/screenshot/debianInstall/44.png" style="width: 800px; height: 600px;" />
-<img alt="Encryption passphrase" class="align-center" src="images/screenshot/debianInstall/45.png" style="width: 800px; height: 600px;" />
-<img alt="Verify passphrase" class="align-center" src="images/screenshot/debianInstall/46.png" style="width: 800px; height: 600px;" />
-<img alt="Configure encrypted volume" class="align-center" src="images/screenshot/debianInstall/47.png" style="width: 800px; height: 600px;" />
-<img alt="Mount point" class="align-center" src="images/screenshot/debianInstall/48.png" style="width: 800px; height: 600px;" />
-<img alt="Mount home" class="align-center" src="images/screenshot/debianInstall/48.1.png" style="width: 800px; height: 600px;" />
-<img alt="Mount options" class="align-center" src="images/screenshot/debianInstall/49.png" style="width: 800px; height: 600px;" />
-<img alt="relatime" class="align-center" src="images/screenshot/debianInstall/25.3.png" style="width: 800px; height: 600px;" />
-<p><strong>Reserved blocks</strong> can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, <strong>non-root partitions</strong> extra space can be gained by reducing the default 5% reserve set aside by Debian to 1% ...</p>
-<img alt="Reserved blocks" class="align-center" src="images/screenshot/debianInstall/49.1.png" style="width: 800px; height: 600px;" />
-<img alt="Percent reserved" class="align-center" src="images/screenshot/debianInstall/49.2.png" style="width: 800px; height: 600px;" />
-<img alt="Done setting up the partition" class="align-center" src="images/screenshot/debianInstall/49.3.png" style="width: 800px; height: 600px;" />
-<img alt="Finish partitioning" class="align-center" src="images/screenshot/debianInstall/49.4.png" style="width: 800px; height: 600px;" />
-<img alt="Write changes to disk" class="align-center" src="images/screenshot/debianInstall/50.png" style="width: 800px; height: 600px;" />
+<img alt="Partitioning method" class="align-center" src="images/screenshot/debianInstallLvm/100.png" style="width: 800px; height: 600px;" />
+<img alt="Partition disks" class="align-center" src="images/screenshot/debianInstallLvm/101.png" style="width: 800px; height: 600px;" />
+<img alt="Partition table" class="align-center" src="images/screenshot/debianInstallLvm/102.png" style="width: 800px; height: 600px;" />
+<img alt="Free space" class="align-center" src="images/screenshot/debianInstallLvm/103.png" style="width: 800px; height: 600px;" />
+<img alt="New partition" class="align-center" src="images/screenshot/debianInstallLvm/104.png" style="width: 800px; height: 600px;" />
+<img alt="Partition size" class="align-center" src="images/screenshot/debianInstallLvm/105.png" style="width: 800px; height: 600px;" />
+<img alt="Primary partition" class="align-center" src="images/screenshot/debianInstallLvm/106.png" style="width: 800px; height: 600px;" />
+<img alt="Beginning" class="align-center" src="images/screenshot/debianInstallLvm/107.png" style="width: 800px; height: 600px;" />
+<p>Modify the default mount options ... <a class="footnote-reference" href="#id14" id="id5">[5]</a></p>
+<div class="highlight"><pre><span></span>Mount point: /boot
+Mount options: relatime
+Bootable flag: on
+</pre></div>
+<img alt="Boot" class="align-center" src="images/screenshot/debianInstallLvm/108.png" style="width: 800px; height: 600px;" />
+<img alt="Free space" class="align-center" src="images/screenshot/debianInstallLvm/109.png" style="width: 800px; height: 600px;" />
+<img alt="New partition" class="align-center" src="images/screenshot/debianInstallLvm/104.png" style="width: 800px; height: 600px;" />
+<p>Assign the remaining storage to the encrypted partition ...</p>
+<img alt="Partition size" class="align-center" src="images/screenshot/debianInstallLvm/110.png" style="width: 800px; height: 600px;" />
+<img alt="Primary partition" class="align-center" src="images/screenshot/debianInstallLvm/106.png" style="width: 800px; height: 600px;" />
+<p>Modify the default mount options ...</p>
+<div class="highlight"><pre><span></span>Use as: physical volume <span class="k">for</span> encryption
+Erase data: no
+</pre></div>
+<p>If the hard disk has not been securely wiped prior to installing Debian you may want to configure <tt class="docutils literal">Erase data: yes</tt>. Note, however, depending on the size of the disk this operation can last several hours.</p>
+<img alt="Physical volume for encryption" class="align-center" src="images/screenshot/debianInstallLvm/111.png" style="width: 800px; height: 600px;" />
+<img alt="Configure encrypted volumes" class="align-center" src="images/screenshot/debianInstallLvm/112.png" style="width: 800px; height: 600px;" />
+<img alt="Write changes" class="align-center" src="images/screenshot/debianInstallLvm/113.png" style="width: 800px; height: 600px;" />
+<img alt="Create encrypted" class="align-center" src="images/screenshot/debianInstallLvm/114.png" style="width: 800px; height: 600px;" />
+<img alt="Devices to encrypt" class="align-center" src="images/screenshot/debianInstallLvm/115.png" style="width: 800px; height: 600px;" />
+<img alt="Finish" class="align-center" src="images/screenshot/debianInstallLvm/116.png" style="width: 800px; height: 600px;" />
+<img alt="Passphrase" class="align-center" src="images/screenshot/debianInstallLvm/117.png" style="width: 800px; height: 600px;" />
+<img alt="Verify passphrase" class="align-center" src="images/screenshot/debianInstallLvm/118.png" style="width: 800px; height: 600px;" />
+<img alt="Partition disks" class="align-center" src="images/screenshot/debianInstallLvm/119.png" style="width: 800px; height: 600px;" />
+<p>Modify the default mount options ...</p>
+<div class="highlight"><pre><span></span>Use as: physical volume <span class="k">for</span> LVM
+</pre></div>
+<img alt="Physical volume for LVM" class="align-center" src="images/screenshot/debianInstallLvm/120.png" style="width: 800px; height: 600px;" />
+<img alt="Configure LVM" class="align-center" src="images/screenshot/debianInstallLvm/121.png" style="width: 800px; height: 600px;" />
+<img alt="Write changes" class="align-center" src="images/screenshot/debianInstallLvm/122.png" style="width: 800px; height: 600px;" />
+<img alt="Create volume group" class="align-center" src="images/screenshot/debianInstallLvm/123.png" style="width: 800px; height: 600px;" />
+<img alt="Vg name" class="align-center" src="images/screenshot/debianInstallLvm/124.png" style="width: 800px; height: 600px;" />
+<img alt="Device for vg" class="align-center" src="images/screenshot/debianInstallLvm/125.png" style="width: 800px; height: 600px;" />
+<img alt="Create lv" class="align-center" src="images/screenshot/debianInstallLvm/126.png" style="width: 800px; height: 600px;" />
+<img alt="Vg" class="align-center" src="images/screenshot/debianInstallLvm/127.png" style="width: 800px; height: 600px;" />
+<img alt="Lv root" class="align-center" src="images/screenshot/debianInstallLvm/128.png" style="width: 800px; height: 600px;" />
+<img alt="Lv root size" class="align-center" src="images/screenshot/debianInstallLvm/129.png" style="width: 800px; height: 600px;" />
+<img alt="Create lv" class="align-center" src="images/screenshot/debianInstallLvm/130.png" style="width: 800px; height: 600px;" />
+<img alt="Vg" class="align-center" src="images/screenshot/debianInstallLvm/131.png" style="width: 800px; height: 600px;" />
+<img alt="Lv swap" class="align-center" src="images/screenshot/debianInstallLvm/132.png" style="width: 800px; height: 600px;" />
+<img alt="Lv swap size" class="align-center" src="images/screenshot/debianInstallLvm/133.png" style="width: 800px; height: 600px;" />
+<img alt="Create lv" class="align-center" src="images/screenshot/debianInstallLvm/134.png" style="width: 800px; height: 600px;" />
+<img alt="Vg" class="align-center" src="images/screenshot/debianInstallLvm/135.png" style="width: 800px; height: 600px;" />
+<img alt="Lv home" class="align-center" src="images/screenshot/debianInstallLvm/136.png" style="width: 800px; height: 600px;" />
+<p>Set aside some unused space for future requirements. LVM makes it easy to expand or create new filesystems as needed ...</p>
+<img alt="Lv home size" class="align-center" src="images/screenshot/debianInstallLvm/137.png" style="width: 800px; height: 600px;" />
+<img alt="Finish lvm" class="align-center" src="images/screenshot/debianInstallLvm/138.png" style="width: 800px; height: 600px;" />
+<img alt="Select lv root" class="align-center" src="images/screenshot/debianInstallLvm/139.png" style="width: 800px; height: 600px;" />
+<p>Modify the default mount options ...</p>
+<div class="highlight"><pre><span></span>Use as: Ext4
+Mount point: /
+Mount options: relatime
+</pre></div>
+<img alt="Lv root config" class="align-center" src="images/screenshot/debianInstallLvm/140.png" style="width: 800px; height: 600px;" />
+<img alt="Select lv swap" class="align-center" src="images/screenshot/debianInstallLvm/141.png" style="width: 800px; height: 600px;" />
+<p>Modify the default mount options ...</p>
+<div class="highlight"><pre><span></span>Use as: swap area
+</pre></div>
+<img alt="Lv swap config" class="align-center" src="images/screenshot/debianInstallLvm/142.png" style="width: 800px; height: 600px;" />
+<img alt="Select lv home" class="align-center" src="images/screenshot/debianInstallLvm/143.png" style="width: 800px; height: 600px;" />
+<p>Modify the default mount options ... <a class="footnote-reference" href="#id15" id="id6">[6]</a></p>
+<div class="highlight"><pre><span></span>Use as: Ext4
+Mount point: /home
+Mount options: relatime
+Reserved blocks: 1%
+</pre></div>
+<img alt="Lv home config" class="align-center" src="images/screenshot/debianInstallLvm/144.png" style="width: 800px; height: 600px;" />
+<img alt="Finish partitioning" class="align-center" src="images/screenshot/debianInstallLvm/145.png" style="width: 800px; height: 600px;" />
+<img alt="Write changes" class="align-center" src="images/screenshot/debianInstallLvm/146.png" style="width: 800px; height: 600px;" />
 </div>
 <div class="section" id="install-packages-and-finish-up">
 <h3>3. Install packages and finish up</h3>
-<img alt="Popularity-contest" class="align-center" src="images/screenshot/debianInstall/51.png" style="width: 800px; height: 600px;" />
-<p>Select only <tt class="docutils literal">[*] standard system utilities</tt> if you wish to start with a minimal, console-only base configuration ready for further customization. <a class="footnote-reference" href="#id9" id="id4">[4]</a></p>
-<img alt="Software selection" class="align-center" src="images/screenshot/debianInstall/52.png" style="width: 800px; height: 600px;" />
+<img alt="Configure package manager" class="align-center" src="images/screenshot/debianInstallLvm/200.png" style="width: 800px; height: 600px;" />
+<p>Use the Debian global mirrors service <a class="reference external" href="https://wiki.debian.org/DebianGeoMirror">deb.debian.org</a> ...</p>
+<img alt="Mirror hostname" class="align-center" src="images/screenshot/debianInstallLvm/201-1.png" style="width: 800px; height: 600px;" />
+<img alt="Mirror directory" class="align-center" src="images/screenshot/debianInstallLvm/202.png" style="width: 800px; height: 600px;" />
+<img alt="Proxy" class="align-center" src="images/screenshot/debianInstallLvm/203.png" style="width: 800px; height: 600px;" />
+<img alt="Popularity contest" class="align-center" src="images/screenshot/debianInstallLvm/204.png" style="width: 800px; height: 600px;" />
+<p>Select only <tt class="docutils literal">[*] standard system utilities</tt> and leave the remaining tasks <a class="footnote-reference" href="#id16" id="id7">[7]</a> unmarked ...</p>
+<img alt="Software selection" class="align-center" src="images/screenshot/debianInstallLvm/205.png" style="width: 800px; height: 600px;" />
 <p>Packages are downloaded and the installer makes its finishing touches ...</p>
-<img alt="GRUB" class="align-center" src="images/screenshot/debianInstall/53.png" style="width: 800px; height: 600px;" />
-<img alt="GRUB install" class="align-center" src="images/screenshot/debianInstall/54.png" style="width: 800px; height: 600px;" />
-<img alt="Finish" class="align-center" src="images/screenshot/debianInstall/55.png" style="width: 800px; height: 600px;" />
+<img alt="Downloading" class="align-center" src="images/screenshot/debianInstallLvm/206.png" style="width: 800px; height: 600px;" />
+<img alt="Install GRUB to MBR" class="align-center" src="images/screenshot/debianInstallLvm/207.png" style="width: 800px; height: 600px;" />
+<img alt="GRUB device" class="align-center" src="images/screenshot/debianInstallLvm/208.png" style="width: 800px; height: 600px;" />
+<img alt="Finish" class="align-center" src="images/screenshot/debianInstallLvm/209.png" style="width: 800px; height: 600px;" />
 </div>
 <div class="section" id="first-boot">
 <h3>4. First boot</h3>
-<img alt="GRUB menu" class="align-center" src="images/screenshot/debianInstall/56.png" style="width: 800px; height: 600px;" />
-<p>System will display a passphrase prompt to unlock encrypted <tt class="docutils literal">home</tt> partition ...</p>
-<img alt="Enter encrypt passphrase" class="align-center" src="images/screenshot/debianInstall/57.png" style="width: 800px; height: 600px;" />
-<img alt="Login" class="align-center" src="images/screenshot/debianInstall/58.png" style="width: 800px; height: 600px;" />
-<p>Login as root ... then run <tt class="docutils literal">timedatectl</tt> to confirm system time+date is properly set.</p>
+<img alt="GRUB menu" class="align-center" src="images/screenshot/debianInstallLvm/300.png" style="width: 800px; height: 600px;" />
+<p>User is prompted for the passphrase to unlock the encrypted partition ...</p>
+<img alt="Unlock passphrase" class="align-center" src="images/screenshot/debianInstallLvm/301-1.png" style="width: 800px; height: 600px;" />
+<img alt="Login" class="align-center" src="images/screenshot/debianInstallLvm/302-1.png" style="width: 800px; height: 600px;" />
+<p>Login and run <tt class="docutils literal">timedatectl</tt> to confirm system date+time is properly configured.</p>
+</div>
+<div class="section" id="grub">
+<h3>5. GRUB</h3>
+<p>After running a minimal install on my Acer C720 Chromebook with encrypted swap + home partitions I ran into this issue: <a class="reference external" href="https://bugs.launchpad.net/ubuntu/+source/cryptsetup/+bug/1375435">&quot;Black screen instead of password prompt for boot encryption&quot;</a>.</p>
+<p>I had to enter my passphrase blind and <tt class="docutils literal">ALT+F1</tt> to console. When I tried removing the GRUB options <tt class="docutils literal">splash</tt> and/or <tt class="docutils literal">quiet</tt> I lost the ability to enter the passphrase at all and a hard reset was required.</p>
+<p><strong>Fix:</strong> Modify <tt class="docutils literal">/etc/default/grub</tt> ...</p>
+<div class="highlight"><pre><span></span><span class="c1">## Force the kernel to boot in normal text mode with &#39;=text&#39;</span>
+<span class="nv">GRUB_GFXPAYLOAD_LINUX</span><span class="o">=</span>text
+</pre></div>
+<p>... and update ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># update-grub</span>
+</pre></div>
+<p>Now it works! My chromebook is currently the only device I have run into this issue.</p>
+<p>See: <a class="reference external" href="https://www.gnu.org/software/grub/manual/html_node/gfxpayload.html">GNU gfxpayload</a></p>
 </div>
 <div class="section" id="network">
-<h3>5. Network</h3>
+<h3>6. Network</h3>
 <p>Check which network interfaces are detected and settings ...</p>
-<div class="highlight"><pre><span></span><span class="c1"># ip a</span>
+<div class="highlight"><pre><span></span>$ ip a
 </pre></div>
 <p><strong>Wired</strong> interfaces are usually auto-configured by default and assigned an IP address courtesy of DHCP.</p>
-<p>To assign a <strong>static</strong> address, deactivate the wired interface and create a new entry in <tt class="docutils literal">/etc/network/interfaces</tt>. Sample entry for <tt class="docutils literal">enp3s0</tt> ...</p>
+<p>To assign a <strong>static</strong> address, deactivate the wired interface and create a new entry in <tt class="docutils literal">/etc/network/interfaces</tt>. <a class="footnote-reference" href="#id17" id="id8">[8]</a> Sample entry for <tt class="docutils literal">enp3s0</tt> ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># The primary network interface</span>
 auto enp3s0
-<span class="c1">#iface enp3s0 inet dhcp</span>
 iface enp3s0 inet static
     address 192.168.1.88
     netmask 255.255.255.0
     gateway 192.168.1.1
-    dns-nameservers 192.168.1.1
+    dns-nameservers 8.8.8.8 8.8.4.4
 </pre></div>
 <p>Bring up|down interface with <tt class="docutils literal">if{up,down} enp3s0</tt>.</p>
 <p>Create a temporary <strong>wireless</strong> interface connection to WPA2 encrypted access points manually using <tt class="docutils literal">wpa_supplicant</tt> + <tt class="docutils literal">wpa_passphrase</tt> + <tt class="docutils literal">dhclinet</tt>. Sample setup of <tt class="docutils literal">wlp1s0</tt> ...</p>
-<div class="highlight"><pre><span></span><span class="c1"># ip link set wlp1s0 up             # bring up interface</span>
-<span class="c1"># iw dev wlp1s0 link                # get link status</span>
-<span class="c1"># iw dev wlp1s0 scan | grep SSID    # scan for access points</span>
-<span class="c1"># wpa_supplicant -i wlp1s0 -c&lt;(wpa_passphrase &quot;MY_SSID&quot; &quot;MY_PASSPHRASE&quot;)   # connect to WPA/WPA2 ... add &#39;-B&#39; to background process</span>
-<span class="c1"># dhclient wlp1s0                   # obtain IP address</span>
+<div class="highlight"><pre><span></span><span class="c1"># ip link set wlp1s0 up             ## bring up interface</span>
+<span class="c1"># iw dev wlp1s0 link                ## get link status</span>
+<span class="c1"># iw dev wlp1s0 scan | grep SSID    ## scan for access points</span>
+<span class="c1"># wpa_supplicant -i wlp1s0 -c&lt;(wpa_passphrase &quot;MY_SSID&quot; &quot;MY_PASSPHRASE&quot;)   ## connect to WPA/WPA2 ... add &#39;-B&#39; to background process</span>
+<span class="c1"># dhclient wlp1s0                   ## obtain IP address</span>
 </pre></div>
-<p>More permanent configurations may be set in <tt class="docutils literal">interfaces</tt>. Sample setup <a class="footnote-reference" href="#id10" id="id5">[5]</a> with a static IP address ...</p>
+<p>More permanent configurations may be set in <tt class="docutils literal">interfaces</tt>. Sample setup <a class="footnote-reference" href="#id18" id="id9">[9]</a> with a static IP address ...</p>
 <div class="highlight"><pre><span></span>iface wlp1s0 inet static
     address 192.168.1.77
     netmask 255.255.255.0
@@ -190,53 +236,76 @@ iface wlp1s0 inet dhcp
     wpa-psk MY_PASSPHRASE
     dns-nameservers 8.8.8.8 8.8.4.4
 </pre></div>
-<p>Once a link is established an optional network manager utility may be installed. Packages <tt class="docutils literal"><span class="pre">network-manager</span></tt> and <tt class="docutils literal"><span class="pre">network-manager-gnome</span></tt> provide the console <tt class="docutils literal">nmcli</tt> and graphical <tt class="docutils literal"><span class="pre">nm-applet</span></tt> clients respectively ...</p>
-<div class="highlight"><pre><span></span><span class="c1"># apt install network-manager</span>
-</pre></div>
-<p>Comment out (deactivate) any entries in <tt class="docutils literal">interfaces</tt> that will be managed by <tt class="docutils literal"><span class="pre">network-manager</span></tt>.</p>
+<p>Once a link is established install an (optional) network manager utility. Packages <tt class="docutils literal"><span class="pre">network-manager</span></tt> and <tt class="docutils literal"><span class="pre">network-manager-gnome</span></tt> provide the console <tt class="docutils literal">nmcli</tt> and graphical <tt class="docutils literal"><span class="pre">nm-applet</span></tt> clients respectively . Comment out (deactivate) any entries in <tt class="docutils literal">interfaces</tt> that will be managed by <tt class="docutils literal"><span class="pre">network-manager</span></tt>.</p>
 </div>
 <div class="section" id="where-to-go-next">
-<h3>6. Where to go next ...</h3>
+<h3>7. Where to go next ...</h3>
 <p>... is up to YOU. Yeehaw.</p>
 <p>Happy hacking!</p>
-</div>
 <div class="section" id="notes">
-<h3>Notes</h3>
-<table class="docutils footnote" frame="void" id="id6" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>An alternative is adding the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>.</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id7" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Recommended: Otherwise the partitioning tool may designate the USB device as primary (sda) storage.</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id8" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>For storage devices &gt;=128GB I create separate <tt class="docutils literal">root</tt> + <tt class="docutils literal">swap</tt> + <tt class="docutils literal">home</tt> partitions. Smaller devices get <tt class="docutils literal">boot</tt> + <tt class="docutils literal">swap</tt> + <tt class="docutils literal">root</tt>  partitions and remember that encrypted <tt class="docutils literal">root</tt> <strong>requires</strong> an unencrypted <tt class="docutils literal">boot</tt>.</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id9" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>The task selection menu can be used post-install by running (as root) <tt class="docutils literal">tasksel</tt>.</td></tr>
-</tbody>
-</table>
+<h4>Notes</h4>
 <table class="docutils footnote" frame="void" id="id10" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id5">[5]</a></td><td>Multiple wireless static IP address setups can be created with <tt class="docutils literal">iface wlp1s0_NAME inet static</tt> and [de]activated with <tt class="docutils literal">if{up.down} wlp1s0=wlp1s0_NAME</tt>.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Image courtesy of <a class="reference external" href="http://jschild.deviantart.com/art/Facebook-cover-debian-Darth-Vader-380351614">jschild</a>.</td></tr>
 </tbody>
 </table>
+<table class="docutils footnote" frame="void" id="id11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Note that encrypted <tt class="docutils literal">root</tt> <strong>requires</strong> an unencrypted <tt class="docutils literal">boot</tt>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id12" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>Very helpful! <a class="reference external" href="https://wiki.archlinux.org/index.php/LVM">LVM post on the Arch Wiki</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id13" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>An alternative is adding the image to a <a class="reference external" href="http://www.circuidipity.com/multi-boot-usb.html">USB stick with multiple Linux installers</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id14" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[5]</a></td><td><tt class="docutils literal">Mount options: relatime</tt> decreases write operations and boosts drive speed.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id15" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[6]</a></td><td>Reserved blocks can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large <strong>non-root partitions</strong> extra space can be gained by reducing the default 5% reserve set aside by Debian to 1%.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id16" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[7]</a></td><td>Task selection menu can be used post-install by running (as root) <tt class="docutils literal">tasksel</tt>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id17" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8">[8]</a></td><td>Problem: setting the network interface to static address can result in <tt class="docutils literal">/etc/resolv.conf</tt> being overwritten every few minutes with an IPv6 address that breaks DNS. The &quot;fix&quot; is to maually set <tt class="docutils literal">nameserver 8.8.8.8</tt> in resolv.conf and install the <tt class="docutils literal">resolvconf</tt> package. Note that <tt class="docutils literal"><span class="pre">dns-nameservers</span></tt> entries are ignored if resolvconf is not installed.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id18" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9">[9]</a></td><td>Multiple wireless static IP address setups can be created with <tt class="docutils literal">iface wlp1s0_NAME inet static</tt> and [de]activated with <tt class="docutils literal">if{up.down} wlp1s0=wlp1s0_NAME</tt>.</td></tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-crypto.html">crypto</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-lvm.html">lvm</a>
 </p>
 </div>
 
