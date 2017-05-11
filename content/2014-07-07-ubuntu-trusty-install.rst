@@ -3,7 +3,7 @@ Minimal Ubuntu
 ==============
 
 :date: 2014-07-07 01:23:00
-:tags: ubuntu, linux, server
+:tags: ubuntu, linux, crypto
 :slug: ubuntu-trusty-install
 :modified: 2016-08-14 19:57:00
 

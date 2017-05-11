@@ -3,7 +3,7 @@ New life for an old laptop as a Linux home server
 =================================================
 
 :date: 2016-08-16 21:47:00
-:tags: server, network, ubuntu, linux
+:tags: network, ubuntu, linux
 :slug: laptop-home-server
 :modified: 2016-08-29 15:15:00
 

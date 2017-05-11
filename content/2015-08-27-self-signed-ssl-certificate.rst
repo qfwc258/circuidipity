@@ -4,7 +4,7 @@ Create a self-signed SSL certificate
 
 :date: 2015-08-27 19:25:00
 :slug: self-signed-ssl-certificate
-:tags: server, network, linux
+:tags: crypto, network, linux
 :modified: 2016-08-21 18:33
 
 Secure web access to services hosted on a `home server <http://www.circuidipity.com/raspberry-pi-home-server.html>`_.
