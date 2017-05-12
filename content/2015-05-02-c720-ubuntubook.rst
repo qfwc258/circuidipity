@@ -4,7 +4,6 @@ Chromebook to Ubuntubook
 
 :date: 2015-05-02 17:30:00
 :slug: c720-ubuntubook
-:template: article-project
 :tags: chromebook, ubuntu, linux
 :modified: 2016-04-30 19:38:00
 

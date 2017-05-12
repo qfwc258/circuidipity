@@ -96,12 +96,12 @@ Projects
         :width: 150px
         :height: 150px
         :align: left
-        :target: c720-ubuntubook.html
+        :target: c720-chromebook-to-jessiebook.html
 
 .. raw:: html
 
     <div class="projectx">
-        <h2>Chromebook to Ubuntubook</h2>
-        <p>Replace Chrome with <a href="c720-ubuntubook.html">full-featured Linux on the Acer C720 Chromebook ...</a></p>
+        <h2>Chromebook to Jessiebook</h2>
+        <p>Replace Chrome with <a href="c720-chromebook-to-jessiebook.html">full-featured Linux on the Acer C720 Chromebook ...</a></p>
         <p style="clear:both;"></p>
     </div>

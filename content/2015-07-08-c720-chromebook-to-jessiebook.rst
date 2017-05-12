@@ -4,12 +4,11 @@ Chromebook to Jessiebook
 
 :date: 2015-07-08 10:45:00
 :slug: c720-chromebook-to-jessiebook
+:template: article-project
 :tags: chromebook, debian, linux
-:modified: 2016-02-14 00:10:00
+:modified: 2017-05-12 00:10:00
 
-**Update:** Currently using `Ubuntu + i3 window manager <http://www.circuidipity.com/c720-ubuntubook.html>`_ ... I like it!
-
-Replace **Chrome OS** permanently with **Debian** on the **Acer C720 Chromebook**.
+Replace ChromeOS permanently with **Debian** on the **Acer C720 Chromebook**.
 
 .. image:: images/jessiebook.png
     :align: right
@@ -25,7 +24,7 @@ Running a full-featured Linux on this little laptop is a delight: lightweight, s
 This device is available in a few different configurations. Mine is the non-touchscreen model ``C720-2848`` with (non-expandable) 2GB RAM and a (user-replaceable) 16GB SSD.
 
 0. Recovery Image
-=================
+-----------------
 
 Create a recovery image of Chrome OS (my C720 is model ``PEPPY C6A-N3C-A7O``) to enable restoring the Chromebook to its default configuration. [1]_ This will require a spare USB stick of 2GB or better:
 
@@ -33,12 +32,12 @@ Create a recovery image of Chrome OS (my C720 is model ``PEPPY C6A-N3C-A7O``) to
 * Insert the USB stick, enter ``chrome://imageburner`` and follow the directions to generate a recovery image
 
 1. Prepare install media
-========================
+------------------------
 
 Download the `64-bit minimal installer <http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/mini.iso>`_ and `flash the image <https://www.debian.org/releases/stable/amd64/ch04s03.html.en>`_ to a USB stick. An alternative (my choice) is adding the image to a `USB stick with multiple Linux installers <http://www.circuidipity.com/multi-boot-usb.html>`_. Using the minimal console installer (requires network connection) downloads all the latest packages during setup.
 
 2. SeaBIOS
-==========
+----------
 
 `SeaBIOS <http://www.coreboot.org/SeaBIOS>`_ in combination with **Coreboot** provides an open-source legacy BIOS that enables access to the MBR and the ability to install an alternative OS on the Chromebook. All this good stuff involves jumping through a few simple hoops and not trembling in fear at the "scary white screen" that pops up at power up stating that the boot loader detects something is **very very wrong** with the Chromebook and helpfully suggests pressing the spacebar to begin recovery. **Do not press the spacebar** or the Debian installation will be wiped from disk!
 
@@ -53,7 +52,7 @@ Experimenting with alternate OS installs on the Chromebook I first employed the 
 
 Disconnect power. Turn the Chromebook over facing bottom up and remove the 13 screws (not missing the one hidden under the warranty sticker). Gently pry the case off starting with the seam where the display connects to device. It comes away pretty easy.
 
-This is what you see:
+This is what you see ...
 
 .. figure:: images/c720-chromebook-annotated-innards.png
     :alt: C720 annotated innards
@@ -68,8 +67,8 @@ This is what you see:
 
 * Remove the write-protect screw
 * Close back cover using only the battery lock screw to hold in place
-* Re-connect power, boot Chromebook and wait until it displays:                           
-                                                                                
+* Re-connect power, boot Chromebook and wait until it displays ...
+
 .. code-block:: bash
     
     Chrome OS is missing or damaged.                                            
@@ -79,7 +78,7 @@ This is what you see:
 * At default Chrome OS "Welcome!" screen open a terminal ``CTRL+ALT+F2`` (Right-arrow)
 * Login as ``chronos`` (no password), then enter ``sudo su`` for superuser access
 
-Set new GBB flags [3]_ using the ``set_gbb_flags.sh`` script in Chrome OS. Enable short **developer mode** screen (1 second timeout) followed by **default legacy mode** boot by using these flags:
+Set new GBB flags [3]_ using the ``set_gbb_flags.sh`` script in Chrome OS. Enable short **developer mode** screen (1 second timeout) followed by **default legacy mode** boot by using these flags ...
 
 .. code-block:: bash
 
@@ -88,13 +87,13 @@ Set new GBB flags [3]_ using the ``set_gbb_flags.sh`` script in Chrome OS. Enabl
     GBB_FLAG_FORCE_DEV_BOOT_LEGACY 0×00000080
     GBB_FLAG_DEFAULT_DEV_BOOT_LEGACY 0×00000400
 
-... which adds up to running in the shell:
+... which adds up to running in the shell ...
 
 .. code-block:: bash
 
     /usr/share/vboot/bin/set_gbb_flags.sh 0x489
 
-Shutdown:
+Shutdown ...
 
 .. code-block:: bash
 
@@ -127,25 +126,21 @@ Enable the **USB Boot** and **Legacy BIOS** modes by opening the shell with ``Ct
 Insert USB stick prepared in Step 1, reboot the Chromebook and press ``CTRL+L`` at the boot screen to enter legacy boot mode. [6]_
 
 3. Install Debian
-=================
+-----------------
 
-My `visual screenshot tour <http://www.circuidipity.com/minimal-debian.html>`_ installing Debian ``jessie/stable``. Due to Chromebook's small storage capacity, however, I use a different 3-partition layout:
-
-* ``sda1`` configured as 300MB ``boot``
-* ``sda2`` configured as 2GB LUKS encrypted ``swap`` with ``random key``
-* ``sda3`` uses remaining space as LUKS encrypted ``root`` with ``passphrase``
+My `visual screenshot tour <http://www.circuidipity.com/minimal-debian.html>`_ installing the Debian stable release.
 
 4. Touchpad
-===========
+-----------
 
-Debian ``jessie/stable`` installs Linux kernel 3.16 with backported support for Chromebook touchpad. Per-session modifications of touchpad settings can be made using ``synclient``:
+Debian ``jessie/stable`` installs Linux kernel 3.16 with backported support for Chromebook touchpad. Per-session modifications of touchpad settings can be made using ``synclient`` ...
 
 .. code-block:: bash
 
-    $ synclient                 # display current settings
-    $ synclient TapButton3=2    # 3-finger tap = middle-click
+    $ synclient                 ## display current settings
+    $ synclient TapButton3=2    ## 3-finger tap = middle-click
 
-Make any desired touchpad settings permanent by creating ``/etc/X11/xorg.conf.d/50-c720-touchpad.conf``:
+Make any desired touchpad settings permanent by creating ``/etc/X11/xorg.conf.d/50-c720-touchpad.conf`` ...
 
 .. code-block:: bash
 
@@ -154,7 +149,7 @@ Make any desired touchpad settings permanent by creating ``/etc/X11/xorg.conf.d/
 
 Modify to adjust timeouts, add tap-mouse actions (2-finger tap = right-click, 3-finger tap = middle-click), and 2-finger scrolling. [7]_
 
-Example:
+Example ...
 
 .. code-block:: bash
 
@@ -175,14 +170,14 @@ Example:
         Option          "TapButton3" "2"
     EndSection
 
-Source: `50-c720-touchpad.conf <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/etc/X11/xorg.conf.d/50-c720-touchpad.conf>`_
+Link: `50-c720-touchpad.conf <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/etc/X11/xorg.conf.d/50-c720-touchpad.conf>`_
 
 5. SSD
-======
+------
 
-`Swappiness <https://en.wikipedia.org/wiki/Swappiness>`_ parameter controls the preference of the kernel to move processes out of physical memory to the swap partition. Range is ``0-100``, default is set to ``60`` and lower values cause the kernel to avoid swapping and higher values prompt more frequent swap use.
+`Swappiness <https://en.wikipedia.org/wiki/Swappiness>`_ parameter controls the preference of the kernel to move processes out of physical memory to the swap partition. Range is **0-100**, default is set to **60** and lower values cause the kernel to avoid swapping and higher values prompt more frequent swap use.
 
-Check current swappiness value:
+Check current swappiness value ...
 
 .. code-block:: bash
 
@@ -192,14 +187,14 @@ Reduce SSD writes by setting a low value of ``vm.swappiness=1`` in ``/etc/sysctl
 
 **TRIM** optimizes SSD performance [8]_ and is enabled by adding the ``discard`` option to ``/etc/crypttab`` and ``/etc/fstab``.
 
-Example ``crypttab``:
+Example ``crypttab`` ...
 
 .. code-block:: bash
 
     sda2_crypt /dev/sda2 /dev/urandom cipher=aes-xts-plain64,size=256,discard,swap
     sda3_crypt UUID=<STRING> none luks,discard
 
-Example ``fstab``:
+Example ``fstab`` ...
 
 .. code-block:: bash
 
@@ -208,16 +203,16 @@ Example ``fstab``:
     UUID=<STRING> /boot                    ext4    noatime,discard         0       2
     /dev/mapper/sda2_crypt none            swap    sw,discard              0       0
 
-Update ``/boot/initrd.img-*``:
+Update ``/boot/initrd.img-*`` ...
 
 .. code-block:: bash
  
     $ sudo update-initramfs -u -k all                                                      
 
 6. Suspend
-==========
+----------
 
-**Problem:** Suspend-and-resume generates a stream of errors:
+**Problem:** Suspend-and-resume generates a stream of errors ...
 
 .. code-block:: bash
 
@@ -230,7 +225,7 @@ Update ``/boot/initrd.img-*``:
 
 ... and blocks Jessiebook from executing a proper restart/shutdown.
 
-**FIX:** [9]_ Create ``/lib/systemd/system-sleep/ehci-pci.sh``:
+**FIX:** [9]_ Create ``/lib/systemd/system-sleep/ehci-pci.sh`` ...
 
 .. code-block:: bash
 
@@ -247,32 +242,32 @@ Update ``/boot/initrd.img-*``:
         ;;
     esac
 
-Make the script executable: 
+Make the script executable ...
                                                                                     
 .. code-block:: bash                                                                
                                                                                     
     $ sudo chmod 755 /lib/systemd/system-sleep/ehci-pci.sh           
                                                                                     
-Configure boot options in ``/etc/default/grub``:                                         
+Configure boot options in ``/etc/default/grub`` ...                                    
                                                                                 
 .. code-block:: bash                                                            
                                                                                 
     GRUB_CMDLINE_LINUX_DEFAULT="tpm_tis.force=1" 
                                                                                 
-Update GRUB:                                                                    
-                                                                                
+Update GRUB ...
+
 .. code-block:: bash                                                            
                                                                                 
     $ sudo update-grub                                                          
 
-Source: `ehci-pci.sh <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/lib/systemd/system-sleep/ehci-pci.sh>`_
+Link: `ehci-pci.sh <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/lib/systemd/system-sleep/ehci-pci.sh>`_
 
 7. Keyboard Shortcuts
-=====================
+---------------------
 
 Top row on the keyboard with the shortcut icons (``Brightness``, ``Volume``, etc.) identify in Linux as ``F1-F10`` keys and the ``Search`` key (in ``CapsLk`` position) acts as ``Super`` (Windows) modifier key.
 
-Create keyboard shortcuts by first installing:
+Create keyboard shortcuts by installing ...
 
 * ``xbindkeys`` - associate keys to shell commands
 * ``xbacklight`` - set backlight level using RandR
@@ -292,7 +287,7 @@ Create keyboard shortcuts by first installing:
 
 Enable function keys to modify sound and brightness settings by creating ``~/.xbindkeysrc``.
 
-Example:
+Example ...
 
 .. code-block:: bash
 
@@ -339,7 +334,7 @@ Example:
     "xvkbd -xsendevent -text '\[End]'"
     Alt + Right
 
-Enable new key shortcuts:
+Enable new key shortcuts ...
 
 .. code-block:: bash
 
@@ -347,7 +342,7 @@ Enable new key shortcuts:
 
 Place ``xbindkeys`` in ``~/.xinitrc`` to load configuration at ``startx``. [10]_
 
-Sources: `.xbindkeysrc <https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc>`_ and `.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_
+Links: `.xbindkeysrc <https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc>`_ and `.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_
 
 7.2 Power Key
 -------------
@@ -357,9 +352,9 @@ Power key in upper-right corner ignores any configuration in the window manager 
 If you want to disable the power key edit ``/etc/systemd/logind.conf`` and set ``HandlePowerKey=ignore``.
 
 8. Wireless
-===========
+-----------
 
-There are a few settings to modify to improve performance of Chromebook's wireless chipset. [11]_ Identify the card and parameters:
+There are a few settings to modify to improve performance of Chromebook's wireless chipset. [11]_ Identify the card and parameters ...
 
 .. code-block:: bash
 
@@ -374,44 +369,43 @@ There are a few settings to modify to improve performance of Chromebook's wirele
     parm:           ps_enable:Enable WLAN PowerSave (int)
     parm:           use_chanctx:Enable channel context for concurrency (int)
 
-Create ``/etc/modprobe.d/ath9k.conf``:
+Create ``/etc/modprobe.d/ath9k.conf`` ...
 
 .. code-block:: bash
   
     options ath9k bt_ant_diversity=1 ps_enable=0
 
-Source: `ath9k.conf <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/etc/modprobe.d/ath9k.conf>`_
+Link: `ath9k.conf <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/etc/modprobe.d/ath9k.conf>`_
 
 9. Microphone
-=============
+-------------
 
-Confirm the microphone is un-muted in ``alsamixer``. Create ``/etc/modprobe.d/snd-hda-intel.conf``:
+Confirm the microphone is un-muted in ``alsamixer``. Create ``/etc/modprobe.d/snd-hda-intel.conf`` ...
 
 .. code-block:: bash
 
     options snd_hda_intel model=,alc283-dac-wcaps                                        
                                                                                        
-... and restart (I couldn't get the module to unload). Give it a try:
+... and restart (I couldn't get the module to unload). Give it a try ...
 
 .. code-block:: bash
 
-    $ arecord -d 5 chr-mic.wav                                                            
+    $ arecord -d 5 chr-mic.wav
     $ aplay chr-mic.wav 
 
-10. Helpful Resources
-=====================
+10. Helpful!
+------------
 
 * Specs: output of `lshw <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lshw.txt>`_, `lspci <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lspci.txt>`_, and `lsusb <https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lsusb.txt>`_
 * Arch Linux C720 installation with useful `post-install details <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook>`_
 * Turn Chromebooks into `Ubuntu-based code learning machines for kids <http://blog.codestarter.org/how-we-turn-199-chromebooks-into-ubuntu-based/>`_
 * My earlier install and configuration of `Lubuntu 14.04 LTS <http://www.circuidipity.com/c720-lubuntubook.html>`_ under ``upstart`` (vs ``systemd`` in Debian) 
 * Lightweight `i3 tiling window manager <http://www.circuidipity.com/i3-tiling-window-manager.html>`_ is snappy on the Chromebook's modest hardware
-* Create shell scripts to configure Chromebook `when it leaves and returns home <http://www.circuidipity.com/chromebook-liftoff-splashdown.html>`_
 
 Happy hacking!
 
 Notes
------
++++++
 
 .. [1] Create a Chromebook `recovery image <https://support.google.com/chromebook/answer/1080595?hl=en>`_.
 
