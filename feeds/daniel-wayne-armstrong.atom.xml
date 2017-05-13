@@ -1,5 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-05-07T10:56:00-04:00</updated><entry><title>Automatic security updates on Debian</title><link href="http://www.circuidipity.com/unattended-upgrades.html" rel="alternate"></link><published>2017-05-07T10:56:00-04:00</published><updated>2017-05-07T10:56:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-05-07:/unattended-upgrades.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #2 .:&lt;/a&gt; Fetch the latest fixes, install, and reboot (if necessary). Hands-free!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-05-13T16:43:00-04:00</updated><entry><title>LVM and encrypted Logical Volumes</title><link href="http://www.circuidipity.com/lvm-crypt-lv.html" rel="alternate"></link><published>2017-05-13T16:43:00-04:00</published><updated>2017-05-13T16:43:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-05-13:/lvm-crypt-lv.html</id><summary type="html">&lt;p&gt;I have been playing with the &lt;strong&gt;Logical Volume Manager&lt;/strong&gt; (LVM) on my recent Debian installs. Instead of creating a traditional partition layout on a hard drive, LVM adds a layer of abstraction over physical storage that allows the creation of &amp;quot;virtual&amp;quot; partitions.&lt;/p&gt;
+&lt;p&gt;For my &lt;a class="reference external" href="http://www.circuidipity.com/laptop-home-server.html"&gt;netbook home server setup&lt;/a&gt; I used …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I have been playing with the &lt;strong&gt;Logical Volume Manager&lt;/strong&gt; (LVM) on my recent Debian installs. Instead of creating a traditional partition layout on a hard drive, LVM adds a layer of abstraction over physical storage that allows the creation of &amp;quot;virtual&amp;quot; partitions.&lt;/p&gt;
+&lt;p&gt;For my &lt;a class="reference external" href="http://www.circuidipity.com/laptop-home-server.html"&gt;netbook home server setup&lt;/a&gt; I used the Debian installer's manual partitioning tools to assign a partition to LVM, create a &lt;strong&gt;Volume Group&lt;/strong&gt; (VG) and &lt;strong&gt;Logical Volumes&lt;/strong&gt; (LVs), with plenty of storage space to spare. &lt;a class="footnote-reference" href="#id3" id="id1"&gt;[1]&lt;/a&gt; After a successful first boot I configure an encrypted container for data storage that is manually mounted by a non-root user. I don't want an unattended server halting in the boot process waiting for a passphrase or any necessary boot mountpoints to reside on an encrypted partition.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Scan my netbook for devices visible to LVM ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lvmdiskscan&lt;/span&gt;
+/dev/vg/root              &lt;span class="o"&gt;[&lt;/span&gt;      14.90 GiB&lt;span class="o"&gt;]&lt;/span&gt;
+/dev/sda1                 &lt;span class="o"&gt;[&lt;/span&gt;     487.00 MiB&lt;span class="o"&gt;]&lt;/span&gt;
+/dev/vg/swap              &lt;span class="o"&gt;[&lt;/span&gt;     952.00 MiB&lt;span class="o"&gt;]&lt;/span&gt;
+/dev/sda2                 &lt;span class="o"&gt;[&lt;/span&gt;     465.28 GiB&lt;span class="o"&gt;]&lt;/span&gt; LVM physical volume
+/dev/mapper/vg-swap_crypt &lt;span class="o"&gt;[&lt;/span&gt;     952.00 MiB&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="m"&gt;3&lt;/span&gt; disks
+&lt;span class="m"&gt;1&lt;/span&gt; partition
+&lt;span class="m"&gt;0&lt;/span&gt; LVM physical volume whole disks
+&lt;span class="m"&gt;1&lt;/span&gt; LVM physical volume
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check for free space in the volume group ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# vgdisplay&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+Free  PE / Size       &lt;span class="m"&gt;115060&lt;/span&gt; / 449.45 GiB
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="create"&gt;
+&lt;h3&gt;0. Create&lt;/h3&gt;
+&lt;p&gt;I create a 400GB &lt;tt class="docutils literal"&gt;data&lt;/tt&gt; logical volume in the volume group ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lvcreate --size 400G vg --name data&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Information about the LVs can be displayed with the &lt;tt class="docutils literal"&gt;lvdisplay&lt;/tt&gt; command.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="encrypt"&gt;
+&lt;h3&gt;1. Encrypt&lt;/h3&gt;
+&lt;p&gt;Configure LUKS encryption on the newly-created LV ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# cryptsetup luksFormat /dev/vg/data&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Open LV &lt;tt class="docutils literal"&gt;data&lt;/tt&gt; under &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vg-data_crypt&lt;/span&gt;&lt;/tt&gt;, format with a filesystem, and mount ... &lt;a class="footnote-reference" href="#id4" id="id2"&gt;[2]&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# cryptsetup open /dev/vg/data vg-data_crypt&lt;/span&gt;
+&lt;span class="c1"&gt;# mkfs.ext4 -m 1 /dev/mapper/vg-data_crypt&lt;/span&gt;
+&lt;span class="c1"&gt;# mount /dev/mapper/vg-data_crypt /mnt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When finished, unmount the filesystem and close the encrypted LV ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# umount /mnt&lt;/span&gt;
+&lt;span class="c1"&gt;# cryptsetup close /dev/mapper/vg-data_crypt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="mountpoint"&gt;
+&lt;h3&gt;2. Mountpoint&lt;/h3&gt;
+&lt;p&gt;I create a dedicated mountpoint for the LV in &lt;tt class="docutils literal"&gt;/media&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# mkdir /media/crypt_data&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/fstab&lt;/tt&gt; and allow mounting by a non-root user ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/dev/mapper/vg-data_crypt /media/crypt_data        ext4    relatime,noauto,user       &lt;span class="m"&gt;0&lt;/span&gt;       0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Open the LV and mount ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# cryptsetup open /dev/vg/data vg-data_crypt&lt;/span&gt;
+$ mount /media/crypt_data
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h4&gt;Notes&lt;/h4&gt;
+&lt;table class="docutils footnote" frame="void" id="id3" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;For setting up LVM from the beginning and learning about its tools the LVM entries on &lt;a class="reference external" href="https://wiki.debian.org/LVM"&gt;wiki.debian.org&lt;/a&gt; and &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/LVM"&gt;wiki.archlinux.org&lt;/a&gt; are very helpful!&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id4" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Reserved blocks can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large non-root partitions extra space can be gained by reducing the default 5% reserve to 1% with option &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-m&lt;/span&gt; &amp;lt;percent&amp;gt;&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="lvm"></category><category term="crypto"></category><category term="linux"></category></entry><entry><title>Automatic security updates on Debian</title><link href="http://www.circuidipity.com/unattended-upgrades.html" rel="alternate"></link><published>2017-05-07T10:56:00-04:00</published><updated>2017-05-07T10:56:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-05-07:/unattended-upgrades.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html"&gt;Home Server Project #2 .:&lt;/a&gt; Fetch the latest fixes, install, and reboot (if necessary). Hands-free!&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Install ...&lt;/p&gt;
@@ -147,39 +222,4 @@ APT::Periodic::Verbose &lt;span class="s2"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;
 &lt;blockquote&gt;
 The best translations into English do not, in fact, read as if they were originally written in English. The English words are arranged in such a way that the reader sees a glimpse of another culture's patterns of thinking, hears an echo of another language's rhythms and cadences, and feels a tremor of another people's gestures and movements.&lt;/blockquote&gt;
 &lt;p&gt;&lt;em&gt;Three-Body&lt;/em&gt; is the first volume in a trilogy and now I am diving right into the second and third books!&lt;/p&gt;
-</content><category term="books"></category></entry><entry><title>MITx Week 2: Algorithms and Python Functions</title><link href="http://www.circuidipity.com/mitx-6001x-w2.html" rel="alternate"></link><published>2017-01-22T16:35:00-05:00</published><updated>2017-01-22T16:35:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-22:/mitx-6001x-w2.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; I completed all the video tutorials and practice exercises assigned this week. Left unfinished is the &lt;em&gt;Week 2 Problem Set&lt;/em&gt; (due Feb 2nd).&lt;/p&gt;
-&lt;p&gt;The big idea this week is &lt;strong&gt;recursion&lt;/strong&gt; and creating functions in Python that call themselves to solve problems. One of the exercises …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; I completed all the video tutorials and practice exercises assigned this week. Left unfinished is the &lt;em&gt;Week 2 Problem Set&lt;/em&gt; (due Feb 2nd).&lt;/p&gt;
-&lt;p&gt;The big idea this week is &lt;strong&gt;recursion&lt;/strong&gt; and creating functions in Python that call themselves to solve problems. One of the exercises involved finding the greatest common divisor of two positive integers (that is, the largest integer that divides each of them without remainder). Here is a cool &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Euclidean_algorithm#Worked_example"&gt;animated example of recursion using Euclid's algorithm to find the GCD of two numbers.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Translated into Python code ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;gcdRecur&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class="sd"&gt;    a, b: positive integers&lt;/span&gt;
-&lt;span class="sd"&gt;    returns: a positive integer, the greatest common divisor of a &amp;amp; b&lt;/span&gt;
-
-&lt;span class="sd"&gt;    A clever mathematical trick (due to Euclid) makes it easy to find&lt;/span&gt;
-&lt;span class="sd"&gt;    greatest common divisors. Suppose that a and b are two positive&lt;/span&gt;
-&lt;span class="sd"&gt;    integers:&lt;/span&gt;
-
-&lt;span class="sd"&gt;    If b = 0, then the answer is a&lt;/span&gt;
-
-&lt;span class="sd"&gt;    Otherwise, gcd(a, b) is the same as gcd(b, a % b)&lt;/span&gt;
-&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;gcdRecur&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;A &lt;strong&gt;big&lt;/strong&gt; help trying to figure out how to code solutions this week was the &lt;a class="reference external" href="http://pythontutor.com/"&gt;online Python Tutor&lt;/a&gt; resource. It allows you to insert your code and then visualize what the computer is doing step-by-step as it executes the instructions. Here is an exercise which required writing a recursive function that executes a bisection search to determine if a character is in a string (the MITx grader uses example strings that are sorted in alphabetical order) ...&lt;/p&gt;
-&lt;iframe width="800" height="750" frameborder="0"
-    src="http://pythontutor.com/iframe-embed.html#code=def%20isIn(char,%20aStr%29%3A%0A%20%20%20%20'''%0A%20%20%20%20char%3A%20a%20single%20character%0A%20%20%20%20aStr%3A%20an%20alphabetized%20string%0A%0A%20%20%20%20returns%3A%20True%20if%20char%20is%20in%20aStr%3B%20False%20otherwise%0A%20%20%20%20'''%0A%20%20%20%20if%20len(aStr%29%20%3E%3D%201%3A%0A%20%20%20%20%20%20%20%20midChar%20%3D%20len(aStr%29%20//%202%0A%20%20%20%20%20%20%20%20if%20char%20%3D%3D%20aStr%5BmidChar%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20True%0A%20%20%20%20%20%20%20%20elif%20char%20%3E%20aStr%5BmidChar%5D%20and%20len(aStr%29%20%3E%201%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20isIn(char,%20aStr%5BmidChar%3A%5D%29%0A%20%20%20%20%20%20%20%20elif%20char%20%3C%20aStr%5BmidChar%5D%20and%20len(aStr%29%20%3E%201%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20isIn(char,%20aStr%5B%3AmidChar%5D%29%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20False%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20False%0A%0A%23%20test%0Aprint(isIn('x',%20'acfghij'%29%29&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cumulative=false&amp;curInstr=27&amp;heapPrimitives=false&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"&gt;
-&lt;/iframe&gt;&lt;p&gt;I am doing the coursework on a system running &lt;a class="reference external" href="http://www.circuidipity.com/tag-ubuntu.html"&gt;Ubuntu&lt;/a&gt; &lt;strong&gt;16.04 LTS&lt;/strong&gt; and writing code using &lt;a class="reference external" href="http://www.circuidipity.com/neovim.html"&gt;Neovim&lt;/a&gt;. A few modifications in &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.config/nvim/init.vim"&gt;~/.config/nvim/init.vim&lt;/a&gt; to give the text editor super Python powers ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;tabstop&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;               &lt;span class="s2"&gt;&amp;quot; number of columns occupied by a tab character&lt;/span&gt;
-&lt;span class="s2"&gt;set softtabstop=4   &amp;quot;&lt;/span&gt; see multiple spaces as tabstops so &amp;lt;BS&amp;gt; does the right thing
-&lt;span class="nb"&gt;set&lt;/span&gt; expandtab               &lt;span class="s2"&gt;&amp;quot; converts tabs to white space&lt;/span&gt;
-&lt;span class="s2"&gt;set shiftwidth=4    &amp;quot;&lt;/span&gt; width &lt;span class="k"&gt;for&lt;/span&gt; autoindents
-&lt;span class="nb"&gt;set&lt;/span&gt; autoindent      &lt;span class="s2"&gt;&amp;quot; indent a new line the same amount as the line just typed&lt;/span&gt;
-&lt;span class="s2"&gt;set number          &amp;quot;&lt;/span&gt; add line numbers
-&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;cc&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;80&lt;/span&gt;           &lt;span class="s2"&gt;&amp;quot; set an 80 column border for good coding style&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Onward!&lt;/p&gt;
-</content><category term="python"></category><category term="programming"></category><category term="mooc"></category></entry></feed>
+</content><category term="books"></category></entry></feed>

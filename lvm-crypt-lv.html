@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | LVM and encrypted Logical Volumes</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+        <!-- analytics -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89591498-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Saturday 13 May 2017</p>
+</div>
+
+<!-- article -->
+<h1>LVM and encrypted Logical Volumes</h1>
+<div id="article">
+    <p>I have been playing with the <strong>Logical Volume Manager</strong> (LVM) on my recent Debian installs. Instead of creating a traditional partition layout on a hard drive, LVM adds a layer of abstraction over physical storage that allows the creation of &quot;virtual&quot; partitions.</p>
+<p>For my <a class="reference external" href="http://www.circuidipity.com/laptop-home-server.html">netbook home server setup</a> I used the Debian installer's manual partitioning tools to assign a partition to LVM, create a <strong>Volume Group</strong> (VG) and <strong>Logical Volumes</strong> (LVs), with plenty of storage space to spare. <a class="footnote-reference" href="#id3" id="id1">[1]</a> After a successful first boot I configure an encrypted container for data storage that is manually mounted by a non-root user. I don't want an unattended server halting in the boot process waiting for a passphrase or any necessary boot mountpoints to reside on an encrypted partition.</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<p>Scan my netbook for devices visible to LVM ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># lvmdiskscan</span>
+/dev/vg/root              <span class="o">[</span>      14.90 GiB<span class="o">]</span>
+/dev/sda1                 <span class="o">[</span>     487.00 MiB<span class="o">]</span>
+/dev/vg/swap              <span class="o">[</span>     952.00 MiB<span class="o">]</span>
+/dev/sda2                 <span class="o">[</span>     465.28 GiB<span class="o">]</span> LVM physical volume
+/dev/mapper/vg-swap_crypt <span class="o">[</span>     952.00 MiB<span class="o">]</span>
+<span class="m">3</span> disks
+<span class="m">1</span> partition
+<span class="m">0</span> LVM physical volume whole disks
+<span class="m">1</span> LVM physical volume
+</pre></div>
+<p>Check for free space in the volume group ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># vgdisplay</span>
+<span class="o">[</span>...<span class="o">]</span>
+Free  PE / Size       <span class="m">115060</span> / 449.45 GiB
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+<div class="section" id="create">
+<h3>0. Create</h3>
+<p>I create a 400GB <tt class="docutils literal">data</tt> logical volume in the volume group ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># lvcreate --size 400G vg --name data</span>
+</pre></div>
+<p>Information about the LVs can be displayed with the <tt class="docutils literal">lvdisplay</tt> command.</p>
+</div>
+<div class="section" id="encrypt">
+<h3>1. Encrypt</h3>
+<p>Configure LUKS encryption on the newly-created LV ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># cryptsetup luksFormat /dev/vg/data</span>
+</pre></div>
+<p>Open LV <tt class="docutils literal">data</tt> under <tt class="docutils literal"><span class="pre">vg-data_crypt</span></tt>, format with a filesystem, and mount ... <a class="footnote-reference" href="#id4" id="id2">[2]</a></p>
+<div class="highlight"><pre><span></span><span class="c1"># cryptsetup open /dev/vg/data vg-data_crypt</span>
+<span class="c1"># mkfs.ext4 -m 1 /dev/mapper/vg-data_crypt</span>
+<span class="c1"># mount /dev/mapper/vg-data_crypt /mnt</span>
+</pre></div>
+<p>When finished, unmount the filesystem and close the encrypted LV ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># umount /mnt</span>
+<span class="c1"># cryptsetup close /dev/mapper/vg-data_crypt</span>
+</pre></div>
+</div>
+<div class="section" id="mountpoint">
+<h3>2. Mountpoint</h3>
+<p>I create a dedicated mountpoint for the LV in <tt class="docutils literal">/media</tt> ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># mkdir /media/crypt_data</span>
+</pre></div>
+<p>Modify <tt class="docutils literal">/etc/fstab</tt> and allow mounting by a non-root user ...</p>
+<div class="highlight"><pre><span></span>/dev/mapper/vg-data_crypt /media/crypt_data        ext4    relatime,noauto,user       <span class="m">0</span>       0
+</pre></div>
+<p>Open the LV and mount ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># cryptsetup open /dev/vg/data vg-data_crypt</span>
+$ mount /media/crypt_data
+</pre></div>
+<p>Happy hacking!</p>
+<div class="section" id="notes">
+<h4>Notes</h4>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>For setting up LVM from the beginning and learning about its tools the LVM entries on <a class="reference external" href="https://wiki.debian.org/LVM">wiki.debian.org</a> and <a class="reference external" href="https://wiki.archlinux.org/index.php/LVM">wiki.archlinux.org</a> are very helpful!</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Reserved blocks can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large non-root partitions extra space can be gained by reducing the default 5% reserve to 1% with option <tt class="docutils literal"><span class="pre">-m</span> &lt;percent&gt;</tt>.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-lvm.html">lvm</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-crypto.html">crypto</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/unattended-upgrades.html">Automatic security updates on Debian</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>
