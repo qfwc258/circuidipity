@@ -37,7 +37,7 @@
 <!-- article -->
 <h1>Run a Raspberry Pi from USB storage v4.0</h1>
 <div id="article">
-    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">Home Server Project #0 .:</a> I am exploring the use of my Pi as <strong>24/7 uptime home server</strong>. Hard drives offer a more robust storage media than a Pi's default choice of microSD cards and that is what I decide to use. <a class="footnote-reference" href="#id3" id="id1">[1]</a> I put my plan in motion using <strong>Debian</strong> and move <tt class="docutils literal">rootfs</tt> from a microSD to a powered 1TB USB 3.5&quot; hard drive with encrypted storage.</p>
+    <p><a class="reference external" href="http://www.circuidipity.com/raspberry-pi-home-server.html">PROJECT: Home Server #0 .:</a> I am exploring the use of my Pi as <strong>24/7 uptime home server</strong>. Hard drives offer a more robust storage media than a Pi's default choice of microSD cards and that is what I decide to use. <a class="footnote-reference" href="#id3" id="id1">[1]</a> I put my plan in motion using <strong>Debian</strong> and move <tt class="docutils literal">rootfs</tt> from a microSD to a powered 1TB USB 3.5&quot; hard drive with encrypted storage.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
 <p>Current setup:</p>
@@ -56,15 +56,14 @@
 <li>v2.0 - <a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-2-from-external-usb-storage.html">Pi 2 Model B + Ubuntu</a></li>
 <li>v1.0 - <a class="reference external" href="http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html">Pi Model B + Raspbian</a></li>
 </ul>
-</div>
 <div class="section" id="debian">
-<h2>0. Debian</h2>
+<h3>0. Debian</h3>
 <p>With the move to ARMv7 the Pi 2 is now capable of running the official Debian <strong>armhf</strong> port. Debian developer Sjoerd Simons has created a <a class="reference external" href="http://sjoerd.luon.net/posts/2015/02/debian-jessie-on-rpi2/">Jessie minimal image</a> with an updated 3.18 Linux kernel and firmware suitable for Pi 2.</p>
 <p>Start here: <a class="reference external" href="http://www.circuidipity.com/debian-jessie-raspberry-pi-2.html">Install and configure Jessie on a microSD</a></p>
 </div>
 <div class="section" id="partition">
-<h2>1. Partition</h2>
-<p>I connect the USB drive to Pi and confirm detection:</p>
+<h3>1. Partition</h3>
+<p>I connect the USB drive to Pi and confirm detection ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># lsblk</span>
 NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
 sda           8:0    <span class="m">0</span> 931.5G  <span class="m">0</span> disk
@@ -79,7 +78,7 @@ mmcblk0     179:0    <span class="m">0</span>   7.6G  <span class="m">0</span> d
 <li>sda2 - 2GB - future encrypted <tt class="docutils literal">swap</tt></li>
 <li>sda3 - remaining space - future encrypted <tt class="docutils literal">storage</tt></li>
 </ul>
-<p>Sample walk-through:</p>
+<p>Sample walk-through ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># fdisk /dev/sda</span>
 
 Welcome to fdisk <span class="o">(</span>util-linux 2.25.2<span class="o">)</span>.
@@ -159,60 +158,60 @@ Syncing disks.
 </pre></div>
 </div>
 <div class="section" id="root">
-<h2>2. Root</h2>
-<p>Format the future <tt class="docutils literal">rootfs</tt> partition using filesystem <tt class="docutils literal">ext4</tt> and mount:</p>
+<h3>2. Root</h3>
+<p>Format the future <tt class="docutils literal">rootfs</tt> partition using filesystem <tt class="docutils literal">ext4</tt> and mount ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># mke2fs -t ext4 -L rootfs /dev/sda1</span>
 <span class="c1"># mount -t ext4 /dev/sda1 /mnt</span>
 </pre></div>
-<p>Modify options in <tt class="docutils literal">/boot/firmware/cmdline.txt</tt> to point the bootloader to <tt class="docutils literal">root</tt> filesystem on the USB device:</p>
+<p>Modify options in <tt class="docutils literal">/boot/firmware/cmdline.txt</tt> to point the bootloader to <tt class="docutils literal">root</tt> filesystem on the USB device ...</p>
 <div class="highlight"><pre><span></span>Original:
 dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span> <span class="nv">console</span><span class="o">=</span>ttyAMA0,115200 <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">root</span><span class="o">=</span>/dev/mmcblk0p2 rootwait net.ifnames<span class="o">=</span>1
 
 Modified:
 dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span> <span class="nv">console</span><span class="o">=</span>ttyAMA0,115200 <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">root</span><span class="o">=</span>/dev/sda1 rootwait <span class="nv">rootdelay</span><span class="o">=</span>5
 </pre></div>
-<p>Comment out <tt class="docutils literal">mmcblk0p2</tt> and point to the new <tt class="docutils literal">root</tt> partition in <tt class="docutils literal">/etc/fstab</tt>:</p>
+<p>Comment out <tt class="docutils literal">mmcblk0p2</tt> and point to the new <tt class="docutils literal">root</tt> partition in <tt class="docutils literal">/etc/fstab</tt> ...</p>
 <div class="highlight"><pre><span></span><span class="c1">#/dev/mmcblk0p2  / ext4 relatime,errors=remount-ro,discard 0 1</span>
 /dev/sda1 / ext4 relatime,errors<span class="o">=</span>remount-ro <span class="m">0</span> 1
 /dev/mmcblk0p1 /boot/firmware vfat defaults <span class="m">0</span> 2
 </pre></div>
-<p>Use <tt class="docutils literal">rsync</tt> to duplicate contents of <tt class="docutils literal">root</tt> on the microSD <a class="footnote-reference" href="#id4" id="id2">[2]</a> to the <tt class="docutils literal">rootfs</tt> partition on the USB hard drive:</p>
+<p>Use <tt class="docutils literal">rsync</tt> to duplicate contents of <tt class="docutils literal">root</tt> on the microSD <a class="footnote-reference" href="#id4" id="id2">[2]</a> to the <tt class="docutils literal">rootfs</tt> partition on the USB hard drive ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># apt-get -y install rsync</span>
 <span class="c1"># rsync --exclude=firmware/* -axv / /mnt</span>
 </pre></div>
 </div>
 <div class="section" id="luks-encryption">
-<h2>3. LUKS encryption</h2>
+<h3>3. LUKS encryption</h3>
 <p>Root is unencrypted to allow <strong>unattended boots</strong> of the server (otherwise the Pi would hang waiting for a passphrase that never arrives). A LUKS-encrypted <tt class="docutils literal">swap</tt> is added with a <strong>randomly-generated key</strong> and post-boot I log in and mount a LUKS-encrypted <tt class="docutils literal">storage</tt> partition using a passphrase.</p>
 <div class="section" id="storage">
-<h3>3.1 Storage</h3>
-<p>Encrypt the partition, assign a passphrase, and format using filesystem <tt class="docutils literal">ext4</tt>:</p>
+<h4>3.1 Storage</h4>
+<p>Encrypt the partition, assign a passphrase, and format using filesystem <tt class="docutils literal">ext4</tt> ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># apt-get -y install cryptsetup</span>
 <span class="c1"># cryptsetup luksFormat /dev/sda3</span>
 <span class="c1"># cryptsetup luksOpen /dev/sda3 sda3_crypt</span>
 <span class="c1"># mkfs.ext4 -L storage /dev/mapper/sda3_crypt</span>
 </pre></div>
-<p>Create a mountpoint and mount the partition:</p>
+<p>Create a mountpoint and mount the partition ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># mkdir /media/sda3_crypt &amp;&amp; mount -t ext4 /dev/mapper/sda3_crypt /media/sda3_crypt/</span>
 </pre></div>
-<p>Unmounting:</p>
+<p>Unmounting ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># umount /media/sda3_crypt &amp;&amp; cryptsetup luksClose /dev/mapper/sda3_crypt</span>
 </pre></div>
 </div>
 <div class="section" id="swap">
-<h3>3.2 Swap</h3>
-<p>Configure the secure wiping of the swap partition, auto-generation of a new random key, and swap activation at boot:</p>
+<h4>3.2 Swap</h4>
+<p>Configure the secure wiping of the swap partition, auto-generation of a new random key, and swap activation at boot ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># echo &quot;sda2_crypt /dev/sda2 /dev/urandom cipher=aes-xts-plain64,size=256,swap&quot; &gt;&gt; /etc/crypttab</span>
 <span class="c1"># echo &quot;/dev/mapper/sda2_crypt none swap sw 0 0&quot; &gt;&gt; /etc/fstab</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="reboot">
-<h2>4. Reboot</h2>
+<h3>4. Reboot</h3>
 <p>Aaaand reboot!</p>
 <div class="highlight"><pre><span></span><span class="c1"># reboot</span>
 </pre></div>
-<p>Log in and check the new filesystem layout:</p>
+<p>Log in and check the new filesystem layout ...</p>
 <div class="highlight"><pre><span></span>$ df -h
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/root        20G  646M   18G   4% /
@@ -225,8 +224,8 @@ tmpfs           463M     <span class="m">0</span>  463M   0% /sys/fs/cgroup
 </pre></div>
 </div>
 <div class="section" id="static-address">
-<h2>5. Static Address</h2>
-<p>Assign a Pi home server a <strong>static network address</strong>. Sample <tt class="docutils literal">/etc/network/interfaces</tt> that disables <tt class="docutils literal">dhcp</tt>, sets ip address <tt class="docutils literal">192.168.1.88</tt>, and connects to a router (managing DNS) at <tt class="docutils literal">192.168.1.1</tt>:</p>
+<h3>5. Static Address</h3>
+<p>Assign a Pi home server a <strong>static network address</strong>. Sample <tt class="docutils literal">/etc/network/interfaces</tt> that disables <tt class="docutils literal">dhcp</tt>, sets ip address <tt class="docutils literal">192.168.1.88</tt>, and connects to a router (managing DNS) at <tt class="docutils literal">192.168.1.1</tt> ...</p>
 <div class="highlight"><pre><span></span>auto eth0
 iface eth0 inet static
     address 192.168.1.88
@@ -236,7 +235,7 @@ iface eth0 inet static
 </pre></div>
 <p>Happy hacking!</p>
 <div class="section" id="notes">
-<h3>Notes</h3>
+<h4>Notes</h4>
 <table class="docutils footnote" frame="void" id="id3" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
@@ -251,9 +250,9 @@ iface eth0 inet static
 </table>
 </div>
 </div>
+</div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-raspberry-pi.html">raspberry pi</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-server.html">server</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
