@@ -5,7 +5,6 @@ Transform a USB stick into a boot device packing multiple Linux distros
 :date: 2012-12-06 01:23:00
 :tags: grub, shell, systemrescuecd, debian, lubuntu, ubuntu, linux
 :slug: multi-boot-usb
-:template: article-project
 :modified: 2017-05-06 12:32:00
 
 .. image:: images/grubs-300.png

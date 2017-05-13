@@ -7,7 +7,7 @@ Secure remote access using SSH keys
 :tags: ssh, crypto, linux
 :modified: 2017-05-06 18:44:00
 
-`Home Server Project #1 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Create cryptographic keys and **disable password logins** to make remote machines more secure.
+`PROJECT: Home Server #1 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Create cryptographic keys and **disable password logins** to make remote machines more secure.
 
 Let's go!
 =========

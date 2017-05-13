@@ -4,7 +4,6 @@ Chromebook to Jessiebook
 
 :date: 2015-07-08 10:45:00
 :slug: c720-chromebook-to-jessiebook
-:template: article-project
 :tags: chromebook, debian, linux
 :modified: 2017-05-12 00:10:00
 

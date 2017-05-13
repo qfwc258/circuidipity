@@ -4,9 +4,9 @@ Run a Raspberry Pi from USB storage v4.0
 
 :date: 2015-07-25 18:25:00
 :slug: raspberry-pi-usb-storage-v4
-:tags: raspberry pi, server, network, debian, linux
+:tags: raspberry pi, network, debian, linux
 
-`Home Server Project #0 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ I am exploring the use of my Pi as **24/7 uptime home server**. Hard drives offer a more robust storage media than a Pi's default choice of microSD cards and that is what I decide to use. [1]_ I put my plan in motion using **Debian** and move ``rootfs`` from a microSD to a powered 1TB USB 3.5" hard drive with encrypted storage. 
+`PROJECT: Home Server #0 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ I am exploring the use of my Pi as **24/7 uptime home server**. Hard drives offer a more robust storage media than a Pi's default choice of microSD cards and that is what I decide to use. [1]_ I put my plan in motion using **Debian** and move ``rootfs`` from a microSD to a powered 1TB USB 3.5" hard drive with encrypted storage. 
 
 Let's go!
 =========
@@ -28,16 +28,16 @@ Previous versions:
 * v1.0 - `Pi Model B + Raspbian <http://www.circuidipity.com/run-a-raspberry-pi-from-external-usb-storage.html>`_
 
 0. Debian
-=========
+---------
 
 With the move to ARMv7 the Pi 2 is now capable of running the official Debian **armhf** port. Debian developer Sjoerd Simons has created a `Jessie minimal image <http://sjoerd.luon.net/posts/2015/02/debian-jessie-on-rpi2/>`_ with an updated 3.18 Linux kernel and firmware suitable for Pi 2.
 
 Start here: `Install and configure Jessie on a microSD <http://www.circuidipity.com/debian-jessie-raspberry-pi-2.html>`_
 
 1. Partition
-============
+------------
 
-I connect the USB drive to Pi and confirm detection:
+I connect the USB drive to Pi and confirm detection ...
 
 .. code-block:: bash
 
@@ -55,7 +55,7 @@ Device is ``sda`` with a single ``sda1`` partition. Use ``fdisk`` to create 3 ne
 * sda2 - 2GB - future encrypted ``swap``
 * sda3 - remaining space - future encrypted ``storage``
 
-Sample walk-through:
+Sample walk-through ...
 
 .. code-block:: bash
 
@@ -137,16 +137,16 @@ Sample walk-through:
     #
 
 2. Root
-=======
+-------
 
-Format the future ``rootfs`` partition using filesystem ``ext4`` and mount:
+Format the future ``rootfs`` partition using filesystem ``ext4`` and mount ...
 
 .. code-block:: bash
 
     # mke2fs -t ext4 -L rootfs /dev/sda1
     # mount -t ext4 /dev/sda1 /mnt
 
-Modify options in ``/boot/firmware/cmdline.txt`` to point the bootloader to ``root`` filesystem on the USB device:
+Modify options in ``/boot/firmware/cmdline.txt`` to point the bootloader to ``root`` filesystem on the USB device ...
 
 .. code-block:: bash
 
@@ -156,7 +156,7 @@ Modify options in ``/boot/firmware/cmdline.txt`` to point the bootloader to ``ro
     Modified:
     dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=/dev/sda1 rootwait rootdelay=5
 
-Comment out ``mmcblk0p2`` and point to the new ``root`` partition in ``/etc/fstab``:
+Comment out ``mmcblk0p2`` and point to the new ``root`` partition in ``/etc/fstab`` ...
 
 .. code-block:: bash
 
@@ -164,7 +164,7 @@ Comment out ``mmcblk0p2`` and point to the new ``root`` partition in ``/etc/fsta
     /dev/sda1 / ext4 relatime,errors=remount-ro 0 1
     /dev/mmcblk0p1 /boot/firmware vfat defaults 0 2
 
-Use ``rsync`` to duplicate contents of ``root`` on the microSD [2]_ to the ``rootfs`` partition on the USB hard drive:
+Use ``rsync`` to duplicate contents of ``root`` on the microSD [2]_ to the ``rootfs`` partition on the USB hard drive ...
 
 .. code-block:: bash
 
@@ -172,14 +172,14 @@ Use ``rsync`` to duplicate contents of ``root`` on the microSD [2]_ to the ``roo
     # rsync --exclude=firmware/* -axv / /mnt
 
 3. LUKS encryption
-==================
+------------------
 
 Root is unencrypted to allow **unattended boots** of the server (otherwise the Pi would hang waiting for a passphrase that never arrives). A LUKS-encrypted ``swap`` is added with a **randomly-generated key** and post-boot I log in and mount a LUKS-encrypted ``storage`` partition using a passphrase.
 
 3.1 Storage
------------
++++++++++++
 
-Encrypt the partition, assign a passphrase, and format using filesystem ``ext4``:
+Encrypt the partition, assign a passphrase, and format using filesystem ``ext4`` ...
 
 .. code-block:: bash
 
@@ -188,22 +188,22 @@ Encrypt the partition, assign a passphrase, and format using filesystem ``ext4``
     # cryptsetup luksOpen /dev/sda3 sda3_crypt
     # mkfs.ext4 -L storage /dev/mapper/sda3_crypt
 
-Create a mountpoint and mount the partition:
+Create a mountpoint and mount the partition ...
 
 .. code-block:: bash
 
     # mkdir /media/sda3_crypt && mount -t ext4 /dev/mapper/sda3_crypt /media/sda3_crypt/
 
-Unmounting:
+Unmounting ...
 
 .. code-block:: bash
 
     # umount /media/sda3_crypt && cryptsetup luksClose /dev/mapper/sda3_crypt
 
 3.2 Swap
---------
+++++++++
 
-Configure the secure wiping of the swap partition, auto-generation of a new random key, and swap activation at boot:
+Configure the secure wiping of the swap partition, auto-generation of a new random key, and swap activation at boot ...
 
 .. code-block:: bash
 
@@ -211,7 +211,7 @@ Configure the secure wiping of the swap partition, auto-generation of a new rand
     # echo "/dev/mapper/sda2_crypt none swap sw 0 0" >> /etc/fstab
 
 4. Reboot
-=========
+---------
 
 Aaaand reboot!
 
@@ -219,7 +219,7 @@ Aaaand reboot!
 
     # reboot
     
-Log in and check the new filesystem layout:
+Log in and check the new filesystem layout ...
 
 .. code-block:: bash
 
@@ -234,9 +234,9 @@ Log in and check the new filesystem layout:
     /dev/mmcblk0p1  121M  9.7M  112M   9% /boot/firmware
 
 5. Static Address
-=================
+-----------------
 
-Assign a Pi home server a **static network address**. Sample ``/etc/network/interfaces`` that disables ``dhcp``, sets ip address ``192.168.1.88``, and connects to a router (managing DNS) at ``192.168.1.1``:
+Assign a Pi home server a **static network address**. Sample ``/etc/network/interfaces`` that disables ``dhcp``, sets ip address ``192.168.1.88``, and connects to a router (managing DNS) at ``192.168.1.1`` ...
 
 .. code-block:: bash
 
@@ -250,7 +250,7 @@ Assign a Pi home server a **static network address**. Sample ``/etc/network/inte
 Happy hacking!
 
 Notes
------
++++++
 
 .. [1] `Discussion thread (raspberrypi.org/forums) <http://www.raspberrypi.org/forums/viewtopic.php?f=29&t=44177>`_ about moving root to external USB storage.
 
