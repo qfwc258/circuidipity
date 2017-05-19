@@ -4,8 +4,8 @@ Create a self-signed SSL certificate
 
 :date: 2015-08-27 19:25:00
 :slug: self-signed-ssl-certificate
-:tags: crypto, network, linux
-:modified: 2016-08-21 18:33
+:tags: ssl, crypto, network, debian, linux
+:modified: 2017-05-19 17:33
 
 Secure web access to services hosted on a `home server <http://www.circuidipity.com/raspberry-pi-home-server.html>`_.
 
@@ -15,9 +15,9 @@ Install ``openssl`` and generate a certificate for Nginx ...
 
 .. code-block:: bash
 
-    $ sudo apt install openssl
-    $ sudo mkdir /etc/nginx/ssl
-    $ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt
+    # apt install openssl
+    # mkdir /etc/nginx/ssl
+    # openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt
 
 Create a new server block in ``/etc/nginx/sites-available`` ... 
 
@@ -51,12 +51,12 @@ Activate the block by creating a symlink in ``/etc/nginx/sites-enabled`` and res
 
 .. code-block:: bash
 
-    $ sudo systemctl restart nginx
+    # systemctl restart nginx
     
 Configure `port forwarding on the router <http://www.circuidipity.com/20141006.html>`_ and (optional) `setup a subdomain <https://wiki.gandi.net/en/dns/zone/subdomain>`_ with a hosting/domain provider.
 
 Note the first time navigating to the new HTTPS address the web browser warns *This Connection is Untrusted* (which is to be expected since its a self-signed certificate vs CA verification).
 
-Happy hacking!
+Helpful! `Create an SSL certificate on Nginx for Ubuntu <https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-nginx-for-ubuntu-14-04>`_; `Rewrite HTTP requests to HTTPS <https://serverfault.com/questions/67316/in-nginx-how-can-i-rewrite-all-http-requests-to-https-while-maintaining-sub-dom>`_; `Nginx server_names <http://nginx.org/en/docs/http/server_names.html>`_
 
-Sources: `Create an SSL certificate on Nginx for Ubuntu <https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-nginx-for-ubuntu-14-04>`_; `Rewrite HTTP requests to HTTPS <https://serverfault.com/questions/67316/in-nginx-how-can-i-rewrite-all-http-requests-to-https-while-maintaining-sub-dom>`_; `Nginx server_names <http://nginx.org/en/docs/http/server_names.html>`_
+Happy hacking!

@@ -4,15 +4,15 @@ Tiny Tiny RSS
 
 :date: 2015-02-11 18:40:00
 :slug: ttrss
-:tags: ttrss, network, linux
-:modified: 2016-08-19 21:00:00
+:tags: ttrss, network, debian, linux
+:modified: 2017-05-19 16:00:00
 
-`PROJECT: Home Server #8 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Install and self-host the **Tiny Tiny RSS** news reader and gain access to news feeds over the web.
+`PROJECT: Home Server #8 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Install and self-host an **RSS news reader** and gain access to news feeds over the web.
 
 Let's go!
 =========
 
-**Setup:** `Netbook <http://www.circuidipity.com/laptop-home-server.html>`_ with IP ADDRESS ``192.168.1.88`` running `Ubuntu 16.04 LTS <http://www.circuidipity.com/tag-ubuntu.html>`_.
+**Setup:** `Netbook <http://www.circuidipity.com/laptop-home-server.html>`_ with IP ADDRESS ``192.168.1.88`` running the latest stable release of `Debian <http://www.circuidipity.com/tag-debian.html>`_.
 
 0. Pre-install
 --------------
@@ -22,11 +22,11 @@ Let's go!
 1. Database
 -----------
 
-Create a new PostgreSQL database to hold the content of RSS feeds. Launch the interactive console front-end ``psql`` and create ``user:www-data`` [2]_ and ``database:ttrss`` ...
+Create a new PostgreSQL database to hold the content of RSS feeds. Launch the PostgreSQL interactive console front-end ``psql`` as ``postgres`` user and create ``user:www-data`` [2]_ and ``database:ttrss`` ...
 
 .. code-block:: bash
 
-    $ sudo -u postgres psql
+    # su -c psql postgres
     postgres=# CREATE USER "www-data" WITH PASSWORD 'newpasswd';   
     postgres=# CREATE DATABASE ttrss WITH OWNER "www-data";                         
     postgres=# GRANT ALL PRIVILEGES ON DATABASE ttrss to "www-data";                
@@ -35,7 +35,7 @@ Create a new PostgreSQL database to hold the content of RSS feeds. Launch the in
 1.1 Peer authentication
 +++++++++++++++++++++++
 
-Later when running the TTRSS ``update.php`` script you may run into the error ``Peer authentication failed for user`` . **Fix:** [3]_ Edit ``/etc/postgresql/9.5/main/pg_hba.conf`` and change ``peer`` ...
+Later when running the TTRSS ``update.php`` script you may run into the error ``Peer authentication failed for user`` . **Fix:** [3]_ Edit ``/etc/postgresql/VERSION/main/pg_hba.conf`` and change ``peer`` ...
 
 .. code-block:: bash
                                                                                     
@@ -53,7 +53,7 @@ Reload server ...
 
 .. code-block:: bash
                                                                                     
-    $ sudo systemctl restart postgresql                                       
+    # systemctl restart postgresql                                       
                                                                                     
 2. TTRSS
 --------
@@ -107,9 +107,9 @@ Save changes and enable block ...
 
 .. code-block:: bash
                                                                                     
-    $ cd /etc/nginx/sites-enabled                                               
-    $ sudo ln -s /etc/nginx/sites-available/ttrss                                       
-    $ sudo systemctl restart nginx                                         
+    # cd /etc/nginx/sites-enabled                                               
+    # ln -s /etc/nginx/sites-available/ttrss                                       
+    # systemctl restart nginx                                         
 
 4. Configure
 ------------
@@ -129,7 +129,8 @@ Navigate to ``http://rss.lan`` and configure TTRSS ...
     Password: [database password created earlier]                                         
     Database Name: ttrss                                                            
     Hostname: [leave blank]                                                           
-    Port: 5432          
+    Port: 5432
+    URL: https://rss.lan    ## 'https' if using the SSL certificate option
 
 Press ``Test configuration``, then ``Initialize database``, and finally ``Save configuration``.
 
@@ -154,12 +155,12 @@ If script returns no errors add a new job to ``cron`` to run script periodically
                                                                                
 .. code-block:: bash
 
-    10 * * * * /usr/bin/php /home/USERNAME/www/ttrss/update.php --feeds --quiet
+    55 * * * * /usr/bin/php /home/USERNAME/www/ttrss/update.php --feeds --quiet
 
 Happy hacking!
 
 Notes
------
++++++
 
 .. [1] Alternative host setups can replace ``nginx`` web server with ``apache`` and ``postgresql`` database with ``mysql`` or ``sqlite``. However the TTRSS community recommends the above combination as the optimal setup for lightweight servers like the Raspberry Pi. 
 

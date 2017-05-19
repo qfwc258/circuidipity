@@ -67,7 +67,7 @@ Test ...
 
 In OpenWRT's ``LuCI`` interface navigate to ``System->Startup`` and enable DDNS to ensure the router continues to send IP address changes after reboot and hotplug events.
                                                                                     
-Source: `OpenWRT DDNS client <http://wiki.openwrt.org/doc/howto/ddns.client>`_
+Link: `OpenWRT DDNS client <http://wiki.openwrt.org/doc/howto/ddns.client>`_
 
 2. Port forwarding
 ------------------
