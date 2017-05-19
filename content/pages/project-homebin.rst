@@ -4,7 +4,7 @@ $HOME slash bin
 
 :slug: homebin
 :template: page-project
-:modified: 2016-09-05 21:45:00
+:modified: 2017-05-19 10:45:00
 
 .. image:: images/infinite-loop-not-300.png
     :align: right
@@ -74,11 +74,8 @@ Let's go!
 `reSearch.py <https://github.com/vonbrownie/homebin/blob/master/reSearch.py>`_
     find matches for regex patterns in file(s)
 
-`teleportHomeTo <https://github.com/vonbrownie/homebin/blob/master/teleportHomeTo>`_
-    sync $HOME to DESTINATION
-
-`teleportHomeToSSH <https://github.com/vonbrownie/homebin/blob/master/teleportHomeToSSH>`_
-    sync $HOME to remote DESTINATION using SSH keys
+`teleportHome.sh <https://github.com/vonbrownie/homebin/blob/master/teleportHome.sh>`_
+    sync $HOME to remote DESTINATION using SSH keys (more: `"Automatic backups over the LAN" <http://www.circuidipity.com/backup-over-lan.html>`_)
 
 `timeToCount.py <https://github.com/vonbrownie/homebin/blob/master/timeToCount.py>`_
     measure clock time for a device to count from 0 to *x* in increments of 1
