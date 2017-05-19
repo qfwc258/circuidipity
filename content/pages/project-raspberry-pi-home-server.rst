@@ -4,7 +4,7 @@ There's no place like [a Raspberry Pi] Home [Server]
 
 :slug: raspberry-pi-home-server
 :template: page-project
-:modified: 2017-05-07 11:22:00
+:modified: 2017-05-19 10:22:00
 
 .. image:: images/raspberry-pi-home-server.png
     :align: right
@@ -51,10 +51,10 @@ Fetch the latest fixes, install, and reboot (if necessary).
 
 A *terminal multiplexor* for creating, detaching, re-attaching work areas.
 
-4. `Backup home <http://www.circuidipity.com/incremental-backups-rsnapshot.html>`_
-----------------------------------------------------------------------------------
+4. `Backup home <http://www.circuidipity.com/backup-over-lan.html>`_
+--------------------------------------------------------------------
 
-Make incremental and automatic backups of a home folder using rsnapshot + cron.
+Make incremental and automatic backups of a home folder to the server using SSH + rsync + cron.
 
 5. `Network attached storage <http://www.circuidipity.com/nas-raspberry-pi-sshfs.html>`_
 ----------------------------------------------------------------------------------------
