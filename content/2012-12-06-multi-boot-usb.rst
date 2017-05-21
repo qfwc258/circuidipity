@@ -3,9 +3,9 @@ Transform a USB stick into a boot device packing multiple Linux distros
 =======================================================================
 
 :date: 2012-12-06 01:23:00
-:tags: grub, shell, systemrescuecd, debian, lubuntu, ubuntu, linux
+:tags: grub, shell, systemrescuecd, debian, bunsenlabs, lubuntu, ubuntu, linux
 :slug: multi-boot-usb
-:modified: 2017-05-06 12:32:00
+:modified: 2017-05-21 15:32:00
 
 .. image:: images/grubs-300.png
     :align: right
@@ -58,6 +58,7 @@ Download Linux distro image (ISO) files and place in the newly-created ``boot/is
 
 * **SystemRescueCd** - `Collection of Linux repair tools <http://www.system-rescue-cd.org/>`_
 * **Debian Jessie Netinst+firmware** - `64bit <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/8.7.1+nonfree/amd64/iso-cd/>`_ and `32bit <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/8.7.1+nonfree/i386/iso-cd/>`_ installers
+* **BunsenLabs** - Lightweight distro based on Debian stable release; `64bit, 32bit, and NonPAE installers <https://kelaino.bunsenlabs.org/ddl/>`_
 * **Lubuntu 16.04 Live Mode + Desktop Installer** - `64bit and 32bit <http://cdimage.ubuntu.com/lubuntu/releases/16.04.2/release/>`_ desktop images allow trying Lubuntu before installing
 * **Ubuntu 16.04 LTS Mini-Installers** - `64bit mini.iso <http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/>`_ and `32bit mini.iso <http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-i386/current/images/netboot/>`_
 
@@ -79,92 +80,18 @@ Fix: Bypass the ``initrd.gz`` that is on the ISO images and use ones that *do* c
 4. GRUB configuration
 ---------------------
 
-Create ``boot/grub/grub.cfg`` and write entries for the ISO files to be copied to the USB device. Note that each Linux distro is a bit different in the manner its booted by GRUB. This can require a bit of research. Example ... 
+Create ``boot/grub/grub.cfg`` and write entries for the ISO files to be copied to the USB device. Note that each Linux distro is a bit different in the manner its booted by GRUB and may require a bit of research. `This post on boot entries for a number of distributions <https://wiki.archlinux.org/index.php/Multiboot_USB_drive#Boot_entries_for_other_distributions>`_ on the Arch Linux Wiki might prove helpful.
 
-.. code-block:: bash
+Link: `My own grub.cfg.sample. <https://github.com/vonbrownie/grubs/blob/master/boot/grub/grub.cfg.sample>`_
 
-    # Config for GNU GRand Unified Bootloader (GRUB)
-    # /boot/grub/grub.cfg
-
-    # Timeout for menu
-    set timeout=30
-
-    # Default boot entry
-    set default=0
-
-    # Menu Colours
-    set menu_color_normal=white/black
-    set menu_color_highlight=white/green
-
-    # Path to the partition holding ISO images (using UUID)
-    #set imgdevpath="/dev/disk/by-uuid/UUID_value"
-    # ... or...
-    # Path to the partition holding ISO images (using device labels)
-    #set imgdevpath="/dev/disk/by-label/label_value"
-    set imgdevpath="/dev/disk/by-label/MULTIBOOT"
-
-    # Boot ISOs
-    menuentry "SystemRescueCd std-64bit" {
-        set iso="/iso/systemrescuecd-x86.iso"
-        loopback loop $iso
-        linux (loop)/isolinux/rescue64 isoloop=$iso
-        initrd (loop)/isolinux/initram.igz
-    }
-
-    menuentry "SystemRescueCd std-32bit" {
-        set iso="/iso/systemrescuecd-x86.iso"
-        loopback loop $iso
-        linux (loop)/isolinux/rescue32 isoloop=$iso
-        initrd (loop)/isolinux/initram.igz
-    }
-
-    menuentry "Debian Jessie - 64bit Netinst+firmware" {
-        set iso="/boot/iso/firmware-8.7.1-amd64-netinst.iso"
-        loopback loop $iso
-        linux (loop)/install.amd/vmlinuz iso-scan/ask_second_pass=true iso-scan/filename=$iso priority=low vga=788 --- quiet 
-        initrd /boot/debian/install.amd/initrd.gz
-    }
-
-    menuentry "Debian Jessie - 32bit Netinst+firmware" {
-        set iso="/boot/iso/firmware-8.7.1-i386-netinst.iso"
-        loopback loop $iso
-        linux (loop)/install.386/vmlinuz iso-scan/ask_second_pass=true iso-scan/filename=$iso priority=low vga=788 --- quiet 
-        initrd /boot/debian/install.386/initrd.gz
-    }
-    
-    menuentry "Lubuntu 16.04 - 64bit Live Mode + Desktop Installer" {
-        set iso="/boot/iso/lubuntu-16.04.2-desktop-amd64.iso"
-        loopback loop $iso
-        linux (loop)/casper/vmlinuz.efi boot=casper iso-scan/filename=$iso noprompt noeject
-        initrd (loop)/casper/initrd.lz
-    }
-
-    menuentry "Ubuntu 16.04 LTS - 64bit Mini-Installer" {
-        set iso="/iso/ubuntu-lts-amd64-mini.iso"
-        loopback loop $iso
-        linux (loop)/linux boot=casper iso-scan/filename=$iso noprompt noeject
-        initrd (loop)/initrd.gz
-    }
-
-    menuentry "Ubuntu 16.04 LTS - 32bit Mini-Installer" {
-        set iso="/iso/ubuntu-lts-i386-mini.iso"
-        loopback loop $iso
-        linux (loop)/linux boot=casper iso-scan/filename=$iso noprompt noeject
-        initrd (loop)/initrd.gz
-    }
-
-    menuentry "Ubuntu 16.04 LTS - 32bit Installer ('forcepae' for Pentium M)" {
-        set iso="/iso/ubuntu-lts-i386-mini.iso"
-        loopback loop $iso
-        linux (loop)/linux boot=casper iso-scan/filename=$iso noprompt noeject forcepae
-        initrd (loop)/initrd.gz
-    }
+5. Run
+------
 
 All done! Reboot. Configure the BIOS to accept removable USB storage as boot device. Reboot and GRUB displays a menu of the Linux distros installed on the USB device. Launch and enjoy!
 
 When finished, simply reboot and return to using the USB device as a VFAT-formatted storage medium.
 
-5. GRUBS Reanimated USB Boot Stick
+6. GRUBS Reanimated USB Boot Stick
 ----------------------------------
 
 I created the `GRUBS shell script that prepares USB storage devices <https://github.com/vonbrownie/grubs>`_ using the above steps and uploaded it to GitHub.
