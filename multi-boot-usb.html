@@ -36,7 +36,7 @@
 
 <!-- article -->
 <h1>Transform a USB stick into a boot device packing multiple Linux distros</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Saturday 06 May 2017</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 21 May 2017</p>
 <div id="article">
     <img alt="GRUBS" class="align-right" src="images/grubs-300.png" style="width: 300px; height: 363px;" />
 <p>Transform removable USB storage into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device capable of loopback mounting Linux distro ISO files. <a class="footnote-reference" href="#id5" id="id1">[1]</a></p>
@@ -68,6 +68,7 @@
 <ul class="simple">
 <li><strong>SystemRescueCd</strong> - <a class="reference external" href="http://www.system-rescue-cd.org/">Collection of Linux repair tools</a></li>
 <li><strong>Debian Jessie Netinst+firmware</strong> - <a class="reference external" href="https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/8.7.1+nonfree/amd64/iso-cd/">64bit</a> and <a class="reference external" href="https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/8.7.1+nonfree/i386/iso-cd/">32bit</a> installers</li>
+<li><strong>BunsenLabs</strong> - Lightweight distro based on Debian stable release; <a class="reference external" href="https://kelaino.bunsenlabs.org/ddl/">64bit, 32bit, and NonPAE installers</a></li>
 <li><strong>Lubuntu 16.04 Live Mode + Desktop Installer</strong> - <a class="reference external" href="http://cdimage.ubuntu.com/lubuntu/releases/16.04.2/release/">64bit and 32bit</a> desktop images allow trying Lubuntu before installing</li>
 <li><strong>Ubuntu 16.04 LTS Mini-Installers</strong> - <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/">64bit mini.iso</a> and <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-i386/current/images/netboot/">32bit mini.iso</a></li>
 </ul>
@@ -85,89 +86,16 @@ $ wget http://ftp.debian.org/debian/dists/jessie/main/installer-i386/current/ima
 </div>
 <div class="section" id="grub-configuration">
 <h3>4. GRUB configuration</h3>
-<p>Create <tt class="docutils literal">boot/grub/grub.cfg</tt> and write entries for the ISO files to be copied to the USB device. Note that each Linux distro is a bit different in the manner its booted by GRUB. This can require a bit of research. Example ...</p>
-<div class="highlight"><pre><span></span><span class="c1"># Config for GNU GRand Unified Bootloader (GRUB)</span>
-<span class="c1"># /boot/grub/grub.cfg</span>
-
-<span class="c1"># Timeout for menu</span>
-<span class="nb">set</span> <span class="nv">timeout</span><span class="o">=</span>30
-
-<span class="c1"># Default boot entry</span>
-<span class="nb">set</span> <span class="nv">default</span><span class="o">=</span>0
-
-<span class="c1"># Menu Colours</span>
-<span class="nb">set</span> <span class="nv">menu_color_normal</span><span class="o">=</span>white/black
-<span class="nb">set</span> <span class="nv">menu_color_highlight</span><span class="o">=</span>white/green
-
-<span class="c1"># Path to the partition holding ISO images (using UUID)</span>
-<span class="c1">#set imgdevpath=&quot;/dev/disk/by-uuid/UUID_value&quot;</span>
-<span class="c1"># ... or...</span>
-<span class="c1"># Path to the partition holding ISO images (using device labels)</span>
-<span class="c1">#set imgdevpath=&quot;/dev/disk/by-label/label_value&quot;</span>
-<span class="nb">set</span> <span class="nv">imgdevpath</span><span class="o">=</span><span class="s2">&quot;/dev/disk/by-label/MULTIBOOT&quot;</span>
-
-<span class="c1"># Boot ISOs</span>
-menuentry <span class="s2">&quot;SystemRescueCd std-64bit&quot;</span> <span class="o">{</span>
-    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/systemrescuecd-x86.iso&quot;</span>
-    loopback loop <span class="nv">$iso</span>
-    linux <span class="o">(</span>loop<span class="o">)</span>/isolinux/rescue64 <span class="nv">isoloop</span><span class="o">=</span><span class="nv">$iso</span>
-    initrd <span class="o">(</span>loop<span class="o">)</span>/isolinux/initram.igz
-<span class="o">}</span>
-
-menuentry <span class="s2">&quot;SystemRescueCd std-32bit&quot;</span> <span class="o">{</span>
-    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/systemrescuecd-x86.iso&quot;</span>
-    loopback loop <span class="nv">$iso</span>
-    linux <span class="o">(</span>loop<span class="o">)</span>/isolinux/rescue32 <span class="nv">isoloop</span><span class="o">=</span><span class="nv">$iso</span>
-    initrd <span class="o">(</span>loop<span class="o">)</span>/isolinux/initram.igz
-<span class="o">}</span>
-
-menuentry <span class="s2">&quot;Debian Jessie - 64bit Netinst+firmware&quot;</span> <span class="o">{</span>
-    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/boot/iso/firmware-8.7.1-amd64-netinst.iso&quot;</span>
-    loopback loop <span class="nv">$iso</span>
-    linux <span class="o">(</span>loop<span class="o">)</span>/install.amd/vmlinuz iso-scan/ask_second_pass<span class="o">=</span><span class="nb">true</span> iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> <span class="nv">priority</span><span class="o">=</span>low <span class="nv">vga</span><span class="o">=</span><span class="m">788</span> --- quiet
-    initrd /boot/debian/install.amd/initrd.gz
-<span class="o">}</span>
-
-menuentry <span class="s2">&quot;Debian Jessie - 32bit Netinst+firmware&quot;</span> <span class="o">{</span>
-    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/boot/iso/firmware-8.7.1-i386-netinst.iso&quot;</span>
-    loopback loop <span class="nv">$iso</span>
-    linux <span class="o">(</span>loop<span class="o">)</span>/install.386/vmlinuz iso-scan/ask_second_pass<span class="o">=</span><span class="nb">true</span> iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> <span class="nv">priority</span><span class="o">=</span>low <span class="nv">vga</span><span class="o">=</span><span class="m">788</span> --- quiet
-    initrd /boot/debian/install.386/initrd.gz
-<span class="o">}</span>
-
-menuentry <span class="s2">&quot;Lubuntu 16.04 - 64bit Live Mode + Desktop Installer&quot;</span> <span class="o">{</span>
-    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/boot/iso/lubuntu-16.04.2-desktop-amd64.iso&quot;</span>
-    loopback loop <span class="nv">$iso</span>
-    linux <span class="o">(</span>loop<span class="o">)</span>/casper/vmlinuz.efi <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject
-    initrd <span class="o">(</span>loop<span class="o">)</span>/casper/initrd.lz
-<span class="o">}</span>
-
-menuentry <span class="s2">&quot;Ubuntu 16.04 LTS - 64bit Mini-Installer&quot;</span> <span class="o">{</span>
-    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/ubuntu-lts-amd64-mini.iso&quot;</span>
-    loopback loop <span class="nv">$iso</span>
-    linux <span class="o">(</span>loop<span class="o">)</span>/linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject
-    initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
-<span class="o">}</span>
-
-menuentry <span class="s2">&quot;Ubuntu 16.04 LTS - 32bit Mini-Installer&quot;</span> <span class="o">{</span>
-    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/ubuntu-lts-i386-mini.iso&quot;</span>
-    loopback loop <span class="nv">$iso</span>
-    linux <span class="o">(</span>loop<span class="o">)</span>/linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject
-    initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
-<span class="o">}</span>
-
-menuentry <span class="s2">&quot;Ubuntu 16.04 LTS - 32bit Installer (&#39;forcepae&#39; for Pentium M)&quot;</span> <span class="o">{</span>
-    <span class="nb">set</span> <span class="nv">iso</span><span class="o">=</span><span class="s2">&quot;/iso/ubuntu-lts-i386-mini.iso&quot;</span>
-    loopback loop <span class="nv">$iso</span>
-    linux <span class="o">(</span>loop<span class="o">)</span>/linux <span class="nv">boot</span><span class="o">=</span>casper iso-scan/filename<span class="o">=</span><span class="nv">$iso</span> noprompt noeject forcepae
-    initrd <span class="o">(</span>loop<span class="o">)</span>/initrd.gz
-<span class="o">}</span>
-</pre></div>
+<p>Create <tt class="docutils literal">boot/grub/grub.cfg</tt> and write entries for the ISO files to be copied to the USB device. Note that each Linux distro is a bit different in the manner its booted by GRUB and may require a bit of research. <a class="reference external" href="https://wiki.archlinux.org/index.php/Multiboot_USB_drive#Boot_entries_for_other_distributions">This post on boot entries for a number of distributions on the Arch Linux Wiki</a> might prove helpful.</p>
+<p>Link: <a class="reference external" href="https://github.com/vonbrownie/grubs/blob/master/boot/grub/grub.cfg.sample">grub.cfg.sample that I use myself.</a></p>
+</div>
+<div class="section" id="run">
+<h3>5. Run</h3>
 <p>All done! Reboot. Configure the BIOS to accept removable USB storage as boot device. Reboot and GRUB displays a menu of the Linux distros installed on the USB device. Launch and enjoy!</p>
 <p>When finished, simply reboot and return to using the USB device as a VFAT-formatted storage medium.</p>
 </div>
 <div class="section" id="grubs-reanimated-usb-boot-stick">
-<h3>5. GRUBS Reanimated USB Boot Stick</h3>
+<h3>6. GRUBS Reanimated USB Boot Stick</h3>
 <p>I created the <a class="reference external" href="https://github.com/vonbrownie/grubs">GRUBS shell script that prepares USB storage devices</a> using the above steps and uploaded it to GitHub.</p>
 <p>Happy hacking!</p>
 <div class="section" id="notes">
@@ -192,6 +120,7 @@ menuentry <span class="s2">&quot;Ubuntu 16.04 LTS - 32bit Installer (&#39;forcep
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-systemrescuecd.html">systemrescuecd</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-bunsenlabs.html">bunsenlabs</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-lubuntu.html">lubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
