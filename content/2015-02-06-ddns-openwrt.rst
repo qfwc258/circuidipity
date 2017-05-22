@@ -7,7 +7,7 @@ Dynamic DNS and OpenWRT
 :tags: openwrt, network, linux
 :modifed: 2015-02-08 18:08:00 
 
-`PROJECT: Home Server #6 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Access a home server from anywhere using **Dynamic DNS** (DDNS).
+`PROJECT: Home Server #6 .: <http://www.circuidipity.com/home-server.html>`_ Access a home server from anywhere using **Dynamic DNS** (DDNS).
 
 Let's go!
 =========

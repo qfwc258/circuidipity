@@ -7,7 +7,7 @@ Tiny Tiny RSS
 :tags: ttrss, network, debian, linux
 :modified: 2017-05-19 16:00:00
 
-`PROJECT: Home Server #8 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Install and self-host an **RSS news reader** and gain access to news feeds over the web.
+`PROJECT: Home Server #8 .: <http://www.circuidipity.com/home-server.html>`_ Install and self-host an **RSS news reader** and gain access to news feeds over the web.
 
 Let's go!
 =========

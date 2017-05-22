@@ -7,7 +7,7 @@ New life for an old laptop as a Linux home server
 :slug: laptop-home-server
 :modified: 2017-05-13 17:15:00
 
-`PROJECT: Home Server #0 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ **Netbooks** ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old **Asus 900HA** netbook and put it to work as a `home server <http://www.circuidipity.com/tag-server.html>`_. Good times!
+`PROJECT: Home Server #0 .: <http://www.circuidipity.com/home-server.html>`_ **Netbooks** ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old **Asus 900HA** netbook and put it to work as a `home server <http://www.circuidipity.com/tag-server.html>`_. Good times!
 
 Running your own home server is a fun learning experience and offers several advantages.
 

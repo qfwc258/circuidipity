@@ -6,7 +6,7 @@ Run a Raspberry Pi from USB storage v4.0
 :slug: raspberry-pi-usb-storage-v4
 :tags: raspberry pi, network, debian, linux
 
-`PROJECT: Home Server #0 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ I am exploring the use of my Pi as **24/7 uptime home server**. Hard drives offer a more robust storage media than a Pi's default choice of microSD cards and that is what I decide to use. [1]_ I put my plan in motion using **Debian** and move ``rootfs`` from a microSD to a powered 1TB USB 3.5" hard drive with encrypted storage. 
+`PROJECT: Home Server #0 .: <http://www.circuidipity.com/home-server.html>`_ I am exploring the use of my Pi as **24/7 uptime home server**. Hard drives offer a more robust storage media than a Pi's default choice of microSD cards and that is what I decide to use. [1]_ I put my plan in motion using **Debian** and move ``rootfs`` from a microSD to a powered 1TB USB 3.5" hard drive with encrypted storage. 
 
 Let's go!
 =========

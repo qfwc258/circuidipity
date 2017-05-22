@@ -6,7 +6,7 @@ Automatic security updates on Debian
 :slug: unattended-upgrades
 :tags: debian, linux
 
-`PROJECT: Home Server #2 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Fetch the latest fixes, install, and reboot (if necessary). Hands-free!
+`PROJECT: Home Server #2 .: <http://www.circuidipity.com/home-server.html>`_ Fetch the latest fixes, install, and reboot (if necessary). Hands-free!
 
 Let's go!
 =========

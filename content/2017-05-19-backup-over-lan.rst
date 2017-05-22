@@ -6,7 +6,7 @@ Automatic backups over the LAN
 :slug: backup-over-lan
 :tags: network, ssh, crypto, linux
 
-`PROJECT: Home Server #4 .: <http://www.circuidipity.com/raspberry-pi-home-server.html>`_ Make incremental and automatic backups of a home folder to a local server using **SSH + rsync + cron**.
+`PROJECT: Home Server #4 .: <http://www.circuidipity.com/home-server.html>`_ Make incremental and automatic backups of a home folder to a local server using **SSH + rsync + cron**.
 
 Let's go!
 =========
