@@ -27,7 +27,7 @@
     <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 12 July 2015</p>
 <div id="article">
     <p>Programming languages like Python can make use of <em>libraries</em> of code to add ready-to-go capabilities to programs. Shell scripts don't use libraries but I learned this week it is possible to <em>source</em> a file in a shell script and add functions to the script as if they were entered directly (vs spawning a subshell). Very useful in creating your own library equivalent for the shell!</p>
-<p>There are several functions I have created in previous scripts that are self-contained in their logic and can be re-used over and over again. This function - for example - adds a test whether or not the user executing a script has root privileges:</p>
+<p>There are several functions I have created in previous scripts that are self-contained in their logic and can be re-used over and over again. This function - for example - adds a test whether or not the user executing a script has root privileges ...</p>
 <div class="highlight"><pre><span></span>testRoot<span class="o">()</span> <span class="o">{</span>
 <span class="nb">local</span> <span class="nv">message</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$scriptName</span><span class="s2"> requires ROOT privileges to do its job.&quot;</span>
 <span class="k">if</span> <span class="o">[[</span> <span class="nv">$UID</span> -ne <span class="m">0</span> <span class="o">]]</span>
@@ -37,12 +37,12 @@
 <span class="k">fi</span>
 <span class="o">}</span>
 </pre></div>
-<p>I gathered up several other functions like this and created a <strong>Library.sh</strong> script that I place in my PATH. When I create a new shell script and want to access this library of functions I source it by adding:</p>
+<p>I gathered up several other functions like this and created a <strong>Library.sh</strong> script that I place in my PATH. When I create a new shell script and want to access this library of functions I source it by adding ...</p>
 <div class="highlight"><pre><span></span>. Library.sh
 </pre></div>
 <p>... and its contents are now available for inclusion in every script that needs it. Write once and use everywhere.</p>
 <p>Sourcing a library file for the shell reminds me of HTML templates and CSS stylesheets for websites. Adding new functions or making improvements to existing ones in a single location means the changes ripple across every script that calls upon that location.</p>
-<p>Source: <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/Library.sh">Library.sh</a></p>
+<p>Link: <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/Library.sh">Library.sh</a></p>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
@@ -54,7 +54,7 @@
 <div id="navmenu">
     <hr />
     <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-        <a href="http://www.circuidipity.com/funkygoodtimer.html">FunkyGoodTimer - A simple (but funky) graphical countdown timer</a></p>
+        <a href="http://www.circuidipity.com/adb-fastboot-android.html">Install ADB and Fastboot Android Tools</a></p>
     <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
         <a href="http://www.circuidipity.com/firefox-rss-reader.html">Firefox as RSS reader</a></p>
 </div>
