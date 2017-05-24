@@ -151,10 +151,9 @@ found USB scanner <span class="o">(</span><span class="nv">vendor</span><span cl
 $ scanimage -L
 device <span class="sb">`</span>brother4:bus1<span class="p">;</span>dev1<span class="err">&#39;</span> is a Brother MFC-J450DW USB scanner
 </pre></div>
-<p>Modify <tt class="docutils literal">/etc/default/saned</tt> to run SANE as server ...
-.. code-block:: bash</p>
-<blockquote>
-RUN=yes</blockquote>
+<p>Modify <tt class="docutils literal">/etc/default/saned</tt> to run SANE as server ...</p>
+<div class="highlight"><pre><span></span><span class="nv">RUN</span><span class="o">=</span>yes
+</pre></div>
 <p>Modify <tt class="docutils literal">/etc/sane.d/saned.conf</tt> to share the scanner over the network ...</p>
 <div class="highlight"><pre><span></span><span class="c1">## Access list</span>
 192.168.1.0/24
