@@ -3,7 +3,7 @@ Getting Started with BeagleBone Black
 =====================================
 
 :date: 2013-09-02 01:23:00
-:tags: beaglebone, electronics, linux
+:tags: beaglebone, electronics, debian, linux
 :slug: getting-started-with-beaglebone-black
 
 .. image:: images/bbb-details3.png

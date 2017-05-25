@@ -3,12 +3,12 @@ Hosting multiple domains from one IP address using Apache
 =========================================================
 
 :date: 2011-02-20 01:23:00
-:tags: server, network, linux
+:tags: network, debian, linux
 :slug: hosting-multiple-domains-from-one-ip-address-using-apache
 
 Creating *virtual hosts* in Apache makes it possible to host multiple websites from a single IP address.
 
-My old netbook has discovered new life as a `Linux home server <http://www.circuidipity.com/linux-home-server.html>`_. A combination of `name-based virtual hosting <http://httpd.apache.org/docs/2.0/vhosts/name-based.html>`_ in Apache + Debian ``squeeze`` allows me to host multiple websites running behind a single static IP address I obtained from my ISP.
+My old netbook has discovered new life as a `Linux home server <http://www.circuidipity.com/home-server.html>`_. A combination of `name-based virtual hosting <http://httpd.apache.org/docs/2.0/vhosts/name-based.html>`_ in Apache + Debian ``squeeze`` allows me to host multiple websites running behind a single static IP address I obtained from my ISP.
 
 This is my setup ...
 

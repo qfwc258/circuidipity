@@ -3,9 +3,9 @@ Add a dynamic menu to your desktop using dmenu
 ==============================================
 
 :date: 2011-03-22 01:23:00
-:tags: shell, programming, openbox, linux
+:tags: shell, programming, openbox, debian, linux
 :slug: add-a-dynamic-menu-to-your-desktop-using-dmenu
-:modified: 15 April 2014
+:modified: 2014-04-15 01:10:00
 
 *Dmenu* is a cool application for generating a dynamic menu on your desktop that can be activated using a hot-key combination.
 

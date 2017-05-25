@@ -3,10 +3,10 @@ Add ascii logo to login prompt
 ==============================
 
 :date: 2014-01-06 01:23:00
-:tags: shell, linux
+:tags: shell, debian, linux
 :slug: ascii-logo
 
-`Linuxlogo <http://www.deater.net/weave/vmwprod/linux_logo/>`_ provides Tux, the Debian swirl, and other distro logos that can be displayed - along with system information - at the console login prompt:
+`Linuxlogo <http://www.deater.net/weave/vmwprod/linux_logo/>`_ provides Tux, the Debian swirl, and other distro logos that can be displayed - along with system information - at the console login prompt ...
 
 .. code-block:: bash
     

@@ -3,7 +3,7 @@ Hello World
 ===========
 
 :date: 2010-05-29 01:23:00
-:tags: web
+:tags: blog
 :slug: hello-world
 
 .. image:: {filename}/images/hello-world.png

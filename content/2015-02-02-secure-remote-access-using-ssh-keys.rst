@@ -4,7 +4,7 @@ Secure remote access using SSH keys
 
 :date: 2015-02-02 00:05:00
 :slug: secure-remote-access-using-ssh-keys
-:tags: ssh, crypto, linux
+:tags: ssh, crypto, debian, linux
 :modified: 2017-05-06 18:44:00
 
 `PROJECT: Home Server #1 .: <http://www.circuidipity.com/home-server.html>`_ Create cryptographic keys and **disable password logins** to make remote machines more secure.

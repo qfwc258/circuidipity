@@ -295,3 +295,4 @@ I like `XFCE <http://www.xfce.org/>`_. For a desktop environment complete with f
     $ sudo apt-get install gtk2-engines gtk2-engines-murrine gnome-colors shiki-colors qt4-qtconfig
     $ sudo apt-get install ttf-mscorefonts-installer ttf-bitstream-vera ttf-liberation xfonts-terminus   
     $ sudo apt-get install network-manager network-manager-gnome
+

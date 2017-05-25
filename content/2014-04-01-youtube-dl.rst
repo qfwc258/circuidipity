@@ -4,7 +4,7 @@ Command line tools: youtube-dl
 
 :date: 2014-04-01 01:10:00
 :slug: youtube-dl
-:tags: shell, tools, linux, programming
+:tags: shell, linux
 :modified: 2015-07-12 19:10:00
 
 `youtube-dl <http://rg3.github.io/youtube-dl/>`_ is a cool command-line program for downloading videos from a whole bunch of online video sites. It can also convert videos into audio files (courtesy of ``ffmpeg``).                                  

@@ -3,7 +3,7 @@ Tie a balloon on your website and head for the clouds of Amazon
 ===============================================================
 
 :date: 2011-11-26 01:23:00
-:tags: blog, network, linux
+:tags: blog
 :slug: host-website-on-amazon-s3
 
 Last week I packed up the handwritten html pages, images, and bits hosted on my home netbook server and moved up into the *cloud*.

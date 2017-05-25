@@ -4,7 +4,7 @@ OpenWrt surgery on more home routers
 
 :date: 2015-02-08 18:16:00
 :slug: supercharge-a-home-router-using-openwrt-pt2
-:tags: openwrt, router, linux, network
+:tags: openwrt, linux, network
 :modified: 2015-07-16 15:05:00
            
 Home routers are more capable than default firmware would lead you to believe. I replace that firmware with `OpenWrt <https://openwrt.org/>`_: an embedded Linux distribution that converts energy-efficient, network-capable devices into much more useful hackable computers.

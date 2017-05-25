@@ -1,10 +1,10 @@
-=======================
-Shell script: paVolume
-=======================
+==========================================
+$HOME slash bin: control PulseAudio volume
+==========================================
 
 :date: 2015-07-10 00:12:00
 :slug: pavolume
-:tags: ubuntu, linux, shell, programming
+:tags: homebin, shell, programming, linux
 :modified: 2016-02-14 13:30:00
 
 My original intent was to manage sound on `Ubuntubook <http://www.circuidipity.com/c720-ubuntubook.html>`_ by binding the commands to the multimedia keys in ``~/.xbindkeysrc``. Instead ``xbindkeys`` calls a standalone script I created to control PulseAudio volume (and thus useful beyond just ``xbindkeys``): `paVolume <https://github.com/vonbrownie/homebin/blob/master/paVolume>`_

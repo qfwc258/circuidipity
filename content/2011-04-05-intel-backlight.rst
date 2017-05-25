@@ -3,7 +3,7 @@ Fix the backlight on laptops using Intel video chipsets
 =======================================================
 
 :date: 2011-04-05 01:23:00
-:tags: linux
+:tags: grub, linux
 :slug: intel-backlight
 
 There are issues with some Intel video cards ``xserver-xorg-video-intel`` and ``KMS`` and the default ``2.6.32 kernel`` in Debian ``squeeze``.

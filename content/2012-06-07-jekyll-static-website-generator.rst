@@ -3,7 +3,7 @@ Great fun getting started with Jekyll
 =====================================
 
 :date: 2012-06-07 01:23:00
-:tags: blog, ruby, network, linux
+:tags: blog, jekyll, linux
 :slugs: jekyll-static-website-generator
 
 I discovered a cool tool named *Jekyll* that I am now using to generate my website. From the `README <https://github.com/mojombo/jekyll#readme>`_ ...
@@ -29,7 +29,7 @@ Getting Started
 
 Jekyll is powered by the `Ruby <http://www.ruby-lang.org/en/>`_ programming language. You don't need to know Ruby to get started and if the default configuration of Jekyll does what you want you can merrily go off and write your posts without touching the language. But Jekyll can be extended by `downloading plugins <https://github.com/mojombo/jekyll/wiki/Plugins>`_ or rolling your own. Having an opportunity to play with Jekyll for the last week I believe it will be good entry-point for myself to learn programming in general and Ruby in particular.
 
-Last week I `installed Ruby using RVM <http://www.circuidipity.com/install-ruby-on-debian-wheezy-using-rvm.html>`_ and after your Ruby environment is properly configured its a simple matter to `install Jekyll <https://github.com/mojombo/jekyll/wiki/install>`_. Note that Jekyll is a *rendering* engine. Pre-configuration is left in user hands. The documentation quickly guides you through creating default directories and files and its possible to have something up and running in minutes. 
+Last week I installed Ruby using RVM and after your Ruby environment is properly configured its a simple matter to `install Jekyll <https://github.com/mojombo/jekyll/wiki/install>`_. Note that Jekyll is a *rendering* engine. Pre-configuration is left in user hands. The documentation quickly guides you through creating default directories and files and its possible to have something up and running in minutes. 
 
 YAML, Liquid, and Markdown
 ==========================
