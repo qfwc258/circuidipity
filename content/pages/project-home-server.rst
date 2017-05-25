@@ -4,7 +4,7 @@ There's no place like [a Linux] home [server]
 
 :slug: home-server
 :template: page-project
-:modified: 2017-05-22 11:22:00
+:modified: 2017-05-24 01:10:00
 
 .. image:: images/home-server.png
     :align: right
