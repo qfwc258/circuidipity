@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Network printer + scanner</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Saturday 27 May 2017</p>
+</div>
+
+<!-- article -->
+<h1>Network printer + scanner</h1>
+<div id="article">
+    <p><a class="reference external" href="http://www.circuidipity.com/home-server.html">PROJECT: Home Server #9 .:</a> Configure a printer + scanner to receive jobs across the local network.</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<p>Multi-purpose printer is an <strong>HP Deskjet 2130</strong> connected to a <strong>home server running Debian</strong> at IP address <tt class="docutils literal">192.168.1.88</tt>.</p>
+<div class="section" id="printer-and-scanner-packages">
+<h3>0. Printer and scanner packages</h3>
+<p>Install a complete set of CUPS (printer) and SANE (scanner) packages on the server and grant (example) username <tt class="docutils literal">foo</tt> admin privileges ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># apt install task-print-server</span>
+<span class="c1"># adduser foo lp</span>
+<span class="c1"># adduser foo lpadmin</span>
+<span class="c1"># adduser foo scanner</span>
+</pre></div>
+</div>
+<div class="section" id="device-drivers-and-firmware">
+<h3>1. Device drivers and firmware</h3>
+<p>Attach the printer to server ...</p>
+<div class="highlight"><pre><span></span>$ lsusb
+<span class="o">[</span>...<span class="o">]</span>
+Bus <span class="m">002</span> Device 004: ID 03f0:e111 Hewlett-Packard
+</pre></div>
+<p>Some printers require additional drivers and firmware from the vendor. Libre software <strong>HPLIP</strong> adds support for the Deskjet and is packaged for Debian/Ubuntu ...</p>
+<div class="highlight"><pre><span></span>$ apt install hplip printer-driver-hpijs
+</pre></div>
+<p>Link: <a class="reference external" href="http://hplipopensource.com/hplip-web/about.html">HP Linux Imaging and Printing</a></p>
+</div>
+<div class="section" id="web-admin-remote-access">
+<h3>2. Web admin remote access</h3>
+<p>Primary configuration of CUPS is done in <tt class="docutils literal">/etc/cups/cupsd.conf</tt> and a web interface is provided for administration. Modify default settings that permit only localhost access to the admin panel to allow access to all machines on local network <tt class="docutils literal">192.168.1.*</tt> ...</p>
+<div class="highlight"><pre><span></span><span class="o">[</span>...<span class="o">]</span>
+
+<span class="c1"># Only listen for connections from the local machine.</span>
+<span class="c1">#Listen localhost:631</span>
+<span class="c1"># Listen for connections from local and remote machines.</span>
+Port 631
+
+<span class="c1"># Show shared printers on the local network.</span>
+Browsing On
+BrowseLocalProtocols dnssd
+
+<span class="o">[</span>...<span class="o">]</span>
+
+<span class="c1"># Web interface setting...</span>
+WebInterface Yes
+
+<span class="c1"># Restrict access to the server...</span>
+&lt;Location /&gt;
+Order allow,deny
+Allow from 192.168.1.*
+&lt;/Location&gt;
+
+<span class="c1"># Restrict access to the admin pages...</span>
+&lt;Location /admin&gt;
+Order allow,deny
+Allow from 192.168.1.*
+&lt;/Location&gt;
+
+<span class="c1"># Restrict access to configuration files...</span>
+&lt;Location /admin/conf&gt;
+AuthType Default
+Require user @SYSTEM
+Order allow,deny
+Allow from 192.168.1.*
+&lt;/Location&gt;
+
+<span class="c1"># Restrict access to log files...</span>
+&lt;Location /admin/log&gt;
+AuthType Default
+Require user @SYSTEM
+Order allow,deny
+Allow from 192.168.1.*
+&lt;/Location&gt;
+</pre></div>
+<p>Restart CUPS ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># systemctl restart cups.service</span>
+</pre></div>
+<p><strong>Example:</strong> Server at address <tt class="docutils literal">192.168.1.88</tt> has admin functions available via browser at <tt class="docutils literal"><span class="pre">https://192.168.1.88:631/admin</span></tt> (Firefox warns <em>Your connection is not secure</em> on first connect; add an exception for the CUPS ssl certificate).</p>
+<img alt="CUPS Admin" class="align-center" src="images/cups-admin.png" style="width: 900px; height: 304px;" />
+</div>
+<div class="section" id="add-the-printer">
+<h3>3. Add the printer</h3>
+<p>Select <tt class="docutils literal"><span class="pre">Administration-&gt;Printers-&gt;Add</span> Printer</tt> and login with the username assigned previously to the <tt class="docutils literal">lpadmin</tt> group.</p>
+<img alt="CUPS local printer" class="align-center" src="images/cups-local-printer.png" style="width: 900px; height: 540px;" />
+<img alt="CUPS add printer" class="align-center" src="images/cups-add-printer.png" style="width: 900px; height: 450px;" />
+<img alt="CUPS printer model" class="align-center" src="images/cups-printer-model.png" style="width: 900px; height: 600px;" />
+<img alt="CUPS printer" class="align-center" src="images/cups-printer.png" style="width: 900px; height: 500px;" />
+<p>Test the configuration by selecting <tt class="docutils literal"><span class="pre">Maintenance-&gt;Print</span> Test Page</tt>.</p>
+<p>Printer settings are saved to <tt class="docutils literal">/etc/cups/printers.conf</tt>. On the command line, check printer status with <tt class="docutils literal">lpstat</tt> ...</p>
+<div class="highlight"><pre><span></span>$ lpstat -t
+scheduler is running
+no system default destination
+device <span class="k">for</span> HP_DeskJet_2130_series: hp:/usb/DeskJet_2130_series?serial<span class="o">=</span>CN674...
+HP_DeskJet_2130_series accepting requests since Sat <span class="m">27</span> May <span class="m">2017</span> 11:16:37 AM EDT
+printer HP_DeskJet_2130_series is idle.  enabled since Sat <span class="m">27</span> May <span class="m">2017</span> 11:16:37 AM EDT
+</pre></div>
+</div>
+<div class="section" id="access-printer-from-a-linux-client">
+<h3>4. Access printer from a Linux client</h3>
+<p>Client machines can dispense with running a local CUPS server and its helper tools. To connect directly with the network printer, download ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># apt install cups-client</span>
+</pre></div>
+<p>Create <tt class="docutils literal">client.conf</tt> in <tt class="docutils literal">$HOME</tt> ...</p>
+<div class="highlight"><pre><span></span>$ mkdir ~/.cups
+$ touch ~/.cups/client.conf
+</pre></div>
+<p>... and add the address of the server hosting the scanner to the file ...</p>
+<div class="highlight"><pre><span></span>ServerName 192.168.1.88
+</pre></div>
+<p><strong>Alternative:</strong> If the Linux client machine regularly connects to printers on different networks it might prove convenient to download a more complete suite of CUPS packages - <tt class="docutils literal">apt install cups</tt> - and add the network printer via the web interface address <tt class="docutils literal">localhost:631</tt> or via the native printer config utility included with some desktop environments.</p>
+<p>Link: <a class="reference external" href="https://wiki.debian.org/PrintQueuesCUPS#Printing_Without_a_Local_CUPS_Server">Printing Without a Local CUPS Server</a></p>
+</div>
+<div class="section" id="add-the-scanner">
+<h3>5. Add the scanner</h3>
+<p>Detect attached device on the server using <tt class="docutils literal"><span class="pre">sane-find-scanner</span></tt> and <tt class="docutils literal">scanimage</tt> ...</p>
+<div class="highlight"><pre><span></span>$ sane-find-scanner
+<span class="o">[</span>...<span class="o">]</span>
+found USB scanner <span class="o">(</span><span class="nv">vendor</span><span class="o">=</span>0x03f0 <span class="o">[</span>HP<span class="o">]</span>, <span class="nv">product</span><span class="o">=</span>0xe111 <span class="o">[</span>DeskJet <span class="m">2130</span> series<span class="o">])</span> at libusb:002:004
+$ scanimage -L
+device <span class="sb">`</span>hpaio:/usb/DeskJet_2130_series?serial<span class="o">=</span>CN674...<span class="err">&#39;</span> is a Hewlett-Packard DeskJet_2130_series all-in-one
+</pre></div>
+<p>Run a test ...</p>
+<div class="highlight"><pre><span></span>$ scanimage &gt; test.ppm
+</pre></div>
+<p>... and retrieve the (grayscale) image from the server and verify the scanner is working on the local server connection (before enabling remote access to client machines).</p>
+<p>Modify <tt class="docutils literal">/etc/sane.d/saned.conf</tt> to share the scanner over the local network ...</p>
+<div class="highlight"><pre><span></span><span class="c1">## Access list</span>
+192.168.1.0/24
+</pre></div>
+<p>Setup SANE in <strong>systemd</strong> and check status ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># systemctl enable saned.socket</span>
+<span class="c1"># systemctl start saned.socket</span>
+$ systemctl status saned.socket
+</pre></div>
+</div>
+<div class="section" id="access-scanner-from-a-linux-client">
+<h3>6. Access scanner from a Linux client</h3>
+<p>Install scanner tools on the client machine ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># apt install sane-utils</span>
+</pre></div>
+<p>Modify <tt class="docutils literal">/etc/sane.d/net.conf</tt> to point the client towards the address of the server hosting the scanner ...</p>
+<div class="highlight"><pre><span></span><span class="nv">connect_timeout</span> <span class="o">=</span> 60
+192.168.1.88
+</pre></div>
+<p>Verify the remote scanner is visible to the client ...</p>
+<div class="highlight"><pre><span></span>$ scanimage -L
+device <span class="sb">`</span>net:192.168.1.88:hpaio:/usb/DeskJet_2130_series?serial<span class="o">=</span>CN674...<span class="err">&#39;</span> is a Hewlett-Packard DeskJet_2130_series all-in-one
+</pre></div>
+<p><strong>Note:</strong> If the client fails to find the remote scanner, reboot the server and try again.</p>
+<p>Run a test ...</p>
+<div class="highlight"><pre><span></span>$ scanimage &gt; test2.ppm
+</pre></div>
+<p>For a simple, graphical scanner program give <strong>simple-scan</strong> a try.</p>
+<p>Happy hacking!</p>
+</div>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-printer.html">printer</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/backup-over-lan.html">Automatic backups over the LAN</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>

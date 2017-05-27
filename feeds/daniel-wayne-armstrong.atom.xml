@@ -1,5 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-05-19T10:50:00-04:00</updated><entry><title>Automatic backups over the LAN</title><link href="http://www.circuidipity.com/backup-over-lan.html" rel="alternate"></link><published>2017-05-19T10:50:00-04:00</published><updated>2017-05-19T10:50:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-05-19:/backup-over-lan.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #4 .:&lt;/a&gt; Make incremental and automatic backups of a home folder to a local server using &lt;strong&gt;SSH + rsync + cron&lt;/strong&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-05-27T19:10:00-04:00</updated><entry><title>Network printer + scanner</title><link href="http://www.circuidipity.com/network-printer-scanner.html" rel="alternate"></link><published>2017-05-27T19:10:00-04:00</published><updated>2017-05-27T19:10:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-05-27:/network-printer-scanner.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #9 .:&lt;/a&gt; Configure a printer + scanner to receive jobs across the local network.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Multi-purpose printer is an &lt;strong&gt;HP Deskjet 2130&lt;/strong&gt; connected to a &lt;strong&gt;home server running Debian&lt;/strong&gt; at IP address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="section" id="printer-and-scanner-packages"&gt;
+&lt;h3&gt;0. Printer and scanner packages&lt;/h3&gt;
+&lt;p&gt;Install a complete set of CUPS (printer …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #9 .:&lt;/a&gt; Configure a printer + scanner to receive jobs across the local network.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Multi-purpose printer is an &lt;strong&gt;HP Deskjet 2130&lt;/strong&gt; connected to a &lt;strong&gt;home server running Debian&lt;/strong&gt; at IP address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="section" id="printer-and-scanner-packages"&gt;
+&lt;h3&gt;0. Printer and scanner packages&lt;/h3&gt;
+&lt;p&gt;Install a complete set of CUPS (printer) and SANE (scanner) packages on the server and grant (example) username &lt;tt class="docutils literal"&gt;foo&lt;/tt&gt; admin privileges ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# apt install task-print-server&lt;/span&gt;
+&lt;span class="c1"&gt;# adduser foo lp&lt;/span&gt;
+&lt;span class="c1"&gt;# adduser foo lpadmin&lt;/span&gt;
+&lt;span class="c1"&gt;# adduser foo scanner&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="device-drivers-and-firmware"&gt;
+&lt;h3&gt;1. Device drivers and firmware&lt;/h3&gt;
+&lt;p&gt;Attach the printer to server ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ lsusb
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+Bus &lt;span class="m"&gt;002&lt;/span&gt; Device 004: ID 03f0:e111 Hewlett-Packard
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Some printers require additional drivers and firmware from the vendor. Libre software &lt;strong&gt;HPLIP&lt;/strong&gt; adds support for the Deskjet and is packaged for Debian/Ubuntu ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ apt install hplip printer-driver-hpijs
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Link: &lt;a class="reference external" href="http://hplipopensource.com/hplip-web/about.html"&gt;HP Linux Imaging and Printing&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="web-admin-remote-access"&gt;
+&lt;h3&gt;2. Web admin remote access&lt;/h3&gt;
+&lt;p&gt;Primary configuration of CUPS is done in &lt;tt class="docutils literal"&gt;/etc/cups/cupsd.conf&lt;/tt&gt; and a web interface is provided for administration. Modify default settings that permit only localhost access to the admin panel to allow access to all machines on local network &lt;tt class="docutils literal"&gt;192.168.1.*&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Only listen for connections from the local machine.&lt;/span&gt;
+&lt;span class="c1"&gt;#Listen localhost:631&lt;/span&gt;
+&lt;span class="c1"&gt;# Listen for connections from local and remote machines.&lt;/span&gt;
+Port 631
+
+&lt;span class="c1"&gt;# Show shared printers on the local network.&lt;/span&gt;
+Browsing On
+BrowseLocalProtocols dnssd
+
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Web interface setting...&lt;/span&gt;
+WebInterface Yes
+
+&lt;span class="c1"&gt;# Restrict access to the server...&lt;/span&gt;
+&amp;lt;Location /&amp;gt;
+Order allow,deny
+Allow from 192.168.1.*
+&amp;lt;/Location&amp;gt;
+
+&lt;span class="c1"&gt;# Restrict access to the admin pages...&lt;/span&gt;
+&amp;lt;Location /admin&amp;gt;
+Order allow,deny
+Allow from 192.168.1.*
+&amp;lt;/Location&amp;gt;
+
+&lt;span class="c1"&gt;# Restrict access to configuration files...&lt;/span&gt;
+&amp;lt;Location /admin/conf&amp;gt;
+AuthType Default
+Require user @SYSTEM
+Order allow,deny
+Allow from 192.168.1.*
+&amp;lt;/Location&amp;gt;
+
+&lt;span class="c1"&gt;# Restrict access to log files...&lt;/span&gt;
+&amp;lt;Location /admin/log&amp;gt;
+AuthType Default
+Require user @SYSTEM
+Order allow,deny
+Allow from 192.168.1.*
+&amp;lt;/Location&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Restart CUPS ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# systemctl restart cups.service&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt; Server at address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt; has admin functions available via browser at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;https://192.168.1.88:631/admin&lt;/span&gt;&lt;/tt&gt; (Firefox warns &lt;em&gt;Your connection is not secure&lt;/em&gt; on first connect; add an exception for the CUPS ssl certificate).&lt;/p&gt;
+&lt;img alt="CUPS Admin" class="align-center" src="images/cups-admin.png" style="width: 900px; height: 304px;" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="add-the-printer"&gt;
+&lt;h3&gt;3. Add the printer&lt;/h3&gt;
+&lt;p&gt;Select &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Administration-&amp;gt;Printers-&amp;gt;Add&lt;/span&gt; Printer&lt;/tt&gt; and login with the username assigned previously to the &lt;tt class="docutils literal"&gt;lpadmin&lt;/tt&gt; group.&lt;/p&gt;
+&lt;img alt="CUPS local printer" class="align-center" src="images/cups-local-printer.png" style="width: 900px; height: 540px;" /&gt;
+&lt;img alt="CUPS add printer" class="align-center" src="images/cups-add-printer.png" style="width: 900px; height: 450px;" /&gt;
+&lt;img alt="CUPS printer model" class="align-center" src="images/cups-printer-model.png" style="width: 900px; height: 600px;" /&gt;
+&lt;img alt="CUPS printer" class="align-center" src="images/cups-printer.png" style="width: 900px; height: 500px;" /&gt;
+&lt;p&gt;Test the configuration by selecting &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Maintenance-&amp;gt;Print&lt;/span&gt; Test Page&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Printer settings are saved to &lt;tt class="docutils literal"&gt;/etc/cups/printers.conf&lt;/tt&gt;. On the command line, check printer status with &lt;tt class="docutils literal"&gt;lpstat&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ lpstat -t
+scheduler is running
+no system default destination
+device &lt;span class="k"&gt;for&lt;/span&gt; HP_DeskJet_2130_series: hp:/usb/DeskJet_2130_series?serial&lt;span class="o"&gt;=&lt;/span&gt;CN674...
+HP_DeskJet_2130_series accepting requests since Sat &lt;span class="m"&gt;27&lt;/span&gt; May &lt;span class="m"&gt;2017&lt;/span&gt; 11:16:37 AM EDT
+printer HP_DeskJet_2130_series is idle.  enabled since Sat &lt;span class="m"&gt;27&lt;/span&gt; May &lt;span class="m"&gt;2017&lt;/span&gt; 11:16:37 AM EDT
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="access-printer-from-a-linux-client"&gt;
+&lt;h3&gt;4. Access printer from a Linux client&lt;/h3&gt;
+&lt;p&gt;Client machines can dispense with running a local CUPS server and its helper tools. To connect directly with the network printer, download ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# apt install cups-client&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Create &lt;tt class="docutils literal"&gt;client.conf&lt;/tt&gt; in &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ mkdir ~/.cups
+$ touch ~/.cups/client.conf
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and add the address of the server hosting the scanner to the file ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ServerName 192.168.1.88
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Alternative:&lt;/strong&gt; If the Linux client machine regularly connects to printers on different networks it might prove convenient to download a more complete suite of CUPS packages - &lt;tt class="docutils literal"&gt;apt install cups&lt;/tt&gt; - and add the network printer via the web interface address &lt;tt class="docutils literal"&gt;localhost:631&lt;/tt&gt; or via the native printer config utility included with some desktop environments.&lt;/p&gt;
+&lt;p&gt;Link: &lt;a class="reference external" href="https://wiki.debian.org/PrintQueuesCUPS#Printing_Without_a_Local_CUPS_Server"&gt;Printing Without a Local CUPS Server&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="add-the-scanner"&gt;
+&lt;h3&gt;5. Add the scanner&lt;/h3&gt;
+&lt;p&gt;Detect attached device on the server using &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;sane-find-scanner&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;scanimage&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sane-find-scanner
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+found USB scanner &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;vendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0x03f0 &lt;span class="o"&gt;[&lt;/span&gt;HP&lt;span class="o"&gt;]&lt;/span&gt;, &lt;span class="nv"&gt;product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0xe111 &lt;span class="o"&gt;[&lt;/span&gt;DeskJet &lt;span class="m"&gt;2130&lt;/span&gt; series&lt;span class="o"&gt;])&lt;/span&gt; at libusb:002:004
+$ scanimage -L
+device &lt;span class="sb"&gt;`&lt;/span&gt;hpaio:/usb/DeskJet_2130_series?serial&lt;span class="o"&gt;=&lt;/span&gt;CN674...&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; is a Hewlett-Packard DeskJet_2130_series all-in-one
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Run a test ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ scanimage &amp;gt; test.ppm
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and retrieve the (grayscale) image from the server and verify the scanner is working on the local server connection (before enabling remote access to client machines).&lt;/p&gt;
+&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/sane.d/saned.conf&lt;/tt&gt; to share the scanner over the local network ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;## Access list&lt;/span&gt;
+192.168.1.0/24
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Setup SANE in &lt;strong&gt;systemd&lt;/strong&gt; and check status ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# systemctl enable saned.socket&lt;/span&gt;
+&lt;span class="c1"&gt;# systemctl start saned.socket&lt;/span&gt;
+$ systemctl status saned.socket
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="access-scanner-from-a-linux-client"&gt;
+&lt;h3&gt;6. Access scanner from a Linux client&lt;/h3&gt;
+&lt;p&gt;Install scanner tools on the client machine ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# apt install sane-utils&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/sane.d/net.conf&lt;/tt&gt; to point the client towards the address of the server hosting the scanner ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;connect_timeout&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 60
+192.168.1.88
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Verify the remote scanner is visible to the client ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ scanimage -L
+device &lt;span class="sb"&gt;`&lt;/span&gt;net:192.168.1.88:hpaio:/usb/DeskJet_2130_series?serial&lt;span class="o"&gt;=&lt;/span&gt;CN674...&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; is a Hewlett-Packard DeskJet_2130_series all-in-one
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If the client fails to find the remote scanner, reboot the server and try again.&lt;/p&gt;
+&lt;p&gt;Run a test ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ scanimage &amp;gt; test2.ppm
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For a simple, graphical scanner program give &lt;strong&gt;simple-scan&lt;/strong&gt; a try.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="printer"></category><category term="network"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Automatic backups over the LAN</title><link href="http://www.circuidipity.com/backup-over-lan.html" rel="alternate"></link><published>2017-05-19T10:50:00-04:00</published><updated>2017-05-19T10:50:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-05-19:/backup-over-lan.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #4 .:&lt;/a&gt; Make incremental and automatic backups of a home folder to a local server using &lt;strong&gt;SSH + rsync + cron&lt;/strong&gt;.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Server&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/laptop-home-server.html"&gt;raised-from-the-dead netbook&lt;/a&gt; on the home network. &lt;strong&gt;Client&lt;/strong&gt; desktop is configured to perform a daily sync of its &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt; to server.&lt;/p&gt;
@@ -260,6 +420,4 @@ APT::Periodic::Verbose &lt;span class="s2"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;
 &lt;/div&gt;
 &lt;p&gt;A few nights ago I finished reading the final volume - &lt;em&gt;Death's End&lt;/em&gt; - in Liu Cixin's &lt;em&gt;Three-Body Problem&lt;/em&gt; trilogy and was so agitated and overwhelmed by the author's vision I had to go out in the dark in the snow and cold on the local wilderness trail and walk it off! Its the first work of Chinese science fiction I have read and the three volumes take the reader from the 1960s Cultural Revolution to the end of this Universe.&lt;/p&gt;
 &lt;p&gt;The first volume - &lt;a class="reference external" href="http://www.circuidipity.com/three-body-problem.html"&gt;The Three-Body Problem&lt;/a&gt; - has a politically persecuted scientist reveal Earth's location to an alien civilization, which dispatches an invasion fleet to conquer the Solar System. Volume II - &lt;em&gt;The Dark Forest&lt;/em&gt; - reveals &lt;em&gt;dark forest strategy&lt;/em&gt; in a universe filled with hunters silently hunting other hunters, the worst-case scenario of possible universes. The first two books are good but the third volume ... wow. What should we value when everything is ground to dust by Time? How can Nature produce creatures that can contemplate such things? How can Nature produce creatures that can view black scratches on white backgrounds, bound between covers, and think and feel things that are entirely beyond anything of personal experience?&lt;/p&gt;
-</content><category term="books"></category></entry><entry><title>MITx Week 3: Lists and Dictionaries</title><link href="http://www.circuidipity.com/mitx-6001x-w3.html" rel="alternate"></link><published>2017-01-29T20:35:00-05:00</published><updated>2017-01-29T20:35:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-01-29:/mitx-6001x-w3.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; I finished the &lt;em&gt;Week 2 Problem Set&lt;/em&gt; and am working my way through this week's lectures and exercises for the Python &lt;strong&gt;list&lt;/strong&gt; and &lt;strong&gt;dictionary&lt;/strong&gt; data structures. While the course is &amp;quot;Computer Science and Programming Using Python&amp;quot; and emphasizes the computer science bit, I sought out …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; I finished the &lt;em&gt;Week 2 Problem Set&lt;/em&gt; and am working my way through this week's lectures and exercises for the Python &lt;strong&gt;list&lt;/strong&gt; and &lt;strong&gt;dictionary&lt;/strong&gt; data structures. While the course is &amp;quot;Computer Science and Programming Using Python&amp;quot; and emphasizes the computer science bit, I sought out another resource to shed more light on Python itself and dug into what looks to be a good Creative Commons-licensed programming book: &lt;a class="reference external" href="https://automatetheboringstuff.com/"&gt;Automate the Boring Stuff with Python&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Onward!&lt;/p&gt;
-</content><category term="python"></category><category term="programming"></category><category term="mooc"></category></entry></feed>
+</content><category term="books"></category></entry></feed>
