@@ -4,7 +4,7 @@ There's no place like [a Linux] home [server]
 
 :slug: home-server
 :template: page-project
-:modified: 2017-05-24 01:10:00
+:modified: 2017-05-27 19:15:00
 
 .. image:: images/home-server.png
     :align: right
@@ -69,5 +69,10 @@ Host web applications using PHP + Nginx + PostgreSQL.
 ---------------------------------------------------------
 
 Access news feeds over the web with Tiny Tiny RSS news reader.
+
+9. `Print and scan <http://www.circuidipity.com/network-printer-scanner.html>`_
+-------------------------------------------------------------------------------
+
+Configure a printer + scanner to receive jobs across the local network.
 
 **Happy hacking!**
