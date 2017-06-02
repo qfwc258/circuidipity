@@ -6,7 +6,7 @@ Configure an encrypted external USB hard drive in Linux
 :tags: crypto, linux
 :slug: encrypt-external-drive
 
-Using an external USB hard drive is part of my personal backup plan (the other part is backing up to a `home server <http://www.circuidipity.com/raspberry-pi-home-server.html>`_). I actually use 2 multi-terabyte drives. One drive is in my possession and the other drive I store offsite at a friend's home. Periodically I swap the drives and update the data.
+Using an external USB hard drive is part of my personal backup plan (the other part is backing up to a `home server <http://www.circuidipity.com/home-server.html>`_). I actually use 2 multi-terabyte drives. One drive is in my possession and the other drive I store offsite at a friend's home. Periodically I swap the drives and update the data.
 
 Let's go!
 =========
@@ -20,13 +20,13 @@ To guard against loss or theft its a good idea to encrypt the hard drive. I prep
 0. Prepare
 ----------
 
-Download ``cryptsetup`` if not already installed. Connect the external drive, leave it **unmounted**, and make note of the device label (``sdb``, ``sdc`` ...):
+Download ``cryptsetup`` if not already installed. Connect the external drive, leave it **unmounted**, and make note of the device label (``sdb``, ``sdc`` ...) ...
 
 .. code-block:: bash
 
     $ lsblk
 
-**Optional:** Overwrite the device with zeros for added security. This can take several hours depending on storage size. **Random number generation** is even more secure but takes much longer:
+**Optional:** Overwrite the device with zeros for added security. This can take several hours depending on storage size. **Random number generation** is even more secure but takes much longer ...
 
 .. code-block:: bash
 
@@ -35,36 +35,36 @@ Download ``cryptsetup`` if not already installed. Connect the external drive, le
 1. Partition
 ------------
 
-Create a single partition using a favourite partitioning utility (``fdisk``, ``gparted``...) that fills the entire drive. Encrypt the partition and assign a password:
+Create a single partition using a favourite partitioning utility (``fdisk``, ``gparted``...) that fills the entire drive. Encrypt the partition and assign a password ...
 
 .. code-block:: bash
 
     $ sudo cryptsetup luksFormat /dev/sdX1
-    $ sudo cryptsetup luksOpen /dev/sdX1 sdX1_crypt
+    $ sudo cryptsetup open /dev/sdX1 sdX1_crypt
 
 2. Filesystem
 -------------
 
-Install a filesystem (example: ``ext4``) [1]_ and mount the partition to gain access to the storage:
+Install a filesystem (example: ``ext4``) [1]_ and mount the partition to gain access to the storage ...
 
 .. code-block:: bash
 
     $ sudo mkfs.ext4 -E lazy_itable_init=0,lazy_journal_init=0 /dev/mapper/sdX1_crypt
     $ sudo mount -t ext4 /dev/mapper/sdX1_crypt /mnt
 
-Before disconnecting the drive the partition must be unmounted and the encrypted device must be closed:
+Before disconnecting the drive the partition must be unmounted and the encrypted device must be closed ...
 
 .. code-block:: bash
 
     $ sudo umount /mnt
-    $ sudo cryptsetup luksClose /dev/mapper/sdX1_crypt
+    $ sudo cryptsetup close /dev/mapper/sdX1_crypt
 
 3. Mountpoint
 -------------
 
 A file manager like ``nautilus`` will auto-mount and unmount encrypted partitions. For crafting a backup script it is useful to assign a **default mountpoint** to the encrypted partition... that is, whenever the USB drive is connected it will always be mounted to the same location.
 
-Mount the encrypted drive. Retrieve the UUID string for the encrypted partition, and create a custom mountpoint (example: ``/media/usb_crypt``):
+Mount the encrypted drive. Retrieve the UUID string for the encrypted partition, and create a custom mountpoint (example: ``/media/usb_crypt``) ...
 
 .. code-block:: bash
 
