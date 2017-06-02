@@ -127,7 +127,7 @@ Insert USB stick prepared in Step 1, reboot the Chromebook and press ``CTRL+L`` 
 3. Install Debian
 -----------------
 
-My `visual screenshot tour <http://www.circuidipity.com/minimal-debian.html>`_ installing the Debian stable release.
+My `visual screenshot tour <http://www.circuidipity.com/minimal-debian.html>`_ installing the Debian _stable_ release. I use Debian's **minimal network install image** to create a console-only base configuration that can be customized for various tasks and alternate desktops. 
 
 4. Touchpad
 -----------
