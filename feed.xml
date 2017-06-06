@@ -1,5 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-05-27T19:10:00-04:00</updated><entry><title>Network printer + scanner</title><link href="http://www.circuidipity.com/network-printer-scanner.html" rel="alternate"></link><published>2017-05-27T19:10:00-04:00</published><updated>2017-05-27T19:10:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-05-27:/network-printer-scanner.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #9 .:&lt;/a&gt; Configure a printer + scanner to receive jobs across the local network.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-05T21:40:00-04:00</updated><entry><title>Command line tools: rTorrent</title><link href="http://www.circuidipity.com/rtorrent.html" rel="alternate"></link><published>2017-06-05T21:40:00-04:00</published><updated>2017-06-05T21:40:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-05:/rtorrent.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #10 .:&lt;/a&gt; A text-based &lt;strong&gt;BitTorrent client&lt;/strong&gt; that - combined with &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; - makes a cool lightweight torrent server.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;I can &lt;tt class="docutils literal"&gt;ssh&lt;/tt&gt; into my home server, start a tmux session and create multiple windows, run &lt;strong&gt;rTorrent&lt;/strong&gt; in a window to start seeding a Linux &lt;tt class="docutils literal"&gt;iso&lt;/tt&gt;, detach from session and …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #10 .:&lt;/a&gt; A text-based &lt;strong&gt;BitTorrent client&lt;/strong&gt; that - combined with &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; - makes a cool lightweight torrent server.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;I can &lt;tt class="docutils literal"&gt;ssh&lt;/tt&gt; into my home server, start a tmux session and create multiple windows, run &lt;strong&gt;rTorrent&lt;/strong&gt; in a window to start seeding a Linux &lt;tt class="docutils literal"&gt;iso&lt;/tt&gt;, detach from session and server, and return later to find everything in place and the &lt;tt class="docutils literal"&gt;iso&lt;/tt&gt; uploading.&lt;/p&gt;
+&lt;div class="section" id="install"&gt;
+&lt;h3&gt;0. Install&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install rtorrent
+$ mkdir -p ~/rtorrent/config.d
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="start-and-config"&gt;
+&lt;h3&gt;1. Start and config&lt;/h3&gt;
+&lt;p&gt;Create an rTorrent executable startup script &lt;tt class="docutils literal"&gt;~/rtorrent/start&lt;/tt&gt; with the &lt;a class="reference external" href="https://rtorrent-docs.readthedocs.io/en/latest/cookbook.html#the-rtorrent-command-line"&gt;details provided in the rTorrent cookbook.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Download and save the &lt;a class="reference external" href="https://github.com/rakshasa/rtorrent/wiki/CONFIG-Template"&gt;default configuration template&lt;/a&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.rtorrentrc&lt;/span&gt;&lt;/tt&gt;. Open the file and comment out (deactivate) the &lt;strong&gt;dht&lt;/strong&gt; and &lt;strong&gt;watch directory&lt;/strong&gt; settings ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="c1"&gt;#dht.mode.set = disable&lt;/span&gt;
+&lt;span class="c1"&gt;#protocol.pex.set = no&lt;/span&gt;
+&lt;span class="c1"&gt;#trackers.use_udp.set = no&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="c1"&gt;#schedule2 = watch_start, 10, 10, ((load.start, (cat, (cfg.watch), &amp;quot;start/*.torrent&amp;quot;)))&lt;/span&gt;
+&lt;span class="c1"&gt;#schedule2 = watch_load, 11, 10, ((load.normal, (cat, (cfg.watch), &amp;quot;load/*.torrent&amp;quot;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Remember to configure &lt;strong&gt;port forwarding&lt;/strong&gt; on the &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;home router firewall&lt;/a&gt;  for ports &lt;tt class="docutils literal"&gt;network.port_range.set&lt;/tt&gt; (default &lt;tt class="docutils literal"&gt;50000&lt;/tt&gt;) and &lt;tt class="docutils literal"&gt;dht.port.set&lt;/tt&gt; (configured below).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="config-fragments"&gt;
+&lt;h3&gt;2. Config fragments&lt;/h3&gt;
+&lt;p&gt;Customize the config by creating some &lt;a class="reference external" href="https://rtorrent-docs.readthedocs.io/en/latest/use-cases.html#load-drop-in-config-fragments"&gt;drop in config fragments&lt;/a&gt; in &lt;tt class="docutils literal"&gt;~/rtorrent/config.d&lt;/tt&gt;. For my setup I create fragments to establish bandwidth quotas, enable dht and require encrypted traffic, and set a directory that rTorrent watches for new torrent files ...&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;bandwidth.rc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Global bandwidth .: download_rate = 100 / upload_rate = 20&amp;quot;&lt;/span&gt;
+throttle.global_down.max_rate.set_kb &lt;span class="o"&gt;=&lt;/span&gt; 100
+throttle.global_up.max_rate.set_kb &lt;span class="o"&gt;=&lt;/span&gt; 20
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;dht.rc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;DHT support = auto&amp;quot;&lt;/span&gt;
+dht.mode.set &lt;span class="o"&gt;=&lt;/span&gt; auto
+dht.port.set &lt;span class="o"&gt;=&lt;/span&gt; 6881
+protocol.pex.set &lt;span class="o"&gt;=&lt;/span&gt; yes
+trackers.use_udp.set &lt;span class="o"&gt;=&lt;/span&gt; yes
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;encryption.rc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Encryption = required&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;encryption&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require,require_RC4,allow_incoming,try_outgoing
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;watch.rc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Watch directory enabled.&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;schedule2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; watch_directory,5,5, &lt;span class="o"&gt;((&lt;/span&gt;load.start, &lt;span class="o"&gt;(&lt;/span&gt;cat, &lt;span class="o"&gt;(&lt;/span&gt;cfg.watch&lt;span class="o"&gt;)&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;*.torrent&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)))&lt;/span&gt;
+&lt;span class="nv"&gt;schedule2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; untied_directory,5,5,stop_untied&lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="nv"&gt;schedule2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; tied_directory,5,5,start_tied&lt;span class="o"&gt;=&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="run"&gt;
+&lt;h3&gt;3. Run&lt;/h3&gt;
+&lt;p&gt;Run &lt;tt class="docutils literal"&gt;~/rtorrent/start&lt;/tt&gt; and a basic rTorrent setup is now up and running. Check out the &lt;a class="reference external" href="http://getos.org/rtorrent_ref.pdf"&gt;cheatsheet&lt;/a&gt; for navigating around the interface and the &lt;a class="reference external" href="https://rtorrent-docs.readthedocs.io/en/latest/overview.html#"&gt;rTorrent docs&lt;/a&gt; and the torrent client's &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/RTorrent"&gt;entry on the Arch Wiki&lt;/a&gt; for details and ideas for more advanced configs.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="rtorrent"></category><category term="shell"></category><category term="network"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Network printer + scanner</title><link href="http://www.circuidipity.com/network-printer-scanner.html" rel="alternate"></link><published>2017-05-27T19:10:00-04:00</published><updated>2017-05-27T19:10:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-05-27:/network-printer-scanner.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #9 .:&lt;/a&gt; Configure a printer + scanner to receive jobs across the local network.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Multi-purpose printer is an &lt;strong&gt;HP Deskjet 2130&lt;/strong&gt; connected to a &lt;strong&gt;home server running Debian&lt;/strong&gt; at IP address &lt;tt class="docutils literal"&gt;192.168.1.88&lt;/tt&gt;.&lt;/p&gt;
@@ -408,16 +475,4 @@ APT::Periodic::Verbose &lt;span class="s2"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Onward!&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="python"></category><category term="programming"></category><category term="mooc"></category></entry><entry><title>The Dark Forest and Death's End</title><link href="http://www.circuidipity.com/deaths-end.html" rel="alternate"></link><published>2017-02-04T20:53:00-05:00</published><updated>2017-02-04T20:53:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-02-04:/deaths-end.html</id><summary type="html">&lt;img alt="Death's End" class="align-left" src="images/deaths-end.jpg" style="width: 150px; height: 225px;" /&gt;
-&lt;div class="line-block"&gt;
-&lt;div class="line"&gt;&lt;strong&gt;The Dark Forest&lt;/strong&gt; and &lt;strong&gt;Death's End&lt;/strong&gt; &lt;em&gt;by Cixin Liu, translated by Ken Liu&lt;/em&gt;&lt;/div&gt;
-&lt;div class="line"&gt;(ISBN: 978-0765377081 and 978-0765377104)&lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;A few nights ago I finished reading the final volume - &lt;em&gt;Death's End&lt;/em&gt; - in Liu Cixin's &lt;em&gt;Three-Body Problem&lt;/em&gt; trilogy and was so agitated and overwhelmed by the author's vision I had to go out …&lt;/p&gt;</summary><content type="html">&lt;img alt="Death's End" class="align-left" src="images/deaths-end.jpg" style="width: 150px; height: 225px;" /&gt;
-&lt;div class="line-block"&gt;
-&lt;div class="line"&gt;&lt;strong&gt;The Dark Forest&lt;/strong&gt; and &lt;strong&gt;Death's End&lt;/strong&gt; &lt;em&gt;by Cixin Liu, translated by Ken Liu&lt;/em&gt;&lt;/div&gt;
-&lt;div class="line"&gt;(ISBN: 978-0765377081 and 978-0765377104)&lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;A few nights ago I finished reading the final volume - &lt;em&gt;Death's End&lt;/em&gt; - in Liu Cixin's &lt;em&gt;Three-Body Problem&lt;/em&gt; trilogy and was so agitated and overwhelmed by the author's vision I had to go out in the dark in the snow and cold on the local wilderness trail and walk it off! Its the first work of Chinese science fiction I have read and the three volumes take the reader from the 1960s Cultural Revolution to the end of this Universe.&lt;/p&gt;
-&lt;p&gt;The first volume - &lt;a class="reference external" href="http://www.circuidipity.com/three-body-problem.html"&gt;The Three-Body Problem&lt;/a&gt; - has a politically persecuted scientist reveal Earth's location to an alien civilization, which dispatches an invasion fleet to conquer the Solar System. Volume II - &lt;em&gt;The Dark Forest&lt;/em&gt; - reveals &lt;em&gt;dark forest strategy&lt;/em&gt; in a universe filled with hunters silently hunting other hunters, the worst-case scenario of possible universes. The first two books are good but the third volume ... wow. What should we value when everything is ground to dust by Time? How can Nature produce creatures that can contemplate such things? How can Nature produce creatures that can view black scratches on white backgrounds, bound between covers, and think and feel things that are entirely beyond anything of personal experience?&lt;/p&gt;
-</content><category term="books"></category></entry></feed>
+</content><category term="python"></category><category term="programming"></category><category term="mooc"></category></entry></feed>

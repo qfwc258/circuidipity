@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Command line tools: rTorrent</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Monday 05 June 2017</p>
+</div>
+
+<!-- article -->
+<h1>Command line tools: rTorrent</h1>
+<div id="article">
+    <p><a class="reference external" href="http://www.circuidipity.com/home-server.html">PROJECT: Home Server #10 .:</a> A text-based <strong>BitTorrent client</strong> that - combined with <a class="reference external" href="http://www.circuidipity.com/tmux.html">tmux</a> - makes a cool lightweight torrent server.</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<p>I can <tt class="docutils literal">ssh</tt> into my home server, start a tmux session and create multiple windows, run <strong>rTorrent</strong> in a window to start seeding a Linux <tt class="docutils literal">iso</tt>, detach from session and server, and return later to find everything in place and the <tt class="docutils literal">iso</tt> uploading.</p>
+<div class="section" id="install">
+<h3>0. Install</h3>
+<div class="highlight"><pre><span></span>$ sudo apt install rtorrent
+$ mkdir -p ~/rtorrent/config.d
+</pre></div>
+</div>
+<div class="section" id="start-and-config">
+<h3>1. Start and config</h3>
+<p>Create an rTorrent executable startup script <tt class="docutils literal">~/rtorrent/start</tt> with the <a class="reference external" href="https://rtorrent-docs.readthedocs.io/en/latest/cookbook.html#the-rtorrent-command-line">details provided in the rTorrent cookbook.</a></p>
+<p>Download and save the <a class="reference external" href="https://github.com/rakshasa/rtorrent/wiki/CONFIG-Template">default configuration template</a> to <tt class="docutils literal"><span class="pre">~/.rtorrentrc</span></tt>. Open the file and comment out (deactivate) the <strong>dht</strong> and <strong>watch directory</strong> settings ...</p>
+<div class="highlight"><pre><span></span><span class="o">[</span>...<span class="o">]</span>
+<span class="c1">#dht.mode.set = disable</span>
+<span class="c1">#protocol.pex.set = no</span>
+<span class="c1">#trackers.use_udp.set = no</span>
+<span class="o">[</span>...<span class="o">]</span>
+<span class="c1">#schedule2 = watch_start, 10, 10, ((load.start, (cat, (cfg.watch), &quot;start/*.torrent&quot;)))</span>
+<span class="c1">#schedule2 = watch_load, 11, 10, ((load.normal, (cat, (cfg.watch), &quot;load/*.torrent&quot;)))</span>
+</pre></div>
+<p>Remember to configure <strong>port forwarding</strong> on the <a class="reference external" href="http://www.circuidipity.com/20141006.html">home router firewall</a>  for ports <tt class="docutils literal">network.port_range.set</tt> (default <tt class="docutils literal">50000</tt>) and <tt class="docutils literal">dht.port.set</tt> (configured below).</p>
+</div>
+<div class="section" id="config-fragments">
+<h3>2. Config fragments</h3>
+<p>Customize the config by creating some <a class="reference external" href="https://rtorrent-docs.readthedocs.io/en/latest/use-cases.html#load-drop-in-config-fragments">drop in config fragments</a> in <tt class="docutils literal">~/rtorrent/config.d</tt>. For my setup I create fragments to establish bandwidth quotas, enable dht and require encrypted traffic, and set a directory that rTorrent watches for new torrent files ...</p>
+<ul class="simple">
+<li>bandwidth.rc</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="nv">print</span><span class="o">=</span><span class="s2">&quot;Global bandwidth .: download_rate = 100 / upload_rate = 20&quot;</span>
+throttle.global_down.max_rate.set_kb <span class="o">=</span> 100
+throttle.global_up.max_rate.set_kb <span class="o">=</span> 20
+</pre></div>
+<ul class="simple">
+<li>dht.rc</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="nv">print</span><span class="o">=</span><span class="s2">&quot;DHT support = auto&quot;</span>
+dht.mode.set <span class="o">=</span> auto
+dht.port.set <span class="o">=</span> 6881
+protocol.pex.set <span class="o">=</span> yes
+trackers.use_udp.set <span class="o">=</span> yes
+</pre></div>
+<ul class="simple">
+<li>encryption.rc</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="nv">print</span><span class="o">=</span><span class="s2">&quot;Encryption = required&quot;</span>
+<span class="nv">encryption</span> <span class="o">=</span> require,require_RC4,allow_incoming,try_outgoing
+</pre></div>
+<ul class="simple">
+<li>watch.rc</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="nv">print</span><span class="o">=</span><span class="s2">&quot;Watch directory enabled.&quot;</span>
+<span class="nv">schedule2</span> <span class="o">=</span> watch_directory,5,5, <span class="o">((</span>load.start, <span class="o">(</span>cat, <span class="o">(</span>cfg.watch<span class="o">)</span>, <span class="s2">&quot;*.torrent&quot;</span><span class="o">)))</span>
+<span class="nv">schedule2</span> <span class="o">=</span> untied_directory,5,5,stop_untied<span class="o">=</span>
+<span class="nv">schedule2</span> <span class="o">=</span> tied_directory,5,5,start_tied<span class="o">=</span>
+</pre></div>
+</div>
+<div class="section" id="run">
+<h3>3. Run</h3>
+<p>Run <tt class="docutils literal">~/rtorrent/start</tt> and a basic rTorrent setup is now up and running. Check out the <a class="reference external" href="http://getos.org/rtorrent_ref.pdf">cheatsheet</a> for navigating around the interface and the <a class="reference external" href="https://rtorrent-docs.readthedocs.io/en/latest/overview.html#">rTorrent docs</a> and the torrent client's <a class="reference external" href="https://wiki.archlinux.org/index.php/RTorrent">entry on the Arch Wiki</a> for details and ideas for more advanced configs.</p>
+<p>Happy hacking!</p>
+</div>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-rtorrent.html">rtorrent</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/network-printer-scanner.html">Network printer + scanner</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>
