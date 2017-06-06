@@ -38,7 +38,7 @@ $ mkdir -p ~/rtorrent/config.d
 <div class="section" id="start-and-config">
 <h3>1. Start and config</h3>
 <p>Create an rTorrent executable startup script <tt class="docutils literal">~/rtorrent/start</tt> with the <a class="reference external" href="https://rtorrent-docs.readthedocs.io/en/latest/cookbook.html#the-rtorrent-command-line">details provided in the rTorrent cookbook.</a></p>
-<p>Download and save the <a class="reference external" href="https://github.com/rakshasa/rtorrent/wiki/CONFIG-Template">default configuration template</a> to <tt class="docutils literal"><span class="pre">~/.rtorrentrc</span></tt>. Open the file and comment out (deactivate) the <strong>dht</strong> and <strong>watch directory</strong> settings ...</p>
+<p>Download and save the <a class="reference external" href="https://github.com/rakshasa/rtorrent/wiki/CONFIG-Template">default configuration template</a> to <tt class="docutils literal"><span class="pre">~/.rtorrentrc</span></tt>. Open the file and comment out (deactivate) the <a class="reference external" href="https://en.wikipedia.org/wiki/Distributed_hash_table">dht</a> and <strong>watch directory</strong> settings ...</p>
 <div class="highlight"><pre><span></span><span class="o">[</span>...<span class="o">]</span>
 <span class="c1">#dht.mode.set = disable</span>
 <span class="c1">#protocol.pex.set = no</span>
@@ -85,7 +85,7 @@ trackers.use_udp.set <span class="o">=</span> yes
 </div>
 <div class="section" id="run">
 <h3>3. Run</h3>
-<p>Run <tt class="docutils literal">~/rtorrent/start</tt> and a basic rTorrent setup is now up and running. Check out the <a class="reference external" href="http://getos.org/rtorrent_ref.pdf">cheatsheet</a> for navigating around the interface and the <a class="reference external" href="https://rtorrent-docs.readthedocs.io/en/latest/overview.html#">rTorrent docs</a> and the torrent client's <a class="reference external" href="https://wiki.archlinux.org/index.php/RTorrent">entry on the Arch Wiki</a> for details and ideas for more advanced configs.</p>
+<p>Launch <tt class="docutils literal">~/rtorrent/start</tt> and a basic rTorrent setup is now up and running. Check out the <a class="reference external" href="http://getos.org/rtorrent_ref.pdf">cheatsheet</a> for navigating around the interface and the <a class="reference external" href="https://rtorrent-docs.readthedocs.io/en/latest/overview.html#">rTorrent docs</a> and the torrent client's <a class="reference external" href="https://wiki.archlinux.org/index.php/RTorrent">entry on the Arch Wiki</a> for details and ideas for more advanced configs.</p>
 <p>Happy hacking!</p>
 </div>
 </div>

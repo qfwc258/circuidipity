@@ -15,7 +15,7 @@ $ mkdir -p ~/rtorrent/config.d
 &lt;div class="section" id="start-and-config"&gt;
 &lt;h3&gt;1. Start and config&lt;/h3&gt;
 &lt;p&gt;Create an rTorrent executable startup script &lt;tt class="docutils literal"&gt;~/rtorrent/start&lt;/tt&gt; with the &lt;a class="reference external" href="https://rtorrent-docs.readthedocs.io/en/latest/cookbook.html#the-rtorrent-command-line"&gt;details provided in the rTorrent cookbook.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Download and save the &lt;a class="reference external" href="https://github.com/rakshasa/rtorrent/wiki/CONFIG-Template"&gt;default configuration template&lt;/a&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.rtorrentrc&lt;/span&gt;&lt;/tt&gt;. Open the file and comment out (deactivate) the &lt;strong&gt;dht&lt;/strong&gt; and &lt;strong&gt;watch directory&lt;/strong&gt; settings ...&lt;/p&gt;
+&lt;p&gt;Download and save the &lt;a class="reference external" href="https://github.com/rakshasa/rtorrent/wiki/CONFIG-Template"&gt;default configuration template&lt;/a&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.rtorrentrc&lt;/span&gt;&lt;/tt&gt;. Open the file and comment out (deactivate) the &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Distributed_hash_table"&gt;dht&lt;/a&gt; and &lt;strong&gt;watch directory&lt;/strong&gt; settings ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;span class="c1"&gt;#dht.mode.set = disable&lt;/span&gt;
 &lt;span class="c1"&gt;#protocol.pex.set = no&lt;/span&gt;
@@ -62,7 +62,7 @@ trackers.use_udp.set &lt;span class="o"&gt;=&lt;/span&gt; yes
 &lt;/div&gt;
 &lt;div class="section" id="run"&gt;
 &lt;h3&gt;3. Run&lt;/h3&gt;
-&lt;p&gt;Run &lt;tt class="docutils literal"&gt;~/rtorrent/start&lt;/tt&gt; and a basic rTorrent setup is now up and running. Check out the &lt;a class="reference external" href="http://getos.org/rtorrent_ref.pdf"&gt;cheatsheet&lt;/a&gt; for navigating around the interface and the &lt;a class="reference external" href="https://rtorrent-docs.readthedocs.io/en/latest/overview.html#"&gt;rTorrent docs&lt;/a&gt; and the torrent client's &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/RTorrent"&gt;entry on the Arch Wiki&lt;/a&gt; for details and ideas for more advanced configs.&lt;/p&gt;
+&lt;p&gt;Launch &lt;tt class="docutils literal"&gt;~/rtorrent/start&lt;/tt&gt; and a basic rTorrent setup is now up and running. Check out the &lt;a class="reference external" href="http://getos.org/rtorrent_ref.pdf"&gt;cheatsheet&lt;/a&gt; for navigating around the interface and the &lt;a class="reference external" href="https://rtorrent-docs.readthedocs.io/en/latest/overview.html#"&gt;rTorrent docs&lt;/a&gt; and the torrent client's &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/RTorrent"&gt;entry on the Arch Wiki&lt;/a&gt; for details and ideas for more advanced configs.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
