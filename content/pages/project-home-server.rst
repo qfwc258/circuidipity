@@ -4,7 +4,7 @@ There's no place like [a Linux] home [server]
 
 :slug: home-server
 :template: page-project
-:modified: 2017-05-27 19:15:00
+:modified: 2017-06-05 15:35:00
 
 .. image:: images/home-server.png
     :align: right
@@ -74,5 +74,10 @@ Access news feeds over the web with Tiny Tiny RSS news reader.
 -------------------------------------------------------------------------------
 
 Configure a printer + scanner to receive jobs across the local network.
+
+10. `Torrents <http://www.circuidipity.com/rtorrent.html>`_
+-----------------------------------------------------------
+
+Use a text-based BitTorrent client combined with tmux to create a lightweight torrent server.
 
 **Happy hacking!**
