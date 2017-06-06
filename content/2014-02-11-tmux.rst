@@ -5,7 +5,7 @@ Command line tools: tmux
 :date: 2014-02-11 01:23:00
 :slug: tmux
 :tags: tmux, shell, debian, linux
-:modified: 2015-06-25 23:38:00
+:modified: 2017-06-05 15:10:00
 
 .. image:: /images/screenshot/tmux_window_pane.png
     :width: 940px
@@ -16,7 +16,7 @@ Command line tools: tmux
 
 Using ``tmux`` I can create terminal sessions with a custom layout of windows / panes / names / running programs, switch between different sessions, and - best of all - **detach** from a session, log out, return later, **re-attach** and find the session layout preserved and programs continuing to run in the interim.
 
-**Example:** I can ``ssh`` into my `home server <http://www.circuidipity.com/raspberry-pi-home-server.html>`_, start a ``tmux`` session and create multiple windows, run `rtorrent <http://libtorrent.rakshasa.no/>`_ in a window to start seeding a Linux ``iso``, detach from session and server, and return later to find everything in place and the ``iso`` uploading.
+**Example:** I can ``ssh`` into my `home server <http://www.circuidipity.com/home-server.html>`_, start a ``tmux`` session and create multiple windows, run `rTorrent <http://www.circuidipity.com/rtorrent.html>`_ in a window to start seeding a Linux ``iso``, detach from session and server, and return later to find everything in place and the ``iso`` uploading.
 
 **Install:** On Ubuntu/Debian ...
 
