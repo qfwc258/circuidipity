@@ -4,7 +4,7 @@ Network printer + scanner
 
 :date: 2017-05-27 19:10:00
 :slug: network-printer-scanner
-:tags: printer, network, debian, linux
+:tags: printer, scanner, network, debian, linux
 
 `PROJECT: Home Server #9 .: <http://www.circuidipity.com/home-server.html>`_ Configure a printer + scanner to receive jobs across the local network.
 
