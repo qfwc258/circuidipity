@@ -39,13 +39,10 @@ TRANSLATION_FEED_ATOM = None
 RELATIVE_URLS = True
 ARTICLE_URL = '{slug}.html'
 PAGE_URL = '{slug}.html'
-PAGE_SAVE_AS = '{slug}.html'
-TAG_URL = 'tag-{slug}.html'
-TAG_SAVE_AS = 'tag-{slug}.html'
-TAGS_URL = 'tags.html'
-TAGS_SAVE_AS = 'tags.html'
+ARCHIVES_SAVE_AS = ''
 PROJECTS_URL = 'projects.html'
-PROJECTS_SAVE_AS = 'projects.html'
+TAG_URL = 'tag-{slug}.html'
+TAGS_URL = 'tags.html'
 
 # Contact
 EMAIL_ADDR = 'daniel at circuidipity dot com'
