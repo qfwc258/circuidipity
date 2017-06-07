@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-05T21:40:00-04:00</updated><entry><title>Command line tools: rTorrent</title><link href="http://www.circuidipity.com/rtorrent.html" rel="alternate"></link><published>2017-06-05T21:40:00-04:00</published><updated>2017-06-05T21:40:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-05:/rtorrent.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #10 .:&lt;/a&gt; A text-based &lt;strong&gt;BitTorrent client&lt;/strong&gt; that - combined with &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; - makes a cool lightweight torrent server.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-07T14:56:00-04:00</updated><entry><title>Scanner udev rule</title><link href="http://www.circuidipity.com/scanner-udev-rule.html" rel="alternate"></link><published>2017-06-07T14:56:00-04:00</published><updated>2017-06-07T14:56:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-07:/scanner-udev-rule.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;[ Problem ]&lt;/strong&gt; Client error trying to scan to a &lt;strong&gt;Brother MFC-J450DW&lt;/strong&gt; configured as a &lt;a class="reference external" href="http://www.circuidipity.com/network-printer-scanner.html"&gt;network scanner&lt;/a&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;scanimage: open of device net:192.168.... failed: Invalid argument
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Scanner &lt;strong&gt;does&lt;/strong&gt; accept jobs from the server. User belongs to the &lt;tt class="docutils literal"&gt;lp&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;lpadmin&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;scanner&lt;/tt&gt; groups.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[ Fix! ]&lt;/strong&gt; Set world-writable permission on the scanner bus device …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;[ Problem ]&lt;/strong&gt; Client error trying to scan to a &lt;strong&gt;Brother MFC-J450DW&lt;/strong&gt; configured as a &lt;a class="reference external" href="http://www.circuidipity.com/network-printer-scanner.html"&gt;network scanner&lt;/a&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;scanimage: open of device net:192.168.... failed: Invalid argument
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Scanner &lt;strong&gt;does&lt;/strong&gt; accept jobs from the server. User belongs to the &lt;tt class="docutils literal"&gt;lp&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;lpadmin&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;scanner&lt;/tt&gt; groups.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[ Fix! ]&lt;/strong&gt; Set world-writable permission on the scanner bus device ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ lsusb
+Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 006: ID 04f9:02fa Brother Industries, Ltd
+$ ls /dev/bus/usb/001/006
+crw-rw-r-- &lt;span class="m"&gt;1&lt;/span&gt; root lp 189, &lt;span class="m"&gt;5&lt;/span&gt; Jun  &lt;span class="m"&gt;6&lt;/span&gt; 17:24 /dev/bus/usb/001/006
+$ sudo chmod &lt;span class="m"&gt;666&lt;/span&gt; /dev/bus/usb/001/006
+$ ls /dev/bus/usb/001/006
+crw-rw-rw- &lt;span class="m"&gt;1&lt;/span&gt; root lp 189, &lt;span class="m"&gt;5&lt;/span&gt; Jun  &lt;span class="m"&gt;6&lt;/span&gt; 17:24 /dev/bus/usb/001/006
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and it works. But when device is unplugged and re-plugged back in again it will be created with the old permissions.&lt;/p&gt;
+&lt;p&gt;A more enduring fix is to create a &lt;strong&gt;udev rule&lt;/strong&gt; with desired permissions. First, retrieve the &lt;tt class="docutils literal"&gt;idVendor&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;idDevice&lt;/tt&gt; of the scanner ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ lsusb &lt;span class="p"&gt;|&lt;/span&gt; grep Brother
+Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 006: ID 04f9:02fa Brother Industries, Ltd
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... then create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/lib/udev/rules.d/61-scanner.rules&lt;/span&gt;&lt;/tt&gt; for &lt;strong&gt;04f9:02fa&lt;/strong&gt; with desired permissions ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;SUBSYSTEMS&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;usb&amp;quot;&lt;/span&gt;, ATTRS&lt;span class="o"&gt;{&lt;/span&gt;idVendor&lt;span class="o"&gt;}==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;04f9&amp;quot;&lt;/span&gt;, ATTRS&lt;span class="o"&gt;{&lt;/span&gt;idProduct&lt;span class="o"&gt;}==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;02fa&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;GROUP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;lp&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;MODE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;0666&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reload rules ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo udevadm control --reload
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... or simply disconnect and re-connect scanner to test ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ls /dev/bus/usb/001/007
+crw-rw-rw- &lt;span class="m"&gt;1&lt;/span&gt; root lp 189, &lt;span class="m"&gt;6&lt;/span&gt; Jun  &lt;span class="m"&gt;6&lt;/span&gt; 18:45 /dev/bus/usb/001/007
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+</content><category term="scanner"></category><category term="network"></category><category term="shell"></category><category term="linux"></category></entry><entry><title>Command line tools: rTorrent</title><link href="http://www.circuidipity.com/rtorrent.html" rel="alternate"></link><published>2017-06-05T21:40:00-04:00</published><updated>2017-06-05T21:40:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-05:/rtorrent.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #10 .:&lt;/a&gt; A text-based &lt;strong&gt;BitTorrent client&lt;/strong&gt; that - combined with &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; - makes a cool lightweight torrent server.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;I can &lt;tt class="docutils literal"&gt;ssh&lt;/tt&gt; into my home server, start a tmux session and create multiple windows, run &lt;strong&gt;rTorrent&lt;/strong&gt; in a window to start seeding a Linux &lt;tt class="docutils literal"&gt;iso&lt;/tt&gt;, detach from session and …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #10 .:&lt;/a&gt; A text-based &lt;strong&gt;BitTorrent client&lt;/strong&gt; that - combined with &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; - makes a cool lightweight torrent server.&lt;/p&gt;
@@ -226,7 +259,7 @@ device &lt;span class="sb"&gt;`&lt;/span&gt;net:192.168.1.88:hpaio:/usb/DeskJet_
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="printer"></category><category term="network"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Automatic backups over the LAN</title><link href="http://www.circuidipity.com/backup-over-lan.html" rel="alternate"></link><published>2017-05-19T10:50:00-04:00</published><updated>2017-05-19T10:50:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-05-19:/backup-over-lan.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #4 .:&lt;/a&gt; Make incremental and automatic backups of a home folder to a local server using &lt;strong&gt;SSH + rsync + cron&lt;/strong&gt;.&lt;/p&gt;
+</content><category term="printer"></category><category term="scanner"></category><category term="network"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Automatic backups over the LAN</title><link href="http://www.circuidipity.com/backup-over-lan.html" rel="alternate"></link><published>2017-05-19T10:50:00-04:00</published><updated>2017-05-19T10:50:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-05-19:/backup-over-lan.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #4 .:&lt;/a&gt; Make incremental and automatic backups of a home folder to a local server using &lt;strong&gt;SSH + rsync + cron&lt;/strong&gt;.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Server&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/laptop-home-server.html"&gt;raised-from-the-dead netbook&lt;/a&gt; on the home network. &lt;strong&gt;Client&lt;/strong&gt; desktop is configured to perform a daily sync of its &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt; to server.&lt;/p&gt;
@@ -447,32 +480,4 @@ APT::Periodic::Verbose &lt;span class="s2"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;
 &lt;p&gt;Onward!&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; I have worked my way through all lectures and exercises and problem sets released to date. This week was all about &lt;strong&gt;defensive programming&lt;/strong&gt;. I will have more to say about this later ... but right now I am deep into the online &lt;strong&gt;Midterm Exam&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Onward!&lt;/p&gt;
-</content><category term="python"></category><category term="programming"></category><category term="mooc"></category></entry><entry><title>MITx Week 3.5: Textbook and Syntax</title><link href="http://www.circuidipity.com/mitx-6001x-w3-5.html" rel="alternate"></link><published>2017-02-05T22:59:00-05:00</published><updated>2017-02-05T22:59:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-02-05:/mitx-6001x-w3-5.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; I have worked my way through all lectures and exercises and problem sets released to date. MITx will release coursework for &lt;em&gt;Week 4&lt;/em&gt; on February 7th.&lt;/p&gt;
-&lt;p&gt;I picked up a copy of the (optional) course textbook: &lt;a class="reference external" href="https://mitpress.mit.edu/books/introduction-computation-and-programming-using-python-0"&gt;Introduction to Computation and Programming Using Python&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I am …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; I have worked my way through all lectures and exercises and problem sets released to date. MITx will release coursework for &lt;em&gt;Week 4&lt;/em&gt; on February 7th.&lt;/p&gt;
-&lt;p&gt;I picked up a copy of the (optional) course textbook: &lt;a class="reference external" href="https://mitpress.mit.edu/books/introduction-computation-and-programming-using-python-0"&gt;Introduction to Computation and Programming Using Python&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I am writing my Python code using the &lt;strong&gt;Neovim&lt;/strong&gt; text editor and I added the &lt;a class="reference external" href="https://github.com/vim-syntastic/syntastic"&gt;Syntastic&lt;/a&gt; syntax checking plugin. It provides a framework for managing syntax files installed separately by the user for various programming languages.&lt;/p&gt;
-&lt;div class="section" id="install-and-configure"&gt;
-&lt;h2&gt;Install and configure&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; Install syntastic plugin using &lt;a class="reference external" href="https://github.com/VundleVim/Vundle.vim"&gt;Vundle&lt;/a&gt;. Edit Neovim's &lt;tt class="docutils literal"&gt;init.vim&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Plugin &lt;span class="s1"&gt;&amp;#39;vim-syntastic/syntastic&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and add some recommended defaults for beginners ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt; statusline+&lt;span class="o"&gt;=&lt;/span&gt;%#warningmsg#
-&lt;span class="nb"&gt;set&lt;/span&gt; statusline+&lt;span class="o"&gt;=&lt;/span&gt;%&lt;span class="o"&gt;{&lt;/span&gt;SyntasticStatuslineFlag&lt;span class="o"&gt;()}&lt;/span&gt;
-&lt;span class="nb"&gt;set&lt;/span&gt; statusline+&lt;span class="o"&gt;=&lt;/span&gt;%*
-
-&lt;span class="nb"&gt;let&lt;/span&gt; g:syntastic_always_populate_loc_list &lt;span class="o"&gt;=&lt;/span&gt; 1
-&lt;span class="nb"&gt;let&lt;/span&gt; g:syntastic_auto_loc_list &lt;span class="o"&gt;=&lt;/span&gt; 1
-&lt;span class="nb"&gt;let&lt;/span&gt; g:syntastic_check_on_open &lt;span class="o"&gt;=&lt;/span&gt; 1
-&lt;span class="nb"&gt;let&lt;/span&gt; g:syntastic_check_on_wq &lt;span class="o"&gt;=&lt;/span&gt; 0
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Install the &lt;strong&gt;pylint&lt;/strong&gt; package (available in Ubuntu) for checking Python syntax ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install pylint pylint3
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; Syntastic defaults to using pylint for Python 2 syntax. I am using Python 3 for MITx coursework so I once again modify &lt;tt class="docutils literal"&gt;init.vim&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; g:syntastic_python_pylint_exe &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python3 -m pylint3&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Onward!&lt;/p&gt;
-&lt;/div&gt;
 </content><category term="python"></category><category term="programming"></category><category term="mooc"></category></entry></feed>

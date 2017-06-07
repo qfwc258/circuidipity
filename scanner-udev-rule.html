@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Scanner udev rule</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Wednesday 07 June 2017</p>
+</div>
+
+<!-- article -->
+<h1>Scanner udev rule</h1>
+<div id="article">
+    <p><strong>[ Problem ]</strong> Client error trying to scan to a <strong>Brother MFC-J450DW</strong> configured as a <a class="reference external" href="http://www.circuidipity.com/network-printer-scanner.html">network scanner</a> ...</p>
+<div class="highlight"><pre><span></span>scanimage: open of device net:192.168.... failed: Invalid argument
+</pre></div>
+<p>Scanner <strong>does</strong> accept jobs from the server. User belongs to the <tt class="docutils literal">lp</tt>, <tt class="docutils literal">lpadmin</tt>, and <tt class="docutils literal">scanner</tt> groups.</p>
+<p><strong>[ Fix! ]</strong> Set world-writable permission on the scanner bus device ...</p>
+<div class="highlight"><pre><span></span>$ lsusb
+Bus <span class="m">001</span> Device 006: ID 04f9:02fa Brother Industries, Ltd
+$ ls /dev/bus/usb/001/006
+crw-rw-r-- <span class="m">1</span> root lp 189, <span class="m">5</span> Jun  <span class="m">6</span> 17:24 /dev/bus/usb/001/006
+$ sudo chmod <span class="m">666</span> /dev/bus/usb/001/006
+$ ls /dev/bus/usb/001/006
+crw-rw-rw- <span class="m">1</span> root lp 189, <span class="m">5</span> Jun  <span class="m">6</span> 17:24 /dev/bus/usb/001/006
+</pre></div>
+<p>... and it works. But when device is unplugged and re-plugged back in again it will be created with the old permissions.</p>
+<p>A more enduring fix is to create a <strong>udev rule</strong> with desired permissions. First, retrieve the <tt class="docutils literal">idVendor</tt> and <tt class="docutils literal">idDevice</tt> of the scanner ...</p>
+<div class="highlight"><pre><span></span>$ lsusb <span class="p">|</span> grep Brother
+Bus <span class="m">001</span> Device 006: ID 04f9:02fa Brother Industries, Ltd
+</pre></div>
+<p>... then create <tt class="docutils literal"><span class="pre">/lib/udev/rules.d/61-scanner.rules</span></tt> for <strong>04f9:02fa</strong> with desired permissions ...</p>
+<div class="highlight"><pre><span></span><span class="nv">SUBSYSTEMS</span><span class="o">==</span><span class="s2">&quot;usb&quot;</span>, ATTRS<span class="o">{</span>idVendor<span class="o">}==</span><span class="s2">&quot;04f9&quot;</span>, ATTRS<span class="o">{</span>idProduct<span class="o">}==</span><span class="s2">&quot;02fa&quot;</span>, <span class="nv">GROUP</span><span class="o">=</span><span class="s2">&quot;lp&quot;</span>, <span class="nv">MODE</span><span class="o">=</span><span class="s2">&quot;0666&quot;</span>
+</pre></div>
+<p>Reload rules ...</p>
+<div class="highlight"><pre><span></span>$ sudo udevadm control --reload
+</pre></div>
+<p>... or simply disconnect and re-connect scanner to test ...</p>
+<div class="highlight"><pre><span></span>$ ls /dev/bus/usb/001/007
+crw-rw-rw- <span class="m">1</span> root lp 189, <span class="m">6</span> Jun  <span class="m">6</span> 18:45 /dev/bus/usb/001/007
+</pre></div>
+<p>Happy hacking!</p>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-scanner.html">scanner</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-network.html">network</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/rtorrent.html">Command line tools: rTorrent</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>
