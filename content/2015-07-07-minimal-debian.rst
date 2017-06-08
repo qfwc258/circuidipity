@@ -28,7 +28,7 @@ Below is a visual walk-through of a sample workstation setup that makes use of t
 0. Prepare install media
 ------------------------
 
-Download the (unofficial image that includes non-free firmware) `64bit firmware-VERSION-amd64-netinst.iso <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/>`_ (`32bit image <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/i386/iso-cd/>`_ for older machines) and `flash the image <https://www.debian.org/releases/stable/amd64/ch04s03.html.en>`_ to a USB stick. [4]_
+Download the (unofficial image that includes non-free firmware) `64bit firmware-CURRENT-amd64-netinst.iso <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/>`_ (`32bit image <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/i386/iso-cd/>`_ for older machines) and `flash the image <https://www.debian.org/releases/stable/amd64/ch04s03.html.en>`_ to a USB stick. [4]_
 
 Minimal installer (requires network connection) downloads all the latest packages during setup.
 

@@ -4,6 +4,17 @@ Notes
 
 :slug: notes
 
+2017-06-08T0920
+---------------
+**[x]** Attaching to a wifi network with ``nmcli`` (network-manager cli client) ...
+
+.. code-block:: bash
+
+    $ nmcli radio
+    $ nmcli device
+    $ nmcli device wifi rescan
+    $ nmcli device wifi connect SSID-Name password PASS
+
 2017-06-07T1219
 ---------------
 **[x]** Disable `Pelican <http://www.circuidipity.com/tag-pelican.html>`_ from auto-generating ``archives.html`` by adding to ``pelicanconf.py`` ...
