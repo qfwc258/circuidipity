@@ -24,9 +24,29 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="t0920">
+    <div class="section" id="t0941">
+<h2>2017-06-09T0941</h2>
+<p>Restart network service on Ubuntu ... Sometimes after wake-from-suspend the network connection is down and network-manager's wifi ap list fails to refresh.</p>
+<p><strong>[ FIX! ]</strong> Simple systemd way ...</p>
+<div class="highlight"><pre><span></span>$ sudo systemctl restart NetworkManager.service
+</pre></div>
+<p>If that doesn't work ... Try using <tt class="docutils literal">nmcli</tt> to stop and start network-manager directly ...</p>
+<div class="highlight"><pre><span></span>$ sudo nmcli networking off
+$ sudo nmcli networking on
+</pre></div>
+<p>Old-fashioned SysV init script method still works on 16.04 ...</p>
+<div class="highlight"><pre><span></span>$ sudo /etc/init.d/networking restart
+    ... or ...
+$ sudo /etc/init.d/network-manager restart
+</pre></div>
+<p>Last resort ...</p>
+<div class="highlight"><pre><span></span>$ sudo ifdown -a  <span class="c1"># -a brings down all interfaces</span>
+$ sudo ifup -a
+</pre></div>
+</div>
+<div class="section" id="t0920">
 <h2>2017-06-08T0920</h2>
-<p><strong>[x]</strong> Attaching to a wifi network with <tt class="docutils literal">nmcli</tt> (network-manager cli client) ...</p>
+<p>Attaching to a wifi network with <tt class="docutils literal">nmcli</tt> (network-manager cli client) ...</p>
 <div class="highlight"><pre><span></span>$ nmcli radio
 $ nmcli device
 $ nmcli device wifi rescan
@@ -35,7 +55,7 @@ $ nmcli device wifi connect SSID-Name password PASS
 </div>
 <div class="section" id="t1219">
 <h2>2017-06-07T1219</h2>
-<p><strong>[x]</strong> Disable <a class="reference external" href="http://www.circuidipity.com/tag-pelican.html">Pelican</a> from auto-generating <tt class="docutils literal">archives.html</tt> by adding to <tt class="docutils literal">pelicanconf.py</tt> ...</p>
+<p>Disable <a class="reference external" href="http://www.circuidipity.com/tag-pelican.html">Pelican</a> from auto-generating <tt class="docutils literal">archives.html</tt> by adding to <tt class="docutils literal">pelicanconf.py</tt> ...</p>
 <div class="highlight"><pre><span></span><span class="nv">ARCHIVES_SAVE_AS</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 </pre></div>
 <p>From <a class="reference external" href="http://docs.getpelican.com/en/latest/settings.html#url-settings">URL Settings</a>: &quot;If you do not want one or more of the default pages to be created ... set the corresponding <tt class="docutils literal">*_SAVE_AS</tt> setting to '' to prevent the relevant page from being generated.&quot;</p>
