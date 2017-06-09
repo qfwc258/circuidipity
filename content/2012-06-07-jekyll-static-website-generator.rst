@@ -16,9 +16,7 @@ I find the idea of creating a static website very appealing. Some of the advanta
 * cheap and easy to host ... I make use of Amazon S3 and its ability to `host static webpages <http://www.circuidipity.com/host-website-on-amazon-s3.html>`_
 * easy to maintain and scale ... at the end of the day its straight HTML
 
-.. note::
-
-    Another possible (free for non-commercial use) hosting option is `GitHub <https://github.com/>`_. Jekyll is the default page generator for the site (and was created by GitHub co-founder Tom Preston-Werner).
+Another possible (free for non-commercial use) hosting option is `GitHub <https://github.com/>`_. Jekyll is the default page generator for the site (and was created by GitHub co-founder Tom Preston-Werner).
 
 The traditional disadvantage to using static pages for a blog has been the lack of dynamic elements - hosting feeds, user comments - but JavaScript for things like the Twitter widget to provide real-time updates and out-sourced services like Disqus to provide comments can work around the old limitations.
 
