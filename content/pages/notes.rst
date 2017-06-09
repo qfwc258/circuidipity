@@ -4,9 +4,41 @@ Notes
 
 :slug: notes
 
+2017-06-09T0941
+---------------
+Restart network service on Ubuntu ... Sometimes after wake-from-suspend the network connection is down and network-manager's wifi ap list fails to refresh.
+                                                                                
+**[ FIX! ]** Simple systemd way ...                                                   
+                                                                                
+.. code-block:: bash                                                            
+                                                                                
+    $ sudo systemctl restart NetworkManager.service                             
+                                                                                
+If that doesn't work ... Try using ``nmcli`` to stop and start network-manager directly ...
+                                                                                
+.. code-block:: bash                                                             
+                                                                                
+    $ sudo nmcli networking off                                                 
+    $ sudo nmcli networking on                                                  
+                                                                                
+Old-fashioned SysV init script method still works on 16.04 ...                
+                                                                                
+.. code-block:: bash                                                            
+                                                                                
+    $ sudo /etc/init.d/networking restart                                       
+        ... or ...                                                              
+    $ sudo /etc/init.d/network-manager restart                                  
+                                                                                
+Last resort ...                                             
+                                                                                
+.. code-block:: bash                                                            
+                                                                                
+    $ sudo ifdown -a  # -a brings down all interfaces                           
+    $ sudo ifup -a
+
 2017-06-08T0920
 ---------------
-**[x]** Attaching to a wifi network with ``nmcli`` (network-manager cli client) ...
+Attaching to a wifi network with ``nmcli`` (network-manager cli client) ...
 
 .. code-block:: bash
 
@@ -17,7 +49,7 @@ Notes
 
 2017-06-07T1219
 ---------------
-**[x]** Disable `Pelican <http://www.circuidipity.com/tag-pelican.html>`_ from auto-generating ``archives.html`` by adding to ``pelicanconf.py`` ...
+Disable `Pelican <http://www.circuidipity.com/tag-pelican.html>`_ from auto-generating ``archives.html`` by adding to ``pelicanconf.py`` ...
 
 .. code-block:: bash
 
