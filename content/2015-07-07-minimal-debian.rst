@@ -5,14 +5,14 @@ Minimal Debian
 :date: 2015-07-07 15:43
 :slug: minimal-debian
 :tags: debian, linux, crypto, lvm
-:modified: 2017-05-11 18:21:00
+:modified: 2017-06-10 16:21:00
 
 .. figure:: images/debianVader.png
     :alt: Debian Vader
     :width: 960px
     :height: 355px
 
-**Debian "Jessie"** is the latest stable release of the popular Linux operating system. I use Debian's `minimal network install image <https://www.debian.org/CD/netinst/>`_ to create a **console-only base configuration** that can be customized for various tasks and `alternate desktops <http://www.circuidipity.com/i3-tiling-window-manager.html>`_. [1]_
+**Debian 8 "Jessie"** is the latest stable release of the popular Linux operating system. I use Debian's `minimal network install image <https://www.debian.org/CD/netinst/>`_ to create a **console-only base configuration** that can be customized for various tasks and `alternate desktops <http://www.circuidipity.com/i3-tiling-window-manager.html>`_. [1]_
 
 Let's go!
 =========
@@ -647,8 +647,96 @@ Alternative setup using DHCP ...
 
 Once a link is established install an (optional) network manager utility. Packages ``network-manager`` and ``network-manager-gnome`` provide the console ``nmcli`` and graphical ``nm-applet`` clients respectively . Comment out (deactivate) any entries in ``interfaces`` that will be managed by ``network-manager``.
 
-7. Where to go next ...
------------------------
+7. Secure access using SSH keys
+-------------------------------
+
+Create `cryptographic keys, install the OpenSSH server, and configure remote access. <http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html>`_
+
+8. Main, non-free, contrib, and backports
+-----------------------------------------
+
+Debian uses three archives to distinguish between software packages based on their licenses. **Main** is enabled by default and includes everything that satisfies the conditions of the `Debian Free Software Guidelines. <https://www.debian.org/social_contract#guidelines>`_ **Non-free** contains packages that do not meet all the conditions of the DFSG but can be freely distributed, and **contrib** packages are open-source themselves but rely on software in non-free to work.
+
+`Backports <https://backports.debian.org/>`_ contains packages drawn from the testing (and sometimes unstable) archive and modified to work in the current stable release. All backports are disabled by default (to prevent unintended system upgrades) and are installed on a per PACKAGE basis by running ...
+
+.. code-block:: bash
+
+    # apt -t jessie-backports install PACKAGE
+
+Modify ``/etc/apt/sources.list`` to add contrib, non-free, and backports ...
+
+.. code-block:: bash
+
+    # Base repository
+    deb http://deb.debian.org/debian/ jessie main contrib non-free
+    deb-src http://deb.debian.org/debian/ jessie main contrib non-free
+
+    # Security updates
+    deb http://security.debian.org/debian-security jessie/updates main contrib non-free
+    deb-src http://security.debian.org/debian-security jessie/updates main contrib non-free
+
+    # Stable updates
+    deb http://deb.debian.org/debian jessie-updates main contrib non-free
+    deb-src http://deb.debian.org/debian jessie-updates main contrib non-free
+
+    # Stable backports
+    deb http://deb.debian.org/debian jessie-backports main contrib non-free
+    deb-src http://deb.debian.org/debian jessie-backports main contrib non-free
+
+Any time ``sources.list`` is modified be sure to update the package database ...
+
+.. code-block:: bash
+
+    # apt update
+
+9. Automatic security updates
+-----------------------------
+
+Fetch and install `the latest fixes courtesy of unattended upgrades. <http://www.circuidipity.com/unattended-upgrades.html>`_
+
+10. Sudo
+--------
+
+Install ``sudo`` to temporarily provide your USER (example: ``foo``) account with root privileges ...
+
+.. code-block:: bash
+
+    # apt install sudo
+    # adduser foo sudo
+
+To allow ``foo`` to shutdown or reboot the system, first create the file ``/etc/sudoers.d/00-alias`` containing ...
+
+.. code-block:: bash
+
+    # Cmnd alias specification
+    Cmnd_Alias SHUTDOWN_CMDS = /sbin/poweroff, /sbin/reboot, /sbin/shutdown
+
+Starting with Stretch, if you run as USER the command ``dmesg`` to read the contents of the kernel message buffer you will see ...
+
+.. code-block:: bash
+
+    dmesg: read kernel buffer failed: Operation not permitted
+
+Turns out it is `a (security) feature not a bug! <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=842226#15>`_
+
+To allow ``foo`` to read the kernel log without being prompted for a password - and use our newly-created ``Cmnd_Alias SHUTDOWN_CMDS`` - create the file ``/etc/sudoers.d/01-nopasswd`` containg the ``NOPASSWD`` option ...
+
+.. code-block:: bash
+
+	# Allow specified users to execute these commands without password
+	foo ALL=(ALL) NOPASSWD: SHUTDOWN_CMDS, /bin/dmesg
+
+I add aliases for the commands in my ``~/.bashrc`` to auto-include ``sudo`` ...
+
+.. code-block:: bash
+
+    alias dmesg='sudo dmesg'
+    alias poweroff='sudo /sbin/poweroff'
+    alias reboot='sudo /sbin/reboot'
+    alias shutdown='sudo /sbin/shutdown'
+
+11. Where to go next ...
+------------------------
 
 ... is up to YOU. Yeehaw.
 
