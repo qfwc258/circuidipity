@@ -4,6 +4,26 @@ Notes
 
 :slug: notes
 
+2017-06-10T0838
+---------------
+
+Microphone problem on Thinkpad x230 running Ubuntu 16.04 ... No sound input and **mic** not detected.
+
+**[ FIX! ]** Get capture device ...                                                          
+
+.. code-block:: bash
+
+	$ arecord -l                                                                         
+	card 0: ... device 0: ...                                                            
+                                                                                     
+... and edit ``/etc/pulse/default.pa`` with ``load-module module-alsa-source device=hw:0,0``.
+
+Kill and respawn pulseaudio ...
+
+.. code-block:: bash
+                                                        
+	$ pulseaudio -k
+
 2017-06-09T0941
 ---------------
 Restart network service on Ubuntu ... Sometimes after wake-from-suspend the network connection is down and network-manager's wifi ap list fails to refresh.
