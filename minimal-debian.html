@@ -24,12 +24,12 @@
 
 <!-- article -->
 <h1>Minimal Debian</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 11 May 2017</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Saturday 10 June 2017</p>
 <div id="article">
     <div class="figure">
 <img alt="Debian Vader" src="images/debianVader.png" style="width: 960px; height: 355px;" />
 </div>
-<p><strong>Debian &quot;Jessie&quot;</strong> is the latest stable release of the popular Linux operating system. I use Debian's <a class="reference external" href="https://www.debian.org/CD/netinst/">minimal network install image</a> to create a <strong>console-only base configuration</strong> that can be customized for various tasks and <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">alternate desktops</a>. <a class="footnote-reference" href="#id10" id="id1">[1]</a></p>
+<p><strong>Debian 8 &quot;Jessie&quot;</strong> is the latest stable release of the popular Linux operating system. I use Debian's <a class="reference external" href="https://www.debian.org/CD/netinst/">minimal network install image</a> to create a <strong>console-only base configuration</strong> that can be customized for various tasks and <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">alternate desktops</a>. <a class="footnote-reference" href="#id10" id="id1">[1]</a></p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
 <p><a class="reference external" href="http://www.debian.org">Debian GNU/Linux</a> is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. There are 3 <strong>release branches</strong>: <tt class="docutils literal">jessie/stable</tt>, <tt class="docutils literal">stretch/testing</tt>, and <tt class="docutils literal">sid/unstable</tt>.</p>
@@ -226,8 +226,68 @@ iface wlp1s0 inet dhcp
 </pre></div>
 <p>Once a link is established install an (optional) network manager utility. Packages <tt class="docutils literal"><span class="pre">network-manager</span></tt> and <tt class="docutils literal"><span class="pre">network-manager-gnome</span></tt> provide the console <tt class="docutils literal">nmcli</tt> and graphical <tt class="docutils literal"><span class="pre">nm-applet</span></tt> clients respectively . Comment out (deactivate) any entries in <tt class="docutils literal">interfaces</tt> that will be managed by <tt class="docutils literal"><span class="pre">network-manager</span></tt>.</p>
 </div>
+<div class="section" id="secure-access-using-ssh-keys">
+<h3>7. Secure access using SSH keys</h3>
+<p>Create <a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html">cryptographic keys, install the OpenSSH server, and configure remote access.</a></p>
+</div>
+<div class="section" id="main-non-free-contrib-and-backports">
+<h3>8. Main, non-free, contrib, and backports</h3>
+<p>Debian uses three archives to distinguish between software packages based on their licenses. <strong>Main</strong> is enabled by default and includes everything that satisfies the conditions of the <a class="reference external" href="https://www.debian.org/social_contract#guidelines">Debian Free Software Guidelines.</a> <strong>Non-free</strong> contains packages that do not meet all the conditions of the DFSG but can be freely distributed, and <strong>contrib</strong> packages are open-source themselves but rely on software in non-free to work.</p>
+<p><a class="reference external" href="https://backports.debian.org/">Backports</a> contains packages drawn from the testing (and sometimes unstable) archive and modified to work in the current stable release. All backports are disabled by default (to prevent unintended system upgrades) and are installed on a per PACKAGE basis by running ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># apt -t jessie-backports install PACKAGE</span>
+</pre></div>
+<p>Modify <tt class="docutils literal">/etc/apt/sources.list</tt> to add contrib, non-free, and backports ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Base repository</span>
+deb http://deb.debian.org/debian/ jessie main contrib non-free
+deb-src http://deb.debian.org/debian/ jessie main contrib non-free
+
+<span class="c1"># Security updates</span>
+deb http://security.debian.org/debian-security jessie/updates main contrib non-free
+deb-src http://security.debian.org/debian-security jessie/updates main contrib non-free
+
+<span class="c1"># Stable updates</span>
+deb http://deb.debian.org/debian jessie-updates main contrib non-free
+deb-src http://deb.debian.org/debian jessie-updates main contrib non-free
+
+<span class="c1"># Stable backports</span>
+deb http://deb.debian.org/debian jessie-backports main contrib non-free
+deb-src http://deb.debian.org/debian jessie-backports main contrib non-free
+</pre></div>
+<p>Any time <tt class="docutils literal">sources.list</tt> is modified be sure to update the package database ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># apt update</span>
+</pre></div>
+</div>
+<div class="section" id="automatic-security-updates">
+<h3>9. Automatic security updates</h3>
+<p>Fetch and install <a class="reference external" href="http://www.circuidipity.com/unattended-upgrades.html">the latest fixes courtesy of unattended upgrades.</a></p>
+</div>
+<div class="section" id="sudo">
+<h3>10. Sudo</h3>
+<p>Install <tt class="docutils literal">sudo</tt> to temporarily provide your USER (example: <tt class="docutils literal">foo</tt>) account with root privileges ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># apt install sudo</span>
+<span class="c1"># adduser foo sudo</span>
+</pre></div>
+<p>To allow <tt class="docutils literal">foo</tt> to shutdown or reboot the system, first create the file <tt class="docutils literal"><span class="pre">/etc/sudoers.d/00-alias</span></tt> containing ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Cmnd alias specification</span>
+Cmnd_Alias <span class="nv">SHUTDOWN_CMDS</span> <span class="o">=</span> /sbin/poweroff, /sbin/reboot, /sbin/shutdown
+</pre></div>
+<p>Starting with Stretch, if you run as USER the command <tt class="docutils literal">dmesg</tt> to read the contents of the kernel message buffer you will see ...</p>
+<div class="highlight"><pre><span></span>dmesg: <span class="nb">read</span> kernel buffer failed: Operation not permitted
+</pre></div>
+<p>Turns out it is <a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=842226#15">a (security) feature not a bug!</a></p>
+<p>To allow <tt class="docutils literal">foo</tt> to read the kernel log without being prompted for a password - and use our newly-created <tt class="docutils literal">Cmnd_Alias SHUTDOWN_CMDS</tt> - create the file <tt class="docutils literal"><span class="pre">/etc/sudoers.d/01-nopasswd</span></tt> containg the <tt class="docutils literal">NOPASSWD</tt> option ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Allow specified users to execute these commands without password</span>
+foo <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span> NOPASSWD: SHUTDOWN_CMDS, /bin/dmesg
+</pre></div>
+<p>I add aliases for the commands in my <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt> to auto-include <tt class="docutils literal">sudo</tt> ...</p>
+<div class="highlight"><pre><span></span><span class="nb">alias</span> <span class="nv">dmesg</span><span class="o">=</span><span class="s1">&#39;sudo dmesg&#39;</span>
+<span class="nb">alias</span> <span class="nv">poweroff</span><span class="o">=</span><span class="s1">&#39;sudo /sbin/poweroff&#39;</span>
+<span class="nb">alias</span> <span class="nv">reboot</span><span class="o">=</span><span class="s1">&#39;sudo /sbin/reboot&#39;</span>
+<span class="nb">alias</span> <span class="nv">shutdown</span><span class="o">=</span><span class="s1">&#39;sudo /sbin/shutdown&#39;</span>
+</pre></div>
+</div>
 <div class="section" id="where-to-go-next">
-<h3>7. Where to go next ...</h3>
+<h3>11. Where to go next ...</h3>
 <p>... is up to YOU. Yeehaw.</p>
 <p>Happy hacking!</p>
 <div class="section" id="notes">
