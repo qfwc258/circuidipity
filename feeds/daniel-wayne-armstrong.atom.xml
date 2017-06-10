@@ -1,5 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-09T07:30:00-04:00</updated><entry><title>The Diving-Bell and the Butterfly</title><link href="http://www.circuidipity.com/diving-bell-and-the-butterfly.html" rel="alternate"></link><published>2017-06-09T07:30:00-04:00</published><updated>2017-06-09T07:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-09:/diving-bell-and-the-butterfly.html</id><summary type="html">&lt;img alt="book cover" class="align-left" src="images/diving-bell-and-the-butterfly.jpg" style="width: 150px; height: 243px;" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-10T09:00:00-04:00</updated><entry><title>Verify a PGP signature with GnuPG</title><link href="http://www.circuidipity.com/verify-pgp-signature-gnupg.html" rel="alternate"></link><published>2017-06-10T09:00:00-04:00</published><updated>2017-06-10T09:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-10:/verify-pgp-signature-gnupg.html</id><summary type="html">&lt;p&gt;I setup &lt;a class="reference external" href="https://www.gnupg.org/"&gt;GNU Privacy Guard&lt;/a&gt; (&lt;strong&gt;GnuPG&lt;/strong&gt; or &lt;strong&gt;GPG&lt;/strong&gt;) - a free software implementation of OpenPGP - and use the utility to verify the PGP signatures of files.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Using a &lt;strong&gt;PGP private/public keypair&lt;/strong&gt; to create a &lt;strong&gt;digital signature&lt;/strong&gt; for a file certifies its integrity. A developer signs a package with …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;I setup &lt;a class="reference external" href="https://www.gnupg.org/"&gt;GNU Privacy Guard&lt;/a&gt; (&lt;strong&gt;GnuPG&lt;/strong&gt; or &lt;strong&gt;GPG&lt;/strong&gt;) - a free software implementation of OpenPGP - and use the utility to verify the PGP signatures of files.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Using a &lt;strong&gt;PGP private/public keypair&lt;/strong&gt; to create a &lt;strong&gt;digital signature&lt;/strong&gt; for a file certifies its integrity. A developer signs a package with their private key and the receiver verifies the signature with the public key. If the package has been modified or corrupted in transmission the verification will fail.&lt;/p&gt;
+&lt;div class="section" id="install-gnupg"&gt;
+&lt;h3&gt;0. Install GnuPG&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install gnupg dirmngr
+$ gpg --version
+gpg &lt;span class="o"&gt;(&lt;/span&gt;GnuPG&lt;span class="o"&gt;)&lt;/span&gt; 2.1.18
+libgcrypt 1.7.6-beta
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;First time invoking &lt;tt class="docutils literal"&gt;gpg &lt;span class="pre"&gt;--list-keys&lt;/span&gt;&lt;/tt&gt; with an empty &lt;strong&gt;keyring&lt;/strong&gt; generates a config directory in $HOME ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gpg --list-keys
+gpg: directory &lt;span class="s1"&gt;&amp;#39;/home/dwa/.gnupg&amp;#39;&lt;/span&gt; created
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Default config files are &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.gnupg/gpg.conf&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.gnupg/dirmngr.conf&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="keyserver"&gt;
+&lt;h3&gt;1. Keyserver&lt;/h3&gt;
+&lt;p&gt;Many keys are stored on a &lt;strong&gt;keyserver&lt;/strong&gt;. I choose the &lt;a class="reference external" href="https://riseup.net/en/security/message-security/openpgp/best-practices#selecting-a-keyserver-and-configuring-your-machine-to-refresh-your-keyring"&gt;recommended sks keyserver pool&lt;/a&gt;. Download the &lt;strong&gt;sks-keyservers.net CA&lt;/strong&gt; and verify the certificate ... &lt;a class="footnote-reference" href="#id3" id="id1"&gt;[1]&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ wget https://sks-keyservers.net/sks-keyservers.netCA.pem -P ~/.gnupg/
+$ &lt;span class="nb"&gt;cd&lt;/span&gt; ~/.gnupg
+$ openssl verify -trusted sks-keyservers.netCA.pem -check_ss_sig sks-keyservers.netCA.pem
+sks-keyservers.netCA.pem: OK
+$ openssl x509 -in sks-keyservers.netCA.pem -noout -text &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s2"&gt;&amp;quot;X509v3 Subject Key Identifier&amp;quot;&lt;/span&gt; -A1 &lt;span class="p"&gt;|&lt;/span&gt; tail -n1
+    E4:C3:2A:09:14:67:D8:4D:52:12:4E:93:3C:13:E8:A0:8D:DA:B6:F3
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and compare with the &lt;a class="reference external" href="https://sks-keyservers.net/verify_tls.php"&gt;key identifier recorded at sks-keyservers.net.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Add the keyserver and the CA to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.gnupg/dirmngr.conf&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;keyserver hkps://hkps.pool.sks-keyservers.net
+hkp-cacert ~/.gnupg/sks-keyservers.netCA.pem
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Link: &lt;a class="reference external" href="https://riseup.net/en/security/message-security/openpgp/best-practices"&gt;OpenPGP Best Practices&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="verify-a-pgp-signature"&gt;
+&lt;h3&gt;2. Verify a PGP signature&lt;/h3&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://www.debian.org/CD/verify"&gt;Verifying authenticity of Debian installer images:&lt;/a&gt; &amp;quot;Cryptographically strong checksum algorithms (SHA256 and SHA512) are available for every release ... To ensure that the checksums files themselves are correct, use GnuPG to verify them against the accompanying signature files.&amp;quot;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt; Download the &lt;strong&gt;minimal network installer&lt;/strong&gt; and the signed checksum files ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ wget https://cdimage.debian.org/cdimage/release/current/amd64/iso-cd/debian-8.8.0-amd64-netinst.iso
+$ wget https://cdimage.debian.org/cdimage/release/current/amd64/iso-cd/SHA512SUMS
+$ wget https://cdimage.debian.org/cdimage/release/current/amd64/iso-cd/SHA512SUMS.sign
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Display the signing key ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gpg --verify SHA512SUMS.sign SHA512SUMS
+gpg: Signature made Sun &lt;span class="m"&gt;07&lt;/span&gt; May &lt;span class="m"&gt;2017&lt;/span&gt; 02:28:21 PM EDT
+gpg:                using RSA key DA87E80D6294BE9B
+gpg: Can&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;t check signature: No public key
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Show details of the key on the keyserver ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gpg --search-keys DA87E80D6294BE9B
+gpg: data source: https://gozer.rediris.es:443
+&lt;span class="o"&gt;(&lt;/span&gt;1&lt;span class="o"&gt;)&lt;/span&gt; Debian CD signing key &amp;lt;debian-cd@lists.debian.org&amp;gt;
+  &lt;span class="m"&gt;4096&lt;/span&gt; bit RSA key DA87E80D6294BE9B, created: 2011-01-05
+  Keys 1-1 of &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;DA87E80D6294BE9B&amp;quot;&lt;/span&gt;.  Enter number&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt;, N&lt;span class="o"&gt;)&lt;/span&gt;ext, or Q&lt;span class="o"&gt;)&lt;/span&gt;uit &amp;gt; n
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Import the key from the keyserver ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gpg --recv-keys DA87E80D6294BE9B
+gpg: key DA87E80D6294BE9B: public key &lt;span class="s2"&gt;&amp;quot;Debian CD signing key &amp;lt;debian-cd@lists.debian.org&amp;gt;&amp;quot;&lt;/span&gt; imported
+gpg: no ultimately trusted keys found
+gpg: Total number processed: 1
+gpg:               imported: 1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Display the keyring containing our new key ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gpg --list-keys
+/home/dwa/.gnupg/pubring.kbx
+----------------------------
+pub   rsa4096 2011-01-05 &lt;span class="o"&gt;[&lt;/span&gt;SC&lt;span class="o"&gt;]&lt;/span&gt;
+    DF9B9C49EAA9298432589D76DA87E80D6294BE9B
+    uid           &lt;span class="o"&gt;[&lt;/span&gt; unknown&lt;span class="o"&gt;]&lt;/span&gt; Debian CD signing key &amp;lt;debian-cd@lists.debian.org&amp;gt;
+    sub   rsa4096 2011-01-05 &lt;span class="o"&gt;[&lt;/span&gt;E&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After importing the signing key ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gpg --verify SHA512SUMS.sign SHA512SUMS
+gpg: Signature made Sun &lt;span class="m"&gt;07&lt;/span&gt; May &lt;span class="m"&gt;2017&lt;/span&gt; 02:28:21 PM EDT
+gpg:                using RSA key DA87E80D6294BE9B
+gpg: Good signature from &lt;span class="s2"&gt;&amp;quot;Debian CD signing key &amp;lt;debian-cd@lists.debian.org&amp;gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;unknown&lt;span class="o"&gt;]&lt;/span&gt;
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: DF9B 9C49 EAA9 &lt;span class="m"&gt;2984&lt;/span&gt; &lt;span class="m"&gt;3258&lt;/span&gt;  9D76 DA87 E80D &lt;span class="m"&gt;6294&lt;/span&gt; BE9B
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The warning about &lt;tt class="docutils literal"&gt;key is not certified with a trusted signature&lt;/tt&gt; means GnuPG verified the key matches the signature but cannot guarantee the key really belongs to the developer. It is up to me to decide how much confidence to place in the authenticity of the key.&lt;/p&gt;
+&lt;p&gt;For this Debian-provided signature file I compare the &lt;tt class="docutils literal"&gt;Primary key fingerprint&lt;/tt&gt; line to the key fingerprints recorded on &lt;a class="reference external" href="https://www.debian.org/CD/verify"&gt;the Debian website.&lt;/a&gt; Looks good! &lt;a class="footnote-reference" href="#id4" id="id2"&gt;[2]&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="verify-file-integrity"&gt;
+&lt;h3&gt;3. Verify file integrity&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sha512sum --ignore-missing --check SHA512SUMS
+debian-8.8.0-amd64-netinst.iso: OK
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h4&gt;Notes&lt;/h4&gt;
+&lt;table class="docutils footnote" frame="void" id="id3" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Verifying &lt;a class="reference external" href="https://github.com/riseupnet/riseup_help/issues/145"&gt;keyserver pool certificate.&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="docutils footnote" frame="void" id="id4" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="https://lkml.org/lkml/2016/8/15/445"&gt;DO NOT TRUST ANYTHING SHORTER THAN THE FINGERPRINTS.&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="gpg"></category><category term="crypto"></category><category term="shell"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>The Diving-Bell and the Butterfly</title><link href="http://www.circuidipity.com/diving-bell-and-the-butterfly.html" rel="alternate"></link><published>2017-06-09T07:30:00-04:00</published><updated>2017-06-09T07:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-09:/diving-bell-and-the-butterfly.html</id><summary type="html">&lt;img alt="book cover" class="align-left" src="images/diving-bell-and-the-butterfly.jpg" style="width: 150px; height: 243px;" /&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;&lt;strong&gt;The Diving-Bell and the Butterfly&lt;/strong&gt; &lt;em&gt;by Jean-Dominique Bauby&lt;/em&gt;&lt;/div&gt;
 &lt;div class="line"&gt;(ISBN: 1857027795)&lt;/div&gt;
@@ -478,14 +589,4 @@ APT::Periodic::Verbose &lt;span class="s2"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;
 &lt;p&gt;A good example was near the beginning of the course when a bisection search algorithm was employed to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; This week we worked through understanding the inherent complexity of problems and how to reduce them to simpler subproblems which can be solved by algorithms (step-by-step recipes).&lt;/p&gt;
 &lt;p&gt;A good example was near the beginning of the course when a bisection search algorithm was employed to progressively halve the search space to zero in on a particular integer or floating point approximation. Another interesting algorithm is &lt;strong&gt;Merge sort&lt;/strong&gt; or &amp;quot;divide-and-conquer&amp;quot; invented by John von Neumann in 1945 for merging &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Merge_sort"&gt;separate sorted lists into a single sorted list&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;One more week to go in the course. Onward!&lt;/p&gt;
-</content><category term="python"></category><category term="programming"></category><category term="mooc"></category></entry><entry><title>MITx Week 5: Object Oriented Programming</title><link href="http://www.circuidipity.com/mitx-6001x-w5.html" rel="alternate"></link><published>2017-02-26T21:49:00-05:00</published><updated>2017-02-26T21:49:00-05:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-02-26:/mitx-6001x-w5.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; This week the focus was on Python &lt;strong&gt;classes&lt;/strong&gt; and &lt;strong&gt;inheritance&lt;/strong&gt; in the context of &lt;strong&gt;object-oriented programming&lt;/strong&gt;. Objects are a combination of data collections and the methods that operate on that data. It allows the programmer to move beyond the built-in types provided by Python (integers …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/mitx-6001x.html"&gt;MITx and the Python DUDE .:&lt;/a&gt; This week the focus was on Python &lt;strong&gt;classes&lt;/strong&gt; and &lt;strong&gt;inheritance&lt;/strong&gt; in the context of &lt;strong&gt;object-oriented programming&lt;/strong&gt;. Objects are a combination of data collections and the methods that operate on that data. It allows the programmer to move beyond the built-in types provided by Python (integers, floating point numbers, strings, lists, dictionaries) and roll their own purpose-built types with methods (which is very cool)!&lt;/p&gt;
-&lt;p&gt;I am still wrapping my head around the idea but I watched all the lecture videos and completed all the exercises for the week. The problem set involved creating a Python class + methods for encryption and decryption using the &lt;em&gt;Caesar Cipher&lt;/em&gt; ...&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The idea of the Caesar Cipher is to pick an integer and shift every letter of your message by that integer. In other words, suppose the shift is k . Then, all instances of the i-th letter of the alphabet that appear in the plaintext should become the (i+k)-th letter of the alphabet in the ciphertext. You will need to be careful with the case in which i + k &amp;gt; 26 (the length of the alphabet). Here is what the whole alphabet looks like shifted three spots to the right:&lt;/p&gt;
-&lt;p&gt;Original:  a b c d e f g h i j k l m n o p q r s t u v w x y z&lt;/p&gt;
-&lt;p&gt;3-shift:  d e f g h i j k l m n o p q r s t u v w x y z a b c&lt;/p&gt;
-&lt;p&gt;Using the above key, we can quickly translate the message &amp;quot;happy&amp;quot; to &amp;quot;kdssb&amp;quot; (note how the 3-shifted alphabet wraps around at the end, so x -&amp;gt; a, y -&amp;gt; b, and z -&amp;gt; c).&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The problem template provided a &lt;tt class="docutils literal"&gt;Message&lt;/tt&gt; class and a few helper methods and I had to create new objects and methods to generate dictionaries to encrypt and decrypt plaintext messages. It (eventually) works!&lt;/p&gt;
-&lt;p&gt;Onward!&lt;/p&gt;
 </content><category term="python"></category><category term="programming"></category><category term="mooc"></category></entry></feed>

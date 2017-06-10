@@ -19,96 +19,124 @@
 <!-- breadcrumb trail -->
 <div id="breadcrumb">
     <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
-    Sunday 19 July 2015</p>
+    Saturday 10 June 2017</p>
 </div>
 
 <!-- article -->
 <h1>Verify a PGP signature with GnuPG</h1>
 <div id="article">
-    <p>Using a <strong>PGP private/public keypair</strong> to create a <strong>digital signature</strong> for a file certifies its integrity. Adding a signature to software available for download heightens confidence that everything is OK!</p>
+    <p>I setup <a class="reference external" href="https://www.gnupg.org/">GNU Privacy Guard</a> (<strong>GnuPG</strong> or <strong>GPG</strong>) - a free software implementation of OpenPGP - and use the utility to verify the PGP signatures of files.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p>A developer signs a package with their private key and the receiver verifies the signature with the public key. If the package has been modified or corrupted in transmission the verification will fail.</p>
+<p>Using a <strong>PGP private/public keypair</strong> to create a <strong>digital signature</strong> for a file certifies its integrity. A developer signs a package with their private key and the receiver verifies the signature with the public key. If the package has been modified or corrupted in transmission the verification will fail.</p>
+<div class="section" id="install-gnupg">
+<h3>0. Install GnuPG</h3>
+<div class="highlight"><pre><span></span>$ sudo apt install gnupg dirmngr
+$ gpg --version
+gpg <span class="o">(</span>GnuPG<span class="o">)</span> 2.1.18
+libgcrypt 1.7.6-beta
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+<p>First time invoking <tt class="docutils literal">gpg <span class="pre">--list-keys</span></tt> with an empty <strong>keyring</strong> generates a config directory in $HOME ...</p>
+<div class="highlight"><pre><span></span>$ gpg --list-keys
+gpg: directory <span class="s1">&#39;/home/dwa/.gnupg&#39;</span> created
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+<p>Default config files are <tt class="docutils literal"><span class="pre">~/.gnupg/gpg.conf</span></tt> and <tt class="docutils literal"><span class="pre">~/.gnupg/dirmngr.conf</span></tt>.</p>
 </div>
-<div class="section" id="download">
-<h2>0. Download</h2>
-<p><strong>GnuPG</strong> is used to verify PGP signatures:</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install gnupg
+<div class="section" id="keyserver">
+<h3>1. Keyserver</h3>
+<p>Many keys are stored on a <strong>keyserver</strong>. I choose the <a class="reference external" href="https://riseup.net/en/security/message-security/openpgp/best-practices#selecting-a-keyserver-and-configuring-your-machine-to-refresh-your-keyring">recommended sks keyserver pool</a>. Download the <strong>sks-keyservers.net CA</strong> and verify the certificate ... <a class="footnote-reference" href="#id3" id="id1">[1]</a></p>
+<div class="highlight"><pre><span></span>$ wget https://sks-keyservers.net/sks-keyservers.netCA.pem -P ~/.gnupg/
+$ <span class="nb">cd</span> ~/.gnupg
+$ openssl verify -trusted sks-keyservers.netCA.pem -check_ss_sig sks-keyservers.netCA.pem
+sks-keyservers.netCA.pem: OK
+$ openssl x509 -in sks-keyservers.netCA.pem -noout -text <span class="p">|</span> grep <span class="s2">&quot;X509v3 Subject Key Identifier&quot;</span> -A1 <span class="p">|</span> tail -n1
+    E4:C3:2A:09:14:67:D8:4D:52:12:4E:93:3C:13:E8:A0:8D:DA:B6:F3
 </pre></div>
-<p><strong>Example:</strong> I download a <a class="reference external" href="http://sjoerd.luon.net/posts/2015/02/debian-jessie-on-rpi2/">Debian Jessie for Raspberry Pi 2</a> image and its signature:</p>
-<div class="highlight"><pre><span></span>$ wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.gz
-$ wget https://images.collabora.co.uk/rpi2/jessie-rpi2-20150705.img.gz.asc
+<p>... and compare with the <a class="reference external" href="https://sks-keyservers.net/verify_tls.php">key identifier recorded at sks-keyservers.net.</a></p>
+<p>Add the keyserver and the CA to <tt class="docutils literal"><span class="pre">~/.gnupg/dirmngr.conf</span></tt> ...</p>
+<div class="highlight"><pre><span></span>keyserver hkps://hkps.pool.sks-keyservers.net
+hkp-cacert ~/.gnupg/sks-keyservers.netCA.pem
 </pre></div>
+<p>Link: <a class="reference external" href="https://riseup.net/en/security/message-security/openpgp/best-practices">OpenPGP Best Practices</a></p>
 </div>
-<div class="section" id="import">
-<h2>1. Import</h2>
-<div class="section" id="method-0">
-<h3>Method 0</h3>
-<p>If the location of the developer's public key is known, I can directly import the key into my keyring (<tt class="docutils literal"><span class="pre">~/.gnupg/pubring.gpg</span></tt>):</p>
-<div class="highlight"><pre><span></span>$ gpg --keyserver x-hkp://pool.sks-keyservers.net --recv-keys 0xC2300F7B
+<div class="section" id="verify-a-pgp-signature">
+<h3>2. Verify a PGP signature</h3>
+<p><a class="reference external" href="https://www.debian.org/CD/verify">Verifying authenticity of Debian installer images:</a> &quot;Cryptographically strong checksum algorithms (SHA256 and SHA512) are available for every release ... To ensure that the checksums files themselves are correct, use GnuPG to verify them against the accompanying signature files.&quot;</p>
+<p><strong>Example:</strong> Download the <strong>minimal network installer</strong> and the signed checksum files ...</p>
+<div class="highlight"><pre><span></span>$ wget https://cdimage.debian.org/cdimage/release/current/amd64/iso-cd/debian-8.8.0-amd64-netinst.iso
+$ wget https://cdimage.debian.org/cdimage/release/current/amd64/iso-cd/SHA512SUMS
+$ wget https://cdimage.debian.org/cdimage/release/current/amd64/iso-cd/SHA512SUMS.sign
 </pre></div>
-</div>
-<div class="section" id="method-1">
-<h3>Method 1</h3>
-<p>Identify the public key used to generate the signature:</p>
-<div class="highlight"><pre><span></span>$ gpg --verify jessie-rpi2-20150705.img.gz.asc
-gpg: Signature made Sun <span class="m">05</span> Jul <span class="m">2015</span> 09:06:01 AM EDT using RSA key ID C2300F7B
-gpg: Can<span class="err">&#39;</span>t check signature: public key not found
+<p>Display the signing key ...</p>
+<div class="highlight"><pre><span></span>$ gpg --verify SHA512SUMS.sign SHA512SUMS
+gpg: Signature made Sun <span class="m">07</span> May <span class="m">2017</span> 02:28:21 PM EDT
+gpg:                using RSA key DA87E80D6294BE9B
+gpg: Can<span class="err">&#39;</span>t check signature: No public key
 </pre></div>
-<p>Public key is <tt class="docutils literal">0xC2300F7B</tt>. Run a key search <a class="footnote-reference" href="#id2" id="id1">[1]</a> and import:</p>
-<div class="highlight"><pre><span></span>$ gpg --search 0xC2300F7B
-gpg: keyring <span class="sb">`</span>/home/dwa/.gnupg/secring.gpg<span class="err">&#39;</span> created
-gpg: searching <span class="k">for</span> <span class="s2">&quot;0xC2300F7B&quot;</span> from hkp server keys.gnupg.net
-<span class="o">(</span>1<span class="o">)</span>     Sjoerd Simons &lt;sjoerd@luon.net&gt;
-        Sjoerd Simons &lt;sjoerd@debian.org&gt;
-        Antonius Gerardus Johannes Simons &lt;sjoerd@luon.net&gt;
-            <span class="m">4096</span> bit RSA key C2300F7B, created: 2014-04-25
-Keys 1-1 of <span class="m">1</span> <span class="k">for</span> <span class="s2">&quot;0xC2300F7B&quot;</span>.  Enter number<span class="o">(</span>s<span class="o">)</span>, N<span class="o">)</span>ext, or Q<span class="o">)</span>uit &gt; 1
-gpg: requesting key C2300F7B from hkp server keys.gnupg.net
-gpg: key C2300F7B: public key <span class="s2">&quot;Sjoerd Simons &lt;sjoerd@luon.net&gt;&quot;</span> imported
+<p>Show details of the key on the keyserver ...</p>
+<div class="highlight"><pre><span></span>$ gpg --search-keys DA87E80D6294BE9B
+gpg: data source: https://gozer.rediris.es:443
+<span class="o">(</span>1<span class="o">)</span> Debian CD signing key &lt;debian-cd@lists.debian.org&gt;
+  <span class="m">4096</span> bit RSA key DA87E80D6294BE9B, created: 2011-01-05
+  Keys 1-1 of <span class="m">1</span> <span class="k">for</span> <span class="s2">&quot;DA87E80D6294BE9B&quot;</span>.  Enter number<span class="o">(</span>s<span class="o">)</span>, N<span class="o">)</span>ext, or Q<span class="o">)</span>uit &gt; n
+</pre></div>
+<p>Import the key from the keyserver ...</p>
+<div class="highlight"><pre><span></span>$ gpg --recv-keys DA87E80D6294BE9B
+gpg: key DA87E80D6294BE9B: public key <span class="s2">&quot;Debian CD signing key &lt;debian-cd@lists.debian.org&gt;&quot;</span> imported
 gpg: no ultimately trusted keys found
 gpg: Total number processed: 1
-gpg:               imported: <span class="m">1</span>  <span class="o">(</span>RSA: 1<span class="o">)</span>
+gpg:               imported: 1
 </pre></div>
-</div>
-</div>
-<div class="section" id="verify">
-<h2>2. Verify</h2>
-<p>List keys in my keyring:</p>
+<p>Display the keyring containing our new key ...</p>
 <div class="highlight"><pre><span></span>$ gpg --list-keys
-/home/dwa/.gnupg/pubring.gpg
+/home/dwa/.gnupg/pubring.kbx
 ----------------------------
-pub   4096R/C2300F7B 2014-04-25
-uid                  Sjoerd Simons &lt;sjoerd@luon.net&gt;
-uid                  Sjoerd Simons &lt;sjoerd@debian.org&gt;
-uid                  Antonius Gerardus Johannes Simons &lt;sjoerd@luon.net&gt;
-sub   4096R/92545E8E 2014-04-25
+pub   rsa4096 2011-01-05 <span class="o">[</span>SC<span class="o">]</span>
+    DF9B9C49EAA9298432589D76DA87E80D6294BE9B
+    uid           <span class="o">[</span> unknown<span class="o">]</span> Debian CD signing key &lt;debian-cd@lists.debian.org&gt;
+    sub   rsa4096 2011-01-05 <span class="o">[</span>E<span class="o">]</span>
 </pre></div>
-<p>Verify package signature:</p>
-<div class="highlight"><pre><span></span>$ gpg --verify jessie-rpi2-20150705.img.gz.asc jessie-rpi2-20150705.img.gz
-gpg: Signature made Sun <span class="m">05</span> Jul <span class="m">2015</span> 09:06:01 AM EDT using RSA key ID C2300F7B
-gpg: Good signature from <span class="s2">&quot;Sjoerd Simons &lt;sjoerd@luon.net&gt;&quot;</span>
-gpg:                 aka <span class="s2">&quot;Sjoerd Simons &lt;sjoerd@debian.org&gt;&quot;</span>
-gpg:                 aka <span class="s2">&quot;Antonius Gerardus Johannes Simons &lt;sjoerd@luon.net&gt;&quot;</span>
+<p>After importing the signing key ...</p>
+<div class="highlight"><pre><span></span>$ gpg --verify SHA512SUMS.sign SHA512SUMS
+gpg: Signature made Sun <span class="m">07</span> May <span class="m">2017</span> 02:28:21 PM EDT
+gpg:                using RSA key DA87E80D6294BE9B
+gpg: Good signature from <span class="s2">&quot;Debian CD signing key &lt;debian-cd@lists.debian.org&gt;&quot;</span> <span class="o">[</span>unknown<span class="o">]</span>
 gpg: WARNING: This key is not certified with a trusted signature!
 gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: <span class="m">2870</span> A31B EA9D BCF2 <span class="m">7472</span>  <span class="m">3108</span> C274 DB64 C230 0F7B
+Primary key fingerprint: DF9B 9C49 EAA9 <span class="m">2984</span> <span class="m">3258</span>  9D76 DA87 E80D <span class="m">6294</span> BE9B
 </pre></div>
-<p>The warning about <strong>key is not certified with a trusted signature</strong> means GnuPG verified that key made that signature but can't guarantee that key really belongs to the developer. It's up to me to decide how much confidence to place in the authenticity of the key.</p>
+<p>The warning about <tt class="docutils literal">key is not certified with a trusted signature</tt> means GnuPG verified the key matches the signature but cannot guarantee the key really belongs to the developer. It is up to me to decide how much confidence to place in the authenticity of the key.</p>
+<p>For this Debian-provided signature file I compare the <tt class="docutils literal">Primary key fingerprint</tt> line to the key fingerprints recorded on <a class="reference external" href="https://www.debian.org/CD/verify">the Debian website.</a> Looks good! <a class="footnote-reference" href="#id4" id="id2">[2]</a></p>
+</div>
+<div class="section" id="verify-file-integrity">
+<h3>3. Verify file integrity</h3>
+<div class="highlight"><pre><span></span>$ sha512sum --ignore-missing --check SHA512SUMS
+debian-8.8.0-amd64-netinst.iso: OK
+</pre></div>
 <p>Happy hacking!</p>
 <div class="section" id="notes">
-<h3>Notes</h3>
-<table class="docutils footnote" frame="void" id="id2" rules="none">
+<h4>Notes</h4>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Auto-generated <tt class="docutils literal"><span class="pre">~/.gnupg/gpg.conf</span></tt> defaults to searching <tt class="docutils literal">keyserver <span class="pre">hkp://keys.gnupg.net</span></tt> which redirects to the <a class="reference external" href="https://sks-keyservers.net/">SKS Keyservers pool</a>.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Verifying <a class="reference external" href="https://github.com/riseupnet/riseup_help/issues/145">keyserver pool certificate.</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><a class="reference external" href="https://lkml.org/lkml/2016/8/15/445">DO NOT TRUST ANYTHING SHORTER THAN THE FINGERPRINTS.</a></td></tr>
 </tbody>
 </table>
 </div>
 </div>
+</div>
 
-    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-pgp.html">pgp</a>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-gpg.html">gpg</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-crypto.html">crypto</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
@@ -118,9 +146,7 @@ Primary key fingerprint: <span class="m">2870</span> A31B EA9D BCF2 <span class=
 <div id="navmenu">
     <hr />
     <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-        <a href="http://www.circuidipity.com/i3-tiling-window-manager.html">Lightweight and a delight: i3 tiling window manager</a></p>
-    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
-        <a href="http://www.circuidipity.com/resize-rootfs-raspberry-pi.html">Resize rootfs on Raspberry Pi</a></p>
+        <a href="http://www.circuidipity.com/diving-bell-and-the-butterfly.html">The Diving-Bell and the Butterfly</a></p>
 </div>
 
 
