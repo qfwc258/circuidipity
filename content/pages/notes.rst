@@ -4,6 +4,11 @@ Notes
 
 :slug: notes
 
+2017-06-11T1020
+---------------
+
+If SSH session is frozen ... Use the key-combo **Enter, Shift + `, .** [Enter, Tilde, Period]  to drop the connection.
+
 2017-06-10T0838
 ---------------
 
