@@ -4,6 +4,19 @@ Notes
 
 :slug: notes
 
+2017-06-12T1041
+---------------
+
+Local install of Python modules as non-root user. Example ...
+
+.. code-block:: bash
+
+    $ pip3 install exifread
+    
+... libraries are installed to ``~/.local/lib/python-ver/`` and the bins are placed in ``~/.local/bin/``.
+
+Add ``~/.local/bin`` to user's $PATH.
+
 2017-06-11T1020
 ---------------
 
