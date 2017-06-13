@@ -24,7 +24,27 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="t1041">
+    <div class="section" id="t0847">
+<h2>2017-06-13T0847</h2>
+<p>Created a Debian _stretch_ virtualbox guest but <tt class="docutils literal"><span class="pre">virtualbox-guest-{dkms,utils,x11}</span></tt> packages no longer available ... but there <em>are</em> pkgs in <a class="reference external" href="https://tracker.debian.org/pkg/virtualbox">_sid_.</a></p>
+<p><strong>[ Fix! ]</strong> Install the _sid_ pkgs. Setup <strong>apt-pinning</strong> in <tt class="docutils literal">/etc/apt/preferences</tt> ...</p>
+<div class="highlight"><pre><span></span>Package: *
+Pin: release <span class="nv">n</span><span class="o">=</span>stretch
+Pin-Priority: 900
+
+Package: *
+Pin: release <span class="nv">a</span><span class="o">=</span>unstable
+Pin-Priority: 300
+</pre></div>
+<p>Add unstable to <tt class="docutils literal">sources.list</tt> ...</p>
+<div class="highlight"><pre><span></span>deb http://deb.debian.org/debian/ unstable main contrib non-free
+</pre></div>
+<p>Update and install ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># apt -t unstable install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11</span>
+<span class="c1"># adduser dwa vboxsf</span>
+</pre></div>
+</div>
+<div class="section" id="t1041">
 <h2>2017-06-12T1041</h2>
 <p>Local install of Python modules as non-root user. Example ...</p>
 <div class="highlight"><pre><span></span>$ pip3 install exifread
