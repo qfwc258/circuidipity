@@ -4,6 +4,36 @@ Notes
 
 :slug: notes
 
+2017-06-13T0847
+---------------
+
+Created a Debian _stretch_ virtualbox guest but ``virtualbox-guest-{dkms,utils,x11}`` packages no longer available ... but there *are* pkgs in `_sid_. <https://tracker.debian.org/pkg/virtualbox>`_
+
+**[ Fix! ]** Install the _sid_ pkgs. Setup **apt-pinning** in ``/etc/apt/preferences`` ...
+
+.. code-block:: bash
+
+    Package: *
+    Pin: release n=stretch
+    Pin-Priority: 900
+
+    Package: *
+    Pin: release a=unstable
+    Pin-Priority: 300
+
+Add unstable to ``sources.list`` ...
+
+.. code-block:: bash
+
+    deb http://deb.debian.org/debian/ unstable main contrib non-free
+
+Update and install ...
+
+.. code-block:: bash
+
+    # apt -t unstable install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+    # adduser dwa vboxsf
+
 2017-06-12T1041
 ---------------
 
