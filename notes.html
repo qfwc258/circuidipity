@@ -24,7 +24,28 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="t0847">
+    <div class="section" id="t0947">
+<h2>2017-06-14T0947</h2>
+<p>Setup colour scheme for vim. As per <a class="reference external" href="http://www.gilesorr.com/blog/">Giles'</a> recommendation I use <a class="reference external" href="http://www.vim.org/scripts/script.php?script_id=2777">tir_black.</a>  Place in <tt class="docutils literal"><span class="pre">~/.vim/colors</span></tt>.</p>
+<p>Set as default colour scheme in <tt class="docutils literal">init.vim</tt> ...</p>
+<div class="highlight"><pre><span></span>colorscheme tir_black
+</pre></div>
+<p>Colour scheme works when neovim runs in terminal. Does <em>not</em> work inside tmux. Tmux is not seeing the 256 color palette ...</p>
+<div class="highlight"><pre><span></span>$ tput colors
+8
+</pre></div>
+<p><strong>[ Fix! ]</strong> Add to <tt class="docutils literal"><span class="pre">~/.tmux.conf</span></tt> ...</p>
+<div class="highlight"><pre><span></span><span class="nb">set</span> -g default-terminal <span class="s2">&quot;rxvt-unicode-256color&quot;</span>
+</pre></div>
+<p><strong>Note:</strong> Kill all existing tmux sessions. It is not enough simply to start a fresh session. Helpful! <a class="reference external" href="http://stackoverflow.com/a/25940093">http://stackoverflow.com/a/25940093</a></p>
+<p>Launch a new tmux session. Neovim colours work OK!</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="nv">$TERM</span>
+rxvt-unicode-256color
+$ tput colors
+256
+</pre></div>
+</div>
+<div class="section" id="t0847">
 <h2>2017-06-13T0847</h2>
 <p>Created a Debian _stretch_ virtualbox guest but <tt class="docutils literal"><span class="pre">virtualbox-guest-{dkms,utils,x11}</span></tt> packages no longer available ... but there <em>are</em> pkgs in <a class="reference external" href="https://tracker.debian.org/pkg/virtualbox">_sid_.</a></p>
 <p><strong>[ Fix! ]</strong> Install the _sid_ pkgs. Setup <strong>apt-pinning</strong> in <tt class="docutils literal">/etc/apt/preferences</tt> ...</p>
