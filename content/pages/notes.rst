@@ -4,6 +4,41 @@ Notes
 
 :slug: notes
 
+2017-06-14T0947
+---------------
+
+Setup colour scheme for vim. As per `Giles' <http://www.gilesorr.com/blog/>`_ recommendation I use `tir_black. <http://www.vim.org/scripts/script.php?script_id=2777>`_  Place in ``~/.vim/colors``.
+
+Set as default colour scheme in ``init.vim`` ...
+
+.. code-block:: bash
+
+    colorscheme tir_black
+
+Colour scheme works when neovim runs in terminal. Does *not* work inside tmux. Tmux is not seeing the 256 color palette ...
+
+.. code-block:: bash
+
+    $ tput colors
+    8
+
+**[ Fix! ]** Add to ``~/.tmux.conf`` ...
+
+.. code-block:: bash
+
+    set -g default-terminal "rxvt-unicode-256color"
+
+**Note:** Kill all existing tmux sessions. It is not enough simply to start a fresh session. Helpful! http://stackoverflow.com/a/25940093
+
+Launch a new tmux session. Neovim colours work OK!
+
+.. code-block:: bash
+
+    $ echo $TERM
+    rxvt-unicode-256color
+    $ tput colors
+    256
+
 2017-06-13T0847
 ---------------
 
