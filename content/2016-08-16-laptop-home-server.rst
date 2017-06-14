@@ -5,7 +5,7 @@ New life for an old laptop as a Linux home server
 :date: 2016-08-16 21:47:00
 :tags: network, debian, linux
 :slug: laptop-home-server
-:modified: 2017-05-13 17:15:00
+:modified: 2017-06-14 19:15:00
 
 `PROJECT: Home Server #0 .: <http://www.circuidipity.com/home-server.html>`_ **Netbooks** ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old **Asus 900HA** netbook and put it to work as a `home server <http://www.circuidipity.com/tag-server.html>`_. Good times!
 
@@ -120,7 +120,23 @@ Create **udev rules** to setup at boot. Existing rule ...
                                                                                    
     ACTION=="add", SUBSYSTEM=="block", KERNEL=="sda", RUN+="/sbin/hdparm -B 254 -S 0 /dev/sda"
 
-6. Services
+6. Backlight
+------------
+
+Install the ``vbetool`` package to control the netbook's display backlight ...
+
+.. code-block:: bash
+
+    $ sudo apt install vbetool
+
+SSH into the server and turn off/on the backlight with the commands ...
+
+.. code-block:: bash
+
+    $ sudo vbetool dpms off
+    $ sudo vbetool dpms on
+
+7. Services
 -----------
 
 What to do next? `Some of the services I use ... <http://www.circuidipity.com/raspberry-pi-home-server.html>`_
