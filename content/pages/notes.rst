@@ -4,6 +4,55 @@ Notes
 
 :slug: notes
 
+2017-06-15T0853
+---------------
+
+Debian _stretch_/stable ``xbacklight`` is acting up ...
+
+.. code-block:: bash
+
+	$ xbacklight -dec 10
+	No outputs have backlight property
+
+I **can** write to the file directly to increase/decreae display brightness ...
+
+.. code-block:: bash
+
+	$ cat /sys/class/backlight/intel_backlight/max_brightness 
+	937
+	$ sudo sh -c 'echo 500 > /sys/class/backlight/intel_backlight/brightness'
+	$ sudo sh -c 'echo 937 > /sys/class/backlight/intel_backlight/brightness'
+
+... or use ``xrandr`` ...
+
+.. code-block:: bash
+
+	$ xrandr --output eDP-1 --brightness 0.5
+
+This is `a known issue. <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=833508>`_
+
+**[ Fix! ]** Roll-back from ``xserver-xorg-core`` to ``xserver-xorg-video-intel``.
+
+Create ``/etc/X11/xorg.conf.d/10-video-intel.conf`` containing ...
+
+.. code-block:: bash
+
+	Section "Device"
+		Identifier "Intel"
+		Driver "intel"
+	EndSection
+
+2017-06-14T2113
+---------------
+
+Trying to install Debian's ``flashplugin-nonfree`` package consistently fails with the error ....
+
+.. code-block:: bash
+
+    ERROR: wget failed to download http://people.debian.org/~bartm/flashplugin-nonfree/D5C0FC14/fp.24.0.0.221.sha512.amd64.pgp.asc
+
+**[ Fix! ]** Manual install works courtesy of the instructions at https://wiki.debian.org/FlashPlayer#Manual_update
+
 2017-06-14T0947
 ---------------
 
