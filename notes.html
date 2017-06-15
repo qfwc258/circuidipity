@@ -24,7 +24,37 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="t0947">
+    <div class="section" id="t0853">
+<h2>2017-06-15T0853</h2>
+<p>Debian _stretch_/stable <tt class="docutils literal">xbacklight</tt> is acting up ...</p>
+<div class="highlight"><pre><span></span>$ xbacklight -dec 10
+No outputs have backlight property
+</pre></div>
+<p>I <strong>can</strong> write to the file directly to increase/decreae display brightness ...</p>
+<div class="highlight"><pre><span></span>$ cat /sys/class/backlight/intel_backlight/max_brightness
+937
+$ sudo sh -c <span class="s1">&#39;echo 500 &gt; /sys/class/backlight/intel_backlight/brightness&#39;</span>
+$ sudo sh -c <span class="s1">&#39;echo 937 &gt; /sys/class/backlight/intel_backlight/brightness&#39;</span>
+</pre></div>
+<p>... or use <tt class="docutils literal">xrandr</tt> ...</p>
+<div class="highlight"><pre><span></span>$ xrandr --output eDP-1 --brightness 0.5
+</pre></div>
+<p>This is <a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=833508">a known issue.</a></p>
+<p><strong>[ Fix! ]</strong> Roll-back from <tt class="docutils literal"><span class="pre">xserver-xorg-core</span></tt> to <tt class="docutils literal"><span class="pre">xserver-xorg-video-intel</span></tt>. Create <tt class="docutils literal"><span class="pre">/etc/X11/xorg.conf.d/10-video-intel.conf</span></tt> containing ...</p>
+<div class="highlight"><pre><span></span>Section <span class="s2">&quot;Device&quot;</span>
+        Identifier <span class="s2">&quot;Intel&quot;</span>
+        Driver <span class="s2">&quot;intel&quot;</span>
+EndSection
+</pre></div>
+</div>
+<div class="section" id="t2113">
+<h2>2017-06-14T2113</h2>
+<p>Trying to install Debian's <tt class="docutils literal"><span class="pre">flashplugin-nonfree</span></tt> package consistently fails with the error ....</p>
+<div class="highlight"><pre><span></span>ERROR: wget failed to download http://people.debian.org/~bartm/flashplugin-nonfree/D5C0FC14/fp.24.0.0.221.sha512.amd64.pgp.asc
+</pre></div>
+<p><strong>[ Fix! ]</strong> Manual install works courtesy of the instructions at <a class="reference external" href="https://wiki.debian.org/FlashPlayer#Manual_update">https://wiki.debian.org/FlashPlayer#Manual_update</a></p>
+</div>
+<div class="section" id="t0947">
 <h2>2017-06-14T0947</h2>
 <p>Setup colour scheme for vim. As per <a class="reference external" href="http://www.gilesorr.com/blog/">Giles'</a> recommendation I use <a class="reference external" href="http://www.vim.org/scripts/script.php?script_id=2777">tir_black.</a>  Place in <tt class="docutils literal"><span class="pre">~/.vim/colors</span></tt>.</p>
 <p>Set as default colour scheme in <tt class="docutils literal">init.vim</tt> ...</p>
