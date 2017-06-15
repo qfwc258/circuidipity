@@ -40,7 +40,8 @@ $ sudo sh -c <span class="s1">&#39;echo 937 &gt; /sys/class/backlight/intel_back
 <div class="highlight"><pre><span></span>$ xrandr --output eDP-1 --brightness 0.5
 </pre></div>
 <p>This is <a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=833508">a known issue.</a></p>
-<p><strong>[ Fix! ]</strong> Roll-back from <tt class="docutils literal"><span class="pre">xserver-xorg-core</span></tt> to <tt class="docutils literal"><span class="pre">xserver-xorg-video-intel</span></tt>. Create <tt class="docutils literal"><span class="pre">/etc/X11/xorg.conf.d/10-video-intel.conf</span></tt> containing ...</p>
+<p><strong>[ Fix! ]</strong> Roll-back from <tt class="docutils literal"><span class="pre">xserver-xorg-core</span></tt> to <tt class="docutils literal"><span class="pre">xserver-xorg-video-intel</span></tt>.</p>
+<p>Create <tt class="docutils literal"><span class="pre">/etc/X11/xorg.conf.d/10-video-intel.conf</span></tt> containing ...</p>
 <div class="highlight"><pre><span></span>Section <span class="s2">&quot;Device&quot;</span>
         Identifier <span class="s2">&quot;Intel&quot;</span>
         Driver <span class="s2">&quot;intel&quot;</span>
