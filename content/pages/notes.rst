@@ -4,6 +4,15 @@ Notes
 
 :slug: notes
 
+2017-06-16T0950
+---------------
+
+Stop pinned tabs from auto-loading upon Firefox startup. Goto ``about:config`` and set to **true** ...
+
+.. code-block:: bash
+
+    * browser.sessionstore.restore_pinned_tabs_on_demand    default boolean false
+
 2017-06-15T0853
 ---------------
 
