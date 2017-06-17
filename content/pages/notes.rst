@@ -4,6 +4,37 @@ Notes
 
 :slug: notes
 
+2017-06-17T0921
+---------------
+
+Start a new project in Git and host on Github (after setting up a default config in ``~/.gitconfig``) ...
+
+.. code-block:: bash
+
+    $ mkdir new_project
+    $ cd new_project
+    $ touch .gitignore
+    $ touch README.rst      # using rst will allow github to auto-detect and configure it as a project homepage
+    $ git init
+    $ git add README.rst    #... or 'git add .' to add all files recursively
+    $ git status
+    $ git commit -a -m 'first commit'   # '-a' option auto-adds all files that are being tracked and commits them
+    $ git log               # to view commit history
+
+Connect with Github ...
+
+.. code-block:: bash
+
+    $ git remote add origin https://github.com/vonbrownie/sitrep.git  # connect my local repo to github for first time
+    $ git remote -v  # confirm local knows about remote
+    $ git push -u origin master
+
+... and to pull in (download) changes from Github master ...
+
+.. code-block:: bash
+
+    $ git pull origin master
+
 2017-06-16T0950
 ---------------
 
