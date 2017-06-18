@@ -5,7 +5,7 @@ Transform a USB stick into a boot device packing multiple Linux distros
 :date: 2012-12-06 01:23:00
 :tags: grub, shell, systemrescuecd, debian, bunsenlabs, lubuntu, ubuntu, linux
 :slug: multi-boot-usb
-:modified: 2017-05-21 15:32:00
+:modified: 2017-06-18 12:30:00
 
 .. image:: images/grubs-300.png
     :align: right
@@ -57,7 +57,7 @@ Install GRUB to the **Master Boot Record (MBR)** of the USB device at MOUNTPOINT
 Download Linux distro image (ISO) files and place in the newly-created ``boot/iso`` folder on the USB device. I have installed ...
 
 * **SystemRescueCd** - `Collection of Linux repair tools <http://www.system-rescue-cd.org/>`_
-* **Debian Jessie Netinst+firmware** - `64bit <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/8.7.1+nonfree/amd64/iso-cd/>`_ and `32bit <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/8.7.1+nonfree/i386/iso-cd/>`_ installers
+* **Debian Stretch Netinst+firmware** - `64bit <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/>`_ and `32bit <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/i386/iso-cd/>`_ installers
 * **BunsenLabs** - Lightweight distro based on Debian stable release; `64bit, 32bit, and NonPAE installers <https://kelaino.bunsenlabs.org/ddl/>`_
 * **Lubuntu 16.04 Live Mode + Desktop Installer** - `64bit and 32bit <http://cdimage.ubuntu.com/lubuntu/releases/16.04.2/release/>`_ desktop images allow trying Lubuntu before installing
 * **Ubuntu 16.04 LTS Mini-Installers** - `64bit mini.iso <http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/>`_ and `32bit mini.iso <http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-i386/current/images/netboot/>`_
@@ -65,7 +65,7 @@ Download Linux distro image (ISO) files and place in the newly-created ``boot/is
 3.1 Debian Netinst
 ++++++++++++++++++
 
-Problem: This was a bit tricky to get working. Selecting ``firmware-8.7.1-ARCH-netinst.iso`` from the GRUB menu would get things started but the install would fail at the stage where the ISO needs to be located and mounted. Debian's netinst images do not include the **iso-scan** package , which is required for searching and loading ISO images.
+Problem: This was a bit tricky to get working. Selecting ``firmware-9.0.0-ARCH-netinst.iso`` from the GRUB menu would get things started but the install would fail at the stage where the ISO needs to be located and mounted. Debian's netinst images do not include the **iso-scan** package , which is required for searching and loading ISO images.
 
 Fix: Bypass the ``initrd.gz`` that is on the ISO images and use ones that *do* contain the iso-scan package, [2]_ which I retrieved from the **hd-media** installers ...
 
@@ -73,9 +73,9 @@ Fix: Bypass the ``initrd.gz`` that is on the ISO images and use ones that *do* c
 
     $ mkdir /media/MOUNTPOINT/boot/debian/install.{amd,386}
     $ cd /media/MOUNTPOINT/boot/debian/install.amd
-    $ wget http://ftp.debian.org/debian/dists/jessie/main/installer-amd64/current/images/hd-media/initrd.gz
+    $ wget http://ftp.debian.org/debian/dists/stable/main/installer-amd64/current/images/hd-media/initrd.gz
     $ cd .. /install.386
-    $ wget http://ftp.debian.org/debian/dists/jessie/main/installer-i386/current/images/hd-media/initrd.gz
+    $ wget http://ftp.debian.org/debian/dists/stable/main/installer-i386/current/images/hd-media/initrd.gz
 
 4. GRUB configuration
 ---------------------
