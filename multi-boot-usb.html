@@ -24,7 +24,7 @@
 
 <!-- article -->
 <h1>Transform a USB stick into a boot device packing multiple Linux distros</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 21 May 2017</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 18 June 2017</p>
 <div id="article">
     <img alt="GRUBS" class="align-right" src="images/grubs-300.png" style="width: 300px; height: 363px;" />
 <p>Transform removable USB storage into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device capable of loopback mounting Linux distro ISO files. <a class="footnote-reference" href="#id5" id="id1">[1]</a></p>
@@ -55,20 +55,20 @@
 <p>Download Linux distro image (ISO) files and place in the newly-created <tt class="docutils literal">boot/iso</tt> folder on the USB device. I have installed ...</p>
 <ul class="simple">
 <li><strong>SystemRescueCd</strong> - <a class="reference external" href="http://www.system-rescue-cd.org/">Collection of Linux repair tools</a></li>
-<li><strong>Debian Jessie Netinst+firmware</strong> - <a class="reference external" href="https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/8.7.1+nonfree/amd64/iso-cd/">64bit</a> and <a class="reference external" href="https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/8.7.1+nonfree/i386/iso-cd/">32bit</a> installers</li>
+<li><strong>Debian Stretch Netinst+firmware</strong> - <a class="reference external" href="https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/">64bit</a> and <a class="reference external" href="https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/i386/iso-cd/">32bit</a> installers</li>
 <li><strong>BunsenLabs</strong> - Lightweight distro based on Debian stable release; <a class="reference external" href="https://kelaino.bunsenlabs.org/ddl/">64bit, 32bit, and NonPAE installers</a></li>
 <li><strong>Lubuntu 16.04 Live Mode + Desktop Installer</strong> - <a class="reference external" href="http://cdimage.ubuntu.com/lubuntu/releases/16.04.2/release/">64bit and 32bit</a> desktop images allow trying Lubuntu before installing</li>
 <li><strong>Ubuntu 16.04 LTS Mini-Installers</strong> - <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/">64bit mini.iso</a> and <a class="reference external" href="http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-i386/current/images/netboot/">32bit mini.iso</a></li>
 </ul>
 <div class="section" id="debian-netinst">
 <h4>3.1 Debian Netinst</h4>
-<p>Problem: This was a bit tricky to get working. Selecting <tt class="docutils literal"><span class="pre">firmware-8.7.1-ARCH-netinst.iso</span></tt> from the GRUB menu would get things started but the install would fail at the stage where the ISO needs to be located and mounted. Debian's netinst images do not include the <strong>iso-scan</strong> package , which is required for searching and loading ISO images.</p>
+<p>Problem: This was a bit tricky to get working. Selecting <tt class="docutils literal"><span class="pre">firmware-9.0.0-ARCH-netinst.iso</span></tt> from the GRUB menu would get things started but the install would fail at the stage where the ISO needs to be located and mounted. Debian's netinst images do not include the <strong>iso-scan</strong> package , which is required for searching and loading ISO images.</p>
 <p>Fix: Bypass the <tt class="docutils literal">initrd.gz</tt> that is on the ISO images and use ones that <em>do</em> contain the iso-scan package, <a class="footnote-reference" href="#id6" id="id4">[2]</a> which I retrieved from the <strong>hd-media</strong> installers ...</p>
 <div class="highlight"><pre><span></span>$ mkdir /media/MOUNTPOINT/boot/debian/install.<span class="o">{</span>amd,386<span class="o">}</span>
 $ <span class="nb">cd</span> /media/MOUNTPOINT/boot/debian/install.amd
-$ wget http://ftp.debian.org/debian/dists/jessie/main/installer-amd64/current/images/hd-media/initrd.gz
+$ wget http://ftp.debian.org/debian/dists/stable/main/installer-amd64/current/images/hd-media/initrd.gz
 $ <span class="nb">cd</span> .. /install.386
-$ wget http://ftp.debian.org/debian/dists/jessie/main/installer-i386/current/images/hd-media/initrd.gz
+$ wget http://ftp.debian.org/debian/dists/stable/main/installer-i386/current/images/hd-media/initrd.gz
 </pre></div>
 </div>
 </div>
