@@ -5,19 +5,19 @@ Minimal Debian
 :date: 2015-07-07 15:43
 :slug: minimal-debian
 :tags: debian, linux, crypto, lvm
-:modified: 2017-06-10 16:21:00
+:modified: 2017-06-18 10:21:00
 
 .. figure:: images/debianVader.png
     :alt: Debian Vader
     :width: 960px
     :height: 355px
 
-**Debian 8 "Jessie"** is the latest stable release of the popular Linux operating system. I use Debian's `minimal network install image <https://www.debian.org/CD/netinst/>`_ to create a **console-only base configuration** that can be customized for various tasks and `alternate desktops <http://www.circuidipity.com/i3-tiling-window-manager.html>`_. [1]_
+**Debian 9 "Stretch"** is the latest stable release of the popular Linux operating system. I use Debian's `minimal network install image <https://www.debian.org/CD/netinst/>`_ to create a **console-only base configuration** that can be customized for various tasks and `alternate desktops <http://www.circuidipity.com/i3-tiling-window-manager.html>`_. [1]_
 
 Let's go!
 =========
 
-`Debian GNU/Linux <http://www.debian.org>`_ is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. There are 3 **release branches**: ``jessie/stable``, ``stretch/testing``, and ``sid/unstable``.
+`Debian GNU/Linux <http://www.debian.org>`_ is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. There are 3 **release branches**: ``stretch/stable``, ``buster/testing``, and ``sid/unstable``.
 
 Below is a visual walk-through of a sample workstation setup that makes use of the entire disk divided into 2 partitions: a ``boot`` partition, [2]_ and an **encrypted partition** used by the **Logical Volume Manager** (LVM) to create "virtual partitions" (Logical Volumes). Installing LVM on top of the encrypted partition allows:
 
@@ -28,14 +28,14 @@ Below is a visual walk-through of a sample workstation setup that makes use of t
 0. Prepare install media
 ------------------------
 
-Download the (unofficial image that includes non-free firmware) `64bit firmware-CURRENT-amd64-netinst.iso <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/>`_ (`32bit image <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/i386/iso-cd/>`_ for older machines) and `flash the image <https://www.debian.org/releases/stable/amd64/ch04s03.html.en>`_ to a USB stick. [4]_
+Download the (unofficial image that includes non-free firmware) `64bit firmware-CURRENT-amd64-netinst.iso <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/>`_ (`32bit image <https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/i386/iso-cd/>`_ for older machines). `Verify the PGP signature <http://www.circuidipity.com/verify-pgp-signature-gnupg.html#verify-file-integrity>`_ and `flash the image <https://www.debian.org/releases/stable/amd64/ch04s03.html.en>`_ to a USB stick. [4]_
 
 Minimal installer (requires network connection) downloads all the latest packages during setup.
 
 1. Launch
 ---------
 
-.. image:: images/screenshot/debianInstallLvm/001-1.png
+.. image:: images/screenshot/debianInstallLvm/001-stretch.png
     :align: center
     :alt: Install
     :width: 800px
@@ -556,7 +556,7 @@ User is prompted for the passphrase to unlock the encrypted partition ...
     :width: 800px
     :height: 600px
 
-.. image:: images/screenshot/debianInstallLvm/302-1.png
+.. image:: images/screenshot/debianInstallLvm/302-stretch.png
     :alt: Login
     :align: center
     :width: 800px
@@ -661,27 +661,27 @@ Debian uses three archives to distinguish between software packages based on the
 
 .. code-block:: bash
 
-    # apt -t jessie-backports install PACKAGE
+    # apt -t stretch-backports install PACKAGE
 
 Modify ``/etc/apt/sources.list`` to add contrib, non-free, and backports ...
 
 .. code-block:: bash
 
     # Base repository
-    deb http://deb.debian.org/debian/ jessie main contrib non-free
-    deb-src http://deb.debian.org/debian/ jessie main contrib non-free
+    deb http://deb.debian.org/debian/ stretch main contrib non-free
+    deb-src http://deb.debian.org/debian/ stretch main contrib non-free
 
     # Security updates
-    deb http://security.debian.org/debian-security jessie/updates main contrib non-free
-    deb-src http://security.debian.org/debian-security jessie/updates main contrib non-free
+    deb http://security.debian.org/debian-security stretch/updates main contrib non-free
+    deb-src http://security.debian.org/debian-security stretch/updates main contrib non-free
 
     # Stable updates
-    deb http://deb.debian.org/debian jessie-updates main contrib non-free
-    deb-src http://deb.debian.org/debian jessie-updates main contrib non-free
+    deb http://deb.debian.org/debian stretch-updates main contrib non-free
+    deb-src http://deb.debian.org/debian stretch-updates main contrib non-free
 
     # Stable backports
-    deb http://deb.debian.org/debian jessie-backports main contrib non-free
-    deb-src http://deb.debian.org/debian jessie-backports main contrib non-free
+    deb http://deb.debian.org/debian stretch-backports main contrib non-free
+    deb-src http://deb.debian.org/debian stretch-backports main contrib non-free
 
 Any time ``sources.list`` is modified be sure to update the package database ...
 
@@ -738,7 +738,7 @@ I add aliases for the commands in my ``~/.bashrc`` to auto-include ``sudo`` ...
 11. Where to go next ...
 ------------------------
 
-... is up to YOU. Yeehaw.
+... is up to YOU. I created a `post-install configuration script <https://github.com/vonbrownie/linux-post-install/tree/master/scripts/debian-stable-setup>`_ that builds on a minimal install towards a more complete console setup, and can also install the `i3 tiling window manager <http://www.circuidipity.com/i3-tiling-window-manager.html>`_ plus a packages collection suitable for a workstation.
 
 Happy hacking!
 
