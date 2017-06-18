@@ -4,6 +4,18 @@ Notes
 
 :slug: notes
 
+2017-06-18T0949
+---------------
+
+Stop pulseaudio from respawning after halt (encountered in Ubuntu 16.04) ... When I kill pulseaudio with ``pulseaudio -k`` or ``kill -9 ID`` it immediately restarts ...
+
+.. code-block:: bash
+
+    $ pgrep pulse
+    12808 /usr/bin/pulseaudio --start --log-target=syslog
+
+**[ Fix! ]** There is a config file ``/etc/pulse/client.conf`` with ``autospawn = yes`` set by default. I could modify that, but chose instead to create ``~/.config/pulse/client.conf`` and set ``autospawn = no``. It works ... pulseaudio stays dead.
+
 2017-06-17T0921
 ---------------
 
