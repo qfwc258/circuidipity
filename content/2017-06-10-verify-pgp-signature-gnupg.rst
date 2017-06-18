@@ -5,6 +5,7 @@ Verify a PGP signature with GnuPG
 :date: 2017-06-10 09:00:00
 :slug: verify-pgp-signature-gnupg
 :tags: gpg, crypto, shell, debian, linux
+:modified: 2017-06-18 11:45:00
 
 I setup `GNU Privacy Guard <https://www.gnupg.org/>`_ (**GnuPG** or **GPG**) - a free software implementation of OpenPGP - and use the utility to verify the PGP signatures of files.
 
@@ -64,13 +65,13 @@ Link: `OpenPGP Best Practices <https://riseup.net/en/security/message-security/o
 
 `Verifying authenticity of Debian installer images: <https://www.debian.org/CD/verify>`_ "Cryptographically strong checksum algorithms (SHA256 and SHA512) are available for every release ... To ensure that the checksums files themselves are correct, use GnuPG to verify them against the accompanying signature files."
 
-**Example:** Download the **minimal network installer** and the signed checksum files ...
+**Example:** Download the (unofficial with firmware) **minimal network installer** and the signed checksum files ...
 
 .. code-block:: bash
 
-    $ wget https://cdimage.debian.org/cdimage/release/current/amd64/iso-cd/debian-8.8.0-amd64-netinst.iso
-    $ wget https://cdimage.debian.org/cdimage/release/current/amd64/iso-cd/SHA512SUMS
-    $ wget https://cdimage.debian.org/cdimage/release/current/amd64/iso-cd/SHA512SUMS.sign
+    $ wget https://cdimage.debian.org/mirror/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/firmware-9.0.0-amd64-netinst.iso
+    $ wget https://cdimage.debian.org/mirror/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/SHA512SUMS.sign
+    $ wget https://cdimage.debian.org/mirror/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/SHA512SUMS
 
 Display the signing key ...
 
@@ -135,7 +136,7 @@ For this Debian-provided signature file I compare the ``Primary key fingerprint`
 .. code-block:: bash
 
     $ sha512sum --ignore-missing --check SHA512SUMS
-    debian-8.8.0-amd64-netinst.iso: OK
+    firmware-9.0.0-amd64-netinst.iso: OK
 
 Happy hacking!
 
