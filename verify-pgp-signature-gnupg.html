@@ -24,6 +24,7 @@
 
 <!-- article -->
 <h1>Verify a PGP signature with GnuPG</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 18 June 2017</p>
 <div id="article">
     <p>I setup <a class="reference external" href="https://www.gnupg.org/">GNU Privacy Guard</a> (<strong>GnuPG</strong> or <strong>GPG</strong>) - a free software implementation of OpenPGP - and use the utility to verify the PGP signatures of files.</p>
 <div class="section" id="let-s-go">
@@ -64,10 +65,10 @@ hkp-cacert ~/.gnupg/sks-keyservers.netCA.pem
 <div class="section" id="verify-a-pgp-signature">
 <h3>2. Verify a PGP signature</h3>
 <p><a class="reference external" href="https://www.debian.org/CD/verify">Verifying authenticity of Debian installer images:</a> &quot;Cryptographically strong checksum algorithms (SHA256 and SHA512) are available for every release ... To ensure that the checksums files themselves are correct, use GnuPG to verify them against the accompanying signature files.&quot;</p>
-<p><strong>Example:</strong> Download the <strong>minimal network installer</strong> and the signed checksum files ...</p>
-<div class="highlight"><pre><span></span>$ wget https://cdimage.debian.org/cdimage/release/current/amd64/iso-cd/debian-8.8.0-amd64-netinst.iso
-$ wget https://cdimage.debian.org/cdimage/release/current/amd64/iso-cd/SHA512SUMS
-$ wget https://cdimage.debian.org/cdimage/release/current/amd64/iso-cd/SHA512SUMS.sign
+<p><strong>Example:</strong> Download the (unofficial with firmware) <strong>minimal network installer</strong> and the signed checksum files ...</p>
+<div class="highlight"><pre><span></span>$ wget https://cdimage.debian.org/mirror/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/firmware-9.0.0-amd64-netinst.iso
+$ wget https://cdimage.debian.org/mirror/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/SHA512SUMS.sign
+$ wget https://cdimage.debian.org/mirror/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/SHA512SUMS
 </pre></div>
 <p>Display the signing key ...</p>
 <div class="highlight"><pre><span></span>$ gpg --verify SHA512SUMS.sign SHA512SUMS
@@ -113,7 +114,7 @@ Primary key fingerprint: DF9B 9C49 EAA9 <span class="m">2984</span> <span class=
 <div class="section" id="verify-file-integrity">
 <h3>3. Verify file integrity</h3>
 <div class="highlight"><pre><span></span>$ sha512sum --ignore-missing --check SHA512SUMS
-debian-8.8.0-amd64-netinst.iso: OK
+firmware-9.0.0-amd64-netinst.iso: OK
 </pre></div>
 <p>Happy hacking!</p>
 <div class="section" id="notes">
