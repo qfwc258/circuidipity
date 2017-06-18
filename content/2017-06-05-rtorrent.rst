@@ -1,10 +1,11 @@
-============================
-Command line tools: rTorrent
-============================
+==========================================
+Command line torrent server using rTorrent
+==========================================
 
 :date: 2017-06-05 21:40:00
 :slug: rtorrent
 :tags: rtorrent, shell, network, debian, linux
+:modified: 2017-06-18 11:24:00
 
 `PROJECT: Home Server #10 .: <http://www.circuidipity.com/home-server.html>`_ A text-based **BitTorrent client** that - combined with `tmux <http://www.circuidipity.com/tmux.html>`_ - makes a cool lightweight torrent server.
 
