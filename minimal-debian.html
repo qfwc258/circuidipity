@@ -24,15 +24,15 @@
 
 <!-- article -->
 <h1>Minimal Debian</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Saturday 10 June 2017</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 18 June 2017</p>
 <div id="article">
     <div class="figure">
 <img alt="Debian Vader" src="images/debianVader.png" style="width: 960px; height: 355px;" />
 </div>
-<p><strong>Debian 8 &quot;Jessie&quot;</strong> is the latest stable release of the popular Linux operating system. I use Debian's <a class="reference external" href="https://www.debian.org/CD/netinst/">minimal network install image</a> to create a <strong>console-only base configuration</strong> that can be customized for various tasks and <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">alternate desktops</a>. <a class="footnote-reference" href="#id10" id="id1">[1]</a></p>
+<p><strong>Debian 9 &quot;Stretch&quot;</strong> is the latest stable release of the popular Linux operating system. I use Debian's <a class="reference external" href="https://www.debian.org/CD/netinst/">minimal network install image</a> to create a <strong>console-only base configuration</strong> that can be customized for various tasks and <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">alternate desktops</a>. <a class="footnote-reference" href="#id10" id="id1">[1]</a></p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p><a class="reference external" href="http://www.debian.org">Debian GNU/Linux</a> is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. There are 3 <strong>release branches</strong>: <tt class="docutils literal">jessie/stable</tt>, <tt class="docutils literal">stretch/testing</tt>, and <tt class="docutils literal">sid/unstable</tt>.</p>
+<p><a class="reference external" href="http://www.debian.org">Debian GNU/Linux</a> is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. There are 3 <strong>release branches</strong>: <tt class="docutils literal">stretch/stable</tt>, <tt class="docutils literal">buster/testing</tt>, and <tt class="docutils literal">sid/unstable</tt>.</p>
 <p>Below is a visual walk-through of a sample workstation setup that makes use of the entire disk divided into 2 partitions: a <tt class="docutils literal">boot</tt> partition, <a class="footnote-reference" href="#id11" id="id2">[2]</a> and an <strong>encrypted partition</strong> used by the <strong>Logical Volume Manager</strong> (LVM) to create &quot;virtual partitions&quot; (Logical Volumes). Installing LVM on top of the encrypted partition allows:</p>
 <ul class="simple">
 <li>creation of multiple LVs protected by a single passphrase entered at boot time</li>
@@ -41,12 +41,12 @@
 </ul>
 <div class="section" id="prepare-install-media">
 <h3>0. Prepare install media</h3>
-<p>Download the (unofficial image that includes non-free firmware) <a class="reference external" href="https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/">64bit firmware-CURRENT-amd64-netinst.iso</a> (<a class="reference external" href="https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/i386/iso-cd/">32bit image</a> for older machines) and <a class="reference external" href="https://www.debian.org/releases/stable/amd64/ch04s03.html.en">flash the image</a> to a USB stick. <a class="footnote-reference" href="#id13" id="id4">[4]</a></p>
+<p>Download the (unofficial image that includes non-free firmware) <a class="reference external" href="https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/">64bit firmware-CURRENT-amd64-netinst.iso</a> (<a class="reference external" href="https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/i386/iso-cd/">32bit image</a> for older machines). <a class="reference external" href="http://www.circuidipity.com/verify-pgp-signature-gnupg.html#verify-file-integrity">Verify the PGP signature</a> and <a class="reference external" href="https://www.debian.org/releases/stable/amd64/ch04s03.html.en">flash the image</a> to a USB stick. <a class="footnote-reference" href="#id13" id="id4">[4]</a></p>
 <p>Minimal installer (requires network connection) downloads all the latest packages during setup.</p>
 </div>
 <div class="section" id="launch">
 <h3>1. Launch</h3>
-<img alt="Install" class="align-center" src="images/screenshot/debianInstallLvm/001-1.png" style="width: 800px; height: 600px;" />
+<img alt="Install" class="align-center" src="images/screenshot/debianInstallLvm/001-stretch.png" style="width: 800px; height: 600px;" />
 <img alt="Select Language" class="align-center" src="images/screenshot/debianInstallLvm/002.png" style="width: 800px; height: 600px;" />
 <img alt="Select Location" class="align-center" src="images/screenshot/debianInstallLvm/003.png" style="width: 800px; height: 600px;" />
 <img alt="Configure Keyboard" class="align-center" src="images/screenshot/debianInstallLvm/004.png" style="width: 800px; height: 600px;" />
@@ -168,7 +168,7 @@ Reserved blocks: 1%
 <img alt="GRUB menu" class="align-center" src="images/screenshot/debianInstallLvm/300.png" style="width: 800px; height: 600px;" />
 <p>User is prompted for the passphrase to unlock the encrypted partition ...</p>
 <img alt="Unlock passphrase" class="align-center" src="images/screenshot/debianInstallLvm/301-1.png" style="width: 800px; height: 600px;" />
-<img alt="Login" class="align-center" src="images/screenshot/debianInstallLvm/302-1.png" style="width: 800px; height: 600px;" />
+<img alt="Login" class="align-center" src="images/screenshot/debianInstallLvm/302-stretch.png" style="width: 800px; height: 600px;" />
 <p>Login and run <tt class="docutils literal">timedatectl</tt> to confirm system date+time is properly configured.</p>
 </div>
 <div class="section" id="grub">
@@ -234,24 +234,24 @@ iface wlp1s0 inet dhcp
 <h3>8. Main, non-free, contrib, and backports</h3>
 <p>Debian uses three archives to distinguish between software packages based on their licenses. <strong>Main</strong> is enabled by default and includes everything that satisfies the conditions of the <a class="reference external" href="https://www.debian.org/social_contract#guidelines">Debian Free Software Guidelines.</a> <strong>Non-free</strong> contains packages that do not meet all the conditions of the DFSG but can be freely distributed, and <strong>contrib</strong> packages are open-source themselves but rely on software in non-free to work.</p>
 <p><a class="reference external" href="https://backports.debian.org/">Backports</a> contains packages drawn from the testing (and sometimes unstable) archive and modified to work in the current stable release. All backports are disabled by default (to prevent unintended system upgrades) and are installed on a per PACKAGE basis by running ...</p>
-<div class="highlight"><pre><span></span><span class="c1"># apt -t jessie-backports install PACKAGE</span>
+<div class="highlight"><pre><span></span><span class="c1"># apt -t stretch-backports install PACKAGE</span>
 </pre></div>
 <p>Modify <tt class="docutils literal">/etc/apt/sources.list</tt> to add contrib, non-free, and backports ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># Base repository</span>
-deb http://deb.debian.org/debian/ jessie main contrib non-free
-deb-src http://deb.debian.org/debian/ jessie main contrib non-free
+deb http://deb.debian.org/debian/ stretch main contrib non-free
+deb-src http://deb.debian.org/debian/ stretch main contrib non-free
 
 <span class="c1"># Security updates</span>
-deb http://security.debian.org/debian-security jessie/updates main contrib non-free
-deb-src http://security.debian.org/debian-security jessie/updates main contrib non-free
+deb http://security.debian.org/debian-security stretch/updates main contrib non-free
+deb-src http://security.debian.org/debian-security stretch/updates main contrib non-free
 
 <span class="c1"># Stable updates</span>
-deb http://deb.debian.org/debian jessie-updates main contrib non-free
-deb-src http://deb.debian.org/debian jessie-updates main contrib non-free
+deb http://deb.debian.org/debian stretch-updates main contrib non-free
+deb-src http://deb.debian.org/debian stretch-updates main contrib non-free
 
 <span class="c1"># Stable backports</span>
-deb http://deb.debian.org/debian jessie-backports main contrib non-free
-deb-src http://deb.debian.org/debian jessie-backports main contrib non-free
+deb http://deb.debian.org/debian stretch-backports main contrib non-free
+deb-src http://deb.debian.org/debian stretch-backports main contrib non-free
 </pre></div>
 <p>Any time <tt class="docutils literal">sources.list</tt> is modified be sure to update the package database ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># apt update</span>
@@ -288,7 +288,7 @@ foo <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</sp
 </div>
 <div class="section" id="where-to-go-next">
 <h3>11. Where to go next ...</h3>
-<p>... is up to YOU. Yeehaw.</p>
+<p>... is up to YOU. I created a <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/scripts/debian-stable-setup">post-install configuration script</a> that builds on a minimal install towards a more complete console setup, and can also install the <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">i3 tiling window manager</a> plus a packages collection suitable for a workstation.</p>
 <p>Happy hacking!</p>
 <div class="section" id="notes">
 <h4>Notes</h4>

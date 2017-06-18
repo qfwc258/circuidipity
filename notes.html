@@ -24,7 +24,37 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="t0950">
+    <div class="section" id="t0949">
+<h2>2017-06-18T0949</h2>
+<p>Stop pulseaudio from respawning after halt (encountered in Ubuntu 16.04) ... When I kill pulseaudio with <tt class="docutils literal">pulseaudio <span class="pre">-k</span></tt> or <tt class="docutils literal">kill <span class="pre">-9</span> ID</tt> it immediately restarts ...</p>
+<div class="highlight"><pre><span></span>$ pgrep pulse
+<span class="m">12808</span> /usr/bin/pulseaudio --start --log-target<span class="o">=</span>syslog
+</pre></div>
+<p><strong>[ Fix! ]</strong> There is a config file <tt class="docutils literal">/etc/pulse/client.conf</tt> with <tt class="docutils literal">autospawn = yes</tt> set by default. I could modify that, but chose instead to create <tt class="docutils literal"><span class="pre">~/.config/pulse/client.conf</span></tt> and set <tt class="docutils literal">autospawn = no</tt>. It works ... pulseaudio stays dead.</p>
+</div>
+<div class="section" id="t0921">
+<h2>2017-06-17T0921</h2>
+<p>Start a new project in Git and host on Github (after setting up a default config in <tt class="docutils literal"><span class="pre">~/.gitconfig</span></tt>) ...</p>
+<div class="highlight"><pre><span></span>$ mkdir new_project
+$ <span class="nb">cd</span> new_project
+$ touch .gitignore
+$ touch README.rst      <span class="c1"># using rst will allow github to auto-detect and configure it as a project homepage</span>
+$ git init
+$ git add README.rst    <span class="c1">#... or &#39;git add .&#39; to add all files recursively</span>
+$ git status
+$ git commit -a -m <span class="s1">&#39;first commit&#39;</span>   <span class="c1"># &#39;-a&#39; option auto-adds all files that are being tracked and commits them</span>
+$ git log               <span class="c1"># to view commit history</span>
+</pre></div>
+<p>Connect with Github ...</p>
+<div class="highlight"><pre><span></span>$ git remote add origin https://github.com/vonbrownie/sitrep.git  <span class="c1"># connect my local repo to github for first time</span>
+$ git remote -v  <span class="c1"># confirm local knows about remote</span>
+$ git push -u origin master
+</pre></div>
+<p>... and to pull in (download) changes from Github master ...</p>
+<div class="highlight"><pre><span></span>$ git pull origin master
+</pre></div>
+</div>
+<div class="section" id="t0950">
 <h2>2017-06-16T0950</h2>
 <p>Stop pinned tabs from auto-loading upon Firefox startup. Goto <tt class="docutils literal">about:config</tt> and set to <strong>true</strong> ...</p>
 <div class="highlight"><pre><span></span>* browser.sessionstore.restore_pinned_tabs_on_demand    default boolean <span class="nb">false</span>
