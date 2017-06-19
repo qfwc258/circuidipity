@@ -4,6 +4,17 @@ Notes
 
 :slug: notes
 
+2017-06-19T0953
+---------------
+
+Configure menu colours in Grub by creating ``/boot/grub/custom.cfg`` with settings ...
+
+.. code-block:: bash
+
+    set color_normal=white/black
+    set menu_color_normal=white/black
+    set menu_color_highlight=white/green
+
 2017-06-18T0949
 ---------------
 
