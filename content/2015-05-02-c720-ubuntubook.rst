@@ -5,7 +5,9 @@ Chromebook to Ubuntubook
 :date: 2015-05-02 17:30:00
 :slug: c720-ubuntubook
 :tags: chromebook, ubuntu, linux
-:modified: 2016-04-30 19:38:00
+:modified: 2017-06-19 01:10:00
+
+**[ Update ]** `Ubuntubook is now a Stretchbook! <http://www.circuidipity.com/jessiebook-to-stretchbook.html>`_
 
 Replace **Chrome OS** permanently with **Ubuntu 16.04 "Xenial Xerus"** on the **Acer C720 Chromebook**.
 

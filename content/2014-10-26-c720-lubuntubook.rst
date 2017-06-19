@@ -5,9 +5,9 @@ Chromebook to Lubuntubook
 :date: 2014-10-26 00:09:00
 :slug: c720-lubuntubook
 :tags: chromebook, lubuntu, linux
-:modified: 2016-02-14 00:14:00
+:modified: 2017-06-19 01:10:00
 
-**Update:** Currently using `Ubuntu + i3 window manager <http://www.circuidipity.com/c720-ubuntubook.html>`_ ... I like it!
+**[ Update ]** `Lubuntubook is now a Stretchbook! <http://www.circuidipity.com/jessiebook-to-stretchbook.html>`_
 
 Replace **Chrome OS** permanently with **Lubuntu 14.04 LTS Linux** on the **Acer C720 Chromebook**.
 
@@ -25,22 +25,22 @@ Let's go!
 =========
 
 0. Recovery Image
-=================
+-----------------
 
 Create a recovery image of Chrome OS (my C720 is model ``PEPPY C6A-N3C-A7O``) to enable restoring the Chromebook to its default configuration. This will require a spare USB stick of 2GB or better:
 
 * Log into the Chromebook and let it auto update, as there sometimes are firmware updates... check the updating status in the browser at ``chrome://help``
 * Insert the USB stick, enter ``chrome://imageburner`` and follow the directions to generate a recovery image
 
-Source: `Create a Chromebook recovery image <https://support.google.com/chromebook/answer/1080595?hl=en>`_ 
+Link: `Create a Chromebook recovery image <https://support.google.com/chromebook/answer/1080595?hl=en>`_ 
 
 1. Prepare install media
-========================
+------------------------
 
 Download the `64-bit Trusty Tahr minimal installer <http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso>`_ and `flash the image <https://help.ubuntu.com/community/Installation/FromUSBStick>`_ to a USB stick. An alternative (my choice) is adding the image to a `USB stick with multiple Linux installers <http://www.circuidipity.com/multi-boot-usb.html>`_. Using the minimal console installer vs. the graphical `Lubuntu installer <https://help.ubuntu.com/community/Lubuntu/GetLubuntu>`_ provides more options during setup [2]_.
 
 2. SeaBIOS
-==========
+----------
 
 `SeaBIOS <http://www.coreboot.org/SeaBIOS>`_ in combination with **coreboot** provides an open-source legacy BIOS that enables access to the MBR and the ability to install an alternative OS on the Chromebook. All this good stuff involves jumping through a few simple hoops and not trembling in fear at the "scary white screen" that pops up at power up stating that the boot loader detects something is **very very wrong** with the Chromebook and helpfully suggests pressing the spacebar to begin recovery. **Do not press the spacebar** or the Lubuntu installation will be wiped from disk!
 
@@ -53,7 +53,7 @@ Experimenting with alternate OS installs on the Chromebook I first employed the 
 **No guarantees** though... Hopefully you enjoy equal success!
 
 2.1 Write-Protect Screw Method
-------------------------------
+``````````````````````````````
 
 Disconnect power. Turn the Chromebook over facing bottom up and remove the 13 screws (not missing the one hidden under the warranty sticker). Gently pry the case off starting with the seam where the display connects to device. It comes away pretty easy.
 
@@ -114,7 +114,7 @@ Re-connect the power, insert the USB stick prepared in Step 1, and power up the 
 Sources: `Useful GBB flags <http://www.coreboot.org/pipermail/coreboot/2014-January/077083.html>`_ for `another new free software machine <https://blogs.fsfe.org/the_unconventional/2014/04/20/c720-debian/>`_
 
 2.2 Developer Mode Method
--------------------------
+`````````````````````````
 
 The alternative to removing the write-protect screw above is to place the Chromebook into developer mode using the Chrome OS shell before booting the USB install media:
 
@@ -135,7 +135,7 @@ Insert the USB stick prepared in Step 1, reboot the Chromebook and press ``CTRL+
 Source: `Chromium OS <http://www.chromium.org/chromium-os>`_ developer information for the `Acer C720 Chromebook <http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/acer-c720-chromebook>`_
 
 3. Install Lubuntu
-==================
+------------------
 
 My `visual screenshot tour <http://www.circuidipity.com/c720-lubuntubook-install.html>`_ of installing Lubuntu 14.04 - a `Long Term Support (LTS) <https://wiki.ubuntu.com/Releases>`_ release.
 
@@ -148,7 +148,7 @@ Chromebook's SSD will be divided into 3 partitions:
 * sda3 uses the remaining space as a LUKS encrypted ``root`` partition using a **passphrase**
 
 4. Touchpad
-===========
+-----------
 
 Lubuntu installs the ``3.13`` Linux kernel and does not support the Chromebook's touchpad. Download and install the more recent ``3.19`` kernel from `Ubuntu MainlineBuilds <https://wiki.ubuntu.com/Kernel/MainlineBuilds>`_ to fix:
 
@@ -194,7 +194,7 @@ Sample config:
 See: `Touchpad Synaptics <https://wiki.archlinux.org/index.php/Touchpad_Synaptics>`_ and the `C720 <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration>`_ on `ArchWiki <https://wiki.archlinux.org/>`_
 
 5. SSD
-======
+------
 
 The `swappiness <https://en.wikipedia.org/wiki/Swappiness>`_ parameter controls the preference of the kernel to move processes out of physical memory to the swap partition. Range is ``0-100``, default is set to ``60`` and lower values cause the kernel to avoid swapping and higher values prompt more frequent swap use.
 
@@ -227,7 +227,7 @@ After modifying ``fstab`` update ``/boot/initrd.img-*`` by running:
 See: `TRIM configuration on solid-state drives <http://www.linuxjournal.com/content/solid-state-drives-get-one-already>`_
 
 6. Suspend
-==========
+``````````
 
 To enable suspend-and-resume [6]_ create ``/etc/initramfs-tools/scripts/init-top/unbind_ehci`` with the following:
 
@@ -301,7 +301,7 @@ Suspend now works reliably when triggered from Lubuntu's shutdown menu. Chromebo
 See: `C720 suspend tips <https://www.reddit.com/r/chrubuntu/comments/1rsxkd/list_of_fixes_for_xubuntu_1310_on_the_acer_c720/ch8eq2o>`_, and `configuring grub <https://www.reddit.com/r/chrubuntu/comments/2evv1c/updating_ubuntu_kernel_headers_image_etc/ckaf6hx>`_
 
 7. Keyboard Shortcuts
-=====================
+---------------------
 
 Top row on the keyboard with the shortcut icons (brightness, volume, etc.) identify in Linux as the ``F1-F10`` keys and the Search key (in the ``CapsLk`` position) acts as the ``Super`` (Windows) modifier key.
 
@@ -317,7 +317,7 @@ Create keyboard shortcuts by first installing:
     $ sudo apt-get install xbindkeys xbacklight pulseaudio-utils xvkbd
 
 7.1 Direction, Brightness, Volume, Page Keys
---------------------------------------------
+````````````````````````````````````````````
 
 .. code-block:: bash
 
@@ -372,14 +372,14 @@ Lubuntu auto-detects ``$HOME/.xbindkeysrc``  and will run ``xbindkeys`` on the n
 See: `Xbindkeys <https://wiki.archlinux.org/index.php/Xbindkeys>`_, and another sample `Chromebook-friendly xbindkeysrc <https://github.com/alexpatel/dotfiles/blob/master/xbindkeysrc>`_
 
 7.2 Power Key
--------------
+`````````````
 
 Power key in upper-right corner ignores any configuration in the window manager and triggers poweroff without delay when pressed (easy to do by accident as its positioned next to ``backspace``).
 
 If you want to disable the power key edit ``/etc/systemd/logind.conf`` and set ``HandlePowerKey=ignore``.
 
 8. Wireless
-===========
+-----------
 
 There are a few settings to modify to improve performance of Chromebook's wireless chipset [8]_. Identify the card and parameters:
 
@@ -405,7 +405,7 @@ Create ``/etc/modprobe.d/ath9k.conf`` with the following options:
 See: `ath9k wireless driver <http://wireless.kernel.org/en/users/Drivers/ath9k>`_ and `bluetooth coexistence <http://wireless.kernel.org/en/users/Drivers/ath9k/btcoex>`_                                                       
 
 9. Helpful Resources
-====================
+````````````````````
 
 * `CrunchBang Linux <https://github.com/liangcj/AcerC720CrunchBang>`_ on the Acer C720
 * Arch Linux `C720 installation with useful post-install details <https://wiki.archlinux.org/index.php/Acer_C720_Chromebook>`_
@@ -415,7 +415,7 @@ See: `ath9k wireless driver <http://wireless.kernel.org/en/users/Drivers/ath9k>`
 Happy hacking!
 
 Notes
------
+`````
 
 .. [1] Device information `output of lshw, lspci, and lsusb <https://github.com/vonbrownie/linux-post-install/tree/master/config/c720_ubuntubook/doc>`_.
 

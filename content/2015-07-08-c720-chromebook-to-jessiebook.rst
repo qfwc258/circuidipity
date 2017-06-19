@@ -5,7 +5,9 @@ Chromebook to Jessiebook
 :date: 2015-07-08 10:45:00
 :slug: c720-chromebook-to-jessiebook
 :tags: chromebook, debian, linux
-:modified: 2017-05-12 00:10:00
+:modified: 2017-06-19 01:10:00
+
+**[ Update ]** `Jessiebook is now a Stretchbook! <http://www.circuidipity.com/jessiebook-to-stretchbook.html>`_
 
 Replace ChromeOS permanently with **Debian** on the **Acer C720 Chromebook**.
 
