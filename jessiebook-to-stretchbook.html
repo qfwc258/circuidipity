@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Jessiebook to Stretchbook</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Monday 19 June 2017</p>
+</div>
+
+<!-- article -->
+<h1>Jessiebook to Stretchbook</h1>
+<div id="article">
+    <p>With the release of <strong>Debian 9 &quot;Stretch&quot;</strong> my <a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html">C720 Chromebook has transitioned from a Jessiebook</a> to a Stretchbook!</p>
+<p>I posted a <a class="reference external" href="http://www.circuidipity.com/minimal-debian.html">visual screenshot tour</a> installing the Debian _stable_ release. I use Debian's <strong>minimal network install image</strong> to create a console-only base configuration that can be customized for various tasks and <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">alternate desktops</a>.</p>
+<p><a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html">Earlier steps</a> taken to setup the Jessiebook still apply with two exceptions. First, <tt class="docutils literal">xbacklight</tt> is acting up ...</p>
+<div class="highlight"><pre><span></span>$ xbacklight -dec 10
+No outputs have backlight property
+</pre></div>
+<p>I <strong>can</strong> write to the file directly to increase/decrease the brightness of the display ...</p>
+<div class="highlight"><pre><span></span>$ cat /sys/class/backlight/intel_backlight/max_brightness
+937
+$ sudo sh -c <span class="s1">&#39;echo 500 &gt; /sys/class/backlight/intel_backlight/brightness&#39;</span>
+$ sudo sh -c <span class="s1">&#39;echo 937 &gt; /sys/class/backlight/intel_backlight/brightness&#39;</span>
+</pre></div>
+<p>... or use <tt class="docutils literal">xrandr</tt> ...</p>
+<div class="highlight"><pre><span></span>$ xrandr --output eDP-1 --brightness 0.5
+</pre></div>
+<p>This is <a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=833508">a known issue.</a></p>
+<p><strong>[ Fix! ]</strong> Roll-back from <tt class="docutils literal"><span class="pre">xserver-xorg-core</span></tt> to <tt class="docutils literal"><span class="pre">xserver-xorg-video-intel</span></tt>. Create <tt class="docutils literal"><span class="pre">/etc/X11/xorg.conf.d/10-video-intel.conf</span></tt> containing ...</p>
+<div class="highlight"><pre><span></span>Section <span class="s2">&quot;Device&quot;</span>
+        Identifier <span class="s2">&quot;Intel&quot;</span>
+        Driver <span class="s2">&quot;intel&quot;</span>
+EndSection
+</pre></div>
+<p>Second, the issues with the <strong>ath9k</strong> driver appear resolved and I leave the wireless alone. No further config tweaks required.</p>
+<p>Happy hacking!</p>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-chromebook.html">chromebook</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/debian-stable-setup.html">Debian _stable_ setup</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>

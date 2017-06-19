@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-18T11:45:00-04:00</updated><entry><title>Debian _stable_ setup</title><link href="http://www.circuidipity.com/debian-stable-setup.html" rel="alternate"></link><published>2017-06-18T07:30:00-04:00</published><updated>2017-06-18T07:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-18:/debian-stable-setup.html</id><summary type="html">&lt;img alt="Debian 9 Stretch" src="images/debian_9_banner.png" style="width: 800px; height: 75px;" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-19T10:20:00-04:00</updated><entry><title>Jessiebook to Stretchbook</title><link href="http://www.circuidipity.com/jessiebook-to-stretchbook.html" rel="alternate"></link><published>2017-06-19T10:20:00-04:00</published><updated>2017-06-19T10:20:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-19:/jessiebook-to-stretchbook.html</id><summary type="html">&lt;p&gt;With the release of &lt;strong&gt;Debian 9 &amp;quot;Stretch&amp;quot;&lt;/strong&gt; my &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;C720 Chromebook has transitioned from a Jessiebook&lt;/a&gt; to a Stretchbook!&lt;/p&gt;
+&lt;p&gt;I posted a &lt;a class="reference external" href="http://www.circuidipity.com/minimal-debian.html"&gt;visual screenshot tour&lt;/a&gt; installing the Debian _stable_ release. I use Debian's &lt;strong&gt;minimal network install image&lt;/strong&gt; to create a console-only base configuration that can be customized for various tasks and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;With the release of &lt;strong&gt;Debian 9 &amp;quot;Stretch&amp;quot;&lt;/strong&gt; my &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;C720 Chromebook has transitioned from a Jessiebook&lt;/a&gt; to a Stretchbook!&lt;/p&gt;
+&lt;p&gt;I posted a &lt;a class="reference external" href="http://www.circuidipity.com/minimal-debian.html"&gt;visual screenshot tour&lt;/a&gt; installing the Debian _stable_ release. I use Debian's &lt;strong&gt;minimal network install image&lt;/strong&gt; to create a console-only base configuration that can be customized for various tasks and &lt;a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html"&gt;alternate desktops&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Earlier steps&lt;/a&gt; taken to setup the Jessiebook still apply with two exceptions. First, &lt;tt class="docutils literal"&gt;xbacklight&lt;/tt&gt; is acting up ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xbacklight -dec 10
+No outputs have backlight property
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I &lt;strong&gt;can&lt;/strong&gt; write to the file directly to increase/decrease the brightness of the display ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ cat /sys/class/backlight/intel_backlight/max_brightness
+937
+$ sudo sh -c &lt;span class="s1"&gt;&amp;#39;echo 500 &amp;gt; /sys/class/backlight/intel_backlight/brightness&amp;#39;&lt;/span&gt;
+$ sudo sh -c &lt;span class="s1"&gt;&amp;#39;echo 937 &amp;gt; /sys/class/backlight/intel_backlight/brightness&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... or use &lt;tt class="docutils literal"&gt;xrandr&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xrandr --output eDP-1 --brightness 0.5
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is &lt;a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=833508"&gt;a known issue.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[ Fix! ]&lt;/strong&gt; Roll-back from &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;xserver-xorg-core&lt;/span&gt;&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;xserver-xorg-video-intel&lt;/span&gt;&lt;/tt&gt;. Create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/X11/xorg.conf.d/10-video-intel.conf&lt;/span&gt;&lt;/tt&gt; containing ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Section &lt;span class="s2"&gt;&amp;quot;Device&amp;quot;&lt;/span&gt;
+        Identifier &lt;span class="s2"&gt;&amp;quot;Intel&amp;quot;&lt;/span&gt;
+        Driver &lt;span class="s2"&gt;&amp;quot;intel&amp;quot;&lt;/span&gt;
+EndSection
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Second, the issues with the &lt;strong&gt;ath9k&lt;/strong&gt; driver appear resolved and I leave the wireless alone. No further config tweaks required.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+</content><category term="chromebook"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Debian _stable_ setup</title><link href="http://www.circuidipity.com/debian-stable-setup.html" rel="alternate"></link><published>2017-06-18T07:30:00-04:00</published><updated>2017-06-18T07:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-18:/debian-stable-setup.html</id><summary type="html">&lt;img alt="Debian 9 Stretch" src="images/debian_9_banner.png" style="width: 800px; height: 75px;" /&gt;
 &lt;p&gt;I created the post-install configuration shell script &lt;strong&gt;debian-stable-setup.sh&lt;/strong&gt; to ideally be run immediately following the first successful boot into a fresh install of Debian.&lt;/p&gt;
 &lt;p&gt;Building on a &lt;a class="reference external" href="http://www.circuidipity.com/minimal-debian.html"&gt;minimal install&lt;/a&gt; the system will be configured to track Debian's _stable_ release. A choice of either 1) a basic console setup (option …&lt;/p&gt;</summary><content type="html">&lt;img alt="Debian 9 Stretch" src="images/debian_9_banner.png" style="width: 800px; height: 75px;" /&gt;
 &lt;p&gt;I created the post-install configuration shell script &lt;strong&gt;debian-stable-setup.sh&lt;/strong&gt; to ideally be run immediately following the first successful boot into a fresh install of Debian.&lt;/p&gt;
@@ -533,72 +558,4 @@ $ mount /media/crypt_data
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="lvm"></category><category term="crypto"></category><category term="linux"></category></entry><entry><title>Automatic security updates on Debian</title><link href="http://www.circuidipity.com/unattended-upgrades.html" rel="alternate"></link><published>2017-05-07T10:56:00-04:00</published><updated>2017-05-07T10:56:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-05-07:/unattended-upgrades.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #2 .:&lt;/a&gt; Fetch the latest fixes, install, and reboot (if necessary). Hands-free!&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Install ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install unattended-upgrades apt-listchanges
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Configuration file for the unattended-upgrades package is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/apt/apt.conf.d/50unattended-upgrades&lt;/span&gt;&lt;/tt&gt;. This section controls which packages are upgraded and security updates are uncommented and enabled by …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #2 .:&lt;/a&gt; Fetch the latest fixes, install, and reboot (if necessary). Hands-free!&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Install ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install unattended-upgrades apt-listchanges
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Configuration file for the unattended-upgrades package is &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/apt/apt.conf.d/50unattended-upgrades&lt;/span&gt;&lt;/tt&gt;. This section controls which packages are upgraded and security updates are uncommented and enabled by default ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Unattended-Upgrade::Origins-Pattern &lt;span class="o"&gt;{&lt;/span&gt;
-    //
-    &lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;origin=Debian,codename=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;distro_codename&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;,label=Debian-Security&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Uncomment the following line to have mail sent to root when Debian auto-installs packages ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Unattended-Upgrade::Mail &lt;span class="s2"&gt;&amp;quot;root&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Confirm a working mail setup is in place. A package that provides &lt;tt class="docutils literal"&gt;mailx&lt;/tt&gt; must be installed ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ dpkg -l &lt;span class="p"&gt;|&lt;/span&gt; grep mailx
-ii  bsd-mailx                     8.1.2-0.20141216cvs-2      i386         simple mail user agent
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;On a laptop consider enabling the &lt;tt class="docutils literal"&gt;MinimalSteps&lt;/tt&gt; option. This allows an upgrade to be interrupted upon shutdown (with a slight delay) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Unattended-Upgrade::MinimalSteps &lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Some security updates can require the system to be rebooted. On a server I enable automatic reboot and set the reboot to occur at a specified time (instead of immediately) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Unattended-Upgrade::Automatic-Reboot &lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-Unattended-Upgrade::Automatic-Reboot-Time &lt;span class="s2"&gt;&amp;quot;04:00&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Activate unattended-upgrades by creating &lt;tt class="docutils literal"&gt;/etc/apt/apt.conf.d/02periodic&lt;/tt&gt;. Sample file ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;// Control parameters &lt;span class="k"&gt;for&lt;/span&gt; cron &lt;span class="nb"&gt;jobs&lt;/span&gt; by /etc/cron.daily/apt //
-
-// Enable the update/upgrade script &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;0&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;disable&lt;span class="o"&gt;)&lt;/span&gt;
-APT::Periodic::Enable &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-// Do &lt;span class="s2"&gt;&amp;quot;apt-get update&amp;quot;&lt;/span&gt; automatically every n-days &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;0&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;disable&lt;span class="o"&gt;)&lt;/span&gt;
-APT::Periodic::Update-Package-Lists &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-// Run the &lt;span class="s2"&gt;&amp;quot;unattended-upgrade&amp;quot;&lt;/span&gt; security upgrade script every n-days &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;0&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;disabled&lt;span class="o"&gt;)&lt;/span&gt;
-// Requires the package &lt;span class="s2"&gt;&amp;quot;unattended-upgrades&amp;quot;&lt;/span&gt; and will write a log in /var/log/unattended-upgrades
-APT::Periodic::Unattended-Upgrade &lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-// Do &lt;span class="s2"&gt;&amp;quot;apt-get autoclean&amp;quot;&lt;/span&gt; every n-days &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;0&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;disable&lt;span class="o"&gt;)&lt;/span&gt;
-APT::Periodic::AutocleanInterval &lt;span class="s2"&gt;&amp;quot;14&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-// Send report mail to root ...
-//  0:  no report             &lt;span class="o"&gt;(&lt;/span&gt;or null string&lt;span class="o"&gt;)&lt;/span&gt;
-//  1:  progress report       &lt;span class="o"&gt;(&lt;/span&gt;actually any string&lt;span class="o"&gt;)&lt;/span&gt;
-//  2:  + &lt;span class="nb"&gt;command&lt;/span&gt; outputs     &lt;span class="o"&gt;(&lt;/span&gt;remove -qq, remove 2&amp;gt;/dev/null, add -d&lt;span class="o"&gt;)&lt;/span&gt;
-//  3:  + trace on
-APT::Periodic::Verbose &lt;span class="s2"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Confirm notifications will be sent to root ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ cat /etc/apt/listchanges.conf
-&lt;span class="o"&gt;[&lt;/span&gt;apt&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;frontend&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;pager
-&lt;span class="nv"&gt;email_address&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;root
-&lt;span class="nv"&gt;confirm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0
-&lt;span class="nv"&gt;save_seen&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/var/lib/apt/listchanges.db
-&lt;span class="nv"&gt;which&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;news
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Upgrade information is also logged within the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/var/log/unattended-upgrades&lt;/span&gt;&lt;/tt&gt; directory.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</content><category term="debian"></category><category term="linux"></category></entry></feed>
+</content><category term="lvm"></category><category term="crypto"></category><category term="linux"></category></entry></feed>

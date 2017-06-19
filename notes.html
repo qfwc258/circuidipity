@@ -24,7 +24,15 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="t0949">
+    <div class="section" id="t0953">
+<h2>2017-06-19T0953</h2>
+<p>Configure menu colours in Grub by creating <tt class="docutils literal">/boot/grub/custom.cfg</tt> with settings ...</p>
+<div class="highlight"><pre><span></span><span class="nb">set</span> <span class="nv">color_normal</span><span class="o">=</span>white/black
+<span class="nb">set</span> <span class="nv">menu_color_normal</span><span class="o">=</span>white/black
+<span class="nb">set</span> <span class="nv">menu_color_highlight</span><span class="o">=</span>white/green
+</pre></div>
+</div>
+<div class="section" id="t0949">
 <h2>2017-06-18T0949</h2>
 <p>Stop pulseaudio from respawning after halt (encountered in Ubuntu 16.04) ... When I kill pulseaudio with <tt class="docutils literal">pulseaudio <span class="pre">-k</span></tt> or <tt class="docutils literal">kill <span class="pre">-9</span> ID</tt> it immediately restarts ...</p>
 <div class="highlight"><pre><span></span>$ pgrep pulse
