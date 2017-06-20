@@ -24,7 +24,18 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="t0953">
+    <div class="section" id="t0926">
+<h2>2017-06-20T0926</h2>
+<p>Clearing the shell cache ... I originally installed <tt class="docutils literal">glances</tt> via apt to <tt class="docutils literal">/usr/bin/glances</tt>, then removed, then installed via pip to <tt class="docutils literal">/usr/local/bin/glances</tt>. The command would show in PATH but - without an explicit path defined - would continue to try and execute from <tt class="docutils literal">/usr/bin</tt>.</p>
+<p><strong>[ FIX! ]</strong>  Bash caches commands. Clear the cache of paths to executables using <tt class="docutils literal">hash</tt> ...</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">type</span> glances
+glances is hashed <span class="o">(</span>/usr/bin/glances<span class="o">)</span>
+$ <span class="nb">hash</span> -d glances
+$ <span class="nb">type</span> glances
+glances is /usr/local/bin/glances
+</pre></div>
+</div>
+<div class="section" id="t0953">
 <h2>2017-06-19T0953</h2>
 <p>Configure menu colours in Grub by creating <tt class="docutils literal">/boot/grub/custom.cfg</tt> with settings ...</p>
 <div class="highlight"><pre><span></span><span class="nb">set</span> <span class="nv">color_normal</span><span class="o">=</span>white/black

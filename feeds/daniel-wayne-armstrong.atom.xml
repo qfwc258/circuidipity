@@ -1,5 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-19T10:20:00-04:00</updated><entry><title>Jessiebook to Stretchbook</title><link href="http://www.circuidipity.com/jessiebook-to-stretchbook.html" rel="alternate"></link><published>2017-06-19T10:20:00-04:00</published><updated>2017-06-19T10:20:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-19:/jessiebook-to-stretchbook.html</id><summary type="html">&lt;p&gt;With the release of &lt;strong&gt;Debian 9 &amp;quot;Stretch&amp;quot;&lt;/strong&gt; my &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;C720 Chromebook has transitioned from a Jessiebook&lt;/a&gt; to a Stretchbook!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-20T07:30:00-04:00</updated><entry><title>Getting started with Neovim</title><link href="http://www.circuidipity.com/neovim.html" rel="alternate"></link><published>2017-06-20T07:30:00-04:00</published><updated>2017-06-20T07:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-20:/neovim.html</id><summary type="html">&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;I have used &lt;strong&gt;Vim&lt;/strong&gt; in the past but barely scratched the surface of its features motherlode. A friend who is a &lt;a class="reference external" href="http://gilesorr.com/blog/tag/vim.html"&gt;passionate vim …&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;I have used &lt;strong&gt;Vim&lt;/strong&gt; in the past but barely scratched the surface of its features motherlode. A friend who is a &lt;a class="reference external" href="http://gilesorr.com/blog/tag/vim.html"&gt;passionate vim user&lt;/a&gt; recommended I try &lt;strong&gt;Neovim&lt;/strong&gt;, which &amp;quot;&lt;em&gt;strives to be a superset of Vim except for some intentionally-removed misfeatures... [and] is built for users who want the good parts of Vim, and more&lt;/em&gt;&amp;quot;. Sounds good!&lt;/p&gt;
+&lt;div class="section" id="install"&gt;
+&lt;h3&gt;0. Install&lt;/h3&gt;
+&lt;p&gt;Neovim packages are available in Debian _stable_/stretch ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install neovim
+$ sudo apt install python-dev python-pip python3-dev python3-pip
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="launch"&gt;
+&lt;h3&gt;1. Launch&lt;/h3&gt;
+&lt;p&gt;Launch editor ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nvim
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;On first launch the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/share/nvim/{shada,swap}&lt;/span&gt;&lt;/tt&gt; directories are auto-generated. Manually create a new &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/nvim&lt;/span&gt;&lt;/tt&gt; directory ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ mkdir ~/.config/nvim
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and create a &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/nvim/init.vim&lt;/span&gt;&lt;/tt&gt; config file (or link to an existing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vimrc&lt;/span&gt;&lt;/tt&gt;). My general settings ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt; nocompatible            &lt;span class="s2"&gt;&amp;quot; Disable compatibility to old-time vi&lt;/span&gt;
+&lt;span class="s2"&gt;set showmatch               &amp;quot;&lt;/span&gt; Show matching brackets.
+&lt;span class="nb"&gt;set&lt;/span&gt; ignorecase              &lt;span class="s2"&gt;&amp;quot; Do case insensitive matching&lt;/span&gt;
+&lt;span class="s2"&gt;set mouse=v                 &amp;quot;&lt;/span&gt; middle-click paste with mouse
+&lt;span class="nb"&gt;set&lt;/span&gt; hlsearch                &lt;span class="s2"&gt;&amp;quot; highlight search results&lt;/span&gt;
+&lt;span class="s2"&gt;set tabstop=4               &amp;quot;&lt;/span&gt; number of columns occupied by a tab character
+&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;softtabstop&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;           &lt;span class="s2"&gt;&amp;quot; see multiple spaces as tabstops so &amp;lt;BS&amp;gt; does the right thing&lt;/span&gt;
+&lt;span class="s2"&gt;set expandtab               &amp;quot;&lt;/span&gt; converts tabs to white space
+&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;shiftwidth&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;            &lt;span class="s2"&gt;&amp;quot; width for autoindents&lt;/span&gt;
+&lt;span class="s2"&gt;set autoindent              &amp;quot;&lt;/span&gt; indent a new line the same amount as the line just typed
+&lt;span class="nb"&gt;set&lt;/span&gt; number                  &lt;span class="s2"&gt;&amp;quot; add line numbers&lt;/span&gt;
+&lt;span class="s2"&gt;set wildmode=longest,list   &amp;quot;&lt;/span&gt; get bash-like tab completions
+&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;cc&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;80&lt;/span&gt;                   &lt;span class="s2"&gt;&amp;quot; set an 80 column border for good coding style&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check out Neovim's built-in &lt;tt class="docutils literal"&gt;:help&lt;/tt&gt; command and the &lt;a class="reference external" href="https://neovim.io/doc/"&gt;online documentation&lt;/a&gt; .&lt;/p&gt;
+&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.config/nvim/init.vim"&gt;dotfiles/.config/nvim/init.vim&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="spelling"&gt;
+&lt;h3&gt;2. Spelling&lt;/h3&gt;
+&lt;p&gt;Toggle spell checking with the command &lt;tt class="docutils literal"&gt;:set invspell&lt;/tt&gt;. First time the command is invoked it prompts to download the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;utf-8&lt;/span&gt;&lt;/tt&gt; spell files ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;spellfile#LoadFile&lt;span class="o"&gt;()&lt;/span&gt;: No &lt;span class="o"&gt;(&lt;/span&gt;writable&lt;span class="o"&gt;)&lt;/span&gt; spell directory found.
+Created /home/dwa/.local/share/nvim/site/spell
+No spell file &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;en&amp;quot;&lt;/span&gt; in utf-8
+Download it?
+&lt;span class="o"&gt;(&lt;/span&gt;Y&lt;span class="o"&gt;)&lt;/span&gt;es, &lt;span class="o"&gt;[&lt;/span&gt;N&lt;span class="o"&gt;]&lt;/span&gt;o:Y
+
+Downloading en.utf-8.spl...
+&lt;span class="s2"&gt;&amp;quot;~/.local/share/nvim/site/spell/en.utf-8.spl&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;New&lt;span class="o"&gt;]&lt;/span&gt; 1121L, 609337C written
+Downloading en.utf-8.sug...
+&lt;span class="s2"&gt;&amp;quot;~/.local/share/nvim/site/spell/en.utf-8.sug&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;New&lt;span class="o"&gt;]&lt;/span&gt; 2512L, 596961C written
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;My own added words are saved in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/nvim/spell/{en.utf-8.add,en.utf-8.add.spl}&lt;/span&gt;&lt;/tt&gt;. Add a hot-key for the spell checker in &lt;tt class="docutils literal"&gt;init.vim&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; toggle spelling&lt;/span&gt;
+&lt;span class="s2"&gt;nnoremap &amp;lt;leader&amp;gt;s :set invspell&amp;lt;CR&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="colors"&gt;
+&lt;h3&gt;3. Colors&lt;/h3&gt;
+&lt;p&gt;Neovim includes a few color schemes and more are available for download. Create a &lt;tt class="docutils literal"&gt;colors&lt;/tt&gt; directory to hold extra schemes ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ mkdir -p ~/.config/nvim/colors
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I use the &lt;a class="reference external" href="http://www.vim.org/scripts/script.php?script_id=2777"&gt;tir_black&lt;/a&gt; scheme. Download and save in the new directory. Set as default color scheme in &lt;tt class="docutils literal"&gt;init.vim&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; color scheme&lt;/span&gt;
+&lt;span class="s2"&gt;colorscheme tir_black&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I ran into the problem where the color scheme worked in the terminal but &lt;strong&gt;not&lt;/strong&gt; inside a &lt;strong&gt;tmux&lt;/strong&gt; session. Turns out my tmux was not seeing the 256 color palette ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ tput colors
+8
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;[ Fix! ]&lt;/strong&gt; Add this setting to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.tmux.conf&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt; -g default-terminal &lt;span class="s2"&gt;&amp;quot;rxvt-unicode-256color&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It is important to &lt;strong&gt;kill all existing tmux sessions&lt;/strong&gt; to see the changes take effect. It is &lt;a class="reference external" href="http://stackoverflow.com/a/25940093"&gt;not enough to simply start a fresh session.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now the colors work OK!&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$TERM&lt;/span&gt;
+rxvt-unicode-256color
+$ tput colors
+256
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="plugins"&gt;
+&lt;h3&gt;4. Plugins&lt;/h3&gt;
+&lt;p&gt;Extend the core features of the text editor using plugins. With a fresh install of Neovim, now is a good time to setup a &lt;strong&gt;plugin manager&lt;/strong&gt;. I install &lt;a class="reference external" href="https://github.com/VundleVim/Vundle.vim"&gt;Vundle&lt;/a&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ mkdir -p ~/.config/nvim/bundle
+    $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Configure neovim to use vundle by modifying &lt;tt class="docutils literal"&gt;init.vim&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;filetype off
+&lt;span class="s2"&gt;&amp;quot; set the runtime path to include Vundle and initialize&lt;/span&gt;
+&lt;span class="s2"&gt;set rtp+=~/.config/nvim/bundle/Vundle.vim&lt;/span&gt;
+&lt;span class="s2"&gt;call vundle#begin(&amp;#39;~/.config/nvim/bundle&amp;#39;)&lt;/span&gt;
+
+&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="nb"&gt;let&lt;/span&gt; Vundle manage Vundle, required
+Plugin &lt;span class="s1"&gt;&amp;#39;VundleVim/Vundle.vim&amp;#39;&lt;/span&gt;
+
+&lt;span class="s2"&gt;&amp;quot; All of your Plugins must be added before the following line&lt;/span&gt;
+&lt;span class="s2"&gt;call vundle#end()&lt;/span&gt;
+&lt;span class="s2"&gt;filetype plugin indent on  &amp;quot;&lt;/span&gt; allows auto-indenting depending on file &lt;span class="nb"&gt;type&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Install plugins by adding &lt;tt class="docutils literal"&gt;Plugin 'plugin/name'&lt;/tt&gt; between &lt;tt class="docutils literal"&gt;vundle#begin()&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;vundle#end()&lt;/tt&gt;, then launch the installer ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nvim +PluginInstall +qall
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A few plugins I have found very useful from the start ...&lt;/p&gt;
+&lt;div class="section" id="syntastic"&gt;
+&lt;h4&gt;Syntastic&lt;/h4&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/vim-syntastic/syntastic"&gt;Syntax checking plugin&lt;/a&gt; that makes use of external syntax checkers. I install &lt;strong&gt;pylint&lt;/strong&gt; for checking Python syntax and &lt;strong&gt;shellcheck&lt;/strong&gt; for Bash scripting ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install pylint pylint3 shellcheck
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Add the plugin to &lt;tt class="docutils literal"&gt;init.vim&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Plugin &lt;span class="s1"&gt;&amp;#39;vim-syntastic/syntastic&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... plus the &lt;a class="reference external" href="https://github.com/vim-syntastic/syntastic#settings"&gt;FAQ&lt;/a&gt; recommends some defaults ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt; statusline+&lt;span class="o"&gt;=&lt;/span&gt;%#warningmsg#
+&lt;span class="nb"&gt;set&lt;/span&gt; statusline+&lt;span class="o"&gt;=&lt;/span&gt;%&lt;span class="o"&gt;{&lt;/span&gt;SyntasticStatuslineFlag&lt;span class="o"&gt;()}&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt; statusline+&lt;span class="o"&gt;=&lt;/span&gt;%*
+
+&lt;span class="nb"&gt;let&lt;/span&gt; g:syntastic_always_populate_loc_list &lt;span class="o"&gt;=&lt;/span&gt; 1
+&lt;span class="nb"&gt;let&lt;/span&gt; g:syntastic_auto_loc_list &lt;span class="o"&gt;=&lt;/span&gt; 1
+&lt;span class="nb"&gt;let&lt;/span&gt; g:syntastic_check_on_open &lt;span class="o"&gt;=&lt;/span&gt; 1
+&lt;span class="nb"&gt;let&lt;/span&gt; g:syntastic_check_on_wq &lt;span class="o"&gt;=&lt;/span&gt; 0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... plus (optional) enable &lt;a class="reference external" href="https://github.com/vim-syntastic/syntastic/issues/1767#issuecomment-217834857"&gt;pylint checking for python3&lt;/a&gt; (the default falls back on python2) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; g:syntastic_python_pylint_exe &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python3 -m pylint3&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="vim-gitgutter"&gt;
+&lt;h4&gt;Vim-gitgutter&lt;/h4&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/airblade/vim-gitgutter"&gt;Plugin that displays a git diff&lt;/a&gt; column at the side of a document marking where lines have been added, modified, or removed.&lt;/p&gt;
+&lt;p&gt;Add the plugin to &lt;tt class="docutils literal"&gt;init.vim&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Plugin &lt;span class="s1"&gt;&amp;#39;airblade/vim-gitgutter&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="vimwiki"&gt;
+&lt;h4&gt;Vimwiki&lt;/h4&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/vimwiki/vimwiki"&gt;Personal wiki plugin&lt;/a&gt; that I use as a simple notebook.&lt;/p&gt;
+&lt;p&gt;Add the plugin to &lt;tt class="docutils literal"&gt;init.vim&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Plugin &lt;span class="s1"&gt;&amp;#39;vimwiki/vimwiki&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Default file location is &lt;tt class="docutils literal"&gt;~/vimwiki&lt;/tt&gt;. To set a different location (example: &lt;tt class="docutils literal"&gt;~/doc/wiki/&lt;/tt&gt;) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; g:vimwiki_list &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;path&amp;#39;&lt;/span&gt;: &lt;span class="s1"&gt;&amp;#39;~/doc/wiki/&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;path_html&amp;#39;&lt;/span&gt;: &lt;span class="s1"&gt;&amp;#39;~/doc/wiki/html/&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;}]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dlg"&gt;created a little script&lt;/a&gt; that runs a &lt;tt class="docutils literal"&gt;git commit&lt;/tt&gt; before launching the wiki.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="default"&gt;
+&lt;h3&gt;5. Default&lt;/h3&gt;
+&lt;p&gt;I set Neovim to be my default editor (for system tasks like &lt;tt class="docutils literal"&gt;visudo&lt;/tt&gt;) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo update-alternatives --config editor
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="neovim"></category><category term="vim"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Jessiebook to Stretchbook</title><link href="http://www.circuidipity.com/jessiebook-to-stretchbook.html" rel="alternate"></link><published>2017-06-19T10:20:00-04:00</published><updated>2017-06-19T10:20:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-19:/jessiebook-to-stretchbook.html</id><summary type="html">&lt;p&gt;With the release of &lt;strong&gt;Debian 9 &amp;quot;Stretch&amp;quot;&lt;/strong&gt; my &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;C720 Chromebook has transitioned from a Jessiebook&lt;/a&gt; to a Stretchbook!&lt;/p&gt;
 &lt;p&gt;I posted a &lt;a class="reference external" href="http://www.circuidipity.com/minimal-debian.html"&gt;visual screenshot tour&lt;/a&gt; installing the Debian _stable_ release. I use Debian's &lt;strong&gt;minimal network install image&lt;/strong&gt; to create a console-only base configuration that can be customized for various tasks and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;With the release of &lt;strong&gt;Debian 9 &amp;quot;Stretch&amp;quot;&lt;/strong&gt; my &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;C720 Chromebook has transitioned from a Jessiebook&lt;/a&gt; to a Stretchbook!&lt;/p&gt;
 &lt;p&gt;I posted a &lt;a class="reference external" href="http://www.circuidipity.com/minimal-debian.html"&gt;visual screenshot tour&lt;/a&gt; installing the Debian _stable_ release. I use Debian's &lt;strong&gt;minimal network install image&lt;/strong&gt; to create a console-only base configuration that can be customized for various tasks and &lt;a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html"&gt;alternate desktops&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Earlier steps&lt;/a&gt; taken to setup the Jessiebook still apply with two exceptions. First, &lt;tt class="docutils literal"&gt;xbacklight&lt;/tt&gt; is acting up ...&lt;/p&gt;
@@ -483,79 +638,4 @@ rsync &lt;span class="nv"&gt;$SYNC_OPT&lt;/span&gt; &lt;span class="nv"&gt;$EXCL
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="network"></category><category term="ssh"></category><category term="crypto"></category><category term="linux"></category></entry><entry><title>LVM and encrypted Logical Volumes</title><link href="http://www.circuidipity.com/lvm-crypt-lv.html" rel="alternate"></link><published>2017-05-13T16:43:00-04:00</published><updated>2017-05-13T16:43:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-05-13:/lvm-crypt-lv.html</id><summary type="html">&lt;p&gt;I have been playing with the &lt;strong&gt;Logical Volume Manager&lt;/strong&gt; (LVM) on my recent Debian installs. Instead of creating a traditional partition layout on a hard drive, LVM adds a layer of abstraction over physical storage that allows the creation of &amp;quot;virtual&amp;quot; partitions.&lt;/p&gt;
-&lt;p&gt;For my &lt;a class="reference external" href="http://www.circuidipity.com/laptop-home-server.html"&gt;netbook home server setup&lt;/a&gt; I used …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I have been playing with the &lt;strong&gt;Logical Volume Manager&lt;/strong&gt; (LVM) on my recent Debian installs. Instead of creating a traditional partition layout on a hard drive, LVM adds a layer of abstraction over physical storage that allows the creation of &amp;quot;virtual&amp;quot; partitions.&lt;/p&gt;
-&lt;p&gt;For my &lt;a class="reference external" href="http://www.circuidipity.com/laptop-home-server.html"&gt;netbook home server setup&lt;/a&gt; I used the Debian installer's manual partitioning tools to assign a partition to LVM, create a &lt;strong&gt;Volume Group&lt;/strong&gt; (VG) and &lt;strong&gt;Logical Volumes&lt;/strong&gt; (LVs), with plenty of storage space to spare. &lt;a class="footnote-reference" href="#id3" id="id1"&gt;[1]&lt;/a&gt; After a successful first boot I configure an encrypted container for data storage that is manually mounted by a non-root user. I don't want an unattended server halting in the boot process waiting for a passphrase or any necessary boot mountpoints to reside on an encrypted partition.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Scan my netbook for devices visible to LVM ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lvmdiskscan&lt;/span&gt;
-/dev/vg/root              &lt;span class="o"&gt;[&lt;/span&gt;      14.90 GiB&lt;span class="o"&gt;]&lt;/span&gt;
-/dev/sda1                 &lt;span class="o"&gt;[&lt;/span&gt;     487.00 MiB&lt;span class="o"&gt;]&lt;/span&gt;
-/dev/vg/swap              &lt;span class="o"&gt;[&lt;/span&gt;     952.00 MiB&lt;span class="o"&gt;]&lt;/span&gt;
-/dev/sda2                 &lt;span class="o"&gt;[&lt;/span&gt;     465.28 GiB&lt;span class="o"&gt;]&lt;/span&gt; LVM physical volume
-/dev/mapper/vg-swap_crypt &lt;span class="o"&gt;[&lt;/span&gt;     952.00 MiB&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="m"&gt;3&lt;/span&gt; disks
-&lt;span class="m"&gt;1&lt;/span&gt; partition
-&lt;span class="m"&gt;0&lt;/span&gt; LVM physical volume whole disks
-&lt;span class="m"&gt;1&lt;/span&gt; LVM physical volume
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Check for free space in the volume group ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# vgdisplay&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
-Free  PE / Size       &lt;span class="m"&gt;115060&lt;/span&gt; / 449.45 GiB
-&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="section" id="create"&gt;
-&lt;h3&gt;0. Create&lt;/h3&gt;
-&lt;p&gt;I create a 400GB &lt;tt class="docutils literal"&gt;data&lt;/tt&gt; logical volume in the volume group ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# lvcreate --size 400G vg --name data&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Information about the LVs can be displayed with the &lt;tt class="docutils literal"&gt;lvdisplay&lt;/tt&gt; command.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="encrypt"&gt;
-&lt;h3&gt;1. Encrypt&lt;/h3&gt;
-&lt;p&gt;Configure LUKS encryption on the newly-created LV ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# cryptsetup luksFormat /dev/vg/data&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Open LV &lt;tt class="docutils literal"&gt;data&lt;/tt&gt; under &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;vg-data_crypt&lt;/span&gt;&lt;/tt&gt;, format with a filesystem, and mount ... &lt;a class="footnote-reference" href="#id4" id="id2"&gt;[2]&lt;/a&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# cryptsetup open /dev/vg/data vg-data_crypt&lt;/span&gt;
-&lt;span class="c1"&gt;# mkfs.ext4 -m 1 /dev/mapper/vg-data_crypt&lt;/span&gt;
-&lt;span class="c1"&gt;# mount /dev/mapper/vg-data_crypt /mnt&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;When finished, unmount the filesystem and close the encrypted LV ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# umount /mnt&lt;/span&gt;
-&lt;span class="c1"&gt;# cryptsetup close /dev/mapper/vg-data_crypt&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="mountpoint"&gt;
-&lt;h3&gt;2. Mountpoint&lt;/h3&gt;
-&lt;p&gt;I create a dedicated mountpoint for the LV in &lt;tt class="docutils literal"&gt;/media&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# mkdir /media/crypt_data&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;/etc/fstab&lt;/tt&gt; and allow mounting by a non-root user ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/dev/mapper/vg-data_crypt /media/crypt_data        ext4    relatime,noauto,user       &lt;span class="m"&gt;0&lt;/span&gt;       0
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Open the LV and mount ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# cryptsetup open /dev/vg/data vg-data_crypt&lt;/span&gt;
-$ mount /media/crypt_data
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h4&gt;Notes&lt;/h4&gt;
-&lt;table class="docutils footnote" frame="void" id="id3" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;For setting up LVM from the beginning and learning about its tools the LVM entries on &lt;a class="reference external" href="https://wiki.debian.org/LVM"&gt;wiki.debian.org&lt;/a&gt; and &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/LVM"&gt;wiki.archlinux.org&lt;/a&gt; are very helpful!&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table class="docutils footnote" frame="void" id="id4" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Reserved blocks can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large non-root partitions extra space can be gained by reducing the default 5% reserve to 1% with option &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-m&lt;/span&gt; &amp;lt;percent&amp;gt;&lt;/tt&gt;.&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</content><category term="lvm"></category><category term="crypto"></category><category term="linux"></category></entry></feed>
+</content><category term="network"></category><category term="ssh"></category><category term="crypto"></category><category term="linux"></category></entry></feed>
