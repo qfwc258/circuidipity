@@ -1,5 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-20T07:30:00-04:00</updated><entry><title>Getting started with Neovim</title><link href="http://www.circuidipity.com/neovim.html" rel="alternate"></link><published>2017-06-20T07:30:00-04:00</published><updated>2017-06-20T07:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-20:/neovim.html</id><summary type="html">&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-21T09:50:00-04:00</updated><entry><title>Dot bashrc</title><link href="http://www.circuidipity.com/dot-bashrc.html" rel="alternate"></link><published>2017-06-21T09:50:00-04:00</published><updated>2017-06-21T09:50:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-21:/dot-bashrc.html</id><summary type="html">&lt;p&gt;I go ahead and customize my experience with the Bash shell by modifying the default &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bashrc&lt;/span&gt;&lt;/tt&gt; placed in $HOME by Debian!&lt;/p&gt;
+&lt;div class="section" id="history"&gt;
+&lt;h2&gt;History&lt;/h2&gt;
+&lt;p&gt;Disable truncating Bash history and &lt;strong&gt;save it all&lt;/strong&gt; ...&lt;/p&gt;
+&lt;p&gt;,. code-block:: bash&lt;/p&gt;
+&lt;blockquote&gt;
+# Unlimited history.
+HISTSIZE=
+HISTFILESIZE=&lt;/blockquote&gt;
+&lt;p&gt;Change the history file location because certain bash sessions will still try and truncate …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;I go ahead and customize my experience with the Bash shell by modifying the default &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bashrc&lt;/span&gt;&lt;/tt&gt; placed in $HOME by Debian!&lt;/p&gt;
+&lt;div class="section" id="history"&gt;
+&lt;h2&gt;History&lt;/h2&gt;
+&lt;p&gt;Disable truncating Bash history and &lt;strong&gt;save it all&lt;/strong&gt; ...&lt;/p&gt;
+&lt;p&gt;,. code-block:: bash&lt;/p&gt;
+&lt;blockquote&gt;
+# Unlimited history.
+HISTSIZE=
+HISTFILESIZE=&lt;/blockquote&gt;
+&lt;p&gt;Change the history file location because certain bash sessions will still try and truncate &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bash_history&lt;/span&gt;&lt;/tt&gt; upon close ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;HISTFILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;~/.bash_unlimited_history
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Default is to write history at the end of each session, overwriting the existing file with an updated version. If logged in with multiple sessions, only the last session to exit will have its history saved.&lt;/p&gt;
+&lt;p&gt;Configure the prompt to write to history after every command and append to the history file, don't overwrite it ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;shopt&lt;/span&gt; -s histappend
+&lt;span class="nv"&gt;PROMPT_COMMAND&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;history -a; &lt;/span&gt;&lt;span class="nv"&gt;$PROMPT_COMMAND&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Add a timestamp per entry. Useful for context when viewing logfiles ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;HISTTIMEFORMAT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;%FT%T  &amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Save all lines of a multiple-line command in the same history entry ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;shopt&lt;/span&gt; -s cmdhist
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reedit a history substitution line if it failed, and edit a recalled history line before executing ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;shopt&lt;/span&gt; -s histreedit
+&lt;span class="nb"&gt;shopt&lt;/span&gt; -s histverify
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Don't put lines starting with space in the history ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;HISTCONTROL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ignorespace
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Toggle recording history off/on for a current shell ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;stophistory&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;set +o history&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;starthistory&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;set -o history&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Helpful links! &lt;a class="reference external" href="https://stackoverflow.com/questions/9457233/unlimited-bash-history"&gt;Unlimited bash history&lt;/a&gt;; &lt;a class="reference external" href="http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login"&gt;History truncated on each login&lt;/a&gt;; &lt;a class="reference external" href="https://unix.stackexchange.com/questions/1288/preserve-bash-history-in-multiple-terminal-windows"&gt;Preserve history in multiple terminal windows&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prompt"&gt;
+&lt;h2&gt;Prompt&lt;/h2&gt;
+&lt;p&gt;I set a two-line prompt (handy when displaying long pathnames), adjust the colour based on HOSTNAME, and if logged in remotely include an 'ssh-session' message ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -n &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$SSH_CLIENT&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    &lt;span class="nv"&gt;ssh_message&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;: ssh-session&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; &lt;span class="nv"&gt;$HOSTNAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;deb&amp;quot;&lt;/span&gt;* &lt;span class="o"&gt;]]&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; &lt;span class="nv"&gt;$HOSTNAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ull&amp;quot;&lt;/span&gt;* &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    &lt;span class="nv"&gt;PS1&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;\[\e[32;1m\]:(\[\e[37;1m\]\u@\h\[\e[33;1m\]&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ssh_message&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;\[\e[32;1m\])-(\[\e[34;1m\]\w\e[32;1m\])\n:.(\[\e[37;1m\]\!\[\e[32;1m\])-\[\e[37;1m\]\$\[\e[0m\] &amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt;
+    &lt;span class="nv"&gt;PS1&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;\[\e[32;1m\]:(\[\e[31;1m\]\u@\h\[\e[33;1m\]&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ssh_message&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;\[\e[32;1m\])-(\[\e[34;1m\]\w\e[32;1m\])\n:.(\[\e[31;1m\]\!\[\e[32;1m\])-\[\e[37;1m\]\$\[\e[0m\] &amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which generates ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;:&lt;span class="o"&gt;(&lt;/span&gt;daniel@debian&lt;span class="o"&gt;)&lt;/span&gt;-&lt;span class="o"&gt;(&lt;/span&gt;~&lt;span class="o"&gt;)&lt;/span&gt;
+:.&lt;span class="o"&gt;(&lt;/span&gt;1054&lt;span class="o"&gt;)&lt;/span&gt;-$ ssh foobian
+:&lt;span class="o"&gt;(&lt;/span&gt;daniel@foobian: ssh-session&lt;span class="o"&gt;)&lt;/span&gt;-&lt;span class="o"&gt;(&lt;/span&gt;~&lt;span class="o"&gt;)&lt;/span&gt;
+:.&lt;span class="o"&gt;(&lt;/span&gt;192&lt;span class="o"&gt;)&lt;/span&gt;-$
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="aliases-and-functions"&gt;
+&lt;h2&gt;Aliases and functions&lt;/h2&gt;
+&lt;p&gt;Enable color support of &lt;tt class="docutils literal"&gt;ls&lt;/tt&gt; and a few handy aliases ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -x /usr/bin/dircolors &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    &lt;span class="nb"&gt;test&lt;/span&gt; -r ~/.dircolors &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;eval&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;dircolors -b ~/.dircolors&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="nb"&gt;eval&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;dircolors -b&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;ls&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ls -aFlhv --color=auto&amp;quot;&lt;/span&gt;
+    &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;diff&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;colordiff&amp;quot;&lt;/span&gt;
+    &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;dir --color=auto&amp;quot;&lt;/span&gt;
+    &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;vdir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;vdir --color=auto&amp;quot;&lt;/span&gt;
+    &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;grep&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;grep --color=auto&amp;quot;&lt;/span&gt;
+    &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;fgrep&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;fgrep --color=auto&amp;quot;&lt;/span&gt;
+    &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;egrep&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;egrep --color=auto&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+
+&lt;span class="c1"&gt;# More aliases and functions.&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; ..&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;cd ..&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;aaa&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sudo apt update &amp;amp;&amp;amp; apt list --upgradable &amp;amp;&amp;amp; sudo apt full-upgrade&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;arst&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;setxkbmap us &amp;amp;&amp;amp; xmodmap ~/.xmodmap&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;asdf&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;setxkbmap us -variant colemak &amp;amp;&amp;amp; xmodmap ~/.xmodmap&amp;quot;&lt;/span&gt;
+bak&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; f in &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$@&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; cp &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$f&lt;/span&gt;&lt;span class="s2"&gt;.&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;date +%FT%H%M%S&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;.bak&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;done&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;df&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;df -hT --total&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;dpkgg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;dpkg -l | grep -i&amp;quot;&lt;/span&gt;
+dsrt&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; du -ach &lt;span class="nv"&gt;$1&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sort -h&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;free&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;free -h&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;gpush&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;git push -u origin master&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;gsave&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;git commit -m &amp;#39;save&amp;#39;&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;gs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;git status&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;histg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;history | grep&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;lsl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ls | less&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;mkdir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;mkdir -pv&amp;quot;&lt;/span&gt;
+mcd&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; mkdir -p &lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+mtg&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; f in &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$@&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; mv &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt;&lt;span class="p"&gt;//[^a-zA-Z0-9&lt;/span&gt;&lt;span class="se"&gt;\.\-&lt;/span&gt;&lt;span class="p"&gt;]/_&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;done&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;pgrep&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pgrep -a&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;psg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ps aux | grep -v grep | grep -i -e VSZ -e&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;tmuxa&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;tmux -f &lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="s2"&gt;/.tmux.default.conf attach&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;wget&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;wget -c&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;zzz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sync &amp;amp;&amp;amp; systemctl suspend&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="extras"&gt;
+&lt;h2&gt;Extras&lt;/h2&gt;
+&lt;p&gt;Automatically prepend &lt;tt class="docutils literal"&gt;cd&lt;/tt&gt; when entering just a path in the shell ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;shopt&lt;/span&gt; -s autocd
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html#key-management"&gt;Setup keychain&lt;/a&gt; for ssh-agent management ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -x /usr/bin/keychain &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    keychain ~/.ssh/id_rsa
+    . ~/.keychain/&lt;span class="nv"&gt;$HOSTNAME&lt;/span&gt;-sh
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Add directories to my &lt;tt class="docutils literal"&gt;$PATH&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;:/sbin
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Disable XON/XOFF flow control ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;stty -ixon
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... which enables the use of &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;CNTRL-S&lt;/span&gt;&lt;/tt&gt; in other commands. &lt;strong&gt;Example:&lt;/strong&gt; forward search in history, and disabling screen freeze in vim.&lt;/p&gt;
+&lt;p&gt;When happy with the changes, save file and reload the config ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;source&lt;/span&gt; ~/.bashrc
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Link: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.bashrc"&gt;dotfiles/.bashrc&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category></entry><entry><title>Getting started with Neovim</title><link href="http://www.circuidipity.com/neovim.html" rel="alternate"></link><published>2017-06-20T07:30:00-04:00</published><updated>2017-06-20T07:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-20:/neovim.html</id><summary type="html">&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;I have used &lt;strong&gt;Vim&lt;/strong&gt; in the past but barely scratched the surface of its features motherlode. A friend who is a &lt;a class="reference external" href="http://gilesorr.com/blog/tag/vim.html"&gt;passionate vim …&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
@@ -582,60 +709,4 @@ device &lt;span class="sb"&gt;`&lt;/span&gt;net:192.168.1.88:hpaio:/usb/DeskJet_
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="printer"></category><category term="scanner"></category><category term="network"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Automatic backups over the LAN</title><link href="http://www.circuidipity.com/backup-over-lan.html" rel="alternate"></link><published>2017-05-19T10:50:00-04:00</published><updated>2017-05-19T10:50:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-05-19:/backup-over-lan.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #4 .:&lt;/a&gt; Make incremental and automatic backups of a home folder to a local server using &lt;strong&gt;SSH + rsync + cron&lt;/strong&gt;.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Server&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/laptop-home-server.html"&gt;raised-from-the-dead netbook&lt;/a&gt; on the home network. &lt;strong&gt;Client&lt;/strong&gt; desktop is configured to perform a daily sync of its &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt; to server.&lt;/p&gt;
-&lt;div class="section" id="server-and-client-ssh-keys"&gt;
-&lt;h3&gt;0. Server and Client …&lt;/h3&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #4 .:&lt;/a&gt; Make incremental and automatic backups of a home folder to a local server using &lt;strong&gt;SSH + rsync + cron&lt;/strong&gt;.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Server&lt;/strong&gt; is a &lt;a class="reference external" href="http://www.circuidipity.com/laptop-home-server.html"&gt;raised-from-the-dead netbook&lt;/a&gt; on the home network. &lt;strong&gt;Client&lt;/strong&gt; desktop is configured to perform a daily sync of its &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt; to server.&lt;/p&gt;
-&lt;div class="section" id="server-and-client-ssh-keys"&gt;
-&lt;h3&gt;0. Server and Client: SSH keys&lt;/h3&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;Create cryptographic keys and disable password logins&lt;/a&gt; to make traffic between server and client more secure.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="server-backup-directory"&gt;
-&lt;h3&gt;1. Server: backup directory&lt;/h3&gt;
-&lt;p&gt;Create a directory to store the backup ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ mkdir -p /path/to/backup
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="client-hosts-alias"&gt;
-&lt;h3&gt;2. Client: hosts alias&lt;/h3&gt;
-&lt;p&gt;Set the IP address and hostname of server in &lt;tt class="docutils literal"&gt;/etc/hosts&lt;/tt&gt;. Sample entry ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;192.168.1.88    netbook.lan
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="client-sync"&gt;
-&lt;h3&gt;3. Client: sync&lt;/h3&gt;
-&lt;p&gt;Test synching &lt;tt class="docutils literal"&gt;$HOME/&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;netbook.lan:/path/to/backup/&lt;/span&gt;&lt;/tt&gt; with the &lt;tt class="docutils literal"&gt;rsync &lt;span class="pre"&gt;--dry-run&lt;/span&gt;&lt;/tt&gt; option. Example ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ rsync --dry-run --archive --delete --verbose &lt;span class="nv"&gt;$HOME&lt;/span&gt;/ netbook.lan:/path/to/backup/
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If everything checks out OK drop &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--dry-run&lt;/span&gt;&lt;/tt&gt; and re-run the command to make a proper backup.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="client-script"&gt;
-&lt;h3&gt;4. Client: script&lt;/h3&gt;
-&lt;p&gt;Start piling on the options to rsync and the command quickly becomes awkward and easy to get wrong. Option &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--delete&lt;/span&gt;&lt;/tt&gt; is useful but can generate unpleasant surprises. A few things I &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--exclude&lt;/span&gt;&lt;/tt&gt; from a &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt; sync are &lt;tt class="docutils literal"&gt;[Cc]ache&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;[Tt]rash&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;[Tt]humbnails&lt;/tt&gt;, and pay attention to the trailing forward-slash &lt;tt class="docutils literal"&gt;/&lt;/tt&gt; on directories.&lt;/p&gt;
-&lt;p&gt;I create a shell script &lt;tt class="docutils literal"&gt;teleportHome.sh&lt;/tt&gt; that makes use of the &lt;tt class="docutils literal"&gt;keychain&lt;/tt&gt; utility to &lt;a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html"&gt;manage SSH keys for password-less logins to servers&lt;/a&gt; and place in &lt;tt class="docutils literal"&gt;$HOME/bin&lt;/tt&gt;. Sample ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
-&lt;span class="nv"&gt;SYNC_OPT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;--archive --verbose --delete&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;EXCLUDE_OPT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;--exclude=*[Cc]ache*/ --exclude=*[Tt]rash*/ --exclude=local/ \&lt;/span&gt;
-&lt;span class="s2"&gt;--exclude=*[Tt]humbnail*/&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;DESTINATION&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;netbook.lan:/path/to/backup/&amp;quot;&lt;/span&gt;
-
-. &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;HOME&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/.keychain/&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;HOSTNAME&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;-sh
-rsync &lt;span class="nv"&gt;$SYNC_OPT&lt;/span&gt; &lt;span class="nv"&gt;$EXCLUDE_OPT&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;HOME&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/ &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DESTINATION&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Link: &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/teleportHome.sh"&gt;teleportHome.sh&lt;/a&gt; - A more complete script that verifies that DESTINATION exists; adds option to include (and exclude) items from a config file.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="client-automate"&gt;
-&lt;h3&gt;5. Client: automate&lt;/h3&gt;
-&lt;p&gt;Automate the backups by running &lt;tt class="docutils literal"&gt;crontab &lt;span class="pre"&gt;-e&lt;/span&gt;&lt;/tt&gt; and creating a &lt;strong&gt;cron job&lt;/strong&gt;. Sample entry runs the backup script daily at 02:30 ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# m h  dom mon dow   command&lt;/span&gt;
-&lt;span class="m"&gt;30&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; * * * . /home/USERNAME/.keychain/&lt;span class="k"&gt;$(&lt;/span&gt;/bin/hostname&lt;span class="k"&gt;)&lt;/span&gt;-sh&lt;span class="p"&gt;;&lt;/span&gt; /home/USERNAME/bin/teleportHome.sh netbook.lan:/path/to/backup/
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</content><category term="network"></category><category term="ssh"></category><category term="crypto"></category><category term="linux"></category></entry></feed>
+</content><category term="printer"></category><category term="scanner"></category><category term="network"></category><category term="debian"></category><category term="linux"></category></entry></feed>

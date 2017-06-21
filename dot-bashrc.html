@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Dot bashrc</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Wednesday 21 June 2017</p>
+</div>
+
+<!-- article -->
+<h1>Dot bashrc</h1>
+<div id="article">
+    <p>I go ahead and customize my experience with the Bash shell by modifying the default <tt class="docutils literal"><span class="pre">~/.bashrc</span></tt> placed in $HOME by Debian!</p>
+<div class="section" id="history">
+<h2>History</h2>
+<p>Disable truncating Bash history and <strong>save it all</strong> ...</p>
+<p>,. code-block:: bash</p>
+<blockquote>
+# Unlimited history.
+HISTSIZE=
+HISTFILESIZE=</blockquote>
+<p>Change the history file location because certain bash sessions will still try and truncate <tt class="docutils literal"><span class="pre">~/.bash_history</span></tt> upon close ...</p>
+<div class="highlight"><pre><span></span><span class="nv">HISTFILE</span><span class="o">=</span>~/.bash_unlimited_history
+</pre></div>
+<p>Default is to write history at the end of each session, overwriting the existing file with an updated version. If logged in with multiple sessions, only the last session to exit will have its history saved.</p>
+<p>Configure the prompt to write to history after every command and append to the history file, don't overwrite it ...</p>
+<div class="highlight"><pre><span></span><span class="nb">shopt</span> -s histappend
+<span class="nv">PROMPT_COMMAND</span><span class="o">=</span><span class="s2">&quot;history -a; </span><span class="nv">$PROMPT_COMMAND</span><span class="s2">&quot;</span>
+</pre></div>
+<p>Add a timestamp per entry. Useful for context when viewing logfiles ...</p>
+<div class="highlight"><pre><span></span><span class="nv">HISTTIMEFORMAT</span><span class="o">=</span><span class="s2">&quot;%FT%T  &quot;</span>
+</pre></div>
+<p>Save all lines of a multiple-line command in the same history entry ...</p>
+<div class="highlight"><pre><span></span><span class="nb">shopt</span> -s cmdhist
+</pre></div>
+<p>Reedit a history substitution line if it failed, and edit a recalled history line before executing ...</p>
+<div class="highlight"><pre><span></span><span class="nb">shopt</span> -s histreedit
+<span class="nb">shopt</span> -s histverify
+</pre></div>
+<p>Don't put lines starting with space in the history ...</p>
+<div class="highlight"><pre><span></span><span class="nv">HISTCONTROL</span><span class="o">=</span>ignorespace
+</pre></div>
+<p>Toggle recording history off/on for a current shell ...</p>
+<div class="highlight"><pre><span></span><span class="nb">alias</span> <span class="nv">stophistory</span><span class="o">=</span><span class="s2">&quot;set +o history&quot;</span>
+<span class="nb">alias</span> <span class="nv">starthistory</span><span class="o">=</span><span class="s2">&quot;set -o history&quot;</span>
+</pre></div>
+<p>Helpful links! <a class="reference external" href="https://stackoverflow.com/questions/9457233/unlimited-bash-history">Unlimited bash history</a>; <a class="reference external" href="http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login">History truncated on each login</a>; <a class="reference external" href="https://unix.stackexchange.com/questions/1288/preserve-bash-history-in-multiple-terminal-windows">Preserve history in multiple terminal windows</a></p>
+</div>
+<div class="section" id="prompt">
+<h2>Prompt</h2>
+<p>I set a two-line prompt (handy when displaying long pathnames), adjust the colour based on HOSTNAME, and if logged in remotely include an 'ssh-session' message ...</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[[</span> -n <span class="s2">&quot;</span><span class="nv">$SSH_CLIENT</span><span class="s2">&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">ssh_message</span><span class="o">=</span><span class="s2">&quot;: ssh-session&quot;</span>
+<span class="k">fi</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="nv">$HOSTNAME</span> <span class="o">=</span> <span class="s2">&quot;deb&quot;</span>* <span class="o">]]</span> <span class="o">||</span> <span class="o">[[</span> <span class="nv">$HOSTNAME</span> <span class="o">=</span> <span class="s2">&quot;ull&quot;</span>* <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">PS1</span><span class="o">=</span><span class="s2">&quot;\[\e[32;1m\]:(\[\e[37;1m\]\u@\h\[\e[33;1m\]</span><span class="si">${</span><span class="nv">ssh_message</span><span class="si">}</span><span class="s2">\[\e[32;1m\])-(\[\e[34;1m\]\w\e[32;1m\])\n:.(\[\e[37;1m\]\!\[\e[32;1m\])-\[\e[37;1m\]\$\[\e[0m\] &quot;</span>
+<span class="k">else</span>
+    <span class="nv">PS1</span><span class="o">=</span><span class="s2">&quot;\[\e[32;1m\]:(\[\e[31;1m\]\u@\h\[\e[33;1m\]</span><span class="si">${</span><span class="nv">ssh_message</span><span class="si">}</span><span class="s2">\[\e[32;1m\])-(\[\e[34;1m\]\w\e[32;1m\])\n:.(\[\e[31;1m\]\!\[\e[32;1m\])-\[\e[37;1m\]\$\[\e[0m\] &quot;</span>
+<span class="k">fi</span>
+</pre></div>
+<p>Which generates ...</p>
+<div class="highlight"><pre><span></span>:<span class="o">(</span>daniel@debian<span class="o">)</span>-<span class="o">(</span>~<span class="o">)</span>
+:.<span class="o">(</span>1054<span class="o">)</span>-$ ssh foobian
+:<span class="o">(</span>daniel@foobian: ssh-session<span class="o">)</span>-<span class="o">(</span>~<span class="o">)</span>
+:.<span class="o">(</span>192<span class="o">)</span>-$
+</pre></div>
+</div>
+<div class="section" id="aliases-and-functions">
+<h2>Aliases and functions</h2>
+<p>Enable color support of <tt class="docutils literal">ls</tt> and a few handy aliases ...</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[</span> -x /usr/bin/dircolors <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">test</span> -r ~/.dircolors <span class="o">&amp;&amp;</span> <span class="nb">eval</span> <span class="s2">&quot;</span><span class="k">$(</span>dircolors -b ~/.dircolors<span class="k">)</span><span class="s2">&quot;</span> <span class="o">||</span> <span class="nb">eval</span> <span class="s2">&quot;</span><span class="k">$(</span>dircolors -b<span class="k">)</span><span class="s2">&quot;</span>
+    <span class="nb">alias</span> <span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;ls -aFlhv --color=auto&quot;</span>
+    <span class="nb">alias</span> <span class="nv">diff</span><span class="o">=</span><span class="s2">&quot;colordiff&quot;</span>
+    <span class="nb">alias</span> <span class="nv">dir</span><span class="o">=</span><span class="s2">&quot;dir --color=auto&quot;</span>
+    <span class="nb">alias</span> <span class="nv">vdir</span><span class="o">=</span><span class="s2">&quot;vdir --color=auto&quot;</span>
+    <span class="nb">alias</span> <span class="nv">grep</span><span class="o">=</span><span class="s2">&quot;grep --color=auto&quot;</span>
+    <span class="nb">alias</span> <span class="nv">fgrep</span><span class="o">=</span><span class="s2">&quot;fgrep --color=auto&quot;</span>
+    <span class="nb">alias</span> <span class="nv">egrep</span><span class="o">=</span><span class="s2">&quot;egrep --color=auto&quot;</span>
+<span class="k">fi</span>
+
+<span class="c1"># More aliases and functions.</span>
+<span class="nb">alias</span> ..<span class="o">=</span><span class="s2">&quot;cd ..&quot;</span>
+<span class="nb">alias</span> <span class="nv">aaa</span><span class="o">=</span><span class="s2">&quot;sudo apt update &amp;&amp; apt list --upgradable &amp;&amp; sudo apt full-upgrade&quot;</span>
+<span class="nb">alias</span> <span class="nv">arst</span><span class="o">=</span><span class="s2">&quot;setxkbmap us &amp;&amp; xmodmap ~/.xmodmap&quot;</span>
+<span class="nb">alias</span> <span class="nv">asdf</span><span class="o">=</span><span class="s2">&quot;setxkbmap us -variant colemak &amp;&amp; xmodmap ~/.xmodmap&quot;</span>
+bak<span class="o">()</span> <span class="o">{</span> <span class="k">for</span> f in <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="p">;</span> <span class="k">do</span> cp <span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">.</span><span class="k">$(</span>date +%FT%H%M%S<span class="k">)</span><span class="s2">.bak&quot;</span><span class="p">;</span> <span class="k">done</span><span class="p">;</span> <span class="o">}</span>
+<span class="nb">alias</span> <span class="nv">df</span><span class="o">=</span><span class="s2">&quot;df -hT --total&quot;</span>
+<span class="nb">alias</span> <span class="nv">dpkgg</span><span class="o">=</span><span class="s2">&quot;dpkg -l | grep -i&quot;</span>
+dsrt<span class="o">()</span> <span class="o">{</span> du -ach <span class="nv">$1</span> <span class="p">|</span> sort -h<span class="p">;</span> <span class="o">}</span>
+<span class="nb">alias</span> <span class="nv">free</span><span class="o">=</span><span class="s2">&quot;free -h&quot;</span>
+<span class="nb">alias</span> <span class="nv">gpush</span><span class="o">=</span><span class="s2">&quot;git push -u origin master&quot;</span>
+<span class="nb">alias</span> <span class="nv">gsave</span><span class="o">=</span><span class="s2">&quot;git commit -m &#39;save&#39;&quot;</span>
+<span class="nb">alias</span> <span class="nv">gs</span><span class="o">=</span><span class="s2">&quot;git status&quot;</span>
+<span class="nb">alias</span> <span class="nv">histg</span><span class="o">=</span><span class="s2">&quot;history | grep&quot;</span>
+<span class="nb">alias</span> <span class="nv">lsl</span><span class="o">=</span><span class="s2">&quot;ls | less&quot;</span>
+<span class="nb">alias</span> <span class="nv">mkdir</span><span class="o">=</span><span class="s2">&quot;mkdir -pv&quot;</span>
+mcd<span class="o">()</span> <span class="o">{</span> mkdir -p <span class="nv">$1</span><span class="p">;</span> <span class="nb">cd</span> <span class="nv">$1</span><span class="p">;</span> <span class="o">}</span>
+mtg<span class="o">()</span> <span class="o">{</span> <span class="k">for</span> f in <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="p">;</span> <span class="k">do</span> mv <span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">f</span><span class="p">//[^a-zA-Z0-9</span><span class="se">\.\-</span><span class="p">]/_</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span> <span class="k">done</span><span class="p">;</span> <span class="o">}</span>
+<span class="nb">alias</span> <span class="nv">pgrep</span><span class="o">=</span><span class="s2">&quot;pgrep -a&quot;</span>
+<span class="nb">alias</span> <span class="nv">psg</span><span class="o">=</span><span class="s2">&quot;ps aux | grep -v grep | grep -i -e VSZ -e&quot;</span>
+<span class="nb">alias</span> <span class="nv">tmuxa</span><span class="o">=</span><span class="s2">&quot;tmux -f </span><span class="nv">$HOME</span><span class="s2">/.tmux.default.conf attach&quot;</span>
+<span class="nb">alias</span> <span class="nv">wget</span><span class="o">=</span><span class="s2">&quot;wget -c&quot;</span>
+<span class="nb">alias</span> <span class="nv">zzz</span><span class="o">=</span><span class="s2">&quot;sync &amp;&amp; systemctl suspend&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="extras">
+<h2>Extras</h2>
+<p>Automatically prepend <tt class="docutils literal">cd</tt> when entering just a path in the shell ...</p>
+<div class="highlight"><pre><span></span><span class="nb">shopt</span> -s autocd
+</pre></div>
+<p><a class="reference external" href="http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html#key-management">Setup keychain</a> for ssh-agent management ...</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[</span> -x /usr/bin/keychain <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    keychain ~/.ssh/id_rsa
+    . ~/.keychain/<span class="nv">$HOSTNAME</span>-sh
+<span class="k">fi</span>
+</pre></div>
+<p>Add directories to my <tt class="docutils literal">$PATH</tt> ...</p>
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/sbin
+</pre></div>
+<p>Disable XON/XOFF flow control ...</p>
+<div class="highlight"><pre><span></span>stty -ixon
+</pre></div>
+<p>... which enables the use of <tt class="docutils literal"><span class="pre">CNTRL-S</span></tt> in other commands. <strong>Example:</strong> forward search in history, and disabling screen freeze in vim.</p>
+<p>When happy with the changes, save file and reload the config ...</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">source</span> ~/.bashrc
+</pre></div>
+<p>Link: <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.bashrc">dotfiles/.bashrc</a></p>
+<p>Happy hacking!</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-dotfiles.html">dotfiles</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/neovim.html">Getting started with Neovim</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>
