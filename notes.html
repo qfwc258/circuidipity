@@ -24,7 +24,15 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="t0926">
+    <div class="section" id="t0832">
+<h2>2017-06-21T0832</h2>
+<p>VLC not playing mkv files on the chromebook. Generates error message ...</p>
+<div class="highlight"><pre><span></span>libvdpau-va-gl: Decoder::Render_h264<span class="o">()</span>: no surfaces left in buffer
+</pre></div>
+<p><strong>[ FIX! ]</strong> In VLC navigated to <tt class="docutils literal"><span class="pre">Tools-&gt;Preferences-&gt;Input/Codecs</span></tt> and for <strong>Hardware-accelerated decoding</strong> switched to <tt class="docutils literal"><span class="pre">VA-API</span> video decoder via x11</tt> instead of using <tt class="docutils literal">VDPAU</tt>. Or set <tt class="docutils literal"><span class="pre">avcodec-hw=vaapi_x11</span></tt> in <tt class="docutils literal"><span class="pre">~/.config/vlc/vlcrc</span></tt>.</p>
+<p>Link: <a class="reference external" href="https://askubuntu.com/questions/714363/intel-vaapi-cant-play-mkv-with-vlc">https://askubuntu.com/questions/714363/intel-vaapi-cant-play-mkv-with-vlc</a></p>
+</div>
+<div class="section" id="t0926">
 <h2>2017-06-20T0926</h2>
 <p>Clearing the shell cache ... I originally installed <tt class="docutils literal">glances</tt> via apt to <tt class="docutils literal">/usr/bin/glances</tt>, then removed, then installed via pip to <tt class="docutils literal">/usr/local/bin/glances</tt>. The command would show in PATH but - without an explicit path defined - would continue to try and execute from <tt class="docutils literal">/usr/bin</tt>.</p>
 <p><strong>[ FIX! ]</strong>  Bash caches commands. Clear the cache of paths to executables using <tt class="docutils literal">hash</tt> ...</p>
