@@ -4,6 +4,34 @@ Notes
 
 :slug: notes
 
+2017-06-21T0832
+---------------
+
+VLC not playing mkv files on the chromebook. Generates error message ...
+
+.. code-block:: bash
+
+    libvdpau-va-gl: Decoder::Render_h264(): no surfaces left in buffer
+
+**[ FIX! ]** In VLC navigated to ``Tools->Preferences->Input/Codecs`` and for **Hardware-accelerated decoding** switched to ``VA-API video decoder via x11`` instead of using ``VDPAU``. Or set ``avcodec-hw=vaapi_x11`` in ``~/.config/vlc/vlcrc``.
+
+Link: https://askubuntu.com/questions/714363/intel-vaapi-cant-play-mkv-with-vlc
+
+2017-06-20T0926
+---------------
+
+Clearing the shell cache ... I originally installed ``glances`` via apt to ``/usr/bin/glances``, then removed, then installed via pip to ``/usr/local/bin/glances``. The command would show in PATH but - without an explicit path defined - would continue to try and execute from ``/usr/bin``.
+
+**[ FIX! ]**  Bash caches commands. Clear the cache of paths to executables using ``hash`` ...
+
+.. code-block:: bash
+
+    $ type glances
+    glances is hashed (/usr/bin/glances)
+    $ hash -d glances
+    $ type glances
+    glances is /usr/local/bin/glances
+
 2017-06-19T0953
 ---------------
 
