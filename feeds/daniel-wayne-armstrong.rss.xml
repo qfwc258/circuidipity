@@ -3,12 +3,11 @@
 &lt;div class="section" id="history"&gt;
 &lt;h2&gt;History&lt;/h2&gt;
 &lt;p&gt;Disable truncating Bash history and &lt;strong&gt;save it all&lt;/strong&gt; ...&lt;/p&gt;
-&lt;p&gt;,. code-block:: bash&lt;/p&gt;
-&lt;blockquote&gt;
-# Unlimited history.
-HISTSIZE=
-HISTFILESIZE=&lt;/blockquote&gt;
-&lt;p&gt;Change the history file location because certain bash sessions will still try and truncate …&lt;/p&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 21 Jun 2017 09:50:00 -0400</pubDate><guid isPermaLink="false">tag:www.circuidipity.com,2017-06-21:/dot-bashrc.html</guid><category>dotfiles</category><category>shell</category><category>linux</category></item><item><title>Getting started with Neovim</title><link>http://www.circuidipity.com/neovim.html</link><description>&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Unlimited history.&lt;/span&gt;
+&lt;span class="nv"&gt;HISTSIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="nv"&gt;HISTFILESIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Change the history file location because certain bash sessions will still try and truncate &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bash_history&lt;/span&gt;&lt;/tt&gt; upon …&lt;/p&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Wed, 21 Jun 2017 09:50:00 -0400</pubDate><guid isPermaLink="false">tag:www.circuidipity.com,2017-06-21:/dot-bashrc.html</guid><category>dotfiles</category><category>shell</category><category>linux</category></item><item><title>Getting started with Neovim</title><link>http://www.circuidipity.com/neovim.html</link><description>&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;I have used &lt;strong&gt;Vim&lt;/strong&gt; in the past but barely scratched the surface of its features motherlode. A friend who is a &lt;a class="reference external" href="http://gilesorr.com/blog/tag/vim.html"&gt;passionate vim …&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Tue, 20 Jun 2017 07:30:00 -0400</pubDate><guid isPermaLink="false">tag:www.circuidipity.com,2017-06-20:/neovim.html</guid><category>neovim</category><category>vim</category><category>linux</category></item><item><title>Jessiebook to Stretchbook</title><link>http://www.circuidipity.com/jessiebook-to-stretchbook.html</link><description>&lt;p&gt;With the release of &lt;strong&gt;Debian 9 &amp;quot;Stretch&amp;quot;&lt;/strong&gt; my &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;C720 Chromebook has transitioned from a Jessiebook&lt;/a&gt; to a Stretchbook!&lt;/p&gt;

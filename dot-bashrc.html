@@ -29,11 +29,10 @@
 <div class="section" id="history">
 <h2>History</h2>
 <p>Disable truncating Bash history and <strong>save it all</strong> ...</p>
-<p>,. code-block:: bash</p>
-<blockquote>
-# Unlimited history.
-HISTSIZE=
-HISTFILESIZE=</blockquote>
+<div class="highlight"><pre><span></span><span class="c1"># Unlimited history.</span>
+<span class="nv">HISTSIZE</span><span class="o">=</span>
+<span class="nv">HISTFILESIZE</span><span class="o">=</span>
+</pre></div>
 <p>Change the history file location because certain bash sessions will still try and truncate <tt class="docutils literal"><span class="pre">~/.bash_history</span></tt> upon close ...</p>
 <div class="highlight"><pre><span></span><span class="nv">HISTFILE</span><span class="o">=</span>~/.bash_unlimited_history
 </pre></div>
