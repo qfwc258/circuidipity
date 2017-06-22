@@ -24,7 +24,20 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="t0832">
+    <div class="section" id="t1036">
+<h2>2017-06-22T1036</h2>
+<p>Generate list of packages installed on one machine running Debian for installation on another machine.</p>
+<p>List of packages on first machine ...</p>
+<div class="highlight"><pre><span></span>$ sudo dpkg --get-selections <span class="p">|</span> grep -v deinstall &gt; deb-pkg-list.txt
+</pre></div>
+<p>Install packages on the second machine ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install dselect
+$ sudo dselect update    <span class="c1"># update dselect database</span>
+$ sudo dpkg --set-selections &lt; deb-pkg-list.txt
+$ sudo apt dselect-upgrade
+</pre></div>
+</div>
+<div class="section" id="t0832">
 <h2>2017-06-21T0832</h2>
 <p>VLC not playing mkv files on the chromebook. Generates error message ...</p>
 <div class="highlight"><pre><span></span>libvdpau-va-gl: Decoder::Render_h264<span class="o">()</span>: no surfaces left in buffer
