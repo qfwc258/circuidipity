@@ -4,6 +4,26 @@ Notes
 
 :slug: notes
 
+2017-06-22T1036
+---------------
+
+Generate list of packages installed on one machine running Debian for installation on another machine.
+
+List of packages on first machine ...
+
+.. code-block:: bash
+
+    $ sudo dpkg --get-selections | grep -v deinstall > deb-pkg-list.txt
+
+Install packages on the second machine ...
+
+.. code-block:: bash
+
+    $ sudo apt install dselect
+    $ sudo dselect update    # update dselect database
+    $ sudo dpkg --set-selections < deb-pkg-list.txt
+    $ sudo apt dselect-upgrade
+
 2017-06-21T0832
 ---------------
 
