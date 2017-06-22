@@ -24,20 +24,20 @@
 
 <!-- article -->
 <h1>Chromebook to Jessiebook</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Monday 19 June 2017</p>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Thursday 22 June 2017</p>
 <div id="article">
     <p><strong>[ Update ]</strong> <a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html">Jessiebook is now a Stretchbook!</a></p>
 <p>Replace ChromeOS permanently with <strong>Debian</strong> on the <strong>Acer C720 Chromebook</strong>.</p>
 <img alt="jessiebook" class="align-right" src="images/jessiebook.png" style="width: 300px; height: 161px;" />
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
-<p>Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with Debian, followed by <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Lubuntu</a>, <a class="reference external" href="http://www.circuidipity.com/arch-install-encrypt.html">Arch</a>, <a class="reference external" href="http://www.circuidipity.com/c720-ubuntubook.html">Ubuntu</a>, and have now returned to the latest Debian <tt class="docutils literal">jessie/stable</tt> release.</p>
+<p>Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with Debian, followed by <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Lubuntu</a>, <a class="reference external" href="http://www.circuidipity.com/arch-install-encrypt.html">Arch</a>, <a class="reference external" href="http://www.circuidipity.com/c720-ubuntubook.html">Ubuntu</a>, and have now returned to the latest Debian <tt class="docutils literal">jessie/_stable_</tt> release.</p>
 <p>This device is available in a few different configurations. Mine is the non-touchscreen model <tt class="docutils literal"><span class="pre">C720-2848</span></tt> with (non-expandable) 2GB RAM and a (user-replaceable) 16GB SSD.</p>
 <div class="section" id="recovery-image">
 <h3>0. Recovery Image</h3>
 <p>Create a recovery image of Chrome OS (my C720 is model <tt class="docutils literal">PEPPY <span class="pre">C6A-N3C-A7O</span></tt>) to enable restoring the Chromebook to its default configuration. <a class="footnote-reference" href="#id13" id="id1">[1]</a> This will require a spare USB stick of 2GB or better:</p>
 <ul class="simple">
-<li>Log into the Chromebook and let it auto update, as there sometimes are firmware updates... check the updating status in the browser at <tt class="docutils literal"><span class="pre">chrome://help</span></tt></li>
+<li>Log into the Chromebook and let it auto update, as there sometimes are firmware updates... Check the updating status in the browser at <tt class="docutils literal"><span class="pre">chrome://help</span></tt></li>
 <li>Insert the USB stick, enter <tt class="docutils literal"><span class="pre">chrome://imageburner</span></tt> and follow the directions to generate a recovery image</li>
 </ul>
 </div>
@@ -49,7 +49,7 @@
 <h3>2. SeaBIOS</h3>
 <p><a class="reference external" href="http://www.coreboot.org/SeaBIOS">SeaBIOS</a> in combination with <strong>Coreboot</strong> provides an open-source legacy BIOS that enables access to the MBR and the ability to install an alternative OS on the Chromebook. All this good stuff involves jumping through a few simple hoops and not trembling in fear at the &quot;scary white screen&quot; that pops up at power up stating that the boot loader detects something is <strong>very very wrong</strong> with the Chromebook and helpfully suggests pressing the spacebar to begin recovery. <strong>Do not press the spacebar</strong> or the Debian installation will be wiped from disk!</p>
 <p>There are 2 different methods for configuring SeaBIOS in preparation for installing Debian. First method uses a few simple commands in the Chrome OS shell to place the Chromebook into <strong>developer mode</strong> and allow booting the USB install media and replacing Chrome OS with Debian. The drawback is that scary screen appears at every boot and you must press <tt class="docutils literal">CTRL+L</tt> to boot to legacy-mode and onward to GRUB and Debian (and <strong>ignore</strong> the helpful prompt to press spacebar and inadvertently begin the adventure of wiping clean the SSD).</p>
-<p>Second method involves setting new flags for the write-protected <strong>Google Binary Block</strong> (GBB) in the device firmware. Delay at the boot screen can be reduced to a one second timeout and the legacy-mode BIOS set as the system default (no key combo required). Pressing the spacebar is disabled from doing any harm to Debian (the Chromebook just beeps). The drawback is that it involves the (very simple) removal of the device's bottom cover and the temporary removal of the <strong>write-protect screw</strong> from the motherboard to permit flashing new flags to the GBB... and this may void the Chromebook's warranty (one of the case screws lies underneath a sticker declaring the warranty void if disturbed).</p>
+<p>Second method involves setting new flags for the write-protected <strong>Google Binary Block</strong> (GBB) in the device firmware. Delay at the boot screen can be reduced to a one second timeout and the legacy-mode BIOS set as the system default (no key combo required). Pressing the spacebar is disabled from doing any harm to Debian (the Chromebook just beeps). The drawback is that it involves the (very simple) removal of the device's bottom cover and the temporary removal of the <strong>write-protect screw</strong> from the motherboard to permit flashing new flags to the GBB. This may void the Chromebook's warranty (one of the case screws lies underneath a sticker declaring the warranty void if disturbed).</p>
 <p>Experimenting with alternate OS installs on the Chromebook I first employed the developer mode method followed by the write-protect screw removal. I prefer configuring the device to default to legacy-mode BIOS but I have employed both methods successfully and describe their respective steps below.</p>
 </div>
 <div class="section" id="write-protect-screw-method">
@@ -114,7 +114,7 @@ $ sudo crossystem <span class="nv">dev_boot_legacy</span><span class="o">=</span
 </div>
 <div class="section" id="touchpad">
 <h3>4. Touchpad</h3>
-<p>Debian <tt class="docutils literal">jessie/stable</tt> installs Linux kernel 3.16 with backported support for Chromebook touchpad. Per-session modifications of touchpad settings can be made using <tt class="docutils literal">synclient</tt> ...</p>
+<p>Debian jessie/_stable_ installs Linux kernel 3.16 with backported support for Chromebook touchpad. Per-session modifications of touchpad settings can be made using <tt class="docutils literal">synclient</tt> ...</p>
 <div class="highlight"><pre><span></span>$ synclient                 <span class="c1">## display current settings</span>
 $ synclient <span class="nv">TapButton3</span><span class="o">=</span><span class="m">2</span>    <span class="c1">## 3-finger tap = middle-click</span>
 </pre></div>
@@ -141,7 +141,7 @@ $ sudo cp /usr/share/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-c
     Option          <span class="s2">&quot;TapButton3&quot;</span> <span class="s2">&quot;2&quot;</span>
 EndSection
 </pre></div>
-<p>Link: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/etc/X11/xorg.conf.d/50-c720-touchpad.conf">50-c720-touchpad.conf</a></p>
+<p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/etc/X11/xorg.conf.d/50-c720-touchpad.conf">linux-post-install/50-c720-touchpad.conf</a></p>
 </div>
 <div class="section" id="ssd">
 <h3>5. SSD</h3>
@@ -167,7 +167,7 @@ sda3_crypt <span class="nv">UUID</span><span class="o">=</span>&lt;STRING&gt; no
 </div>
 <div class="section" id="suspend">
 <h3>6. Suspend</h3>
-<p><strong>Problem:</strong> Suspend-and-resume generates a stream of errors ...</p>
+<p>Suspend-and-resume generates a stream of errors ...</p>
 <div class="highlight"><pre><span></span>ehci-pci 0000:00:1d.0: port <span class="m">1</span> resume error -19
 ehci-pci 0000:00:1d.0: port <span class="m">2</span> resume error -19
 usb usb3-port1: over-current condition
@@ -176,7 +176,7 @@ usb usb3-port2: over-current condition
 usb usb3-port2: connect-debounce failed
 </pre></div>
 <p>... and blocks Jessiebook from executing a proper restart/shutdown.</p>
-<p><strong>FIX:</strong> <a class="footnote-reference" href="#id22" id="id10">[9]</a> Create <tt class="docutils literal"><span class="pre">/lib/systemd/system-sleep/ehci-pci.sh</span></tt> ...</p>
+<p><strong>[ FIX! ]</strong> <a class="footnote-reference" href="#id22" id="id10">[9]</a> Create <tt class="docutils literal"><span class="pre">/lib/systemd/system-sleep/ehci-pci.sh</span></tt> ...</p>
 <div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
 <span class="k">case</span> <span class="nv">$1</span>/<span class="nv">$2</span> in
@@ -199,7 +199,7 @@ usb usb3-port2: connect-debounce failed
 <p>Update GRUB ...</p>
 <div class="highlight"><pre><span></span>$ sudo update-grub
 </pre></div>
-<p>Link: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/lib/systemd/system-sleep/ehci-pci.sh">ehci-pci.sh</a></p>
+<p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/lib/systemd/system-sleep/ehci-pci.sh">linux-post-install/ehci-pci.sh</a></p>
 </div>
 <div class="section" id="keyboard-shortcuts">
 <h3>7. Keyboard Shortcuts</h3>
@@ -213,44 +213,42 @@ usb usb3-port2: connect-debounce failed
 </ul>
 <div class="highlight"><pre><span></span>$ sudo apt-get install xbindkeys xbacklight pulseaudio-utils xvkbd
 </pre></div>
-</div>
 <div class="section" id="direction-brightness-volume-page-keys">
-<h3>7.1 Direction, Brightness, Volume, Page Keys</h3>
+<h4>7.1 Direction, Brightness, Volume, Page Keys</h4>
+<p>Enable function keys to modify sound, brightness, and page movements by creating <tt class="docutils literal"><span class="pre">~/.xbindkeysrc</span></tt>. Discover the keycode for a particular key by running ...</p>
 <div class="highlight"><pre><span></span>$ xbindkeys -k
 </pre></div>
-<p>Enable function keys to modify sound and brightness settings by creating <tt class="docutils literal"><span class="pre">~/.xbindkeysrc</span></tt>.</p>
-<p>Example ...</p>
-<div class="highlight"><pre><span></span><span class="c1"># backward/forward</span>
+<p>... press the key of interest, and a snippet of code is outputted that can be added to <tt class="docutils literal"><span class="pre">~/.xbindkeysrc</span></tt>.</p>
+<p>My own config for the chromebook ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Backward/forward</span>
 <span class="s2">&quot;xvkbd -xsendevent -text &quot;</span><span class="se">\A\[</span>Left<span class="o">]</span><span class="s2">&quot;&quot;</span>
 F1
 
 <span class="s2">&quot;xvkbd -xsendevent -text &quot;</span><span class="se">\A\[</span>Right<span class="o">]</span><span class="s2">&quot;&quot;</span>
 F2
 
-<span class="c1"># screenshots</span>
-<span class="c1"># desktop</span>
-<span class="s2">&quot;scrot &#39;%Y-%m-%dT%H%M%S.png&#39; -e &#39;mv </span><span class="nv">$f</span><span class="s2"> ~/Downloads &amp;&amp; eog ~/Downloads/</span><span class="nv">$f</span><span class="s2">&#39;&quot;</span>
-Alt + F4
-<span class="c1"># active Window</span>
-<span class="s2">&quot;scrot -d 4 -u -z &#39;%Y-%m-%dT%H%M%S.png&#39; -e &#39;mv </span><span class="nv">$f</span><span class="s2"> ~/Downloads &amp;&amp; eog ~/Downloads/</span><span class="nv">$f</span><span class="s2">&#39;&quot;</span>
-Control + F4
-
-<span class="c1"># backlight decrease/increase</span>
+<span class="c1"># Backlight decrease/increase</span>
 <span class="s2">&quot;xbacklight -dec 10&quot;</span>
 F6
 <span class="s2">&quot;xbacklight -inc 10&quot;</span>
 F7
 
-<span class="c1"># volume mute/decrease/increase</span>
+<span class="c1"># Volume mute/decrease/increase</span>
 <span class="c1"># paVolume - https://github.com/vonbrownie/homebin/blob/master/paVolume</span>
 <span class="s2">&quot;paVolume -m&quot;</span>
 F8
+<span class="s2">&quot;paVolume -m&quot;</span>
+XF86AudioMute
 <span class="s2">&quot;paVolume -d&quot;</span>
 F9
+<span class="s2">&quot;paVolume -d&quot;</span>
+XF86AudioLowerVolume
 <span class="s2">&quot;paVolume -u&quot;</span>
 F10
+<span class="s2">&quot;paVolume -u&quot;</span>
+XF86AudioRaiseVolume
 
-<span class="c1"># page up/down, home, end</span>
+<span class="c1"># Page up/down, home, end</span>
 <span class="s2">&quot;xvkbd -xsendevent -text &#39;\[Page_Up]&#39;&quot;</span>
 Alt + Up
 
@@ -266,13 +264,18 @@ Alt + Right
 <p>Enable new key shortcuts ...</p>
 <div class="highlight"><pre><span></span>$ xbindkeys
 </pre></div>
-<p>Place <tt class="docutils literal">xbindkeys</tt> in <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt> to load configuration at <tt class="docutils literal">startx</tt>. <a class="footnote-reference" href="#id23" id="id11">[10]</a></p>
-<p>Links: <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc">.xbindkeysrc</a> and <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc">.xinitrc</a></p>
+<p>Place <tt class="docutils literal">xbindkeys</tt> in <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt> to load configuration at <tt class="docutils literal">startx</tt> ... <a class="footnote-reference" href="#id23" id="id11">[10]</a></p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[</span> -f ~/.xbindkeysrc <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    xbindkeys
+<span class="k">fi</span>
+</pre></div>
+<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook">dotfiles/.xbindkeysrc</a> and <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc">dotfiles/.xinitrc</a></p>
 </div>
 <div class="section" id="power-key">
-<h3>7.2 Power Key</h3>
+<h4>7.2 Power Key</h4>
 <p>Power key in upper-right corner ignores any configuration in the window manager and triggers poweroff without delay when pressed (easy to do by accident as its positioned next to <tt class="docutils literal">backspace</tt>).</p>
 <p>If you want to disable the power key edit <tt class="docutils literal">/etc/systemd/logind.conf</tt> and set <tt class="docutils literal">HandlePowerKey=ignore</tt>.</p>
+</div>
 </div>
 <div class="section" id="wireless">
 <h3>8. Wireless</h3>
@@ -291,11 +294,11 @@ parm:           use_chanctx:Enable channel context <span class="k">for</span> co
 <p>Create <tt class="docutils literal">/etc/modprobe.d/ath9k.conf</tt> ...</p>
 <div class="highlight"><pre><span></span>options ath9k <span class="nv">bt_ant_diversity</span><span class="o">=</span><span class="m">1</span> <span class="nv">ps_enable</span><span class="o">=</span>0
 </pre></div>
-<p>Link: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/etc/modprobe.d/ath9k.conf">ath9k.conf</a></p>
+<p>Source: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/etc/modprobe.d/ath9k.conf">linux-post-install/ath9k.conf</a></p>
 </div>
 <div class="section" id="microphone">
 <h3>9. Microphone</h3>
-<p>Confirm the microphone is un-muted in <tt class="docutils literal">alsamixer</tt>. Create <tt class="docutils literal"><span class="pre">/etc/modprobe.d/snd-hda-intel.conf</span></tt> ...</p>
+<p>Confirm the microphone is unmuted in <tt class="docutils literal">alsamixer</tt>. Create <tt class="docutils literal"><span class="pre">/etc/modprobe.d/snd-hda-intel.conf</span></tt> ...</p>
 <div class="highlight"><pre><span></span>options snd_hda_intel <span class="nv">model</span><span class="o">=</span>,alc283-dac-wcaps
 </pre></div>
 <p>... and restart (I couldn't get the module to unload). Give it a try ...</p>
@@ -308,7 +311,7 @@ $ aplay chr-mic.wav
 <ul class="simple">
 <li>Specs: output of <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lshw.txt">lshw</a>, <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lspci.txt">lspci</a>, and <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_jessiebook/doc/lsusb.txt">lsusb</a></li>
 <li>Arch Linux C720 installation with useful <a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook">post-install details</a></li>
-<li>Turn Chromebooks into <a class="reference external" href="http://blog.codestarter.org/how-we-turn-199-chromebooks-into-ubuntu-based/">Ubuntu-based code learning machines for kids</a></li>
+<li>Turn chromebooks into <a class="reference external" href="http://blog.codestarter.org/how-we-turn-199-chromebooks-into-ubuntu-based/">Ubuntu-based code learning machines for kids</a></li>
 <li>My earlier install and configuration of <a class="reference external" href="http://www.circuidipity.com/c720-lubuntubook.html">Lubuntu 14.04 LTS</a> under <tt class="docutils literal">upstart</tt> (vs <tt class="docutils literal">systemd</tt> in Debian)</li>
 <li>Lightweight <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">i3 tiling window manager</a> is snappy on the Chromebook's modest hardware</li>
 </ul>
