@@ -4,6 +4,24 @@ Notes
 
 :slug: notes
 
+2017-06-23T1001
+---------------
+
+Switch from default qwerty to the colemak keyboard layout ...
+
+.. code-block:: bash
+
+    $ setxkbmap -query
+    rules:      evdev
+    model:      pc105
+    layout:     us
+    $ setxkbmap us -variant colemak
+    $ setxkbmap -query
+    rules:      evdev
+    model:      pc105
+    layout:     us
+    variant:    colemak
+
 2017-06-22T1036
 ---------------
 
