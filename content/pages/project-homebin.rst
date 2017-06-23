@@ -4,7 +4,7 @@ $HOME slash bin
 
 :slug: homebin
 :template: page-project
-:modified: 2017-05-19 10:45:00
+:modified: 2017-06-23 18:45:00
 
 .. image:: images/infinite-loop-not-300.png
     :align: right
@@ -56,6 +56,12 @@ Let's go!
 `dmenu-run.sh <https://github.com/vonbrownie/homebin/blob/master/dmenu-run.sh>`_
     ``dmenu`` configuration
 
+`flashManUpdate <https://github.com/vonbrownie/homebin/blob/master/flashManUpdate>`_
+    Installs libflashplayer.so
+
+`keyboardconf <https://github.com/vonbrownie/homebin/blob/master/keyboardconf>`_
+    Detect and configure keyboards
+
 `magic8ball.py <https://github.com/vonbrownie/homebin/blob/master/magic8ball.py>`_
     Magic 8 Ball peers into the future and retrieves the answer to your questions
 
@@ -63,7 +69,7 @@ Let's go!
     get a street address from command line arguments or clipboard and open web browser to the Google Maps page for the address
 
 `paVolume <https://github.com/vonbrownie/homebin/blob/master/paVolume>`_
-    pulseaudio volume control (more: `"Shell script: paVolume" <http://www.circuidipity.com/pavolume.html>`_)
+    pulseaudio volume control (more: `"Volume control and notification" <http://www.circuidipity.com/pavolume.html>`_)
 
 `raiseRedLantern.py <https://github.com/vonbrownie/homebin/blob/master/raiseRedLantern.py>`_
     a set of classes to add notification capabilities to scripts
