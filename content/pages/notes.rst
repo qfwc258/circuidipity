@@ -4,6 +4,13 @@ Notes
 
 :slug: notes
 
+2017-06-24T0844
+---------------
+
+Retrieve information about hardware using ``sudo dmidecode``, or much of the same information is available to the non-root user in ``/sys/devices/virtual/dmi/id``.
+
+Link: https://unix.stackexchange.com/a/172334
+
 2017-06-23T1001
 ---------------
 

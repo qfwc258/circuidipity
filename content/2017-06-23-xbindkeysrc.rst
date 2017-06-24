@@ -2,7 +2,7 @@
 Dot xbindkeysrc
 ===============
 
-:date: 2017-06-23 23:10:00
+:date: 2017-06-23 23:30:00
 :slug: xbindkeysrc
 :tags: dotfiles, shell, linux
 
