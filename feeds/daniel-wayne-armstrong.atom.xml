@@ -1,5 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-22T12:11:00-04:00</updated><entry><title>Dot xinitrc</title><link href="http://www.circuidipity.com/xinitrc.html" rel="alternate"></link><published>2017-06-22T12:11:00-04:00</published><updated>2017-06-22T12:11:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-22:/xinitrc.html</id><summary type="html">&lt;p&gt;File &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; is read by &lt;tt class="docutils literal"&gt;xinit&lt;/tt&gt; and by its front-end &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt;. I create the file in my home directory and set it up to look for a few optional config files, disable screen blanking, clear out the trash, launch applications, and finally start the desktop.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-24T08:47:00-04:00</updated><entry><title>Volume control and notification</title><link href="http://www.circuidipity.com/pavolume.html" rel="alternate"></link><published>2017-06-24T08:47:00-04:00</published><updated>2017-06-24T08:47:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-24:/pavolume.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/homebin.html"&gt;PROJECT: $HOME slash bin .:&lt;/a&gt; My original intent was to manage sound on &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook&lt;/a&gt; by binding the commands to the multimedia keys in &lt;a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html"&gt;~/.xbindkeysrc.&lt;/a&gt; Instead &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; calls a standalone script I created to control PulseAudio volume (and thus useful beyond just &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt;).&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Script requirements: &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;pamixer&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="section" id="pactl"&gt;
+&lt;h3&gt;0 …&lt;/h3&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/homebin.html"&gt;PROJECT: $HOME slash bin .:&lt;/a&gt; My original intent was to manage sound on &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook&lt;/a&gt; by binding the commands to the multimedia keys in &lt;a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html"&gt;~/.xbindkeysrc.&lt;/a&gt; Instead &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; calls a standalone script I created to control PulseAudio volume (and thus useful beyond just &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt;).&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Script requirements: &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;pamixer&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="section" id="pactl"&gt;
+&lt;h3&gt;0. Pactl&lt;/h3&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;Pactl&lt;/tt&gt; controls a PulseAudio sound server and is included in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pulseaudio-utils&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install pulseaudio-utils
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pamixer"&gt;
+&lt;h3&gt;1. Pamixer&lt;/h3&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/cdemoulins/pamixer"&gt;Pamixer&lt;/a&gt; is a PulseAudio console mixer. Compile dependencies ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install build-essential libpulse-dev libboost-program-options1.62.0:amd64 libboost-program-options-dev
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Download source and compile ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git clone https://cdemoulins@github.com/cdemoulins/pamixer.git
+$ &lt;span class="nb"&gt;cd&lt;/span&gt; pamixer
+$ make
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;No &lt;tt class="docutils literal"&gt;make install&lt;/tt&gt;. Place the resulting &lt;tt class="docutils literal"&gt;pamixer&lt;/tt&gt; in PATH (I use &lt;tt class="docutils literal"&gt;~/bin&lt;/tt&gt;).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="volnoti"&gt;
+&lt;h3&gt;2. Volnoti&lt;/h3&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/davidbrazdil/volnoti"&gt;Volnoti&lt;/a&gt; is a lightweight volume notification. Compile dependencies ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install libdbus-glib-1-dev libgtk2.0-dev libgdk-pixbuf2.0-dev autoconf automake
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Download ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git clone git://github.com/davidbrazdil/volnoti.git
+$ &lt;span class="nb"&gt;cd&lt;/span&gt; volnoti
+$ ./prepare.sh
+$ ./configure --prefix&lt;span class="o"&gt;=&lt;/span&gt;/usr
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Apply this fix &lt;a class="footnote-reference" href="#id4" id="id3"&gt;[1]&lt;/a&gt; to the source ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; src
+$ rm value-client-stub.h &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make value-client-stub.h
+$ rm value-daemon-stub.h &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make value-daemon-stub.h
+$ &lt;span class="nb"&gt;cd&lt;/span&gt; ..
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Compile source (and I use &lt;a class="reference external" href="https://packages.debian.org/stretch/checkinstall"&gt;checkinstall&lt;/a&gt; to make a &lt;tt class="docutils literal"&gt;deb&lt;/tt&gt; package and install) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ make
+$ sudo checkinstall make install
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Start &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt; daemon ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ volnoti
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Configure daemon to auto-start by adding it to &lt;a class="reference external" href="http://www.circuidipity.com/xinitrc.html"&gt;~/.xinitrc&lt;/a&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;volnoti -t &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="script-pavolume"&gt;
+&lt;h3&gt;3. Script paVolume&lt;/h3&gt;
+&lt;p&gt;I tie all the pieces together with my paVolume shell script and create keycodes to increase/decrease/mute volume in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;paVolume -m&amp;quot;&lt;/span&gt;
+F8
+&lt;span class="s2"&gt;&amp;quot;paVolume -m&amp;quot;&lt;/span&gt;
+XF86AudioMute
+&lt;span class="s2"&gt;&amp;quot;paVolume -d&amp;quot;&lt;/span&gt;
+F9
+&lt;span class="s2"&gt;&amp;quot;paVolume -d&amp;quot;&lt;/span&gt;
+XF86AudioLowerVolume
+&lt;span class="s2"&gt;&amp;quot;paVolume -u&amp;quot;&lt;/span&gt;
+F10
+&lt;span class="s2"&gt;&amp;quot;paVolume -u&amp;quot;&lt;/span&gt;
+XF86AudioRaiseVolume
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;homebin/paVolume&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook"&gt;dotfiles/.xbindkeysrc.chromebook&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h4&gt;Notes&lt;/h4&gt;
+&lt;table class="docutils footnote" frame="void" id="id4" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id3"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Ubuntu forums: &lt;a class="reference external" href="http://ubuntuforums.org/showthread.php?t=2215264&amp;amp;s=7aa2dfa8b89411472598e737c38f1475&amp;amp;p=12978792#post12978792"&gt;Error when using make &amp;quot;client.c:108:5: error: too many arguments to function&amp;quot;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="homebin"></category><category term="shell"></category><category term="programming"></category><category term="linux"></category></entry><entry><title>Dot xbindkeysrc</title><link href="http://www.circuidipity.com/xbindkeysrc.html" rel="alternate"></link><published>2017-06-23T23:30:00-04:00</published><updated>2017-06-23T23:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-23:/xbindkeysrc.html</id><summary type="html">&lt;p&gt;Bind commands to certain keys or key combos by creating &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Top row on my &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook's&lt;/a&gt; keyboard has shortcut icons (&lt;tt class="docutils literal"&gt;Brightness&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;Volume&lt;/tt&gt;, etc.) that identify in Linux as &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;F1-F10&lt;/span&gt;&lt;/tt&gt; keys and the &lt;tt class="docutils literal"&gt;Search&lt;/tt&gt; key (in &lt;tt class="docutils literal"&gt;CapsLk&lt;/tt&gt; position) acts as a &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; (Windows) modifier key.&lt;/p&gt;
+&lt;p&gt;Install some helpful utilities …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Bind commands to certain keys or key combos by creating &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Top row on my &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook's&lt;/a&gt; keyboard has shortcut icons (&lt;tt class="docutils literal"&gt;Brightness&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;Volume&lt;/tt&gt;, etc.) that identify in Linux as &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;F1-F10&lt;/span&gt;&lt;/tt&gt; keys and the &lt;tt class="docutils literal"&gt;Search&lt;/tt&gt; key (in &lt;tt class="docutils literal"&gt;CapsLk&lt;/tt&gt; position) acts as a &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; (Windows) modifier key.&lt;/p&gt;
+&lt;p&gt;Install some helpful utilities in Debian that we will associate with keyboard shortcuts ...&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; - associate keys to shell commands&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;xbacklight&lt;/tt&gt; - set backlight level using RandR&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pulseaudio-utils&lt;/span&gt;&lt;/tt&gt; - manage sound with &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;xvkbd&lt;/tt&gt; - send characters to another client&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install xbindkeys xbacklight pulseaudio-utils xvkbd
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Enable function keys to modify sound, brightness, and page movement. Discover the &lt;strong&gt;keycode&lt;/strong&gt; for a particular key by running ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xbindkeys -k
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... press the key of interest, and a snippet of code is outputted that can be added to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;My own config for the Stretchbook ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Backward/forward&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\A\[&lt;/span&gt;Left&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+F1
+
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\A\[&lt;/span&gt;Right&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+F2
+
+&lt;span class="c1"&gt;# Backlight decrease/increase&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;xbacklight -dec 10&amp;quot;&lt;/span&gt;
+F6
+&lt;span class="s2"&gt;&amp;quot;xbacklight -inc 10&amp;quot;&lt;/span&gt;
+F7
+
+&lt;span class="c1"&gt;# Volume mute/decrease/increase&lt;/span&gt;
+&lt;span class="c1"&gt;# paVolume - https://github.com/vonbrownie/homebin/blob/master/paVolume&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;paVolume -m&amp;quot;&lt;/span&gt;
+F8
+&lt;span class="s2"&gt;&amp;quot;paVolume -m&amp;quot;&lt;/span&gt;
+XF86AudioMute
+&lt;span class="s2"&gt;&amp;quot;paVolume -d&amp;quot;&lt;/span&gt;
+F9
+&lt;span class="s2"&gt;&amp;quot;paVolume -d&amp;quot;&lt;/span&gt;
+XF86AudioLowerVolume
+&lt;span class="s2"&gt;&amp;quot;paVolume -u&amp;quot;&lt;/span&gt;
+F10
+&lt;span class="s2"&gt;&amp;quot;paVolume -u&amp;quot;&lt;/span&gt;
+XF86AudioRaiseVolume
+
+&lt;span class="c1"&gt;# Page up/down, home, end&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;#39;\[Page_Up]&amp;#39;&amp;quot;&lt;/span&gt;
+Alt + Up
+
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;#39;\[Page_Down]&amp;#39;&amp;quot;&lt;/span&gt;
+Alt + Down
+
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;#39;\[Home]&amp;#39;&amp;quot;&lt;/span&gt;
+Alt + Left
+
+&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;#39;\[End]&amp;#39;&amp;quot;&lt;/span&gt;
+Alt + Right
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Enable new key shortcuts ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xbindkeys
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Place in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; to load configuration at &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -f ~/.xbindkeysrc &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    xbindkeys
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook"&gt;dotfiles/.xbindkeysrc&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;dotfiles/.xinitrc&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category></entry><entry><title>Dot xinitrc</title><link href="http://www.circuidipity.com/xinitrc.html" rel="alternate"></link><published>2017-06-22T12:11:00-04:00</published><updated>2017-06-22T12:11:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-22:/xinitrc.html</id><summary type="html">&lt;p&gt;File &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; is read by &lt;tt class="docutils literal"&gt;xinit&lt;/tt&gt; and by its front-end &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt;. I create the file in my home directory and set it up to look for a few optional config files, disable screen blanking, clear out the trash, launch applications, and finally start the desktop.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Set config parameters …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;File &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; is read by &lt;tt class="docutils literal"&gt;xinit&lt;/tt&gt; and by its front-end &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt;. I create the file in my home directory and set it up to look for a few optional config files, disable screen blanking, clear out the trash, launch applications, and finally start the desktop.&lt;/p&gt;
@@ -498,104 +656,4 @@ firmware-9.0.0-amd64-netinst.iso: OK
 &lt;/div&gt;
 &lt;p&gt;On December, 1995 the 42-year-old author, editor-in-chief of &lt;em&gt;Elle&lt;/em&gt; magazine in Paris, suffered a massive brain-stem stroke. When he awoke from a coma three weeks later his mind made a rapid recovery but his body lay broken. His condition is known as &amp;quot;locked-in syndrome&amp;quot; and he was paralyzed from head to toe with the exception of (a later) slight movement of the neck and the ability to blink his left eyelid.&lt;/p&gt;
 &lt;p&gt;But what an eye! With one blink for yes, two for no, a system for translating blinks to alphabetic characters and a patient transcriber, he narrates this story of holding on to humanity with humour and of an imagination that can still roam free. Do we need to suffer tragedy before we can learn to be courageous and grateful and kind? &lt;em&gt;&amp;quot;Regret for a vanished past, and above all remorse for lost opportunities ... the women we were unable to love, the chances we failed to seize, the moments of happiness we allowed to drift away. Today it seems to me that my whole life was nothing but a string of those small near misses. A race whose result we know beforehand, but in which we fail to bet on the winner.&amp;quot;&lt;/em&gt;&lt;/p&gt;
-</content><category term="books"></category></entry><entry><title>Scanner udev rule</title><link href="http://www.circuidipity.com/scanner-udev-rule.html" rel="alternate"></link><published>2017-06-07T14:56:00-04:00</published><updated>2017-06-07T14:56:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-07:/scanner-udev-rule.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;[ Problem ]&lt;/strong&gt; Client error trying to scan to a &lt;strong&gt;Brother MFC-J450DW&lt;/strong&gt; configured as a &lt;a class="reference external" href="http://www.circuidipity.com/network-printer-scanner.html"&gt;network scanner&lt;/a&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;scanimage: open of device net:192.168.... failed: Invalid argument
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Scanner &lt;strong&gt;does&lt;/strong&gt; accept jobs from the server. User belongs to the &lt;tt class="docutils literal"&gt;lp&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;lpadmin&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;scanner&lt;/tt&gt; groups.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;[ Fix! ]&lt;/strong&gt; Set world-writable permission on the scanner bus device …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;[ Problem ]&lt;/strong&gt; Client error trying to scan to a &lt;strong&gt;Brother MFC-J450DW&lt;/strong&gt; configured as a &lt;a class="reference external" href="http://www.circuidipity.com/network-printer-scanner.html"&gt;network scanner&lt;/a&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;scanimage: open of device net:192.168.... failed: Invalid argument
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Scanner &lt;strong&gt;does&lt;/strong&gt; accept jobs from the server. User belongs to the &lt;tt class="docutils literal"&gt;lp&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;lpadmin&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;scanner&lt;/tt&gt; groups.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;[ Fix! ]&lt;/strong&gt; Set world-writable permission on the scanner bus device ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ lsusb
-Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 006: ID 04f9:02fa Brother Industries, Ltd
-$ ls /dev/bus/usb/001/006
-crw-rw-r-- &lt;span class="m"&gt;1&lt;/span&gt; root lp 189, &lt;span class="m"&gt;5&lt;/span&gt; Jun  &lt;span class="m"&gt;6&lt;/span&gt; 17:24 /dev/bus/usb/001/006
-$ sudo chmod &lt;span class="m"&gt;666&lt;/span&gt; /dev/bus/usb/001/006
-$ ls /dev/bus/usb/001/006
-crw-rw-rw- &lt;span class="m"&gt;1&lt;/span&gt; root lp 189, &lt;span class="m"&gt;5&lt;/span&gt; Jun  &lt;span class="m"&gt;6&lt;/span&gt; 17:24 /dev/bus/usb/001/006
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and it works. But when device is unplugged and re-plugged back in again it will be created with the old permissions.&lt;/p&gt;
-&lt;p&gt;A more enduring fix is to create a &lt;strong&gt;udev rule&lt;/strong&gt; with desired permissions. First, retrieve the &lt;tt class="docutils literal"&gt;idVendor&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;idDevice&lt;/tt&gt; of the scanner ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ lsusb &lt;span class="p"&gt;|&lt;/span&gt; grep Brother
-Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 006: ID 04f9:02fa Brother Industries, Ltd
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... then create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/lib/udev/rules.d/61-scanner.rules&lt;/span&gt;&lt;/tt&gt; for &lt;strong&gt;04f9:02fa&lt;/strong&gt; with desired permissions ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;SUBSYSTEMS&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;usb&amp;quot;&lt;/span&gt;, ATTRS&lt;span class="o"&gt;{&lt;/span&gt;idVendor&lt;span class="o"&gt;}==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;04f9&amp;quot;&lt;/span&gt;, ATTRS&lt;span class="o"&gt;{&lt;/span&gt;idProduct&lt;span class="o"&gt;}==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;02fa&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;GROUP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;lp&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;MODE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;0666&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Reload rules ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo udevadm control --reload
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... or simply disconnect and re-connect scanner to test ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ls /dev/bus/usb/001/007
-crw-rw-rw- &lt;span class="m"&gt;1&lt;/span&gt; root lp 189, &lt;span class="m"&gt;6&lt;/span&gt; Jun  &lt;span class="m"&gt;6&lt;/span&gt; 18:45 /dev/bus/usb/001/007
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-</content><category term="scanner"></category><category term="network"></category><category term="shell"></category><category term="linux"></category></entry><entry><title>Command line torrent server using rTorrent</title><link href="http://www.circuidipity.com/rtorrent.html" rel="alternate"></link><published>2017-06-05T21:40:00-04:00</published><updated>2017-06-18T11:24:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-05:/rtorrent.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #10 .:&lt;/a&gt; A text-based &lt;strong&gt;BitTorrent client&lt;/strong&gt; that - combined with &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; - makes a cool lightweight torrent server.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;I can &lt;tt class="docutils literal"&gt;ssh&lt;/tt&gt; into my home server, start a tmux session and create multiple windows, run &lt;strong&gt;rTorrent&lt;/strong&gt; in a window to start seeding a Linux &lt;tt class="docutils literal"&gt;iso&lt;/tt&gt;, detach from session and …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/home-server.html"&gt;PROJECT: Home Server #10 .:&lt;/a&gt; A text-based &lt;strong&gt;BitTorrent client&lt;/strong&gt; that - combined with &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; - makes a cool lightweight torrent server.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;I can &lt;tt class="docutils literal"&gt;ssh&lt;/tt&gt; into my home server, start a tmux session and create multiple windows, run &lt;strong&gt;rTorrent&lt;/strong&gt; in a window to start seeding a Linux &lt;tt class="docutils literal"&gt;iso&lt;/tt&gt;, detach from session and server, and return later to find everything in place and the &lt;tt class="docutils literal"&gt;iso&lt;/tt&gt; uploading.&lt;/p&gt;
-&lt;div class="section" id="install"&gt;
-&lt;h3&gt;0. Install&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install rtorrent
-$ mkdir -p ~/rtorrent/config.d
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="start-and-config"&gt;
-&lt;h3&gt;1. Start and config&lt;/h3&gt;
-&lt;p&gt;Create an rTorrent executable startup script &lt;tt class="docutils literal"&gt;~/rtorrent/start&lt;/tt&gt; with the &lt;a class="reference external" href="https://rtorrent-docs.readthedocs.io/en/latest/cookbook.html#the-rtorrent-command-line"&gt;details provided in the rTorrent cookbook.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Download and save the &lt;a class="reference external" href="https://github.com/rakshasa/rtorrent/wiki/CONFIG-Template"&gt;default configuration template&lt;/a&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.rtorrentrc&lt;/span&gt;&lt;/tt&gt;. Open the file and comment out (deactivate) the &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Distributed_hash_table"&gt;dht&lt;/a&gt; and &lt;strong&gt;watch directory&lt;/strong&gt; settings ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="c1"&gt;#dht.mode.set = disable&lt;/span&gt;
-&lt;span class="c1"&gt;#protocol.pex.set = no&lt;/span&gt;
-&lt;span class="c1"&gt;#trackers.use_udp.set = no&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="c1"&gt;#schedule2 = watch_start, 10, 10, ((load.start, (cat, (cfg.watch), &amp;quot;start/*.torrent&amp;quot;)))&lt;/span&gt;
-&lt;span class="c1"&gt;#schedule2 = watch_load, 11, 10, ((load.normal, (cat, (cfg.watch), &amp;quot;load/*.torrent&amp;quot;)))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Remember to configure &lt;strong&gt;port forwarding&lt;/strong&gt; on the &lt;a class="reference external" href="http://www.circuidipity.com/20141006.html"&gt;home router firewall&lt;/a&gt;  for ports &lt;tt class="docutils literal"&gt;network.port_range.set&lt;/tt&gt; (default &lt;tt class="docutils literal"&gt;50000&lt;/tt&gt;) and &lt;tt class="docutils literal"&gt;dht.port.set&lt;/tt&gt; (configured below).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="config-fragments"&gt;
-&lt;h3&gt;2. Config fragments&lt;/h3&gt;
-&lt;p&gt;Customize the config by creating some &lt;a class="reference external" href="https://rtorrent-docs.readthedocs.io/en/latest/use-cases.html#load-drop-in-config-fragments"&gt;drop in config fragments&lt;/a&gt; in &lt;tt class="docutils literal"&gt;~/rtorrent/config.d&lt;/tt&gt;. For my setup I create fragments to establish bandwidth quotas, enable dht and require encrypted traffic, and set a directory that rTorrent watches for new torrent files ...&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;bandwidth.rc&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Global bandwidth .: download_rate = 100 / upload_rate = 20&amp;quot;&lt;/span&gt;
-throttle.global_down.max_rate.set_kb &lt;span class="o"&gt;=&lt;/span&gt; 100
-throttle.global_up.max_rate.set_kb &lt;span class="o"&gt;=&lt;/span&gt; 20
-&lt;/pre&gt;&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;dht.rc&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;DHT support = auto&amp;quot;&lt;/span&gt;
-dht.mode.set &lt;span class="o"&gt;=&lt;/span&gt; auto
-dht.port.set &lt;span class="o"&gt;=&lt;/span&gt; 6881
-protocol.pex.set &lt;span class="o"&gt;=&lt;/span&gt; yes
-trackers.use_udp.set &lt;span class="o"&gt;=&lt;/span&gt; yes
-&lt;/pre&gt;&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;encryption.rc&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Encryption = required&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;encryption&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; require,require_RC4,allow_incoming,try_outgoing
-&lt;/pre&gt;&lt;/div&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;watch.rc&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Watch directory enabled.&amp;quot;&lt;/span&gt;
-&lt;span class="nv"&gt;schedule2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; watch_directory,5,5, &lt;span class="o"&gt;((&lt;/span&gt;load.start, &lt;span class="o"&gt;(&lt;/span&gt;cat, &lt;span class="o"&gt;(&lt;/span&gt;cfg.watch&lt;span class="o"&gt;)&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;*.torrent&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)))&lt;/span&gt;
-&lt;span class="nv"&gt;schedule2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; untied_directory,5,5,stop_untied&lt;span class="o"&gt;=&lt;/span&gt;
-&lt;span class="nv"&gt;schedule2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; tied_directory,5,5,start_tied&lt;span class="o"&gt;=&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="run"&gt;
-&lt;h3&gt;3. Run&lt;/h3&gt;
-&lt;p&gt;Launch &lt;tt class="docutils literal"&gt;~/rtorrent/start&lt;/tt&gt; and a basic rTorrent setup is now up and running. Check out the &lt;a class="reference external" href="http://getos.org/rtorrent_ref.pdf"&gt;cheatsheet&lt;/a&gt; for navigating around the interface and the &lt;a class="reference external" href="https://rtorrent-docs.readthedocs.io/en/latest/overview.html#"&gt;rTorrent docs&lt;/a&gt; and the torrent client's &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/RTorrent"&gt;entry on the Arch Wiki&lt;/a&gt; for details and ideas for more advanced configs.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</content><category term="rtorrent"></category><category term="shell"></category><category term="network"></category><category term="debian"></category><category term="linux"></category></entry></feed>
+</content><category term="books"></category></entry></feed>

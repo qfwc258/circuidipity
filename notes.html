@@ -24,7 +24,27 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="t1036">
+    <div class="section" id="t0844">
+<h2>2017-06-24T0844</h2>
+<p>Retrieve information about hardware using <tt class="docutils literal">sudo dmidecode</tt>, or much of the same information is available to the non-root user in <tt class="docutils literal">/sys/devices/virtual/dmi/id</tt>.</p>
+<p>Link: <a class="reference external" href="https://unix.stackexchange.com/a/172334">https://unix.stackexchange.com/a/172334</a></p>
+</div>
+<div class="section" id="t1001">
+<h2>2017-06-23T1001</h2>
+<p>Switch from default qwerty to the colemak keyboard layout ...</p>
+<div class="highlight"><pre><span></span>$ setxkbmap -query
+rules:      evdev
+model:      pc105
+layout:     us
+$ setxkbmap us -variant colemak
+$ setxkbmap -query
+rules:      evdev
+model:      pc105
+layout:     us
+variant:    colemak
+</pre></div>
+</div>
+<div class="section" id="t1036">
 <h2>2017-06-22T1036</h2>
 <p>Generate list of packages installed on one machine running Debian for installation on another machine.</p>
 <p>List of packages on first machine ...</p>

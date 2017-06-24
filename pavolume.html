@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-        <title>Circuidipity | $HOME slash bin: control PulseAudio volume</title>
+        <title>Circuidipity | Volume control and notification</title>
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="author" content="Daniel Wayne Armstrong" />
@@ -19,30 +19,28 @@
 <!-- breadcrumb trail -->
 <div id="breadcrumb">
     <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
-    Friday 10 July 2015</p>
+    Saturday 24 June 2017</p>
 </div>
 
 <!-- article -->
-<h1>$HOME slash bin: control PulseAudio volume</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 14 February 2016</p>
+<h1>Volume control and notification</h1>
 <div id="article">
-    <p>My original intent was to manage sound on <a class="reference external" href="http://www.circuidipity.com/c720-ubuntubook.html">Ubuntubook</a> by binding the commands to the multimedia keys in <tt class="docutils literal"><span class="pre">~/.xbindkeysrc</span></tt>. Instead <tt class="docutils literal">xbindkeys</tt> calls a standalone script I created to control PulseAudio volume (and thus useful beyond just <tt class="docutils literal">xbindkeys</tt>): <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume">paVolume</a></p>
+    <p><a class="reference external" href="http://www.circuidipity.com/homebin.html">PROJECT: $HOME slash bin .:</a> My original intent was to manage sound on <a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html">Stretchbook</a> by binding the commands to the multimedia keys in <a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html">~/.xbindkeysrc.</a> Instead <tt class="docutils literal">xbindkeys</tt> calls a standalone script I created to control PulseAudio volume (and thus useful beyond just <tt class="docutils literal">xbindkeys</tt>).</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
 <p>Script requirements: <tt class="docutils literal">pactl</tt>, <tt class="docutils literal">pamixer</tt>, and <tt class="docutils literal">volnoti</tt>.</p>
-</div>
 <div class="section" id="pactl">
-<h2>0. pactl</h2>
-<p><tt class="docutils literal">pactl</tt> controls a PulseAudio sound server and is included in <tt class="docutils literal"><span class="pre">pulseaudio-utils</span></tt>:</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install pulseaudio-utils
+<h3>0. Pactl</h3>
+<p><tt class="docutils literal">Pactl</tt> controls a PulseAudio sound server and is included in <tt class="docutils literal"><span class="pre">pulseaudio-utils</span></tt> ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install pulseaudio-utils
 </pre></div>
 </div>
 <div class="section" id="pamixer">
-<h2>1. pamixer</h2>
-<p><a class="reference external" href="https://github.com/cdemoulins/pamixer">pamixer</a> is a PulseAudio console mixer. Compile dependencies:</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install build-essential libpulse-dev libboost-program-options1.58.0 libboost-program-options-dev
+<h3>1. Pamixer</h3>
+<p><a class="reference external" href="https://github.com/cdemoulins/pamixer">Pamixer</a> is a PulseAudio console mixer. Compile dependencies ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install build-essential libpulse-dev libboost-program-options1.62.0:amd64 libboost-program-options-dev
 </pre></div>
-<p>Download source and compile:</p>
+<p>Download source and compile ...</p>
 <div class="highlight"><pre><span></span>$ git clone https://cdemoulins@github.com/cdemoulins/pamixer.git
 $ <span class="nb">cd</span> pamixer
 $ make
@@ -50,46 +48,60 @@ $ make
 <p>No <tt class="docutils literal">make install</tt>. Place the resulting <tt class="docutils literal">pamixer</tt> in PATH (I use <tt class="docutils literal">~/bin</tt>).</p>
 </div>
 <div class="section" id="volnoti">
-<h2>2. volnoti</h2>
-<p><a class="reference external" href="https://github.com/davidbrazdil/volnoti">volnoti</a> is a lightweight volume notification. Compile dependencies:</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install libdbus-glib-1-dev libgtk2.0-dev libgdk-pixbuf2.0-dev autoconf automake
+<h3>2. Volnoti</h3>
+<p><a class="reference external" href="https://github.com/davidbrazdil/volnoti">Volnoti</a> is a lightweight volume notification. Compile dependencies ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install libdbus-glib-1-dev libgtk2.0-dev libgdk-pixbuf2.0-dev autoconf automake
 </pre></div>
-<p>Download:</p>
+<p>Download ...</p>
 <div class="highlight"><pre><span></span>$ git clone git://github.com/davidbrazdil/volnoti.git
 $ <span class="nb">cd</span> volnoti
 $ ./prepare.sh
 $ ./configure --prefix<span class="o">=</span>/usr
 </pre></div>
-<p>Apply this fix <a class="footnote-reference" href="#id5" id="id3">[1]</a> to the source:</p>
+<p>Apply this fix <a class="footnote-reference" href="#id4" id="id3">[1]</a> to the source ...</p>
 <div class="highlight"><pre><span></span>$ <span class="nb">cd</span> src
 $ rm value-client-stub.h <span class="o">&amp;&amp;</span> make value-client-stub.h
 $ rm value-daemon-stub.h <span class="o">&amp;&amp;</span> make value-daemon-stub.h
 $ <span class="nb">cd</span> ..
 </pre></div>
-<p>Compile source (and I use <a class="reference external" href="https://packages.debian.org/jessie/checkinstall">checkinstall</a> to make a <tt class="docutils literal">deb</tt> package and install):</p>
+<p>Compile source (and I use <a class="reference external" href="https://packages.debian.org/stretch/checkinstall">checkinstall</a> to make a <tt class="docutils literal">deb</tt> package and install) ...</p>
 <div class="highlight"><pre><span></span>$ make
 $ sudo checkinstall make install
 </pre></div>
-<p>Start <tt class="docutils literal">volnoti</tt> daemon:</p>
+<p>Start <tt class="docutils literal">volnoti</tt> daemon ...</p>
 <div class="highlight"><pre><span></span>$ volnoti
 </pre></div>
-<p>Configure daemon to auto-start at desktop launch (example: <strong>i3</strong> - add to <tt class="docutils literal"><span class="pre">~/.i3/config</span></tt>):</p>
-<div class="highlight"><pre><span></span><span class="c1"># Auto-start applications</span>
-<span class="nb">exec</span> --no-startup-id volnoti -t 2
+<p>Configure daemon to auto-start by adding it to <a class="reference external" href="http://www.circuidipity.com/xinitrc.html">~/.xinitrc</a> ...</p>
+<div class="highlight"><pre><span></span>volnoti -t <span class="m">2</span> <span class="p">&amp;</span>
 </pre></div>
 </div>
-<div class="section" id="id4">
-<h2>3. paVolume</h2>
-<p><a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume">Script posted to GitHub</a>. Download and place in PATH. Run <tt class="docutils literal">paVolume <span class="pre">-h</span></tt> for options.</p>
+<div class="section" id="script-pavolume">
+<h3>3. Script paVolume</h3>
+<p>I tie all the pieces together with my paVolume shell script and create keycodes to increase/decrease/mute volume in <tt class="docutils literal"><span class="pre">~/.xbindkeysrc</span></tt> ...</p>
+<div class="highlight"><pre><span></span><span class="s2">&quot;paVolume -m&quot;</span>
+F8
+<span class="s2">&quot;paVolume -m&quot;</span>
+XF86AudioMute
+<span class="s2">&quot;paVolume -d&quot;</span>
+F9
+<span class="s2">&quot;paVolume -d&quot;</span>
+XF86AudioLowerVolume
+<span class="s2">&quot;paVolume -u&quot;</span>
+F10
+<span class="s2">&quot;paVolume -u&quot;</span>
+XF86AudioRaiseVolume
+</pre></div>
+<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume">homebin/paVolume</a> and <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook">dotfiles/.xbindkeysrc.chromebook</a></p>
 <p>Happy hacking!</p>
 <div class="section" id="notes">
-<h3>Notes</h3>
-<table class="docutils footnote" frame="void" id="id5" rules="none">
+<h4>Notes</h4>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td>Ubuntu forums: <a class="reference external" href="http://ubuntuforums.org/showthread.php?t=2215264&amp;s=7aa2dfa8b89411472598e737c38f1475&amp;p=12978792#post12978792">Error when using make &quot;client.c:108:5: error: too many arguments to function&quot;</a></td></tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
 
@@ -104,9 +116,7 @@ $ sudo checkinstall make install
 <div id="navmenu">
     <hr />
     <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-        <a href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html">Chromebook to Jessiebook</a></p>
-    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
-        <a href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html">ThinkPad USB Keyboard with TrackPoint</a></p>
+        <a href="http://www.circuidipity.com/xbindkeysrc.html">Dot xbindkeysrc</a></p>
 </div>
 
 
