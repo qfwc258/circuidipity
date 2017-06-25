@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Dot Xresources</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Sunday 25 June 2017</p>
+</div>
+
+<!-- article -->
+<h1>Dot Xresources</h1>
+<div id="article">
+    <p>I create <tt class="docutils literal"><span class="pre">~/.Xresources</span></tt> to set my custom configuration parameters for X client applications.</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<p>Whenever making any changes to the file, refresh the configuration by running ...</p>
+<div class="highlight"><pre><span></span>$ xrdb -merge ~/.Xresources
+</pre></div>
+<div class="section" id="fonts">
+<h3>Fonts</h3>
+<div class="highlight"><pre><span></span>Xft.antialias:  <span class="nb">true</span>
+Xft.rgba:       rgb
+Xft.hinting:    <span class="nb">true</span>
+Xft.hintstyle:  hintslight
+</pre></div>
+</div>
+<div class="section" id="terminal-colours">
+<h3>Terminal colours</h3>
+<p>I use the <strong>Urxvt</strong> terminal. Install (on Debian) ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install rxvt-unicode-256color
+</pre></div>
+<p>Setup a colour scheme ...</p>
+<div class="highlight"><pre><span></span>*foreground:       <span class="c1">#6fc3df</span>
+*background:       <span class="c1">#000000</span>
+*cursorColor:      <span class="c1">#ef2929</span>
+! black
+*color0:           <span class="c1">#000000</span>
+*color8:           <span class="c1">#555753</span>
+! red
+*color1:           <span class="c1">#cc0000</span>
+*color9:           <span class="c1">#ef2929</span>
+! green
+*color2:           <span class="c1">#4e9a06</span>
+*color10:          <span class="c1">#8ae234</span>
+! yellow
+*color3:           <span class="c1">#c4a000</span>
+*color11:          <span class="c1">#fce94f</span>
+! blue
+*color4:           <span class="c1">#3465a4</span>
+*color12:          <span class="c1">#025cac</span>
+! magenta
+*color5:           <span class="c1">#75507b</span>
+*color13:          <span class="c1">#ad7fa8</span>
+! cyan
+*color6:           <span class="c1">#06989a</span>
+*color14:          <span class="c1">#96cdfe</span>
+! white
+*color7:           <span class="c1">#d3d7cf</span>
+*color15:          <span class="c1">#eeeeec</span>
+</pre></div>
+</div>
+<div class="section" id="terminal-settings">
+<h3>Terminal settings</h3>
+<div class="highlight"><pre><span></span>URxvt.scrollBar: <span class="nb">false</span>
+URxvt.saveLines: 8888
+URxvt.font: xft:terminus:pixelsize<span class="o">=</span>18
+URxvt.boldFont: xft:terminus:bold:pixelsize<span class="o">=</span>18
+URxvt.perl-ext-common: default,matcher,tabbed
+URxvt.tabbed.tabbar-fg: 15
+URxvt.tabbed.tabbar-bg: 0
+URxvt.tabbed.tab-fg: 15
+URxvt.tabbed.tab-bg: 4
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+! add a spot of colour to man pages
+URxvt.colorIT:      <span class="c1">#87af5f</span>
+URxvt.colorBD:      <span class="c1">#d7d7d7</span>
+URxvt.colorUL:      <span class="c1">#87afd7</span>
+</pre></div>
+</div>
+<div class="section" id="rofi">
+<h3>Rofi</h3>
+<p>A <a class="reference external" href="https://davedavenport.github.io/rofi/">window switcher + run dialog</a> utility. Good stuff! Add colour ...</p>
+<div class="highlight"><pre><span></span>rofi.hlfg:          <span class="c1">#FFFFFF</span>
+rofi.hlbg:          <span class="c1">#FF0000</span>
+</pre></div>
+</div>
+<div class="section" id="startx">
+<h3>Startx</h3>
+<p>Add the file to <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt> for loading when executing <tt class="docutils literal">startx</tt> ...</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[</span> -f ~/.Xresources <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    xrdb -merge ~/.Xresources
+<span class="k">fi</span>
+</pre></div>
+<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.Xresources">dotfiles/.Xresources</a> and <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc">dotfiles/.xinitrc</a></p>
+<p>Happy hacking!</p>
+</div>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-dotfiles.html">dotfiles</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/pavolume.html">Volume control and notification</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>

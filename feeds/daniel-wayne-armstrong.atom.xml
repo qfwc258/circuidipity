@@ -1,5 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-24T08:47:00-04:00</updated><entry><title>Volume control and notification</title><link href="http://www.circuidipity.com/pavolume.html" rel="alternate"></link><published>2017-06-24T08:47:00-04:00</published><updated>2017-06-24T08:47:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-24:/pavolume.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/homebin.html"&gt;PROJECT: $HOME slash bin .:&lt;/a&gt; My original intent was to manage sound on &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook&lt;/a&gt; by binding the commands to the multimedia keys in &lt;a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html"&gt;~/.xbindkeysrc.&lt;/a&gt; Instead &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; calls a standalone script I created to control PulseAudio volume (and thus useful beyond just &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt;).&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-25T09:30:00-04:00</updated><entry><title>Dot Xresources</title><link href="http://www.circuidipity.com/xresources.html" rel="alternate"></link><published>2017-06-25T09:30:00-04:00</published><updated>2017-06-25T09:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-25:/xresources.html</id><summary type="html">&lt;p&gt;I create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.Xresources&lt;/span&gt;&lt;/tt&gt; to set my custom configuration parameters for X client applications.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Whenever making any changes to the file, refresh the configuration by running ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xrdb -merge ~/.Xresources
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="fonts"&gt;
+&lt;h3&gt;Fonts&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Xft.antialias:  &lt;span class="nb"&gt;true&lt;/span&gt;
+Xft.rgba:       rgb
+Xft.hinting:    &lt;span class="nb"&gt;true&lt;/span&gt;
+Xft.hintstyle:  hintslight
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="terminal-colours"&gt;
+&lt;h3&gt;Terminal colours&lt;/h3&gt;
+&lt;p&gt;I use the &lt;strong&gt;Urxvt&lt;/strong&gt; terminal …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;I create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.Xresources&lt;/span&gt;&lt;/tt&gt; to set my custom configuration parameters for X client applications.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Whenever making any changes to the file, refresh the configuration by running ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xrdb -merge ~/.Xresources
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="fonts"&gt;
+&lt;h3&gt;Fonts&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Xft.antialias:  &lt;span class="nb"&gt;true&lt;/span&gt;
+Xft.rgba:       rgb
+Xft.hinting:    &lt;span class="nb"&gt;true&lt;/span&gt;
+Xft.hintstyle:  hintslight
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="terminal-colours"&gt;
+&lt;h3&gt;Terminal colours&lt;/h3&gt;
+&lt;p&gt;I use the &lt;strong&gt;Urxvt&lt;/strong&gt; terminal. Install (on Debian) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install rxvt-unicode-256color
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Setup a colour scheme ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;*foreground:       &lt;span class="c1"&gt;#6fc3df&lt;/span&gt;
+*background:       &lt;span class="c1"&gt;#000000&lt;/span&gt;
+*cursorColor:      &lt;span class="c1"&gt;#ef2929&lt;/span&gt;
+! black
+*color0:           &lt;span class="c1"&gt;#000000&lt;/span&gt;
+*color8:           &lt;span class="c1"&gt;#555753&lt;/span&gt;
+! red
+*color1:           &lt;span class="c1"&gt;#cc0000&lt;/span&gt;
+*color9:           &lt;span class="c1"&gt;#ef2929&lt;/span&gt;
+! green
+*color2:           &lt;span class="c1"&gt;#4e9a06&lt;/span&gt;
+*color10:          &lt;span class="c1"&gt;#8ae234&lt;/span&gt;
+! yellow
+*color3:           &lt;span class="c1"&gt;#c4a000&lt;/span&gt;
+*color11:          &lt;span class="c1"&gt;#fce94f&lt;/span&gt;
+! blue
+*color4:           &lt;span class="c1"&gt;#3465a4&lt;/span&gt;
+*color12:          &lt;span class="c1"&gt;#025cac&lt;/span&gt;
+! magenta
+*color5:           &lt;span class="c1"&gt;#75507b&lt;/span&gt;
+*color13:          &lt;span class="c1"&gt;#ad7fa8&lt;/span&gt;
+! cyan
+*color6:           &lt;span class="c1"&gt;#06989a&lt;/span&gt;
+*color14:          &lt;span class="c1"&gt;#96cdfe&lt;/span&gt;
+! white
+*color7:           &lt;span class="c1"&gt;#d3d7cf&lt;/span&gt;
+*color15:          &lt;span class="c1"&gt;#eeeeec&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="terminal-settings"&gt;
+&lt;h3&gt;Terminal settings&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;URxvt.scrollBar: &lt;span class="nb"&gt;false&lt;/span&gt;
+URxvt.saveLines: 8888
+URxvt.font: xft:terminus:pixelsize&lt;span class="o"&gt;=&lt;/span&gt;18
+URxvt.boldFont: xft:terminus:bold:pixelsize&lt;span class="o"&gt;=&lt;/span&gt;18
+URxvt.perl-ext-common: default,matcher,tabbed
+URxvt.tabbed.tabbar-fg: 15
+URxvt.tabbed.tabbar-bg: 0
+URxvt.tabbed.tab-fg: 15
+URxvt.tabbed.tab-bg: 4
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+! add a spot of colour to man pages
+URxvt.colorIT:      &lt;span class="c1"&gt;#87af5f&lt;/span&gt;
+URxvt.colorBD:      &lt;span class="c1"&gt;#d7d7d7&lt;/span&gt;
+URxvt.colorUL:      &lt;span class="c1"&gt;#87afd7&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="rofi"&gt;
+&lt;h3&gt;Rofi&lt;/h3&gt;
+&lt;p&gt;A &lt;a class="reference external" href="https://davedavenport.github.io/rofi/"&gt;window switcher + run dialog&lt;/a&gt; utility. Good stuff! Add colour ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rofi.hlfg:          &lt;span class="c1"&gt;#FFFFFF&lt;/span&gt;
+rofi.hlbg:          &lt;span class="c1"&gt;#FF0000&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="startx"&gt;
+&lt;h3&gt;Startx&lt;/h3&gt;
+&lt;p&gt;Add the file to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; for loading when executing &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -f ~/.Xresources &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    xrdb -merge ~/.Xresources
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.Xresources"&gt;dotfiles/.Xresources&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;dotfiles/.xinitrc&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category></entry><entry><title>Volume control and notification</title><link href="http://www.circuidipity.com/pavolume.html" rel="alternate"></link><published>2017-06-24T08:47:00-04:00</published><updated>2017-06-24T08:47:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-24:/pavolume.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/homebin.html"&gt;PROJECT: $HOME slash bin .:&lt;/a&gt; My original intent was to manage sound on &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook&lt;/a&gt; by binding the commands to the multimedia keys in &lt;a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html"&gt;~/.xbindkeysrc.&lt;/a&gt; Instead &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; calls a standalone script I created to control PulseAudio volume (and thus useful beyond just &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt;).&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Script requirements: &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;pamixer&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt;.&lt;/p&gt;
@@ -644,16 +746,4 @@ firmware-9.0.0-amd64-netinst.iso: OK
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="gpg"></category><category term="crypto"></category><category term="shell"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>The Diving-Bell and the Butterfly</title><link href="http://www.circuidipity.com/diving-bell-and-the-butterfly.html" rel="alternate"></link><published>2017-06-09T07:30:00-04:00</published><updated>2017-06-09T07:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-09:/diving-bell-and-the-butterfly.html</id><summary type="html">&lt;img alt="book cover" class="align-left" src="images/diving-bell-and-the-butterfly.jpg" style="width: 150px; height: 243px;" /&gt;
-&lt;div class="line-block"&gt;
-&lt;div class="line"&gt;&lt;strong&gt;The Diving-Bell and the Butterfly&lt;/strong&gt; &lt;em&gt;by Jean-Dominique Bauby&lt;/em&gt;&lt;/div&gt;
-&lt;div class="line"&gt;(ISBN: 1857027795)&lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;On December, 1995 the 42-year-old author, editor-in-chief of &lt;em&gt;Elle&lt;/em&gt; magazine in Paris, suffered a massive brain-stem stroke. When he awoke from a coma three weeks later his mind made a rapid recovery but his body lay broken. His condition is …&lt;/p&gt;</summary><content type="html">&lt;img alt="book cover" class="align-left" src="images/diving-bell-and-the-butterfly.jpg" style="width: 150px; height: 243px;" /&gt;
-&lt;div class="line-block"&gt;
-&lt;div class="line"&gt;&lt;strong&gt;The Diving-Bell and the Butterfly&lt;/strong&gt; &lt;em&gt;by Jean-Dominique Bauby&lt;/em&gt;&lt;/div&gt;
-&lt;div class="line"&gt;(ISBN: 1857027795)&lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;On December, 1995 the 42-year-old author, editor-in-chief of &lt;em&gt;Elle&lt;/em&gt; magazine in Paris, suffered a massive brain-stem stroke. When he awoke from a coma three weeks later his mind made a rapid recovery but his body lay broken. His condition is known as &amp;quot;locked-in syndrome&amp;quot; and he was paralyzed from head to toe with the exception of (a later) slight movement of the neck and the ability to blink his left eyelid.&lt;/p&gt;
-&lt;p&gt;But what an eye! With one blink for yes, two for no, a system for translating blinks to alphabetic characters and a patient transcriber, he narrates this story of holding on to humanity with humour and of an imagination that can still roam free. Do we need to suffer tragedy before we can learn to be courageous and grateful and kind? &lt;em&gt;&amp;quot;Regret for a vanished past, and above all remorse for lost opportunities ... the women we were unable to love, the chances we failed to seize, the moments of happiness we allowed to drift away. Today it seems to me that my whole life was nothing but a string of those small near misses. A race whose result we know beforehand, but in which we fail to bet on the winner.&amp;quot;&lt;/em&gt;&lt;/p&gt;
-</content><category term="books"></category></entry></feed>
+</content><category term="gpg"></category><category term="crypto"></category><category term="shell"></category><category term="debian"></category><category term="linux"></category></entry></feed>

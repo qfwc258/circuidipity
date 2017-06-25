@@ -24,7 +24,20 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="t0844">
+    <div class="section" id="t0922">
+<h2>2017-06-25T0922</h2>
+<p>Firework sounds for upcoming Canada Day!</p>
+<div class="highlight"><pre><span></span>$ sudo apt install sox
+</pre></div>
+<p>Screamer ...</p>
+<div class="highlight"><pre><span></span>$ play -n synth sine <span class="m">8000</span> bend 0.5,-1800,5 flanger <span class="m">0</span> <span class="m">3</span> <span class="m">0</span> <span class="m">20</span> <span class="m">10</span> tri <span class="m">20</span> quad trim <span class="m">0</span> 7
+</pre></div>
+<p>Bottle rocket ...</p>
+<div class="highlight"><pre><span></span>$ play -n synth whitenoise <span class="m">200</span> fade 0.2 <span class="m">1</span> <span class="m">1</span> trim <span class="m">0</span> 0.5 <span class="p">;</span> sleep <span class="m">1</span> <span class="p">;</span> play -n synth whitenoise <span class="m">200</span> fade <span class="m">0</span> <span class="m">1</span> <span class="m">1</span> trim <span class="m">0</span> 1
+</pre></div>
+<p>Links: <a class="reference external" href="https://twitter.com/climagic/status/485083242425368579">https://twitter.com/climagic/status/485083242425368579</a> and <a class="reference external" href="https://twitter.com/climagic/status/485069251401629697">https://twitter.com/climagic/status/485069251401629697</a></p>
+</div>
+<div class="section" id="t0844">
 <h2>2017-06-24T0844</h2>
 <p>Retrieve information about hardware using <tt class="docutils literal">sudo dmidecode</tt>, or much of the same information is available to the non-root user in <tt class="docutils literal">/sys/devices/virtual/dmi/id</tt>.</p>
 <p>Link: <a class="reference external" href="https://unix.stackexchange.com/a/172334">https://unix.stackexchange.com/a/172334</a></p>
