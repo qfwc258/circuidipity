@@ -4,6 +4,29 @@ Notes
 
 :slug: notes
 
+2017-06-25T0922
+---------------
+
+Firework sounds for upcoming Canada Day!
+
+.. code-block:: bash
+
+    $ sudo apt install sox
+
+Screamer ...
+
+.. code-block:: bash
+
+    $ play -n synth sine 8000 bend 0.5,-1800,5 flanger 0 3 0 20 10 tri 20 quad trim 0 7
+
+Bottle rocket ...
+
+.. code-block:: bash
+
+    $ play -n synth whitenoise 200 fade 0.2 1 1 trim 0 0.5 ; sleep 1 ; play -n synth whitenoise 200 fade 0 1 1 trim 0 1
+
+Links: https://twitter.com/climagic/status/485083242425368579 and https://twitter.com/climagic/status/485069251401629697
+
 2017-06-24T0844
 ---------------
 
