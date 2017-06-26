@@ -4,6 +4,18 @@ Notes
 
 :slug: notes
 
+2017-06-26T1126
+---------------
+
+Limit the CPU usage of an application ... I tried using **handbrake-gtk** to convert a video and the application grabbed 100% of all 4 cores, sent system temperature to 98C, and finally crashed the machine.
+
+**[ FIX! ]** Install **cpulimit** and set the limit to 80 (20percent * 4 cores) ...
+
+.. code-block:: bash
+
+    $ sudo cpulimit -e ghb -l 80
+
+
 2017-06-25T0922
 ---------------
 
