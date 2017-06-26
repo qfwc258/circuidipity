@@ -1,5 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-25T09:30:00-04:00</updated><entry><title>Dot Xresources</title><link href="http://www.circuidipity.com/xresources.html" rel="alternate"></link><published>2017-06-25T09:30:00-04:00</published><updated>2017-06-25T09:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-25:/xresources.html</id><summary type="html">&lt;p&gt;I create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.Xresources&lt;/span&gt;&lt;/tt&gt; to set my custom configuration parameters for X client applications.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-26T11:33:00-04:00</updated><entry><title>Dot xmodmap</title><link href="http://www.circuidipity.com/xmodmap.html" rel="alternate"></link><published>2017-06-26T11:33:00-04:00</published><updated>2017-06-26T11:33:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-26:/xmodmap.html</id><summary type="html">&lt;p&gt;The &lt;tt class="docutils literal"&gt;xmodmap&lt;/tt&gt; utility is useful for remapping keys. I use it to change the behaviour of a few keys on chromebook keyboards.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Install (on Debian) &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;x11-xserver-utils&lt;/span&gt;&lt;/tt&gt; and write any modifications to a newly-created &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xmodmap&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install x11-xserver-utils
+$ touch ~/.xmodmap
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;View the current keymap and I note the …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;The &lt;tt class="docutils literal"&gt;xmodmap&lt;/tt&gt; utility is useful for remapping keys. I use it to change the behaviour of a few keys on chromebook keyboards.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Install (on Debian) &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;x11-xserver-utils&lt;/span&gt;&lt;/tt&gt; and write any modifications to a newly-created &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xmodmap&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install x11-xserver-utils
+$ touch ~/.xmodmap
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;View the current keymap and I note the keycodes to be remapped ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xmodmap -pke
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+keycode &lt;span class="nv"&gt;108&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Alt_R Meta_R Alt_R Meta_R
+keycode &lt;span class="nv"&gt;124&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; XF86PowerOff NoSymbol XF86PowerOff
+keycode &lt;span class="nv"&gt;133&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Super_L NoSymbol Super_L
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Make my changes in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xmodmap&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;! Chromebook &lt;span class="s1"&gt;&amp;#39;Search&amp;#39;&lt;/span&gt; meta key to backspace
+! IMPORTANT: &lt;span class="s1"&gt;&amp;#39;clear Mod4&amp;#39;&lt;/span&gt; to &lt;span class="nb"&gt;enable&lt;/span&gt; key combo in GTK apps
+clear Mod4
+keycode &lt;span class="nv"&gt;133&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; BackSpace
+
+keycode &lt;span class="nv"&gt;108&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Alt_R
+
+! &lt;span class="s1"&gt;&amp;#39;HandlePowerKey=ignore&amp;#39;&lt;/span&gt; in /etc/systemd/logind.conf and powerkey to pause
+keycode &lt;span class="nv"&gt;124&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Pause
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Run &lt;tt class="docutils literal"&gt;xmodmap &lt;span class="pre"&gt;~/.xmodmap&lt;/span&gt;&lt;/tt&gt; to activate the key remapping. Check out the altered keycodes ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xmodmap -pke
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+keycode &lt;span class="nv"&gt;108&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Alt_R NoSymbol Alt_R
+keycode &lt;span class="nv"&gt;124&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Pause NoSymbol Pause
+keycode &lt;span class="nv"&gt;133&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; BackSpace NoSymbol BackSpace
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Make an entry in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; to run the command at &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xmodmap -pke
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Modify key mappings (handled by keyboardconf)&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -f ~/.xmodmap &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    xmodmap ~/.xmodmap
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.chromebook"&gt;dotfiles/.xmodmap.chromebook&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;dotfiles/.xinitrc&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category><category term="keyboard"></category></entry><entry><title>Dot Xresources</title><link href="http://www.circuidipity.com/xresources.html" rel="alternate"></link><published>2017-06-25T09:30:00-04:00</published><updated>2017-06-25T09:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-25:/xresources.html</id><summary type="html">&lt;p&gt;I create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.Xresources&lt;/span&gt;&lt;/tt&gt; to set my custom configuration parameters for X client applications.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Whenever making any changes to the file, refresh the configuration by running ...&lt;/p&gt;
@@ -635,115 +686,4 @@ EndSection
 &lt;/div&gt;
 &lt;p&gt;A wonderful graphic novel sponsored by the Wellcome Trust that takes an expedition through the human brain and where we meet explorers along the way: &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Santiago_Ram%C3%B3n_y_Cajal"&gt;Santiago Ramón y Cajal&lt;/a&gt; and &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Camillo_Golgi"&gt;Camillo Golgi&lt;/a&gt; in the neural forest, &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Charles_Scott_Sherrington"&gt;Charles Scott Sherrington&lt;/a&gt; and &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Bernard_Katz"&gt;Bernard Katz&lt;/a&gt; down in the synaptic control room readying a release of vesicles, paratrooping neurotransmitters, fending off giant squid with &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Alan_Lloyd_Hodgkin"&gt;Alan Hodgkin&lt;/a&gt; and &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Andrew_Huxley"&gt;Andrew Huxley&lt;/a&gt;, &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Eric_Kandel"&gt;Eric Kandel&lt;/a&gt; and &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Classical_conditioning"&gt;Pavlov (not) feeding the dog&lt;/a&gt;, &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Hans_Berger"&gt;Hans Berger&lt;/a&gt; atop the mountain, finally pushing on to face our (false?) sense of self in the Castle of Consciousness.&lt;/p&gt;
 &lt;p&gt;I am really intrigued by Berger's invention of the &lt;strong&gt;electroencephalogram&lt;/strong&gt; in 1924 and what reading the electrical activity of the brain actually represents, and how we could possibly tease more data out of the patterns. It sounds like the kind of &lt;strong&gt;affordable and noninvasive&lt;/strong&gt; (bonus!) tech that lends itself to happy hacking!&lt;/p&gt;
-</content><category term="books"></category></entry><entry><title>Verify a PGP signature with GnuPG</title><link href="http://www.circuidipity.com/verify-pgp-signature-gnupg.html" rel="alternate"></link><published>2017-06-10T09:00:00-04:00</published><updated>2017-06-18T11:45:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-10:/verify-pgp-signature-gnupg.html</id><summary type="html">&lt;p&gt;I setup &lt;a class="reference external" href="https://www.gnupg.org/"&gt;GNU Privacy Guard&lt;/a&gt; (&lt;strong&gt;GnuPG&lt;/strong&gt; or &lt;strong&gt;GPG&lt;/strong&gt;) - a free software implementation of OpenPGP - and use the utility to verify the PGP signatures of files.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Using a &lt;strong&gt;PGP private/public keypair&lt;/strong&gt; to create a &lt;strong&gt;digital signature&lt;/strong&gt; for a file certifies its integrity. A developer signs a package with …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;I setup &lt;a class="reference external" href="https://www.gnupg.org/"&gt;GNU Privacy Guard&lt;/a&gt; (&lt;strong&gt;GnuPG&lt;/strong&gt; or &lt;strong&gt;GPG&lt;/strong&gt;) - a free software implementation of OpenPGP - and use the utility to verify the PGP signatures of files.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Using a &lt;strong&gt;PGP private/public keypair&lt;/strong&gt; to create a &lt;strong&gt;digital signature&lt;/strong&gt; for a file certifies its integrity. A developer signs a package with their private key and the receiver verifies the signature with the public key. If the package has been modified or corrupted in transmission the verification will fail.&lt;/p&gt;
-&lt;div class="section" id="install-gnupg"&gt;
-&lt;h3&gt;0. Install GnuPG&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install gnupg dirmngr
-$ gpg --version
-gpg &lt;span class="o"&gt;(&lt;/span&gt;GnuPG&lt;span class="o"&gt;)&lt;/span&gt; 2.1.18
-libgcrypt 1.7.6-beta
-&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;First time invoking &lt;tt class="docutils literal"&gt;gpg &lt;span class="pre"&gt;--list-keys&lt;/span&gt;&lt;/tt&gt; with an empty &lt;strong&gt;keyring&lt;/strong&gt; generates a config directory in $HOME ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gpg --list-keys
-gpg: directory &lt;span class="s1"&gt;&amp;#39;/home/dwa/.gnupg&amp;#39;&lt;/span&gt; created
-&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Default config files are &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.gnupg/gpg.conf&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.gnupg/dirmngr.conf&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="keyserver"&gt;
-&lt;h3&gt;1. Keyserver&lt;/h3&gt;
-&lt;p&gt;Many keys are stored on a &lt;strong&gt;keyserver&lt;/strong&gt;. I choose the &lt;a class="reference external" href="https://riseup.net/en/security/message-security/openpgp/best-practices#selecting-a-keyserver-and-configuring-your-machine-to-refresh-your-keyring"&gt;recommended sks keyserver pool&lt;/a&gt;. Download the &lt;strong&gt;sks-keyservers.net CA&lt;/strong&gt; and verify the certificate ... &lt;a class="footnote-reference" href="#id3" id="id1"&gt;[1]&lt;/a&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ wget https://sks-keyservers.net/sks-keyservers.netCA.pem -P ~/.gnupg/
-$ &lt;span class="nb"&gt;cd&lt;/span&gt; ~/.gnupg
-$ openssl verify -trusted sks-keyservers.netCA.pem -check_ss_sig sks-keyservers.netCA.pem
-sks-keyservers.netCA.pem: OK
-$ openssl x509 -in sks-keyservers.netCA.pem -noout -text &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s2"&gt;&amp;quot;X509v3 Subject Key Identifier&amp;quot;&lt;/span&gt; -A1 &lt;span class="p"&gt;|&lt;/span&gt; tail -n1
-    E4:C3:2A:09:14:67:D8:4D:52:12:4E:93:3C:13:E8:A0:8D:DA:B6:F3
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and compare with the &lt;a class="reference external" href="https://sks-keyservers.net/verify_tls.php"&gt;key identifier recorded at sks-keyservers.net.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Add the keyserver and the CA to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.gnupg/dirmngr.conf&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;keyserver hkps://hkps.pool.sks-keyservers.net
-hkp-cacert ~/.gnupg/sks-keyservers.netCA.pem
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Link: &lt;a class="reference external" href="https://riseup.net/en/security/message-security/openpgp/best-practices"&gt;OpenPGP Best Practices&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="verify-a-pgp-signature"&gt;
-&lt;h3&gt;2. Verify a PGP signature&lt;/h3&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://www.debian.org/CD/verify"&gt;Verifying authenticity of Debian installer images:&lt;/a&gt; &amp;quot;Cryptographically strong checksum algorithms (SHA256 and SHA512) are available for every release ... To ensure that the checksums files themselves are correct, use GnuPG to verify them against the accompanying signature files.&amp;quot;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt; Download the (unofficial with firmware) &lt;strong&gt;minimal network installer&lt;/strong&gt; and the signed checksum files ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ wget https://cdimage.debian.org/mirror/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/firmware-9.0.0-amd64-netinst.iso
-$ wget https://cdimage.debian.org/mirror/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/SHA512SUMS.sign
-$ wget https://cdimage.debian.org/mirror/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/SHA512SUMS
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Display the signing key ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gpg --verify SHA512SUMS.sign SHA512SUMS
-gpg: Signature made Sun &lt;span class="m"&gt;07&lt;/span&gt; May &lt;span class="m"&gt;2017&lt;/span&gt; 02:28:21 PM EDT
-gpg:                using RSA key DA87E80D6294BE9B
-gpg: Can&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;t check signature: No public key
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Show details of the key on the keyserver ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gpg --search-keys DA87E80D6294BE9B
-gpg: data source: https://gozer.rediris.es:443
-&lt;span class="o"&gt;(&lt;/span&gt;1&lt;span class="o"&gt;)&lt;/span&gt; Debian CD signing key &amp;lt;debian-cd@lists.debian.org&amp;gt;
-  &lt;span class="m"&gt;4096&lt;/span&gt; bit RSA key DA87E80D6294BE9B, created: 2011-01-05
-  Keys 1-1 of &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;DA87E80D6294BE9B&amp;quot;&lt;/span&gt;.  Enter number&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt;, N&lt;span class="o"&gt;)&lt;/span&gt;ext, or Q&lt;span class="o"&gt;)&lt;/span&gt;uit &amp;gt; n
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Import the key from the keyserver ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gpg --recv-keys DA87E80D6294BE9B
-gpg: key DA87E80D6294BE9B: public key &lt;span class="s2"&gt;&amp;quot;Debian CD signing key &amp;lt;debian-cd@lists.debian.org&amp;gt;&amp;quot;&lt;/span&gt; imported
-gpg: no ultimately trusted keys found
-gpg: Total number processed: 1
-gpg:               imported: 1
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Display the keyring containing our new key ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gpg --list-keys
-/home/dwa/.gnupg/pubring.kbx
-----------------------------
-pub   rsa4096 2011-01-05 &lt;span class="o"&gt;[&lt;/span&gt;SC&lt;span class="o"&gt;]&lt;/span&gt;
-    DF9B9C49EAA9298432589D76DA87E80D6294BE9B
-    uid           &lt;span class="o"&gt;[&lt;/span&gt; unknown&lt;span class="o"&gt;]&lt;/span&gt; Debian CD signing key &amp;lt;debian-cd@lists.debian.org&amp;gt;
-    sub   rsa4096 2011-01-05 &lt;span class="o"&gt;[&lt;/span&gt;E&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;After importing the signing key ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gpg --verify SHA512SUMS.sign SHA512SUMS
-gpg: Signature made Sun &lt;span class="m"&gt;07&lt;/span&gt; May &lt;span class="m"&gt;2017&lt;/span&gt; 02:28:21 PM EDT
-gpg:                using RSA key DA87E80D6294BE9B
-gpg: Good signature from &lt;span class="s2"&gt;&amp;quot;Debian CD signing key &amp;lt;debian-cd@lists.debian.org&amp;gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;unknown&lt;span class="o"&gt;]&lt;/span&gt;
-gpg: WARNING: This key is not certified with a trusted signature!
-gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: DF9B 9C49 EAA9 &lt;span class="m"&gt;2984&lt;/span&gt; &lt;span class="m"&gt;3258&lt;/span&gt;  9D76 DA87 E80D &lt;span class="m"&gt;6294&lt;/span&gt; BE9B
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The warning about &lt;tt class="docutils literal"&gt;key is not certified with a trusted signature&lt;/tt&gt; means GnuPG verified the key matches the signature but cannot guarantee the key really belongs to the developer. It is up to me to decide how much confidence to place in the authenticity of the key.&lt;/p&gt;
-&lt;p&gt;For this Debian-provided signature file I compare the &lt;tt class="docutils literal"&gt;Primary key fingerprint&lt;/tt&gt; line to the key fingerprints recorded on &lt;a class="reference external" href="https://www.debian.org/CD/verify"&gt;the Debian website.&lt;/a&gt; Looks good! &lt;a class="footnote-reference" href="#id4" id="id2"&gt;[2]&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="verify-file-integrity"&gt;
-&lt;h3&gt;3. Verify file integrity&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sha512sum --ignore-missing --check SHA512SUMS
-firmware-9.0.0-amd64-netinst.iso: OK
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h4&gt;Notes&lt;/h4&gt;
-&lt;table class="docutils footnote" frame="void" id="id3" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Verifying &lt;a class="reference external" href="https://github.com/riseupnet/riseup_help/issues/145"&gt;keyserver pool certificate.&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table class="docutils footnote" frame="void" id="id4" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="https://lkml.org/lkml/2016/8/15/445"&gt;DO NOT TRUST ANYTHING SHORTER THAN THE FINGERPRINTS.&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</content><category term="gpg"></category><category term="crypto"></category><category term="shell"></category><category term="debian"></category><category term="linux"></category></entry></feed>
+</content><category term="books"></category></entry></feed>

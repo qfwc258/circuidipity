@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Dot xmodmap</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Monday 26 June 2017</p>
+</div>
+
+<!-- article -->
+<h1>Dot xmodmap</h1>
+<div id="article">
+    <p>The <tt class="docutils literal">xmodmap</tt> utility is useful for remapping keys. I use it to change the behaviour of a few keys on chromebook keyboards.</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<p>Install (on Debian) <tt class="docutils literal"><span class="pre">x11-xserver-utils</span></tt> and write any modifications to a newly-created <tt class="docutils literal"><span class="pre">~/.xmodmap</span></tt> ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install x11-xserver-utils
+$ touch ~/.xmodmap
+</pre></div>
+<p>View the current keymap and I note the keycodes to be remapped ...</p>
+<div class="highlight"><pre><span></span>$ xmodmap -pke
+<span class="o">[</span>...<span class="o">]</span>
+keycode <span class="nv">108</span> <span class="o">=</span> Alt_R Meta_R Alt_R Meta_R
+keycode <span class="nv">124</span> <span class="o">=</span> XF86PowerOff NoSymbol XF86PowerOff
+keycode <span class="nv">133</span> <span class="o">=</span> Super_L NoSymbol Super_L
+</pre></div>
+<p>Make my changes in <tt class="docutils literal"><span class="pre">~/.xmodmap</span></tt> ...</p>
+<div class="highlight"><pre><span></span>! Chromebook <span class="s1">&#39;Search&#39;</span> meta key to backspace
+! IMPORTANT: <span class="s1">&#39;clear Mod4&#39;</span> to <span class="nb">enable</span> key combo in GTK apps
+clear Mod4
+keycode <span class="nv">133</span> <span class="o">=</span> BackSpace
+
+keycode <span class="nv">108</span> <span class="o">=</span> Alt_R
+
+! <span class="s1">&#39;HandlePowerKey=ignore&#39;</span> in /etc/systemd/logind.conf and powerkey to pause
+keycode <span class="nv">124</span> <span class="o">=</span> Pause
+</pre></div>
+<p>Run <tt class="docutils literal">xmodmap <span class="pre">~/.xmodmap</span></tt> to activate the key remapping. Check out the altered keycodes ...</p>
+<div class="highlight"><pre><span></span>$ xmodmap -pke
+<span class="o">[</span>...<span class="o">]</span>
+keycode <span class="nv">108</span> <span class="o">=</span> Alt_R NoSymbol Alt_R
+keycode <span class="nv">124</span> <span class="o">=</span> Pause NoSymbol Pause
+keycode <span class="nv">133</span> <span class="o">=</span> BackSpace NoSymbol BackSpace
+</pre></div>
+<p>Make an entry in <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt> to run the command at <tt class="docutils literal">startx</tt> ...</p>
+<div class="highlight"><pre><span></span>$ xmodmap -pke
+<span class="o">[</span>...<span class="o">]</span>
+
+<span class="c1"># Modify key mappings (handled by keyboardconf)</span>
+<span class="k">if</span> <span class="o">[</span> -f ~/.xmodmap <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    xmodmap ~/.xmodmap
+<span class="k">fi</span>
+</pre></div>
+<p>Sources: <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.chromebook">dotfiles/.xmodmap.chromebook</a> and <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc">dotfiles/.xinitrc</a></p>
+<p>Happy hacking!</p>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-dotfiles.html">dotfiles</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-keyboard.html">keyboard</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/xresources.html">Dot Xresources</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>
