@@ -24,7 +24,23 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="t1126">
+    <div class="section" id="t0902">
+<h2>2017-06-27T0902</h2>
+<p>Default keyboard layout in Debian is configured in <tt class="docutils literal">/etc/default/keyboard</tt> and is shared between X and the command line ...</p>
+<div class="highlight"><pre><span></span>$ cat /etc/default/keyboard
+<span class="o">[</span>...<span class="o">]</span>
+<span class="nv">XKBMODEL</span><span class="o">=</span><span class="s2">&quot;pc105&quot;</span>
+<span class="nv">XKBLAYOUT</span><span class="o">=</span><span class="s2">&quot;us&quot;</span>
+<span class="nv">XKBVARIANT</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">XKBOPTIONS</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+
+<span class="nv">BACKSPACE</span><span class="o">=</span><span class="s2">&quot;guess&quot;</span>
+</pre></div>
+<p>Modify this file to set a new default keyboard layout, either manually or run ...</p>
+<div class="highlight"><pre><span></span>$ sudo dpkg-reconfigure keyboard-configuration
+</pre></div>
+</div>
+<div class="section" id="t1126">
 <h2>2017-06-26T1126</h2>
 <p>Limit the CPU usage of an application ... I tried using <strong>handbrake-gtk</strong> to convert a video and the application grabbed 100% of all 4 cores, sent system temperature to 98C, and finally crashed the machine.</p>
 <p><strong>[ FIX! ]</strong> Install <strong>cpulimit</strong> and set the limit to 80 (20percent * 4 cores) ...</p>
