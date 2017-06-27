@@ -4,6 +4,28 @@ Notes
 
 :slug: notes
 
+2017-06-27T0902
+---------------
+
+Default keyboard layout in Debian is configured in ``/etc/default/keyboard`` and is shared between X and the command line ...
+
+.. code-block:: bash
+
+    $ cat /etc/default/keyboard
+    [...]
+    XKBMODEL="pc105"
+    XKBLAYOUT="us"
+    XKBVARIANT=""
+    XKBOPTIONS=""
+
+    BACKSPACE="guess"
+
+Modify this file to set a new default keyboard layout, either manually or run ...
+
+.. code-block:: bash
+
+    $ sudo dpkg-reconfigure keyboard-configuration
+
 2017-06-26T1126
 ---------------
 
