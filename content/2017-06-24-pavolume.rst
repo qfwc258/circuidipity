@@ -107,7 +107,7 @@ I tie all the pieces together with my paVolume shell script and create keycodes 
     "paVolume -u"
     XF86AudioRaiseVolume
 
-Sources: `homebin/paVolume <https://github.com/vonbrownie/homebin/blob/master/paVolume>`_ and `dotfiles/.xbindkeysrc.chromebook <https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook>`_
+Sources: homebin/`paVolume <https://github.com/vonbrownie/homebin/blob/master/paVolume>`_ and dotfiles/`.xbindkeysrc.chromebook <https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook>`_
 
 Happy hacking!
 

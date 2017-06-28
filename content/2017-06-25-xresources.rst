@@ -110,6 +110,6 @@ Add the file to ``~/.xinitrc`` for loading when executing ``startx`` ...
         xrdb -merge ~/.Xresources
     fi
 
-Sources: `dotfiles/.Xresources <https://github.com/vonbrownie/dotfiles/blob/master/.Xresources>`_ and `dotfiles/.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_
+Sources: dotfiles/`.Xresources <https://github.com/vonbrownie/dotfiles/blob/master/.Xresources>`_ and dotfiles/`.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_
 
 Happy hacking!

@@ -4,7 +4,7 @@ $HOME slash bin
 
 :slug: homebin
 :template: page-project
-:modified: 2017-06-23 18:45:00
+:modified: 2017-06-27 18:45:00
 
 .. image:: images/infinite-loop-not-300.png
     :align: right
@@ -60,7 +60,7 @@ Let's go!
     Installs libflashplayer.so
 
 `keyboardconf <https://github.com/vonbrownie/homebin/blob/master/keyboardconf>`_
-    Detect and configure keyboards
+    Detect and configure keyboards (more: `"Detect and configure keyboards" <http://www.circuidipity.com/keyboardconf.html>`_)
 
 `magic8ball.py <https://github.com/vonbrownie/homebin/blob/master/magic8ball.py>`_
     Magic 8 Ball peers into the future and retrieves the answer to your questions

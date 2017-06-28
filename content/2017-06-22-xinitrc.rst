@@ -73,6 +73,6 @@ Start the `window manager <http://www.circuidipity.com/i3-tiling-window-manager.
 
     exec i3
 
-Source: `dotfiles/.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_
+Source: dotfiles/`.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_
 
 Happy hacking!

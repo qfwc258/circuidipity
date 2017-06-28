@@ -17,6 +17,6 @@ Building on a `minimal install <http://www.circuidipity.com/minimal-debian.html>
 
 Depends: ``bash``
 
-Link: `linux-post-install/scripts/debian-stable-setup <https://github.com/vonbrownie/linux-post-install/tree/master/scripts/debian-stable-setup>`_
+Source: linux-post-install/scripts/`debian-stable-setup <https://github.com/vonbrownie/linux-post-install/tree/master/scripts/debian-stable-setup>`_
 
 Happy hacking!

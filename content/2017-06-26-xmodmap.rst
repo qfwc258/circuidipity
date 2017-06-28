@@ -64,6 +64,6 @@ Make an entry in ``~/.xinitrc`` to run the command at ``startx`` ...
         xmodmap ~/.xmodmap
     fi
 
-Sources: `dotfiles/.xmodmap.chromebook <https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.chromebook>`_ and `dotfiles/.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_
+Sources: dotfiles/`.xmodmap.chromebook <https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.chromebook>`_ and dotfiles/`.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_
 
 Happy hacking!

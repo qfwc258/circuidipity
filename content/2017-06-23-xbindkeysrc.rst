@@ -91,6 +91,6 @@ Place in ``~/.xinitrc`` to load configuration at ``startx`` ...
         xbindkeys
     fi
 
-Sources: `dotfiles/.xbindkeysrc <https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook>`_ and `dotfiles/.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_
+Sources: dotfiles/`.xbindkeysrc <https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook>`_ and dotfiles/`.xinitrc <https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc>`_
 
 Happy hacking!

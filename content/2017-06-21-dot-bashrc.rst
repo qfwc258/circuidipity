@@ -173,6 +173,6 @@ When happy with the changes, save file and reload the config ...
 
     $ source ~/.bashrc
 
-Link: `dotfiles/.bashrc <https://github.com/vonbrownie/dotfiles/blob/master/.bashrc>`_
+Link: dotfiles/`.bashrc <https://github.com/vonbrownie/dotfiles/blob/master/.bashrc>`_
 
 Happy hacking!
