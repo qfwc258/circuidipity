@@ -1,5 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-26T11:33:00-04:00</updated><entry><title>Dot xmodmap</title><link href="http://www.circuidipity.com/xmodmap.html" rel="alternate"></link><published>2017-06-26T11:33:00-04:00</published><updated>2017-06-26T11:33:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-26:/xmodmap.html</id><summary type="html">&lt;p&gt;The &lt;tt class="docutils literal"&gt;xmodmap&lt;/tt&gt; utility is useful for remapping keys. I use it to change the behaviour of a few keys on chromebook keyboards.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-28T08:40:00-04:00</updated><entry><title>ThinkPad USB Keyboard with TrackPoint</title><link href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html" rel="alternate"></link><published>2017-06-28T08:40:00-04:00</published><updated>2017-06-28T08:40:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-28:/thinkpad-usb-keyboard-trackpoint.html</id><summary type="html">&lt;p&gt;A Thinkpad keyboard minus the Thinkpad with the classic Trackpoint + Left/Middle/Right mouse buttons. Its attached to my &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook&lt;/a&gt; and I want to change the behaviour of a few keys.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Attach the keyboard ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ lsusb &lt;span class="p"&gt;|&lt;/span&gt; grep -i keyboard
+Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 002: ID 17ef:6009 Lenovo ThinkPad Keyboard …&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;A Thinkpad keyboard minus the Thinkpad with the classic Trackpoint + Left/Middle/Right mouse buttons. Its attached to my &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook&lt;/a&gt; and I want to change the behaviour of a few keys.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Attach the keyboard ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ lsusb &lt;span class="p"&gt;|&lt;/span&gt; grep -i keyboard
+Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 002: ID 17ef:6009 Lenovo ThinkPad Keyboard with TrackPoint
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="caps-lock-and-xmodmap"&gt;
+&lt;h3&gt;0. Caps_Lock and xmodmap&lt;/h3&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt; occupies a prime location and - seeing as I do not carry on many ALL CAPS conversations - the key can be re-purposed for better use. I use &lt;a class="reference external" href="http://www.circuidipity.com/xmodmap.html"&gt;xmodmap&lt;/a&gt; to modify the keymap and transform the key into &lt;tt class="docutils literal"&gt;BackSpace&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Retrieve current keymap (and the &lt;tt class="docutils literal"&gt;keycode&lt;/tt&gt; for &lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt;) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xmodmap -pke
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+keycode  &lt;span class="nv"&gt;66&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Caps_Lock NoSymbol Caps_Lock
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Output for &lt;tt class="docutils literal"&gt;Caps_Lock&lt;/tt&gt; using &lt;tt class="docutils literal"&gt;xev&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;KeyPress event, serial 32, synthetic NO, window 0x1600001,
+    root 0xb4, subw 0x0, &lt;span class="nb"&gt;time&lt;/span&gt; 578277182, &lt;span class="o"&gt;(&lt;/span&gt;137,-6&lt;span class="o"&gt;)&lt;/span&gt;, root:&lt;span class="o"&gt;(&lt;/span&gt;781,12&lt;span class="o"&gt;)&lt;/span&gt;,
+    state 0x0, keycode &lt;span class="m"&gt;66&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;keysym 0xffe5, Caps_Lock&lt;span class="o"&gt;)&lt;/span&gt;, same_screen YES,
+    XLookupString gives &lt;span class="m"&gt;0&lt;/span&gt; bytes:
+    XmbLookupString gives &lt;span class="m"&gt;0&lt;/span&gt; bytes:
+     XFilterEvent returns: False
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Test a new key modification in the current Xsession ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xmodmap -e &lt;span class="s2"&gt;&amp;quot;keycode 66 = BackSpace&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; xmodmap -e &lt;span class="s2"&gt;&amp;quot;clear Lock&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Make the change sticky by adding the keymapping to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xmodmap&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;! Modify Caps_Lock into Backspace
+keycode &lt;span class="nv"&gt;66&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; BackSpace
+clear Lock
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Modify &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; to load keymap at &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -f ~/.xmodmap &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    xmodmap ~/.xmodmap
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and apply the new settings in the current session ..&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;xmodmap ~/.xmodmap
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="multimedia-keys-and-xbindkeys"&gt;
+&lt;h3&gt;1. Multimedia keys and xbindkeys&lt;/h3&gt;
+&lt;p&gt;This keyboard includes multimedia keys. Create keyboard shortcuts for these specialty keys by installing ...&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; - associate keys to shell commands&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pulseaudio-utils&lt;/span&gt;&lt;/tt&gt; - manage sound with &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;rhythmbox-plugins&lt;/span&gt;&lt;/tt&gt; - (optional) player controls&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install xbindkeys pulseaudio-utils rhythmbox-plugins
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;rhythmbox-plugins&lt;/span&gt;&lt;/tt&gt; the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Fn+{Play,Pause,Previous,Next,Stop}&lt;/span&gt;&lt;/tt&gt; controls &amp;quot;just work&amp;quot; with the audio player. I use &lt;a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html"&gt;xbindkeys&lt;/a&gt;  to associate new functions to keys.&lt;/p&gt;
+&lt;p&gt;Retrieve the &lt;tt class="docutils literal"&gt;keycodes&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;keysyms&lt;/tt&gt; of the volume keys ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xmodmap -pke &lt;span class="p"&gt;|&lt;/span&gt; egrep -i &lt;span class="s1"&gt;&amp;#39;volume|mute&amp;#39;&lt;/span&gt;
+keycode &lt;span class="nv"&gt;121&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; XF86AudioMute NoSymbol XF86AudioMute
+keycode &lt;span class="nv"&gt;122&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; XF86AudioLowerVolume NoSymbol XF86AudioLowerVolume
+keycode &lt;span class="nv"&gt;123&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; XF86AudioRaiseVolume NoSymbol XF86AudioRaiseVolume
+keycode &lt;span class="nv"&gt;198&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; XF86AudioMicMute NoSymbol XF86AudioMicMute
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I create a &lt;a class="reference external" href="http://www.circuidipity.com/pavolume.html"&gt;standalone script&lt;/a&gt; to control PulseAudio volume and associate the new command &lt;tt class="docutils literal"&gt;paVolume&lt;/tt&gt; and its options to volume keys in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Mute/lower/raise volume&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;paVolume -m&amp;quot;&lt;/span&gt;
+XF86AudioMute
+&lt;span class="s2"&gt;&amp;quot;paVolume -d&amp;quot;&lt;/span&gt;
+XF86AudioLowerVolume
+&lt;span class="s2"&gt;&amp;quot;paVolume -u&amp;quot;&lt;/span&gt;
+XF86AudioRaiseVolume
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Add command &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; to load the new configuration at &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -f ~/.xbindkeysrc &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    xbindkeys
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="trackpoint"&gt;
+&lt;h3&gt;2. TrackPoint&lt;/h3&gt;
+&lt;p&gt;Discover &lt;tt class="docutils literal"&gt;DEVICE &amp;lt;ID&amp;gt;&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;xinput list | grep pointer&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&amp;lt;ID&amp;gt; PROPERTIES&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;xinput &lt;span class="pre"&gt;list-props&lt;/span&gt; &amp;lt;ID&amp;gt;&lt;/tt&gt;. Trackpoint sensitivity is modified using the &lt;tt class="docutils literal"&gt;Device Accel Constant Deceleration&lt;/tt&gt; property ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xinput list &lt;span class="p"&gt;|&lt;/span&gt; grep pointer
+⎡ Virtual core pointer                          &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;    &lt;span class="o"&gt;[&lt;/span&gt;master pointer  &lt;span class="o"&gt;(&lt;/span&gt;3&lt;span class="o"&gt;)]&lt;/span&gt;
+⎜   ↳ Virtual core XTEST pointer                &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;    &lt;span class="o"&gt;[&lt;/span&gt;slave  pointer  &lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)]&lt;/span&gt;
+⎜   ↳ Lite-On Technology Corp. ThinkPad USB Keyboard with TrackPoint    &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;   &lt;span class="o"&gt;[&lt;/span&gt;slave  pointer  &lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)]&lt;/span&gt;
+$ xinput list-props &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s2"&gt;&amp;quot;Device Accel Constant Deceleration&amp;quot;&lt;/span&gt;
+        Device Accel Constant Deceleration &lt;span class="o"&gt;(&lt;/span&gt;251&lt;span class="o"&gt;)&lt;/span&gt;:       1.000000
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Make the change sticky by adding the command to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Customize pointer settings by installing &lt;tt class="docutils literal"&gt;xinput&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install xinput
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Discover the &lt;tt class="docutils literal"&gt;DEVICE &amp;lt;ID&amp;gt;&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;xinput list | grep &amp;quot;TrackPoint&amp;quot; | grep &amp;quot;pointer&amp;quot;&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xinput list &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s2"&gt;&amp;quot;TrackPoint&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s2"&gt;&amp;quot;pointer&amp;quot;&lt;/span&gt;
+⎜   ↳ Lite-On Technology Corp. ThinkPad USB Keyboard with TrackPoint    &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;   &lt;span class="o"&gt;[&lt;/span&gt;slave  pointer  &lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Trackpoint is auto-detected but slow. My old method of configuring the pointer was failing under Debian _stable_/stretch (device id=13) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xinput set-prop &lt;span class="m"&gt;13&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Device Accel Constant Deceleration&amp;quot;&lt;/span&gt; 0.30
+property &lt;span class="s1"&gt;&amp;#39;Device Accel Constant Deceleration&amp;#39;&lt;/span&gt; doesn&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;t exist, you need to specify its &lt;span class="nb"&gt;type&lt;/span&gt; and format
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and viewing the device properties with &lt;tt class="docutils literal"&gt;xinput &lt;span class="pre"&gt;list-props&lt;/span&gt; 13&lt;/tt&gt; shows the problem; the old &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Device...&lt;/span&gt;&lt;/tt&gt; settings have been replaced with &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;libinput...&lt;/span&gt;&lt;/tt&gt;, which is a library to handle input devices. Xorg in the latest Debian has switched away from using &lt;tt class="docutils literal"&gt;evdev&lt;/tt&gt; to the &lt;tt class="docutils literal"&gt;libinput&lt;/tt&gt; driver ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ dpkg -l &lt;span class="p"&gt;|&lt;/span&gt; grep xserver-xorg-input
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+ii  xserver-xorg-input-libinput     0.23.0-2    amd64   X.Org X server -- libinput input driver
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check out which devices are managed by &lt;tt class="docutils literal"&gt;libinput&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ grep libinput &lt;span class="nv"&gt;$HOME&lt;/span&gt;/.local/share/xorg/Xorg.0.log
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;[ Fix! ]&lt;/strong&gt; Modify the &amp;quot;Coordinate Transformation Matrix&amp;quot;, a &lt;a class="reference external" href="https://wiki.ubuntu.com/X/InputCoordinateTransformation"&gt;transformation matrix used to calculate a pointer movement.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Current setting ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xinput list-props &lt;span class="m"&gt;13&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s2"&gt;&amp;quot;Coordinate Transformation Matrix&amp;quot;&lt;/span&gt;
+Coordinate Transformation Matrix &lt;span class="o"&gt;(&lt;/span&gt;140&lt;span class="o"&gt;)&lt;/span&gt;: 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Experiment a bit with setting a new matrix in row-order. &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt; I wanted a faster pointer speed and found this configuration to my liking ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xinput set-prop &lt;span class="m"&gt;13&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Coordinate Transformation Matrix&amp;quot;&lt;/span&gt; 2.600000, 0.000000, 0.000000, 0.000000, 2.600000, 0.000000, 0.000000, 0.000000, 1.000000
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/keyboardconf"&gt;created a shell script&lt;/a&gt; that detects and applies custom settings as per keyboard type. I add the command to &lt;a class="reference external" href="http://www.circuidipity.com/xinitrc.html"&gt;my xinitrc&lt;/a&gt; to be run at &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~/bin/keyboardconf &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sources: dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.thinkpad_usb"&gt;.xmodmap.thinkpad_usb&lt;/a&gt;, dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;, dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.thinkpad_usb"&gt;.xbindkeysrc.thinkpad_usb&lt;/a&gt;, and homebin/&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/keyboardconf"&gt;keyboardconf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;div class="section" id="notes"&gt;
+&lt;h4&gt;Notes&lt;/h4&gt;
+&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="https://unix.stackexchange.com/a/177640"&gt;&amp;quot;I don't want any mouse acceleration, but I want to increase the speed of my mouse&amp;quot;&lt;/a&gt; and &lt;a class="reference external" href="https://wiki.ubuntu.com/X/InputCoordinateTransformation"&gt;InputCoordinateTransformation&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="keyboard"></category><category term="linux"></category></entry><entry><title>Detect and configure keyboards</title><link href="http://www.circuidipity.com/keyboardconf.html" rel="alternate"></link><published>2017-06-27T23:30:00-04:00</published><updated>2017-06-27T23:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-27:/keyboardconf.html</id><summary type="html">&lt;p&gt;I have two keyboards I am interested in modifying with custom hotkey actions (via &lt;a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html"&gt;xbindkeys&lt;/a&gt;) and remapping keys (via &lt;a class="reference external" href="http://www.circuidipity.com/xmodmap.html"&gt;xmodmap&lt;/a&gt;). So for my &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook's&lt;/a&gt; keyboard I created &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook"&gt;.xbindkeysrc.chromebook&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.chromebook"&gt;.xmodmap.chromebook&lt;/a&gt;, my &lt;a class="reference external" href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html"&gt;Thinkpad USB Keyboard + Trackpoint&lt;/a&gt; uses &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.thinkpad_usb"&gt;.xbindkeysrc.thinkpad_usb&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.thinkpad_usb"&gt;.xmodmap.thinkpad_usb&lt;/a&gt;, and I would create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xmodmap …&lt;/span&gt;&lt;/tt&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I have two keyboards I am interested in modifying with custom hotkey actions (via &lt;a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html"&gt;xbindkeys&lt;/a&gt;) and remapping keys (via &lt;a class="reference external" href="http://www.circuidipity.com/xmodmap.html"&gt;xmodmap&lt;/a&gt;). So for my &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook's&lt;/a&gt; keyboard I created &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook"&gt;.xbindkeysrc.chromebook&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.chromebook"&gt;.xmodmap.chromebook&lt;/a&gt;, my &lt;a class="reference external" href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html"&gt;Thinkpad USB Keyboard + Trackpoint&lt;/a&gt; uses &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.thinkpad_usb"&gt;.xbindkeysrc.thinkpad_usb&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.thinkpad_usb"&gt;.xmodmap.thinkpad_usb&lt;/a&gt;, and I would create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xmodmap&lt;/span&gt;&lt;/tt&gt; symlinks to the relevant config for the keyboard in use.&lt;/p&gt;
+&lt;p&gt;Now that Stretchbook is my primary machine, I may be using either keyboard on the same machine depending on location: the built-in keyboard when away; connecting to the USB keyboard and external display when at home. Old method of symlinking won't work if I am switching which keyboard I use.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[ FIX! ]&lt;/strong&gt; I created the &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/keyboardconf"&gt;keyboardconf&lt;/a&gt; shell script to detect attached keyboards and load appropriate modifications. Priority is assigned to the external Thinkpad keyboard and, failing to detect that device, the program falls back to setting up the built-in keyboard. Scripting this detection makes it easy for me to add more keyboard types in the future!&lt;/p&gt;
+&lt;p&gt;Program is in my &lt;a class="reference external" href="http://www.circuidipity.com/homebin.html"&gt;~/bin&lt;/a&gt; and I add the command to &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;~/.xinitrc&lt;/a&gt; to run at &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;~/bin/keyboardconf &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sources: homebin/&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/keyboardconf"&gt;keyboardconf&lt;/a&gt;, dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook"&gt;.xbindkeysrc.chromebook&lt;/a&gt;, dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.chromebook"&gt;.xmodmap.chromebook&lt;/a&gt;, dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.thinkpad_usb"&gt;.xbindkeysrc.thinkpad_usb&lt;/a&gt;, dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.thinkpad_usb"&gt;.xmodmap.thinkpad_usb&lt;/a&gt;, and dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+</content><category term="keyboard"></category><category term="shell"></category><category term="programming"></category><category term="homebin"></category><category term="linux"></category></entry><entry><title>Dot xmodmap</title><link href="http://www.circuidipity.com/xmodmap.html" rel="alternate"></link><published>2017-06-26T11:33:00-04:00</published><updated>2017-06-26T11:33:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-26:/xmodmap.html</id><summary type="html">&lt;p&gt;The &lt;tt class="docutils literal"&gt;xmodmap&lt;/tt&gt; utility is useful for remapping keys. I use it to change the behaviour of a few keys on chromebook keyboards.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Install (on Debian) &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;x11-xserver-utils&lt;/span&gt;&lt;/tt&gt; and write any modifications to a newly-created &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xmodmap&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
@@ -47,7 +188,7 @@ keycode &lt;span class="nv"&gt;133&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span
     xmodmap ~/.xmodmap
 &lt;span class="k"&gt;fi&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.chromebook"&gt;dotfiles/.xmodmap.chromebook&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;dotfiles/.xinitrc&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.chromebook"&gt;.xmodmap.chromebook&lt;/a&gt; and dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 </content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category><category term="keyboard"></category></entry><entry><title>Dot Xresources</title><link href="http://www.circuidipity.com/xresources.html" rel="alternate"></link><published>2017-06-25T09:30:00-04:00</published><updated>2017-06-25T09:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-25:/xresources.html</id><summary type="html">&lt;p&gt;I create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.Xresources&lt;/span&gt;&lt;/tt&gt; to set my custom configuration parameters for X client applications.&lt;/p&gt;
@@ -148,7 +289,7 @@ rofi.hlbg:          &lt;span class="c1"&gt;#FF0000&lt;/span&gt;
     xrdb -merge ~/.Xresources
 &lt;span class="k"&gt;fi&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.Xresources"&gt;dotfiles/.Xresources&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;dotfiles/.xinitrc&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.Xresources"&gt;.Xresources&lt;/a&gt; and dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -223,7 +364,7 @@ F10
 &lt;span class="s2"&gt;&amp;quot;paVolume -u&amp;quot;&lt;/span&gt;
 XF86AudioRaiseVolume
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;homebin/paVolume&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook"&gt;dotfiles/.xbindkeysrc.chromebook&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: homebin/&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;paVolume&lt;/a&gt; and dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook"&gt;.xbindkeysrc.chromebook&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;div class="section" id="notes"&gt;
 &lt;h4&gt;Notes&lt;/h4&gt;
@@ -307,7 +448,7 @@ Alt + Right
     xbindkeys
 &lt;span class="k"&gt;fi&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook"&gt;dotfiles/.xbindkeysrc&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;dotfiles/.xinitrc&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sources: dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook"&gt;.xbindkeysrc&lt;/a&gt; and dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 </content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category></entry><entry><title>Dot xinitrc</title><link href="http://www.circuidipity.com/xinitrc.html" rel="alternate"></link><published>2017-06-22T12:11:00-04:00</published><updated>2017-06-22T12:11:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-22:/xinitrc.html</id><summary type="html">&lt;p&gt;File &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; is read by &lt;tt class="docutils literal"&gt;xinit&lt;/tt&gt; and by its front-end &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt;. I create the file in my home directory and set it up to look for a few optional config files, disable screen blanking, clear out the trash, launch applications, and finally start the desktop.&lt;/p&gt;
@@ -358,7 +499,7 @@ urxvt &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
 &lt;p&gt;Start the &lt;a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html"&gt;window manager&lt;/a&gt; ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;exec&lt;/span&gt; i3
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;dotfiles/.xinitrc&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Source: dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 </content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category></entry><entry><title>Dot bashrc</title><link href="http://www.circuidipity.com/dot-bashrc.html" rel="alternate"></link><published>2017-06-21T09:50:00-04:00</published><updated>2017-06-21T09:50:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-21:/dot-bashrc.html</id><summary type="html">&lt;p&gt;I go ahead and customize my experience with the Bash shell by modifying the default &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bashrc&lt;/span&gt;&lt;/tt&gt; placed in $HOME by Debian!&lt;/p&gt;
@@ -483,7 +624,7 @@ mtg&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &l
 &lt;p&gt;When happy with the changes, save file and reload the config ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;source&lt;/span&gt; ~/.bashrc
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Link: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.bashrc"&gt;dotfiles/.bashrc&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Link: dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.bashrc"&gt;.bashrc&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 </content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category></entry><entry><title>Getting started with Neovim</title><link href="http://www.circuidipity.com/neovim.html" rel="alternate"></link><published>2017-06-20T07:30:00-04:00</published><updated>2017-06-20T07:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-20:/neovim.html</id><summary type="html">&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
@@ -641,8 +782,8 @@ Plugin &lt;span class="s1"&gt;&amp;#39;VundleVim/Vundle.vim&amp;#39;&lt;/span&gt
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="neovim"></category><category term="vim"></category><category term="linux"></category></entry><entry><title>Jessiebook to Stretchbook</title><link href="http://www.circuidipity.com/jessiebook-to-stretchbook.html" rel="alternate"></link><published>2017-06-19T10:20:00-04:00</published><updated>2017-06-19T10:20:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-19:/jessiebook-to-stretchbook.html</id><summary type="html">&lt;p&gt;With the release of &lt;strong&gt;Debian 9 &amp;quot;Stretch&amp;quot;&lt;/strong&gt; my &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;C720 Chromebook has transitioned from a Jessiebook&lt;/a&gt; to a Stretchbook!&lt;/p&gt;
-&lt;p&gt;I posted a &lt;a class="reference external" href="http://www.circuidipity.com/minimal-debian.html"&gt;visual screenshot tour&lt;/a&gt; installing the Debian _stable_ release. I use Debian's &lt;strong&gt;minimal network install image&lt;/strong&gt; to create a console-only base configuration that can be customized for various tasks and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;With the release of &lt;strong&gt;Debian 9 &amp;quot;Stretch&amp;quot;&lt;/strong&gt; my &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;C720 Chromebook has transitioned from a Jessiebook&lt;/a&gt; to a Stretchbook!&lt;/p&gt;
+</content><category term="neovim"></category><category term="vim"></category><category term="linux"></category></entry><entry><title>Jessiebook to Stretchbook</title><link href="http://www.circuidipity.com/jessiebook-to-stretchbook.html" rel="alternate"></link><published>2017-06-19T10:20:00-04:00</published><updated>2017-06-19T10:20:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-19:/jessiebook-to-stretchbook.html</id><summary type="html">&lt;p&gt;With the release of &lt;strong&gt;Debian 9 &amp;quot;Stretch&amp;quot;&lt;/strong&gt; my chromebook has &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;transitioned from a Jessiebook&lt;/a&gt; to a Stretchbook!&lt;/p&gt;
+&lt;p&gt;I posted a &lt;a class="reference external" href="http://www.circuidipity.com/minimal-debian.html"&gt;visual screenshot tour&lt;/a&gt; installing the Debian _stable_ release. I use Debian's &lt;strong&gt;minimal network install image&lt;/strong&gt; to create a console-only base configuration that can be customized for various tasks and &lt;a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html"&gt;alternate …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;With the release of &lt;strong&gt;Debian 9 &amp;quot;Stretch&amp;quot;&lt;/strong&gt; my chromebook has &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;transitioned from a Jessiebook&lt;/a&gt; to a Stretchbook!&lt;/p&gt;
 &lt;p&gt;I posted a &lt;a class="reference external" href="http://www.circuidipity.com/minimal-debian.html"&gt;visual screenshot tour&lt;/a&gt; installing the Debian _stable_ release. I use Debian's &lt;strong&gt;minimal network install image&lt;/strong&gt; to create a console-only base configuration that can be customized for various tasks and &lt;a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html"&gt;alternate desktops&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Earlier steps&lt;/a&gt; taken to setup the Jessiebook still apply with two exceptions. First, &lt;tt class="docutils literal"&gt;xbacklight&lt;/tt&gt; is acting up ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xbacklight -dec 10
@@ -666,24 +807,4 @@ EndSection
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Second, the issues with the &lt;strong&gt;ath9k&lt;/strong&gt; driver appear resolved and I leave the wireless alone. No further config tweaks required.&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-</content><category term="chromebook"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Debian _stable_ setup</title><link href="http://www.circuidipity.com/debian-stable-setup.html" rel="alternate"></link><published>2017-06-18T07:30:00-04:00</published><updated>2017-06-18T07:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-18:/debian-stable-setup.html</id><summary type="html">&lt;img alt="Debian 9 Stretch" src="images/debian_9_banner.png" style="width: 800px; height: 75px;" /&gt;
-&lt;p&gt;I created the post-install configuration shell script &lt;strong&gt;debian-stable-setup.sh&lt;/strong&gt; to ideally be run immediately following the first successful boot into a fresh install of Debian.&lt;/p&gt;
-&lt;p&gt;Building on a &lt;a class="reference external" href="http://www.circuidipity.com/minimal-debian.html"&gt;minimal install&lt;/a&gt; the system will be configured to track Debian's _stable_ release. A choice of either 1) a basic console setup (option …&lt;/p&gt;</summary><content type="html">&lt;img alt="Debian 9 Stretch" src="images/debian_9_banner.png" style="width: 800px; height: 75px;" /&gt;
-&lt;p&gt;I created the post-install configuration shell script &lt;strong&gt;debian-stable-setup.sh&lt;/strong&gt; to ideally be run immediately following the first successful boot into a fresh install of Debian.&lt;/p&gt;
-&lt;p&gt;Building on a &lt;a class="reference external" href="http://www.circuidipity.com/minimal-debian.html"&gt;minimal install&lt;/a&gt; the system will be configured to track Debian's _stable_ release. A choice of either 1) a basic console setup (option '-b'); or 2) a more complete setup which includes the &lt;a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html"&gt;i3 tiling window manager&lt;/a&gt; plus a packages collection suitable for a workstation will be installed.&lt;/p&gt;
-&lt;p&gt;Depends: &lt;tt class="docutils literal"&gt;bash&lt;/tt&gt;&lt;/p&gt;
-&lt;p&gt;Link: &lt;a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/scripts/debian-stable-setup"&gt;linux-post-install/scripts/debian-stable-setup&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-</content><category term="debian"></category><category term="linux"></category><category term="shell"></category><category term="programming"></category></entry><entry><title>Neurocomic</title><link href="http://www.circuidipity.com/neurocomic.html" rel="alternate"></link><published>2017-06-16T09:38:00-04:00</published><updated>2017-06-16T09:38:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-16:/neurocomic.html</id><summary type="html">&lt;img alt="Neurocomic cover" class="align-left" src="images/neurocomic.jpg" style="width: 150px; height: 205px;" /&gt;
-&lt;div class="line-block"&gt;
-&lt;div class="line"&gt;&lt;strong&gt;Neurocomic&lt;/strong&gt; &lt;em&gt;by Dr. Matteo Farinella and Dr. Hana Ros&lt;/em&gt;&lt;/div&gt;
-&lt;div class="line"&gt;(ISBN: 9781907704703)&lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;A wonderful graphic novel sponsored by the Wellcome Trust that takes an expedition through the human brain and where we meet explorers along the way: &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Santiago_Ram%C3%B3n_y_Cajal"&gt;Santiago Ramón y Cajal&lt;/a&gt; and &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Camillo_Golgi"&gt;Camillo Golgi&lt;/a&gt; in the neural forest, &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Charles_Scott_Sherrington"&gt;Charles Scott Sherrington …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;img alt="Neurocomic cover" class="align-left" src="images/neurocomic.jpg" style="width: 150px; height: 205px;" /&gt;
-&lt;div class="line-block"&gt;
-&lt;div class="line"&gt;&lt;strong&gt;Neurocomic&lt;/strong&gt; &lt;em&gt;by Dr. Matteo Farinella and Dr. Hana Ros&lt;/em&gt;&lt;/div&gt;
-&lt;div class="line"&gt;(ISBN: 9781907704703)&lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;A wonderful graphic novel sponsored by the Wellcome Trust that takes an expedition through the human brain and where we meet explorers along the way: &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Santiago_Ram%C3%B3n_y_Cajal"&gt;Santiago Ramón y Cajal&lt;/a&gt; and &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Camillo_Golgi"&gt;Camillo Golgi&lt;/a&gt; in the neural forest, &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Charles_Scott_Sherrington"&gt;Charles Scott Sherrington&lt;/a&gt; and &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Bernard_Katz"&gt;Bernard Katz&lt;/a&gt; down in the synaptic control room readying a release of vesicles, paratrooping neurotransmitters, fending off giant squid with &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Alan_Lloyd_Hodgkin"&gt;Alan Hodgkin&lt;/a&gt; and &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Andrew_Huxley"&gt;Andrew Huxley&lt;/a&gt;, &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Eric_Kandel"&gt;Eric Kandel&lt;/a&gt; and &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Classical_conditioning"&gt;Pavlov (not) feeding the dog&lt;/a&gt;, &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Hans_Berger"&gt;Hans Berger&lt;/a&gt; atop the mountain, finally pushing on to face our (false?) sense of self in the Castle of Consciousness.&lt;/p&gt;
-&lt;p&gt;I am really intrigued by Berger's invention of the &lt;strong&gt;electroencephalogram&lt;/strong&gt; in 1924 and what reading the electrical activity of the brain actually represents, and how we could possibly tease more data out of the patterns. It sounds like the kind of &lt;strong&gt;affordable and noninvasive&lt;/strong&gt; (bonus!) tech that lends itself to happy hacking!&lt;/p&gt;
-</content><category term="books"></category></entry></feed>
+</content><category term="chromebook"></category><category term="debian"></category><category term="linux"></category></entry></feed>

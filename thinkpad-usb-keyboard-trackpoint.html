@@ -19,24 +19,22 @@
 <!-- breadcrumb trail -->
 <div id="breadcrumb">
     <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
-    Wednesday 15 July 2015</p>
+    Wednesday 28 June 2017</p>
 </div>
 
 <!-- article -->
 <h1>ThinkPad USB Keyboard with TrackPoint</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Sunday 14 February 2016</p>
 <div id="article">
-    <p>An external ThinkPad keyboard minus the ThinkPad with the classic TrackPoint + Left/Middle/Right mouse buttons. Its attached to my Ubuntu desktop and I want to change the behaviour of a few keys.</p>
+    <p>A Thinkpad keyboard minus the Thinkpad with the classic Trackpoint + Left/Middle/Right mouse buttons. Its attached to my <a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html">Stretchbook</a> and I want to change the behaviour of a few keys.</p>
 <div class="section" id="let-s-go">
 <h2>Let's go!</h2>
 <p>Attach the keyboard ...</p>
 <div class="highlight"><pre><span></span>$ lsusb <span class="p">|</span> grep -i keyboard
 Bus <span class="m">001</span> Device 002: ID 17ef:6009 Lenovo ThinkPad Keyboard with TrackPoint
 </pre></div>
-</div>
 <div class="section" id="caps-lock-and-xmodmap">
-<h2>0. Caps_Lock and xmodmap</h2>
-<p><tt class="docutils literal">Caps_Lock</tt> occupies a prime location and - seeing as I do not carry on many ALL CAPS conversations - the key can be repurposed for better use. I use <tt class="docutils literal">xmodmap</tt> to modify the keymap and transform the key into <tt class="docutils literal">BackSpace</tt>.</p>
+<h3>0. Caps_Lock and xmodmap</h3>
+<p><tt class="docutils literal">Caps_Lock</tt> occupies a prime location and - seeing as I do not carry on many ALL CAPS conversations - the key can be re-purposed for better use. I use <a class="reference external" href="http://www.circuidipity.com/xmodmap.html">xmodmap</a> to modify the keymap and transform the key into <tt class="docutils literal">BackSpace</tt>.</p>
 <p>Retrieve current keymap (and the <tt class="docutils literal">keycode</tt> for <tt class="docutils literal">Caps_Lock</tt>) ...</p>
 <div class="highlight"><pre><span></span>$ xmodmap -pke
 <span class="o">[</span>...<span class="o">]</span>
@@ -51,38 +49,42 @@ keycode  <span class="nv">66</span> <span class="o">=</span> Caps_Lock NoSymbol 
     XmbLookupString gives <span class="m">0</span> bytes:
      XFilterEvent returns: False
 </pre></div>
-<p>Making <tt class="docutils literal">Caps_Lock</tt> into <tt class="docutils literal">BackSpace</tt> is a 3-part process: <strong>remap</strong> the key, remove the <strong>lock</strong> on the key, and make it a <strong>repeating</strong> key.</p>
 <p>Test a new key modification in the current Xsession ...</p>
-<div class="highlight"><pre><span></span>$ xmodmap -e <span class="s2">&quot;keycode 66 = BackSpace&quot;</span> <span class="o">&amp;&amp;</span> xmodmap -e <span class="s2">&quot;clear Lock&quot;</span> <span class="o">&amp;&amp;</span> xset r 66
+<div class="highlight"><pre><span></span>$ xmodmap -e <span class="s2">&quot;keycode 66 = BackSpace&quot;</span> <span class="o">&amp;&amp;</span> xmodmap -e <span class="s2">&quot;clear Lock&quot;</span>
 </pre></div>
-<p>Make the change sticky by adding the keymapping to <tt class="docutils literal"><span class="pre">~/.xmodmap</span></tt> ... <a class="footnote-reference" href="#id2" id="id1">[1]</a></p>
+<p>Make the change sticky by adding the keymapping to <tt class="docutils literal"><span class="pre">~/.xmodmap</span></tt> ...</p>
 <div class="highlight"><pre><span></span>! Modify Caps_Lock into Backspace
 keycode <span class="nv">66</span> <span class="o">=</span> BackSpace
 clear Lock
 </pre></div>
 <p>Modify <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt> to load keymap at <tt class="docutils literal">startx</tt> ...</p>
-<div class="highlight"><pre><span></span>xmodmap ~/.xmodmap <span class="o">&amp;&amp;</span> xset r 66
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[</span> -f ~/.xmodmap <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    xmodmap ~/.xmodmap
+<span class="k">fi</span>
+</pre></div>
+<p>... and apply the new settings in the current session ..</p>
+<div class="highlight"><pre><span></span>xmodmap ~/.xmodmap
 </pre></div>
 </div>
 <div class="section" id="multimedia-keys-and-xbindkeys">
-<h2>1. Multimedia keys and xbindkeys</h2>
-<p>This keyboard includes mediaplayer+volume keys. Create keyboard shortcuts for these multimedia keys by installing:</p>
+<h3>1. Multimedia keys and xbindkeys</h3>
+<p>This keyboard includes multimedia keys. Create keyboard shortcuts for these specialty keys by installing ...</p>
 <ul class="simple">
 <li><tt class="docutils literal">xbindkeys</tt> - associate keys to shell commands</li>
 <li><tt class="docutils literal"><span class="pre">pulseaudio-utils</span></tt> - manage sound with <tt class="docutils literal">pactl</tt></li>
 <li><tt class="docutils literal"><span class="pre">rhythmbox-plugins</span></tt> - (optional) player controls</li>
 </ul>
-<div class="highlight"><pre><span></span>$ sudo apt-get install xbindkeys pulseaudio-utils rhythmbox-plugins
+<div class="highlight"><pre><span></span>$ sudo apt install xbindkeys pulseaudio-utils rhythmbox-plugins
 </pre></div>
-<p>With <tt class="docutils literal"><span class="pre">rhythmbox-plugins</span></tt> the <tt class="docutils literal"><span class="pre">Fn+{Play,Pause,Previous,Next,Stop}</span></tt> controls &quot;just work&quot; with the audio player. I use <tt class="docutils literal">xbindkeys</tt> to associate new functions to keys.</p>
-<p>Retrieve the <tt class="docutils literal">keycodes</tt> and <tt class="docutils literal">keysyms</tt> of the volume keys:</p>
+<p>With <tt class="docutils literal"><span class="pre">rhythmbox-plugins</span></tt> the <tt class="docutils literal"><span class="pre">Fn+{Play,Pause,Previous,Next,Stop}</span></tt> controls &quot;just work&quot; with the audio player. I use <a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html">xbindkeys</a>  to associate new functions to keys.</p>
+<p>Retrieve the <tt class="docutils literal">keycodes</tt> and <tt class="docutils literal">keysyms</tt> of the volume keys ...</p>
 <div class="highlight"><pre><span></span>$ xmodmap -pke <span class="p">|</span> egrep -i <span class="s1">&#39;volume|mute&#39;</span>
 keycode <span class="nv">121</span> <span class="o">=</span> XF86AudioMute NoSymbol XF86AudioMute
 keycode <span class="nv">122</span> <span class="o">=</span> XF86AudioLowerVolume NoSymbol XF86AudioLowerVolume
 keycode <span class="nv">123</span> <span class="o">=</span> XF86AudioRaiseVolume NoSymbol XF86AudioRaiseVolume
 keycode <span class="nv">198</span> <span class="o">=</span> XF86AudioMicMute NoSymbol XF86AudioMicMute
 </pre></div>
-<p>I create a <a class="reference external" href="http://www.circuidipity.com/pavolume.html">standalone script</a> to control PulseAudio volume and associate the new command <tt class="docutils literal">paVolume</tt> and its options to volume keys in <tt class="docutils literal"><span class="pre">~/.xbindkeysrc</span></tt>:</p>
+<p>I create a <a class="reference external" href="http://www.circuidipity.com/pavolume.html">standalone script</a> to control PulseAudio volume and associate the new command <tt class="docutils literal">paVolume</tt> and its options to volume keys in <tt class="docutils literal"><span class="pre">~/.xbindkeysrc</span></tt> ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># Mute/lower/raise volume</span>
 <span class="s2">&quot;paVolume -m&quot;</span>
 XF86AudioMute
@@ -91,14 +93,15 @@ XF86AudioLowerVolume
 <span class="s2">&quot;paVolume -u&quot;</span>
 XF86AudioRaiseVolume
 </pre></div>
-<p>Add command <tt class="docutils literal">xbindkeys</tt> to <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt> to load the new configuration at <tt class="docutils literal">startx</tt>.</p>
+<p>Add command <tt class="docutils literal">xbindkeys</tt> to <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt> to load the new configuration at <tt class="docutils literal">startx</tt> ...</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[</span> -f ~/.xbindkeysrc <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    xbindkeys
+<span class="k">fi</span>
+</pre></div>
 </div>
 <div class="section" id="trackpoint">
-<h2>2. TrackPoint</h2>
-<p>TrackPoint is auto-detected but slow. Customize pointer settings by installing <tt class="docutils literal">xinput</tt>:</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install xinput
-</pre></div>
-<p>Discover <tt class="docutils literal">DEVICE &lt;ID&gt;</tt> with <tt class="docutils literal">xinput list | grep pointer</tt> and <tt class="docutils literal">&lt;ID&gt; PROPERTIES</tt> with <tt class="docutils literal">xinput <span class="pre">list-props</span> &lt;ID&gt;</tt>. TrackPoint sensitivity is modified using the <tt class="docutils literal">Device Accel Constant Deceleration</tt> property:</p>
+<h3>2. TrackPoint</h3>
+<p>Discover <tt class="docutils literal">DEVICE &lt;ID&gt;</tt> with <tt class="docutils literal">xinput list | grep pointer</tt> and <tt class="docutils literal">&lt;ID&gt; PROPERTIES</tt> with <tt class="docutils literal">xinput <span class="pre">list-props</span> &lt;ID&gt;</tt>. Trackpoint sensitivity is modified using the <tt class="docutils literal">Device Accel Constant Deceleration</tt> property ...</p>
 <div class="highlight"><pre><span></span>$ xinput list <span class="p">|</span> grep pointer
 ⎡ Virtual core pointer                          <span class="nv">id</span><span class="o">=</span><span class="m">2</span>    <span class="o">[</span>master pointer  <span class="o">(</span>3<span class="o">)]</span>
 ⎜   ↳ Virtual core XTEST pointer                <span class="nv">id</span><span class="o">=</span><span class="m">4</span>    <span class="o">[</span>slave  pointer  <span class="o">(</span>2<span class="o">)]</span>
@@ -106,23 +109,52 @@ XF86AudioRaiseVolume
 $ xinput list-props <span class="m">10</span> <span class="p">|</span> grep <span class="s2">&quot;Device Accel Constant Deceleration&quot;</span>
         Device Accel Constant Deceleration <span class="o">(</span>251<span class="o">)</span>:       1.000000
 </pre></div>
-<p>Test a new setting with <tt class="docutils literal">xinput <span class="pre">set-prop</span> ID &quot;Device Accel Constant Deceleration&quot; SETTING</tt>. Example:</p>
-<div class="highlight"><pre><span></span>$ xinput set-prop <span class="m">10</span> <span class="s2">&quot;Device Accel Constant Deceleration&quot;</span> 0.50
-</pre></div>
 <p>Make the change sticky by adding the command to <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt>.</p>
+<p>Customize pointer settings by installing <tt class="docutils literal">xinput</tt> ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install xinput
+</pre></div>
+<p>Discover the <tt class="docutils literal">DEVICE &lt;ID&gt;</tt> with <tt class="docutils literal">xinput list | grep &quot;TrackPoint&quot; | grep &quot;pointer&quot;</tt> ...</p>
+<div class="highlight"><pre><span></span>$ xinput list <span class="p">|</span> grep <span class="s2">&quot;TrackPoint&quot;</span> <span class="p">|</span> grep <span class="s2">&quot;pointer&quot;</span>
+⎜   ↳ Lite-On Technology Corp. ThinkPad USB Keyboard with TrackPoint    <span class="nv">id</span><span class="o">=</span><span class="m">13</span>   <span class="o">[</span>slave  pointer  <span class="o">(</span>2<span class="o">)]</span>
+</pre></div>
+<p>Trackpoint is auto-detected but slow. My old method of configuring the pointer was failing under Debian _stable_/stretch (device id=13) ...</p>
+<div class="highlight"><pre><span></span>$ xinput set-prop <span class="m">13</span> <span class="s2">&quot;Device Accel Constant Deceleration&quot;</span> 0.30
+property <span class="s1">&#39;Device Accel Constant Deceleration&#39;</span> doesn<span class="err">&#39;</span>t exist, you need to specify its <span class="nb">type</span> and format
+</pre></div>
+<p>... and viewing the device properties with <tt class="docutils literal">xinput <span class="pre">list-props</span> 13</tt> shows the problem; the old <tt class="docutils literal"><span class="pre">Device...</span></tt> settings have been replaced with <tt class="docutils literal"><span class="pre">libinput...</span></tt>, which is a library to handle input devices. Xorg in the latest Debian has switched away from using <tt class="docutils literal">evdev</tt> to the <tt class="docutils literal">libinput</tt> driver ...</p>
+<div class="highlight"><pre><span></span>$ dpkg -l <span class="p">|</span> grep xserver-xorg-input
+<span class="o">[</span>...<span class="o">]</span>
+ii  xserver-xorg-input-libinput     0.23.0-2    amd64   X.Org X server -- libinput input driver
+</pre></div>
+<p>Check out which devices are managed by <tt class="docutils literal">libinput</tt> ...</p>
+<div class="highlight"><pre><span></span>$ grep libinput <span class="nv">$HOME</span>/.local/share/xorg/Xorg.0.log
+</pre></div>
+<p><strong>[ Fix! ]</strong> Modify the &quot;Coordinate Transformation Matrix&quot;, a <a class="reference external" href="https://wiki.ubuntu.com/X/InputCoordinateTransformation">transformation matrix used to calculate a pointer movement.</a></p>
+<p>Current setting ...</p>
+<div class="highlight"><pre><span></span>$ xinput list-props <span class="m">13</span> <span class="p">|</span> grep <span class="s2">&quot;Coordinate Transformation Matrix&quot;</span>
+Coordinate Transformation Matrix <span class="o">(</span>140<span class="o">)</span>: 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
+</pre></div>
+<p>Experiment a bit with setting a new matrix in row-order. <a class="footnote-reference" href="#id2" id="id1">[1]</a> I wanted a faster pointer speed and found this configuration to my liking ...</p>
+<div class="highlight"><pre><span></span>$ xinput set-prop <span class="m">13</span> <span class="s2">&quot;Coordinate Transformation Matrix&quot;</span> 2.600000, 0.000000, 0.000000, 0.000000, 2.600000, 0.000000, 0.000000, 0.000000, 1.000000
+</pre></div>
+<p>I <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/keyboardconf">created a shell script</a> that detects and applies custom settings as per keyboard type. I add the command to <a class="reference external" href="http://www.circuidipity.com/xinitrc.html">my xinitrc</a> to be run at <tt class="docutils literal">startx</tt> ...</p>
+<div class="highlight"><pre><span></span>~/bin/keyboardconf <span class="p">&amp;</span>
+</pre></div>
+<p>Sources: dotfiles/<a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.thinkpad_usb">.xmodmap.thinkpad_usb</a>, dotfiles/<a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc">.xinitrc</a>, dotfiles/<a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.thinkpad_usb">.xbindkeysrc.thinkpad_usb</a>, and homebin/<a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/keyboardconf">keyboardconf</a></p>
 <p>Happy hacking!</p>
 <div class="section" id="notes">
-<h3>Notes</h3>
+<h4>Notes</h4>
 <table class="docutils footnote" frame="void" id="id2" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>My <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.thinkpad_usb">.xmodmap</a>, <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc">.xinitrc</a>, and <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.thinkpad_usb">.xbindkeysrc</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="https://unix.stackexchange.com/a/177640">&quot;I don't want any mouse acceleration, but I want to increase the speed of my mouse&quot;</a> and <a class="reference external" href="https://wiki.ubuntu.com/X/InputCoordinateTransformation">InputCoordinateTransformation</a></td></tr>
 </tbody>
 </table>
 </div>
 </div>
+</div>
 
-    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-keyboard.html">keyboard</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
 </div>
@@ -131,9 +163,7 @@ $ xinput list-props <span class="m">10</span> <span class="p">|</span> grep <spa
 <div id="navmenu">
     <hr />
     <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-        <a href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html">Chromebook to Jessiebook</a></p>
-    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
-        <a href="http://www.circuidipity.com/i3-tiling-window-manager.html">Lightweight and a delight: i3 tiling window manager</a></p>
+        <a href="http://www.circuidipity.com/keyboardconf.html">Detect and configure keyboards</a></p>
 </div>
 
 
