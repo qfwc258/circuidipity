@@ -80,15 +80,6 @@ XF86AudioRaiseVolume
 &lt;/div&gt;
 &lt;div class="section" id="trackpoint"&gt;
 &lt;h3&gt;2. TrackPoint&lt;/h3&gt;
-&lt;p&gt;Discover &lt;tt class="docutils literal"&gt;DEVICE &amp;lt;ID&amp;gt;&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;xinput list | grep pointer&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&amp;lt;ID&amp;gt; PROPERTIES&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;xinput &lt;span class="pre"&gt;list-props&lt;/span&gt; &amp;lt;ID&amp;gt;&lt;/tt&gt;. Trackpoint sensitivity is modified using the &lt;tt class="docutils literal"&gt;Device Accel Constant Deceleration&lt;/tt&gt; property ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xinput list &lt;span class="p"&gt;|&lt;/span&gt; grep pointer
-⎡ Virtual core pointer                          &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;    &lt;span class="o"&gt;[&lt;/span&gt;master pointer  &lt;span class="o"&gt;(&lt;/span&gt;3&lt;span class="o"&gt;)]&lt;/span&gt;
-⎜   ↳ Virtual core XTEST pointer                &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;    &lt;span class="o"&gt;[&lt;/span&gt;slave  pointer  &lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)]&lt;/span&gt;
-⎜   ↳ Lite-On Technology Corp. ThinkPad USB Keyboard with TrackPoint    &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;   &lt;span class="o"&gt;[&lt;/span&gt;slave  pointer  &lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)]&lt;/span&gt;
-$ xinput list-props &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s2"&gt;&amp;quot;Device Accel Constant Deceleration&amp;quot;&lt;/span&gt;
-        Device Accel Constant Deceleration &lt;span class="o"&gt;(&lt;/span&gt;251&lt;span class="o"&gt;)&lt;/span&gt;:       1.000000
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Make the change sticky by adding the command to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;Customize pointer settings by installing &lt;tt class="docutils literal"&gt;xinput&lt;/tt&gt; ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install xinput
 &lt;/pre&gt;&lt;/div&gt;

@@ -101,15 +101,6 @@ XF86AudioRaiseVolume
 </div>
 <div class="section" id="trackpoint">
 <h3>2. TrackPoint</h3>
-<p>Discover <tt class="docutils literal">DEVICE &lt;ID&gt;</tt> with <tt class="docutils literal">xinput list | grep pointer</tt> and <tt class="docutils literal">&lt;ID&gt; PROPERTIES</tt> with <tt class="docutils literal">xinput <span class="pre">list-props</span> &lt;ID&gt;</tt>. Trackpoint sensitivity is modified using the <tt class="docutils literal">Device Accel Constant Deceleration</tt> property ...</p>
-<div class="highlight"><pre><span></span>$ xinput list <span class="p">|</span> grep pointer
-⎡ Virtual core pointer                          <span class="nv">id</span><span class="o">=</span><span class="m">2</span>    <span class="o">[</span>master pointer  <span class="o">(</span>3<span class="o">)]</span>
-⎜   ↳ Virtual core XTEST pointer                <span class="nv">id</span><span class="o">=</span><span class="m">4</span>    <span class="o">[</span>slave  pointer  <span class="o">(</span>2<span class="o">)]</span>
-⎜   ↳ Lite-On Technology Corp. ThinkPad USB Keyboard with TrackPoint    <span class="nv">id</span><span class="o">=</span><span class="m">10</span>   <span class="o">[</span>slave  pointer  <span class="o">(</span>2<span class="o">)]</span>
-$ xinput list-props <span class="m">10</span> <span class="p">|</span> grep <span class="s2">&quot;Device Accel Constant Deceleration&quot;</span>
-        Device Accel Constant Deceleration <span class="o">(</span>251<span class="o">)</span>:       1.000000
-</pre></div>
-<p>Make the change sticky by adding the command to <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt>.</p>
 <p>Customize pointer settings by installing <tt class="docutils literal">xinput</tt> ...</p>
 <div class="highlight"><pre><span></span>$ sudo apt install xinput
 </pre></div>
