@@ -4,6 +4,15 @@ Notes
 
 :slug: notes
 
+2017-06-28T1512
+---------------
+
+Lots of documentation and config samples are available in ``/usr/share/doc`` in gzip'ed format. Non-root user access with the ``zcat`` and ``zless`` commands. Make use of a config sample by redirecting output. Example ...
+
+.. code-block:: bash
+
+    $ zcat /usr/share/doc/dunst/dunstrc.example.gz > ~/.config/dunst/dunstrc
+
 2017-06-27T0902
 ---------------
 
