@@ -1,5 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-28T08:40:00-04:00</updated><entry><title>ThinkPad USB Keyboard with TrackPoint</title><link href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html" rel="alternate"></link><published>2017-06-28T08:40:00-04:00</published><updated>2017-06-28T08:40:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-28:/thinkpad-usb-keyboard-trackpoint.html</id><summary type="html">&lt;p&gt;A Thinkpad keyboard minus the Thinkpad with the classic Trackpoint + Left/Middle/Right mouse buttons. Its attached to my &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook&lt;/a&gt; and I want to change the behaviour of a few keys.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-29T09:50:00-04:00</updated><entry><title>Colemak keyboard layout on Debian</title><link href="http://www.circuidipity.com/colemak-debian.html" rel="alternate"></link><published>2017-06-29T09:50:00-04:00</published><updated>2017-06-29T09:50:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-29:/colemak-debian.html</id><summary type="html">&lt;p&gt;Change a default QWERTY keyboard layout to &lt;strong&gt;Colemak&lt;/strong&gt; on Debian.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;I am a recent convert to (slow) touch typing, and - surprise - it turns out we have learned new things about making keyboards since QWERTY made its appearance in the 19th century! &lt;a class="reference external" href="https://colemak.com/"&gt;Colemak&lt;/a&gt; is an alternative keyboard layout that …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Change a default QWERTY keyboard layout to &lt;strong&gt;Colemak&lt;/strong&gt; on Debian.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;I am a recent convert to (slow) touch typing, and - surprise - it turns out we have learned new things about making keyboards since QWERTY made its appearance in the 19th century! &lt;a class="reference external" href="https://colemak.com/"&gt;Colemak&lt;/a&gt; is an alternative keyboard layout that - by changing the location of less than 20 keys - significantly reduces finger movement and makes typing feel much more comfortable!&lt;/p&gt;
+&lt;p&gt;No need to throw out your keyboard. It is easy to remap the keys for different layouts and toggle back and forth between mappings.&lt;/p&gt;
+&lt;div class="section" id="try-out-colemak"&gt;
+&lt;h3&gt;Try out Colemak&lt;/h3&gt;
+&lt;p&gt;Colemak is already installed in Debian. Display current settings in X and switch to Colemak using the &lt;tt class="docutils literal"&gt;setxkbmap&lt;/tt&gt; command ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ setxkbmap -query
+rules:      evdev
+model:      pc105
+layout:     us
+$ setxkbmap us -variant colemak
+$ setxkbmap -query
+rules:      evdev
+model:      pc105
+layout:     us
+variant:    colemak
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When I first started using Colemak my friend &lt;a class="reference external" href="http://gilesorr.com/"&gt;Giles&lt;/a&gt; (longtime Dvorak user) suggested creating these easy-to-remember &lt;strong&gt;aliases&lt;/strong&gt; in &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.bashrc"&gt;~/.bashrc&lt;/a&gt; to toggle between keyboard mappings ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;arst&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;setxkbmap us &amp;amp;&amp;amp; ~/bin/keyboardconf&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;asdf&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;setxkbmap us -variant colemak &amp;amp;&amp;amp; ~/bin/keyboardconf&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;My shell script &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/keyboardconf"&gt;keyboardconf&lt;/a&gt; loads appropriate &lt;a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html"&gt;~/.xbindkeysrc&lt;/a&gt; and &lt;a class="reference external" href="http://www.circuidipity.com/xmodmap.html"&gt;~/.xmodmap&lt;/a&gt; files for different keyboard types that I use. These configuration files must be reloaded when changing a keyboard mapping.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="colemak-as-default-layout"&gt;
+&lt;h3&gt;Colemak as default layout&lt;/h3&gt;
+&lt;p&gt;Install some keyboard config tools ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install console-setup keyboard-configuration
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Default keyboard layout in Debian is configured in &lt;tt class="docutils literal"&gt;/etc/default/keyboard&lt;/tt&gt; and is shared between X and the command line ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ cat /etc/default/keyboard
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;XKBMODEL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pc105&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;XKBLAYOUT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;us&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;XKBVARIANT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;XKBOPTIONS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+
+&lt;span class="nv"&gt;BACKSPACE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;guess&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Set Colemak as the new default by either manually editing this file, or run ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo dpkg-reconfigure keyboard-configuration
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="keyboard-model"&gt;
+&lt;h4&gt;Keyboard Model&lt;/h4&gt;
+&lt;img alt="kb model" class="align-center" src="images/kb_model.png" style="width: 800px; height: 300px;" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="keyboard-layout"&gt;
+&lt;h4&gt;Keyboard layout&lt;/h4&gt;
+&lt;img alt="kb layout" class="align-center" src="images/kb_layout.png" style="width: 800px; height: 520px;" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="key-to-function-as-altgr"&gt;
+&lt;h4&gt;Key to function as AltGr&lt;/h4&gt;
+&lt;img alt="kb altgr" class="align-center" src="images/kb_altgr.png" style="width: 800px; height: 300px;" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="compose-key"&gt;
+&lt;h4&gt;Compose key&lt;/h4&gt;
+&lt;img alt="kb compose" class="align-center" src="images/kb_compose.png" style="width: 800px; height: 240px;" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="control-alt-backspace"&gt;
+&lt;h4&gt;Control+Alt+Backspace&lt;/h4&gt;
+&lt;img alt="kb control+Alt+Backspace" class="align-center" src="images/kb_cab.png" style="width: 800px; height: 90px;" /&gt;
+&lt;p&gt;View changes ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ cat /etc/default/keyboard
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;XKBMODEL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pc105&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;XKBLAYOUT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;us&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;XKBVARIANT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;colemak&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;XKBOPTIONS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;terminate:ctrl_alt_bksp&amp;quot;&lt;/span&gt;
+
+&lt;span class="nv"&gt;BACKSPACE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;guess&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Activate changes in X ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo udevadm trigger --subsystem-match&lt;span class="o"&gt;=&lt;/span&gt;input --action&lt;span class="o"&gt;=&lt;/span&gt;change
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Activate changes in the console ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo setupcon
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... or reboot.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="bootup"&gt;
+&lt;h3&gt;Bootup&lt;/h3&gt;
+&lt;p&gt;Set the keyboard to Colemak at bootup by modifying &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/initramfs-tools/initramfs.conf&lt;/span&gt;&lt;/tt&gt; to read the keyboard mapping ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Load a keymap during the initramfs stage.&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="nv"&gt;KEYMAP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;y
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Whenever modifying initramfs it is necessary to rebuild to apply changes ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo update-initramfs -u
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Links: &lt;a class="reference external" href="https://wiki.debian.org/Keyboard"&gt;wiki.debian.org/Keyboard&lt;/a&gt; and &lt;a class="reference external" href="https://manpages.debian.org/stretch/keyboard-configuration/keyboard.5.en.html"&gt;man 5 keyboard&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="colemak"></category><category term="keyboard"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>ThinkPad USB Keyboard with TrackPoint</title><link href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html" rel="alternate"></link><published>2017-06-28T08:40:00-04:00</published><updated>2017-06-28T08:40:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-28:/thinkpad-usb-keyboard-trackpoint.html</id><summary type="html">&lt;p&gt;A Thinkpad keyboard minus the Thinkpad with the classic Trackpoint + Left/Middle/Right mouse buttons. Its attached to my &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook&lt;/a&gt; and I want to change the behaviour of a few keys.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Attach the keyboard ...&lt;/p&gt;
@@ -773,29 +871,4 @@ Plugin &lt;span class="s1"&gt;&amp;#39;VundleVim/Vundle.vim&amp;#39;&lt;/span&gt
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="neovim"></category><category term="vim"></category><category term="linux"></category></entry><entry><title>Jessiebook to Stretchbook</title><link href="http://www.circuidipity.com/jessiebook-to-stretchbook.html" rel="alternate"></link><published>2017-06-19T10:20:00-04:00</published><updated>2017-06-19T10:20:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-19:/jessiebook-to-stretchbook.html</id><summary type="html">&lt;p&gt;With the release of &lt;strong&gt;Debian 9 &amp;quot;Stretch&amp;quot;&lt;/strong&gt; my chromebook has &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;transitioned from a Jessiebook&lt;/a&gt; to a Stretchbook!&lt;/p&gt;
-&lt;p&gt;I posted a &lt;a class="reference external" href="http://www.circuidipity.com/minimal-debian.html"&gt;visual screenshot tour&lt;/a&gt; installing the Debian _stable_ release. I use Debian's &lt;strong&gt;minimal network install image&lt;/strong&gt; to create a console-only base configuration that can be customized for various tasks and &lt;a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html"&gt;alternate …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;With the release of &lt;strong&gt;Debian 9 &amp;quot;Stretch&amp;quot;&lt;/strong&gt; my chromebook has &lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;transitioned from a Jessiebook&lt;/a&gt; to a Stretchbook!&lt;/p&gt;
-&lt;p&gt;I posted a &lt;a class="reference external" href="http://www.circuidipity.com/minimal-debian.html"&gt;visual screenshot tour&lt;/a&gt; installing the Debian _stable_ release. I use Debian's &lt;strong&gt;minimal network install image&lt;/strong&gt; to create a console-only base configuration that can be customized for various tasks and &lt;a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html"&gt;alternate desktops&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html"&gt;Earlier steps&lt;/a&gt; taken to setup the Jessiebook still apply with two exceptions. First, &lt;tt class="docutils literal"&gt;xbacklight&lt;/tt&gt; is acting up ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xbacklight -dec 10
-No outputs have backlight property
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I &lt;strong&gt;can&lt;/strong&gt; write to the file directly to increase/decrease the brightness of the display ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ cat /sys/class/backlight/intel_backlight/max_brightness
-937
-$ sudo sh -c &lt;span class="s1"&gt;&amp;#39;echo 500 &amp;gt; /sys/class/backlight/intel_backlight/brightness&amp;#39;&lt;/span&gt;
-$ sudo sh -c &lt;span class="s1"&gt;&amp;#39;echo 937 &amp;gt; /sys/class/backlight/intel_backlight/brightness&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... or use &lt;tt class="docutils literal"&gt;xrandr&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xrandr --output eDP-1 --brightness 0.5
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This is &lt;a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=833508"&gt;a known issue.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;[ Fix! ]&lt;/strong&gt; Roll-back from &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;xserver-xorg-core&lt;/span&gt;&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;xserver-xorg-video-intel&lt;/span&gt;&lt;/tt&gt;. Create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/X11/xorg.conf.d/10-video-intel.conf&lt;/span&gt;&lt;/tt&gt; containing ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Section &lt;span class="s2"&gt;&amp;quot;Device&amp;quot;&lt;/span&gt;
-        Identifier &lt;span class="s2"&gt;&amp;quot;Intel&amp;quot;&lt;/span&gt;
-        Driver &lt;span class="s2"&gt;&amp;quot;intel&amp;quot;&lt;/span&gt;
-EndSection
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Second, the issues with the &lt;strong&gt;ath9k&lt;/strong&gt; driver appear resolved and I leave the wireless alone. No further config tweaks required.&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-</content><category term="chromebook"></category><category term="debian"></category><category term="linux"></category></entry></feed>
+</content><category term="neovim"></category><category term="vim"></category><category term="linux"></category></entry></feed>

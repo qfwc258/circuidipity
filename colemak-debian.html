@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Colemak keyboard layout on Debian</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Thursday 29 June 2017</p>
+</div>
+
+<!-- article -->
+<h1>Colemak keyboard layout on Debian</h1>
+<div id="article">
+    <p>Change a default QWERTY keyboard layout to <strong>Colemak</strong> on Debian.</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<p>I am a recent convert to (slow) touch typing, and - surprise - it turns out we have learned new things about making keyboards since QWERTY made its appearance in the 19th century! <a class="reference external" href="https://colemak.com/">Colemak</a> is an alternative keyboard layout that - by changing the location of less than 20 keys - significantly reduces finger movement and makes typing feel much more comfortable!</p>
+<p>No need to throw out your keyboard. It is easy to remap the keys for different layouts and toggle back and forth between mappings.</p>
+<div class="section" id="try-out-colemak">
+<h3>Try out Colemak</h3>
+<p>Colemak is already installed in Debian. Display current settings in X and switch to Colemak using the <tt class="docutils literal">setxkbmap</tt> command ...</p>
+<div class="highlight"><pre><span></span>$ setxkbmap -query
+rules:      evdev
+model:      pc105
+layout:     us
+$ setxkbmap us -variant colemak
+$ setxkbmap -query
+rules:      evdev
+model:      pc105
+layout:     us
+variant:    colemak
+</pre></div>
+<p>When I first started using Colemak my friend <a class="reference external" href="http://gilesorr.com/">Giles</a> (longtime Dvorak user) suggested creating these easy-to-remember <strong>aliases</strong> in <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.bashrc">~/.bashrc</a> to toggle between keyboard mappings ...</p>
+<div class="highlight"><pre><span></span><span class="nb">alias</span> <span class="nv">arst</span><span class="o">=</span><span class="s2">&quot;setxkbmap us &amp;&amp; ~/bin/keyboardconf&quot;</span>
+<span class="nb">alias</span> <span class="nv">asdf</span><span class="o">=</span><span class="s2">&quot;setxkbmap us -variant colemak &amp;&amp; ~/bin/keyboardconf&quot;</span>
+</pre></div>
+<p>My shell script <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/keyboardconf">keyboardconf</a> loads appropriate <a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html">~/.xbindkeysrc</a> and <a class="reference external" href="http://www.circuidipity.com/xmodmap.html">~/.xmodmap</a> files for different keyboard types that I use. These configuration files must be reloaded when changing a keyboard mapping.</p>
+</div>
+<div class="section" id="colemak-as-default-layout">
+<h3>Colemak as default layout</h3>
+<p>Install some keyboard config tools ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install console-setup keyboard-configuration
+</pre></div>
+<p>Default keyboard layout in Debian is configured in <tt class="docutils literal">/etc/default/keyboard</tt> and is shared between X and the command line ...</p>
+<div class="highlight"><pre><span></span>$ cat /etc/default/keyboard
+<span class="o">[</span>...<span class="o">]</span>
+<span class="nv">XKBMODEL</span><span class="o">=</span><span class="s2">&quot;pc105&quot;</span>
+<span class="nv">XKBLAYOUT</span><span class="o">=</span><span class="s2">&quot;us&quot;</span>
+<span class="nv">XKBVARIANT</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">XKBOPTIONS</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+
+<span class="nv">BACKSPACE</span><span class="o">=</span><span class="s2">&quot;guess&quot;</span>
+</pre></div>
+<p>Set Colemak as the new default by either manually editing this file, or run ...</p>
+<div class="highlight"><pre><span></span>$ sudo dpkg-reconfigure keyboard-configuration
+</pre></div>
+<div class="section" id="keyboard-model">
+<h4>Keyboard Model</h4>
+<img alt="kb model" class="align-center" src="images/kb_model.png" style="width: 800px; height: 300px;" />
+</div>
+<div class="section" id="keyboard-layout">
+<h4>Keyboard layout</h4>
+<img alt="kb layout" class="align-center" src="images/kb_layout.png" style="width: 800px; height: 520px;" />
+</div>
+<div class="section" id="key-to-function-as-altgr">
+<h4>Key to function as AltGr</h4>
+<img alt="kb altgr" class="align-center" src="images/kb_altgr.png" style="width: 800px; height: 300px;" />
+</div>
+<div class="section" id="compose-key">
+<h4>Compose key</h4>
+<img alt="kb compose" class="align-center" src="images/kb_compose.png" style="width: 800px; height: 240px;" />
+</div>
+<div class="section" id="control-alt-backspace">
+<h4>Control+Alt+Backspace</h4>
+<img alt="kb control+Alt+Backspace" class="align-center" src="images/kb_cab.png" style="width: 800px; height: 90px;" />
+<p>View changes ...</p>
+<div class="highlight"><pre><span></span>$ cat /etc/default/keyboard
+<span class="o">[</span>...<span class="o">]</span>
+<span class="nv">XKBMODEL</span><span class="o">=</span><span class="s2">&quot;pc105&quot;</span>
+<span class="nv">XKBLAYOUT</span><span class="o">=</span><span class="s2">&quot;us&quot;</span>
+<span class="nv">XKBVARIANT</span><span class="o">=</span><span class="s2">&quot;colemak&quot;</span>
+<span class="nv">XKBOPTIONS</span><span class="o">=</span><span class="s2">&quot;terminate:ctrl_alt_bksp&quot;</span>
+
+<span class="nv">BACKSPACE</span><span class="o">=</span><span class="s2">&quot;guess&quot;</span>
+</pre></div>
+<p>Activate changes in X ...</p>
+<div class="highlight"><pre><span></span>$ sudo udevadm trigger --subsystem-match<span class="o">=</span>input --action<span class="o">=</span>change
+</pre></div>
+<p>Activate changes in the console ...</p>
+<div class="highlight"><pre><span></span>$ sudo setupcon
+</pre></div>
+<p>... or reboot.</p>
+</div>
+</div>
+<div class="section" id="bootup">
+<h3>Bootup</h3>
+<p>Set the keyboard to Colemak at bootup by modifying <tt class="docutils literal"><span class="pre">/etc/initramfs-tools/initramfs.conf</span></tt> to read the keyboard mapping ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Load a keymap during the initramfs stage.</span>
+<span class="c1">#</span>
+<span class="nv">KEYMAP</span><span class="o">=</span>y
+</pre></div>
+<p>Whenever modifying initramfs it is necessary to rebuild to apply changes ...</p>
+<div class="highlight"><pre><span></span>$ sudo update-initramfs -u
+</pre></div>
+<p>Links: <a class="reference external" href="https://wiki.debian.org/Keyboard">wiki.debian.org/Keyboard</a> and <a class="reference external" href="https://manpages.debian.org/stretch/keyboard-configuration/keyboard.5.en.html">man 5 keyboard</a></p>
+<p>Happy hacking!</p>
+</div>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-colemak.html">colemak</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-keyboard.html">keyboard</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint.html">ThinkPad USB Keyboard with TrackPoint</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>
