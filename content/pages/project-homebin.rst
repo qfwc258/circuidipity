@@ -4,7 +4,7 @@ $HOME slash bin
 
 :slug: homebin
 :template: page-project
-:modified: 2017-06-27 18:45:00
+:modified: 2017-06-29 18:40:00
 
 .. image:: images/infinite-loop-not-300.png
     :align: right
@@ -57,7 +57,10 @@ Let's go!
     ``dmenu`` configuration
 
 `flashManUpdate <https://github.com/vonbrownie/homebin/blob/master/flashManUpdate>`_
-    Installs libflashplayer.so
+    installs libflashplayer.so
+
+`i3wm_conf <https://github.com/vonbrownie/homebin/blob/master/i3wm_conf>`_
+    conditionals for building i3 window manager config at runtime
 
 `keyboardconf <https://github.com/vonbrownie/homebin/blob/master/keyboardconf>`_
     Detect and configure keyboards (more: `"Detect and configure keyboards" <http://www.circuidipity.com/keyboardconf.html>`_)
