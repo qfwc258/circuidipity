@@ -24,7 +24,21 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="t1512">
+    <div class="section" id="t1237">
+<h2>2017-06-29T1237</h2>
+<p>Find and replace text with <strong>sed</strong>.</p>
+<p>Save back to the original file ...</p>
+<div class="highlight"><pre><span></span>$ sed -i <span class="s1">&#39;s/original/new/g&#39;</span> file.txt
+</pre></div>
+<p>Save to new_file.txt ...</p>
+<div class="highlight"><pre><span></span>$ sed <span class="s1">&#39;s/original/new/g&#39;</span> file.txt &gt; new_file.txt
+</pre></div>
+<p>Multiple text patterns and variables ...</p>
+<div class="highlight"><pre><span></span>$ sed <span class="s2">&quot;s/</span><span class="nv">$original</span><span class="s2">/</span><span class="nv">$new</span><span class="s2">/g; s/</span><span class="nv">$pattern2</span><span class="s2">/</span><span class="nv">$new_again</span><span class="s2">/g&quot;</span> file.txt &gt; new_file.txt
+</pre></div>
+<p>Link: <a class="reference external" href="https://askubuntu.com/q/20414">https://askubuntu.com/q/20414</a></p>
+</div>
+<div class="section" id="t1512">
 <h2>2017-06-28T1512</h2>
 <p>Lots of documentation and config samples are available in <tt class="docutils literal">/usr/share/doc</tt> in gzip'ed format. Non-root user access with the <tt class="docutils literal">zcat</tt> and <tt class="docutils literal">zless</tt> commands. Make use of a config sample by redirecting output. Example ...</p>
 <div class="highlight"><pre><span></span>$ zcat /usr/share/doc/dunst/dunstrc.example.gz &gt; ~/.config/dunst/dunstrc
