@@ -1,5 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-06-29T09:50:00-04:00</updated><entry><title>Colemak keyboard layout on Debian</title><link href="http://www.circuidipity.com/colemak-debian.html" rel="alternate"></link><published>2017-06-29T09:50:00-04:00</published><updated>2017-06-29T09:50:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-29:/colemak-debian.html</id><summary type="html">&lt;p&gt;Change a default QWERTY keyboard layout to &lt;strong&gt;Colemak&lt;/strong&gt; on Debian.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-07-02T15:57:00-04:00</updated><entry><title>Build a package from mentors.debian.net</title><link href="http://www.circuidipity.com/build-qt5ct.html" rel="alternate"></link><published>2017-07-02T15:57:00-04:00</published><updated>2017-07-02T15:57:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-07-02:/build-qt5ct.html</id><summary type="html">&lt;p&gt;A package for the Qt configuration utility &lt;a class="reference external" href="https://sourceforge.net/projects/qt5ct/"&gt;qt5ct&lt;/a&gt; is not available in the Debian archives but a &amp;quot;debianized&amp;quot; version &lt;strong&gt;is&lt;/strong&gt; available through &lt;a class="reference external" href="https://mentors.debian.net/"&gt;mentors.debian.net&lt;/a&gt;, a service where Debian developers sponsor (usually source) packages uploaded by non-Debian developers.&lt;/p&gt;
+&lt;p&gt;This &lt;a class="reference external" href="https://mentors.debian.net/package/qt5ct"&gt;qt5ct package&lt;/a&gt; contains a &lt;strong&gt;.dsc&lt;/strong&gt; (Debian Source Control) text file that …&lt;/p&gt;</summary><content type="html">&lt;p&gt;A package for the Qt configuration utility &lt;a class="reference external" href="https://sourceforge.net/projects/qt5ct/"&gt;qt5ct&lt;/a&gt; is not available in the Debian archives but a &amp;quot;debianized&amp;quot; version &lt;strong&gt;is&lt;/strong&gt; available through &lt;a class="reference external" href="https://mentors.debian.net/"&gt;mentors.debian.net&lt;/a&gt;, a service where Debian developers sponsor (usually source) packages uploaded by non-Debian developers.&lt;/p&gt;
+&lt;p&gt;This &lt;a class="reference external" href="https://mentors.debian.net/package/qt5ct"&gt;qt5ct package&lt;/a&gt; contains a &lt;strong&gt;.dsc&lt;/strong&gt; (Debian Source Control) text file that describes the source package. I use this file to build a &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;qt5ct-VERSION.deb&lt;/span&gt;&lt;/tt&gt; binary package ready to be installed!&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;All packages are signed with public key encryption. Ensure the build machine is setup with GnuPG: &lt;a class="reference external" href="http://www.circuidipity.com/verify-pgp-signature-gnupg.html"&gt;Verify a PGP signature with GnuPG&lt;/a&gt;&lt;/p&gt;
+&lt;div class="section" id="build-tools"&gt;
+&lt;h3&gt;0. Build tools&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Devscripts&lt;/strong&gt; is a collection of tools for Debian developers. Install ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install devscripts
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="import-key"&gt;
+&lt;h3&gt;1. Import key&lt;/h3&gt;
+&lt;p&gt;Search for the package uploader's public key ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gpg --keyserver hkps://hkps.pool.sks-keyservers.net --search-keys mati75@linuxmint.pl
+gpg: data source: https://kerckhoffs.surfnet.nl:443
+&lt;span class="o"&gt;(&lt;/span&gt;1&lt;span class="o"&gt;)&lt;/span&gt;     Mateusz Łukasik &amp;lt;mati75@linuxmint.pl&amp;gt;
+          &lt;span class="m"&gt;2048&lt;/span&gt; bit RSA key CCD91D6111A06851, created: 2012-01-26
+Keys 1-1 of &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;mati75@linuxmint.pl&amp;quot;&lt;/span&gt;.  Enter number&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt;, N&lt;span class="o"&gt;)&lt;/span&gt;ext, or Q&lt;span class="o"&gt;)&lt;/span&gt;uit &amp;gt; n
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Import the key from the keyserver ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gpg --recv-keys CCD91D6111A06851
+gpg: key CCD91D6111A06851: &lt;span class="s2"&gt;&amp;quot;Mateusz Łukasik &amp;lt;mati75@linuxmint.pl&amp;gt;&amp;quot;&lt;/span&gt; not changed
+gpg: Total number processed: 1
+gpg:              unchanged: 1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Display the keyring containing our new key ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gpg --list-keys
+/home/foo/.gnupg/pubring.kbx
+----------------------------
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+pub   rsa2048 2012-01-26 &lt;span class="o"&gt;[&lt;/span&gt;SC&lt;span class="o"&gt;]&lt;/span&gt;
+      D93B0C12C8D04D7AAFBCFA27CCD91D6111A06851
+uid           &lt;span class="o"&gt;[&lt;/span&gt; unknown&lt;span class="o"&gt;]&lt;/span&gt; Mateusz Łukasik &amp;lt;mati75@linuxmint.pl&amp;gt;
+sub   rsa2048 2012-01-26 &lt;span class="o"&gt;[&lt;/span&gt;E&lt;span class="o"&gt;]&lt;/span&gt;
+sub   rsa2048 2012-01-26 &lt;span class="o"&gt;[&lt;/span&gt;E&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Setup the &lt;tt class="docutils literal"&gt;dscverify&lt;/tt&gt; tool from devscripts to use my personal gpg keyring ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ cp /etc/devscripts.conf ~/.devscripts
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.devscripts&lt;/span&gt;&lt;/tt&gt; I activate the option &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;DSCVERIFY_KEYRINGS=&amp;quot;&amp;quot;&lt;/span&gt;&lt;/tt&gt; and specify my keyring location (&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;DSCVERIFY_KEYRINGS=&amp;quot;~/.gnupg/pubring.kbx&amp;quot;&lt;/span&gt;&lt;/tt&gt;).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="build-depends"&gt;
+&lt;h3&gt;2. Build-Depends&lt;/h3&gt;
+&lt;p&gt;Take note and install any packages required to build the source package that are listed in the &lt;tt class="docutils literal"&gt;*.dsc&lt;/tt&gt; file (&lt;a class="reference external" href="https://mentors.debian.net/debian/pool/main/q/qt5ct/qt5ct_0.31-2.dsc"&gt;qt5ct_0.31-2.dsc&lt;/a&gt;) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+Build-Depends: debhelper &lt;span class="o"&gt;(&lt;/span&gt;&amp;gt;&lt;span class="o"&gt;=&lt;/span&gt; 10&lt;span class="o"&gt;)&lt;/span&gt;, qtbase5-dev, libqt5svg5-dev, qttools5-dev-tools, qtbase5-private-dev, libfontconfig1-dev, libfreetype6-dev, libglib2.0-dev, libxrender-dev, libmtdev-dev &lt;span class="o"&gt;[&lt;/span&gt;linux-any&lt;span class="o"&gt;]&lt;/span&gt;, libegl1-mesa-dev
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Install ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install debhelper qtbase5-dev libqt5svg5-dev qttools5-dev-tools qtbase5-private-dev libfontconfig1-dev libfreetype6-dev libglib2.0-dev libxrender-dev libmtdev-dev libegl1-mesa-dev
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="build-and-install"&gt;
+&lt;h3&gt;3. Build and install&lt;/h3&gt;
+&lt;p&gt;Use &lt;tt class="docutils literal"&gt;dget&lt;/tt&gt; to download the source and &lt;tt class="docutils literal"&gt;debuild&lt;/tt&gt; to build the &lt;tt class="docutils literal"&gt;*.deb&lt;/tt&gt; file ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ dget https://mentors.debian.net/debian/pool/main/q/qt5ct/qt5ct_0.31-2.dsc
+$ &lt;span class="nb"&gt;cd&lt;/span&gt; /path/to/extracted/package
+$ debuild -us -uc
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Package &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;qt5ct_0.31-2_amd64.deb&lt;/span&gt;&lt;/tt&gt; is built and placed one directory up from the current build directory. Install using &lt;tt class="docutils literal"&gt;dpkg&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo dpkg -i qt5ct_0.31-2_amd64.deb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If &lt;tt class="docutils literal"&gt;dpkg&lt;/tt&gt; exits with an error message about dependencies, install the missing ones and run the command again.&lt;/p&gt;
+&lt;p&gt;Links: &lt;a class="reference external" href="https://wiki.debian.org/DebianMentorsFaq#How_do_I_install_a_package_from_mentor.debian.net.3F"&gt;How do I install a package from mentors.debian.net&lt;/a&gt; and &lt;a class="reference external" href="https://debian-handbook.info/browse/stable/sect.source-package-structure.html"&gt;Structure of a source package&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="qt5ct"></category><category term="qt"></category><category term="shell"></category><category term="debian"></category><category term="linux"></category><category term="crypto"></category></entry><entry><title>Colemak keyboard layout on Debian</title><link href="http://www.circuidipity.com/colemak-debian.html" rel="alternate"></link><published>2017-06-29T09:50:00-04:00</published><updated>2017-06-29T09:50:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-29:/colemak-debian.html</id><summary type="html">&lt;p&gt;Change a default QWERTY keyboard layout to &lt;strong&gt;Colemak&lt;/strong&gt; on Debian.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;I am a recent convert to (slow) touch typing, and - surprise - it turns out we have learned new things about making keyboards since QWERTY made its appearance in the 19th century! &lt;a class="reference external" href="https://colemak.com/"&gt;Colemak&lt;/a&gt; is an alternative keyboard layout that …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Change a default QWERTY keyboard layout to &lt;strong&gt;Colemak&lt;/strong&gt; on Debian.&lt;/p&gt;
@@ -716,159 +784,4 @@ mtg&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &l
 &lt;p&gt;Link: dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.bashrc"&gt;.bashrc&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category></entry><entry><title>Getting started with Neovim</title><link href="http://www.circuidipity.com/neovim.html" rel="alternate"></link><published>2017-06-20T07:30:00-04:00</published><updated>2017-06-20T07:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-20:/neovim.html</id><summary type="html">&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;I have used &lt;strong&gt;Vim&lt;/strong&gt; in the past but barely scratched the surface of its features motherlode. A friend who is a &lt;a class="reference external" href="http://gilesorr.com/blog/tag/vim.html"&gt;passionate vim …&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;I have used &lt;strong&gt;Vim&lt;/strong&gt; in the past but barely scratched the surface of its features motherlode. A friend who is a &lt;a class="reference external" href="http://gilesorr.com/blog/tag/vim.html"&gt;passionate vim user&lt;/a&gt; recommended I try &lt;strong&gt;Neovim&lt;/strong&gt;, which &amp;quot;&lt;em&gt;strives to be a superset of Vim except for some intentionally-removed misfeatures... [and] is built for users who want the good parts of Vim, and more&lt;/em&gt;&amp;quot;. Sounds good!&lt;/p&gt;
-&lt;div class="section" id="install"&gt;
-&lt;h3&gt;0. Install&lt;/h3&gt;
-&lt;p&gt;Neovim packages are available in Debian ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install neovim
-$ sudo apt install python-dev python-pip python3-dev python3-pip
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="launch"&gt;
-&lt;h3&gt;1. Launch&lt;/h3&gt;
-&lt;p&gt;Launch editor ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nvim
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;On first launch the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.local/share/nvim/{shada,swap}&lt;/span&gt;&lt;/tt&gt; directories are auto-generated. Manually create a new &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/nvim&lt;/span&gt;&lt;/tt&gt; directory ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ mkdir ~/.config/nvim
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... and create a &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/nvim/init.vim&lt;/span&gt;&lt;/tt&gt; config file (or link to an existing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.vimrc&lt;/span&gt;&lt;/tt&gt;). My general settings ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt; nocompatible            &lt;span class="s2"&gt;&amp;quot; Disable compatibility to old-time vi&lt;/span&gt;
-&lt;span class="s2"&gt;set showmatch               &amp;quot;&lt;/span&gt; Show matching brackets.
-&lt;span class="nb"&gt;set&lt;/span&gt; ignorecase              &lt;span class="s2"&gt;&amp;quot; Do case insensitive matching&lt;/span&gt;
-&lt;span class="s2"&gt;set mouse=v                 &amp;quot;&lt;/span&gt; middle-click paste with mouse
-&lt;span class="nb"&gt;set&lt;/span&gt; hlsearch                &lt;span class="s2"&gt;&amp;quot; highlight search results&lt;/span&gt;
-&lt;span class="s2"&gt;set tabstop=4               &amp;quot;&lt;/span&gt; number of columns occupied by a tab character
-&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;softtabstop&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;           &lt;span class="s2"&gt;&amp;quot; see multiple spaces as tabstops so &amp;lt;BS&amp;gt; does the right thing&lt;/span&gt;
-&lt;span class="s2"&gt;set expandtab               &amp;quot;&lt;/span&gt; converts tabs to white space
-&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;shiftwidth&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;            &lt;span class="s2"&gt;&amp;quot; width for autoindents&lt;/span&gt;
-&lt;span class="s2"&gt;set autoindent              &amp;quot;&lt;/span&gt; indent a new line the same amount as the line just typed
-&lt;span class="nb"&gt;set&lt;/span&gt; number                  &lt;span class="s2"&gt;&amp;quot; add line numbers&lt;/span&gt;
-&lt;span class="s2"&gt;set wildmode=longest,list   &amp;quot;&lt;/span&gt; get bash-like tab completions
-&lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;cc&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;80&lt;/span&gt;                   &lt;span class="s2"&gt;&amp;quot; set an 80 column border for good coding style&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Check out Neovim's built-in &lt;tt class="docutils literal"&gt;:help&lt;/tt&gt; command and the &lt;a class="reference external" href="https://neovim.io/doc/"&gt;online documentation&lt;/a&gt; .&lt;/p&gt;
-&lt;p&gt;Source: &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.config/nvim/init.vim"&gt;dotfiles/.config/nvim/init.vim&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="spelling"&gt;
-&lt;h3&gt;2. Spelling&lt;/h3&gt;
-&lt;p&gt;Toggle spell checking with the command &lt;tt class="docutils literal"&gt;:set invspell&lt;/tt&gt;. First time the command is invoked it prompts to download the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;utf-8&lt;/span&gt;&lt;/tt&gt; spell files ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;spellfile#LoadFile&lt;span class="o"&gt;()&lt;/span&gt;: No &lt;span class="o"&gt;(&lt;/span&gt;writable&lt;span class="o"&gt;)&lt;/span&gt; spell directory found.
-Created /home/dwa/.local/share/nvim/site/spell
-No spell file &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;en&amp;quot;&lt;/span&gt; in utf-8
-Download it?
-&lt;span class="o"&gt;(&lt;/span&gt;Y&lt;span class="o"&gt;)&lt;/span&gt;es, &lt;span class="o"&gt;[&lt;/span&gt;N&lt;span class="o"&gt;]&lt;/span&gt;o:Y
-
-Downloading en.utf-8.spl...
-&lt;span class="s2"&gt;&amp;quot;~/.local/share/nvim/site/spell/en.utf-8.spl&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;New&lt;span class="o"&gt;]&lt;/span&gt; 1121L, 609337C written
-Downloading en.utf-8.sug...
-&lt;span class="s2"&gt;&amp;quot;~/.local/share/nvim/site/spell/en.utf-8.sug&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;New&lt;span class="o"&gt;]&lt;/span&gt; 2512L, 596961C written
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;My own added words are saved in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/nvim/spell/{en.utf-8.add,en.utf-8.add.spl}&lt;/span&gt;&lt;/tt&gt;. Add a hot-key for the spell checker in &lt;tt class="docutils literal"&gt;init.vim&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; toggle spelling&lt;/span&gt;
-&lt;span class="s2"&gt;nnoremap &amp;lt;leader&amp;gt;s :set invspell&amp;lt;CR&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="colors"&gt;
-&lt;h3&gt;3. Colors&lt;/h3&gt;
-&lt;p&gt;Neovim includes a few color schemes and more are available for download. Create a &lt;tt class="docutils literal"&gt;colors&lt;/tt&gt; directory to hold extra schemes ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ mkdir -p ~/.config/nvim/colors
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I use the &lt;a class="reference external" href="http://www.vim.org/scripts/script.php?script_id=2777"&gt;tir_black&lt;/a&gt; scheme. Download and save in the new directory. Set as default color scheme in &lt;tt class="docutils literal"&gt;init.vim&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; color scheme&lt;/span&gt;
-&lt;span class="s2"&gt;colorscheme tir_black&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I ran into the problem where the color scheme worked in the (urxvt) terminal but not inside a &lt;strong&gt;tmux&lt;/strong&gt; session. Turns out my tmux was not seeing the 256 color palette ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ tput colors
-8
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;[ Fix! ]&lt;/strong&gt; Add this setting to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.tmux.conf&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt; -g default-terminal &lt;span class="s2"&gt;&amp;quot;rxvt-unicode-256color&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;It is important to &lt;strong&gt;kill all existing tmux sessions&lt;/strong&gt; to see the changes take effect. It is &lt;a class="reference external" href="http://stackoverflow.com/a/25940093"&gt;not enough to simply start a fresh session.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Now the colors work OK!&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$TERM&lt;/span&gt;
-rxvt-unicode-256color
-$ tput colors
-256
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="plugins"&gt;
-&lt;h3&gt;4. Plugins&lt;/h3&gt;
-&lt;p&gt;Extend the core features of the text editor using plugins. With a fresh install of Neovim, now is a good time to setup a &lt;strong&gt;plugin manager&lt;/strong&gt;. I install &lt;a class="reference external" href="https://github.com/VundleVim/Vundle.vim"&gt;Vundle&lt;/a&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ mkdir -p ~/.config/nvim/bundle
-    $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Configure neovim to use vundle by modifying &lt;tt class="docutils literal"&gt;init.vim&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;filetype off
-&lt;span class="s2"&gt;&amp;quot; set the runtime path to include Vundle and initialize&lt;/span&gt;
-&lt;span class="s2"&gt;set rtp+=~/.config/nvim/bundle/Vundle.vim&lt;/span&gt;
-&lt;span class="s2"&gt;call vundle#begin(&amp;#39;~/.config/nvim/bundle&amp;#39;)&lt;/span&gt;
-
-&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="nb"&gt;let&lt;/span&gt; Vundle manage Vundle, required
-Plugin &lt;span class="s1"&gt;&amp;#39;VundleVim/Vundle.vim&amp;#39;&lt;/span&gt;
-
-&lt;span class="s2"&gt;&amp;quot; All of your Plugins must be added before the following line&lt;/span&gt;
-&lt;span class="s2"&gt;call vundle#end()&lt;/span&gt;
-&lt;span class="s2"&gt;filetype plugin indent on  &amp;quot;&lt;/span&gt; allows auto-indenting depending on file &lt;span class="nb"&gt;type&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Install plugins by adding &lt;tt class="docutils literal"&gt;Plugin 'plugin/name'&lt;/tt&gt; between &lt;tt class="docutils literal"&gt;vundle#begin()&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;vundle#end()&lt;/tt&gt;, then launch the installer ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nvim +PluginInstall +qall
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;A few plugins I have found very useful from the start ...&lt;/p&gt;
-&lt;div class="section" id="syntastic"&gt;
-&lt;h4&gt;Syntastic&lt;/h4&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/vim-syntastic/syntastic"&gt;Syntax checking plugin&lt;/a&gt; that makes use of external syntax checkers. I install &lt;strong&gt;pylint&lt;/strong&gt; for checking Python syntax and &lt;strong&gt;shellcheck&lt;/strong&gt; for Bash scripting ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install pylint pylint3 shellcheck
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Add the plugin to &lt;tt class="docutils literal"&gt;init.vim&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Plugin &lt;span class="s1"&gt;&amp;#39;vim-syntastic/syntastic&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... plus the &lt;a class="reference external" href="https://github.com/vim-syntastic/syntastic#settings"&gt;FAQ&lt;/a&gt; recommends some defaults ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt; statusline+&lt;span class="o"&gt;=&lt;/span&gt;%#warningmsg#
-&lt;span class="nb"&gt;set&lt;/span&gt; statusline+&lt;span class="o"&gt;=&lt;/span&gt;%&lt;span class="o"&gt;{&lt;/span&gt;SyntasticStatuslineFlag&lt;span class="o"&gt;()}&lt;/span&gt;
-&lt;span class="nb"&gt;set&lt;/span&gt; statusline+&lt;span class="o"&gt;=&lt;/span&gt;%*
-
-&lt;span class="nb"&gt;let&lt;/span&gt; g:syntastic_always_populate_loc_list &lt;span class="o"&gt;=&lt;/span&gt; 1
-&lt;span class="nb"&gt;let&lt;/span&gt; g:syntastic_auto_loc_list &lt;span class="o"&gt;=&lt;/span&gt; 1
-&lt;span class="nb"&gt;let&lt;/span&gt; g:syntastic_check_on_open &lt;span class="o"&gt;=&lt;/span&gt; 1
-&lt;span class="nb"&gt;let&lt;/span&gt; g:syntastic_check_on_wq &lt;span class="o"&gt;=&lt;/span&gt; 0
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... plus (optional) enable &lt;a class="reference external" href="https://github.com/vim-syntastic/syntastic/issues/1767#issuecomment-217834857"&gt;pylint checking for python3&lt;/a&gt; (the default falls back on python2) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; g:syntastic_python_pylint_exe &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python3 -m pylint3&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="vim-gitgutter"&gt;
-&lt;h4&gt;Vim-gitgutter&lt;/h4&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/airblade/vim-gitgutter"&gt;Plugin that displays a git diff&lt;/a&gt; column at the side of a document marking where lines have been added, modified, or removed.&lt;/p&gt;
-&lt;p&gt;Add the plugin to &lt;tt class="docutils literal"&gt;init.vim&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Plugin &lt;span class="s1"&gt;&amp;#39;airblade/vim-gitgutter&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="vimwiki"&gt;
-&lt;h4&gt;Vimwiki&lt;/h4&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/vimwiki/vimwiki"&gt;Personal wiki plugin&lt;/a&gt; that I use as a simple notebook.&lt;/p&gt;
-&lt;p&gt;Add the plugin to &lt;tt class="docutils literal"&gt;init.vim&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Plugin &lt;span class="s1"&gt;&amp;#39;vimwiki/vimwiki&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Default file location is &lt;tt class="docutils literal"&gt;~/vimwiki&lt;/tt&gt;. To set a different location (example: &lt;tt class="docutils literal"&gt;~/doc/wiki/&lt;/tt&gt;) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;let&lt;/span&gt; g:vimwiki_list &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;path&amp;#39;&lt;/span&gt;: &lt;span class="s1"&gt;&amp;#39;~/doc/wiki/&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;path_html&amp;#39;&lt;/span&gt;: &lt;span class="s1"&gt;&amp;#39;~/doc/wiki/html/&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;}]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dlg"&gt;created a little script&lt;/a&gt; that runs a &lt;tt class="docutils literal"&gt;git commit&lt;/tt&gt; before launching the wiki.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="default"&gt;
-&lt;h3&gt;5. Default&lt;/h3&gt;
-&lt;p&gt;I set Neovim to be my default editor (for system tasks like &lt;tt class="docutils literal"&gt;visudo&lt;/tt&gt;) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo update-alternatives --config editor
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</content><category term="neovim"></category><category term="vim"></category><category term="linux"></category></entry></feed>
+</content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category></entry></feed>

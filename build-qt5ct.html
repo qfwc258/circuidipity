@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Build a package from mentors.debian.net</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Sunday 02 July 2017</p>
+</div>
+
+<!-- article -->
+<h1>Build a package from mentors.debian.net</h1>
+<div id="article">
+    <p>A package for the Qt configuration utility <a class="reference external" href="https://sourceforge.net/projects/qt5ct/">qt5ct</a> is not available in the Debian archives but a &quot;debianized&quot; version <strong>is</strong> available through <a class="reference external" href="https://mentors.debian.net/">mentors.debian.net</a>, a service where Debian developers sponsor (usually source) packages uploaded by non-Debian developers.</p>
+<p>This <a class="reference external" href="https://mentors.debian.net/package/qt5ct">qt5ct package</a> contains a <strong>.dsc</strong> (Debian Source Control) text file that describes the source package. I use this file to build a <tt class="docutils literal"><span class="pre">qt5ct-VERSION.deb</span></tt> binary package ready to be installed!</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<p>All packages are signed with public key encryption. Ensure the build machine is setup with GnuPG: <a class="reference external" href="http://www.circuidipity.com/verify-pgp-signature-gnupg.html">Verify a PGP signature with GnuPG</a></p>
+<div class="section" id="build-tools">
+<h3>0. Build tools</h3>
+<p><strong>Devscripts</strong> is a collection of tools for Debian developers. Install ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install devscripts
+</pre></div>
+</div>
+<div class="section" id="import-key">
+<h3>1. Import key</h3>
+<p>Search for the package uploader's public key ...</p>
+<div class="highlight"><pre><span></span>$ gpg --keyserver hkps://hkps.pool.sks-keyservers.net --search-keys mati75@linuxmint.pl
+gpg: data source: https://kerckhoffs.surfnet.nl:443
+<span class="o">(</span>1<span class="o">)</span>     Mateusz Łukasik &lt;mati75@linuxmint.pl&gt;
+          <span class="m">2048</span> bit RSA key CCD91D6111A06851, created: 2012-01-26
+Keys 1-1 of <span class="m">1</span> <span class="k">for</span> <span class="s2">&quot;mati75@linuxmint.pl&quot;</span>.  Enter number<span class="o">(</span>s<span class="o">)</span>, N<span class="o">)</span>ext, or Q<span class="o">)</span>uit &gt; n
+</pre></div>
+<p>Import the key from the keyserver ...</p>
+<div class="highlight"><pre><span></span>$ gpg --recv-keys CCD91D6111A06851
+gpg: key CCD91D6111A06851: <span class="s2">&quot;Mateusz Łukasik &lt;mati75@linuxmint.pl&gt;&quot;</span> not changed
+gpg: Total number processed: 1
+gpg:              unchanged: 1
+</pre></div>
+<p>Display the keyring containing our new key ...</p>
+<div class="highlight"><pre><span></span>$ gpg --list-keys
+/home/foo/.gnupg/pubring.kbx
+----------------------------
+<span class="o">[</span>...<span class="o">]</span>
+pub   rsa2048 2012-01-26 <span class="o">[</span>SC<span class="o">]</span>
+      D93B0C12C8D04D7AAFBCFA27CCD91D6111A06851
+uid           <span class="o">[</span> unknown<span class="o">]</span> Mateusz Łukasik &lt;mati75@linuxmint.pl&gt;
+sub   rsa2048 2012-01-26 <span class="o">[</span>E<span class="o">]</span>
+sub   rsa2048 2012-01-26 <span class="o">[</span>E<span class="o">]</span>
+</pre></div>
+<p>Setup the <tt class="docutils literal">dscverify</tt> tool from devscripts to use my personal gpg keyring ...</p>
+<div class="highlight"><pre><span></span>$ cp /etc/devscripts.conf ~/.devscripts
+</pre></div>
+<p>... and in <tt class="docutils literal"><span class="pre">~/.devscripts</span></tt> I activate the option <tt class="docutils literal"><span class="pre">DSCVERIFY_KEYRINGS=&quot;&quot;</span></tt> and specify my keyring location (<tt class="docutils literal"><span class="pre">DSCVERIFY_KEYRINGS=&quot;~/.gnupg/pubring.kbx&quot;</span></tt>).</p>
+</div>
+<div class="section" id="build-depends">
+<h3>2. Build-Depends</h3>
+<p>Take note and install any packages required to build the source package that are listed in the <tt class="docutils literal">*.dsc</tt> file (<a class="reference external" href="https://mentors.debian.net/debian/pool/main/q/qt5ct/qt5ct_0.31-2.dsc">qt5ct_0.31-2.dsc</a>) ...</p>
+<div class="highlight"><pre><span></span><span class="o">[</span>...<span class="o">]</span>
+Build-Depends: debhelper <span class="o">(</span>&gt;<span class="o">=</span> 10<span class="o">)</span>, qtbase5-dev, libqt5svg5-dev, qttools5-dev-tools, qtbase5-private-dev, libfontconfig1-dev, libfreetype6-dev, libglib2.0-dev, libxrender-dev, libmtdev-dev <span class="o">[</span>linux-any<span class="o">]</span>, libegl1-mesa-dev
+</pre></div>
+<p>Install ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install debhelper qtbase5-dev libqt5svg5-dev qttools5-dev-tools qtbase5-private-dev libfontconfig1-dev libfreetype6-dev libglib2.0-dev libxrender-dev libmtdev-dev libegl1-mesa-dev
+</pre></div>
+</div>
+<div class="section" id="build-and-install">
+<h3>3. Build and install</h3>
+<p>Use <tt class="docutils literal">dget</tt> to download the source and <tt class="docutils literal">debuild</tt> to build the <tt class="docutils literal">*.deb</tt> file ...</p>
+<div class="highlight"><pre><span></span>$ dget https://mentors.debian.net/debian/pool/main/q/qt5ct/qt5ct_0.31-2.dsc
+$ <span class="nb">cd</span> /path/to/extracted/package
+$ debuild -us -uc
+</pre></div>
+<p>Package <tt class="docutils literal"><span class="pre">qt5ct_0.31-2_amd64.deb</span></tt> is built and placed one directory up from the current build directory. Install using <tt class="docutils literal">dpkg</tt> ...</p>
+<div class="highlight"><pre><span></span>$ sudo dpkg -i qt5ct_0.31-2_amd64.deb
+</pre></div>
+<p>If <tt class="docutils literal">dpkg</tt> exits with an error message about dependencies, install the missing ones and run the command again.</p>
+<p>Links: <a class="reference external" href="https://wiki.debian.org/DebianMentorsFaq#How_do_I_install_a_package_from_mentor.debian.net.3F">How do I install a package from mentors.debian.net</a> and <a class="reference external" href="https://debian-handbook.info/browse/stable/sect.source-package-structure.html">Structure of a source package</a></p>
+<p>Happy hacking!</p>
+</div>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-qt5ct.html">qt5ct</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-qt.html">qt</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-crypto.html">crypto</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/colemak-debian.html">Colemak keyboard layout on Debian</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>
