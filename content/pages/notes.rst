@@ -4,6 +4,38 @@ Notes
 
 :slug: notes
 
+2017-07-02T1014
+---------------
+
+Addon for Firefox: `Text Contrast for Dark Themes <https://addons.mozilla.org/en-US/firefox/addon/text-contrast-for-dark-themes/>`_
+
+Fixs issue with text entry on some websites (white text on white in gmail signin, yahoo search, others) when using the **Breeze Dark** QT theme.
+
+2017-06-29T1237
+---------------
+
+Find and replace text with **sed**.
+
+Save back to the original file ...
+
+.. code-block:: bash
+
+    $ sed -i 's/original/new/g' file.txt
+    
+Save to new_file.txt ...
+
+.. code-block:: bash
+
+    $ sed 's/original/new/g' file.txt > new_file.txt
+    
+Multiple text patterns and variables ...
+
+.. code-block:: bash
+
+    $ sed "s/$original/$new/g; s/$pattern2/$new_again/g" file.txt > new_file.txt
+    
+Link: https://askubuntu.com/q/20414
+
 2017-06-28T1512
 ---------------
 
