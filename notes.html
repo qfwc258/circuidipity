@@ -24,7 +24,20 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="t1014">
+    <div class="section" id="t0900">
+<h2>2017-07-03T0900</h2>
+<p>Configure i3wm to put clients on specific workspaces. Run <tt class="docutils literal">xprop</tt> in a terminal and click on the client to get <tt class="docutils literal">WM_CLASS</tt>: first part is the <strong>instance</strong>, second part is the <strong>class</strong> ...</p>
+<div class="highlight"><pre><span></span>$ xprop
+<span class="o">[</span>...<span class="o">]</span>
+WM_CLASS<span class="o">(</span>STRING<span class="o">)</span> <span class="o">=</span> <span class="s2">&quot;transmission-qt&quot;</span>, <span class="s2">&quot;transmission&quot;</span>
+</pre></div>
+<p>Add the change to <tt class="docutils literal"><span class="pre">~/.config/i3/config</span></tt> ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Assign torrent client to workspace 10</span>
+assign <span class="o">[</span><span class="nv">instance</span><span class="o">=</span><span class="s2">&quot;transmission-qt&quot;</span><span class="o">]</span> 10
+</pre></div>
+<p>Link: <a class="reference external" href="https://i3wm.org/docs/userguide.html#assign_workspace">Automatically putting clients on specific workspaces</a></p>
+</div>
+<div class="section" id="t1014">
 <h2>2017-07-02T1014</h2>
 <p>Addon for Firefox: <a class="reference external" href="https://addons.mozilla.org/en-US/firefox/addon/text-contrast-for-dark-themes/">Text Contrast for Dark Themes</a></p>
 <p>Fixs issue with text entry on some websites (white text on white in gmail signin, yahoo search, others) when using the <strong>Breeze Dark</strong> QT theme.</p>
