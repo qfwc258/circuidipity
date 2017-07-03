@@ -4,6 +4,26 @@ Notes
 
 :slug: notes
 
+2017-07-03T0900
+---------------
+
+Configure i3wm to put clients on specific workspaces. Run ``xprop`` in a terminal and click on the client to get ``WM_CLASS``: first part is the **instance**, second part is the **class** ...
+
+.. code-block:: bash
+
+    $ xprop
+    [...]
+    WM_CLASS(STRING) = "transmission-qt", "transmission"
+    
+Add the change to ``~/.config/i3/config`` ...
+
+.. code-block:: bash
+
+    # Assign torrent client to workspace 10
+    assign [instance="transmission-qt"] 10
+    
+Link: `Automatically putting clients on specific workspaces <https://i3wm.org/docs/userguide.html#assign_workspace>`_
+
 2017-07-02T1014
 ---------------
 
