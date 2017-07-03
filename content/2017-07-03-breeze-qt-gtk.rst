@@ -21,7 +21,7 @@ Install the ``breeze`` package for Qt and ``gtk3-engines-breeze`` for GTK ...
 
 I am `not running KDE <http://www.circuidipity.com/i3-tiling-window-manager.html>`_ or any other desktop environment, so I install a few independent configuration tools ...
 
-* ``qt5ct`` (package built from `mentors.debian.net <http://www.circuidipity.com/build-qt5ct.html>`_)
+* ``qt5ct`` for Qt5 (package built from `mentors.debian.net <http://www.circuidipity.com/build-qt5ct.html>`_)
 * ``qt4-qtconfig`` for Qt4
 * ``lxappearance`` for Gtk2 and Gtk3
 
