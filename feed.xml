@@ -13,7 +13,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I am &lt;a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html"&gt;not running KDE&lt;/a&gt; or any other desktop environment, so I install a few independent configuration tools ...&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;qt5ct&lt;/tt&gt; (package built from &lt;a class="reference external" href="http://www.circuidipity.com/build-qt5ct.html"&gt;mentors.debian.net&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;qt5ct&lt;/tt&gt; for Qt5 (package built from &lt;a class="reference external" href="http://www.circuidipity.com/build-qt5ct.html"&gt;mentors.debian.net&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;qt4-qtconfig&lt;/span&gt;&lt;/tt&gt; for Qt4&lt;/li&gt;
 &lt;li&gt;&lt;tt class="docutils literal"&gt;lxappearance&lt;/tt&gt; for Gtk2 and Gtk3&lt;/li&gt;
 &lt;/ul&gt;
