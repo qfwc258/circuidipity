@@ -1,0 +1,108 @@
+=======================================
+Build a package from mentors.debian.net
+=======================================
+
+:date: 2017-07-02 15:57:00
+:slug: build-qt5ct
+:tags: qt5ct, qt, shell, debian, linux, crypto
+
+A package for the Qt configuration utility `qt5ct <https://sourceforge.net/projects/qt5ct/>`_ is not available in the Debian archives but a "debianized" version **is** available through `mentors.debian.net <https://mentors.debian.net/>`_, a service where Debian developers sponsor (usually source) packages uploaded by non-Debian developers.
+
+This `qt5ct package <https://mentors.debian.net/package/qt5ct>`_ contains a **.dsc** (Debian Source Control) text file that describes the source package. I use this file to build a ``qt5ct-VERSION.deb`` binary package ready to be installed!
+
+Let's go!
+=========
+
+All packages are signed with public key encryption. Ensure the build machine is setup with GnuPG: `Verify a PGP signature with GnuPG <http://www.circuidipity.com/verify-pgp-signature-gnupg.html>`_
+
+0. Build tools
+--------------
+
+**Devscripts** is a collection of tools for Debian developers. Install ...
+
+.. code-block:: bash
+
+	$ sudo apt install devscripts
+
+1. Import key
+-------------
+
+Search for the package uploader's public key ...
+
+.. code-block:: bash
+
+	$ gpg --keyserver hkps://hkps.pool.sks-keyservers.net --search-keys mati75@linuxmint.pl
+	gpg: data source: https://kerckhoffs.surfnet.nl:443
+	(1)     Mateusz Łukasik <mati75@linuxmint.pl>
+	          2048 bit RSA key CCD91D6111A06851, created: 2012-01-26
+	Keys 1-1 of 1 for "mati75@linuxmint.pl".  Enter number(s), N)ext, or Q)uit > n
+
+Import the key from the keyserver ...
+
+.. code-block:: bash
+
+	$ gpg --recv-keys CCD91D6111A06851
+	gpg: key CCD91D6111A06851: "Mateusz Łukasik <mati75@linuxmint.pl>" not changed
+	gpg: Total number processed: 1
+	gpg:              unchanged: 1
+
+Display the keyring containing our new key ...
+
+.. code-block:: bash
+
+	$ gpg --list-keys
+	/home/foo/.gnupg/pubring.kbx
+	----------------------------
+	[...]
+	pub   rsa2048 2012-01-26 [SC]
+	      D93B0C12C8D04D7AAFBCFA27CCD91D6111A06851
+	uid           [ unknown] Mateusz Łukasik <mati75@linuxmint.pl>
+	sub   rsa2048 2012-01-26 [E]
+	sub   rsa2048 2012-01-26 [E]
+
+Setup the ``dscverify`` tool from devscripts to use my personal gpg keyring ...
+
+.. code-block:: bash
+
+	$ cp /etc/devscripts.conf ~/.devscripts
+
+... and in ``~/.devscripts`` I activate the option ``DSCVERIFY_KEYRINGS=""`` and specify my keyring location (``DSCVERIFY_KEYRINGS="~/.gnupg/pubring.kbx"``). 
+
+2. Build-Depends
+----------------
+
+Take note and install any packages required to build the source package that are listed in the ``*.dsc`` file (`qt5ct_0.31-2.dsc <https://mentors.debian.net/debian/pool/main/q/qt5ct/qt5ct_0.31-2.dsc>`_) ...
+
+.. code-block:: bash
+
+    [...]
+    Build-Depends: debhelper (>= 10), qtbase5-dev, libqt5svg5-dev, qttools5-dev-tools, qtbase5-private-dev, libfontconfig1-dev, libfreetype6-dev, libglib2.0-dev, libxrender-dev, libmtdev-dev [linux-any], libegl1-mesa-dev
+
+Install ...
+
+.. code-block:: bash
+
+    $ sudo apt install debhelper qtbase5-dev libqt5svg5-dev qttools5-dev-tools qtbase5-private-dev libfontconfig1-dev libfreetype6-dev libglib2.0-dev libxrender-dev libmtdev-dev libegl1-mesa-dev
+
+3. Build and install
+--------------------
+
+Use ``dget`` to download the source and ``debuild`` to build the ``*.deb`` file ...
+
+.. code-block:: bash
+
+	$ dget https://mentors.debian.net/debian/pool/main/q/qt5ct/qt5ct_0.31-2.dsc
+	$ cd /path/to/extracted/package
+	$ debuild -us -uc
+
+Package ``qt5ct_0.31-2_amd64.deb`` is built and placed one directory up from the current build directory. Install using ``dpkg`` ...
+
+.. code-block:: bash
+
+	$ sudo dpkg -i qt5ct_0.31-2_amd64.deb 
+
+If ``dpkg`` exits with an error message about dependencies, install the missing ones and run the command again.
+
+Links: `How do I install a package from mentors.debian.net <https://wiki.debian.org/DebianMentorsFaq#How_do_I_install_a_package_from_mentor.debian.net.3F>`_ and `Structure of a source package <https://debian-handbook.info/browse/stable/sect.source-package-structure.html>`_
+
+Happy hacking!
