@@ -19,143 +19,223 @@
 <!-- breadcrumb trail -->
 <div id="breadcrumb">
     <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
-    Friday 17 July 2015</p>
+    Tuesday 04 July 2017</p>
 </div>
 
 <!-- article -->
 <h1>Lightweight and a delight: i3 tiling window manager</h1>
-    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Saturday 30 April 2016</p>
 <div id="article">
-    <p>As a former <strong>Fluxbox</strong> and <strong>Openbox</strong> user I can understand the love for a lightweight, minimal window manager where I can &quot;paint&quot; my applications across the screen. I was curious about <a class="reference external" href="https://en.wikipedia.org/wiki/Tiling_window_manager">tiling window managers</a> but never quite grokked the advantage from screenshots: seeing consoles arranged in a grid made me think <a class="reference external" href="http://www.circuidipity.com/tmux.html">tmux</a> a better choice for that task, and why would I want to watch a video in a reduced square in the corner of a screen?</p>
-<p>And then I tried <a class="reference external" href="https://i3wm.org/">i3</a> and found my new default desktop:</p>
+    <p>As a former <strong>Fluxbox</strong> and <strong>Openbox</strong> user I can understand the love for a lightweight, minimal window manager where I can &quot;paint&quot; my applications across the screen. I was curious about <a class="reference external" href="https://en.wikipedia.org/wiki/Tiling_window_manager">tiling window managers</a> but never quite grokked the advantage from screenshots. Seeing consoles arranged in a grid made me think <a class="reference external" href="http://www.circuidipity.com/tmux.html">tmux</a> a better choice for that task, and why would I want to watch a video in a reduced square in the corner of a screen?</p>
+<p>But then I tried <a class="reference external" href="https://i3wm.org/">i3</a> and found my new desktop ...</p>
 <ul class="simple">
-<li><tt class="docutils literal">startx</tt> to X almost instantaneous on <a class="reference external" href="http://www.circuidipity.com/c720-ubuntubook.html">Ubuntubook</a></li>
+<li>low memory requirements and <a class="reference external" href="http://www.circuidipity.com/xinitrc.html">startx to X</a>  almost instantaneous on <a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html">Stretchbook</a></li>
 <li>loads sensible defaults and - thanks to the excellent <a class="reference external" href="https://i3wm.org/docs/userguide.html">User's Guide</a> - easy to customize via text files</li>
 <li>toggle between <strong>tiled</strong>, <strong>tabbed</strong> (my default), <strong>stacked</strong>, and <strong>floating</strong> mode (see User's Guide)</li>
 <li>even if you rarely use applications in a tiled arrangement, i3 handles maximized windows, desktops, and multiple displays extremely well via keyboard</li>
 </ul>
-<p>Still want to use a mouse here-and-there? Hey, i3 is flexible and OK with that. Provides a statusbar, but you can swap it out for an <a class="reference external" href="https://wiki.archlinux.org/index.php/I3#i3bar_alternatives">alternative</a> or run none at all.</p>
-<p>Starting out I find myself mostly happy with the <a class="reference external" href="https://i3wm.org/docs/userguide.html#_default_keybindings">default keybindings</a> and behaviour; making only a few adjustments and additions to my <tt class="docutils literal"><span class="pre">~/.i3/config</span></tt> and <tt class="docutils literal">/.i3status.conf</tt>. <a class="footnote-reference" href="#id2" id="id1">[1]</a></p>
+<p>Still want to use a mouse here and here? No problem! Provides a <strong>statusbar</strong>, but you can swap it out for an <a class="reference external" href="https://wiki.archlinux.org/index.php/I3#i3bar_alternatives">alternative</a> or run none at all.</p>
+<p>Install and configure on Debian ...</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<p>Starting out I find myself mostly happy with the <a class="reference external" href="https://i3wm.org/docs/userguide.html#_default_keybindings">default keybindings</a> and behaviour; making only a few adjustments and additions to <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.config/i3/config.base">my configuration</a>.</p>
 <div class="section" id="install">
-<h2>Install</h2>
-<p>I use the third-party <a class="reference external" href="https://i3wm.org/docs/repositories.html">i3 Ubuntu repository</a>. Download and install the keyring, configure apt, and install the latest window manager packages ...</p>
-<div class="highlight"><pre><span></span>$ wget http://debian.sur5r.net/i3/pool/universe/s/sur5r-keyring/sur5r-keyring_2015.12.29_all.deb
-$ sudo dpkg -i sur5r-keyring*.deb
-$ sudo cp /etc/apt/sources.list /etc/apt/sources.list.<span class="k">$(</span>date +%FT%H%M%S<span class="k">)</span>.bak
-$ sudo <span class="nb">echo</span> <span class="s2">&quot;## i3 window manager&quot;</span> &gt;&gt; /etc/apt/sources.list
-$ sudo <span class="nb">echo</span> <span class="s2">&quot;deb http://debian.sur5r.net/i3/ </span><span class="k">$(</span>lsb_release -c -s<span class="k">)</span><span class="s2"> universe&quot;</span> &gt;&gt; /etc/apt/sources.list
-$ sudo apt update <span class="o">&amp;&amp;</span> sudo apt install i3 i3status i3lock
+<h3>Install</h3>
+<p>Download the <strong>i3 metapackage</strong> and a few desktop utilities ...</p>
+<ul class="simple">
+<li><strong>dunst</strong> - lightweight notification daemon</li>
+<li><strong>volnoti</strong> - volume notification (<a class="reference external" href="http://www.circuidipity.com/pavolume.html#volnoti">built separately</a>)</li>
+<li><strong>rofi</strong> - dynamic application launcher + window selector</li>
+<li><strong>nm-applet</strong> - network monitor and control (provided by <tt class="docutils literal"><span class="pre">network-manager-gnome</span></tt>)</li>
+<li><strong>scrot</strong> - screenshots</li>
+<li><strong>lximage-qt</strong> - image viewer</li>
+<li><strong>urxvt</strong> - terminal</li>
+</ul>
+<div class="highlight"><pre><span></span>$ sudo apt install i3 dunst rofi network-manager-gnome scrot lximage-qt rxvt-unicode-256color
 </pre></div>
 </div>
-<div class="section" id="auto-start-applications">
-<h2>Auto-start applications</h2>
-<p>In my <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt> I have added a few applications to start at launch: a script to detect and setup a second display if attached (using <tt class="docutils literal">xrandr</tt>), another script to configure things like my Thinkpad USB keyboard and empty Trash, and finally open a terminal.</p>
-<p>In the i3 configuration file I replace the default dynamic application launcher <tt class="docutils literal">dmenu</tt> with <a class="reference external" href="https://davedavenport.github.io/rofi/">rofi</a> (<tt class="docutils literal">sudo apt install rofi</tt>) ...</p>
-<div class="highlight"><pre><span></span><span class="c1"># rofi - window switcher, run dialog and dmenu replacement</span>
-bindsym F3 <span class="nb">exec</span> --no-startup-id rofi -show run
-bindsym <span class="nv">$mod</span>+Tab <span class="nb">exec</span> --no-startup-id rofi -show window
+<div class="section" id="countdown-to-launch">
+<h3>Countdown to launch</h3>
+<p>In my <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc">~/.xinitrc</a> I add a few tasks before launching the window manager.</p>
+<p>Load config parameters for X client applications, disable screen blanking, and empty the trash ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Config parameters for X client applications</span>
+<span class="o">[</span> -f ~/.Xresources <span class="o">]</span> <span class="o">&amp;&amp;</span> xrdb -merge ~/.Xresources
+
+<span class="c1"># Disable DPMS and turn off screen blanking</span>
+xset s off -dpms
+
+<span class="c1"># Janitor</span>
+<span class="o">[</span> -d ~/.local/share/Trash <span class="o">]</span> <span class="o">&amp;&amp;</span> rm -rf ~/.local/share/Trash/*
 </pre></div>
+<p>Start applications ...</p>
+<ul class="simple">
+<li><strong>dldsply</strong> - detect and - if present - configure a second display</li>
+<li><strong>i3wm_conf</strong> - <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html#conditionals">build a config at runtime for i3wm</a></li>
+<li><strong>keyboardconf</strong> - bind commands to keys and load key mappings</li>
+<li><strong>nm-applet</strong> - network-manager utility</li>
+<li><strong>volnoti</strong> - volume notification</li>
+<li><strong>urxvt</strong> - terminal</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c1"># Applications</span>
+~/bin/dldsply -r <span class="p">&amp;</span>
+~/bin/i3wm_conf <span class="p">&amp;</span>
+~/bin/keyboardconf <span class="p">&amp;</span>
+sleep 2
+<span class="o">[</span> -x /usr/bin/nm-applet <span class="o">]</span> <span class="o">&amp;&amp;</span> nm-applet <span class="p">&amp;</span>
+volnoti -t <span class="m">2</span> <span class="p">&amp;</span>
+urxvt <span class="p">&amp;</span>
+</pre></div>
+<p><strong>Launch i3!</strong></p>
+<div class="highlight"><pre><span></span><span class="c1"># Start window manager</span>
+<span class="nb">exec</span> i3
+</pre></div>
+<p>Source for startup scripts: homebin/<a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dldsply">dldsply</a>; homebin/<a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/i3wm_conf">i3wm_conf</a>; and homebin/<a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/keyboardconf">keyboardconf</a></p>
 </div>
-<div class="section" id="window-tabs">
-<h2>Window tabs</h2>
-<p>I remove tabs from windows and replace them with thin coloured bars by reducing window title font size to zero ...</p>
-<div class="highlight"><pre><span></span><span class="c1"># Font for window titles. Will also be used by the bar unless a different font</span>
-<span class="c1"># is used in the bar {} block below.</span>
-font pango:DejaVu Sans Mono 0
+<div class="section" id="configuration">
+<h3>Configuration</h3>
+<p>Window manager configuration file is <tt class="docutils literal"><span class="pre">~/.config/i3/config</span></tt>, which i3 offers to generate at first launch. A few changes that I make from the i3 defaults ...</p>
+<div class="section" id="windows-and-workspaces">
+<h4>Windows and Workspaces</h4>
+<p>Remove the default tabs from windows and replace them with thin coloured bars by reducing window title font size to zero ...</p>
+<div class="highlight"><pre><span></span>font pango:monospace 0
 </pre></div>
-<p>... and setting the colour for active/inactive windows ...</p>
+<p>... and set colours for windows ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># Colours</span>
 <span class="c1"># * class                 border  backgrd text    indicator</span>
-client.focused            <span class="c1">#ff0000 #ff0000 #ffffff #2e9ef4</span>
-client.focused_inactive   <span class="c1">#333333 #333333 #ffffff #484e50</span>
-client.unfocused          <span class="c1">#000000 #000000 #ffffff #292d2e</span>
+client.focused            <span class="c1">#3daee9 #3daee9 #ffffff #2e9ef4</span>
+client.focused_inactive   <span class="c1">#1cdc9a #1cdc9a #ffffff #484e50</span>
+client.unfocused          <span class="c1">#4d4d4d #4d4d4d #ffffff #292d2e</span>
 client.urgent             <span class="c1">#2f343a #900000 #ffffff #900000</span>
 </pre></div>
-</div>
-<div class="section" id="containers">
-<h2>Containers</h2>
-<p>Arrange containers (windows) to default to a <strong>tabbed</strong> layout ... and allow a few applications to start in alternate <strong>floating</strong> (unmaximized) mode ...</p>
-<div class="highlight"><pre><span></span><span class="c1"># Layout mode for new containers</span>
+<p>Workspace defaults to a tabbed layout for windows, with hotkeys for toggling between different layouts ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Layout mode</span>
 workspace_layout tabbed
-<span class="c1"># Enable floating mode</span>
-for_window <span class="o">[</span><span class="nv">class</span><span class="o">=</span><span class="s2">&quot;Remmina&quot;</span><span class="o">]</span> floating <span class="nb">enable</span>
-for_window <span class="o">[</span><span class="nv">class</span><span class="o">=</span><span class="s2">&quot;Remmina&quot;</span><span class="o">]</span> border normal
-for_window <span class="o">[</span><span class="nv">class</span><span class="o">=</span><span class="s2">&quot;VirtualBox&quot;</span><span class="o">]</span> floating <span class="nb">enable</span>
-for_window <span class="o">[</span><span class="nv">class</span><span class="o">=</span><span class="s2">&quot;VirtualBox&quot;</span><span class="o">]</span> border normal
-for_window <span class="o">[</span><span class="nv">class</span><span class="o">=</span><span class="s2">&quot;vlc&quot;</span><span class="o">]</span> floating <span class="nb">enable</span>
-for_window <span class="o">[</span><span class="nv">class</span><span class="o">=</span><span class="s2">&quot;vlc&quot;</span><span class="o">]</span> border normal
+
+<span class="c1"># Change layout (stacked, tabbed, toggle split)</span>
+bindsym <span class="nv">$mod</span>+s layout stacking
+bindsym <span class="nv">$mod</span>+w layout tabbed
+bindsym <span class="nv">$mod</span>+e layout toggle split
 </pre></div>
-</div>
-<div class="section" id="screenshots">
-<h2>Screenshots</h2>
-<p>I install <strong>scrot</strong> for screenshots and <strong>eog</strong> as image viewer ...</p>
-<div class="highlight"><pre><span></span>$ sudo apt install scrot eog
-</pre></div>
-<p>... and configure key combos to trigger desktop/active window/selected area snapshots ...</p>
-<div class="highlight"><pre><span></span><span class="c1"># Screenshot</span>
-<span class="c1"># * desktop</span>
-bindsym --release Print <span class="nb">exec</span> --no-startup-id scrot <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
-bindsym --release F4 <span class="nb">exec</span> --no-startup-id scrot <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
-<span class="c1"># * active Window</span>
-bindsym --release <span class="nv">$mod</span>+Print <span class="nb">exec</span> --no-startup-id scrot -d <span class="m">4</span> -u -z <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
-bindsym --release <span class="nv">$mod</span>+F4 <span class="nb">exec</span> --no-startup-id scrot -d <span class="m">4</span> -u -z <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
-<span class="c1"># * selected area... (click and move mouse)</span>
-bindsym --release Shift+Print <span class="nb">exec</span> --no-startup-id scrot -s <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
-bindsym --release Shift+F4 <span class="nb">exec</span> --no-startup-id scrot -s <span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; eog ~/Downloads/$f&#39;</span>
-</pre></div>
-</div>
-<div class="section" id="sound">
-<h2>Sound</h2>
-<p>I use a combination of <strong>pavucontrol</strong>, <strong>volnoti</strong> (a lightweight sound notification utility), <strong>xbindkeys</strong> + <a class="reference external" href="http://www.circuidipity.com/pavolume.html">shell script</a> to control PulseAudio volume levels.</p>
 </div>
 <div class="section" id="styling">
-<h2>Styling</h2>
-<p>Theme dependencies, fonts, and config utilities ...</p>
-<div class="highlight"><pre><span></span>$ sudo apt install gnome-themes-standard gtk2-engines-murrine gtk2-engines-pixbuf fonts-liberation ttf-ubuntu-font-family xfonts-terminus lxappearance qt4-qtconfig
-</pre></div>
-<p>I use the <a class="reference external" href="http://www.ravefinity.com/p/download-ambiance-radiance-colors.html">Ambiance Colors GTK</a> and <a class="reference external" href="http://www.ravefinity.com/p/vibrancy-colors-gtk-icon-theme.html">Vibrancy Color Icon</a> themes. Download the <tt class="docutils literal">*.deb</tt> packages separately and install using <tt class="docutils literal">sudo dpkg <span class="pre">-i</span> *.deb</tt>.</p>
-<p>Run <tt class="docutils literal">lxappearance</tt> to setup the GTK theme (outputs to <tt class="docutils literal"><span class="pre">~/.gtkrc-2.0</span></tt> and <tt class="docutils literal"><span class="pre">~/.config/gtk-{2,3}.0</span></tt>) and <tt class="docutils literal"><span class="pre">qtconfig-qt4</span></tt> to configure QT4 (outputs to <tt class="docutils literal"><span class="pre">~/.config/Trolltech.conf</span></tt>) to use the <tt class="docutils literal">GTK+</tt> default theme.</p>
-<p>Theming for QT5 applications can be configured using the <tt class="docutils literal">qt5ct</tt> utility. <a class="reference external" href="http://ppa.launchpad.net/nilarimogard/webupd8/ubuntu/pool/main/q/qt5ct/">Download the qt5ct package</a> available on the <a class="reference external" href="https://launchpad.net/~nilarimogard/+archive/ubuntu/webupd8">WebUpd8 PPA</a> and <tt class="docutils literal">sudo dpkg <span class="pre">-i</span> <span class="pre">qt5ct*.deb</span></tt>.</p>
-<p>Add to <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt> ...</p>
-<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">QT_QPA_PLATFORMTHEME</span><span class="o">=</span><span class="s2">&quot;qt5ct&quot;</span>
-</pre></div>
-<p>Exit from X and log back in. Run <tt class="docutils literal">qt5ct</tt> (outputs to <tt class="docutils literal"><span class="pre">~/.config/qt5ct/qt5ct.conf</span></tt>) and configure QT5 to use GTK settings.</p>
-<p>See: <a class="reference external" href="https://wiki.archlinux.org/index.php/Uniform_look_for_Qt_and_GTK_applications">Uniform look for QT and GTK applications</a> and <a class="reference external" href="http://www.webupd8.org/2015/11/configure-qt5-application-style-icons.html">Configure QT5 with QT5CT</a></p>
+<h4>Styling</h4>
+<p><strong>Breeze</strong> is the default Qt style of KDE Plasma with good support for both Qt and GTK applications. More: <a class="reference external" href="http://www.circuidipity.com/breeze-qt-gtk.html">It is a Breeze to make QT and GTK applications look good</a></p>
 </div>
-<div class="section" id="lockscreen-logout-suspend-reboot-shutdown">
-<h2>LockScreen/Logout/Suspend/Reboot/Shutdown</h2>
-<p>Screen locks are handled by <tt class="docutils literal">i3lock</tt> and <tt class="docutils literal">systemctl</tt> deals with system suspend/reboot/shutdown ...</p>
-<div class="highlight"><pre><span></span><span class="c1"># Lock/Logout/Suspend/Reboot/Shutdown</span>
-<span class="c1"># * https://wiki.archlinux.org/index.php/I3#Shutdown.2C_reboot.2C_lock_screen</span>
-<span class="nb">set</span> <span class="nv">$Locker</span> i3lock -i ~/.i3lock.png <span class="o">&amp;&amp;</span> sleep 1
-<span class="nb">set</span> <span class="nv">$mode_system</span> System <span class="o">(</span>l<span class="o">)</span> lock, <span class="o">(</span>e<span class="o">)</span> logout, <span class="o">(</span>s<span class="o">)</span> suspend, <span class="o">(</span>r<span class="o">)</span> reboot, <span class="o">(</span>Shift+s<span class="o">)</span> shutdown
-mode <span class="s2">&quot;</span><span class="nv">$mode_system</span><span class="s2">&quot;</span> <span class="o">{</span>
-    bindsym l <span class="nb">exec</span> --no-startup-id <span class="nv">$Locker</span>, mode <span class="s2">&quot;default&quot;</span>
-    bindsym e <span class="nb">exec</span> --no-startup-id i3-msg exit, mode <span class="s2">&quot;default&quot;</span>
-    bindsym s <span class="nb">exec</span> --no-startup-id <span class="nv">$Locker</span> <span class="o">&amp;&amp;</span> sync <span class="o">&amp;&amp;</span> systemctl suspend, mode <span class="s2">&quot;default&quot;</span>
-    bindsym r <span class="nb">exec</span> --no-startup-id systemctl reboot, mode <span class="s2">&quot;default&quot;</span>
-    bindsym Shift+s <span class="nb">exec</span> --no-startup-id systemctl poweroff -i, mode <span class="s2">&quot;default&quot;</span>
+<div class="section" id="applications">
+<h4>Applications</h4>
+<p>Create a hotkey to open terminals ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Start a terminal</span>
+bindsym <span class="nv">$mod</span>+Return <span class="nb">exec</span> urxvt
+</pre></div>
+<p>Before running the <tt class="docutils literal">dunst</tt> notification daemon for the first time, create a default config ...</p>
+<div class="highlight"><pre><span></span>$ zcat /usr/share/doc/dunst/dunstrc.example.gz &gt; ~/.config/dunst/dunstrc
+</pre></div>
+<p>Start notifications and launcher in the background ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Start dunst - lightweight notification-daemon</span>
+<span class="nb">exec</span> --no-startup-id dunst -config ~/.config/dunst/dunstrc
 
-    <span class="c1"># back to normal: Enter or Escape</span>
-    bindsym Return mode <span class="s2">&quot;default&quot;</span>
-    bindsym Escape mode <span class="s2">&quot;default&quot;</span>
+<span class="c1"># Start rofi - window switcher, run dialog, and dmenu replacement</span>
+bindsym <span class="nv">$mod</span>+F2 <span class="nb">exec</span> --no-startup-id rofi -monitor -1 -show run
+bindsym <span class="nv">$mod</span>+Tab <span class="nb">exec</span> --no-startup-id rofi -monitor -1 -show window
+</pre></div>
+<p>Create hotkeys for <strong>screenshots</strong> ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Screenshots using scrot + lximage-qt</span>
+<span class="c1"># * desktop image</span>
+bindsym --release Print <span class="nb">exec</span> --no-startup-id scrot <span class="se">\</span>
+<span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; lximage-qt ~/Downloads/$f&#39;</span>
+bindsym --release <span class="nv">$mod</span>+F4 <span class="nb">exec</span> --no-startup-id scrot <span class="se">\</span>
+<span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; lximage-qt ~/Downloads/$f&#39;</span>
+<span class="c1"># * active window image</span>
+bindsym --release Shift+Print <span class="nb">exec</span> --no-startup-id scrot -d <span class="m">4</span> -u -z <span class="se">\</span>
+<span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; lximage-qt ~/Downloads/$f&#39;</span>
+bindsym --release Shift+F4 <span class="nb">exec</span> --no-startup-id scrot -d <span class="m">4</span> -u -z <span class="se">\</span>
+<span class="s1">&#39;%Y-%m-%dT%H%M%S.png&#39;</span> -e <span class="s1">&#39;mv $f ~/Downloads &amp;&amp; lximage-qt ~/Downloads/$f&#39;</span>
+</pre></div>
+<p><a class="reference external" href="https://i3wm.org/docs/userguide.html#assign_workspace">Automatically put clients on specific workspaces</a> ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Assign torrent client to workspace 10</span>
+assign <span class="o">[</span><span class="nv">instance</span><span class="o">=</span><span class="s2">&quot;transmission-qt&quot;</span><span class="o">]</span> 10
+<span class="c1"># Assign music player to workspace 10</span>
+assign <span class="o">[</span><span class="nv">class</span><span class="o">=</span><span class="s2">&quot;Rhythmbox&quot;</span><span class="o">]</span> 10
+</pre></div>
+<p>Volume control and notification is a combination of <tt class="docutils literal">pavucontrol</tt>, <tt class="docutils literal">volnoti</tt>, and <a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html">xbindkeys</a> linked together in a <a class="reference external" href="http://www.circuidipity.com/pavolume.html">shell script</a>.</p>
+</div>
+<div class="section" id="lock-logout-suspend-reboot-shutdown">
+<h4>Lock/Logout/Suspend/Reboot/Shutdown</h4>
+<p>Screen locks are handled by <tt class="docutils literal">i3lock</tt>. Pick an image to serve as the lock splashscreen (example: <tt class="docutils literal"><span class="pre">~/.i3lock.png</span></tt>). Command <tt class="docutils literal">systemctl</tt> deals with system suspend/reboot/shutdown ...</p>
+<div class="highlight"><pre><span></span><span class="nb">set</span> <span class="nv">$Locker</span> i3lock -i ~/.i3lock.png <span class="o">&amp;&amp;</span> sleep 1
+<span class="nb">set</span> <span class="nv">$mode_system</span> System <span class="o">(</span>l<span class="o">)</span> lock, <span class="o">(</span>e<span class="o">)</span> logout, <span class="o">(</span>s<span class="o">)</span> suspend, <span class="o">(</span>r<span class="o">)</span> reboot, <span class="se">\</span>
+<span class="o">(</span>Shift+s<span class="o">)</span> shutdown
+mode <span class="s2">&quot;</span><span class="nv">$mode_system</span><span class="s2">&quot;</span> <span class="o">{</span>
+bindsym l <span class="nb">exec</span> --no-startup-id <span class="nv">$Locker</span>, mode <span class="s2">&quot;default&quot;</span>
+bindsym e <span class="nb">exec</span> --no-startup-id i3-msg exit, mode <span class="s2">&quot;default&quot;</span>
+bindsym s <span class="nb">exec</span> --no-startup-id <span class="nv">$Locker</span> <span class="o">&amp;&amp;</span> sync <span class="o">&amp;&amp;</span> systemctl suspend, <span class="se">\</span>
+mode <span class="s2">&quot;default&quot;</span>
+bindsym r <span class="nb">exec</span> --no-startup-id systemctl reboot, mode <span class="s2">&quot;default&quot;</span>
+bindsym Shift+s <span class="nb">exec</span> --no-startup-id systemctl poweroff -i, mode <span class="s2">&quot;default&quot;</span>
+<span class="c1"># back to normal: Enter or Escape</span>
+bindsym Return mode <span class="s2">&quot;default&quot;</span>
+bindsym Escape mode <span class="s2">&quot;default&quot;</span>
 <span class="o">}</span>
 bindsym <span class="nv">$mod</span>+Pause mode <span class="s2">&quot;</span><span class="nv">$mode_system</span><span class="s2">&quot;</span>
 </pre></div>
+<p>Link: <a class="reference external" href="https://wiki.archlinux.org/index.php/I3#Shutdown.2C_reboot.2C_lock_screen">Shutdown, reboot, lock screen</a></p>
+</div>
+</div>
+<div class="section" id="conditionals">
+<h3>Conditionals</h3>
+<p>The <tt class="docutils literal"><span class="pre">~/.config/i3/config</span></tt> file has no provision for interpreting conditionals, so I put my <a class="reference external" href="https://github.com/vonbrownie/dotfiles/tree/master/.config/i3">default settings and conditions in separate files</a> and generate an appropriate config at runtime using <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/i3wm_conf">i3wm_conf</a>.</p>
+<p><strong>a) If two displays are detected</strong> (laptop connected to external monitor) there is extra workspace configuration ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Automatically place workspaces on specific displays</span>
+<span class="c1"># * external display =  PRIMARY</span>
+<span class="c1"># * laptop display =    SECOND</span>
+workspace <span class="m">1</span> output PRIMARY
+workspace <span class="m">10</span> output SECOND
+</pre></div>
+<p>Customize the included <tt class="docutils literal">i3bar</tt> statusbar by adding text-based information snippets configured in <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.config/i3/i3status.conf">~/.config/i3/i3status.conf</a>: system tray, battery status, system load and temperature, and time.</p>
+<p>Start <tt class="docutils literal">i3bar</tt> on the external (primary) display and a <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.config/i3/i3status-small.conf">secondary statusbar</a> on the other display ...</p>
+<div class="highlight"><pre><span></span>bar <span class="o">{</span>
+output PRIMARY
+position top
+status_command i3status --config ~/.config/i3/i3status.conf
+font pango:Terminus 11px
+colors <span class="o">{</span>
+        focused_workspace <span class="c1">#3daee9 #3daee9 #ffffff</span>
+        inactive_workspace <span class="c1">#4d4d4d #4d4d4d #ffffff</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+
+bar <span class="o">{</span>
+output SECOND
+position top
+tray_output none
+status_command i3status --config ~/.config/i3/i3status-small.conf
+font pango:Terminus 11px
+colors <span class="o">{</span>
+        focused_workspace <span class="c1">#3daee9 #3daee9 #ffffff</span>
+        inactive_workspace <span class="c1">#4d4d4d #4d4d4d #ffffff</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<p><strong>b) If only a single display</strong> ...</p>
+<div class="highlight"><pre><span></span>bar <span class="o">{</span>
+position top
+status_command i3status --config ~/.config/i3/i3status.conf
+font pango:Terminus 11px
+colors <span class="o">{</span>
+        focused_workspace <span class="c1">#3daee9 #3daee9 #ffffff</span>
+        inactive_workspace <span class="c1">#4d4d4d #4d4d4d #ffffff</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="section" id="onward">
+<h3>Onward</h3>
+<p>With some scripting and a few extra applications it all rolls together as a lightweight and delightful <strong>custom desktop environment</strong>!</p>
 <p>Happy hacking!</p>
-<div class="section" id="notes">
-<h3>Notes</h3>
-<table class="docutils footnote" frame="void" id="id2" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>My configs and scripts: <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.i3/config">.i3/config</a>, statusbar (for my Chromebook) <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.i3status.conf.chromebook">.i3status.conf</a>, <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc">.xinitrc</a>, dual-display detect/config script <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/dldsply">dldsply</a>, some <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/xtra">xinit extras</a>, and <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.gtkrc-2.0">.gtkrc-2.0</a> generated by running <tt class="docutils literal">lxappearance</tt>.</td></tr>
-</tbody>
-</table>
 </div>
 </div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-i3.html">i3</a>
-        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-ubuntu.html">ubuntu</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
 </p>
 </div>
@@ -164,9 +244,7 @@ bindsym <span class="nv">$mod</span>+Pause mode <span class="s2">&quot;</span><s
 <div id="navmenu">
     <hr />
     <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
-        <a href="http://www.circuidipity.com/c720-chromebook-to-jessiebook.html">Chromebook to Jessiebook</a></p>
-    <p class="nextpost">Newer <i class="fa fa-arrow-right"></i><br />
-        <a href="http://www.circuidipity.com/resize-rootfs-raspberry-pi.html">Resize rootfs on Raspberry Pi</a></p>
+        <a href="http://www.circuidipity.com/breeze-qt-gtk.html">It is a Breeze to make QT and GTK applications look good</a></p>
 </div>
 
 
