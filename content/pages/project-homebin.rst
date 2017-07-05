@@ -4,7 +4,7 @@ $HOME slash bin
 
 :slug: homebin
 :template: page-project
-:modified: 2017-06-29 18:40:00
+:modified: 2017-07-05 09:00:00
 
 .. image:: images/infinite-loop-not-300.png
     :align: right
@@ -60,7 +60,7 @@ Let's go!
     installs libflashplayer.so
 
 `i3wm_conf <https://github.com/vonbrownie/homebin/blob/master/i3wm_conf>`_
-    conditionals for building i3 window manager config at runtime
+    conditionals for building i3 window manager config at runtime (more: `"i3 tiling window manager: Conditionals" <http://www.circuidipity.com/i3-tiling-window-manager.html#conditionals>`_)
 
 `keyboardconf <https://github.com/vonbrownie/homebin/blob/master/keyboardconf>`_
     Detect and configure keyboards (more: `"Detect and configure keyboards" <http://www.circuidipity.com/keyboardconf.html>`_)
