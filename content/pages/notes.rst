@@ -4,6 +4,25 @@ Notes
 
 :slug: notes
 
+2017-07-06T0857
+---------------
+
+Use ``apt-show-versions`` to check list of installed packages and available versions. Good way to quickly grep which packages are **not** part of the default release.
+
+Install ...
+
+.. code-block:: bash
+
+    $ sudo apt install apt-show-versions
+    
+Release is ``stretch`` ...
+
+.. code-block:: bash
+
+    $ apt-show-versions | grep -v stretch
+    qt5ct:amd64 0.31-2 installed: No available version in archive
+	volnoti:amd64 20161215T1244-1 installed: No available version in archive
+
 2017-07-03T0900
 ---------------
 
