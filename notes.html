@@ -24,7 +24,19 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="t0900">
+    <div class="section" id="t0857">
+<h2>2017-07-06T0857</h2>
+<p>Use <tt class="docutils literal"><span class="pre">apt-show-versions</span></tt> to check list of installed packages and available versions. Good way to quickly grep which packages are <strong>not</strong> part of the default release.</p>
+<p>Install ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install apt-show-versions
+</pre></div>
+<p>Release is <tt class="docutils literal">stretch</tt> ...</p>
+<div class="highlight"><pre><span></span>$ apt-show-versions <span class="p">|</span> grep -v stretch
+qt5ct:amd64 0.31-2 installed: No available version in archive
+    volnoti:amd64 20161215T1244-1 installed: No available version in archive
+</pre></div>
+</div>
+<div class="section" id="t0900">
 <h2>2017-07-03T0900</h2>
 <p>Configure i3wm to put clients on specific workspaces. Run <tt class="docutils literal">xprop</tt> in a terminal and click on the client to get <tt class="docutils literal">WM_CLASS</tt>: first part is the <strong>instance</strong>, second part is the <strong>class</strong> ...</p>
 <div class="highlight"><pre><span></span>$ xprop
