@@ -4,6 +4,17 @@ Notes
 
 :slug: notes
 
+2017-07-09T0807
+---------------
+
+**Nmap** will quickly identify Internet services hosted by a network connected machine without even requiring to log in to it. Simply call the following command on another machine connected to the same network ...
+
+.. code-block:: bash
+
+    $ nmap 192.168.1.88
+    
+Link: `DAH: 3.2.1.1. Network and Processes <https://debian-handbook.info/browse/stable/sect.how-to-migrate.html>`_
+
 2017-07-06T0857
 ---------------
 
