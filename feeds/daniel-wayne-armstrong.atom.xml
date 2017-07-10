@@ -1,5 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-07-04T09:17:00-04:00</updated><entry><title>Lightweight and a delight: i3 tiling window manager</title><link href="http://www.circuidipity.com/i3-tiling-window-manager.html" rel="alternate"></link><published>2017-07-04T09:17:00-04:00</published><updated>2017-07-04T09:17:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-07-04:/i3-tiling-window-manager.html</id><summary type="html">&lt;p&gt;As a former &lt;strong&gt;Fluxbox&lt;/strong&gt; and &lt;strong&gt;Openbox&lt;/strong&gt; user I can understand the love for a lightweight, minimal window manager where I can &amp;quot;paint&amp;quot; my applications across the screen. I was curious about &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Tiling_window_manager"&gt;tiling window managers&lt;/a&gt; but never quite grokked the advantage from screenshots. Seeing consoles arranged in a grid made me …&lt;/p&gt;</summary><content type="html">&lt;p&gt;As a former &lt;strong&gt;Fluxbox&lt;/strong&gt; and &lt;strong&gt;Openbox&lt;/strong&gt; user I can understand the love for a lightweight, minimal window manager where I can &amp;quot;paint&amp;quot; my applications across the screen. I was curious about &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Tiling_window_manager"&gt;tiling window managers&lt;/a&gt; but never quite grokked the advantage from screenshots. Seeing consoles arranged in a grid made me think &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; a better choice for that task, and why would I want to watch a video in a reduced square in the corner of a screen?&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity - Daniel Wayne Armstrong</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feeds/daniel-wayne-armstrong.atom.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-07-10T16:00:00-04:00</updated><entry><title>Compile and install programs in $HOME</title><link href="http://www.circuidipity.com/compile-install-homedir.html" rel="alternate"></link><published>2017-07-10T16:00:00-04:00</published><updated>2017-07-10T16:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-07-10:/compile-install-homedir.html</id><summary type="html">&lt;p&gt;Debian has extensive (50,000+) package archives but sometimes I want &lt;strong&gt;that one thing&lt;/strong&gt; they do not! Or maybe I want to re-compile the source code of a program with different options.&lt;/p&gt;
+&lt;p&gt;I can make a clean separation between &lt;strong&gt;a)&lt;/strong&gt; programs installed by Debian packages; and &lt;strong&gt;b)&lt;/strong&gt; programs installed by …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Debian has extensive (50,000+) package archives but sometimes I want &lt;strong&gt;that one thing&lt;/strong&gt; they do not! Or maybe I want to re-compile the source code of a program with different options.&lt;/p&gt;
+&lt;p&gt;I can make a clean separation between &lt;strong&gt;a)&lt;/strong&gt; programs installed by Debian packages; and &lt;strong&gt;b)&lt;/strong&gt; programs installed by myself; by compiling and installing programs as a &lt;strong&gt;non-root user&lt;/strong&gt; in my home directory.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/davidbrazdil/volnoti"&gt;Volnoti&lt;/a&gt; is a lightweight volume notification tool &lt;a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html"&gt;I like to use with i3&lt;/a&gt; and there is no Debian package available.&lt;/p&gt;
+&lt;div class="section" id="start"&gt;
+&lt;h3&gt;0. Start&lt;/h3&gt;
+&lt;p&gt;Download the program source code. Source for &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt; is hosted on GitHub ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git clone git://github.com/davidbrazdil/volnoti.git
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check the README for any build dependencies and install. All the &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt; requirements can be satisfied with Debian packages ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install libdbus-glib-1-dev libgtk2.0-dev libgdk-pixbuf2.0-dev autoconf automake
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Create the &lt;strong&gt;destination directory&lt;/strong&gt; for the program contents. By creating a program-specific directory I can easily remove a program by simply deleting the directory ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ mkdir -p ~/opt/volnoti
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pre-compile"&gt;
+&lt;h3&gt;1. Pre-compile&lt;/h3&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://ubuntuforums.org/showthread.php?t=2215264&amp;amp;s=7aa2dfa8b89411472598e737c38f1475&amp;amp;p=12978792#post12978792"&gt;Apply any necessary fixes&lt;/a&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; volnoti
+$ ./prepare.sh
+$ &lt;span class="nb"&gt;cd&lt;/span&gt; src
+$ rm value-client-stub.h &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make value-client-stub.h
+$ rm value-daemon-stub.h &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make value-daemon-stub.h
+$ &lt;span class="nb"&gt;cd&lt;/span&gt; ..
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="compile-and-install"&gt;
+&lt;h3&gt;2. Compile and install&lt;/h3&gt;
+&lt;p&gt;Compile and install program to the custom destination directory ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ./configure --prefix&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/opt/volnoti
+$ make
+$ make install
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Add the executable directory (&lt;tt class="docutils literal"&gt;$HOME/opt/volnoti/bin&lt;/tt&gt;) to the PATH in &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.profile"&gt;~/.profile&lt;/a&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# set PATH so it includes programs installed in user&amp;#39;s home directory&lt;/span&gt;
+&lt;span class="c1"&gt;# volnoti - volume notification daemon&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -d &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="s2"&gt;/opt/volnoti/bin&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="s2"&gt;/opt/volnoti/bin:&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="run-program"&gt;
+&lt;h3&gt;3. Run program&lt;/h3&gt;
+&lt;p&gt;Start the &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt; daemon ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ volnoti
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Configure daemon to auto-start by adding it to &lt;a class="reference external" href="http://www.circuidipity.com/xinitrc.html"&gt;~/.xinitrc&lt;/a&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;volnoti -t &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Links: &lt;a class="reference external" href="http://www.circuidipity.com/pavolume.html"&gt;Volume control and notification&lt;/a&gt; and &lt;a class="reference external" href="https://wiki.debian.org/DontBreakDebian"&gt;DontBreakDebian&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="shell"></category><category term="linux"></category></entry><entry><title>Lightweight and a delight: i3 tiling window manager</title><link href="http://www.circuidipity.com/i3-tiling-window-manager.html" rel="alternate"></link><published>2017-07-04T09:17:00-04:00</published><updated>2017-07-04T09:17:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-07-04:/i3-tiling-window-manager.html</id><summary type="html">&lt;p&gt;As a former &lt;strong&gt;Fluxbox&lt;/strong&gt; and &lt;strong&gt;Openbox&lt;/strong&gt; user I can understand the love for a lightweight, minimal window manager where I can &amp;quot;paint&amp;quot; my applications across the screen. I was curious about &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Tiling_window_manager"&gt;tiling window managers&lt;/a&gt; but never quite grokked the advantage from screenshots. Seeing consoles arranged in a grid made me …&lt;/p&gt;</summary><content type="html">&lt;p&gt;As a former &lt;strong&gt;Fluxbox&lt;/strong&gt; and &lt;strong&gt;Openbox&lt;/strong&gt; user I can understand the love for a lightweight, minimal window manager where I can &amp;quot;paint&amp;quot; my applications across the screen. I was curious about &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Tiling_window_manager"&gt;tiling window managers&lt;/a&gt; but never quite grokked the advantage from screenshots. Seeing consoles arranged in a grid made me think &lt;a class="reference external" href="http://www.circuidipity.com/tmux.html"&gt;tmux&lt;/a&gt; a better choice for that task, and why would I want to watch a video in a reduced square in the corner of a screen?&lt;/p&gt;
 &lt;p&gt;But then I tried &lt;a class="reference external" href="https://i3wm.org/"&gt;i3&lt;/a&gt; and found my new desktop ...&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;low memory requirements and &lt;a class="reference external" href="http://www.circuidipity.com/xinitrc.html"&gt;startx to X&lt;/a&gt;  almost instantaneous on &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook&lt;/a&gt;&lt;/li&gt;
@@ -693,7 +749,7 @@ rofi.hlbg:          &lt;span class="c1"&gt;#FF0000&lt;/span&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category></entry><entry><title>Volume control and notification</title><link href="http://www.circuidipity.com/pavolume.html" rel="alternate"></link><published>2017-06-24T08:47:00-04:00</published><updated>2017-06-24T08:47:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-24:/pavolume.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/homebin.html"&gt;PROJECT: $HOME slash bin .:&lt;/a&gt; My original intent was to manage sound on &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook&lt;/a&gt; by binding the commands to the multimedia keys in &lt;a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html"&gt;~/.xbindkeysrc.&lt;/a&gt; Instead &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; calls a standalone script I created to control PulseAudio volume (and thus useful beyond just &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt;).&lt;/p&gt;
+</content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category></entry><entry><title>Volume control and notification</title><link href="http://www.circuidipity.com/pavolume.html" rel="alternate"></link><published>2017-06-24T08:47:00-04:00</published><updated>2017-07-10T15:55:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-24:/pavolume.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/homebin.html"&gt;PROJECT: $HOME slash bin .:&lt;/a&gt; My original intent was to manage sound on &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook&lt;/a&gt; by binding the commands to the multimedia keys in &lt;a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html"&gt;~/.xbindkeysrc.&lt;/a&gt; Instead &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; calls a standalone script I created to control PulseAudio volume (and thus useful beyond just &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt;).&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Script requirements: &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;pamixer&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt;.&lt;/p&gt;
@@ -722,31 +778,7 @@ $ make
 &lt;/div&gt;
 &lt;div class="section" id="volnoti"&gt;
 &lt;h3&gt;2. Volnoti&lt;/h3&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/davidbrazdil/volnoti"&gt;Volnoti&lt;/a&gt; is a lightweight volume notification. Compile dependencies ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install libdbus-glib-1-dev libgtk2.0-dev libgdk-pixbuf2.0-dev autoconf automake
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Download ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git clone git://github.com/davidbrazdil/volnoti.git
-$ &lt;span class="nb"&gt;cd&lt;/span&gt; volnoti
-$ ./prepare.sh
-$ ./configure --prefix&lt;span class="o"&gt;=&lt;/span&gt;/usr
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Apply this fix &lt;a class="footnote-reference" href="#id4" id="id3"&gt;[1]&lt;/a&gt; to the source ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; src
-$ rm value-client-stub.h &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make value-client-stub.h
-$ rm value-daemon-stub.h &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make value-daemon-stub.h
-$ &lt;span class="nb"&gt;cd&lt;/span&gt; ..
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Compile source (and I use &lt;a class="reference external" href="https://packages.debian.org/stretch/checkinstall"&gt;checkinstall&lt;/a&gt; to make a &lt;tt class="docutils literal"&gt;deb&lt;/tt&gt; package and install) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ make
-$ sudo checkinstall make install
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Start &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt; daemon ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ volnoti
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Configure daemon to auto-start by adding it to &lt;a class="reference external" href="http://www.circuidipity.com/xinitrc.html"&gt;~/.xinitrc&lt;/a&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;volnoti -t &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/davidbrazdil/volnoti"&gt;Volnoti&lt;/a&gt; is a lightweight volume notification. More: &lt;a class="reference external" href="http://www.circuidipity.com/compile-install-homedir.html"&gt;Compile and install programs in $HOME&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="script-pavolume"&gt;
 &lt;h3&gt;3. Script paVolume&lt;/h3&gt;
@@ -766,89 +798,6 @@ XF86AudioRaiseVolume
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Sources: homebin/&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;paVolume&lt;/a&gt; and dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook"&gt;.xbindkeysrc.chromebook&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;div class="section" id="notes"&gt;
-&lt;h4&gt;Notes&lt;/h4&gt;
-&lt;table class="docutils footnote" frame="void" id="id4" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id3"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Ubuntu forums: &lt;a class="reference external" href="http://ubuntuforums.org/showthread.php?t=2215264&amp;amp;s=7aa2dfa8b89411472598e737c38f1475&amp;amp;p=12978792#post12978792"&gt;Error when using make &amp;quot;client.c:108:5: error: too many arguments to function&amp;quot;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-</content><category term="homebin"></category><category term="shell"></category><category term="programming"></category><category term="linux"></category></entry><entry><title>Dot xbindkeysrc</title><link href="http://www.circuidipity.com/xbindkeysrc.html" rel="alternate"></link><published>2017-06-23T23:30:00-04:00</published><updated>2017-06-23T23:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-23:/xbindkeysrc.html</id><summary type="html">&lt;p&gt;Bind commands to certain keys or key combos by creating &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Top row on my &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook's&lt;/a&gt; keyboard has shortcut icons (&lt;tt class="docutils literal"&gt;Brightness&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;Volume&lt;/tt&gt;, etc.) that identify in Linux as &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;F1-F10&lt;/span&gt;&lt;/tt&gt; keys and the &lt;tt class="docutils literal"&gt;Search&lt;/tt&gt; key (in &lt;tt class="docutils literal"&gt;CapsLk&lt;/tt&gt; position) acts as a &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; (Windows) modifier key.&lt;/p&gt;
-&lt;p&gt;Install some helpful utilities …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Bind commands to certain keys or key combos by creating &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Top row on my &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook's&lt;/a&gt; keyboard has shortcut icons (&lt;tt class="docutils literal"&gt;Brightness&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;Volume&lt;/tt&gt;, etc.) that identify in Linux as &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;F1-F10&lt;/span&gt;&lt;/tt&gt; keys and the &lt;tt class="docutils literal"&gt;Search&lt;/tt&gt; key (in &lt;tt class="docutils literal"&gt;CapsLk&lt;/tt&gt; position) acts as a &lt;tt class="docutils literal"&gt;Super&lt;/tt&gt; (Windows) modifier key.&lt;/p&gt;
-&lt;p&gt;Install some helpful utilities in Debian that we will associate with keyboard shortcuts ...&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; - associate keys to shell commands&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;xbacklight&lt;/tt&gt; - set backlight level using RandR&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pulseaudio-utils&lt;/span&gt;&lt;/tt&gt; - manage sound with &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt;&lt;/li&gt;
-&lt;li&gt;&lt;tt class="docutils literal"&gt;xvkbd&lt;/tt&gt; - send characters to another client&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install xbindkeys xbacklight pulseaudio-utils xvkbd
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Enable function keys to modify sound, brightness, and page movement. Discover the &lt;strong&gt;keycode&lt;/strong&gt; for a particular key by running ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xbindkeys -k
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;... press the key of interest, and a snippet of code is outputted that can be added to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;My own config for the Stretchbook ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Backward/forward&lt;/span&gt;
-&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\A\[&lt;/span&gt;Left&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
-F1
-
-&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\A\[&lt;/span&gt;Right&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
-F2
-
-&lt;span class="c1"&gt;# Backlight decrease/increase&lt;/span&gt;
-&lt;span class="s2"&gt;&amp;quot;xbacklight -dec 10&amp;quot;&lt;/span&gt;
-F6
-&lt;span class="s2"&gt;&amp;quot;xbacklight -inc 10&amp;quot;&lt;/span&gt;
-F7
-
-&lt;span class="c1"&gt;# Volume mute/decrease/increase&lt;/span&gt;
-&lt;span class="c1"&gt;# paVolume - https://github.com/vonbrownie/homebin/blob/master/paVolume&lt;/span&gt;
-&lt;span class="s2"&gt;&amp;quot;paVolume -m&amp;quot;&lt;/span&gt;
-F8
-&lt;span class="s2"&gt;&amp;quot;paVolume -m&amp;quot;&lt;/span&gt;
-XF86AudioMute
-&lt;span class="s2"&gt;&amp;quot;paVolume -d&amp;quot;&lt;/span&gt;
-F9
-&lt;span class="s2"&gt;&amp;quot;paVolume -d&amp;quot;&lt;/span&gt;
-XF86AudioLowerVolume
-&lt;span class="s2"&gt;&amp;quot;paVolume -u&amp;quot;&lt;/span&gt;
-F10
-&lt;span class="s2"&gt;&amp;quot;paVolume -u&amp;quot;&lt;/span&gt;
-XF86AudioRaiseVolume
-
-&lt;span class="c1"&gt;# Page up/down, home, end&lt;/span&gt;
-&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;#39;\[Page_Up]&amp;#39;&amp;quot;&lt;/span&gt;
-Alt + Up
-
-&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;#39;\[Page_Down]&amp;#39;&amp;quot;&lt;/span&gt;
-Alt + Down
-
-&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;#39;\[Home]&amp;#39;&amp;quot;&lt;/span&gt;
-Alt + Left
-
-&lt;span class="s2"&gt;&amp;quot;xvkbd -xsendevent -text &amp;#39;\[End]&amp;#39;&amp;quot;&lt;/span&gt;
-Alt + Right
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Enable new key shortcuts ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xbindkeys
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Place in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; to load configuration at &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -f ~/.xbindkeysrc &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
-    xbindkeys
-&lt;span class="k"&gt;fi&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook"&gt;.xbindkeysrc&lt;/a&gt; and dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-</content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category></entry></feed>
+</content><category term="homebin"></category><category term="shell"></category><category term="programming"></category><category term="linux"></category></entry></feed>

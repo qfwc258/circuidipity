@@ -24,6 +24,7 @@
 
 <!-- article -->
 <h1>Volume control and notification</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Monday 10 July 2017</p>
 <div id="article">
     <p><a class="reference external" href="http://www.circuidipity.com/homebin.html">PROJECT: $HOME slash bin .:</a> My original intent was to manage sound on <a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html">Stretchbook</a> by binding the commands to the multimedia keys in <a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html">~/.xbindkeysrc.</a> Instead <tt class="docutils literal">xbindkeys</tt> calls a standalone script I created to control PulseAudio volume (and thus useful beyond just <tt class="docutils literal">xbindkeys</tt>).</p>
 <div class="section" id="let-s-go">
@@ -49,31 +50,7 @@ $ make
 </div>
 <div class="section" id="volnoti">
 <h3>2. Volnoti</h3>
-<p><a class="reference external" href="https://github.com/davidbrazdil/volnoti">Volnoti</a> is a lightweight volume notification. Compile dependencies ...</p>
-<div class="highlight"><pre><span></span>$ sudo apt install libdbus-glib-1-dev libgtk2.0-dev libgdk-pixbuf2.0-dev autoconf automake
-</pre></div>
-<p>Download ...</p>
-<div class="highlight"><pre><span></span>$ git clone git://github.com/davidbrazdil/volnoti.git
-$ <span class="nb">cd</span> volnoti
-$ ./prepare.sh
-$ ./configure --prefix<span class="o">=</span>/usr
-</pre></div>
-<p>Apply this fix <a class="footnote-reference" href="#id4" id="id3">[1]</a> to the source ...</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> src
-$ rm value-client-stub.h <span class="o">&amp;&amp;</span> make value-client-stub.h
-$ rm value-daemon-stub.h <span class="o">&amp;&amp;</span> make value-daemon-stub.h
-$ <span class="nb">cd</span> ..
-</pre></div>
-<p>Compile source (and I use <a class="reference external" href="https://packages.debian.org/stretch/checkinstall">checkinstall</a> to make a <tt class="docutils literal">deb</tt> package and install) ...</p>
-<div class="highlight"><pre><span></span>$ make
-$ sudo checkinstall make install
-</pre></div>
-<p>Start <tt class="docutils literal">volnoti</tt> daemon ...</p>
-<div class="highlight"><pre><span></span>$ volnoti
-</pre></div>
-<p>Configure daemon to auto-start by adding it to <a class="reference external" href="http://www.circuidipity.com/xinitrc.html">~/.xinitrc</a> ...</p>
-<div class="highlight"><pre><span></span>volnoti -t <span class="m">2</span> <span class="p">&amp;</span>
-</pre></div>
+<p><a class="reference external" href="https://github.com/davidbrazdil/volnoti">Volnoti</a> is a lightweight volume notification. More: <a class="reference external" href="http://www.circuidipity.com/compile-install-homedir.html">Compile and install programs in $HOME</a></p>
 </div>
 <div class="section" id="script-pavolume">
 <h3>3. Script paVolume</h3>
@@ -93,15 +70,6 @@ XF86AudioRaiseVolume
 </pre></div>
 <p>Sources: homebin/<a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume">paVolume</a> and dotfiles/<a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook">.xbindkeysrc.chromebook</a></p>
 <p>Happy hacking!</p>
-<div class="section" id="notes">
-<h4>Notes</h4>
-<table class="docutils footnote" frame="void" id="id4" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td>Ubuntu forums: <a class="reference external" href="http://ubuntuforums.org/showthread.php?t=2215264&amp;s=7aa2dfa8b89411472598e737c38f1475&amp;p=12978792#post12978792">Error when using make &quot;client.c:108:5: error: too many arguments to function&quot;</a></td></tr>
-</tbody>
-</table>
-</div>
 </div>
 </div>
 

@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Compile and install programs in $HOME</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Monday 10 July 2017</p>
+</div>
+
+<!-- article -->
+<h1>Compile and install programs in $HOME</h1>
+<div id="article">
+    <p>Debian has extensive (50,000+) package archives but sometimes I want <strong>that one thing</strong> they do not! Or maybe I want to re-compile the source code of a program with different options.</p>
+<p>I can make a clean separation between <strong>a)</strong> programs installed by Debian packages; and <strong>b)</strong> programs installed by myself; by compiling and installing programs as a <strong>non-root user</strong> in my home directory.</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<p><a class="reference external" href="https://github.com/davidbrazdil/volnoti">Volnoti</a> is a lightweight volume notification tool <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">I like to use with i3</a> and there is no Debian package available.</p>
+<div class="section" id="start">
+<h3>0. Start</h3>
+<p>Download the program source code. Source for <tt class="docutils literal">volnoti</tt> is hosted on GitHub ...</p>
+<div class="highlight"><pre><span></span>$ git clone git://github.com/davidbrazdil/volnoti.git
+</pre></div>
+<p>Check the README for any build dependencies and install. All the <tt class="docutils literal">volnoti</tt> requirements can be satisfied with Debian packages ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install libdbus-glib-1-dev libgtk2.0-dev libgdk-pixbuf2.0-dev autoconf automake
+</pre></div>
+<p>Create the <strong>destination directory</strong> for the program contents. By creating a program-specific directory I can easily remove a program by simply deleting the directory ...</p>
+<div class="highlight"><pre><span></span>$ mkdir -p ~/opt/volnoti
+</pre></div>
+</div>
+<div class="section" id="pre-compile">
+<h3>1. Pre-compile</h3>
+<p><a class="reference external" href="http://ubuntuforums.org/showthread.php?t=2215264&amp;s=7aa2dfa8b89411472598e737c38f1475&amp;p=12978792#post12978792">Apply any necessary fixes</a> ...</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> volnoti
+$ ./prepare.sh
+$ <span class="nb">cd</span> src
+$ rm value-client-stub.h <span class="o">&amp;&amp;</span> make value-client-stub.h
+$ rm value-daemon-stub.h <span class="o">&amp;&amp;</span> make value-daemon-stub.h
+$ <span class="nb">cd</span> ..
+</pre></div>
+</div>
+<div class="section" id="compile-and-install">
+<h3>2. Compile and install</h3>
+<p>Compile and install program to the custom destination directory ...</p>
+<div class="highlight"><pre><span></span>$ ./configure --prefix<span class="o">=</span><span class="nv">$HOME</span>/opt/volnoti
+$ make
+$ make install
+</pre></div>
+<p>Add the executable directory (<tt class="docutils literal">$HOME/opt/volnoti/bin</tt>) to the PATH in <a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.profile">~/.profile</a> ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># set PATH so it includes programs installed in user&#39;s home directory</span>
+<span class="c1"># volnoti - volume notification daemon</span>
+<span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/opt/volnoti/bin&quot;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+    <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/opt/volnoti/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+<div class="section" id="run-program">
+<h3>3. Run program</h3>
+<p>Start the <tt class="docutils literal">volnoti</tt> daemon ...</p>
+<div class="highlight"><pre><span></span>$ volnoti
+</pre></div>
+<p>Configure daemon to auto-start by adding it to <a class="reference external" href="http://www.circuidipity.com/xinitrc.html">~/.xinitrc</a> ...</p>
+<div class="highlight"><pre><span></span>volnoti -t <span class="m">2</span> <span class="p">&amp;</span>
+</pre></div>
+<p>Links: <a class="reference external" href="http://www.circuidipity.com/pavolume.html">Volume control and notification</a> and <a class="reference external" href="https://wiki.debian.org/DontBreakDebian">DontBreakDebian</a></p>
+<p>Happy hacking!</p>
+</div>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/i3-tiling-window-manager.html">Lightweight and a delight: i3 tiling window manager</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>
