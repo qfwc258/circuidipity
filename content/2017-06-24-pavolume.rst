@@ -2,6 +2,7 @@
 Volume control and notification
 ===============================
 
+:modified: 2017-07-10 15:55:00
 :date: 2017-06-24 08:47:00
 :slug: pavolume
 :tags: homebin, shell, programming, linux
@@ -44,48 +45,7 @@ No ``make install``. Place the resulting ``pamixer`` in PATH (I use ``~/bin``).
 2. Volnoti
 ----------
 
-`Volnoti <https://github.com/davidbrazdil/volnoti>`_ is a lightweight volume notification. Compile dependencies ...
-
-.. code-block:: bash
-
-    $ sudo apt install libdbus-glib-1-dev libgtk2.0-dev libgdk-pixbuf2.0-dev autoconf automake
-
-Download ...
-
-.. code-block:: bash
-
-    $ git clone git://github.com/davidbrazdil/volnoti.git
-    $ cd volnoti
-    $ ./prepare.sh
-    $ ./configure --prefix=/usr
-
-Apply this fix [1]_ to the source ...
-
-.. code-block:: bash
-
-    $ cd src
-    $ rm value-client-stub.h && make value-client-stub.h
-    $ rm value-daemon-stub.h && make value-daemon-stub.h
-    $ cd ..
-
-Compile source (and I use `checkinstall <https://packages.debian.org/stretch/checkinstall>`_ to make a ``deb`` package and install) ...
-
-.. code-block:: bash
-
-    $ make
-    $ sudo checkinstall make install
-
-Start ``volnoti`` daemon ...
-
-.. code-block:: bash
-
-    $ volnoti
-
-Configure daemon to auto-start by adding it to `~/.xinitrc <http://www.circuidipity.com/xinitrc.html>`_ ... 
-
-.. code-block:: bash
-
-    volnoti -t 2 &
+`Volnoti <https://github.com/davidbrazdil/volnoti>`_ is a lightweight volume notification. More: `Compile and install programs in $HOME <http://www.circuidipity.com/compile-install-homedir.html>`_
 
 3. Script paVolume
 ------------------
@@ -110,8 +70,3 @@ I tie all the pieces together with my paVolume shell script and create keycodes 
 Sources: homebin/`paVolume <https://github.com/vonbrownie/homebin/blob/master/paVolume>`_ and dotfiles/`.xbindkeysrc.chromebook <https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook>`_
 
 Happy hacking!
-
-Notes
-`````
-
-.. [1] Ubuntu forums: `Error when using make "client.c:108:5: error: too many arguments to function" <http://ubuntuforums.org/showthread.php?t=2215264&s=7aa2dfa8b89411472598e737c38f1475&p=12978792#post12978792>`_
