@@ -4,6 +4,18 @@ Notes
 
 :slug: notes
 
+2017-07-10T18:46
+----------------
+
+Assign user to new group and reload assignments without logging out ...
+
+.. code-block:: bash
+
+    $ su - $USER
+    $ id        # see the new group
+    
+Link: https://superuser.com/a/354475
+
 2017-07-09T0807
 ---------------
 
