@@ -38,7 +38,7 @@ USB sticks are my Linux install media of choice because I have configured severa
 
 :warning:`WARNING!` Make sure to record the correct USB device ID. The following procedure **wipes out all data on the USB stick.** On my system the device shows up as ``sdb`` but it will possibly be different on **your** system.
 
-Copy the iso to the USB stick ...
+Copy the ISO to the USB stick ...
 
 .. code-block:: bash
 
@@ -57,7 +57,7 @@ Plug the freshly prepared USB stick into the target box. Power up. Either the de
 
     Advanced Options -> Expert install
 
-Mostly I stick with the default selections presented by the Debian installer .. with a few exceptions noted below.
+Mostly I stick with the default selections presented by the Debian installer, with a few exceptions noted below.
 
 2.2 Choose a mirror of the Debian archive
 `````````````````````````````````````````
@@ -165,7 +165,7 @@ Allow a user to run commands with root-privileges using ``sudo``. Run the comman
     # Allow user to run certain commands without prompting for a password
     yourusername     ALL=NOPASSWD: /sbin/cryptsetup, /sbin/halt, /sbin/ifconfig
 
-Save changes and add your USERNAME to ``sudo`` group ...
+Save changes and add username to ``sudo`` group ...
 
 .. code-block:: bash
 

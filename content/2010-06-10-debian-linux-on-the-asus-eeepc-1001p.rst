@@ -1,4 +1,4 @@
-====================================
+===================================
 Debian Linux on the Asus EEEPC 1001P
 ====================================
 
@@ -126,7 +126,7 @@ Default scaling governor is ``ondemand``.
 2.5 Screen brightness
 `````````````````````
 
-Post-install the display brightness is extremely low and the assigned funtion keys for adjusting the brightness level cause the setting to jump all over the place. This can be fixed by editing ``/etc/default/grub`` and modifying ``GRUB_CMDLINE_LINUX_DEFAULT`` ...
+Post-install the display brightness is extremely low and the assigned function keys for adjusting the brightness level cause the setting to jump all over the place. This can be fixed by editing ``/etc/default/grub`` and modifying ``GRUB_CMDLINE_LINUX_DEFAULT`` ...
 
 .. code-block:: bash
 
