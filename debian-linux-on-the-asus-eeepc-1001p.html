@@ -129,7 +129,7 @@
 </div>
 <div class="section" id="screen-brightness">
 <h4>2.5 Screen brightness</h4>
-<p>Post-install the display brightness is extremely low and the assigned funtion keys for adjusting the brightness level cause the setting to jump all over the place. This can be fixed by editing <tt class="docutils literal">/etc/default/grub</tt> and modifying <tt class="docutils literal">GRUB_CMDLINE_LINUX_DEFAULT</tt> ...</p>
+<p>Post-install the display brightness is extremely low and the assigned function keys for adjusting the brightness level cause the setting to jump all over the place. This can be fixed by editing <tt class="docutils literal">/etc/default/grub</tt> and modifying <tt class="docutils literal">GRUB_CMDLINE_LINUX_DEFAULT</tt> ...</p>
 <div class="highlight"><pre><span></span><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s2">&quot;quiet acpi_osi=Linux acpi_backlight=vendor&quot;</span>
 </pre></div>
 <p>Save your changes and run <tt class="docutils literal">sudo <span class="pre">update-grub2</span></tt>. Reboot... login... and run ...</p>

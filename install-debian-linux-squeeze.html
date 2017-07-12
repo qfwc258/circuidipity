@@ -42,7 +42,7 @@
 <h2>1. Prepare USB stick</h2>
 <p>USB sticks are my Linux install media of choice because I have configured several devices that do not include an optical drive. Plug the USB stick into your Linux host machine and leave the stick <strong>unmounted</strong>. Run the <tt class="docutils literal">dmesg</tt> command and note the USB device ID (<tt class="docutils literal">sdb</tt>, <tt class="docutils literal">sdc</tt>, ...).</p>
 <p><span class="warning">WARNING!</span> Make sure to record the correct USB device ID. The following procedure <strong>wipes out all data on the USB stick.</strong> On my system the device shows up as <tt class="docutils literal">sdb</tt> but it will possibly be different on <strong>your</strong> system.</p>
-<p>Copy the iso to the USB stick ...</p>
+<p>Copy the ISO to the USB stick ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># cat debian-VERSION-i386-businesscard.iso &gt; /dev/sdX</span>
 <span class="c1"># sync</span>
 </pre></div>
@@ -54,7 +54,7 @@
 <p>Plug the freshly prepared USB stick into the target box. Power up. Either the device is pre-configured in the BIOS to recognize a USB stick as the first choice for boot or hit the device hotkey to enter the boot menu. Select the USB stick and launch the Debian installer ...</p>
 <div class="highlight"><pre><span></span>Advanced Options -&gt; Expert install
 </pre></div>
-<p>Mostly I stick with the default selections presented by the Debian installer .. with a few exceptions noted below.</p>
+<p>Mostly I stick with the default selections presented by the Debian installer, with a few exceptions noted below.</p>
 </div>
 <div class="section" id="choose-a-mirror-of-the-debian-archive">
 <h3>2.2 Choose a mirror of the Debian archive</h3>
@@ -135,7 +135,7 @@ root    <span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="
 <span class="c1"># Allow user to run certain commands without prompting for a password</span>
 yourusername     <span class="nv">ALL</span><span class="o">=</span>NOPASSWD: /sbin/cryptsetup, /sbin/halt, /sbin/ifconfig
 </pre></div>
-<p>Save changes and add your USERNAME to <tt class="docutils literal">sudo</tt> group ...</p>
+<p>Save changes and add username to <tt class="docutils literal">sudo</tt> group ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># adduser USERNAME sudo</span>
 </pre></div>
 </div>

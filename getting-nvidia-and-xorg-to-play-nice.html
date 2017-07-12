@@ -28,8 +28,8 @@
     <p>Configure a Nvidia graphics card for use in Debian.</p>
 <p><em>Nvidia</em> provides a driver on their website that can be downloaded and installed directly on a Linux system. But it is not a recommended course of action for a Debian user.</p>
 <p>A better way is to use an open-source driver (2-D graphics) ... and if 3-D is the name of your game the <em>best</em> way is either downloading the Debian pre-built Nvidia package or create one using <tt class="docutils literal"><span class="pre">module-assistant</span></tt>. Going down the package route permits the Nvidia driver to be properly tracked and managed by the awesome Debian package tools.</p>
-<div class="section" id="step-0-start">
-<h2>Step 0 - Start</h2>
+<div class="section" id="start">
+<h2>0. Start</h2>
 <p>Shutdown the X server if currently running ... either by exiting the current X session and returning to the console or - if running a graphical login manager such as <tt class="docutils literal">gdm</tt> or <tt class="docutils literal">kdm</tt> - exiting to the login screen and hitting CTRL+ALT+F1 to jump back to a console.</p>
 <p>Stop the running X session ... <tt class="docutils literal">sudo /etc/init.d/gdm stop</tt>.</p>
 <div class="section" id="determine-which-nvidia-graphics-card-is-installed">
@@ -42,8 +42,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="step-1-install-driver">
-<h2>Step 1 - Install driver</h2>
+<div class="section" id="install-driver">
+<h2>1. Install driver</h2>
 <div class="section" id="using-the-open-source-nouveau-driver">
 <h3>Using the open-source nouveau driver</h3>
 <p>For 2-D graphics the <tt class="docutils literal">vesa</tt> or <tt class="docutils literal">nv</tt> or <tt class="docutils literal">nouveau</tt> drivers will suffice (3-D graphics require the proprietary driver).</p>
@@ -89,8 +89,8 @@ $ sudo apt-get install nvidia-glx
 <p>Never had a need to do this myself. But here are the <a class="reference external" href="http://wiki.debian.org/NvidiaGraphicsDrivers#Buildmanually.2Cwithacustomkernel">instructions</a> in the Debian wiki.</p>
 </div>
 </div>
-<div class="section" id="step-2-xorg-conf">
-<h2>Step 2 - Xorg.conf</h2>
+<div class="section" id="xorg-conf">
+<h2>2. Xorg.conf</h2>
 <p>An X configuration file is no longer included by default in Debian <tt class="docutils literal">squeeze</tt>. Create a sample file by running ... <tt class="docutils literal">sudo Xorg <span class="pre">-configure</span></tt>.</p>
 <p>Open the new <tt class="docutils literal">xorg.conf.new</tt> file in a text editor. Under <tt class="docutils literal">Module</tt> confirm that it contains the line <tt class="docutils literal">Load &quot;glx&quot;</tt>.</p>
 <p>Remove/comment out any lines that refer to the <tt class="docutils literal">dri</tt> or <tt class="docutils literal">GLCore</tt> modules.</p>
@@ -119,8 +119,8 @@ EndSection
 </pre></div>
 <p>Any user that wants to run 3-D code must belong to the <tt class="docutils literal">video</tt> group. Should already be pre-configured ... but if not <tt class="docutils literal">sudo adduser USERNAME video</tt>.</p>
 </div>
-<div class="section" id="step-3-run">
-<h2>Step 3 - Run</h2>
+<div class="section" id="run">
+<h2>3. Run</h2>
 <p>Logged in as regular user ... start the X server <tt class="docutils literal">startx</tt> or restart <tt class="docutils literal">sudo /etc/init.d/gdm start</tt> if using a graphical login manager. I needed to restart my system to get the nvidia driver to work properly.</p>
 <p>View what video driver is in use ...</p>
 <div class="highlight"><pre><span></span>$ grep -B2 <span class="s1">&#39;Module class: X.Org Video Driver&#39;</span> /var/log/Xorg.0.log

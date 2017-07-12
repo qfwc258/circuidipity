@@ -28,18 +28,18 @@
     <p>Last week I packed up the handwritten html pages, images, and bits hosted on my home netbook server and moved up into the <em>cloud</em>.</p>
 <p><a class="reference external" href="http://aws.amazon.com/s3/">Amazon Simple Storage Service</a> (S3) added the capability of <a class="reference external" href="http://www.allthingsdistributed.com/2011/02/website_amazon_s3.html">hosting a static website</a> (a website built on files as opposed to a database) and made it very cheap to get started and very easy to scale up bandwidth and storage as required.</p>
 <p>This is how I did it in 5 steps ...</p>
-<div class="section" id="step-0-sign-up-for-amazon-web-services-aws-free-usage-tier">
-<h2>Step 0 — Sign up for Amazon Web Services (AWS) Free Usage Tier</h2>
+<div class="section" id="sign-up-for-amazon-web-services-aws-free-usage-tier">
+<h2>0. Sign up for Amazon Web Services (AWS) Free Usage Tier</h2>
 <p>AWS has created a <a class="reference external" href="http://aws.amazon.com/free/">free 12-month introductory offer</a> to try out their various services. Amazon S3 includes 5 GB storage, 20,000 Get Requests and 2,000 Put Requests for hosting your website. You <a class="reference external" href="http://aws.amazon.com/s3/#pricing">pay for anything</a> that exceeds those limits.</p>
 </div>
-<div class="section" id="step-1-create-an-amazon-s3-website-enabled-bucket">
-<h2>Step 1 — Create an Amazon S3 website-enabled bucket</h2>
+<div class="section" id="create-an-amazon-s3-website-enabled-bucket">
+<h2>1. Create an Amazon S3 website-enabled bucket</h2>
 <p>S3 uses <em>buckets</em> (think folders) that act as containers for your static files. <a class="reference external" href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?HostingWebsiteOnS3Setup.html">Create a new website-enabled bucket</a> to hold your website files.</p>
 <p>Make sure when creating the S3 bucket to give it the name <em>www.YOURWEBSITE.TLD</em>. For example, this website uses an S3 bucket with the name <tt class="docutils literal">www.circuidipity.com</tt>.</p>
 <p>The endpoint address for your newly-created S3 bucket will be <a class="reference external" href="http://www.YOURWEBSITE.TLD.s3-website-location.amazonaws.com">http://www.YOURWEBSITE.TLD.s3-website-location.amazonaws.com</a> (my endpoint is <a class="reference external" href="http://www.circuidipity.com.s3-website-us-east-1.amazonaws.com">http://www.circuidipity.com.s3-website-us-east-1.amazonaws.com</a>).</p>
 </div>
-<div class="section" id="step-2-set-public-permissions-on-s3-bucket">
-<h2>Step 2 - Set public permissions on S3 bucket</h2>
+<div class="section" id="set-public-permissions-on-s3-bucket">
+<h2>2. Set public permissions on S3 bucket</h2>
 <p>At this stage your website-enabled bucket and contents are only viewable over the web by their owner ... you.</p>
 <p>Add a <em>bucket policy</em> to make your files <a class="reference external" href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?HostingWebsiteOnS3Setup.html">publicly available</a>. In the AWS Management Console, right-click on your website bucket and select <tt class="docutils literal"><span class="pre">Properties-&gt;Permissions-&gt;Edit</span> bucket policy</tt> and create a new policy ...</p>
 <div class="highlight"><pre><span></span><span class="o">{</span>
@@ -59,8 +59,8 @@
 </pre></div>
 <p>Now any files placed in your bucket will be world-readable.</p>
 </div>
-<div class="section" id="step-3-upload-website-files">
-<h2>Step 3 — Upload website files</h2>
+<div class="section" id="upload-website-files">
+<h2>3. Upload website files</h2>
 <p>Start your website by creating 2 files ...  <tt class="docutils literal">index.html</tt> and a custom 404 error document <tt class="docutils literal">doesnotexist.html</tt>. Use the AWS Management Console to upload the files into your S3 bucket and test by browsing to <a class="reference external" href="http://YOURBUCKET.s3-location.amazonaws.com/">http://YOURBUCKET.s3-location.amazonaws.com/</a> .</p>
 <p>For uploading multiple files in one great swoop I ran across <a class="reference external" href="http://s3tools.org/s3cmd">s3cmd</a> ... a cool Linux command line utility for managing S3 storage. A package is available for Debian <tt class="docutils literal">sudo <span class="pre">apt-get</span> install s3cmd</tt>.</p>
 <p>Before configuring <tt class="docutils literal">s3cmd</tt> to grant access to your website's S3 bucket you require your <tt class="docutils literal">Access Key ID</tt> and <tt class="docutils literal">Secret Access Key</tt>. Navigate to <a class="reference external" href="https://aws-portal.amazon.com">https://aws-portal.amazon.com</a> and the <tt class="docutils literal"><span class="pre">-&gt;</span> Security Credentials <span class="pre">-&gt;</span> Access Keys</tt> tab and make note of your Amazon S3 keys.</p>
@@ -73,8 +73,8 @@
 $ s3cmd sync output/ s3://www.circuidipity.com/
 </pre></div>
 </div>
-<div class="section" id="step-4-configure-dns">
-<h2>Step 4 - Configure DNS</h2>
+<div class="section" id="configure-dns">
+<h2>4. Configure DNS</h2>
 <p>To transform <em>s3-website-location.amazonaws.com</em> into <em>www.YOURWEBSITE.com</em> you need to <a class="reference external" href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?VirtualHosting.html">create a CNAME at your DNS provider</a> that maps <tt class="docutils literal">www</tt> to your S3 bucket ... in my case DNS is provided by GoDaddy and I map <tt class="docutils literal">www</tt> to www.circuidipity.com.s3-website-us-east-1.amazonaws.com.</p>
 <p><em>s3-website-us-east-1.amazonaws.com</em> is for accessing the website feature. If you just want S3 you can use <em>s3.amazonaws.com</em>.</p>
 <p>Allow a bit of time for your changes to propagate through the global network of DNS servers ... check your modifications by running <tt class="docutils literal">host</tt> (cool little DNS hookup utility) ...</p>
