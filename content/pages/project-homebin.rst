@@ -4,7 +4,7 @@ $HOME slash bin
 
 :slug: homebin
 :template: page-project
-:modified: 2017-07-05 09:00:00
+:modified: 2017-07-12 13:17:00
 
 .. image:: images/infinite-loop-not-300.png
     :align: right
@@ -58,6 +58,9 @@ Let's go!
 
 `flashManUpdate <https://github.com/vonbrownie/homebin/blob/master/flashManUpdate>`_
     installs libflashplayer.so
+
+`generatePkgList <https://github.com/vonbrownie/homebin/blob/master/generatePkgList>`_
+    output list of installed Debian packages on HOSTNAME
 
 `i3wm_conf <https://github.com/vonbrownie/homebin/blob/master/i3wm_conf>`_
     conditionals for building i3 window manager config at runtime (more: `"i3 tiling window manager: Conditionals" <http://www.circuidipity.com/i3-tiling-window-manager.html#conditionals>`_)
