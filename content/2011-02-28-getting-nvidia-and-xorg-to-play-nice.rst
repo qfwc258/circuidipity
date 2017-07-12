@@ -12,8 +12,8 @@ Configure a Nvidia graphics card for use in Debian.
 
 A better way is to use an open-source driver (2-D graphics) ... and if 3-D is the name of your game the *best* way is either downloading the Debian pre-built Nvidia package or create one using ``module-assistant``. Going down the package route permits the Nvidia driver to be properly tracked and managed by the awesome Debian package tools.
 
-Step 0 - Start
-==============
+0. Start
+========
 
 Shutdown the X server if currently running ... either by exiting the current X session and returning to the console or - if running a graphical login manager such as ``gdm`` or ``kdm`` - exiting to the login screen and hitting CTRL+ALT+F1 to jump back to a console.
 
@@ -33,8 +33,8 @@ On the motherboard of my primary workstation I have an embedded Nvidia chipset w
     $ lspci -v | grep "VGA compatible controller: nvidia"
     00:05.0 VGA compatible controller: nVidia Corporation C51PV [GeForce 6150] (rev a2) (prog-if 00 [VGA controller])
 
-Step 1 - Install driver
-=======================
+1. Install driver
+=================
 
 Using the open-source nouveau driver
 ------------------------------------
@@ -97,8 +97,8 @@ Manual build
 
 Never had a need to do this myself. But here are the `instructions <http://wiki.debian.org/NvidiaGraphicsDrivers#Buildmanually.2Cwithacustomkernel>`_ in the Debian wiki.
 
-Step 2 - Xorg.conf
-==================
+2. Xorg.conf
+============
 
 An X configuration file is no longer included by default in Debian ``squeeze``. Create a sample file by running ... ``sudo Xorg -configure``.
 
@@ -138,8 +138,8 @@ Move the modified file to its default name and location ...
 
 Any user that wants to run 3-D code must belong to the ``video`` group. Should already be pre-configured ... but if not ``sudo adduser USERNAME video``.
 
-Step 3 - Run
-============
+3. Run
+======
 
 Logged in as regular user ... start the X server ``startx`` or restart ``sudo /etc/init.d/gdm start`` if using a graphical login manager. I needed to restart my system to get the nvidia driver to work properly.
                         

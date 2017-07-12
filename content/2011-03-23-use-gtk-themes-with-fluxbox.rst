@@ -20,7 +20,7 @@ GTK
 
 Download the Finery Dark *GTK* matching theme, untar the package and place the theme folder in ``~/.themes`` (create folder if necessary).
 
-GTK themes require an *engine* to run. Download the ``murrine`` engine to run Finery Dark and some GUI apps (thanks `Dan <a href="http://identi.ca/allsystemsarego>`_ for sugesting ``gtk-chtheme``) to make switching between themes easier ...
+GTK themes require an *engine* to run. Download the ``murrine`` engine to run Finery Dark and some GUI apps (thanks `Dan <a href="http://identi.ca/allsystemsarego>`_ for suggesting ``gtk-chtheme``) to make switching between themes easier ...
 
 .. code-block:: bash
 

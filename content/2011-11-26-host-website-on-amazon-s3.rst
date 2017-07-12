@@ -12,13 +12,13 @@ Last week I packed up the handwritten html pages, images, and bits hosted on my 
 
 This is how I did it in 5 steps ...
 
-Step 0 — Sign up for Amazon Web Services (AWS) Free Usage Tier
-==============================================================
+0. Sign up for Amazon Web Services (AWS) Free Usage Tier
+========================================================
 
 AWS has created a `free 12-month introductory offer <http://aws.amazon.com/free/>`_ to try out their various services. Amazon S3 includes 5 GB storage, 20,000 Get Requests and 2,000 Put Requests for hosting your website. You `pay for anything <http://aws.amazon.com/s3/#pricing>`_ that exceeds those limits.
 
-Step 1 — Create an Amazon S3 website-enabled bucket
-===================================================
+1. Create an Amazon S3 website-enabled bucket
+=============================================
 
 S3 uses *buckets* (think folders) that act as containers for your static files. `Create a new website-enabled bucket <http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?HostingWebsiteOnS3Setup.html>`_ to hold your website files.
 
@@ -27,8 +27,8 @@ Make sure when creating the S3 bucket to give it the name *www.YOURWEBSITE.TLD*.
 
 The endpoint address for your newly-created S3 bucket will be http://www.YOURWEBSITE.TLD.s3-website-location.amazonaws.com (my endpoint is http://www.circuidipity.com.s3-website-us-east-1.amazonaws.com).
     
-Step 2 - Set public permissions on S3 bucket
-============================================
+2. Set public permissions on S3 bucket
+======================================
 
 At this stage your website-enabled bucket and contents are only viewable over the web by their owner ... you. 
 
@@ -53,8 +53,8 @@ Add a *bucket policy* to make your files `publicly available <http://docs.amazon
 
 Now any files placed in your bucket will be world-readable.
 
-Step 3 — Upload website files
-=============================
+3. Upload website files
+=======================
 
 Start your website by creating 2 files ...  ``index.html`` and a custom 404 error document ``doesnotexist.html``. Use the AWS Management Console to upload the files into your S3 bucket and test by browsing to http://YOURBUCKET.s3-location.amazonaws.com/ .
 
@@ -77,8 +77,8 @@ For my own website I run ...
     $ s3cmd sync --dry-run output/ s3://www.circuidipity.com/   # first I test it out ... nothing is transferred
     $ s3cmd sync output/ s3://www.circuidipity.com/
 
-Step 4 - Configure DNS
-======================
+4. Configure DNS
+================
 
 To transform *s3-website-location.amazonaws.com* into *www.YOURWEBSITE.com* you need to `create a CNAME at your DNS provider <http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?VirtualHosting.html>`_ that maps ``www`` to your S3 bucket ... in my case DNS is provided by GoDaddy and I map ``www`` to www.circuidipity.com.s3-website-us-east-1.amazonaws.com.
 

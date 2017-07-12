@@ -32,4 +32,4 @@ Create a bash script named ``dmenu-run.sh`` and place in ``$HOME/bin`` ...
 
 This will use ``dmenu`` to generate a horizontal menu of applications running across the bottom of the desktop (this can be tricky to get right... thanks `Giles <http://www.gilesorr.com/wm/helpers.html>`_ for the hint). Create a hot-key combination to activate ``dmenu-run.sh`` on your desktop.
 
-Source: `dmenu-run.sh <https://github.com/vonbrownie/linux-home-bin/blob/master/dmenu-run.sh>`_
+Source: homebin/`dmenu-run.sh <https://github.com/vonbrownie/linux-home-bin/blob/master/dmenu-run.sh>`_
