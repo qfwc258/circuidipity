@@ -224,7 +224,7 @@ The ``~/.config/i3/config`` file has no provision for interpreting conditionals,
 	workspace 1 output PRIMARY
 	workspace 10 output SECOND
 
-Customize the included ``i3bar`` statusbar by adding text-based information snippets configured in `~/.config/i3/i3status.conf <https://github.com/vonbrownie/dotfiles/blob/master/.config/i3/i3status.conf>`_: system tray, battery status, system load and temperature, and time.
+Customize the included ``i3bar`` statusbar by adding text-based information snippets configured in ``~/.config/i3/i3status.conf``: system tray, battery status, system load and temperature, and time.
 
 Start ``i3bar`` on the external (primary) display and a `secondary statusbar <https://github.com/vonbrownie/dotfiles/blob/master/.config/i3/i3status-small.conf>`_ on the other display ...
 
