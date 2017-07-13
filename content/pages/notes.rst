@@ -4,8 +4,17 @@ Notes
 
 :slug: notes
 
-2017-07-10T18:46
-----------------
+2017-07-13T0916
+---------------
+
+Retrieving Debian release information (depending on what I want) ...
+
+* ``/etc/debian_version``
+* ``/etc/os-release``
+* ``lsb_release -c``
+
+2017-07-10T1846
+---------------
 
 Assign user to new group and reload assignments without logging out ...
 
