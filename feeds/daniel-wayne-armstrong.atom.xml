@@ -220,7 +220,7 @@ bindsym &lt;span class="nv"&gt;$mod&lt;/span&gt;+Pause mode &lt;span class="s2"&
 workspace &lt;span class="m"&gt;1&lt;/span&gt; output PRIMARY
 workspace &lt;span class="m"&gt;10&lt;/span&gt; output SECOND
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Customize the included &lt;tt class="docutils literal"&gt;i3bar&lt;/tt&gt; statusbar by adding text-based information snippets configured in &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.config/i3/i3status.conf"&gt;~/.config/i3/i3status.conf&lt;/a&gt;: system tray, battery status, system load and temperature, and time.&lt;/p&gt;
+&lt;p&gt;Customize the included &lt;tt class="docutils literal"&gt;i3bar&lt;/tt&gt; statusbar by adding text-based information snippets configured in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.config/i3/i3status.conf&lt;/span&gt;&lt;/tt&gt;: system tray, battery status, system load and temperature, and time.&lt;/p&gt;
 &lt;p&gt;Start &lt;tt class="docutils literal"&gt;i3bar&lt;/tt&gt; on the external (primary) display and a &lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.config/i3/i3status-small.conf"&gt;secondary statusbar&lt;/a&gt; on the other display ...&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;bar &lt;span class="o"&gt;{&lt;/span&gt;
 output PRIMARY
