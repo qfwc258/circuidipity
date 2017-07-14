@@ -2,10 +2,10 @@
 Virtualbox
 ==========
 
+:modified: 2017-03-28 19:57:00
 :date: 2012-12-07 00:11:00
 :tags: virtualbox, ubuntu, linux
 :slug: virtualbox-install
-:modified: 2017-03-28 19:57:00
 
 `Virtualbox <https://www.virtualbox.org/>`_ is virtualization software that allows a Linux user to HOST multiple GUEST operating systems as `virtual machines (VMs) <http://www.circuidipity.com/tag-vm.html>`_. Its a cool tool for playing with different Linux distros and experimenting with configurations.
 
@@ -80,7 +80,7 @@ Reboot GUEST and ``vbox`` drivers should now be loaded:
 3.1 Display
 +++++++++++
 
-Tweak display settings by going to the Virtualbox ``Machine->Settings...->Display`` setting and move the slider to add more video memory and enable 3d acceleration.
+Tweak display settings by going to the Virtualbox ``Machine->Settings...->Display`` setting and move the slider to add more video memory and enable 3D acceleration.
 
 .. image:: images/20121207-display.png
     :alt: Display Settings
