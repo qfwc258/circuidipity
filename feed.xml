@@ -1,5 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-07-10T16:00:00-04:00</updated><entry><title>Compile and install programs in $HOME</title><link href="http://www.circuidipity.com/compile-install-homedir.html" rel="alternate"></link><published>2017-07-10T16:00:00-04:00</published><updated>2017-07-10T16:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-07-10:/compile-install-homedir.html</id><summary type="html">&lt;p&gt;Debian has extensive (50,000+) package archives but sometimes I want &lt;strong&gt;that one thing&lt;/strong&gt; they do not! Or maybe I want to re-compile the source code of a program with different options.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-07-14T12:37:00-04:00</updated><entry><title>Install (almost) the same list of Debian packages on multiple machines</title><link href="http://www.circuidipity.com/debian-package-list.html" rel="alternate"></link><published>2017-07-14T12:37:00-04:00</published><updated>2017-07-14T12:37:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-07-14:/debian-package-list.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Scenario:&lt;/strong&gt; I have a whole bunch of packages installed on &lt;strong&gt;Machine A&lt;/strong&gt; and I want to replicate that package selection on &lt;strong&gt;Machine B&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Machine A serves as the original source of the list of packages.&lt;/p&gt;
+&lt;div class="section" id="make"&gt;
+&lt;h3&gt;0. Make&lt;/h3&gt;
+&lt;p&gt;Generate the list ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ dpkg --get-selections &amp;gt; pkg-list
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pkg-list&lt;/span&gt;&lt;/tt&gt; file now contains …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Scenario:&lt;/strong&gt; I have a whole bunch of packages installed on &lt;strong&gt;Machine A&lt;/strong&gt; and I want to replicate that package selection on &lt;strong&gt;Machine B&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;Machine A serves as the original source of the list of packages.&lt;/p&gt;
+&lt;div class="section" id="make"&gt;
+&lt;h3&gt;0. Make&lt;/h3&gt;
+&lt;p&gt;Generate the list ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ dpkg --get-selections &amp;gt; pkg-list
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pkg-list&lt;/span&gt;&lt;/tt&gt; file now contains the list of installed Debian packages on Machine A. However I want to make a few changes (hence the &amp;quot;almost&amp;quot; in the title) to the list.&lt;/p&gt;
+&lt;p&gt;Delete entries for packages that have been installed then removed (marked as &lt;tt class="docutils literal"&gt;deinstall&lt;/tt&gt;) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sed -i &lt;span class="s1"&gt;&amp;#39;/deinstall/d&amp;#39;&lt;/span&gt; pkg-list
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I also delete entries for packages that I built myself (identified using &lt;a class="reference external" href="https://tracker.debian.org/pkg/apt-show-versions"&gt;apt-show-versions&lt;/a&gt;) and are not available in the Debian package archives ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;ARRAY&lt;/span&gt;&lt;span class="o"&gt;=(&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;apt-show-versions &lt;span class="p"&gt;|&lt;/span&gt; grep -v &lt;span class="s2"&gt;&amp;quot;stretch&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; awk -F: &lt;span class="s1"&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; package in &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ARRAY&lt;/span&gt;&lt;span class="p"&gt;[@]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;do&lt;/span&gt;
+    sed -i &lt;span class="s2"&gt;&amp;quot;/&lt;/span&gt;&lt;span class="nv"&gt;$package&lt;/span&gt;&lt;span class="s2"&gt;/d&amp;quot;&lt;/span&gt; pkg-list
+&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I made the &lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/generatePkgList"&gt;generatePkgList&lt;/a&gt; shell script to create modified package lists.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="install"&gt;
+&lt;h3&gt;1. Install&lt;/h3&gt;
+&lt;p&gt;Copy &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pkg-list&lt;/span&gt;&lt;/tt&gt; to Machine B and update its &lt;tt class="docutils literal"&gt;dpkg&lt;/tt&gt; database of known packages ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# avail=`mktemp`&lt;/span&gt;
+&lt;span class="c1"&gt;# apt-cache dumpavail &amp;gt; &amp;quot;$avail&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;# dpkg --merge-avail &amp;quot;$avail&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;# rm -f &amp;quot;$avail&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Update the &lt;tt class="docutils literal"&gt;dpkg&lt;/tt&gt; selections ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# dpkg --set-selections &amp;lt; pkg-list&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Use &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;apt-get&lt;/span&gt;&lt;/tt&gt; to install the selected packages ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# apt-get dselect-upgrade&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Link: &lt;a class="reference external" href="https://debian-handbook.info/browse/stable/sect.apt-get.html"&gt;Debian Administrator's Handbook - 6.2. aptitude, apt-get, and apt Commands&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="debian"></category><category term="linux"></category><category term="shell"></category><category term="programming"></category></entry><entry><title>Compile and install programs in $HOME</title><link href="http://www.circuidipity.com/compile-install-homedir.html" rel="alternate"></link><published>2017-07-10T16:00:00-04:00</published><updated>2017-07-10T16:00:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-07-10:/compile-install-homedir.html</id><summary type="html">&lt;p&gt;Debian has extensive (50,000+) package archives but sometimes I want &lt;strong&gt;that one thing&lt;/strong&gt; they do not! Or maybe I want to re-compile the source code of a program with different options.&lt;/p&gt;
 &lt;p&gt;I can make a clean separation between &lt;strong&gt;a)&lt;/strong&gt; programs installed by Debian packages; and &lt;strong&gt;b)&lt;/strong&gt; programs installed by …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Debian has extensive (50,000+) package archives but sometimes I want &lt;strong&gt;that one thing&lt;/strong&gt; they do not! Or maybe I want to re-compile the source code of a program with different options.&lt;/p&gt;
 &lt;p&gt;I can make a clean separation between &lt;strong&gt;a)&lt;/strong&gt; programs installed by Debian packages; and &lt;strong&gt;b)&lt;/strong&gt; programs installed by myself; by compiling and installing programs as a &lt;strong&gt;non-root user&lt;/strong&gt; in my home directory.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
@@ -749,55 +798,4 @@ rofi.hlbg:          &lt;span class="c1"&gt;#FF0000&lt;/span&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category></entry><entry><title>Volume control and notification</title><link href="http://www.circuidipity.com/pavolume.html" rel="alternate"></link><published>2017-06-24T08:47:00-04:00</published><updated>2017-07-10T15:55:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-24:/pavolume.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/homebin.html"&gt;PROJECT: $HOME slash bin .:&lt;/a&gt; My original intent was to manage sound on &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook&lt;/a&gt; by binding the commands to the multimedia keys in &lt;a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html"&gt;~/.xbindkeysrc.&lt;/a&gt; Instead &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; calls a standalone script I created to control PulseAudio volume (and thus useful beyond just &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt;).&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Script requirements: &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;pamixer&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt;.&lt;/p&gt;
-&lt;div class="section" id="pactl"&gt;
-&lt;h3&gt;0 …&lt;/h3&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.circuidipity.com/homebin.html"&gt;PROJECT: $HOME slash bin .:&lt;/a&gt; My original intent was to manage sound on &lt;a class="reference external" href="http://www.circuidipity.com/jessiebook-to-stretchbook.html"&gt;Stretchbook&lt;/a&gt; by binding the commands to the multimedia keys in &lt;a class="reference external" href="http://www.circuidipity.com/xbindkeysrc.html"&gt;~/.xbindkeysrc.&lt;/a&gt; Instead &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt; calls a standalone script I created to control PulseAudio volume (and thus useful beyond just &lt;tt class="docutils literal"&gt;xbindkeys&lt;/tt&gt;).&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Script requirements: &lt;tt class="docutils literal"&gt;pactl&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;pamixer&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;volnoti&lt;/tt&gt;.&lt;/p&gt;
-&lt;div class="section" id="pactl"&gt;
-&lt;h3&gt;0. Pactl&lt;/h3&gt;
-&lt;p&gt;&lt;tt class="docutils literal"&gt;Pactl&lt;/tt&gt; controls a PulseAudio sound server and is included in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;pulseaudio-utils&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install pulseaudio-utils
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="pamixer"&gt;
-&lt;h3&gt;1. Pamixer&lt;/h3&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/cdemoulins/pamixer"&gt;Pamixer&lt;/a&gt; is a PulseAudio console mixer. Compile dependencies ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install build-essential libpulse-dev libboost-program-options1.62.0:amd64 libboost-program-options-dev
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Download source and compile ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git clone https://cdemoulins@github.com/cdemoulins/pamixer.git
-$ &lt;span class="nb"&gt;cd&lt;/span&gt; pamixer
-$ make
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;No &lt;tt class="docutils literal"&gt;make install&lt;/tt&gt;. Place the resulting &lt;tt class="docutils literal"&gt;pamixer&lt;/tt&gt; in PATH (I use &lt;tt class="docutils literal"&gt;~/bin&lt;/tt&gt;).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="volnoti"&gt;
-&lt;h3&gt;2. Volnoti&lt;/h3&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/davidbrazdil/volnoti"&gt;Volnoti&lt;/a&gt; is a lightweight volume notification. More: &lt;a class="reference external" href="http://www.circuidipity.com/compile-install-homedir.html"&gt;Compile and install programs in $HOME&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="script-pavolume"&gt;
-&lt;h3&gt;3. Script paVolume&lt;/h3&gt;
-&lt;p&gt;I tie all the pieces together with my paVolume shell script and create keycodes to increase/decrease/mute volume in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xbindkeysrc&lt;/span&gt;&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;paVolume -m&amp;quot;&lt;/span&gt;
-F8
-&lt;span class="s2"&gt;&amp;quot;paVolume -m&amp;quot;&lt;/span&gt;
-XF86AudioMute
-&lt;span class="s2"&gt;&amp;quot;paVolume -d&amp;quot;&lt;/span&gt;
-F9
-&lt;span class="s2"&gt;&amp;quot;paVolume -d&amp;quot;&lt;/span&gt;
-XF86AudioLowerVolume
-&lt;span class="s2"&gt;&amp;quot;paVolume -u&amp;quot;&lt;/span&gt;
-F10
-&lt;span class="s2"&gt;&amp;quot;paVolume -u&amp;quot;&lt;/span&gt;
-XF86AudioRaiseVolume
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: homebin/&lt;a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/paVolume"&gt;paVolume&lt;/a&gt; and dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook"&gt;.xbindkeysrc.chromebook&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</content><category term="homebin"></category><category term="shell"></category><category term="programming"></category><category term="linux"></category></entry></feed>
+</content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category></entry></feed>

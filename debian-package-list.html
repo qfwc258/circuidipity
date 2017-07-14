@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Install (almost) the same list of Debian packages on multiple machines</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Friday 14 July 2017</p>
+</div>
+
+<!-- article -->
+<h1>Install (almost) the same list of Debian packages on multiple machines</h1>
+<div id="article">
+    <p><strong>Scenario:</strong> I have a whole bunch of packages installed on <strong>Machine A</strong> and I want to replicate that package selection on <strong>Machine B</strong>.</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<p>Machine A serves as the original source of the list of packages.</p>
+<div class="section" id="make">
+<h3>0. Make</h3>
+<p>Generate the list ...</p>
+<div class="highlight"><pre><span></span>$ dpkg --get-selections &gt; pkg-list
+</pre></div>
+<p>The <tt class="docutils literal"><span class="pre">pkg-list</span></tt> file now contains the list of installed Debian packages on Machine A. However I want to make a few changes (hence the &quot;almost&quot; in the title) to the list.</p>
+<p>Delete entries for packages that have been installed then removed (marked as <tt class="docutils literal">deinstall</tt>) ...</p>
+<div class="highlight"><pre><span></span>$ sed -i <span class="s1">&#39;/deinstall/d&#39;</span> pkg-list
+</pre></div>
+<p>I also delete entries for packages that I built myself (identified using <a class="reference external" href="https://tracker.debian.org/pkg/apt-show-versions">apt-show-versions</a>) and are not available in the Debian package archives ...</p>
+<div class="highlight"><pre><span></span><span class="nv">ARRAY</span><span class="o">=(</span> <span class="k">$(</span>apt-show-versions <span class="p">|</span> grep -v <span class="s2">&quot;stretch&quot;</span> <span class="p">|</span> awk -F: <span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span> <span class="o">)</span>
+<span class="k">for</span> package in <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ARRAY</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">do</span>
+    sed -i <span class="s2">&quot;/</span><span class="nv">$package</span><span class="s2">/d&quot;</span> pkg-list
+<span class="k">done</span>
+</pre></div>
+<p>I made the <a class="reference external" href="https://github.com/vonbrownie/homebin/blob/master/generatePkgList">generatePkgList</a> shell script to create modified package lists.</p>
+</div>
+<div class="section" id="install">
+<h3>1. Install</h3>
+<p>Copy <tt class="docutils literal"><span class="pre">pkg-list</span></tt> to Machine B and update its <tt class="docutils literal">dpkg</tt> database of known packages ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># avail=`mktemp`</span>
+<span class="c1"># apt-cache dumpavail &gt; &quot;$avail&quot;</span>
+<span class="c1"># dpkg --merge-avail &quot;$avail&quot;</span>
+<span class="c1"># rm -f &quot;$avail&quot;</span>
+</pre></div>
+<p>Update the <tt class="docutils literal">dpkg</tt> selections ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># dpkg --set-selections &lt; pkg-list</span>
+</pre></div>
+<p>Use <tt class="docutils literal"><span class="pre">apt-get</span></tt> to install the selected packages ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># apt-get dselect-upgrade</span>
+</pre></div>
+<p>Link: <a class="reference external" href="https://debian-handbook.info/browse/stable/sect.apt-get.html">Debian Administrator's Handbook - 6.2. aptitude, apt-get, and apt Commands</a></p>
+<p>Happy hacking!</p>
+</div>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-shell.html">shell</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-programming.html">programming</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/compile-install-homedir.html">Compile and install programs in $HOME</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>
