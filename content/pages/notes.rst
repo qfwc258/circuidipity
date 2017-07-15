@@ -4,15 +4,15 @@ Notes
 
 :slug: notes
 
-2017-07-14T1538
----------------
+N2017-07-14T15:38
+-----------------
 
 Correct the 'stripping effect' in QT applications using the **Breeze Dark** theme. Example: Transmission-qt would show file listings in alternating background colours, with every other line rendered in light background and foreground colours.
 
 **[ Fix! ]** Offending colour is ``#eff0f1``. Replaced with ``#404552`` in ``~/.config/qt5ct/colors/breeze_dark.conf``.
 
-2017-07-13T0916
----------------
+N2017-07-13T09:16
+-----------------
 
 Retrieving Debian release information (depending on what I want) ...
 
@@ -20,8 +20,8 @@ Retrieving Debian release information (depending on what I want) ...
 * ``/etc/os-release``
 * ``lsb_release -c``
 
-2017-07-10T1846
----------------
+N2017-07-10T18:46
+-----------------
 
 Assign user to new group and reload assignments without logging out ...
 
@@ -32,8 +32,8 @@ Assign user to new group and reload assignments without logging out ...
     
 Link: https://superuser.com/a/354475
 
-2017-07-09T0807
----------------
+N2017-07-09T08:07
+-----------------
 
 **Nmap** will quickly identify Internet services hosted by a network connected machine without even requiring to log in to it. Simply call the following command on another machine connected to the same network ...
 
@@ -43,8 +43,8 @@ Link: https://superuser.com/a/354475
     
 Link: `DAH: 3.2.1.1. Network and Processes <https://debian-handbook.info/browse/stable/sect.how-to-migrate.html>`_
 
-2017-07-06T0857
----------------
+N2017-07-06T08:57
+-----------------
 
 Use ``apt-show-versions`` to check list of installed packages and available versions. Good way to quickly grep which packages are **not** part of the default release.
 
@@ -62,8 +62,8 @@ Release is ``stretch`` ...
     qt5ct:amd64 0.31-2 installed: No available version in archive
 	volnoti:amd64 20161215T1244-1 installed: No available version in archive
 
-2017-07-03T0900
----------------
+N2017-07-03T09:00
+-----------------
 
 Configure i3wm to put clients on specific workspaces. Run ``xprop`` in a terminal and click on the client to get ``WM_CLASS``: first part is the **instance**, second part is the **class** ...
 
@@ -82,15 +82,15 @@ Add the change to ``~/.config/i3/config`` ...
     
 Link: `Automatically putting clients on specific workspaces <https://i3wm.org/docs/userguide.html#assign_workspace>`_
 
-2017-07-02T1014
----------------
+N2017-07-02T10:14
+-----------------
 
 Addon for Firefox: `Text Contrast for Dark Themes <https://addons.mozilla.org/en-US/firefox/addon/text-contrast-for-dark-themes/>`_
 
 Fixs issue with text entry on some websites (white text on white in gmail signin, yahoo search, others) when using the **Breeze Dark** QT theme.
 
-2017-06-29T1237
----------------
+N2017-06-29T12:37
+-----------------
 
 Find and replace text with **sed**.
 
@@ -114,8 +114,8 @@ Multiple text patterns and variables ...
     
 Link: https://askubuntu.com/q/20414
 
-2017-06-28T1512
----------------
+N2017-06-28T15:12
+-----------------
 
 Lots of documentation and config samples are available in ``/usr/share/doc`` in gzip'ed format. Non-root user access with the ``zcat`` and ``zless`` commands. Make use of a config sample by redirecting output. Example ...
 
@@ -123,8 +123,8 @@ Lots of documentation and config samples are available in ``/usr/share/doc`` in 
 
     $ zcat /usr/share/doc/dunst/dunstrc.example.gz > ~/.config/dunst/dunstrc
 
-2017-06-27T0902
----------------
+N2017-06-27T09:02
+-----------------
 
 Default keyboard layout in Debian is configured in ``/etc/default/keyboard`` and is shared between X and the command line ...
 
@@ -145,20 +145,20 @@ Modify this file to set a new default keyboard layout, either manually or run ..
 
     $ sudo dpkg-reconfigure keyboard-configuration
 
-2017-06-26T1126
----------------
+N2017-06-26T11:26
+-----------------
 
 Limit the CPU usage of an application ... I tried using **handbrake-gtk** to convert a video and the application grabbed 100% of all 4 cores, sent system temperature to 98C, and finally crashed the machine.
 
-**[ FIX! ]** Install **cpulimit** and set the limit to 80 (20percent * 4 cores) ...
+**[ Fix! ]** Install **cpulimit** and set the limit to 80 (20percent * 4 cores) ...
 
 .. code-block:: bash
 
     $ sudo cpulimit -e ghb -l 80
 
 
-2017-06-25T0922
----------------
+N2017-06-25T09:22
+-----------------
 
 Firework sounds for upcoming Canada Day!
 
@@ -180,15 +180,15 @@ Bottle rocket ...
 
 Links: https://twitter.com/climagic/status/485083242425368579 and https://twitter.com/climagic/status/485069251401629697
 
-2017-06-24T0844
----------------
+N2017-06-24T0:844
+-----------------
 
 Retrieve information about hardware using ``sudo dmidecode``, or much of the same information is available to the non-root user in ``/sys/devices/virtual/dmi/id``.
 
 Link: https://unix.stackexchange.com/a/172334
 
-2017-06-23T1001
----------------
+N2017-06-23T10:01
+-----------------
 
 Switch from default qwerty to the colemak keyboard layout ...
 
@@ -205,8 +205,8 @@ Switch from default qwerty to the colemak keyboard layout ...
     layout:     us
     variant:    colemak
 
-2017-06-22T1036
----------------
+N2017-06-22T10-36
+-----------------
 
 Generate list of packages installed on one machine running Debian for installation on another machine.
 
@@ -225,8 +225,8 @@ Install packages on the second machine ...
     $ sudo dpkg --set-selections < deb-pkg-list.txt
     $ sudo apt dselect-upgrade
 
-2017-06-21T0832
----------------
+N2017-06-21T08:32
+-----------------
 
 VLC not playing mkv files on the chromebook. Generates error message ...
 
@@ -234,16 +234,16 @@ VLC not playing mkv files on the chromebook. Generates error message ...
 
     libvdpau-va-gl: Decoder::Render_h264(): no surfaces left in buffer
 
-**[ FIX! ]** In VLC navigated to ``Tools->Preferences->Input/Codecs`` and for **Hardware-accelerated decoding** switched to ``VA-API video decoder via x11`` instead of using ``VDPAU``. Or set ``avcodec-hw=vaapi_x11`` in ``~/.config/vlc/vlcrc``.
+**[ Fix! ]** In VLC navigated to ``Tools->Preferences->Input/Codecs`` and for **Hardware-accelerated decoding** switched to ``VA-API video decoder via x11`` instead of using ``VDPAU``. Or set ``avcodec-hw=vaapi_x11`` in ``~/.config/vlc/vlcrc``.
 
 Link: https://askubuntu.com/questions/714363/intel-vaapi-cant-play-mkv-with-vlc
 
-2017-06-20T0926
----------------
+N2017-06-20T09:26
+-----------------
 
 Clearing the shell cache ... I originally installed ``glances`` via apt to ``/usr/bin/glances``, then removed, then installed via pip to ``/usr/local/bin/glances``. The command would show in PATH but - without an explicit path defined - would continue to try and execute from ``/usr/bin``.
 
-**[ FIX! ]**  Bash caches commands. Clear the cache of paths to executables using ``hash`` ...
+**[ Fix! ]**  Bash caches commands. Clear the cache of paths to executables using ``hash`` ...
 
 .. code-block:: bash
 
@@ -253,8 +253,8 @@ Clearing the shell cache ... I originally installed ``glances`` via apt to ``/us
     $ type glances
     glances is /usr/local/bin/glances
 
-2017-06-19T0953
----------------
+N2017-06-19T09:53
+-----------------
 
 Configure menu colours in Grub by creating ``/boot/grub/custom.cfg`` with settings ...
 
@@ -264,8 +264,8 @@ Configure menu colours in Grub by creating ``/boot/grub/custom.cfg`` with settin
     set menu_color_normal=white/black
     set menu_color_highlight=white/green
 
-2017-06-18T0949
----------------
+N2017-06-18T09:49
+-----------------
 
 Stop pulseaudio from respawning after halt (encountered in Ubuntu 16.04) ... When I kill pulseaudio with ``pulseaudio -k`` or ``kill -9 ID`` it immediately restarts ...
 
@@ -276,8 +276,8 @@ Stop pulseaudio from respawning after halt (encountered in Ubuntu 16.04) ... Whe
 
 **[ Fix! ]** There is a config file ``/etc/pulse/client.conf`` with ``autospawn = yes`` set by default. I could modify that, but chose instead to create ``~/.config/pulse/client.conf`` and set ``autospawn = no``. It works ... pulseaudio stays dead.
 
-2017-06-17T0921
----------------
+N2017-06-17T09:21
+-----------------
 
 Start a new project in Git and host on Github (after setting up a default config in ``~/.gitconfig``) ...
 
@@ -307,8 +307,8 @@ Connect with Github ...
 
     $ git pull origin master
 
-2017-06-16T0950
----------------
+N2017-06-16T09:50
+-----------------
 
 Stop pinned tabs from auto-loading upon Firefox startup. Goto ``about:config`` and set to **true** ...
 
@@ -316,8 +316,8 @@ Stop pinned tabs from auto-loading upon Firefox startup. Goto ``about:config`` a
 
     * browser.sessionstore.restore_pinned_tabs_on_demand    default boolean false
 
-2017-06-15T0853
----------------
+N2017-06-15T08:53
+-----------------
 
 Debian _stretch_/stable ``xbacklight`` is acting up ...
 
@@ -354,8 +354,8 @@ Create ``/etc/X11/xorg.conf.d/10-video-intel.conf`` containing ...
 		Driver "intel"
 	EndSection
 
-2017-06-14T2113
----------------
+N2017-06-14T21:13
+-----------------
 
 Trying to install Debian's ``flashplugin-nonfree`` package consistently fails with the error ....
 
@@ -365,8 +365,8 @@ Trying to install Debian's ``flashplugin-nonfree`` package consistently fails wi
 
 **[ Fix! ]** Manual install works courtesy of the instructions at https://wiki.debian.org/FlashPlayer#Manual_update
 
-2017-06-14T0947
----------------
+N2017-06-14T09:47
+-----------------
 
 Setup colour scheme for vim. As per `Giles' <http://www.gilesorr.com/blog/>`_ recommendation I use `tir_black. <http://www.vim.org/scripts/script.php?script_id=2777>`_  Place in ``~/.vim/colors``.
 
@@ -400,8 +400,8 @@ Launch a new tmux session. Neovim colours work OK!
     $ tput colors
     256
 
-2017-06-13T0847
----------------
+N2017-06-13T08:47
+-----------------
 
 Created a Debian _stretch_ virtualbox guest but ``virtualbox-guest-{dkms,utils,x11}`` packages no longer available ... but there *are* pkgs in `_sid_. <https://tracker.debian.org/pkg/virtualbox>`_
 
@@ -430,8 +430,8 @@ Update and install ...
     # apt -t unstable install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
     # adduser dwa vboxsf
 
-2017-06-12T1041
----------------
+N2017-06-12T10:41
+-----------------
 
 Local install of Python modules as non-root user. Example ...
 
@@ -443,17 +443,17 @@ Local install of Python modules as non-root user. Example ...
 
 Add ``~/.local/bin`` to user's $PATH.
 
-2017-06-11T1020
----------------
+N2017-06-11T10:20
+-----------------
 
 If SSH session is frozen ... Use the key-combo **Enter, Shift + `, .** [Enter, Tilde, Period]  to drop the connection.
 
-2017-06-10T0838
----------------
+N2017-06-10T08:38
+-----------------
 
 Microphone problem on Thinkpad x230 running Ubuntu 16.04 ... No sound input and **mic** not detected.
 
-**[ FIX! ]** Get capture device ...                                                          
+**[ Fix! ]** Get capture device ...                                                          
 
 .. code-block:: bash
 
@@ -468,11 +468,12 @@ Kill and respawn pulseaudio ...
                                                         
 	$ pulseaudio -k
 
-2017-06-09T0941
----------------
+N2017-06-09T09:41
+-----------------
+
 Restart network service on Ubuntu ... Sometimes after wake-from-suspend the network connection is down and network-manager's wifi ap list fails to refresh.
                                                                                 
-**[ FIX! ]** Simple systemd way ...                                                   
+**[ Fix! ]** Simple systemd way ...                                                   
                                                                                 
 .. code-block:: bash                                                            
                                                                                 
@@ -500,8 +501,9 @@ Last resort ...
     $ sudo ifdown -a  # -a brings down all interfaces                           
     $ sudo ifup -a
 
-2017-06-08T0920
----------------
+N2017-06-08T09:20
+-----------------
+
 Attaching to a wifi network with ``nmcli`` (network-manager cli client) ...
 
 .. code-block:: bash
@@ -511,8 +513,9 @@ Attaching to a wifi network with ``nmcli`` (network-manager cli client) ...
     $ nmcli device wifi rescan
     $ nmcli device wifi connect SSID-Name password PASS
 
-2017-06-07T1219
----------------
+N2017-06-07T12:19
+-----------------
+
 Disable `Pelican <http://www.circuidipity.com/tag-pelican.html>`_ from auto-generating ``archives.html`` by adding to ``pelicanconf.py`` ...
 
 .. code-block:: bash
