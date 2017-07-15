@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+        <title>Circuidipity | Virtualbox on Debian Stretch</title>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Daniel Wayne Armstrong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/pygment.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/css/font.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="http://www.circuidipity.com/theme/images/icons/font-awesome/css/font-awesome.min.css">
+        <link rel="icon" href="http://www.circuidipity.com/theme/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+        <!-- content -->
+
+<!-- breadcrumb trail -->
+<div id="breadcrumb">
+    <p><a href="/"><img class="minime" src="/theme/images/minime.png" alt="Mini Me" height="38" width="38" /> Howdy!</a> &nbsp;<i class="fa fa-arrow-right"></i>&nbsp;
+    Saturday 15 July 2017</p>
+</div>
+
+<!-- article -->
+<h1>Virtualbox on Debian Stretch</h1>
+<div id="article">
+    <p><a class="reference external" href="https://www.virtualbox.org/">Virtualbox</a> is virtualization software that allows a Linux user to host multiple guest operating systems as <strong>virtual machines (VMs)</strong>. It is a cool tool for playing with different Linux distros and experimenting with configurations.</p>
+<div class="section" id="let-s-go">
+<h2>Let's go!</h2>
+<p>In this HOWTO I install Virtualbox on a <a class="reference external" href="http://www.circuidipity.com/tag-debian.html">Debian</a> <tt class="docutils literal">stable/stretch</tt> HOST and create a Debian GUEST virtual machine.</p>
+<div class="section" id="install-virtualbox-on-host">
+<h3>0. Install VirtualBox on HOST</h3>
+<p>Kernel modules for Virtualbox are built via <a class="reference external" href="http://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support">Dynamic Kernel Module Support (DKMS)</a>. After installing Virtualbox the <tt class="docutils literal">vbox</tt> modules should be auto-built and -loaded. Install a few tools ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install dkms module-assistant linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span>
+</pre></div>
+<p>Virtualbox packages have been removed from the latest Debian stable release (still available in unstable/sid). I choose to retrieve Virtualbox directly from Oracle and their third-party Debian package repository.</p>
+<p>Create the <tt class="docutils literal">virtualbox.list</tt> file in <tt class="docutils literal">/etc/apt/sources.list.d</tt> ...</p>
+<div class="highlight"><pre><span></span>$ sudo sh -c <span class="err">&#39;</span><span class="nb">echo</span> <span class="s2">&quot;deb http://download.virtualbox.org/virtualbox/debian stretch contrib&quot;</span> &gt; /etc/apt/sources.list.d/virtualbox.list
+</pre></div>
+<p>Add Oracle's Virtualbox public key ...</p>
+<div class="highlight"><pre><span></span>$ wget https://www.virtualbox.org/download/oracle_vbox_2016.asc
+$ sudo mv oracle_vbox_2016.asc /etc/apt/trusted.gpg.d
+$ apt-key list
+<span class="o">[</span>...<span class="o">]</span>
+/etc/apt/trusted.gpg.d/oracle_vbox_2016.asc
+-------------------------------------------
+pub   rsa4096 2016-04-22 <span class="o">[</span>SC<span class="o">]</span>
+B9F8 D658 297A F3EF C18D  5CDF A2F6 83C5 <span class="m">2980</span> AECF
+uid           <span class="o">[</span> unknown<span class="o">]</span> Oracle Corporation <span class="o">(</span>VirtualBox archive signing key<span class="o">)</span> &lt;info@virtualbox.org&gt;
+sub   rsa4096 2016-04-22 <span class="o">[</span>E<span class="o">]</span>
+</pre></div>
+<p>Install Virtualbox ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt update <span class="o">&amp;&amp;</span> sudo apt install virtualbox-5.1
+</pre></div>
+<p>Add my USERNAME to the <tt class="docutils literal">vboxusers</tt> group ...</p>
+<div class="highlight"><pre><span></span>$ sudo adduser USERNAME vboxusers
+</pre></div>
+</div>
+<div class="section" id="create-a-debian-guest-vm">
+<h3>1. Create a Debian GUEST VM</h3>
+<p><strong>Default Machine Folder</strong> where Virtual Machine (VM) images are stored is <tt class="docutils literal">~/Virtualbox VMs</tt> (this can be modified in <tt class="docutils literal"><span class="pre">File-&gt;Preferences-&gt;General</span></tt>).</p>
+<p>See the <a class="reference external" href="http://www.virtualbox.org/manual/UserManual.html">User Manual</a> for creating a GUEST VM. I use the Debian <tt class="docutils literal">netinst</tt> installer to create a new virtual machine with a <a class="reference external" href="http://www.circuidipity.com/minimal-debian.html">minimal system configuration</a>.</p>
+</div>
+<div class="section" id="guest-additions">
+<h3>2. Guest additions</h3>
+<p>Enable extra features such as the ability to tweak display settings and add a shared folder between HOST and GUEST machines.</p>
+<p>Launch the new Debian GUEST and install ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># apt update &amp;&amp; apt install build-essential module-assistant linux-headers-$(uname -r) dkms</span>
+<span class="c1"># m-a prepare</span>
+</pre></div>
+<p>Download the <tt class="docutils literal">VBoxGuestAdditions_VERSION.iso</tt> ...</p>
+<div class="highlight"><pre><span></span>$ wget -c http://download.virtualbox.org/virtualbox/5.1.22/VBoxGuestAdditions_5.1.22.iso
+</pre></div>
+<p>In the GUEST window menu, select <tt class="docutils literal">Devices &gt; Insert Guest Additions CD image</tt> to make the image accessible to the VM. Inside the VM: <strong>mount</strong> the image; <strong>run</strong> the install script; <strong>add</strong> user to the <tt class="docutils literal">vboxsf</tt> group; <strong>reboot</strong> the VM ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># mount /media/cdrom</span>
+<span class="c1"># sh /media/cdrom/VBoxLinuxAdditions.run</span>
+<span class="c1"># adduser USERNAME vboxsf</span>
+<span class="c1"># reboot</span>
+</pre></div>
+<p>If the virtualbox modules need to be rebuilt for any reason for the running kernel ...</p>
+<div class="highlight"><pre><span></span>$ uname -r <span class="p">|</span> sudo xargs -n1 /usr/lib/dkms/dkms_autoinstaller start
+</pre></div>
+</div>
+<div class="section" id="display">
+<h3>3. Display</h3>
+<p>Tweak display settings by going to the Virtualbox <tt class="docutils literal"><span class="pre">Machine-&gt;Settings...-&gt;Display</span></tt> setting and move the slider to add more video memory and enable 3D acceleration.</p>
+<img alt="Display Settings" class="align-center" src="images/20121207-display.png" style="width: 662px; height: 502px;" />
+<p>With VirtualBox guest additions the display and resolution can be changed when running a graphical environment. If the GUEST VM does not use a graphical login manager to launch its desktop, then modify <tt class="docutils literal"><span class="pre">~/.xinitrc</span></tt> to start <strong>VBoxClient</strong> services ...</p>
+<div class="highlight"><pre><span></span>VBoxClient --clipboard <span class="p">&amp;</span>
+VBoxClient --display <span class="p">&amp;</span>
+VBoxClient --seamless <span class="p">&amp;</span>
+</pre></div>
+</div>
+<div class="section" id="console">
+<h3>4. Console</h3>
+<p>Debian GUEST in console mode defaults to a small 80x40 window. Resize by rebooting the GUEST and configuring <strong>Grub</strong> ...</p>
+<ul class="simple">
+<li>Grub boot screen: hit <tt class="docutils literal">c</tt> to enter command mode</li>
+<li>At the prompt <tt class="docutils literal">grub&gt;</tt>: run <tt class="docutils literal">vbeinfo</tt> to display supported resolutions (example: <tt class="docutils literal">1152x864</tt>)</li>
+<li><dl class="first docutils">
+<dt>Modify the config <tt class="docutils literal">/etc/default/grub</tt>: add ...</dt>
+<dd><ul class="first last">
+<li><tt class="docutils literal"><span class="pre">GRUB_CMDLINE_LINUX_DEFAULT=&quot;nomodeset&quot;</span></tt></li>
+<li><tt class="docutils literal">GRUB_GFXMODE=1152x864</tt></li>
+<li><tt class="docutils literal">GRUB_GFXPAYLOAD_LINUX=keep</tt> (<a class="reference external" href="https://askubuntu.com/a/887785">Helpful!</a>)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>Save changes: run <tt class="docutils literal">sudo <span class="pre">update-grub</span></tt> and reboot</li>
+</ul>
+</div>
+<div class="section" id="shared-folder">
+<h3>5. Shared folder</h3>
+<p>Create a shared folder on HOST. Make it accessible to GUEST by going to <tt class="docutils literal"><span class="pre">Machine-&gt;Settings...-&gt;Shared</span> Folders</tt> and click <tt class="docutils literal">Add Shared Folder</tt> and <tt class="docutils literal"><span class="pre">Auto-Mount</span></tt>.</p>
+<img alt="Shared Folder Settings" class="align-center" src="images/20121207-shared-folders.png" style="width: 662px; height: 502px;" />
+</div>
+<div class="section" id="ssh-from-host-to-guest">
+<h3>6. SSH from HOST to GUEST</h3>
+<p><a class="reference external" href="http://christophermaier.name/blog/2010/09/01/host-only-networking-with-virtualbox">Host-only networking with Virtualbox</a> was a big help getting this properly configured.</p>
+<p><strong>Scenario:</strong> I want to SSH from my HOST to GUEST. Default configuration supplies GUEST with a NAT interface for internet access but no HOST&lt;-&gt;GUEST connectivity. A solution for local access is creating a <strong>host-only adapter</strong>.</p>
+<div class="section" id="host">
+<h4>HOST</h4>
+<p>Navigate to Virtualbox's <tt class="docutils literal"><span class="pre">File-&gt;Preferences-&gt;Network</span></tt>, select <tt class="docutils literal"><span class="pre">Host-only</span> Networks</tt>, click <tt class="docutils literal">Adds new <span class="pre">host-only</span> network</tt> to create <tt class="docutils literal">vboxnet0</tt>. Default setup is interface address <tt class="docutils literal">192.168.56.1</tt> with DHCP enabled.</p>
+<p>Select the GUEST VM and in <tt class="docutils literal"><span class="pre">Machine-&gt;Settings-&gt;Network</span></tt> click on <tt class="docutils literal">Adapter 2</tt>, enable network adapter attached to <tt class="docutils literal"><span class="pre">Host-only</span> Adapter</tt>, and select <tt class="docutils literal">vboxnet0</tt>.</p>
+</div>
+<div class="section" id="guest">
+<h4>GUEST</h4>
+<p>Boot the VM and confirm the new interface has been created. Add the interface to <tt class="docutils literal">/etc/network/interfaces</tt> (example: <tt class="docutils literal">enp0s8</tt>) ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Host-only interface</span>
+auto enp0s8
+iface enp0s8 inet dhcp
+</pre></div>
+<p>Install the SSH server ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt install openssh-server
+</pre></div>
+<p>Reboot GUEST. The second interface has been assigned address <tt class="docutils literal">192.168.56.101</tt> by DHCP and can now be accessed from HOST via SSH.</p>
+<p><strong>Optional:</strong> Assign GUEST a static address outside the range of the Virtualbox DHCP server (101-254 by default) ...</p>
+<div class="highlight"><pre><span></span><span class="c1"># Host-only interface</span>
+auto enp0s8
+iface enp0s8 inet static
+address 192.168.56.50
+netmask 255.255.255.0
+network 192.168.56.0
+broadcast 192.168.56.255
+</pre></div>
+<p>... and modify <tt class="docutils literal">/etc/hosts</tt> on HOST by adding the VM static address.</p>
+<p>Happy hacking!</p>
+</div>
+</div>
+</div>
+
+    <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-virtualbox.html">virtualbox</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
+        &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
+</p>
+</div>
+
+<!-- Nav links to previous|next article -->
+<div id="navmenu">
+    <hr />
+    <p class="prevpost"><i class="fa fa-arrow-left"></i> Older<br />
+        <a href="http://www.circuidipity.com/debian-package-list.html">Install (almost) the same list of Debian packages on multiple machines</a></p>
+</div>
+
+
+        <!-- footer -->
+<div id="footer">
+    <img class="imgfooter" src="./theme/images/footerbar.png" />
+    <p class="contentinfo">
+    <span class="noWrap">
+        Copyright &#169; 2017 and
+        <a rel="license" class="ccLicense" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA License</a> by
+        <a rel="author" class="authorID" href="/">Daniel Wayne Armstrong</a>
+    </span>
+    <span class="noWrap">
+        <i class="fa fa-globe"></i>
+        Find me at <span class="whoa">daniel at circuidipity dot com</span>
+    </span>
+    <br />
+    Don't miss a thing... updates by
+    <a href="feed.xml">RSS</a> and
+    <a class="subTweat" href="https://twitter.com/circuidipity">Twitter</a>
+    </p>
+</div></body>
+</html>

@@ -1,5 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-07-14T12:37:00-04:00</updated><entry><title>Install (almost) the same list of Debian packages on multiple machines</title><link href="http://www.circuidipity.com/debian-package-list.html" rel="alternate"></link><published>2017-07-14T12:37:00-04:00</published><updated>2017-07-14T12:37:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-07-14:/debian-package-list.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Scenario:&lt;/strong&gt; I have a whole bunch of packages installed on &lt;strong&gt;Machine A&lt;/strong&gt; and I want to replicate that package selection on &lt;strong&gt;Machine B&lt;/strong&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Circuidipity</title><link href="http://www.circuidipity.com/" rel="alternate"></link><link href="http://www.circuidipity.com/feed.xml" rel="self"></link><id>http://www.circuidipity.com/</id><updated>2017-07-15T14:21:00-04:00</updated><entry><title>Virtualbox on Debian Stretch</title><link href="http://www.circuidipity.com/virtualbox-debian-stretch.html" rel="alternate"></link><published>2017-07-15T14:21:00-04:00</published><updated>2017-07-15T14:21:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-07-15:/virtualbox-debian-stretch.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://www.virtualbox.org/"&gt;Virtualbox&lt;/a&gt; is virtualization software that allows a Linux user to host multiple guest operating systems as &lt;strong&gt;virtual machines (VMs)&lt;/strong&gt;. It is a cool tool for playing with different Linux distros and experimenting with configurations.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;In this HOWTO I install Virtualbox on a &lt;a class="reference external" href="http://www.circuidipity.com/tag-debian.html"&gt;Debian&lt;/a&gt; &lt;tt class="docutils literal"&gt;stable/stretch&lt;/tt&gt; HOST and create …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://www.virtualbox.org/"&gt;Virtualbox&lt;/a&gt; is virtualization software that allows a Linux user to host multiple guest operating systems as &lt;strong&gt;virtual machines (VMs)&lt;/strong&gt;. It is a cool tool for playing with different Linux distros and experimenting with configurations.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;In this HOWTO I install Virtualbox on a &lt;a class="reference external" href="http://www.circuidipity.com/tag-debian.html"&gt;Debian&lt;/a&gt; &lt;tt class="docutils literal"&gt;stable/stretch&lt;/tt&gt; HOST and create a Debian GUEST virtual machine.&lt;/p&gt;
+&lt;div class="section" id="install-virtualbox-on-host"&gt;
+&lt;h3&gt;0. Install VirtualBox on HOST&lt;/h3&gt;
+&lt;p&gt;Kernel modules for Virtualbox are built via &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support"&gt;Dynamic Kernel Module Support (DKMS)&lt;/a&gt;. After installing Virtualbox the &lt;tt class="docutils literal"&gt;vbox&lt;/tt&gt; modules should be auto-built and -loaded. Install a few tools ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install dkms module-assistant linux-headers-&lt;span class="k"&gt;$(&lt;/span&gt;uname -r&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Virtualbox packages have been removed from the latest Debian stable release (still available in unstable/sid). I choose to retrieve Virtualbox directly from Oracle and their third-party Debian package repository.&lt;/p&gt;
+&lt;p&gt;Create the &lt;tt class="docutils literal"&gt;virtualbox.list&lt;/tt&gt; file in &lt;tt class="docutils literal"&gt;/etc/apt/sources.list.d&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo sh -c &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;deb http://download.virtualbox.org/virtualbox/debian stretch contrib&amp;quot;&lt;/span&gt; &amp;gt; /etc/apt/sources.list.d/virtualbox.list
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Add Oracle's Virtualbox public key ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ wget https://www.virtualbox.org/download/oracle_vbox_2016.asc
+$ sudo mv oracle_vbox_2016.asc /etc/apt/trusted.gpg.d
+$ apt-key list
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+/etc/apt/trusted.gpg.d/oracle_vbox_2016.asc
+-------------------------------------------
+pub   rsa4096 2016-04-22 &lt;span class="o"&gt;[&lt;/span&gt;SC&lt;span class="o"&gt;]&lt;/span&gt;
+B9F8 D658 297A F3EF C18D  5CDF A2F6 83C5 &lt;span class="m"&gt;2980&lt;/span&gt; AECF
+uid           &lt;span class="o"&gt;[&lt;/span&gt; unknown&lt;span class="o"&gt;]&lt;/span&gt; Oracle Corporation &lt;span class="o"&gt;(&lt;/span&gt;VirtualBox archive signing key&lt;span class="o"&gt;)&lt;/span&gt; &amp;lt;info@virtualbox.org&amp;gt;
+sub   rsa4096 2016-04-22 &lt;span class="o"&gt;[&lt;/span&gt;E&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Install Virtualbox ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt install virtualbox-5.1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Add my USERNAME to the &lt;tt class="docutils literal"&gt;vboxusers&lt;/tt&gt; group ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo adduser USERNAME vboxusers
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="create-a-debian-guest-vm"&gt;
+&lt;h3&gt;1. Create a Debian GUEST VM&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Default Machine Folder&lt;/strong&gt; where Virtual Machine (VM) images are stored is &lt;tt class="docutils literal"&gt;~/Virtualbox VMs&lt;/tt&gt; (this can be modified in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;File-&amp;gt;Preferences-&amp;gt;General&lt;/span&gt;&lt;/tt&gt;).&lt;/p&gt;
+&lt;p&gt;See the &lt;a class="reference external" href="http://www.virtualbox.org/manual/UserManual.html"&gt;User Manual&lt;/a&gt; for creating a GUEST VM. I use the Debian &lt;tt class="docutils literal"&gt;netinst&lt;/tt&gt; installer to create a new virtual machine with a &lt;a class="reference external" href="http://www.circuidipity.com/minimal-debian.html"&gt;minimal system configuration&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="guest-additions"&gt;
+&lt;h3&gt;2. Guest additions&lt;/h3&gt;
+&lt;p&gt;Enable extra features such as the ability to tweak display settings and add a shared folder between HOST and GUEST machines.&lt;/p&gt;
+&lt;p&gt;Launch the new Debian GUEST and install ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# apt update &amp;amp;&amp;amp; apt install build-essential module-assistant linux-headers-$(uname -r) dkms&lt;/span&gt;
+&lt;span class="c1"&gt;# m-a prepare&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Download the &lt;tt class="docutils literal"&gt;VBoxGuestAdditions_VERSION.iso&lt;/tt&gt; ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ wget -c http://download.virtualbox.org/virtualbox/5.1.22/VBoxGuestAdditions_5.1.22.iso
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In the GUEST window menu, select &lt;tt class="docutils literal"&gt;Devices &amp;gt; Insert Guest Additions CD image&lt;/tt&gt; to make the image accessible to the VM. Inside the VM: &lt;strong&gt;mount&lt;/strong&gt; the image; &lt;strong&gt;run&lt;/strong&gt; the install script; &lt;strong&gt;add&lt;/strong&gt; user to the &lt;tt class="docutils literal"&gt;vboxsf&lt;/tt&gt; group; &lt;strong&gt;reboot&lt;/strong&gt; the VM ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# mount /media/cdrom&lt;/span&gt;
+&lt;span class="c1"&gt;# sh /media/cdrom/VBoxLinuxAdditions.run&lt;/span&gt;
+&lt;span class="c1"&gt;# adduser USERNAME vboxsf&lt;/span&gt;
+&lt;span class="c1"&gt;# reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If the virtualbox modules need to be rebuilt for any reason for the running kernel ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ uname -r &lt;span class="p"&gt;|&lt;/span&gt; sudo xargs -n1 /usr/lib/dkms/dkms_autoinstaller start
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="display"&gt;
+&lt;h3&gt;3. Display&lt;/h3&gt;
+&lt;p&gt;Tweak display settings by going to the Virtualbox &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Machine-&amp;gt;Settings...-&amp;gt;Display&lt;/span&gt;&lt;/tt&gt; setting and move the slider to add more video memory and enable 3D acceleration.&lt;/p&gt;
+&lt;img alt="Display Settings" class="align-center" src="images/20121207-display.png" style="width: 662px; height: 502px;" /&gt;
+&lt;p&gt;With VirtualBox guest additions the display and resolution can be changed when running a graphical environment. If the GUEST VM does not use a graphical login manager to launch its desktop, then modify &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; to start &lt;strong&gt;VBoxClient&lt;/strong&gt; services ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;VBoxClient --clipboard &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+VBoxClient --display &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+VBoxClient --seamless &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="console"&gt;
+&lt;h3&gt;4. Console&lt;/h3&gt;
+&lt;p&gt;Debian GUEST in console mode defaults to a small 80x40 window. Resize by rebooting the GUEST and configuring &lt;strong&gt;Grub&lt;/strong&gt; ...&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Grub boot screen: hit &lt;tt class="docutils literal"&gt;c&lt;/tt&gt; to enter command mode&lt;/li&gt;
+&lt;li&gt;At the prompt &lt;tt class="docutils literal"&gt;grub&amp;gt;&lt;/tt&gt;: run &lt;tt class="docutils literal"&gt;vbeinfo&lt;/tt&gt; to display supported resolutions (example: &lt;tt class="docutils literal"&gt;1152x864&lt;/tt&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;Modify the config &lt;tt class="docutils literal"&gt;/etc/default/grub&lt;/tt&gt;: add ...&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first last"&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;GRUB_CMDLINE_LINUX_DEFAULT=&amp;quot;nomodeset&amp;quot;&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;GRUB_GFXMODE=1152x864&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;GRUB_GFXPAYLOAD_LINUX=keep&lt;/tt&gt; (&lt;a class="reference external" href="https://askubuntu.com/a/887785"&gt;Helpful!&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;li&gt;Save changes: run &lt;tt class="docutils literal"&gt;sudo &lt;span class="pre"&gt;update-grub&lt;/span&gt;&lt;/tt&gt; and reboot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="shared-folder"&gt;
+&lt;h3&gt;5. Shared folder&lt;/h3&gt;
+&lt;p&gt;Create a shared folder on HOST. Make it accessible to GUEST by going to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Machine-&amp;gt;Settings...-&amp;gt;Shared&lt;/span&gt; Folders&lt;/tt&gt; and click &lt;tt class="docutils literal"&gt;Add Shared Folder&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Auto-Mount&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;img alt="Shared Folder Settings" class="align-center" src="images/20121207-shared-folders.png" style="width: 662px; height: 502px;" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ssh-from-host-to-guest"&gt;
+&lt;h3&gt;6. SSH from HOST to GUEST&lt;/h3&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://christophermaier.name/blog/2010/09/01/host-only-networking-with-virtualbox"&gt;Host-only networking with Virtualbox&lt;/a&gt; was a big help getting this properly configured.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Scenario:&lt;/strong&gt; I want to SSH from my HOST to GUEST. Default configuration supplies GUEST with a NAT interface for internet access but no HOST&amp;lt;-&amp;gt;GUEST connectivity. A solution for local access is creating a &lt;strong&gt;host-only adapter&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="section" id="host"&gt;
+&lt;h4&gt;HOST&lt;/h4&gt;
+&lt;p&gt;Navigate to Virtualbox's &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;File-&amp;gt;Preferences-&amp;gt;Network&lt;/span&gt;&lt;/tt&gt;, select &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Host-only&lt;/span&gt; Networks&lt;/tt&gt;, click &lt;tt class="docutils literal"&gt;Adds new &lt;span class="pre"&gt;host-only&lt;/span&gt; network&lt;/tt&gt; to create &lt;tt class="docutils literal"&gt;vboxnet0&lt;/tt&gt;. Default setup is interface address &lt;tt class="docutils literal"&gt;192.168.56.1&lt;/tt&gt; with DHCP enabled.&lt;/p&gt;
+&lt;p&gt;Select the GUEST VM and in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Machine-&amp;gt;Settings-&amp;gt;Network&lt;/span&gt;&lt;/tt&gt; click on &lt;tt class="docutils literal"&gt;Adapter 2&lt;/tt&gt;, enable network adapter attached to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Host-only&lt;/span&gt; Adapter&lt;/tt&gt;, and select &lt;tt class="docutils literal"&gt;vboxnet0&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="guest"&gt;
+&lt;h4&gt;GUEST&lt;/h4&gt;
+&lt;p&gt;Boot the VM and confirm the new interface has been created. Add the interface to &lt;tt class="docutils literal"&gt;/etc/network/interfaces&lt;/tt&gt; (example: &lt;tt class="docutils literal"&gt;enp0s8&lt;/tt&gt;) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Host-only interface&lt;/span&gt;
+auto enp0s8
+iface enp0s8 inet dhcp
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Install the SSH server ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install openssh-server
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot GUEST. The second interface has been assigned address &lt;tt class="docutils literal"&gt;192.168.56.101&lt;/tt&gt; by DHCP and can now be accessed from HOST via SSH.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Optional:&lt;/strong&gt; Assign GUEST a static address outside the range of the Virtualbox DHCP server (101-254 by default) ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Host-only interface&lt;/span&gt;
+auto enp0s8
+iface enp0s8 inet static
+address 192.168.56.50
+netmask 255.255.255.0
+network 192.168.56.0
+broadcast 192.168.56.255
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;... and modify &lt;tt class="docutils literal"&gt;/etc/hosts&lt;/tt&gt; on HOST by adding the VM static address.&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="virtualbox"></category><category term="debian"></category><category term="linux"></category></entry><entry><title>Install (almost) the same list of Debian packages on multiple machines</title><link href="http://www.circuidipity.com/debian-package-list.html" rel="alternate"></link><published>2017-07-14T12:37:00-04:00</published><updated>2017-07-14T12:37:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-07-14:/debian-package-list.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Scenario:&lt;/strong&gt; I have a whole bunch of packages installed on &lt;strong&gt;Machine A&lt;/strong&gt; and I want to replicate that package selection on &lt;strong&gt;Machine B&lt;/strong&gt;.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Machine A serves as the original source of the list of packages.&lt;/p&gt;
@@ -696,106 +824,4 @@ keycode &lt;span class="nv"&gt;133&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span
 &lt;p&gt;Sources: dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.chromebook"&gt;.xmodmap.chromebook&lt;/a&gt; and dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category><category term="keyboard"></category></entry><entry><title>Dot Xresources</title><link href="http://www.circuidipity.com/xresources.html" rel="alternate"></link><published>2017-06-25T09:30:00-04:00</published><updated>2017-06-25T09:30:00-04:00</updated><author><name>Daniel Wayne Armstrong</name></author><id>tag:www.circuidipity.com,2017-06-25:/xresources.html</id><summary type="html">&lt;p&gt;I create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.Xresources&lt;/span&gt;&lt;/tt&gt; to set my custom configuration parameters for X client applications.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Whenever making any changes to the file, refresh the configuration by running ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xrdb -merge ~/.Xresources
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="section" id="fonts"&gt;
-&lt;h3&gt;Fonts&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Xft.antialias:  &lt;span class="nb"&gt;true&lt;/span&gt;
-Xft.rgba:       rgb
-Xft.hinting:    &lt;span class="nb"&gt;true&lt;/span&gt;
-Xft.hintstyle:  hintslight
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="terminal-colours"&gt;
-&lt;h3&gt;Terminal colours&lt;/h3&gt;
-&lt;p&gt;I use the &lt;strong&gt;Urxvt&lt;/strong&gt; terminal …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;I create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.Xresources&lt;/span&gt;&lt;/tt&gt; to set my custom configuration parameters for X client applications.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Whenever making any changes to the file, refresh the configuration by running ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xrdb -merge ~/.Xresources
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="section" id="fonts"&gt;
-&lt;h3&gt;Fonts&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Xft.antialias:  &lt;span class="nb"&gt;true&lt;/span&gt;
-Xft.rgba:       rgb
-Xft.hinting:    &lt;span class="nb"&gt;true&lt;/span&gt;
-Xft.hintstyle:  hintslight
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="terminal-colours"&gt;
-&lt;h3&gt;Terminal colours&lt;/h3&gt;
-&lt;p&gt;I use the &lt;strong&gt;Urxvt&lt;/strong&gt; terminal. Install (on Debian) ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install rxvt-unicode-256color
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Setup a colour scheme ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;*foreground:       &lt;span class="c1"&gt;#6fc3df&lt;/span&gt;
-*background:       &lt;span class="c1"&gt;#000000&lt;/span&gt;
-*cursorColor:      &lt;span class="c1"&gt;#ef2929&lt;/span&gt;
-! black
-*color0:           &lt;span class="c1"&gt;#000000&lt;/span&gt;
-*color8:           &lt;span class="c1"&gt;#555753&lt;/span&gt;
-! red
-*color1:           &lt;span class="c1"&gt;#cc0000&lt;/span&gt;
-*color9:           &lt;span class="c1"&gt;#ef2929&lt;/span&gt;
-! green
-*color2:           &lt;span class="c1"&gt;#4e9a06&lt;/span&gt;
-*color10:          &lt;span class="c1"&gt;#8ae234&lt;/span&gt;
-! yellow
-*color3:           &lt;span class="c1"&gt;#c4a000&lt;/span&gt;
-*color11:          &lt;span class="c1"&gt;#fce94f&lt;/span&gt;
-! blue
-*color4:           &lt;span class="c1"&gt;#3465a4&lt;/span&gt;
-*color12:          &lt;span class="c1"&gt;#025cac&lt;/span&gt;
-! magenta
-*color5:           &lt;span class="c1"&gt;#75507b&lt;/span&gt;
-*color13:          &lt;span class="c1"&gt;#ad7fa8&lt;/span&gt;
-! cyan
-*color6:           &lt;span class="c1"&gt;#06989a&lt;/span&gt;
-*color14:          &lt;span class="c1"&gt;#96cdfe&lt;/span&gt;
-! white
-*color7:           &lt;span class="c1"&gt;#d3d7cf&lt;/span&gt;
-*color15:          &lt;span class="c1"&gt;#eeeeec&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="terminal-settings"&gt;
-&lt;h3&gt;Terminal settings&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;URxvt.scrollBar: &lt;span class="nb"&gt;false&lt;/span&gt;
-URxvt.saveLines: 8888
-URxvt.font: xft:terminus:pixelsize&lt;span class="o"&gt;=&lt;/span&gt;18
-URxvt.boldFont: xft:terminus:bold:pixelsize&lt;span class="o"&gt;=&lt;/span&gt;18
-URxvt.perl-ext-common: default,matcher,tabbed
-URxvt.tabbed.tabbar-fg: 15
-URxvt.tabbed.tabbar-bg: 0
-URxvt.tabbed.tab-fg: 15
-URxvt.tabbed.tab-bg: 4
-URxvt.url-launcher: /usr/bin/firefox
-URxvt.matcher.button: 1
-! add a spot of colour to man pages
-URxvt.colorIT:      &lt;span class="c1"&gt;#87af5f&lt;/span&gt;
-URxvt.colorBD:      &lt;span class="c1"&gt;#d7d7d7&lt;/span&gt;
-URxvt.colorUL:      &lt;span class="c1"&gt;#87afd7&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="rofi"&gt;
-&lt;h3&gt;Rofi&lt;/h3&gt;
-&lt;p&gt;A &lt;a class="reference external" href="https://davedavenport.github.io/rofi/"&gt;window switcher + run dialog&lt;/a&gt; utility. Good stuff! Add colour ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rofi.hlfg:          &lt;span class="c1"&gt;#FFFFFF&lt;/span&gt;
-rofi.hlbg:          &lt;span class="c1"&gt;#FF0000&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="startx"&gt;
-&lt;h3&gt;Startx&lt;/h3&gt;
-&lt;p&gt;Add the file to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.xinitrc&lt;/span&gt;&lt;/tt&gt; for loading when executing &lt;tt class="docutils literal"&gt;startx&lt;/tt&gt; ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -f ~/.Xresources &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
-    xrdb -merge ~/.Xresources
-&lt;span class="k"&gt;fi&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sources: dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.Xresources"&gt;.Xresources&lt;/a&gt; and dotfiles/&lt;a class="reference external" href="https://github.com/vonbrownie/dotfiles/blob/master/.xinitrc"&gt;.xinitrc&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Happy hacking!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category></entry></feed>
+</content><category term="dotfiles"></category><category term="shell"></category><category term="linux"></category><category term="keyboard"></category></entry></feed>

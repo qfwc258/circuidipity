@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Circuidipity - Daniel Wayne Armstrong</title><link>http://www.circuidipity.com/</link><description></description><lastBuildDate>Fri, 14 Jul 2017 12:37:00 -0400</lastBuildDate><item><title>Install (almost) the same list of Debian packages on multiple machines</title><link>http://www.circuidipity.com/debian-package-list.html</link><description>&lt;p&gt;&lt;strong&gt;Scenario:&lt;/strong&gt; I have a whole bunch of packages installed on &lt;strong&gt;Machine A&lt;/strong&gt; and I want to replicate that package selection on &lt;strong&gt;Machine B&lt;/strong&gt;.&lt;/p&gt;
+<rss version="2.0"><channel><title>Circuidipity - Daniel Wayne Armstrong</title><link>http://www.circuidipity.com/</link><description></description><lastBuildDate>Sat, 15 Jul 2017 14:21:00 -0400</lastBuildDate><item><title>Virtualbox on Debian Stretch</title><link>http://www.circuidipity.com/virtualbox-debian-stretch.html</link><description>&lt;p&gt;&lt;a class="reference external" href="https://www.virtualbox.org/"&gt;Virtualbox&lt;/a&gt; is virtualization software that allows a Linux user to host multiple guest operating systems as &lt;strong&gt;virtual machines (VMs)&lt;/strong&gt;. It is a cool tool for playing with different Linux distros and experimenting with configurations.&lt;/p&gt;
+&lt;div class="section" id="let-s-go"&gt;
+&lt;h2&gt;Let's go!&lt;/h2&gt;
+&lt;p&gt;In this HOWTO I install Virtualbox on a &lt;a class="reference external" href="http://www.circuidipity.com/tag-debian.html"&gt;Debian&lt;/a&gt; &lt;tt class="docutils literal"&gt;stable/stretch&lt;/tt&gt; HOST and create …&lt;/p&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sat, 15 Jul 2017 14:21:00 -0400</pubDate><guid isPermaLink="false">tag:www.circuidipity.com,2017-07-15:/virtualbox-debian-stretch.html</guid><category>virtualbox</category><category>debian</category><category>linux</category></item><item><title>Install (almost) the same list of Debian packages on multiple machines</title><link>http://www.circuidipity.com/debian-package-list.html</link><description>&lt;p&gt;&lt;strong&gt;Scenario:&lt;/strong&gt; I have a whole bunch of packages installed on &lt;strong&gt;Machine A&lt;/strong&gt; and I want to replicate that package selection on &lt;strong&gt;Machine B&lt;/strong&gt;.&lt;/p&gt;
 &lt;div class="section" id="let-s-go"&gt;
 &lt;h2&gt;Let's go!&lt;/h2&gt;
 &lt;p&gt;Machine A serves as the original source of the list of packages.&lt;/p&gt;
@@ -30,20 +33,4 @@ Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 002: ID 17ef:6009 Lenovo Think
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install x11-xserver-utils
 $ touch ~/.xmodmap
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;View the current keymap and I note the …&lt;/p&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Mon, 26 Jun 2017 11:33:00 -0400</pubDate><guid isPermaLink="false">tag:www.circuidipity.com,2017-06-26:/xmodmap.html</guid><category>dotfiles</category><category>shell</category><category>linux</category><category>keyboard</category></item><item><title>Dot Xresources</title><link>http://www.circuidipity.com/xresources.html</link><description>&lt;p&gt;I create &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.Xresources&lt;/span&gt;&lt;/tt&gt; to set my custom configuration parameters for X client applications.&lt;/p&gt;
-&lt;div class="section" id="let-s-go"&gt;
-&lt;h2&gt;Let's go!&lt;/h2&gt;
-&lt;p&gt;Whenever making any changes to the file, refresh the configuration by running ...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xrdb -merge ~/.Xresources
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="section" id="fonts"&gt;
-&lt;h3&gt;Fonts&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Xft.antialias:  &lt;span class="nb"&gt;true&lt;/span&gt;
-Xft.rgba:       rgb
-Xft.hinting:    &lt;span class="nb"&gt;true&lt;/span&gt;
-Xft.hintstyle:  hintslight
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="terminal-colours"&gt;
-&lt;h3&gt;Terminal colours&lt;/h3&gt;
-&lt;p&gt;I use the &lt;strong&gt;Urxvt&lt;/strong&gt; terminal …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Sun, 25 Jun 2017 09:30:00 -0400</pubDate><guid isPermaLink="false">tag:www.circuidipity.com,2017-06-25:/xresources.html</guid><category>dotfiles</category><category>shell</category><category>linux</category></item></channel></rss>
+&lt;p&gt;View the current keymap and I note the …&lt;/p&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wayne Armstrong</dc:creator><pubDate>Mon, 26 Jun 2017 11:33:00 -0400</pubDate><guid isPermaLink="false">tag:www.circuidipity.com,2017-06-26:/xmodmap.html</guid><category>dotfiles</category><category>shell</category><category>linux</category><category>keyboard</category></item></channel></rss>
