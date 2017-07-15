@@ -24,13 +24,53 @@
 
 <!-- article -->
 <h1>Debian _stable_ setup</h1>
+    <p class="modified"><i class="fa fa-wrench"></i>&nbsp; Last modified on Saturday 15 July 2017</p>
 <div id="article">
     <img alt="Debian 9 Stretch" src="images/debian_9_banner.png" style="width: 800px; height: 75px;" />
-<p>I created the post-install configuration shell script <strong>debian-stable-setup.sh</strong> to ideally be run immediately following the first successful boot into a fresh install of Debian.</p>
-<p>Building on a <a class="reference external" href="http://www.circuidipity.com/minimal-debian.html">minimal install</a> the system will be configured to track Debian's _stable_ release. A choice of either 1) a basic console setup (option '-b'); or 2) a more complete setup which includes the <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">i3 tiling window manager</a> plus a packages collection suitable for a workstation will be installed.</p>
-<p>Depends: <tt class="docutils literal">bash</tt></p>
+<div class="section" id="synopsis">
+<h2>SYNOPSIS</h2>
+<div class="highlight"><pre><span></span>debian-stable-setup.sh <span class="o">[</span> options <span class="o">]</span> USER
+</pre></div>
+</div>
+<div class="section" id="options">
+<h2>OPTIONS</h2>
+<div class="highlight"><pre><span></span>-h              print details
+-b              basic setup <span class="o">(</span>console only<span class="o">)</span>
+-p PKG_LIST     install packages from PKG_LIST
+</pre></div>
+</div>
+<div class="section" id="example">
+<h2>EXAMPLE</h2>
+<p>Post-install setup of a machine running Debian _stable_ release  for (existing) USER 'foo' ...</p>
+<div class="highlight"><pre><span></span>$ sudo ./debian-stable-setup.sh foo
+</pre></div>
+<p>Install packages from 'pkg-list' ...</p>
+<div class="highlight"><pre><span></span>$ sudo ./debian-stable-setup.sh -p pkg-list foo
+</pre></div>
+</div>
+<div class="section" id="description">
+<h2>DESCRIPTION</h2>
+<p>Script <strong>debian-stable-setup.sh</strong> is ideally run immediately following the first successful boot into your new Debian installation.</p>
+<p>Building on a <a class="reference external" href="http://www.circuidipity.com/minimal-debian.html">minimal install</a> the system will be configured to track Debian's _stable_ release. A choice of either ...</p>
+<ol class="arabic simple">
+<li>a basic console setup; or</li>
+<li>a more complete setup which includes the <a class="reference external" href="http://www.circuidipity.com/i3-tiling-window-manager.html">i3 tiling window manager</a> plus a packages collection suitable for a workstation; or</li>
+<li>install the <a class="reference external" href="http://www.circuidipity.com/debian-package-list.html">same list of packages as PKG_LIST</a></li>
+</ol>
+<p>... will be installed.</p>
+</div>
+<div class="section" id="use">
+<h2>USE</h2>
+<p><strong>0.</strong> Install program folder on target machine.</p>
+<p><strong>1.</strong> Copy <tt class="docutils literal">config.sample</tt> to <tt class="docutils literal">config</tt> and (optional) enable settings. All settings are <strong>disabled</strong> by default.</p>
+<p><strong>2.</strong> Run program!</p>
+</div>
+<div class="section" id="depends">
+<h2>DEPENDS</h2>
+<p><tt class="docutils literal">bash</tt></p>
 <p>Source: linux-post-install/scripts/<a class="reference external" href="https://github.com/vonbrownie/linux-post-install/tree/master/scripts/debian-stable-setup">debian-stable-setup</a></p>
 <p>Happy hacking!</p>
+</div>
 
     <p class="articletags"><i class="fa fa-coffee"></i> More         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-debian.html">debian</a>
         &#8226; <a class="tag" href="http://www.circuidipity.com/tag-linux.html">linux</a>
