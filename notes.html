@@ -24,13 +24,13 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="t1538">
-<h2>2017-07-14T1538</h2>
+    <div class="section" id="n2017-07-14t1538">
+<h2>N2017-07-14T1538</h2>
 <p>Correct the 'stripping effect' in QT applications using the <strong>Breeze Dark</strong> theme. Example: Transmission-qt would show file listings in alternating background colours, with every other line rendered in light background and foreground colours.</p>
 <p><strong>[ Fix! ]</strong> Offending colour is <tt class="docutils literal">#eff0f1</tt>. Replaced with <tt class="docutils literal">#404552</tt> in <tt class="docutils literal"><span class="pre">~/.config/qt5ct/colors/breeze_dark.conf</span></tt>.</p>
 </div>
-<div class="section" id="t0916">
-<h2>2017-07-13T0916</h2>
+<div class="section" id="n2017-07-13t0916">
+<h2>N2017-07-13T0916</h2>
 <p>Retrieving Debian release information (depending on what I want) ...</p>
 <ul class="simple">
 <li><tt class="docutils literal">/etc/debian_version</tt></li>
@@ -38,8 +38,8 @@
 <li><tt class="docutils literal">lsb_release <span class="pre">-c</span></tt></li>
 </ul>
 </div>
-<div class="section" id="t1846">
-<h2>2017-07-10T1846</h2>
+<div class="section" id="n2017-07-10t1846">
+<h2>N2017-07-10T1846</h2>
 <p>Assign user to new group and reload assignments without logging out ...</p>
 <div class="highlight"><pre><span></span>$ su - <span class="nv">$USER</span>
 $ id        <span class="c1"># see the new group</span>
@@ -122,7 +122,7 @@ assign <span class="o">[</span><span class="nv">instance</span><span class="o">=
 <div class="section" id="t1126">
 <h2>2017-06-26T1126</h2>
 <p>Limit the CPU usage of an application ... I tried using <strong>handbrake-gtk</strong> to convert a video and the application grabbed 100% of all 4 cores, sent system temperature to 98C, and finally crashed the machine.</p>
-<p><strong>[ FIX! ]</strong> Install <strong>cpulimit</strong> and set the limit to 80 (20percent * 4 cores) ...</p>
+<p><strong>[ Fix! ]</strong> Install <strong>cpulimit</strong> and set the limit to 80 (20percent * 4 cores) ...</p>
 <div class="highlight"><pre><span></span>$ sudo cpulimit -e ghb -l 80
 </pre></div>
 </div>
@@ -177,13 +177,13 @@ $ sudo apt dselect-upgrade
 <p>VLC not playing mkv files on the chromebook. Generates error message ...</p>
 <div class="highlight"><pre><span></span>libvdpau-va-gl: Decoder::Render_h264<span class="o">()</span>: no surfaces left in buffer
 </pre></div>
-<p><strong>[ FIX! ]</strong> In VLC navigated to <tt class="docutils literal"><span class="pre">Tools-&gt;Preferences-&gt;Input/Codecs</span></tt> and for <strong>Hardware-accelerated decoding</strong> switched to <tt class="docutils literal"><span class="pre">VA-API</span> video decoder via x11</tt> instead of using <tt class="docutils literal">VDPAU</tt>. Or set <tt class="docutils literal"><span class="pre">avcodec-hw=vaapi_x11</span></tt> in <tt class="docutils literal"><span class="pre">~/.config/vlc/vlcrc</span></tt>.</p>
+<p><strong>[ Fix! ]</strong> In VLC navigated to <tt class="docutils literal"><span class="pre">Tools-&gt;Preferences-&gt;Input/Codecs</span></tt> and for <strong>Hardware-accelerated decoding</strong> switched to <tt class="docutils literal"><span class="pre">VA-API</span> video decoder via x11</tt> instead of using <tt class="docutils literal">VDPAU</tt>. Or set <tt class="docutils literal"><span class="pre">avcodec-hw=vaapi_x11</span></tt> in <tt class="docutils literal"><span class="pre">~/.config/vlc/vlcrc</span></tt>.</p>
 <p>Link: <a class="reference external" href="https://askubuntu.com/questions/714363/intel-vaapi-cant-play-mkv-with-vlc">https://askubuntu.com/questions/714363/intel-vaapi-cant-play-mkv-with-vlc</a></p>
 </div>
 <div class="section" id="t0926">
 <h2>2017-06-20T0926</h2>
 <p>Clearing the shell cache ... I originally installed <tt class="docutils literal">glances</tt> via apt to <tt class="docutils literal">/usr/bin/glances</tt>, then removed, then installed via pip to <tt class="docutils literal">/usr/local/bin/glances</tt>. The command would show in PATH but - without an explicit path defined - would continue to try and execute from <tt class="docutils literal">/usr/bin</tt>.</p>
-<p><strong>[ FIX! ]</strong>  Bash caches commands. Clear the cache of paths to executables using <tt class="docutils literal">hash</tt> ...</p>
+<p><strong>[ Fix! ]</strong>  Bash caches commands. Clear the cache of paths to executables using <tt class="docutils literal">hash</tt> ...</p>
 <div class="highlight"><pre><span></span>$ <span class="nb">type</span> glances
 glances is hashed <span class="o">(</span>/usr/bin/glances<span class="o">)</span>
 $ <span class="nb">hash</span> -d glances
@@ -322,7 +322,7 @@ Pin-Priority: 300
 <div class="section" id="t0838">
 <h2>2017-06-10T0838</h2>
 <p>Microphone problem on Thinkpad x230 running Ubuntu 16.04 ... No sound input and <strong>mic</strong> not detected.</p>
-<p><strong>[ FIX! ]</strong> Get capture device ...</p>
+<p><strong>[ Fix! ]</strong> Get capture device ...</p>
 <div class="highlight"><pre><span></span>$ arecord -l
 card 0: ... device 0: ...
 </pre></div>
@@ -334,7 +334,7 @@ card 0: ... device 0: ...
 <div class="section" id="t0941">
 <h2>2017-06-09T0941</h2>
 <p>Restart network service on Ubuntu ... Sometimes after wake-from-suspend the network connection is down and network-manager's wifi ap list fails to refresh.</p>
-<p><strong>[ FIX! ]</strong> Simple systemd way ...</p>
+<p><strong>[ Fix! ]</strong> Simple systemd way ...</p>
 <div class="highlight"><pre><span></span>$ sudo systemctl restart NetworkManager.service
 </pre></div>
 <p>If that doesn't work ... Try using <tt class="docutils literal">nmcli</tt> to stop and start network-manager directly ...</p>
