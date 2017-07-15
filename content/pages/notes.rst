@@ -4,6 +4,13 @@ Notes
 
 :slug: notes
 
+2017-07-14T1538
+---------------
+
+Correct the 'stripping effect' in QT applications using the **Breeze Dark** theme. Example: Transmission-qt would show file listings in alternating background colours, with every other line rendered in light background and foreground colours.
+
+**[ Fix! ]** Offending colour is ``#eff0f1``. Replaced with ``#404552`` in ``~/.config/qt5ct/colors/breeze_dark.conf``.
+
 2017-07-13T0916
 ---------------
 
