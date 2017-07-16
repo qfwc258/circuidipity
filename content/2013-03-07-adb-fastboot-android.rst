@@ -35,7 +35,7 @@ Start ADB:
 
     $ adb start-server
 
-Android 4.2.2 now requires the **RSA key fingerprint** of the connecting host to be confirmed before allowing ADB to do its stuff. Coonnect the tablet and Android prompts for confirmation:
+Android 4.2.2 now requires the **RSA key fingerprint** of the connecting host to be confirmed before allowing ADB to do its stuff. Connect the tablet and Android prompts for confirmation:
 
 .. code-block:: bash
 

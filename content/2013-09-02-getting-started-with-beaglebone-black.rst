@@ -157,7 +157,7 @@ When BBB is connected to my HOST via USB ... Network-Manager sets up a second wi
               collisions:0 txqueuelen:1000 
               RX bytes:888859 (868.0 KiB)  TX bytes:13309157 (12.6 MiB)
 
-This arrangment is OK for getting HOST and BBB talking to each other but BBB - in lieu of an additional ethernet cable - cannot reach the net. I created a tiny script that can be run as desired to configure my Linux HOST to route internet traffic for the BBB ...
+This arrangement is OK for getting HOST and BBB talking to each other but BBB - in lieu of an additional ethernet cable - cannot reach the net. I created a tiny script that can be run as desired to configure my Linux HOST to route internet traffic for the BBB ...
 
 .. code-block:: bash
 
@@ -190,7 +190,7 @@ Tip from http://derekmolloy.ie/automatically-setting-the-beaglebone-black-time-u
 
 The BeagleBone Black does not include an onboard *Real Time Clock* (RTC) and thus loses its time and date setting after every power off. 
 
-Set the time over the internet using an ntp server by first configuring the timezone linking ``localtime`` to your proper location in ``zoneinfo`` (in my case ``Toronto/New York``) and then running a quick one-off command to set the proper date ...
+Set the time over the internet using an NTP server by first configuring the timezone linking ``localtime`` to your proper location in ``zoneinfo`` (in my case ``Toronto/New York``) and then running a quick one-off command to set the proper date ...
 
 .. code-block:: bash
 
