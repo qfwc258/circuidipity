@@ -2,11 +2,12 @@
 Build a package from mentors.debian.net
 =======================================
 
+:modified: 2017-07-16 18:35:00
 :date: 2017-07-02 15:57:00
 :slug: build-qt5ct
 :tags: qt5ct, qt, shell, debian, linux, crypto
 
-A package for the Qt configuration utility `qt5ct <https://sourceforge.net/projects/qt5ct/>`_ is not available in the Debian archives but a "debianized" version **is** available through `mentors.debian.net <https://mentors.debian.net/>`_, a service where Debian developers sponsor (usually source) packages uploaded by non-Debian developers.
+`PROJECT: The Lifecycle of Debian Objects .: <http://www.circuidipity.com/the-lifecycle-of-debian-objects.html>`_ A package for the Qt configuration utility `qt5ct <https://sourceforge.net/projects/qt5ct/>`_ is not available in the Debian archives but a "debianized" version **is** available through `mentors.debian.net <https://mentors.debian.net/>`_, a service where Debian developers sponsor (usually source) packages uploaded by non-Debian developers.
 
 This `qt5ct package <https://mentors.debian.net/package/qt5ct>`_ contains a **.dsc** (Debian Source Control) text file that describes the source package. I use this file to build a ``qt5ct-VERSION.deb`` binary package ready to be installed!
 

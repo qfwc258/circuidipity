@@ -2,11 +2,12 @@
 Install (almost) the same list of Debian packages on multiple machines
 ======================================================================
 
+:modified: 2017-07-16 18:35:00
 :date: 2017-07-14 12:37:00
 :slug: debian-package-list
 :tags: debian, linux, shell, programming
 
-**Scenario:** I have a whole bunch of packages installed on **Machine A** and I want to replicate that package selection on **Machine B**.
+`PROJECT: The Lifecycle of Debian Objects .: <http://www.circuidipity.com/the-lifecycle-of-debian-objects.html>`_ **Scenario:** I have a whole bunch of packages installed on **Machine A** and I want to replicate that package selection on **Machine B**.
 
 Let's go!
 =========

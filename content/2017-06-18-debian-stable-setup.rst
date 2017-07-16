@@ -2,7 +2,7 @@
 Debian _stable_ setup
 =====================
 
-:modified: 2017-07-15 16:44:00
+:modified: 2017-07-16 18:35:00
 :date: 2017-06-18 07:30:00
 :slug: debian-stable-setup
 :tags: debian, linux, shell, programming
@@ -46,7 +46,7 @@ Install packages from 'pkg-list' ...
 DESCRIPTION
 ===========
 
-Script **debian-stable-setup.sh** is ideally run immediately following the first successful boot into your new Debian installation.
+`PROJECT: The Lifecycle of Debian Objects .: <http://www.circuidipity.com/the-lifecycle-of-debian-objects.html>`_ Script **debian-stable-setup.sh** is ideally run immediately following the first successful boot into your new Debian installation.
 
 Building on a `minimal install <http://www.circuidipity.com/minimal-debian.html>`_ the system will be configured to track Debian's _stable_ release. A choice of either ...
 

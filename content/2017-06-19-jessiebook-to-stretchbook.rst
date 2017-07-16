@@ -2,11 +2,12 @@
 Jessiebook to Stretchbook
 =========================
 
+:modified: 2017-07-16 18:35:00
 :date: 2017-06-19 10:20:00
 :slug: jessiebook-to-stretchbook
 :tags: chromebook, debian, linux
 
-With the release of **Debian 9 "Stretch"** my chromebook has `transitioned from a Jessiebook <http://www.circuidipity.com/c720-chromebook-to-jessiebook.html>`_ to a Stretchbook! 
+`PROJECT: The Lifecycle of Debian Objects .: <http://www.circuidipity.com/the-lifecycle-of-debian-objects.html>`_ With the release of **Debian 9 "Stretch"** my chromebook has `transitioned from a Jessiebook <http://www.circuidipity.com/c720-chromebook-to-jessiebook.html>`_ to a Stretchbook! 
 
 I posted a `visual screenshot tour <http://www.circuidipity.com/minimal-debian.html>`_ installing the Debian _stable_ release. I use Debian's **minimal network install image** to create a console-only base configuration that can be customized for various tasks and `alternate desktops <http://www.circuidipity.com/i3-tiling-window-manager.html>`_. 
 

@@ -2,11 +2,12 @@
 Compile and install programs in $HOME
 =====================================
 
+:modified: 2017-07-16 18:35:00
 :date: 2017-07-10 16:00:00
 :slug: compile-install-homedir
 :tags: shell, linux
 
-Debian has extensive (50,000+) package archives but sometimes I want **that one thing** they do not! Or maybe I want to re-compile the source code of a program with different options.
+`PROJECT: The Lifecycle of Debian Objects .: <http://www.circuidipity.com/the-lifecycle-of-debian-objects.html>`_ Debian has extensive (50,000+) package archives but sometimes I want **that one thing** they do not! Or maybe I want to re-compile the source code of a program with different options.
 
 I can make a clean separation between **a)** programs installed by Debian packages; and **b)** programs installed by myself; by compiling and installing programs as a **non-root user** in my home directory.
 

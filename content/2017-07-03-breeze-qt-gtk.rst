@@ -2,11 +2,12 @@
 It is a Breeze to make QT and GTK applications look good
 ========================================================
 
+:modified: 2017-07-16 18:35:00
 :date: 2017-07-03 12:40:00
 :slug: breeze-qt-gtk
 :tags: qt, gtk, debian, linux
 
-I went looking for a desktop style with good support for both Qt and GTK applications. **Breeze** is the default Qt style of KDE Plasma and the one I chose. I like it!
+`PROJECT: The Lifecycle of Debian Objects .: <http://www.circuidipity.com/the-lifecycle-of-debian-objects.html>`_ I went looking for a desktop style with good support for both Qt and GTK applications. **Breeze** is the default Qt style of KDE Plasma and the one I chose. I like it!
 
 To setup on Debian ...
 

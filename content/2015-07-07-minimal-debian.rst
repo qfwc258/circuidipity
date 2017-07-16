@@ -2,17 +2,17 @@
 Minimal Debian
 ==============
 
+:modified: 2017-07-16 18:35:00
 :date: 2015-07-07 15:43
 :slug: minimal-debian
 :tags: debian, linux, crypto, lvm
-:modified: 2017-06-18 10:21:00
 
 .. figure:: images/debianVader.png
     :alt: Debian Vader
     :width: 960px
     :height: 355px
 
-**Debian 9 "Stretch"** is the latest stable release of the popular Linux operating system. I use Debian's `minimal network install image <https://www.debian.org/CD/netinst/>`_ to create a **console-only base configuration** that can be customized for various tasks and `alternate desktops <http://www.circuidipity.com/i3-tiling-window-manager.html>`_. [1]_
+`PROJECT: The Lifecycle of Debian Objects .: <http://www.circuidipity.com/the-lifecycle-of-debian-objects.html>`_ **Debian 9 "Stretch"** is the latest stable release of the popular Linux operating system. I use Debian's `minimal network install image <https://www.debian.org/CD/netinst/>`_ to create a **console-only base configuration** that can be customized for various tasks and `alternate desktops <http://www.circuidipity.com/i3-tiling-window-manager.html>`_. [1]_
 
 Let's go!
 =========

@@ -2,7 +2,7 @@
 Transform a USB stick into a boot device packing multiple Linux distros
 =======================================================================
 
-:modified: 2017-06-18 12:30:00
+:modified: 2017-07-16 18:35:00
 :date: 2012-12-06 01:23:00
 :tags: grub, shell, systemrescuecd, debian, bunsenlabs, lubuntu, ubuntu, linux
 :slug: multi-boot-usb
@@ -13,7 +13,7 @@ Transform a USB stick into a boot device packing multiple Linux distros
     :width: 300px
     :height: 363px
 
-Transform removable USB storage into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device capable of loopback mounting Linux distro ISO files. [1]_
+`PROJECT: The Lifecycle of Debian Objects .: <http://www.circuidipity.com/the-lifecycle-of-debian-objects.html>`_ Transform removable USB storage into a dual-purpose device that is both a storage medium usable under Linux, Windows, and Mac OS and a GRUB boot device capable of loopback mounting Linux distro ISO files. [1]_
 
 Depends: ``grub2``, ``bash``, ``sudo``, ``rsync``
 

@@ -2,11 +2,12 @@
 Lightweight and a delight: i3 tiling window manager
 ===================================================
 
+:modified: 2017-07-16 18:35:00
 :date: 2017-07-04 09:17:00
 :slug: i3-tiling-window-manager
 :tags: i3, debian, linux
 
-As a former **Fluxbox** and **Openbox** user I can understand the love for a lightweight, minimal window manager where I can "paint" my applications across the screen. I was curious about `tiling window managers <https://en.wikipedia.org/wiki/Tiling_window_manager>`_ but never quite grokked the advantage from screenshots. Seeing consoles arranged in a grid made me think `tmux <http://www.circuidipity.com/tmux.html>`_ a better choice for that task, and why would I want to watch a video in a reduced square in the corner of a screen?
+`PROJECT: The Lifecycle of Debian Objects .: <http://www.circuidipity.com/the-lifecycle-of-debian-objects.html>`_ As a former **Fluxbox** and **Openbox** user I can understand the love for a lightweight, minimal window manager where I can "paint" my applications across the screen. I was curious about `tiling window managers <https://en.wikipedia.org/wiki/Tiling_window_manager>`_ but never quite grokked the advantage from screenshots. Seeing consoles arranged in a grid made me think `tmux <http://www.circuidipity.com/tmux.html>`_ a better choice for that task, and why would I want to watch a video in a reduced square in the corner of a screen?
 
 But then I tried `i3 <https://i3wm.org/>`_ and found my new desktop ...
 
