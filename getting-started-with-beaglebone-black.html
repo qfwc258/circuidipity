@@ -135,7 +135,7 @@ usb0      Link encap:Ethernet  HWaddr BA:E1:A2:37:43:15
           collisions:0 txqueuelen:1000
           RX bytes:888859 <span class="o">(</span>868.0 KiB<span class="o">)</span>  TX bytes:13309157 <span class="o">(</span>12.6 MiB<span class="o">)</span>
 </pre></div>
-<p>This arrangment is OK for getting HOST and BBB talking to each other but BBB - in lieu of an additional ethernet cable - cannot reach the net. I created a tiny script that can be run as desired to configure my Linux HOST to route internet traffic for the BBB ...</p>
+<p>This arrangement is OK for getting HOST and BBB talking to each other but BBB - in lieu of an additional ethernet cable - cannot reach the net. I created a tiny script that can be run as desired to configure my Linux HOST to route internet traffic for the BBB ...</p>
 <div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
 <span class="c1"># bbbIPforward.sh -- Enable internet access for my BeagleBone Black (BBB)</span>
@@ -163,7 +163,7 @@ scp /etc/resolv.conf root@<span class="nv">$bbbAddr</span>:/etc/
 <h3>Date and Time</h3>
 <p>Tip from <a class="reference external" href="http://derekmolloy.ie/automatically-setting-the-beaglebone-black-time-using-ntp/">http://derekmolloy.ie/automatically-setting-the-beaglebone-black-time-using-ntp/</a></p>
 <p>The BeagleBone Black does not include an onboard <em>Real Time Clock</em> (RTC) and thus loses its time and date setting after every power off.</p>
-<p>Set the time over the internet using an ntp server by first configuring the timezone linking <tt class="docutils literal">localtime</tt> to your proper location in <tt class="docutils literal">zoneinfo</tt> (in my case <tt class="docutils literal">Toronto/New York</tt>) and then running a quick one-off command to set the proper date ...</p>
+<p>Set the time over the internet using an NTP server by first configuring the timezone linking <tt class="docutils literal">localtime</tt> to your proper location in <tt class="docutils literal">zoneinfo</tt> (in my case <tt class="docutils literal">Toronto/New York</tt>) and then running a quick one-off command to set the proper date ...</p>
 <div class="highlight"><pre><span></span><span class="c1"># ln -s /usr/share/zoneinfo/America/New_York /etc/localtime</span>
 <span class="c1"># ntpdate -u pool.ntp.org</span>
 </pre></div>
