@@ -2,9 +2,9 @@
 $HOME slash bin
 ===============
 
+:modified: 2017-07-16 20:17:00
 :slug: homebin
 :template: page-project
-:modified: 2017-07-12 13:17:00
 
 .. image:: images/infinite-loop-not-300.png
     :align: right
@@ -60,7 +60,7 @@ Let's go!
     installs libflashplayer.so
 
 `generatePkgList <https://github.com/vonbrownie/homebin/blob/master/generatePkgList>`_
-    output list of installed Debian packages on HOSTNAME
+    output list of installed Debian packages on HOSTNAME (more: `"Install (almost) the same list of Debian packages on multiple machines" <http://www.circuidipity.com/debian-package-list.html>`_)
 
 `i3wm_conf <https://github.com/vonbrownie/homebin/blob/master/i3wm_conf>`_
     conditionals for building i3 window manager config at runtime (more: `"i3 tiling window manager: Conditionals" <http://www.circuidipity.com/i3-tiling-window-manager.html#conditionals>`_)
