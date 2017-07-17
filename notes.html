@@ -24,7 +24,15 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="n2017-07-14t15-38">
+    <div class="section" id="n2017-07-17t09-41">
+<h2>N2017-07-17T09:41</h2>
+<p><a class="reference external" href="http://www.deater.net/weave/vmwprod/linux_logo/">Linuxlogo</a> provides Tux, the Debian swirl, and other distro logos that can be displayed - along with system information - at the console login prompt ...</p>
+<div class="highlight"><pre><span></span>$ sudo apt-get install linuxlogo
+$ sudo cp /etc/issue /etc/issue.bak
+$ sudo sh -c <span class="s1">&#39;linux_logo -L debian -F &quot;.: Greetings, Carbon-Based Biped :.\n\n#O Version #V\nCompiled #C\n#H \\l&quot; &gt; /etc/issue&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="n2017-07-14t15-38">
 <h2>N2017-07-14T15:38</h2>
 <p>Correct the 'stripping effect' in QT applications using the <strong>Breeze Dark</strong> theme. Example: Transmission-qt would show file listings in alternating background colours, with every other line rendered in light background and foreground colours.</p>
 <p><strong>[ Fix! ]</strong> Offending colour is <tt class="docutils literal">#eff0f1</tt>. Replaced with <tt class="docutils literal">#404552</tt> in <tt class="docutils literal"><span class="pre">~/.config/qt5ct/colors/breeze_dark.conf</span></tt>.</p>
