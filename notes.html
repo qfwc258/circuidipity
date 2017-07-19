@@ -24,21 +24,21 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="n2017-07-17t09-41">
-<h2>N2017-07-17T09:41</h2>
+    <div class="section" id="n2017-07-17t0941">
+<h2>N2017-07-17T0941</h2>
 <p><a class="reference external" href="http://www.deater.net/weave/vmwprod/linux_logo/">Linuxlogo</a> provides Tux, the Debian swirl, and other distro logos that can be displayed - along with system information - at the console login prompt ...</p>
 <div class="highlight"><pre><span></span>$ sudo apt-get install linuxlogo
 $ sudo cp /etc/issue /etc/issue.bak
 $ sudo sh -c <span class="s1">&#39;linux_logo -L debian -F &quot;.: Greetings, Carbon-Based Biped :.\n\n#O Version #V\nCompiled #C\n#H \\l&quot; &gt; /etc/issue&#39;</span>
 </pre></div>
 </div>
-<div class="section" id="n2017-07-14t15-38">
-<h2>N2017-07-14T15:38</h2>
+<div class="section" id="n2017-07-14t1538">
+<h2>N2017-07-14T1538</h2>
 <p>Correct the 'stripping effect' in QT applications using the <strong>Breeze Dark</strong> theme. Example: Transmission-qt would show file listings in alternating background colours, with every other line rendered in light background and foreground colours.</p>
 <p><strong>[ Fix! ]</strong> Offending colour is <tt class="docutils literal">#eff0f1</tt>. Replaced with <tt class="docutils literal">#404552</tt> in <tt class="docutils literal"><span class="pre">~/.config/qt5ct/colors/breeze_dark.conf</span></tt>.</p>
 </div>
-<div class="section" id="n2017-07-13t09-16">
-<h2>N2017-07-13T09:16</h2>
+<div class="section" id="n2017-07-13t0916">
+<h2>N2017-07-13T0916</h2>
 <p>Retrieving Debian release information (depending on what I want) ...</p>
 <ul class="simple">
 <li><tt class="docutils literal">/etc/debian_version</tt></li>
@@ -46,23 +46,23 @@ $ sudo sh -c <span class="s1">&#39;linux_logo -L debian -F &quot;.: Greetings, C
 <li><tt class="docutils literal">lsb_release <span class="pre">-c</span></tt></li>
 </ul>
 </div>
-<div class="section" id="n2017-07-10t18-46">
-<h2>N2017-07-10T18:46</h2>
+<div class="section" id="n2017-07-10t1846">
+<h2>N2017-07-10T1846</h2>
 <p>Assign user to new group and reload assignments without logging out ...</p>
 <div class="highlight"><pre><span></span>$ su - <span class="nv">$USER</span>
 $ id        <span class="c1"># see the new group</span>
 </pre></div>
 <p>Link: <a class="reference external" href="https://superuser.com/a/354475">https://superuser.com/a/354475</a></p>
 </div>
-<div class="section" id="n2017-07-09t08-07">
-<h2>N2017-07-09T08:07</h2>
+<div class="section" id="n2017-07-09t0807">
+<h2>N2017-07-09T0807</h2>
 <p><strong>Nmap</strong> will quickly identify Internet services hosted by a network connected machine without even requiring to log in to it. Simply call the following command on another machine connected to the same network ...</p>
 <div class="highlight"><pre><span></span>$ nmap 192.168.1.88
 </pre></div>
 <p>Link: <a class="reference external" href="https://debian-handbook.info/browse/stable/sect.how-to-migrate.html">DAH: 3.2.1.1. Network and Processes</a></p>
 </div>
-<div class="section" id="n2017-07-06t08-57">
-<h2>N2017-07-06T08:57</h2>
+<div class="section" id="n2017-07-06t0857">
+<h2>N2017-07-06T0857</h2>
 <p>Use <tt class="docutils literal"><span class="pre">apt-show-versions</span></tt> to check list of installed packages and available versions. Good way to quickly grep which packages are <strong>not</strong> part of the default release.</p>
 <p>Install ...</p>
 <div class="highlight"><pre><span></span>$ sudo apt install apt-show-versions
@@ -73,8 +73,8 @@ qt5ct:amd64 0.31-2 installed: No available version in archive
     volnoti:amd64 20161215T1244-1 installed: No available version in archive
 </pre></div>
 </div>
-<div class="section" id="n2017-07-03t09-00">
-<h2>N2017-07-03T09:00</h2>
+<div class="section" id="n2017-07-03t0900">
+<h2>N2017-07-03T0900</h2>
 <p>Configure i3wm to put clients on specific workspaces. Run <tt class="docutils literal">xprop</tt> in a terminal and click on the client to get <tt class="docutils literal">WM_CLASS</tt>: first part is the <strong>instance</strong>, second part is the <strong>class</strong> ...</p>
 <div class="highlight"><pre><span></span>$ xprop
 <span class="o">[</span>...<span class="o">]</span>
@@ -86,13 +86,13 @@ assign <span class="o">[</span><span class="nv">instance</span><span class="o">=
 </pre></div>
 <p>Link: <a class="reference external" href="https://i3wm.org/docs/userguide.html#assign_workspace">Automatically putting clients on specific workspaces</a></p>
 </div>
-<div class="section" id="n2017-07-02t10-14">
-<h2>N2017-07-02T10:14</h2>
+<div class="section" id="n2017-07-02t1014">
+<h2>N2017-07-02T1014</h2>
 <p>Addon for Firefox: <a class="reference external" href="https://addons.mozilla.org/en-US/firefox/addon/text-contrast-for-dark-themes/">Text Contrast for Dark Themes</a></p>
 <p>Fixs issue with text entry on some websites (white text on white in gmail signin, yahoo search, others) when using the <strong>Breeze Dark</strong> QT theme.</p>
 </div>
-<div class="section" id="n2017-06-29t12-37">
-<h2>N2017-06-29T12:37</h2>
+<div class="section" id="n2017-06-29t1237">
+<h2>N2017-06-29T1237</h2>
 <p>Find and replace text with <strong>sed</strong>.</p>
 <p>Save back to the original file ...</p>
 <div class="highlight"><pre><span></span>$ sed -i <span class="s1">&#39;s/original/new/g&#39;</span> file.txt
@@ -105,14 +105,14 @@ assign <span class="o">[</span><span class="nv">instance</span><span class="o">=
 </pre></div>
 <p>Link: <a class="reference external" href="https://askubuntu.com/q/20414">https://askubuntu.com/q/20414</a></p>
 </div>
-<div class="section" id="n2017-06-28t15-12">
-<h2>N2017-06-28T15:12</h2>
+<div class="section" id="n2017-06-28t1512">
+<h2>N2017-06-28T1512</h2>
 <p>Lots of documentation and config samples are available in <tt class="docutils literal">/usr/share/doc</tt> in gzip'ed format. Non-root user access with the <tt class="docutils literal">zcat</tt> and <tt class="docutils literal">zless</tt> commands. Make use of a config sample by redirecting output. Example ...</p>
 <div class="highlight"><pre><span></span>$ zcat /usr/share/doc/dunst/dunstrc.example.gz &gt; ~/.config/dunst/dunstrc
 </pre></div>
 </div>
-<div class="section" id="n2017-06-27t09-02">
-<h2>N2017-06-27T09:02</h2>
+<div class="section" id="n2017-06-27t0902">
+<h2>N2017-06-27T0902</h2>
 <p>Default keyboard layout in Debian is configured in <tt class="docutils literal">/etc/default/keyboard</tt> and is shared between X and the command line ...</p>
 <div class="highlight"><pre><span></span>$ cat /etc/default/keyboard
 <span class="o">[</span>...<span class="o">]</span>
@@ -127,15 +127,15 @@ assign <span class="o">[</span><span class="nv">instance</span><span class="o">=
 <div class="highlight"><pre><span></span>$ sudo dpkg-reconfigure keyboard-configuration
 </pre></div>
 </div>
-<div class="section" id="n2017-06-26t11-26">
-<h2>N2017-06-26T11:26</h2>
+<div class="section" id="n2017-06-26t1126">
+<h2>N2017-06-26T1126</h2>
 <p>Limit the CPU usage of an application ... I tried using <strong>handbrake-gtk</strong> to convert a video and the application grabbed 100% of all 4 cores, sent system temperature to 98C, and finally crashed the machine.</p>
 <p><strong>[ Fix! ]</strong> Install <strong>cpulimit</strong> and set the limit to 80 (20percent * 4 cores) ...</p>
 <div class="highlight"><pre><span></span>$ sudo cpulimit -e ghb -l 80
 </pre></div>
 </div>
-<div class="section" id="n2017-06-25t09-22">
-<h2>N2017-06-25T09:22</h2>
+<div class="section" id="n2017-06-25t0922">
+<h2>N2017-06-25T0922</h2>
 <p>Firework sounds for upcoming Canada Day!</p>
 <div class="highlight"><pre><span></span>$ sudo apt install sox
 </pre></div>
@@ -147,13 +147,13 @@ assign <span class="o">[</span><span class="nv">instance</span><span class="o">=
 </pre></div>
 <p>Links: <a class="reference external" href="https://twitter.com/climagic/status/485083242425368579">https://twitter.com/climagic/status/485083242425368579</a> and <a class="reference external" href="https://twitter.com/climagic/status/485069251401629697">https://twitter.com/climagic/status/485069251401629697</a></p>
 </div>
-<div class="section" id="n2017-06-24t0-844">
-<h2>N2017-06-24T0:844</h2>
+<div class="section" id="n2017-06-24t0844">
+<h2>N2017-06-24T0844</h2>
 <p>Retrieve information about hardware using <tt class="docutils literal">sudo dmidecode</tt>, or much of the same information is available to the non-root user in <tt class="docutils literal">/sys/devices/virtual/dmi/id</tt>.</p>
 <p>Link: <a class="reference external" href="https://unix.stackexchange.com/a/172334">https://unix.stackexchange.com/a/172334</a></p>
 </div>
-<div class="section" id="n2017-06-23t10-01">
-<h2>N2017-06-23T10:01</h2>
+<div class="section" id="n2017-06-23t1001">
+<h2>N2017-06-23T1001</h2>
 <p>Switch from default qwerty to the colemak keyboard layout ...</p>
 <div class="highlight"><pre><span></span>$ setxkbmap -query
 rules:      evdev
@@ -167,8 +167,8 @@ layout:     us
 variant:    colemak
 </pre></div>
 </div>
-<div class="section" id="n2017-06-22t10-36">
-<h2>N2017-06-22T10-36</h2>
+<div class="section" id="n2017-06-22t1036">
+<h2>N2017-06-22T1036</h2>
 <p>Generate list of packages installed on one machine running Debian for installation on another machine.</p>
 <p>List of packages on first machine ...</p>
 <div class="highlight"><pre><span></span>$ sudo dpkg --get-selections <span class="p">|</span> grep -v deinstall &gt; deb-pkg-list.txt
@@ -180,16 +180,16 @@ $ sudo dpkg --set-selections &lt; deb-pkg-list.txt
 $ sudo apt dselect-upgrade
 </pre></div>
 </div>
-<div class="section" id="n2017-06-21t08-32">
-<h2>N2017-06-21T08:32</h2>
+<div class="section" id="n2017-06-21t0832">
+<h2>N2017-06-21T0832</h2>
 <p>VLC not playing mkv files on the chromebook. Generates error message ...</p>
 <div class="highlight"><pre><span></span>libvdpau-va-gl: Decoder::Render_h264<span class="o">()</span>: no surfaces left in buffer
 </pre></div>
 <p><strong>[ Fix! ]</strong> In VLC navigated to <tt class="docutils literal"><span class="pre">Tools-&gt;Preferences-&gt;Input/Codecs</span></tt> and for <strong>Hardware-accelerated decoding</strong> switched to <tt class="docutils literal"><span class="pre">VA-API</span> video decoder via x11</tt> instead of using <tt class="docutils literal">VDPAU</tt>. Or set <tt class="docutils literal"><span class="pre">avcodec-hw=vaapi_x11</span></tt> in <tt class="docutils literal"><span class="pre">~/.config/vlc/vlcrc</span></tt>.</p>
 <p>Link: <a class="reference external" href="https://askubuntu.com/questions/714363/intel-vaapi-cant-play-mkv-with-vlc">https://askubuntu.com/questions/714363/intel-vaapi-cant-play-mkv-with-vlc</a></p>
 </div>
-<div class="section" id="n2017-06-20t09-26">
-<h2>N2017-06-20T09:26</h2>
+<div class="section" id="n2017-06-20t0926">
+<h2>N2017-06-20T0926</h2>
 <p>Clearing the shell cache ... I originally installed <tt class="docutils literal">glances</tt> via apt to <tt class="docutils literal">/usr/bin/glances</tt>, then removed, then installed via pip to <tt class="docutils literal">/usr/local/bin/glances</tt>. The command would show in PATH but - without an explicit path defined - would continue to try and execute from <tt class="docutils literal">/usr/bin</tt>.</p>
 <p><strong>[ Fix! ]</strong>  Bash caches commands. Clear the cache of paths to executables using <tt class="docutils literal">hash</tt> ...</p>
 <div class="highlight"><pre><span></span>$ <span class="nb">type</span> glances
@@ -199,24 +199,24 @@ $ <span class="nb">type</span> glances
 glances is /usr/local/bin/glances
 </pre></div>
 </div>
-<div class="section" id="n2017-06-19t09-53">
-<h2>N2017-06-19T09:53</h2>
+<div class="section" id="n2017-06-19t0953">
+<h2>N2017-06-19T0953</h2>
 <p>Configure menu colours in Grub by creating <tt class="docutils literal">/boot/grub/custom.cfg</tt> with settings ...</p>
 <div class="highlight"><pre><span></span><span class="nb">set</span> <span class="nv">color_normal</span><span class="o">=</span>white/black
 <span class="nb">set</span> <span class="nv">menu_color_normal</span><span class="o">=</span>white/black
 <span class="nb">set</span> <span class="nv">menu_color_highlight</span><span class="o">=</span>white/green
 </pre></div>
 </div>
-<div class="section" id="n2017-06-18t09-49">
-<h2>N2017-06-18T09:49</h2>
+<div class="section" id="n2017-06-18t0949">
+<h2>N2017-06-18T0949</h2>
 <p>Stop pulseaudio from respawning after halt (encountered in Ubuntu 16.04) ... When I kill pulseaudio with <tt class="docutils literal">pulseaudio <span class="pre">-k</span></tt> or <tt class="docutils literal">kill <span class="pre">-9</span> ID</tt> it immediately restarts ...</p>
 <div class="highlight"><pre><span></span>$ pgrep pulse
 <span class="m">12808</span> /usr/bin/pulseaudio --start --log-target<span class="o">=</span>syslog
 </pre></div>
 <p><strong>[ Fix! ]</strong> There is a config file <tt class="docutils literal">/etc/pulse/client.conf</tt> with <tt class="docutils literal">autospawn = yes</tt> set by default. I could modify that, but chose instead to create <tt class="docutils literal"><span class="pre">~/.config/pulse/client.conf</span></tt> and set <tt class="docutils literal">autospawn = no</tt>. It works ... pulseaudio stays dead.</p>
 </div>
-<div class="section" id="n2017-06-17t09-21">
-<h2>N2017-06-17T09:21</h2>
+<div class="section" id="n2017-06-17t0921">
+<h2>N2017-06-17T0921</h2>
 <p>Start a new project in Git and host on Github (after setting up a default config in <tt class="docutils literal"><span class="pre">~/.gitconfig</span></tt>) ...</p>
 <div class="highlight"><pre><span></span>$ mkdir new_project
 $ <span class="nb">cd</span> new_project
@@ -237,14 +237,14 @@ $ git push -u origin master
 <div class="highlight"><pre><span></span>$ git pull origin master
 </pre></div>
 </div>
-<div class="section" id="n2017-06-16t09-50">
-<h2>N2017-06-16T09:50</h2>
+<div class="section" id="n2017-06-16t0950">
+<h2>N2017-06-16T0950</h2>
 <p>Stop pinned tabs from auto-loading upon Firefox startup. Goto <tt class="docutils literal">about:config</tt> and set to <strong>true</strong> ...</p>
 <div class="highlight"><pre><span></span>* browser.sessionstore.restore_pinned_tabs_on_demand    default boolean <span class="nb">false</span>
 </pre></div>
 </div>
-<div class="section" id="n2017-06-15t08-53">
-<h2>N2017-06-15T08:53</h2>
+<div class="section" id="n2017-06-15t0853">
+<h2>N2017-06-15T0853</h2>
 <p>Debian _stretch_/stable <tt class="docutils literal">xbacklight</tt> is acting up ...</p>
 <div class="highlight"><pre><span></span>$ xbacklight -dec 10
 No outputs have backlight property
@@ -267,15 +267,15 @@ $ sudo sh -c <span class="s1">&#39;echo 937 &gt; /sys/class/backlight/intel_back
 EndSection
 </pre></div>
 </div>
-<div class="section" id="n2017-06-14t21-13">
-<h2>N2017-06-14T21:13</h2>
+<div class="section" id="n2017-06-14t2113">
+<h2>N2017-06-14T2113</h2>
 <p>Trying to install Debian's <tt class="docutils literal"><span class="pre">flashplugin-nonfree</span></tt> package consistently fails with the error ....</p>
 <div class="highlight"><pre><span></span>ERROR: wget failed to download http://people.debian.org/~bartm/flashplugin-nonfree/D5C0FC14/fp.24.0.0.221.sha512.amd64.pgp.asc
 </pre></div>
 <p><strong>[ Fix! ]</strong> Manual install works courtesy of the instructions at <a class="reference external" href="https://wiki.debian.org/FlashPlayer#Manual_update">https://wiki.debian.org/FlashPlayer#Manual_update</a></p>
 </div>
-<div class="section" id="n2017-06-14t09-47">
-<h2>N2017-06-14T09:47</h2>
+<div class="section" id="n2017-06-14t0947">
+<h2>N2017-06-14T0947</h2>
 <p>Setup colour scheme for vim. As per <a class="reference external" href="http://www.gilesorr.com/blog/">Giles'</a> recommendation I use <a class="reference external" href="http://www.vim.org/scripts/script.php?script_id=2777">tir_black.</a>  Place in <tt class="docutils literal"><span class="pre">~/.vim/colors</span></tt>.</p>
 <p>Set as default colour scheme in <tt class="docutils literal">init.vim</tt> ...</p>
 <div class="highlight"><pre><span></span>colorscheme tir_black
@@ -295,8 +295,8 @@ $ tput colors
 256
 </pre></div>
 </div>
-<div class="section" id="n2017-06-13t08-47">
-<h2>N2017-06-13T08:47</h2>
+<div class="section" id="n2017-06-13t0847">
+<h2>N2017-06-13T0847</h2>
 <p>Created a Debian _stretch_ virtualbox guest but <tt class="docutils literal"><span class="pre">virtualbox-guest-{dkms,utils,x11}</span></tt> packages no longer available ... but there <em>are</em> pkgs in <a class="reference external" href="https://tracker.debian.org/pkg/virtualbox">_sid_.</a></p>
 <p><strong>[ Fix! ]</strong> Install the _sid_ pkgs. Setup <strong>apt-pinning</strong> in <tt class="docutils literal">/etc/apt/preferences</tt> ...</p>
 <div class="highlight"><pre><span></span>Package: *
@@ -315,20 +315,20 @@ Pin-Priority: 300
 <span class="c1"># adduser dwa vboxsf</span>
 </pre></div>
 </div>
-<div class="section" id="n2017-06-12t10-41">
-<h2>N2017-06-12T10:41</h2>
+<div class="section" id="n2017-06-12t1041">
+<h2>N2017-06-12T1041</h2>
 <p>Local install of Python modules as non-root user. Example ...</p>
 <div class="highlight"><pre><span></span>$ pip3 install exifread
 </pre></div>
 <p>... libraries are installed to <tt class="docutils literal"><span class="pre">~/.local/lib/python-ver/</span></tt> and the bins are placed in <tt class="docutils literal"><span class="pre">~/.local/bin/</span></tt>.</p>
 <p>Add <tt class="docutils literal"><span class="pre">~/.local/bin</span></tt> to user's $PATH.</p>
 </div>
-<div class="section" id="n2017-06-11t10-20">
-<h2>N2017-06-11T10:20</h2>
+<div class="section" id="n2017-06-11t1020">
+<h2>N2017-06-11T1020</h2>
 <p>If SSH session is frozen ... Use the key-combo <strong>Enter, Shift + `, .</strong> [Enter, Tilde, Period]  to drop the connection.</p>
 </div>
-<div class="section" id="n2017-06-10t08-38">
-<h2>N2017-06-10T08:38</h2>
+<div class="section" id="n2017-06-10t0838">
+<h2>N2017-06-10T0838</h2>
 <p>Microphone problem on Thinkpad x230 running Ubuntu 16.04 ... No sound input and <strong>mic</strong> not detected.</p>
 <p><strong>[ Fix! ]</strong> Get capture device ...</p>
 <div class="highlight"><pre><span></span>$ arecord -l
@@ -339,8 +339,8 @@ card 0: ... device 0: ...
 <div class="highlight"><pre><span></span>$ pulseaudio -k
 </pre></div>
 </div>
-<div class="section" id="n2017-06-09t09-41">
-<h2>N2017-06-09T09:41</h2>
+<div class="section" id="n2017-06-09t0941">
+<h2>N2017-06-09T0941</h2>
 <p>Restart network service on Ubuntu ... Sometimes after wake-from-suspend the network connection is down and network-manager's wifi ap list fails to refresh.</p>
 <p><strong>[ Fix! ]</strong> Simple systemd way ...</p>
 <div class="highlight"><pre><span></span>$ sudo systemctl restart NetworkManager.service
@@ -359,8 +359,8 @@ $ sudo /etc/init.d/network-manager restart
 $ sudo ifup -a
 </pre></div>
 </div>
-<div class="section" id="n2017-06-08t09-20">
-<h2>N2017-06-08T09:20</h2>
+<div class="section" id="n2017-06-08t0920">
+<h2>N2017-06-08T0920</h2>
 <p>Attaching to a wifi network with <tt class="docutils literal">nmcli</tt> (network-manager cli client) ...</p>
 <div class="highlight"><pre><span></span>$ nmcli radio
 $ nmcli device
@@ -368,8 +368,8 @@ $ nmcli device wifi rescan
 $ nmcli device wifi connect SSID-Name password PASS
 </pre></div>
 </div>
-<div class="section" id="n2017-06-07t12-19">
-<h2>N2017-06-07T12:19</h2>
+<div class="section" id="n2017-06-07t1219">
+<h2>N2017-06-07T1219</h2>
 <p>Disable <a class="reference external" href="http://www.circuidipity.com/tag-pelican.html">Pelican</a> from auto-generating <tt class="docutils literal">archives.html</tt> by adding to <tt class="docutils literal">pelicanconf.py</tt> ...</p>
 <div class="highlight"><pre><span></span><span class="nv">ARCHIVES_SAVE_AS</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 </pre></div>
