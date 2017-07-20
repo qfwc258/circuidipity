@@ -17,7 +17,7 @@ Let's go!
 0. Install git
 --------------
 
-**Ubuntu Linux:** Install ``git`` package and write global configuration variables for ``USERNAME`` in ``~/.gitconfig`` ...
+**Debian:** Install ``git`` package and write global configuration variables for ``USERNAME`` in ``~/.gitconfig`` ...
 
 .. code-block:: bash
 

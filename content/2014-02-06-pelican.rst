@@ -1,4 +1,4 @@
-====================================================
+===================================================
 Build a blog using the Pelican static site generator
 ====================================================
 
@@ -14,7 +14,7 @@ I like the idea of creating a static website. Some of the advantages:
 * no database required ... plaintext is easy to edit, backup and move around
 * plaintext allows your choice of editor
 * cheap and easy to host practically anywhere ... one option: `GitHub Pages <http://pages.github.com/>`_ is a free service for hosting static HTML content 
-* no database or excutable code makes a website easy to secure, maintain and scale
+* no database or executable code makes a website easy to secure, maintain and scale
 
 The traditional disadvantage to using static pages for a blog has been the lack of dynamic elements - hosting feeds, user comments - but JavaScript for things like a Twitter widget to provide real-time updates and out-sourced services like Disqus for commenting are possible alternatives to work around static limitations.
  

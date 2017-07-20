@@ -129,7 +129,7 @@ Copy Mode
     move cursor forward | backward one word at a time (in vi mode)
 
 ``?`` | ``n`` | ``N``
-    search for *keyword* | next occurance | previous occurance
+    search for *keyword* | next occurrence | previous occurrence
 
 ``SPACEBAR`` | ``ENTER``
     start copy | stop copy
