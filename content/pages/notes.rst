@@ -4,6 +4,21 @@ Notes
 
 :slug: notes
 
+N2017-07-21T1033
+----------------
+
+Enable forward search in Bash history. ``CTRL-R`` enables reverse incremental searches through the Bash shell history and ``CTRL-S`` runs forward searches. However ``CTRL-S`` collides with XON/XOFF flow control in terminal and disables that feature in history.
+
+**[ Fix! ]** Disable XON/XOFF in ``$HOME/.bashrc``...
+
+.. code-block:: bash
+
+    stty -ixon
+
+Hitting ``CTRL-S`` by mistake in vim no longer disables output to the terminal.
+
+Link: `Unable to forward search Bash history similarly as with CTRL-r <https://stackoverflow.com/questions/791765/unable-to-forward-search-bash-history-similarly-as-with-ctrl-r>`_
+
 N2017-07-20T1039
 ----------------
 
