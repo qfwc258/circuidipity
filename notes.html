@@ -24,7 +24,16 @@
 <!-- page contents -->
 <h1>Notes</h1>
 <div id="page">
-    <div class="section" id="n2017-07-20t1039">
+    <div class="section" id="n2017-07-21t1033">
+<h2>N2017-07-21T1033</h2>
+<p>Enable forward search in Bash history. <tt class="docutils literal"><span class="pre">CTRL-R</span></tt> enables reverse incremental searches through the Bash shell history and <tt class="docutils literal"><span class="pre">CTRL-S</span></tt> runs forward searches. However <tt class="docutils literal"><span class="pre">CTRL-S</span></tt> collides with XON/XOFF flow control in terminal and disables that feature in history.</p>
+<p><strong>[ Fix! ]</strong> Disable XON/XOFF in <tt class="docutils literal"><span class="pre">$HOME/.bashrc</span></tt>...</p>
+<div class="highlight"><pre><span></span>stty -ixon
+</pre></div>
+<p>Hitting <tt class="docutils literal"><span class="pre">CTRL-S</span></tt> by mistake in vim no longer disables output to the terminal.</p>
+<p>Link: <a class="reference external" href="https://stackoverflow.com/questions/791765/unable-to-forward-search-bash-history-similarly-as-with-ctrl-r">Unable to forward search Bash history similarly as with CTRL-r</a></p>
+</div>
+<div class="section" id="n2017-07-20t1039">
 <h2>N2017-07-20T1039</h2>
 <p>A simple <a class="reference external" href="http://www.gimp.org">GIMP</a> recipe for play at making 8-bit pixel images:</p>
 <ul class="simple">
