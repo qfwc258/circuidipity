@@ -1,4 +1,4 @@
-========================================================
+=======================================================
 He did not have a long voyage, just a long tossing about
 ========================================================
 
@@ -16,7 +16,7 @@ In his book *On the Shortness of Life* the Roman statesman and philosopher **Sen
 
     Everyone hustles his life along, and is troubled by a longing for the future and weariness of the present. But the man who... organizes every day as though it were his last, neither longs for nor fears the next day… Nothing can be taken from this life, and you can only add to it as if giving to a man who is already full and satisfied food which he does not want but can hold. So you must not think a man has lived long because he has white hair and wrinkles: he has not lived long, just existed long. For suppose you should think that a man had had a long voyage who had been caught in a raging storm as he left harbor, and carried hither and thither and driven round and round in a circle by the rage of opposing winds? He did not have a long voyage, just a long tossing about.
 
-We reach the end of our days and discover that we have placed a low value on an irreplacable commodity - the time that has been alloted to us:
+We reach the end of our days and discover that we have placed a low value on an irreplaceable commodity - the time that has been alloted to us:
 
     No one will bring back the years; no one will restore you to yourself. Life will follow the path it began to take, and will neither reverse nor check its course. It will cause no commotion to remind you of its swiftness, but glide on quietly. It will not lengthen itself for a king’s command or a people’s favor... You have been preoccupied while life hastens on. Meanwhile death will arrive, and you have no choice in making yourself available for that.
 
