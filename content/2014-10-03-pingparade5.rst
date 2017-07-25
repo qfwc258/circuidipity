@@ -21,7 +21,7 @@ To configure a VNC server and client:
 
 VNC enables a connection to a remote device display using two different methods: control an **existing** remote desktop attached to a physical display on a device running a VNC server (example: **x11vnc**); use a VNC server on the remote device to create a **new** desktop (example: `tightvnc <http://www.tightvnc.com/>`_) for display on the VNC client device. This second option is what I configure to enable running the Pi as a **headless** device (no attached display or peripherals).
 
-Temporary access to a display and USB input devices makes the inital configuration of the Pi and VNC an easier task. The alternative is connecting to the Pi using `SSH <http://www.raspberrypi.org/documentation/remote-access/ssh/>`_.
+Temporary access to a display and USB input devices makes the initial configuration of the Pi and VNC an easier task. The alternative is connecting to the Pi using `SSH <http://www.raspberrypi.org/documentation/remote-access/ssh/>`_.
 
 Open or access a console on the Pi and install ``tightvncserver``:
 
