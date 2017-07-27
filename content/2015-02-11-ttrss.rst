@@ -17,7 +17,7 @@ Let's go!
 0. Pre-install
 --------------
 
-`Tiny Tiny RSS <http://tt-rss.org/redmine/projects/tt-rss/wiki>`_ is a PHP application that requires a proxy web server and a database back-end to store content. See `PHP + Nginx + PostgreSQL <http://www.circuidipity.com/php-nginx-postgresql.html>`_ for necessary prerequites to host TTRSS. [1]_
+`Tiny Tiny RSS <http://tt-rss.org/redmine/projects/tt-rss/wiki>`_ is a PHP application that requires a proxy web server and a database back-end to store content. See `PHP + Nginx + PostgreSQL <http://www.circuidipity.com/php-nginx-postgresql.html>`_ for necessary prerequisite to host TTRSS. [1]_
 
 1. Database
 -----------
@@ -58,7 +58,7 @@ Reload server ...
 2. TTRSS
 --------
                                                                                     
-Clone tt-rss repository using Git, and change permissions ...
+Clone ttrss repository using Git, and change permissions ...
 
 .. code-block:: bash
 
