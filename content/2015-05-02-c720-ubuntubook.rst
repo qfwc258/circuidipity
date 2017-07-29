@@ -197,7 +197,7 @@ Sample config ...
 
 **Note:** If using Ubuntu's default Unity desktop ... you may find the 3-finger middle-click option requires a manual reset each session.
 
-**Fix:** Stop the Gnome Settings daemon from overiding ``50-c720-touchpad.conf`` ...
+**Fix:** Stop the Gnome Settings daemon from overriding ``50-c720-touchpad.conf`` ...
 
 .. code-block:: bash
 
@@ -408,7 +408,7 @@ See: `ath9k.conf <https://github.com/vonbrownie/linux-post-install/blob/master/c
 9. Microphone
 =============
 
-Confirm the microphone is un-muted in ``alsamixer``. Create ``/etc/modprobe.d/snd-hda-intel.conf`` ...
+Confirm the microphone is unmuted in ``alsamixer``. Create ``/etc/modprobe.d/snd-hda-intel.conf`` ...
 
 .. code-block:: bash
 
