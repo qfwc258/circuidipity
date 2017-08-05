@@ -4,6 +4,19 @@ Notes
 
 :slug: notes
 
+N2017-08-05T1840
+----------------
+
+Fresh install of `Tiny Tiny RSS <https://tt-rss.org/>`_ allows a single URL path to be set. I want multiple URLs to support both local and remote access.
+
+**[ Fix! ]** Disable URL checks by adding to ``config.php`` ...
+
+.. code-block:: bash
+
+    define('_SKIP_SELF_URL_PATH_CHECKS', true);
+
+Link: `Access by local + domain IP <https://discourse.tt-rss.org/t/after-todays-upgrade-6-7-2017/353/11?u=conrad784>`_
+
 N2017-07-21T1033
 ----------------
 
