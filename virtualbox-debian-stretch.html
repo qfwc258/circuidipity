@@ -36,7 +36,7 @@
 </pre></div>
 <p>Virtualbox packages have been removed from the latest Debian stable release (still available in unstable/sid). I choose to retrieve Virtualbox directly from Oracle and their third-party Debian package repository.</p>
 <p>Create the <tt class="docutils literal">virtualbox.list</tt> file in <tt class="docutils literal">/etc/apt/sources.list.d</tt> ...</p>
-<div class="highlight"><pre><span></span>$ sudo sh -c <span class="err">&#39;</span><span class="nb">echo</span> <span class="s2">&quot;deb http://download.virtualbox.org/virtualbox/debian stretch contrib&quot;</span> &gt; /etc/apt/sources.list.d/virtualbox.list
+<div class="highlight"><pre><span></span>$ sudo sh -c <span class="s1">&#39;echo &quot;deb http://download.virtualbox.org/virtualbox/debian stretch contrib&quot; &gt; /etc/apt/sources.list.d/virtualbox.list&#39;</span>
 </pre></div>
 <p>Add Oracle's Virtualbox public key ...</p>
 <div class="highlight"><pre><span></span>$ wget https://www.virtualbox.org/download/oracle_vbox_2016.asc

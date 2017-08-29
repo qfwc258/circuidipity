@@ -161,7 +161,7 @@ $ sudo cp /usr/share/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-c
 EndSection
 </pre></div>
 <p><strong>Note:</strong> If using Ubuntu's default Unity desktop ... you may find the 3-finger middle-click option requires a manual reset each session.</p>
-<p><strong>Fix:</strong> Stop the Gnome Settings daemon from overiding <tt class="docutils literal"><span class="pre">50-c720-touchpad.conf</span></tt> ...</p>
+<p><strong>Fix:</strong> Stop the Gnome Settings daemon from overriding <tt class="docutils literal"><span class="pre">50-c720-touchpad.conf</span></tt> ...</p>
 <div class="highlight"><pre><span></span>$ gsettings <span class="nb">set</span> org.gnome.settings-daemon.plugins.mouse active <span class="nb">false</span>
 </pre></div>
 <p>See: <a class="reference external" href="https://github.com/vonbrownie/linux-post-install/blob/master/config/c720_ubuntubook/etc/X11/xorg.conf.d/50-c720-touchpad.conf">50-c720-touchpad.conf</a>, and pages for <a class="reference external" href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics">Touchpad Synaptics</a> and the <a class="reference external" href="https://wiki.archlinux.org/index.php/Acer_C720_Chromebook#configuration">C720 Chromebook</a> on <a class="reference external" href="https://wiki.archlinux.org/">ArchWiki</a></p>
@@ -314,7 +314,7 @@ parm:           use_chanctx:Enable channel context <span class="k">for</span> co
 </div>
 <div class="section" id="microphone">
 <h2>9. Microphone</h2>
-<p>Confirm the microphone is un-muted in <tt class="docutils literal">alsamixer</tt>. Create <tt class="docutils literal"><span class="pre">/etc/modprobe.d/snd-hda-intel.conf</span></tt> ...</p>
+<p>Confirm the microphone is unmuted in <tt class="docutils literal">alsamixer</tt>. Create <tt class="docutils literal"><span class="pre">/etc/modprobe.d/snd-hda-intel.conf</span></tt> ...</p>
 <div class="highlight"><pre><span></span>options snd_hda_intel <span class="nv">model</span><span class="o">=</span>,alc283-dac-wcaps
 </pre></div>
 <p>... and restart. Give it a try ...</p>
