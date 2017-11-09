@@ -1,0 +1,23 @@
+.comments-container #disqus_thread:before,.entry+.home-sections-container .home-sections:before,.entry-nav:before,.footer:before,.header:after,
+.prev-entry~.next-entry:before{content:"";display:block;border-bottom:.125em solid #3daee9;width:4em}
+.header:after{margin-top:2em;margin-bottom:2.5em}.comments-container #disqus_thread:before,.entry+.home-sections-container .home-sections:before,.entry-nav:before,.footer:before,.prev-entry~.next-entry:before{margin-top:2.5em;margin-bottom:2em}.comments-container,.entry,.entry-cover-container,.entry-footer-container,.entry-nav-container,.footer-container,.header-container,.home-sections-container,.list-container,.main,.site,.term-cloud-container{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%}.comments-container #disqus_thread,.entry-content,.entry-cover,.entry-cover figcaption,.entry-footer,.entry-nav,.entry-toc,.footer,.header,.home-sections,.list,.pagination,
+.term-cloud{width:100%;max-width:960px;padding-left:20px;padding-right:20px}.icon{display:inline-block;height:1em;width:1em}/*!
+
+*/html
+.title,h1{color:#660066}
+.title,h2,h3,h4,h5,h6{color:#263238}
+.title,h1,h2,h3,h4,h5,h6{font-family:Yanone Kaffeesatz,sans-serif;font-weight:700;line-height:1.2;margin:0 0 .625em}
+.site-title,h1{font-size:2.0em}h2{font-size:1.75em}h3{font-size:1.5em}.home-section-title,h4{font-size:1.375em}h5{font-size:1.25em}h6{font-size:1.125em}
+.header-info{margin-top:1.5em}.header-info .title{margin-bottom:0;text-transform:capitalize}
+.main-menu li{display:inline-block;text-transform:capitalize;margin-right:.625em}
+.list-item .list-item-title{font-size:1.375em;font-weight:400;margin-bottom:0}
+a{color:#ff6600;text-decoration:none;-webkit-transition:color .1s ease-in-out;transition:color .1s ease-in-out}a:focus{outline-color:#ffcd00}a:active,a:hover{outline:0}a:active,a:focus,a:hover{color:#009900}
+.entry-content a{border-bottom:.125em dashed #bdbdbd}.entry-content a:active,.entry-content
+a:focus,.entry-content a:hover{color:#009900;border-bottom-color:#009900}.entry-content a.footnote-return{border-bottom:none}
+.footnote-ref a,.footnote-ref a:focus,.footnote-ref a:active,.footnote-ref a:hover{color:#ffffff;background-color:#ff6600}
+img[style*="float:left"] {
+  margin: 0px 15px 0px 0px;
+}
+img[style*="float:right"] {
+  margin: 0px 0px 0px 15px;
+}

@@ -1,0 +1,23 @@
+{{ partial "header" . }}
+
+<main id='main' class='main'>
+  <div class='entry'>
+    <div class='entry-content'>
+      <span class='screen-reader'>
+        {{- .Site.Params.info.title404 | default .Title -}}
+      </span>
+          <img src='/img/4041.png' alt='No can do friend ...'/>
+          <span class='screen-reader'>
+            {{- i18n "goHome" -}}
+          </span>
+        <figcaption>
+          <h2 class='title'>
+              {{- .Site.Params.info.title404 | default .Title -}}
+          </h2>
+        </figcaption>
+    </div>
+  </div>
+
+</main>
+
+{{ partial "footer" . }}
