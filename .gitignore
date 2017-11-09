@@ -1,4 +1,2 @@
-*.pid
-*.pyc
-output/
-cache/
+*.bak
+public/
