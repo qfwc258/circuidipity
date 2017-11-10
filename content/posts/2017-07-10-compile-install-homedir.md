@@ -1,5 +1,5 @@
 ---
-title: "Compile and install programs in $HOME"
+title: "Compile and install programs in HOME"
 date: "2017-07-10"
 publishDate: "2017-07-10"
 tags:
