@@ -6,9 +6,7 @@ tags:
   - openwrt
   - network
   - linux
-slug: "20141006"
-aliases:
-  - /20141006.html
+slug: "port-forwarding"
 ---
 
 **Port forwarding** enables [SSH access](http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html) to my [home server](http://www.circuidipity.com/home-server.html) from outside the home by forwarding traffic directed at a port on the router (reachable over the Internet by [dynamic DDNS](http://www.circuidipity.com/ddns-openwrt.html)) to the SSH port on the internal server behind a [NAT firewall](http://wiki.openwrt.org/doc/uci/firewall).

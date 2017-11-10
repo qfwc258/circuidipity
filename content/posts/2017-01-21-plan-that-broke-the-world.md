@@ -5,8 +5,6 @@ publishDate: "2017-01-21"
 tags:
   - books
 slug: "plan-that-broke-the-world"
-aliases:
-  - /plan-that-broke-the-world.html
 ---
 
 <img style="float:left" src="/img/plan_that_broke_the_world.jpg" />

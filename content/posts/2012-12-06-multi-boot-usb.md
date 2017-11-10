@@ -7,8 +7,6 @@ tags:
   - shell
   - linux
 slug: "multi-boot-usb"
-aliases:
-  - /multi-boot-usb.html
 ---
 
 <img style="float:right" src="/img/grubs-300.png" />

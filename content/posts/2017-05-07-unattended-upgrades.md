@@ -6,8 +6,6 @@ tags:
   - debian
   - linux
 slug: "unattended-upgrades"
-aliases:
-  - /unattended-upgrades.html
 ---
 
 :penguin: [Home Server](http://www.circuidipity.com/home-server/) :: Fetch the latest fixes, install, and reboot (if necessary). Hands-free!

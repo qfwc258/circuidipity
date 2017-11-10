@@ -6,9 +6,7 @@ tags:
   - openwrt
   - network
   - linux
-slug: "pingparade4"
-aliases:
-  - /pingparade4.html
+slug: "home-router-openwrt"
 ---
 
 <img style="float:right;" src="/img/supercharge-router.png" />

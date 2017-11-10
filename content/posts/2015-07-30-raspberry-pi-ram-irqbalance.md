@@ -5,9 +5,7 @@ publishDate: "2015-07-30"
 tags:
   - raspberry pi
   - linux
-slug: "raspberry-pi-ram-irqbalance"
-aliases:
-  - /raspberry-pi-ram-irqbalance.html
+slug: "pi-ram-irqbalance"
 ---
 
 **Problem:** After a few days uptime my Pi sees hundreds of MB gobbled up by the `irqbalance` daemon (which balances interrupts across multiple CPUs). Package version is `1.0.6-3` on Debian `jessie/armhf` and its a [known bug](https://bugs.launchpad.net/ubuntu/+source/irqbalance/+bug/1247107).

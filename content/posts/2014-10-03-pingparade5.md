@@ -8,9 +8,7 @@ tags:
   - raspberry pi
   - raspbian
   - linux
-slug: "pingparade5"
-aliases:
-  - /pingparade5.html
+slug: "vnc"
 ---
 
 [Raspberry Pi](http://www.raspberrypi.org/) is a less-than-$50 credit card sized computer that delivers all the power and flexibility of Linux, tools to start programming, and the opportunity to explore electronics courtesy of the onboard GPIO pins. There is an active community of Pi enthusiasts and plenty of resources to help you [get started](http://www.raspberrypi.org/help/). 

@@ -1,8 +1,6 @@
 ---
 title: "$HOME slash bin"
 slug: "homebin"
-aliases:
-  - /homebin.html"
 ---
 
  <img style="float:right;" src="/img/infinite-loop-not-300.png" />

@@ -5,8 +5,6 @@ publishDate: "2017-01-14"
 tags:
   - books
 slug: "virtually-human"
-aliases:
-  - /virtually-human.html
 ---
 
 <img style="float:left" src="/img/virtually_human.jpg" />

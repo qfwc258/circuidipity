@@ -1,8 +1,6 @@
 ---
 title: Notes
 slug: notes
-aliases:
-  - /notes.html
 menu:
   main:
     weight: 50

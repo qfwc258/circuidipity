@@ -7,8 +7,6 @@ tags:
   - crypto
   - linux
 slug: "lvm-crypt-lv"
-aliases:
-  - /lvm-crypt-lv.html
 ---
 
 I have been playing with the **Logical Volume Manager** (LVM) on my recent Debian installs. Instead of creating a traditional partition layout on a hard drive, LVM adds a layer of abstraction over physical storage that allows the creation of "virtual" partitions. 

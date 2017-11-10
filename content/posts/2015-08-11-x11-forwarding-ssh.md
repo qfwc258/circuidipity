@@ -7,8 +7,6 @@ tags:
   - network
   - linux
 slug: "x11-forwarding-ssh"
-aliases:
-  - /x11-forwarding-ssh.html
 ---
 
 Run remote X applications on a local display with X11 forwarding over SSH.

@@ -1,8 +1,6 @@
 ---
 title: Colophon
 slug: colophon
-aliases:
-  - /colophon.html
 menu:
   main:
     weight: 60

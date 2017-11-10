@@ -7,8 +7,6 @@ tags:
   - gtk
   - linux
 slug: "breeze-qt-gtk"
-aliases:
-  - /breeze-qt-gtk.html
 ---
 
 I went looking for a desktop style with good support for both Qt and GTK applications. **Breeze** is the default Qt style of KDE Plasma and the one I chose. I like it!

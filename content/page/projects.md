@@ -1,8 +1,6 @@
 ---
 title: Projects
 slug: projects
-aliases:
-  - /projects.html
 menu:
   main:
     weight: 40

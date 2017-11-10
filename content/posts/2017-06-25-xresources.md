@@ -7,8 +7,6 @@ tags:
   - shell
   - linux
 slug: "xresources"
-aliases:
-  - /xresources.html
 ---
 
 I create `~/.Xresources` to set my custom configuration parameters for X client applications.

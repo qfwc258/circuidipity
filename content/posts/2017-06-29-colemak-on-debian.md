@@ -8,8 +8,6 @@ tags:
   - debian
   - linux
 slug: "colemak-debian"
-aliases:
-  - /colemak-debian.html
 ---
 
 Change a default QWERTY keyboard layout to **Colemak** on Debian.

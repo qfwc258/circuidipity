@@ -6,9 +6,7 @@ tags:
   - dotfiles
   - shell
   - linux
-slug: "dot-bashrc"
-aliases:
-  - /dot-bashrc.html
+slug: "bashrc"
 ---
 
 I go ahead and customize my experience with the Bash shell by modifying the default `~/.bashrc` placed in $HOME.

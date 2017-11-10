@@ -6,8 +6,6 @@ tags:
   - shell
   - linux
 slug: "youtube-dl"
-aliases:
-  - /youtube-dl.html
 ---
 
 Download videos using the command line program [youtube-dl](http://rg3.github.io/youtube-dl/) from a whole bunch of online video sites. It can also convert videos into audio files (courtesy of `ffmpeg`).

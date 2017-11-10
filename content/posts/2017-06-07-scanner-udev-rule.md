@@ -8,8 +8,6 @@ tags:
   - shell
   - linux
 slug: "scanner-udev-rule"
-aliases:
-  - /scanner-udev-rule.html
 ---
 
 **[ Problem ]** Client error trying to scan to a **Brother MFC-J450DW** configured as a [network scanner](http://www.circuidipity.com/network-printer-scanner) ...

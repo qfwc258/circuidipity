@@ -5,9 +5,7 @@ publishDate: "2014-10-17"
 tags:
   - lubuntu
   - linux
-slug: "20141017"
-aliases:
-  - /20141017.html
+slug: "pentium-m-pae"
 ---
 
 I have a **Thinkpad X31** with a **Pentium M** processor. A standard Ubuntu 14.04 install will bail thinking the machine has a **non-PAE** processor when in fact the CPU **does** support PAE extensions but omits reporting the necessary details. 

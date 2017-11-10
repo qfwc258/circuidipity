@@ -6,9 +6,7 @@ tags:
   - openwrt
   - linux
   - network
-slug: "supercharge-a-home-router-using-openwrt-pt2"
-aliases:
-  - /supercharge-a-home-router-using-openwrt-pt2.html
+slug: "home-router-openwrt-2"
 ---
            
 Home routers are more capable than default firmware would lead you to believe. I replace that firmware with [OpenWrt](https://openwrt.org/): an embedded Linux distribution that converts energy-efficient, network-capable devices into much more useful hackable computers.

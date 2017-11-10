@@ -8,8 +8,6 @@ tags:
   - shell
   - programming
 slug: "debian-package-list"
-aliases:
-  - /debian-package-list.html
 ---
 
 **Scenario:** I have a whole bunch of packages installed on **Machine A** and I want to replicate that package selection on **Machine B**.

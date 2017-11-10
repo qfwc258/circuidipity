@@ -8,8 +8,6 @@ tags:
   - programming
   - linux
 slug: "keyboardconf"
-aliases:
-  - /keyboardconf.html
 ---
 
 I have two keyboards I am interested in modifying with custom hotkey actions (via [xbindkeys](http://www.circuidipity.com/xbindkeysrc)) and remapping keys (via [xmodmap](http://www.circuidipity.com/xmodmap)). So for my laptop's keyboard I created [.xbindkeysrc.chromebook](https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.chromebook) and [.xmodmap.chromebook](https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.chromebook), my [Thinkpad USB Keyboard + Trackpoint](http://www.circuidipity.com/thinkpad-usb-keyboard-trackpoint) uses [.xbindkeysrc.thinkpad_usb](https://github.com/vonbrownie/dotfiles/blob/master/.xbindkeysrc.thinkpad_usb) and [.xmodmap.thinkpad_usb](https://github.com/vonbrownie/dotfiles/blob/master/.xmodmap.thinkpad_usb), and I create `~/.xbindkeysrc` and `~/.xmodmap` symlinks to the relevant config for the keyboard in use.

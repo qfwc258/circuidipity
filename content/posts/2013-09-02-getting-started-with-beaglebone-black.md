@@ -7,8 +7,6 @@ tags:
   - electronics
   - linux
 slug: "getting-started-with-beaglebone-black"
-aliases:
-  - /getting-started-with-beaglebone-black.html
 ---
 
 ![Beaglebone](/img/bbb-details3.png)

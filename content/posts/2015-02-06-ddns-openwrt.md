@@ -7,8 +7,6 @@ tags:
   - network
   - linux
 slug: "ddns-openwrt"
-aliases:
-  - /ddns-openwrt.html
 ---
 
 :penguin: [Home Server](http://www.circuidipity.com/home-server/) :: Access a home server from anywhere using **Dynamic DNS** (DDNS).

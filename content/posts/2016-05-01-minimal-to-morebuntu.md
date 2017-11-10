@@ -8,9 +8,7 @@ tags:
   - i3
   - shell
   - programming
-slug: "20160501"
-aliases:
-  - /20160501.html
+slug: "morebuntu"
 ---
 
 <img style="float:right;" src="/img/ubuntu-crane-300.png" />

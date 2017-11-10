@@ -8,8 +8,6 @@ tags:
   - crypto
   - lvm
 slug: "minimal-debian"
-aliases:
-  - /minimal-debian.html
 ---
 
 ![Debian Vader](/img/debianVader.png))

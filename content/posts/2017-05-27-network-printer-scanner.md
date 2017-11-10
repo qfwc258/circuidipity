@@ -9,8 +9,6 @@ tags:
   - debian
   - linux
 slug: "network-printer-scanner"
-aliases:
-  - /network-printer-scanner.html
 ---
 
 :penguin: [Home Server](http://www.circuidipity.com/home-server/) :: Configure a printer + scanner to receive jobs across the local network.

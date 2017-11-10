@@ -6,8 +6,6 @@ tags:
   - neovim
   - linux
 slug: "neovim"
-aliases:
-  - /neovim.html
 ---
 
 Text-wrangling is a big part of unlocking the power of Linux and programming ... and with great power comes the need for a great text editor!

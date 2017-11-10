@@ -8,9 +8,7 @@ tags:
   - chromebook
   - crypto
   - lvm
-slug: "arch-install-encrypt"
-aliases:
-  - /arch-install-encrypt.html
+slug: "arch-install"
 ---
 
 My notes for installing **Arch Linux** that follow a condensed path through the [Beginner's Guide](https://wiki.archlinux.org/index.php/Beginners%27_guide) plus extra steps to configure LUKS-encrypted root + swap.

@@ -7,8 +7,6 @@ tags:
   - debian
   - linux
 slug: "jessiebook-to-stretchbook"
-aliases:
-  - /jessiebook-to-stretchbook.html
 ---
 
 With the release of **Debian 9 "Stretch"** my chromebook has transitioned from a [Jessiebook](http://www.circuidipity.com/c720-chromebook-to-jessiebook) to a Stretchbook! 

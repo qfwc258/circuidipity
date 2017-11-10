@@ -6,9 +6,7 @@ tags:
   - ssh
   - crypto
   - linux
-slug: "secure-remote-access-using-ssh-keys"
-aliases:
-  - /secure-remote-access-using-ssh-keys.html
+slug: "ssh-keys"
 ---
 
 :penguin: [Home Server](http://www.circuidipity.com/home-server/) :: Create cryptographic keys and **disable password logins** to make remote machines more secure.

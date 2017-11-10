@@ -4,9 +4,7 @@ date: "2010-06-17"
 publishDate: "2010-06-17"
 tags:
   - linux
-slug: "big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr"
-aliases:
-  - /big-screen-little-screen-virtual-screen-dual-display-configuration-using-xrandr.html
+slug: "xrandr"
 ---
 
 Sometimes *less is more*. But sometimes less is just... well... *less*. I love my [little netbook](http://www.circuidipity.com/debian-linux-on-the-asus-eeepc-1001p.html). But when you have parked yourself somewhere and made yourself comfortable with an espresso and a banana... and portability is no longer a factor... the 10" screen can be a mite limiting.

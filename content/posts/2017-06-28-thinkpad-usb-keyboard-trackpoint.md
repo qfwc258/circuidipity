@@ -6,8 +6,6 @@ tags:
   - keyboard
   - linux
 slug: "thinkpad-usb-keyboard-trackpoint"
-aliases:
-  - /thinkpad-usb-keyboard-trackpoint.html
 ---
 
 A Thinkpad keyboard minus the Thinkpad with the classic Trackpoint + Left/Middle/Right mouse buttons. Its attached to my desktop and I want to change the behaviour of a few keys.

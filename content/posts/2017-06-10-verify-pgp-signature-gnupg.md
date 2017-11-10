@@ -9,8 +9,6 @@ tags:
   - debian
   - linux
 slug: "verify-pgp-signature-gnupg"
-aliases:
-  - /verify-pgp-signature-gnupg.html
 ---
 
 I setup [GNU Privacy Guard](https://www.gnupg.org/) (**GnuPG** or **GPG**) - a free software implementation of OpenPGP - and use the utility to verify the PGP signatures of files.

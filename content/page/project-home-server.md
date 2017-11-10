@@ -1,8 +1,6 @@
 ---
 title: "There's no place like [a Linux] home [server]"
 slug: "home-server"
-aliases:
-  - /home-server.html
 ---
 
 <img style="float:right" src="/img/home-server.png" />

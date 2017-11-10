@@ -7,8 +7,6 @@ tags:
   - debian
   - linux
 slug: "laptop-home-server"
-aliases:
-  - /laptop-home-server.html
 ---
 
 :penguin: [Home Server](http://www.circuidipity.com/home-server/) :: **Netbooks** ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old **Asus 900HA** netbook and put it to work as a home server. Good times!

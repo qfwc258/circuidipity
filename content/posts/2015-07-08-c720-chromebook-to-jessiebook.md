@@ -7,8 +7,6 @@ tags:
   - debian
   - linux
 slug: "c720-chromebook-to-jessiebook"
-aliases:
-  - /c720-chromebook-to-jessiebook.html
 ---
 
 <img style="float:right;" src="/img/jessiebook.png" />

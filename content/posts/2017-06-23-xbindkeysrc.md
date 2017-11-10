@@ -7,8 +7,6 @@ tags:
   - shell
   - linux
 slug: "xbindkeysrc"
-aliases:
-  - /xbindkeysrc.html
 ---
 
 Bind commands to certain keys or key combos by creating `~/.xbindkeysrc`.

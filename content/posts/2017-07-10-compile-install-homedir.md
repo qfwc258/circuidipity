@@ -6,8 +6,6 @@ tags:
   - shell
   - linux
 slug: "compile-install-homedir"
-aliases:
-  - /compile-install-homedir.html
 ---
 
 Debian has extensive (50,000+) package archives but sometimes I want **that one thing** they do not! Or maybe I want to re-compile the source code of a program with different options.

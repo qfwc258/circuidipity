@@ -8,8 +8,6 @@ tags:
   - network
   - linux
 slug: "self-signed-ssl-certificate"
-aliases:
-  - /self-signed-ssl-certificate.html
 ---
 
 Secure web access to services hosted on a [home server](http://www.circuidipity.com/home-server).

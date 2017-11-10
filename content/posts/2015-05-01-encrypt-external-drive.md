@@ -6,8 +6,6 @@ tags:
   - crypto
   - linux
 slug: "encrypt-external-drive"
-aliases:
-  - /encrypt-external-drive.html
 ---
 
 Using an external USB hard drive is part of my personal backup plan (the other part is backing up to a [home server](http://www.circuidipity.com/home-server.html)). I actually use 2 multi-terabyte drives. One drive is in my possession and the other drive I store offsite at a friend's home. Periodically I swap the drives and update the data.

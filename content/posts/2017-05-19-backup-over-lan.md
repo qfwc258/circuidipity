@@ -8,8 +8,6 @@ tags:
   - crypto
   - linux
 slug: "backup-over-lan"
-aliases:
-  - /backup-over-lan.html
 ---
 
 :penguin: [Home Server](http://www.circuidipity.com/home-server/) :: Make incremental and automatic backups of a home folder to a local server using **SSH + rsync + cron**.

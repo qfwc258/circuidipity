@@ -6,8 +6,6 @@ tags:
   - i3
   - linux
 slug: "i3-tiling-window-manager"
-aliases:
-  - /i3-tiling-window-manager.html
 ---
 
 As a former *Fluxbox* and *Openbox* user I can understand the love for a lightweight, minimal window manager where I can "paint" my applications across the screen. I was curious about [tiling window managers](https://en.wikipedia.org/wiki/Tiling_window_manager) but never quite grokked the advantage from screenshots. Seeing consoles arranged in a grid made me think [tmux](http://www.circuidipity.com/tmux) a better choice for that task, and why would I want to watch a video in a reduced square in the corner of a screen?

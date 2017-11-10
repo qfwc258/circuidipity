@@ -6,9 +6,7 @@ tags:
   - ubuntu
   - linux
   - crypto
-slug: "ubuntu-trusty-install"
-aliases:
-  - /ubuntu-trusty-install.html
+slug: "minimal-ubuntu"
 ---
 
 <img style="float:right" src="/img/screenshot/ubuntuInstall/xerus.png" />

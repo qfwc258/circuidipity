@@ -6,9 +6,7 @@ tags:
   - debian
   - linux
   - raspberry pi
-slug: "debian-jessie-raspberry-pi-2"
-aliases:
-  - /debian-jessie-raspberry-pi-2.html
+slug: "jessie-pi2"
 ---
 
 With the move to ARMv7 I am now capable of running the official ARM port of Debian (with Pi-friendly kernel+firmware) on my Raspberry Pi 2! 

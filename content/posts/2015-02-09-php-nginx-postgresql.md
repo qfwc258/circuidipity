@@ -10,8 +10,6 @@ tags:
   - debian
   - linux
 slug: "php-nginx-postgresql"
-aliases:
-  - /php-nginx-postgresql.html
 ---
 
 :penguin: [Home Server](http://www.circuidipity.com/home-server/) :: As a requirement to host web applications like [Tiny Tiny RSS](http://www.circuidipity.com/ttrss.html) on my home server I install **PHP**, the lightweight proxy server **Nginx**, and the **PostgreSQL** database.

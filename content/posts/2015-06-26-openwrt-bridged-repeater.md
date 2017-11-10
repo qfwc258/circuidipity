@@ -7,8 +7,6 @@ tags:
   - linux
   - network
 slug: "openwrt-bridged-repeater"
-aliases:
-  - /openwrt-bridged-repeater.html
 ---
 
 Extend the range of a wireless network using a cheap and cheerful router running **OpenWrt** as a **bridged repeater**. All client devices use the same IP address range and are capable of communicating with each other.

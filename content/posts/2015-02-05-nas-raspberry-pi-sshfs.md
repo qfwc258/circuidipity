@@ -8,9 +8,7 @@ tags:
   - ssh
   - crypto
   - linux
-slug: "nas-raspberry-pi-sshfs"
-aliases:
-  - /nas-raspberry-pi-sshfs.html
+slug: "nas-pi-sshfs"
 ---
 
 :penguin: [Home Server](http://www.circuidipity.com/home-server/) :: Connect a Pi to external USB storage and create a cheap and cheerful NAS device via **SSH Filesystem** (SSHFS).

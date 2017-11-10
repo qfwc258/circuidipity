@@ -7,9 +7,7 @@ tags:
   - network
   - debian
   - linux
-slug: "raspberry-pi-usb-storage-v4"
-aliases:
-  - /raspberry-pi-usb-storage-v4.html
+slug: "pi-usb-storage"
 ---
 
 :penguin: [Home Server](http://www.circuidipity.com/home-server/) :: I am exploring the use of my Pi as **24/7 uptime home server**. Hard drives offer a more robust storage media than a Pi's default choice of microSD cards and that is what I decide to use. [^1] I put my plan in motion using **Debian** and move `rootfs` from a microSD to a powered 1TB USB 3.5" hard drive with encrypted storage. 

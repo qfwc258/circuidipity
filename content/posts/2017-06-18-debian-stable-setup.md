@@ -8,8 +8,6 @@ tags:
   - shell
   - programming
 slug: "debian-stable-setup"
-aliases:
-  - /debian-stable-setup.html
 ---
 
 ![Debian stretch](/img/debian_9_banner.png)
