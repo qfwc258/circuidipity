@@ -7,8 +7,6 @@ tags:
   - debian
   - linux
 slug: "virtualbox-debian-stretch"
-aliases:
-  - /virtualbox-debian-stretch.html
 ---
 
 [Virtualbox](https://www.virtualbox.org/) is virtualization software that allows a Linux user to host multiple guest operating systems as **virtual machines (VMs)**. It is a cool tool for playing with different Linux distros and experimenting with configurations.
