@@ -6,6 +6,54 @@ menu:
     weight: 50
 ---
 
+### 2017-11-14T1831
+
+Pulseaudio for Ubuntu MATE. Sound works OK (on Thinkpad E520). Configure volume hotkeys in custom `.xbindkeysrc.thinkpad_e520` (`@DEFAULT_SINK@` was auto-detected) ...
+
+```bash
+# Volume mute/decrease/increase                      
+"pactl set-sink-mute @DEFAULT_SINK@ toggle"          
+    F1                    
+"pactl set-sink-volume @DEFAULT_SINK@ -5%"           
+    F2                    
+"pactl set-sink-volume @DEFAULT_SINK@ +5%"           
+    F3
+```
+
+Load custom file with `xbindkeys --file ~/.xbindkeysrc.thinkpad_e520`.
+
+If `@DEFAULT_SINK@` **not** auto-detected, set manually. First, by detecting the default output source ...
+
+```bash
+pacmd list-sinks | grep -e 'name:' -e 'index'
+  * index: 0                                   
+        name: <alsa_output.pci-0000_00_1b.0.analog-stereo>
+```
+
+... then set it as the system wide default, by adding the following to `/etc/pulse/default.pa` ...
+
+```bash
+set-default-sink alsa_output.pci-0000_00_1b.0.analog-stereo
+```
+
+Restart pulseaudio with `pulseaudio -k` (kills and restarts).
+
+Link: [Pulseaudio examples](https://wiki.archlinux.org/index.php/PulseAudio/Examples)
+
+### 2017-11-13T2222
+
+Ubuntu MATE 17.10: Custom start page set in Firefox constantly overwritten and reset back to MATE start page.
+
+**[ Fix! ]** Edit `/usr/lib/firefox/ubuntumate.cfg` with my preferred start page.
+
+### 2017-11-12T2128
+
+Ubuntu MATE 17.10: Set custom time format on panel using `dconf-editor`.
+
+Modify `/org/mate/panel/objects/clock/prefs/` **format** from 24 hours to `custom`, then modify **custom-format** to preferred setting, example: `%j:%d:%H:%M`.
+
+Link: [Customize panel date-time](https://ubuntu-mate.community/t/how-to-customize-panel-date-time-display-at-ubuntu-mate/8243/4)
+
 ### 2017-10-28T1701
 
 Enable **periodic TRIM** on SSD drives. Create a weekly TRIM job in `/etc/cron.weekly/trim` ...
