@@ -1,212 +1,258 @@
 ---
 title: "Minimal Ubuntu"
-date: "2016-08-14"
+date: "2017-11-17"
 publishDate: "2014-07-07"
 tags:
   - ubuntu
   - linux
   - crypto
+  - lvm
 slug: "minimal-ubuntu"
 ---
 
-<img style="float:right" src="/img/screenshot/ubuntuInstall/xerus.png" />
+<img style="float:right" src="/img/artful-aardvark-300.png" />
 
-**Ubuntu 16.04 "Xenial Xerus"** is the latest **Long Term Support (LTS)** release of the popular Linux operating system. I use Ubuntu's [minimal install image](https://help.ubuntu.com/community/Installation/MinimalCD) to create a **console-only base configuration** that can be customized for various tasks and [alternate desktops](http://www.circuidipity.com/i3-tiling-window-manager.html).
+**Ubuntu 17.10 "Artful Aardvark"** is the latest release of the popular Linux operating system. I use Ubuntu's [minimal install image](https://help.ubuntu.com/community/Installation/MinimalCD) to create a **console-only base configuration** that can be customized for various tasks and alternate desktops.
 
 ## Let's go!
 
-Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire storage device divided into 3 partitions: an unencrypted `root` partition, and encrypted `swap` + `home`. 
+Below is a visual walk-through of a sample Ubuntu setup that makes use of an entire disk divided into 2 partitions: a `boot` partition, [^1] and an **encrypted** partition used by the **Logical Volume Manager** (LVM) to create "virtual partitions" (Logical Volumes). Installing LVM on top of the encrypted partition allows:
+
+* creation of multiple LVs protected by a single passphrase entered at boot time
+* dynamic resizing of filesystems (set aside unallocated space and make use of it as needed)
+* snapshots of filesystems that can be used as backups or to restore a previous state [^2]
 
 ## 0. Prepare install media
 
-Download the [64-bit xenial minimal installer](http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/mini.iso) ([32-bit](http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-i386/current/images/netboot/mini.iso) for older machines) and burn to CD or [flash the image](https://help.ubuntu.com/community/Installation/FromUSBStick) to a USB stick. [^1] Using the minimal console installer vs. the graphical installer provides more options during setup. [^2]
+Download the [64-bit artful minimal installer](http://archive.ubuntu.com/ubuntu/dists/artful/main/installer-amd64/current/images/netboot/mini.iso) ([32-bit](http://archive.ubuntu.com/ubuntu/dists/artful/main/installer-i386/current/images/netboot/mini.iso) for older machines) and burn to CD or [flash the image](https://help.ubuntu.com/community/Installation/FromUSBStick) to a USB stick. [^3] Using the minimal console installer vs. the graphical installer provides more options during setup.
 
 Minimal installer (requires network connection) downloads all the latest packages during setup.
 
 ## 1. Launch
----------
 
-![Install](/img/screenshot/ubuntuInstall/100.png)
+![Install](/img/screenshot/minimal-ubuntu/100.png)
 
-![Select language](/img/screenshot/ubuntuInstall/101.png)
+![Select language](/img/screenshot/minimal-ubuntu/101.png)
 
-![Selecl location](/img/screenshot/ubuntuInstall/102.png)
+![Selecl location](/img/screenshot/minimal-ubuntu/102.png)
 
-![Configure keyboard](/img/screenshot/ubuntuInstall/103.png)
+![Configure keyboard](/img/screenshot/minimal-ubuntu/103.png)
 
-![Keyboard](/img/screenshot/ubuntuInstall/104.png)
+![Keyboard](/img/screenshot/minimal-ubuntu/104.png)
 
-![Keyboard](/img/screenshot/ubuntuInstall/105.png)
+I use the **Colemak** keyboard layout ...
 
-![Hostname](/img/screenshot/ubuntuInstall/106.png)
+![Keyboard](/img/screenshot/minimal-ubuntu/105.png)
 
-![Mirror country](/img/screenshot/ubuntuInstall/107.png)
+A device with a single network interface is auto-detected and configured (otherwise the installer prompts to select an interface) ...
 
-![Mirror archive](/img/screenshot/ubuntuInstall/108.png)
+![Detecting network hardware](/img/screenshot/minimal-ubuntu/106.png)
 
-![Proxy](/img/screenshot/ubuntuInstall/109.png)
+![DHCP](/img/screenshot/minimal-ubuntu/107.png)
 
-Contents of the installer are now loaded into memory and the USB stick can safely be removed. [^3]
+![Hostname](/img/screenshot/minimal-ubuntu/108.png)
 
-![Full name](/img/screenshot/ubuntuInstall/110.png)
+![Mirror country](/img/screenshot/minimal-ubuntu/109.png)
 
-![Username](/img/screenshot/ubuntuInstall/111.png)
+![Mirror archive](/img/screenshot/minimal-ubuntu/110.png)
 
-![User password](/img/screenshot/ubuntuInstall/112.png)
+![Proxy](/img/screenshot/minimal-ubuntu/111.png)
 
-![Verify password](/img/screenshot/ubuntuInstall/113.png)
+Contents of the installer are now loaded into memory and the USB stick can safely be removed. [^4]
 
-![Encrypt home](/img/screenshot/ubuntuInstall/114.png)
+![Full name](/img/screenshot/minimal-ubuntu/112.png)
 
-![Configure clock](/img/screenshot/ubuntuInstall/115.png)
+![Username](/img/screenshot/minimal-ubuntu/113.png)
 
-![Select time zone](/img/screenshot/ubuntuInstall/116.png)
+![User password](/img/screenshot/minimal-ubuntu/114.png)
+
+![Verify password](/img/screenshot/minimal-ubuntu/115.png)
+
+![Encrypt home](/img/screenshot/minimal-ubuntu/116.png)
+
+![Configure clock](/img/screenshot/minimal-ubuntu/117.png)
 
 ## 2. Partitions
 
-In the example below I create 3 partitions [^4] on the disk:
+Sample layout:
 
-* sda1 is a 24GB `root` partition 
-* sda2 is a 2GB LUKS encrypted `swap` partition using a **random key**
-* sda3 uses the remaining space as a LUKS encrypted `home` partition using a **passphrase**
+* sda1 is a 512MB `boot` partition
+* sda2 uses the remaining storage as a LUKS encrypted partition
+* LVM is installed on the encrypted partition, and contains a volume group with the 3 logical volumes: <nobr> `root` + `swap` + `home` </nobr>
 
-![Partitioning method](/img/screenshot/ubuntuInstall/200.png)
+![Partitioning method](/img/screenshot/minimal-ubuntu/200.png)
 
-![Partition disks](/img/screenshot/ubuntuInstall/201.png)
+![Partition disks](/img/screenshot/minimal-ubuntu/201.png)
 
-![Partition table](/img/screenshot/ubuntuInstall/202.png)
+![Partition table](/img/screenshot/minimal-ubuntu/202.png)
 
-![Free space](/img/screenshot/ubuntuInstall/203.png)
+![Free space](/img/screenshot/minimal-ubuntu/203.png)
 
-![New partition](/img/screenshot/ubuntuInstall/204.png)
+![New partition](/img/screenshot/minimal-ubuntu/204.png)
 
-![Partition size](/img/screenshot/ubuntuInstall/205.png)
+![Partition size](/img/screenshot/minimal-ubuntu/205.png)
 
-![Primary partition](/img/screenshot/ubuntuInstall/206.png)
+![Primary partition](/img/screenshot/minimal-ubuntu/206.png)
 
-![Beginning](/img/screenshot/ubuntuInstall/207.png)
+![Beginning](/img/screenshot/minimal-ubuntu/207.png)
 
-Setting `Mount options: relatime` decreases write operations and boosts drive speed ...
+![Mount point](/img/screenshot/minimal-ubuntu/208.png)
 
-![Mount options](/img/screenshot/ubuntuInstall/208.png)
+![Mount boot](/img/screenshot/minimal-ubuntu/209.png)
 
-![Mount relatime](/img/screenshot/ubuntuInstall/209.png)
+![Boot flag](/img/screenshot/minimal-ubuntu/210.png)
 
-![Done with partition](/img/screenshot/ubuntuInstall/210.png)
+![Done with partition](/img/screenshot/minimal-ubuntu/211.png)
 
-![Free space](/img/screenshot/ubuntuInstall/211.png)
+![Free space](/img/screenshot/minimal-ubuntu/212.png)
 
-![New partition](/img/screenshot/ubuntuInstall/204.png)
+![New partition](/img/screenshot/minimal-ubuntu/213.png)
 
-![Partition size](/img/screenshot/ubuntuInstall/213.png)
+![Partition size](/img/screenshot/minimal-ubuntu/214.png)
 
-![Primary partition](/img/screenshot/ubuntuInstall/206.png)
+![Primary partition](/img/screenshot/minimal-ubuntu/215.png)
 
-![Beginning](/img/screenshot/ubuntuInstall/207.png)
-    
-![Use as](/img/screenshot/ubuntuInstall/215.png)
+![Use as](/img/screenshot/minimal-ubuntu/216.png)
 
-![Encrypt volume](/img/screenshot/ubuntuInstall/216.png)
+![Encrypt volume](/img/screenshot/minimal-ubuntu/217.png)
 
-![Encrypt key](/img/screenshot/ubuntuInstall/217.png)
+If the hard disk has not been securely wiped prior to installing Ubuntu you may want to configure <nobr>`Erase data: yes`.</nobr> Note, however, that depending on the size of the disk this operation can last several hours ...
 
-![Random key](/img/screenshot/ubuntuInstall/218.png)
+![Done with partition](/img/screenshot/minimal-ubuntu/218.png)
 
-If the hard disk has not been securely wiped prior to installing Ubuntu you may want to configure `Erase data: yes`. Note, however, that depending on the size of the disk this operation can last several hours ...
+![Configure encrypt](/img/screenshot/minimal-ubuntu/219.png)
 
-![Done with partition](/img/screenshot/ubuntuInstall/219.png)
+![Write changes](/img/screenshot/minimal-ubuntu/220.png)
 
-![Free space](/img/screenshot/ubuntuInstall/220.png)
+![Create encrypt](/img/screenshot/minimal-ubuntu/221.png)
 
-![New partition](/img/screenshot/ubuntuInstall/204.png)
+![Device to encrypt](/img/screenshot/minimal-ubuntu/222.png)
 
-![Partition size](/img/screenshot/ubuntuInstall/222.png)
+![Finish](/img/screenshot/minimal-ubuntu/223.png)
 
-![Primary partition](/img/screenshot/ubuntuInstall/206.png)
+![Passphrase](/img/screenshot/minimal-ubuntu/224.png)
 
-![Use as](/img/screenshot/ubuntuInstall/224.png)
+![Re-enter passphrase](/img/screenshot/minimal-ubuntu/225.png)
 
-![Encrypt volume](/img/screenshot/ubuntuInstall/216.png)
+![Encrypt volume](/img/screenshot/minimal-ubuntu/226.png)
 
-![Encrypt key](/img/screenshot/ubuntuInstall/216-1.png)
+![Use as](/img/screenshot/minimal-ubuntu/227.png)
 
-![Passphrase](/img/screenshot/ubuntuInstall/216-2.png)
-
-![Done with partition](/img/screenshot/ubuntuInstall/226.png)
+![LVM](/img/screenshot/minimal-ubuntu/228.png)
  
-![Configure encrypted volumes](/img/screenshot/ubuntuInstall/227.png)
+![Done setting up partition](/img/screenshot/minimal-ubuntu/229.png)
 
-![Write changes](/img/screenshot/ubuntuInstall/228.png)
+![Configure LVM](/img/screenshot/minimal-ubuntu/230.png)
 
-![Create encrypted volumes](/img/screenshot/ubuntuInstall/229.png)
+![Write changes](/img/screenshot/minimal-ubuntu/231.png)
 
-![Devices to encrypt](/img/screenshot/ubuntuInstall/230.png)
+![Create volume group](/img/screenshot/minimal-ubuntu/232.png)
 
-![Finish](/img/screenshot/ubuntuInstall/231.png)
+![Volume group name](/img/screenshot/minimal-ubuntu/233.png)
 
-![Encrypt passphrase](/img/screenshot/ubuntuInstall/232.png)
+![Device for group](/img/screenshot/minimal-ubuntu/234.png)
 
-![Verify passphrase](/img/screenshot/ubuntuInstall/233.png)
+![Create lv](/img/screenshot/minimal-ubuntu/235.png)
 
-![Configure encrypt volume](/img/screenshot/ubuntuInstall/234.png)
+![Vg](/img/screenshot/minimal-ubuntu/236.png)
 
-![Mount point](/img/screenshot/ubuntuInstall/235.png)
+![Lv root](/img/screenshot/minimal-ubuntu/237.png)
 
-![Mount home](/img/screenshot/ubuntuInstall/236.png)
+![Lv size](/img/screenshot/minimal-ubuntu/238.png)
 
-![Mount options](/img/screenshot/ubuntuInstall/237.png)
+![Create lv](/img/screenshot/minimal-ubuntu/239.png)
 
-![Mount relatime](/img/screenshot/ubuntuInstall/209.png)
+![Vg](/img/screenshot/minimal-ubuntu/240.png)
 
-**Reserved blocks** can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, **non-root partitions** extra space can be gained by reducing the `5%` default reserve set by Ubuntu to `1%` ...
+![Lv swap](/img/screenshot/minimal-ubuntu/241.png)
 
-![Reserved blocks](/img/screenshot/ubuntuInstall/239.png)
+![Lv size](/img/screenshot/minimal-ubuntu/242.png)
 
-![Percent reserved](/img/screenshot/ubuntuInstall/240.png)
+![Create lv](/img/screenshot/minimal-ubuntu/243.png)
 
-![Done with partition](/img/screenshot/ubuntuInstall/241.png)
+![Vg](/img/screenshot/minimal-ubuntu/244.png)
 
-![Finish](/img/screenshot/ubuntuInstall/242.png)
+![Lv home](/img/screenshot/minimal-ubuntu/245.png)
 
-![Write changes](/img/screenshot/ubuntuInstall/243.png)
+![Lv size](/img/screenshot/minimal-ubuntu/246.png)
+
+![Finish](/img/screenshot/minimal-ubuntu/247.png)
+
+![Partition](/img/screenshot/minimal-ubuntu/248.png)
+
+![Use as](/img/screenshot/minimal-ubuntu/249.png)
+
+![Ext4](/img/screenshot/minimal-ubuntu/250.png)
+
+![Mount point](/img/screenshot/minimal-ubuntu/251.png)
+
+![Home](/img/screenshot/minimal-ubuntu/252.png)
+
+**Reserved blocks** can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large, **non-root** partitions extra space can be gained by reducing the `5%` default reserve set by Ubuntu to `1%` ...
+
+![Reserved blocks](/img/screenshot/minimal-ubuntu/253.png)
+
+![Percent reserved](/img/screenshot/minimal-ubuntu/254.png)
+
+![Done with partition](/img/screenshot/minimal-ubuntu/255.png)
+
+![Partition](/img/screenshot/minimal-ubuntu/256.png)
+
+![Use as](/img/screenshot/minimal-ubuntu/257.png)
+
+![Ext4](/img/screenshot/minimal-ubuntu/258.png)
+
+![Mount point](/img/screenshot/minimal-ubuntu/259.png)
+
+![Root](/img/screenshot/minimal-ubuntu/260.png)
+
+![Done with partition](/img/screenshot/minimal-ubuntu/261.png)
+
+![Partition](/img/screenshot/minimal-ubuntu/262.png)
+
+![Use as](/img/screenshot/minimal-ubuntu/263.png)
+
+![Swap](/img/screenshot/minimal-ubuntu/264.png)
+
+![Done with partition](/img/screenshot/minimal-ubuntu/265.png)
+
+![Finish](/img/screenshot/minimal-ubuntu/266.png)
+
+![Write changes](/img/screenshot/minimal-ubuntu/267.png)
 
 ## 3. Install packages and finish up
 
-![No automatic updates](/img/screenshot/ubuntuInstall/300.png)
+![Install base](/img/screenshot/minimal-ubuntu/300.png)
 
-**Alternative:** For a [home server setup](http://www.circuidipity.com/laptop-home-server.html) I like to select `Install security updates automatically` for a device often running unattended ...
+![No automatic updates](/img/screenshot/minimal-ubuntu/301.png)
 
-![Install security updates](/img/screenshot/ubuntuInstall/300-1.png)
+**Alternative:** For a [home server setup](https://www.circuidipity.com/laptop-home-server/) I like to select <nobr>`Install security updates automatically`</nobr> for a device often running unattended.
 
-Select `[*] standard system utilities` and leave the remaining tasks unmarked if you wish to start with a minimal, console-only base configuration ready for further customization ... [^5]
+Un-select all tasks [^5] for a minimal install ...
 
-![Software selection](/img/screenshot/ubuntuInstall/301.png)
+![Software selection](/img/screenshot/minimal-ubuntu/302.png)
 
-**Alternative:** Or - again, for a home server - select the few extras included in `[*] Basic Ubuntu server` ...
+Core packages are downloaded and the installer makes its finishing touches ...
 
-![Software selection](/img/screenshot/ubuntuInstall/301-1.png)
+![GRUB](/img/screenshot/minimal-ubuntu/303.png)
 
-Packages are downloaded and the installer makes its finishing touches ...
+![UTC](/img/screenshot/minimal-ubuntu/304.png)
 
-![GRUB](/img/screenshot/ubuntuInstall/302.png)
-
-![UTC](/img/screenshot/ubuntuInstall/303.png)
-
-![Finish install](/img/screenshot/ubuntuInstall/304.png)
+![Finish install](/img/screenshot/minimal-ubuntu/305.png)
 
 ## 4. First boot
 
-System will display a passphrase prompt to unlock encrypted `home` partition ...
+User is prompted for the passphrase to unlock the encrypted partition ...
 
-![Enter encrypt passphrase](/img/screenshot/ubuntuInstall/305.png)
+![Enter encrypt passphrase](/img/screenshot/minimal-ubuntu/306.png)
 
-![Login](/img/screenshot/ubuntuInstall/306.png)
+![Login](/img/screenshot/minimal-ubuntu/307.png)
 
 Login ... then run `timedatectl` to confirm system time+date is properly set.
 
 ## 5. GRUB
 
-After running a minimal install on my laptop with encrypted `swap` + `home` partitions I ran into this issue: ["Black screen instead of password prompt for boot encryption"](https://bugs.launchpad.net/ubuntu/+source/cryptsetup/+bug/1375435).
+After running a minimal install on my laptop with LUKS encryption I ran into this issue: ["Black screen instead of password prompt for boot encryption"](https://bugs.launchpad.net/ubuntu/+source/cryptsetup/+bug/1375435).
 
 I had to enter my passphrase blind and `ALT+F1` to console. When I tried removing the GRUB options `splash` and/or `quiet` I lost the ability to enter the passphrase at all and a hard reset was required.
 
@@ -223,7 +269,7 @@ GRUB_GFXPAYLOAD_LINUX=text
 sudo update-grub
 ```
 
-Now it works! My chromebook is the only device I have run into this issue.
+Now it works!
 
 Link: [GNU gfxpayload](https://www.gnu.org/software/grub/manual/html_node/gfxpayload.html)
 
@@ -286,15 +332,13 @@ wpa-psk MY_PASSPHRASE
 dns-nameservers 8.8.8.8 8.8.4.4
 ```
 
-Once a link is established an optional network manager utility may be installed. Package `network-manager-gnome` provides the console `nmcli` and graphical `nm-applet` clients ...
+Once a link is established install an (optional) network manager utility. Packages `network-manager` and `network-manager-gnome` provide the console `nmcli` and graphical `nm-applet` clients respectively. Comment out (deactivate) any entries in `interfaces` that will be managed by `network-manager`.
 
-```bash
-sudo apt install network-manager-gnome 
-```
+## 7. Secure access using SSH keys
 
-Comment out (deactivate) any entries in `/etc/network/interfaces` that will be managed by `network-manager`.
+Create cryptographic keys, install the OpenSSH server, and [configure remote access](https://www.circuidipity.com/ssh-keys/).
 
-## 7. Where to go next ...
+## 8. Where to go next ...
 
 ... is up to YOU. Yeehaw.
 
@@ -302,13 +346,13 @@ Happy hacking!
 
 #### Notes
 
-[^1]: An alternative is adding the image to a [USB stick with multiple Linux installers](http://www.circuidipity.com/multi-boot-usb.html).
+[^1]: Encrypted `root` requires an unencrypted `boot`.
 
-[^2]: Specifically, the console installer provides a **random key** option for the encrypted swap partition.
+[^2]: Very helpful! [LVM post on the Arch Wiki](https://wiki.archlinux.org/index.php/LVM).
 
-[^3]: Recommended: Otherwise the partitioning tool may designate the USB device as primary (sda) storage and lead to broken partition layouts.
+[^3]: An alternative is adding the image to a [USB stick with multiple Linux installers](https://www.circuidipity.com/multi-boot-usb/).
 
-[^4]: For storage devices >=128GB I create separate `root` + `swap` + `home` partitions. Smaller devices get `boot` + `swap` + `root` partitions. Note encrypted `root` **requires** an unencrypted `boot`.
+[^4]: Recommended: Otherwise the partitioning tool may designate the USB device as primary (sda) storage and lead to broken partition layouts.
 
 [^5]: The task selection menu can be run post-install using `sudo tasksel`.
 
