@@ -6,6 +6,56 @@ menu:
     weight: 50
 ---
 
+### 2017-11-16T2137
+
+**Slick Greeter** for LightDM. Users can create and modify `/etc/lightdm/slick-greeter.conf`, settings in this files take priority.
+
+I create a new `backgrounds` directory and copy over my images ...
+
+```bash
+sudo mkdir /usr/local/share/backgrounds
+sudo cp foo.jpg /usr/local/share/backgrounds/
+```
+
+Create `/etc/lightdm/slick-greeter.conf` ...
+
+```bash
+# LightDM GTK+ Configuration
+[Greeter]
+background=/usr/local/share/backgrounds/foo.jpg
+theme-name=Ambiant-MATE-Dark
+icon-theme-name=Ambiant-MATE
+draw-grid=false
+```
+
+Link: https://github.com/linuxmint/slick-greeter
+
+### 2017-11-16T1842
+
+Increase the number of items stored in `Places->Recent Documents` in Ubuntu MATE.
+
+In **dconf editor** go to `org > mate > mate-menu > plugins > recent > num-recent-docs`. Set `Use default value` to `off` and enter a `Custom value`.
+
+Link: https://ubuntu-mate.community/t/increase-the-number-of-recent-documents-in-mate-panel/7407/5
+
+### 2017-11-15T1642
+
+Create keyboard shortcut to move a window to next monitor in a dual-display setup. Install ...
+
+```bash
+sudo apt install xdotool wmctrl
+```
+
+Download this ['move-to-next-monitor' script](https://makandracards.com/makandra/12447-how-to-move-a-window-to-the-next-monitor-on-xfce-xubuntu/attachments/5045), save it to `~/bin`, and make it executable ...
+
+```bash
+chmod 755 ~/bin/move-to-next-monitor
+```
+
+In `Control Center->Hardware-Keyboard Shortcuts` create a custom command and shortcut for the script.
+
+Link: [How to move a window to the next monitor](https://makandracards.com/makandra/12447-how-to-move-a-window-to-the-next-monitor-on-xfce-xubuntu)
+
 ### 2017-11-14T1831
 
 Pulseaudio for Ubuntu MATE. Sound works OK (on Thinkpad E520). Configure volume hotkeys in custom `.xbindkeysrc.thinkpad_e520` (`@DEFAULT_SINK@` was auto-detected) ...

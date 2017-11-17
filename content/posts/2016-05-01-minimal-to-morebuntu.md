@@ -21,7 +21,7 @@ I use Ubuntu's [minimal install image](https://help.ubuntu.com/community/Install
 
 ## 0. Minimal Ubuntu
 
-**Start here:** A [visual walk-through of a sample Ubuntu setup](/ubuntu-trusty-install) that makes use of an entire storage device divided into 3 partitions: an unencrypted `root` partition, and encrypted `swap + home`.
+**Start here:** A [visual walk-through of a sample Ubuntu setup](/minimal-ubuntu) that makes use of an entire storage device divided into 3 partitions: an unencrypted `root` partition, and encrypted `swap + home`.
 
 ## 1. Install X
 

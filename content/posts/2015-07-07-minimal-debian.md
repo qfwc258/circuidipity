@@ -24,8 +24,7 @@ Below is a visual walk-through of a sample workstation setup that makes use of t
 * dynamic resizing of filesystems (set aside unallocated space and make use of it as needed)
 * snapshots of filesystems that can be used as backups or to restore a previous state [^3]
 
-0. Prepare install media
-------------------------
+## 0. Prepare install media
 
 Download the (unofficial with firmware) 64bit [firmware-9.0.0-amd64-netinst.iso](https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/firmware-9.0.0-amd64-netinst.iso) or the 32bit [firmware-9.0.0-i386-netinst.iso](https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/i386/iso-cd/firmware-9.0.0-i386-netinst.iso) for older machines. [Verify the PGP signature](http://www.circuidipity.com/verify-pgp-signature-gnupg.html#verify-file-integrity) and [flash the image](https://www.debian.org/releases/stable/amd64/ch04s03.html.en) to a USB stick. [^4]
 
@@ -338,7 +337,7 @@ Once a link is established install an (optional) network manager utility. Packag
 
 ## 7. Secure access using SSH keys
 
-Create cryptographic keys, install the OpenSSH server, and [configure remote access](http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html).
+Create cryptographic keys, install the OpenSSH server, and [configure remote access](https://www.circuidipity.com/ssh-keys/).
 
 ## 8. Main, non-free, contrib, and backports
 
@@ -422,7 +421,7 @@ alias shutdown='sudo /sbin/shutdown'
 
 ## 11. Where to go next ...
 
-... is up to YOU. I created a [post-install configuration shell script](https://github.com/vonbrownie/linux-post-install/tree/master/scripts/debian-stable-setup) that builds on a minimal install towards a more complete console setup, and can also install the [i3 tiling window manager](http://www.circuidipity.com/i3-tiling-window-manager.html) plus a packages collection suitable for a workstation.
+... is up to YOU. I created a [post-install configuration shell script](https://github.com/vonbrownie/linux-post-install/tree/master/scripts/debian-stable-setup) that builds on a minimal install towards a more complete console setup, and can also install the [i3 tiling window manager](https://www.circuidipity.com/i3-tiling-window-manager/) plus a packages collection suitable for a workstation.
 
 Happy hacking!
 
@@ -434,7 +433,7 @@ Happy hacking!
 
 [^3]: Very helpful! [LVM post on the Arch Wiki](https://wiki.archlinux.org/index.php/LVM).
 
-[^4]: An alternative is adding the image to a [USB stick with multiple Linux installers](http://www.circuidipity.com/multi-boot-usb.html).
+[^4]: An alternative is adding the image to a [USB stick with multiple Linux installers](https://www.circuidipity.com/multi-boot-usb/).
 
 [^5]: `Mount options: relatime` decreases write operations and boosts drive speed.
 
