@@ -33,6 +33,9 @@ slug: "homebin"
 [paVolume](https://github.com/vonbrownie/homebin/blob/master/paVolume)
 : pulseaudio volume control (more: ["Volume control and notification"](/pavolume))
 
+[startup.sh](https://github.com/vonbrownie/homebin/blob/master/startup.sh)
+: personal startup script run at login in [Ubuntu MATE](https://ubuntu-mate.org/)
+
 [teleportHome.sh](https://github.com/vonbrownie/homebin/blob/master/teleportHome.sh)
 : sync $HOME to remote DESTINATION using SSH keys (more: ["Automatic backups over the LAN"](/backup-over-lan))
 
