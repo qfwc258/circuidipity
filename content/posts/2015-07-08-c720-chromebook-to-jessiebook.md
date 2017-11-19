@@ -15,7 +15,7 @@ Replace ChromeOS permanently with **Debian** on the **Acer C720 Chromebook**.
 
 ## Let's go!
 
-Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with Debian, followed by [Lubuntu](http://www.circuidipity.com/c720-lubuntubook.html), [Arch](http://www.circuidipity.com/arch-install-encrypt.html), [Ubuntu](http://www.circuidipity.com/c720-ubuntubook.html), and have now returned to the latest Debian `jessie/_stable_` release.
+Running a full-featured Linux on this little laptop is a delight: lightweight, several hours battery life, inexpensive, and snappy performance. I started with Debian, followed by Lubuntu, Arch, Ubuntu, and have now returned to the latest Debian `jessie/_stable_` release.
 
 This device is available in a few different configurations. Mine is the non-touchscreen model `C720-2848` with (non-expandable) 2GB RAM and a (user-replaceable) 16GB SSD.
 

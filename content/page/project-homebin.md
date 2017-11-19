@@ -22,7 +22,7 @@ slug: "homebin"
 : `dmenu` configuration
 
 [generatePkgList](https://github.com/vonbrownie/homebin/blob/master/generatePkgList)
-: output list of installed Debian packages on HOSTNAME (more: ["Install (almost) the same list of Debian packages on multiple machines"](/debian-package-list))
+: generate a list of installed Debian/Ubuntu packages on HOSTNAME (more: ["Install (almost) the same list of Debian packages on multiple machines"](/debian-package-list))
 
 [i3wm_conf](https://github.com/vonbrownie/homebin/blob/master/i3wm_conf)
 : conditionals for building i3 window manager config at runtime (more: ["i3 tiling window manager: Conditionals"](/i3-tiling-window-manager#conditionals))
