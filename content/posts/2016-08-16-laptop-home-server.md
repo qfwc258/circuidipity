@@ -1,6 +1,6 @@
 ---
 title: "New life for an old laptop as a Linux home server"
-date: "2017-06-14"
+date: "2018-01-11"
 publishDate: "2016-08-16"
 tags:
   - network
@@ -25,17 +25,16 @@ Privacy may be important to you. Hosting your own server running your own servic
 
 ## 0. Install Debian
 
-My [screenshot tour](http://www.circuidipity.com/minimal-debian) of installing the Debian stable release. Debian's **minimal network install image** (32bit for the netbook) makes it easy to create a console-only base configuration that can be later customized for various tasks. 
+My [screenshot tour](http://www.circuidipity.com/minimal-debian) of installing the Debian **stretch/stable** release. Debian's minimal **network+firmware install image** (32bit for the netbook) makes it easy to create a console-only base configuration that can be later customized for various tasks. 
 
-I make a few modifications to my usual desktop install routine that are more appropriate for configuring a home server. I don't want an unattended server halting in the boot process waiting for a passphrase or any necessary boot mountpoints to reside on an encrypted partition. After a successful first boot I configure an encrypted container for data storage to be mounted manually to `/media`.
+I make a few modifications to my usual desktop install routine that are more appropriate for configuring a home server. I don't want an unattended server halting in the boot process waiting for a passphrase or any necessary boot mountpoints to reside on an encrypted partition. After a successful first boot I configure an encrypted container for data storage to be mounted manually.
 
 Using the Debian installer I create 2 partitions on the netbook's 500GB internal storage ...
 
-* sda1 is 512MB dedicated to `boot` [^1]
-* sda2 is the remaining space dedicated to the **Logical Volume Manager** (LVM) that contains 2  **Logical Volumes** (LVs) ...
-    * LV0 is 16GB used for `root`
-    * LV1 is 1GB used for `swap` encrypted with a **random key**
-    * lots of space left free for the encrypted LV to be created post-install
+* sda1 is 16GB dedicated to `root`
+* sda2 is 2GB used for `swap`
+
+... with lots of space left free for the encrypted partition to be created post-install.
 
 ## 1. Static network address
 
@@ -47,7 +46,7 @@ ip a
                                                                                 
 **Wired** interfaces are usually auto-configured by default and assigned an IP address courtesy of DHCP.
                                                                                 
-To assign the server a **static** address (recommended), deactivate the wired interface and create a new entry in `/etc/network/interfaces`. [^2] Sample entry for `enp3s0` ...
+To assign the server a **static** address (recommended), deactivate the wired interface and create a new entry in `/etc/network/interfaces`. [^1] Sample entry for `enp3s0` ...
 
                                                                                 
 ```bash                                                            
@@ -72,7 +71,33 @@ Fetch the [latest fixes, install, and reboot (if necessary)](http://www.circuidi
 
 ## 4. Encrypted storage
 
-Create a new logical volume, [use LUKS to encrypt the storage, and setup a mountpoint](http://www.circuidipity.com/lvm-crypt-lv) for manual mounting by a non-root user.
+I use the remaining disk space to create partition `sda3` (using `fdisk`). Configure LUKS encryption on the new partition ...
+
+```
+# cryptsetup luksFormat /dev/sda3
+```
+
+Open the encrypted partition under ``sda3_crypt``, format with the `ext4` filesystem, create a dedicated mountpoint, and mount ... [^2]
+
+```
+# cryptsetup open /dev/sda3 sda3_crypt
+# mkfs.ext4 -m 1 /dev/mapper/sda3_crypt
+# mkdir /media/sda3_crypt
+# mount /dev/mapper/sda3_crypt /media/sda3_crypt
+```
+
+When finished, unmount the filesystem and close the encrypted partition ...
+
+```
+# umount /media/sda3_crypt
+# cryptsetup close /dev/mapper/sda3_crypt
+```
+
+Modify ``/etc/fstab`` and allow mounting by a non-root user ...
+
+```
+/dev/mapper/sda3_crypt   /media/sda3_crypt     ext4    relatime,noauto,user    0   0
+```
 
 ## 5. Power management on hard drive
 
@@ -138,6 +163,7 @@ Happy hacking!
 
 #### Notes
 
-[^1]: Grub is not compatible with LVM, so `/boot` should be outside the storage managed by LVM.
+[^1]: Problem: setting the network interface to static address can result in `/etc/resolv.conf` being overwritten every few minutes with an IPv6 address that breaks DNS. The "fix" is to maually set `nameserver 8.8.8.8` in resolv.conf and install the `resolvconf` package. Note that `dns-nameservers` entries are ignored if resolvconf is not installed.
 
-[^2]: Problem: setting the network interface to static address can result in `/etc/resolv.conf` being overwritten every few minutes with an IPv6 address that breaks DNS. The "fix" is to maually set `nameserver 8.8.8.8` in resolv.conf and install the `resolvconf` package. Note that `dns-nameservers` entries are ignored if resolvconf is not installed.
+[^2]: Reserved blocks can be used by privileged system processes to write to disk - useful if a full filesystem blocks users from writing - and reduce disk fragmentation. On large non-root partitions extra space can be gained by reducing the default 5% reserve set aside to 1% with option ``-m <percent>``.
+
