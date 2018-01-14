@@ -168,30 +168,6 @@ cat /proc/sys/vm/swappiness
 
 Reduce SSD writes by setting a low value of `vm.swappiness=1` in `/etc/sysctl.conf`.
 
-**TRIM** optimizes SSD performance [^8] and is enabled by adding the `discard` option to `/etc/crypttab` and `/etc/fstab`.
-
-Example `crypttab` ...
-
-```bash
-sda2_crypt /dev/sda2 /dev/urandom cipher=aes-xts-plain64,size=256,discard,swap
-sda3_crypt UUID=<STRING> none luks,discard
-```
-
-Example `fstab` ...
-
-```bash
-# <file system> <mount point>   <type>  <options>       <dump>  <pass>
-/dev/mapper/sda3_crypt /               ext4    noatime,discard,errors=remount-ro 0       1
-UUID=<STRING> /boot                    ext4    noatime,discard         0       2
-/dev/mapper/sda2_crypt none            swap    sw,discard              0       0
-```
-
-Update `/boot/initrd.img-*` ...
-
-```bash
-sudo update-initramfs -u -k all                                                      
-```
-
 ## 6. Suspend
 
 Suspend-and-resume generates a stream of errors ...

@@ -1,6 +1,6 @@
 ---
 title: "Minimal Debian"
-date: "2017-06-16"
+date: "2018-01-14"
 publishDate: "2015-07-07"
 tags:
   - debian
@@ -335,11 +335,19 @@ dns-nameservers 8.8.8.8 8.8.4.4
 
 Once a link is established install an (optional) network manager utility. Packages `network-manager` and `network-manager-gnome` provide the console `nmcli` and graphical `nm-applet` clients respectively . Comment out (deactivate) any entries in `interfaces` that will be managed by `network-manager`.
 
-## 7. Secure access using SSH keys
+## 7. Upgrade
+
+Install any upgrades ...
+
+```bash
+apt update; apt full-upgrade
+```
+
+## 8. Secure access using SSH keys
 
 Create cryptographic keys, install the OpenSSH server, and [configure remote access](https://www.circuidipity.com/ssh-keys/).
 
-## 8. Main, non-free, contrib, and backports
+## 9. Main, non-free, contrib, and backports
 
 Debian uses three archives to distinguish between software packages based on their licenses. **Main** is enabled by default and includes everything that satisfies the conditions of the [Debian Free Software Guidelines](https://www.debian.org/social_contract#guidelines). **Non-free** contains packages that do not meet all the conditions of the DFSG but can be freely distributed, and **contrib** packages are open-source themselves but rely on software in non-free to work.
 
@@ -375,11 +383,11 @@ Any time `sources.list` is modified be sure to update the package database ...
 apt update
 ```
 
-## 9. Automatic security updates
+## 10. Automatic security updates
 
 Fetch and install the latest fixes courtesy of [unattended upgrades](http://www.circuidipity.com/unattended-upgrades.html).
 
-## 10. Sudo
+## 11. Sudo
 
 Install `sudo` to temporarily provide your USER (example: `foo`) account with root privileges ...
 
@@ -419,7 +427,16 @@ alias reboot='sudo /sbin/reboot'
 alias shutdown='sudo /sbin/shutdown'
 ```
 
-## 11. Where to go next ...
+## 12. SSD
+
+[Periodic TRIM](https://www.digitalocean.com/community/tutorials/how-to-configure-periodic-trim-for-ssd-storage-on-linux-servers) optimizes performance on SSD storage. Enable a weekly task that discards unused blocks on the drive ...
+
+```bash
+cp /usr/share/doc/util-linux/examples/fstrim.{service,timer} /etc/systemd/system/
+systemctl enable fstrim.timer
+```
+
+## 13. Where to go next ...
 
 ... is up to YOU. I created a [post-install configuration shell script](https://github.com/vonbrownie/linux-post-install/tree/master/scripts/debian-stable-setup) that builds on a minimal install towards a more complete console setup, and can also install the [i3 tiling window manager](https://www.circuidipity.com/i3-tiling-window-manager/) plus a packages collection suitable for a workstation.
 
