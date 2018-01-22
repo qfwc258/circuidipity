@@ -6,6 +6,98 @@ menu:
     weight: 50
 ---
 
+### 2018-01-20T1123
+
+After assigning `foo` to a new group `vboxusers` (Virtualbox) I can reload the user's group assignments without logging out ...
+
+```bash
+$ sudo adduser foo vboxusers
+$ su - $USER
+```
+
+Command `id` will now list the new group.
+
+Link: https://superuser.com/questions/272061/reload-a-linux-users-group-assignments-without-logging-out
+
+### 2018-01-18T1827
+
+[Tiny Tiny RSS](https://www.circuidipity.com/ttrss/) update script was generating warnings that were being mailed to my admin account ...
+
+```bash
+libpng warning: iCCP: known incorrect sRGB profile
+```
+
+**[ Fix! ]** Send the errors to null in my crontab ...
+
+```bash
+55 * * * * /usr/bin/php /home/dwa/www/ttrss/update.php --feeds --quiet 2>/dev/null
+```
+
+### 2018-01-17T1121
+
+Steps to verify a Ubuntu installer ISO ...
+
+0. Download SHA256SUMS and SHA256SUMS.gpg files from http://releases.ubuntu.com/16.04/
+
+1. Get the key used for the signature from the Ubuntu key server https://tutorials.ubuntu.com/tutorial/tutorial-how-to-verify-ubuntu#2
+
+```bash
+$ gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys "8439 38DF 228D 22F7 B374 2BC0 D94A A3F0 EFE2 1092" "C598 6B4F 1257 FFA8 6632 CBA7 4618 1433 FBB7 5451"
+$ gpg --list-keys --with-fingerprint 0xFBB75451 0xEFE21092
+```
+
+2. Verify the signature
+
+```bash
+$ gpg --verify SHA256SUMS.gpg SHA256SUMS
+```
+
+3. Check the Ubuntu ISO with sha256sum against the downloaded sums
+
+```bash
+$ sha256sum -c SHA256SUMS 2>&1 | grep OK
+```
+
+Link: https://tutorials.ubuntu.com/tutorial/tutorial-how-to-verify-ubuntu
+
+### 2018-01-12T2120
+
+Install `logwatch` (log analyser) on server ...
+
+```bash
+$ sudo apt install logwatch
+```
+
+Config file in `/usr/share/logwatch/default.conf/logwatch.conf`. Default cronjob in `/etc/cron.daily/00logwatch`.
+
+### 2018-01-05T0919
+
+> We don't see things as they are; we see them as we are.
+-- Anaïs Nin
+
+### 2017-12-29T2136
+
+Install Firefox quantum on Debian stable ...
+
+```bash
+$ mkdir -p ~/debian/packages; cd ~/debian/packages
+$ wget -c -O firefox-latest.tar.bz2 "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US"
+$ tar -xvf firefox-latest.tar.bz2
+$ sudo ln -s ~/debian/packages/firefox/firefox /usr/local/bin/
+```
+
+### 2017-12-08T1214
+
+> At any rate, here is a principle that is good and true: Bluntness is good in the design of information devices. Power relationships are unavoidable, but are always more ethical when they are stated clearly.
+-- Jaron Lanier, *Dawn of the New Everything*, p195
+
+### 2017-12-06T1136
+
+> Successful innovators don't ask customers and clients to do something different; they ask them to become someone different ...
+> Successful innovators ask users to embrace - or at least tolerate - new values, new skills, new behaviours, new vocabulary, new ideas, 
+> new expectations, and new aspirations. They transform their customers.
+-- Michael Schrage, *Who Do You Want Your Customers to Become?*
+
 ### 2017-11-16T2137
 
 **Slick Greeter** for LightDM. Users can create and modify `/etc/lightdm/slick-greeter.conf`, settings in this files take priority.
