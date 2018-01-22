@@ -37,22 +37,22 @@ libpng warning: iCCP: known incorrect sRGB profile
 
 Steps to verify a Ubuntu installer ISO ...
 
-0. Download SHA256SUMS and SHA256SUMS.gpg files from http://releases.ubuntu.com/16.04/
+**0.** Download SHA256SUMS and SHA256SUMS.gpg files from http://releases.ubuntu.com/16.04/
 
-1. Get the key used for the signature from the Ubuntu key server https://tutorials.ubuntu.com/tutorial/tutorial-how-to-verify-ubuntu#2
+**1.** Get the key used for the signature from the Ubuntu key server https://tutorials.ubuntu.com/tutorial/tutorial-how-to-verify-ubuntu#2
 
 ```bash
 $ gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys "8439 38DF 228D 22F7 B374 2BC0 D94A A3F0 EFE2 1092" "C598 6B4F 1257 FFA8 6632 CBA7 4618 1433 FBB7 5451"
 $ gpg --list-keys --with-fingerprint 0xFBB75451 0xEFE21092
 ```
 
-2. Verify the signature
+**2.** Verify the signature
 
 ```bash
 $ gpg --verify SHA256SUMS.gpg SHA256SUMS
 ```
 
-3. Check the Ubuntu ISO with sha256sum against the downloaded sums
+**3.** Check the Ubuntu ISO with sha256sum against the downloaded sums
 
 ```bash
 $ sha256sum -c SHA256SUMS 2>&1 | grep OK
@@ -73,6 +73,7 @@ Config file in `/usr/share/logwatch/default.conf/logwatch.conf`. Default cronjob
 ### 2018-01-05T0919
 
 > We don't see things as they are; we see them as we are.
+
 -- Anaïs Nin
 
 ### 2017-12-29T2136
@@ -89,6 +90,7 @@ $ sudo ln -s ~/debian/packages/firefox/firefox /usr/local/bin/
 ### 2017-12-08T1214
 
 > At any rate, here is a principle that is good and true: Bluntness is good in the design of information devices. Power relationships are unavoidable, but are always more ethical when they are stated clearly.
+
 -- Jaron Lanier, *Dawn of the New Everything*, p195
 
 ### 2017-12-06T1136
@@ -96,6 +98,7 @@ $ sudo ln -s ~/debian/packages/firefox/firefox /usr/local/bin/
 > Successful innovators don't ask customers and clients to do something different; they ask them to become someone different ...
 > Successful innovators ask users to embrace - or at least tolerate - new values, new skills, new behaviours, new vocabulary, new ideas, 
 > new expectations, and new aspirations. They transform their customers.
+
 -- Michael Schrage, *Who Do You Want Your Customers to Become?*
 
 ### 2017-11-16T2137
