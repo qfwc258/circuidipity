@@ -6,6 +6,43 @@ menu:
     weight: 50
 ---
 
+### 2018-01-26T22T30
+
+Access the **ISS HDEV** (High Definition Earth Viewing) stream using `streamlink` and display in `VLC`.
+
+`Streamlink` is written in python. Install for user via `virtualenv` ...
+
+```bash
+$ sudo apt install virtualenv
+$ virtualenv ~/code/streamlink
+$ source ~/code/streamlink/bin/activate
+(streamlink) $ pip install streamlink
+```
+
+Stream video ...
+
+```bash
+(streamlink) $ streamlink http://www.ustream.tv/channel/iss-hdev-payload best
+[cli][info] Found matching plugin ustreamtv for URL http://www.ustream.tv/channel/iss-hdev-payload
+[cli][info] Available streams: 252p (worst), 360p, 486p, 720p (best)
+[cli][info] Opening stream: 720p (hls)
+[cli][info] Starting player: /usr/bin/vlc
+```
+
+Exit `virtualenv` ...
+
+```bash
+(streamlink) $ deactivate
+```
+
+Using `streamlink` without activating the environment ...
+
+```bash
+$ ~/code/streamlink/bin/streamlink ...
+```
+
+Links: [streamlink](https://github.com/streamlink/streamlink), the [HDEV stream](http://www.ustream.tv/channel/iss-hdev-payload), and the [ISS tracker](http://www.isstracker.com/)
+
 ### 2018-01-20T1123
 
 After assigning `foo` to a new group `vboxusers` (Virtualbox) I can reload the user's group assignments without logging out ...
