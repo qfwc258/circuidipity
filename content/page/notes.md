@@ -6,7 +6,39 @@ menu:
     weight: 50
 ---
 
-### 2018-01-26T22T30
+### 2018-02-01T1113
+
+Wipe the storage on a iMac G5 PowerPC All-in-one using a Lubuntu 16.04 Live Installer.
+
+Download and write [lubuntu-16.04-desktop-powerpc.iso](http://cdimage.ubuntu.com/lubuntu/releases/16.04.1/release/lubuntu-16.04-desktop-powerpc.iso) to USB stick ...
+
+```bash
+$ sudo dd bs=1M if=lubuntu-16.04-desktop-powerpc.iso of=/dev/sdX
+```
+
+Start the iMac, pressing the `Command+Option+O+F` keys to enter OpenFirmware. At the prompt, enter ...
+
+```bash
+boot ud:,\\:tbxi
+```
+
+... and - if it works (it did) - Lubuntu live-installer boots. If not, its necessary to get the proper boot string for the USB stick. Check out [Ubuntu PowerPC FAQ](https://wiki.ubuntu.com/PowerPCFAQ) for details.
+
+When the Lubuntu desktop appears, open a terminal and overwrite the internal drive (example: `/dev/sda`) with zeros ...
+
+```bash
+$ sudo dd if=/dev/zero of=/dev/sda bs=1M
+```
+
+Takes approximately 75min per 100G.
+
+### 2018-01-31T1835 
+
+> What lies behind you and what lies in front of you, pales in comparison to what lies inside of you.
+
+-- Ralph Waldo Emerson
+
+### 2018-01-26T2230
 
 Access the **ISS HDEV** (High Definition Earth Viewing) stream using `streamlink` and display in `VLC`.
 
