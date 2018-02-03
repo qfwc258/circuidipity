@@ -1,0 +1,4 @@
+{{ $id := .Get 0 | lower | replaceRE "[^0-9a-z]" "-" | replaceRE "-+" "-" -}}
+<a href="#{{ $id }}">
+    <h3 id="{{ $id }}">{{- partial "svg/icons" "calendar" -}} {{ .Get 0 }}</h3>
+</a>
