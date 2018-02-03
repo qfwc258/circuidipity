@@ -6,7 +6,7 @@ menu:
     weight: 50
 ---
 
-### 2018-02-01T1113
+{{< note-heading "2018-02-01T1113" >}}
 
 Wipe the storage on a iMac G5 PowerPC All-in-one using a Lubuntu 16.04 Live Installer.
 
@@ -32,13 +32,13 @@ $ sudo dd if=/dev/zero of=/dev/sda bs=1M
 
 Takes approximately 75min per 100G.
 
-### 2018-01-31T1835 
+{{< note-heading "2018-01-31T1835" >}}
 
 > What lies behind you and what lies in front of you, pales in comparison to what lies inside of you.
 
 -- Ralph Waldo Emerson
 
-### 2018-01-26T2230
+{{< note-heading "2018-01-26T2230" >}}
 
 Access the **ISS HDEV** (High Definition Earth Viewing) stream using `streamlink` and display in `VLC`.
 
@@ -75,7 +75,7 @@ $ ~/code/streamlink/bin/streamlink ...
 
 Links: [streamlink](https://github.com/streamlink/streamlink), the [HDEV stream](http://www.ustream.tv/channel/iss-hdev-payload), and the [ISS tracker](http://www.isstracker.com/)
 
-### 2018-01-20T1123
+{{< note-heading "2018-01-20T1123" >}}
 
 After assigning `foo` to a new group `vboxusers` (Virtualbox) I can reload the user's group assignments without logging out ...
 
@@ -88,7 +88,7 @@ Command `id` will now list the new group.
 
 Link: https://superuser.com/questions/272061/reload-a-linux-users-group-assignments-without-logging-out
 
-### 2018-01-18T1827
+{{< note-heading "2018-01-18T1827" >}}
 
 [Tiny Tiny RSS](https://www.circuidipity.com/ttrss/) update script was generating warnings that were being mailed to my admin account ...
 
@@ -102,7 +102,7 @@ libpng warning: iCCP: known incorrect sRGB profile
 55 * * * * /usr/bin/php /home/dwa/www/ttrss/update.php --feeds --quiet 2>/dev/null
 ```
 
-### 2018-01-17T1121
+{{< note-heading "2018-01-17T1121" >}}
 
 Steps to verify a Ubuntu installer ISO ...
 
@@ -129,7 +129,7 @@ $ sha256sum -c SHA256SUMS 2>&1 | grep OK
 
 Link: https://tutorials.ubuntu.com/tutorial/tutorial-how-to-verify-ubuntu
 
-### 2018-01-12T2120
+{{< note-heading "2018-01-12T2120" >}}
 
 Install `logwatch` (log analyser) on server ...
 
@@ -139,13 +139,13 @@ $ sudo apt install logwatch
 
 Config file in `/usr/share/logwatch/default.conf/logwatch.conf`. Default cronjob in `/etc/cron.daily/00logwatch`.
 
-### 2018-01-05T0919
+{{< note-heading "2018-01-05T0919" >}}
 
 > We don't see things as they are; we see them as we are.
 
 -- Anaïs Nin
 
-### 2017-12-29T2136
+{{< note-heading "2017-12-29T2136" >}}
 
 Install Firefox quantum on Debian stable ...
 
@@ -156,13 +156,13 @@ $ tar -xvf firefox-latest.tar.bz2
 $ sudo ln -s ~/debian/packages/firefox/firefox /usr/local/bin/
 ```
 
-### 2017-12-08T1214
+{{< note-heading "2017-12-08T1214" >}}
 
 > At any rate, here is a principle that is good and true: Bluntness is good in the design of information devices. Power relationships are unavoidable, but are always more ethical when they are stated clearly.
 
 -- Jaron Lanier, *Dawn of the New Everything*, p195
 
-### 2017-12-06T1136
+{{< note-heading "2017-12-06T1136" >}}
 
 > Successful innovators don't ask customers and clients to do something different; they ask them to become someone different ...
 > Successful innovators ask users to embrace - or at least tolerate - new values, new skills, new behaviours, new vocabulary, new ideas, 
@@ -170,7 +170,7 @@ $ sudo ln -s ~/debian/packages/firefox/firefox /usr/local/bin/
 
 -- Michael Schrage, *Who Do You Want Your Customers to Become?*
 
-### 2017-11-16T2137
+{{< note-heading "2017-11-16T2137" >}}
 
 **Slick Greeter** for LightDM. Users can create and modify `/etc/lightdm/slick-greeter.conf`, settings in this files take priority.
 
@@ -194,7 +194,7 @@ draw-grid=false
 
 Link: https://github.com/linuxmint/slick-greeter
 
-### 2017-11-16T1842
+{{< note-heading "2017-11-16T1842" >}}
 
 Increase the number of items stored in `Places->Recent Documents` in Ubuntu MATE.
 
@@ -202,7 +202,7 @@ In **dconf editor** go to `org > mate > mate-menu > plugins > recent > num-recen
 
 Link: https://ubuntu-mate.community/t/increase-the-number-of-recent-documents-in-mate-panel/7407/5
 
-### 2017-11-15T1642
+{{< note-heading "2017-11-15T1642" >}}
 
 Create keyboard shortcut to move a window to next monitor in a dual-display setup. Install ...
 
@@ -220,7 +220,7 @@ In `Control Center->Hardware-Keyboard Shortcuts` create a custom command and sho
 
 Link: [How to move a window to the next monitor](https://makandracards.com/makandra/12447-how-to-move-a-window-to-the-next-monitor-on-xfce-xubuntu)
 
-### 2017-11-14T1831
+{{< note-heading "2017-11-14T1831" >}}
 
 Pulseaudio for Ubuntu MATE. Sound works OK (on Thinkpad E520). Configure volume hotkeys in custom `.xbindkeysrc.thinkpad_e520` (`@DEFAULT_SINK@` was auto-detected) ...
 
@@ -254,13 +254,13 @@ Restart pulseaudio with `pulseaudio -k` (kills and restarts).
 
 Link: [Pulseaudio examples](https://wiki.archlinux.org/index.php/PulseAudio/Examples)
 
-### 2017-11-13T2222
+{{< note-heading "2017-11-13T2222" >}}
 
 Ubuntu MATE 17.10: Custom start page set in Firefox constantly overwritten and reset back to MATE start page.
 
 **[ Fix! ]** Edit `/usr/lib/firefox/ubuntumate.cfg` with my preferred start page.
 
-### 2017-11-12T2128
+{{< note-heading "2017-11-12T2128" >}}
 
 Ubuntu MATE 17.10: Set custom time format on panel using `dconf-editor`.
 
@@ -268,7 +268,7 @@ Modify `/org/mate/panel/objects/clock/prefs/` **format** from 24 hours to `custo
 
 Link: [Customize panel date-time](https://ubuntu-mate.community/t/how-to-customize-panel-date-time-display-at-ubuntu-mate/8243/4)
 
-### 2017-10-28T1701
+{{< note-heading "2017-10-28T1701" >}}
 
 Enable **periodic TRIM** on SSD drives. Create a weekly TRIM job in `/etc/cron.weekly/trim` ...
 
@@ -289,7 +289,7 @@ $ sudo run-parts --test /etc/cron.weekly    # checks that cron can run the scrip
 
 Links: [Proper way to trim ssd in void linux](https://forum.voidlinux.eu/t/ssd-proper-way-to-trim-ssd-in-void-linux/749) and [HOWTO configure periodic trim](https://www.digitalocean.com/community/tutorials/how-to-configure-periodic-trim-for-ssd-storage-on-linux-servers)
 
-### 2017-10-25T2126
+{{< note-heading "2017-10-25T2126" >}}
 
 Crappy font rendering in firefox. **[ Fix! ]** ...
 
@@ -323,7 +323,7 @@ DejaVuSans.ttf: "DejaVu Sans" "Book"
 
 Link: https://forum.voidlinux.eu/t/bad-font-rendering-in-firefox-for-helvetica/2748/5
 
-### 2017-10-21T1315
+{{< note-heading "2017-10-21T1315" >}}
 
 Using [runit](http://smarden.org/runit/) init ... To stop an enabled service from starting automatically at boot, create a file named `down` in the service directory ...
 
@@ -331,7 +331,7 @@ Using [runit](http://smarden.org/runit/) init ... To stop an enabled service fro
 sudo touch /etc/sv/*service_name*/down
 ```
 
-### 2017-10-07T1116
+{{< note-heading "2017-10-07T1116" >}}
 
 > Act without doing;  
 > work without effort.  
@@ -351,7 +351,7 @@ sudo touch /etc/sv/*service_name*/down
 
 -- Lao Tzu, *Tao Te Ching, Ch 63*
 
-### 2017-09-28T1203
+{{< note-heading "2017-09-28T1203" >}}
 
 Pulseaudio for Arch Linux ... set [default sink](https://wiki.archlinux.org/index.php/PulseAudio/Examples).
 
@@ -377,13 +377,13 @@ The default sink can be referred as `@DEFAULT_SINK@` in commands, for example ..
 pactl set-sink-volume @DEFAULT_SINK@ +5%
 ```
 
-### 2017-09-17T1150
+{{< note-heading "2017-09-17T1150" >}}
 
 > Since the late 1980s, scientists have been tracking a whale who sings at a sonic frequency higher than any other whale of its species: at 52 hertz, just above the lowest note on a tuba. It sings songs no one answers. Internet societies have been following it for years like sad Ahabs, transposing their own feelings on to it, believing they understand it. Alone in their bedrooms they hunt this whale they believe to be lonely just like them. Talk to scientists and they will say other whales can probably hear it, maybe it’s deaf, maybe the whale’s song is the result of a genetic mutation. But it doesn’t matter: the lonely people have taken this whale as their totem. I’ve followed it for years.
 
 Link: https://www.theguardian.com/global/2017/sep/17/choosing-to-be-on-your-own
 
-### 2017-08-30T2055
+{{< note-heading "2017-08-30T2055" >}}
 
 **Extend an LVM logical volume and filesystem:** the quick and automatic way ... If you are growing the LV you can do this while the filesystem is mounted ...
 
@@ -399,7 +399,7 @@ sudo lvresize --resizefs --size +100G /dev/vg/home
 
 Link: https://www.systutorials.com/5621/extending-a-mounted-ext4-file-system-on-lvm-in-linux/
 
-### 2017-08-23T2205
+{{< note-heading "2017-08-23T2205" >}}
 
 **Disable system beep** on a Thinkpad ...
 
@@ -421,7 +421,7 @@ xset b off
 
 NOTE: this did *not* work ... adding `blacklist pcspkr` to (add/create) `/etc/modprobe.d/blacklist`.
 
-### 2017-08-05T1840
+{{< note-heading "2017-08-05T1840" >}}
 
 Fresh install of [Tiny Tiny RSS](https://tt-rss.org/) allows a single URL path to be set. I want multiple URLs to support both local and remote access.
 
@@ -433,7 +433,7 @@ define('_SKIP_SELF_URL_PATH_CHECKS', true);
 
 Link: [Access by local + domain IP](https://discourse.tt-rss.org/t/after-todays-upgrade-6-7-2017/353/11?u=conrad784)
 
-### 2017-07-21T1033
+{{< note-heading "2017-07-21T1033" >}}
 
 Enable forward search in Bash history. `CTRL-R` enables reverse incremental searches through the Bash shell history and `CTRL-S` runs forward searches. However `CTRL-S` collides with XON/XOFF flow control in terminal and disables that feature in history.
 
@@ -447,7 +447,7 @@ Hitting `CTRL-S` by mistake in vim no longer disables output to the terminal.
 
 Link: [Unable to forward search Bash history similarly as with CTRL-r](https://stackoverflow.com/questions/791765/unable-to-forward-search-bash-history-similarly-as-with-ctrl-r)
 
-### 2017-07-20T1039
+{{< note-heading "2017-07-20T1039" >}}
 
 A simple [GIMP](http://www.gimp.org) recipe for play at making 8-bit pixel images:
 
@@ -457,7 +457,7 @@ A simple [GIMP](http://www.gimp.org) recipe for play at making 8-bit pixel image
 
 Manipulate the scale image settings to increase/decrease pixelation to satisfaction.
 
-### 2017-07-17T0941
+{{< note-heading "2017-07-17T0941" >}}
 
 [Linuxlogo](http://www.deater.net/weave/vmwprod/linux_logo/) provides Tux, the Debian swirl, and other distro logos that can be displayed - along with system information - at the console login prompt ...
 
@@ -467,13 +467,13 @@ sudo cp /etc/issue /etc/issue.bak
 sudo sh -c 'linux_logo -L debian -F ".: Greetings, Carbon-Based Biped :.\n\n#O Version #V\nCompiled #C\n#H \\l" > /etc/issue'
 ```
 
-### 2017-07-14T1538
+{{< note-heading "2017-07-14T1538" >}}
 
 Correct the 'stripping effect' in QT applications using the **Breeze Dark** theme. Example: Transmission-qt would show file listings in alternating background colours, with every other line rendered in light background and foreground colours.
 
 **[ Fix! ]** Offending colour is `#eff0f1`. Replaced with `#404552` in `~/.config/qt5ct/colors/breeze_dark.conf`.
 
-### 2017-07-13T0916
+{{< note-heading "2017-07-13T0916" >}}
 
 Retrieving Debian release information (depending on what I want) ...
 
@@ -481,7 +481,7 @@ Retrieving Debian release information (depending on what I want) ...
 * `/etc/os-release`
 * `lsb_release -c`
 
-### 2017-07-10T1846
+{{< note-heading "2017-07-10T1846" >}}
 
 Assign user to new group and reload assignments without logging out ...
 
@@ -492,7 +492,7 @@ id        # see the new group
 
 Link: https://superuser.com/a/354475
 
-### 2017-07-09T0807
+{{< note-heading "2017-07-09T0807" >}}
 
 **Nmap** will quickly identify Internet services hosted by a network connected machine without even requiring to log in to it. Simply call the following command on another machine connected to the same network ...
 
@@ -502,7 +502,7 @@ nmap 192.168.1.88
 
 Link: [DAH: 3.2.1.1. Network and Processes](https://debian-handbook.info/browse/stable/sect.how-to-migrate.html)
 
-### 2017-07-06T0857
+{{< note-heading "2017-07-06T0857" >}}
 
 Use `apt-show-versions` to check list of installed packages and available versions. Good way to quickly grep which packages are **not** part of the default release.
 
@@ -520,7 +520,7 @@ apt-show-versions | grep -v stretch
   volnoti:amd64 20161215T1244-1 installed: No available version in archive
 ```
 
-### 2017-07-03T0900
+{{< note-heading "2017-07-03T0900" >}}
 
 Configure i3wm to put clients on specific workspaces. Run `xprop` in a terminal and click on the client to get `WM_CLASS`: first part is the **instance**, second part is the **class** ...
 
@@ -539,13 +539,13 @@ assign [instance="transmission-qt"] 10
 
 Link: [Automatically putting clients on specific workspaces](https://i3wm.org/docs/userguide.html#assign_workspace)
 
-### 2017-07-02T1014
+{{< note-heading "2017-07-02T1014" >}}
 
 Addon for Firefox: [Text Contrast for Dark Themes](https://addons.mozilla.org/en-US/firefox/addon/text-contrast-for-dark-themes/)
 
 Fixs issue with text entry on some websites (white text on white in gmail signin, yahoo search, others) when using the **Breeze Dark** QT theme.
 
-### 2017-06-29T1237
+{{< note-heading "2017-06-29T1237" >}}
 
 Find and replace text with **sed**.
 
@@ -569,7 +569,7 @@ sed "s/$original/$new/g; s/$pattern2/$new_again/g" file.txt > new_file.txt
 
 Link: https://askubuntu.com/q/20414
 
-### 2017-06-28T1512
+{{< note-heading "2017-06-28T1512" >}}
 
 Lots of documentation and config samples are available in `/usr/share/doc` in gzip'ed format. Non-root user access with the `zcat` and `zless` commands. Make use of a config sample by redirecting output. Example ...
 
@@ -577,7 +577,7 @@ Lots of documentation and config samples are available in `/usr/share/doc` in gz
 zcat /usr/share/doc/dunst/dunstrc.example.gz > ~/.config/dunst/dunstrc
 ```
 
-### 2017-06-27T0902
+{{< note-heading "2017-06-28T1512" >}}
 
 Default keyboard layout in Debian is configured in `/etc/default/keyboard` and is shared between X and the command line ...
 
@@ -597,7 +597,7 @@ Modify this file to set a new default keyboard layout, either manually or run ..
 sudo dpkg-reconfigure keyboard-configuration
 ```
 
-### 2017-06-26T1126
+{{< note-heading "2017-06-26T1126" >}}
 
 Limit the CPU usage of an application ... I tried using **handbrake-gtk** to convert a video and the application grabbed 100% of all 4 cores, sent system temperature to 98C, and finally crashed the machine.
 
@@ -607,7 +607,7 @@ Limit the CPU usage of an application ... I tried using **handbrake-gtk** to con
 sudo cpulimit -e ghb -l 80
 ```
 
-### 2017-06-25T0922
+{{< note-heading "2017-06-25T0922" >}}
 
 Firework sounds for upcoming Canada Day!
 
@@ -629,13 +629,13 @@ play -n synth whitenoise 200 fade 0.2 1 1 trim 0 0.5 ; sleep 1 ; play -n synth w
 
 Links: https://twitter.com/climagic/status/485083242425368579 and https://twitter.com/climagic/status/485069251401629697
 
-### 2017-06-24T0844
+{{< note-heading "2017-06-24T0844" >}}
 
 Retrieve information about hardware using `sudo dmidecode`, or much of the same information is available to the non-root user in `/sys/devices/virtual/dmi/id`.
 
 Link: https://unix.stackexchange.com/a/172334
 
-### 2017-06-23T1001
+{{< note-heading "2017-06-23T1001" >}}
 
 Switch from default qwerty to the colemak keyboard layout ...
 
@@ -652,7 +652,7 @@ setxkbmap -query
   variant:    colemak
 ```
 
-### 2017-06-22T1036
+{{< note-heading "2017-06-22T1036" >}}
 
 Generate list of packages installed on one machine running Debian for installation on another machine.
 
@@ -671,7 +671,7 @@ sudo dpkg --set-selections < deb-pkg-list.txt
 sudo apt dselect-upgrade
 ```
 
-### N2017-06-21T0832
+{{< note-heading "2017-06-21T0832" >}}
 
 VLC not playing mkv files on the chromebook. Generates error message ...
 
@@ -683,7 +683,7 @@ libvdpau-va-gl: Decoder::Render_h264(): no surfaces left in buffer
 
 Link: https://askubuntu.com/questions/714363/intel-vaapi-cant-play-mkv-with-vlc
 
-### 2017-06-20T0926
+{{< note-heading "2017-06-20T0926" >}}
 
 Clearing the shell cache ... I originally installed `glances` via apt to `/usr/bin/glances`, then removed, then installed via pip to `/usr/local/bin/glances`. The command would show in PATH but - without an explicit path defined - would continue to try and execute from `/usr/bin`.
 
@@ -697,7 +697,7 @@ type glances
   glances is /usr/local/bin/glances
 ```
 
-### 2017-06-19T0953
+{{< note-heading "2017-06-19T0953" >}}
 
 Configure menu colours in Grub by creating `/boot/grub/custom.cfg` with settings ...
 
@@ -707,7 +707,7 @@ set menu_color_normal=white/black
 set menu_color_highlight=white/green
 ```
 
-### 2017-06-18T0949
+{{< note-heading "2017-06-18T0949" >}}
 
 Stop pulseaudio from respawning after halt (encountered in Ubuntu 16.04) ... When I kill pulseaudio with `pulseaudio -k` or `kill -9 ID` it immediately restarts ...
 
@@ -718,7 +718,7 @@ pgrep pulse
 
 **[ Fix! ]** There is a config file `/etc/pulse/client.conf` with `autospawn = yes` set by default. I could modify that, but chose instead to create `~/.config/pulse/client.conf` and set `autospawn = no`. It works ... pulseaudio stays dead.
 
-### 2017-06-17T0921
+{{< note-heading "2017-06-17T0921" >}}
 
 Start a new project in Git and host on Github (after setting up a default config in `~/.gitconfig`) ...
 
@@ -748,7 +748,7 @@ git push -u origin master
 git pull origin master
 ```
 
-### 2017-06-16T0950
+{{< note-heading "2017-06-16T0950" >}}
 
 Stop pinned tabs from auto-loading upon Firefox startup. Goto `about:config` and set to **true** ...
 
@@ -756,7 +756,7 @@ Stop pinned tabs from auto-loading upon Firefox startup. Goto `about:config` and
 * browser.sessionstore.restore_pinned_tabs_on_demand    default boolean false
 ```
 
-### 2017-06-15T0853
+{{< note-heading "2017-06-15T0853" >}}
 
 Debian *stretch*/stable `xbacklight` is acting up ...
 
@@ -793,7 +793,7 @@ Section "Device"
 EndSection
 ```
 
-### 2017-06-14T2113
+{{< note-heading "2017-06-14T2113" >}}
 
 Trying to install Debian's `flashplugin-nonfree` package consistently fails with the error ....
 
@@ -803,7 +803,7 @@ ERROR: wget failed to download http://people.debian.org/~bartm/flashplugin-nonfr
 
 **[ Fix! ]** Manual install works courtesy of the instructions at https://wiki.debian.org/FlashPlayer#Manual_update
 
-### 2017-06-14T0947
+{{< note-heading "2017-06-14T0947" >}}
 
 Setup colour scheme for vim. As per [Giles](http://www.gilesorr.com/blog/) recommendation I use [tir_black.](http://www.vim.org/scripts/script.php?script_id=2777) Place in `~/.vim/colors`.
 
@@ -837,7 +837,7 @@ tput colors
   256
 ```
 
-### 2017-06-13T0847
+{{< note-heading "2017-06-13T0847" >}}
 
 Created a Debian _stretch_ virtualbox guest but `virtualbox-guest-{dkms,utils,x11}` packages no longer available ... but there *are* pkgs in [sid](https://tracker.debian.org/pkg/virtualbox).
 
@@ -866,7 +866,7 @@ sudo apt -t unstable install virtualbox-guest-dkms virtualbox-guest-utils virtua
 sudo adduser dwa vboxsf
 ```
 
-### 2017-06-12T1041
+{{< note-heading "2017-06-12T1041" >}}
 
 Local install of Python modules as non-root user. Example ...
 
@@ -878,11 +878,11 @@ pip3 install exifread
 
 Add `~/.local/bin` to user's $PATH.
 
-### 2017-06-11T1020
+{{< note-heading "2017-06-11T1020" >}}
 
 If SSH session is frozen ... Use the key-combo **Enter, Shift + `, .** [Enter, Tilde, Period]  to drop the connection.
 
-### 2017-06-10T0838
+{{< note-heading "2017-06-10T0838" >}}
 
 Microphone problem on Thinkpad x230 running Ubuntu 16.04 ... No sound input and **mic** not detected.
 
@@ -897,7 +897,7 @@ arecord -l
 
 Kill and respawn pulseaudio with `pulseaudio -k`.
 
-### 2017-06-09T0941
+{{< note-heading "2017-06-09T0941" >}}
 
 Restart network service on Ubuntu ... Sometimes after wake-from-suspend the network connection is down and network-manager's wifi ap list fails to refresh.
                                                                                 
@@ -929,7 +929,7 @@ sudo ifdown -a  # -a brings down all interfaces
 sudo ifup -a
 ```
 
-### 2017-06-08T0920
+{{< note-heading "2017-06-08T0920" >}}
 
 Attaching to a wifi network with `nmcli` (network-manager cli client) ...
 
@@ -940,7 +940,7 @@ nmcli device wifi rescan
 nmcli device wifi connect SSID-Name password PASS
 ```
 
-### 2017-06-07T1219
+{{< note-heading "2017-06-07T1219" >}}
 
 Disable [Pelican](http://www.circuidipity.com/tag-pelican.html) from auto-generating `archives.html` by adding to `pelicanconf.py` ...
 
