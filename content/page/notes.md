@@ -6,6 +6,23 @@ menu:
     weight: 50
 ---
 
+{{< note-heading "2018-02-03T1847" >}}
+
+On my [notes](https://www.circuidipity.com/notes/) page I wanted to make my headers into **anchor links** with a small graphic to make it easy to link to a specific section of the page.
+
+This [post on Stack Overflow](https://stackoverflow.com/a/43164165) was helpful! Hugo already auto-generates an ID tag on each heading. I create a Hugo [shortcode](https://gohugo.io/templates/shortcode-templates/) - a partial snippet of code that can be inserted into pages - that generates the header link decorated with the `calendar` icon from [Feather Icons](https://feather.netlify.com/).
+
+Create `layouts/shortcodes/note-heading.html` with ...  
+
+```html
+{{ $id := .Get 0 | lower | replaceRE "[^0-9a-z]" "-" | replaceRE "-+" "-" -}}
+<a href="#{{ $id }}">
+    <h3 id="{{ $id }}">{{- partial "svg/icons" "calendar" -}} {{ .Get 0 }}</h3>
+</a>
+```
+
+Then in my markdown document I use {{</* note-heading "A note of interest " */>}} for headers.
+
 {{< note-heading "2018-02-01T1113" >}}
 
 Wipe the storage on a iMac G5 PowerPC All-in-one using a Lubuntu 16.04 Live Installer.
