@@ -18,11 +18,6 @@ Install a stable, well-tested Linux distribution and provide services such as ne
 **A used laptop** -  retired in favour of more current and powerful machines - can still deliver plenty of *oomph* for running a personal server. Frugal with power and come equipped with their own built-in UPS (battery)!<br />
 Link: [New life for an old laptop](/laptop-home-server)
 
-**... OR ...**
-
-Running a **Pi server** with 24/7 uptime will enjoy more robust performance operating from a hard drive (vs SD card media).<br />
-Link: [Host rootfs on external USB storage](/raspberry-pi-usb-storage-v4)
-
 ## 1. Secure access
 
 Use cryptographic keys to secure access to your new home server.<br />
