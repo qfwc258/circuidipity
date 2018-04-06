@@ -6,6 +6,49 @@ menu:
     weight: 50
 ---
 
+{{< note-heading "2018-04-02T1918" >}}
+
+**Logwatch** reported multiple attempts directed against the SSH port by a single illegal user trying to gain access to my home server. 
+
+SSH listens on a non-standard port, password authentication and root login is disabled already in my default setup. Still, attackers should not be given the chance to keep trying their luck, and I installed `fail2ban` as another line of defense ...
+
+```bash
+$ sudo apt install fail2ban
+```
+
+Auto-starts with reasonable defaults.
+
+{{< note-heading "2018-03-04T1500" >}}
+
+> Nothing is so firmly believed as that which we least know.
+
+-- Michel Eyquem de Montaigne, *Of Divine Ordinances*
+
+{{< note-heading "2018-02-21T1156" >}}
+
+> The Guest House   
+>  
+> This being human is a guest house.  
+> Every morning a new arrival.  
+> A joy, a depression, a meanness,  
+> some momentary awareness comes  
+> as an unexpected visitor.  
+> Welcome and entertain them all!  
+> Even if they're a crowd of sorrows,  
+> who violently sweep your house  
+> empty of its furniture,  
+> still, treat each guest honorably.  
+> He may be clearing you out  
+> for some new delight.  
+> The dark thought, the shame, the malice,  
+> meet them at the door laughing,  
+> and invite them in.  
+> Be grateful for whoever comes,  
+> because each has been sent  
+> as a guide from beyond.  
+
+-- Rumi, *translation by Coleman Barks*
+
 {{< note-heading "2018-02-03T1847" >}}
 
 On my [notes](https://www.circuidipity.com/notes/) page I wanted to make my headers into **anchor links** with a small graphic to make it easy to link to a specific section of the page.
