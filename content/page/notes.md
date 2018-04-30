@@ -6,6 +6,38 @@ menu:
     weight: 50
 ---
 
+{{< note-heading "2018-04-29T1611" >}}
+
+After running a minimal Ubuntu install on my laptop with LUKS encryption, the boot process would halt for ~30 seconds then generate this message ...
+
+```bash
+Gave up waiting for suspend/resume device
+```
+
+... followed by a prompt for the passphrase to unlock encrypted `home`, then continue to login.
+
+**[ Fix! ]** System is looking for a swap device for suspend-to-disk/hibernate and fails to recognize my encrypted swap. I don't use hibernate, so I disable the task by adding kernel option `noresume`.
+
+Modify `/etc/default/grub` ...
+
+```bash
+GRUB_CMDLINE_LINUX_DEFAULT="quiet noresume"
+```
+
+... and update ...
+
+```bash
+$ sudo update-grub
+```
+
+Link: [boot delayed by 30sec waiting for suspend/resume device](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=860543#22)
+
+{{< note-heading "2018-04-28T1634" >}}
+
+> The Olympus Mons mountain on Mars is so tall and yet so gently sloped that, were you suited and supplied correctly, ascending it would allow you to walk most of the way to space. Mars has a big, puffy atmosphere, taller than ours, but there’s barely anything to it at that level. 30 Pascals of pressure, which is what we get in an industrial vacuum furnace here on Earth. You may as well be in space. Imagine that. Imagine a world where you could quite literally walk to space.
+
+Link: http://www.warrenellis.com/?p=14314
+
 {{< note-heading "2018-04-02T1918" >}}
 
 **Logwatch** reported multiple attempts directed against the SSH port by a single illegal user trying to gain access to my home server. 
@@ -17,6 +49,22 @@ $ sudo apt install fail2ban
 ```
 
 Auto-starts with reasonable defaults.
+
+{{< note-heading "2018-03-25T1028" >}}
+
+*Alzheimer's disease without cognitive loss:* From 1994 through 2011, the [Religious Orders Study](https://www.ncbi.nlm.nih.gov/pubmed/22471860) recruited more than a thousand Catholic nuns, priests and brothers, from across the United States, and collected over 350 brains for autopsy. Participants were drawn from a stable background of similar life experiences, education, and living standards (minimizing variables). Primary goals were to collect brain tissue from donors without dementia, and also from persons on whom clinical information had been collected prior to the onset of dementia.
+
+Researchers were surprised to discover in post-mortem examinations that some of the brains displayed all the symptoms of full-blown Alzheimer's, but the persons had exhibited no cognitive loss while alive. After studying risk factors, the study suggests that a rich cognitive environment and a positive psychology foster a "cognitive reserve" that the brain can enlist as it routes activity around damaged regions. Conversely, clinical depression showed a strong correlation with cognitive decline.
+
+{{< note-heading "2018-03-21T2155" >}}
+
+> Once upon a time, I dreamt I was a butterfly, fluttering hither and thither, to all intents and purposes a butterfly. I was conscious only of following my fancies as a butterfly, and was unconscious of my individuality as a man. Suddenly, I awake, and there I lay, myself again. Now I do not know whether I was then a man dreaming I was a butterfly, or whether I am now a butterfly dreaming that I am a man.
+
+-- Zhuang Zhou (369-286 BC)
+
+{{< note-heading "2018-03-20T2108" >}}
+
+[Cameron Mott](https://www.theconfidentteacher.com/2017/09/a-new-school-year-and-a-new-start/) began experiencing life-threatening seizures at three years old. As her condition deteriorated, doctors chose a radical solution: remove the damaged half of her brain, a procedure known as a _hemispherectomy_. After intensive rehabilitation, she made a remarkable recovery and is now living the life of a normal teenager. The natural property of _neuroplasticity_ empowered her brain to remap the functions of the removed tissue on to the surviving hemisphere. [Not all brain surgeries](http://sapienlabs.co/the-curious-outcomes-of-neurosurgery/) have such successful outcomes, but what kind of technologies could we develop to augment the brain's natural abilities to self-heal?
 
 {{< note-heading "2018-03-04T1500" >}}
 
