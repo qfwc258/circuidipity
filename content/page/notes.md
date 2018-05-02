@@ -431,6 +431,38 @@ DejaVuSans.ttf: "DejaVu Sans" "Book"
 
 Link: https://forum.voidlinux.eu/t/bad-font-rendering-in-firefox-for-helvetica/2748/5
 
+{{< note-heading "2017-10-22T1622" >}}
+
+Using a dark desktop theme renders input fields for websites viewed in Firefox with very faint text on white background.
+
+**[ Fix! ]** Create `~/.mozilla/firefox/xxxxxxxx.default/chrome/userContent.css` with ...
+
+```bash
+input:not(.urlbar-input):not(.textbox-input):not(.form-control):not([type='checkbox']):not([type='radio']) {
+    -moz-appearance: none !important;
+    background-color: white;
+    color: black;
+}
+
+#downloads-indicator-counter {
+    color: white;
+}
+
+textarea {
+    -moz-appearance: none !important;
+    background-color: white;
+    color: black;
+}
+
+select {
+    -moz-appearance: none !important;
+    background-color: white;
+    color: black;
+}
+```
+
+Link: [Unreadable input fields with dark GTK+ themes](https://wiki.archlinux.org/index.php/firefox#Unreadable_input_fields_with_dark_GTK.2B_themes)
+
 {{< note-heading "2017-10-21T1315" >}}
 
 Using [runit](http://smarden.org/runit/) init ... To stop an enabled service from starting automatically at boot, create a file named `down` in the service directory ...
