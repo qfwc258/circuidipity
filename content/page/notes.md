@@ -6,6 +6,18 @@ menu:
     weight: 50
 ---
 
+{{< note-heading "2018-05-10T2212" >}}
+
+Install the latest Firefox Stable on Debian Stretch.
+
+Create `~/opt` directory to store programs in `$HOME`. Download and unpack the latest binaries from the official website, and create a link to the executable in my PATH ...
+
+```bash
+$ wget -c -O FirefoxSetup.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US"
+$ tar xvf FirefoxSetup.tar.bz2 -C ~/opt/
+$ sudo ln -s ~/opt/firefox/firefox /usr/local/bin/
+```
+
 {{< note-heading "2018-04-29T1611" >}}
 
 After running a minimal Ubuntu install on my laptop with LUKS encryption, the boot process would halt for ~30 seconds then generate this message ...

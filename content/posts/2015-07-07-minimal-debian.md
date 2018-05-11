@@ -1,6 +1,6 @@
 ---
 title: "Minimal Debian"
-date: "2018-01-14"
+date: "2018-05-11"
 publishDate: "2015-07-07"
 tags:
   - debian
@@ -10,13 +10,13 @@ tags:
 slug: "minimal-debian"
 ---
 
-![Debian Vader](/img/debianVader.png))
+![Debian Vader](/img/debianVader.png)
 
-**Debian 9 "Stretch"** is the latest stable release of the popular Linux operating system. I use Debian's [minimal network install image](https://www.debian.org/CD/netinst/) to create a **console-only base configuration** that can be customized for various tasks and [alternate desktops](http://www.circuidipity.com/i3-tiling-window-manager.html). [^1]
+**Debian 9 "Stretch"** is the latest stable release of the popular Linux operating system. I use Debian's [network installer image](https://www.debian.org/CD/netinst/) to create a **console-only base configuration** that can be customized for various tasks and [alternate desktops](http://www.circuidipity.com/i3-tiling-window-manager.html). [^1]
 
 ## Let's go!
 
-[Debian GNU/Linux](http://www.debian.org) is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. There are 3 **release branches**: `stretch/stable`, `buster/testing`, and `sid/unstable`.
+[Debian GNU/Linux](http://www.debian.org) is an operating system created by volunteers of one of the largest and longest-running free software projects in the world. There are 3 **release branches**: stable (code-named *stretch*), testing (*buster*), and unstable (*sid*).
 
 Below is a visual walk-through of a sample workstation setup that makes use of the entire disk divided into 2 partitions: a `boot` partition, [^2] and an **encrypted partition** used by the **Logical Volume Manager** (LVM) to create "virtual partitions" (Logical Volumes). Installing LVM on top of the encrypted partition allows:
 
@@ -26,9 +26,24 @@ Below is a visual walk-through of a sample workstation setup that makes use of t
 
 ## 0. Prepare install media
 
-Download the (unofficial with firmware) 64bit [firmware-9.0.0-amd64-netinst.iso](https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/firmware-9.0.0-amd64-netinst.iso) or the 32bit [firmware-9.0.0-i386-netinst.iso](https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/i386/iso-cd/firmware-9.0.0-i386-netinst.iso) for older machines. [Verify the PGP signature](http://www.circuidipity.com/verify-pgp-signature-gnupg.html#verify-file-integrity) and [flash the image](https://www.debian.org/releases/stable/amd64/ch04s03.html.en) to a USB stick. [^4]
+Download and verify the (unofficial with firmware) 64-bit `firmware-9.4.0-amd64-netinst.iso` ...
 
-Minimal installer (requires network connection) downloads all the latest packages during setup.
+```bash
+$ wget -c https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/firmware-9.4.0-amd64-netinst.iso
+$ wget -c https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/SHA256SUMS
+$ sha256sum -c SHA256SUMS
+firmware-9.4.0-amd64-netinst.iso: OK
+```
+
+Write the installer to an **unmounted** USB storage device using `dd` as root. **BE VERY CAREFUL TO NOTE THE PROPER DEVICE. ALL DATA ON THE DEVICE WILL BE OVERWRITTEN.**
+
+*Example:* On a Linux system, if a USB stick appears as `sde1`, then write the installer to the device using ...
+
+```bash
+$ sudo dd if=firmware-9.4.0-amd64-netinst.iso of=/dev/sde bs=4M && sudo sync
+```
+
+Minimal installer (requires network connection) downloads all the latest packages during setup. [^4]
 
 ## 1. Launch
 
@@ -270,7 +285,7 @@ GRUB_GFXPAYLOAD_LINUX=text
 ... and update ...
 
 ```bash
-# update-grub
+update-grub
 ```
 
 Now it works! My chromebook is currently the only device I have run into this issue.
@@ -385,7 +400,7 @@ apt update
 
 ## 10. Automatic security updates
 
-Fetch and install the latest fixes courtesy of [unattended upgrades](http://www.circuidipity.com/unattended-upgrades.html).
+Fetch and install the latest fixes courtesy of [unattended upgrades](http://www.circuidipity.com/unattended-upgrades.html). Useful feature for a [home server](https://www.circuidipity.com/home-server/); on the desktop I manage updates myself.
 
 ## 11. Sudo
 
