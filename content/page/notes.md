@@ -6,6 +6,26 @@ menu:
     weight: 50
 ---
 
+{{< note-heading "2018-05-12T1136" >}}
+
+**Openbox:** Set default that will match all normal windows and maximize + remove decorations when launched. Leave things like dialog windows or panels untouched. Modify `~/.config/openbox/rc.xml` ...
+
+```bash
+<application type="normal">
+    <maximized>true</maximized><decor>no</decor>
+</application>
+```
+
+... except for VLC ...
+
+```bash
+<application class="vlc">
+    <maximized>false</maximized><decor>yes</decor>
+</application>
+```
+
+Links: [Launching windows maximized](https://help.ubuntu.com/community/Lubuntu/Windows#Launching_Windows_Maximized); [Finding parameters](http://openbox.org/wiki/Help:Applications#Finding_the_class.2C_name.2C_role.2C_title_and_type_parameters)
+
 {{< note-heading "2018-05-10T2212" >}}
 
 Install the latest Firefox Stable on Debian Stretch.
