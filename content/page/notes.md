@@ -6,6 +6,28 @@ menu:
     weight: 50
 ---
 
+{{< note-heading "2018-05-18T0947" >}}
+
+Network-manager and the nm-applet on Openbox: No prompt for the wireless passphrase when connecting to new access points. Confirmed that `dbus`, `gnome-keyring`, and `polkit` were installed and running ...
+
+```bash
+589 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+13763 /usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh
+22762 /usr/lib/policykit-1/polkitd --no-debug
+```
+
+Noticed that `dunst` (lightweight notification daemon) was failing to launch, command `notify-send` was absent, and this error message was cropping up ...
+
+```bash
+Error connecting: Failed to execute child process "dbus-launch" (No such file or directory)
+```
+
+**[ Fix! ]** Installing these packages fix the issues with nm-applet and notifications ...
+
+```bash
+$ sudo apt install dbus-x11 libnotify-bin
+```
+
 {{< note-heading "2018-05-12T1136" >}}
 
 **Openbox:** Set default that will match all normal windows and maximize + remove decorations when launched. Leave things like dialog windows or panels untouched. Modify `~/.config/openbox/rc.xml` ...
