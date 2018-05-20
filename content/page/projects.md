@@ -15,3 +15,9 @@ menu:
 ## There's no place like [a Linux] home [server]
 [Run your own cheap and cheerful home server](/home-server) ...
 <p style="clear:both;"></p>
+
+[<img style="float:left;" src="/img/jessiebook-thumb.1.png" />](/c720-chromebook-to-jessiebook)
+## Chromebook to Jessiebook
+[Replace ChromeOS permanently with Debian](/c720-chromebook-to-jessiebook) ...
+<p style="clear:both;"></p>
+
