@@ -10,7 +10,13 @@ menu:
 
 Background colour specified by `xsetroot` in `~/.config/openbox/autostart` was not being set. Turns out that the compositing manager that I use - `compton` - does not read `XSetWindowBackground()` used by `xsetroot`.
 
-**[ Fix! ]** Compton reads `_XROOTPMAP_ID` or `_XSETROOT_ID`. Install `hsetroot` that uses these properties. Add to `autostart` ...
+**[ Fix! ]** Compton reads `_XROOTPMAP_ID` or `_XSETROOT_ID`. Install `hsetroot` that uses these properties ...
+
+```bash
+$ sudo apt install hsetroot
+```
+
+Add to `autostart` ...
 
 ```bash
 hsetroot -solid "#000000"
