@@ -7,6 +7,7 @@ tags:
   - linux
   - shell
   - programming
+  - homebin
 slug: "debian-package-list"
 ---
 
@@ -42,7 +43,7 @@ do
 done
 ```
 
-:penguin: [$HOME Slash Bin](http://www.circuidipity.com/homebin/) :: I made the [generatePkgList](https://github.com/vonbrownie/homebin/blob/master/generatePkgList) shell script to create modified package lists.
+I made the [generatePkgList](https://github.com/vonbrownie/homebin/blob/master/generatePkgList) shell script to create modified package lists.
 
 ## 1. Install
 
@@ -68,5 +69,7 @@ apt-get dselect-upgrade
 ```
 
 Link: [Debian Administrator's Handbook - 6.2. aptitude, apt-get, and apt Commands](https://debian-handbook.info/browse/stable/sect.apt-get.html)
+
+:penguin: *Part of the* [HOME slash bin](https://www.circuidipity.com/homebin/) *project*.
 
 Happy hacking!

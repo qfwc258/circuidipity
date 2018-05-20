@@ -1,10 +1,12 @@
 ---
 title: "Command line tools: youtube-dl"
-date: "2015-07-12"
+date: "2015-07-01"
 publishDate: "2014-04-01"
 tags:
   - shell
+  - programming
   - linux
+  - homebin
 slug: "youtube-dl"
 ---
 
@@ -55,6 +57,8 @@ See `man youtube-dl` for more possibilities!
 
 **Update**
 
-:penguin: [$HOME Slash Bin](http://www.circuidipity.com/homebin/) :: I skipped the alterations to `.bashrc` and created a shell script: [yt-audio](https://github.com/vonbrownie/homebin/blob/master/yt-audio) 
+I skipped the alterations to `.bashrc` and created a shell script: [yt-audio](https://github.com/vonbrownie/homebin/blob/master/yt-audio) 
+
+:penguin: *Part of the* [HOME slash bin](https://www.circuidipity.com/homebin/) *project*.
 
 Happy hacking!

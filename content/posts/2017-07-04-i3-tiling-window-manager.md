@@ -5,6 +5,7 @@ publishDate: "2017-07-04"
 tags:
   - i3
   - linux
+  - homebin
 slug: "i3-tiling-window-manager"
 ---
 

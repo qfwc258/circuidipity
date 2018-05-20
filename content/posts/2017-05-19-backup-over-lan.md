@@ -6,11 +6,14 @@ tags:
   - network
   - ssh
   - crypto
+  - shell
+  - programming
   - linux
+  - homebin
 slug: "backup-over-lan"
 ---
 
-:penguin: [Home Server](https://www.circuidipity.com/home-server/) :: Make incremental and automatic backups of a home folder to a local server using **SSH + rsync + cron**.
+Make incremental and automatic backups of a home folder to a local server using **SSH + rsync + cron**.
 
 ## Let's go!
 
@@ -50,7 +53,7 @@ If everything checks out OK drop `--dry-run` and re-run the command to make a pr
 
 Start piling on the options to rsync and the command quickly becomes awkward and easy to get wrong. Option `--delete` is useful but can generate unpleasant surprises. A few things I `--exclude` from a `$HOME` sync are `[Cc]ache` and `[Tt]rash` and `[Tt]humbnails`, and pay attention to the trailing forward-slash `/` on directories.
 
-:penguin: [$HOME Slash Bin](https://www.circuidipity.com/homebin/) :: I create a shell script `teleportHome.sh` that makes use of the `keychain` utility to manage SSH keys for [password-less logins to servers](https://www.circuidipity.com/secure-remote-access-using-ssh-keys) and place in `$HOME/bin`. Sample ...
+I create a shell script that makes use of the `keychain` utility to manage SSH keys for [password-less logins to servers](https://www.circuidipity.com/secure-remote-access-using-ssh-keys) and place in `$HOME/bin`. Sample ...
 
 ```bash
 #!/bin/bash                                                                     
@@ -77,5 +80,7 @@ Automate the backups by running `crontab -e` and creating a **cron job**. Sample
 ## 6. Server: rsnapshot
 
 Use the **rsync** powers of [rsnapshot](https://www.circuidipity.com/rsnapshot/) to make daily, weekly, and monthly **incremental** backups of data.
+
+:penguin: *Part of the* [HOME slash bin](https://www.circuidipity.com/homebin/) *and* [Linux Home Server](https://www.circuidipity.com/home-server/) *projects*.
 
 Happy hacking!

@@ -11,7 +11,7 @@ tags:
 slug: "network-printer-scanner"
 ---
 
-:penguin: [Home Server](http://www.circuidipity.com/home-server/) :: Configure a printer + scanner to receive jobs across the local network.
+Configure a printer + scanner to receive jobs across the local network.
 
 ## Let's go!
 
@@ -222,5 +222,7 @@ scanimage > test2.ppm
 ```
 
 For a simple, graphical scanner program give **simple-scan** a try.
+
+:penguin: *Part of the* [Linux Home Server](https://www.circuidipity.com/home-server/) *project*.
 
 Happy hacking!

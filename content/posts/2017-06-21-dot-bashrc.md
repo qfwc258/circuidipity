@@ -78,21 +78,12 @@ I set a two-line prompt (handy when displaying long pathnames), adjust the colou
 if [[ -n "$SSH_CLIENT" ]]; then
     ssh_message=": ssh-session"
 fi
-
-if [[ $HOSTNAME = "deb"* ]] || [[ $HOSTNAME = "ull"* ]]; then
-    PS1="\[\e[32;1m\]:(\[\e[37;1m\]\u@\h\[\e[33;1m\]${ssh_message}\[\e[32;1m\])-(\[\e[34;1m\]\w\e[32;1m\])\n:.(\[\e[37;1m\]\!\[\e[32;1m\])-\[\e[37;1m\]\$\[\e[0m\] "
+if [ "$color_prompt" = yes ]; then
+    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1="${debian_chroot:+($debian_chroot)}\[\e[35;1m\]\u \[\e[37;1m\]at \[\e[32;1m\]\h\[\e[33;1m\]${ssh_message} \[\e[37;1m\]in \[\e[34;1m\]\w \n\[\e[37;1m\]\$\[\e[0m\] "
 else
-    PS1="\[\e[32;1m\]:(\[\e[31;1m\]\u@\h\[\e[33;1m\]${ssh_message}\[\e[32;1m\])-(\[\e[34;1m\]\w\e[32;1m\])\n:.(\[\e[31;1m\]\!\[\e[32;1m\])-\[\e[37;1m\]\$\[\e[0m\] "
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
-```
-
-Which generates ...
-
-```bash
-:(daniel@debian)-(~)
-:.(1054)-$ ssh foobian
-:(daniel@foobian: ssh-session)-(~)
-:.(192)-$
 ```
 
 ## Aliases and functions
@@ -112,27 +103,27 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # More aliases and functions.
-alias ..="cd .."
-alias aaa="sudo apt update && apt list --upgradable && sudo apt full-upgrade"
-alias arst="setxkbmap us && xmodmap ~/.xmodmap"
-alias asdf="setxkbmap us -variant colemak && xmodmap ~/.xmodmap"
+alias aaa="generatePkgList -d ~/code/debian && sudo apt update && apt list --upgradable && sudo apt full-upgrade && sudo apt autoremove"
+alias arst="setxkbmap us && ~/bin/keyboardconf"
+alias asdf="setxkbmap us -variant colemak && ~/bin/keyboardconf"
 bak() { for f in "$@"; do cp "$f" "$f.$(date +%FT%H%M%S).bak"; done; }
 alias df="df -hT --total"
+alias dmesg="sudo dmesg"
 alias dpkgg="dpkg -l | grep -i"
-dsrt() { du -ach $1 | sort -h; }
+alias earthview="streamlink http://www.ustream.tv/channel/iss-hdev-payload best &"
 alias free="free -h"
 alias gpush="git push -u origin master"
 alias gsave="git commit -m 'save'"
 alias gs="git status"
 alias histg="history | grep"
-alias lsl="ls | less"
 alias mkdir="mkdir -pv"
-mcd() { mkdir -p $1; cd $1; } 
 mtg() { for f in "$@"; do mv "$f" "${f//[^a-zA-Z0-9\.\-]/_}"; done; }
 alias pgrep="pgrep -a"
+alias poweroff="systemctl poweroff"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
-alias tmuxa="tmux -f $HOME/.tmux.default.conf attach"
-alias wget="wget -c"
+alias reboot="systemctl reboot"
+alias shutdown="sudo /sbin/shutdown"
+alias tmuxd="tmux -f ~/.tmux.default attach"
 alias zzz="sync && systemctl suspend"
 ```
 
@@ -153,12 +144,6 @@ if [ -x /usr/bin/keychain ]; then
 fi
 ```
 
-Add directories to my `$PATH` ...
-
-```bash
-export PATH=$PATH:/sbin
-```
-
 Disable XON/XOFF flow control ...
 
 ```bash
@@ -167,12 +152,20 @@ stty -ixon
 
 ... which enables the use of `CNTRL-S` in other commands. **Example:** forward search in history, and disabling screen freeze in vim.
 
+Set cursor colour ...
+
+```bash
+if [ -t 1 ]; then
+    echo -e "\e]12;red\a"
+fi
+```
+
 When happy with the changes, save file and reload the config ...
 
 ```bash
 source ~/.bashrc
 ```
 
-Source: [.bashrc](https://github.com/vonbrownie/dotfiles/blob/master/.bashrc)
+Source: [dot bashrc](https://github.com/vonbrownie/dotfiles/blob/master/.bashrc)
 
 Happy hacking!

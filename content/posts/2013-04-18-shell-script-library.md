@@ -1,11 +1,12 @@
 ---
-title: "A library for shell scripts"
+title: "Command line tools: A library for shell scripts"
 date: "2015-07-12"
 publishDate: "2013-04-18"
 tags:
   - shell
   - programming
   - linux
+  - homebin
 slug: "shell-script-library"
 ---
 
@@ -24,7 +25,7 @@ testRoot() {
 }
 ```
 
-:penguin: [$HOME Slash Bin](http://www.circuidipity.com/homebin/) :: I gathered up several other functions like this and created a **Library.sh** script that I place in my PATH. When I create a new shell script and want to access this library of functions I source it by adding ...
+I gathered up several other functions like this and created a **Library.sh** script that I place in my PATH. When I create a new shell script and want to access this library of functions I source it by adding ...
 
 ```bash
 . Library.sh
@@ -33,5 +34,7 @@ testRoot() {
 ... and its contents are now available for inclusion in every script that needs it. Write once and use everywhere.
 
 Sourcing a library file for the shell reminds me of HTML templates and CSS stylesheets for websites. Adding new functions or making improvements to existing ones in a single location means the changes ripple across every script that calls upon that location.
+
+:penguin: *Part of the* [HOME slash bin](https://www.circuidipity.com/homebin/) *project*.
 
 Source: [Library.sh](https://github.com/vonbrownie/homebin/blob/master/Library.sh)

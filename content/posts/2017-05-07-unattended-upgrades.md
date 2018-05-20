@@ -8,7 +8,7 @@ tags:
 slug: "unattended-upgrades"
 ---
 
-:penguin: [Home Server](http://www.circuidipity.com/home-server/) :: Fetch the latest fixes, install, and reboot (if necessary). Hands-free!
+Fetch the latest fixes, install, and reboot (if necessary). Hands-free!
 
 ## Let's go!
 
@@ -93,5 +93,7 @@ cat /etc/apt/listchanges.conf
 ```
 
 Upgrade information is also logged within the `/var/log/unattended-upgrades` directory.
+
+:penguin: *Part of the* [Linux Home Server](https://www.circuidipity.com/home-server/) *project*.
 
 Happy hacking!
