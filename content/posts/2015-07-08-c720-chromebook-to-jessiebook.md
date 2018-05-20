@@ -6,6 +6,7 @@ tags:
   - chromebook
   - debian
   - linux
+  - projects
 slug: "c720-chromebook-to-jessiebook"
 ---
 
