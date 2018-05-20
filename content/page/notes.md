@@ -6,6 +6,18 @@ menu:
     weight: 50
 ---
 
+{{< note-heading "2018-05-20T0929" >}}
+
+Background colour specified by `xsetroot` in `~/.config/openbox/autostart` was not being set. Turns out that the compositing manager that I use - `compton` - does not read `XSetWindowBackground()` used by `xsetroot`.
+
+**[ Fix! ]** Compton reads `_XROOTPMAP_ID` or `_XSETROOT_ID`. Install `hsetroot` that uses these properties. Add to `autostart` ...
+
+```bash
+hsetroot -solid "#000000"
+```
+
+Link: [Compton incompatible with xsetroot](https://github.com/chjj/compton/issues/162)
+
 {{< note-heading "2018-05-18T0947" >}}
 
 Network-manager and the nm-applet on Openbox: No prompt for the wireless passphrase when connecting to new access points. Confirmed that `dbus`, `gnome-keyring`, and `polkit` were installed and running ...
