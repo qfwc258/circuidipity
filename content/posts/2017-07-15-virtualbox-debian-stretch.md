@@ -1,6 +1,6 @@
 ---
 title: "Virtualbox on Debian Stretch"
-date: "2017-07-15"
+date: "2018-05-20"
 publishDate: "2017-07-15"
 tags:
   - virtualbox
@@ -13,30 +13,44 @@ slug: "virtualbox-debian-stretch"
 
 ## Let's go!
 
-In this HOWTO I install Virtualbox on a [Debian](http://www.circuidipity.com/tags/debian/) `stable/stretch` HOST and create a Debian GUEST virtual machine.
+In this HOWTO I install Virtualbox on a [Debian](http://www.circuidipity.com/tags/debian/) stable (*stretch*) HOST and create a Debian GUEST virtual machine.
 
 ## 0. Install VirtualBox on HOST
 
 Kernel modules for Virtualbox are built via [Dynamic Kernel Module Support (DKMS)](http://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support). After installing Virtualbox the `vbox` modules should be auto-built and -loaded. Install a few tools ...
 
 ```bash
-sudo apt install dkms module-assistant linux-headers-$(uname -r)
+$ sudo apt install dkms module-assistant linux-headers-$(uname -r)
 ```
 
-Virtualbox packages have been removed from the latest Debian stable release (still available in unstable/sid). I choose to retrieve Virtualbox directly from Oracle and their third-party Debian package repository.
+Virtualbox packages for the Debian stable release are available in **stretch-backports**. Add the repository to `/etc/apt/sources.list` ...
+
+```bash
+deb http://deb.debian.org/debian/ stretch-backports main contrib non-free
+deb-src http://deb.debian.org/debian/ stretch-backports main contrib non-free
+```
+
+Refresh package listings, install Virtualbox, and assign username to `vboxusers` group ...
+
+```bash
+$ sudo apt update && sudo apt --target-release stretch-backports install virtualbox
+$ sudo adduser foo vboxusers
+```
+
+*Alternative install method: Retrieve Virtualbox directly from Oracle and their third-party Debian package repository.*
 
 Create the `virtualbox.list` file in `/etc/apt/sources.list.d` ...
 
 ```bash
-sudo sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" > /etc/apt/sources.list.d/virtualbox.list'
+$ sudo sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" > /etc/apt/sources.list.d/virtualbox.list'
 ```
 
 Add Oracle's Virtualbox public key ...
 
 ```bash
-wget https://www.virtualbox.org/download/oracle_vbox_2016.asc
-sudo mv oracle_vbox_2016.asc /etc/apt/trusted.gpg.d
-apt-key list
+$ wget https://www.virtualbox.org/download/oracle_vbox_2016.asc
+$ sudo mv oracle_vbox_2016.asc /etc/apt/trusted.gpg.d
+$ apt-key list
     [...]
     /etc/apt/trusted.gpg.d/oracle_vbox_2016.asc
     -------------------------------------------
@@ -46,16 +60,11 @@ apt-key list
     sub   rsa4096 2016-04-22 [E]
 ```
 
-Install Virtualbox ...
+Install Virtualbox, and assign username to `vboxusers` group ...
 
 ```bash
-sudo apt update && sudo apt install virtualbox-5.1
-```
-
-Add my USERNAME to the `vboxusers` group ...
-
-```bash
-sudo adduser USERNAME vboxusers
+$ sudo apt update && sudo apt install virtualbox-*
+$ sudo adduser foo vboxusers
 ```
 
 ## 1. Create a Debian GUEST VM
@@ -71,14 +80,14 @@ Enable extra features such as the ability to tweak display settings and add a sh
 Launch the new Debian GUEST and install ...
 
 ```bash
-sudo apt update && apt install build-essential module-assistant linux-headers-$(uname -r) dkms
-sudo m-a prepare
+$ sudo apt update && apt install build-essential module-assistant linux-headers-$(uname -r) dkms
+$ sudo m-a prepare
 ```
 
 Download the `VBoxGuestAdditions_VERSION.iso` ...   
 
 ```bash
-wget -c http://download.virtualbox.org/virtualbox/5.1.22/VBoxGuestAdditions_5.1.22.iso
+$ wget -c http://download.virtualbox.org/virtualbox/5.1.22/VBoxGuestAdditions_5.1.22.iso
 ```
 
 In the GUEST window menu, select `Devices > Insert Guest Additions CD image` to make the image accessible to the VM. Inside the VM: **mount** the image; **run** the install script; **add** user to the `vboxsf` group; **reboot** the VM, and as root ...
@@ -153,7 +162,7 @@ iface enp0s8 inet dhcp
 Install the SSH server ...
 
 ```bash
-sudo apt install openssh-server                                                         
+$ sudo apt install openssh-server                                                         
 ```
 
 Reboot GUEST. The second interface has been assigned address `192.168.56.101` by DHCP and can now be accessed from HOST via SSH.
@@ -170,6 +179,6 @@ auto enp0s8
     broadcast 192.168.56.255
 ```
 
-... and modify `/etc/hosts` on HOST by adding the VM static address.
+Modify `/etc/hosts` on HOST by adding the VM static address.
 
 Happy hacking!
