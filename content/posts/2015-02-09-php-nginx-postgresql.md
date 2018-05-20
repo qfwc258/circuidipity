@@ -12,7 +12,7 @@ tags:
 slug: "php-nginx-postgresql"
 ---
 
-:penguin: [Home Server](http://www.circuidipity.com/home-server/) :: As a requirement to host web applications like [Tiny Tiny RSS](http://www.circuidipity.com/ttrss.html) on my home server I install **PHP**, the lightweight proxy server **Nginx**, and the **PostgreSQL** database.
+As a requirement to host web applications like [Tiny Tiny RSS](http://www.circuidipity.com/ttrss.html) on my home server I install **PHP**, the lightweight proxy server **Nginx**, and the **PostgreSQL** database.
 
 ## Let's go!
 
@@ -166,6 +166,8 @@ $ systemctl status postgresql
 * [Set up Nginx Server Blocks](https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-14-04-lts)
 * [PostgreSQL and Ubuntu](https://help.ubuntu.com/community/PostgreSQL)
 * [Practical PostgreSQL database](http://www.linuxtopia.org/online_books/database_guides/Practical_PostgreSQL_database/c15679_002.htm)
+
+:penguin: *Part of the* [Linux Home Server](https://www.circuidipity.com/home-server/) *project*.
 
 Happy hacking!
 

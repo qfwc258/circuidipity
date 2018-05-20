@@ -9,7 +9,7 @@ tags:
 slug: "laptop-home-server"
 ---
 
-:penguin: [Home Server](http://www.circuidipity.com/home-server/) :: **Netbooks** ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old **Asus 900HA** netbook and put it to work as a home server. Good times!
+**Netbooks** ... remember those small, (a few) Linux-powered laptops from several years ago? I dusted off my old **Asus 900HA** netbook and put it to work as a home server. Good times!
 
 Running your own home server is a fun learning experience and offers several advantages.
 
@@ -25,16 +25,16 @@ Privacy may be important to you. Hosting your own server running your own servic
 
 ## 0. Install Debian
 
-My [screenshot tour](http://www.circuidipity.com/minimal-debian) of installing the Debian **stretch/stable** release. Debian's minimal **network+firmware install image** (32bit for the netbook) makes it easy to create a console-only base configuration that can be later customized for various tasks. 
+See my [visual walk-through](http://www.circuidipity.com/minimal-debian) installing the Debian **stretch/stable** release. Debian's minimal **network+firmware installer image** (32bit for the netbook) makes it easy to create a console-only base configuration that can be later customized for various tasks. 
 
 I make a few modifications to my usual desktop install routine that are more appropriate for configuring a home server. I don't want an unattended server halting in the boot process waiting for a passphrase or any necessary boot mountpoints to reside on an encrypted partition. After a successful first boot I configure an encrypted container for data storage to be mounted manually.
 
-Using the Debian installer I create 2 partitions on the netbook's 500GB internal storage ...
+During the install, I create 2 partitions on the netbook's 500GB internal storage ...
 
 * sda1 is 16GB dedicated to `root`
 * sda2 is 2GB used for `swap`
 
-... with lots of space left free for the encrypted partition to be created post-install.
+... with lots of space left free for the encrypted partition to be created manually post-install.
 
 ## 1. Static network address
 
@@ -74,23 +74,23 @@ Fetch the [latest fixes, install, and reboot (if necessary)](http://www.circuidi
 I use the remaining disk space to create partition `sda3` (using `fdisk`). Configure LUKS encryption on the new partition ...
 
 ```
-# cryptsetup luksFormat /dev/sda3
+cryptsetup luksFormat /dev/sda3
 ```
 
 Open the encrypted partition under ``sda3_crypt``, format with the `ext4` filesystem, create a dedicated mountpoint, and mount ... [^2]
 
 ```
-# cryptsetup open /dev/sda3 sda3_crypt
-# mkfs.ext4 -m 1 /dev/mapper/sda3_crypt
-# mkdir /media/sda3_crypt
-# mount /dev/mapper/sda3_crypt /media/sda3_crypt
+cryptsetup open /dev/sda3 sda3_crypt
+mkfs.ext4 -m 1 /dev/mapper/sda3_crypt
+mkdir /media/sda3_crypt
+mount /dev/mapper/sda3_crypt /media/sda3_crypt
 ```
 
 When finished, unmount the filesystem and close the encrypted partition ...
 
 ```
-# umount /media/sda3_crypt
-# cryptsetup close /dev/mapper/sda3_crypt
+umount /media/sda3_crypt
+cryptsetup close /dev/mapper/sda3_crypt
 ```
 
 Modify ``/etc/fstab`` and allow mounting by a non-root user ...
@@ -106,7 +106,7 @@ Default settings on the netbook frequently park and spindown the drive, generati
 Get information on drive ...                                                     
 
 ```bash                                                               
-sudo hdparm -I /dev/sda                                                      
+hdparm -I /dev/sda                                                      
 ```
 
 From `man hdparm` ...
@@ -120,7 +120,7 @@ From `man hdparm` ...
 On the netbook I run ...                                                         
                                                                                    
 ```bash                                                               
-sudo hdparm -B 254 -S 0 /dev/sda                                             
+hdparm -B 254 -S 0 /dev/sda                                             
     /dev/sda:                                                                        
     setting Advanced Power Management level to 0xfe (254)                            
     setting standby to 0 (off)                                                       
@@ -145,19 +145,21 @@ ACTION=="add", SUBSYSTEM=="block", KERNEL=="sda", RUN+="/sbin/hdparm -B 254 -S 0
 Install the `vbetool` package to control the netbook's display backlight ...
 
 ```bash
-sudo apt install vbetool
+apt install vbetool
 ```
 
 SSH into the server and turn off/on the backlight with the commands ...
 
 ```bash
-sudo vbetool dpms off
-sudo vbetool dpms on
+vbetool dpms off
+vbetool dpms on
 ```
 
 ## 7. Services
 
 What to do next? [Some of the services I use ...](http://www.circuidipity.com/home-server)
+
+:penguin: *Part of the* [Linux Home Server](https://www.circuidipity.com/home-server/) *project*.
 
 Happy hacking!
 

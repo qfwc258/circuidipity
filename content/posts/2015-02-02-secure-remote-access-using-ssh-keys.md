@@ -9,7 +9,7 @@ tags:
 slug: "ssh-keys"
 ---
 
-:penguin: [Home Server](http://www.circuidipity.com/home-server/) :: Create cryptographic keys and **disable password logins** to make remote machines more secure.
+Create cryptographic keys and **disable password logins** to make remote machines more secure.
 
 ## Let's go!
 
@@ -152,5 +152,7 @@ keychain --clear
 ```bash
 set-option -g update-environment "DISPLAY SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY"
 ```
+
+:penguin: *Part of the* [Linux Home Server](https://www.circuidipity.com/home-server/) *project*.
 
 Happy hacking!

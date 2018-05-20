@@ -11,7 +11,7 @@ tags:
 slug: "nas-pi-sshfs"
 ---
 
-:penguin: [Home Server](http://www.circuidipity.com/home-server/) :: Connect a Pi to external USB storage and create a cheap and cheerful NAS device via **SSH Filesystem** (SSHFS).
+Connect a Pi to external USB storage and create a cheap and cheerful NAS device via **SSH Filesystem** (SSHFS).
 
 With a [Pi-attached 1TB hard drive](http://www.circuidipity.com/raspberry-pi-usb-storage-v4.html) hosting a properly configured [SSH server](http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html) nothing extra is required server-side. 
 
@@ -37,5 +37,7 @@ fusermount -u ~/NAS
 ```
 
 Raspberry Pi + SSHFS is no speed demon but its very usable. On my laptop using a wireless LAN connection I am able to run Rhythmbox playing music and videos in VLC remotely hosted on the Pi.
+
+:penguin: *Part of the* [Linux Home Server](https://www.circuidipity.com/home-server/) *project*.
 
 Happy hacking!

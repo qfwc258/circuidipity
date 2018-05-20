@@ -9,7 +9,7 @@ tags:
 slug: "ddns-openwrt"
 ---
 
-:penguin: [Home Server](http://www.circuidipity.com/home-server/) :: Access a home server from anywhere using **Dynamic DNS** (DDNS).
+Access a home server from anywhere using **Dynamic DNS** (DDNS).
 
 ## Let's go!
 
@@ -71,5 +71,7 @@ Link: [OpenWRT DDNS client](http://wiki.openwrt.org/doc/howto/ddns.client)
 ## 2. Port forwarding
 
 [Port forwarding](http://www.circuidipity.com/20141006.html) configures OpenWRT to forward traffic directed at one of the router's ports to the listening port on the server. **Example:** configure port `56789` on the router to [connect over SSH](http://www.circuidipity.com/secure-remote-access-using-ssh-keys.html) to port `22` on the home server.
+
+:penguin: *Part of the* [Linux Home Server](https://www.circuidipity.com/home-server/) *project*.
 
 Happy hacking!
