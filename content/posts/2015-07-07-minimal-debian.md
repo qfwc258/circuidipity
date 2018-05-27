@@ -7,6 +7,7 @@ tags:
   - linux
   - crypto
   - lvm
+  - projects
 slug: "minimal-debian"
 ---
 
