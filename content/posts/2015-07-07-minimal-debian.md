@@ -481,7 +481,7 @@ systemctl enable fstrim.timer
 
 ## 12. Where to go next ...
 
-... is up to YOU. I created a [post-install setup script](https://github.com/vonbrownie/linux-post-install/tree/master/scripts/debian-stable-setup) that builds on a minimal install towards a more complete console setup, and can also install the [i3 tiling window manager](https://www.circuidipity.com/i3-tiling-window-manager/) plus a packages collection suitable for a workstation.
+... is up to YOU. A [home server](https://www.circuidipity.com/home-server/)? A workstation with your own [custom desktop](https://www.circuidipity.com/openbox/)?
 
 Happy hacking!
 

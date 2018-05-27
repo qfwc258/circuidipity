@@ -6,6 +6,11 @@ menu:
     weight: 40
 ---
 
+[<img style="float:left;" src="/img/grubs-300-thumb.png" />](/openbox)
+## Roll your own Linux desktop using Openbox
+[Start with a bare display and pick and choose components](/openbox) ...
+<p style="clear:both;"></p>
+
 [<img style="float:left;" src="/img/infinite-loop-not-300-thumb.png" />](/homebin)
 ## $HOME slash bin
 [My collection of little programs and experiments](/homebin) ...
@@ -20,4 +25,3 @@ menu:
 ## Chromebook to Jessiebook
 [Replace ChromeOS permanently with Debian](/c720-chromebook-to-jessiebook) ...
 <p style="clear:both;"></p>
-
