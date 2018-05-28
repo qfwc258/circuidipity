@@ -16,6 +16,11 @@ menu:
 [My collection of little programs and experiments -->](/homebin)
 <p style="clear:both;"></p>
 
+[<img style="float:left;" src="/img/hugo-thumb.png" />](/hugo)
+## Build and host a blog 
+[Use the Hugo static site generator and free hosting courtesy of Netlify -->](/hugo)
+<p style="clear:both;"></p>
+
 [<img style="float:left;" src="/img/home-server-thumb.png" />](/home-server)
 ## There's no place like [a Linux] home [server]
 [Run your own cheap and cheerful home server -->](/home-server)
