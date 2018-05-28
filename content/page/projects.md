@@ -18,7 +18,7 @@ menu:
 
 [<img style="float:left;" src="/img/hugo-thumb.png" />](/hugo)
 ## Build and host a blog 
-[Use the Hugo static site generator and free hosting courtesy of Netlify -->](/hugo)
+[Use the Hugo static site generator plus free hosting on Netlify -->](/hugo)
 <p style="clear:both;"></p>
 
 [<img style="float:left;" src="/img/home-server-thumb.png" />](/home-server)
