@@ -1,6 +1,6 @@
 ---
 title: "Virtualbox on Debian Stretch"
-date: "2018-05-20"
+date: "2018-05-31"
 publishDate: "2017-07-15"
 tags:
   - virtualbox
@@ -13,7 +13,7 @@ slug: "virtualbox-debian-stretch"
 
 ## Let's go!
 
-In this HOWTO I install Virtualbox on a [Debian](http://www.circuidipity.com/tags/debian/) stable (*stretch*) HOST and create a Debian GUEST virtual machine.
+In this HOWTO I install Virtualbox (version 5.2.10) on a [Debian](http://www.circuidipity.com/tags/debian/) stable (*stretch*) HOST and create a Debian GUEST virtual machine.
 
 ## 0. Install VirtualBox on HOST
 
@@ -77,26 +77,21 @@ See the [User Manual](http://www.virtualbox.org/manual/UserManual.html) for crea
 
 Enable extra features such as the ability to tweak display settings and add a shared folder between HOST and GUEST machines.
 
-Launch the new Debian GUEST and install ...
+Launch the new Debian GUEST. Virtualbox packages for the Debian stable release are available in **stretch-backports**. Add the repository to `/etc/apt/sources.list` ...
 
 ```bash
-$ sudo apt update && apt install build-essential module-assistant linux-headers-$(uname -r) dkms
+deb http://deb.debian.org/debian/ stretch-backports main contrib non-free
+deb-src http://deb.debian.org/debian/ stretch-backports main contrib non-free
+```
+
+Refresh package listings, install build tools, install virtualbox-guest packages, and assign USERNAME to the `vboxsf` group ...
+
+```bash
+$ sudo apt update
+$ sudo apt install build-essential module-assistant linux-headers-$(uname -r) dkms
 $ sudo m-a prepare
-```
-
-Download the `VBoxGuestAdditions_VERSION.iso` ...   
-
-```bash
-$ wget -c http://download.virtualbox.org/virtualbox/5.1.22/VBoxGuestAdditions_5.1.22.iso
-```
-
-In the GUEST window menu, select `Devices > Insert Guest Additions CD image` to make the image accessible to the VM. Inside the VM: **mount** the image; **run** the install script; **add** user to the `vboxsf` group; **reboot** the VM, and as root ...
-
-```bash
-mount /media/cdrom
-sh /media/cdrom/VBoxLinuxAdditions.run
-adduser USERNAME vboxsf
-reboot
+$ sudo apt --target-release stretch-backports install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+$ sudo adduser USERNAME vboxsf
 ```
 
 If the virtualbox modules need to be rebuilt for any reason for the running kernel ...
@@ -144,8 +139,10 @@ Create a shared folder on HOST. Make it accessible to GUEST by going to `Machine
 **Scenario:** I want to SSH from my HOST to GUEST. Default configuration supplies GUEST with a NAT interface for internet access but no HOST<->GUEST connectivity. A solution for local access is creating a **host-only adapter**.
 
 ### HOST
-                                                                                     
-Navigate to Virtualbox's `File->Preferences->Network`, select `Host-only Networks`, click `Adds new host-only network` to create `vboxnet0`. Default setup is interface address `192.168.56.1` with DHCP enabled.
+
+In the Virtualbox control panel, select `Global Tools` then `Host Network Manager`. Click `Create` and a new host-only network card - `vboxnet0` - is enabled with a default address `192.168.56.1` and DHCP enabled.
+
+Close `Host Network Manager` and return to `Machine Tools`. 
 
 Select the GUEST VM and in `Machine->Settings->Network` click on `Adapter 2`, enable network adapter attached to `Host-only Adapter`, and select `vboxnet0`.
 
