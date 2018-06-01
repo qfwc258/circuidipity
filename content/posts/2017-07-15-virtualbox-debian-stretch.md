@@ -33,7 +33,7 @@ deb-src http://deb.debian.org/debian/ stretch-backports main contrib non-free
 Refresh package listings, install Virtualbox, and assign username to `vboxusers` group ...
 
 ```bash
-$ sudo apt update && sudo apt --target-release stretch-backports install virtualbox
+$ sudo apt update && sudo apt install virtualbox
 $ sudo adduser foo vboxusers
 ```
 
@@ -90,7 +90,7 @@ Refresh package listings, install build tools, install virtualbox-guest packages
 $ sudo apt update
 $ sudo apt install build-essential module-assistant linux-headers-$(uname -r) dkms
 $ sudo m-a prepare
-$ sudo apt --target-release stretch-backports install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+$ sudo apt install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
 $ sudo adduser USERNAME vboxsf
 ```
 

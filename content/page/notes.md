@@ -6,6 +6,29 @@ menu:
     weight: 50
 ---
 
+{{< note-heading "2018-05-31T1637" >}}
+
+Virtualbox guest additions from Oracle: Download the `VBoxGuestAdditions_VERSION.iso` ...   
+
+```bash
+$ wget -c http://download.virtualbox.org/virtualbox/VERSION/VBoxGuestAdditions_VERSION.iso
+```
+
+In the GUEST window menu, select `Devices > Insert Guest Additions CD image` to make the image accessible to the VM. Inside the VM: **mount** the image; **run** the install script; **add** user to the `vboxsf` group; **reboot** the VM, and as root ...
+
+```bash
+mount /media/cdrom
+sh /media/cdrom/VBoxLinuxAdditions.run
+adduser USERNAME vboxsf
+reboot
+```
+
+If the virtualbox modules need to be rebuilt for any reason for the running kernel ...
+
+```bash
+$ uname -r | sudo xargs -n1 /usr/lib/dkms/dkms_autoinstaller start
+```
+
 {{< note-heading "2018-05-20T0929" >}}
 
 Background colour specified by `xsetroot` in `~/.config/openbox/autostart` was not being set. Turns out that the compositing manager that I use - `compton` - does not read `XSetWindowBackground()` used by `xsetroot`.
