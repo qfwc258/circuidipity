@@ -482,7 +482,7 @@ systemctl enable fstrim.timer
 
 ## 12. Where to go next ...
 
-... is up to YOU. A [home server](https://www.circuidipity.com/home-server/)? A workstation with your own [custom desktop](https://www.circuidipity.com/openbox/)?
+... is up to YOU. A [home server](https://www.circuidipity.com/home-server/)? A workstation with your own [custom desktop](https://www.circuidipity.com/openbox/)? I have a [shell script](https://www.circuidipity.com/debian-stable-setup/) that might be of use ... :penguin:
 
 Happy hacking!
 
